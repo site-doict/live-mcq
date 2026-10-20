@@ -1,20 +1,46 @@
 /**
  * বাংলা সাহিত্য বিসিএস পূর্ণাঙ্গ প্রস্তুতি - স্মার্ট ইবুক ন্যাভিগেশন কম্পোনেন্ট
- * Smart E-Book Navigation Component for GitHub Pages & Local Reading
+ * Smart E-Book Navigation Component for Mobile & Desktop
+ * Specialized for mobile viewing (Samsung Galaxy A23, Android, iOS & Desktop)
  * 
  * Features:
- * - Top Sticky Glassmorphism Navigation Bar (ToC Drawer, Home, Current Topic, Prev/Next)
- * - Slide-in Offcanvas Table of Contents (All 5 Chapters, 31 Topics, Search, Active Highlight)
- * - Live LocalStorage Progress Sync (Checkmarks from index.html)
- * - Bottom Page-to-Page Chapter Cards
- * - Floating Quick Access Button (FAB)
- * - Keyboard Shortcuts (Alt+Left: Prev, Alt+Right: Next, Esc: Close, M: ToC)
+ * - Dynamic Fast Font Loading with display=swap (Instant text rendering)
+ * - Top Reading Progress Bar (Slim gradient indicator)
+ * - Auto-Hiding Topbar on mobile scroll down, instant reveal on scroll up
+ * - Safe-area Inset support for notches and gesture navigation bars
+ * - Full-height Slide-in Drawer with live search & Chapter trees
+ * - Font Size Controls (A- / A+ / Reset) for reading comfort
+ * - Mobile Table & Layout safeguards (No horizontal page wobble)
+ * - Touch-optimized buttons (touch-action: manipulation)
+ * - LocalStorage sync for reading completion checkmarks
  */
 
 (function () {
   'use strict';
 
-  // 1. Data Definition: 5 Chapters, 31 Topics mapped to 30 files
+  // 1. Ensure Noto Serif Bengali with display=swap is loaded for instant rendering
+  function ensureFontsLoaded() {
+    if (!document.querySelector('link[href*="Noto+Serif+Bengali"]')) {
+      const p1 = document.createElement('link');
+      p1.rel = 'preconnect';
+      p1.href = 'https://fonts.googleapis.com';
+      document.head.appendChild(p1);
+
+      const p2 = document.createElement('link');
+      p2.rel = 'preconnect';
+      p2.href = 'https://fonts.gstatic.com';
+      p2.crossOrigin = 'anonymous';
+      document.head.appendChild(p2);
+
+      const fontLink = document.createElement('link');
+      fontLink.rel = 'stylesheet';
+      fontLink.href = 'https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap';
+      document.head.appendChild(fontLink);
+    }
+  }
+  ensureFontsLoaded();
+
+  // 2. Data Definition: 5 Chapters, 31 Topics mapped to 30 files
   const BOOK_CHAPTERS = [
     {
       id: "ch-1",
@@ -151,14 +177,14 @@
     } catch (e) {}
   }
 
-  // 2. Inject Styles
+  // 3. Inject CSS Styles with Mobile Optimizations
   const css = `
-    /* ══════ Smart E-Book Navigation Styles ══════ */
+    /* ══════ Smart E-Book Mobile & Responsive Engine ══════ */
     :root {
       --ebk-primary: #0f766e;
       --ebk-primary-hover: #115e59;
       --ebk-accent: #d97706;
-      --ebk-bg-bar: rgba(255, 255, 255, 0.92);
+      --ebk-bg-bar: rgba(255, 255, 255, 0.94);
       --ebk-bg-drawer: #ffffff;
       --ebk-text-main: #1e293b;
       --ebk-text-muted: #64748b;
@@ -172,7 +198,7 @@
       --ebk-primary: #14b8a6;
       --ebk-primary-hover: #2dd4bf;
       --ebk-accent: #fbbf24;
-      --ebk-bg-bar: rgba(15, 23, 42, 0.92);
+      --ebk-bg-bar: rgba(15, 23, 42, 0.94);
       --ebk-bg-drawer: #0f172a;
       --ebk-text-main: #f8fafc;
       --ebk-text-muted: #94a3b8;
@@ -182,7 +208,36 @@
       --ebk-shadow-lg: 0 10px 30px -4px rgba(0, 0, 0, 0.6);
     }
 
-    /* Fixed Top Smart Bar */
+    /* Universal Mobile Safeguards: prevent horizontal page shake */
+    html {
+      overflow-x: clip;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      overflow-x: clip;
+      width: 100%;
+      min-width: 0;
+      margin: 0;
+      font-family: 'Noto Serif Bengali', serif, system-ui, sans-serif;
+      line-height: 1.7;
+    }
+
+    /* Scroll Reading Progress Bar at the absolute top */
+    .ebk-scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--ebk-primary), var(--ebk-accent));
+      z-index: 99999;
+      transition: width 0.12s ease-out;
+      pointer-events: none;
+    }
+
+    /* Fixed Top Smart Bar with notch safe-area support */
     .ebk-topbar {
       position: sticky;
       top: 0;
@@ -190,19 +245,26 @@
       right: 0;
       width: 100%;
       height: 52px;
+      padding-top: env(safe-area-inset-top, 0px);
       background: var(--ebk-bg-bar);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--ebk-border);
       box-shadow: var(--ebk-shadow);
       z-index: 99990;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 14px;
+      padding-left: max(12px, env(safe-area-inset-left, 0px));
+      padding-right: max(12px, env(safe-area-inset-right, 0px));
       font-family: 'Noto Serif Bengali', serif, system-ui, sans-serif;
       box-sizing: border-box;
-      transition: transform 0.25s ease, background 0.25s ease;
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s ease;
+    }
+
+    /* Class for hiding topbar on mobile scroll down */
+    .ebk-topbar.ebk-topbar-hidden {
+      transform: translateY(-100%);
     }
 
     .ebk-topbar * {
@@ -212,7 +274,7 @@
     .ebk-bar-left, .ebk-bar-right {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       flex-shrink: 0;
     }
 
@@ -221,20 +283,20 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       min-width: 0;
-      padding: 0 10px;
+      padding: 0 6px;
       text-align: center;
     }
 
     .ebk-cur-title {
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 700;
       color: var(--ebk-text-main);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 480px;
+      max-width: 440px;
     }
 
     .ebk-cur-badge {
@@ -248,14 +310,14 @@
       white-space: nowrap;
     }
 
-    /* Action Buttons */
+    /* Touch-Optimized Action Buttons */
     .ebk-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      height: 36px;
-      padding: 0 12px;
+      gap: 5px;
+      height: 38px;
+      padding: 0 11px;
       font-size: 13px;
       font-weight: 600;
       color: var(--ebk-text-main);
@@ -266,13 +328,18 @@
       text-decoration: none;
       transition: all 0.15s ease;
       user-select: none;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .ebk-btn:hover {
       background: var(--ebk-card-bg);
       border-color: var(--ebk-primary);
       color: var(--ebk-primary);
-      transform: translateY(-1px);
+    }
+
+    .ebk-btn:active {
+      transform: scale(0.96);
     }
 
     .ebk-btn-primary {
@@ -287,7 +354,7 @@
     }
 
     .ebk-btn-icon {
-      width: 36px;
+      width: 38px;
       padding: 0;
     }
 
@@ -301,13 +368,13 @@
     .ebk-drawer-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.6);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
       z-index: 99995;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
+      transition: opacity 0.28s ease, visibility 0.28s ease;
     }
 
     .ebk-drawer-overlay.ebk-open {
@@ -320,17 +387,19 @@
       top: 0;
       left: 0;
       bottom: 0;
-      width: 380px;
-      max-width: 90vw;
+      width: 350px;
+      max-width: 88vw;
       background: var(--ebk-bg-drawer);
       color: var(--ebk-text-main);
       z-index: 99999;
       box-shadow: var(--ebk-shadow-lg);
       transform: translateX(-100%);
-      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
       font-family: 'Noto Serif Bengali', serif, system-ui, sans-serif;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
     }
 
     .ebk-drawer.ebk-open {
@@ -338,7 +407,7 @@
     }
 
     .ebk-drawer-header {
-      padding: 16px 18px;
+      padding: 14px 16px;
       border-bottom: 1px solid var(--ebk-border);
       display: flex;
       align-items: center;
@@ -347,18 +416,18 @@
     }
 
     .ebk-drawer-title {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 800;
       color: var(--ebk-primary);
       margin: 0;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
     }
 
     .ebk-drawer-close {
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 8px;
       border: 1px solid var(--ebk-border);
       background: transparent;
@@ -368,33 +437,67 @@
       align-items: center;
       justify-content: center;
       font-size: 16px;
-      transition: all 0.15s;
+      touch-action: manipulation;
     }
 
-    .ebk-drawer-close:hover {
-      background: rgba(239, 68, 68, 0.12);
+    .ebk-drawer-close:active {
+      background: rgba(239, 68, 68, 0.15);
       color: #ef4444;
-      border-color: #ef4444;
     }
 
-    /* Drawer Search & Stats */
-    .ebk-drawer-searchbox {
-      padding: 12px 16px;
+    /* Font Size Controls & Search in Drawer */
+    .ebk-drawer-toolbar {
+      padding: 10px 14px;
       border-bottom: 1px solid var(--ebk-border);
       background: var(--ebk-bg-drawer);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ebk-fontsize-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 6px;
+      background: var(--ebk-card-bg);
+      border-radius: 8px;
+      border: 1px solid var(--ebk-border);
+    }
+
+    .ebk-fs-btn {
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 6px;
+      border: 1px solid var(--ebk-border);
+      background: var(--ebk-bg-drawer);
+      color: var(--ebk-text-main);
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .ebk-fs-btn:active {
+      background: var(--ebk-primary);
+      color: #fff;
+    }
+
+    .ebk-search-wrap {
+      position: relative;
+      width: 100%;
     }
 
     .ebk-search-input {
       width: 100%;
-      padding: 9px 12px 9px 36px;
+      padding: 8px 12px 8px 34px;
       border-radius: 8px;
       border: 1px solid var(--ebk-border);
       background: var(--ebk-card-bg);
       color: var(--ebk-text-main);
       font-size: 13px;
+      font-family: inherit;
       outline: none;
       box-sizing: border-box;
-      transition: border-color 0.2s;
     }
 
     .ebk-search-input:focus {
@@ -402,13 +505,9 @@
       box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
     }
 
-    .ebk-search-wrap {
-      position: relative;
-    }
-
     .ebk-search-icon {
       position: absolute;
-      left: 11px;
+      left: 10px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--ebk-text-muted);
@@ -418,35 +517,31 @@
     .ebk-drawer-body {
       flex: 1;
       overflow-y: auto;
-      padding: 12px 14px;
+      padding: 10px 12px;
       scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
     }
 
     /* Chapter Accordion in Drawer */
     .ebk-chap-box {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       border: 1px solid var(--ebk-border);
-      border-radius: 10px;
+      border-radius: 9px;
       overflow: hidden;
       background: var(--ebk-card-bg);
     }
 
     .ebk-chap-header {
-      padding: 10px 14px;
-      background: var(--ebk-card-bg);
+      padding: 10px 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       cursor: pointer;
       user-select: none;
       font-weight: 700;
-      font-size: 13.5px;
+      font-size: 13px;
       color: var(--ebk-text-main);
-      transition: background 0.15s;
-    }
-
-    .ebk-chap-header:hover {
-      background: rgba(15, 118, 110, 0.06);
+      touch-action: manipulation;
     }
 
     .ebk-chap-badge {
@@ -458,9 +553,9 @@
       border-radius: 6px;
       background: var(--ebk-primary);
       color: #fff;
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 800;
-      margin-right: 8px;
+      margin-right: 6px;
     }
 
     .ebk-topic-list {
@@ -475,26 +570,16 @@
       border-bottom: 1px solid rgba(226, 232, 240, 0.6);
     }
 
-    .ebk-topic-item:last-child {
-      border-bottom: none;
-    }
-
     .ebk-topic-link {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 9px 12px;
+      padding: 9px 10px;
       color: var(--ebk-text-main);
       text-decoration: none;
-      font-size: 13px;
-      transition: all 0.15s;
-      gap: 8px;
-    }
-
-    .ebk-topic-link:hover {
-      background: rgba(15, 118, 110, 0.08);
-      color: var(--ebk-primary);
-      padding-left: 16px;
+      font-size: 12.5px;
+      gap: 7px;
+      touch-action: manipulation;
     }
 
     .ebk-topic-link.ebk-active {
@@ -507,8 +592,8 @@
     .ebk-topic-check {
       cursor: pointer;
       accent-color: var(--ebk-primary);
-      width: 15px;
-      height: 15px;
+      width: 16px;
+      height: 16px;
       flex-shrink: 0;
     }
 
@@ -520,34 +605,33 @@
     }
 
     .ebk-topic-page {
-      font-size: 10.5px;
+      font-size: 10px;
       color: var(--ebk-text-muted);
       background: var(--ebk-card-bg);
-      padding: 1px 6px;
+      padding: 1px 5px;
       border-radius: 4px;
       border: 1px solid var(--ebk-border);
       white-space: nowrap;
     }
 
-    /* Drawer Footer */
     .ebk-drawer-footer {
-      padding: 12px 16px;
+      padding: 10px 14px;
       border-top: 1px solid var(--ebk-border);
       background: var(--ebk-card-bg);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px;
     }
 
     /* Bottom Page-to-Page Navigator */
     .ebk-bottom-nav {
-      margin: 48px auto 24px auto;
+      margin: 40px auto 20px auto;
       max-width: 860px;
-      padding: 16px;
+      padding: 14px;
       display: grid;
       grid-template-columns: 1fr auto 1fr;
-      gap: 12px;
+      gap: 10px;
       align-items: center;
       font-family: 'Noto Serif Bengali', serif, system-ui, sans-serif;
       box-sizing: border-box;
@@ -556,8 +640,8 @@
     .ebk-nav-card {
       display: flex;
       flex-direction: column;
-      padding: 12px 16px;
-      border-radius: 12px;
+      padding: 11px 14px;
+      border-radius: 10px;
       border: 1px solid var(--ebk-border);
       background: var(--ebk-card-bg);
       text-decoration: none;
@@ -566,91 +650,82 @@
       box-shadow: var(--ebk-shadow);
     }
 
-    .ebk-nav-card:hover {
-      border-color: var(--ebk-primary);
-      transform: translateY(-2px);
-      box-shadow: var(--ebk-shadow-lg);
-    }
-
     .ebk-nav-card-dir {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 700;
       color: var(--ebk-primary);
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 3px;
+      margin-bottom: 2px;
     }
 
     .ebk-nav-card-title {
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .ebk-nav-card.ebk-prev {
-      text-align: left;
-    }
-
-    .ebk-nav-card.ebk-next {
-      text-align: right;
-    }
+    .ebk-nav-card.ebk-prev { text-align: left; }
+    .ebk-nav-card.ebk-next { text-align: right; }
 
     .ebk-bottom-home-btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
       background: var(--ebk-card-bg);
       border: 1px solid var(--ebk-border);
       color: var(--ebk-text-main);
       text-decoration: none;
-      font-size: 18px;
-      transition: all 0.2s;
-    }
-
-    .ebk-bottom-home-btn:hover {
-      background: var(--ebk-primary);
-      color: #fff;
-      border-color: var(--ebk-primary);
+      font-size: 17px;
     }
 
     /* Floating Quick Action Button */
     .ebk-fab {
       position: fixed;
-      bottom: 24px;
-      left: 24px;
+      bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+      left: calc(16px + env(safe-area-inset-left, 0px));
       z-index: 99980;
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 10px 16px;
+      gap: 6px;
+      padding: 9px 15px;
       border-radius: 999px;
       background: var(--ebk-primary);
       color: #ffffff;
-      box-shadow: 0 6px 20px rgba(15, 118, 110, 0.4);
+      box-shadow: 0 4px 18px rgba(15, 118, 110, 0.4);
       cursor: pointer;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
-      font-family: 'Noto Serif Bengali', serif, system-ui, sans-serif;
-      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      font-family: 'Noto Serif Bengali', serif, sans-serif;
+      touch-action: manipulation;
       user-select: none;
     }
 
-    .ebk-fab:hover {
-      transform: scale(1.06) translateY(-2px);
-      box-shadow: 0 10px 25px rgba(15, 118, 110, 0.5);
-      background: var(--ebk-primary-hover);
+    /* Responsive Tables: ensure no table breaks viewport on mobile */
+    .table-wrapper, .table-responsive, .sc, .table-container {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      touch-action: pan-x pan-y;
+      margin-bottom: 1rem;
+      border-radius: 8px;
     }
 
-    /* Responsive adjustments */
+    /* Mobile Phone Screen Layout (Samsung Galaxy A23 ~384px-412px) */
     @media (max-width: 768px) {
+      .ebk-topbar {
+        padding-left: 8px;
+        padding-right: 8px;
+        height: 48px;
+      }
       .ebk-cur-title {
-        max-width: 160px;
+        max-width: 140px;
         font-size: 12.5px;
       }
       .ebk-cur-badge {
@@ -659,22 +734,26 @@
       .ebk-btn-text {
         display: none;
       }
+      .ebk-btn {
+        width: 34px;
+        height: 34px;
+        padding: 0;
+      }
       .ebk-bottom-nav {
         grid-template-columns: 1fr;
+        gap: 8px;
       }
       .ebk-nav-card.ebk-next {
         text-align: left;
       }
       .ebk-fab {
-        bottom: 16px;
-        left: 16px;
-        padding: 8px 14px;
+        padding: 8px 13px;
         font-size: 12px;
       }
     }
 
     @media print {
-      .ebk-topbar, .ebk-drawer, .ebk-drawer-overlay, .ebk-bottom-nav, .ebk-fab {
+      .ebk-topbar, .ebk-drawer, .ebk-drawer-overlay, .ebk-bottom-nav, .ebk-fab, .ebk-scroll-progress-bar {
         display: none !important;
       }
     }
@@ -686,7 +765,15 @@
   styleEl.textContent = css;
   document.head.appendChild(styleEl);
 
-  // 3. Render Top Navigation Bar
+  // 4. Render Scroll Reading Progress Bar
+  function renderProgressBar() {
+    const bar = document.createElement('div');
+    bar.className = 'ebk-scroll-progress-bar';
+    bar.id = 'ebk-scroll-progress';
+    document.body.prepend(bar);
+  }
+
+  // 5. Render Top Navigation Bar
   function renderTopBar() {
     const topBar = document.createElement('header');
     topBar.className = 'ebk-topbar';
@@ -735,7 +822,7 @@
     document.body.prepend(topBar);
   }
 
-  // 4. Render Slide-over Drawer
+  // 6. Render Slide-over Drawer
   function renderDrawer() {
     const progress = getProgressState();
     let totalCompleted = 0;
@@ -745,12 +832,10 @@
       });
     });
 
-    // Overlay
     const overlay = document.createElement('div');
     overlay.className = 'ebk-drawer-overlay';
     overlay.id = 'ebk-drawer-overlay';
 
-    // Drawer container
     const drawer = document.createElement('aside');
     drawer.className = 'ebk-drawer';
     drawer.id = 'ebk-drawer';
@@ -763,7 +848,16 @@
         <button class="ebk-drawer-close" id="ebk-drawer-close-btn" title="বন্ধ করুন (Esc)">✕</button>
       </div>
 
-      <div class="ebk-drawer-searchbox">
+      <div class="ebk-drawer-toolbar">
+        <div class="ebk-fontsize-bar">
+          <span style="font-size:12px; font-weight:600; opacity:0.85;">ফন্ট সাইজ:</span>
+          <div style="display:flex; gap:6px;">
+            <button class="ebk-fs-btn" onclick="ebkAdjustFontSize(-0.08)" title="লেখা ছোট করুন">A-</button>
+            <button class="ebk-fs-btn" onclick="ebkResetFontSize()" title="স্বাভাবিক সাইজ">রিসেট</button>
+            <button class="ebk-fs-btn" onclick="ebkAdjustFontSize(0.08)" title="লেখা বড় করুন">A+</button>
+          </div>
+        </div>
+
         <div class="ebk-search-wrap">
           <svg class="ebk-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
           <input type="text" class="ebk-search-input" id="ebk-drawer-search" placeholder="টপিক বা লেখক খুঁজুন..." autocomplete="off">
@@ -816,28 +910,22 @@
     document.body.appendChild(overlay);
     document.body.appendChild(drawer);
 
-    // Event Listeners for drawer
     overlay.addEventListener('click', closeDrawer);
     document.getElementById('ebk-drawer-close-btn').addEventListener('click', closeDrawer);
     document.getElementById('ebk-open-drawer-btn').addEventListener('click', openDrawer);
 
-    // Drawer Search Filter
     const searchInput = document.getElementById('ebk-drawer-search');
     searchInput.addEventListener('input', function (e) {
       const q = e.target.value.trim().toLowerCase();
       const items = drawer.querySelectorAll('.ebk-topic-item');
       items.forEach(item => {
         const title = item.getAttribute('data-title') || '';
-        if (!q || title.includes(q)) {
-          item.style.display = 'block';
-        } else {
-          item.style.display = 'none';
-        }
+        item.style.display = (!q || title.includes(q)) ? 'block' : 'none';
       });
     });
   }
 
-  // 5. Render Bottom Page-to-Page Navigator
+  // 7. Render Bottom Page-to-Page Navigator
   function renderBottomNav() {
     const nav = document.createElement('nav');
     nav.className = 'ebk-bottom-nav';
@@ -868,14 +956,14 @@
     document.body.appendChild(nav);
   }
 
-  // 6. Floating Action Button (FAB)
+  // 8. Floating Action Button (FAB)
   function renderFAB() {
     const fab = document.createElement('button');
     fab.className = 'ebk-fab';
     fab.id = 'ebk-fab';
     fab.setAttribute('title', 'সূচিপত্র খুলুন (M)');
     fab.innerHTML = `
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       <span>সূচিপত্র</span>
     `;
     fab.addEventListener('click', openDrawer);
@@ -890,15 +978,10 @@
       overlay.classList.add('ebk-open');
       drawer.classList.add('ebk-open');
 
-      // Auto scroll to active topic
       setTimeout(() => {
         const activeLink = drawer.querySelector('.ebk-topic-link.ebk-active');
         if (activeLink) {
           activeLink.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-        const searchInput = document.getElementById('ebk-drawer-search');
-        if (searchInput && window.innerWidth > 768) {
-          searchInput.focus();
         }
       }, 150);
     }
@@ -927,7 +1010,6 @@
     state[topicId] = checkbox.checked;
     setProgressState(state);
 
-    // Update progress count
     let totalCompleted = 0;
     BOOK_CHAPTERS.forEach(ch => {
       ch.topics.forEach(t => {
@@ -940,19 +1022,48 @@
     }
   };
 
+  // Font Size Adjustments
+  let currentFontScale = parseFloat(localStorage.getItem('ebk_font_scale')) || 1.0;
+  function applyFontScale(scale) {
+    currentFontScale = Math.min(1.35, Math.max(0.85, Math.round(scale * 100) / 100));
+    try { localStorage.setItem('ebk_font_scale', currentFontScale); } catch(e){}
+
+    let styleEl = document.getElementById('ebk-font-scale-override');
+    if (!styleEl) {
+      styleEl = document.createElement('style');
+      styleEl.id = 'ebk-font-scale-override';
+      document.head.appendChild(styleEl);
+    }
+    styleEl.textContent = `
+      body, p, li, td, th, .quiz-question, .quiz-option, .note, .card, main {
+        font-size: calc(1rem * ${currentFontScale}) !important;
+      }
+    `;
+  }
+
+  window.ebkAdjustFontSize = function (delta) {
+    applyFontScale(currentFontScale + delta);
+  };
+
+  window.ebkResetFontSize = function () {
+    applyFontScale(1.0);
+  };
+
+  if (localStorage.getItem('ebk_font_scale')) {
+    applyFontScale(currentFontScale);
+  }
+
   // Theme Toggle Button
   function setupThemeToggle() {
     const btn = document.getElementById('ebk-theme-btn');
     if (!btn) return;
 
     btn.addEventListener('click', () => {
-      // Check if page already has its own toggleTheme function
       if (typeof window.toggleTheme === 'function') {
         window.toggleTheme();
         return;
       }
 
-      // Default theme toggle
       const root = document.documentElement;
       const currentTheme = root.getAttribute('data-theme') || (document.body.classList.contains('dark') ? 'dark' : 'light');
       const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -970,14 +1081,47 @@
     });
   }
 
+  // Scroll Behaviors: Progress Bar + Mobile Topbar Auto-Hide
+  function setupScrollInteractions() {
+    const topBar = document.getElementById('ebk-topbar');
+    const progressBar = document.getElementById('ebk-scroll-progress');
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+          // Update Progress Bar
+          if (progressBar && docHeight > 0) {
+            const pct = Math.min(100, Math.max(0, (currentScrollY / docHeight) * 100));
+            progressBar.style.width = pct + '%';
+          }
+
+          // Mobile topbar auto-hide on scroll down, reveal on scroll up
+          if (topBar && window.innerWidth <= 768) {
+            if (currentScrollY > 60 && currentScrollY > lastScrollY + 12) {
+              topBar.classList.add('ebk-topbar-hidden');
+            } else if (currentScrollY < lastScrollY - 12 || currentScrollY <= 20) {
+              topBar.classList.remove('ebk-topbar-hidden');
+            }
+          }
+
+          lastScrollY = currentScrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+
   // Keyboard Shortcuts
   function setupShortcuts() {
     window.addEventListener('keydown', (e) => {
-      // Avoid if user is typing in input or textarea
       if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
-        if (e.key === 'Escape') {
-          closeDrawer();
-        }
+        if (e.key === 'Escape') closeDrawer();
         return;
       }
 
@@ -1001,14 +1145,15 @@
 
   // Initialize once DOM is ready
   function init() {
-    // Avoid double injection
     if (document.getElementById('ebk-topbar')) return;
 
+    renderProgressBar();
     renderTopBar();
     renderDrawer();
     renderBottomNav();
     renderFAB();
     setupThemeToggle();
+    setupScrollInteractions();
     setupShortcuts();
   }
 

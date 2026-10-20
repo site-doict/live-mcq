@@ -46,11 +46,23 @@
   </script>
 
   <style>
+    html {
+      overflow-x: clip;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
     body {
       font-family: 'Noto Serif Bengali', serif;
       background-color: #f7f5f0;
       background-image: radial-gradient(#e5dec9 0.75px, transparent 0.75px);
       background-size: 20px 20px;
+      overflow-x: clip;
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    /* Touch target optimizations for mobile */
+    button, a, input, [role="button"] {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
     .serif-title {
       font-family: 'Noto Serif Bengali', serif;
@@ -471,19 +483,19 @@
               <!-- Chapter Header -->
               <div 
                 onclick="toggleChapterAccordion('${chapter.id}')"
-                class="px-5 py-4 bg-gradient-to-r from-slate-50 via-white to-slate-50 flex items-center justify-between cursor-pointer select-none border-b border-slate-100 hover:bg-slate-100/70 transition"
+                class="px-3.5 sm:px-5 py-3.5 sm:py-4 bg-gradient-to-r from-slate-50 via-white to-slate-50 flex items-center justify-between cursor-pointer select-none border-b border-slate-100 hover:bg-slate-100/70 transition"
               >
-                <div class="flex items-center gap-3 sm:gap-4 flex-1 pr-3">
-                  <span class="w-9 h-9 rounded-xl bg-emerald-900 text-amber-300 font-bold flex items-center justify-center shrink-0 serif-title shadow-sm text-base">
+                <div class="flex items-center gap-3 sm:gap-4 flex-1 pr-2 sm:pr-3">
+                  <span class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-900 text-amber-300 font-bold flex items-center justify-center shrink-0 serif-title shadow-sm text-sm sm:text-base">
                     ${chapter.number}
                   </span>
                   <div>
-                    <h2 class="serif-title font-bold text-slate-800 text-base sm:text-lg tracking-tight">
+                    <h2 class="serif-title font-bold text-slate-800 text-sm sm:text-lg tracking-tight">
                       ${chapter.title}
                     </h2>
-                    <div class="flex items-center gap-3 text-xs text-slate-500 mt-0.5">
-                      <span class="inline-flex items-center gap-1 font-medium text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200/50">
-                        <i class="fa-regular fa-bookmark text-[11px]"></i> ${chapter.pages}
+                    <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-slate-500 mt-0.5">
+                      <span class="inline-flex items-center gap-1 font-medium text-emerald-800 bg-emerald-50 px-1.5 sm:px-2 py-0.5 rounded border border-emerald-200/50">
+                        <i class="fa-regular fa-bookmark text-[10px] sm:text-[11px]"></i> ${chapter.pages}
                       </span>
                       <span>${toBengaliNumber(chapter.topics.length)} টি অনুচ্ছেদ</span>
                     </div>
@@ -491,8 +503,8 @@
                 </div>
 
                 <div class="flex items-center gap-2">
-                  <span class="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 bg-slate-100 transition-transform duration-300" id="icon-${chapter.id}">
-                    <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300"></i>
+                  <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-slate-400 bg-slate-100 transition-transform duration-300" id="icon-${chapter.id}">
+                    <i class="fa-solid fa-chevron-down text-xs sm:text-sm transition-transform duration-300"></i>
                   </span>
                 </div>
               </div>
@@ -505,9 +517,9 @@
                   return `
                     <div 
                       id="item-${topic.id}"
-                      class="px-5 py-3.5 flex items-center justify-between gap-4 hover:bg-slate-50/80 transition group ${isChecked ? 'bg-emerald-50/40' : ''}"
+                      class="px-3 sm:px-5 py-3 sm:py-3.5 flex items-center justify-between gap-2.5 sm:gap-4 hover:bg-slate-50/80 transition group ${isChecked ? 'bg-emerald-50/40' : ''}"
                     >
-                      <div class="flex items-center gap-3 flex-1 min-w-0">
+                      <div class="flex items-center gap-2.5 sm:gap-3 flex-1 min-w-0">
                         <input 
                           type="checkbox" 
                           id="chk-${topic.id}"
