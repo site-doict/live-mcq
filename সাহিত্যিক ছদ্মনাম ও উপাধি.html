@@ -454,6 +454,169 @@
       background: var(--primary-light);
     }
 
+    /* ══════ ফিল্টার বার ও মেমোরি কার্ড ডিজাইন ══════ */
+    .mnemonic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin: 16px 0 20px;
+    }
+
+    .mnemonic-card {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      border-top: 4px solid var(--primary);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+    .mnemonic-card.accent { border-top-color: var(--accent); }
+    .mnemonic-card.success { border-top-color: var(--success); }
+    .mnemonic-card.warning { border-top-color: var(--warning); }
+    .mnemonic-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-toolbar {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 16px 0;
+      background: var(--bg-surface-alt);
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+
+    .search-box-wrap {
+      position: relative;
+      width: 100%;
+    }
+    .search-box-wrap input {
+      width: 100%;
+      padding: 10px 14px 10px 38px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 14.5px;
+      outline: none;
+      transition: var(--transition);
+    }
+    .search-box-wrap input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.15);
+    }
+    .search-icon-svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .filter-pills-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-pill {
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .filter-pill:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .filter-pill.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .badge-type {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .badge-type.badge-title {
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+    .badge-type.badge-pen {
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+    .badge-type.badge-female {
+      background: #fce7f3;
+      color: #be185d;
+      border: 1px solid #f472b6;
+    }
+    .badge-type.badge-special {
+      background: var(--success-light);
+      color: var(--success);
+      border: 1px solid var(--success);
+    }
+    .badge-type.badge-nick {
+      background: #ede9fe;
+      color: #6d28d9;
+      border: 1px solid #c4b5fd;
+    }
+    [data-theme="dark"] .badge-type.badge-female {
+      background: #500724;
+      color: #f472b6;
+      border-color: #831843;
+    }
+    [data-theme="dark"] .badge-type.badge-nick {
+      background: #2e1065;
+      color: #c4b5fd;
+      border-color: #4c1d95;
+    }
+
+    .no-results-msg {
+      display: none;
+      text-align: center;
+      padding: 24px;
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
     /* ══════ কুইজ সেকশন ══════ */
     .quiz-container {
       display: flex;
@@ -793,173 +956,222 @@
         <span class="section-meta">বইয়ের ছক ও ব্যাখ্যার সমন্বিত রূপ</span>
       </div>
 
+      <!-- দ্রুত মনে রাখার ৪টি প্যাটার্ন কার্ড (Mnemonics) -->
+      <div class="mnemonic-grid">
+        <div class="mnemonic-card">
+          <div class="mnemonic-card-title">🌸 নারী ছদ্মনামে পুরুষ লেখক</div>
+          • অচিন্ত্যকুমার সেনগুপ্ত → <strong>নীহারিকা দেবী</strong><br>
+          • রবীন্দ্রনাথ ঠাকুর → <strong>শ্রীমতি মধ্যমা</strong>, <strong>শ্রীমতি কনিষ্ঠা</strong>, <strong>আন্নাকালী পাকড়াশী</strong>
+        </div>
+        <div class="mnemonic-card accent">
+          <div class="mnemonic-card-title">🎨 রং ও বিশেষ রূপক</div>
+          • সুনীল গঙ্গোপাধ্যায় → <strong>নীল লোহিত</strong>, <strong>নীল উপাধ্যায়</strong><br>
+          • বলাইচাঁদ মুখোপাধ্যায় → <strong>বনফুল</strong><br>
+          • বিনয়কৃষ্ণ মুখোপাধ্যায় → <strong>যাযাবর</strong>
+        </div>
+        <div class="mnemonic-card success">
+          <div class="mnemonic-card-title">🦅 পাখি ও প্রাণী রূপক</div>
+          • কালীপ্রসন্ন সিংহ → <strong>হুতোম পেঁচা</strong><br>
+          • বিমল ঘোষ → <strong>মৌমাছি</strong><br>
+          • বিহারীলাল চক্রবর্তী → <strong>ভোরের পাখি</strong> (রবীন্দ্রনাথ প্রদত্ত)
+        </div>
+        <div class="mnemonic-card warning">
+          <div class="mnemonic-card-title">👑 শীর্ষ ৫টি রাজকীয় উপাধি</div>
+          • হরপ্রসাদ শাস্ত্রী → <strong>মহামহোপাধ্যায়</strong> (১৮৯৮)<br>
+          • ঈশ্বরচন্দ্র → <strong>বিদ্যাসাগর</strong> (১৮৩৯)<br>
+          • মুকুন্দদাস → <strong>চারণকবি</strong><br>
+          • সৈয়দ শামসুল হক → <strong>সব্যসাচী লেখক</strong>
+        </div>
+      </div>
+
+      <!-- ইন্টারেক্টিভ সার্চ ও ফিল্টার টুলবার -->
+      <div class="filter-toolbar">
+        <div class="search-box-wrap">
+          <span class="search-icon-svg">🔍</span>
+          <input type="text" id="pen-search" placeholder="ছদ্মনাম, উপাধি বা সাহিত্যিকের নাম দিয়ে দ্রুত খুঁজুন..." oninput="filterTable()">
+        </div>
+        <div class="filter-pills-row">
+          <div class="filter-pills">
+            <button class="filter-pill active" data-filter="all" onclick="setCategoryFilter('all', this)">✨ সব তালিকা (৩১)</button>
+            <button class="filter-pill" data-filter="title" onclick="setCategoryFilter('title', this)">👑 উপাধিসমূহ</button>
+            <button class="filter-pill" data-filter="pen" onclick="setCategoryFilter('pen', this)">🎭 ছদ্মনামসমূহ</button>
+            <button class="filter-pill" data-filter="female" onclick="setCategoryFilter('female', this)">🌸 নারী ছদ্মনাম</button>
+            <button class="filter-pill" data-filter="special" onclick="setCategoryFilter('special', this)">⭐ বিশেষ মর্যাদা ও ডাকনাম</button>
+          </div>
+          <span id="pen-visible-count" style="font-size:12.5px; font-weight:700; color:var(--text-muted);">প্রদর্শিত: ৩১ টি</span>
+        </div>
+      </div>
+
       <div class="table-responsive">
         <table class="custom-table">
           <thead>
             <tr>
-              <th>প্রকৃত নাম</th>
-              <th>ছদ্মনাম / উপাধি / ডাকনাম</th>
+              <th style="min-width:140px;">প্রকৃত নাম</th>
+              <th style="min-width:190px;">ছদ্মনাম / উপাধি / ডাকনাম</th>
               <th>অতিরিক্ত তথ্য / প্রাসঙ্গিক প্রেক্ষাপট (বইয়ের নোট)</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
+          <tbody id="pen-table-body">
+            <tr data-category="title">
               <td><strong>হরপ্রসাদ শাস্ত্রী</strong></td>
-              <td><mark>মহামহোপাধ্যায়</mark> (উপাধি)</td>
+              <td><mark>মহামহোপাধ্যায়</mark> <span class="badge-type badge-title">উপাধি</span></td>
               <td>১৮৯৮ সালে ব্রিটিশ সরকার তাঁকে এ উপাধি দেয়; চর্যাপদ আবিষ্কারক (১৯০৭)।</td>
             </tr>
-            <tr>
+            <tr data-category="title">
               <td><strong>ঈশ্বরচন্দ্র বিদ্যাসাগর</strong></td>
-              <td>বিদ্যাসাগর (উপাধি)</td>
+              <td>বিদ্যাসাগর <span class="badge-type badge-title">উপাধি</span></td>
               <td>১৮৩৯ সালে কলকাতার সংস্কৃত কলেজ তাঁকে এই উপাধি প্রদান করে।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>সুনীল গঙ্গোপাধ্যায়</strong></td>
-              <td><mark>নীল লোহিত</mark>, নীল উপাধ্যায়, সনাতন পাঠক</td>
+              <td><mark>নীল লোহিত</mark>, নীল উপাধ্যায়, সনাতন পাঠক <span class="badge-type badge-pen">ছদ্মনাম</span></td>
               <td>কবি, ঔপন্যাসিক ও সাংবাদিক (১৯৩৪–২০১২); 'টাইম ট্রিলজি'র রচয়িতা।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>সমরেশ বসু</strong></td>
-              <td><mark>কালকূট</mark>, হাবু শর্মা</td>
+              <td><mark>কালকূট</mark>, হাবু শর্মা <span class="badge-type badge-pen">ছদ্মনাম</span></td>
               <td>কথাসাহিত্যিক, ঔপন্যাসিক ও গল্পকার (১৯২৪–১৯৮৮)।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>সতিনাথ ভাদুড়ী</strong></td>
-              <td>চিত্রগুপ্ত</td>
+              <td>চিত্রগুপ্ত <span class="badge-type badge-pen">ছদ্মনাম</span></td>
               <td>পৃষ্ঠা ১৭৯-এর মূল তালিকায় মুদ্রিত।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>তারাশঙ্কর বন্দ্যোপাধ্যায়</strong></td>
-              <td>দৃষ্টিহীন</td>
+              <td>দৃষ্টিহীন <span class="badge-type badge-pen">ছদ্মনাম</span></td>
               <td>পৃষ্ঠা ১৭৯-এর ছদ্মনাম তালিকাভুক্ত।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>দক্ষিণারঞ্জনমিত্র মজুমদার</strong></td>
-              <td>দৃষ্টিহীন</td>
+              <td>দৃষ্টিহীন <span class="badge-type badge-pen">ছদ্মনাম</span></td>
               <td>পৃষ্ঠা ১৭৯-এর ছদ্মনাম তালিকাভুক্ত।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>সৈয়দ মুজতবা আলী</strong></td>
-              <td>ওমর খৈয়াম, সত্যপীর, রায়পিথোর</td>
+              <td>ওমর খৈয়াম, সত্যপীর, রায়পিথোর <span class="badge-type badge-pen">ছদ্মনাম</span></td>
               <td>পৃষ্ঠা ১৭৯-এর মূল ছকভুক্ত।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>বলাইচাঁদ মুখোপাধ্যায়</strong></td>
-              <td><mark>বনফুল</mark></td>
+              <td><mark>বনফুল</mark> <span class="badge-type badge-pen">ছদ্মনাম</span></td>
               <td>স্কুলে পড়ার সময় থেকেই 'বনফুল' নামে কবিতা লিখতেন।</td>
             </tr>
-            <tr>
+            <tr data-category="pen female">
               <td><strong>অচিন্ত্যকুমার সেনগুপ্ত</strong></td>
-              <td>নীহারিকা দেবী</td>
+              <td>নীহারিকা দেবী <span class="badge-type badge-female">নারী ছদ্মনাম</span></td>
               <td>পৃষ্ঠা ১৭৯-এর তালিকায় উল্লেখিত।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>বিনয়কৃষ্ণ মুখোপাধ্যায়</strong></td>
-              <td>যাযাবর</td>
+              <td>যাযাবর <span class="badge-type badge-pen">ছদ্মনাম</span></td>
               <td>পৃষ্ঠা ১৭৯-এর তালিকায় উল্লেখিত।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>অন্নদাশংকর রায়</strong></td>
-              <td>লীলাময় রায়</td>
+              <td>লীলাময় রায় <span class="badge-type badge-pen">ছদ্মনাম</span></td>
               <td>পৃষ্ঠা ১৭৯-এর তালিকায় উল্লেখিত।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>বিমল ঘোষ</strong></td>
-              <td>মৌমাছি</td>
+              <td>মৌমাছি <span class="badge-type badge-pen">ছদ্মনাম</span></td>
               <td>পৃষ্ঠা ১৭৯-এর তালিকায় উল্লেখিত।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>কালিকানন্দ</strong></td>
-              <td>অবধূত</td>
+              <td>অবধূত <span class="badge-type badge-pen">ছদ্মনাম</span></td>
               <td>পৃষ্ঠা ১৭৯-এর তালিকায় উল্লেখিত।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>বিমল মিত্র</strong></td>
-              <td>জাবালি</td>
+              <td>জাবালি <span class="badge-type badge-pen">ছদ্মনাম</span></td>
               <td>পৃষ্ঠা ১৭৯-এর তালিকায় উল্লেখিত।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>কালীপ্রসন্ন সিংহ</strong></td>
-              <td>হুতোম পেঁচা</td>
+              <td>হুতোম পেঁচা <span class="badge-type badge-pen">ছদ্মনাম</span></td>
               <td>পৃষ্ঠা ১৭৯-এর তালিকায় উল্লেখিত।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>রাজশেখর বসু</strong></td>
-              <td>পরশুরাম</td>
+              <td>পরশুরাম <span class="badge-type badge-pen">ছদ্মনাম</span></td>
               <td>পৃষ্ঠা ১৭৯ ও ১৮১-তে উল্লেখিত।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>চারুচন্দ্র চক্রবর্তী</strong></td>
-              <td>জরাসন্ধ</td>
+              <td>জরাসন্ধ <span class="badge-type badge-pen">ছদ্মনাম</span></td>
               <td>পৃষ্ঠা ১৭৯-এর তালিকায় উল্লেখিত।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>প্রমথ চৌধুরী</strong></td>
-              <td><mark>বীরবল</mark></td>
+              <td><mark>বীরবল</mark> <span class="badge-type badge-pen">ছদ্মনাম</span></td>
               <td>বাংলা গদ্যে চলিত রীতির প্রবর্তক; 'বীরবলের হালখাতা' (১৯০২)।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>প্রমথনাথ বিশী</strong></td>
-              <td>প্রণবী</td>
+              <td>প্রণবী <span class="badge-type badge-pen">ছদ্মনাম</span></td>
               <td>৩৮তম বিসিএস ব্যাখ্যার অন্তর্ভুক্ত।</td>
             </tr>
-            <tr>
+            <tr data-category="title">
               <td><strong>মুকুন্দদাস</strong></td>
-              <td><mark>চারণকবি</mark> (উপাধি)</td>
+              <td><mark>চারণকবি</mark> <span class="badge-type badge-title">উপাধি</span></td>
               <td>রবীন্দ্রনাথ ঠাকুর ও কাজী নজরুল ইসলাম তাঁকে এই মর্যাদা দেন।</td>
             </tr>
-            <tr>
+            <tr data-category="pen title">
               <td><strong>আবদুল মান্নান সৈয়দ</strong></td>
-              <td>অশোক সৈয়দ / <mark>পরাবাস্তব কবি</mark></td>
+              <td>অশোক সৈয়দ / <mark>পরাবাস্তব কবি</mark> <span class="badge-type badge-pen">ছদ্মনাম</span> <span class="badge-type badge-title">উপাধি</span></td>
               <td>প্রথম জীবনে 'অশোক সৈয়দ' ছদ্মনামে লিখতেন।</td>
             </tr>
-            <tr>
+            <tr data-category="title">
               <td><strong>বিহারীলাল চক্রবর্তী</strong></td>
-              <td><mark>ভোরের পাখি</mark> / বিজনবাসী ভাবনিমগ্ন কবি</td>
+              <td><mark>ভোরের পাখি</mark> / বিজনবাসী ভাবনিমগ্ন কবি <span class="badge-type badge-title">উপাধি</span></td>
               <td>গীতিকবিতার গুরু; রবীন্দ্রনাথ ঠাকুর তাঁকে 'ভোরের পাখি' আখ্যা দেন।</td>
             </tr>
-            <tr>
+            <tr data-category="pen female">
               <td><strong>রবীন্দ্রনাথ ঠাকুর</strong></td>
-              <td>ভানুসিংহ ঠাকুর, অকপট চন্দ্র ভাস্কর, আন্নাকালী পাকড়াশী, দিকশূন্য ভট্টাচার্য, ষষ্ঠীচরণ দেবশর্মা, বাণীবিনোদ, বিদ্যাবিনোদ, নবীন কিশোর শর্মণ, ভূতনাথ বাবু, শ্রীমতি মধ্যমা, শ্রীমতি কনিষ্ঠা</td>
+              <td>ভানুসিংহ ঠাকুর, অকপট চন্দ্র ভাস্কর, আন্নাকালী পাকড়াশী, দিকশূন্য ভট্টাচার্য, ষষ্ঠীচরণ দেবশর্মা, বাণীবিনোদ, বিদ্যাবিনোদ, নবীন কিশোর শর্মণ, ভূতনাথ বাবু, শ্রীমতি মধ্যমা, শ্রীমতি কনিষ্ঠা <span class="badge-type badge-pen">ছদ্মনাম</span> <span class="badge-type badge-female">নারী ছদ্মনাম অন্তর্ভুক্ত</span></td>
               <td>পৃষ্ঠা ১৮১-এর ব্যাখ্যায় উল্লেখিত রবীন্দ্র-ছদ্মনামমালা।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>মোহিতলাল মজুমদার</strong></td>
-              <td>কৃত্তিবাস ওঝা, সত্যসুন্দর দাস</td>
+              <td>কৃত্তিবাস ওঝা, সত্যসুন্দর দাস <span class="badge-type badge-pen">ছদ্মনাম</span></td>
               <td>২৬তম বিসিএস ব্যাখ্যার অন্তর্ভুক্ত।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>ঈশ্বরচন্দ্র গুপ্ত</strong></td>
-              <td>ভ্রমণকারী বন্ধু</td>
+              <td>ভ্রমণকারী বন্ধু <span class="badge-type badge-pen">ছদ্মনাম</span></td>
               <td>পৃষ্ঠা ১৮১-এর ব্যাখ্যায় উল্লেখিত।</td>
             </tr>
-            <tr>
+            <tr data-category="pen">
               <td><strong>শেখ আজিজুর রহমান</strong></td>
-              <td>শওকত ওসমান (প্রকৃত নাম শেখ আজিজুর রহমান)</td>
+              <td>শওকত ওসমান (প্রকৃত নাম শেখ আজিজুর রহমান) <span class="badge-type badge-pen">সাহিত্যিক নাম</span></td>
               <td>৪১তম বিসিএস-এর অপশন ব্যাখ্যায় উল্লেখিত।</td>
             </tr>
-            <tr>
+            <tr data-category="special">
               <td><strong>আলাউদ্দিন আল আজাদ</strong></td>
-              <td>বাদশাহ (ডাকনাম)</td>
+              <td>বাদশাহ <span class="badge-type badge-nick">ডাকনাম</span></td>
               <td>৪১তম বিসিএস-এর অপশন ব্যাখ্যায় উল্লেখিত।</td>
             </tr>
-            <tr>
+            <tr data-category="title">
               <td><strong>সৈয়দ শামসুল হক</strong></td>
-              <td>সব্যসাচী লেখক (উপাধি)</td>
+              <td>সব্যসাচী লেখক <span class="badge-type badge-title">উপাধি</span></td>
               <td>৩১তম বিসিএস-এর অপশন ব্যাখ্যায় উল্লেখিত।</td>
             </tr>
-            <tr>
+            <tr data-category="special title">
               <td><strong>আলাওল</strong></td>
-              <td>মধ্যযুগের সর্বাধিক গ্রন্থপ্রণেতা কবি (৭টি কাব্য)</td>
+              <td>মধ্যযুগের সর্বাধিক গ্রন্থপ্রণেতা কবি (৭টি কাব্য) <span class="badge-type badge-special">বিশেষ মর্যাদা</span></td>
               <td>৪১তম বিসিএস ব্যাখ্যার তথ্য।</td>
             </tr>
-            <tr>
+            <tr data-category="special title">
               <td><strong>চন্দ্রাবতী</strong></td>
-              <td>মধ্যযুগের প্রথম মহিলা কবি</td>
+              <td>মধ্যযুগের প্রথম মহিলা কবি <span class="badge-type badge-special">বিশেষ মর্যাদা</span></td>
               <td>মনসামঙ্গলের কবি দ্বিজ বংশীদাসের কন্যা।</td>
             </tr>
           </tbody>
         </table>
+        <div class="no-results-msg" id="no-pen-results">
+          🔍 আপনার অনুসন্ধানের সাথে মিলে এমন কোনো সাহিত্যিক বা ছদ্মনাম পাওয়া যায়নি।
+        </div>
       </div>
     </section>
 
@@ -1486,6 +1698,46 @@
 
       updateScoreDisplay();
       window.location.hash = 'sec-quiz';
+    }
+
+    /* ══════ ছদ্মনাম ও উপাধি লাইভ ফিল্টার ও সার্চ ══════ */
+    function filterTable() {
+      const searchInput = document.getElementById('pen-search');
+      const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
+      const activePill = document.querySelector('.filter-pill.active');
+      const filterCat = activePill ? activePill.getAttribute('data-filter') : 'all';
+      const rows = document.querySelectorAll('#pen-table-body tr');
+      let visibleCount = 0;
+
+      rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        const cat = row.getAttribute('data-category') || '';
+        const matchesQuery = !query || text.includes(query);
+        const matchesCategory = filterCat === 'all' || cat.includes(filterCat);
+
+        if (matchesQuery && matchesCategory) {
+          row.style.display = '';
+          visibleCount++;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      const noMsg = document.getElementById('no-pen-results');
+      if (noMsg) noMsg.style.display = visibleCount === 0 ? 'block' : 'none';
+
+      const countEl = document.getElementById('pen-visible-count');
+      if (countEl) {
+        const bnDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+        const bnCount = String(visibleCount).replace(/\d/g, d => bnDigits[d]);
+        countEl.textContent = `প্রদর্শিত: ${bnCount} টি`;
+      }
+    }
+
+    function setCategoryFilter(cat, btn) {
+      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      filterTable();
     }
 
     (function init() {
