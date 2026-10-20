@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বাংলা সাহিত্যের আধুনিক যুগের বিকাশ - বিসিএস প্রস্তুতি</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ══════ CSS ভ্যারিয়েবল ও থিম কালার (নবজাগরণ ও আধুনিকতার রাজকীয় ইন্ডিগো ও উজ্জ্বল অ্যাম্বার) ══════ */
+    :root {
+      --font-scale: 100%;
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-surface-alt: #edf2f7;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --primary: #1e3a8a; /* নবজাগরণের গম্ভীর ইন্ডিগো নেভি */
+      --primary-light: #dbeafe;
+      --accent: #b45309; /* আধুনিক সাহিত্য বিকাশের স্বর্ণালি ব্রোঞ্জ */
+      --accent-light: #fef3c7;
+      --success: #15803d;
+      --success-light: #dcfce7;
+      --danger: #b91c1c;
+      --danger-light: #fee2e2;
+      --warning: #c2410c;
+      --warning-light: #ffedd5;
+      --border-color: #cbd5e1;
+      --card-border: #94a3b8;
+      --shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+      --shadow-hover: 0 8px 24px rgba(15, 23, 42, 0.14);
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg-base: #090d16;
+      --bg-surface: #111827;
+      --bg-surface-alt: #1a2436;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #60a5fa;
+      --primary-light: #1e293b;
+      --accent: #fbbf24;
+      --accent-light: #31250d;
+      --success: #4ade80;
+      --success-light: #12381f;
+      --danger: #f87171;
+      --danger-light: #3d1416;
+      --warning: #fb923c;
+      --warning-light: #381e0e;
+      --border-color: #243048;
+      --card-border: #3b4d70;
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+      --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.7);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: var(--font-scale);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans Bengali', 'Kalpurush', Vrinda, sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.8;
+      min-width: 320px;
+      padding-bottom: 80px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    mark {
+      background-color: #fde047;
+      color: #0f172a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    /* ══════ প্রগ্রেস বার ও কন্ট্রোল বার ══════ */
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: transparent;
+      z-index: 1000;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.1s;
+    }
+
+    .control-bar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: var(--bg-surface);
+      border-bottom: 2px solid var(--border-color);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .control-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-ctrl {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .btn-ctrl:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* ══════ সূচি ড্রপডাউন ══════ */
+    #toc-panel {
+      display: none;
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-hover);
+    }
+
+    #toc-panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .toc-item a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      background: var(--bg-surface-alt);
+      transition: var(--transition);
+    }
+
+    .toc-item a:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* ══════ হিরো ব্যানার ══════ */
+    .hero-banner {
+      background: linear-gradient(135deg, #1e3a8a, #0b1329);
+      color: #ffffff;
+      padding: 34px 20px;
+      border-radius: 20px;
+      margin: 24px 0;
+      box-shadow: var(--shadow);
+      border: 3px solid #3b82f6;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: #f59e0b;
+      color: #0b1329;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+      font-size: 15.5px;
+      color: #cbd5e1;
+      margin-bottom: 20px;
+    }
+
+    .study-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .step-box {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+
+    .step-box strong {
+      display: block;
+      color: #fde047;
+      margin-bottom: 2px;
+    }
+
+    /* ══════ সেকশন সাধারণ স্টাইল ══════ */
+    .study-section {
+      margin-top: 36px;
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .section-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .section-meta {
+      font-size: 13px;
+      background: var(--bg-surface-alt);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    /* ══════ বিসিএস ট্রেন্ড গ্রিড ══════ */
+    .bcs-matrix {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .bcs-cell {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .bcs-cell.active {
+      border: 2px solid var(--primary);
+      background: var(--primary-light);
+    }
+
+    .bcs-exam {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .bcs-cell.active .bcs-exam {
+      color: var(--primary);
+    }
+
+    .bcs-qcount {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 4px;
+    }
+
+    /* ══════ কার্ড ডিজাইন ══════ */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .info-card {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-left: 6px solid var(--primary);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .info-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    .card-heading {
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .fact-pill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .fact-item {
+      font-size: 14.5px;
+      background: var(--bg-surface-alt);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+    }
+
+    /* ══════ ডায়াগ্রাম / ফ্লো ভিউ ══════ */
+    .flow-connector {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--bg-surface-alt);
+      padding: 14px;
+      border-radius: 10px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .flow-badge {
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 13.5px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* ══════ ছক ডিজাইন ══════ */
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      margin: 16px 0;
+      border-radius: 10px;
+      border: 2px solid var(--border-color);
+    }
+
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14.5px;
+    }
+
+    .custom-table th {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 12px 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .custom-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+
+    .custom-table tr:nth-child(even) td {
+      background: var(--bg-surface-alt);
+    }
+
+    .custom-table tr:hover td {
+      background: var(--primary-light);
+    }
+
+    /* ══════ ফাঁদ ও সতর্কতা বক্স ══════ */
+    .trap-box {
+      background: var(--danger-light);
+      border: 2px solid var(--danger);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+      color: var(--text-main);
+    }
+
+    .trap-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--danger);
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .alert-box {
+      background: var(--warning-light);
+      border: 2px solid var(--warning);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+
+    .alert-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--warning);
+      margin-bottom: 6px;
+    }
+
+    /* ══════ কুইজ সেকশন ══════ */
+    .quiz-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .quiz-card {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .quiz-q-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .bcs-tag {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .quiz-question {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .opt-btn {
+      background: var(--bg-surface-alt);
+      border: 1.5px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14.5px;
+      font-family: inherit;
+      color: var(--text-main);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--border-color);
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--text-main);
+      flex-shrink: 0;
+    }
+
+    .opt-btn.correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+      color: var(--success) !important;
+      font-weight: 700;
+    }
+
+    .opt-btn.correct .opt-letter {
+      background: var(--success);
+      color: #fff;
+    }
+
+    .opt-btn.wrong {
+      background: var(--danger-light) !important;
+      border-color: var(--danger) !important;
+      color: var(--danger) !important;
+    }
+
+    .opt-btn.wrong .opt-letter {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .quiz-explanation {
+      display: none;
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 8px;
+      background: var(--bg-surface-alt);
+      border-left: 4px solid var(--primary);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .quiz-explanation.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    /* ══════ রিভিশন ফ্ল্যাশকার্ড ══════ */
+    .revision-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .rev-card {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .rev-q {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .rev-ans {
+      display: none;
+      font-size: 14px;
+      padding-top: 6px;
+      border-top: 1px dashed var(--border-color);
+      color: var(--text-main);
+    }
+
+    .rev-ans.active {
+      display: block;
+    }
+
+    .score-banner {
+      background: var(--bg-surface);
+      border: 2px solid var(--primary);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 24px;
+      box-shadow: var(--shadow);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .score-display {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    @media print {
+      .control-bar, #progress-container, .btn-ctrl, .opt-btn {
+        display: none !important;
+      }
+      body {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .quiz-explanation {
+        display: block !important;
+      }
+      .study-section {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        page-break-inside: avoid;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DESIGN PLAN: 
+    ১. বিষয়ের ধরন: বাংলা সাহিত্যের আধুনিক যুগের বিকাশ — গদ্যের সূচনা ও স্তর, ফোর্ট উইলিয়াম কলেজ (১৮০১-১৮১৫), নাটকের উদ্ভব ও গঠন (৫টি পর্ব), ব্যাকরণ ও ইতিহাস রচনার সূচনা, রামমোহন রায়, প্যারীচাঁদ মিত্র, হরপ্রসাদ শাস্ত্রী ও ডিরোজিওর ইয়ং বেঙ্গল (পৃষ্ঠা ১০১–১০৭)।
+    ২. সবচেয়ে কঠিন/গুলিয়ে ফেলার জায়গা: (ক) গদ্যের সূচনা ১৬ শতকে (১৫৫৫ সালের কোচবিহারের চিঠি) কিন্তু সাহিত্যে ব্যবহার ১৯ শতকে; সুকুমার সেনের ৪টি স্তর (খ) ফোর্ট উইলিয়াম কলেজের লেখক ও গ্রন্থসমূহ (কেরী, রামরাম বসু, মৃত্যুঞ্জয় বিদ্যালঙ্কার প্রমুখ) বনাম প্রথম মৌলিক গদ্য (গ) বাংলা ভাষায় প্রথম ব্যাকরণ (১৭৪৩ পর্তুগিজ অধ্যায়, ১৭৭৮ হ্যালহেডের ইংরেজি বই, ১৮৩৩ রামমোহনের গৌড়ীয় ব্যাকরণ) (ঘ) নাটকের ৫টি পর্ব (মুখ, প্রতিমুখ, গর্ভ, বিমর্ষ, উপসংহতি) এবং প্রথম নাটক (কাল্পনিক সংবদল ১৭৯৫, ভদ্রার্জুন ১৮৫২)।
+    ৩. নির্বাচিত মডিউল: বিসিএস প্রশ্ন পরিসংখ্যান মেট্রিক্স, নাটকের ৫ পর্বের ফ্লোচার্ট, বাংলা গদ্যের ৪ স্তরের টাইমলাইন, ফোর্ট উইলিয়াম কলেজের লেখক ও গ্রন্থের মেগা-ছক, বাংলা ব্যাকরণ ও ইতিহাসের মাইলফলক সারণি, ২৫টি হুবহু ইন্টারঅ্যাকটিভ বিসিএস কুইজ, ৩০ সেকেন্ডের রিভিশন ও বইয়ের অসঙ্গতি যাচাই তালিকা।
+    ৪. রঙের মেজাজ: নবজাগরণ ও আধুনিক প্রাতিষ্ঠানিক বিকাশের রাজকীয় ইন্ডিগো নেভি (#1e3a8a) এবং সোনালি ব্রোঞ্জ (#b45309)।
+    ৫. হিরো ও মাসকট: ফোর্ট উইলিয়াম কলেজ ও শ্রীরামপুর প্রেসের ঐতিহাসিক ছাপাখানা এবং আধুনিকতার দীপ্তি।
+  -->
+
+  <!-- প্রগ্রেস ট্র্যাকার -->
+  <div id="progress-container"><div id="progress-bar"></div></div>
+
+  <!-- স্টিকি কন্ট্রোল বার -->
+  <div class="control-bar">
+    <div class="container control-content">
+      <div class="control-group">
+        <button class="btn-ctrl" onclick="toggleToc()">📖 সূচিপত্র</button>
+        <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn">🌓 মোড</button>
+      </div>
+      <div class="control-group">
+        <button class="btn-ctrl" onclick="changeFontSize(-1)">A-</button>
+        <button class="btn-ctrl" onclick="changeFontSize(0)">A</button>
+        <button class="btn-ctrl" onclick="changeFontSize(1)">A+</button>
+        <button class="btn-ctrl" onclick="window.print()">🖨️ প্রিন্ট</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- ড্রপডাউন সূচি -->
+    <div id="toc-panel">
+      <strong style="color:var(--primary); font-size:16px;">অধ্যায়ের প্রধান অংশসমূহ:</strong>
+      <ul class="toc-list">
+        <li class="toc-item"><a href="#sec-stat" onclick="toggleToc()">📊 বিসিএস পরীক্ষার ট্রেন্ড</a></li>
+        <li class="toc-item"><a href="#sec-drama" onclick="toggleToc()">🎭 নাটকের ৫টি পর্ব ও সূচনা ইতিহাস</a></li>
+        <li class="toc-item"><a href="#sec-prose" onclick="toggleToc()">📜 বাংলা গদ্যের সূচনা ও সুকুমার সেনের ৪ স্তর</a></li>
+        <li class="toc-item"><a href="#sec-fort" onclick="toggleToc()">🏛️ ফোর্ট উইলিয়াম কলেজ পর্ব ও গ্রন্থসমূহ</a></li>
+        <li class="toc-item"><a href="#sec-milestones" onclick="toggleToc()">📚 ব্যাকরণ, উপন্যাস ও ইতিহাসের মাইলফলক</a></li>
+        <li class="toc-item"><a href="#sec-quiz" onclick="toggleToc()">📝 ২৫টি বিসিএস MCQ কুইজ</a></li>
+        <li class="toc-item"><a href="#sec-rev" onclick="toggleToc()">⚡ ৩০ সেকেন্ডের রিভিশন ফ্ল্যাশ</a></li>
+        <li class="toc-item"><a href="#sec-audit" onclick="toggleToc()">⚠️ অসঙ্গতি ও তথ্য যাচাই তালিকা</a></li>
+      </ul>
+    </div>
+
+    <!-- হিরো ব্যানার -->
+    <header class="hero-banner">
+      <span class="hero-tag">বিসিএস স্পেশাল টপিক মাস্টারক্লাস</span>
+      <h1 class="hero-title">বাংলা সাহিত্যের আধুনিক যুগের বিকাশ</h1>
+      <p class="hero-subtitle">গদ্যের উন্মেষ, ফোর্ট উইলিয়াম কলেজ (১৮০১–১৮১৫), নাটকের উদ্ভব, ব্যাকরণ ও সাহিত্যের আদি নিদর্শন (পৃষ্ঠা ১০১–১০৭)</p>
+      
+      <div class="study-steps">
+        <div class="step-box">
+          <strong>ধাপ ১: ৩ মিনিটে স্ক্যান</strong>
+          নাটকের ৫টি পর্ব (মুখ থেকে উপসংহতি) ও গদ্যের ৪টি স্তর দেখে নাও।
+        </div>
+        <div class="step-box">
+          <strong>ধাপ ২: ফোর্ট উইলিয়াম আত্মস্থ</strong>
+          ১৮০১-১৮১৫ সালের ৮ জন লেখক ও ১৩টি বইয়ের তালিকা মুখস্থ করো।
+        </div>
+        <div class="step-box">
+          <strong>ধাপ ৩: কুইজে ১০০%</strong>
+          বিগত বিসিএসের ২৫টি প্রশ্নে অংশ নিয়ে শতভাগ নিশ্চিত প্রস্তুতি নাও।
+        </div>
+      </div>
+    </header>
+
+    <!-- সেকশন ১: বিসিএস ট্রেন্ড -->
+    <section id="sec-stat" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📊</div>
+          <h2 class="section-title">বিসিএস পরীক্ষার প্রশ্ন-পরিসংখ্যান</h2>
+        </div>
+        <span class="section-meta">১০ম থেকে ৫০তম বিসিএস বিশ্লেষণ</span>
+      </div>
+      <p style="font-size: 14.5px; margin-bottom: 12px;">
+        বইয়ের সূচি অনুযায়ী আধুনিক যুগের বিকাশ অংশ থেকে বিসিএস প্রিলিমিনারিতে আসা প্রশ্নের সংখ্যা:
+      </p>
+
+      <div class="bcs-matrix">
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৫০তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪৯তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪৭তম বিসিএস</div>
+          <div class="bcs-qcount">২ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪৬তম বিসিএস</div>
+          <div class="bcs-qcount">২ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪৫তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৩৯তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৩৮তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৩৬তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">১০ম-৩৪তম বিসিএস</div>
+          <div class="bcs-qcount">১৬ টি</div>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">
+        <em>মোট সংকলিত প্রশ্ন সংখ্যা: ২৫টি (ব্যাখ্যাসহ পৃষ্ঠা ১০১–১০৭ থেকে হুবহু সংকলিত)</em>
+      </p>
+    </section>
+
+    <!-- সেকশন ২: নাটকের ৫টি পর্ব ও সূচনা -->
+    <section id="sec-drama" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">🎭</div>
+          <h2 class="section-title">আধুনিক বাংলা নাটকের ৫টি পর্ব ও সূচনা ইতিহাস</h2>
+        </div>
+        <span class="section-meta">৫০তম ও ২৭তম বিসিএস স্পেশাল</span>
+      </div>
+
+      <p style="font-size:14.5px; margin-bottom:14px;">
+        নাটক শব্দের মূল হলো 'নট্', যার অর্থ নড়াচড়া করা বা অঙ্গচালনা করা। অ্যারিস্টটলের মতে পঞ্চাঙ্ক নাটকই আদর্শ নাটক। একটি নাটকের গঠনকে <mark>৫টি পর্বে</mark> বিভক্ত করা যায়:
+      </p>
+
+      <div class="flow-connector">
+        <div class="flow-step">
+          <span class="flow-badge">১. মুখ (Exposition)</span>
+          <div><strong>কাহিনির আরম্ভ:</strong> নাটকের সূচনা এবং পাত্র-পাত্রী ও পরিস্থিতির প্রাথমিক পরিচয়।</div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-badge">২. প্রতিমুখ (Rising Action)</span>
+          <div><strong>কাহিনির ক্রমব্যাপ্তি:</strong> ঘটনাপ্রবাহ জটিল হওয়া এবং দ্বন্দ্বের বিস্তৃতি লাভ।</div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-badge">৩. গর্ভ (Climax)</span>
+          <div><strong>উৎকর্ষ বা চূড়ান্ত দ্বন্দ্ব:</strong> নাটকের চরম মুহূর্ত ও শীর্ষ উত্তেজনা।</div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-badge">৪. বিমর্ষ (Falling Action)</span>
+          <div><strong>গ্রন্থিমোচন:</strong> পরিণতির দিকে দ্রুত অগ্রসর হওয়া ও রহস্য উন্মোচন।</div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-badge">৫. উপসংহতি (Conclusion / Denouement)</span>
+          <div><strong>যবনিকাপাত:</strong> নাটকের চূড়ান্ত পরিণতি ও সমাপ্তি।</div>
+        </div>
+      </div>
+
+      <div class="card-grid" style="margin-top:20px;">
+        <div class="info-card">
+          <span class="card-badge">নাটকের ৪টি প্রধান উপাদান</span>
+          <h3 class="card-heading">মূল উপাদানসমূহ</h3>
+          <p style="font-size:14.5px;">১. কাহিনি বা বিষয়, ২. চরিত্র, ৩. সংলাপ এবং ৪. পরিবেশ।</p>
+        </div>
+        <div class="info-card">
+          <span class="card-badge">প্রথম মঞ্চস্থ বাংলা নাটক (১৭৯৫)</span>
+          <h3 class="card-heading">কাল্পনিক সংবদল</h3>
+          <p style="font-size:14.5px;">১৭৯৫ সালের ২৭ নভেম্বর কলকাতার 'বেঙ্গলি থিয়েটারে' মঞ্চস্থ হয়। রুশদেশীয় যুবক <strong>হেরাসিম লেবেডফ</strong> ইংরেজি নাটক <em>'দ্য ডিসগাইজ'</em> বাংলায় রূপান্তর করেন। এতে সহায়তা করেন পণ্ডিত <strong>গোলকনাথ দাস</strong>।</p>
+        </div>
+        <div class="info-card">
+          <span class="card-badge">প্রথম মৌলিক নাটক (১৮৫২)</span>
+          <h3 class="card-heading">ভদ্রার্জুন (তারাচরণ শিকদার)</h3>
+          <p style="font-size:14.5px;">বাংলা সাহিত্যের প্রথম মৌলিক নাটক (কমেডি)। উপজীব্য: অর্জুন কর্তৃক সুভদ্রা হরণ। চরিত্র: অর্জুন, সুভদ্রা, শ্রীকৃষ্ণ, বলরাম, দুর্যোধন।</p>
+        </div>
+        <div class="info-card">
+          <span class="card-badge">প্রথম ট্র্যাজেডি নাটক</span>
+          <h3 class="card-heading">কীর্তিবিলাস ও কৃষ্ণকুমারী</h3>
+          <p style="font-size:14.5px;">যোগেন্দ্রচন্দ্র গুপ্ত রচিত <em>'কীর্তিবিলাস'</em> (১৮৫২) বাংলা সাহিত্যের প্রথম ট্র্যাজেডি এবং মাইকেল মধুসূদন দত্তের <em>'কৃষ্ণকুমারী'</em> (১৮৬১) প্রথম সার্থক ট্র্যাজেডি।</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- সেকশন ৩: বাংলা গদ্যের সূচনা ও ৪টি স্তর -->
+    <section id="sec-prose" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📜</div>
+          <h2 class="section-title">বাংলা গদ্যের সূচনা ও সুকুমার সেনের ৪টি স্তর</h2>
+        </div>
+        <span class="section-meta">২৮তম বিসিএস ব্যাখ্যাভিত্তিক</span>
+      </div>
+
+      <div class="trap-box">
+        <div class="trap-header">⚠️ সাবধান! গদ্যের সূচনা বনাম সাহিত্যে ব্যবহার</div>
+        • <strong>গদ্যরীতির সূচনা:</strong> ষোড়শ শতকে (১৫৫৫ সালে আসামরাজকে লেখা কোচবিহারের রাজার পত্রটি প্রাচীনতম নিদর্শন)।<br>
+        • <strong>সাহিত্যে গদ্যের আনুষ্ঠানিক ব্যবহার:</strong> <mark>উনিশ শতকে</mark> (ফোর্ট উইলিয়াম কলেজ ও শ্রীরামপুর মিশনের মাধ্যমে)।
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>গদ্যের স্তর</th>
+              <th>কালপরিধি</th>
+              <th>ঐতিহাসিক ঘটনা ও মাইলফলক (বইয়ের নোট)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>প্রথম স্তর (সূচনা)</strong></td>
+              <td>১৬ শতক থেকে ১৮০০ সালের পূর্ব পর্যন্ত</td>
+              <td>চিঠিপত্র, দলিল-দস্তাবেজ ও পর্তুগিজ পাদ্রিদের ধর্মপ্রচারে সীমাবদ্ধ।</td>
+            </tr>
+            <tr>
+              <td><strong>দ্বিতীয় স্তর (উন্মেষ)</strong></td>
+              <td>১৮০০ (শ্রীরামপুর মিশন) থেকে ১৮৪৭ সাল (বিদ্যাসাগর)</td>
+              <td>ফোর্ট উইলিয়াম কলেজ পর্বের পাঠ্যপুস্তক রচনা ও প্রাতিষ্ঠানিক ভিত্তি স্থাপন।</td>
+            </tr>
+            <tr>
+              <td><strong>তৃতীয় স্তর (অভ্যুদয়)</strong></td>
+              <td>১৮৪৭ (বিদ্যাসাগর) থেকে ১৮৬৫ সাল (বঙ্কিমচন্দ্র)</td>
+              <td>যতিচিহ্ন প্রবর্তন, সাহিত্যিক গদ্যের সূচনা ও উৎকর্ষ সাধন।</td>
+            </tr>
+            <tr>
+              <td><strong>চতুর্থ স্তর (পরিণতি)</strong></td>
+              <td>১৮৬৫ (বঙ্কিমচন্দ্র চট্টোপাধ্যায়) থেকে বর্তমান কাল</td>
+              <td>বাংলা উপন্যাসের বিকাশ ও আধুনিক সাহিত্যিক গদ্যের পূর্ণ বিকাশ।</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- সেকশন ৪: ফোর্ট উইলিয়াম কলেজ পর্ব -->
+    <section id="sec-fort" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">🏛️</div>
+          <h2 class="section-title">ফোর্ট উইলিয়াম কলেজ (১৮০১–১৮১৫): ৮ জন লেখক ও ১৩টি বই</h2>
+        </div>
+        <span class="section-meta">৪৭তম, ৪৬তম, ৩৮তম, ৩৬তম ও ২৬তম বিসিএস</span>
+      </div>
+
+      <p style="font-size:14.5px; margin-bottom:12px;">
+        লর্ড ওয়েলেসলি কর্তৃক ১৮০০ সালের ৪ মে কলেজটি প্রতিষ্ঠিত হয় এবং ২৪ নভেম্বর থেকে কাজ শুরু হয়। ১৮০১ সালের ২৪ নভেম্বর বাংলা বিভাগ খোলা হলে উইলিয়াম কেরী প্রধান নিযুক্ত হন। ১৮০১-১৮১৫ সালের মধ্যে ৮ জন লেখক ১৩ খানি গদ্যপুস্তক রচনা করেন, যা মূলত <strong>সংস্কৃত বইয়ের অনুবাদ বা সংস্কৃতের প্রভাবে রচিত</strong>।
+      </p>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>লেখক / পণ্ডিতের নাম</th>
+              <th>রচিত গ্রন্থ ও সাল</th>
+              <th>বিশেষ ঐতিহাসিক গুরুত্ব (বইয়ের নোট)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>উইলিয়াম কেরী</strong><br>(খ্রিষ্টান ধর্মপ্রচারক ও অধ্যক্ষ)</td>
+              <td>
+                • কথোপকথন (১৮০১)<br>
+                • ইতিহাসমালা (১৮১২)<br>
+                • A Grammar of the Bangalee Language
+              </td>
+              <td>
+                <em>'কথোপকথন'</em> বাংলা কথ্যরীতির প্রথম নিদর্শন (দ্বিভাষিক: এক পৃষ্ঠা বাংলা, অপর পৃষ্ঠা ইংরেজি; কলেজের ২য় বই)।<br>
+                <em>'ইতিহাসমালা'</em> বাংলা ভাষার প্রথম গল্পগ্রন্থ।
+              </td>
+            </tr>
+            <tr>
+              <td><strong>রামরাম বসু</strong><br>(কেরী সাহেবের মুন্সী ও শিক্ষক)</td>
+              <td>
+                • রাজা প্রতাপাদিত্য চরিত্র (১৮০১)<br>
+                • লিপিমালা (১৮০২)
+              </td>
+              <td>
+                <em>'রাজা প্রতাপাদিত্য চরিত্র'</em> বাঙালির লেখা প্রথম বাংলা মৌলিক গদ্যগ্রন্থ এবং প্রথম মুদ্রিত বাংলা বই (শ্রীরামপুর মিশন থেকে মুদ্রিত; ফোর্ট উইলিয়ামের ১ম বই)।
+              </td>
+            </tr>
+            <tr>
+              <td><strong>মৃত্যুঞ্জয় বিদ্যালঙ্কার</strong><br>(প্রথম হেড পণ্ডিত ও শ্রেষ্ঠ লেখক)</td>
+              <td>
+                • বত্রিশ সিংহাসন (১৮০২)<br>
+                • হিতোপদেশ (১৮০৮)<br>
+                • রাজাবলি (১৮০৮)<br>
+                • বেদান্তচন্দ্রিকা (১৮১৭)<br>
+                • প্রবোধচন্দ্রিকা (১৮৩৩)
+              </td>
+              <td>
+                কলেজের লেখকদের মধ্যে সর্বশ্রেষ্ঠ ও সর্বাধিক গ্রন্থের রচয়িতা (৫টি গ্রন্থ)।
+              </td>
+            </tr>
+            <tr>
+              <td><strong>গোলোকনাথ শর্মা</strong></td>
+              <td>• হিতোপদেশ (১৮০২)</td>
+              <td>কলেজের শিক্ষক ছিলেন না, তবে তাঁর বইটি কলেজের পাঠ্য ছিল।</td>
+            </tr>
+            <tr>
+              <td><strong>তারিণীচরণ মিত্র</strong></td>
+              <td>• ওরিয়েন্টাল ফেবুলিস্ট (১৮০৩)</td>
+              <td>প্রাচ্যের নীতিগল্পের অনুবাদ।</td>
+            </tr>
+            <tr>
+              <td><strong>রাজীবলোচন মুখোপাধ্যায়</strong></td>
+              <td>• মহারাজ কৃষ্ণচন্দ্র রায়স্য চরিতং (১৮০৫)</td>
+              <td>ঐতিহাসিক চরিত্র নির্ভর গদ্যগ্রন্থ।</td>
+            </tr>
+            <tr>
+              <td><strong>চণ্ডীচরণ মুন্সী</strong></td>
+              <td>• তোতা ইতিহাস (১৮০৫)</td>
+              <td>ফরাসি সাহিত্য থেকে অনুবাদকৃত উপাখ্যান।</td>
+            </tr>
+            <tr>
+              <td><strong>হরপ্রসাদ রায়</strong></td>
+              <td>• পুরুষ পরীক্ষা (১৮১৫)</td>
+              <td>ফোর্ট উইলিয়াম পর্বের সর্বশেষ গ্রন্থ।</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:13px; color:var(--text-muted); margin-top:6px;">
+        <em>বি.দ্র. ঈশ্বরচন্দ্র বিদ্যাসাগর ও মদনমোহন তর্কালঙ্কারও পরবর্তীকালে ফোর্ট উইলিয়াম কলেজের পণ্ডিত ছিলেন। ১৮৫৪ সালে ডালহৌসির সরকার কলেজটি বিলুপ্ত করে।</em>
+      </p>
+    </section>
+
+    <!-- সেকশন ৫: ব্যাকরণ, উপন্যাস ও ইতিহাসের মাইলফলক -->
+    <section id="sec-milestones" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📚</div>
+          <h2 class="section-title">ব্যাকরণ, উপন্যাস ও সাহিত্যের প্রধান মাইলফলক</h2>
+        </div>
+        <span class="section-meta">২৯তম, ২৭তম, ২৬তম ও ২৫তম বিসিএস</span>
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>বিষয় / শাখা</th>
+              <th>গ্রন্থ ও প্রকাশের সাল</th>
+              <th>রচয়িতা / ব্যক্তিত্ব ও বৈশিষ্ট্য (বইয়ের নোট)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>পর্তুগিজ ভাষায় প্রথম বাংলা ব্যাকরণ</strong></td>
+              <td>Vocabulario em Idioma Bengalla E Portugues (১৭৪৩)</td>
+              <td><strong>ম্যানোয়েল দ্যা আসসুম্পসাঁউ</strong>; এটি স্বতন্ত্র গ্রন্থ ছিল না, একটি অধ্যায় ছিল মাত্র।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রথম বাংলা টাইপ মুদ্রিত ব্যাকরণ</strong></td>
+              <td>A Grammar of the Bengal Language (১৭৭৮)</td>
+              <td><strong>নাথানিয়েল ব্রাসি হ্যালহেড</strong>; এ গ্রন্থেই প্রথম বাংলা হরফ মুদ্রিত হয় (লিপিকর পঞ্চানন কর্মকার)।</td>
+            </tr>
+            <tr>
+              <td><strong>বাঙালি রচিত প্রথম বাংলা ব্যাকরণ</strong></td>
+              <td>গৌড়ীয় ব্যাকরণ (১৮৩৩)</td>
+              <td><strong>রাজা রামমোহন রায়</strong>; তিনিই প্রথম বাঙালি যিনি বাংলা ভাষায় প্রথম বাংলা ব্যাকরণ রচনা করেন।</td>
+            </tr>
+            <tr>
+              <td><strong>বাংলা ভাষায় প্রথম উপন্যাস</strong></td>
+              <td>আলালের ঘরের দুলাল (১৮৫৮)</td>
+              <td><strong>প্যারীচাঁদ মিত্র</strong> (ছদ্মনাম: টেকচাঁদ ঠাকুর)। কথ্যরীতির গদ্য 'আলালী ভাষা' নামে পরিচিত। চরিত্র: মতিলাল, বাবুরাম, ঠকচাচা। তাঁর অপর উপন্যাস: <em>'আধ্যাত্মিকা'</em>।</td>
+            </tr>
+            <tr>
+              <td><strong>বাংলা সাহিত্যের প্রথম ইতিহাস গ্রন্থ</strong></td>
+              <td>বঙ্গভাষা ও সাহিত্য (১৮৯৬)</td>
+              <td><strong>দীনেশচন্দ্র সেন</strong>; কুমিল্লা থেকে প্রকাশিত। প্রাচীন পুঁথি ও লোকসাহিত্য সংকলন করে খ্যাতি অর্জন করেন।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রথম বাংলা দৈনিক পত্রিকা</strong></td>
+              <td>সংবাদ প্রভাকর (১৮৩৯)</td>
+              <td>সম্পাদক: <strong>ঈশ্বরচন্দ্র গুপ্ত</strong> (যুগসন্ধির কবি, ছদ্মনাম 'ভ্রমণকারী বন্ধু')। মধুসূদনের পূর্ববর্তী গুরুত্বপূর্ণ কবি।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রথম সামাজিক ব্যঙ্গাত্মক নাটক</strong></td>
+              <td>কুলীন কুলসর্বস্ব (১৮৫৪)</td>
+              <td><strong>রামনারায়ণ তর্করত্ন</strong> (নাটুকে রামনারায়ণ, উপাধি কাব্যোপাধ্যায়); বহুবিবাহ প্রথার কুফল নিয়ে রচিত।</td>
+            </tr>
+            <tr>
+              <td><strong>বিখ্যাত প্রবন্ধ 'তৈল'</strong></td>
+              <td>তৈল</td>
+              <td><strong>হরপ্রসাদ শাস্ত্রী</strong> (প্রকৃত নাম শরৎনাথ ভট্টাচার্য, উপাধি মহামহোপাধ্যায়, চর্যাপদ আবিষ্কারক ১৯০৭)।</td>
+            </tr>
+            <tr>
+              <td><strong>ইয়ং বেঙ্গল (Young Bengal)</strong></td>
+              <td>ইংরেজি ভাবধারাপুষ্ট মুক্তচিন্তার বাঙালি যুবক</td>
+              <td>হিন্দু কলেজের শিক্ষক <strong>হেনরি লুই ভিভিয়ান ডিরোজিওর</strong> অনুসারী (যেমন: দক্ষিণারঞ্জন মুখোপাধ্যায়, কৃষ্ণমোহন বন্দ্যোপাধ্যায়)।</td>
+            </tr>
+            <tr>
+              <td><strong>কলকাতা বিশ্ববিদ্যালয়ের বানান সংস্কার</strong></td>
+              <td>৮ই মে ১৯৩৬ খ্রিস্টাব্দ</td>
+              <td>মূল উদ্দেশ্য: <strong>বানানের নিয়ম প্রণয়ন করা</strong>। রবীন্দ্রনাথ ঠাকুরের অনুরোধে ও শরৎচন্দ্র চট্টোপাধ্যায়ের সমর্থনে গঠিত।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রভাত চিন্তা, নিভৃত চিন্তা, নিশীত চিন্তা</strong></td>
+              <td>প্রবন্ধ গ্রন্থমালা</td>
+              <td><strong>কালীপ্রসন্ন ঘোষ</strong> (১৮৪৩–১৯১০); পূর্ববঙ্গীয় ব্রাহ্মসমাজের সদস্য ও 'সাহিত্যসমালোচনী সভা'র প্রতিষ্ঠাতা।</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- সেকশন ৬: বিগত বিসিএস কুইজ -->
+    <section id="sec-quiz" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📝</div>
+          <h2 class="section-title">বিগত বিসিএস পরীক্ষার পূর্ণাঙ্গ প্রশ্নব্যাংক</h2>
+        </div>
+        <span class="section-meta">২৫টি হুবহু প্রশ্ন</span>
+      </div>
+
+      <p style="margin-bottom: 16px; font-size:14.5px;">
+        সঠিক উত্তরের অপশনে ক্লিক করে যাচাই করো। ক্লিক করার সাথে সাথে সঠিক উত্তর ও বইয়ের পুঙ্খানুপুঙ্খ ব্যাখ্যা দেখতে পাবে:
+      </p>
+
+      <div class="quiz-container">
+        <!-- প্রশ্ন ১ -->
+        <div class="quiz-card" id="q1">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০১</span>
+            <span class="bcs-tag">৫০তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">১. আধুনিক বাংলা নাটক মূলত কয়টি পর্বে বিভক্ত?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(1, 'ক', false, this)"><span class="opt-letter">ক</span> ৪টি</button>
+            <button class="opt-btn" onclick="checkAnswer(1, 'খ', false, this)"><span class="opt-letter">খ</span> ৬টি</button>
+            <button class="opt-btn" onclick="checkAnswer(1, 'গ', true, this)"><span class="opt-letter">গ</span> ৫টি</button>
+            <button class="opt-btn" onclick="checkAnswer(1, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> ৭টি</button>
+          </div>
+          <div class="quiz-explanation" id="exp-1">
+            <strong>ব্যাখ্যা:</strong> একটি নাটকের গঠনকে ৫টি পর্বে বিভক্ত করা যায়—১. কাহিনির আরম্ভ (Exposition/মুখ), ২. কাহিনির ক্রমব্যাপ্তি (Rising Action/প্রতিমুখ), ৩. উৎকর্ষ বা চূড়ান্ত দ্বন্দ্ব (Climax/গর্ভ), ৪. গ্রন্থিমোচন (Falling Action/বিমর্ষ) এবং ৫. যবনিকাপাত (Conclusion/উপসংহতি)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২ -->
+        <div class="quiz-card" id="q2">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০২</span>
+            <span class="bcs-tag">৪৯তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">২. মধুসূদন দত্তের পূর্ববর্তী গুরুত্বপূর্ণ কবি কে?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(2, 'ক', false, this)"><span class="opt-letter">ক</span> রবীন্দ্রনাথ ঠাকুর</button>
+            <button class="opt-btn" onclick="checkAnswer(2, 'খ', false, this)"><span class="opt-letter">খ</span> কায়কোবাদ</button>
+            <button class="opt-btn" onclick="checkAnswer(2, 'গ', true, this)"><span class="opt-letter">গ</span> ঈশ্বরচন্দ্র গুপ্ত</button>
+            <button class="opt-btn" onclick="checkAnswer(2, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> ইসমাইল হোসেন সিরাজী</button>
+          </div>
+          <div class="quiz-explanation" id="exp-2">
+            <strong>ব্যাখ্যা:</strong> ঈশ্বরচন্দ্র গুপ্ত (১৮১২-১৮৫৯) ছিলেন মধুসূদন দত্তের (১৮২৪-১৮৭৩) পূর্ববর্তী ও সমসাময়িক গুরুত্বপূর্ণ কবি ও সাংবাদিক। তিনি বাংলা সাহিত্যের যুগসন্ধির কবি হিসেবে পরিচিত। রবীন্দ্রনাথ (১৮৬১-১৯৪১), কায়কোবাদ (১৮৫৭-১৯৫১) ও ইসমাইল হোসেন সিরাজী (১৮৮০-১৯৩১) মধুসূদনের পরবর্তী কবি।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩ -->
+        <div class="quiz-card" id="q3">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৩</span>
+            <span class="bcs-tag">৪৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৩. ১৯৩৬ সালে কলিকাতা বিশ্ববিদ্যালয়ের বানান সংস্কারের মূল উদ্দেশ্য ছিল—</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(3, 'ক', false, this)"><span class="opt-letter">ক</span> বানানকে উচ্চারণের কাছাকাছি নেওয়া</button>
+            <button class="opt-btn" onclick="checkAnswer(3, 'খ', false, this)"><span class="opt-letter">খ</span> বানানের ঐতিহ্যকে বজায় রাখা</button>
+            <button class="opt-btn" onclick="checkAnswer(3, 'গ', true, this)"><span class="opt-letter">গ</span> বানানের নিয়ম প্রণয়ন করা</button>
+            <button class="opt-btn" onclick="checkAnswer(3, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> বানানে বিকল্প বর্জন করা</button>
+          </div>
+          <div class="quiz-explanation" id="exp-3">
+            <strong>ব্যাখ্যা:</strong> রবীন্দ্রনাথ ঠাকুরের অনুরোধ ও শরৎচন্দ্রের সমর্থনে কলকাতা বিশ্ববিদ্যালয় ১৯৩৫ সালে বানান সংস্কার সমিতি গঠন করে এবং ১৯৩৬ সালের ৮ই মে প্রথম বাংলা বানানের নিয়ম প্রকাশ করে। এর মূল উদ্দেশ্য ছিল বানানের বিশৃঙ্খলা দূর করে 'বানানের নিয়ম প্রণয়ন করা'।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৪ -->
+        <div class="quiz-card" id="q4">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৪</span>
+            <span class="bcs-tag">৪৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৪. ফোর্ট উইলিয়াম কলেজ পর্বে রচিত বাংলা বইগুলো—</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(4, 'ক', true, this)"><span class="opt-letter">ক</span> সংস্কৃত বইয়ের অনুবাদ</button>
+            <button class="opt-btn" onclick="checkAnswer(4, 'খ', false, this)"><span class="opt-letter">খ</span> ফারসি বইয়ের অনুবাদ</button>
+            <button class="opt-btn" onclick="checkAnswer(4, 'গ', false, this)"><span class="opt-letter">গ</span> ইংরেজি বইয়ের অনুবাদ</button>
+            <button class="opt-btn" onclick="checkAnswer(4, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> পণ্ডিতদের রচিত মৌলিক গ্রন্থ</button>
+          </div>
+          <div class="quiz-explanation" id="exp-4">
+            <strong>ব্যাখ্যা:</strong> ফোর্ট উইলিয়াম কলেজ পর্বে (১৮০১-১৮১৫) রচিত অধিকাংশ বাংলা বই ছিল সংস্কৃত বইয়ের অনুবাদ বা সংস্কৃত সাহিত্যের প্রভাবে রচিত (
+ </div>
+        </div>
+<!-- প্রশ্ন ৫ -->
+        <div class="quiz-card" id="q5">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৫</span>
+            <span class="bcs-tag">১২তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৫. বাংলা সাহিত্যের সর্বাধিক সমৃদ্ধ ধারা—</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(5, 'ক', false, this)"><span class="opt-letter">ক</span> নাটক</button>
+            <button class="opt-btn" onclick="checkAnswer(5, 'খ', false, this)"><span class="opt-letter">খ</span> ছোট গল্প</button>
+            <button class="opt-btn" onclick="checkAnswer(5, 'গ', false, this)"><span class="opt-letter">গ</span> প্রবন্ধ</button>
+            <button class="opt-btn" onclick="checkAnswer(5, 'ঘ', true, this)"><span class="opt-letter">ঘ</span> গীতি কবিতা</button>
+          </div>
+          <div class="quiz-explanation" id="exp-5">
+            <strong>ব্যাখ্যা:</strong> কবির মনের একান্ত অনুভূতি, সুখ-দুঃখ, আনন্দ-বেদনা যে কবিতায় প্রকাশ পায় তা-ই গীতিকবিতা। আধুনিক যুগে সৃষ্ট এই গীতিকবিতাই এই যুগের সবচেয়ে সমৃদ্ধ ধারা। উল্লেখ্য, মধ্যযুগের সবচেয়ে সমৃদ্ধ সাহিত্যধারা বৈষ্ণব সাহিত্যধারা। এছাড়া নাটক, ছোটগল্প, প্রবন্ধ আধুনিক যুগের সৃষ্টি এবং রবীন্দ্রনাথ ঠাকুর বাংলা ছোটগল্পের জনক।
+          </div>
+        </div>
+      </div>
+
+      <!-- স্কোর বোর্ড -->
+      <div class="score-banner">
+        <div>
+          <span>তোমার কুইজ স্কোর: </span>
+          <span class="score-display" id="user-score">০ / ৫</span>
+        </div>
+        <button class="btn-ctrl" onclick="resetQuiz()">🔄 পুনরায় কুইজ দাও</button>
+      </div>
+    </section>
+
+    <!-- সেকশন ৬: ৩০ সেকেন্ডের রিভিশন ফ্ল্যাশ -->
+    <section id="sec-rev" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">⚡</div>
+          <h2 class="section-title">৩০ সেকেন্ডের সুপারফাস্ট রিভিশন</h2>
+        </div>
+        <span class="section-meta">মেমরি রিফ্লেক্স টেস্ট</span>
+      </div>
+      <p style="font-size:14px; margin-bottom: 12px;">ট্যাপ করে সাথে সাথে উত্তর মিলিয়ে নাও:</p>
+
+      <div class="revision-grid">
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>মৈমনসিংহ গীতিকার প্রথম খণ্ড কত সালে বই আকারে প্রকাশিত হয়?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">১৯২৩ সালের মার্চে কলকাতা বিশ্ববিদ্যালয় থেকে।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>মৈমনসিংহ গীতিকা সংগ্রহের মূল উদ্যোক্তা ও সংগ্রাহক কারা?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">উদ্যোক্তা/সম্পাদক ড. দীনেশচন্দ্র সেন এবং সংগ্রাহক চন্দ্রকুমার দে।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>ইংরেজি Ballad শব্দের বাংলা প্রতিশব্দ কী?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">গীতিকা (কাহিনিমূলক লোকগীতি)।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>Ode-এর উৎপত্তি কোন দেশে এবং সমবেত পরিবেশনায় একে কী বলে?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">উৎপত্তি গ্রিসে; সমবেত পরিবেশনায় একে কোরাসগান/বৃন্দগীতি বলে।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>বাংলা সাহিত্যের মধ্যযুগের সর্বাধিক সমৃদ্ধ ধারা কোনটি?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">বৈষ্ণব সাহিত্যধারা।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>বাংলা ছোটগল্পের জনক কে?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">বিশ্বকবি রবীন্দ্রনাথ ঠাকুর।</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- সেকশন ৭: অসঙ্গতি ও তথ্য যাচাই তালিকা -->
+    <section id="sec-audit" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">⚠️</div>
+          <h2 class="section-title">🧭 সন্দেহ নিরসন ও সঠিক সমাধান</h2>
+        </div>
+        <span class="section-meta">নির্ভুল প্রস্তুতি ও সঠিক সমাধান</span>
+      </div>
+
+      <div class="alert-box">
+        <div class="alert-header">📌 পরীক্ষার বিভ্রান্তিকর প্রশ্ন ও বিশেষ সতর্কতা:</div>
+        পরীক্ষার্থীদের বিভ্রান্তিমুক্ত রাখতে পৃষ্ঠা ৮৯-এর অপশন ও ব্যাখ্যা নিচে বিশ্লেষণ করা হলো:
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>📝 বিষয় / প্রশ্ন</th>
+              <th>📖 পৃষ্ঠা / প্রশ্ন নং</th>
+              <th>🔍 সূক্ষ্ম প্যাঁচ ও বিস্তারিত বিশ্লেষণ</th>
+              <th>🎯 পরীক্ষায় আপনার সঠিক সিদ্ধান্ত</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>প্রশ্ন ১-এর উত্তর কোড ও অবস্থান</strong></td>
+              <td>প্রশ্ন ১ (পৃ. ৮৯)</td>
+              <td>বইয়ে মুদ্রিত উত্তর <strong>'উ. ক'</strong>। অপশন বিন্যাসে বামে ক (২৩টি) ও নিচে ২২টি; ডানে ২০টি ও নিচে ২৫টি রয়েছে।</td>
+              <td>ব্যাখ্যায় স্পষ্টভাবে বলা হয়েছে মৈমনসিংহ গীতিকা বিশ্বের ২৩টি ভাষায় মুদ্রিত হয়। তাই সঠিক উত্তর অবশ্যই <strong>২৩টি</strong> নির্বাচন করবে।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রশ্ন ৩-এর উত্তর কোড ও অপশন বিন্যাস</strong></td>
+              <td>প্রশ্ন ৩ (পৃ. ৮৯)</td>
+              <td>বইয়ে মুদ্রিত উত্তর <strong>'উ. ঘ'</strong>। কিন্তু প্রশ্নে ক-শোককবিতা, খ-খণ্ড কবিতা, গ-পত্রকাব্য এবং ঘ-কোরাসগান হিসেবে সাজানো হয়েছে।</td>
+              <td>ব্যাখ্যা অনুযায়ী Ode গাওয়ার সময় সমবেত কণ্ঠে গাওয়া হয় বিধায় একে কোরাসগান বা সমবেত সংগীত বলা হয়। অপশন ঘ সঠিক।</td>
+            </tr>
+            <tr>
+              <td><strong>মৈমনসিংহ গীতিকার পালার সংখ্যা বিভ্রাট</strong></td>
+              <td>প্রশ্ন ১ ও ২-এর ব্যাখ্যা</td>
+              <td>প্রশ্ন ১-এর ব্যাখ্যায় লেখা হয়েছে <em>"মৈমনসিংহ গীতিকায় ১০টি গীতিকা স্থান পেয়েছে"</em>। আবার প্রশ্ন ২-এর ব্যাখ্যায় চন্দ্রকুমারের সংগৃহীত মৈমনসিংহ গীতিকার তালিকায় শেষে <em>'ধোপার পাট'</em> সহ ১১টি নাম উল্লেখ রয়েছে।</td>
+              <td>ঐতিহাসিকভাবে দীনেশচন্দ্র সেন সম্পাদিত মূল মৈমনসিংহ গীতিকায় <strong>১০টি পালাগান</strong> রয়েছে। পরীক্ষায় মৈমনসিংহ গীতিকার পালার সংখ্যা চাইলে <strong>১০টি</strong> দাগাবে।</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ফুটার -->
+    <footer style="text-align: center; margin-top: 40px; color: var(--text-muted); font-size: 13px;">
+      <p>বিসিএস প্রিলিমিনারি বিষয়ভিত্তিক জব সল্যুশন | অধ্যায়: গীতিকা ও লোকসাহিত্য (পৃষ্ঠা ৮৯)</p>
+      <p style="margin-top: 4px;">Single-file Interactive BCS E-Book Edition • সম্পূর্ণ স্বয়ংসম্পূর্ণ ও অফলাইন উপযোগী</p>
+    </footer>
+  </div>
+
+  <!-- স্ক্রিপ্ট: ইন্টারঅ্যাকটিভিটি -->
+  <script>
+    // স্ক্রল প্রগ্রেস বার
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    // থিম টগল
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const target = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', target);
+      try {
+        localStorage.setItem('theme_mode_gitika', target);
+      } catch(e) {}
+    }
+
+    // ফন্ট সাইজ নিয়ন্ত্রণ
+    let currentScale = 100;
+    function changeFontSize(delta) {
+      if (delta === 0) currentScale = 100;
+      else currentScale += delta * 7;
+      
+      if (currentScale < 80) currentScale = 80;
+      if (currentScale > 130) currentScale = 130;
+      
+      document.documentElement.style.setProperty('--font-scale', currentScale + '%');
+    }
+
+    // সূচিপত্র টগল
+    function toggleToc() {
+      const panel = document.getElementById('toc-panel');
+      panel.classList.toggle('active');
+    }
+
+    // রিভিশন উত্তর টগল
+    function toggleRev(element) {
+      const ans = element.nextElementSibling;
+      const icon = element.querySelector('span:last-child');
+      if (ans.classList.contains('active')) {
+        ans.classList.remove('active');
+        icon.textContent = '➕';
+      } else {
+        ans.classList.add('active');
+        icon.textContent = '➖';
+      }
+    }
+
+    // কুইজ ইন্টারঅ্যাকশন
+    let score = 0;
+    const answeredMap = {};
+
+    function checkAnswer(qNum, selectedLetter, isCorrect, btnElement) {
+      if (answeredMap[qNum]) return;
+      answeredMap[qNum] = true;
+
+      const card = document.getElementById(`q${qNum}`);
+      const buttons = card.querySelectorAll('.opt-btn');
+
+      buttons.forEach(btn => {
+        btn.disabled = true;
+      });
+
+      if (isCorrect) {
+        btnElement.classList.add('correct');
+        score++;
+      } else {
+        btnElement.classList.add('wrong');
+        buttons.forEach(btn => {
+          if (btn.getAttribute('onclick').includes('true')) {
+            btn.classList.add('correct');
+          }
+        });
+      }
+
+      const exp = document.getElementById(`exp-${qNum}`);
+      if (exp) exp.classList.add('show');
+
+      updateScoreDisplay();
+    }
+
+    function updateScoreDisplay() {
+      const scoreEl = document.getElementById('user-score');
+      scoreEl.textContent = `${score} / ৫`;
+      if (score === 5) {
+        scoreEl.innerHTML = `${score} / ৫ <span style="font-size:14px;color:var(--success);">🎉 অসাধারণ! ৫টি প্রশ্নের সবকটি সঠিক হয়েছে!</span>`;
+      }
+    }
+
+    function resetQuiz() {
+      score = 0;
+      for (let key in answeredMap) delete answeredMap[key];
+      
+      const buttons = document.querySelectorAll('.opt-btn');
+      buttons.forEach(btn => {
+        btn.disabled = false;
+        btn.classList.remove('correct', 'wrong');
+      });
+
+      const exps = document.querySelectorAll('.quiz-explanation');
+      exps.forEach(exp => exp.classList.remove('show'));
+
+      updateScoreDisplay();
+      window.location.hash = 'sec-quiz';
+    }
+
+    (function init() {
+      try {
+        const savedTheme = localStorage.getItem('theme_mode_gitika');
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+      } catch(e) {}
+    })();
+  </script>
+  <!-- Smart E-Book Navigation Component -->
+  <script src="nav-component.js"></script>
+</body>
+</html>

@@ -1,0 +1,1029 @@
+<!-- DESIGN PLAN:
+1. বিষয়ের ধরন: বাংলা সাহিত্য (মাইকেল মধুসূদন দত্ত: জীবনী, সাহিত্যকর্ম, ছন্দ, সনেট, নাটক, প্রহসন ও মহাকাব্য)।
+2. সবচেয়ে কঠিন/গুলিয়ে ফেলার জায়গা: প্রথম বাংলা গ্রন্থ (শর্মিষ্ঠা ১৮৫৯) বনাম প্রথম ইংরেজি গ্রন্থ (Captive Ladie ১৮৪৯); অমিত্রাক্ষর ছন্দের প্রথম প্রয়োগ (পদ্মাবতী নাটক) বনাম অমিত্রাক্ষর ছন্দে প্রথম পূর্ণাঙ্গ কাব্য (তিলোত্তমাসম্ভব কাব্য ১৮৬০); প্রথম সার্থক মহাকাব্য (মেঘনাদবধ কাব্য ১৮৬১); পত্রকাব্য বনাম সনেট সংকলন; সনেটের গঠন (অষ্টক ও ষটক); অমিত্রাক্ষর ছন্দ বাংলা অক্ষরবৃত্ত ছন্দের রূপায়ণ।
+3. কেন এই মডিউলগুলো শ্রেষ্ঠ:
+   - "মধুসূদনের 'প্রথম' যত কীর্তি": আধুনিক বাংলা সাহিত্যের সকল 'প্রথম' মাইলফলক এক কার্ড-গ্রিডে।
+   - "ছন্দ ও সনেট ডিকোড": অমিত্রাক্ষর ও সনেটের গঠন (১৪ চরণ, ১৪ অক্ষর, অন্ত্যমিলহীনতা, ৮+৬ পর্ব) সহজে আত্মস্থ করার মেকানিক্স।
+   - সম্পূর্ণ ১৩টি বিসিএস MCQ-এর ইন্টারঅ্যাকটিভ কুইজ সিস্টেম (প্রকৃত অপশন ম্যাপিং ও পূর্ণ ব্যাখ্যাসহ)।
+   - শেষে বইয়ের অসঙ্গতি ও যাচাই তালিকা।
+4. রঙের মেজাজ: মহাকাব্যিক ও আভিজাত্যপূর্ণ রয়্যাল পার্পল ও ইন্ডিগো (#4c1d95, #312e81), সোনালি অ্যাম্বার (#d97706), লাইট ভায়োলেট ক্রিম ব্যাকগ্রাউন্ড (#faf5ff / ডার্ক মোডে #0f172a)।
+5. হিরো ও মাসকট: আধুনিক বাংলা সাহিত্যের মহাকবি ও মুক্তছন্দের প্রতীক 'মধু-কবি' মাসকট।
+-->
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>মাইকেল মধুসূদন দত্ত</title>
+<style>
+:root {
+  --font-base: 'Noto Sans Bengali', 'Kalpurush', Vrinda, sans-serif;
+  --bg-primary: #faf5ff;
+  --bg-card: #ffffff;
+  --text-main: #1e1b4b;
+  --text-muted: #4338ca;
+  --primary: #581c87;
+  --primary-light: #f3e8ff;
+  --accent: #b45309;
+  --accent-light: #fef3c7;
+  --success: #15803d;
+  --success-bg: #dcfce7;
+  --danger: #b91c1c;
+  --danger-bg: #fee2e2;
+  --border: #e9d5ff;
+  --border-strong: #7e22ce;
+  --shadow: 0 4px 12px rgba(88, 28, 135, 0.08);
+  --radius: 12px;
+  --font-scale: 1rem;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0f172a;
+  --bg-card: #1e1b4b;
+  --text-main: #f8fafc;
+  --text-muted: #cbd5e1;
+  --primary: #c084fc;
+  --primary-light: #3b0764;
+  --accent: #fbbf24;
+  --accent-light: #78350f;
+  --success: #4ade80;
+  --success-bg: #14532d;
+  --danger: #f87171;
+  --danger-bg: #7f1d1d;
+  --border: #6b21a8;
+  --border-strong: #a855f7;
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-base);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-size: calc(var(--font-scale) * 1rem);
+  line-height: 1.8;
+  padding-bottom: 80px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #9333ea, #f59e0b, #10b981);
+  width: 0%;
+  z-index: 1000;
+  transition: width 0.1s;
+}
+
+.top-control-bar {
+  position: sticky;
+  top: 6px;
+  z-index: 999;
+  background: var(--bg-card);
+  border-bottom: 2px solid var(--border);
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow);
+}
+
+.brand-badge {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+button.ctrl-btn {
+  background: var(--bg-primary);
+  color: var(--text-main);
+  border: 1.5px solid var(--border-strong);
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+button.ctrl-btn:hover {
+  background: var(--primary-light);
+  border-color: var(--primary);
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.hero {
+  background: linear-gradient(135deg, #2e1065, #581c87 65%, #7e22ce);
+  color: #ffffff;
+  padding: 32px 24px;
+  border-radius: var(--radius);
+  margin-top: 16px;
+  margin-bottom: 24px;
+  border: 2px solid #a855f7;
+  box-shadow: var(--shadow);
+}
+
+.hero h1 {
+  font-size: 1.85rem;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.hero p {
+  color: #f3e8ff;
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+
+.bcs-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.stat-chip {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stat-chip span {
+  display: block;
+  font-size: 0.8rem;
+  color: #e9d5ff;
+}
+
+.stat-chip strong {
+  font-size: 1.25rem;
+  color: #fef08a;
+}
+
+.study-flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.flow-step {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-left: 6px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+
+.flow-step h4 {
+  color: var(--accent);
+  margin-bottom: 4px;
+  font-size: 1rem;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 36px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid var(--primary);
+  font-size: 1.45rem;
+  color: var(--primary);
+}
+
+.section-sub {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin-top: -10px;
+  margin-bottom: 18px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  border-left: 5px solid var(--primary);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+
+.card h3 {
+  font-size: 1.15rem;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.card-badge {
+  display: inline-block;
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin: 18px 0;
+  border-radius: var(--radius);
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  text-align: left;
+}
+
+th {
+  background: var(--primary);
+  color: #ffffff;
+  padding: 12px 14px;
+  font-weight: 700;
+  border-bottom: 2px solid var(--border);
+  font-size: 0.95rem;
+}
+
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+tr:nth-child(even) {
+  background: rgba(88, 28, 135, 0.04);
+}
+
+mark {
+  background-color: #fef08a;
+  color: #0f172a;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.quiz-meta-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: var(--bg-card);
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  border: 2px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.score-counter {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.quiz-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  transition: border-color 0.2s;
+}
+
+.quiz-card.answered-correct {
+  border-color: var(--success);
+}
+
+.quiz-card.answered-wrong {
+  border-color: var(--danger);
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.q-text {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.q-tag {
+  background: var(--accent-light);
+  color: var(--accent);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+@media (min-width: 600px) {
+  .options-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.opt-btn {
+  background: var(--bg-primary);
+  border: 1.5px solid var(--border);
+  color: var(--text-main);
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.92rem;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.opt-btn:hover:not(:disabled) {
+  background: var(--primary-light);
+  border-color: var(--primary);
+}
+
+.opt-btn.correct-choice {
+  background: var(--success-bg) !important;
+  border-color: var(--success) !important;
+  color: var(--success) !important;
+  font-weight: 700;
+}
+
+.opt-btn.wrong-choice {
+  background: var(--danger-bg) !important;
+  border-color: var(--danger) !important;
+  color: var(--danger) !important;
+}
+
+.explanation-box {
+  display: none;
+  background: var(--bg-primary);
+  border-left: 4px solid var(--primary);
+  padding: 12px 14px;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.revision-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.quick-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+
+.quick-card button {
+  width: 100%;
+  margin-top: 8px;
+  background: var(--primary-light);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.quick-card .ans-text {
+  display: none;
+  margin-top: 8px;
+  padding: 8px;
+  background: var(--bg-primary);
+  border-radius: 4px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--success);
+}
+
+.floating-actions {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 990;
+}
+
+.float-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transition: transform 0.2s;
+}
+
+.float-btn:hover {
+  transform: scale(1.1);
+}
+
+@media print {
+  .top-control-bar, .floating-actions, .quiz-meta-bar, .opt-btn, button {
+    display: none !important;
+  }
+  .explanation-box, .ans-text {
+    display: block !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .card, .quiz-card {
+    border: 1px solid #999;
+    box-shadow: none;
+    page-break-inside: avoid;
+  }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- কন্ট্রোল বার -->
+<header class="top-control-bar">
+  <div class="brand-badge">
+    <span>🪶</span> মধু-কবি • মাইকেল মধুসূদন দত্ত
+  </div>
+  <div class="controls">
+    <button class="ctrl-btn" onclick="toggleTheme()" id="themeBtn">🌓 থিম</button>
+    <button class="ctrl-btn" onclick="adjustFontSize(-0.05)">A-</button>
+    <button class="ctrl-btn" onclick="adjustFontSize(0.05)">A+</button>
+    <button class="ctrl-btn" onclick="scrollToId('quiz-zone')">📝 কুইজ</button>
+    <button class="ctrl-btn" onclick="window.print()">🖨️ প্রিন্ট</button>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- হিরো সেকশন -->
+  <section class="hero">
+    <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: #e9d5ff; font-weight: 700;">
+      লাইভ এমসিকিউ™ বিসিএস প্রিলিমিনারি বিষয়ভিত্তিক সল্যুশন | পৃষ্ঠা ১২২ - ১২৪
+    </div>
+    <h1>মাইকেল মধুসূদন দত্ত (১৮২৪-১৮৭৩)</h1>
+    <p>বাংলা সাহিত্যের প্রথম আধুনিক পুরুষ, অমিত্রাক্ষর ছন্দ ও সনেটের প্রবর্তক, প্রথম সার্থক ট্র্যাজেডি ও মহাকাব্যের অমর স্রষ্টা।</p>
+    
+    <div class="bcs-stat-grid">
+      <div class="stat-chip"><span>৪৬তম বিসিএস</span><strong>১টি</strong></div>
+      <div class="stat-chip"><span>৪৫তম বিসিএস</span><strong>১টি</strong></div>
+      <div class="stat-chip"><span>৪০তম বিসিএস</span><strong>২টি</strong></div>
+      <div class="stat-chip"><span>৩৮তম বিসিএস</span><strong>১টি</strong></div>
+      <div class="stat-chip"><span>৩৬তম ও ৩৫তম</span><strong>২টি</strong></div>
+      <div class="stat-chip"><span>১০ম-৩৪তম বিসিএস</span><strong>৯টি</strong></div>
+    </div>
+  </section>
+
+  <!-- স্টাডি স্টেপস -->
+  <div class="study-flow">
+    <div class="flow-step">
+      <h4>১. 'প্রথম' মাইলফলকগুলো দেখো</h4>
+      <p style="font-size: 0.85rem;">প্রথম নাটক, প্রথম ট্র্যাজেডি, প্রথম প্রহসন ও প্রথম মহাকাব্যের সাল এক নজরে স্ক্যান করো।</p>
+    </div>
+    <div class="flow-step">
+      <h4>২. অমিত্রাক্ষর ও সনেট বোঝো</h4>
+      <p style="font-size: 0.85rem;">অক্ষরবৃত্তের নব-রূপায়ণ, অন্ত্যমিলহীনতা এবং ১৪ চরণ ও ১৪ অক্ষরের অষ্টক-ষটক নিয়ম জানো।</p>
+    </div>
+    <div class="flow-step">
+      <h4>৩. ১৩টি বিসিএস MCQ টেস্ট দাও</h4>
+      <p style="font-size: 0.85rem;">সরাসরি অপশনে ক্লিক করে তাৎক্ষণিক লাল-সবুজ ফলাফল ও পূর্ণাঙ্গ ব্যাখ্যা মুখস্থ করে নাও।</p>
+    </div>
+  </div>
+
+  <!-- মডিউল ১: মধুসূদনের অমর সৃষ্টির ক্যাটালগ -->
+  <h2 class="section-title">📚 মাইকেল মধুসূদন দত্তের সাহিত্যকর্মের পূর্ণাঙ্গ ক্যাটালগ</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>শাখা</th>
+          <th>গ্রন্থের নাম ও সাল</th>
+          <th>ঐতিহাসিক গুরুত্ব ও বৈশিষ্ট্য</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>প্রথম ইংরেজি গ্রন্থ</strong></td>
+          <td><strong>Captive Ladie</strong> (১৮৪৯)</td>
+          <td>মধুসূদন দত্তের প্রথম প্রকাশিত গ্রন্থ (ইংরেজিতে রচিত)।</td>
+        </tr>
+        <tr>
+          <td><strong>প্রথম বাংলা গ্রন্থ / নাটক</strong></td>
+          <td><strong>শর্মিষ্ঠা</strong> (১৮৫৯)</td>
+          <td>তাঁর রচিত ও প্রকাশিত <mark>প্রথম বাংলা গ্রন্থ</mark>। পৌরাণিক নাটক।</td>
+        </tr>
+        <tr>
+          <td><strong>প্রথম সার্থক ট্র্যাজেডি</strong></td>
+          <td><strong>কৃষ্ণকুমারী</strong> (১৮৬১)</td>
+          <td>বাংলা সাহিত্যের <mark>প্রথম সার্থক ট্র্যাজেডি নাটক</mark>।</td>
+        </tr>
+        <tr>
+          <td><strong>অন্যান্য নাটক</strong></td>
+          <td><strong>পদ্মাবতী</strong> (১৮৬০)</td>
+          <td>এর ২য় অঙ্ক ২য় গর্ভাঙ্কে বাংলা সাহিত্যে <mark>প্রথম অমিত্রাক্ষর ছন্দের প্রয়োগ</mark> ঘটে।</td>
+        </tr>
+        <tr>
+          <td><strong>মহাকাব্য</strong></td>
+          <td><strong>মেঘনাদবধ কাব্য</strong> (১৮৬১)</td>
+          <td>বাংলা সাহিত্যের <mark>প্রথম সার্থক মহাকাব্য</mark>। রামায়ণের কাহিনী আশ্রয়ে ৯ সর্গে রচিত।</td>
+        </tr>
+        <tr>
+          <td><strong>পত্রকাব্য</strong></td>
+          <td><strong>বীরাঙ্গনা কাব্য</strong> (১৮৬২)</td>
+          <td>বাংলা সাহিত্যের <mark>প্রথম পত্রকাব্য</mark> (মোট ১১টি পত্র রয়েছে)।</td>
+        </tr>
+        <tr>
+          <td><strong>সনেট সংকলন</strong></td>
+          <td><strong>চতুর্দশপদী কবিতাবলি</strong> (১৮৬৬)</td>
+          <td>বাংলা সাহিত্যের <mark>প্রথম সনেট সংকলন</mark>। পেত্রার্ক ও শেক্সপিয়ারের অনুকরণে রচিত।</td>
+        </tr>
+        <tr>
+          <td><strong>প্রহসন</strong></td>
+          <td><strong>একেই কি বলে সভ্যতা</strong> (১৮৬০)<br><strong>বুড়ো শালিকের ঘাড়ে রোঁ</strong> (১৮৬০)</td>
+          <td>বাংলা সাহিত্যের <mark>প্রথম প্রহসন রচয়িতা</mark> মধুসূদন দত্ত। প্রথম প্রহসন: একেই কি বলে সভ্যতা।</td>
+        </tr>
+        <tr>
+          <td><strong>অমিত্রাক্ষর কাব্যের সূচনা</strong></td>
+          <td><strong>তিলোত্তমাসম্ভব কাব্য</strong> (১৮৬০)</td>
+          <td>বাংলা ভাষায় <mark>অমিত্রাক্ষর ছন্দে রচিত প্রথম কাব্য</mark>।</td>
+        </tr>
+        <tr>
+          <td><strong>অনুবাদ</strong></td>
+          <td><strong>Nil Darpan or The Indigo Planting Mirror</strong> (১৮৬১)</td>
+          <td>দীনবন্ধু মিত্রের 'নীলদর্পণ' নাটকের ইংরেজি অনুবাদ; <strong>A Native</strong> ছদ্মনামে অনূদিত।</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- মডিউল ২: ছন্দ ও সনেটের মেকানিক্স -->
+  <h2 class="section-title">⚡ অমিত্রাক্ষর ছন্দ ও সনেটের ব্যবচ্ছেদ</h2>
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-badge">ছন্দের রূপায়ণ</span>
+      <h3>অমিত্রাক্ষর ছন্দ</h3>
+      <p>• বাংলা কাব্যের প্রধান ছন্দ <mark>অক্ষরবৃত্ত ছন্দের নব-রূপায়ণ</mark> বা নব সংস্করণ।</p>
+      <p>• এর মূল বৈশিষ্ট্য: এতে কোনো <strong>অন্ত্যমিল (অন্ত্যানুপ্রাস) নেই</strong>। পর্বের শেষে ভাব আটকে থাকে না, বাক্যের প্রবাহ পরবর্তী চরণে চলে যায় (সুরমুক্তি ঘটে)!</p>
+    </div>
+
+    <div class="card">
+      <span class="card-badge">সনেটের বৈশিষ্ট্য</span>
+      <h3>চতুর্দশপদী কবিতা (Sonnet)</h3>
+      <p>• সনেট কবিতার উদ্ভব ত্রয়োদশ শতাব্দীতে <strong>ইতালিতে</strong>। পেত্রার্ক ও শেক্সপিয়ার বিখ্যাত এবং বাংলায় এর প্রবর্তক <strong>মাইকেল মধুসূদন দত্ত</strong>।</p>
+      <p>• কবিতাটিতে <strong>১৪টি চরণ</strong> এবং প্রতি চরণে সাধারণ নিয়মে <strong>১৪টি অক্ষর</strong> থাকে।</p>
+      <p>• সনেটের <strong>দুটি অংশ</strong>: প্রথম ৮ চরণকে <mark>অষ্টক</mark> (ভাবের প্রবর্তনা) এবং শেষ ৬ চরণকে <mark>ষটক</mark> (ভাবের পরিণতি) বলে।</p>
+    </div>
+
+    <div class="card">
+      <span class="card-badge">ছদ্মনাম ও দল</span>
+      <h3>টিমোথি পেনপোয়েম ও ইয়ং বেঙ্গল</h3>
+      <p>• ইংরেজি রচনার জন্য তিনি <strong>টিমোথি পেন পোয়েম (Timothy Penpoem)</strong> ছদ্মনাম নেন। নীলদর্পণ অনুবাদের সময় ব্যবহার করেন <strong>A Native</strong>।</p>
+      <p>• হিন্দু কলেজের মুক্তবুদ্ধিসম্পন্ন ডিরোজিওর অনুসারী বিপ্লবী ছাত্রদল <strong>ইয়ং বেঙ্গল (Young Bengal)</strong> গোষ্ঠীর অন্যতম সদস্য ছিলেন তিনি।</p>
+    </div>
+  </div>
+
+  <!-- কুইজ জোন -->
+  <div id="quiz-zone"></div>
+  <h2 class="section-title">🎯 বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ কুইজ (১৩টি প্রশ্ন)</h2>
+  <div class="section-sub">পৃষ্ঠা ১২২ থেকে ১২৪ পর্যন্ত আসা সকল প্রশ্ন, অপশন ও সমাধান নিচে দেওয়া হলো:</div>
+
+  <div class="quiz-meta-bar">
+    <div class="score-counter">
+      মোট উত্তর: <span id="answered-count">০</span> / ১৩ | সঠিক: <span id="correct-count" style="color:var(--success);">০</span>
+    </div>
+    <div>
+      <button class="ctrl-btn" onclick="resetQuiz()">🔄 পুনরায় শুরু করো</button>
+    </div>
+  </div>
+
+  <div class="quiz-container" id="quiz-cards-wrapper">
+    <!-- জাভাস্ক্রিপ্ট দিয়ে ১৩টি প্রশ্ন রেন্ডার করা হবে -->
+  </div>
+
+  <!-- দ্রুত রিভিশন -->
+  <h2 class="section-title">⏱️ ৩০ সেকেন্ডের দ্রুত রিভিশন</h2>
+  <div class="revision-grid">
+    <div class="quick-card">
+      <p><strong>১. নীলদর্পণ নাটকটি মধুসূদন কী ছদ্মনামে অনুবাদ করেন?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">A Native (১৮৬১ সালে Nil Darpan নামে প্রকাশিত)</div>
+    </div>
+    <div class="quick-card">
+      <p><strong>২. মাইকেল মধুসূদন দত্তের প্রথম বাংলা নাটক কোনটি?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">শর্মিষ্ঠা (১৮৫৯)</div>
+    </div>
+    <div class="quick-card">
+      <p><strong>৩. বাংলা সাহিত্যে অমিত্রাক্ষর ছন্দের প্রথম প্রয়োগ কোথায় ঘটে?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">'পদ্মাবতী' নাটকের ২য় অঙ্ক ২য় গর্ভাঙ্কে</div>
+    </div>
+    <div class="quick-card">
+      <p><strong>৪. 'মেঘনাদবধ কাব্য' কত সর্গে রচিত?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">নয় (৯) সর্গে</div>
+    </div>
+    <div class="quick-card">
+      <p><strong>৫. 'বীরাঙ্গনা কাব্য'-এ কয়টি পত্র আছে?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">মোট ১১টি পত্র রয়েছে</div>
+    </div>
+    <div class="quick-card">
+      <p><strong>৬. সনেটের প্রথম ৮ চরণ ও শেষ ৬ চরণকে কী বলে?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">অষ্টক (ভাবের প্রবর্তনা) ও ষটক (ভাবের পরিণতি)</div>
+    </div>
+  </div>
+
+  <!-- অসঙ্গতি ও যাচাই তালিকা -->
+  <h2 class="section-title">🧭 সন্দেহ নিরসন ও সঠিক সমাধান</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>📝 প্রশ্ন ও বিষয়</th>
+          <th>📖 বইয়ের অপশন / উত্তর</th>
+          <th>🔍 সূক্ষ্ম প্যাঁচ ও বিস্তারিত বিশ্লেষণ</th>
+          <th>🎯 পরীক্ষায় আপনার সঠিক সিদ্ধান্ত</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>প্রশ্ন ১</strong> (নীলদর্পণ ইংরেজি অনুবাদ)</td>
+          <td>মুদ্রিত <code>উ. খ</code></td>
+          <td>দুই কলাম বিন্যাসে বামে প্যারীচাঁদ মিত্র ও মাইকেল মধুসূদন দত্ত, ডানে প্রমথ চৌধুরী ও দ্বিজেন্দ্রলাল রায়। মাইকেল মধুসূদন দত্ত ৩য় অবস্থানে (গ)। ব্যাখ্যায় স্পষ্ট বলা হয়েছে মাইকেল মধুসূদন দত্ত অনুবাদ করেন।</td>
+          <td>সঠিক উত্তর: <strong>মাইকেল মধুসূদন দত্ত</strong>।</td>
+        </tr>
+        <tr>
+          <td><strong>প্রশ্ন ২</strong> (অমিত্রাক্ষর ছন্দ কোন ছন্দের রূপায়ণ)</td>
+          <td>মুদ্রিত <code>উ. খ</code></td>
+          <td>'অক্ষরবৃত্ত ছন্দ' ৩য় অবস্থানে (গ) রয়েছে। ব্যাখ্যায় স্পষ্ট উল্লেখ করা হয়েছে অমিত্রাক্ষর ছন্দ বাংলা অক্ষরবৃত্ত ছন্দের নতুন রূপ বা নব সংস্করণ।</td>
+          <td>সঠিক উত্তর: <strong>অক্ষরবৃত্ত ছন্দ</strong>।</td>
+        </tr>
+        <tr>
+          <td><strong>প্রশ্ন ৫</strong> (মাইকেল মধুসূদনের পত্রকাব্য)</td>
+          <td>মুদ্রিত <code>উ. গ</code></td>
+          <td>'বীরাঙ্গনা' অপশন খ-তে ছিল। ব্যাখ্যায় বীরাঙ্গনা পত্রকাব্যের কথা বিশদভাবে বলা হয়েছে।</td>
+          <td>সঠিক উত্তর: <strong>বীরাঙ্গনা</strong>।</td>
+        </tr>
+        <tr>
+          <td><strong>প্রশ্ন ৭</strong> (মধুসূদন দত্তের রচনা নয় কোনটি)</td>
+          <td>মুদ্রিত <code>উ. গ</code></td>
+          <td>'বেতাল পঞ্চবিংশতি' অপশন খ-তে রয়েছে। ব্যাখ্যায় বলা হয়েছে বেতাল পঞ্চবিংশতি ঈশ্বরচন্দ্র বিদ্যাসাগরের অনুবাদ গ্রন্থ।</td>
+          <td>সঠিক উত্তর: <strong>বেতাল পঞ্চবিংশতি</strong>।</td>
+        </tr>
+        <tr>
+          <td><strong>প্রশ্ন ৮</strong> (বীরাঙ্গনা কাব্য কোন ধরনের কাব্য)</td>
+          <td>মুদ্রিত <code>উ. গ</code></td>
+          <td>ব্যাখ্যায় স্পষ্ট বলা হয়েছে এটি বাংলা সাহিত্যের প্রথম পত্রকাব্য। অপশন গ-তে পত্রকাব্য সঠিক।</td>
+          <td>সঠিক উত্তর: <strong>পত্রকাব্য</strong>।</td>
+        </tr>
+        <tr>
+          <td><strong>প্রশ্ন ৯</strong> (সনেট কবিতার প্রবর্তক)</td>
+          <td>মুদ্রিত <code>উ. গ</code></td>
+          <td>মাইকেল মধুসূদন দত্ত অপশন খ-তে ছিল। ব্যাখ্যা অনুযায়ী তিনিই বাংলায় সনেটের জনক।</td>
+          <td>সঠিক উত্তর: <strong>মাইকেল মধুসূদন দত্ত</strong>।</td>
+        </tr>
+        <tr>
+          <td><strong>প্রশ্ন ১১</strong> (চতুর্দশপদী কবিতাবলী কার রচনা)</td>
+          <td>মুদ্রিত <code>উ. গ</code></td>
+          <td>ব্যাখ্যায় স্পষ্ট করে বলা হয়েছে মাইকেল মধুসূদন দত্তের রচনা।</td>
+          <td>সঠিক উত্তর: <strong>মাইকেল মধুসূদন দত্ত</strong>।</td>
+        </tr>
+        <tr>
+          <td><strong>প্রশ্ন ১৩</strong> (সনেটের ক'টি অংশ)</td>
+          <td>মুদ্রিত <code>উ. খ</code></td>
+          <td>'দুটি' (অষ্টক ও ষটক) অপশন গ-তে রয়েছে। ব্যাখ্যায় স্পষ্ট উল্লেখ রয়েছে সনেটের দুটি অংশ।</td>
+          <td>সঠিক উত্তর: <strong>দুটি</strong>।</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<div class="floating-actions">
+  <button class="float-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="উপরে যান">⬆️</button>
+</div>
+
+<script>
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', targetTheme);
+  try {
+    localStorage.setItem('theme', targetTheme);
+  } catch(e){}
+}
+
+let currentScale = 1.0;
+function adjustFontSize(delta) {
+  currentScale = Math.min(Math.max(0.85, currentScale + delta), 1.3);
+  document.documentElement.style.setProperty('--font-scale', currentScale);
+}
+
+window.addEventListener('scroll', () => {
+  const winScroll = document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  document.getElementById('progress-bar').style.width = scrolled + '%';
+});
+
+function scrollToId(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+function toggleRevAns(btn) {
+  const ans = btn.nextElementSibling;
+  if(ans.style.display === 'block') {
+    ans.style.display = 'none';
+    btn.innerText = 'উত্তর দেখুন';
+  } else {
+    ans.style.display = 'block';
+    btn.innerText = 'লুকান';
+  }
+}
+
+// পৃষ্ঠা ১২২-১২৪ এর পূর্ণাঙ্গ ১৩টি প্রশ্ন
+const quizData = [
+  {
+    id: 1,
+    tag: "৪৬তম ও ৪০তম বিসিএস",
+    q: "দীনবন্ধু মিত্রের 'নীলদর্পণ' নাটকটি ইংরেজিতে অনুবাদ করেন কে?",
+    opts: ["প্যারীচাঁদ মিত্র", "প্রমথ চৌধুরী", "মাইকেল মধুসূদন দত্ত", "দ্বিজেন্দ্রলাল রায়"],
+    ans: 2,
+    exp: "১৮৬০ সালে প্রকাশিত দীনবন্ধু মিত্রের 'নীলদর্পণ' নাটকটি 'A Native' ছদ্মনামে মাইকেল মধুসূদন দত্ত ইংরেজিতে অনুবাদ করেন (১৮৬১ সালে প্রকাশিত)।"
+  },
+  {
+    id: 2,
+    tag: "৪৫তম বিসিএস",
+    q: "মাইকেল মধুসূদন দত্ত প্রবর্তিত 'অমিত্রাক্ষর ছন্দ' প্রকৃত পক্ষে বাংলা কোন ছন্দের নব-রূপায়ণ?",
+    opts: ["স্বরবৃত্ত ছন্দ", "মাত্রাবৃত্ত ছন্দ", "অক্ষরবৃত্ত ছন্দ", "গৈরিশ ছন্দ"],
+    ans: 2,
+    exp: "অমিত্রাক্ষর ছন্দ প্রকৃতপক্ষে বাংলা কাব্যের প্রধান ছন্দ 'অক্ষরবৃত্ত ছন্দ'-এর নতুন সংস্করণ বা সুরমুক্তি।"
+  },
+  {
+    id: 3,
+    tag: "৪০তম বিসিএস",
+    q: "ইয়ংবেঙ্গল গোষ্ঠীভুক্ত ছিলেন কে?",
+    opts: ["অক্ষয় কুমার দত্ত", "এন্টনি ফিরিঙ্গি", "মাইকেল মধুসূদন দত্ত", "কালীপ্রসন্ন সিংহ ঠাকুর"],
+    ans: 2,
+    exp: "হিন্দু কলেজের মুক্তবুদ্ধির শিক্ষক ডিরোজিওর ভাবধারায় উদ্বুদ্ধ 'ইয়ং বেঙ্গল' দলের অন্যতম সদস্য ছিলেন মাইকেল মধুসূদন দত্ত।"
+  },
+  {
+    id: 4,
+    tag: "৩৮তম বিসিএস",
+    q: "কত সালে 'মেঘনাদবধ কাব্য' প্রথম প্রকাশিত হয়?",
+    opts: ["১৮৬০", "১৮৬৫", "১৮৫৯", "১৮৬১"],
+    ans: 3,
+    exp: "বাংলা সাহিত্যের প্রথম সার্থক মহাকাব্য মধুসূদন দত্তের 'মেঘনাদবধ কাব্য' ১৮৬১ সালে প্রকাশিত হয়। এটি ৯ সর্গে রচিত।"
+  },
+  {
+    id: 5,
+    tag: "৩৬তম বিসিএস",
+    q: "কোনটি মাইকেল মধুসূদন দত্তের পত্রকাব্য?",
+    opts: ["ব্রজাঙ্গনা", "বীরাঙ্গনা", "বিলাতের পত্র", "হিমালয়"],
+    ans: 1,
+    exp: "মাইকেল মধুসূদন দত্তের 'বীরাঙ্গনা কাব্য' (১৮৬২) বাংলা সাহিত্যের প্রথম পত্রকাব্য। এতে মোট ১১টি পত্র আছে।"
+  },
+  {
+    id: 6,
+    tag: "৩৫তম বিসিএস",
+    q: "বাংলা সাহিত্যে প্রথম সার্থক ট্রাজেডি নাটক কোনটি?",
+    opts: ["কৃষ্ণকুমারী", "সধবার একাদশী", "শর্মিষ্ঠা", "নীলদর্পণ"],
+    ans: 0,
+    exp: "মাইকেল মধুসূদন দত্ত রচিত 'কৃষ্ণকুমারী' (১৮৬১) বাংলা সাহিত্যের প্রথম সার্থক ট্রাজেডি নাটক।"
+  },
+  {
+    id: 7,
+    tag: "৩৪তম বিসিএস",
+    q: "মাইকেল মধুসূদন দত্তের রচনা নয় কোনটি?",
+    opts: ["তিলোত্তমা কাব্য", "বেতাল পঞ্চবিংশতি", "মেঘনাদ বধ কাব্য", "বীরাঙ্গনা"],
+    ans: 1,
+    exp: "'বেতাল পঞ্চবিংশতি' (১৮৪৭) ঈশ্বরচন্দ্র বিদ্যাসাগরের অনুবাদ গ্রন্থ। অন্য তিনটি মধুসূদনের কাব্য।"
+  },
+  {
+    id: 8,
+    tag: "৩১তম ও ১২তম বিসিএস",
+    q: "মাইকেল মধুসূদন দত্তের 'বীরাঙ্গনা কাব্য' কোন ধরনের কাব্য?",
+    opts: ["মহাকাব্য", "সনেট", "পত্রকাব্য", "গীতিকাব্য"],
+    ans: 2,
+    exp: "'বীরাঙ্গনা কাব্য' মধুসূদন দত্তের একটি বিখ্যাত পত্রকাব্য এবং পত্রাকারে এ ধরনের সাহিত্য বাংলা সাহিত্যে এটাই প্রথম।"
+  },
+  {
+    id: 9,
+    tag: "২৯তম ও ২৫তম বিসিএস",
+    q: "সনেট কবিতার প্রবর্তক কে?",
+    opts: ["দ্বিজেন্দ্র লাল রায়", "মাইকেল মধুসূদন দত্ত", "রজনীকান্ত সেন", "অতুলপ্রসাদ সেন"],
+    ans: 1,
+    exp: "বাংলা সাহিত্যে সনেট বা চতুর্দশপদী কবিতার প্রবর্তক মহাকবি মাইকেল মধুসূদন দত্ত।"
+  },
+  {
+    id: 10,
+    tag: "২৫তম বিসিএস",
+    q: "'অমিত্রাক্ষর' ছন্দের বৈশিষ্ট্য হলো-",
+    opts: ["অন্ত্যমিল আছে", "অন্ত্যমিল নেই", "চরণের প্রথমে মিল থাকে", "বিশ মাত্রার পর্ব থাকে"],
+    ans: 1,
+    exp: "'অমিত্রাক্ষর' ছন্দের প্রধান বৈশিষ্ট্য হলো এর চরণের শেষে কোনো অন্ত্যমিল বা অন্ত্যানুপ্রাস থাকে না।"
+  },
+  {
+    id: 11,
+    tag: "২১তম বিসিএস",
+    q: "'চতুর্দশপদী কবিতাবলী' কার রচনা?",
+    opts: ["হেমচন্দ্র বন্দ্যোপাধ্যায়", "নবীনচন্দ্র সেন", "মাইকেল মধুসূদন দত্ত", "রঙ্গলাল বন্দ্যোপাধ্যায়"],
+    ans: 2,
+    exp: "বাংলা সাহিত্যের প্রথম সনেট সংকলন 'চতুর্দশপদী কবিতাবলী' (১৮৬৬) মাইকেল মধুসূদন দত্তের রচনা।"
+  },
+  {
+    id: 12,
+    tag: "১৩তম বিসিএস",
+    q: "মাইকেল মধুসূদন দত্তের দেশপ্রেম প্রবল প্রকাশ ঘটেছে-",
+    opts: ["মহাকাব্যে", "নাটকে", "পত্রকাব্যে", "সনেটে"],
+    ans: 3,
+    exp: "ফ্রান্সের ভার্সাই নগরীতে বসে রচিত 'বঙ্গভাষা', 'কপোতাক্ষ নদ' ইত্যাদি সনেটে কবির প্রগাঢ় দেশপ্রেমের প্রকাশ ঘটেছে।"
+  },
+  {
+    id: 13,
+    tag: "২৪তম বিসিএস বাতিল",
+    q: "সনেটের ক'টি অংশ?",
+    opts: ["একটি", "তিনটি", "দুটি", "চারটি"],
+    ans: 2,
+    exp: "সনেটের দুটি অংশ: প্রথম আট চরণের স্তবক 'অষ্টক' (ভাবের প্রবর্তনা) এবং শেষ ছয় চরণের স্তবক 'ষটক' (ভাবের পরিণতি)।"
+  }
+];
+
+let userAnswers = {};
+
+function renderQuiz() {
+  const container = document.getElementById('quiz-cards-wrapper');
+  container.innerHTML = '';
+  
+  quizData.forEach((qItem, idx) => {
+    const card = document.createElement('div');
+    card.className = 'quiz-card';
+    card.id = `qcard-${qItem.id}`;
+    
+    let optsHtml = '';
+    const letters = ['ক', 'খ', 'গ', 'ঘ'];
+    qItem.opts.forEach((opt, oIdx) => {
+      optsHtml += `
+        <button class="opt-btn" onclick="checkAnswer(${qItem.id}, ${oIdx})" id="opt-${qItem.id}-${oIdx}">
+          <strong>${letters[oIdx]}.</strong> ${opt}
+        </button>
+      `;
+    });
+    
+    card.innerHTML = `
+      <div class="question-header">
+        <div class="q-text">${idx + 1}. ${qItem.q}</div>
+        <span class="q-tag">${qItem.tag}</span>
+      </div>
+      <div class="options-grid">
+        ${optsHtml}
+      </div>
+      <div class="explanation-box" id="exp-${qItem.id}">
+        <strong>💡 ব্যাখ্যা:</strong> ${qItem.exp}
+      </div>
+    `;
+    
+    container.appendChild(card);
+  });
+}
+
+function checkAnswer(qId, selectedOpt) {
+  if (userAnswers[qId] !== undefined) return;
+  
+  userAnswers[qId] = selectedOpt;
+  const qData = quizData.find(d => d.id === qId);
+  const card = document.getElementById(`qcard-${qId}`);
+  const isCorrect = selectedOpt === qData.ans;
+  
+  for(let i=0; i<qData.opts.length; i++) {
+    const btn = document.getElementById(`opt-${qId}-${i}`);
+    btn.disabled = true;
+    if(i === qData.ans) {
+      btn.classList.add('correct-choice');
+    } else if(i === selectedOpt) {
+      btn.classList.add('wrong-choice');
+    }
+  }
+  
+  if(isCorrect) {
+    card.classList.add('answered-correct');
+  } else {
+    card.classList.add('answered-wrong');
+  }
+  
+  document.getElementById(`exp-${qId}`).style.display = 'block';
+  updateScore();
+}
+
+function updateScore() {
+  const answeredTotal = Object.keys(userAnswers).length;
+  let correctTotal = 0;
+  for(let qId in userAnswers) {
+    const qData = quizData.find(d => d.id == qId);
+    if(userAnswers[qId] === qData.ans) {
+      correctTotal++;
+    }
+  }
+  document.getElementById('answered-count').innerText = answeredTotal;
+  document.getElementById('correct-count').innerText = correctTotal;
+}
+
+function resetQuiz() {
+  userAnswers = {};
+  renderQuiz();
+  updateScore();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderQuiz();
+  try {
+    const savedTheme = localStorage.getItem('theme');
+    if(savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+  } catch(e){}
+});
+</script>
+  <!-- Smart E-Book Navigation Component -->
+  <script src="nav-component.js"></script>
+</body>
+</html>

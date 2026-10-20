@@ -1,0 +1,972 @@
+<!-- DESIGN PLAN:
+1. বিষয়ের ধরন: বাংলা সাহিত্যের কালজয়ী চরিত্র (উপন্যাস, ছোটগল্প ও মধ্যযুগীয় কাব্যের অমর চরিত্রাবলি)।
+2. সবচেয়ে কঠিন/গুলিয়ে ফেলার জায়গা: বিভিন্ন উপন্যাসের জটিল নারী ও পুরুষ চরিত্র (যেমন: রোহিণী - কৃষ্ণকান্তের উইল, বিনোদিনী - চোখের বালি, কিরণময়ী - চরিত্রহীন; চাঁদের অমাবস্যার শিক্ষক আরেফ আলী vs অন্যান্য চরিত্র; জীবন আমার বোনের খোকা-রঞ্জু; শ্রীকৃষ্ণকীর্তনের বড়াই)।
+3. কেন এই মডিউলগুলো শ্রেষ্ঠ:
+   - "স্মরণীয় চরিত্র-ম্যাট্রিক্স": ৮টি প্রধান প্রশ্নের সব চরিত্র, সংশ্লিষ্ট গ্রন্থ ও রচয়িতাকে এক নজরে টেবিল ও কার্ডে বিন্যস্ত করা।
+   - সম্পূর্ণ ৮টি বিসিএস MCQ-এর লাইভ ইন্টারঅ্যাকটিভ কুইজ সিস্টেম (প্রকৃত অপশন ম্যাপিং ও পুঙ্খানুপুঙ্খ ব্যাখ্যাসহ)।
+   - শেষে "বইয়ের অসঙ্গতি ও যাচাই তালিকা" সারণি।
+4. রঙের মেজাজ: থিয়েট্রিক্যাল ও ধ্রুপদী সাহিত্যের আভিজাত্য ফুটিয়ে তুলতে গভীর রাজকীয় বেগুনী-মেরুন (#701a75, #831843), অ্যাম্বার সোনালি (#d97706) এবং হালকা ভিন্টেজ পার্চমেন্ট (#fdf4ff / ডার্ক মোডে #18052e)।
+5. হিরো ও মাসকট: নাট্যমঞ্চের মুখরোচক চরিত্র 'চরিত্র-গুরু' মাসকট।
+-->
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>বাংলা সাহিত্যের চরিত্র</title>
+<style>
+:root {
+  --font-base: 'Noto Sans Bengali', 'Kalpurush', Vrinda, sans-serif;
+  --bg-primary: #fdf4ff;
+  --bg-card: #ffffff;
+  --text-main: #2e1065;
+  --text-muted: #581c87;
+  --primary: #701a75;
+  --primary-light: #fae8ff;
+  --accent: #b45309;
+  --accent-light: #fef3c7;
+  --success: #15803d;
+  --success-bg: #dcfce7;
+  --danger: #b91c1c;
+  --danger-bg: #fee2e2;
+  --border: #f0abfc;
+  --border-strong: #a21caf;
+  --shadow: 0 4px 12px rgba(112, 26, 117, 0.08);
+  --radius: 12px;
+  --font-scale: 1rem;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #18052e;
+  --bg-card: #2c0b4d;
+  --text-main: #faf5ff;
+  --text-muted: #e9d5ff;
+  --primary: #f0abfc;
+  --primary-light: #4a044e;
+  --accent: #fbbf24;
+  --accent-light: #78350f;
+  --success: #4ade80;
+  --success-bg: #14532d;
+  --danger: #f87171;
+  --danger-bg: #7f1d1d;
+  --border: #86198f;
+  --border-strong: #c026d3;
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-base);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-size: calc(var(--font-scale) * 1rem);
+  line-height: 1.8;
+  padding-bottom: 80px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #c026d3, #f59e0b, #10b981);
+  width: 0%;
+  z-index: 1000;
+  transition: width 0.1s;
+}
+
+.top-control-bar {
+  position: sticky;
+  top: 6px;
+  z-index: 999;
+  background: var(--bg-card);
+  border-bottom: 2px solid var(--border);
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow);
+}
+
+.brand-badge {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+button.ctrl-btn {
+  background: var(--bg-primary);
+  color: var(--text-main);
+  border: 1.5px solid var(--border-strong);
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+button.ctrl-btn:hover {
+  background: var(--primary-light);
+  border-color: var(--primary);
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.hero {
+  background: linear-gradient(135deg, #4a044e, #701a75 65%, #86198f);
+  color: #ffffff;
+  padding: 32px 24px;
+  border-radius: var(--radius);
+  margin-top: 16px;
+  margin-bottom: 24px;
+  border: 2px solid #d946ef;
+  box-shadow: var(--shadow);
+}
+
+.hero h1 {
+  font-size: 1.85rem;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.hero p {
+  color: #fae8ff;
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+
+.bcs-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.stat-chip {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stat-chip span {
+  display: block;
+  font-size: 0.8rem;
+  color: #f5d0fe;
+}
+
+.stat-chip strong {
+  font-size: 1.25rem;
+  color: #fef08a;
+}
+
+.study-flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.flow-step {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-left: 6px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+
+.flow-step h4 {
+  color: var(--accent);
+  margin-bottom: 4px;
+  font-size: 1rem;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 36px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid var(--primary);
+  font-size: 1.45rem;
+  color: var(--primary);
+}
+
+.section-sub {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin-top: -10px;
+  margin-bottom: 18px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  border-left: 5px solid var(--primary);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+
+.card h3 {
+  font-size: 1.15rem;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.card-badge {
+  display: inline-block;
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin: 18px 0;
+  border-radius: var(--radius);
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  text-align: left;
+}
+
+th {
+  background: var(--primary);
+  color: #ffffff;
+  padding: 12px 14px;
+  font-weight: 700;
+  border-bottom: 2px solid var(--border);
+  font-size: 0.95rem;
+}
+
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+tr:nth-child(even) {
+  background: rgba(112, 26, 117, 0.04);
+}
+
+mark {
+  background-color: #fef08a;
+  color: #0f172a;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.quiz-meta-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: var(--bg-card);
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  border: 2px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.score-counter {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.quiz-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  transition: border-color 0.2s;
+}
+
+.quiz-card.answered-correct {
+  border-color: var(--success);
+}
+
+.quiz-card.answered-wrong {
+  border-color: var(--danger);
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.q-text {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.q-tag {
+  background: var(--accent-light);
+  color: var(--accent);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+@media (min-width: 600px) {
+  .options-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.opt-btn {
+  background: var(--bg-primary);
+  border: 1.5px solid var(--border);
+  color: var(--text-main);
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.92rem;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.opt-btn:hover:not(:disabled) {
+  background: var(--primary-light);
+  border-color: var(--primary);
+}
+
+.opt-btn.correct-choice {
+  background: var(--success-bg) !important;
+  border-color: var(--success) !important;
+  color: var(--success) !important;
+  font-weight: 700;
+}
+
+.opt-btn.wrong-choice {
+  background: var(--danger-bg) !important;
+  border-color: var(--danger) !important;
+  color: var(--danger) !important;
+}
+
+.explanation-box {
+  display: none;
+  background: var(--bg-primary);
+  border-left: 4px solid var(--primary);
+  padding: 12px 14px;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.revision-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.quick-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+
+.quick-card button {
+  width: 100%;
+  margin-top: 8px;
+  background: var(--primary-light);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.quick-card .ans-text {
+  display: none;
+  margin-top: 8px;
+  padding: 8px;
+  background: var(--bg-primary);
+  border-radius: 4px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--success);
+}
+
+.floating-actions {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 990;
+}
+
+.float-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transition: transform 0.2s;
+}
+
+.float-btn:hover {
+  transform: scale(1.1);
+}
+
+@media print {
+  .top-control-bar, .floating-actions, .quiz-meta-bar, .opt-btn, button {
+    display: none !important;
+  }
+  .explanation-box, .ans-text {
+    display: block !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .card, .quiz-card {
+    border: 1px solid #999;
+    box-shadow: none;
+    page-break-inside: avoid;
+  }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- কন্ট্রোল বার -->
+<header class="top-control-bar">
+  <div class="brand-badge">
+    <span>🎭</span> চরিত্র-গুরু • বাংলা সাহিত্যের চরিত্র
+  </div>
+  <div class="controls">
+    <button class="ctrl-btn" onclick="toggleTheme()" id="themeBtn">🌓 থিম</button>
+    <button class="ctrl-btn" onclick="adjustFontSize(-0.05)">A-</button>
+    <button class="ctrl-btn" onclick="adjustFontSize(0.05)">A+</button>
+    <button class="ctrl-btn" onclick="scrollToId('quiz-zone')">📝 কুইজ</button>
+    <button class="ctrl-btn" onclick="window.print()">🖨️ প্রিন্ট</button>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- হিরো সেকশন -->
+  <section class="hero">
+    <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: #f5d0fe; font-weight: 700;">
+      লাইভ এমসিকিউ™ বিসিএস প্রিলিমিনারি বিষয়ভিত্তিক সল্যুশন | পৃষ্ঠা ১৯৬ - ১৯৭
+    </div>
+    <h1>বাংলা সাহিত্যের চরিত্র</h1>
+    <p>উপন্যাস, ছোটগল্প ও মধ্যযুগীয় আখ্যানকাব্যের অবিস্মরণীয় নায়ক-নায়িকা ও খলচরিত্র—বিসিএসের ৮টি মৌলিক প্রশ্ন ও পূর্ণ সমাধান!</p>
+    
+    <div class="bcs-stat-grid">
+      <div class="stat-chip"><span>৪৪তম বিসিএস</span><strong>২টি</strong></div>
+      <div class="stat-chip"><span>৩৮তম বিসিএস</span><strong>১টি</strong></div>
+      <div class="stat-chip"><span>২৮তম বিসিএস</span><strong>১টি</strong></div>
+      <div class="stat-chip"><span>২৬তম বিসিএস</span><strong>২টি</strong></div>
+      <div class="stat-chip"><span>২৫তম ও ২৩তম</span><strong>২টি</strong></div>
+      <div class="stat-chip"><span>সর্বমোট প্রশ্ন</span><strong>৮টি</strong></div>
+    </div>
+  </section>
+
+  <!-- স্টাডি স্টেপস -->
+  <div class="study-flow">
+    <div class="flow-step">
+      <h4>১. উপন্যাসের চরিত্র মেলাও</h4>
+      <p style="font-size: 0.85rem;">খোকা-রঞ্জু, আরেফ আলী, জয়গুন, ঠকচাচা ও রোহিণীর সাহিত্যিক উৎস স্পষ্ট করো!</p>
+    </div>
+    <div class="flow-step">
+      <h4>২. ছোটগল্পের নায়িকারা</h4>
+      <p style="font-size: 0.85rem;">রবীন্দ্রনাথের চন্দরা ('শাস্তি') এবং মৃন্ময়ী ('সমাপ্তি')-র ব্যক্তিত্ব ও উৎস মনে রাখো!</p>
+    </div>
+    <div class="flow-step">
+      <h4>৩. ৮টি বিসিএস MCQ টেস্ট দাও</h4>
+      <p style="font-size: 0.85rem;">সরাসরি অপশনে ক্লিক করো, তাৎক্ষণিক লাল-সবুজ ফলাফল ও পূর্ণাঙ্গ সমাধান আয়ত্ত করে নাও!</p>
+    </div>
+  </div>
+
+  <!-- মডিউল ১: প্রধান চরিত্র ও সাহিত্যকর্মের ম্যাট্রিক্স -->
+  <h2 class="section-title">👥 বাংলা সাহিত্যের কালজয়ী চরিত্র-ম্যাট্রিক্স</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>সাহিত্যকর্ম ও প্রকাশকাল</th>
+          <th>রচয়িতা</th>
+          <th>প্রধান ও উল্লেখযোগ্য চরিত্রসমূহ</th>
+          <th>চরিত্রের বৈশিষ্ট্য ও মূল প্রেক্ষাপট</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>জীবন আমার বোন</strong> (১৯৭৬)</td>
+          <td>মাহমুদুল হক</td>
+          <td><mark>খোকা (জাহিদুল কবির খোকা), রঞ্জু</mark>, মুরাদ, রহমান, ইয়াসিন</td>
+          <td>মুক্তিযুদ্ধভিত্তিক উপন্যাস; এক নির্লিপ্ত ও জীবন-পলাতক মানুষের মানসিক অন্তর্দ্বন্দ্ব।</td>
+        </tr>
+        <tr>
+          <td><strong>চাঁদের অমাবস্যা</strong> (১৯৬৪)</td>
+          <td>সৈয়দ ওয়ালীউল্লাহ</td>
+          <td><mark>স্কুলমাস্টার আরেফ আলী</mark>, কাদের</td>
+          <td>মনোসমীক্ষণমূলক উপন্যাস; একটি হত্যাকাণ্ডের প্রত্যক্ষদর্শী যুবকের অন্তর্জীবনের জটিলতা ও নৈতিক সংকট।</td>
+        </tr>
+        <tr>
+          <td><strong>শাস্তি</strong> (ছোটগল্প)</td>
+          <td>রবীন্দ্রনাথ ঠাকুর</td>
+          <td><mark>চন্দরা</mark>, দুখিরাম, ছিদাম</td>
+          <td>সমাজের প্রান্তিক নারী, মিথ্যা দোষারোপের বিরুদ্ধে তীব্র আত্মসম্মানবোধ ও অপূরণীয় ব্যক্তিত্বের প্রকাশ।</td>
+        </tr>
+        <tr>
+          <td><strong>শ্রীকৃষ্ণকীর্তন</strong></td>
+          <td>বড়ুচণ্ডীদাস</td>
+          <td>কৃষ্ণ (পরমাত্মা), রাধা (জীবাত্মা), <mark>বড়াই</mark></td>
+          <td>মধ্যযুগের আদি নিদর্শন; বড়াই হলো রাধাকৃষ্ণের প্রেমের প্রধান দূতী।</td>
+        </tr>
+        <tr>
+          <td><strong>সূর্য-দীঘল বাড়ী</strong> (১৯৫৫)</td>
+          <td>আবু ইসহাক</td>
+          <td><mark>জয়গুন</mark>, হাসু, মায়মুনা, শফি, ডা. রমেশ চক্রবর্তী, মোড়ল গদু</td>
+          <td>পঞ্চাশের মন্বন্তর, দেশবিভাগ ও কুসংস্কারের বিরুদ্ধে এক সংগ্রামী নারীর বেঁচে থাকার লড়াই।</td>
+        </tr>
+        <tr>
+          <td><strong>আলালের ঘরের দুলাল</strong> (১৮৫৮)</td>
+          <td>প্যারীচাঁদ মিত্র (টেকচাঁদ ঠাকুর)</td>
+          <td><mark>ঠকচাচা (মোকাজান মিঞা)</mark>, মতিলাল, বাবুরাম, বটলর, বাঞ্ছারাম, বক্রেশ্বর</td>
+          <td>বাংলা সাহিত্যের প্রথম উপন্যাস; কলকাতার সমকালীন সমাজ এবং ধূর্ত ও প্রতারক ঠকচাচা চরিত্র।</td>
+        </tr>
+        <tr>
+          <td><strong>সমাপ্তি</strong> (ছোটগল্প)</td>
+          <td>রবীন্দ্রনাথ ঠাকুর</td>
+          <td><mark>মৃন্ময়ী</mark>, অপূর্ব</td>
+          <td>দুরন্ত, বাঁধনহারা ও গ্রাম্য চঞ্চল প্রকৃতির বালিকার দাম্পত্যে মানসিক রূপান্তর।</td>
+        </tr>
+        <tr>
+          <td><strong>কৃষ্ণকান্তের উইল</strong></td>
+          <td>বঙ্কিমচন্দ্র চট্টোপাধ্যায়</td>
+          <td><mark>রোহিণী</mark>, ভ্রমর, গোবিন্দলাল</td>
+          <td>রোহিণী, ভ্রমর ও গোবিন্দলালের ত্রিভুজ প্রেমের সামাজিক ও মনস্তাত্ত্বিক ট্র্যাজেডি।</td>
+        </tr>
+        <tr>
+          <td><strong>চোখের বালি</strong></td>
+          <td>রবীন্দ্রনাথ ঠাকুর</td>
+          <td><mark>বিনোদিনী</mark>, মহেন্দ্র, আশালতা, বিহারী</td>
+          <td>বাংলা সাহিত্যের প্রথম মনস্তাত্ত্বিক উপন্যাস; বিধবা বিনোদিনীর জটিল মানসিক রূপায়ণ।</td>
+        </tr>
+        <tr>
+          <td><strong>চরিত্রহীন</strong></td>
+          <td>শরৎচন্দ্র চট্টোপাধ্যায়</td>
+          <td><mark>কিরণময়ী</mark>, সাবিত্রী, সতীশ, উপেন্দ্র</td>
+          <td>প্রথাবহির্ভূত প্রেম ও নারী-পুরুষের সম্পর্কের সূক্ষ্ম মনস্তাত্ত্বিক জটিলতা।</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- মডিউল ২: ফাঁদে পোড়ো না (পার্শ্ব-চরিত্র বিশ্লেষণ) -->
+  <h2 class="section-title">🛑 ফাঁদে পোড়ো না! (অন্যান্য উপন্যাসের চরিত্র বিভাজন)</h2>
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-badge">সৈয়দ ওয়ালীউল্লাহর চরিত্র</span>
+      <h3>আরেফ আলী vs মজিদ</h3>
+      <p>• <strong>চাঁদের অমাবস্যা (১৯৬৪):</strong> যুবক শিক্ষক <mark>আরেফ আলী</mark> এবং কাদের!</p>
+      <p>• <strong>লালসালু (১৯৪৮):</strong> ধর্মের ভণ্ড ব্যবসায়ী <mark>মজিদ</mark>, জমিলা ও রহিমা!</p>
+    </div>
+
+    <div class="card">
+      <span class="card-badge">গ্রামীণ নারীর সংগ্রাম</span>
+      <h3>জয়গুন vs শ্যামা vs নবিতুন</h3>
+      <p>• <strong>সূর্য-দীঘল বাড়ী (আবু ইসহাক):</strong> কেন্দ্রীয় সংগ্রামী নারী <mark>জয়গুন</mark>!</p>
+      <p>• <strong>জননী (মানিক বন্দ্যোপাধ্যায়):</strong> সংসারের ট্র্যাজিক নায়িকা <mark>শ্যামা</mark> ও শীতল!</p>
+      <p>• <strong>সারেং বৌ (শহীদুল্লা কায়সার):</strong> উপকূলীয় অঞ্চলের নারী <mark>নবিতুন</mark> ও কদম সারেং!</p>
+      <p>• <strong>হাজার বছর ধরে (জহির রায়হান):</strong> টুনি, মন্তু ও মকবুল!</p>
+    </div>
+
+    <div class="card">
+      <span class="card-badge">রবীন্দ্রনাথের ছোটগল্পের নায়িকারা</span>
+      <h3>মৃন্ময়ী vs চন্দরা vs নিরু</h3>
+      <p>• <strong>সমাপ্তি:</strong> দুরন্ত কিশোরী <mark>মৃন্ময়ী</mark>!</p>
+      <p>• <strong>শাস্তি:</strong> আত্মমর্যাদাসম্পন্ন নারী <mark>চন্দরা</mark>!</p>
+      <p>• <strong>দেনা-পাওনা:</strong> পণপ্রথার শিকার <mark>নিরুপমা (নিরু)</mark>!</p>
+      <p>• <strong>পোস্টমাস্টার:</strong> অনাথ বালিকা <mark>রতন</mark>!</p>
+      <p>• <strong>মধ্যবর্তিনী:</strong> নিঃসন্তান গৃহবধূ <mark>হরসুন্দরী</mark>!</p>
+    </div>
+  </div>
+
+  <!-- কুইজ জোন -->
+  <div id="quiz-zone"></div>
+  <h2 class="section-title">🎯 বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ কুইজ (৮টি প্রশ্ন)</h2>
+  <div class="section-sub">পৃষ্ঠা ১৯৬ থেকে ১৯৭ পর্যন্ত আসা চরিত্রবিষয়ক সকল আসল প্রশ্ন, অপশন ও পুঙ্খানুপুঙ্খ সমাধান:</div>
+
+  <div class="quiz-meta-bar">
+    <div class="score-counter">
+      মোট উত্তর: <span id="answered-count">০</span> / ৮ | সঠিক: <span id="correct-count" style="color:var(--success);">০</span>
+    </div>
+    <div>
+      <button class="ctrl-btn" onclick="resetQuiz()">🔄 পুনরায় শুরু করো</button>
+    </div>
+  </div>
+
+  <div class="quiz-container" id="quiz-cards-wrapper">
+    <!-- জাভাস্ক্রিপ্ট দিয়ে ৮টি প্রশ্ন রেন্ডার করা হবে -->
+  </div>
+
+  <!-- দ্রুত রিভিশন -->
+  <h2 class="section-title">⏱️ ৩০ সেকেন্ডের দ্রুত রিভিশন</h2>
+  <div class="revision-grid">
+    <div class="quick-card">
+      <p><strong>১. 'খোকা' ও 'রঞ্জু' কোন উপন্যাসের চরিত্র?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">মাহমুদুল হকের মুক্তিযুদ্ধভিত্তিক উপন্যাস 'জীবন আমার বোন' (১৯৭৬)</div>
+    </div>
+    <div class="quick-card">
+      <p><strong>২. 'চাঁদের অমাবস্যা' উপন্যাসের যুবক-শিক্ষকের নাম কী?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">আরেফ আলী (সৈয়দ ওয়ালীউল্লাহর উপন্যাস)</div>
+    </div>
+    <div class="quick-card">
+      <p><strong>৩. রবীন্দ্রনাথের 'শাস্তি' ছোটগল্পের নায়িকার নাম কী?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">চন্দরা (সমাজের প্রান্তিক কিন্তু দৃঢ়চেতা নারী)</div>
+    </div>
+    <div class="quick-card">
+      <p><strong>৪. 'শ্রীকৃষ্ণকীর্তন' কাব্যে 'বড়াই' কোন ধরনের চরিত্র?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">রাধাকৃষ্ণের প্রেমের দূতী (আবিষ্কারক: বসন্তরঞ্জন রায় বিদ্বদ্বল্লভ)</div>
+    </div>
+    <div class="quick-card">
+      <p><strong>৫. 'জয়গুন' চরিত্রটি কোন উপন্যাসে দেখা যায়?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">আবু ইসহাকের 'সূর্য-দীঘল বাড়ী' (১৯৫৫)</div>
+    </div>
+    <div class="quick-card">
+      <p><strong>৬. ঠকচাচা (মোকাজান মিঞা) কোন উপন্যাসের চরিত্র?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">প্যারীচাঁদ মিত্রের 'আলালের ঘরের দুলাল' (১৮৫৮)</div>
+    </div>
+  </div>
+
+  <!-- অসঙ্গতি ও যাচাই তালিকা -->
+  <h2 class="section-title">🧭 সন্দেহ নিরসন ও সঠিক সমাধান</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>📝 প্রশ্ন ও বিষয়</th>
+          <th>📖 বইয়ের অপশন / উত্তর</th>
+          <th>🔍 সূক্ষ্ম প্যাঁচ ও বিস্তারিত বিশ্লেষণ</th>
+          <th>🎯 পরীক্ষায় আপনার সঠিক সিদ্ধান্ত</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>প্রশ্ন ৩</strong> ('চন্দরা' চরিত্রের স্রষ্টা কে)</td>
+          <td>মুদ্রিত <code>উ. খ</code></td>
+          <td>মুদ্রণে দুই কলাম বিন্যাসে বামে বুদ্ধদেব বসু ও মীর মশাররফ হোসেন, ডানে রবীন্দ্রনাথ ঠাকুর ও সৈয়দ শামসুল হক। রবীন্দ্রনাথ ঠাকুর ২য় অবস্থানে (খ) হিসেবে সঠিক।</td>
+          <td>সঠিক উত্তর: <strong>রবীন্দ্রনাথ ঠাকুর</strong>।</td>
+        </tr>
+        <tr>
+          <td><strong>প্রশ্ন ৫</strong> ('জয়গুন' কোন উপন্যাসের চরিত্র)</td>
+          <td>মুদ্রিত <code>উ. খ</code></td>
+          <td>মুদ্রণে 'সূর্য-দীঘল বাড়ী' ৩য় অবস্থানে (গ) ছিল। ব্যাখ্যায় স্পষ্টভাবে বলা হয়েছে আবু ইসহাকের 'সূর্য দীঘল বাড়ী' উপন্যাসের কেন্দ্রীয় চরিত্র জয়গুন। খ-তে ছিল 'সারেং বৌ'। এটি মুদ্রণগত কোড বিভ্রাট।</td>
+          <td>সঠিক উত্তর: <strong>সূর্য-দীঘল বাড়ী</strong>।</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<div class="floating-actions">
+  <button class="float-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="উপরে যান">⬆️</button>
+</div>
+
+<script>
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', targetTheme);
+  try {
+    localStorage.setItem('theme', targetTheme);
+  } catch(e){}
+}
+
+let currentScale = 1.0;
+function adjustFontSize(delta) {
+  currentScale = Math.min(Math.max(0.85, currentScale + delta), 1.3);
+  document.documentElement.style.setProperty('--font-scale', currentScale);
+}
+
+window.addEventListener('scroll', () => {
+  const winScroll = document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  document.getElementById('progress-bar').style.width = scrolled + '%';
+});
+
+function scrollToId(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+function toggleRevAns(btn) {
+  const ans = btn.nextElementSibling;
+  if(ans.style.display === 'block') {
+    ans.style.display = 'none';
+    btn.innerText = 'উত্তর দেখুন';
+  } else {
+    ans.style.display = 'block';
+    btn.innerText = 'লুকান';
+  }
+}
+
+// পৃষ্ঠা ১৯৬ - ১৯৭ এর সম্পূর্ণ ৮টি আসল বিসিএস প্রশ্নমালা
+const quizData = [
+  {
+    id: 1,
+    tag: "৪৪তম বিসিএস",
+    q: "'খোকা' ও 'রঞ্জু' মাহমুদুল হক-এর কোন উপন্যাসের চরিত্র?",
+    opts: ["কালো বরফ", "অনুর পাঠশালা", "খেলাঘর", "জীবন আমার বোন"],
+    ans: 3,
+    exp: "মাহমুদুল হক রচিত মুক্তিযুদ্ধভিত্তিক উপন্যাস 'জীবন আমার বোন' (১৯৭৬)-এর প্রধান চরিত্র খোকা (জাহিদুল কবির খোকা) ও রঞ্জু। অন্যান্য চরিত্র: মুরাদ, রহমান, ইয়াসিন।"
+  },
+  {
+    id: 2,
+    tag: "৪৪তম বিসিএস",
+    q: "'চাঁদের অমাবস্যা' উপন্যাসের যুবক-শিক্ষকের নাম-",
+    opts: ["আবদুল কাদের", "আক্কাস আলী", "খতিব মিয়া", "আরেফ আলী"],
+    ans: 3,
+    exp: "সৈয়দ ওয়ালীউল্লাহ রচিত মনোসমীক্ষণমূলক উপন্যাস 'চাঁদের অমাবস্যা' (১৯৬৪)-তে স্কুল মাস্টার আরেফ আলীকে কেন্দ্র করে মানুষের অন্তর্জীবনের জটিলতা ও অবক্ষয় তুলে ধরা হয়েছে।"
+  },
+  {
+    id: 3,
+    tag: "৩৮তম বিসিএস",
+    q: "'চন্দরা' চরিত্রের স্রষ্টা কে?",
+    opts: ["বুদ্ধদেব বসু", "রবীন্দ্রনাথ ঠাকুর", "মীর মশাররফ হোসেন", "সৈয়দ শামসুল হক"],
+    ans: 1,
+    exp: "রবীন্দ্রনাথ ঠাকুর রচিত বিখ্যাত ছোটগল্প 'শাস্তি'-র কেন্দ্রীয় নায়িকা 'চন্দরা'। সে সমাজের প্রান্তিক শ্রেণির নারী হলেও তার চরিত্রে তীব্র ব্যক্তিত্ব ও দৃঢ়তা প্রকাশ পেয়েছে।"
+  },
+  {
+    id: 4,
+    tag: "২৮তম বিসিএস",
+    q: "শ্রীকৃষ্ণকীর্তন কাব্যের বড়াই কি ধরনের চরিত্র?",
+    opts: ["শ্রী রাধার ননদিনী", "শ্রী রাধার শাশুড়ি", "রাধাকৃষ্ণের প্রেমের দূতী", "জনৈক গোপবালা"],
+    ans: 2,
+    exp: "বড়ুচণ্ডীদাস রচিত 'শ্রীকৃষ্ণকীর্তন' কাব্যের তিনটি প্রধান চরিত্র হলো কৃষ্ণ (পরমাত্মা), রাধা (জীবাত্মা) ও বড়াই (রাধাকৃষ্ণের প্রেমের দূতী)।"
+  },
+  {
+    id: 5,
+    tag: "২৬তম বিসিএস",
+    q: "'জয়গুন' কোন উপন্যাসের চরিত্র?",
+    opts: ["জননী", "সারেং বৌ", "সূর্য-দীঘল বাড়ী", "হাজার বছর ধরে"],
+    ans: 2,
+    exp: "আবু ইসহাকের বিখ্যাত উপন্যাস 'সূর্য দীঘল বাড়ী' (১৯৫৫)-র কেন্দ্রীয় চরিত্র জয়গুন। এতে পঞ্চাশের মন্বন্তর ও দেশবিভাগের পটভূমিতে দুর্ভিক্ষপীড়িত মানুষের জীবনসংগ্রাম চিত্রিত হয়েছে।"
+  },
+  {
+    id: 6,
+    tag: "২৬তম ও ১৫তম বিসিএস",
+    q: "'ঠক চাচা' চরিত্রটি কোন উপন্যাসে পাওয়া যায়?",
+    opts: ["আলালের ঘরের দুলাল", "মৃত্যুক্ষুধা", "জোহরা", "হাজার বছর ধরে"],
+    ans: 0,
+    exp: "প্যারীচাঁদ মিত্রের 'আলালের ঘরের দুলাল' (১৮৫৮) উপন্যাসের সর্বাধিক উল্লেখযোগ্য চরিত্র হলো মোকাজান মিঞা বা ঠকচাচা। অন্যান্য চরিত্র: বটলর, বাঞ্ছারাম, বক্রেশ্বর।"
+  },
+  {
+    id: 7,
+    tag: "২৫তম বিসিএস",
+    q: "'মৃন্ময়ী' রবীন্দ্রনাথ ঠাকুরের কোন ছোটগল্পের নায়িকা?",
+    opts: ["সমাপ্তি", "পোস্ট-মাস্টার", "দেনা-পাওনা", "মধ্যবর্তিনী"],
+    ans: 0,
+    exp: "রবীন্দ্রনাথ ঠাকুরের 'সমাপ্তি' গল্পের চঞ্চল ও দুরন্ত নায়িকা মৃন্ময়ী। দেনাপাওনার নিরু, পোস্টমাস্টারের রতন এবং মধ্যবর্তিনীর নায়িকা হরসুন্দরী।"
+  },
+  {
+    id: 8,
+    tag: "২৩তম বিসিএস",
+    q: "রোহিণী-বিনোদিনী-কিরণময়ী কোন গ্রন্থগুচ্ছের চরিত্র?",
+    opts: [
+      "বিষবৃক্ষ-চতুরঙ্গ-চরিত্রহীন",
+      "কৃষ্ণকান্তের উইল-যোগাযোগ-পথের দাবি",
+      "দুর্গেশনন্দিনী-চোখের বালি-গৃহদাহ",
+      "কৃষ্ণকান্তের উইল-চোখের বালি-চরিত্রহীন"
+    ],
+    ans: 3,
+    exp: "রোহিণী বঙ্কিমচন্দ্রের 'কৃষ্ণকান্তের উইল' উপন্যাসের, বিনোদিনী রবীন্দ্রনাথের 'চোখের বালি'র এবং কিরণময়ী শরৎচন্দ্রের 'চরিত্রহীন' উপন্যাসের প্রধান নারী চরিত্র।"
+  }
+];
+
+let userAnswers = {};
+
+function renderQuiz() {
+  const container = document.getElementById('quiz-cards-wrapper');
+  container.innerHTML = '';
+  
+  quizData.forEach((qItem, idx) => {
+    const card = document.createElement('div');
+    card.className = 'quiz-card';
+    card.id = `qcard-${qItem.id}`;
+    
+    let optsHtml = '';
+    const letters = ['ক', 'খ', 'গ', 'ঘ'];
+    qItem.opts.forEach((opt, oIdx) => {
+      optsHtml += `
+        <button class="opt-btn" onclick="checkAnswer(${qItem.id}, ${oIdx})" id="opt-${qItem.id}-${oIdx}">
+          <strong>${letters[oIdx]}.</strong> ${opt}
+        </button>
+      `;
+    });
+    
+    card.innerHTML = `
+      <div class="question-header">
+        <div class="q-text">${idx + 1}. ${qItem.q}</div>
+        <span class="q-tag">${qItem.tag}</span>
+      </div>
+      <div class="options-grid">
+        ${optsHtml}
+      </div>
+      <div class="explanation-box" id="exp-${qItem.id}">
+        <strong>💡 ব্যাখ্যা:</strong> ${qItem.exp}
+      </div>
+    `;
+    
+    container.appendChild(card);
+  });
+}
+
+function checkAnswer(qId, selectedOpt) {
+  if (userAnswers[qId] !== undefined) return;
+  
+  userAnswers[qId] = selectedOpt;
+  const qData = quizData.find(d => d.id === qId);
+  const card = document.getElementById(`qcard-${qId}`);
+  const isCorrect = selectedOpt === qData.ans;
+  
+  for(let i=0; i<qData.opts.length; i++) {
+    const btn = document.getElementById(`opt-${qId}-${i}`);
+    btn.disabled = true;
+    if(i === qData.ans) {
+      btn.classList.add('correct-choice');
+    } else if(i === selectedOpt) {
+      btn.classList.add('wrong-choice');
+    }
+  }
+  
+  if(isCorrect) {
+    card.classList.add('answered-correct');
+  } else {
+    card.classList.add('answered-wrong');
+  }
+  
+  document.getElementById(`exp-${qId}`).style.display = 'block';
+  updateScore();
+}
+
+function updateScore() {
+  const answeredTotal = Object.keys(userAnswers).length;
+  let correctTotal = 0;
+  for(let qId in userAnswers) {
+    const qData = quizData.find(d => d.id == qId);
+    if(userAnswers[qId] === qData.ans) {
+      correctTotal++;
+    }
+  }
+  document.getElementById('answered-count').innerText = answeredTotal;
+  document.getElementById('correct-count').innerText = correctTotal;
+}
+
+function resetQuiz() {
+  userAnswers = {};
+  renderQuiz();
+  updateScore();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderQuiz();
+  try {
+    const savedTheme = localStorage.getItem('theme');
+    if(savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+  } catch(e){}
+});
+</script>
+  <!-- Smart E-Book Navigation Component -->
+  <script src="nav-component.js"></script>
+</body>
+</html>

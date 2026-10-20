@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বাংলা সাহিত্যের অমর উক্তি ও সংলাপ - বিসিএস প্রস্তুতি</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ══════ CSS ভ্যারিয়েবল ও থিম কালার (উষ্ণ রুবি-ক্রিমসন ও ক্ল্যাসিক এম্বার প্যালেট) ══════ */
+    :root {
+      --font-scale: 100%;
+      --bg-base: #fdfbf7;
+      --bg-surface: #ffffff;
+      --bg-surface-alt: #f7f1e7;
+      --text-main: #1f1b18;
+      --text-muted: #5e544c;
+      --primary: #991b1b; /* ঐতিহাসিক উক্তি ও সংহতির রক্তিম রুবি */
+      --primary-light: #fee2e2;
+      --accent: #b45309; /* ক্ল্যাসিক সাহিত্যের সোনালি ব্রোঞ্জ */
+      --accent-light: #fef3c7;
+      --success: #15803d;
+      --success-light: #dcfce7;
+      --danger: #b91c1c;
+      --danger-light: #fee2e2;
+      --warning: #c2410c;
+      --warning-light: #ffedd5;
+      --border-color: #e5d8c8;
+      --card-border: #cebcab;
+      --shadow: 0 4px 14px rgba(45, 20, 15, 0.08);
+      --shadow-hover: 0 8px 24px rgba(45, 20, 15, 0.14);
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg-base: #110d0b;
+      --bg-surface: #1c1613;
+      --bg-surface-alt: #27201b;
+      --text-main: #fcf9f5;
+      --text-muted: #cbd5e1;
+      --primary: #f87171;
+      --primary-light: #3d1618;
+      --accent: #fbbf24;
+      --accent-light: #33250f;
+      --success: #4ade80;
+      --success-light: #12381f;
+      --danger: #ef4444;
+      --danger-light: #451010;
+      --warning: #fb923c;
+      --warning-light: #3b1b0b;
+      --border-color: #3e322b;
+      --card-border: #5c4b40;
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+      --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.7);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: var(--font-scale);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans Bengali', 'Kalpurush', Vrinda, sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.8;
+      min-width: 320px;
+      padding-bottom: 80px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    mark {
+      background-color: #fde047;
+      color: #0f172a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    /* ══════ প্রগ্রেস বার ও কন্ট্রোল বার ══════ */
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: transparent;
+      z-index: 1000;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.1s;
+    }
+
+    .control-bar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: var(--bg-surface);
+      border-bottom: 2px solid var(--border-color);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .control-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-ctrl {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .btn-ctrl:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* ══════ সূচি ড্রপডাউন ══════ */
+    #toc-panel {
+      display: none;
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-hover);
+    }
+
+    #toc-panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .toc-item a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      background: var(--bg-surface-alt);
+      transition: var(--transition);
+    }
+
+    .toc-item a:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* ══════ হিরো ব্যানার ══════ */
+    .hero-banner {
+      background: linear-gradient(135deg, #7f1d1d, #2a0808);
+      color: #ffffff;
+      padding: 34px 20px;
+      border-radius: 20px;
+      margin: 24px 0;
+      box-shadow: var(--shadow);
+      border: 3px solid #ef4444;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: #f59e0b;
+      color: #1a0808;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+      font-size: 15.5px;
+      color: #fee2e2;
+      margin-bottom: 20px;
+    }
+
+    .study-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .step-box {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+
+    .step-box strong {
+      display: block;
+      color: #fde047;
+      margin-bottom: 2px;
+    }
+
+    /* ══════ সেকশন সাধারণ স্টাইল ══════ */
+    .study-section {
+      margin-top: 36px;
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .section-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .section-meta {
+      font-size: 13px;
+      background: var(--bg-surface-alt);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    /* ══════ বিসিএস ট্রেন্ড গ্রিড ══════ */
+    .bcs-matrix {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .bcs-cell {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .bcs-cell.active {
+      border: 2px solid var(--primary);
+      background: var(--primary-light);
+    }
+
+    .bcs-exam {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .bcs-cell.active .bcs-exam {
+      color: var(--primary);
+    }
+
+    .bcs-qcount {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 4px;
+    }
+
+    /* ══════ কার্ড ও সারণি ══════ */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .info-card {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-left: 6px solid var(--primary);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .info-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    .card-heading {
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .fact-pill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .fact-item {
+      font-size: 14.5px;
+      background: var(--bg-surface-alt);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      margin: 16px 0;
+      border-radius: 10px;
+      border: 2px solid var(--border-color);
+    }
+
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14.5px;
+    }
+
+    .custom-table th {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 12px 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .custom-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+
+    .custom-table tr:nth-child(even) td {
+      background: var(--bg-surface-alt);
+    }
+
+    .custom-table tr:hover td {
+      background: var(--primary-light);
+    }
+
+    /* ══════ উক্তি ও সংলাপ হাইলাইট বক্স ══════ */
+    .quote-box {
+      background: var(--bg-surface-alt);
+      border-left: 5px solid var(--primary);
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin: 12px 0;
+      font-size: 15px;
+    }
+
+    .quote-box strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 4px;
+      font-size: 16px;
+    }
+
+    .quote-source {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* ══════ কুইজ সেকশন ══════ */
+    .quiz-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .quiz-card {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .quiz-q-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .bcs-tag {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .quiz-question {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .opt-btn {
+      background: var(--bg-surface-alt);
+      border: 1.5px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14.5px;
+      font-family: inherit;
+      color: var(--text-main);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--border-color);
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--text-main);
+      flex-shrink: 0;
+    }
+
+    .opt-btn.correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+      color: var(--success) !important;
+      font-weight: 700;
+    }
+
+    .opt-btn.correct .opt-letter {
+      background: var(--success);
+      color: #fff;
+    }
+
+    .opt-btn.wrong {
+      background: var(--danger-light) !important;
+      border-color: var(--danger) !important;
+      color: var(--danger) !important;
+    }
+
+    .opt-btn.wrong .opt-letter {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .quiz-explanation {
+      display: none;
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 8px;
+      background: var(--bg-surface-alt);
+      border-left: 4px solid var(--primary);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .quiz-explanation.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    /* ══════ রিভিশন ফ্ল্যাশকার্ড ══════ */
+    .revision-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .rev-card {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .rev-q {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .rev-ans {
+      display: none;
+      font-size: 14px;
+      padding-top: 6px;
+      border-top: 1px dashed var(--border-color);
+      color: var(--text-main);
+    }
+
+    .rev-ans.active {
+      display: block;
+    }
+
+    .score-banner {
+      background: var(--bg-surface);
+      border: 2px solid var(--primary);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 24px;
+      box-shadow: var(--shadow);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .score-display {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .alert-box {
+      background: var(--warning-light);
+      border: 2px solid var(--warning);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+
+    .alert-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--warning);
+      margin-bottom: 6px;
+    }
+
+    @media print {
+      .control-bar, #progress-container, .btn-ctrl, .opt-btn {
+        display: none !important;
+      }
+      body {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .quiz-explanation {
+        display: block !important;
+      }
+      .study-section {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        page-break-inside: avoid;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DESIGN PLAN: 
+    ১. বিষয়ের ধরন: বাংলা সাহিত্যের কালজয়ী উক্তি, অমর পঙ্ক্তি, কবিতাংশ, নাটক-প্রবন্ধের সংলাপ ও বিখ্যাত গান (পৃষ্ঠা ১৯৮–২০২)।
+    ২. সবচেয়ে কঠিন/গুলিয়ে ফেলার জায়গা: কাছাকাছি ভাবার্থের পঙ্ক্তি ও লেখক মিলানো (যেমন: ঈশ্বরচন্দ্র গুপ্তের নীলকর শ্লেষ, কৃষ্ণচন্দ্র মজুমদারের উপদেশমূলক পঙ্ক্তি, মদনমোহনের শিশুতোষ পদ, শিখা পত্রিকার মটো, রবীন্দ্রনাথের কণিকা ও পদাবলী, লালনের দেহতত্ত্ব এবং রঙ্গলালের স্বাধীনতা আহ্বান)।
+    ৩. নির্বাচিত মডিউল: বিসিএস ট্রেন্ড মেট্রিক্স, উক্তি ও রচয়িতা মেগা মাস্টার তালিকা, বিশিষ্ট লেখকদের পরিচয়-কার্ড, ২০টি পূর্ণাঙ্গ ইন্টারঅ্যাকটিভ বিসিএস কুইজ, ৩০ সেকেন্ডের রিভিশন ও বইয়ের অসঙ্গতি যাচাই তালিকা।
+    ৪. রঙের মেজাজ: ঐতিহাসিক বিদ্রোহ ও গভীর সাহিত্যিক সংহতির রক্তিম রুবি (#991b1b) ও ক্ল্যাসিক ব্রোঞ্জ-সোনালি (#b45309)।
+    ৫. হিরো ও মাসকট: বাংলা সাহিত্যের অমর উদ্ধৃতি ও কালজয়ী অক্ষরমালার স্মারক।
+  -->
+
+  <!-- প্রগ্রেস ট্র্যাকার -->
+  <div id="progress-container"><div id="progress-bar"></div></div>
+
+  <!-- স্টিকি কন্ট্রোল বার -->
+  <div class="control-bar">
+    <div class="container control-content">
+      <div class="control-group">
+        <button class="btn-ctrl" onclick="toggleToc()">📖 সূচিপত্র</button>
+        <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn">🌓 মোড</button>
+      </div>
+      <div class="control-group">
+        <button class="btn-ctrl" onclick="changeFontSize(-1)">A-</button>
+        <button class="btn-ctrl" onclick="changeFontSize(0)">A</button>
+        <button class="btn-ctrl" onclick="changeFontSize(1)">A+</button>
+        <button class="btn-ctrl" onclick="window.print()">🖨️ প্রিন্ট</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- ড্রপডাউন সূচি -->
+    <div id="toc-panel">
+      <strong style="color:var(--primary); font-size:16px;">অধ্যায়ের প্রধান অংশসমূহ:</strong>
+      <ul class="toc-list">
+        <li class="toc-item"><a href="#sec-stat" onclick="toggleToc()">📊 বিসিএস পরীক্ষার ট্রেন্ড</a></li>
+        <li class="toc-item"><a href="#sec-master-quotes" onclick="toggleToc()">📜 অমর উক্তি ও রচয়িতা মেগা তালিকা</a></li>
+        <li class="toc-item"><a href="#sec-authors-bio" onclick="toggleToc()">🏛️ বিশিষ্ট স্রষ্টাদের পরিচয় ও সাহিত্যকর্ম</a></li>
+        <li class="toc-item"><a href="#sec-quiz" onclick="toggleToc()">📝 ২০টি বিসিএস MCQ কুইজ</a></li>
+        <li class="toc-item"><a href="#sec-rev" onclick="toggleToc()">⚡ ৩০ সেকেন্ডের রিভিশন ফ্ল্যাশ</a></li>
+        <li class="toc-item"><a href="#sec-audit" onclick="toggleToc()">⚠️ অসঙ্গতি ও তথ্য যাচাই তালিকা</a></li>
+      </ul>
+    </div>
+
+    <!-- হিরো ব্যানার -->
+    <header class="hero-banner">
+      <span class="hero-tag">বিসিএস স্পেশাল টপিক মাস্টারক্লাস</span>
+      <h1 class="hero-title">বাংলা সাহিত্যের উক্তি ও সংলাপ</h1>
+      <p class="hero-subtitle">রবীন্দ্রনাথ, নজরুল, ঈশ্বরচন্দ্র গুপ্ত, মদনমোহন, লালন শাহ ও কৃষ্ণচন্দ্র মজুমদারের অমর পঙ্ক্তিমালা (পৃষ্ঠা ১৯৮–২০২)</p>
+      
+      <div class="study-steps">
+        <div class="step-box">
+          <strong>ধাপ ১: ৩ মিনিটে স্ক্যান</strong>
+          বিসিএস প্রশ্ন-পরিসংখ্যান ও মেগা উক্তি তালিকাটি একনজরে দেখে নাও।
+        </div>
+        <div class="step-box">
+          <strong>ধাপ ২: উৎস শনাক্ত</strong>
+          কোন পঙ্ক্তি কোন কবিতার বা প্রবন্ধের, তা স্পষ্ট করে আয়ত্ত করো।
+        </div>
+        <div class="step-box">
+          <strong>ধাপ ৩: কুইজে ১০০%</strong>
+          বিগত বিসিএসের ২০টি প্রশ্নে অংশ নিয়ে প্রস্তুতি সম্পূর্ণ করো।
+        </div>
+      </div>
+    </header>
+
+    <!-- সেকশন ১: বিসিএস ট্রেন্ড -->
+    <section id="sec-stat" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📊</div>
+          <h2 class="section-title">বিসিএস পরীক্ষার প্রশ্ন-পরিসংখ্যান</h2>
+        </div>
+        <span class="section-meta">১০ম থেকে ৫০তম বিসিএস বিশ্লেষণ</span>
+      </div>
+      <p style="font-size: 14.5px; margin-bottom: 12px;">
+        বইয়ের সূচি অনুযায়ী বাংলা সাহিত্যের উক্তি ও সংলাপ থেকে বিসিএস প্রিলিমিনারিতে আসা প্রশ্নের সংখ্যা:
+      </p>
+
+      <div class="bcs-matrix">
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪৬তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪৫তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪৪তম বিসিএস</div>
+          <div class="bcs-qcount">২ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪০তম বিসিএস</div>
+          <div class="bcs-qcount">২ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৩৭তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৩৫তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">১০ম-৩৪তম বিসিএস</div>
+          <div class="bcs-qcount">১৪ টি</div>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">
+        <em>মোট সংকলিত প্রশ্ন সংখ্যা: ২০টি (পৃষ্ঠা ১৯৮–২০২ থেকে ব্যাখ্যাসহ পূর্ণাঙ্গ সংকলিত)</em>
+      </p>
+    </section>
+
+    <!-- সেকশন ২: উক্তি ও রচয়িতা মেগা মাস্টার তালিকা -->
+    <section id="sec-master-quotes" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📜</div>
+          <h2 class="section-title">বাংলা সাহিত্যের অমর উক্তি ও সংলাপের মেগা তালিকা</h2>
+        </div>
+        <span class="section-meta">হুবহু বইয়ের উৎস ও পঙ্ক্তিমালা</span>
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>বিখ্যাত উক্তি / পঙ্ক্তি</th>
+              <th>রচয়িতা / বক্তা</th>
+              <th>মূল গ্রন্থ / কবিতা / প্রসঙ্গ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>"একুশ মানে মাথা নত না করা"</td>
+              <td><strong>আবুল ফজল</strong></td>
+              <td>রাজনীতি ও রাজনীতিবিদ বিষয়ক প্রবন্ধ।</td>
+            </tr>
+            <tr>
+              <td>"আমার ভাইয়ের রক্তে রাঙানো একুশে ফেব্রুয়ারি, আমি কি ভুলিতে পারি"</td>
+              <td><strong>আব্দুল গাফফার চৌধুরী</strong> (সুরকার: আলতাফ মাহমুদ; ১ম সুরকার: আবদুল লতিফ)</td>
+              <td>হাসান হাফিজুর রহমান সম্পাদিত 'একুশে ফেব্রুয়ারি' (১৯৫৩)।</td>
+            </tr>
+            <tr>
+              <td>"ষোল নয় আমার মাতৃভাষার ষোলশত রূপ"</td>
+              <td><strong>মুনীর চৌধুরী</strong></td>
+              <td>নাট্যকারের বিখ্যাত উক্তি।</td>
+            </tr>
+            <tr>
+              <td>"সমষ্টিগতভাবে যদি আমরা বাঁচি, ব্যক্তিগতভাবেও আমরা বাঁচবো।"</td>
+              <td><strong>সিরাজুল ইসলাম চৌধুরী</strong></td>
+              <td>প্রাবন্ধিক ও ঢাবির ইমেরিটাস অধ্যাপকের উক্তি।</td>
+            </tr>
+            <tr>
+              <td>"তুমি মা কল্পতরু আমরা সব পোষা গরু / শিখিনি শিং বাঁকানো / কেবল খাবো খোল বিচিলি ঘাষ ॥"</td>
+              <td><strong>ঈশ্বরচন্দ্র গুপ্ত</strong></td>
+              <td>'নীলকর' কবিতা (মহারানী ভিক্টোরিয়াকে সম্বোধন)।</td>
+            </tr>
+            <tr>
+              <td>"আপনাকে বড় বলে বড় সেই নয় লোকে যারে বড় বলে বড় সেই হয়।"</td>
+              <td><strong>ঈশ্বরচন্দ্র গুপ্ত</strong></td>
+              <td>কবি ও সম্পাদকের বিখ্যাত উক্তি।</td>
+            </tr>
+            <tr>
+              <td>"কতরূপ স্নেহ করি, দেশের কুকুর ধরি, বিদেশের ঠাকুর ফেলিয়া।"</td>
+              <td><strong>ঈশ্বরচন্দ্র গুপ্ত</strong></td>
+              <td>স্বদেশপ্রেমমূলক কবিতাংশ।</td>
+            </tr>
+            <tr>
+              <td>"স্বাধীনতা হীনতায় কে বাঁচিতে চায় হে, কে বাঁচিতে চায়"</td>
+              <td><strong>রঙ্গলাল বন্দ্যোপাধ্যায়</strong></td>
+              <td>'পদ্মিনী উপাখ্যান' (১৮৫৮)।</td>
+            </tr>
+            <tr>
+              <td>"মহাজ্ঞানী মহাজন, যে পথে করে গমন হয়েছেন প্রাতঃস্মরণীয়।"</td>
+              <td><strong>হেমচন্দ্র বন্দ্যোপাধ্যায়</strong> (বাংলার মিল্টন)</td>
+              <td>বিখ্যাত অনুপ্রেরণামূলক উক্তি।</td>
+            </tr>
+            <tr>
+              <td>"সকলের তরে সকলে আমরা / প্রত্যেকে আমরা পরের তরে।"</td>
+              <td><strong>কামিনী রায়</strong></td>
+              <td>'আলো ও ছায়া' কাব্যের 'সুখ' কবিতা।</td>
+            </tr>
+            <tr>
+              <td>"করিতে পারিনা কাজ / সদা ভয় সদা লাজ, / সংশয়ে সংকল্পে সদা টলে / পাছে লোকে কিছু বলে।"</td>
+              <td><strong>কামিনী রায়</strong></td>
+              <td>'পাছে লোকে কিছু বলে' কবিতা।</td>
+            </tr>
+            <tr>
+              <td>"বাবুই পাখিরে ডাকি, বলিছে চড়াই, কুড়ে ঘরে থাকি কর শিল্পের বড়াই"</td>
+              <td><strong>রজনীকান্ত সেন</strong></td>
+              <td>'স্বাধীনতার সুখ' কবিতা।</td>
+            </tr>
+            <tr>
+              <td>"ধন ধান্যে পুষ্পে ভরা আমাদের এই বসুন্ধরা"</td>
+              <td><strong>দ্বিজেন্দ্রলাল রায়</strong></td>
+              <td>বিখ্যাত দেশাত্মবোধক গান।</td>
+            </tr>
+            <tr>
+              <td>"মরণ রে, তুঁহু মম শ্যাম সমান!"</td>
+              <td><strong>রবীন্দ্রনাথ ঠাকুর</strong></td>
+              <td>'ভানুসিংহ ঠাকুরের পদাবলী' (১৮৮৪)।</td>
+            </tr>
+            <tr>
+              <td>"কিন্তু আরম্ভের পূর্বেও আরম্ভ আছে / সন্ধ্যা বেলায় দীপ জ্বলার আগে সকাল বেলায় সলতে পাকানো"</td>
+              <td><strong>রবীন্দ্রনাথ ঠাকুর</strong></td>
+              <td>'যোগাযোগ' উপন্যাস।</td>
+            </tr>
+            <tr>
+              <td>"মরিতে চাহিনা আমি সুন্দর ভুবনে, / মানবের মাঝে আমি বাঁচিবার চাই।"</td>
+              <td><strong>রবীন্দ্রনাথ ঠাকুর</strong></td>
+              <td>'প্রাণ' কবিতা।</td>
+            </tr>
+            <tr>
+              <td>"সত্য যে কঠিন, কঠিনেরে ভালোবাসিলাম / সে কখনো করে না বঞ্চনা।"</td>
+              <td><strong>রবীন্দ্রনাথ ঠাকুর</strong></td>
+              <td>'রূপ-নারায়ণের কূলে' কবিতা।</td>
+            </tr>
+            <tr>
+              <td>"শৈবাল দিঘিরে বলে উচ্চ করি শির লিখে রেখ এক ফোঁটা দিলেম শিশির।"</td>
+              <td><strong>রবীন্দ্রনাথ ঠাকুর</strong></td>
+              <td>'কণিকা' কাব্য (অকৃতজ্ঞতার প্রতীক)।</td>
+            </tr>
+            <tr>
+              <td>"সকালে উঠিয়া আমি মনে মনে বলি, সারাদিন আমি যেন ভালো হয়ে চলি"</td>
+              <td><strong>মদনমোহন তর্কালঙ্কার</strong></td>
+              <td>'আমার পণ' কবিতা।</td>
+            </tr>
+            <tr>
+              <td>"পাখী সব করে রব রাতি পোহাইল, কাননে কুসুমকলি সকলি ফুটিল।"</td>
+              <td><strong>মদনমোহন তর্কালঙ্কার</strong></td>
+              <td>'শিশু শিক্ষা' / প্রভাত কবিতা।</td>
+            </tr>
+            <tr>
+              <td>"ধর্ম সাধারণ লোকের সংস্কৃতি, আর সংস্কৃতি শিক্ষিত মার্জিত লোকের ধর্ম।"</td>
+              <td><strong>মোতাহের হোসেন চৌধুরী</strong></td>
+              <td>'সংস্কৃতির কথা' প্রবন্ধগ্রন্থ।</td>
+            </tr>
+            <tr>
+              <td>"প্রাণের বান্ধব রে বুড়ি হইলাম তোর কারণে"</td>
+              <td><strong>শেখ ওয়াহিদুর রহমান</strong></td>
+              <td>গীতিকবি ও বীর মুক্তিযোদ্ধার জনপ্রিয় গান।</td>
+            </tr>
+            <tr>
+              <td>"কেন পান্থ ক্ষান্ত হও হেরি দীর্ঘ পথ?"</td>
+              <td><strong>কৃষ্ণচন্দ্র মজুমদার</strong></td>
+              <td>'সদ্ভাবশতক' কাব্য।</td>
+            </tr>
+            <tr>
+              <td>"চিরসুখীজন ভ্রমে কি কখন, ব্যথিতবেদন বুঝিতে পারে।"</td>
+              <td><strong>কৃষ্ণচন্দ্র মজুমদার</strong></td>
+              <td>'সদ্ভাবশতক' কাব্য।</td>
+            </tr>
+            <tr>
+              <td>"ভাষা মানুষের মুখ থেকে কলমের মুখে আসে, উল্টোটা করতে গেলে মুখে শুধু কালি পড়ে"</td>
+              <td><strong>প্রমথ চৌধুরী</strong></td>
+              <td>'প্রবন্ধ সংগ্রহ' ('কথার কথা' প্রবন্ধ)।</td>
+            </tr>
+            <tr>
+              <td>"সুশিক্ষিত লোক মাত্রই স্বশিক্ষিত"</td>
+              <td><strong>প্রমথ চৌধুরী</strong></td>
+              <td>'বইপড়া' প্রবন্ধ।</td>
+            </tr>
+            <tr>
+              <td>"কেউ মালা, কেউ তসবি গলায়, তাইতো জাত ভিন্ন বলায়"</td>
+              <td><strong>লালন শাহ</strong></td>
+              <td>বাউল সম্রাট লালনের গান।</td>
+            </tr>
+            <tr>
+              <td>"মধুর চেয়েও আছে মধুর সে আমার এই দেশের মাটি খাঁটি সোনার চেয়ে খাঁটি।"</td>
+              <td><strong>সত্যেন্দ্রনাথ দত্ত</strong></td>
+              <td>'খাঁটি সোনা' কবিতা।</td>
+            </tr>
+            <tr>
+              <td>"জ্ঞান যেখানে সীমাবদ্ধ, বুদ্ধি সেখানে আড়ষ্ট, মুক্তি সেখানে অসম্ভব।"</td>
+              <td><strong>মুসলিম সাহিত্য-সমাজ</strong></td>
+              <td>'শিখা' পত্রিকার প্রতিটি সংখ্যার শিরোদেশ (মটো)।</td>
+            </tr>
+            <tr>
+              <td>"কোথায় স্বর্গ কোথায় নরক, কে বলে তা বহু দূর, / মানুষের মাঝে স্বর্গ-নরক, মানুষেতে সুরা-সুর।"</td>
+              <td><strong>শেখ ফজলুল করিম</strong></td>
+              <td>'স্বর্গ-নরক' কবিতা।</td>
+            </tr>
+            <tr>
+              <td>"বন্যেরা বনে সুন্দর, শিশুরা মাতৃক্রোড়ে"</td>
+              <td><strong>সঞ্জীবচন্দ্র চট্টোপাধ্যায়</strong></td>
+              <td>'পালামৌ' ভ্রমণকাহিনী।</td>
+            </tr>
+            <tr>
+              <td>"মোদের গরব, মোদের আশা / আ-মরি বাংলা ভাষা"</td>
+              <td><strong>অতুলপ্রসাদ সেন</strong></td>
+              <td>বিখ্যাত গান (ঠুংরি ধারার প্রবর্তক)।</td>
+            </tr>
+            <tr>
+              <td>"নানান দেশের নানান ভাষা। / বিনা স্বদেশীয় ভাষা / পুরে কি আশা।"</td>
+              <td><strong>রামনিধি গুপ্ত (নিধু বাবু)</strong></td>
+              <td>'স্বদেশী ভাষা' (টপ্পা গানের জনক)।</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- সেকশন ৩: বিশিষ্ট স্রষ্টাদের পরিচয় -->
+    <section id="sec-authors-bio" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">🏛️</div>
+          <h2 class="section-title">উক্তি সংশ্লিষ্ট শীর্ষ সাহিত্যিকদের সাহিত্যকীর্তি</h2>
+        </div>
+        <span class="section-meta">ব্যাখ্যায় উল্লেখিত সাহিত্যিকদের প্রোফাইল</span>
+      </div>
+
+      <div class="card-grid">
+        <div class="info-card">
+          <span class="card-badge">কথাসাহিত্যিক ও শিক্ষাবিদ</span>
+          <h3 class="card-heading">আবুল ফজল</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>সংগঠন ও শিখা:</strong> মুসলিম সাহিত্য সমাজ (১৯২৬) প্রতিষ্ঠার সঙ্গে যুক্ত ছিলেন এবং ১৯৩১ সালে 'শিখা' পত্রিকার ৫ম সংখ্যার সম্পাদক হন।
+            </div>
+            <div class="fact-item">
+              <strong>উপন্যাস ও আত্মজীবনী:</strong> উপন্যাস: <em>চৌচির</em>, <em>প্রদীপ ও পতঙ্গ</em>, <em>রাঙ্গা প্রভাত</em>। আত্মজীবনী: <em>রেখাচিত্র</em>, <em>দুর্দিনের দিনলিপি</em>।
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <span class="card-badge">কবি ও সম্পাদক</span>
+          <h3 class="card-heading">ঈশ্বরচন্দ্র গুপ্ত</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>কবিতা:</strong> <em>নীলকর</em>, <em>মানুষ কে</em>, <em>মাতৃভূমি ও মাতৃভাষা</em>, <em>পৌষ পার্বণ</em>, <em>বাঙালি মেয়ে</em>, <em>আনারস</em>, <em>তপসে মাছ</em>, <em>পাঁঠা</em>।
+            </div>
+            <div class="fact-item">
+              <strong>অন্যান্য গ্রন্থ:</strong> <em>প্রবোধ প্রভাকর</em>, <em>হিতপ্রভাকর</em>, <em>বোধেন্দুবিকাশ</em>, <em>কবিবর ভারতচন্দ্র রায় ও তাঁর জীবনবৃত্তান্ত</em>।
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <span class="card-badge">বুদ্ধির মুক্তি আন্দোলনের চিন্তাবিদ</span>
+          <h3 class="card-heading">মোতাহের হোসেন চৌধুরী</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>জীবনকাল ও কর্ম:</strong> ১৯০৩–১৯৫৬; ঢাকার বুদ্ধির মুক্তি আন্দোলনের সাথে সংশ্লিষ্ট ছিলেন; গদ্যে প্রমথ চৌধুরীর প্রভাব রয়েছে।
+            </div>
+            <div class="fact-item">
+              <strong>অনুবাদ ও প্রবন্ধ:</strong> <em>সভ্যতা</em> (ক্লাইভ বেলের Civilization), <em>সুখ</em> (বার্ট্রান্ড রাসেলের Conquest of Happiness); বিখ্যাত প্রবন্ধ: 'রবীন্দ্রনাথ ও বৈরাগ্য বিলাস'।
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <span class="card-badge">ছন্দের জাদুকর ও অন্যান্য</span>
+          <h3 class="card-heading">সত্যেন্দ্রনাথ দত্ত ও রঙ্গলাল</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>সত্যেন্দ্রনাথ দত্ত:</strong> কাব্যগ্রন্থ: <em>সবিতা</em>, <em>বেণু ও বীণা</em>, <em>কুহু ও কেকা</em>, <em>হোমশিখা</em>, <em>হসন্তিকা</em>। অনুবাদকাব্য: <em>তীর্থ সলীল</em>, <em>তীর্থ রেণু</em>, <em>মণি মঞ্জুষা</em>।
+            </div>
+            <div class="fact-item">
+              <strong>রঙ্গলাল বন্দ্যোপাধ্যায়:</strong> প্রথম কাব্য <em>পদ্মিনী উপাখ্যান</em> (১৮৫৮; টডের রাজস্থান অবলম্বনে)। অন্যান্য কাব্য: <em>কর্মদেবী</em>, <em>শূরসুন্দরী</em>, <em>কাঞ্চী কাবেরী</em>।
+            </div>
+            <div class="fact-item">
+              <strong>মাওলানা আকরম খাঁ:</strong> গ্রন্থাবলী: <em>মোস্তফা চরিত</em>, <em>সমস্যা ও সমাধান</em>, <em>আমপারার বঙ্গানুবাদ</em>।
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- সেকশন ৪: বিগত বিসিএস কুইজ -->
+    <section id="sec-quiz" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📝</div>
+          <h2 class="section-title">বিগত বিসিএস পরীক্ষার পূর্ণাঙ্গ প্রশ্নব্যাংক</h2>
+        </div>
+        <span class="section-meta">২০টি হুবহু প্রশ্ন</span>
+      </div>
+
+      <p style="margin-bottom: 16px; font-size:14.5px;">
+        সঠিক উত্তরের অপশনে ক্লিক করে যাচাই করো। ক্লিক করার সাথে সাথে সঠিক উত্তর ও বইয়ের পুঙ্খানুপুঙ্খ ব্যাখ্যা দেখতে পাবে:
+      </p>
+
+      <div class="quiz-container">
+        <!-- প্রশ্ন ১ -->
+        <div class="quiz-card" id="q1">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০১</span>
+            <span class="bcs-tag">৪৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">১. "একুশ মানে মাথা নত না করা"- এই অমর পংক্তির রচয়িতা-</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(1, 'ক', false, this)"><span class="opt-letter">ক</span> আবদুল গাফফার চৌধুরী</button>
+            <button class="opt-btn" onclick="checkAnswer(1, 'খ', true, this)"><span class="opt-letter">খ</span> আবুল ফজল</button>
+            <button class="opt-btn" onclick="checkAnswer(1, 'গ', false, this)"><span class="opt-letter">গ</span> মুনীর চৌধুরী</button>
+            <button class="opt-btn" onclick="checkAnswer(1, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> সিরাজুল ইসলাম চৌধুরী</button>
+          </div>
+          <div class="quiz-explanation" id="exp-1">
+            <strong>ব্যাখ্যা:</strong> "একুশ মানে মাথা নত না করা"—এই অমর পঙ্ক্তির রচয়িতা হচ্ছেন বিখ্যাত কথাসাহিত্যিক আবুল ফজল। আবুল ফজল ঢাকা বিশ্ববিদ্যালয়ে অধ্যয়নকালে ঢাকার মুসলিম সাহিত্য সমাজ (১৯২৬) প্রতিষ্ঠার সঙ্গে যুক্ত ছিলেন এবং ১৯৩১ সালে শিখা পত্রিকার পঞ্চম সংখ্যার সম্পাদক হন। তাঁর উল্লেখযোগ্য উপন্যাস—চৌচির, প্রদীপ ও পতঙ্গ, রাঙ্গা প্রভাত এবং আত্মজীবনী—রেখাচিত্র, দুর্দিনের দিনলিপি।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২ -->
+        <div class="quiz-card" id="q2">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০২</span>
+            <span class="bcs-tag">৪৫তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">২. 'তুমি মা কল্পতরু, আমরা সব পোষা গরু'-এই কবিতাংশটির রচয়িতা কে?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(2, 'ক', false, this)"><span class="opt-letter">ক</span> রঙ্গলাল বন্দ্যোপাধ্যায়</button>
+            <button class="opt-btn" onclick="checkAnswer(2, 'খ', false, this)"><span class="opt-letter">খ</span> ঈশ্বরচন্দ্র বিদ্যাসাগর</button>
+            <button class="opt-btn" onclick="checkAnswer(2, 'গ', false, this)"><span class="opt-letter">গ</span> হেমচন্দ্র বন্দ্যোপাধ্যায়</button>
+            <button class="opt-btn" onclick="checkAnswer(2, 'ঘ', true, this)"><span class="opt-letter">ঘ</span> ঈশ্বরচন্দ্র গুপ্ত</button>
+          </div>
+          <div class="quiz-explanation" id="exp-2">
+            <strong>ব্যাখ্যা:</strong> প্রশ্নে উল্লিখিত চরণদ্বয়ের রচয়িতা কবি ঈশ্বরচন্দ্র গুপ্ত। তিনি সমাজের নানা অসঙ্গতি নিয়ে ব্যঙ্গ করেছেন। 'নীলকর' কবিতায় মহারানী ভিক্টোরিয়াকে সম্বোধন করে তিনি এ চরণ লেখেন। রঙ্গলাল বন্দ্যোপাধ্যায়ের উক্তি—'স্বাধীনতা হীনতায় কে বাঁচিতে চায় হে', হেমচন্দ্র বন্দ্যোপাধ্যায়ের উক্তি—'মহাজ্ঞানী মহাজন যে পথে করে গমন'।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩ -->
+        <div class="quiz-card" id="q3">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৩</span>
+            <span class="bcs-tag">৪৪তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৩. 'সকলের তরে সকলে আমরা/প্রত্যেকে আমরা পরের তরে।'-কার রচিত পংক্তি?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(3, 'ক', false, this)"><span class="opt-letter">ক</span> রজনীকান্ত সেন</button>
+            <button class="opt-btn" onclick="checkAnswer(3, 'খ', true, this)"><span class="opt-letter">খ</span> কামিনী রায়</button>
+            <button class="opt-btn" onclick="checkAnswer(3, 'গ', false, this)"><span class="opt-letter">গ</span> ইসমাইল হোসেন সিরাজী</button>
+            <button class="opt-btn" onclick="checkAnswer(3, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> দ্বিজেন্দ্রলাল রায়</button>
+          </div>
+          <div class="quiz-explanation" id="exp-3">
+            <strong>ব্যাখ্যা:</strong> লাইন দুটি কবি কামিনী রায় রচিত 'আলো ও ছায়া' কাব্যের 'সুখ' কবিতা থেকে গৃহীত হয়েছে। তিনি একসময় 'জনৈক বঙ্গমহিলা' ছদ্মনামে লিখতেন। তাঁর অপর বিখ্যাত কবিতাংশ—'পাছে লোকে কিছু বলে'। (বি.দ্র. বইয়ে মুদ্রিত উত্তর 'উ. গ' থাকলেও ব্যাখ্যা অনুযায়ী কামিনী রায় সঠিক)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৪ -->
+        <div class="quiz-card" id="q4">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৪</span>
+            <span class="bcs-tag">৪৪তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৪. 'মরণ রে তুঁহু মম শ্যাম সমান।'-পংক্তিটির রচয়িতা-</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(4, 'ক', false, this)"><span class="opt-letter">ক</span> বিদ্যাপতি</button>
+            <button class="opt-btn" onclick="checkAnswer(4, 'খ', true, this)"><span class="opt-letter">খ</span> রবীন্দ্রনাথ ঠাকুর</button>
+            <button class="opt-btn" onclick="checkAnswer(4, 'গ', false, this)"><span class="opt-letter">গ</span> গোবিন্দদাস</button>
+            <button class="opt-btn" onclick="checkAnswer(4, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> কৃষ্ণদাস কবিরাজ</button>
+          </div>
+          <div class="quiz-explanation" id="exp-4">
+            <strong>ব্যাখ্যা:</strong> রবীন্দ্রনাথ ঠাকুর রচিত 'ভানুসিংহ ঠাকুরের পদাবলী'র (১৮৮৪) অন্তর্গত পদ। এর বেশির ভাগ পদই ব্রজবুলি ভাষায় রচিত। বিদ্যাপতি, গোবিন্দদাস ও কৃষ্ণদাস কবিরাজ মধ্যযুগের বৈষ্ণব পদাবলীর কবি।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৫ -->
+        <div class="quiz-card" id="q5">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৫</span>
+            <span class="bcs-tag">৪০তম ও ৩০তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৫. সকালে উঠিয়া আমি মনে মনে বলি, সারাদিন আমি যেন ভালো হয়ে চলি-চরণ দুটির রচয়িতা কে?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(5, 'ক', false, this)"><span class="opt-letter">ক</span> চণ্ডীচরণ মুনশী</button>
+            <button class="opt-btn" onclick="checkAnswer(5, 'খ', false, this)"><span class="opt-letter">খ</span> রবীন্দ্রনাথ ঠাকুর</button>
+            <button class="opt-btn" onclick="checkAnswer(5, 'গ', false, this)"><span class="opt-letter">গ</span> কাজী নজরুল ইসলাম</button>
+            <button class="opt-btn" onclick="checkAnswer(5, 'ঘ', true, this)"><span class="opt-letter">ঘ</span> মদনমোহন তর্কালঙ্কার</button>
+          </div>
+          <div class="quiz-explanation" id="exp-5">
+            <strong>ব্যাখ্যা:</strong> চরণ দুটি মদনমোহন তর্কালঙ্কারের 'আমার পণ' কবিতার অংশ। তিনি সংস্কৃত কলেজ থেকে 'কাব্যরত্নাকর' ও 'তর্কালঙ্কার' উপাধি লাভ করেন। তাঁর মৌলিক কাব্যগ্রন্থ—রসতরঙ্গিণী ও বাসবদত্তা এবং বিখ্যাত শিশুপাঠ্য—'শিশু শিক্ষা'।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৬ -->
+        <div class="quiz-card" id="q6">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৬</span>
+            <span class="bcs-tag">৪০তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৬. 'একুশে ফেব্রুয়ারি'র বিখ্যাত গানটির সুরকার কে?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(6, 'ক', false, this)"><span class="opt-letter">ক</span> সুবীর সাহা</button>
+            <button class="opt-btn" onclick="checkAnswer(6, 'খ', true, this)"><span class="opt-letter">খ</span> আলতাফ মাহমুদ</button>
+            <button class="opt-btn" onclick="checkAnswer(6, 'গ', false, this)"><span class="opt-letter">গ</span> সুধীন দাস</button>
+            <button class="opt-btn" onclick="checkAnswer(6, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> আলতাফ মামুন</button>
+          </div>
+          <div class="quiz-explanation" id="exp-6">
+            <strong>ব্যাখ্যা:</strong> একুশে ফেব্রুয়ারির বিখ্যাত গানটির বর্তমান সুরকার আলতাফ মাহমুদ। গানটির রচয়িতা আবদুল গাফ্ফার চৌধুরী এবং প্রথম সুরকার ছিলেন আবদুল লতিফ। (বি.দ্র. বইয়ে মুদ্রিত উত্তর 'উ. গ' থাকলেও ব্যাখ্যায় স্পষ্ট আলতাফ মাহমুদ)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৭ -->
+        <div class="quiz-card" id="q7">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৭</span>
+            <span class="bcs-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৭. 'ধর্ম সাধারণ লোকের সংস্কৃতি, আর সংস্কৃতি শিক্ষিত মার্জিত লোকের ধর্ম।'- কে বলেছেন?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(7, 'ক', true, this)"><span class="opt-letter">ক</span> মোতাহের হোসেন চৌধুরী</button>
+            <button class="opt-btn" onclick="checkAnswer(7, 'খ', false, this)"><span class="opt-letter">খ</span> রামেন্দ্রসুন্দর ত্রিবেদী</button>
+            <button class="opt-btn" onclick="checkAnswer(7, 'গ', false, this)"><span class="opt-letter">গ</span> প্রমথ চৌধুরী</button>
+            <button class="opt-btn" onclick="checkAnswer(7, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> কাজী আব্দুল ওদুদ</button>
+          </div>
+          <div class="quiz-explanation" id="exp-7">
+            <strong>ব্যাখ্যা:</strong> মোতাহের হোসেন চৌধুরীর বিখ্যাত প্রবন্ধগ্রন্থ 'সংস্কৃতির কথা' থেকে উক্তিটি নেওয়া হয়েছে। তাঁর অপর উক্তি—'মানুষের বৃদ্ধি কেবল দৈহিক নয়, আত্মিকও'।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৮ -->
+        <div class="quiz-card" id="q8">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৮</span>
+            <span class="bcs-tag">৩৫তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৮. প্রাণের বান্ধব রে বুড়ি হইলাম তোর কারণে। গানটির গীতিকার কে?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(8, 'ক', false, this)"><span class="opt-letter">ক</span> শাহ আবদুল করিম</button>
+            <button class="opt-btn" onclick="checkAnswer(8, 'খ', true, this)"><span class="opt-letter">খ</span> শেখ ওয়াহিদ</button>
+            <button class="opt-btn" onclick="checkAnswer(8, 'গ', false, this)"><span class="opt-letter">গ</span> রাধারমন</button>
+            <button class="opt-btn" onclick="checkAnswer(8, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> কুদ্দুস বয়াতি</button>
+          </div>
+          <div class="quiz-explanation" id="exp-8">
+            <strong>ব্যাখ্যা:</strong> গানটির স্রষ্টা গীতিকবি বীর মুক্তিযোদ্ধা শেখ ওয়াহিদুর রহমান। তাঁর অপর জনপ্রিয় গান 'আমার মাটির গাছে লাউ ধইরাছে'। (বি.দ্র. বইয়ে মুদ্রিত উত্তর 'উ. গ' থাকলেও ব্যাখ্যা অনুযায়ী শেখ ওয়াহিদ সঠিক)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৯ -->
+        <div class="quiz-card" id="q9">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৯</span>
+            <span class="bcs-tag">৩৩তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৯. 'কেন পান্থ ক্ষান্ত হও হেরি দীর্ঘ পথ?' কার লেখা?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(9, 'ক', true, this)"><span class="opt-letter">ক</span> কৃষ্ণচন্দ্র মজুমদার</button>
+            <button class="opt-btn" onclick="checkAnswer(9, 'খ', false, this)"><span class="opt-letter">খ</span> ঈশ্বরচন্দ্র গুপ্ত</button>
+            <button class="opt-btn" onclick="checkAnswer(9, 'গ', false, this)"><span class="opt-letter">গ</span> কামিনী রায়</button>
+            <button class="opt-btn" onclick="checkAnswer(9, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> যতীন্দ্রমোহন বাগচী</button>
+          </div>
+          <div class="quiz-explanation" id="exp-9">
+            <strong>ব্যাখ্যা:</strong> উক্তিটি কৃষ্ণচন্দ্র মজুমদারের 'সদ্ভাবশতক' কাব্য থেকে নেওয়া হয়েছে। তাঁর অন্যান্য উক্তি: "চিরসুখীজন ভ্রমে কি কখন ব্যথিতবেদন বুঝিতে পারে", "যে জন দিবসে মনের হরষে জ্বালায় মোমের বাতি"।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১০ -->
+        <div class="quiz-card" id="q10">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ১০</span>
+            <span class="bcs-tag">২৭তম ও ২৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">১০. 'পাখি সব করে রব রাতি পোহাইল'- পংক্তির রচয়িতা কে?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(10, 'ক', true, this)"><span class="opt-letter">ক</span> মদনমোহন তর্কালংকার</button>
+            <button class="opt-btn" onclick="checkAnswer(10, 'খ', false, this)"><span class="opt-letter">খ</span> রামনারায়ন তর্করত্ন</button>
+            <button class="opt-btn" onclick="checkAnswer(10, 'গ', false, this)"><span class="opt-letter">গ</span> বিহারীলাল চিক্রবর্তী</button>
+            <button class="opt-btn" onclick="checkAnswer(10, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> কৃষ্ণচন্দ্র মজুমদার</button>
+          </div>
+          <div class="quiz-explanation" id="exp-10">
+            <strong>ব্যাখ্যা:</strong> চরণ দুটি মদনমোহন তর্কালঙ্কারের 'পাখি সব করে রব রাতি পোহাইল' (শিশু শিক্ষা) কবিতার অংশ।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১১ -->
+        <div class="quiz-card" id="q11">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ১১</span>
+            <span class="bcs-tag">২৪তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">১১. 'ভাষা মানুষের মুখ থেকে কলমের মুখে আসে, উল্টোটা করতে গেলে মুখে শুধু কালি পড়ে' বলেছেন-</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(11, 'ক', false, this)"><span class="opt-letter">ক</span> রবীন্দ্রনাথ ঠাকুর</button>
+            <button class="opt-btn" onclick="checkAnswer(11, 'খ', false, this)"><span class="opt-letter">খ</span> বলাইচাঁদ মুখোপাধ্যায়</button>
+            <button class="opt-btn" onclick="checkAnswer(11, 'গ', false, this)"><span class="opt-letter">গ</span> কাজী নজরুল ইসলাম</button>
+            <button class="opt-btn" onclick="checkAnswer(11, 'ঘ', true, this)"><span class="opt-letter">ঘ</span> প্রমথ চৌধুরী</button>
+          </div>
+          <div class="quiz-explanation" id="exp-11">
+            <strong>ব্যাখ্যা:</strong> প্রমথ চৌধুরীর 'প্রবন্ধ সংগ্রহ' গদ্যগ্রন্থের 'কথার কথা' প্রবন্ধ থেকে উক্তিটি নেওয়া হয়েছে। তাঁর অন্যান্য উক্তি: "সুশিক্ষিত লোক মাত্রই স্বশিক্ষিত", "ব্যাধিই সংক্রামক, স্বাস্থ্য নয়"।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১২ -->
+        <div class="quiz-card" id="q12">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ১২</span>
+            <span class="bcs-tag">১৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">১২. 'কেউ মালা, কেউ তসবি গলায়, তাইতো জাত ভিন্ন বলায়' এই পংক্তিটি নিচের একজনের লেখা-</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(12, 'ক', true, this)"><span class="opt-letter">ক</span> লালন শাহ</button>
+            <button class="opt-btn" onclick="checkAnswer(12, 'খ', false, this)"><span class="opt-letter">খ</span> সিরাজ সাঁই</button>
+            <button class="opt-btn" onclick="checkAnswer(12, 'গ', false, this)"><span class="opt-letter">গ</span> মদন বাউল</button>
+            <button class="opt-btn" onclick="checkAnswer(12, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> পাগলা কানাই</button>
+          </div>
+          <div class="quiz-explanation" id="exp-12">
+            <strong>ব্যাখ্যা:</strong> গানটির রচয়িতা বাউল সম্রাট লালন শাহ (১৭৭২–১৮৯০)। তাঁর অন্যান্য গান: 'বাড়ির কাছে আরশী নগর', 'খাঁচার ভিতর অচিন পাখি', 'মিলন হবে কত দিনে'।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৩ -->
+        <div class="quiz-card" id="q13">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ১৩</span>
+            <span class="bcs-tag">১৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">১৩. 'মধুর চেয়েও আছে মধুর সে আমার এই দেশের মাটি খাঁটি সোনার চেয়ে খাঁটি।'-কবিতায় এই অংশ বিশেষের রচয়িতা-</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(13, 'ক', false, this)"><span class="opt-letter">ক</span> রবীন্দ্রনাথ ঠাকুর</button>
+            <button class="opt-btn" onclick="checkAnswer(13, 'খ', true, this)"><span class="opt-letter">খ</span> সত্যেন্দ্রনাথ দত্ত</button>
+            <button class="opt-btn" onclick="checkAnswer(13, 'গ', false, this)"><span class="opt-letter">গ</span> মোহাম্মদ মনিরুজ্জামান</button>
+            <button class="opt-btn" onclick="checkAnswer(13, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> নির্মলেন্দু গুণ</button>
+          </div>
+          <div class="quiz-explanation" id="exp-13">
+            <strong>ব্যাখ্যা:</strong> ছন্দের জাদুকর সত্যেন্দ্রনাথ দত্তের 'খাঁটি সোনা' কবিতার অংশবিশেষ। (বি.দ্র. বইয়ে মুদ্রিত উত্তর 'উ. গ' থাকলেও ব্যাখ্যা অনুযায়ী সত্যেন্দ্রনাথ দত্ত সঠিক)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৪ -->
+        <div class="quiz-card" id="q14">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ১৪</span>
+            <span class="bcs-tag">১৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">১৪. "জ্ঞান যেখানে সীমাবদ্ধ, বুদ্ধি সেখানে আড়ষ্ট, মুক্তি সেখানে অসম্ভব।"-এ উক্তিটি কোন পত্রিকার প্রতি সংখ্যায় লেখা থাকত?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(14, 'ক', false, this)"><span class="opt-letter">ক</span> সওগাত</button>
+            <button class="opt-btn" onclick="checkAnswer(14, 'খ', false, this)"><span class="opt-letter">খ</span> সমকাল</button>
+            <button class="opt-btn" onclick="checkAnswer(14, 'গ', false, this)"><span class="opt-letter">গ</span> মোহাম্মদী</button>
+            <button class="opt-btn" onclick="checkAnswer(14, 'ঘ', true, this)"><span class="opt-letter">ঘ</span> শিখা</button>
+          </div>
+          <div class="quiz-explanation" id="exp-14">
+            <strong>ব্যাখ্যা:</strong> মুসলিম সাহিত্য-সমাজের মুখপত্র 'শিখা' (১৯২৭) পত্রিকার প্রতিটি সংখ্যার শিরোদেশে এই মটো বা আদর্শবাণী লেখা থাকত।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৫ -->
+        <div class="quiz-card" id="q15">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ১৫</span>
+            <span class="bcs-tag">১৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">১৫. 'মানুষের মাঝে স্বর্গ নরক, মানুষেতে সুরাসুর'- এ পঙক্তিটি কার রচনা?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(15, 'ক', false, this)"><span class="opt-letter">ক</span> রবীন্দ্রনাথ ঠাকুর</button>
+            <button class="opt-btn" onclick="checkAnswer(15, 'খ', true, this)"><span class="opt-letter">খ</span> শেখ ফজলুল করিম</button>
+            <button class="opt-btn" onclick="checkAnswer(15, 'গ', false, this)"><span class="opt-letter">গ</span> কাজী নজরুল ইসলাম</button>
+            <button class="opt-btn" onclick="checkAnswer(15, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> শামসুর রাহমান</button>
+          </div>
+          <div class="quiz-explanation" id="exp-15">
+            <strong>ব্যাখ্যা:</strong> কবি শেখ ফজলুল করিম রচিত 'স্বর্গ-নরক' কবিতার চরণ। তিনি 'বাসনা' পত্রিকার সম্পাদক ছিলেন। (বি.দ্র. বইয়ে মুদ্রিত উত্তর 'উ. গ' থাকলেও ব্যাখ্যা অনুযায়ী শেখ ফজলুল করিম সঠিক)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৬ -->
+        <div class="quiz-card" id="q16">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ১৬</span>
+            <span class="bcs-tag">১৩তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">১৬. 'বন্যেরা বনে সুন্দর, শিশুরা মাতৃক্রোড়ে' এ উক্তিটির প্রকৃত তাৎপর্য হচ্ছে-</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(16, 'ক', false, this)"><span class="opt-letter">ক</span> আদিবাসী মানুষ অরণ্য জনপদে বাস করে</button>
+            <button class="opt-btn" onclick="checkAnswer(16, 'খ', false, this)"><span class="opt-letter">খ</span> বনের পশু বনে থাকতেই ভালোবাসে</button>
+            <button class="opt-btn" onclick="checkAnswer(16, 'গ', true, this)"><span class="opt-letter">গ</span> জীবমাত্রই স্বাভাবিক অবস্থানে সুন্দর</button>
+            <button class="opt-btn" onclick="checkAnswer(16, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> প্রকৃতির রূপ-সৌন্দর্য আদি ও অকৃত্রিম</button>
+          </div>
+          <div class="quiz-explanation" id="exp-16">
+            <strong>ব্যাখ্যা:</strong> সঞ্জীবচন্দ্র চট্টোপাধ্যায় তাঁর 'পালামৌ' নামক ভ্রমণকাহিনীতে উক্তিটি করেছিলেন। এর মূলভাব হলো—প্রাকৃতিক নিয়মে যার যথা স্থান সেখানেই তার সৌন্দর্য ফুটে উঠে।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৭ -->
+        <div class="quiz-card" id="q17">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ১৭</span>
+            <span class="bcs-tag">১৩তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">১৭. 'শৈবাল দীঘিরে কহে উচ্চ করি শির; লিখে রেখ, একবিন্দু দিলেম শিশির।' এ অংশটুকুর মূল প্রতিপাদ্য-</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(17, 'ক', false, this)"><span class="opt-letter">ক</span> প্রতিদান</button>
+            <button class="opt-btn" onclick="checkAnswer(17, 'খ', false, this)"><span class="opt-letter">খ</span> প্রত্যুপকার</button>
+            <button class="opt-btn" onclick="checkAnswer(17, 'গ', true, this)"><span class="opt-letter">গ</span> অকৃতজ্ঞতা</button>
+            <button class="opt-btn" onclick="checkAnswer(17, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> অসহিষ্ণুতা</button>
+          </div>
+          <div class="quiz-explanation" id="exp-17">
+            <strong>ব্যাখ্যা:</strong> রবীন্দ্রনাথ ঠাকুরের 'কণিকা' কাব্যের বিখ্যাত উক্তি। সামান্য উপকার প্রচার করে বেড়ানো মানুষের অকৃতজ্ঞ মানসিকতাকে প্রকাশ করে।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৮ -->
+        <div class="quiz-card" id="q18">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ১৮</span>
+            <span class="bcs-tag">১২তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">১৮. 'মোদের গরব, মোদের আশা/আ-মরি বাংলা ভাষা' রচিয়তা-</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(18, 'ক', false, this)"><span class="opt-letter">ক</span> রামনিধি গুপ্ত</button>
+            <button class="opt-btn" onclick="checkAnswer(18, 'খ', true, this)"><span class="opt-letter">খ</span> অতুল প্রসাদ সেন</button>
+            <button class="opt-btn" onclick="checkAnswer(18, 'গ', false, this)"><span class="opt-letter">গ</span> রবীন্দ্রনাথ ঠাকুর</button>
+            <button class="opt-btn" onclick="checkAnswer(18, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> সত্যেন্দ্রনাথ দত্ত</button>
+          </div>
+          <div class="quiz-explanation" id="exp-18">
+            <strong>ব্যাখ্যা:</strong> অতুলপ্রসাদ সেনের কালজয়ী গান। তিনি বাংলা গানে ঠুংরি ধারার প্রবর্তক। (বি.দ্র. বইয়ে মুদ্রিত উত্তর 'উ. গ' থাকলেও ব্যাখ্যা অনুযায়ী অতুলপ্রসাদ সেন সঠিক)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৯ -->
+        <div class="quiz-card" id="q19">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ১৯</span>
+            <span class="bcs-tag">১২তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">১৯. 'স্বাধীনতা হীনতায় কে বাঁচিতে চায়' চরণটি কার রচনা?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(19, 'ক', false, this)"><span class="opt-letter">ক</span> ঈশ্বরচন্দ্র গুপ্ত</button>
+            <button class="opt-btn" onclick="checkAnswer(19, 'খ', false, this)"><span class="opt-letter">খ</span> মধুসূদন দত্ত</button>
+            <button class="opt-btn" onclick="checkAnswer(19, 'গ', false, this)"><span class="opt-letter">গ</span> হেমচন্দ্র বন্দ্যোপাধ্যায়</button>
+            <button class="opt-btn" onclick="checkAnswer(19, 'ঘ', true, this)"><span class="opt-letter">ঘ</span> রঙ্গলাল বন্দ্যোপাধ্যায়</button>
+          </div>
+          <div class="quiz-explanation" id="exp-19">
+            <strong>ব্যাখ্যা:</strong> রঙ্গলাল বন্দ্যোপাধ্যায়ের 'পদ্মিনী উপাখ্যান' (১৮৫৮) কাব্যের অমর পঙ্ক্তি। মাইকেল মধুসূদন দত্তের উক্তি: "হে বঙ্গ ভাণ্ডারে তব বিবিধ রতন", "জন্মিলে মরিতে হবে, অমর কে কোথা কবে"।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২০ -->
+        <div class="quiz-card" id="q20">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ২০</span>
+            <span class="bcs-tag">১১তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">২০. 'মোস্তফা চরিত' গ্রন্থের রচয়িতা-</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(20, 'ক', false, this)"><span class="opt-letter">ক</span> মুহম্মদ আব্দুল হাই</button>
+            <button class="opt-btn" onclick="checkAnswer(20, 'খ', false, this)"><span class="opt-letter">খ</span> মো: বরকতুল্লাহ</button>
+            <button class="opt-btn" onclick="checkAnswer(20, 'গ', false, this)"><span class="opt-letter">গ</span> ড. মুহম্মদ শহীদুল্লাহ</button>
+            <button class="opt-btn" onclick="checkAnswer(20, 'ঘ', true, this)"><span class="opt-letter">ঘ</span> মাওলানা আকরম খাঁ</button>
+          </div>
+          <div class="quiz-explanation" id="exp-20">
+            <strong>ব্যাখ্যা:</strong> বিশিষ্ট সাংবাদিক ও রাজনীতিক মাওলানা আকরম খাঁর গ্রন্থ। অপরদিকে মোহাম্মদ বরকতুল্লাহর বিখ্যাত গ্রন্থ 'পারস্য প্রতিভা' (২ খণ্ড)।
+          </div>
+        </div>
+      </div>
+
+      <!-- স্কোর বোর্ড -->
+      <div class="score-banner">
+        <div>
+          <span>তোমার কুইজ স্কোর: </span>
+          <span class="score-display" id="user-score">০ / ২০</span>
+        </div>
+        <button class="btn-ctrl" onclick="resetQuiz()">🔄 পুনরায় কুইজ দাও</button>
+      </div>
+    </section>
+
+    <!-- সেকশন ৫: ৩০ সেকেন্ডের রিভিশন ফ্ল্যাশ -->
+    <section id="sec-rev" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">⚡</div>
+          <h2 class="section-title">৩০ সেকেন্ডের সুপারফাস্ট রিভিশন</h2>
+        </div>
+        <span class="section-meta">মেমরি রিফ্লেক্স টেস্ট</span>
+      </div>
+      <p style="font-size:14px; margin-bottom: 12px;">ট্যাপ করে সাথে সাথে উত্তর মিলিয়ে নাও:</p>
+
+      <div class="revision-grid">
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>"একুশ মানে মাথা নত না করা" কার রচনা?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">কথাসাহিত্যিক আবুল ফজল।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>"তুমি মা কল্পতরু আমরা সব পোষা গরু" কার কবিতা?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">কবি ঈশ্বরচন্দ্র গুপ্ত ('নীলকর' কবিতা)।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+<div class="rev-q" onclick="toggleRev(this)">
+            <span>"মরণ রে তুঁহু মম শ্যাম সমান" কোন গ্রন্থের পদ?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">রবীন্দ্রনাথ ঠাকুরের 'ভানুসিংহ ঠাকুরের পদাবলী'।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>"সুশিক্ষিত লোক মাত্রই স্বশিক্ষিত" কার উক্তি?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">প্রমথ চৌধুরী ('বইপড়া' প্রবন্ধ)।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>"জ্ঞান যেখানে সীমাবদ্ধ..." কোন পত্রিকার মটো?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">'শিখা' পত্রিকা (মুসলিম সাহিত্য সমাজ)।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>"বন্যেরা বনে সুন্দর, শিশুরা মাতৃক্রোড়ে" কোন গ্রন্থে আছে?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">সঞ্জীবচন্দ্র চট্টোপাধ্যায়ের 'পালামৌ' ভ্রমণকাহিনী।</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- সেকশন ৬: অসঙ্গতি ও তথ্য যাচাই তালিকা -->
+    <section id="sec-audit" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">⚠️</div>
+          <h2 class="section-title">🧭 সন্দেহ নিরসন ও সঠিক সমাধান</h2>
+        </div>
+        <span class="section-meta">নির্ভুল প্রস্তুতি ও সঠিক সমাধান</span>
+      </div>
+
+      <div class="alert-box">
+        <div class="alert-header">📌 পরীক্ষার বিভ্রান্তিকর প্রশ্ন ও বিশেষ সতর্কতা:</div>
+        পরীক্ষার্থীদের বিভ্রান্তিমুক্ত রাখতে পৃষ্ঠা ১৯৮ থেকে ২০২-এর অপশন ও ব্যাখ্যা নিচে বিশ্লেষণ করা হলো:
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>📝 বিষয় / প্রশ্ন</th>
+              <th>📖 পৃষ্ঠা / প্রশ্ন নং</th>
+              <th>🔍 সূক্ষ্ম প্যাঁচ ও বিস্তারিত বিশ্লেষণ</th>
+              <th>🎯 পরীক্ষায় আপনার সঠিক সিদ্ধান্ত</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>প্রশ্ন ৩-এর উত্তর কোড ও অবস্থান</strong></td>
+              <td>প্রশ্ন ৩ (পৃ. ১৯৮)</td>
+              <td>বইয়ে মুদ্রিত উত্তর <strong>'উ. গ'</strong>। কিন্তু দুই কলামের বিন্যাসে বামে ক (রজনীকান্ত সেন) ও নিচে ইসমাইল হোসেন সিরাজী; ডানে খ (কামিনী রায়) ও নিচে দ্বিজেন্দ্রলাল রায় রয়েছে।</td>
+              <td>ব্যাখ্যা অনুযায়ী পঙ্ক্তিটি নিশ্চিতভাবেই কামিনী রায়ের 'সুখ' কবিতার। তাই কামিনী রায় দাগাবে।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রশ্ন ৬-এর উত্তর কোড</strong></td>
+              <td>প্রশ্ন ৬ (পৃ. ১৯৯)</td>
+              <td>বইয়ে মুদ্রিত উত্তর <strong>'উ. গ'</strong>। অপশনে গ-তে রয়েছে সুধীন দাস।</td>
+              <td>ব্যাখ্যায় স্পষ্টভাবে বলা হয়েছে একুশে ফেব্রুয়ারির বিখ্যাত গানটির বর্তমান সুরকার আলতাফ মাহমুদ। আলতাফ মাহমুদ দাগাবে।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রশ্ন ৮-এর উত্তর কোড</strong></td>
+              <td>প্রশ্ন ৮ (পৃ. ১৯৯)</td>
+              <td>বইয়ে মুদ্রিত উত্তর <strong>'উ. গ'</strong> (রাধারমন)।</td>
+              <td>ব্যাখ্যায় বিশদভাবে প্রমাণিত হয়েছে 'প্রাণের বান্ধব রে বুড়ি হইলাম তোর কারণে' গানটির গীতিকার মুক্তিযোদ্ধা শেখ ওয়াহিদ।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রশ্ন ১৩, ১৫ ও ১৮-এর উত্তর কোড</strong></td>
+              <td>প্রশ্ন ১৩, ১৫ ও ১৮ (পৃ. ২০০–২০১)</td>
+              <td>তিনটি প্রশ্নেই মুদ্রিত উত্তর <strong>'উ. গ'</strong> দেওয়া হয়েছে।</td>
+              <td>ব্যাখ্যা অনুযায়ী যথাক্রমে সত্যেন্দ্রনাথ দত্ত (প্রশ্ন ১৩), শেখ ফজলুল করিম (প্রশ্ন ১৫) এবং অতুলপ্রসাদ সেন (প্রশ্ন ১৮) সঠিক রচয়িতা।</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ফুটার -->
+    <footer style="text-align: center; margin-top: 40px; color: var(--text-muted); font-size: 13px;">
+      <p>বিসিএস প্রিলিমিনারি বিষয়ভিত্তিক জব সল্যুশন | অধ্যায়: বাংলা সাহিত্যের উক্তি ও সংলাপ (পৃষ্ঠা ১৯৮–২০২)</p>
+      <p style="margin-top: 4px;">Single-file Interactive BCS E-Book Edition • সম্পূর্ণ স্বয়ংসম্পূর্ণ ও অফলাইন উপযোগী</p>
+    </footer>
+  </div>
+
+  <!-- স্ক্রিপ্ট: ইন্টারঅ্যাকটিভিটি -->
+  <script>
+    // স্ক্রল প্রগ্রেস বার
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    // থিম টগল
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const target = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', target);
+      try {
+        localStorage.setItem('theme_mode_quotes_dialogue', target);
+      } catch(e) {}
+    }
+
+    // ফন্ট সাইজ নিয়ন্ত্রণ
+    let currentScale = 100;
+    function changeFontSize(delta) {
+      if (delta === 0) currentScale = 100;
+      else currentScale += delta * 7;
+      
+      if (currentScale < 80) currentScale = 80;
+      if (currentScale > 130) currentScale = 130;
+      
+      document.documentElement.style.setProperty('--font-scale', currentScale + '%');
+    }
+
+    // সূচিপত্র টগল
+    function toggleToc() {
+      const panel = document.getElementById('toc-panel');
+      panel.classList.toggle('active');
+    }
+
+    // রিভিশন উত্তর টগল
+    function toggleRev(element) {
+      const ans = element.nextElementSibling;
+      const icon = element.querySelector('span:last-child');
+      if (ans.classList.contains('active')) {
+        ans.classList.remove('active');
+        icon.textContent = '➕';
+      } else {
+        ans.classList.add('active');
+        icon.textContent = '➖';
+      }
+    }
+
+    // কুইজ ইন্টারঅ্যাকশন
+    let score = 0;
+    const answeredMap = {};
+
+    function checkAnswer(qNum, selectedLetter, isCorrect, btnElement) {
+      if (answeredMap[qNum]) return;
+      answeredMap[qNum] = true;
+
+      const card = document.getElementById(`q${qNum}`);
+      const buttons = card.querySelectorAll('.opt-btn');
+
+      buttons.forEach(btn => {
+        btn.disabled = true;
+      });
+
+      if (isCorrect) {
+        btnElement.classList.add('correct');
+        score++;
+      } else {
+        btnElement.classList.add('wrong');
+        buttons.forEach(btn => {
+          if (btn.getAttribute('onclick').includes('true')) {
+            btn.classList.add('correct');
+          }
+        });
+      }
+
+      const exp = document.getElementById(`exp-${qNum}`);
+      if (exp) exp.classList.add('show');
+
+      updateScoreDisplay();
+    }
+
+    function updateScoreDisplay() {
+      const scoreEl = document.getElementById('user-score');
+      scoreEl.textContent = `${score} / ২০`;
+      if (score === 20) {
+        scoreEl.innerHTML = `${score} / ২০ <span style="font-size:14px;color:var(--success);">🎉 অসাধারণ! ২০টি প্রশ্নের সবকটি সঠিক হয়েছে!</span>`;
+      }
+    }
+
+    function resetQuiz() {
+      score = 0;
+      for (let key in answeredMap) delete answeredMap[key];
+      
+      const buttons = document.querySelectorAll('.opt-btn');
+      buttons.forEach(btn => {
+        btn.disabled = false;
+        btn.classList.remove('correct', 'wrong');
+      });
+
+      const exps = document.querySelectorAll('.quiz-explanation');
+      exps.forEach(exp => exp.classList.remove('show'));
+
+      updateScoreDisplay();
+      window.location.hash = 'sec-quiz';
+    }
+
+    (function init() {
+      try {
+        const savedTheme = localStorage.getItem('theme_mode_quotes_dialogue');
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+      } catch(e) {}
+    })();
+  </script>
+  <!-- Smart E-Book Navigation Component -->
+  <script src="nav-component.js"></script>
+</body>
+</html>

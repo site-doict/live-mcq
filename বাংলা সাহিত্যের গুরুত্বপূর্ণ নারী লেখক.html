@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বাংলা সাহিত্যের গুরুত্বপূর্ণ নারী লেখক - বিসিএস প্রস্তুতি</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ══════ CSS ভ্যারিয়েবল ও থিম কালার ══════ */
+    :root {
+      --font-scale: 100%;
+      --bg-base: #fdf8f9;
+      --bg-surface: #ffffff;
+      --bg-surface-alt: #fbf0f4;
+      --text-main: #2b1320;
+      --text-muted: #6b4d5e;
+      --primary: #9d174d; /* ডিপ ম্যাজেন্টা / বেরি */
+      --primary-light: #fce7f3;
+      --accent: #b45309; /* মার্জিত ব্রোঞ্জ / গোল্ড */
+      --accent-light: #fef3c7;
+      --success: #15803d;
+      --success-light: #dcfce7;
+      --danger: #b91c1c;
+      --danger-light: #fee2e2;
+      --warning: #c2410c;
+      --warning-light: #ffedd5;
+      --border-color: #f3cbdc;
+      --card-border: #e2a8c0;
+      --shadow: 0 4px 14px rgba(74, 15, 45, 0.08);
+      --shadow-hover: 0 8px 24px rgba(74, 15, 45, 0.14);
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg-base: #140910;
+      --bg-surface: #1f101a;
+      --bg-surface-alt: #2b1725;
+      --text-main: #fce7f3;
+      --text-muted: #cca5bb;
+      --primary: #f472b6;
+      --primary-light: #381528;
+      --accent: #fbbf24;
+      --accent-light: #33240e;
+      --success: #4ade80;
+      --success-light: #12381f;
+      --danger: #f87171;
+      --danger-light: #3d1416;
+      --warning: #fb923c;
+      --warning-light: #3b1b0b;
+      --border-color: #4a2139;
+      --card-border: #662d4e;
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+      --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.7);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: var(--font-scale);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans Bengali', 'Kalpurush', Vrinda, sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.8;
+      min-width: 320px;
+      padding-bottom: 80px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    mark {
+      background-color: #fde047;
+      color: #0f172a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    /* ══════ প্রগ্রেস বার ও কন্ট্রোল বার ══════ */
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: transparent;
+      z-index: 1000;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.1s;
+    }
+
+    .control-bar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: var(--bg-surface);
+      border-bottom: 2px solid var(--border-color);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .control-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-ctrl {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .btn-ctrl:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* ══════ সূচি প্যানেল ══════ */
+    #toc-panel {
+      display: none;
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-hover);
+    }
+
+    #toc-panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .toc-item a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      background: var(--bg-surface-alt);
+      transition: var(--transition);
+    }
+
+    .toc-item a:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* ══════ হিরো ব্যানার ══════ */
+    .hero-banner {
+      background: linear-gradient(135deg, #831843, #500724);
+      color: #ffffff;
+      padding: 34px 20px;
+      border-radius: 20px;
+      margin: 24px 0;
+      box-shadow: var(--shadow);
+      border: 3px solid #db2777;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: #f59e0b;
+      color: #1f0714;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+      font-size: 15.5px;
+      color: #fce7f3;
+      margin-bottom: 20px;
+    }
+
+    .study-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .step-box {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+
+    .step-box strong {
+      display: block;
+      color: #fde047;
+      margin-bottom: 2px;
+    }
+
+    /* ══════ সেকশন সাধারণ স্টাইল ══════ */
+    .study-section {
+      margin-top: 36px;
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .section-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .section-meta {
+      font-size: 13px;
+      background: var(--bg-surface-alt);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    /* ══════ বিসিএস ট্রেন্ড গ্রিড ══════ */
+    .bcs-matrix {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .bcs-cell {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .bcs-cell.active {
+      border: 2px solid var(--accent);
+      background: var(--accent-light);
+    }
+
+    .bcs-exam {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .bcs-cell.active .bcs-exam {
+      color: var(--accent);
+    }
+
+    .bcs-qcount {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 4px;
+    }
+
+    /* ══════ কার্ড ডিজাইন ══════ */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .author-card {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-left: 6px solid var(--primary);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .author-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .author-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    .author-name {
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .fact-pill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .fact-item {
+      font-size: 14.5px;
+      background: var(--bg-surface-alt);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+    }
+
+    /* ══════ কবিতা ও উদ্ধৃতি ডিসপ্লে ══════ */
+    .poem-quote-box {
+      background: var(--bg-surface-alt);
+      border-left: 4px solid var(--primary);
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin: 12px 0;
+      font-style: normal;
+    }
+
+    .poem-quote-box strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    /* ══════ ফাঁদ ও সতর্কতা বক্স ══════ */
+    .trap-box {
+      background: var(--danger-light);
+      border: 2px solid var(--danger);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+      color: var(--text-main);
+    }
+
+    .trap-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--danger);
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .alert-box {
+      background: var(--warning-light);
+      border: 2px solid var(--warning);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+
+    .alert-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--warning);
+      margin-bottom: 6px;
+    }
+
+    /* ══════ ছক ডিজাইন ══════ */
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      margin: 16px 0;
+      border-radius: 10px;
+      border: 2px solid var(--border-color);
+    }
+
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14.5px;
+    }
+
+    .custom-table th {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 12px 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .custom-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+
+    .custom-table tr:nth-child(even) td {
+      background: var(--bg-surface-alt);
+    }
+
+    /* ══════ টাইমলাইন / ফ্লো ভিউ (HTML/CSS) ══════ */
+    .flow-connector {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--bg-surface-alt);
+      padding: 14px;
+      border-radius: 10px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .flow-badge {
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 13.5px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* ══════ কুইজ সেকশন ══════ */
+    .quiz-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .quiz-card {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .quiz-q-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .bcs-tag {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .quiz-question {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .opt-btn {
+      background: var(--bg-surface-alt);
+      border: 1.5px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14.5px;
+      font-family: inherit;
+      color: var(--text-main);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--border-color);
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--text-main);
+      flex-shrink: 0;
+    }
+
+    .opt-btn.correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+      color: var(--success) !important;
+      font-weight: 700;
+    }
+
+    .opt-btn.correct .opt-letter {
+      background: var(--success);
+      color: #fff;
+    }
+
+    .opt-btn.wrong {
+      background: var(--danger-light) !important;
+      border-color: var(--danger) !important;
+      color: var(--danger) !important;
+    }
+
+    .opt-btn.wrong .opt-letter {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .quiz-explanation {
+      display: none;
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 8px;
+      background: var(--bg-surface-alt);
+      border-left: 4px solid var(--primary);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .quiz-explanation.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    /* ══════ রিভিশন ফ্ল্যাশকার্ড ══════ */
+    .revision-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .rev-card {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .rev-q {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .rev-ans {
+      display: none;
+      font-size: 14px;
+      padding-top: 6px;
+      border-top: 1px dashed var(--border-color);
+      color: var(--text-main);
+    }
+
+    .rev-ans.active {
+      display: block;
+    }
+
+    .score-banner {
+      background: var(--bg-surface);
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 24px;
+      box-shadow: var(--shadow);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .score-display {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    @media print {
+      .control-bar, #progress-container, .btn-ctrl, .opt-btn {
+        display: none !important;
+      }
+      body {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .quiz-explanation {
+        display: block !important;
+      }
+      .study-section {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        page-break-inside: avoid;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DESIGN PLAN: 
+    ১. বিষয়ের ধরন: বাংলা সাহিত্যের গুরুত্বপূর্ণ নারী লেখক (স্বর্ণকুমারী দেবী, কামিনী রায়, শামসুন্নাহার মাহমুদ, রাজিয়া খান আমিন, বেগম রোকেয়া, ফয়জুন্নেসা চৌধুরানী প্রমুখ)।
+    ২. সবচেয়ে কঠিন/গুলিয়ে ফেলার জায়গা: (ক) প্রথম মহিলা ঔপন্যাসিক (স্বর্ণকুমারী) বনাম প্রথম মুসলিম মহিলা ঔপন্যাসিক (নূরুন্নাহার ফয়জুন্নেসা) (খ) নারী জাগরণের 'অগ্রদূত' (রোকেয়া) বনাম 'কবি' (শামসুন্নাহার মাহমুদ) (গ) 'সুখ' বনাম 'পরার্থে' কবিতা বিতর্ক।
+    ৩. নির্বাচিত মডিউল: বিসিএস ট্রেন্ড গ্রিড, লেখিকাদের প্রোফাইল কার্ড ও শাখাভিত্তিক গ্রন্থতালিকা, কবিতার লাইন ও উৎসের পার্থক্য, কনফিউশন-ক্লিনিক গ্রিড, ৬টি ইন্টারেক্টিভ MCQ ও সতর্কতামূলক অডিট টেবিল।
+    ৪. রঙের মেজাজ: নারীবাদী সাহিত্যিক মর্যাদা প্রকাশক ডিপ ম্যাজেন্টা/বেরি (#9d174d) ও আভিজাত্যপূর্ণ ব্রোঞ্জ/গোল্ড (#b45309)।
+    ৫. হিরো ও মাসকট: অগ্রগামী নারী শিক্ষার প্রতীক দীপশিখা ও সাহিত্য স্মারক।
+  -->
+
+  <!-- প্রগ্রেস ট্র্যাকার -->
+  <div id="progress-container"><div id="progress-bar"></div></div>
+
+  <!-- স্টিকি কন্ট্রোল বার -->
+  <div class="control-bar">
+    <div class="container control-content">
+      <div class="control-group">
+        <button class="btn-ctrl" onclick="toggleToc()">📖 সূচিপত্র</button>
+        <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn">🌓 মোড</button>
+      </div>
+      <div class="control-group">
+        <button class="btn-ctrl" onclick="changeFontSize(-1)">A-</button>
+        <button class="btn-ctrl" onclick="changeFontSize(0)">A</button>
+        <button class="btn-ctrl" onclick="changeFontSize(1)">A+</button>
+        <button class="btn-ctrl" onclick="window.print()">🖨️ প্রিন্ট</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- ড্রপডাউন সূচি -->
+    <div id="toc-panel">
+      <strong style="color:var(--primary); font-size:16px;">অধ্যায়ের প্রধান অংশসমূহ:</strong>
+      <ul class="toc-list">
+        <li class="toc-item"><a href="#sec-stat" onclick="toggleToc()">📊 বিসিএস পরীক্ষার ট্রেন্ড</a></li>
+        <li class="toc-item"><a href="#sec-authors" onclick="toggleToc()">🧕 প্রধান নারী লেখকদের পরিচিতি ও সাহিত্যকর্ম</a></li>
+        <li class="toc-item"><a href="#sec-magazines" onclick="toggleToc()">📰 পত্রিকা ও যৌথ কর্মপ্রবাহ ('বালক' ও 'ভারতী')</a></li>
+        <li class="toc-item"><a href="#sec-poems" onclick="toggleToc()">📜 গুরুত্বপূর্ণ কবিতা ও বিখ্যাত পঙ্ক্তি</a></li>
+        <li class="toc-item"><a href="#sec-confusion" onclick="toggleToc()">⚡ কনফিউশন ব্যাংক: ১ম মহিলা ও অগ্রদূত উপাধি</a></li>
+        <li class="toc-item"><a href="#sec-quiz" onclick="toggleToc()">📝 বিগত ৬টি বিসিএস MCQ কুইজ</a></li>
+        <li class="toc-item"><a href="#sec-rev" onclick="toggleToc()">⚡ ৩০ সেকেন্ডের রিভিশন ফ্ল্যাশ</a></li>
+        <li class="toc-item"><a href="#sec-audit" onclick="toggleToc()">⚠️ অসঙ্গতি ও তথ্য যাচাই তালিকা</a></li>
+      </ul>
+    </div>
+
+    <!-- হিরো ব্যানার -->
+    <header class="hero-banner">
+      <span class="hero-tag">বিসিএস স্পেশাল টপিক মাস্টারক্লাস</span>
+      <h1 class="hero-title">বাংলা সাহিত্যের গুরুত্বপূর্ণ নারী লেখক</h1>
+      <p class="hero-subtitle">স্বর্ণকুমারী দেবী, কামিনী রায়, শামসুন্নাহার মাহমুদ ও রাজিয়া খান আমিনের পূর্ণাঙ্গ প্রস্তুতি নোট (পৃষ্ঠা ১৬১–১৬৩)</p>
+      
+      <div class="study-steps">
+        <div class="step-box">
+          <strong>ধাপ ১: ৩ মিনিটে স্ক্যান</strong>
+          প্রথম মহিলা ঔপন্যাসিক ও কবিদের উপাধি এবং বিসিএস প্রশ্নের হার একনজরে দেখে নাও।
+        </div>
+        <div class="step-box">
+          <strong>ধাপ ২: ফাঁদ শনাক্ত</strong>
+          'সুখ' বনাম 'পরার্থে' এবং অগ্রদূত বনাম কবির মতো পরীক্ষার বিভ্রান্তি দূর করো।
+        </div>
+        <div class="step-box">
+          <strong>ধাপ ৩: কুইজে ১০০%</strong>
+          ৬টি বিসিএস প্রশ্নের ইন্টারঅ্যাকটিভ কুইজে অংশ নিয়ে নিশ্চিত প্রস্তুতি নাও।
+        </div>
+      </div>
+    </header>
+
+    <!-- সেকশন ১: বিসিএস প্রশ্ন পরিসংখ্যান -->
+    <section id="sec-stat" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📊</div>
+          <h2 class="section-title">বিসিএস পরীক্ষার প্রশ্ন-পরিসংখ্যান</h2>
+        </div>
+        <span class="section-meta">১০ম থেকে ৫০তম বিসিএস বিশ্লেষণ</span>
+      </div>
+      <p style="font-size: 14.5px; margin-bottom: 12px;">
+        বইয়ের সূচি অনুযায়ী কোন কোন বিসিএসে গুরুত্বপূর্ণ নারী লেখকদের থেকে প্রশ্ন এসেছে তা নিচে প্রদর্শিত হলো:
+      </p>
+
+      <div class="bcs-matrix">
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৫০তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪৭তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪৬তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪৩তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">১০ম-৩৪তম বিসিএস</div>
+          <div class="bcs-qcount">২ টি</div>
+        </div>
+        <div class="bcs-cell">
+          <div class="bcs-exam">অন্যান্য বিসিএস</div>
+          <div class="bcs-qcount">-</div>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">
+        <em>মোট সংকলিত প্রশ্ন সংখ্যা: ৬টি (ব্যাখ্যাসহ পৃষ্ঠা ১৬১-১৬৩ থেকে হুবহু সন্নিবেশিত)</em>
+      </p>
+    </section>
+
+    <!-- সেকশন ২: প্রধান নারী লেখকদের পরিচিতি ও সাহিত্যকর্ম -->
+    <section id="sec-authors" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">🧕</div>
+          <h2 class="section-title">প্রধান নারী লেখকদের পরিচিতি ও সাহিত্যকীর্তি</h2>
+        </div>
+        <span class="section-meta">মাস্টার কার্ড ভিউ</span>
+      </div>
+
+      <div class="card-grid">
+        <!-- স্বর্ণকুমারী দেবী -->
+        <article class="author-card">
+          <span class="author-badge">প্রথম মহিলা ঔপন্যাসিক ও সম্পাদক</span>
+          <h3 class="author-name">স্বর্ণকুমারী দেবী</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>পরিচয় ও পরিবার:</strong> দেবেন্দ্রনাথ ঠাকুরের দশম সন্তান। প্রিন্স দ্বারকানাথ ঠাকুর তাঁর পিতামহ এবং রবীন্দ্রনাথ ঠাকুর তাঁর ভাই (স্বর্ণকুমারী রবীন্দ্রনাথের বড় বোন)। জন্ম: ১৮৫৫ সালের ২৮শে আগস্ট জোড়াসাঁকোর ঠাকুর পরিবারে। মৃত্যু: ৩রা জুলাই ১৯৩২।
+            </div>
+            <div class="fact-item">
+              <strong>মর্যাদা ও পুরস্কার:</strong> আধুনিক বাংলা সাহিত্যের <strong>প্রথম মহিলা ঔপন্যাসিক</strong>। ১৯২৭ সালে কলকাতা বিশ্ববিদ্যালয় কর্তৃক <strong>'জগত্তারিণী স্বর্ণ পদকে'</strong> ভূষিত হন।
+            </div>
+            <div class="fact-item">
+              <strong>সমাজসেবা ও সংগঠন:</strong> বিধবা ও দরিদ্র নারীদের সাহায্যার্থে <strong>'সখী সমিতি'</strong> নামে একটি সংগঠন প্রতিষ্ঠায় সহায়তা করেন।
+            </div>
+            <div class="fact-item">
+              <strong>ঐতিহাসিক উপন্যাস:</strong> <em>দীপ নির্বাণ</em> (প্রথম উপন্যাস), <em>ফুলের মালা</em>, <em>মেবার রাজ</em>, <em>বিদ্রোহ</em>।
+            </div>
+            <div class="fact-item">
+              <strong>সামাজিক উপন্যাস:</strong> <em>ছিন্নমুকুল</em>, <em>মালতী</em>, <em>কাহাকে</em> (সেরা গ্রন্থ; <em>The Unfinished Song</em> নামে ইংরেজিতে অনূদিত), <em>হুগলীর ইমামবাড়ী</em>, <em>স্নেহলতা</em>, <em>বিচিত্রা</em>, <em>স্বপ্নবাণী</em>, <em>মিলনরাত্রি</em>।
+            </div>
+            <div class="fact-item">
+              <strong>নাটক ও গীতিনাট্য:</strong> <em>বসন্ত উৎসব</em> (গীতিনাট্য — বাংলায় লিখিত প্রথম অপেরা), <em>বিবাহ উৎসব</em>, <em>দেব কৌতুক</em> (কাব্যনাট্য), <em>কনে বদল</em>।
+            </div>
+            <div class="fact-item">
+              <strong>কাব্য ও পত্রিকা:</strong> কাব্য: <em>গাথা</em>, <em>কবিতা ও গান</em>। তিনি দীর্ঘ ৩০ বছর মাসিক <strong>'ভারতী'</strong> পত্রিকার লেখক ও সম্পাদক ছিলেন এবং কিশোর পত্রিকা <strong>'বালক'</strong> প্রতিষ্ঠা ও সম্পাদনা তাঁর অমর কীর্তি।
+            </div>
+          </div>
+        </article>
+
+        <!-- কামিনী রায় -->
+        <article class="author-card">
+          <span class="author-badge">কবি ও সমাজকর্মী</span>
+          <h3 class="author-name">কামিনী রায়</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>জন্ম ও মৃত্যু:</strong> ১৮৬৪ সালের ১২ অক্টোবর বাকেরগঞ্জের বাসন্ডা গ্রামে জন্ম। মৃত্যু: ২৭ সেপ্টেম্বর ১৯৩৩, হাজারীবাগ, বিহার।
+            </div>
+            <div class="fact-item">
+              <strong>ছদ্মনাম ও লেখালেখি:</strong> মাত্র ৮ বছর বয়স থেকে কবিতা লেখা শুরু করেন। একসময় <strong>'জনৈক বঙ্গমহিলা'</strong> ছদ্মনামে লিখতেন। কবিতা সহজ, সরল, মানবিক ও উপদেশমূলক।
+            </div>
+            <div class="fact-item">
+              <strong>প্রথম কাব্যগ্রন্থ:</strong> <em>'আলো ও ছায়া'</em> (১৮৮৯) — মাত্র ১৫ বছর বয়সে রচিত। এই গ্রন্থের ভূমিকা লেখেন হেমচন্দ্র বন্দ্যোপাধ্যায়। বিখ্যাত 'সুখ' কবিতাটি এই কাব্যের অন্তর্ভুক্ত।
+            </div>
+            <div class="fact-item">
+              <strong>স্বীকৃতি ও দায়িত্ব:</strong> কলকাতা বিশ্ববিদ্যালয়ের (১৯২৯) <strong>'জগত্তারিণী পদকে'</strong> সম্মানিত হন। তিনি 'নারী শ্রম তদন্ত কমিশন' (১৯২২-২৩)-এর সদস্য ছিলেন।
+            </div>
+            <div class="fact-item">
+              <strong>অন্যান্য সাহিত্যকর্ম:</strong> কাব্যগ্রন্থ: <em>নির্মাল্য</em>, <em>পৌরাণিকী</em>, <em>গুঞ্জন</em> (শিশুকাব্য), <em>ধৰ্ম্মপুত্র</em> (অনুবাদ), <em>মাল্য ও নির্মাল্য</em>, <em>অশোকসঙ্গীত</em> (সনেট) এবং নাটক: <em>অম্বা</em>।
+            </div>
+          </div>
+        </article>
+
+        <!-- শামসুন্নাহার মাহমুদ -->
+        <article class="author-card">
+          <span class="author-badge">মুসলমান নারী জাগরণের কবি</span>
+          <h3 class="author-name">শামসুন্নাহার মাহমুদ</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>উপাধি ও ভূমিকা:</strong> মুসলমান <strong>নারী জাগরণের কবি</strong>। বেগম রোকেয়ার নারীশিক্ষা ও নারীমুক্তি আন্দোলনের অন্যতম অংশীদার। ১৯৬২ সালে জাতীয় পরিষদের সদস্য নির্বাচিত হন।
+            </div>
+            <div class="fact-item">
+              <strong>প্রথম লেখা ও পত্রিকা সম্পাদনা:</strong> প্রথম কবিতা প্রকাশিত হয় কিশোরদের <strong>'আঙ্গুর'</strong> নামক মাসিক পত্রিকায়। কলকাতা থেকে প্রকাশিত <strong>'বুলবুল'</strong> (১৯৩৩) পত্রিকা তিনি ও হবীবুল্লাহ বাহার যুগ্মভাবে সম্পাদনা করেন।
+            </div>
+            <div class="fact-item">
+              <strong>নজরুলের উৎসর্গ:</strong> কাজী নজরুল ইসলাম তাঁর <em>'সিন্ধু-হিন্দোল'</em> (১৯২৭) কাব্যখানি <strong>'বাহার-নাহার'</strong>কে উৎসর্গ করেন।
+            </div>
+            <div class="fact-item">
+              <strong>উল্লেখযোগ্য গ্রন্থ:</strong> <em>পুণ্যময়ী</em>, <em>ফুলবাগিচা</em>, <em>বেগম মহল</em>, <em>রোকেয়া জীবনী</em>, <em>শিশুর শিক্ষা</em>, <em>আমার দেখা তুরষ্ক</em> (ভ্রমণকাহিনি), <em>নজরুলকে যেমন দেখেছি</em> ইত্যাদি।
+            </div>
+          </div>
+        </article>
+
+        <!-- রাজিয়া খান আমিন ও অন্যান্যরা -->
+        <article class="author-card">
+          <span class="author-badge">ঔপন্যাসিক ও শিক্ষাবিদ</span>
+          <h3 class="author-name">রাজিয়া খান ও অন্যান্য লেখিকা</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>রাজিয়া খান আমিন (১৯৩৬–২০১১):</strong> ঢাকা বিশ্ববিদ্যালয়ের ইংরেজি বিভাগের অধ্যাপক, সাহিত্যিক ও মঞ্চাভিনেত্রী। মাত্র ১৮ বছর বয়সে সাড়া জাগানো বই <strong>'বটতলার উপন্যাস'</strong> রচনা করেন। তাঁর মুক্তিযুদ্ধভিত্তিক উপন্যাস: <strong>'দ্রৌপদী'</strong>।
+            </div>
+            <div class="fact-item">
+              <strong>বেগম ফজিলাতুন্নেছা:</strong> ঢাকা বিশ্ববিদ্যালয়ের <strong>প্রথম মুসলিম ছাত্রী</strong> ও নিখিল বঙ্গে <strong>প্রথম মুসলিম মহিলা গ্রাজুয়েট</strong>। নারী শিক্ষা ও অগ্রগতির বিষয়ে 'শিখা' ও 'সওগাত' পত্রিকায় তাঁর প্রবন্ধ ও গল্প প্রকাশিত হতো।
+            </div>
+            <div class="fact-item">
+              <strong>নবাব ফয়জুন্নেসা চৌধুরানি:</strong> জমিদার, নারীশিক্ষার প্রবর্তক, সমাজসেবক ও কবি। গদ্যে-পদ্যে রচিত তাঁর রূপক আত্মজীবনীমূলক গ্রন্থ: <strong>'রূপজালাল'</strong> (১৮৭৬)।
+            </div>
+            <div class="fact-item">
+              <strong>নূরুন্নাহার ফয়জুন্নেসা:</strong> বাংলা সাহিত্যের <strong>'প্রথম মুসলিম মহিলা ঔপন্যাসিক'</strong>।
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- সেকশন ৩: 'বালক' ও 'ভারতী' পত্রিকার গতিপ্রবাহ -->
+    <section id="sec-magazines" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📰</div>
+          <h2 class="section-title">পত্রিকা টাইমলাইন: 'বালক' ও 'ভারতী' পত্রিকার ইতিহাস</h2>
+        </div>
+        <span class="section-meta">৫০তম ও ৪৬তম বিসিএস ফোকাস</span>
+      </div>
+
+      <div class="flow-connector">
+        <div class="flow-step">
+          <span class="flow-badge">১২৯২ বঙ্গাব্দ (বৈশাখ)</span>
+          <div>
+            <strong>'বালক' পত্রিকার সূচনা:</strong> কলকাতার জোড়াসাঁকো ঠাকুরবাড়ি থেকে প্রকাশিত পারিবারিক সচিত্র মাসিক শিশু-পত্রিকা। সম্পাদক ছিলেন জ্ঞানদানন্দিনী দেবী (সত্যেন্দ্রনাথ ঠাকুরের স্ত্রী ও রবীন্দ্রনাথের মেজো বৌঠাকুরানী)। পত্রিকার কার্যাধ্যক্ষ ছিলেন রবীন্দ্রনাথ ঠাকুর।
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-badge">১২৯৩ বঙ্গাব্দ</span>
+          <div>
+            <strong>রবীন্দ্রনাথের পদত্যাগ ও সংকট:</strong> রবীন্দ্রনাথ ঠাকুর কার্যাধ্যক্ষের পদ ত্যাগ করায় জ্ঞানদানন্দিনী দেবীর পক্ষে একা পরিচালনা অসম্ভব হয়ে পড়ে। ফলে সচিত্র মাসিক 'বালক' স্বাধীনভাবে মাত্র ১ বছর চলেছিল।
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-badge">১৮৮৬ খ্রি. (১২৯৩ বৈশাখ)</span>
+          <div>
+            <strong>'ভারতী ও বালক' যৌথ প্রকাশনা:</strong> 'বালক' যুক্ত হয় ঠাকুরবাড়ির বিখ্যাত পত্রিকা 'ভারতী'র সঙ্গে। তৎকালীন 'ভারতী'র সম্পাদক স্বর্ণকুমারী দেবী 'বালক' পত্রিকার সম্পাদনা করেন।
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-badge">সাত বছরের জাগরণ</span>
+          <div>
+            <strong>শিশুসাহিত্যের বিকাশ:</strong> 'ভারতী'র সাথে যুগ্মভাবে 'বালক'-এর আয়ুষ্কাল ছিল ৭ বছর। ঠাকুরবাড়ির সদস্য ও তৎকালীন বহু খ্যাতনামা লেখকের রচনার মাধ্যমে বাংলায় শিশুসাহিত্যের নবজাগরণ এনেছিল। স্বর্ণকুমারী দেবীর দীর্ঘ ৩০ বছর 'ভারতী' সম্পাদনার খ্যাতি ছিল।
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- সেকশন ৪: বিখ্যাত কবিতা ও পঙ্ক্তি বিশ্লেষণ -->
+    <section id="sec-poems" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📜</div>
+          <h2 class="section-title">গুরুত্বপূর্ণ কবিতা, অমর পঙ্ক্তি ও অপশন বিশ্লেষণ</h2>
+        </div>
+        <span class="section-meta">৪৭তম বিসিএস স্পেশাল</span>
+      </div>
+
+      <div class="poem-quote-box">
+        <strong>'সুখ' কবিতা — কামিনী রায় ('আলো ও ছায়া' কাব্যগ্রন্থ):</strong>
+        <p>
+          "আপনারে লয়ে বিব্রত রহিতে<br>
+          আসে নাই কেহ অবনী 'পরে,<br>
+          <mark>সকলের তরে সকলে আমরা,</mark><br>
+          <mark>প্রত্যেকে আমরা পরের তরে।</mark>"
+        </p>
+      </div>
+
+      <div class="poem-quote-box">
+        <strong>'পাছে লোকে কিছু বলে' কবিতা — কামিনী রায়:</strong>
+        <p>
+          "করিতে পারি না কাজ<br>
+          সদা ভয় সদা লাজ<br>
+          সংশয়ে সংকল্প সদা টলে,-<br>
+          পাছে লোকে কিছু বলে।"
+        </p>
+      </div>
+
+      <div class="poem-quote-box">
+        <strong>'বড় কে' কবিতা — হরিশচন্দ্র মিত্র (অপশন বিশ্লেষণ):</strong>
+        <p>
+          "আপনারে বড় বলে, বড় সেই নয় লোকে যারে বড় বলে বড় সেই হয়।<br>
+          বড় হওয়া সংসারেতে কঠিন ব্যাপার সংসারে সে বড় হয়, বড় গুণ যার।<br>
+          গুণেতে হইলে বড়, বড় বলে সবে বড় যদি হতে চাও, ছোট হও তবে।"
+        </p>
+      </div>
+
+      <div class="trap-box">
+        <div class="trap-header">⚠️ 'সুখ' বনাম 'পরার্থে' কবিতার বিভ্রান্তি সমাধান (বইয়ের নোট অনুসারে)</div>
+        <p>
+          • কামিনী রায়ের মূল কাব্যগ্রন্থ <em>'আলো ও ছায়া'</em>-তে 'পরার্থে' নামে কোনো কবিতা নেই। মূল কবিতার নাম <strong>'সুখ'</strong>।<br>
+          • ২০১৪ সালের পুরনো ষষ্ঠ শ্রেণির বোর্ড বইয়ে 'সুখ' কবিতার কিছু অংশ নিয়ে 'পরার্থে' নামে অন্তর্ভুক্ত করা হয়েছিল।<br>
+          • বর্তমান <strong>২০২৫ সালের বোর্ড বইয়ে</strong> মূল নামানুসারে <strong>'সুখ'</strong> অন্তর্ভুক্ত রয়েছে।<br>
+          👉 <strong>পরীক্ষার সিদ্ধান্ত নিয়ম:</strong> অপশনে শুধু 'পরার্থে' থাকলে উত্তর = <em>পরার্থে</em>। শুধু 'সুখ' থাকলে উত্তর = <em>সুখ</em>। আর অপশনে 'সুখ' ও 'পরার্থে' দুটোই থাকলে নির্ভুল উত্তর হবে = <strong>সুখ</strong>!
+        </p>
+      </div>
+    </section>
+
+    <!-- সেকশন ৫: কনফিউশন ব্যাংক -->
+    <section id="sec-confusion" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">⚡</div>
+          <h2 class="section-title">কনফিউশন ব্যাংক: প্রথম মহিলা ও জাগরণ উপাধি</h2>
+        </div>
+        <span class="section-meta">পরীক্ষায় গুলিয়ে ফেলার ফাঁদ</span>
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>বিবরণ / উপাধি</th>
+              <th>ব্যক্তিত্বের নাম</th>
+              <th>বইয়ের গুরুত্বপূর্ণ তথ্য ও প্রেক্ষাপট</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>বাংলা সাহিত্যের প্রথম মহিলা ঔপন্যাসিক</strong></td>
+              <td>স্বর্ণকুমারী দেবী</td>
+              <td>প্রথম উপন্যাস 'দীপ নির্বাণ', জ্যোতিরিন্দ্রনাথ ও রবীন্দ্রনাথের বোন।</td>
+            </tr>
+            <tr>
+              <td><strong>বাংলা সাহিত্যের প্রথম মুসলিম মহিলা ঔপন্যাসিক</strong></td>
+              <td>নূরুন্নাহার ফয়জুন্নেসা</td>
+              <td>৪৩তম বিসিএস-এর ব্যাখ্যায় উল্লিখিত।</td>
+            </tr>
+            <tr>
+              <td><strong>মুসলিম নারী জাগরণের অগ্রদূত</strong></td>
+              <td>বেগম রোকেয়া</td>
+              <td>মূলত প্রাবন্ধিক হিসেবে খ্যাত।</td>
+            </tr>
+            <tr>
+              <td><strong>মুসলমান নারী জাগরণের কবি</strong></td>
+              <td>শামসুন্নাহার মাহমুদ</td>
+              <td>২৯তম বিসিএস-এর উত্তর; রোকেয়ার আন্দোলনের অংশীদার।</td>
+            </tr>
+            <tr>
+              <td><strong>ঢাবির ১ম মুসলিম ছাত্রী ও নিখিল বঙ্গে ১ম গ্রাজুয়েট</strong></td>
+              <td>বেগম ফজিলাতুন্নেছা</td>
+              <td>'শিখা' ও 'সওগাত' পত্রিকার লেখক।</td>
+            </tr>
+            <tr>
+              <td><strong>গদ্যে-পদ্যে আত্মজীবনী 'রূপজালাল' (১৮৭৬)</strong></td>
+              <td>নবাব ফয়জুন্নেসা চৌধুরানি</td>
+              <td>জমিদার, নারীশিক্ষার প্রবর্তক, সমাজসেবক ও কবি।</td>
+            </tr>
+            <tr>
+              <td><strong>মাত্র ১৮ বছর বয়সে 'বটতলার উপন্যাস'</strong></td>
+              <td>রাজিয়া খান আমিন</td>
+              <td>ইংরেজি বিভাগের অধ্যাপক ও মঞ্চাভিনেত্রী; মুক্তিযুদ্ধ উপন্যাস 'দ্রৌপদী'।</td>
+            </tr>
+            <tr>
+              <td><strong>'জনৈক বঙ্গমহিলা' ছদ্মনাম ও ১৫ বছরে ১ম কাব্য</strong></td>
+              <td>কামিনী রায়</td>
+              <td>প্রথম কাব্যগ্রন্থ 'আলো ও ছায়া' (১৮৮৯), জগত্তারিণী পদকপ্রাপ্ত (১৯২৯)।</td>
+            </tr>
+            <tr>
+              <td><strong>বাংলায় লিখিত প্রথম অপেরা (গীতিনাট্য)</strong></td>
+              <td>'বসন্ত উৎসব' (স্বর্ণকুমারী দেবী)</td>
+              <td>স্বর্ণকুমারী দেবীর রচিত বিশেষ নাটক।</td>
+            </tr>
+            <tr>
+              <td><strong>The Unfinished Song নামে অনূদিত উপন্যাস</strong></td>
+              <td>'কাহাকে' (স্বর্ণকুমারী দেবী)</td>
+              <td>স্বর্ণকুমারী দেবীর অন্যতম সেরা সামাজিক উপন্যাস।</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- সেকশন ৬: বিগত বিসিএস কুইজ -->
+    <section id="sec-quiz" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📝</div>
+          <h2 class="section-title">বিগত বিসিএস পরীক্ষার পূর্ণাঙ্গ প্রশ্নব্যাংক</h2>
+        </div>
+        <span class="section-meta">৬টি হুবহু প্রশ্ন</span>
+      </div>
+
+      <p style="margin-bottom: 16px; font-size:14.5px;">
+        সঠিক উত্তরের অপশনে ক্লিক করে যাচাই করো। ক্লিক করার সাথে সাথে সঠিক উত্তর ও বইয়ের পুঙ্খানুপুঙ্খ ব্যাখ্যা দেখতে পাবে:
+      </p>
+
+      <div class="quiz-container">
+        <!-- প্রশ্ন ১ -->
+        <div class="quiz-card" id="q1">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০১</span>
+            <span class="bcs-tag">৫০তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">১. কিশোর পত্রিকা 'বালক' প্রতিষ্ঠা কার অমর কীর্তি?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(1, 'ক', true, this)"><span class="opt-letter">ক</span> স্বর্ণকুমারী দেবী</button>
+            <button class="opt-btn" onclick="checkAnswer(1, 'খ', false, this)"><span class="opt-letter">খ</span> আল মাহমুদ</button>
+            <button class="opt-btn" onclick="checkAnswer(1, 'গ', false, this)"><span class="opt-letter">গ</span> সেলিনা হোসেন</button>
+            <button class="opt-btn" onclick="checkAnswer(1, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> কাদম্বরী দেবী</button>
+          </div>
+          <div class="quiz-explanation" id="exp-1">
+            <strong>ব্যাখ্যা:</strong> কিশোর পত্রিকা 'বালক' প্রতিষ্ঠা স্বর্ণকুমারী দেবীর অমর কীর্তি। পত্রিকাটি ১২৯২ বঙ্গাব্দে জোড়াসাঁকো ঠাকুরবাড়ি থেকে প্রথম জ্ঞানদানন্দিনী দেবীর সম্পাদনায় এবং রবীন্দ্রনাথ ঠাকুরের কার্যাধ্যক্ষতায় প্রকাশিত হয়। পরবর্তীতে রবীন্দ্রনাথ অবসর নিলে পত্রিকাটি 'ভারতী'র সঙ্গে যুক্ত হয়ে 'ভারতী ও বালক' নামে স্বর্ণকুমারী দেবীর সম্পাদনায় প্রকাশিত হতে থাকে এবং দীর্ঘ সাত বছর শিশুসাহিত্যে নবজাগরণ তৈরি করে।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২ -->
+        <div class="quiz-card" id="q2">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০২</span>
+            <span class="bcs-tag">৪৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">২. "সকলের তরে সকলে আমরা/প্রত্যেকে আমরা পরের তরে।"— কোন কবিতার অংশ?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(2, 'ক', false, this)"><span class="opt-letter">ক</span> পরার্থে</button>
+            <button class="opt-btn" onclick="checkAnswer(2, 'খ', false, this)"><span class="opt-letter">খ</span> বড় কে</button>
+            <button class="opt-btn" onclick="checkAnswer(2, 'গ', false, this)"><span class="opt-letter">গ</span> পাছে লোকে কিছু বলে</button>
+            <button class="opt-btn" onclick="checkAnswer(2, 'ঘ', true, this)"><span class="opt-letter">ঘ</span> সুখ</button>
+          </div>
+          <div class="quiz-explanation" id="exp-2">
+            <strong>ব্যাখ্যা:</strong> পঙ্ক্তিদ্বয় কামিনী রায় রচিত 'সুখ' কবিতার অন্তর্গত, যা তাঁর প্রথম কাব্যগ্রন্থ 'আলো ও ছায়া' (১৮৮৯)-এর অন্তর্ভুক্ত। ২০১৪ সালের পুরানো বোর্ড বইয়ে কবিতাটি 'পরার্থে' নামে থাকলেও মূল কবিতার নাম 'সুখ' এবং ২০২৫ সালের বর্তমান বোর্ড বইতেও 'সুখ' নামেই অন্তর্ভুক্ত রয়েছে। অপশনে দুটো থাকলে সঠিক উত্তর 'সুখ'।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩ -->
+        <div class="quiz-card" id="q3">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৩</span>
+            <span class="bcs-tag">৪৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৩. স্বর্ণকুমারী দেবীর পিতার নাম—</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(3, 'ক', false, this)"><span class="opt-letter">ক</span> দ্বারকানাথ ঠাকুর</button>
+            <button class="opt-btn" onclick="checkAnswer(3, 'খ', true, this)"><span class="opt-letter">খ</span> দেবেন্দ্রনাথ ঠাকুর</button>
+            <button class="opt-btn" onclick="checkAnswer(3, 'গ', false, this)"><span class="opt-letter">গ</span> রথীন্দ্রনাথ ঠাকুর</button>
+            <button class="opt-btn" onclick="checkAnswer(3, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> প্রমথ চৌধুরী</button>
+          </div>
+          <div class="quiz-explanation" id="exp-3">
+            <strong>ব্যাখ্যা:</strong> স্বর্ণকুমারী দেবী মহর্ষি দেবেন্দ্রনাথ ঠাকুরের দশম সন্তান এবং রবীন্দ্রনাথ ঠাকুরের বোন। প্রিন্স দ্বারকানাথ ঠাকুর ছিলেন তাঁর পিতামহ। স্বর্ণকুমারী দেবী আধুনিক বাংলা সাহিত্যের প্রথম মহিলা ঔপন্যাসিক।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৪ -->
+        <div class="quiz-card" id="q4">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৪</span>
+            <span class="bcs-tag">৪৩তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৪. বাংলা সাহিত্যে প্রথম মহিলা ঔপন্যাসিকের নাম কী?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(4, 'ক', false, this)"><span class="opt-letter">ক</span> বেগম রোকেয়া</button>
+            <button class="opt-btn" onclick="checkAnswer(4, 'খ', false, this)"><span class="opt-letter">খ</span> কাদম্বরী দেবী</button>
+            <button class="opt-btn" onclick="checkAnswer(4, 'গ', true, this)"><span class="opt-letter">গ</span> স্বর্ণকুমারী দেবী</button>
+            <button class="opt-btn" onclick="checkAnswer(4, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> নূরুন্নাহার ফয়জুন্নেসা</button>
+          </div>
+          <div class="quiz-explanation" id="exp-4">
+            <strong>ব্যাখ্যা:</strong> স্বর্ণকুমারী দেবী বাংলা সাহিত্যের প্রথম মহিলা ঔপন্যাসিক। তাঁর প্রথম উপন্যাস 'দীপ নির্বাণ'। উল্লেখ্য, নূরুন্নাহার ফয়জুন্নেসা হলেন বাংলা সাহিত্যের 'প্রথম মুসলিম মহিলা ঔপন্যাসিক' এবং বেগম রোকেয়া হলেন 'মুসলিম নারী জাগরণের অগ্রদূত'।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৫ -->
+        <div class="quiz-card" id="q5">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৫</span>
+            <span class="bcs-tag">৩১তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৫. 'বটতলার উপন্যাস' গ্রন্থের লেখকের নাম কী?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(5, 'ক', false, this)"><span class="opt-letter">ক</span> দিলারা হাশেম</button>
+            <button class="opt-btn" onclick="checkAnswer(5, 'খ', true, this)"><span class="opt-letter">খ</span> রাজিয়া খান</button>
+            <button class="opt-btn" onclick="checkAnswer(5, 'গ', false, this)"><span class="opt-letter">গ</span> রিজিয়া রহমান</button>
+            <button class="opt-btn" onclick="checkAnswer(5, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> সেলিনা হোসেন</button>
+          </div>
+          <div class="quiz-explanation" id="exp-5">
+            <strong>ব্যাখ্যা:</strong> রাজিয়া খান আমিন (১৯৩৬-২০১১) মূলত ঢাকা বিশ্ববিদ্যালয়ের ইংরেজি বিভাগের অধ্যাপক, মঞ্চাভিনেত্রী ও সাহিত্যিক ছিলেন। তিনি মাত্র ১৮ বছর বয়সে তাঁর বহুল প্রশংসিত 'বটতলার উপন্যাস' গ্রন্থটি রচনা করেন। তাঁর মুক্তিযুদ্ধভিত্তিক বিখ্যাত উপন্যাস হলো 'দ্রৌপদী'।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৬ -->
+        <div class="quiz-card" id="q6">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৬</span>
+            <span class="bcs-tag">২৯তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৬. মুসলমান নারী জাগরণের কবি—</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(6, 'ক', false, this)"><span class="opt-letter">ক</span> ফজিলাতুন্নেছা</button>
+            <button class="opt-btn" onclick="checkAnswer(6, 'খ', false, this)"><span class="opt-letter">খ</span> ফয়জুন্নেছা</button>
+            <button class="opt-btn" onclick="checkAnswer(6, 'গ', false, this)"><span class="opt-letter">গ</span> বেগম রোকেয়া</button>
+            <button class="opt-btn" onclick="checkAnswer(6, 'ঘ', true, this)"><span class="opt-letter">ঘ</span> শামসুন্নাহার</button>
+          </div>
+          <div class="quiz-explanation" id="exp-6">
+            <strong>ব্যাখ্যা:</strong> মুসলমান নারী জাগরণের কবি হলেন শামসুন্নাহার মাহমুদ। পক্ষান্তরে বেগম রোকেয়াকে বলা হয় 'মুসলিম নারী জাগরণের অগ্রদূত' (তিনি মূলত প্রাবন্ধিক ছিলেন)। শামসুন্নাহার মাহমুদ রোকেয়ার নারীমুক্তি আন্দোলনের সহযাত্রী ছিলেন এবং হবীবুল্লাহ বাহারের সাথে যৌথভাবে 'বুলবুল' পত্রিকা সম্পাদনা করেছিলেন।
+          </div>
+        </div>
+      </div>
+
+      <!-- স্কোর বোর্ড -->
+      <div class="score-banner">
+        <div>
+          <span>তোমার বর্তমান স্কোর: </span>
+          <span class="score-display" id="user-score">০ / ৬</span>
+        </div>
+        <button class="btn-ctrl" onclick="resetQuiz()">🔄 পুনরায় কুইজ দাও</button>
+      </div>
+    </section>
+
+    <!-- সেকশন ৭: ৩০ সেকেন্ডের সুপারফাস্ট রিভিশন -->
+    <section id="sec-rev" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">⚡</div>
+          <h2 class="section-title">৩০ সেকেন্ডের সুপারফাস্ট রিভিশন</h2>
+        </div>
+        <span class="section-meta">ক্লিক করে উত্তর মেলাও</span>
+      </div>
+      <p style="font-size:14px; margin-bottom: 12px;">দ্রুত রিভিশন দিতে প্রতিটি প্রশ্নে ট্যাপ করো:</p>
+
+      <div class="revision-grid">
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>'সখী সমিতি' কে প্রতিষ্ঠা করেন?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">স্বর্ণকুমারী দেবী (বিধবা ও দরিদ্র নারীদের সাহায্যের উদ্দেশ্যে)।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>বাংলা সাহিত্যের প্রথম অপেরা (গীতিনাট্য) কোনটি?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">'বসন্ত উৎসব' (রচয়িতা: স্বর্ণকুমারী দেবী)।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>কামিনী রায় কত বছর বয়সে প্রথম কাব্য লেখেন?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">মাত্র ১৫ বছর বয়সে ('আলো ও ছায়া', ১৮৮৯)।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>নজরুল তাঁর 'সিন্ধু-হিন্দোল' কাকে উৎসর্গ করেন?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">'বাহার-নাহার'কে (হবীবুল্লাহ বাহার ও শামসুন্নাহার মাহমুদ)।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>'রূপজালাল' কার রচনা এবং এর ধরন কী?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">নবাব ফয়জুন্নেসা চৌধুরানি (১৮৭৬); এটি গদ্যে-পদ্যে রচিত আত্মজীবনীমূলক গ্রন্থ।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>রাজিয়া খানের মুক্তিযুদ্ধভিত্তিক উপন্যাস কোনটি?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">'দ্রৌপদী'।</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- সেকশন ৮: অসঙ্গতি ও তথ্য যাচাই তালিকা -->
+    <section id="sec-audit" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">⚠️</div>
+          <h2 class="section-title">🧭 সন্দেহ নিরসন ও সঠিক সমাধান</h2>
+        </div>
+        <span class="section-meta">নির্ভুল প্রস্তুতি ও সঠিক সমাধান</span>
+      </div>
+
+      <div class="alert-box">
+        <div class="alert-header">📌 পরীক্ষার বিভ্রান্তিকর প্রশ্ন ও বিশেষ সতর্কতা:</div>
+        পরীক্ষার্থীদের বিভ্রান্তি দূর করতে পৃষ্ঠা ১৬১ থেকে ১৬৩-এর মধ্যকার দ্বিধামূলক অংশ নিচে বিশ্লেষণ করা হলো:
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>📝 বিষয় / প্রশ্ন</th>
+              <th>📖 পৃষ্ঠা / প্রশ্ন নং</th>
+              <th>🔍 সূক্ষ্ম প্যাঁচ ও বিস্তারিত বিশ্লেষণ</th>
+              <th>🎯 পরীক্ষায় আপনার সঠিক সিদ্ধান্ত</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>'ভারতী' পত্রিকার প্রকাশ সাল</strong></td>
+              <td>প্রশ্ন ৩ ব্যাখ্যা (পৃ. ১৬২) বনাম প্রশ্ন ৪ ব্যাখ্যা (পৃ. ১৬২)</td>
+              <td>প্রশ্ন ৪-এর ব্যাখ্যায় লেখা হয়েছে <em>"তিনি ১৮৭২ সালে প্রকাশিত 'ভারতী' পত্রিকা সম্পাদনা করেন"</em>। কিন্তু প্রমিত ইতিহাসে এবং ঠাকুরবাড়ির ইতিহাসে ভারতী ১৮৭৭ সালে প্রকাশিত হয়।</td>
+              <td>বইয়ের পাতায় ১৮৭২ সাল ছাপা হয়েছে। পরীক্ষার প্রশ্নে সাল উল্লেখ থাকলে প্রশ্নপত্রের অপশন অনুযায়ী সতর্কতা অবলম্বন করতে হবে।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রশ্ন ৩-এর উত্তর কোড ও অপশন পজিশন</strong></td>
+              <td>প্রশ্ন ৩ (পৃ. ১৬২)</td>
+              <td>বইয়ে উত্তরে ছাপা হয়েছে <strong>'উ. খ'</strong>। কিন্তু দুই কলামের লেআউটে বাম পাশে ক-এর নিচে গ এবং ডান পাশে খ-এর নিচে ঘ থাকে।</td>
+              <td>ব্যাখ্যায় সুস্পষ্টভাবে লেখা রয়েছে দেবেন্দ্রনাথ ঠাকুর। তাই লেটার কোড যাই থাকুক, সঠিক উত্তর দেবেন্দ্রনাথ ঠাকুর দাগাবে।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রশ্ন ৪-এর উত্তর কোড</strong></td>
+              <td>প্রশ্ন ৪ (পৃ. ১৬২)</td>
+              <td>বইয়ে মুদ্রিত উত্তর <strong>'উ. গ'</strong>। দুই কলাম বিন্যাসে স্বর্ণকুমারী দেবীর অবস্থান অনুযায়ী এটি সঠিক।</td>
+              <td>প্রথম মহিলা ঔপন্যাসিক বললে নিঃসন্দেহে স্বর্ণকুমারী দেবী নির্বাচন করবে।</td>
+            </tr>
+            <tr>
+              <td><strong>'সুখ' বনাম 'পরার্থে' কবিতা বিতর্ক</strong></td>
+              <td>প্রশ্ন ২ ব্যাখ্যা (পৃ. ১৬১)</td>
+              <td>পুরানো ২০১৪ সালের বোর্ড বইয়ে কামিনী রায়ের কবিতাটিকে 'পরার্থে' নাম দেওয়া হলেও মূল বইয়ে এ নামে কবিতা নেই।</td>
+              <td>বর্তমান ২০২৫ সালের নবম-দশম/ষষ্ঠ শ্রেণির বই অনুসারে মূল নাম 'সুখ' নেওয়া হয়েছে। পরীক্ষায় অপশনে 'সুখ' ও 'পরার্থে' দুটোই থাকলে 'সুখ' সঠিক।</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ফুটার নোট -->
+    <footer style="text-align: center; margin-top: 40px; color: var(--text-muted); font-size: 13px;">
+      <p>বিসিএস প্রিলিমিনারি বিষয়ভিত্তিক জব সল্যুশন | অধ্যায়: বাংলা সাহিত্যের গুরুত্বপূর্ণ নারী লেখক (পৃষ্ঠা ১৬১–১৬৩)</p>
+      <p style="margin-top: 4px;">Single-file Interactive BCS E-Book Edition • অফলাইন উপযোগী ও স্বয়ংসম্পূর্ণ</p>
+    </footer>
+  </div>
+
+  <!-- স্ক্রিপ্ট: ইন্টারঅ্যাকটিভিটি -->
+  <script>
+    // স্ক্রল প্রগ্রেস বার
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    // থিম টগল (ডার্ক/লাইট)
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const target = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', target);
+      try {
+        localStorage.setItem('theme_mode_female_authors', target);
+      } catch(e) {}
+    }
+
+    // ফন্ট সাইজ স্কেলিং
+    let currentScale = 100;
+    function changeFontSize(delta) {
+      if (delta === 0) currentScale = 100;
+      else currentScale += delta * 7;
+      
+      if (currentScale < 80) currentScale = 80;
+      if (currentScale > 130) currentScale = 130;
+      
+      document.documentElement.style.setProperty('--font-scale', currentScale + '%');
+    }
+
+    // সূচিপত্র টগল
+    function toggleToc() {
+      const panel = document.getElementById('toc-panel');
+      panel.classList.toggle('active');
+    }
+
+    // রিভিশন উত্তর টগল
+    function toggleRev(element) {
+      const ans = element.nextElementSibling;
+      const icon = element.querySelector('span:last-child');
+      if (ans.classList.contains('active')) {
+        ans.classList.remove('active');
+        icon.textContent = '➕';
+      } else {
+        ans.classList.add('active');
+        icon.textContent = '➖';
+      }
+    }
+
+    // কুইজ ইন্টারঅ্যাকশন
+    let score = 0;
+    const answeredMap = {};
+
+    function checkAnswer(qNum, selectedLetter, isCorrect, btnElement) {
+      if (answeredMap[qNum]) return;
+      answeredMap[qNum] = true;
+
+      const card = document.getElementById(`q${qNum}`);
+      const buttons = card.querySelectorAll('.opt-btn');
+
+      buttons.forEach(btn => {
+        btn.disabled = true;
+      });
+
+      if (isCorrect) {
+        btnElement.classList.add('correct');
+        score++;
+      } else {
+        btnElement.classList.add('wrong');
+        buttons.forEach(btn => {
+          if (btn.getAttribute('onclick').includes('true')) {
+            btn.classList.add('correct');
+          }
+        });
+      }
+
+      const exp = document.getElementById(`exp-${qNum}`);
+      if (exp) exp.classList.add('show');
+
+      updateScoreDisplay();
+    }
+
+    function updateScoreDisplay() {
+      const scoreEl = document.getElementById('user-score');
+      scoreEl.textContent = `${score} / ৬`;
+      if (score === 6) {
+        scoreEl.innerHTML = `${score} / ৬ <span style="font-size:14px;color:var(--success);">🎉 অভিনন্দন! সব কটি উত্তর নিখুঁত হয়েছে!</span>`;
+      }
+    }
+
+    function resetQuiz() {
+      score = 0;
+      for (let key in answeredMap) delete answeredMap[key];
+      
+      const buttons = document.querySelectorAll('.opt-btn');
+      buttons.forEach(btn => {
+        btn.disabled = false;
+        btn.classList.remove('correct', 'wrong');
+      });
+
+      const exps = document.querySelectorAll('.quiz-explanation');
+      exps.forEach(exp => exp.classList.remove('show'));
+
+      updateScoreDisplay();
+      window.location.hash = 'sec-quiz';
+    }
+
+    (function init() {
+      try {
+        const savedTheme = localStorage.getItem('theme_mode_female_authors');
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+      } catch(e) {}
+    })();
+  </script>
+  <!-- Smart E-Book Navigation Component -->
+  <script src="nav-component.js"></script>
+</body>
+</html>

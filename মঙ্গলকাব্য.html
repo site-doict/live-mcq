@@ -1,0 +1,1023 @@
+<!-- DESIGN PLAN:
+1. বিষয়ের ধরন: মধ্যযুগের বাংলা সাহিত্য (মঙ্গলকাব্য: মনসামঙ্গল, চণ্ডীমঙ্গল, অন্নদামঙ্গল, ধর্মমঙ্গল; আদি ও শ্রেষ্ঠ কবিগণ, চরিত্রাবলি, ঐতিহাসিক প্রেক্ষাপট ও অমর পঙ্ক্তি)।
+2. সবচেয়ে কঠিন/গুলিয়ে ফেলার জায়গা:
+   - আদি কবি বনাম শ্রেষ্ঠ কবি: মনসামঙ্গলের আদিকবি কানাহরি দত্ত বনাম পুঁথিভিত্তিক প্রাচীনতম/শ্রেষ্ঠ কবি বিজয়গুপ্ত; চণ্ডীমঙ্গলের আদিকবি মানিক দত্ত বনাম শ্রেষ্ঠ কবি কবিকঙ্কণ মুকুন্দরাম চক্রবর্তী; মঙ্গলকাব্যের সামগ্রিক শেষ কবি ভারতচন্দ্র রায়গুণাকর।
+   - কাব্যের নামভেদ: মনসামঙ্গলের অপর নাম 'পদ্মপুরাণ' (বিজয়গুপ্ত ও নারায়ণ দেব উভয়ের কাব্যের নাম পদ্মপুরাণ)।
+   - ঐতিহাসিক চরিত্র বনাম পৌরাণিক চরিত্র: অন্নদামঙ্গল কাব্যে খাঁটি ঐতিহাসিক চরিত্র আছে (মুঘল সেনাপতি মানসিংহ ও বর্ধমানের ভবানন্দ মজুমদার); বাকিগুলোতে লোকগাথা ও পৌরাণিক চরিত্র (কালকেতু-ফুল্লরা, চাঁদ সওদাগর-বেহুলা-লখীন্দর)।
+   - দেব-দেবীর পরিচয়: চণ্ডীমঙ্গলের উপাস্য 'চণ্ডী' দেবতা শিবের স্ত্রী।
+   - কবিগানের দাশু রায় বনাম মঙ্গলকাব্যের কবিগণ (দাশু রায় কবিগানের পাঁচালীকার, মঙ্গলকাব্যের কবি নন)।
+3. কেন এই মডিউলগুলো শ্রেষ্ঠ:
+   - "মঙ্গলকাব্যের চার স্তম্ভ": মনসামঙ্গল, চণ্ডীমঙ্গল, ধর্মমঙ্গল ও অন্নদামঙ্গল কাব্যের আদি কবি, শ্রেষ্ঠ কবি ও চরিত্রাবলি এক নজরে ম্যাপিং।
+   - "ঐতিহাসিক চরিত্র ও অন্নদামঙ্গল স্পেশাল": মানসিংহ-ভবানন্দ খণ্ডের গুরুত্ব ও ভারতচন্দ্রের অমর প্রবচনগুলো বাইট-সাইজ কার্ডে।
+   - সম্পূর্ণ ৭টি বিসিএস MCQ-এর লাইভ ইন্টারঅ্যাকটিভ কুইজ সিস্টেম (প্রকৃত অপশন ম্যাপিং, ভুল চিহ্নিতকরণ ও পূর্ণাঙ্গ সমাধানসহ)।
+   - শেষে "বইয়ের অসঙ্গতি ও যাচাই তালিকা" সারণি।
+4. রঙের মেজাজ: মধ্যযুগীয় মন্দিরের দেওয়ালচিত্র ও দেববন্দনার মেজাজে টেরা কোটা ও ক্রাসন রুবি (#991b1b, #7c2d12, #b45309), সোনালি হলুদ (#f59e0b) এবং প্রাচীন পার্চমেন্ট ব্যাকগ্রাউন্ড (#fffbeb / ডার্ক মোডে #1a0f0a)।
+5. হিরো ও মাসকট: মধ্যযুগীয় দোতারা হাতে কথক ঠাকুর 'মঙ্গল-গুরু'।
+-->
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>মঙ্গলকাব্য</title>
+<style>
+:root {
+  --font-base: 'Noto Sans Bengali', 'Kalpurush', Vrinda, sans-serif;
+  --bg-primary: #fffbeb;
+  --bg-card: #ffffff;
+  --text-main: #292524;
+  --text-muted: #57534e;
+  --primary: #991b1b;
+  --primary-light: #fee2e2;
+  --accent: #b45309;
+  --accent-light: #ffedd5;
+  --success: #15803d;
+  --success-bg: #dcfce7;
+  --danger: #b91c1c;
+  --danger-bg: #fee2e2;
+  --border: #fecaca;
+  --border-strong: #b91c1c;
+  --shadow: 0 4px 12px rgba(153, 27, 27, 0.08);
+  --radius: 12px;
+  --font-scale: 1rem;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #180a0a;
+  --bg-card: #2c1212;
+  --text-main: #fef2f2;
+  --text-muted: #fca5a5;
+  --primary: #f87171;
+  --primary-light: #450a0a;
+  --accent: #fbbf24;
+  --accent-light: #78350f;
+  --success: #4ade80;
+  --success-bg: #14532d;
+  --danger: #ef4444;
+  --danger-bg: #7f1d1d;
+  --border: #7f1d1d;
+  --border-strong: #f87171;
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-base);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-size: calc(var(--font-scale) * 1rem);
+  line-height: 1.8;
+  padding-bottom: 80px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #dc2626, #f59e0b, #10b981);
+  width: 0%;
+  z-index: 1000;
+  transition: width 0.1s;
+}
+
+.top-control-bar {
+  position: sticky;
+  top: 6px;
+  z-index: 999;
+  background: var(--bg-card);
+  border-bottom: 2px solid var(--border);
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow);
+}
+
+.brand-badge {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+button.ctrl-btn {
+  background: var(--bg-primary);
+  color: var(--text-main);
+  border: 1.5px solid var(--border-strong);
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+button.ctrl-btn:hover {
+  background: var(--primary-light);
+  border-color: var(--primary);
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.hero {
+  background: linear-gradient(135deg, #450a0a, #991b1b 65%, #b91c1c);
+  color: #ffffff;
+  padding: 32px 24px;
+  border-radius: var(--radius);
+  margin-top: 16px;
+  margin-bottom: 24px;
+  border: 2px solid #ef4444;
+  box-shadow: var(--shadow);
+}
+
+.hero h1 {
+  font-size: 1.85rem;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.hero p {
+  color: #fee2e2;
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+
+.bcs-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.stat-chip {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stat-chip span {
+  display: block;
+  font-size: 0.8rem;
+  color: #fecaca;
+}
+
+.stat-chip strong {
+  font-size: 1.25rem;
+  color: #fef08a;
+}
+
+.study-flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.flow-step {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-left: 6px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+
+.flow-step h4 {
+  color: var(--accent);
+  margin-bottom: 4px;
+  font-size: 1rem;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 36px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid var(--primary);
+  font-size: 1.45rem;
+  color: var(--primary);
+}
+
+.section-sub {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin-top: -10px;
+  margin-bottom: 18px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  border-left: 5px solid var(--primary);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+
+.card h3 {
+  font-size: 1.15rem;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.card-badge {
+  display: inline-block;
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.quote-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-left: 5px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+
+.quote-line {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 4px;
+  line-height: 1.5;
+}
+
+.quote-author {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px dashed var(--border);
+  padding-top: 6px;
+  margin-top: 6px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin: 18px 0;
+  border-radius: var(--radius);
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  text-align: left;
+}
+
+th {
+  background: var(--primary);
+  color: #ffffff;
+  padding: 12px 14px;
+  font-weight: 700;
+  border-bottom: 2px solid var(--border);
+  font-size: 0.95rem;
+}
+
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+tr:nth-child(even) {
+  background: rgba(153, 27, 27, 0.04);
+}
+
+mark {
+  background-color: #fef08a;
+  color: #0f172a;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.quiz-meta-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: var(--bg-card);
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  border: 2px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.score-counter {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.quiz-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  transition: border-color 0.2s;
+}
+
+.quiz-card.answered-correct {
+  border-color: var(--success);
+}
+
+.quiz-card.answered-wrong {
+  border-color: var(--danger);
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.q-text {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.q-tag {
+  background: var(--accent-light);
+  color: var(--accent);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+@media (min-width: 600px) {
+  .options-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.opt-btn {
+  background: var(--bg-primary);
+  border: 1.5px solid var(--border);
+  color: var(--text-main);
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.92rem;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.opt-btn:hover:not(:disabled) {
+  background: var(--primary-light);
+  border-color: var(--primary);
+}
+
+.opt-btn.correct-choice {
+  background: var(--success-bg) !important;
+  border-color: var(--success) !important;
+  color: var(--success) !important;
+  font-weight: 700;
+}
+
+.opt-btn.wrong-choice {
+  background: var(--danger-bg) !important;
+  border-color: var(--danger) !important;
+  color: var(--danger) !important;
+}
+
+.explanation-box {
+  display: none;
+  background: var(--bg-primary);
+  border-left: 4px solid var(--primary);
+  padding: 12px 14px;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.revision-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.quick-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+
+.quick-card button {
+  width: 100%;
+  margin-top: 8px;
+  background: var(--primary-light);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.quick-card .ans-text {
+  display: none;
+  margin-top: 8px;
+  padding: 8px;
+  background: var(--bg-primary);
+  border-radius: 4px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--success);
+}
+
+.floating-actions {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 990;
+}
+
+.float-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transition: transform 0.2s;
+}
+
+.float-btn:hover {
+  transform: scale(1.1);
+}
+
+@media print {
+  .top-control-bar, .floating-actions, .quiz-meta-bar, .opt-btn, button {
+    display: none !important;
+  }
+  .explanation-box, .ans-text {
+    display: block !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .card, .quiz-card {
+    border: 1px solid #999;
+    box-shadow: none;
+    page-break-inside: avoid;
+  }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- কন্ট্রোল বার -->
+<header class="top-control-bar">
+  <div class="brand-badge">
+    <span>🪕</span> মঙ্গল-গুরু • মঙ্গলকাব্য
+  </div>
+  <div class="controls">
+    <button class="ctrl-btn" onclick="toggleTheme()" id="themeBtn">🌓 থিম</button>
+    <button class="ctrl-btn" onclick="adjustFontSize(-0.05)">A-</button>
+    <button class="ctrl-btn" onclick="adjustFontSize(0.05)">A+</button>
+    <button class="ctrl-btn" onclick="scrollToId('quiz-zone')">📝 কুইজ</button>
+    <button class="ctrl-btn" onclick="window.print()">🖨️ প্রিন্ট</button>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- হিরো সেকশন -->
+  <section class="hero">
+    <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: #fecaca; font-weight: 700;">
+      লাইভ এমসিকিউ™ বিসিএস প্রিলিমিনারি বিষয়ভিত্তিক সল্যুশন | পৃষ্ঠা ৮২ - ৮৩
+    </div>
+    <h1>মঙ্গলকাব্য</h1>
+    <p>মধ্যযুগের দেব-মাহাত্ম্যসূচক আখ্যানকাব্য, মনসা-চণ্ডী-ধর্ম-অন্নদামঙ্গল ধারা, অমর চরিত্রাবলি এবং বিসিএসের ৭টি মূল প্রশ্ন।</p>
+    
+    <div class="bcs-stat-grid">
+      <div class="stat-chip"><span>৪৭তম বিসিএস</span><strong>১টি</strong></div>
+      <div class="stat-chip"><span>৪৪তম বিসিএস</span><strong>২টি</strong></div>
+      <div class="stat-chip"><span>৪৩তম বিসিএস</span><strong>১টি</strong></div>
+      <div class="stat-chip"><span>৩৫তম বিসিএস</span><strong>১টি</strong></div>
+      <div class="stat-chip"><span>১০ম-৩৪তম বিসিএস</span><strong>২টি</strong></div>
+      <div class="stat-chip"><span>মোট প্রশ্ন</span><strong>৭টি</strong></div>
+    </div>
+  </section>
+
+  <!-- স্টাডি স্টেপস -->
+  <div class="study-flow">
+    <div class="flow-step">
+      <h4>১. চার মঙ্গলকাব্যের ছক দেখো</h4>
+      <p style="font-size: 0.85rem;">মনসামঙ্গল, চণ্ডীমঙ্গল, ধর্মমঙ্গল ও অন্নদামঙ্গলের কবি ও চরিত্র পাশাপাশি মেলাও!</p>
+    </div>
+    <div class="flow-step">
+      <h4>২. ভারতচন্দ্র ও উক্তি ডিকোড করো</h4>
+      <p style="font-size: 0.85rem;">ঈশ্বরী পাটনীর প্রার্থনা ও অন্নদামঙ্গলের প্রবচণগুলো আত্মস্থ করে নাও!</p>
+    </div>
+    <div class="flow-step">
+      <h4>৩. ৭টি বিসিএস MCQ টেস্ট সম্পন্ন করো</h4>
+      <p style="font-size: 0.85rem;">অপশনে ক্লিক করো, তাৎক্ষণিক লাল-সবুজ ফলাফল ও বইয়ের সঠিক সমাধান জেনে নাও!</p>
+    </div>
+  </div>
+
+  <!-- মডিউল ১: মঙ্গলকাব্যের চার প্রধান ধারা ও কবি-ম্যাট্রিক্স -->
+  <h2 class="section-title">🏛️ মঙ্গলকাব্যের চার প্রধান ধারা ও কবি-চরিত্র সারণি</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>কাব্যধারা</th>
+          <th>আদি কবি ও শ্রেষ্ঠ কবি</th>
+          <th>অন্যান্য উল্লেখযোগ্য কবি</th>
+          <th>প্রধান ও উল্লেখযোগ্য চরিত্রসমূহ</th>
+          <th>মূল উপজীব্য ও বিশেষত্ব</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>মনসামঙ্গল</strong><br>(অপর নাম: <em>পদ্মপুরাণ</em>)</td>
+          <td>• <strong>আদি কবি:</strong> কানাহরি দত্ত<br>• <strong>পুঁথিভিত্তিক প্রাচীন ও শ্রেষ্ঠ:</strong> বিজয়গুপ্ত</td>
+          <td>নারায়ণ দেব (কাব্যের নামও পদ্মপুরাণ), বিপ্রদাস পিপিলাই, কেতকাদাস ক্ষেমানন্দ</td>
+          <td><mark>মনসা দেবী, চাঁদ সওদাগর, বেহুলা, লখিন্দর, সনকা</mark></td>
+          <td>সাপের অধিষ্ঠাত্রী দেবী মনসার পূজা প্রতিষ্ঠা ও শিবভক্ত চাঁদ সওদাগরের সংঘাত। প্রাচীনতম মঙ্গলকাব্য ধারা।</td>
+        </tr>
+        <tr>
+          <td><strong>চণ্ডীমঙ্গল</strong></td>
+          <td>• <strong>আদি কবি:</strong> মানিক দত্ত (১৪শ শতক)<br>• <strong>শ্রেষ্ঠ কবি:</strong> কবিকঙ্কণ মুকুন্দরাম চক্রবর্তী (১৬শ শতক)</td>
+          <td>দ্বিজমাধব</td>
+          <td><mark>কালকেতু, ফুল্লরা, ধনপতি, লহনা, খুল্লনা, ভাঁড়ুদত্ত, মুরারি শীল</mark></td>
+          <td>দেবী চণ্ডী হলেন <strong>শিবের স্ত্রী</strong>। দুটি খণ্ডে বিভক্ত: <em>আক্ষেটিক খণ্ড</em> (কালকেতু-ফুল্লরা) ও <em>বণিক খণ্ড</em> (ধনপতি-খুল্লনা)।</td>
+        </tr>
+        <tr>
+          <td><strong>অন্নদামঙ্গল</strong></td>
+          <td>• <strong>রচয়িতা:</strong> ভারতচন্দ্র রায়গুণাকর (১৭১২-১৭৬০)</td>
+          <td>মধ্যযুগের শেষ বড় কবি ও বাংলা সাহিত্যের ১ম নাগরিক কবি।</td>
+          <td><mark>মানসিংহ, ভবানন্দ, ঈশ্বরী পাটনী, বিদ্যা, সুন্দর, হীরা মালিনী, হরিহোড়</mark></td>
+          <td>১৭৫২-৫৩ সালে রাজা কৃষ্ণচন্দ্রের আদেশে রচিত। ৩টি খণ্ড: শিবনারায়ণ, কালিকামঙ্গল, মানসিংহ-ভবানন্দ। <mark>খাঁটি ঐতিহাসিক চরিত্র রয়েছে</mark>।</td>
+        </tr>
+        <tr>
+          <td><strong>ধর্মমঙ্গল</strong></td>
+          <td>• ধর্মঠাকুরের নামে সৃষ্ট<br>• কবি: ঘনরাম চক্রবর্তী প্রমুখ</td>
+          <td>মঙ্গলকাব্যে মোট ৬২ জন কবির সন্ধান মেলে।</td>
+          <td><mark>ধর্মঠাকুর, রাজা হরিশ্চন্দ্র, মদনা, লুইধর, কর্ণসেন, রঞ্জাবতী, মহামদ, লাউসেন</mark></td>
+          <td>দুটি পালায় বিভক্ত: রাজা হরিশ্চন্দ্রের গল্প এবং লাউসেনের গল্প।</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- মডিউল ২: ঐতিহাসিক চরিত্র ও অন্নদামঙ্গলের অমর প্রবচন -->
+  <h2 class="section-title">📜 অন্নদামঙ্গল: ঐতিহাসিক চরিত্র ও অমর পঙ্ক্তিমালা</h2>
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-badge">৪৭তম বিসিএস স্পেশাল</span>
+      <h3>ঐতিহাসিক চরিত্র: মানসিংহ ও ভবানন্দ</h3>
+      <p>• <strong>মানসিংহ:</strong> মুঘল সম্রাট আকবরের প্রধান সেনাপতি, যিনি বাংলায় বারোভূঁইয়া ও রাজা প্রতাপাদিত্যকে দমন করতে অভিযান পরিচালনা করেছিলেন।</p>
+      <p>• <strong>ভবানন্দ মজুমদার:</strong> বর্ধমানের ঐতিহাসিক জমিদার পরিবারের পূর্বপুরুষ, যিনি মানসিংহকে সাহায্য করেছিলেন। অন্নদামঙ্গলের ২য় খণ্ডে এই ঐতিহাসিক আখ্যান বর্ণিত হয়েছে!</p>
+    </div>
+
+    <div class="card">
+      <span class="card-badge">৪৪তম ও ২৩তম বিসিএস</span>
+      <h3>ঈশ্বরী পাটনীর অমর প্রার্থনা</h3>
+      <p>দেবী অন্নপূর্ণা যখন নদী পার হন, তখন খেয়াঘাটের মাঝি ঈশ্বরী পাটনীর কাছে বর প্রার্থনা করতে বললে সে জাগতিক ধনসম্পদ না চেয়ে বলে:</p>
+      <div style="background: var(--accent-light); padding: 8px 12px; border-radius: 6px; font-weight: 700; color: var(--accent); margin-top: 6px;">
+        "আমার সন্তান যেন থাকে দুধে ভাতে।"
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-badge">কবি ও ধারা বিভাজন</span>
+      <h3>মঙ্গলকাব্যের শেষ কবি বনাম দাশু রায়</h3>
+      <p>• <strong>ভারতচন্দ্র রায়গুণাকর:</strong> মঙ্গলকাব্য ধারার সর্বশেষ কবি। রাজা কৃষ্ণচন্দ্র তাঁকে 'রায়গুণাকর' উপাধি দেন। তাঁর মৃত্যুর (১৭৬০) মধ্য দিয়ে মধ্যযুগের সমাপ্তি ঘটে!</p>
+      <p>• <strong>দাশু রায় (দাশরথি রায়):</strong> তিনি মঙ্গলকাব্যের কবি নন! তিনি কবিগানের যুগের পাঁচালী গানের বিখ্যাত রচয়িতা ছিলেন।</p>
+    </div>
+  </div>
+
+  <!-- মডিউল ৩: ভারতচন্দ্রের অমর প্রবাদ ও উক্তি ডায়েরি -->
+  <h2 class="section-title">💬 ভারতচন্দ্র রায়গুণাকরের অমর প্রবচনসমূহ</h2>
+  <div class="card-grid">
+    <div class="quote-card">
+      <div class="quote-line">"আমার সন্তান যেন থাকে দুধে ভাতে।"</div>
+      <div class="quote-author">
+        <span><strong>ঈশ্বরী পাটনীর উক্তি</strong></span>
+        <span>অন্নদামঙ্গল কাব্য</span>
+      </div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-line">"মন্ত্রের সাধন কিংবা শরীর পাতন।"</div>
+      <div class="quote-author">
+        <span><strong>ভারতচন্দ্র রায়গুণাকর</strong></span>
+        <span>অন্নদামঙ্গল কাব্য</span>
+      </div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-line">"নগর পুড়িলে দেবালয় কি এড়ায়?"</div>
+      <div class="quote-author">
+        <span><strong>ভারতচন্দ্র রায়গুণাকর</strong></span>
+        <span>অন্নদামঙ্গল কাব্য</span>
+      </div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-line">"বড়র পিরীতি বালির বাঁধ! ক্ষণে হাতে দড়ি, ক্ষনেকে চাঁদ।"</div>
+      <div class="quote-author">
+        <span><strong>ভারতচন্দ্র রায়গুণাকর</strong></span>
+        <span>অন্নদামঙ্গল কাব্য</span>
+      </div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-line">"হাভাতে যদ্যপি চায় সাগর শুকায়ে যায়।"</div>
+      <div class="quote-author">
+        <span><strong>ভারতচন্দ্র রায়গুণাকর</strong></span>
+        <span>অন্নদামঙ্গল কাব্য</span>
+      </div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-line">"না রবে প্রাসাদগুণ না হবে রসাল, অতএব কহি ভাষা যাবনী মিশাল।"</div>
+      <div class="quote-author">
+        <span><strong>ভারতচন্দ্র রায়গুণাকর</strong></span>
+        <span>অন্নদামঙ্গল কাব্য (যাবনী মিশাল ভাষা)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- কুইজ জোন -->
+  <div id="quiz-zone"></div>
+  <h2 class="section-title">🎯 বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ কুইজ (৭টি প্রশ্ন)</h2>
+  <div class="section-sub">পৃষ্ঠা ৮২ থেকে ৮৩ পর্যন্ত আসা সকল আসল প্রশ্ন, অপশন ও পুঙ্খানুপুঙ্খ সমাধান:</div>
+
+  <div class="quiz-meta-bar">
+    <div class="score-counter">
+      মোট উত্তর: <span id="answered-count">০</span> / ৭ | সঠিক: <span id="correct-count" style="color:var(--success);">০</span>
+    </div>
+    <div>
+      <button class="ctrl-btn" onclick="resetQuiz()">🔄 পুনরায় শুরু করো</button>
+    </div>
+  </div>
+
+  <div class="quiz-container" id="quiz-cards-wrapper">
+    <!-- জাভাস্ক্রিপ্ট দিয়ে ৭টি প্রশ্ন রেন্ডার করা হবে -->
+  </div>
+
+  <!-- দ্রুত রিভিশন -->
+  <h2 class="section-title">⏱️ ৩০ সেকেন্ডের দ্রুত রিভিশন</h2>
+  <div class="revision-grid">
+    <div class="quick-card">
+      <p><strong>১. কোন মঙ্গলকাব্যে বাস্তব ঐতিহাসিক চরিত্র আছে?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">অন্নদামঙ্গল (মুঘল সেনাপতি মানসিংহ ও ভবানন্দ মজুমদার)</div>
+    </div>
+    <div class="quick-card">
+      <p><strong>২. 'চণ্ডীমঙ্গল' কাব্যের দেবী চণ্ডী কার স্ত্রী?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">মহাদেব শিবের স্ত্রী</div>
+    </div>
+    <div class="quick-card">
+      <p><strong>৩. মনসা দেবীকে নিয়ে লেখা বিজয়গুপ্তের কাব্যের নাম কী?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">'পদ্মপুরাণ' (মনসামঙ্গলের অপর নাম পদ্মপুরাণ)</div>
+    </div>
+    <div class="quick-card">
+      <p><strong>৪. মধ্যযুগ ও মঙ্গলকাব্য ধারার সর্বশেষ কবির নাম কী?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">ভারতচন্দ্র রায়গুণাকর (১৭১২-১৭৬০; মহারাজা কৃষ্ণচন্দ্রের সভাকবি)</div>
+    </div>
+    <div class="quick-card">
+      <p><strong>৫. চণ্ডীমঙ্গল কাব্যের আদি কবি ও শ্রেষ্ঠ কবি কে?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">আদি কবি মানিক দত্ত এবং শ্রেষ্ঠ কবি কবিকঙ্কণ মুকুন্দরাম চক্রবর্তী</div>
+    </div>
+    <div class="quick-card">
+      <p><strong>৬. দাশু রায় কোন ধারার কবি ছিলেন?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">কবিগানের যুগের পাঁচালী গান রচয়িতা (তিনি মঙ্গলকাব্যের কবি নন)</div>
+    </div>
+  </div>
+
+  <!-- অসঙ্গতি ও যাচাই তালিকা -->
+  <h2 class="section-title">🧭 সন্দেহ নিরসন ও সঠিক সমাধান</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>📝 প্রশ্ন ও বিষয়</th>
+          <th>📖 বইয়ের অপশন / উত্তর</th>
+          <th>🔍 সূক্ষ্ম প্যাঁচ ও বিস্তারিত বিশ্লেষণ</th>
+          <th>🎯 পরীক্ষায় আপনার সঠিক সিদ্ধান্ত</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>প্রশ্ন ২</strong> ('আমার সন্তান যেন থাকে দুধেভাতে' কার মনোবাঞ্ছা)</td>
+          <td>মুদ্রিত <code>উ. গ</code></td>
+          <td>মুদ্রণে ২ কলাম বিন্যাসে বামে ভাঁড়ুদত্ত ও চাঁদ সওদাগর, ডানে ঈশ্বরী পাটনী ও নলকুবের। ঈশ্বরী পাটনী ২য় বা ৩য় অবস্থানে থাকলেও ব্যাখ্যায় স্পষ্ট বলা হয়েছে এটি অন্নদামঙ্গল কাব্যের চরিত্র ঈশ্বরী পাটনীর উক্তি।</td>
+          <td>সঠিক উত্তর: <strong>ঈশ্বরী পাটনী</strong>।</td>
+        </tr>
+        <tr>
+          <td><strong>প্রশ্ন ৪</strong> (মনসা দেবীকে নিয়ে বিজয়গুপ্তের মঙ্গলকাব্যের নাম)</td>
+          <td>মুদ্রিত <code>উ. গ</code></td>
+          <td>মুদ্রণে 'পদ্মপুরাণ' অপশন খ-তে ছিল। ব্যাখ্যায় স্পষ্ট উল্লেখ রয়েছে মনসামঙ্গলের অপর নাম পদ্মপুরাণ এবং বিজয়গুপ্ত 'পদ্মপুরাণ' নামক মনসামঙ্গল কাব্য রচনা করেন। গ-তে ছিল 'মনসাবিজয়'। এটি মুদ্রণগত কোড বিভ্রাট।</td>
+          <td>সঠিক উত্তর: <strong>পদ্মপুরাণ</strong>।</td>
+        </tr>
+        <tr>
+          <td><strong>প্রশ্ন ৬</strong> (মঙ্গলযুগের সর্বশেষ কবির নাম কি)</td>
+          <td>মুদ্রিত <code>উ. খ</code></td>
+          <td>মুদ্রণে অপশনগুলোর মধ্যে ভারতচন্দ্র রায়গুণাকর ১ম অবস্থানে (ক) ছিল। ব্যাখ্যায় স্পষ্ট করে ভারতচন্দ্র রায়গুণাকরকেই মঙ্গলকাব্য ধারার শেষ কবি বলা হয়েছে।</td>
+          <td>সঠিক উত্তর: <strong>ভারতচন্দ্র রায়গুণাকর</strong>।</td>
+        </tr>
+        <tr>
+          <td><strong>প্রশ্ন ৭</strong> (চাঁদ সওদাগর বাংলা কোন কাব্যধারার চরিত্র)</td>
+          <td>মুদ্রিত <code>উ. খ</code></td>
+          <td>মুদ্রণে অপশন খ-তে ছিল 'ধর্মমঙ্গল' এবং গ-তে ছিল 'মনসামঙ্গল'। অথচ ব্যাখ্যায় পরিষ্কার লেখা আছে চাঁদ সওদাগর 'মনসামঙ্গল' কাব্যের প্রধান চরিত্র। এটি সুস্পষ্ট অপশন কোড মুদ্রণত্রুটি।</td>
+          <td>সঠিক উত্তর: <strong>মনসামঙ্গল</strong>।</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<div class="floating-actions">
+  <button class="float-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="উপরে যান">⬆️</button>
+</div>
+
+<script>
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', targetTheme);
+  try {
+    localStorage.setItem('theme', targetTheme);
+  } catch(e){}
+}
+
+let currentScale = 1.0;
+function adjustFontSize(delta) {
+  currentScale = Math.min(Math.max(0.85, currentScale + delta), 1.3);
+  document.documentElement.style.setProperty('--font-scale', currentScale);
+}
+
+window.addEventListener('scroll', () => {
+  const winScroll = document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  document.getElementById('progress-bar').style.width = scrolled + '%';
+});
+
+function scrollToId(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+function toggleRevAns(btn) {
+  const ans = btn.nextElementSibling;
+  if(ans.style.display === 'block') {
+    ans.style.display = 'none';
+    btn.innerText = 'উত্তর দেখুন';
+  } else {
+    ans.style.display = 'block';
+    btn.innerText = 'লুকান';
+  }
+}
+
+// পৃষ্ঠা ৮২ - ৮৩ এর সম্পূর্ণ ৭টি আসল বিসিএস প্রশ্নমালা
+const quizData = [
+  {
+    id: 1,
+    tag: "৪৭তম বিসিএস",
+    q: "কোন মঙ্গলকাব্যে ঐতিহাসিক চরিত্র আছে?",
+    opts: ["মনসামঙ্গল", "চণ্ডীমঙ্গল", "অন্নদামঙ্গল", "ধর্মমঙ্গল"],
+    ans: 2,
+    exp: "ভারতচন্দ্র রায়গুণাকরের 'অন্নদামঙ্গল' কাব্যে মুঘল সেনাপতি মানসিংহ এবং বর্ধমানের জমিদার ভবানন্দ মজুমদার ঐতিহাসিক চরিত্র হিসেবে উপস্থিত। মানসিংহের বাংলায় আগমন ও প্রতাপাদিত্যকে দমনের ঐতিহাসিক ঘটনা কাব্যের ২য় খণ্ডে বর্ণিত হয়েছে।"
+  },
+  {
+    id: 2,
+    tag: "৪৪তম ও ২৩তম বিসিএস",
+    q: "'আমার সন্তান যেন থাকে দুধেভাতে' এই মনোবাঞ্ছা কার? / এ প্রার্থনাটি করেছে-",
+    opts: ["ভাঁড়ুদত্ত", "ঈশ্বরী পাটনী", "চাঁদ সওদাগর", "নলকুবের"],
+    ans: 1,
+    exp: "ভারতচন্দ্র রায়গুণাকর রচিত 'অন্নদামঙ্গল' কাব্যের খেয়াঘাটের মাঝি চরিত্র ঈশ্বরী পাটনীর অমর উক্তি এটি। দেবী অন্নপূর্ণার কাছে সে কেবল সন্তানের দুধেভাতে থাকার প্রার্থনা করেছিল।"
+  },
+  {
+    id: 3,
+    tag: "৪৪তম বিসিএস",
+    q: "'চণ্ডীমঙ্গল' কাব্যের উপাস্য 'চণ্ডী' কার স্ত্রী?",
+    opts: ["জগন্নাথ", "বিষ্ণু", "প্রজাপতি", "শিব"],
+    ans: 3,
+    exp: "চণ্ডীমঙ্গল কাব্যের লৌকিক-পৌরাণিক উপাস্য দেবী চণ্ডী হলেন দেবতা শিবের স্ত্রী। শিবের উপাসক কালকেতু ও ফুল্লরার মাধ্যমে দেবী মর্ত্যে নিজের পূজা প্রচার করান।"
+  },
+  {
+    id: 4,
+    tag: "৪৩তম বিসিএস",
+    q: "মনসা দেবীকে নিয়ে লেখা বিজয়গুপ্তের মঙ্গলকাব্যের নাম কী?",
+    opts: ["'মনসামঙ্গল'", "'পদ্মপুরাণ'", "'মনসাবিজয়'", "'পদ্মাবতী'"],
+    ans: 1,
+    exp: "মনসামঙ্গল কাব্যধারার প্রাচীনতম প্রামাণ্য কবি বিজয়গুপ্ত রচিত কাব্যের নাম 'পদ্মপুরাণ'। মনসামঙ্গল কাব্যের অপর নামও পদ্মপুরাণ। কবি নারায়ণ দেবের কাব্যের নামও পদ্মপুরাণ।"
+  },
+  {
+    id: 5,
+    tag: "৩৫তম বিসিএস",
+    q: "মঙ্গলকাব্যের কবি নন কে?",
+    opts: ["কানাহরি দত্ত", "ভারতচন্দ্র", "মানিক দত্ত", "দাশু রায়"],
+    ans: 3,
+    exp: "দাশুরথি রায় বা 'দাশু রায়' কবিগানের যুগের পাঁচালী গানের বিখ্যাত রচয়িতা ছিলেন, তিনি মঙ্গলকাব্যের কবি নন। কানাহরি দত্ত মনসামঙ্গলের এবং মানিক দত্ত চণ্ডীমঙ্গলের আদি কবি; আর ভারতচন্দ্র মঙ্গলকাব্যের শেষ কবি।"
+  },
+  {
+    id: 6,
+    tag: "২৮তম বিসিএস",
+    q: "মঙ্গলযুগের সর্বশেষ কবির নাম কি?",
+    opts: ["ভারতচন্দ্র রায়গুণাকর", "কানাহরি দত্ত", "বিজয়গুপ্ত", "মুকুন্দরাম চক্রবর্তী"],
+    ans: 0,
+    exp: "মহারাজা কৃষ্ণচন্দ্রের সভাকবি ভারতচন্দ্র রায়গুণাকর (১৭১২-১৭৬০) অষ্টাদশ শতকের শ্রেষ্ঠ কবি এবং মঙ্গলকাব্য ধারার সর্বশেষ কবি। তাঁকে বাংলা সাহিত্যের প্রথম নাগরিক কবিও বলা হয়।"
+  },
+  {
+    id: 7,
+    tag: "২৩তম বিসিএস",
+    q: "চাঁদ সওদাগর বাংলা কোন কাব্যধারার চরিত্র?",
+    opts: ["চণ্ডীমঙ্গল", "ধর্মমঙ্গল", "মনসামঙ্গল", "অন্নদামঙ্গল"],
+    ans: 2,
+    exp: "শিবভক্ত অনমনীয় চরিত্র 'চাঁদ সওদাগর' প্রাচীন মনসামঙ্গল কাব্যের প্রধান চরিত্র। অন্যান্য চরিত্র: দেবী মনসা, বেহুলা, লখিন্দর ও সনকা।"
+  }
+];
+
+let userAnswers = {};
+
+function renderQuiz() {
+  const container = document.getElementById('quiz-cards-wrapper');
+  container.innerHTML = '';
+  
+  quizData.forEach((qItem, idx) => {
+    const card = document.createElement('div');
+    card.className = 'quiz-card';
+    card.id = `qcard-${qItem.id}`;
+    
+    let optsHtml = '';
+    const letters = ['ক', 'খ', 'গ', 'ঘ'];
+    qItem.opts.forEach((opt, oIdx) => {
+      optsHtml += `
+        <button class="opt-btn" onclick="checkAnswer(${qItem.id}, ${oIdx})" id="opt-${qItem.id}-${oIdx}">
+          <strong>${letters[oIdx]}.</strong> ${opt}
+        </button>
+      `;
+    });
+    
+    card.innerHTML = `
+      <div class="question-header">
+        <div class="q-text">${idx + 1}. ${qItem.q}</div>
+        <span class="q-tag">${qItem.tag}</span>
+      </div>
+      <div class="options-grid">
+        ${optsHtml}
+      </div>
+      <div class="explanation-box" id="exp-${qItem.id}">
+        <strong>💡 ব্যাখ্যা:</strong> ${qItem.exp}
+      </div>
+    `;
+    
+    container.appendChild(card);
+  });
+}
+
+function checkAnswer(qId, selectedOpt) {
+  if (userAnswers[qId] !== undefined) return;
+  
+  userAnswers[qId] = selectedOpt;
+  const qData = quizData.find(d => d.id === qId);
+  const card = document.getElementById(`qcard-${qId}`);
+  const isCorrect = selectedOpt === qData.ans;
+  
+  for(let i=0; i<qData.opts.length; i++) {
+    const btn = document.getElementById(`opt-${qId}-${i}`);
+    btn.disabled = true;
+    if(i === qData.ans) {
+      btn.classList.add('correct-choice');
+    } else if(i === selectedOpt) {
+      btn.classList.add('wrong-choice');
+    }
+  }
+  
+  if(isCorrect) {
+    card.classList.add('answered-correct');
+  } else {
+    card.classList.add('answered-wrong');
+  }
+  
+  document.getElementById(`exp-${qId}`).style.display = 'block';
+  updateScore();
+}
+
+function updateScore() {
+  const answeredTotal = Object.keys(userAnswers).length;
+  let correctTotal = 0;
+  for(let qId in userAnswers) {
+    const qData = quizData.find(d => d.id == qId);
+    if(userAnswers[qId] === qData.ans) {
+      correctTotal++;
+    }
+  }
+  document.getElementById('answered-count').innerText = answeredTotal;
+  document.getElementById('correct-count').innerText = correctTotal;
+}
+
+function resetQuiz() {
+  userAnswers = {};
+  renderQuiz();
+  updateScore();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderQuiz();
+  try {
+    const savedTheme = localStorage.getItem('theme');
+    if(savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+  } catch(e){}
+});
+</script>
+  <!-- Smart E-Book Navigation Component -->
+  <script src="nav-component.js"></script>
+</body>
+</html>

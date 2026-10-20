@@ -1,0 +1,901 @@
+<!-- DESIGN PLAN:
+1. বিষয়ের ধরন: মধ্যযুগের বাংলা সাহিত্য (বৈষ্ণব পদাবলি: ব্রজবুলি ভাষা, পঞ্চরস/শৃঙ্গার রস, পদ বা পদাবলির সংজ্ঞা, আদি পদকর্তা ও মহাজন কবিগণ)।
+2. সবচেয়ে কঠিন/গুলিয়ে ফেলার জায়গা:
+   - ব্রজবুলি ভাষার প্রকৃতি: এটি কোনো স্থানিক বা কথ্য ভাষা নয়, এটি মূলত মৈথিলি ও বাংলার মিশ্রণে তৈরি একরকম কৃত্রিম কবিভাষা (উদ্ভাবক মিথিলার কবি বিদ্যাপতি)। রবীন্দ্রনাথ ঠাকুরও তাঁর 'ভানুসিংহ ঠাকুরের পদাবলী' এ ভাষায় রচনা করেছেন।
+   - প্রথম পদকর্তা ও ভাষা বিভাজন: বাঙালি কবি জয়দেবকে বৈষ্ণব পদাবলির প্রথম পদকর্তা বলা হয়, তবে তিনি পদাবলি রচনা করেন সংস্কৃত ভাষায় (গীতগোবিন্দম); অন্যদিকে পদাবলির অন্যান্য মহাজনরা (বিদ্যাপতি, চণ্ডীদাস, জ্ঞানদাস, গোবিন্দদাস) ব্রজবুলি ও বাংলায় রচনা করেছেন।
+   - পঞ্চরস ও শৃঙ্গার রস: বৈষ্ণব পদাবলির পাঁচ রসের (শান্ত, দাস্য, সখ্য, বাৎসল্য, মধুর) মধ্যে 'শৃঙ্গার রস'-এর অপর নাম 'মধুর রস'।
+   - পদ বা পদাবলির স্বরূপ: এটি কেবল সাধারণ কবিতা নয়, মূলত বৌদ্ধ বা বৈষ্ণবীয় ধর্মের গূঢ় তত্ত্বের বিশেষ সৃষ্টি এবং জীবাত্মা ও পরমাত্মার মিলনতত্ত্ব।
+3. কেন এই মডিউলগুলো শ্রেষ্ঠ:
+   - "ব্রজবুলি ও বৈষ্ণব রস ডিকোড": ব্রজবুলির উৎপত্তি, জয়দেবের সংস্কৃত পদাবলি এবং পঞ্চরসের বিভাজন টেবিল আকারে পরিষ্কার করা হয়েছে।
+   - সম্পূর্ণ ৪টি বিসিএস MCQ-এর লাইভ ইন্টারঅ্যাকটিভ কুইজ সিস্টেম (প্রকৃত অপশন ম্যাপিং ও ব্যাখ্যাসহ)।
+   - শেষে "বইয়ের অসঙ্গতি ও যাচাই তালিকা" সারণি (মুদ্রণগত অপশন ক্রম যাচাইয়ের জন্য)।
+4. রঙের মেজাজ: বৈষ্ণব ভক্তি ও পদাবলির আবহে বাসন্তী-হলুদ ও শ্রীখোল-চন্দনের সোনালি জাফরান (#7c2d12, #d97706, #b45309), ব্যাকগ্রাউন্ডে নরম পার্চমেন্ট ক্রিম (#fffbeb / ডার্ক মোডে #1c1917)।
+5. হিরো ও মাসকট: একতারা ও খোল-করতাল হাতে ভক্তিগীতির কথক 'পদাবলি-গুরু'।
+-->
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>বৈষ্ণব পদাবলি</title>
+<style>
+:root {
+  --font-base: 'Noto Sans Bengali', 'Kalpurush', Vrinda, sans-serif;
+  --bg-primary: #fffbeb;
+  --bg-card: #ffffff;
+  --text-main: #292524;
+  --text-muted: #57534e;
+  --primary: #9a3412;
+  --primary-light: #ffedd5;
+  --accent: #d97706;
+  --accent-light: #fef3c7;
+  --success: #15803d;
+  --success-bg: #dcfce7;
+  --danger: #b91c1c;
+  --danger-bg: #fee2e2;
+  --border: #fed7aa;
+  --border-strong: #ea580c;
+  --shadow: 0 4px 12px rgba(154, 52, 18, 0.08);
+  --radius: 12px;
+  --font-scale: 1rem;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #1c1917;
+  --bg-card: #292524;
+  --text-main: #fafaf9;
+  --text-muted: #d6d3d1;
+  --primary: #fb923c;
+  --primary-light: #431407;
+  --accent: #f59e0b;
+  --accent-light: #78350f;
+  --success: #4ade80;
+  --success-bg: #14532d;
+  --danger: #f87171;
+  --danger-bg: #7f1d1d;
+  --border: #57534e;
+  --border-strong: #ea580c;
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-base);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-size: calc(var(--font-scale) * 1rem);
+  line-height: 1.8;
+  padding-bottom: 80px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #ea580c, #f59e0b, #10b981);
+  width: 0%;
+  z-index: 1000;
+  transition: width 0.1s;
+}
+
+.top-control-bar {
+  position: sticky;
+  top: 6px;
+  z-index: 999;
+  background: var(--bg-card);
+  border-bottom: 2px solid var(--border);
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow);
+}
+
+.brand-badge {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+button.ctrl-btn {
+  background: var(--bg-primary);
+  color: var(--text-main);
+  border: 1.5px solid var(--border-strong);
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+button.ctrl-btn:hover {
+  background: var(--primary-light);
+  border-color: var(--primary);
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.hero {
+  background: linear-gradient(135deg, #431407, #9a3412 65%, #c2410c);
+  color: #ffffff;
+  padding: 32px 24px;
+  border-radius: var(--radius);
+  margin-top: 16px;
+  margin-bottom: 24px;
+  border: 2px solid #ea580c;
+  box-shadow: var(--shadow);
+}
+
+.hero h1 {
+  font-size: 1.85rem;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.hero p {
+  color: #ffedd5;
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+
+.bcs-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.stat-chip {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stat-chip span {
+  display: block;
+  font-size: 0.8rem;
+  color: #fed7aa;
+}
+
+.stat-chip strong {
+  font-size: 1.25rem;
+  color: #fef08a;
+}
+
+.study-flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.flow-step {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-left: 6px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+
+.flow-step h4 {
+  color: var(--accent);
+  margin-bottom: 4px;
+  font-size: 1rem;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 36px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid var(--primary);
+  font-size: 1.45rem;
+  color: var(--primary);
+}
+
+.section-sub {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin-top: -10px;
+  margin-bottom: 18px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  border-left: 5px solid var(--primary);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+
+.card h3 {
+  font-size: 1.15rem;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.card-badge {
+  display: inline-block;
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin: 18px 0;
+  border-radius: var(--radius);
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  text-align: left;
+}
+
+th {
+  background: var(--primary);
+  color: #ffffff;
+  padding: 12px 14px;
+  font-weight: 700;
+  border-bottom: 2px solid var(--border);
+  font-size: 0.95rem;
+}
+
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+tr:nth-child(even) {
+  background: rgba(154, 52, 18, 0.04);
+}
+
+mark {
+  background-color: #fef08a;
+  color: #0f172a;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.quiz-meta-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: var(--bg-card);
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  border: 2px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.score-counter {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.quiz-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  transition: border-color 0.2s;
+}
+
+.quiz-card.answered-correct {
+  border-color: var(--success);
+}
+
+.quiz-card.answered-wrong {
+  border-color: var(--danger);
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.q-text {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.q-tag {
+  background: var(--accent-light);
+  color: var(--accent);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+@media (min-width: 600px) {
+  .options-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.opt-btn {
+  background: var(--bg-primary);
+  border: 1.5px solid var(--border);
+  color: var(--text-main);
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.92rem;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.opt-btn:hover:not(:disabled) {
+  background: var(--primary-light);
+  border-color: var(--primary);
+}
+
+.opt-btn.correct-choice {
+  background: var(--success-bg) !important;
+  border-color: var(--success) !important;
+  color: var(--success) !important;
+  font-weight: 700;
+}
+
+.opt-btn.wrong-choice {
+  background: var(--danger-bg) !important;
+  border-color: var(--danger) !important;
+  color: var(--danger) !important;
+}
+
+.explanation-box {
+  display: none;
+  background: var(--bg-primary);
+  border-left: 4px solid var(--primary);
+  padding: 12px 14px;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.revision-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.quick-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+
+.quick-card button {
+  width: 100%;
+  margin-top: 8px;
+  background: var(--primary-light);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.quick-card .ans-text {
+  display: none;
+  margin-top: 8px;
+  padding: 8px;
+  background: var(--bg-primary);
+  border-radius: 4px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--success);
+}
+
+.floating-actions {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 990;
+}
+
+.float-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transition: transform 0.2s;
+}
+
+.float-btn:hover {
+  transform: scale(1.1);
+}
+
+@media print {
+  .top-control-bar, .floating-actions, .quiz-meta-bar, .opt-btn, button {
+    display: none !important;
+  }
+  .explanation-box, .ans-text {
+    display: block !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .card, .quiz-card {
+    border: 1px solid #999;
+    box-shadow: none;
+    page-break-inside: avoid;
+  }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- কন্ট্রোল বার -->
+<header class="top-control-bar">
+  <div class="brand-badge">
+    <span>🪘</span> পদাবলি-গুরু • বৈষ্ণব পদাবলি
+  </div>
+  <div class="controls">
+    <button class="ctrl-btn" onclick="toggleTheme()" id="themeBtn">🌓 থিম</button>
+    <button class="ctrl-btn" onclick="adjustFontSize(-0.05)">A-</button>
+    <button class="ctrl-btn" onclick="adjustFontSize(0.05)">A+</button>
+    <button class="ctrl-btn" onclick="scrollToId('quiz-zone')">📝 কুইজ</button>
+    <button class="ctrl-btn" onclick="window.print()">🖨️ প্রিন্ট</button>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- হিরো সেকশন -->
+  <section class="hero">
+    <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: #fed7aa; font-weight: 700;">
+      লাইভ এমসিকিউ™ বিসিএস প্রিলিমিনারি বিষয়ভিত্তিক সল্যুশন | পৃষ্ঠা ৮৪
+    </div>
+    <h1>বৈষ্ণব পদাবলি</h1>
+    <p>রাধা-কৃষ্ণের প্রেমলীলা, ব্রজবুলি নামক কৃত্রিম কবিভাষা, বৈষ্ণব রসতত্ত্ব এবং বিসিএসের ৪টি মৌলিক প্রশ্ন।</p>
+    
+    <div class="bcs-stat-grid">
+      <div class="stat-chip"><span>৪০তম বিসিএস</span><strong>১টি</strong></div>
+      <div class="stat-chip"><span>৩৭তম বিসিএস</span><strong>১টি</strong></div>
+      <div class="stat-chip"><span>২২তম বিসিএস</span><strong>১টি</strong></div>
+      <div class="stat-chip"><span>২১তম বিসিএস</span><strong>১টি</strong></div>
+      <div class="stat-chip"><span>মোট প্রশ্ন</span><strong>৪টি</strong></div>
+    </div>
+  </section>
+
+  <!-- স্টাডি স্টেপস -->
+  <div class="study-flow">
+    <div class="flow-step">
+      <h4>১. ব্রজবুলি ভাষার স্বরূপ বোঝো</h4>
+      <p style="font-size: 0.85rem;">মৈথিলি ও বাংলার সংমিশ্রণে তৈরি কৃত্রিম কবিভাষা, যার জনক কবি বিদ্যাপতি।</p>
+    </div>
+    <div class="flow-step">
+      <h4>২. বৈষ্ণব পঞ্চরস ও পদাবলি ধারণা</h4>
+      <p style="font-size: 0.85rem;">শৃঙ্গার রসই মধুর রস; বৈষ্ণব ধর্মে জীবাত্মা ও পরমাত্মার মিলনতত্ত্বই এর মূল সুর।</p>
+    </div>
+    <div class="flow-step">
+      <h4>৩. ৪টি বিসিএস MCQ টেস্ট সম্পন্ন করো</h4>
+      <p style="font-size: 0.85rem;">অপশনে ক্লিক করো, তাৎক্ষণিক লাল-সবুজ ফলাফল ও পূর্ণাঙ্গ সমাধান আয়ত্ত করো!</p>
+    </div>
+  </div>
+
+  <!-- মডিউল ১: ব্রজবুলি ও পদাবলির মূল তত্ত্ব -->
+  <h2 class="section-title">✨ ব্রজবুলি ভাষা ও বৈষ্ণব পদাবলির মূল দর্শন</h2>
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-badge">ভাষা ও উৎপত্তি</span>
+      <h3>ব্রজবুলি ভাষা</h3>
+      <p>• <strong>স্বরূপ:</strong> ব্রজবুলি কোনো অঞ্চলের মুখের ভাষা নয়; এটি মূলত <mark>একরকম কৃত্রিম কবিভাষা</mark>।</p>
+      <p>• <strong>মিশ্রণ:</strong> <mark>মৈথিলি ও বাংলা ভাষার মিশ্রিত রূপ</mark> হলো ব্রজবুলি। মধ্যযুগীয় বাংলা সাহিত্যের দ্বিতীয় কাব্যভাষা বা উপভাষা।</p>
+      <p>• <strong>উদ্ভাবক:</strong> পঞ্চদশ শতাব্দীর শেষভাগে মিথিলার প্রখ্যাত কবি <strong>বিদ্যাপতি</strong> এর উদ্ভাবন করেন।</p>
+      <p>• <strong>আধুনিক প্রয়োগ:</strong> রবীন্দ্রনাথ ঠাকুর ব্রজবুলি ভাষায় তাঁর বিখ্যাত <em>'ভানুসিংহ ঠাকুরের পদাবলী'</em> রচনা করেন।</p>
+    </div>
+
+    <div class="card">
+      <span class="card-badge">পদাবলি ও মহাজন</span>
+      <h3>প্রথম পদকর্তা ও মহাজন কবি</h3>
+      <p>• <strong>আদি পদকর্তা:</strong> বাঙালি কবি <strong>জয়দেব</strong>-কে বৈষ্ণব পদাবলির প্রথম পদকর্তা বলা হয়। তবে তিনি বাঙালি হলেও পদাবলি রচনা করেন <strong>সংস্কৃত ভাষায়</strong> (গীতগোবিন্দম)।</p>
+      <p>• <strong>প্রধান রচয়িতাগণ:</strong> বিদ্যাপতি, চণ্ডীদাস, জ্ঞানদাস, গোবিন্দদাস প্রমুখ।</p>
+      <p>• <strong>মহাজন পদাবলি:</strong> বৈষ্ণব সমাজে বৈষ্ণব পদাবলি 'মহাজন পদাবলি' এবং পদকর্তারা <mark>'মহাজন'</mark> নামে পরিচিত।</p>
+    </div>
+
+    <div class="card">
+      <span class="card-badge">রসতত্ত্ব ও মিলন</span>
+      <h3>বৈষ্ণব পঞ্চরস ও জীবাত্মা-পরমাত্মা</h3>
+      <p>• বৈষ্ণব পদাবলিতে <strong>পাঁচ প্রকার সাহিত্য রস</strong> রয়েছে: শান্তরস, দাস্যরস, সখ্যরস, বাৎসল্যরস ও মধুররস।</p>
+      <p>• <mark>'শৃঙ্গার রস'-কে বৈষ্ণব পদাবলিতে 'মধুর রস' বলে</mark>।</p>
+      <p>• <strong>মূল প্রতিপাদ্য:</strong> জীবাত্মার সাথে পরমাত্মার মিলন। রাধা জীবাত্মা এবং কৃষ্ণ পরমাত্মার প্রতীক (বৌদ্ধ বা বৈষ্ণবীয় ধর্মের গূঢ় বিষয়ের বিশেষ সৃষ্টি)!</p>
+    </div>
+  </div>
+
+  <!-- মডিউল ২: বৈষ্ণব পঞ্চরস সারণি -->
+  <h2 class="section-title">🍯 বৈষ্ণব পদাবলির পঞ্চরস সারণি</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>রসের নাম</th>
+          <th>সম্পর্ক ও স্বরূপ</th>
+          <th>বৈষ্ণবীয় ভাব ও বৈশিষ্ট্য</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>শান্ত রস</strong></td>
+          <td>ভগবানের মহিমা দর্শন ও প্রশান্তি</td>
+          <td>ভগবানকে জগতের পরম স্রষ্টা জেনে নির্বিকার চিত্তে ভক্তি নিবেদন।</td>
+        </tr>
+        <tr>
+          <td><strong>দাস্য রস</strong></td>
+          <td>প্রভু ও ভৃত্যের সম্পর্ক</td>
+          <td>ভগবানকে প্রভু এবং নিজেকে তাঁর অনুগত সেবক বা দাস মনে করা।</td>
+        </tr>
+        <tr>
+          <td><strong>সখ্য রস</strong></td>
+          <td>বন্ধুর সাথে বন্ধুর সম্পর্ক</td>
+          <td>ভগবান শ্রীকৃষ্ণকে সমকক্ষ পরম বন্ধু বা সখা রূপে সেবা ও প্রণয়।</td>
+        </tr>
+        <tr>
+          <td><strong>বাৎসল্য রস</strong></td>
+          <td>পিতামাতার অপত্য স্নেহ</td>
+          <td>শ্রীকৃষ্ণকে নিজের আদরের সন্তান মনে করে স্নেহপূর্ণ লালনপালন (যশোদা ভাব)।</td>
+        </tr>
+        <tr>
+          <td><strong>মধুর রস (শৃঙ্গার রস)</strong></td>
+          <td>নায়ক-নায়িকার মিলন ও প্রণয়</td>
+          <td><mark>সর্বশ্রেষ্ঠ ও পূর্ণাঙ্গ রস</mark>; পূর্বের চার রসের সমস্ত গুণ মধুর রসে বিদ্যমান। শ্রীরাধার কায়মনোবাক্যে কৃষ্ণে আত্মসমর্পণ।</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- কুইজ জোন -->
+  <div id="quiz-zone"></div>
+  <h2 class="section-title">🎯 বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ কুইজ (৪টি প্রশ্ন)</h2>
+  <div class="section-sub">পৃষ্ঠা ৮৪-তে আসা বৈষ্ণব পদাবলির সকল আসল প্রশ্ন, অপশন ও পুঙ্খানুপুঙ্খ ব্যাখ্যা:</div>
+
+  <div class="quiz-meta-bar">
+    <div class="score-counter">
+      মোট উত্তর: <span id="answered-count">০</span> / ৪ | সঠিক: <span id="correct-count" style="color:var(--success);">০</span>
+    </div>
+    <div>
+      <button class="ctrl-btn" onclick="resetQuiz()">🔄 পুনরায় শুরু করো</button>
+    </div>
+  </div>
+
+  <div class="quiz-container" id="quiz-cards-wrapper">
+    <!-- জাভাস্ক্রিপ্ট দিয়ে ৪টি প্রশ্ন রেন্ডার করা হবে -->
+  </div>
+
+  <!-- দ্রুত রিভিশন -->
+  <h2 class="section-title">⏱️ ৩০ সেকেন্ডের দ্রুত রিভিশন</h2>
+  <div class="revision-grid">
+    <div class="quick-card">
+      <p><strong>১. ব্রজবুলি ভাষার উদ্ভাবক কে?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">মিথিলার কবি বিদ্যাপতি (পঞ্চদশ শতাব্দীর শেষভাগে)</div>
+    </div>
+    <div class="quick-card">
+      <p><strong>২. বৈষ্ণব পদাবলির প্রথম পদকর্তা কে এবং তাঁর ভাষা কী ছিল?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">বাঙালি কবি জয়দেব; তিনি সংস্কৃত ভাষায় পদাবলি রচনা করেন</div>
+    </div>
+    <div class="quick-card">
+      <p><strong>৩. বৈষ্ণব পদাবলিতে 'শৃঙ্গার রস'-কে কী রস বলা হয়?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">মধুর রস (পঞ্চরসের মধ্যে শ্রেষ্ঠ)</div>
+    </div>
+    <div class="quick-card">
+      <p><strong>৪. ব্রজবুলি ভাষা কোন দুটি ভাষার মিশ্রণে তৈরি?</strong></p>
+      <button onclick="toggleRevAns(this)">উত্তর দেখুন</button>
+      <div class="ans-text">মৈথিলি ও বাংলা ভাষার মিশ্রণ (এটি কৃত্রিম কবিভাষা)</div>
+    </div>
+  </div>
+
+  <!-- অসঙ্গতি ও যাচাই তালিকা -->
+  <h2 class="section-title">🧭 সন্দেহ নিরসন ও সঠিক সমাধান</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>📝 প্রশ্ন ও বিষয়</th>
+          <th>📖 বইয়ের অপশন / উত্তর</th>
+          <th>🔍 সূক্ষ্ম প্যাঁচ ও বিস্তারিত বিশ্লেষণ</th>
+          <th>🎯 পরীক্ষায় আপনার সঠিক সিদ্ধান্ত</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>প্রশ্ন ১</strong> (বৈষ্ণব পদাবলীর সাথে কোন ভাষা সম্পর্কিত)</td>
+          <td>মুদ্রিত <code>উ. গ</code></td>
+          <td>মুদ্রণে অপশন ২য় অবস্থানে (খ) ছিল 'ব্রজবুলি'। ব্যাখ্যায় স্পষ্টভাবে বলা হয়েছে বৈষ্ণব পদাবলির অধিকাংশ পদই 'ব্রজবুলি' নামক কৃত্রিম ভাষায় রচিত। গ-তে ছিল 'অধিভাষা'। এটি মুদ্রণগত কোড বিভ্রাট।</td>
+          <td>সঠিক উত্তর: <strong>ব্রজবুলি</strong>।</td>
+        </tr>
+        <tr>
+          <td><strong>প্রশ্ন ৩</strong> (পদ বা পদাবলি বলতে কী বুঝায়)</td>
+          <td>মুদ্রিত <code>উ. ঘ</code></td>
+          <td>মুদ্রণে ৪র্থ অবস্থানে (ঘ) রয়েছে 'বৌদ্ধ বা বৈষ্ণবীয় ধর্মের গূঢ় বিষয়ের বিশেষ সৃষ্টি'। ব্যাখ্যায় স্পষ্ট উল্লেখ রয়েছে পদাবলিতে জীবাত্মা ও পরমাত্মার মিলন এবং গৌড়ীয় বৈষ্ণব ও বৌদ্ধ সহজিয়াদের গূঢ় সাধনপ্রণালীর কথা বিধৃত।</td>
+          <td>সঠিক উত্তর: <strong>বৌদ্ধ বা বৈষ্ণবীয় ধর্মের গূঢ় বিষয়ের বিশেষ সৃষ্টি</strong>।</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<div class="floating-actions">
+  <button class="float-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="উপরে যান">⬆️</button>
+</div>
+
+<script>
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', targetTheme);
+  try {
+    localStorage.setItem('theme', targetTheme);
+  } catch(e){}
+}
+
+let currentScale = 1.0;
+function adjustFontSize(delta) {
+  currentScale = Math.min(Math.max(0.85, currentScale + delta), 1.3);
+  document.documentElement.style.setProperty('--font-scale', currentScale);
+}
+
+window.addEventListener('scroll', () => {
+  const winScroll = document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  document.getElementById('progress-bar').style.width = scrolled + '%';
+});
+
+function scrollToId(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+function toggleRevAns(btn) {
+  const ans = btn.nextElementSibling;
+  if(ans.style.display === 'block') {
+    ans.style.display = 'none';
+    btn.innerText = 'উত্তর দেখুন';
+  } else {
+    ans.style.display = 'block';
+    btn.innerText = 'লুকান';
+  }
+}
+
+// পৃষ্ঠা ৮৪ এর সম্পূর্ণ ৪টি আসল বিসিএস প্রশ্নমালা
+const quizData = [
+  {
+    id: 1,
+    tag: "৪০তম বিসিএস",
+    q: "বৈষ্ণব পদাবলীর সঙ্গে কোন ভাষা সম্পর্কিত?",
+    opts: ["সন্ধ্যাভাষা", "ব্রজবুলি", "অধিভাষা", "সংস্কৃত ভাষা"],
+    ans: 1,
+    exp: "মধ্যযুগের বৈষ্ণব পদাবলির অধিকাংশ পদই 'ব্রজবুলি' নামক এক কৃত্রিম মিশ্র কবিভাষায় রচিত। মৈথিলি ও বাংলা ভাষার মিশ্রণে পঞ্চদশ শতকের শেষভাগে মিথিলার কবি বিদ্যাপতি এ ভাষা উদ্ভাবন করেন।"
+  },
+  {
+    id: 2,
+    tag: "৩৭তম বিসিএস",
+    q: "শৃঙ্গার রসকে বৈষ্ণব পদাবলিতে কী রস বলে?",
+    opts: ["ভাবরস", "মধুর রস", "প্রেমরস", "লীলারস"],
+    ans: 1,
+    exp: "বৈষ্ণব পদাবলিতে মোট পাঁচ প্রকার সাহিত্যরস রয়েছে (শান্ত, দাস্য, সখ্য, বাৎসল্য ও মধুর)। এর মধ্যে অলঙ্কারশাস্ত্রের 'শৃঙ্গার রস'-কে বৈষ্ণব পদাবলিতে 'মধুর রস' বলা হয়।"
+  },
+  {
+    id: 3,
+    tag: "২২তম বিসিএস",
+    q: "পদ বা পদাবলি বলতে কী বুঝায়?",
+    opts: [
+      "লাচাড়ী ছন্দে রচিত পদ্য বা কবিতাবলী",
+      "পদ্যাকারে রচিত দেবস্তুতিমূলক রচনা",
+      "বাউল বা মরমী গীতি",
+      "বৌদ্ধ বা বৈষ্ণবীয় ধর্মের গূঢ় বিষয়ের বিশেষ সৃষ্টি"
+    ],
+    ans: 3,
+    exp: "বাংলা সাহিত্যে পদ বা পদাবলি বলতে বৌদ্ধ সহজিয়া অথবা বৈষ্ণব ধর্মের নিগূঢ় রসতত্ত্ব, সাধনপ্রণালি এবং জীবাত্মার সাথে পরমাত্মার মিলনবিষয়ক বিশেষ আধ্যাত্মিক সৃষ্টিকে বোঝায়।"
+  },
+  {
+    id: 4,
+    tag: "২১তম বিসিএস",
+    q: "'ব্রজবুলি' বলতে কী বোঝায়?",
+    opts: [
+      "ব্রজধামে কথিত ভাষা",
+      "একরকম কৃত্রিম কবিভাষা",
+      "বাংলা ও হিন্দির যোগফল",
+      "মৈথিলি ভাষার একটি উপভাষা"
+    ],
+    ans: 1,
+    exp: "ব্রজবুলি মূলত এক ধরনের কৃত্রিম মিশ্র সাহিত্যিক ভাষা বা কবিভাষা। মৈথিলি ও বাংলা ভাষার সংমিশ্রণে কবি বিদ্যাপতি এটি তৈরি করেন। রবীন্দ্রনাথ ঠাকুরও ভানুসিংহ ঠাকুরের পদাবলীতে এই ভাষা ব্যবহার করেছেন।"
+  }
+];
+
+let userAnswers = {};
+
+function renderQuiz() {
+  const container = document.getElementById('quiz-cards-wrapper');
+  container.innerHTML = '';
+  
+  quizData.forEach((qItem, idx) => {
+    const card = document.createElement('div');
+    card.className = 'quiz-card';
+    card.id = `qcard-${qItem.id}`;
+    
+    let optsHtml = '';
+    const letters = ['ক', 'খ', 'গ', 'ঘ'];
+    qItem.opts.forEach((opt, oIdx) => {
+      optsHtml += `
+        <button class="opt-btn" onclick="checkAnswer(${qItem.id}, ${oIdx})" id="opt-${qItem.id}-${oIdx}">
+          <strong>${letters[oIdx]}.</strong> ${opt}
+        </button>
+      `;
+    });
+    
+    card.innerHTML = `
+      <div class="question-header">
+        <div class="q-text">${idx + 1}. ${qItem.q}</div>
+        <span class="q-tag">${qItem.tag}</span>
+      </div>
+      <div class="options-grid">
+        ${optsHtml}
+      </div>
+      <div class="explanation-box" id="exp-${qItem.id}">
+        <strong>💡 ব্যাখ্যা:</strong> ${qItem.exp}
+      </div>
+    `;
+    
+    container.appendChild(card);
+  });
+}
+
+function checkAnswer(qId, selectedOpt) {
+  if (userAnswers[qId] !== undefined) return;
+  
+  userAnswers[qId] = selectedOpt;
+  const qData = quizData.find(d => d.id === qId);
+  const card = document.getElementById(`qcard-${qId}`);
+  const isCorrect = selectedOpt === qData.ans;
+  
+  for(let i=0; i<qData.opts.length; i++) {
+    const btn = document.getElementById(`opt-${qId}-${i}`);
+    btn.disabled = true;
+    if(i === qData.ans) {
+      btn.classList.add('correct-choice');
+    } else if(i === selectedOpt) {
+      btn.classList.add('wrong-choice');
+    }
+  }
+  
+  if(isCorrect) {
+    card.classList.add('answered-correct');
+  } else {
+    card.classList.add('answered-wrong');
+  }
+  
+  document.getElementById(`exp-${qId}`).style.display = 'block';
+  updateScore();
+}
+
+function updateScore() {
+  const answeredTotal = Object.keys(userAnswers).length;
+  let correctTotal = 0;
+  for(let qId in userAnswers) {
+    const qData = quizData.find(d => d.id == qId);
+    if(userAnswers[qId] === qData.ans) {
+      correctTotal++;
+    }
+  }
+  document.getElementById('answered-count').innerText = answeredTotal;
+  document.getElementById('correct-count').innerText = correctTotal;
+}
+
+function resetQuiz() {
+  userAnswers = {};
+  renderQuiz();
+  updateScore();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderQuiz();
+  try {
+    const savedTheme = localStorage.getItem('theme');
+    if(savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+  } catch(e){}
+});
+</script>
+  <!-- Smart E-Book Navigation Component -->
+  <script src="nav-component.js"></script>
+</body>
+</html>

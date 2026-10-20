@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>সাহিত্যিক ছদ্মনাম ও উপাধি - বিসিএস প্রস্তুতি</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ══════ CSS ভ্যারিয়েবল ও থিম কালার (গাঢ় নীলাভ ও সোনালি প্যালেট) ══════ */
+    :root {
+      --font-scale: 100%;
+      --bg-base: #f6f8fd;
+      --bg-surface: #ffffff;
+      --bg-surface-alt: #edf2f9;
+      --text-main: #141c2e;
+      --text-muted: #4b5875;
+      --primary: #1e3a8a; /* গভীর ইন্ডিগো নেভি */
+      --primary-light: #dbeafe;
+      --accent: #b45309; /* রাজকীয় ব্রোঞ্জ স্বর্ণালি */
+      --accent-light: #fef3c7;
+      --success: #15803d;
+      --success-light: #dcfce7;
+      --danger: #b91c1c;
+      --danger-light: #fee2e2;
+      --warning: #c2410c;
+      --warning-light: #ffedd5;
+      --border-color: #cbd5e1;
+      --card-border: #94a3b8;
+      --shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+      --shadow-hover: 0 8px 24px rgba(15, 23, 42, 0.14);
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg-base: #0a0f1d;
+      --bg-surface: #131c31;
+      --bg-surface-alt: #1a2642;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --primary: #60a5fa;
+      --primary-light: #1e2d4d;
+      --accent: #fbbf24;
+      --accent-light: #322510;
+      --success: #4ade80;
+      --success-light: #12381f;
+      --danger: #f87171;
+      --danger-light: #3d1416;
+      --warning: #fb923c;
+      --warning-light: #381e0e;
+      --border-color: #273754;
+      --card-border: #3b4f74;
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+      --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.7);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: var(--font-scale);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans Bengali', 'Kalpurush', Vrinda, sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.8;
+      min-width: 320px;
+      padding-bottom: 80px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    mark {
+      background-color: #fde047;
+      color: #0f172a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    /* ══════ প্রগ্রেস বার ও কন্ট্রোল বার ══════ */
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: transparent;
+      z-index: 1000;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.1s;
+    }
+
+    .control-bar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: var(--bg-surface);
+      border-bottom: 2px solid var(--border-color);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .control-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-ctrl {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .btn-ctrl:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* ══════ সূচি ড্রপডাউন ══════ */
+    #toc-panel {
+      display: none;
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-hover);
+    }
+
+    #toc-panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .toc-item a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      background: var(--bg-surface-alt);
+      transition: var(--transition);
+    }
+
+    .toc-item a:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* ══════ হিরো ব্যানার ══════ */
+    .hero-banner {
+      background: linear-gradient(135deg, #1e3a8a, #0b152d);
+      color: #ffffff;
+      padding: 34px 20px;
+      border-radius: 20px;
+      margin: 24px 0;
+      box-shadow: var(--shadow);
+      border: 3px solid #3b82f6;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: #f59e0b;
+      color: #0b152d;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+      font-size: 15.5px;
+      color: #cbd5e1;
+      margin-bottom: 20px;
+    }
+
+    .study-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .step-box {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+
+    .step-box strong {
+      display: block;
+      color: #fde047;
+      margin-bottom: 2px;
+    }
+
+    /* ══════ সেকশন সাধারণ স্টাইল ══════ */
+    .study-section {
+      margin-top: 36px;
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .section-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .section-meta {
+      font-size: 13px;
+      background: var(--bg-surface-alt);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    /* ══════ বিসিএস ট্রেন্ড গ্রিড ══════ */
+    .bcs-matrix {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .bcs-cell {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .bcs-cell.active {
+      border: 2px solid var(--accent);
+      background: var(--accent-light);
+    }
+
+    .bcs-exam {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .bcs-cell.active .bcs-exam {
+      color: var(--accent);
+    }
+
+    .bcs-qcount {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 4px;
+    }
+
+    /* ══════ কার্ড ডিজাইন ══════ */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .scholar-card {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-left: 6px solid var(--primary);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .scholar-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .scholar-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    .scholar-name {
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .fact-pill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .fact-item {
+      font-size: 14.5px;
+      background: var(--bg-surface-alt);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+    }
+
+    /* ══════ গান ও উদ্ধৃতি বক্স ══════ */
+    .quote-box {
+      background: var(--bg-surface-alt);
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin: 10px 0;
+      font-size: 14.5px;
+    }
+
+    /* ══════ ছক ডিজাইন ══════ */
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      margin: 16px 0;
+      border-radius: 10px;
+      border: 2px solid var(--border-color);
+    }
+
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14.5px;
+    }
+
+    .custom-table th {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 12px 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .custom-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+
+    .custom-table tr:nth-child(even) td {
+      background: var(--bg-surface-alt);
+    }
+
+    .custom-table tr:hover td {
+      background: var(--primary-light);
+    }
+
+    /* ══════ কুইজ সেকশন ══════ */
+    .quiz-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .quiz-card {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .quiz-q-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .bcs-tag {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .quiz-question {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .opt-btn {
+      background: var(--bg-surface-alt);
+      border: 1.5px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14.5px;
+      font-family: inherit;
+      color: var(--text-main);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--border-color);
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--text-main);
+      flex-shrink: 0;
+    }
+
+    .opt-btn.correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+      color: var(--success) !important;
+      font-weight: 700;
+    }
+
+    .opt-btn.correct .opt-letter {
+      background: var(--success);
+      color: #fff;
+    }
+
+    .opt-btn.wrong {
+      background: var(--danger-light) !important;
+      border-color: var(--danger) !important;
+      color: var(--danger) !important;
+    }
+
+    .opt-btn.wrong .opt-letter {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .quiz-explanation {
+      display: none;
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 8px;
+      background: var(--bg-surface-alt);
+      border-left: 4px solid var(--primary);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .quiz-explanation.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    /* ══════ রিভিশন ফ্ল্যাশকার্ড ══════ */
+    .revision-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .rev-card {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .rev-q {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .rev-ans {
+      display: none;
+      font-size: 14px;
+      padding-top: 6px;
+      border-top: 1px dashed var(--border-color);
+      color: var(--text-main);
+    }
+
+    .rev-ans.active {
+      display: block;
+    }
+
+    .score-banner {
+      background: var(--bg-surface);
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 24px;
+      box-shadow: var(--shadow);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .score-display {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .alert-box {
+      background: var(--warning-light);
+      border: 2px solid var(--warning);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+
+    .alert-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--warning);
+      margin-bottom: 6px;
+    }
+
+    @media print {
+      .control-bar, #progress-container, .btn-ctrl, .opt-btn {
+        display: none !important;
+      }
+      body {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .quiz-explanation {
+        display: block !important;
+      }
+      .study-section {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        page-break-inside: avoid;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DESIGN PLAN: 
+    ১. বিষয়ের ধরন: বাংলা সাহিত্যের বিশিষ্ট সাহিত্যিকদের ছদ্মনাম, সাহিত্যিক উপাধি, প্রকৃত নাম এবং সংশ্লিষ্ট লেখক-পরিচিতি (পৃষ্ঠা ১৭৯–১৮১)।
+    ২. সবচেয়ে কঠিন/গুলিয়ে ফেলার জায়গা: (ক) সুনীল গঙ্গোপাধ্যায়ের একাধিক ছদ্মনাম (নীল লোহিত, নীল উপাধ্যায়, সনাতন পাঠক) (খ) সমরেশ বসুর 'কালকূট' ও 'হাবু শর্মা' বনাম সমরেশ মজুমদার (গ) 'ভোরের পাখি' (বিহারীলাল) বনাম রবীন্দ্রনাথের ভূয়সী প্রশংসা (ঘ) ছদ্মনাম টেবিলের বিশাল তালিকা।
+    ৩. নির্বাচিত মডিউল: বিসিএস ট্রেন্ড গ্রিড, মেগা ছদ্মনাম ও উপাধি মাস্টার সারণি, বিশিষ্ট লেখকদের জীবনী-কার্ড, ঐতিহাসিক উক্তি ও স্বদেশী গান বক্স, ৮টি হুবহু ইন্টারঅ্যাকটিভ বিসিএস কুইজ, ৩০ সেকেন্ডের রিভিশন ও অসঙ্গতি যাচাই তালিকা।
+    ৪. রঙের মেজাজ: অ্যাকাডেমিক ব্লু/ইন্ডিগো (#1e3a8a) ও মার্জিত স্বর্ণালি ব্রোঞ্জ (#b45309)।
+    ৫. হিরো ও মাসকট: ছদ্মনামের মুখোশ উন্মোচন ও উপাধির মুকুট রূপক।
+  -->
+
+  <!-- প্রগ্রেস ট্র্যাকার -->
+  <div id="progress-container"><div id="progress-bar"></div></div>
+
+  <!-- স্টিকি কন্ট্রোল বার -->
+  <div class="control-bar">
+    <div class="container control-content">
+      <div class="control-group">
+        <button class="btn-ctrl" onclick="toggleToc()">📖 সূচিপত্র</button>
+        <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn">🌓 মোড</button>
+      </div>
+      <div class="control-group">
+        <button class="btn-ctrl" onclick="changeFontSize(-1)">A-</button>
+        <button class="btn-ctrl" onclick="changeFontSize(0)">A</button>
+        <button class="btn-ctrl" onclick="changeFontSize(1)">A+</button>
+        <button class="btn-ctrl" onclick="window.print()">🖨️ প্রিন্ট</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- ড্রপডাউন সূচি -->
+    <div id="toc-panel">
+      <strong style="color:var(--primary); font-size:16px;">অধ্যায়ের প্রধান অংশসমূহ:</strong>
+      <ul class="toc-list">
+        <li class="toc-item"><a href="#sec-stat" onclick="toggleToc()">📊 বিসিএস পরীক্ষার ট্রেন্ড</a></li>
+        <li class="toc-item"><a href="#sec-master-table" onclick="toggleToc()">📜 ছদ্মনাম ও উপাধির মেগা মাস্টার তালিকা</a></li>
+        <li class="toc-item"><a href="#sec-scholars" onclick="toggleToc()">🏛️ শীর্ষ সাহিত্যিকদের বিশদ প্রোফাইল</a></li>
+        <li class="toc-item"><a href="#sec-songs" onclick="toggleToc()">🎶 চারণকবির গান ও বিখ্যাত উক্তি</a></li>
+        <li class="toc-item"><a href="#sec-quiz" onclick="toggleToc()">📝 ৮টি বিসিএস MCQ কুইজ</a></li>
+        <li class="toc-item"><a href="#sec-rev" onclick="toggleToc()">⚡ ৩০ সেকেন্ডের রিভিশন ফ্ল্যাশ</a></li>
+        <li class="toc-item"><a href="#sec-audit" onclick="toggleToc()">⚠️ অসঙ্গতি ও তথ্য যাচাই তালিকা</a></li>
+      </ul>
+    </div>
+
+    <!-- হিরো ব্যানার -->
+    <header class="hero-banner">
+      <span class="hero-tag">বিসিএস স্পেশাল টপিক মাস্টারক্লাস</span>
+      <h1 class="hero-title">সাহিত্যিক ছদ্মনাম ও উপাধি</h1>
+      <p class="hero-subtitle">হরপ্রসাদ শাস্ত্রী, সুনীল গঙ্গোপাধ্যায়, সমরেশ বসু, মুকুন্দদাস ও বিহারীলাল চক্রবর্তীর পূর্ণাঙ্গ প্রস্তুতি (পৃষ্ঠা ১৭৯–১৮১)</p>
+      
+      <div class="study-steps">
+        <div class="step-box">
+          <strong>ধাপ ১: ৩ মিনিটে স্ক্যান</strong>
+          প্রথমে মেগা মাস্টার তালিকাটি চোখ বুলিয়ে নাও।
+        </div>
+        <div class="step-box">
+          <strong>ধাপ ২: উপাধি ও ছদ্মনাম ভেদ</strong>
+          মহামহোপাধ্যায়, চারণকবি, ভোরের পাখি ও বীরবলের পার্থক্য স্পষ্ট করো।
+        </div>
+        <div class="step-box">
+          <strong>ধাপ ৩: কুইজে ১০০%</strong>
+          বিগত বিসিএসের ৮টি প্রশ্নে অংশ নিয়ে শতভাগ প্রস্তুতি নিশ্চিত করো।
+        </div>
+      </div>
+    </header>
+
+    <!-- সেকশন ১: বিসিএস ট্রেন্ড -->
+    <section id="sec-stat" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📊</div>
+          <h2 class="section-title">বিসিএস পরীক্ষার প্রশ্ন-পরিসংখ্যান</h2>
+        </div>
+        <span class="section-meta">১০ম থেকে ৫০তম বিসিএস বিশ্লেষণ</span>
+      </div>
+      <p style="font-size: 14.5px; margin-bottom: 12px;">
+        বইয়ের সূচি অনুযায়ী সাহিত্যিক ছদ্মনাম ও উপাধি থেকে বিসিএস প্রিলিমিনারিতে আসা প্রশ্নের সংখ্যা:
+      </p>
+
+      <div class="bcs-matrix">
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪৩তম বিসিএস</div>
+          <div class="bcs-qcount">২ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪১তম বিসিএস</div>
+          <div class="bcs-qcount">২ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৩৮তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">১০ম-৩৪তম বিসিএস</div>
+          <div class="bcs-qcount">৫ টি</div>
+        </div>
+        <div class="bcs-cell">
+          <div class="bcs-exam">অন্যান্য বিসিএস</div>
+          <div class="bcs-qcount">-</div>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">
+        <em>মোট সংকলিত প্রশ্ন সংখ্যা: ৮টি (ব্যাখ্যাসহ পৃষ্ঠা ১৭৯-১৮১ থেকে সম্পূর্ণ সংকলিত)</em>
+      </p>
+    </section>
+
+    <!-- সেকশন ২: মেগা ছদ্মনাম ও উপাধি মাস্টার তালিকা -->
+    <section id="sec-master-table" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📜</div>
+          <h2 class="section-title">ছদ্মনাম ও উপাধির মেগা মাস্টার তালিকা</h2>
+        </div>
+        <span class="section-meta">বইয়ের ছক ও ব্যাখ্যার সমন্বিত রূপ</span>
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>প্রকৃত নাম</th>
+              <th>ছদ্মনাম / উপাধি / ডাকনাম</th>
+              <th>অতিরিক্ত তথ্য / প্রাসঙ্গিক প্রেক্ষাপট (বইয়ের নোট)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>হরপ্রসাদ শাস্ত্রী</strong></td>
+              <td><mark>মহামহোপাধ্যায়</mark> (উপাধি)</td>
+              <td>১৮৯৮ সালে ব্রিটিশ সরকার তাঁকে এ উপাধি দেয়; চর্যাপদ আবিষ্কারক (১৯০৭)।</td>
+            </tr>
+            <tr>
+              <td><strong>ঈশ্বরচন্দ্র বিদ্যাসাগর</strong></td>
+              <td>বিদ্যাসাগর (উপাধি)</td>
+              <td>১৮৩৯ সালে কলকাতার সংস্কৃত কলেজ তাঁকে এই উপাধি প্রদান করে।</td>
+            </tr>
+            <tr>
+              <td><strong>সুনীল গঙ্গোপাধ্যায়</strong></td>
+              <td><mark>নীল লোহিত</mark>, নীল উপাধ্যায়, সনাতন পাঠক</td>
+              <td>কবি, ঔপন্যাসিক ও সাংবাদিক (১৯৩৪–২০১২); 'টাইম ট্রিলজি'র রচয়িতা।</td>
+            </tr>
+            <tr>
+              <td><strong>সমরেশ বসু</strong></td>
+              <td><mark>কালকূট</mark>, হাবু শর্মা</td>
+              <td>কথাসাহিত্যিক, ঔপন্যাসিক ও গল্পকার (১৯২৪–১৯৮৮)।</td>
+            </tr>
+            <tr>
+              <td><strong>সতিনাথ ভাদুড়ী</strong></td>
+              <td>চিত্রগুপ্ত</td>
+              <td>পৃষ্ঠা ১৭৯-এর মূল তালিকায় মুদ্রিত।</td>
+            </tr>
+            <tr>
+              <td><strong>তারাশঙ্কর বন্দ্যোপাধ্যায়</strong></td>
+              <td>দৃষ্টিহীন</td>
+              <td>পৃষ্ঠা ১৭৯-এর ছদ্মনাম তালিকাভুক্ত।</td>
+            </tr>
+            <tr>
+              <td><strong>দক্ষিণারঞ্জনমিত্র মজুমদার</strong></td>
+              <td>দৃষ্টিহীন</td>
+              <td>পৃষ্ঠা ১৭৯-এর ছদ্মনাম তালিকাভুক্ত।</td>
+            </tr>
+            <tr>
+              <td><strong>সৈয়দ মুজতবা আলী</strong></td>
+              <td>ওমর খৈয়াম, সত্যপীর, রায়পিথোর</td>
+              <td>পৃষ্ঠা ১৭৯-এর মূল ছকভুক্ত।</td>
+            </tr>
+            <tr>
+              <td><strong>বলাইচাঁদ মুখোপাধ্যায়</strong></td>
+              <td><mark>বনফুল</mark></td>
+              <td>স্কুলে পড়ার সময় থেকেই 'বনফুল' নামে কবিতা লিখতেন।</td>
+            </tr>
+            <tr>
+              <td><strong>অচিন্ত্যকুমার সেনগুপ্ত</strong></td>
+              <td>নীহারিকা দেবী</td>
+              <td>পৃষ্ঠা ১৭৯-এর তালিকায় উল্লেখিত।</td>
+            </tr>
+            <tr>
+              <td><strong>বিনয়কৃষ্ণ মুখোপাধ্যায়</strong></td>
+              <td>যাযাবর</td>
+              <td>পৃষ্ঠা ১৭৯-এর তালিকায় উল্লেখিত।</td>
+            </tr>
+            <tr>
+              <td><strong>অন্নদাশংকর রায়</strong></td>
+              <td>লীলাময় রায়</td>
+              <td>পৃষ্ঠা ১৭৯-এর তালিকায় উল্লেখিত।</td>
+            </tr>
+            <tr>
+              <td><strong>বিমল ঘোষ</strong></td>
+              <td>মৌমাছি</td>
+              <td>পৃষ্ঠা ১৭৯-এর তালিকায় উল্লেখিত।</td>
+            </tr>
+            <tr>
+              <td><strong>কালিকানন্দ</strong></td>
+              <td>অবধূত</td>
+              <td>পৃষ্ঠা ১৭৯-এর তালিকায় উল্লেখিত।</td>
+            </tr>
+            <tr>
+              <td><strong>বিমল মিত্র</strong></td>
+              <td>জাবালি</td>
+              <td>পৃষ্ঠা ১৭৯-এর তালিকায় উল্লেখিত।</td>
+            </tr>
+            <tr>
+              <td><strong>কালীপ্রসন্ন সিংহ</strong></td>
+              <td>হুতোম পেঁচা</td>
+              <td>পৃষ্ঠা ১৭৯-এর তালিকায় উল্লেখিত।</td>
+            </tr>
+            <tr>
+              <td><strong>রাজশেখর বসু</strong></td>
+              <td>পরশুরাম</td>
+              <td>পৃষ্ঠা ১৭৯ ও ১৮১-তে উল্লেখিত।</td>
+            </tr>
+            <tr>
+              <td><strong>চারুচন্দ্র চক্রবর্তী</strong></td>
+              <td>জরাসন্ধ</td>
+              <td>পৃষ্ঠা ১৭৯-এর তালিকায় উল্লেখিত।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রমথ চৌধুরী</strong></td>
+              <td><mark>বীরবল</mark></td>
+              <td>বাংলা গদ্যে চলিত রীতির প্রবর্তক; 'বীরবলের হালখাতা' (১৯০২)।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রমথনাথ বিশী</strong></td>
+              <td>প্রণবী</td>
+              <td>৩৮তম বিসিএস ব্যাখ্যার অন্তর্ভুক্ত।</td>
+            </tr>
+            <tr>
+              <td><strong>মুকুন্দদাস</strong></td>
+              <td><mark>চারণকবি</mark> (উপাধি)</td>
+              <td>রবীন্দ্রনাথ ঠাকুর ও কাজী নজরুল ইসলাম তাঁকে এই মর্যাদা দেন।</td>
+            </tr>
+            <tr>
+              <td><strong>আবদুল মান্নান সৈয়দ</strong></td>
+              <td>অশোক সৈয়দ / <mark>পরাবাস্তব কবি</mark></td>
+              <td>প্রথম জীবনে 'অশোক সৈয়দ' ছদ্মনামে লিখতেন।</td>
+            </tr>
+            <tr>
+              <td><strong>বিহারীলাল চক্রবর্তী</strong></td>
+              <td><mark>ভোরের পাখি</mark> / বিজনবাসী ভাবনিমগ্ন কবি</td>
+              <td>গীতিকবিতার গুরু; রবীন্দ্রনাথ ঠাকুর তাঁকে 'ভোরের পাখি' আখ্যা দেন।</td>
+            </tr>
+            <tr>
+              <td><strong>রবীন্দ্রনাথ ঠাকুর</strong></td>
+              <td>ভানুসিংহ ঠাকুর, অকপট চন্দ্র ভাস্কর, আন্নাকালী পাকড়াশী, দিকশূন্য ভট্টাচার্য, ষষ্ঠীচরণ দেবশর্মা, বাণীবিনোদ, বিদ্যাবিনোদ, নবীন কিশোর শর্মণ, ভূতনাথ বাবু, শ্রীমতি মধ্যমা, শ্রীমতি কনিষ্ঠা</td>
+              <td>পৃষ্ঠা ১৮১-এর ব্যাখ্যায় উল্লেখিত রবীন্দ্র-ছদ্মনামমালা।</td>
+            </tr>
+            <tr>
+              <td><strong>মোহিতলাল মজুমদার</strong></td>
+              <td>কৃত্তিবাস ওঝা, সত্যসুন্দর দাস</td>
+              <td>২৬তম বিসিএস ব্যাখ্যার অন্তর্ভুক্ত।</td>
+            </tr>
+            <tr>
+              <td><strong>ঈশ্বরচন্দ্র গুপ্ত</strong></td>
+              <td>ভ্রমণকারী বন্ধু</td>
+              <td>পৃষ্ঠা ১৮১-এর ব্যাখ্যায় উল্লেখিত।</td>
+            </tr>
+            <tr>
+              <td><strong>শেখ আজিজুর রহমান</strong></td>
+              <td>শওকত ওসমান (প্রকৃত নাম শেখ আজিজুর রহমান)</td>
+              <td>৪১তম বিসিএস-এর অপশন ব্যাখ্যায় উল্লেখিত।</td>
+            </tr>
+            <tr>
+              <td><strong>আলাউদ্দিন আল আজাদ</strong></td>
+              <td>বাদশাহ (ডাকনাম)</td>
+              <td>৪১তম বিসিএস-এর অপশন ব্যাখ্যায় উল্লেখিত।</td>
+            </tr>
+            <tr>
+              <td><strong>সৈয়দ শামসুল হক</strong></td>
+              <td>সব্যসাচী লেখক (উপাধি)</td>
+              <td>৩১তম বিসিএস-এর অপশন ব্যাখ্যায় উল্লেখিত।</td>
+            </tr>
+            <tr>
+              <td><strong>আলাওল</strong></td>
+              <td>মধ্যযুগের সর্বাধিক গ্রন্থপ্রণেতা কবি (৭টি কাব্য)</td>
+              <td>৪১তম বিসিএস ব্যাখ্যার তথ্য।</td>
+            </tr>
+            <tr>
+              <td><strong>চন্দ্রাবতী</strong></td>
+              <td>মধ্যযুগের প্রথম মহিলা কবি</td>
+              <td>মনসামঙ্গলের কবি দ্বিজ বংশীদাসের কন্যা।</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- সেকশন ৩: শীর্ষ সাহিত্যিকদের বিশদ প্রোফাইল -->
+    <section id="sec-scholars" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">🏛️</div>
+          <h2 class="section-title">শীর্ষ সাহিত্যিকদের বিশদ পরিচিতি ও গ্রন্থাবলী</h2>
+        </div>
+        <span class="section-meta">বিসিএস পরীক্ষার গভীর প্রস্তুতি</span>
+      </div>
+
+      <div class="card-grid">
+        <!-- হরপ্রসাদ শাস্ত্রী -->
+        <article class="scholar-card">
+          <span class="scholar-badge">মহামহোপাধ্যায় ও প্রত্নতাত্ত্বিক</span>
+          <h3 class="scholar-name">হরপ্রসাদ শাস্ত্রী</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>আদি নিবাস ও পদমর্যাদা:</strong> খুলনা জেলার কুমিরা গ্রাম। ১৮৮৫ সালে রাজেন্দ্রলাল মিত্রের সহায়তায় এশিয়াটিক সোসাইটির সদস্য হন। ১৯২১ সালের ১৮ জুন ঢাকা বিশ্ববিদ্যালয়ের বাংলা ও সংস্কৃত বিভাগের প্রধান অধ্যাপক পদে যোগদান করেন। ১৯২৭ সালে ঢাবি তাঁকে অনারারি ডি.লিট ডিগ্রি দেয়।
+            </div>
+            <div class="fact-item">
+              <strong>চর্যাপদ আবিষ্কার:</strong> ১৯০৭ সালে নেপালের রাজদরবারের গ্রন্থশালা থেকে বাংলা সাহিত্যের আদিগ্রন্থ 'চর্যাপদ' আবিষ্কার করেন।
+            </div>
+            <div class="fact-item">
+              <strong>উপন্যাস:</strong> <em>বেণের মেয়ে</em>, <em>কাঞ্চনমালা</em>।
+            </div>
+            <div class="fact-item">
+              <strong>অন্যান্য গ্রন্থ:</strong> <em>হাজার বছরের পুরাণ বাঙ্গালা ভাষায় বৌদ্ধগান ও দোহা</em> (১৯১৬), <em>বাল্মীকির জয়</em>, <em>মেঘদূত ব্যাখ্যা</em>, <em>সচিত্র রামায়ণ</em>, <em>প্রাচীন বাংলার গৌরব</em>, <em>বৌদ্ধধর্ম</em>।
+            </div>
+          </div>
+        </article>
+
+        <!-- সুনীল গঙ্গোপাধ্যায় -->
+        <article class="scholar-card">
+          <span class="scholar-badge">নীল লোহিত ও কথাশিল্পী</span>
+          <h3 class="scholar-name">সুনীল গঙ্গোপাধ্যায়</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>জন্ম:</strong> ১৯৩৪–২০১২; মাদারীপুর জেলার কালকিনি থানার মাইজপারা গ্রামে জন্মগ্রহণ করেন।
+            </div>
+            <div class="fact-item">
+              <strong>টাইম ট্রিলজি (উপন্যাসত্রয়ী):</strong> <em>সেই সময়</em>, <em>প্রথম আলো</em>, <em>পূর্ব-পশ্চিম</em> (দেশ বিভাগ, পশ্চিমবঙ্গের নকশাল আন্দোলন, ভাষা আন্দোলন ও মুক্তিযুদ্ধের প্রেক্ষাপট)।
+            </div>
+            <div class="fact-item">
+              <strong>অন্যান্য উপন্যাস:</strong> <em>আত্মপ্রকাশ</em>, <em>মনের মানুষ</em> (লালন শাহের জীবনী), <em>অরণ্যের দিনরাত্রি</em>, <em>প্রতিদ্বন্দ্বী</em>।
+            </div>
+            <div class="fact-item">
+              <strong>কাব্য ও গোয়েন্দা সিরিজ:</strong> কাব্য: <em>এক এবং কয়েকজন</em>, <em>রাত্রির রঁদেভু</em>, <em>হঠাৎ নারীর জন্য</em>, <em>নারী হারিয়ে যেও না</em>। শিশুতোষ: <em>কাকাবাবু-সন্তু</em> সিরিজ। বিখ্যাত উক্তি: <em>'কেউ কথা রাখেনি'</em>।
+            </div>
+          </div>
+        </article>
+
+        <!-- চারণকবি মুকুন্দদাস -->
+        <article class="scholar-card">
+          <span class="scholar-badge">চারণকবি ও স্বদেশী আন্দোলনের সাধক</span>
+          <h3 class="scholar-name">মুকুন্দদাস</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>জন্ম ও সাধনসঙ্গীত:</strong> ১৮৭৮–১৯৩৪; ঢাকা জেলার বিক্রমপুরের বানারি গ্রামে জন্ম। শতাধিক গান <em>'সাধন সংগীত'</em> গ্রন্থে সংকলিত, যাতে তিনি 'মুকুন্দ' ভণিতা দিতেন।
+            </div>
+            <div class="fact-item">
+              <strong>স্বদেশী যাত্রা ও খেতাব:</strong> ১৯০৫ সালের বঙ্গভঙ্গ আন্দোলনের সময় স্বদেশী যাত্রার মাধ্যমে ব্রিটিশবিরোধী চেতনা প্রচার করেন। রবীন্দ্রনাথ ও নজরুল তাঁকে 'চারণকবি' উপাধি দেন।
+            </div>
+            <div class="fact-item">
+              <strong>গ্রন্থাবলী:</strong> <em>সাধনসঙ্গীত</em>, <em>পল্লীসেবা</em>, <em>ব্রহ্মচারিণী</em>, <em>পথ</em>, <em>সাথী</em>, <em>সমাজ</em> প্রভৃতি।
+            </div>
+          </div>
+        </article>
+
+        <!-- প্রমথ চৌধুরী ও বলাইচাঁদ মুখোপাধ্যায় -->
+        <article class="scholar-card">
+          <span class="scholar-badge">বীরবল ও বনফুল</span>
+          <h3 class="scholar-name">প্রমথ চৌধুরী ও বলাইচাঁদ</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>প্রমথ চৌধুরী (বীরবল):</strong> চলিত রীতির প্রবর্তক ও বিদ্রূপাত্মক প্রাবন্ধিক। ১৯০২ সালে ভারতী পত্রিকায় প্রকাশিত <em>'বীরবলের হালখাতা'</em>-তে চলিত রীতির প্রথম প্রয়োগ ঘটান। তিনিই বাংলায় প্রথম ইতালীয় সনেটের প্রবর্তন করেন।
+            </div>
+            <div class="fact-item">
+              <strong>বলাইচাঁদ মুখোপাধ্যায় (বনফুল):</strong> প্রবাসী পত্রিকায় 'একপাতা আধপাতা' ছোটগল্প লিখে বিখ্যাত হন। উপন্যাস: <em>অগ্নি</em> (রাজনৈতিক), <em>তৃণখণ্ড</em>, <em>জঙ্গম</em>, <em>বৈতরণী-তীরে</em>, <em>কিছুক্ষণ</em>, <em>নির্মোক</em>, <em>সে ও আমি</em>, <em>লক্ষ্মীর আগমন</em>।
+            </div>
+            <div class="fact-item">
+              <strong>বনফুলের কাব্য ও গল্প:</strong> কাব্য: <em>বনফুলের কবিতা</em>, <em>ব্যঙ্গ কবিতা</em>, <em>অঙ্গারপর্ণী</em>, <em>চতুর্দশী</em>, <em>করকমলেষু</em>। গল্পগ্রন্থ: <em>বাহুল্য</em>, <em>বিন্দুবিসর্গ</em>, <em>তন্বী</em>, <em>ঊর্মিমালা</em>।
+            </div>
+          </div>
+        </article>
+
+        <!-- বিহারীলাল চক্রবর্তী ও আবদুল মান্নান সৈয়দ -->
+        <article class="scholar-card">
+          <span class="scholar-badge">ভোরের পাখি ও পরাবাস্তব কবি</span>
+          <h3 class="scholar-name">বিহারীলাল ও আবদুল মান্নান সৈয়দ</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>বিহারীলাল চক্রবর্তী (১৮৩৫–১৮৯৪):</strong> গীতিকাব্যের গুরু; রবীন্দ্রনাথ তাঁকে 'ভোরের পাখি' ও 'বিজনবাসী ভাবনিমগ্ন কবি' বলেন। শ্রেষ্ঠ রচনা: <em>সারদামঙ্গল</em>। ১ম কাব্য: <em>স্বপ্নদর্শন</em>। অন্যান্য: <em>সংগীত শতক</em>, <em>বঙ্গসুন্দরী</em>, <em>নিসর্গ সন্দর্শন</em>, <em>বন্ধু বিয়োগ</em>, <em>প্রেম প্রবাহিনী</em>, <em>সাধের আসন</em>। পত্রিকা: <em>পূর্ণিমা</em>, <em>সাহিত্য-সংক্রান্তি</em>, <em>অবোধবন্ধু</em>।
+            </div>
+            <div class="fact-item">
+              <strong>আবদুল মান্নান সৈয়দ (১৯৪৩–২০১০):</strong> প্রথম জীবনে <em>অশোক সৈয়দ</em> ছদ্মনামে লিখতেন। 'পরাবাস্তব কবি' নামে পরিচিত। প্রথম গ্রন্থ: <em>জন্মান্ধ কবিতাগুচ্ছ</em> (১৯৬৭)। উপন্যাস: <em>পরিপ্রেক্ষিতের দাসদাসী</em>, <em>অ-তে অজগর</em>, <em>গভীর গভীরতর অসুখ</em>।
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- সেকশন ৪: বিখ্যাত গান ও ঐতিহাসিক পঙ্ক্তি -->
+    <section id="sec-songs" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">🎶</div>
+          <h2 class="section-title">চারণকবি মুকুন্দদাসের অমর গানসমূহ</h2>
+        </div>
+        <span class="section-meta">৪১তম বিসিএস ব্যাখ্যা</span>
+      </div>
+
+      <div class="quote-box">
+        <strong>ক্ষুদিরামের ফাঁসির পর রচিত গান:</strong>
+        <p>"হাসি হাসি পরব ফাঁসি / দেখবে জগৎ বাসী / একবার বিদায় দে মা ঘুরে আসি।"</p>
+      </div>
+
+      <div class="quote-box">
+        <strong>স্বদেশী আন্দোলনে বিদেশি পণ্য বর্জনের ডাক:</strong>
+        <p>"ছেড়ে দেও কাঁচের চুড়ি বঙ্গনারী"</p>
+      </div>
+
+      <div class="quote-box">
+        <strong>সংগ্রামের উদ্দীপক গান:</strong>
+        <p>"ভয় কি মরণে থাকিতে সন্তানে / মাতঙ্গী মেতেছে আজ সমর রঙ্গে।"</p>
+      </div>
+    </section>
+
+    <!-- সেকশন ৫: বিগত বিসিএস কুইজ -->
+    <section id="sec-quiz" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📝</div>
+          <h2 class="section-title">বিগত বিসিএস পরীক্ষার পূর্ণাঙ্গ প্রশ্নব্যাংক</h2>
+        </div>
+        <span class="section-meta">৮টি হুবহু প্রশ্ন</span>
+      </div>
+
+      <p style="margin-bottom: 16px; font-size:14.5px;">
+        সঠিক উত্তরের অপশনে ক্লিক করে যাচাই করো। ক্লিক করার সাথে সাথে সঠিক উত্তর ও বইয়ের পুঙ্খানুপুঙ্খ ব্যাখ্যা দেখতে পাবে:
+      </p>
+
+      <div class="quiz-container">
+        <!-- প্রশ্ন ১ -->
+        <div class="quiz-card" id="q1">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০১</span>
+            <span class="bcs-tag">৪৩তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">১. হরপ্রসাদ শাস্ত্রীর উপাধি কী?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(1, 'ক', false, this)"><span class="opt-letter">ক</span> পণ্ডিত</button>
+            <button class="opt-btn" onclick="checkAnswer(1, 'খ', false, this)"><span class="opt-letter">খ</span> বিদ্যাসাগর</button>
+            <button class="opt-btn" onclick="checkAnswer(1, 'গ', false, this)"><span class="opt-letter">গ</span> শাস্ত্রজ্ঞ</button>
+            <button class="opt-btn" onclick="checkAnswer(1, 'ঘ', true, this)"><span class="opt-letter">ঘ</span> মহামহোপাধ্যায়</button>
+          </div>
+          <div class="quiz-explanation" id="exp-1">
+            <strong>ব্যাখ্যা:</strong> হরপ্রসাদ শাস্ত্রীর উপাধি মহামহোপাধ্যায়। ১৮৯৮ সালে ব্রিটিশ সরকার তাঁকে এই উপাধি প্রদান করে। তিনি ১৯০৭ সালে নেপালের রাজদরবার থেকে চর্যাপদ আবিষ্কার করেন। অপরদিকে ১৮৩৯ সালে কলকাতার সংস্কৃত কলেজ ঈশ্বরচন্দ্র বিদ্যাসাগরকে 'বিদ্যাসাগর' উপাধি দেয়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২ -->
+        <div class="quiz-card" id="q2">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০২</span>
+            <span class="bcs-tag">৪৩তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">২. 'নীল লোহিত' কোন লেখকের ছদ্মনাম?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(2, 'ক', false, this)"><span class="opt-letter">ক</span> অরুণ মিত্র</button>
+            <button class="opt-btn" onclick="checkAnswer(2, 'খ', false, this)"><span class="opt-letter">খ</span> সমরেশ বসু</button>
+            <button class="opt-btn" onclick="checkAnswer(2, 'গ', true, this)"><span class="opt-letter">গ</span> সুনীল গঙ্গোপাধ্যায়</button>
+            <button class="opt-btn" onclick="checkAnswer(2, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> সমরেশ মজুমদার</button>
+          </div>
+          <div class="quiz-explanation" id="exp-2">
+            <strong>ব্যাখ্যা:</strong> সুনীল গঙ্গোপাধ্যায়ের ছদ্মনাম 'নীল লোহিত'। তিনি নীল উপাধ্যায় ও সনাতন পাঠক ছদ্মনামেও লিখতেন। তাঁর বিখ্যাত টাইম ট্রিলজি: 'সেই সময়', 'প্রথম আলো' ও 'পূর্ব-পশ্চিম'।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩ -->
+        <div class="quiz-card" id="q3">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৩</span>
+            <span class="bcs-tag">৪১তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৩. বাংলা সাহিত্যে 'কালকূট' নামে পরিচিত কোন লেখক?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(3, 'ক', false, this)"><span class="opt-letter">ক</span> সমরেশ মজুমদার</button>
+            <button class="opt-btn" onclick="checkAnswer(3, 'খ', false, this)"><span class="opt-letter">খ</span> শওকত ওসমান</button>
+            <button class="opt-btn" onclick="checkAnswer(3, 'গ', true, this)"><span class="opt-letter">গ</span> সমরেশ বসু</button>
+            <button class="opt-btn" onclick="checkAnswer(3, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> আলাউদ্দিন আল আজাদ</button>
+          </div>
+          <div class="quiz-explanation" id="exp-3">
+            <strong>ব্যাখ্যা:</strong> সমরেশ বসুর ছদ্মনাম কালকূট (তাঁর অপর ছদ্মনাম হাবু শর্মা)। শওকত ওসমানের প্রকৃত নাম শেখ আজিজুর রহমান এবং আলাউদ্দিন আল আজাদের ডাকনাম বাদশাহ।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৪ -->
+        <div class="quiz-card" id="q4">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৪</span>
+            <span class="bcs-tag">৪১তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৪. চারণকবি হিসেবে বিখ্যাত কে?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(4, 'ক', false, this)"><span class="opt-letter">ক</span> আলাওল</button>
+            <button class="opt-btn" onclick="checkAnswer(4, 'খ', false, this)"><span class="opt-letter">খ</span> চন্দ্রাবতী</button>
+            <button class="opt-btn" onclick="checkAnswer(4, 'গ', true, this)"><span class="opt-letter">গ</span> মুকুন্দদাস</button>
+            <button class="opt-btn" onclick="checkAnswer(4, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> মুক্তারাম চক্রবর্তী</button>
+          </div>
+          <div class="quiz-explanation" id="exp-4">
+            <strong>ব্যাখ্যা:</strong> চারণকবি হিসেবে খ্যাত মুকুন্দদাস (১৮৭৮–১৯৩৪)। ১৯০৫ সালে বঙ্গভঙ্গ আন্দোলনের সময় স্বদেশী যাত্রার মাধ্যমে ব্রিটিশবিরোধী ভাবনা প্রচার করায় রবীন্দ্রনাথ ও নজরুল তাঁকে চারণকবির মর্যাদা দেন।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৫ -->
+        <div class="quiz-card" id="q5">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৫</span>
+            <span class="bcs-tag">৩৮তম ও ৩২তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৫. 'বীরবল' কোন লেখকের ছদ্মনাম?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(5, 'ক', false, this)"><span class="opt-letter">ক</span> আবু ইসহাক</button>
+            <button class="opt-btn" onclick="checkAnswer(5, 'খ', false, this)"><span class="opt-letter">খ</span> সুনীল গঙ্গোপাধ্যায়</button>
+            <button class="opt-btn" onclick="checkAnswer(5, 'গ', false, this)"><span class="opt-letter">গ</span> প্রমথনাথ বিশী</button>
+            <button class="opt-btn" onclick="checkAnswer(5, 'ঘ', true, this)"><span class="opt-letter">ঘ</span> প্রমথ চৌধুরী</button>
+          </div>
+          <div class="quiz-explanation" id="exp-5">
+            <strong>ব্যাখ্যা:</strong> প্রমথ চৌধুরীর সাহিত্যিক ছদ্মনাম বীরবল। 'বীরবলের হালখাতা' (১৯০২) গ্রন্থে তিনি প্রথম চলিত রীতির প্রয়োগ ঘটান। অপরদিকে প্রমথনাথ বিশীর ছদ্মনাম প্রণবী।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৬ -->
+        <div class="quiz-card" id="q6">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৬</span>
+            <span class="bcs-tag">৩১তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৬. অশোক সৈয়দ কার ছদ্মনাম?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(6, 'ক', true, this)"><span class="opt-letter">ক</span> আবদুল মান্নান সৈয়দ</button>
+            <button class="opt-btn" onclick="checkAnswer(6, 'খ', false, this)"><span class="opt-letter">খ</span> আবু সয়ীদ আইয়ুব</button>
+            <button class="opt-btn" onclick="checkAnswer(6, 'গ', false, this)"><span class="opt-letter">গ</span> সৈয়দ আজিজুল হক</button>
+            <button class="opt-btn" onclick="checkAnswer(6, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> সৈয়দ শামসুল হক</button>
+          </div>
+          <div class="quiz-explanation" id="exp-6">
+            <strong>ব্যাখ্যা:</strong> আবদুল মান্নান সৈয়দ প্রথম জীবনে 'অশোক সৈয়দ' ছদ্মনামে লিখতেন। তাঁকে বাংলা সাহিত্যের 'পরাবাস্তব কবি' বলা হয়। তাঁর প্রথম কাব্য 'জন্মান্ধ কবিতাগুচ্ছ' (১৯৬৭)। সৈয়দ শামসুল হককে বলা হয় 'সব্যসাচী লেখক'।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৭ -->
+        <div class="quiz-card" id="q7">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৭</span>
+            <span class="bcs-tag">২৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৭. 'বনফুল' কার ছদ্মনাম?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(7, 'ক', false, this)"><span class="opt-letter">ক</span> প্রমথ চৌধুরী</button>
+            <button class="opt-btn" onclick="checkAnswer(7, 'খ', true, this)"><span class="opt-letter">খ</span> বলাইচাঁদ মুখোপাধ্যায়</button>
+            <button class="opt-btn" onclick="checkAnswer(7, 'গ', false, this)"><span class="opt-letter">গ</span> যতীন্দ্রমোহন বাগচী</button>
+            <button class="opt-btn" onclick="checkAnswer(7, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> মোহিতলাল মজুমদার</button>
+          </div>
+          <div class="quiz-explanation" id="exp-7">
+            <strong>ব্যাখ্যা:</strong> বলাইচাঁদ মুখোপাধ্যায়ের সাহিত্যিক ছদ্মনাম বনফুল। তিনি স্কুলে পড়ার সময় থেকেই এ নামে লিখতেন এবং প্রবাসী পত্রিকায় 'একপাতা আধপাতা' গল্প লিখে খ্যাতি পান। মোহিতলাল মজুমদারের ছদ্মনাম কৃত্তিবাস ওঝা ও সত্যসুন্দর দাস।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৮ -->
+        <div class="quiz-card" id="q8">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৮</span>
+            <span class="bcs-tag">১৪তম ও ১১তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৮. বাংলা সাহিত্যে 'ভোরের পাখি' বলা হয় কাকে?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(8, 'ক', false, this)"><span class="opt-letter">ক</span> রবীন্দ্রনাথ ঠাকুর</button>
+            <button class="opt-btn" onclick="checkAnswer(8, 'খ', false, this)"><span class="opt-letter">খ</span> রাজশেখর বসু</button>
+            <button class="opt-btn" onclick="checkAnswer(8, 'গ', false, this)"><span class="opt-letter">গ</span> ঈশ্বরচন্দ্র বিদ্যাসাগর</button>
+            <button class="opt-btn" onclick="checkAnswer(8, 'ঘ', true, this)"><span class="opt-letter">ঘ</span> বিহারীলাল চক্রবর্তী</button>
+          </div>
+          <div class="quiz-explanation" id="exp-8">
+            <strong>ব্যাখ্যা:</strong> বিহারীলাল চক্রবর্তীকে রবীন্দ্রনাথ ঠাকুর বাংলা গীতি কাব্য-ধারার 'ভোরের পাখি' বলে আখ্যায়িত করেন। বিহারীলালের শ্রেষ্ঠ রচনা 'সারদামঙ্গল'। রবীন্দ্রনাথের অন্যান্য ছদ্মনাম: ভানুসিংহ ঠাকুর, আন্নাকালী পাকড়াশী প্রভৃতি। ঈশ্বরচন্দ্র গুপ্তের ছদ্মনাম 'ভ্রমণকারী বন্ধু'।
+          </div>
+        </div>
+      </div>
+
+      <!-- স্কোর বোর্ড -->
+      <div class="score-banner">
+        <div>
+          <span>তোমার কুইজ স্কোর: </span>
+          <span class="score-display" id="user-score">০ / ৮</span>
+        </div>
+        <button class="btn-ctrl" onclick="resetQuiz()">🔄 পুনরায় কুইজ দাও</button>
+      </div>
+    </section>
+
+    <!-- সেকশন ৬: ৩০ সেকেন্ডের রিভিশন ফ্ল্যাশ -->
+    <section id="sec-rev" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">⚡</div>
+          <h2 class="section-title">৩০ সেকেন্ডের সুপারফাস্ট রিভিশন</h2>
+        </div>
+        <span class="section-meta">মেমরি রিফ্লেক্স টেস্ট</span>
+      </div>
+      <p style="font-size:14px; margin-bottom: 12px;">ট্যাপ করে উত্তর মিলিয়ে নাও:</p>
+
+      <div class="revision-grid">
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>হরপ্রসাদ শাস্ত্রী কত সালে 'মহামহোপাধ্যায়' উপাধি পান?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">১৮৯৮ সালে (ব্রিটিশ সরকার কর্তৃক)।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>সুনীল গঙ্গোপাধ্যায়ের টাইম ট্রিলজি কোনগুলো?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">'সেই সময়', 'প্রথম আলো' ও 'পূর্ব-পশ্চিম'।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>মুকুন্দদাসকে 'চারণকবি' উপাধি কে দেন?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">রবীন্দ্রনাথ ঠাকুর ও কাজী নজরুল ইসলাম।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>বিহারীলালকে 'ভোরের পাখি' কে বলেছিলেন?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">কবিগুরু রবীন্দ্রনাথ ঠাকুর।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>'যাযাবর' ও 'হুতোম পেঁচা' কার ছদ্মনাম?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">যাযাবর = বিনয়কৃষ্ণ মুখোপাধ্যায়; হুতোম পেঁচা = কালীপ্রসন্ন সিংহ।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>'পরশুরাম' কার ছদ্মনাম?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">রাজশেখর বসু।</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- সেকশন ৭: বইয়ের অসঙ্গতি ও তথ্য যাচাই তালিকা -->
+    <section id="sec-audit" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">⚠️</div>
+          <h2 class="section-title">🧭 সন্দেহ নিরসন ও সঠিক সমাধান</h2>
+        </div>
+        <span class="section-meta">নির্ভুল প্রস্তুতি ও সঠিক সমাধান</span>
+      </div>
+
+      <div class="alert-box">
+        <div class="alert-header">📌 পরীক্ষার বিভ্রান্তিকর প্রশ্ন ও বিশেষ সতর্কতা:</div>
+        পরীক্ষার্থীদের স্পষ্ট ধারণা দিতে পৃষ্ঠা ১৭৯ থেকে ১৮১-এর মুদ্রণ ত্রুটিগুলো চিহ্নিত করা হলো:
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>📝 বিষয় / প্রশ্ন</th>
+              <th>📖 পৃষ্ঠা / প্রশ্ন নং</th>
+              <th>🔍 সূক্ষ্ম প্যাঁচ ও বিস্তারিত বিশ্লেষণ</th>
+              <th>🎯 পরীক্ষায় আপনার সঠিক সিদ্ধান্ত</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>তারাশঙ্কর বন্দ্যোপাধ্যায় ও দক্ষিণারঞ্জনমিত্র মজুমদারের ছদ্মনাম</strong></td>
+              <td>পৃষ্ঠা ১৭৯-এর মূল সারণি</td>
+              <td>বইয়ের ১৭৯ পৃষ্ঠার ছকে তারাশঙ্কর বন্দ্যোপাধ্যায়ের ঘরে কোনো ছদ্মনাম নেই এবং নিচে দক্ষিণারঞ্জনমিত্র মজুমদারের বিপরীতে সরাসরি 'দৃষ্টিহীন' লেখা হয়েছে।</td>
+              <td>বাংলা সাহিত্যে মধুসূদন মজুমদার 'দৃষ্টিহীন' ছদ্মনামে পরিচিত হলেও বইয়ের ছক যেভাবে বিন্যস্ত, তাতে দৃষ্টিহীন শব্দটি স্থান পেয়েছে। পরীক্ষার প্রশ্নে এলে সতর্কতার সাথে অপশন দেখে উত্তর নির্বাচন করতে হবে।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রশ্ন ৩-এর উত্তর কোড ও অবস্থান</strong></td>
+              <td>প্রশ্ন ৩ (পৃ. ১৭৯–১৮০)</td>
+              <td>বইয়ে ১৭৯ পৃষ্ঠার নিচে প্রশ্ন দিয়ে উত্তর ছাপা হয়েছে <strong>'উ. গ'</strong>। দুই কলাম বিন্যাসে ডানদিকের প্রথম সারিতে সমরেশ বসুর অবস্থান।</td>
+              <td>ব্যাখ্যায় স্পষ্টভাবে লেখা হয়েছে সমরেশ বসুর ছদ্মনাম কালকূট। তাই কালকূট থাকলে নির্ভুলভাবে সমরেশ বসু নির্বাচন করবে।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রশ্ন ৫-এর উত্তর কোড</strong></td>
+              <td>প্রশ্ন ৫ (পৃ. ১৮০)</td>
+              <td>প্রশ্নে উত্তর ছাপা রয়েছে <strong>'উ. ঘ'</strong>। কলাম বিন্যাস অনুযায়ী ডানদিকের নিচে প্রমথ চৌধুরী রয়েছে।</td>
+              <td>ব্যাখ্যা অনুযায়ী বীরবল নিশ্চিতভাবেই প্রমথ চৌধুরীর ছদ্মনাম।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রশ্ন ৭-এর অপশন ও উত্তর লেটার</strong></td>
+              <td>প্রশ্ন ৭ (পৃ. ১৮০)</td>
+              <td>বইয়ে মুদ্রিত উত্তর <strong>'উ. খ'</strong>। কিন্তু অপশন বিন্যাসে খ-তে বলাইচাঁদ মুখোপাধ্যায় মুদ্রিত।</td>
+              <td>বনফুল বলাইচাঁদ মুখোপাধ্যায়েরই সুপ্রসিদ্ধ ছদ্মনাম।</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ফুটার -->
+    <footer style="text-align: center; margin-top: 40px; color: var(--text-muted); font-size: 13px;">
+      <p>বিসিএস প্রিলিমিনারি বিষয়ভিত্তিক জব সল্যুশন | অধ্যায়: সাহিত্যিক ছদ্মনাম ও উপাধি (পৃষ্ঠা ১৭৯–১৮১)</p>
+      <p style="margin-top: 4px;">Single-file Interactive BCS E-Book Edition • সম্পূর্ণ স্বয়ংসম্পূর্ণ ও অফলাইন উপযোগী</p>
+    </footer>
+  </div>
+
+  <!-- স্ক্রিপ্ট: ইন্টারঅ্যাকটিভিটি -->
+  <script>
+    // স্ক্রল প্রগ্রেস বার
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    // থিম টগল
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const target = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', target);
+      try {
+        localStorage.setItem('theme_mode_pen_names', target);
+      } catch(e) {}
+    }
+
+    // ফন্ট সাইজ নিয়ন্ত্রণ
+    let currentScale = 100;
+    function changeFontSize(delta) {
+      if (delta === 0) currentScale = 100;
+      else currentScale += delta * 7;
+      
+      if (currentScale < 80) currentScale = 80;
+      if (currentScale > 130) currentScale = 130;
+      
+      document.documentElement.style.setProperty('--font-scale', currentScale + '%');
+    }
+
+    // সূচিপত্র টগল
+    function toggleToc() {
+      const panel = document.getElementById('toc-panel');
+      panel.classList.toggle('active');
+    }
+
+    // রিভিশন উত্তর টগল
+    function toggleRev(element) {
+      const ans = element.nextElementSibling;
+      const icon = element.querySelector('span:last-child');
+      if (ans.classList.contains('active')) {
+        ans.classList.remove('active');
+        icon.textContent = '➕';
+      } else {
+        ans.classList.add('active');
+        icon.textContent = '➖';
+      }
+    }
+
+    // কুইজ ইন্টারঅ্যাকশন
+    let score = 0;
+    const answeredMap = {};
+
+    function checkAnswer(qNum, selectedLetter, isCorrect, btnElement) {
+      if (answeredMap[qNum]) return;
+      answeredMap[qNum] = true;
+
+      const card = document.getElementById(`q${qNum}`);
+      const buttons = card.querySelectorAll('.opt-btn');
+
+      buttons.forEach(btn => {
+        btn.disabled = true;
+      });
+
+      if (isCorrect) {
+        btnElement.classList.add('correct');
+        score++;
+      } else {
+        btnElement.classList.add('wrong');
+        buttons.forEach(btn => {
+          if (btn.getAttribute('onclick').includes('true')) {
+            btn.classList.add('correct');
+          }
+        });
+      }
+
+      const exp = document.getElementById(`exp-${qNum}`);
+      if (exp) exp.classList.add('show');
+
+      updateScoreDisplay();
+    }
+
+    function updateScoreDisplay() {
+      const scoreEl = document.getElementById('user-score');
+      scoreEl.textContent = `${score} / ৮`;
+      if (score === 8) {
+        scoreEl.innerHTML = `${score} / ৮ <span style="font-size:14px;color:var(--success);">🎉 অসাধারণ! ৮টি উত্তরই সঠিক হয়েছে!</span>`;
+      }
+    }
+
+    function resetQuiz() {
+      score = 0;
+      for (let key in answeredMap) delete answeredMap[key];
+      
+      const buttons = document.querySelectorAll('.opt-btn');
+      buttons.forEach(btn => {
+        btn.disabled = false;
+        btn.classList.remove('correct', 'wrong');
+      });
+
+      const exps = document.querySelectorAll('.quiz-explanation');
+      exps.forEach(exp => exp.classList.remove('show'));
+
+      updateScoreDisplay();
+      window.location.hash = 'sec-quiz';
+    }
+
+    (function init() {
+      try {
+        const savedTheme = localStorage.getItem('theme_mode_pen_names');
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+      } catch(e) {}
+    })();
+  </script>
+  <!-- Smart E-Book Navigation Component -->
+  <script src="nav-component.js"></script>
+</body>
+</html>

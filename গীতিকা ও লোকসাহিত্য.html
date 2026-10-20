@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>গীতিকা ও লোকসাহিত্য - বিসিএস প্রস্তুতি</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ══════ CSS ভ্যারিয়েবল ও থিম কালার (পল্লিমাটির সবুজ ও সোনালি খড়ের প্যালেট) ══════ */
+    :root {
+      --font-scale: 100%;
+      --bg-base: #f7faf8;
+      --bg-surface: #ffffff;
+      --bg-surface-alt: #eef6f0;
+      --text-main: #142319;
+      --text-muted: #4b6353;
+      --primary: #1b5e20; /* পল্লির স্নিগ্ধ শ্যামল সবুজ */
+      --primary-light: #dcfce7;
+      --accent: #b45309; /* লোকগাথার সোনালি ব্রোঞ্জ */
+      --accent-light: #fef3c7;
+      --success: #15803d;
+      --success-light: #dcfce7;
+      --danger: #b91c1c;
+      --danger-light: #fee2e2;
+      --warning: #c2410c;
+      --warning-light: #ffedd5;
+      --border-color: #cbdad0;
+      --card-border: #9db7a5;
+      --shadow: 0 4px 14px rgba(20, 50, 30, 0.08);
+      --shadow-hover: 0 8px 24px rgba(20, 50, 30, 0.14);
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg-base: #09130c;
+      --bg-surface: #102015;
+      --bg-surface-alt: #162b1d;
+      --text-main: #f1f8f3;
+      --text-muted: #9bb7a3;
+      --primary: #4ade80;
+      --primary-light: #163821;
+      --accent: #fbbf24;
+      --accent-light: #33240e;
+      --success: #4ade80;
+      --success-light: #12381f;
+      --danger: #f87171;
+      --danger-light: #3d1416;
+      --warning: #fb923c;
+      --warning-light: #381e0e;
+      --border-color: #26432f;
+      --card-border: #385d43;
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+      --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.7);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: var(--font-scale);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans Bengali', 'Kalpurush', Vrinda, sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.8;
+      min-width: 320px;
+      padding-bottom: 80px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    mark {
+      background-color: #fde047;
+      color: #0f172a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    /* ══════ প্রগ্রেস বার ও কন্ট্রোল বার ══════ */
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: transparent;
+      z-index: 1000;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.1s;
+    }
+
+    .control-bar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: var(--bg-surface);
+      border-bottom: 2px solid var(--border-color);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .control-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-ctrl {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .btn-ctrl:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* ══════ সূচি ড্রপডাউন ══════ */
+    #toc-panel {
+      display: none;
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-hover);
+    }
+
+    #toc-panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .toc-item a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      background: var(--bg-surface-alt);
+      transition: var(--transition);
+    }
+
+    .toc-item a:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* ══════ হিরো ব্যানার ══════ */
+    .hero-banner {
+      background: linear-gradient(135deg, #14532d, #052e16);
+      color: #ffffff;
+      padding: 34px 20px;
+      border-radius: 20px;
+      margin: 24px 0;
+      box-shadow: var(--shadow);
+      border: 3px solid #22c55e;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: #f59e0b;
+      color: #142319;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+      font-size: 15.5px;
+      color: #bbf7d0;
+      margin-bottom: 20px;
+    }
+
+    .study-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .step-box {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+
+    .step-box strong {
+      display: block;
+      color: #fde047;
+      margin-bottom: 2px;
+    }
+
+    /* ══════ সেকশন সাধারণ স্টাইল ══════ */
+    .study-section {
+      margin-top: 36px;
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .section-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .section-meta {
+      font-size: 13px;
+      background: var(--bg-surface-alt);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    /* ══════ বিসিএস ট্রেন্ড গ্রিড ══════ */
+    .bcs-matrix {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .bcs-cell {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .bcs-cell.active {
+      border: 2px solid var(--primary);
+      background: var(--primary-light);
+    }
+
+    .bcs-exam {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .bcs-cell.active .bcs-exam {
+      color: var(--primary);
+    }
+
+    .bcs-qcount {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 4px;
+    }
+
+    /* ══════ কার্ড ডিজাইন ══════ */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .info-card {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-left: 6px solid var(--primary);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .info-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    .card-heading {
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .fact-pill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .fact-item {
+      font-size: 14.5px;
+      background: var(--bg-surface-alt);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+    }
+
+    /* ══════ ডায়াগ্রাম / নো-কাটা ফ্লেক্স ভিউ ══════ */
+    .flow-connector {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--bg-surface-alt);
+      padding: 14px;
+      border-radius: 10px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .flow-badge {
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 13.5px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* ══════ ছক ডিজাইন ══════ */
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      margin: 16px 0;
+      border-radius: 10px;
+      border: 2px solid var(--border-color);
+    }
+
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14.5px;
+    }
+
+    .custom-table th {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 12px 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .custom-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+
+    .custom-table tr:nth-child(even) td {
+      background: var(--bg-surface-alt);
+    }
+
+    .custom-table tr:hover td {
+      background: var(--primary-light);
+    }
+
+    /* ══════ উদ্ধৃতি ও উক্তি বক্স ══════ */
+    .quote-box {
+      background: var(--bg-surface-alt);
+      border-left: 4px solid var(--accent);
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin: 12px 0;
+      font-size: 14.5px;
+    }
+
+    .quote-box strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    /* ══════ ফাঁদ ও সতর্কতা বক্স ══════ */
+    .trap-box {
+      background: var(--danger-light);
+      border: 2px solid var(--danger);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+      color: var(--text-main);
+    }
+
+    .trap-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--danger);
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .alert-box {
+      background: var(--warning-light);
+      border: 2px solid var(--warning);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+
+    .alert-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--warning);
+      margin-bottom: 6px;
+    }
+
+    /* ══════ কুইজ সেকশন ══════ */
+    .quiz-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .quiz-card {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .quiz-q-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .bcs-tag {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .quiz-question {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .opt-btn {
+      background: var(--bg-surface-alt);
+      border: 1.5px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14.5px;
+      font-family: inherit;
+      color: var(--text-main);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--border-color);
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--text-main);
+      flex-shrink: 0;
+    }
+
+    .opt-btn.correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+      color: var(--success) !important;
+      font-weight: 700;
+    }
+
+    .opt-btn.correct .opt-letter {
+      background: var(--success);
+      color: #fff;
+    }
+
+    .opt-btn.wrong {
+      background: var(--danger-light) !important;
+      border-color: var(--danger) !important;
+      color: var(--danger) !important;
+    }
+
+    .opt-btn.wrong .opt-letter {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .quiz-explanation {
+      display: none;
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 8px;
+      background: var(--bg-surface-alt);
+      border-left: 4px solid var(--primary);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .quiz-explanation.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    /* ══════ রিভিশন ফ্ল্যাশকার্ড ══════ */
+    .revision-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .rev-card {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .rev-q {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .rev-ans {
+      display: none;
+      font-size: 14px;
+      padding-top: 6px;
+      border-top: 1px dashed var(--border-color);
+      color: var(--text-main);
+    }
+
+    .rev-ans.active {
+      display: block;
+    }
+
+    .score-banner {
+      background: var(--bg-surface);
+      border: 2px solid var(--primary);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 24px;
+      box-shadow: var(--shadow);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .score-display {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    @media print {
+      .control-bar, #progress-container, .btn-ctrl, .opt-btn {
+        display: none !important;
+      }
+      body {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .quiz-explanation {
+        display: block !important;
+      }
+      .study-section {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        page-break-inside: avoid;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DESIGN PLAN: 
+    ১. বিষয়ের ধরন: বাংলা সাহিত্যের লোকগাথা, ব্যালাড, গীতিকা (মৈমনসিংহ গীতিকা, পূর্ববঙ্গ গীতিকা), Ode এবং আধুনিক কাব্যধারা (পৃষ্ঠা ৮৯)।
+    ২. সবচেয়ে কঠিন/গুলিয়ে ফেলার জায়গা: (ক) মৈমনসিংহ গীতিকার সংগ্রাহক (চন্দ্রকুমার দে) বনাম সম্পাদক (দীনেশচন্দ্র সেন) (খ) অনূদিত ভাষার সংখ্যা (২৩টি ভাষা) (গ) মৈমনসিংহ গীতিকার ১০টি পালার নাম ও পূর্ববঙ্গ গীতিকার পালার নাম আলাদা করা (ঘ) Ode (গাথাকবিতা/কোরাসগান/বৃন্দগীতি) বনাম Ballad (কাহিনিমূলক গীতিকা)।
+    ৩. নির্বাচিত মডিউল: বিসিএস প্রশ্ন পরিসংখ্যান ছক, গীতিকার ৩ প্রকারভেদ, মৈমনসিংহ গীতিকার ১০টি পালার তালিকা, আন্তর্জাতিক পণ্ডিতদের প্রশংসাপত্র ও শহীদুল্লাহর উক্তি, পূর্ববঙ্গ গীতিকার তালিকা, ৫টি পূর্ণাঙ্গ ইন্টারঅ্যাকটিভ বিসিএস কুইজ, ৩০ সেকেন্ডের রিভিশন ও অসঙ্গতি যাচাই তালিকা।
+    ৪. রঙের মেজাজ: লোকায়ত পল্লির স্নিগ্ধ শ্যামল সবুজ (#1b5e20) এবং লোকগাথার সোনালি ব্রোঞ্জ (#b45309)।
+    ৫. হিরো ও মাসকট: হাওর ও ভাটি অঞ্চলের জারি-সারি আর বাঁশের বাঁশির সুর রূপক।
+  -->
+
+  <!-- প্রগ্রেস ট্র্যাকার -->
+  <div id="progress-container"><div id="progress-bar"></div></div>
+
+  <!-- স্টিকি কন্ট্রোল বার -->
+  <div class="control-bar">
+    <div class="container control-content">
+      <div class="control-group">
+        <button class="btn-ctrl" onclick="toggleToc()">📖 সূচিপত্র</button>
+        <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn">🌓 মোড</button>
+      </div>
+      <div class="control-group">
+        <button class="btn-ctrl" onclick="changeFontSize(-1)">A-</button>
+        <button class="btn-ctrl" onclick="changeFontSize(0)">A</button>
+        <button class="btn-ctrl" onclick="changeFontSize(1)">A+</button>
+        <button class="btn-ctrl" onclick="window.print()">🖨️ প্রিন্ট</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- ড্রপডাউন সূচি -->
+    <div id="toc-panel">
+      <strong style="color:var(--primary); font-size:16px;">অধ্যায়ের প্রধান অংশসমূহ:</strong>
+      <ul class="toc-list">
+        <li class="toc-item"><a href="#sec-stat" onclick="toggleToc()">📊 বিসিএস পরীক্ষার ট্রেন্ড</a></li>
+        <li class="toc-item"><a href="#sec-mymen" onclick="toggleToc()">🌾 মৈমনসিংহ গীতিকা ও বিশ্বস্বীকৃতি</a></li>
+        <li class="toc-item"><a href="#sec-palas" onclick="toggleToc()">📜 মৈমনসিংহ বনাম পূর্ববঙ্গ গীতিকার পালা</a></li>
+        <li class="toc-item"><a href="#sec-forms" onclick="toggleToc()">🎭 Ode, Ballad ও আধুনিক গীতিকবিতা</a></li>
+        <li class="toc-item"><a href="#sec-quiz" onclick="toggleToc()">📝 ৫টি বিসিএস MCQ কুইজ</a></li>
+        <li class="toc-item"><a href="#sec-rev" onclick="toggleToc()">⚡ ৩০ সেকেন্ডের রিভিশন ফ্ল্যাশ</a></li>
+        <li class="toc-item"><a href="#sec-audit" onclick="toggleToc()">⚠️ অসঙ্গতি ও তথ্য যাচাই তালিকা</a></li>
+      </ul>
+    </div>
+
+    <!-- হিরো ব্যানার -->
+    <header class="hero-banner">
+      <span class="hero-tag">বিসিএস স্পেশাল টপিক মাস্টারক্লাস</span>
+      <h1 class="hero-title">গীতিকা ও লোকসাহিত্য</h1>
+      <p class="hero-subtitle">মৈমনসিংহ গীতিকা, পূর্ববঙ্গ গীতিকা, ব্যালাড (Ballad), ওড (Ode) ও আধুনিক গীতিধারার পূর্ণাঙ্গ প্রস্তুতি নোট (পৃষ্ঠা ৮৯)</p>
+      
+      <div class="study-steps">
+        <div class="step-box">
+          <strong>ধাপ ১: ৩ মিনিটে স্ক্যান</strong>
+          ২৩টি ভাষায় অনুবাদ, চন্দ্রকুমার দের সংগ্রহ এবং ১৯২৩ সালের প্রকাশনা দেখে নাও।
+        </div>
+        <div class="step-box">
+          <strong>ধাপ ২: পালা ও টার্ম মুখস্থ</strong>
+          মৈমনসিংহ গীতিকার ১০টি পালা এবং Ode ও Ballad-এর সংজ্ঞা স্পষ্ট করো।
+        </div>
+        <div class="step-box">
+          <strong>ধাপ ৩: কুইজে ১০০%</strong>
+          বিগত বিসিএসের ৫টি প্রশ্নে অংশ নিয়ে শতভাগ নিশ্চিত প্রস্তুতি নাও।
+        </div>
+      </div>
+    </header>
+
+    <!-- সেকশন ১: বিসিএস ট্রেন্ড -->
+    <section id="sec-stat" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📊</div>
+          <h2 class="section-title">বিসিএস পরীক্ষার প্রশ্ন-পরিসংখ্যান</h2>
+        </div>
+        <span class="section-meta">১০ম থেকে ৫০তম বিসিএস বিশ্লেষণ</span>
+      </div>
+      <p style="font-size: 14.5px; margin-bottom: 12px;">
+        বইয়ের সূচি অনুযায়ী গীতিকা ও সংশ্লিষ্ট অংশ থেকে বিসিএস প্রিলিমিনারিতে আসা প্রশ্নের সংখ্যা:
+      </p>
+
+      <div class="bcs-matrix">
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৫০তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৩৭তম বিসিএস</div>
+          <div class="bcs-qcount">২ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">১০ম-৩৪তম বিসিএস</div>
+          <div class="bcs-qcount">২ টি</div>
+        </div>
+        <div class="bcs-cell">
+          <div class="bcs-exam">অন্যান্য বিসিএস</div>
+          <div class="bcs-qcount">-</div>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">
+        <em>মোট সংকলিত প্রশ্ন সংখ্যা: ৫টি (ব্যাখ্যাসহ পৃষ্ঠা ৮৯ থেকে হুবহু সংকলিত)</em>
+      </p>
+    </section>
+
+    <!-- সেকশন ২: মৈমনসিংহ গীতিকা ও বিশ্বস্বীকৃতি -->
+    <section id="sec-mymen" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">🌾</div>
+          <h2 class="section-title">মৈমনসিংহ গীতিকা ও বিশ্বসাহিত্যে এর প্রভাব</h2>
+        </div>
+        <span class="section-meta">৫০তম ও ৩৭তম বিসিএস ফোকাস</span>
+      </div>
+
+      <div class="card-grid">
+        <div class="info-card">
+          <span class="card-badge">সংগ্রহ ও প্রকাশনা</span>
+          <h3 class="card-heading">সংগ্রাহক ও সম্পাদক</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>সংগ্রাহক:</strong> <strong>চন্দ্রকুমার দে</strong> (১৮৮৯–১৯৪৬); বৃহত্তর ময়মনসিংহের নেত্রকোনা জেলার রাঘবপুর গ্রামে জন্ম। কলকাতা বিশ্ববিদ্যালয়ের অধ্যাপক ড. দীনেশচন্দ্র সেনের আগ্রহে তিনি আমৃত্যু এ পালাগুলো সংগ্রহ করেন।
+            </div>
+            <div class="fact-item">
+              <strong>সম্পাদক:</strong> <strong>দীনেশচন্দ্র সেন</strong>। তিনি মৈমনসিংহ গীতিকায় একটি দীর্ঘ ভূমিকা লিখেছিলেন।
+            </div>
+            <div class="fact-item">
+              <strong>প্রকাশকাল ও গ্রন্থরূপ:</strong> ১০টি পালাগান নিয়ে ১৯২৩ সালের মার্চে কলকাতা বিশ্ববিদ্যালয় থেকে <em>'Eastern Bengal Ballads-Mymensing (Vol-1, Part-1)'</em> নামে প্রথম প্রকাশিত হয়।
+            </div>
+            <div class="fact-item">
+              <strong>বিশ্বভাষায় রূপান্তর:</strong> মৈমনসিংহ গীতিকা বিশ্বের <mark>২৩টি ভাষায়</mark> অনূদিত ও মুদ্রিত হয়।
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <span class="card-badge">গীতিকার প্রকারভেদ ও প্রশংসা</span>
+          <h3 class="card-heading">আন্তর্জাতিক খ্যাতি ও প্রকার</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>বাংলা সাহিত্যের ৩ প্রকার গীতিকা:</strong> ১. নাথ গীতিকা, ২. মৈমনসিংহ-গীতিকা এবং ৩. পূর্ববঙ্গ গীতিকা।
+            </div>
+            <div class="fact-item">
+              <strong>প্রশংসাকারী আন্তর্জাতিক মনীষী:</strong> মনীষী রোমা রোলাঁ, ড. সিলভা লেভি, স্যার জর্জ গ্রিয়ারসন (গ্রীয়ারসন), উইলিয়াম রদেনস্টাইন, ফ্রান্সিস এইচ. স্ক্রাইন, ই.এফ. ওটেন প্রমুখ ভূয়সী প্রশংসা করেন।
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quote-box">
+        <strong>ড. মুহম্মদ শহীদুল্লাহর বিখ্যাত মন্তব্য ('বাংলা সাহিত্যের কথা' গ্রন্থ):</strong>
+        <p><mark>"গীতিকাগুলোর সাহিত্যিক মূল্য বিদেশী সাহিত্য রসিকেরা কি দিয়াছেন, তাহা জানিলে বোধ হয় আমরা আমাদের ঘরের জিনিসকে একটু বেশি আদর করিব।"</mark></p>
+      </div>
+    </section>
+
+    <!-- সেকশন ৩: পালাসমূহের তালিকা -->
+    <section id="sec-palas" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📜</div>
+          <h2 class="section-title">মৈমনসিংহ গীতিকা বনাম পূর্ববঙ্গ গীতিকার পালাসমূহ</h2>
+        </div>
+        <span class="section-meta">চন্দ্রকুমার দে সংগৃহীত পালামালা</span>
+      </div>
+
+      <div class="trap-box">
+        <div class="trap-header">⚠️ সাবধান! পরীক্ষার কমন বিভ্রান্তি</div>
+        মৈমনসিংহ গীতিকায় স্থান পেয়েছে <strong>১০টি পালা</strong>। অন্যদিকে দীনেশচন্দ্র সেনের সম্পাদনায় ১৯২৬ সালে প্রকাশিত হয় <strong>'পূর্ববঙ্গ-গীতিকা'</strong>। কোন পালাটি কোন সংকলনের, তা নিচের ছক থেকে মুখস্থ করে নাও:
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>সংকলনের নাম</th>
+              <th>সম্পাদনা ও প্রকাশ সাল</th>
+              <th>অন্তর্ভুক্ত পালাসমূহের নাম (বইয়ের নোট অনুযায়ী)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>মৈমনসিংহ গীতিকা</strong></td>
+              <td>দীনেশচন্দ্র সেন (১৯২৩ খ্রি.)</td>
+              <td>
+                • মহুয়া<br>
+                • মলুয়া<br>
+                • চন্দ্রাবতী<br>
+                • কমলা<br>
+                • দেওয়ান ভাবনা<br>
+                • দস্যু কেনারামের পালা (দস্যু কেনারাম)<br>
+                • রূপবতী<br>
+                • কঙ্ক ও লীলা<br>
+                • কাজলরেখা<br>
+                • দেওয়ান মদিনা<br>
+                <em>(চন্দ্রকুমার দের সংগ্রহ তালিকায় 'ধোপার পাট'-এর কথাও উল্লেখিত)</em>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>পূর্ববঙ্গ-গীতিকা</strong></td>
+              <td>দীনেশচন্দ্র সেন (১৯২৬ খ্রি.)</td>
+              <td>
+                ভেলুয়া সুন্দরী, মইষাল বন্ধু, কমলারাণী, দেওয়ান ঈসা খাঁ, ফিরোজ খাঁ দেওয়ান, আয়না বিবি, শ্যামরায়, শিলাদেবী, আন্ধা বন্ধু, বন্ডুলার বারমাসী, রতন ঠাকুর, পীর বাতাসী, জিবালনি, সোনারামের জন্ম ও ভারাইয়া রাজা।
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- সেকশন ৪: Ode, Ballad ও গীতিকবিতা -->
+    <section id="sec-forms" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">🎭</div>
+          <h2 class="section-title">সাহিত্য রূপভেদ: Ode, Ballad ও আধুনিক গীতিধারা</h2>
+        </div>
+        <span class="section-meta">৩৭তম, ২৬তম ও ১২তম বিসিএস</span>
+      </div>
+
+      <div class="flow-connector">
+        <div class="flow-step">
+          <span class="flow-badge">Ode (গাথাকবিতা)</span>
+          <div>
+            <strong>সংজ্ঞা ও বৈশিষ্ট্য:</strong> Ode এক প্রকার কবিতাবিশেষ (গাথাকবিতা)। সাধারণত অনিয়মিত ছন্দে রচিত ও মহৎ অনুভূতি প্রকাশক এই কবিতা প্রায়ই কোনো বিশেষ ঘটনা বা বস্তুর মহিমাকীর্তন করে।<br>
+            <strong>উৎপত্তি ও পরিবেশনা:</strong> এর জন্মভূমি মূলত <strong>গ্রিস</strong>, পরে ইংরেজি সাহিত্যে প্রবেশ ঘটে। গাওয়ার সময় বিভিন্ন বাদ্যযন্ত্রের ঐক্যতানের সাথে সমবেত কণ্ঠে গাওয়া হয় বলে একে <mark>কোরাসগান</mark>, সমবেত সংগীত বা বৃন্দগীতিও বলা হয়।
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-badge">Ballad (গীতিকা)</span>
+          <div>
+            <strong>সংজ্ঞা ও বৈশিষ্ট্য:</strong> এক শ্রেণির কাহিনিমূলক লোকগীতি বাংলা সাহিত্যে <mark>'গীতিকা'</mark> নামে পরিচিত। এর মূল ভিত্তি জনশ্রুতিমূলক বিষয় এবং বর্ণনায় লৌকিক ছন্দ ব্যবহৃত হয়। ইংরেজি 'Ballad' ও বাংলা 'গীতিকা' প্রায় সমধর্মী শব্দ। এতে সুরের চেয়ে কাহিনিই বেশি প্রাধান্য পায় (যেমন: মহুয়া, মলুয়া, দেওয়ানা মদিনা)।<br>
+            <em>লোকগীতি: লোকমানস থেকে উদ্ভূত সংগীত যা শ্রুতি ও স্মৃতি নির্ভর (যেমন: ভাটিয়ালি, ভাওয়াইয়া)।</em>
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-badge">গীতি কবিতা</span>
+          <div>
+            <strong>সর্বাধিক সমৃদ্ধ ধারা:</strong> কবির মনের একান্ত অনুভূতি, সুখ-দুঃখ, আনন্দ-বেদনা যে কবিতায় প্রকাশ পায় তা-ই গীতি কবিতা। আধুনিক যুগে সৃষ্ট এই <strong>গীতিকবিতাই আধুনিক যুগের সবচেয়ে সমৃদ্ধ ধারা</strong>।<br>
+            <em>উল্লেখ্য, মধ্যযুগের সবচেয়ে সমৃদ্ধ সাহিত্যধারা হলো বৈষ্ণব সাহিত্যধারা। নাটক, ছোটগল্প, প্রবন্ধ—সবগুলোই আধুনিক যুগের সৃষ্টি এবং বাংলা ছোটগল্পের জনক হলেন রবীন্দ্রনাথ ঠাকুর।</em>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- সেকশন ৫: বিগত বিসিএস কুইজ -->
+    <section id="sec-quiz" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📝</div>
+          <h2 class="section-title">বিগত বিসিএস পরীক্ষার পূর্ণাঙ্গ প্রশ্নব্যাংক</h2>
+        </div>
+        <span class="section-meta">৫টি হুবহু প্রশ্ন</span>
+      </div>
+
+      <p style="margin-bottom: 16px; font-size:14.5px;">
+        সঠিক উত্তরের অপশনে ক্লিক করে যাচাই করো। ক্লিক করার সাথে সাথে সঠিক উত্তর ও বইয়ের পুঙ্খানুপুঙ্খ ব্যাখ্যা দেখতে পাবে:
+      </p>
+
+      <div class="quiz-container">
+        <!-- প্রশ্ন ১ -->
+        <div class="quiz-card" id="q1">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০১</span>
+            <span class="bcs-tag">৫০তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">১. মৈমনসিংহ গীতিকা কতটি ভাষায় অনূদিত হয়েছে?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(1, 'ক', true, this)"><span class="opt-letter">ক</span> ২৩টি</button>
+            <button class="opt-btn" onclick="checkAnswer(1, 'খ', false, this)"><span class="opt-letter">খ</span> ২০টি</button>
+            <button class="opt-btn" onclick="checkAnswer(1, 'গ', false, this)"><span class="opt-letter">গ</span> ২২টি</button>
+            <button class="opt-btn" onclick="checkAnswer(1, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> ২৫টি</button>
+          </div>
+          <div class="quiz-explanation" id="exp-1">
+            <strong>ব্যাখ্যা:</strong> মৈমনসিংহ গীতিকা বিশ্বের ২৩টি ভাষায় মুদ্রিত ও অনূদিত হয়। ড. দীনেশচন্দ্র সেনের সম্পাদনায় ১৯২৩ সালে কলকাতা বিশ্ববিদ্যালয় থেকে এটি প্রথম প্রকাশিত হয়। এর সংগ্রাহক ছিলেন ময়মনসিংহের চন্দ্রকুমার দে।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২ -->
+        <div class="quiz-card" id="q2">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০২</span>
+            <span class="bcs-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">২. 'পূর্ববঙ্গ গীতিকা'র লোকপালাসমূহের সংগ্রাহক কে?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(2, 'ক', false, this)"><span class="opt-letter">ক</span> দক্ষিণারঞ্জন মিত্র মজুমদার</button>
+            <button class="opt-btn" onclick="checkAnswer(2, 'খ', false, this)"><span class="opt-letter">খ</span> হরপ্রসাদ শাস্ত্রী</button>
+            <button class="opt-btn" onclick="checkAnswer(2, 'গ', true, this)"><span class="opt-letter">গ</span> চন্দ্রকুমার দে</button>
+            <button class="opt-btn" onclick="checkAnswer(2, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> দীনেশচন্দ্র সেন</button>
+          </div>
+          <div class="quiz-explanation" id="exp-2">
+            <strong>ব্যাখ্যা:</strong> চন্দ্রকুমার দে (১৮৮৯-১৯৪৬) বৃহত্তর ময়মনসিংহের নেত্রকোনা জেলার রাঘবপুর গ্রামে জন্মগ্রহণ করেন। তিনি আমৃত্যু পল্লীর লোকসাহিত্য সংগ্রহে নিয়োজিত থেকে বহু পালা সংগ্রহ করেন। সেগুলির অধিকাংশই দীনেশচন্দ্র সেনের সম্পাদনায় মৈমনসিংহ গীতিকা (১৯২৩) ও পূর্ববঙ্গ-গীতিকা (১৯২৬) নামে প্রকাশিত হয়। অন্যদিকে দক্ষিণারঞ্জন মিত্র মজুমদার 'ঠাকুরমার ঝুলি'র সংগ্রাহক এবং হরপ্রসাদ শাস্ত্রী চর্যাপদের আবিষ্কারক।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩ -->
+        <div class="quiz-card" id="q3">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৩</span>
+            <span class="bcs-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৩. Ode কী?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(3, 'ক', false, this)"><span class="opt-letter">ক</span> শোককবিতা</button>
+            <button class="opt-btn" onclick="checkAnswer(3, 'খ', false, this)"><span class="opt-letter">খ</span> খণ্ড কবিতা</button>
+            <button class="opt-btn" onclick="checkAnswer(3, 'গ', false, this)"><span class="opt-letter">গ</span> পত্রকাব্য</button>
+            <button class="opt-btn" onclick="checkAnswer(3, 'ঘ', true, this)"><span class="opt-letter">ঘ</span> কোরাসগান</button>
+          </div>
+          <div class="quiz-explanation" id="exp-3">
+            <strong>ব্যাখ্যা:</strong> Ode কবিতাবিশেষ (গাথাকবিতা)। এটি সাধারণত অনিয়মিত ছন্দে রচিত ও মহৎ অনুভূতি প্রকাশক। এর জন্মভূমি গ্রিস। গাওয়ার সময় বিভিন্ন বাদ্যযন্ত্রের সাথে সমবেতকণ্ঠে গাওয়া হয় বিধায় একে কোরাসগান, সমবেত সংগীত বা বৃন্দগীতিও বলা হয়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৪ -->
+        <div class="quiz-card" id="q4">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৪</span>
+            <span class="bcs-tag">২৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৪. Ballad কি?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(4, 'ক', false, this)"><span class="opt-letter">ক</span> লোকগীতি</button>
+            <button class="opt-btn" onclick="checkAnswer(4, 'খ', false, this)"><span class="opt-letter">খ</span> লোকগাথা</button>
+            <button class="opt-btn" onclick="checkAnswer(4, 'গ', true, this)"><span class="opt-letter">গ</span> গীতিকা</button>
+            <button class="opt-btn" onclick="checkAnswer(4, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> গাথা</button>
+          </div>
+          <div class="quiz-explanation" id="exp-4">
+            <strong>ব্যাখ্যা:</strong> এক শ্রেণির কাহিনিমূলক লোকগীতি বাংলা সাহিত্যে 'গীতিকা' নামে পরিচিত। বাংলা 'গীতিকা' ও ইংরেজি 'Ballad' শব্দ দুটি প্রায় সমধর্মী। এতে গানের সুরের চেয়ে কাহিনিই বেশি প্রাধান্য পায় (যেমন: মহুয়া, মলুয়া, দেওয়ান মদিনা)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৫ -->
+        <div class="quiz-card" id="q5">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৫</span>
+            <span class="bcs-tag">১২তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৫. বাংলা সাহিত্যের সর্বাধিক সমৃদ্ধ ধারা—</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(5, 'ক', false, this)"><span class="opt-letter">ক</span> নাটক</button>
+            <button class="opt-btn" onclick="checkAnswer(5, 'খ', false, this)"><span class="opt-letter">খ</span> ছোট গল্প</button>
+            <button class="opt-btn" onclick="checkAnswer(5, 'গ', false, this)"><span class="opt-letter">গ</span> প্রবন্ধ</button>
+            <button class="opt-btn" onclick="checkAnswer(5, 'ঘ', true, this)"><span class="opt-letter">ঘ</span> গীতি কবিতা</button>
+          </div>
+          <div class="quiz-explanation" id="exp-5">
+            <strong>ব্যাখ্যা:</strong> কবির মনের একান্ত অনুভূতি, সুখ-দুঃখ, আনন্দ-বেদনা যে কবিতায় প্রকাশ পায় তা-ই গীতিকবিতা। আধুনিক যুগে সৃষ্ট এই গীতিকবিতাই এই যুগের সবচেয়ে সমৃদ্ধ ধারা। উল্লেখ্য, মধ্যযুগের সবচেয়ে সমৃদ্ধ সাহিত্যধারা বৈষ্ণব সাহিত্যধারা। এছাড়া নাটক, ছোটগল্প, প্রবন্ধ আধুনিক যুগের সৃষ্টি এবং রবীন্দ্রনাথ ঠাকুর বাংলা ছোটগল্পের জনক।
+          </div>
+        </div>
+      </div>
+
+      <!-- স্কোর বোর্ড -->
+      <div class="score-banner">
+        <div>
+          <span>তোমার কুইজ স্কোর: </span>
+          <span class="score-display" id="user-score">০ / ৫</span>
+        </div>
+        <button class="btn-ctrl" onclick="resetQuiz()">🔄 পুনরায় কুইজ দাও</button>
+      </div>
+    </section>
+
+    <!-- সেকশন ৬: ৩০ সেকেন্ডের রিভিশন ফ্ল্যাশ -->
+    <section id="sec-rev" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">⚡</div>
+          <h2 class="section-title">৩০ সেকেন্ডের সুপারফাস্ট রিভিশন</h2>
+        </div>
+        <span class="section-meta">মেমরি রিফ্লেক্স টেস্ট</span>
+      </div>
+      <p style="font-size:14px; margin-bottom: 12px;">ট্যাপ করে সাথে সাথে উত্তর মিলিয়ে নাও:</p>
+
+      <div class="revision-grid">
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>মৈমনসিংহ গীতিকার প্রথম খণ্ড কত সালে বই আকারে প্রকাশিত হয়?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">১৯২৩ সালের মার্চে কলকাতা বিশ্ববিদ্যালয় থেকে।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>মৈমনসিংহ গীতিকা সংগ্রহের মূল উদ্যোক্তা ও সংগ্রাহক কারা?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">উদ্যোক্তা/সম্পাদক ড. দীনেশচন্দ্র সেন এবং সংগ্রাহক চন্দ্রকুমার দে।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>ইংরেজি Ballad শব্দের বাংলা প্রতিশব্দ কী?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">গীতিকা (কাহিনিমূলক লোকগীতি)।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>Ode-এর উৎপত্তি কোন দেশে এবং সমবেত পরিবেশনায় একে কী বলে?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">উৎপত্তি গ্রিসে; সমবেত পরিবেশনায় একে কোরাসগান/বৃন্দগীতি বলে।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>বাংলা সাহিত্যের মধ্যযুগের সর্বাধিক সমৃদ্ধ ধারা কোনটি?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">বৈষ্ণব সাহিত্যধারা।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>বাংলা ছোটগল্পের জনক কে?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">বিশ্বকবি রবীন্দ্রনাথ ঠাকুর।</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- সেকশন ৭: অসঙ্গতি ও তথ্য যাচাই তালিকা -->
+    <section id="sec-audit" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">⚠️</div>
+          <h2 class="section-title">🧭 সন্দেহ নিরসন ও সঠিক সমাধান</h2>
+        </div>
+        <span class="section-meta">নির্ভুল প্রস্তুতি ও সঠিক সমাধান</span>
+      </div>
+
+      <div class="alert-box">
+        <div class="alert-header">📌 পরীক্ষার বিভ্রান্তিকর প্রশ্ন ও বিশেষ সতর্কতা:</div>
+        পরীক্ষার্থীদের বিভ্রান্তিমুক্ত রাখতে পৃষ্ঠা ৮৯-এর অপশন ও ব্যাখ্যা নিচে বিশ্লেষণ করা হলো:
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>📝 বিষয় / প্রশ্ন</th>
+              <th>📖 পৃষ্ঠা / প্রশ্ন নং</th>
+              <th>🔍 সূক্ষ্ম প্যাঁচ ও বিস্তারিত বিশ্লেষণ</th>
+              <th>🎯 পরীক্ষায় আপনার সঠিক সিদ্ধান্ত</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>প্রশ্ন ১-এর উত্তর কোড ও অবস্থান</strong></td>
+              <td>প্রশ্ন ১ (পৃ. ৮৯)</td>
+              <td>বইয়ে মুদ্রিত উত্তর <strong>'উ. ক'</strong>। অপশন বিন্যাসে বামে ক (২৩টি) ও নিচে ২২টি; ডানে ২০টি ও নিচে ২৫টি রয়েছে।</td>
+              <td>ব্যাখ্যায় স্পষ্টভাবে বলা হয়েছে মৈমনসিংহ গীতিকা বিশ্বের ২৩টি ভাষায় মুদ্রিত হয়। তাই সঠিক উত্তর অবশ্যই <strong>২৩টি</strong> নির্বাচন করবে।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রশ্ন ৩-এর উত্তর কোড ও অপশন বিন্যাস</strong></td>
+              <td>প্রশ্ন ৩ (পৃ. ৮৯)</td>
+              <td>বইয়ে মুদ্রিত উত্তর <strong>'উ. ঘ'</strong>। কিন্তু প্রশ্নে ক-শোককবিতা, খ-খণ্ড কবিতা, গ-পত্রকাব্য এবং ঘ-কোরাসগান হিসেবে সাজানো হয়েছে।</td>
+              <td>ব্যাখ্যা অনুযায়ী Ode গাওয়ার সময় সমবেত কণ্ঠে গাওয়া হয় বিধায় একে কোরাসগান বা সমবেত সংগীত বলা হয়। অপশন ঘ সঠিক।</td>
+            </tr>
+            <tr>
+              <td><strong>মৈমনসিংহ গীতিকার পালার সংখ্যা বিভ্রাট</strong></td>
+              <td>প্রশ্ন ১ ও ২-এর ব্যাখ্যা</td>
+              <td>প্রশ্ন ১-এর ব্যাখ্যায় লেখা হয়েছে <em>"মৈমনসিংহ গীতিকায় ১০টি গীতিকা স্থান পেয়েছে"</em>। আবার প্রশ্ন ২-এর ব্যাখ্যায় চন্দ্রকুমারের সংগৃহীত মৈমনসিংহ গীতিকার তালিকায় শেষে <em>'ধোপার পাট'</em> সহ ১১টি নাম উল্লেখ রয়েছে।</td>
+              <td>ঐতিহাসিকভাবে দীনেশচন্দ্র সেন সম্পাদিত মূল মৈমনসিংহ গীতিকায় <strong>১০টি পালাগান</strong> রয়েছে। পরীক্ষায় মৈমনসিংহ গীতিকার পালার সংখ্যা চাইলে <strong>১০টি</strong> দাগাবে।</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ফুটার -->
+    <footer style="text-align: center; margin-top: 40px; color: var(--text-muted); font-size: 13px;">
+      <p>বিসিএস প্রিলিমিনারি বিষয়ভিত্তিক জব সল্যুশন | অধ্যায়: গীতিকা ও লোকসাহিত্য (পৃষ্ঠা ৮৯)</p>
+      <p style="margin-top: 4px;">Single-file Interactive BCS E-Book Edition • সম্পূর্ণ স্বয়ংসম্পূর্ণ ও অফলাইন উপযোগী</p>
+    </footer>
+  </div>
+
+  <!-- স্ক্রিপ্ট: ইন্টারঅ্যাকটিভিটি -->
+  <script>
+    // স্ক্রল প্রগ্রেস বার
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    // থিম টগল
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const target = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', target);
+      try {
+        localStorage.setItem('theme_mode_gitika', target);
+      } catch(e) {}
+    }
+
+    // ফন্ট সাইজ নিয়ন্ত্রণ
+    let currentScale = 100;
+    function changeFontSize(delta) {
+      if (delta === 0) currentScale = 100;
+      else currentScale += delta * 7;
+      
+      if (currentScale < 80) currentScale = 80;
+      if (currentScale > 130) currentScale = 130;
+      
+      document.documentElement.style.setProperty('--font-scale', currentScale + '%');
+    }
+
+    // সূচিপত্র টগল
+    function toggleToc() {
+      const panel = document.getElementById('toc-panel');
+      panel.classList.toggle('active');
+    }
+
+    // রিভিশন উত্তর টগল
+    function toggleRev(element) {
+      const ans = element.nextElementSibling;
+      const icon = element.querySelector('span:last-child');
+      if (ans.classList.contains('active')) {
+        ans.classList.remove('active');
+        icon.textContent = '➕';
+      } else {
+        ans.classList.add('active');
+        icon.textContent = '➖';
+      }
+    }
+
+    // কুইজ ইন্টারঅ্যাকশন
+    let score = 0;
+    const answeredMap = {};
+
+    function checkAnswer(qNum, selectedLetter, isCorrect, btnElement) {
+      if (answeredMap[qNum]) return;
+      answeredMap[qNum] = true;
+
+      const card = document.getElementById(`q${qNum}`);
+      const buttons = card.querySelectorAll('.opt-btn');
+
+      buttons.forEach(btn => {
+        btn.disabled = true;
+      });
+
+      if (isCorrect) {
+        btnElement.classList.add('correct');
+        score++;
+      } else {
+        btnElement.classList.add('wrong');
+        buttons.forEach(btn => {
+          if (btn.getAttribute('onclick').includes('true')) {
+            btn.classList.add('correct');
+          }
+        });
+      }
+
+      const exp = document.getElementById(`exp-${qNum}`);
+      if (exp) exp.classList.add('show');
+
+      updateScoreDisplay();
+    }
+
+    function updateScoreDisplay() {
+      const scoreEl = document.getElementById('user-score');
+      scoreEl.textContent = `${score} / ৫`;
+      if (score === 5) {
+        scoreEl.innerHTML = `${score} / ৫ <span style="font-size:14px;color:var(--success);">🎉 অসাধারণ! ৫টি প্রশ্নের সবকটি সঠিক হয়েছে!</span>`;
+      }
+    }
+
+    function resetQuiz() {
+      score = 0;
+      for (let key in answeredMap) delete answeredMap[key];
+      
+      const buttons = document.querySelectorAll('.opt-btn');
+      buttons.forEach(btn => {
+        btn.disabled = false;
+        btn.classList.remove('correct', 'wrong');
+      });
+
+      const exps = document.querySelectorAll('.quiz-explanation');
+      exps.forEach(exp => exp.classList.remove('show'));
+
+      updateScoreDisplay();
+      window.location.hash = 'sec-quiz';
+    }
+
+    (function init() {
+      try {
+        const savedTheme = localStorage.getItem('theme_mode_gitika');
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+      } catch(e) {}
+    })();
+  </script>
+  <!-- Smart E-Book Navigation Component -->
+  <script src="nav-component.js"></script>
+</body>
+</html>

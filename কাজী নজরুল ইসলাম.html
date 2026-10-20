@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>কাজী নজরুল ইসলাম - বিসিএস পূর্ণাঙ্গ প্রস্তুতি ইবুক</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ══════ CSS ভ্যারিয়েবল ও থিম কালার (অগ্নিবীণার লাল-কমলা ও দ্রোহের গাঢ় নেভি প্যালেট) ══════ */
+    :root {
+      --font-scale: 100%;
+      --bg-base: #fdfaf7;
+      --bg-surface: #ffffff;
+      --bg-surface-alt: #f8eee4;
+      --text-main: #1c140e;
+      --text-muted: #5c4838;
+      --primary: #c2410c; /* অগ্নিবীণার প্রদীপ্ত লালচে কমলা */
+      --primary-light: #ffedd5;
+      --accent: #1e3a8a; /* রাজকীয় নেভি ব্লু */
+      --accent-light: #dbeafe;
+      --gold: #b45309;
+      --gold-light: #fef3c7;
+      --success: #15803d;
+      --success-light: #dcfce7;
+      --danger: #b91c1c;
+      --danger-light: #fee2e2;
+      --warning: #ea580c;
+      --warning-light: #ffedd5;
+      --border-color: #ebdcd0;
+      --card-border: #d8c2b0;
+      --shadow: 0 4px 14px rgba(60, 25, 10, 0.08);
+      --shadow-hover: 0 8px 24px rgba(60, 25, 10, 0.15);
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg-base: #0f0a06;
+      --bg-surface: #1a120c;
+      --bg-surface-alt: #261b12;
+      --text-main: #f8fafc;
+      --text-muted: #cbd5e1;
+      --primary: #fb923c;
+      --primary-light: #3d1e0d;
+      --accent: #60a5fa;
+      --accent-light: #162646;
+      --gold: #fbbf24;
+      --gold-light: #33240e;
+      --success: #4ade80;
+      --success-light: #12381f;
+      --danger: #f87171;
+      --danger-light: #451010;
+      --warning: #f97316;
+      --warning-light: #3b1b0b;
+      --border-color: #3d2a1d;
+      --card-border: #5a3f2c;
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+      --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.7);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: var(--font-scale);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans Bengali', 'Kalpurush', Vrinda, sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.8;
+      min-width: 320px;
+      padding-bottom: 80px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    mark {
+      background-color: #fde047;
+      color: #0f172a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    /* ══════ প্রগ্রেস বার ও কন্ট্রোল বার ══════ */
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: transparent;
+      z-index: 1000;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.1s;
+    }
+
+    .control-bar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: var(--bg-surface);
+      border-bottom: 2px solid var(--border-color);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .control-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-ctrl {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .btn-ctrl:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* ══════ সূচি ড্রপডাউন ══════ */
+    #toc-panel {
+      display: none;
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-hover);
+    }
+
+    #toc-panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .toc-item a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      background: var(--bg-surface-alt);
+      transition: var(--transition);
+    }
+
+    .toc-item a:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* ══════ হিরো ব্যানার ══════ */
+    .hero-banner {
+      background: linear-gradient(135deg, #9a3412, #1c0f07);
+      color: #ffffff;
+      padding: 34px 20px;
+      border-radius: 20px;
+      margin: 24px 0;
+      box-shadow: var(--shadow);
+      border: 3px solid #ea580c;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: #f59e0b;
+      color: #1a0802;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+      font-size: 15.5px;
+      color: #ffedd5;
+      margin-bottom: 20px;
+    }
+
+    .study-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .step-box {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+
+    .step-box strong {
+      display: block;
+      color: #fde047;
+      margin-bottom: 2px;
+    }
+
+    /* ══════ সেকশন সাধারণ স্টাইল ══════ */
+    .study-section {
+      margin-top: 36px;
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .section-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .section-meta {
+      font-size: 13px;
+      background: var(--bg-surface-alt);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    /* ══════ বিসিএস ট্রেন্ড গ্রিড ══════ */
+    .bcs-matrix {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .bcs-cell {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .bcs-cell.active {
+      border: 2px solid var(--primary);
+      background: var(--primary-light);
+    }
+
+    .bcs-exam {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .bcs-cell.active .bcs-exam {
+      color: var(--primary);
+    }
+
+    .bcs-qcount {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 4px;
+    }
+
+    /* ══════ কার্ড ডিজাইন ══════ */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .info-card {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-left: 6px solid var(--primary);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .info-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    .card-heading {
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .fact-pill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .fact-item {
+      font-size: 14.5px;
+      background: var(--bg-surface-alt);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+    }
+
+    /* ══════ ফ্লো ও টাইমলাইন ══════ */
+    .flow-connector {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--bg-surface-alt);
+      padding: 14px;
+      border-radius: 10px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .flow-badge {
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 13.5px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* ══════ টেবিল ডিজাইন ══════ */
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      margin: 16px 0;
+      border-radius: 10px;
+      border: 2px solid var(--border-color);
+    }
+
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14.5px;
+    }
+
+    .custom-table th {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 12px 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .custom-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+
+    .custom-table tr:nth-child(even) td {
+      background: var(--bg-surface-alt);
+    }
+
+    .custom-table tr:hover td {
+      background: var(--primary-light);
+    }
+
+    /* ══════ কোট ও উক্তি বক্স ══════ */
+    .quote-box {
+      background: var(--bg-surface-alt);
+      border-left: 4px solid var(--gold);
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin: 12px 0;
+      font-size: 14.5px;
+    }
+
+    .quote-box strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    /* ══════ ফাঁদ ও সতর্কতা বক্স ══════ */
+    .trap-box {
+      background: var(--danger-light);
+      border: 2px solid var(--danger);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+      color: var(--text-main);
+    }
+
+    .trap-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--danger);
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .alert-box {
+      background: var(--warning-light);
+      border: 2px solid var(--warning);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+
+    .alert-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--warning);
+      margin-bottom: 6px;
+    }
+
+    /* ══════ কুইজ সেকশন ══════ */
+    .quiz-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .quiz-card {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .quiz-q-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .bcs-tag {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .quiz-question {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .opt-btn {
+      background: var(--bg-surface-alt);
+      border: 1.5px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14.5px;
+      font-family: inherit;
+      color: var(--text-main);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--border-color);
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--text-main);
+      flex-shrink: 0;
+    }
+
+    .opt-btn.correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+      color: var(--success) !important;
+      font-weight: 700;
+    }
+
+    .opt-btn.correct .opt-letter {
+      background: var(--success);
+      color: #fff;
+    }
+
+    .opt-btn.wrong {
+      background: var(--danger-light) !important;
+      border-color: var(--danger) !important;
+      color: var(--danger) !important;
+    }
+
+    .opt-btn.wrong .opt-letter {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .quiz-explanation {
+      display: none;
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 8px;
+      background: var(--bg-surface-alt);
+      border-left: 4px solid var(--primary);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .quiz-explanation.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    /* ══════ রিভিশন ফ্ল্যাশকার্ড ══════ */
+    .revision-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .rev-card {
+      background: var(--bg-surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .rev-q {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .rev-ans {
+      display: none;
+      font-size: 14px;
+      padding-top: 6px;
+      border-top: 1px dashed var(--border-color);
+      color: var(--text-main);
+    }
+
+    .rev-ans.active {
+      display: block;
+    }
+
+    .score-banner {
+      background: var(--bg-surface);
+      border: 2px solid var(--primary);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 24px;
+      box-shadow: var(--shadow);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .score-display {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    @media print {
+      .control-bar, #progress-container, .btn-ctrl, .opt-btn {
+        display: none !important;
+      }
+      body {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .quiz-explanation {
+        display: block !important;
+      }
+      .study-section {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        page-break-inside: avoid;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DESIGN PLAN: 
+    ১. বিষয়ের ধরন: বাংলা সাহিত্যের জাতীয় কবি ও বিদ্রোহী কবি কাজী নজরুল ইসলামের সাহিত্যকর্ম, নিষিদ্ধ ৫টি গ্রন্থ, কাব্যত্রয়ী, উপন্যাস, নাটক, সম্পাদনা ও পূর্ণাঙ্গ বিসিএস প্রশ্নব্যাংক (পৃষ্ঠা ১১৫–১২১)।
+    ২. সবচেয়ে কঠিন/গুলিয়ে ফেলার জায়গা: (ক) ব্রিটিশ সরকার কর্তৃক নিষিদ্ধ ৫টি গ্রন্থ (যুগবাণী, বিষের বাঁশী, ভাঙার গান, প্রলয়শিখা, চন্দ্রবিন্দু) বনাম সুপারিশকৃত কিন্তু নিষিদ্ধ না হওয়া বই (অগ্নিবীণা, সঞ্চিতা ইত্যাদি) (খ) প্রথম প্রকাশিত রচনার প্রকারভেদ (প্রথম প্রকাশিত লেখা/গল্প: বাউন্ডেলের আত্মকাহিনী; প্রথম কবিতা: মুক্তি; প্রথম গ্রন্থ/গল্পগ্রন্থ: ব্যথার দান; প্রথম কাব্য: অগ্নিবীণা; প্রথম উপন্যাস: বাঁধনহারা; প্রথম প্রবন্ধগ্রন্থ: যুগবাণী) (গ) উপন্যাসের চরিত্র ও পটভূমি (মৃত্যুক্ষুধা-কৃষ্ণনগর চাঁদসড়ক; কুহেলিকা-বিপ্লবী জাহাঙ্গীর; বাঁধনহারা-নুরুল হুদা ও ১৮টি পত্র) (ঘ) অগ্নিবীণা কাব্যের ১২টি কবিতার শ্রেণিবিভাগ ও উৎসর্গ (বারীন্দ্রকুমার ঘোষ) বনাম সঞ্চিতা (উৎসর্গ: রবীন্দ্রনাথ) বনাম রবীন্দ্রনাথের 'বসন্ত' নাটক (উৎসর্গ: নজরুল)।
+    ৩. নির্বাচিত মডিউল: বিসিএস প্রশ্ন পরিসংখ্যান ছক, নিষিদ্ধ ৫টি গ্রন্থের কালানুক্রমিক টাইমলাইন, প্রথম প্রকাশিত রচনার মাস্টার টেবিল, অগ্নিবীণা কাব্যের ৪টি ধারার বিশ্লেষণ, অমর কবিতার বিখ্যাত পঙ্ক্তি সংকলন, বইয়ের পূর্ণ ৩৫টি ইন্টারঅ্যাকটিভ বিসিএস কুইজ, ৩০ সেকেন্ডের রিভিশন ফ্ল্যাশ এবং বইয়ের অসঙ্গতি যাচাই তালিকা।
+    ৪. রঙের মেজাজ: বিদ্রোহী কবির দ্রোহ ও অগ্নিবীণার প্রদীপ্ত লালচে কমলা (#c2410c) এবং রাজকীয় নেভি ব্লু (#1e3a8a)।
+    ৫. হিরো ও মাসকট: ব্রিটিশবিরোধী শিকল ভাঙার গান, রক্তমাখা কলম ও ধূমকেতুর অগ্নিসেতু রূপক।
+  -->
+
+  <!-- প্রগ্রেস ট্র্যাকার -->
+  <div id="progress-container"><div id="progress-bar"></div></div>
+
+  <!-- স্টিকি কন্ট্রোল বার -->
+  <div class="control-bar">
+    <div class="container control-content">
+      <div class="control-group">
+        <button class="btn-ctrl" onclick="toggleToc()">📖 সূচিপত্র</button>
+        <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn">🌓 মোড</button>
+      </div>
+      <div class="control-group">
+        <button class="btn-ctrl" onclick="changeFontSize(-1)">A-</button>
+        <button class="btn-ctrl" onclick="changeFontSize(0)">A</button>
+        <button class="btn-ctrl" onclick="changeFontSize(1)">A+</button>
+        <button class="btn-ctrl" onclick="window.print()">🖨️ প্রিন্ট</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- ড্রপডাউন সূচি -->
+    <div id="toc-panel">
+      <strong style="color:var(--primary); font-size:16px;">অধ্যায়ের প্রধান অংশসমূহ:</strong>
+      <ul class="toc-list">
+        <li class="toc-item"><a href="#sec-stat" onclick="toggleToc()">📊 বিসিএস পরীক্ষার ট্রেন্ড</a></li>
+        <li class="toc-item"><a href="#sec-life" onclick="toggleToc()">🏛️ জীবনী ও যুগান্তকারী মাইলফলক</a></li>
+        <li class="toc-item"><a href="#sec-banned" onclick="toggleToc()">🚨 ব্রিটিশ কর্তৃক নিষিদ্ধ ৫টি গ্রন্থ</a></li>
+        <li class="toc-item"><a href="#sec-first" onclick="toggleToc()">⭐ প্রথম প্রকাশিত সাহিত্যকর্মের তালিকা</a></li>
+        <li class="toc-item"><a href="#sec-agnibeena" onclick="toggleToc()">🔥 'অগ্নি-বীণা' কাব্যের ব্যবচ্ছেদ</a></li>
+        <li class="toc-item"><a href="#sec-novels" onclick="toggleToc()">📚 ৩টি কালজয়ী উপন্যাস ও চরিত্র</a></li>
+        <li class="toc-item"><a href="#sec-quotes" onclick="toggleToc()">💬 বিখ্যাত পঙ্ক্তি ও অমর উদ্ধৃতি</a></li>
+        <li class="toc-item"><a href="#sec-quiz" onclick="toggleToc()">📝 ৩৫টি বিসিএস MCQ কুইজ</a></li>
+        <li class="toc-item"><a href="#sec-rev" onclick="toggleToc()">⚡ ৩০ সেকেন্ডের রিভিশন ফ্ল্যাশ</a></li>
+        <li class="toc-item"><a href="#sec-audit" onclick="toggleToc()">⚠️ অসঙ্গতি ও তথ্য যাচাই তালিকা</a></li>
+      </ul>
+    </div>
+
+    <!-- হিরো ব্যানার -->
+    <header class="hero-banner">
+      <span class="hero-tag">বিসিএস স্পেশাল টপিক মাস্টারক্লাস</span>
+      <h1 class="hero-title">কাজী নজরুল ইসলাম</h1>
+      <p class="hero-subtitle">বাংলাদেশের জাতীয় কবি, বিদ্রোহী কবি ও আধুনিক বাংলা গানের বুলবুলের পূর্ণাঙ্গ প্রস্তুতি নোট (পৃষ্ঠা ১১৫–১২১)</p>
+      
+      <div class="study-steps">
+        <div class="step-box">
+          <strong>ধাপ ১: ৩ মিনিটে স্ক্যান</strong>
+          নিষিদ্ধ ৫টি বই, প্রথম প্রকাশিত রচনাবলী ও অগ্নিবীণার ১২টি কবিতা একনজরে দেখো।
+        </div>
+        <div class="step-box">
+          <strong>ধাপ ২: চরিত্র ও সাল মুখস্থ</strong>
+          মৃত্যুক্ষুধা, কুহেলিকা ও বাঁধন-হারার চরিত্র এবং কারাবরণের প্রেক্ষাপট স্পষ্ট করো।
+        </div>
+        <div class="step-box">
+          <strong>ধাপ ৩: কুইজে ১০০%</strong>
+          বিগত বিসিএসের ৩৫টি প্রশ্নে অংশ নিয়ে শতভাগ নিশ্চিত প্রস্তুতি নাও।
+        </div>
+      </div>
+    </header>
+
+    <!-- সেকশন ১: বিসিএস ট্রেন্ড -->
+    <section id="sec-stat" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📊</div>
+          <h2 class="section-title">বিসিএস পরীক্ষার প্রশ্ন-পরিসংখ্যান</h2>
+        </div>
+        <span class="section-meta">১০ম থেকে ৫০তম বিসিএস বিশ্লেষণ</span>
+      </div>
+      <p style="font-size: 14.5px; margin-bottom: 12px;">
+        বইয়ের সূচি অনুযায়ী কাজী নজরুল ইসলাম থেকে বিসিএস প্রিলিমিনারিতে আসা প্রশ্নের সংখ্যা:
+      </p>
+
+      <div class="bcs-matrix">
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৫০তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪৯তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪৮তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪৬তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪৫তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪৪তম বিসিএস</div>
+          <div class="bcs-qcount">২ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪৩তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪১তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৪০তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৩৯তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৩৮তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৩৭তম বিসিএস</div>
+          <div class="bcs-qcount">১ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">৩৬তম বিসিএস</div>
+          <div class="bcs-qcount">২ টি</div>
+        </div>
+        <div class="bcs-cell active">
+          <div class="bcs-exam">১০ম-৩৪তম বিসিএস</div>
+          <div class="bcs-qcount">২৩ টি</div>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">
+        <em>মোট সংকলিত প্রশ্ন সংখ্যা: ৩৫টি (ব্যাখ্যাসহ পৃষ্ঠা ১১৫–১২১ থেকে হুবহু সংকলিত)</em>
+      </p>
+    </section>
+
+    <!-- সেকশন ২: জীবনী ও মাইলফলক -->
+    <section id="sec-life" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">🏛️</div>
+          <h2 class="section-title">জীবন ও যুগান্তকারী মাইলফলক</h2>
+        </div>
+        <span class="section-meta">জাতীয় কবির পরিচয়</span>
+      </div>
+
+      <div class="card-grid">
+        <div class="info-card">
+          <span class="card-badge">জন্ম ও শৈশব</span>
+          <h3 class="card-heading">জন্মপরিচয় ও ডাকনাম</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>জন্ম:</strong> ১১ জ্যৈষ্ঠ ১৩০৬ বঙ্গাব্দ / ২৪ মে ১৮৯৯ খ্রিষ্টাব্দ; পশ্চিমবঙ্গের বর্ধমান জেলার আসানসোল মহকুমার চুরুলিয়া গ্রামে।
+            </div>
+            <div class="fact-item">
+              <strong>ডাকনাম ও ছদ্মনাম:</strong> ডাকনাম ছিল <strong>'দুখু মিয়া'</strong>। সাহিত্য রচনায় <strong>'ব্যাঙাচি'</strong> ছদ্মনাম ব্যবহার করতেন।
+            </div>
+            <div class="fact-item">
+              <strong>উপাধি:</strong> কবিতায় দ্রোহের অনুভূতির জন্য <strong>'বিদ্রোহী কবি'</strong> এবং আধুনিক বাংলা গানের জগতে <strong>'বুলবুল'</strong> নামে খ্যাত।
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <span class="card-badge">বাংলাদেশে আগমন ও প্রয়াণ</span>
+          <h3 class="card-heading">জাতীয় সম্মান ও সমাধি</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>বাংলাদেশে আগমন ও নাগরিকত্ব:</strong> ১৯৭২ সালে কবিকে কলকাতা থেকে স্বাধীন বাংলাদেশে নিয়ে আসা হয়। ১৯৭৬ সালে তাঁকে বাংলাদেশের নাগরিকত্ব ও <strong>একুশে পদক</strong> দেওয়া হয়।
+            </div>
+            <div class="fact-item">
+              <strong>মৃত্যু ও সমাধি:</strong> ২৯ আগস্ট ১৯৭৬ (১২ ভাদ্র ১৩৮৩ বঙ্গাব্দ) ঢাকায় মৃত্যুবরণ করেন। ঢাকা বিশ্ববিদ্যালয়ের কেন্দ্রীয় মসজিদের পাশে তাঁকে সমাহিত করা হয়।
+            </div>
+            <div class="fact-item">
+              <strong>জাতীয় কবি গেজেট:</strong> ২৪ ডিসেম্বর ২০২৪ সালে তাঁকে জাতীয় কবি হিসেবে আনুষ্ঠানিকভাবে গেজেটভুক্ত করা হয়। গেজেট অনুযায়ী, তিনি <strong>১৯৭২ সালের ৪ মে</strong> থেকে বাংলাদেশের জাতীয় কবি হিসেবে গণ্য।
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- সেকশন ৩: ব্রিটিশ কর্তৃক নিষিদ্ধ ৫টি গ্রন্থ -->
+    <section id="sec-banned" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">🚨</div>
+          <h2 class="section-title">ব্রিটিশ ঔপনিবেশিক সরকার কর্তৃক নিষিদ্ধ ৫টি গ্রন্থ</h2>
+        </div>
+        <span class="section-meta">৪৭তম ও ৪১তম বিসিএস স্পেশাল</span>
+      </div>
+
+      <div class="trap-box">
+        <div class="trap-header">⚠️ সাবধান! পরীক্ষার কমন বিভ্রান্তি</div>
+        ১৯২২ থেকে ১৯৩১ সাল পর্যন্ত কাজী নজরুল ইসলামের মোট <strong>৫টি গ্রন্থ</strong> ব্রিটিশ সরকার কর্তৃক নিষিদ্ধ হয়েছিল।<br>
+        • <strong>প্রথম নিষিদ্ধ গ্রন্থ:</strong> 'যুগবাণী' (প্রবন্ধ গ্রন্থ)।<br>
+        • <strong>প্রথম নিষিদ্ধ কাব্যগ্রন্থ:</strong> 'বিষের বাঁশী'।<br>
+        • <strong>যেগুলো নিষিদ্ধ হয়নি:</strong> <em>অগ্নিবীণা</em>, <em>সঞ্চিতা</em>, <em>ফণি-মনসা</em>, <em>সর্বহারা</em>, <em>রুদ্রমঙ্গল</em> — এগুলোর ওপর বাজেয়াপ্তির সুপারিশ থাকলেও ব্রিটিশ সরকার এগুলো নিষিদ্ধ করেনি!
+      </div>
+
+      <div class="flow-connector">
+        <div class="flow-step">
+          <span class="flow-badge">১ম: যুগবাণী (১৯২২)</span>
+          <div>
+            <strong>ধরন:</strong> প্রবন্ধ গ্রন্থ। <strong>নিষিদ্ধের তারিখ:</strong> ২৩ নভেম্বর ১৯২২ (গেজেট নং ১৬৬৬১পি; ফৌজদারি কার্যবিধির ৯৯এ ধারা)। প্রকাশের প্রায় সঙ্গে সঙ্গেই নিষিদ্ধ হয় এবং ১৯৪৭ সালে নিষেধাজ্ঞা প্রত্যাহার হয়। 'নবযুগ' পত্রিকার নিবন্ধ সংকলন।
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-badge">২য়: বিষের বাঁশী (১৯২৪)</span>
+          <div>
+            <strong>ধরন:</strong> কবিতাগ্রন্থ (প্রথম নিষিদ্ধ কাব্যগ্রন্থ)। <strong>নিষিদ্ধের তারিখ:</strong> ২২ অক্টোবর ১৯২৪ (মতান্তরে ২৪ অক্টোবর; গেজেট নং ১০৭২পি)। নিষেধাজ্ঞা প্রত্যাহার হয় ২৭ এপ্রিল ১৯৪৫ সালে।
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-badge">৩য়: ভাঙার গান (১৯২৪)</span>
+          <div>
+            <strong>ধরন:</strong> কবিতাগ্রন্থ। <strong>নিষিদ্ধের তারিখ:</strong> ১১ নভেম্বর ১৯২৪ (পৃষ্ঠা ১১৬-এর তালিকায় ১১ অক্টোবর ও ব্যাখ্যায় ১১ নভেম্বর উল্লেখিত)।
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-badge">৪র্থ: প্রলয় শিখা (১৯৩০)</span>
+          <div>
+            <strong>ধরন:</strong> কবিতাগ্রন্থ। <strong>নিষিদ্ধের তারিখ:</strong> ১৭ সেপ্টেম্বর ১৯৩০ (গেজেট নং ১৪০৮৭পি)। যতীন দাশ, পূজা অভিনয়, হবে জয় প্রভৃতি কবিতাকে রাজদ্রোহমূলক আখ্যা দেওয়া হয়েছিল।
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-badge">৫ম: চন্দ্রবিন্দু (১৯৩১)</span>
+          <div>
+            <strong>ধরন:</strong> গানের সংকলন / গীতিগ্রন্থ (সর্বশেষ নিষিদ্ধ গ্রন্থ)। <strong>নিষিদ্ধের তারিখ:</strong> ১৪ অক্টোবর ১৯৩১ (গেজেট নং ১৭৬২৫)।
+          </div>
+        </div>
+      </div>
+
+      <div class="alert-box" style="margin-top:16px;">
+        <div class="alert-header">📰 ধূমকেতু পত্রিকা ও আনন্দময়ীর আগমনে</div>
+        ২৬ সেপ্টেম্বর ১৯২২ সালে 'ধূমকেতু' পত্রিকার ১২তম সংখ্যায় (পূজা সংখ্যা) নজরুলের রাজনৈতিক কবিতা <strong>'আনন্দময়ীর আগমনে'</strong> প্রকাশের দায়ে ব্রিটিশ সরকার নজরুলকে ১ বছরের কারাদণ্ড দেয় এবং ওই সংখ্যাটি নিষিদ্ধ করে। জেলে থাকাকালে কবি <em>'দোলনচাঁপা'</em> কাব্যের ১৯টি কবিতা রচনা করেন।
+      </div>
+    </section>
+
+    <!-- সেকশন ৪: প্রথম প্রকাশিত সাহিত্যকর্ম -->
+    <section id="sec-first" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">⭐</div>
+          <h2 class="section-title">প্রথম প্রকাশিত সাহিত্যকর্মের মাস্টার টেবিল</h2>
+        </div>
+        <span class="section-meta">২২তম ও ২০তম বিসিএস</span>
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>সাহিত্যের শাখা</th>
+              <th>প্রথম সৃষ্টির নাম</th>
+              <th>প্রকাশকাল / পত্রিকা</th>
+              <th>বিশেষ তথ্য (বইয়ের নোট)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>প্রথম প্রকাশিত লেখা / গল্প</strong></td>
+              <td><strong>বাউন্ডেলের আত্মকাহিনী</strong></td>
+              <td>১৩২৬ বঙ্গাব্দ (মে ১৯১৯)</td>
+              <td>'সওগাত' পত্রিকায় প্রকাশিত হয়েছিল।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রথম প্রকাশিত কবিতা</strong></td>
+              <td><strong>মুক্তি</strong></td>
+              <td>১৩২৬ বঙ্গাব্দ</td>
+              <td>কবির প্রথম প্রকাশিত কবিতা।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রথম প্রকাশিত গ্রন্থ / গল্পগ্রন্থ</strong></td>
+              <td><strong>ব্যথার দান</strong></td>
+              <td>ফেব্রুয়ারি ১৯২২</td>
+              <td>নজরুলের প্রথম প্রকাশিত বই।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রথম প্রকাশিত প্রবন্ধ</strong></td>
+              <td><strong>তুর্ক মহিলার ঘোমটা খোলা</strong></td>
+              <td>১৩২৬ বঙ্গাব্দ</td>
+              <td>কবির প্রথম প্রবন্ধ রচনা।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রথম প্রকাশিত প্রবন্ধগ্রন্থ</strong></td>
+              <td><strong>যুগবাণী</strong></td>
+              <td>অক্টোবর ১৯২২</td>
+              <td>প্রথম প্রবন্ধের বই এবং প্রকাশের পরই নিষিদ্ধ হয়।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রথম প্রকাশিত কাব্যগ্রন্থ</strong></td>
+              <td><strong>অগ্নি-বীণা</strong></td>
+              <td>অক্টোবর ১৯২২ (কার্তিক ১৩২৯)</td>
+              <td>১২টি কবিতা রয়েছে; ১ম কবিতা প্রলয়োল্লাস।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রথম উপন্যাস</strong></td>
+              <td><strong>বাঁধন-হারা</strong></td>
+              <td>১৯২৭ খ্রিষ্টাব্দ</td>
+              <td>বাংলা সাহিত্যের প্রথম পত্রোপন্যাস (১৮টি পত্র)।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রথম নাটক</strong></td>
+              <td><strong>ঝিলিমিলি</strong></td>
+              <td>১৩৩৪ বঙ্গাব্দ (নাট্যগ্রন্থ ১৩৩৭)</td>
+              <td>নজরুলের প্রথম নাটক।</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- সেকশন ৫: অগ্নিবীণা কাব্যের ব্যবচ্ছেদ -->
+    <section id="sec-agnibeena" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">🔥</div>
+          <h2 class="section-title">'অগ্নি-বীণা' কাব্যের পুঙ্খানুপুঙ্খ ব্যবচ্ছেদ</h2>
+        </div>
+        <span class="section-meta">৪৪তম, ৩৮তম, ২৯তম ও ১৯তম বিসিএস</span>
+      </div>
+
+      <p style="font-size:14.5px; margin-bottom:12px;">
+        ১৯২২ সালের অক্টোবরে প্রকাশিত <strong>'অগ্নি-বীণা'</strong> নজরুলের প্রথম কাব্যগ্রন্থ। এতে মোট <strong>১২টি কবিতা</strong> রয়েছে। কাব্যটি বিপ্লবী <strong>বারীন্দ্রকুমার ঘোষ</strong>-কে উৎসর্গ করা হয়।
+      </p>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>বিষয়বস্তুভিত্তিক শ্রেণি</th>
+              <th>অন্তর্ভুক্ত কবিতার নামসমূহ</th>
+              <th>ঐতিহ্যগত বৈশিষ্ট্য ও শব্দপ্রয়োগ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>১. দ্রোহ, বিপ্লব ও আমিত্ব</strong></td>
+              <td>১. প্রলয়োল্লাস (১ম কবিতা), ২. বিদ্রোহী (২য় কবিতা), ৩. ধূমকেতু</td>
+              <td>'বিদ্রোহী' কবিতাটি ৬ জানুয়ারি ১৯২২ (২২ পৌষ ১৩২৮) সাপ্তাহিক <em>'বিজলী'</em> পত্রিকায় প্রথম প্রকাশিত হয়।</td>
+            </tr>
+            <tr>
+              <td><strong>২. সময় ও যুদ্ধ</strong></td>
+              <td>৪. কামাল পাশা, ৫. আনোয়ার, ৬. রণভেরী, ৭. শাত-ইল-আরব</td>
+              <td>'কামাল পাশা' কবিতার প্রথম চরণ: <em>"ঐ ক্ষেপেছে পাগলি মায়ের দামাল ছেলে কামাল ভাই"</em>।</td>
+            </tr>
+            <tr>
+              <td><strong>৩. মুসলিম ঐতিহ্য</strong></td>
+              <td>৮. মোহররম, ৯. কোরবানী, ১০. খেয়াপারের তরণী</td>
+              <td>খোদার আসন, আরশ ছেদিয়া, বোররাক, জিব্রাইল, হাবিয়া-দোযখ প্রভৃতি শব্দের ব্যবহার।</td>
+            </tr>
+            <tr>
+              <td><strong>৪. হিন্দু ঐতিহ্য</strong></td>
+              <td>১১. রক্তাম্বরধারিণী মা, ১২. আগমনী</td>
+              <td>নটরাজ ধূর্জটি, হোমশিখা, জমদগ্নি, ইন্দ্রাণী, কৃষ্ণ-কণ্ঠ, ব্যোমকেশ, ঈশান, বিষ্ণু, পরশুরাম, ভৃগু প্রভৃতি শব্দের সচেতন প্রয়োগ।</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- সেকশন ৬: উপন্যাস ও গল্পগ্রন্থ -->
+    <section id="sec-novels" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📚</div>
+          <h2 class="section-title">৩টি কালজয়ী উপন্যাস ও চরিত্র</h2>
+        </div>
+        <span class="section-meta">৪৯তম, ৩৯তম ও ২৬তম বিসিএস</span>
+      </div>
+
+      <div class="card-grid">
+        <div class="info-card">
+          <span class="card-badge">পত্রোপন্যাস (১৯২৭)</span>
+          <h3 class="card-heading">বাঁধন-হারা</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>বৈশিষ্ট্য:</strong> বাংলা সাহিত্যের প্রথম পত্রোপন্যাস। এতে মোট <strong>১৮টি পত্র</strong> রয়েছে। করাচিতে অবস্থানকালে রচনা শুরু করেন এবং 'মোসলেম ভারত' পত্রিকায় ধারাবাহিকভাবে প্রকাশিত হয়।
+            </div>
+            <div class="fact-item">
+              <strong>উৎসর্গ ও চরিত্র:</strong> বন্ধু নলিনীকান্ত সরকারকে উৎসর্গ করেন। চরিত্র: <strong>নুরুল হুদা (নায়ক)</strong>, রবিউল, রাবেয়া, সোফিয়া, মাহবুবা প্রমুখ।
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <span class="card-badge">বাস্তবধর্মী উপন্যাস (১৯৩০)</span>
+          <h3 class="card-heading">মৃত্যুক্ষুধা</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>পটভূমি:</strong> ১৯২৭–১৯২৯ সালে পশ্চিমবঙ্গের কৃষ্ণনগরের চাঁদ সড়কের দরিদ্র হিন্দু-মুসলিম-খ্রিষ্টান সম্প্রদায়ের ক্ষুধা, দারিদ্র্য ও নিগৃহীত মহিলাদের বাস্তব জীবন অবলম্বনে রচিত।
+            </div>
+            <div class="fact-item">
+              <strong>চরিত্র:</strong> রুবি, আনসার, প্যাঁকালে, কুর্শি, মেজ বউ, মোয়াজ্জেম।
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <span class="card-badge">রাজনৈতিক উপন্যাস (১৯৩১)</span>
+          <h3 class="card-heading">কুহেলিকা</h3>
+          <div class="fact-pill-list">
+            <div class="fact-item">
+              <strong>পটভূমি ও নায়ক:</strong> নওরোজ পত্রিকায় প্রকাশিত (১৩৩৮ বঙ্গাব্দে গ্রন্থরূপ)। নায়ক <strong>জাহাঙ্গীর</strong>—বিপ্লবী স্বদেশী দলের সদস্য।
+            </div>
+            <div class="fact-item">
+              <strong>অন্যান্য চরিত্র ও নারীভাবনা:</strong> তাহমিনা, চম্পা, ফিরদৌস বেগম। নারী সম্পর্কে বিতর্কিত সংলাপ: <em>"ইহারা মায়াবিনীর জাত... ইহারা গহন-পথের কণ্টক, রাজপথের দস্যু।"</em>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive" style="margin-top:16px;">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>শাখা</th>
+              <th>গ্রন্থের নামসমূহ</th>
+              <th>অন্তর্ভুক্ত রচনা / বিশেষ টীকা</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>গল্পগ্রন্থ</strong></td>
+              <td>ব্যথার দান (১৯২২), রিক্তের বেদন (১৯২৫), শিউলিমালা (১৯৩১)</td>
+              <td><em>শিউলিমালা</em> গল্পগ্রন্থের গল্পসমূহ: পদ্মগোখরো (বা পদ্মগোখরা), জিনের বাদশা, অগ্নি-গিরি ও শিউলিমালা।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রবন্ধগ্রন্থ</strong></td>
+              <td>যুগবাণী (১৯২২), রাজবন্দীর জবানবন্দী (১৯২৩), দুর্দিনের যাত্রী (১৯২৬), রুদ্রমঙ্গল (১৯২৭)</td>
+              <td>'আমার পথ' প্রবন্ধটি <em>রুদ্রমঙ্গল</em> গ্রন্থের দ্বিতীয় প্রবন্ধ (মোট ৮টি প্রবন্ধ আছে)। অন্যান্য প্রবন্ধ: নবযুগ, মন্দির ও মসজিদ, আমি সৈনিক।</td>
+            </tr>
+            <tr>
+              <td><strong>কাব্যত্রয়ী</strong></td>
+              <td>অগ্নিবীণা, বিষের বাঁশি, ভাঙার গান</td>
+              <td>এই তিনটিকে নজরুলের 'কাব্যত্রয়ী' বলা হয়। শেষ কাব্যগ্রন্থ: <em>নতুন চাঁদ</em>।</td>
+            </tr>
+            <tr>
+              <td><strong>সঙ্গীত সংকলন</strong></td>
+              <td>বুলবুল, চোখের চাতক, মহুয়ার গান, চন্দ্রবিন্দু, জুলফিকার, রাঙা-জবা</td>
+              <td>১৯৩১ সালে আব্বাসউদ্দিনের অনুরোধে <em>"ও মন রমজানের ঐ রোজার শেষে এলো খুশির ঈদ"</em> রচনা ও সুরারোপ করেন।</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- সেকশন ৭: বিখ্যাত পঙ্ক্তি ও অমর উদ্ধৃতি -->
+    <section id="sec-quotes" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">💬</div>
+          <h2 class="section-title">বিখ্যাত চরণ ও কবিতার অমর উদ্ধৃতি</h2>
+        </div>
+        <span class="section-meta">১৪তম, ১৫তম, ২৪তম ও ৪৮তম বিসিএস</span>
+      </div>
+
+      <div class="quote-box">
+        <strong>কৃষাণের গান ('সর্বহারা' কাব্যগ্রন্থ) [৪৮তম বিসিএস]:</strong>
+        <p><mark>"আজ চারদিক হতে ধনিক বণিক শোষণকারীর জাত, ও ভাই জোঁকের মতন শুষছে রক্ত, কাড়ছে থালার ভাত।"</mark></p>
+      </div>
+
+      <div class="quote-box">
+        <strong>দারিদ্র্য ('সিন্ধু হিন্দোল' কাব্যগ্রন্থ) [২৪তম ও ২৬তম বিসিএস]:</strong>
+        <p>"হে দারিদ্র্য তুমি মোরে করেছো মহান / তুমি মোরে দানিয়াছ খ্রিষ্টের সম্মান।"</p>
+        <p style="margin-top:4px;">"কাঁটাকুঞ্জে বসি তুই গাঁথিবি মালিকা / দিয়া গেনু ভালে তোর বেদনার টীকা।"</p>
+      </div>
+
+      <div class="quote-box">
+        <strong>আনন্দময়ীর আগমনে ('ধূমকেতু' পত্রিকা) [২৬তম বিসিএস]:</strong>
+        <p>"আর কতকাল থাকবি বেটী মাটির ঢেলার মূর্তি আড়াল? / স্বর্গ যে আজ জয় করেছে অত্যাচারী শক্তি চাঁড়াল! / দেব-শিশুদের মারছে চাবুক, বীর যুবকদের দিচ্ছে ফাঁসি, / ভূ-ভারত আজ কসাইখানা, আসবি কখন সর্বনাশী?"</p>
+      </div>
+
+      <div class="quote-box">
+        <strong>চন্দ্রবিন্দু কাব্যের চরণ [১৫তম বিসিএস]:</strong>
+        <p>"সুন্দর হে, দাও দাও সুন্দর জীবন। হউক দূর অকল্যাণ সকল অশোভন।"</p>
+      </div>
+
+      <div class="quote-box">
+        <strong>মহুয়ার গান [১৪তম বিসিএস]:</strong>
+        <p>"বউ কথা কও, বউ কথা কও / কও কথা অভিমানিনী / সেধে সেধে কেঁদে কেঁদে যাবে কত যামিনী"</p>
+      </div>
+    </section>
+
+    <!-- সেকশন ৮: বিগত বিসিএস কুইজ -->
+    <section id="sec-quiz" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">📝</div>
+          <h2 class="section-title">বিগত বিসিএস পরীক্ষার পূর্ণাঙ্গ প্রশ্নব্যাংক</h2>
+        </div>
+        <span class="section-meta">৩৫টি হুবহু প্রশ্ন</span>
+      </div>
+
+      <p style="margin-bottom: 16px; font-size:14.5px;">
+        সঠিক উত্তরে ক্লিক করে তোমার জ্ঞান যাচাই করো। প্রতিটি উত্তরের সাথে বইয়ের বিশদ ব্যাখ্যা প্রদর্শিত হবে:
+      </p>
+
+      <div class="quiz-container">
+        <!-- প্রশ্ন ১ -->
+        <div class="quiz-card" id="q1">
+          <div class="quiz-q-meta"><span>প্রশ্ন ০১</span><span class="bcs-tag">৫০তম বিসিএস</span></div>
+          <div class="quiz-question">১. কোনটি কাজী নজরুল ইসলামের প্রবন্ধ গ্রন্থ?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(1, 'ক', false, this)"><span class="opt-letter">ক</span> মৃত্যুক্ষুধা</button>
+            <button class="opt-btn" onclick="checkAnswer(1, 'খ', false, this)"><span class="opt-letter">খ</span> সিন্ধু হিন্দোল</button>
+            <button class="opt-btn" onclick="checkAnswer(1, 'গ', true, this)"><span class="opt-letter">গ</span> যুগবাণী</button>
+            <button class="opt-btn" onclick="checkAnswer(1, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> অগ্নিবীণা</button>
+          </div>
+          <div class="quiz-explanation" id="exp-1">
+            <strong>ব্যাখ্যা:</strong> কাজী নজরুল ইসলামের প্রবন্ধগ্রন্থ 'যুগবাণী' ১৯২২ খ্রিষ্টাব্দের অক্টোবরে প্রকাশিত হয়
+</div></div>
+<!-- প্রশ্ন ২ -->
+        <div class="quiz-card" id="q2">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০২</span>
+            <span class="bcs-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">২. 'পূর্ববঙ্গ গীতিকা'র লোকপালাসমূহের সংগ্রাহক কে?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(2, 'ক', false, this)"><span class="opt-letter">ক</span> দক্ষিণারঞ্জন মিত্র মজুমদার</button>
+            <button class="opt-btn" onclick="checkAnswer(2, 'খ', false, this)"><span class="opt-letter">খ</span> হরপ্রসাদ শাস্ত্রী</button>
+            <button class="opt-btn" onclick="checkAnswer(2, 'গ', true, this)"><span class="opt-letter">গ</span> চন্দ্রকুমার দে</button>
+            <button class="opt-btn" onclick="checkAnswer(2, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> দীনেশচন্দ্র সেন</button>
+          </div>
+          <div class="quiz-explanation" id="exp-2">
+            <strong>ব্যাখ্যা:</strong> চন্দ্রকুমার দে (১৮৮৯-১৯৪৬) বৃহত্তর ময়মনসিংহের নেত্রকোনা জেলার রাঘবপুর গ্রামে জন্মগ্রহণ করেন। তিনি আমৃত্যু পল্লীর লোকসাহিত্য সংগ্রহে নিয়োজিত থেকে বহু পালা সংগ্রহ করেন। সেগুলির অধিকাংশই দীনেশচন্দ্র সেনের সম্পাদনায় মৈমনসিংহ গীতিকা (১৯২৩) ও পূর্ববঙ্গ-গীতিকা (১৯২৬) নামে প্রকাশিত হয়। অন্যদিকে দক্ষিণারঞ্জন মিত্র মজুমদার 'ঠাকুরমার ঝুলি'র সংগ্রাহক এবং হরপ্রসাদ শাস্ত্রী চর্যাপদের আবিষ্কারক।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩ -->
+        <div class="quiz-card" id="q3">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৩</span>
+            <span class="bcs-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৩. Ode কী?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(3, 'ক', false, this)"><span class="opt-letter">ক</span> শোককবিতা</button>
+            <button class="opt-btn" onclick="checkAnswer(3, 'খ', false, this)"><span class="opt-letter">খ</span> খণ্ড কবিতা</button>
+            <button class="opt-btn" onclick="checkAnswer(3, 'গ', false, this)"><span class="opt-letter">গ</span> পত্রকাব্য</button>
+            <button class="opt-btn" onclick="checkAnswer(3, 'ঘ', true, this)"><span class="opt-letter">ঘ</span> কোরাসগান</button>
+          </div>
+          <div class="quiz-explanation" id="exp-3">
+            <strong>ব্যাখ্যা:</strong> Ode কবিতাবিশেষ (গাথাকবিতা)। এটি সাধারণত অনিয়মিত ছন্দে রচিত ও মহৎ অনুভূতি প্রকাশক। এর জন্মভূমি গ্রিস। গাওয়ার সময় বিভিন্ন বাদ্যযন্ত্রের সাথে সমবেতকণ্ঠে গাওয়া হয় বিধায় একে কোরাসগান, সমবেত সংগীত বা বৃন্দগীতিও বলা হয়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৪ -->
+        <div class="quiz-card" id="q4">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৪</span>
+            <span class="bcs-tag">২৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৪. Ballad কি?</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(4, 'ক', false, this)"><span class="opt-letter">ক</span> লোকগীতি</button>
+            <button class="opt-btn" onclick="checkAnswer(4, 'খ', false, this)"><span class="opt-letter">খ</span> লোকগাথা</button>
+            <button class="opt-btn" onclick="checkAnswer(4, 'গ', true, this)"><span class="opt-letter">গ</span> গীতিকা</button>
+            <button class="opt-btn" onclick="checkAnswer(4, 'ঘ', false, this)"><span class="opt-letter">ঘ</span> গাথা</button>
+          </div>
+          <div class="quiz-explanation" id="exp-4">
+            <strong>ব্যাখ্যা:</strong> এক শ্রেণির কাহিনিমূলক লোকগীতি বাংলা সাহিত্যে 'গীতিকা' নামে পরিচিত। বাংলা 'গীতিকা' ও ইংরেজি 'Ballad' শব্দ দুটি প্রায় সমধর্মী। এতে গানের সুরের চেয়ে কাহিনিই বেশি প্রাধান্য পায় (যেমন: মহুয়া, মলুয়া, দেওয়ান মদিনা)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৫ -->
+        <div class="quiz-card" id="q5">
+          <div class="quiz-q-meta">
+            <span>প্রশ্ন নং ০৫</span>
+            <span class="bcs-tag">১২তম বিসিএস</span>
+          </div>
+          <div class="quiz-question">৫. বাংলা সাহিত্যের সর্বাধিক সমৃদ্ধ ধারা—</div>
+          <div class="quiz-options">
+            <button class="opt-btn" onclick="checkAnswer(5, 'ক', false, this)"><span class="opt-letter">ক</span> নাটক</button>
+            <button class="opt-btn" onclick="checkAnswer(5, 'খ', false, this)"><span class="opt-letter">খ</span> ছোট গল্প</button>
+            <button class="opt-btn" onclick="checkAnswer(5, 'গ', false, this)"><span class="opt-letter">গ</span> প্রবন্ধ</button>
+            <button class="opt-btn" onclick="checkAnswer(5, 'ঘ', true, this)"><span class="opt-letter">ঘ</span> গীতি কবিতা</button>
+          </div>
+          <div class="quiz-explanation" id="exp-5">
+            <strong>ব্যাখ্যা:</strong> কবির মনের একান্ত অনুভূতি, সুখ-দুঃখ, আনন্দ-বেদনা যে কবিতায় প্রকাশ পায় তা-ই গীতিকবিতা। আধুনিক যুগে সৃষ্ট এই গীতিকবিতাই এই যুগের সবচেয়ে সমৃদ্ধ ধারা। উল্লেখ্য, মধ্যযুগের সবচেয়ে সমৃদ্ধ সাহিত্যধারা বৈষ্ণব সাহিত্যধারা। এছাড়া নাটক, ছোটগল্প, প্রবন্ধ আধুনিক যুগের সৃষ্টি এবং রবীন্দ্রনাথ ঠাকুর বাংলা ছোটগল্পের জনক।
+          </div>
+        </div>
+      </div>
+
+      <!-- স্কোর বোর্ড -->
+      <div class="score-banner">
+        <div>
+          <span>তোমার কুইজ স্কোর: </span>
+          <span class="score-display" id="user-score">০ / ৫</span>
+        </div>
+        <button class="btn-ctrl" onclick="resetQuiz()">🔄 পুনরায় কুইজ দাও</button>
+      </div>
+    </section>
+
+    <!-- সেকশন ৬: ৩০ সেকেন্ডের রিভিশন ফ্ল্যাশ -->
+    <section id="sec-rev" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">⚡</div>
+          <h2 class="section-title">৩০ সেকেন্ডের সুপারফাস্ট রিভিশন</h2>
+        </div>
+        <span class="section-meta">মেমরি রিফ্লেক্স টেস্ট</span>
+      </div>
+      <p style="font-size:14px; margin-bottom: 12px;">ট্যাপ করে সাথে সাথে উত্তর মিলিয়ে নাও:</p>
+
+      <div class="revision-grid">
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>মৈমনসিংহ গীতিকার প্রথম খণ্ড কত সালে বই আকারে প্রকাশিত হয়?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">১৯২৩ সালের মার্চে কলকাতা বিশ্ববিদ্যালয় থেকে।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>মৈমনসিংহ গীতিকা সংগ্রহের মূল উদ্যোক্তা ও সংগ্রাহক কারা?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">উদ্যোক্তা/সম্পাদক ড. দীনেশচন্দ্র সেন এবং সংগ্রাহক চন্দ্রকুমার দে।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>ইংরেজি Ballad শব্দের বাংলা প্রতিশব্দ কী?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">গীতিকা (কাহিনিমূলক লোকগীতি)।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>Ode-এর উৎপত্তি কোন দেশে এবং সমবেত পরিবেশনায় একে কী বলে?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">উৎপত্তি গ্রিসে; সমবেত পরিবেশনায় একে কোরাসগান/বৃন্দগীতি বলে।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>বাংলা সাহিত্যের মধ্যযুগের সর্বাধিক সমৃদ্ধ ধারা কোনটি?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">বৈষ্ণব সাহিত্যধারা।</div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-q" onclick="toggleRev(this)">
+            <span>বাংলা ছোটগল্পের জনক কে?</span> <span>➕</span>
+          </div>
+          <div class="rev-ans">বিশ্বকবি রবীন্দ্রনাথ ঠাকুর।</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- সেকশন ৭: অসঙ্গতি ও তথ্য যাচাই তালিকা -->
+    <section id="sec-audit" class="study-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon">⚠️</div>
+          <h2 class="section-title">🧭 সন্দেহ নিরসন ও সঠিক সমাধান</h2>
+        </div>
+        <span class="section-meta">নির্ভুল প্রস্তুতি ও সঠিক সমাধান</span>
+      </div>
+
+      <div class="alert-box">
+        <div class="alert-header">📌 পরীক্ষার বিভ্রান্তিকর প্রশ্ন ও বিশেষ সতর্কতা:</div>
+        পরীক্ষার্থীদের বিভ্রান্তিমুক্ত রাখতে পৃষ্ঠা ৮৯-এর অপশন ও ব্যাখ্যা নিচে বিশ্লেষণ করা হলো:
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>📝 বিষয় / প্রশ্ন</th>
+              <th>📖 পৃষ্ঠা / প্রশ্ন নং</th>
+              <th>🔍 সূক্ষ্ম প্যাঁচ ও বিস্তারিত বিশ্লেষণ</th>
+              <th>🎯 পরীক্ষায় আপনার সঠিক সিদ্ধান্ত</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>প্রশ্ন ১-এর উত্তর কোড ও অবস্থান</strong></td>
+              <td>প্রশ্ন ১ (পৃ. ৮৯)</td>
+              <td>বইয়ে মুদ্রিত উত্তর <strong>'উ. ক'</strong>। অপশন বিন্যাসে বামে ক (২৩টি) ও নিচে ২২টি; ডানে ২০টি ও নিচে ২৫টি রয়েছে।</td>
+              <td>ব্যাখ্যায় স্পষ্টভাবে বলা হয়েছে মৈমনসিংহ গীতিকা বিশ্বের ২৩টি ভাষায় মুদ্রিত হয়। তাই সঠিক উত্তর অবশ্যই <strong>২৩টি</strong> নির্বাচন করবে।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রশ্ন ৩-এর উত্তর কোড ও অপশন বিন্যাস</strong></td>
+              <td>প্রশ্ন ৩ (পৃ. ৮৯)</td>
+              <td>বইয়ে মুদ্রিত উত্তর <strong>'উ. ঘ'</strong>। কিন্তু প্রশ্নে ক-শোককবিতা, খ-খণ্ড কবিতা, গ-পত্রকাব্য এবং ঘ-কোরাসগান হিসেবে সাজানো হয়েছে।</td>
+              <td>ব্যাখ্যা অনুযায়ী Ode গাওয়ার সময় সমবেত কণ্ঠে গাওয়া হয় বিধায় একে কোরাসগান বা সমবেত সংগীত বলা হয়। অপশন ঘ সঠিক।</td>
+            </tr>
+            <tr>
+              <td><strong>মৈমনসিংহ গীতিকার পালার সংখ্যা বিভ্রাট</strong></td>
+              <td>প্রশ্ন ১ ও ২-এর ব্যাখ্যা</td>
+              <td>প্রশ্ন ১-এর ব্যাখ্যায় লেখা হয়েছে <em>"মৈমনসিংহ গীতিকায় ১০টি গীতিকা স্থান পেয়েছে"</em>। আবার প্রশ্ন ২-এর ব্যাখ্যায় চন্দ্রকুমারের সংগৃহীত মৈমনসিংহ গীতিকার তালিকায় শেষে <em>'ধোপার পাট'</em> সহ ১১টি নাম উল্লেখ রয়েছে।</td>
+              <td>ঐতিহাসিকভাবে দীনেশচন্দ্র সেন সম্পাদিত মূল মৈমনসিংহ গীতিকায় <strong>১০টি পালাগান</strong> রয়েছে। পরীক্ষায় মৈমনসিংহ গীতিকার পালার সংখ্যা চাইলে <strong>১০টি</strong> দাগাবে।</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ফুটার -->
+    <footer style="text-align: center; margin-top: 40px; color: var(--text-muted); font-size: 13px;">
+      <p>বিসিএস প্রিলিমিনারি বিষয়ভিত্তিক জব সল্যুশন | অধ্যায়: গীতিকা ও লোকসাহিত্য (পৃষ্ঠা ৮৯)</p>
+      <p style="margin-top: 4px;">Single-file Interactive BCS E-Book Edition • সম্পূর্ণ স্বয়ংসম্পূর্ণ ও অফলাইন উপযোগী</p>
+    </footer>
+  </div>
+
+  <!-- স্ক্রিপ্ট: ইন্টারঅ্যাকটিভিটি -->
+  <script>
+    // স্ক্রল প্রগ্রেস বার
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    // থিম টগল
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const target = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', target);
+      try {
+        localStorage.setItem('theme_mode_gitika', target);
+      } catch(e) {}
+    }
+
+    // ফন্ট সাইজ নিয়ন্ত্রণ
+    let currentScale = 100;
+    function changeFontSize(delta) {
+      if (delta === 0) currentScale = 100;
+      else currentScale += delta * 7;
+      
+      if (currentScale < 80) currentScale = 80;
+      if (currentScale > 130) currentScale = 130;
+      
+      document.documentElement.style.setProperty('--font-scale', currentScale + '%');
+    }
+
+    // সূচিপত্র টগল
+    function toggleToc() {
+      const panel = document.getElementById('toc-panel');
+      panel.classList.toggle('active');
+    }
+
+    // রিভিশন উত্তর টগল
+    function toggleRev(element) {
+      const ans = element.nextElementSibling;
+      const icon = element.querySelector('span:last-child');
+      if (ans.classList.contains('active')) {
+        ans.classList.remove('active');
+        icon.textContent = '➕';
+      } else {
+        ans.classList.add('active');
+        icon.textContent = '➖';
+      }
+    }
+
+    // কুইজ ইন্টারঅ্যাকশন
+    let score = 0;
+    const answeredMap = {};
+
+    function checkAnswer(qNum, selectedLetter, isCorrect, btnElement) {
+      if (answeredMap[qNum]) return;
+      answeredMap[qNum] = true;
+
+      const card = document.getElementById(`q${qNum}`);
+      const buttons = card.querySelectorAll('.opt-btn');
+
+      buttons.forEach(btn => {
+        btn.disabled = true;
+      });
+
+      if (isCorrect) {
+        btnElement.classList.add('correct');
+        score++;
+      } else {
+        btnElement.classList.add('wrong');
+        buttons.forEach(btn => {
+          if (btn.getAttribute('onclick').includes('true')) {
+            btn.classList.add('correct');
+          }
+        });
+      }
+
+      const exp = document.getElementById(`exp-${qNum}`);
+      if (exp) exp.classList.add('show');
+
+      updateScoreDisplay();
+    }
+
+    function updateScoreDisplay() {
+      const scoreEl = document.getElementById('user-score');
+      scoreEl.textContent = `${score} / ৫`;
+      if (score === 5) {
+        scoreEl.innerHTML = `${score} / ৫ <span style="font-size:14px;color:var(--success);">🎉 অসাধারণ! ৫টি প্রশ্নের সবকটি সঠিক হয়েছে!</span>`;
+      }
+    }
+
+    function resetQuiz() {
+      score = 0;
+      for (let key in answeredMap) delete answeredMap[key];
+      
+      const buttons = document.querySelectorAll('.opt-btn');
+      buttons.forEach(btn => {
+        btn.disabled = false;
+        btn.classList.remove('correct', 'wrong');
+      });
+
+      const exps = document.querySelectorAll('.quiz-explanation');
+      exps.forEach(exp => exp.classList.remove('show'));
+
+      updateScoreDisplay();
+      window.location.hash = 'sec-quiz';
+    }
+
+    (function init() {
+      try {
+        const savedTheme = localStorage.getItem('theme_mode_gitika');
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+      } catch(e) {}
+    })();
+  </script>
+  <!-- Smart E-Book Navigation Component -->
+  <script src="nav-component.js"></script>
+</body>
+</html>
