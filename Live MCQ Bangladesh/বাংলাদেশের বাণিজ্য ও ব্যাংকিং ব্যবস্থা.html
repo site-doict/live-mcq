@@ -401,6 +401,52 @@
       border: 1px solid var(--border);
     }
 
+    
+    /* ফ্ল্যাশকার্ড ডিজাইন */
+    .flash-card-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .flash-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .flash-item:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+
+    .flash-question {
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: calc(15.5px * var(--font-scale));
+    }
+
+    .flash-answer {
+      display: none;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border);
+      color: var(--text);
+      font-size: calc(15px * var(--font-scale));
+      line-height: 1.7;
+    }
+
+    .flash-item.open .flash-answer {
+      display: block;
+    }
+
     .discrepancy-card {
       background: var(--surface);
       border: 2px dashed var(--danger);
@@ -467,6 +513,7 @@
       <button id="fontUp" title="ফন্ট বড়">A+</button>
     </div>
     <div class="btn-group">
+      <button onclick="document.getElementById('sec-revision').scrollIntoView({behavior: 'smooth'})">⚡ ফ্ল্যাশকার্ড</button>
       <button onclick="document.getElementById('quiz-section').scrollIntoView({behavior: 'smooth'})">📝 সব MCQ কুইজ</button>
       <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆️ উপরে</button>
       <button onclick="window.print()">🖨️ প্রিন্ট / PDF</button>
@@ -529,7 +576,24 @@
       </div>
     </div>
 
-    <div class="section-card">
+    <!-- দ্রুত নেভিগেশন সূচি -->
+    <div class="section-card" id="toc-card" style="border-left: 4px solid var(--primary);">
+      <div class="section-header">
+        <h2>📑 দ্রুত নেভিগেশন সূচি</h2>
+      </div>
+      <div class="section-body">
+        <ul style="list-style-type: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; font-size: 0.95rem;">
+          <li>💵 <a href="#sec-notes" style="color: var(--primary); text-decoration: none; font-weight: 600;">১. সরকারি নোট বনাম ব্যাংক নোট ও মুদ্রার টাইমলাইন</a></li>
+          <li>🏛️ <a href="#sec-banks" style="color: var(--primary); text-decoration: none; font-weight: 600;">২. তফসিলি (৫৮টি) ও অ-তফসিলি (৫টি) ব্যাংক</a></li>
+          <li>💡 <a href="#sec-milestones" style="color: var(--primary); text-decoration: none; font-weight: 600;">৩. ব্যাংকিং ব্যবস্থার বিশেষ মাইলফলক ও ব্যক্তিত্ব</a></li>
+          <li>📝 <a href="#quiz-section" style="color: var(--primary); text-decoration: none; font-weight: 600;">৪. বিসিএস বিগত প্রশ্নব্যাংক ও কুইজ (১-৯)</a></li>
+          <li>⚡ <a href="#sec-revision" style="color: var(--primary); text-decoration: none; font-weight: 600;">৫. ৩০ সেকেন্ডের রিভিশন ফ্ল্যাশকার্ড (১০টি)</a></li>
+          <li>🔍 <a href="#sec-discrepancy" style="color: var(--primary); text-decoration: none; font-weight: 600;">৬. বইয়ের অসঙ্গতি ও তথ্য যাচাই তালিকা</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-card" id="sec-notes">
       <div class="section-header">
         <h2>💵 সরকারি নোট বনাম ব্যাংক নোট এবং মুদ্রা প্রবর্তনের ইতিহাস</h2>
       </div>
@@ -597,7 +661,7 @@
       </div>
     </div>
 
-    <div class="section-card">
+    <div class="section-card" id="sec-banks">
       <div class="section-header">
         <h2>🏛️ তফসিলি ব্যাংকের শ্রেণিবিন্যাস (মোট ৫৮টি ব্যাংক)</h2>
       </div>
@@ -605,6 +669,10 @@
         <p style="margin-bottom: 12px; color: var(--text-muted);">
           🎯 লক্ষ্য: বাংলাদেশে কার্যরত তফসিলি ও অ-তফসিলি ব্যাংকের সংখ্যা ও ধরন আয়ত্ত করা। (আনুমানিক পাঠ সময়: ৫ মিনিট) (আমার অনুমান)
         </p>
+
+        <div class="note-box" style="margin-bottom: 16px;">
+          📌 <strong>স্বাধীনতার পূর্ববর্তী ব্যাংকিং কাঠামো:</strong> ১৯৭১ সালে মহান মুক্তিযুদ্ধের পূর্বে বাংলাদেশে (তৎকালীন পূর্ব পাকিস্তান) মোট <strong>২২টি ব্যাংক বা আর্থিক প্রতিষ্ঠান</strong> কর্মরত ছিল। স্বাধীনতার পর ১৯৭২ সালের রাষ্ট্রপতির আদেশে ব্যাংকসমূহ জাতীয়করণ ও পুনর্গঠন করা হয়।
+        </div>
 
         <div class="table-container">
           <table>
@@ -682,7 +750,7 @@
       </div>
     </div>
 
-    <div class="section-card">
+    <div class="section-card" id="sec-milestones">
       <div class="section-header">
         <h2>💡 ব্যাংকিং ব্যবস্থার বিশেষ মাইলফলক ও ব্যক্তিত্ব</h2>
       </div>
@@ -712,19 +780,24 @@
                 <td><strong>প্রথম বেসরকারি বাণিজ্যিক ব্যাংক</strong>। ১৯৯৬ সালে গুলশান ক্লাবে প্রথম এটিএম (ATM) এবং ২০১১ সালে উত্তরায় প্রথম সৌরশক্তি চালিত এটিএম চালু করে।</td>
               </tr>
               <tr>
-                <td><strong>ডাচ-বাংলা ব্যাংক (DBBL)</strong></td>
+                <td><strong>ডাচ-বাংলা ব্যাংক (DBBL) ও মোবাইল ব্যাংকিং</strong></td>
                 <td>৩১ মার্চ ২০১১</td>
-                <td>বাংলাদেশে <strong>সর্বপ্রথম মোবাইল ব্যাংকিং</strong> চালু করে (বর্তমানে রকেট নামে পরিচিত)।</td>
+                <td>বাংলাদেশে <strong>সর্বপ্রথম মোবাইল ব্যাংকিং</strong> চালু করে (বর্তমানে রকেট নামে পরিচিত)। এছাড়া ট্রাস্ট ব্যাংকের সহযোগী প্রতিষ্ঠান হিসেবে <strong>'ফাস্টক্যাশ' (Fast Cash)</strong> মোবাইল ব্যাংকিং সেবা প্রদান করে।</td>
               </tr>
               <tr>
-                <td><strong>গ্রামীণ ব্যাংক ও ক্ষুদ্রঋণ</strong></td>
+                <td><strong>ব্যাংক এশিয়া (Bank Asia)</strong></td>
+                <td>২০১৪</td>
+                <td>বাংলাদেশে সর্বপ্রথম <strong>'এজেন্ট ব্যাংকিং' (Agent Banking)</strong> সেবা চালু করে আর্থিক অন্তর্ভুক্তিতে যুগান্তকারী পরিবর্তন আনে।</td>
+              </tr>
+              <tr>
+                <td><strong>গ্রামীণ ব্যাংক ও ড. মুহাম্মদ ইউনূস</strong></td>
                 <td>১৯৭৬ (জোবরা) / ১৯৮৩ (ব্যাংক)</td>
-                <td>ড. মুহাম্মদ ইউনূস কর্তৃক প্রবর্তিত জামানতবিহীন ক্ষুদ্রঋণ। ১৯৯৭ সালের ২-৪ ফেব্রুয়ারি প্রথম আন্তর্জাতিক মাইক্রোক্রেডিট সম্মেলন অনুষ্ঠিত হয়। <strong>২০০৬ সালে ড. ইউনূস ও গ্রামীণ ব্যাংক যৌথভাবে শান্তিতে নোবেল পুরস্কার লাভ করেন</strong>।</td>
+                <td>১৯৭৬ সালে চট্টগ্রাম জেলার হাথাজারী উপজেলার জোবরা গ্রামে প্রবর্তিত ড. মুহাম্মদ ইউনূসের জামানতবিহীন ক্ষুদ্রঋণ উদ্যোগটির প্রাথমিক নাম ছিল <strong>'পল্লী ব্যাংকিং'-এর একটি পাইলট প্রকল্প</strong> (যা পরবর্তীতে ১৯৮৩ সালে পূর্ণাঙ্গ ব্যাংকে রূপ নেয়)। বর্তমানে দেশব্যাপী গ্রামীণ ব্যাংকের <strong>২,৫৬৮টি শাখা</strong> রয়েছে এবং এটি দেশের <strong>৬৮,৭৮৭টি গ্রামে</strong> তাদের ঋণসুবিধা প্রদান করছে, যা সমগ্র বাংলাদেশের মোট গ্রামের <strong>৯৩ শতাংশেরও বেশি</strong>! ১৯৯৭ সালে ১ম মাইক্রোক্রেডিট সম্মেলন এবং <strong>২০০৬ সালে যৌথভাবে শান্তিতে নোবেল পুরস্কার লাভ</strong> করে।</td>
               </tr>
               <tr>
                 <td><strong>আইএফআইসি ব্যাংক (IFIC)</strong></td>
                 <td>১৯৮২</td>
-                <td>মালদ্বীপে প্রথম বৈদেশিক যৌথ উদ্যোগ ব্যাংক (ব্যাংক অব মালদ্বীপ) স্থাপন করে এবং দীর্ঘদিন সেদেশের কেন্দ্রীয় ব্যাংক হিসেবে কাজ করে।</td>
+                <td>১৯৮২ সালে মালদ্বীপে প্রথম বৈদেশিক যৌথ উদ্যোগ ব্যাংক <strong>'ব্যাংক অব মালদ্বীপ লিমিটেড'</strong> স্থাপন করে এবং দীর্ঘদিন সেদেশের কেন্দ্রীয় ব্যাংক হিসেবে কাজ করে। পরবর্তীতে এই ব্যাংকে আইএফআইসি ব্যাংকের যে শেয়ার ছিল, তা <strong>মালদ্বীপ সরকারের কাছে বিক্রি করে দেওয়া হয়</strong>।</td>
               </tr>
             </tbody>
           </table>
@@ -800,7 +873,7 @@
           </div>
           <div class="quiz-feedback">
             <strong>উত্তর: গ (ডাচ-বাংলা ব্যাংক — বইয়ে 'উ. খ' মুদ্রিত থাকলেও ব্যাখ্যা অনুযায়ী ডাচ-বাংলা ব্যাংক)</strong><br>
-            <strong>ব্যাখ্যা:</strong> ডাচ-বাংলা ব্যাংক ২০১১ সালের ৩১ মার্চ বাংলাদেশে সর্বপ্রথম মোবাইল ব্যাংকিং সেবা চালু করে (বর্তমানে এটি রকেট নামে পরিচিত)।
+            <strong>ব্যাখ্যা:</strong> ডাচ-বাংলা ব্যাংক ২০১১ সালের ৩১ মার্চ বাংলাদেশে সর্বপ্রথম মোবাইল ব্যাংকিং সেবা চালু করে (বর্তমানে এটি রকেট নামে পরিচিত)। এছাড়া ট্রাস্ট ব্যাংকের সহযোগী প্রতিষ্ঠান হিসেবে <strong>'ফাস্টক্যাশ' (Fast Cash)</strong> মোবাইল ব্যাংকিং সেবা প্রদান করে। আর বাংলাদেশে প্রথম এজেন্ট ব্যাংকিং চালু করে <strong>ব্যাংক এশিয়া</strong>।
           </div>
         </div>
 
@@ -854,7 +927,7 @@
           </div>
           <div class="quiz-feedback">
             <strong>উত্তর: খ (গ্রামীণ ব্যাংক — বইয়ে 'উ. গ' মুদ্রিত থাকলেও ব্যাখ্যা অনুযায়ী গ্রামীণ ব্যাংক)</strong><br>
-            <strong>ব্যাখ্যা:</strong> ১৯৯৭ সালের ২-৪ ফেব্রুয়ারি অনুষ্ঠিত প্রথম মাইক্রোক্রেডিট সম্মেলনের অন্যতম প্রধান উদ্যোক্তা ছিল গ্রামীণ ব্যাংক।
+            <strong>ব্যাখ্যা:</strong> ১৯৯৭ সালের ২-৪ ফেব্রুয়ারি অনুষ্ঠিত প্রথম মাইক্রোক্রেডিট সম্মেলনের অন্যতম প্রধান উদ্যোক্তা ছিল গ্রামীণ ব্যাংক। ১৯৭৬ সালে জোবরা গ্রামে ড. মুহাম্মদ ইউনূস জামানতবিহীন ক্ষুদ্রঋণের যে উদ্যোগ নেন তার প্রাথমিক নাম ছিল <strong>'পল্লী ব্যাংকিং' পাইলট প্রকল্প</strong>।
           </div>
         </div>
 
@@ -908,35 +981,108 @@
           </div>
           <div class="quiz-feedback">
             <strong>উত্তর: গ (গ্রামীণ ব্যাংক — বইয়ে 'উ. খ' মুদ্রিত থাকলেও ব্যাখ্যা অনুযায়ী গ্রামীণ ব্যাংক)</strong><br>
-            <strong>ব্যাখ্যা:</strong> গ্রামীণ ব্যাংক জামানতবিহীন ক্ষুদ্রঋণ কার্যক্রমের মাধ্যমে প্রান্তিক ও দরিদ্রতম জনগোষ্ঠীকে স্বাবলম্বী করে দেশে ও বিশ্বজুড়ে অনন্য সুনাম অর্জন করেছে।
+            <strong>ব্যাখ্যা:</strong> গ্রামীণ ব্যাংক জামানতবিহীন ক্ষুদ্রঋণ কার্যক্রমের মাধ্যমে প্রান্তিক ও দরিদ্রতম জনগোষ্ঠীকে স্বাবলম্বী করে দেশে ও বিশ্বজুড়ে অনন্য সুনাম অর্জন করেছে (২০০৬ সালে নোবেল শান্তি পুরস্কার বিজয়ী)। বর্তমানে দেশব্যাপী গ্রামীণ ব্যাংকের <strong>২,৫৬৮টি শাখা</strong> রয়েছে এবং এটি দেশের <strong>৬৮,৭৮৭টি গ্রামে</strong> ঋণসেবা দিচ্ছে, যা দেশের মোট গ্রামের <strong>৯৩% এরও বেশি</strong>।
           </div>
         </div>
 
       </div>
     </div>
 
-    <div class="discrepancy-card">
+    <!-- ৫. ৩০ সেকেন্ডের রিভিশন ফ্ল্যাশকার্ড -->
+    <div class="section-card" id="sec-revision">
+      <div class="section-header">
+        <h2>⚡ ৩০ সেকেন্ডের ঝটপট রিভিশন ফ্ল্যাশকার্ড (১০টি মেগা রিভিশন)</h2>
+        <span class="badge" style="background: var(--accent); color: #fff;">ক্লিক করে উত্তর দেখুন</span>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 14px; color: var(--text-muted);">
+          পরীক্ষার ঠিক আগে সবচেয়ে বেশি গুরুত্বপূর্ণ ১০টি ব্যাংকিং তথ্য দ্রুত রিভিশন দিয়ে নাও:
+        </p>
+        <div class="flash-card-list">
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ১. ১৯৭১ সালে মুক্তিযুদ্ধের পূর্বে বাংলাদেশে কতটি ব্যাংক বা আর্থিক প্রতিষ্ঠান ছিল?</span> <span>➕</span></div>
+            <div class="flash-answer">মোট ২২টি ব্যাংক বা আর্থিক প্রতিষ্ঠান কর্মরত ছিল।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ২. বাংলাদেশে সর্বপ্রথম 'এজেন্ট ব্যাংকিং' (Agent Banking) সেবা চালু করে কোন ব্যাংক?</span> <span>➕</span></div>
+            <div class="flash-answer">ব্যাংক এশিয়া (Bank Asia)।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ৩. ট্রাস্ট ব্যাংকের সহযোগী প্রতিষ্ঠান হিসেবে পরিচালিত মোবাইল ব্যাংকিং সেবার নাম কী?</span> <span>➕</span></div>
+            <div class="flash-answer">'ফাস্টক্যাশ' (Fast Cash)।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ৪. ১৯৭৬ সালে জোবরা গ্রামে ড. মুহাম্মদ ইউনূসের ক্ষুদ্রঋণ উদ্যোগটির প্রাথমিক নাম কী ছিল?</span> <span>➕</span></div>
+            <div class="flash-answer">'পল্লী ব্যাংকিং'-এর একটি পাইলট প্রকল্প (যা পরবর্তীতে ১৯৮৩ সালে পূর্ণাঙ্গ গ্রামীণ ব্যাংকে রূপ নেয়)।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ৫. গ্রামীণ ব্যাংকের দেশব্যাপী শাখা ও গ্রাম কভারেজ কত?</span> <span>➕</span></div>
+            <div class="flash-answer">বর্তমানে মোট ২,৫৬৮টি শাখা রয়েছে এবং এটি ৬৮,৭৮৭টি গ্রামে ঋণসুবিধা দিচ্ছে, যা বাংলাদেশের মোট গ্রামের ৯৩ শতাংশেরও বেশি।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ৬. ১৯৮২ সালে মালদ্বীপে প্রতিষ্ঠিত 'ব্যাংক অব মালদ্বীপ লিমিটেড'-এ আইএফআইসি ব্যাংকের শেয়ারের কী পরিণতি হয়?</span> <span>➕</span></div>
+            <div class="flash-answer">পরবর্তীতে আইএফআইসি ব্যাংক তাদের শেয়ার মালদ্বীপ সরকারের কাছে বিক্রি করে দেয়।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ৭. বাংলাদেশে সরকারি কাগুজে নোট কোনগুলো এবং এগুলোতে কার স্বাক্ষর থাকে?</span> <span>➕</span></div>
+            <div class="flash-answer">১ টাকা, ২ টাকা ও ৫ টাকার নোট সরকারি নোট; এগুলোতে অর্থসচিবের স্বাক্ষর থাকে।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ৮. বাংলাদেশে প্রথম বেসরকারি বাণিজ্যিক ব্যাংক কোনটি?</span> <span>➕</span></div>
+            <div class="flash-answer">আরব-বাংলাদেশ ব্যাংক (এবি ব্যাংক লিমিটেড) — প্রতিষ্ঠা ৩১ ডিসেম্বর ১৯৮১।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ৯. বাংলাদেশে প্রথম মোবাইল ব্যাংকিং সেবা চালু করে কোন ব্যাংক?</span> <span>➕</span></div>
+            <div class="flash-answer">ডাচ-বাংলা ব্যাংক লিমিটেড (৩১ মার্চ ২০১১; বর্তমানে রকেট নামে পরিচিত)।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ১০. ড. মুহাম্মদ ইউনূস ও গ্রামীণ ব্যাংক কবে শান্তিতে নোবেল পুরস্কার লাভ করেন?</span> <span>➕</span></div>
+            <div class="flash-answer">২০০৬ সালে যৌথভাবে শান্তিতে নোবেল পুরস্কার লাভ করেন।</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="discrepancy-card" id="sec-discrepancy">
       <h3 style="color: var(--danger); margin-bottom: 12px;">⚠️ বইয়ের অসঙ্গতি ও যাচাই তালিকা</h3>
       <p style="font-size: 0.875rem; margin-bottom: 14px;">বইয়ের পাতাগুলোতে মুদ্রিত অপশন কোড ও কলাম লেআউটে ব্যাপক মুদ্রণ বিভ্রাট লক্ষ্য করা গেছে:</p>
       <div class="table-container">
         <table>
-        <thead>
-          
+          <thead>
+            <tr>
               <th>প্রশ্ন নং / বিষয়</th>
               <th>বইয়ে যা মুদ্রিত আছে</th>
               <th>প্রকৃত সমস্যা বা অসঙ্গতি</th>
-              <th>সঠিক রূপ ও ব্যাখ্যা</th>
-            
-        </thead>
-        <tbody>
-          <tr>
-              <td>সরকারি নোটের ব্যাখ্যা (পৃ. ৪৮৪)</td>
+              <th>সঠিক রূপ ও সিদ্ধান্ত</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>সরকারি নোটের ব্যাখ্যা (পৃ. ৪৮৪)</strong></td>
               <td>"বর্তমানে দেশে তিনটি (১, ২ ও ৫ টাকার নোট) ব্যাংক নোট প্রচলিত রয়েছে"</td>
               <td>বাক্যের শেষে 'সরকারি নোট'-এর জায়গায় অসাবধানতাবশত 'ব্যাংক নোট' শব্দটি ছাপা হয়েছে।</td>
-              <td>এটি সরকারি নোট হবে।</td>
+              <td>এটি <strong>সরকারি নোট</strong> হবে (অর্থসচিবের স্বাক্ষর থাকে)।</td>
             </tr>
-        </tbody>
-      </table>
+            <tr>
+              <td><strong>প্রশ্ন ৩ (পৃ. ৪৮৫)</strong><br>প্রথম মোবাইল ব্যাংকিং</td>
+              <td>কলামে উত্তর কোড মুদ্রিত: 'উ. খ' (এবি ব্যাংক)</td>
+              <td>ব্যাখ্যায় স্পষ্টভাবে লেখা আছে ডাচ-বাংলা ব্যাংক (গ)। কলামের উত্তর কোডে মুদ্রণ বিভ্রাট ঘটেছে।</td>
+              <td>সঠিক উত্তর <strong>ডাচ-বাংলা ব্যাংক</strong> (৩১ মার্চ ২০১১)।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রশ্ন ৫ (পৃ. ৪৮৫)</strong><br>প্রথম বেসরকারি ব্যাংক</td>
+              <td>কলামে উত্তর কোড মুদ্রিত: 'উ. খ' (আইএফআইসি ব্যাংক)</td>
+              <td>ব্যাখ্যায় স্পষ্টভাবে লেখা আছে আরব-বাংলাদেশ ব্যাংক (গ)।</td>
+              <td>সঠিক উত্তর <strong>আরব-বাংলাদেশ (এবি) ব্যাংক</strong> (১৯৮১)।</td>
+            </tr>
+            <tr>
+              <td><strong>প্রশ্ন ৬ ও ৯ (পৃ. ৪৮৫-৪৮৬)</strong><br>গ্রামীণ ব্যাংকের প্রশ্নসমূহ</td>
+              <td>কলামে উত্তর কোডে বিভ্রাট ('উ. গ' ও 'উ. খ')</td>
+              <td>প্রশ্ন ৬ ও ৯ উভয়টিরই সঠিক ব্যাখ্যাভিত্তিক উত্তর গ্রামীণ ব্যাংক।</td>
+              <td>সঠিক উত্তর <strong>গ্রামীণ ব্যাংক</strong>।</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
@@ -975,6 +1121,16 @@
       const scrolled = (winScroll / height) * 100;
       document.getElementById('progress-bar').style.width = scrolled + '%';
     });
+
+    
+    // ফ্ল্যাশকার্ড টগল ফাংশন
+    function toggleFlash(card) {
+      card.classList.toggle('open');
+      const icon = card.querySelector('.flash-question span:last-child');
+      if (icon) {
+        icon.textContent = card.classList.contains('open') ? '➖' : '➕';
+      }
+    }
 
     let correctCount = 0;
     const answeredCards = new Set();
