@@ -983,6 +983,16 @@
         <button class="ebk-drawer-close" id="ebk-drawer-close-btn" title="বন্ধ করুন (Esc)">✕</button>
       </div>
 
+      <!-- Subject Switcher -->
+      <div style="padding: 8px 14px; background: rgba(15, 118, 110, 0.08); border-bottom: 1px solid var(--ebk-border); font-size: 12px; display: flex; align-items: center; justify-content: space-between;">
+        <span style="font-weight: 700; color: var(--ebk-primary);">বিষয় পরিবর্তন:</span>
+        <select onchange="if(this.value!=='current') window.location.href=this.value;" style="padding: 3px 6px; border-radius: 6px; border: 1px solid var(--ebk-border); background: var(--ebk-card-bg); color: var(--ebk-text-main); font-family: inherit; font-size: 12px; cursor: pointer;">
+          <option value="current" selected>📚 বাংলা সাহিত্য</option>
+          <option value="../Live MCQ Bangladesh/বাংলাদেশ বিষয়াবলি (৪০১-৫৬৪) index.html">🇧🇩 বাংলাদেশ বিষয়াবলি</option>
+          <option value="../Master Portal Index.html">🏛️ মাস্টার লাইব্রেরি পোর্টাল</option>
+        </select>
+      </div>
+
       <div class="ebk-drawer-toolbar">
         <div class="ebk-fontsize-bar">
           <span style="font-size:12px; font-weight:600; opacity:0.85;">ফন্ট সাইজ:</span>
