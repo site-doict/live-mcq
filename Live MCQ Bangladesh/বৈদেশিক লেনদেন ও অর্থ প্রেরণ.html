@@ -417,6 +417,52 @@
       border: 1px solid var(--border);
     }
 
+    
+    /* ফ্ল্যাশকার্ড ডিজাইন */
+    .flash-card-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .flash-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .flash-item:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+
+    .flash-question {
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: calc(15.5px * var(--font-scale));
+    }
+
+    .flash-answer {
+      display: none;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border);
+      color: var(--text);
+      font-size: calc(15px * var(--font-scale));
+      line-height: 1.7;
+    }
+
+    .flash-item.open .flash-answer {
+      display: block;
+    }
+
     .discrepancy-card {
       background: var(--surface);
       border: 2px dashed var(--danger);
@@ -485,6 +531,7 @@
       <button id="fontUp" title="ফন্ট বড়">A+</button>
     </div>
     <div class="btn-group">
+      <button onclick="document.getElementById('sec-revision').scrollIntoView({behavior: 'smooth'})">⚡ ফ্ল্যাশকার্ড</button>
       <button onclick="document.getElementById('quiz-section').scrollIntoView({behavior: 'smooth'})">📝 সব MCQ কুইজ</button>
       <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆️ উপরে</button>
       <button onclick="window.print()">🖨️ প্রিন্ট / PDF</button>
@@ -573,8 +620,25 @@
       </div>
     </div>
 
+    <!-- দ্রুত নেভিগেশন সূচি -->
+    <div class="section-card" id="toc-card" style="border-left: 4px solid var(--primary);">
+      <div class="section-header">
+        <h2>📑 দ্রুত নেভিগেশন সূচি</h2>
+      </div>
+      <div class="section-body">
+        <ul style="list-style-type: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; font-size: 0.95rem;">
+          <li>📉 <a href="#sec-mod1" style="color: var(--primary); text-decoration: none; font-weight: 600;">১. মুদ্রার অবমূল্যায়ন (Devaluation) ও প্রভাব</a></li>
+          <li>✈️ <a href="#sec-mod2" style="color: var(--primary); text-decoration: none; font-weight: 600;">২. প্রবাসী কর্মী, রেমিট্যান্স ও ওয়াশিংটন ঐকমত্য</a></li>
+          <li>🚢 <a href="#sec-mod3" style="color: var(--primary); text-decoration: none; font-weight: 600;">৩. ডব্লিউটিও (WTO), জিএসপি (GSP) ও বাজার সুবিধা</a></li>
+          <li>📝 <a href="#quiz-section" style="color: var(--primary); text-decoration: none; font-weight: 600;">৪. বিসিএস বিগত প্রশ্নব্যাংক ও কুইজ (১-৬)</a></li>
+          <li>⚡ <a href="#sec-revision" style="color: var(--primary); text-decoration: none; font-weight: 600;">৫. ৩০ সেকেন্ডের রিভিশন ফ্ল্যাশকার্ড (১০টি)</a></li>
+          <li>🔍 <a href="#sec-discrepancy" style="color: var(--primary); text-decoration: none; font-weight: 600;">৬. বইয়ের অসঙ্গতি ও তথ্য যাচাই তালিকা</a></li>
+        </ul>
+      </div>
+    </div>
+
     <!-- মডিউল ১: টাকার অবমূল্যায়নের কার্যকারণ ও প্রভাব চেইন -->
-    <div class="section-card">
+    <div class="section-card" id="sec-mod1">
       <div class="section-header">
         <h2>📉 মুদ্রার অবমূল্যায়ন (Devaluation) ও এর দ্বিমুখী প্রভাব</h2>
       </div>
@@ -610,7 +674,7 @@
     </div>
 
     <!-- মডিউল ২: প্রবাসী অভিবাসন ও রেমিট্যান্স ডাটা (BMET ২০২৪) -->
-    <div class="section-card">
+    <div class="section-card" id="sec-mod2">
       <div class="section-header">
         <h2>✈️ প্রবাসী কর্মী অভিবাসন ও রেমিট্যান্স ডেটাসেট (২০২৪)</h2>
       </div>
@@ -667,15 +731,16 @@
         </div>
 
         <div class="trap-box">
-          ⚠️ <strong>বেইল আউট (Bailout) বনাম আইএমএফের ঋণ:</strong><br>
-          • <strong>বেইল আউট:</strong> দেনার দায়ে বা মূলধন সংকটে দেউলিয়া হওয়ার মুখে থাকা কোনো রাষ্ট্রকে আইএমএফের বিশেষ আর্থিক সহায়তা (কঠিন শর্তযুক্ত)।<br>
-          • <strong>বাংলাদেশের ৪৭০ কোটি ডলার ঋণ:</strong> এটি কোনো 'বেইল আউট' নয়, বরং এটি সাধারণ শর্তের সংস্কার প্যাকেজ যা 'ওয়াশিংটন ঐকমত্য' (Washington Consensus)-এর আওতায় রয়েছে!
+          ⚠️ <strong>বেইল আউট (Bailout) বনাম আইএমএফের ঋণ ও ওয়াশিংটন ঐকমত্য:</strong><br>
+          • <strong>বেইল আউট:</strong> দেনার দায়ে বা মূলধন সংকটে দেউলিয়া হওয়ার মুখে থাকা কোনো রাষ্ট্রকে আইএমএফের বিশেষ আর্থিক সহায়তা (কঠিন শর্তযুক্ত জরুরি ঋণ)।<br>
+          • <strong>বাংলাদেশের ৪৭০ কোটি ডলার ঋণ:</strong> এটি কোনো 'বেইল আউট' নয়, বরং এটি সাধারণ শর্তের দীর্ঘমেয়াদি অর্থনৈতিক সংস্কার প্যাকেজ যা 'ওয়াশিংটন ঐকমত্য' (Washington Consensus)-এর আওতায় রয়েছে!<br>
+          • <strong>ওয়াশিংটন ঐকমত্যের (Washington Consensus) অংশীদার প্রতিষ্ঠানসমূহ:</strong> ওয়াশিংটন ঐকমত্য মূলত <strong>বিশ্বব্যাংক</strong>, <strong>আইএমএফ (IMF)</strong> এবং <strong>মার্কিন অর্থ মন্ত্রণালয় (ইউএস ট্রেজারি বিভাগ)</strong> — এই তিনটি প্রতিষ্ঠানেরই যৌথ স্বার্থ রক্ষাকারী নীতি সংস্কারের একটি শর্ত সংবলিত প্যাকেজ।
         </div>
       </div>
     </div>
 
     <!-- মডিউল ৩: শুল্কমুক্ত বাজার সুবিধা (GSP) ও বিশেষ চুক্তি -->
-    <div class="section-card">
+    <div class="section-card" id="sec-mod3">
       <div class="section-header">
         <h2>🚢 শুল্কমুক্ত সুবিধা (GSP) ও আন্তর্জাতিক বাজার</h2>
       </div>
@@ -685,10 +750,10 @@
         </p>
 
         <div class="note-box">
-          <strong>Generalized System of Preference (GSP):</strong><br>
-          বিশ্ব বাণিজ্য সংস্থার (WTO) প্রতিষ্ঠাতা সদস্য ও স্বল্পোন্নত দেশ (LDC) হিসেবে বাংলাদেশ উন্নত দেশগুলো থেকে শুল্কমুক্ত ও কোটামুক্ত বাজার সুবিধা পায়।<br>
-          • <strong>কানাডার LDCT স্কিম:</strong> ২০০৩ সাল থেকে কানাডার 'স্বল্পোন্নত দেশ শুল্ক' (Least Developed Country Tariff - LDCT) প্রকল্পের আওতায় পোশাকসহ পণ্য শুল্ক ও কোটামুক্ত সুবিধা পায়।<br>
-          • <strong>অন্যান্য শুল্কমুক্ত সুবিধাদাতা দেশ:</strong> ইউরোপীয় ইউনিয়নভুক্ত দেশসমূহ, জাপান, চিলি, নরওয়ে, নিউজিল্যান্ড, অস্ট্রেলিয়া, রাশিয়া ইত্যাদি।
+          <strong>🌐 বিশ্ব বাণিজ্য সংস্থায় বাংলাদেশের ভূমিকা ও জিএসপি (GSP) সুবিধা:</strong><br>
+          বিশ্ব বাণিজ্য সংস্থার (WTO) প্রতিষ্ঠাতা সদস্য এবং স্বল্পোন্নত দেশগুলোর (LDC) অন্যতম প্রধান মুখপাত্র হিসেবে বাংলাদেশ উন্নত ও উদীয়মান উন্নয়নশীল দেশগুলোর কাছ থেকে শুল্কমুক্ত ও কোটামুক্ত বাজার সুবিধা (GSP - Generalized System of Preference) আদায় করেছে।<br>
+          • <strong>কানাডার LDCT স্কিম:</strong> ২০০৩ সাল থেকে কানাডার 'স্বল্পোন্নত দেশ শুল্ক' (Least Developed Country Tariff - LDCT) প্রকল্পের আওতায় পোশাকসহ দেশীয় পণ্য শুল্ক ও কোটামুক্ত বাজার প্রবেশাধিকার সুবিধা পেয়ে আসছে।<br>
+          • <strong>অন্যান্য শুল্কমুক্ত সুবিধাদাতা দেশ:</strong> ইউরোপীয় ইউনিয়নভুক্ত দেশসমূহ (EBA সুবিধার আওতায়), জাপান, চিলি, নরওয়ে, নিউজিল্যান্ড, অস্ট্রেলিয়া, রাশিয়া ইত্যাদি উন্নত দেশ বাংলাদেশকে এই বিশেষ বাণিজ্য সুবিধা প্রদান করেছে।
         </div>
       </div>
     </div>
@@ -754,7 +819,8 @@
           </div>
           <div class="quiz-feedback">
             <strong>উত্তর: গ (প্রবাসীদের পাঠানো remittance-এর মাধ্যমে)</strong><br>
-            <strong>ব্যাখ্যা:</strong> মোট রপ্তানি ও আমদানির আর্থিক মূল্যের দৃশ্যমান পার্থক্যই বাণিজ্য ভারসাম্য। প্রবাসীদের পাঠানো রেমিট্যান্সের বড় যোগান এবং রপ্তানি আয়ের মাধ্যমে বিদেশি লেনদেনের ভারসাম্য (Balance of Payments - BOP) ইতিবাচক রাখা সম্ভব হয়।
+            <strong>ব্যাখ্যা:</strong> মোট রপ্তানি ও আমদানির আর্থিক মূল্যের দৃশ্যমান পার্থক্যই বাণিজ্য ভারসাম্য। প্রবাসীদের পাঠানো রেমিট্যান্সের বড় যোগান এবং রপ্তানি আয়ের মাধ্যমে বিদেশি লেনদেনের ভারসাম্য (Balance of Payments - BOP) ইতিবাচক রাখা সম্ভব হয়।<br>
+            <em>গুরুত্বপূর্ণ ইনসাইট:</em> অপশনে থাকা আইএমএফ ঋণ কোনো বেইল-আউট নয়। এছাড়া <strong>ওয়াশিংটন ঐকমত্যের (Washington Consensus) অংশীদার প্রতিষ্ঠানসমূহ</strong> হলো: বিশ্বব্যাংক, আইএমএফ (IMF) এবং মার্কিন অর্থ মন্ত্রণালয় (ইউএস ট্রেজারি বিভাগ) — এই তিনটি প্রতিষ্ঠানেরই যৌথ স্বার্থ রক্ষাকারী নীতি সংস্কার প্যাকেজ।
           </div>
         </div>
 
@@ -790,7 +856,7 @@
           </div>
           <div class="quiz-feedback">
             <strong>উত্তর: খ (কানাডা)</strong><br>
-            <strong>ব্যাখ্যা:</strong> ২০০৩ সাল থেকে কানাডার 'স্বল্পোন্নত দেশ শুল্ক' (LDCT) প্রকল্পের আওতায় বাংলাদেশের পণ্য শুল্ক ও কোটামুক্ত বাজার প্রবেশাধিকার সুবিধা পেয়ে আসছে।
+            <strong>ব্যাখ্যা:</strong> ২০০৩ সাল থেকে কানাডার 'স্বল্পোন্নত দেশ শুল্ক' (LDCT) প্রকল্পের আওতায় বাংলাদেশের পণ্য শুল্ক ও কোটামুক্ত বাজার প্রবেশাধিকার সুবিধা পেয়ে আসছে। বিশ্ব বাণিজ্য সংস্থার (WTO) প্রতিষ্ঠাতা সদস্য এবং স্বল্পোন্নত দেশগুলোর (LDC) মুখপাত্র হিসেবে বাংলাদেশ উন্নত ও উদীয়মান উন্নয়নশীল দেশগুলোর কাছ থেকে শুল্কমুক্ত ও কোটামুক্ত বাজার সুবিধা (GSP) আদায় করেছে।
           </div>
         </div>
 
@@ -815,29 +881,96 @@
       </div>
     </div>
 
+    <!-- ৫. ৩০ সেকেন্ডের রিভিশন ফ্ল্যাশকার্ড -->
+    <div class="section-card" id="sec-revision">
+      <div class="section-header">
+        <h2>⚡ ৩০ সেকেন্ডের ঝটপট রিভিশন ফ্ল্যাশকার্ড (১০টি মেগা রিভিশন)</h2>
+        <span class="badge" style="background: var(--accent); color: #fff;">ক্লিক করে উত্তর দেখুন</span>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 14px; color: var(--text-muted);">
+          পরীক্ষার ঠিক আগে সবচেয়ে বেশি বিভ্রান্তিকর ১০টি তথ্য চোখের পলকে রিভিশন দিয়ে নাও:
+        </p>
+        <div class="flash-card-list">
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ১. ডলারের বিপরীতে দেশীয় মুদ্রার অবমূল্যায়নের অন্যতম মূল প্রভাব কী?</span> <span>➕</span></div>
+            <div class="flash-answer">রপ্তানি বাড়ানো (বিশ্ববাজারে পণ্যের মূল্য প্রতিদ্বন্দ্বিতা সক্ষমতা বাড়ে) এবং আমদানি নিরুৎসাহিত হয়ে বাণিজ্য ঘাটতি হ্রাস পায়।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ২. ২০২৪ সালে প্রবাসী বাংলাদেশি কর্মীদের শীর্ষ গন্তব্য দেশ কোনটি?</span> <span>➕</span></div>
+            <div class="flash-answer">সৌদি আরব (মোট কর্মীর ৬২.১৭% বা ৬ লাখ ২৮ হাজার ৫৬৪ জন)।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ৩. সৌদি আরবের পর ২০২৪ সালে দ্বিতীয় শীর্ষ অভিবাসন গন্তব্য কোনটি?</span> <span>➕</span></div>
+            <div class="flash-answer">মালয়েশিয়া (৯৩,৬৩২ জন কর্মী)।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ৪. বাংলাদেশের বৈদেশিক লেনদেনের ভারসাম্য (BOP) রক্ষায় প্রধান ভূমিকা রাখে কোনটি?</span> <span>➕</span></div>
+            <div class="flash-answer">প্রবাসীদের পাঠানো রেমিট্যান্স (Remittance) এবং রপ্তানি আয়।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ৫. বাংলাদেশে সরাসরি বিদেশি বিনিয়োগে (FDI) শীর্ষ দেশ কোনটি?</span> <span>➕</span></div>
+            <div class="flash-answer">যুক্তরাজ্য (UK) — ২০২৪ সালে নেট ৪০৯.৬১ মিলিয়ন মার্কিন ডলার।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ৬. বিশ্ব বাণিজ্য সংস্থায় (WTO) বাংলাদেশ কোন ভূমিকা রেখে জিএসপি সুবিধা আদায় করেছে?</span> <span>➕</span></div>
+            <div class="flash-answer">বিশ্ব বাণিজ্য সংস্থার প্রতিষ্ঠাতা সদস্য এবং স্বল্পোন্নত দেশগুলোর (LDC) মুখপাত্র হিসেবে বাংলাদেশ উন্নত ও উদীয়মান উন্নয়নশীল দেশগুলোর কাছ থেকে শুল্কমুক্ত ও কোটামুক্ত বাজার সুবিধা (GSP) আদায় করেছে।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ৭. কানাডায় বাংলাদেশের তৈরি পোশাক কোন প্রকল্পের আওতায় শুল্ক ও কোটামুক্ত সুবিধা পায়?</span> <span>➕</span></div>
+            <div class="flash-answer">কানাডার 'স্বল্পোন্নত দেশ শুল্ক' (Least Developed Country Tariff - LDCT) প্রকল্পের আওতায় (২০০৩ সাল থেকে)।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ৮. ওয়াশিংটন ঐকমত্যের (Washington Consensus) অংশীদার প্রতিষ্ঠানসমূহ কোনগুলো?</span> <span>➕</span></div>
+            <div class="flash-answer">বিশ্বব্যাংক, আইএমএফ (IMF) এবং মার্কিন অর্থ মন্ত্রণালয় (ইউএস ট্রেজারি বিভাগ) — এই তিনটি প্রতিষ্ঠানের যৌথ স্বার্থ রক্ষাকারী নীতি সংস্কার প্যাকেজ।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ৯. বেইল আউট (Bailout) কী এবং বাংলাদেশের আইএমএফ ঋণ কি বেইল আউট?</span> <span>➕</span></div>
+            <div class="flash-answer">দেউলিয়া হওয়ার মুখে থাকা রাষ্ট্রকে দেওয়া বিশেষ জরুরি ঋণ হলো বেইল আউট; বাংলাদেশের ৪৭০ কোটি ডলার ঋণ কোনো বেইল আউট নয়, বরং এটি সাধারণ সংস্কার প্যাকেজ।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ১০. বাংলাদেশের সর্বাধিক বৈদেশিক মুদ্রা অর্জনকারী খাত কোনটি?</span> <span>➕</span></div>
+            <div class="flash-answer">তৈরি পোশাক বা রেডিমেড গার্মেন্টস (RMG)।</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- বইয়ের অসঙ্গতি ও যাচাই তালিকা -->
-    <div class="discrepancy-card">
+    <div class="discrepancy-card" id="sec-discrepancy">
       <h3 style="color: var(--danger); margin-bottom: 12px;">⚠️ বইয়ের অসঙ্গতি ও যাচাই তালিকা</h3>
       <p style="font-size: 0.875rem; margin-bottom: 14px;">বইয়ের পাতাগুলোতে মুদ্রিত অপশন কোড ও লেআউটে যেসব অসংগতি পরিলক্ষিত হয়েছে:</p>
       <div class="table-container">
         <table>
-        <thead>
-          
-              <td>প্রশ্ন ১ এর ব্যাখ্যার অবস্থান (পৃ. ৪৮২)</td>
+          <thead>
+            <tr>
+              <th>বিষয় ও প্রশ্ন নং</th>
+              <th>বইয়ে যা মুদ্রিত আছে</th>
+              <th>অসঙ্গতির কারণ</th>
+              <th>সঠিক সিদ্ধান্ত ও ব্যাখ্যা</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>প্রশ্ন ১ এর ব্যাখ্যার অবস্থান (পৃ. ৪৮২)</strong></td>
               <td>ব্যাখ্যার কিছু অংশ প্রশ্নের বিকল্পের উপরে ঢুকে গেছে</td>
               <td>মুদ্রণ বিভ্রাটে অপশন ক ও গ-এর মাঝে ব্যাখ্যার দুই লাইন ছাপা হয়েছে।</td>
               <td>এটি কলাম ভাঙার মুদ্রণজনিত লেআউট বিভ্রাট।</td>
-            
-        </thead>
-        <tbody>
-          <tr>
-              <td>প্রশ্ন ১ (পৃ. ৪৮২)</td>
+            </tr>
+            <tr>
+              <td><strong>প্রশ্ন ১ (পৃ. ৪৮২)</strong><br>বানানগত বৈচিত্র্য</td>
               <td>"রপ্তানী বাড়ানো" বনাম "রপ্তানি"</td>
               <td>একই পৃষ্ঠায় 'রপ্তানী' ও 'রপ্তানি' দুই ধরণের বানান ব্যবহৃত হয়েছে।</td>
-              <td>উভয় রূপই প্রচলিত (আমার অনুমান)।</td>
+              <td>উভয় রূপই প্রচলিত।</td>
             </tr>
-        </tbody>
-      </table>
+            <tr>
+              <td><strong>প্রশ্ন ৬ (পৃ. ৪৮৩)</strong><br>সর্বোচ্চ এফডিআই (FDI) দেশ</td>
+              <td>বইয়ের কলামের উত্তরে 'উ. খ' (দক্ষিণ কোরিয়া) নির্দেশিত হলেও ব্যাখ্যার সাম্প্রতিক তথ্যে যুক্তরাজ্যকে শীর্ষে উল্লেখ করা হয়েছে।</td>
+              <td>বাংলাদেশ ব্যাংকের নেট এফডিআই প্রবাহের তথ্যমতে যুক্তরাজ্য একক শীর্ষে।</td>
+              <td>সাম্প্রতিক তথ্যমতে সঠিক উত্তর <strong>যুক্তরাজ্য</strong> (৪০৯.৬১ মিলিয়ন ডলার)।</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
@@ -879,6 +1012,16 @@
       const scrolled = (winScroll / height) * 100;
       document.getElementById('progress-bar').style.width = scrolled + '%';
     });
+
+    
+    // ফ্ল্যাশকার্ড টগল ফাংশন
+    function toggleFlash(card) {
+      card.classList.toggle('open');
+      const icon = card.querySelector('.flash-question span:last-child');
+      if (icon) {
+        icon.textContent = card.classList.contains('open') ? '➖' : '➕';
+      }
+    }
 
     // কুইজ হ্যান্ডলার
     let correctCount = 0;
