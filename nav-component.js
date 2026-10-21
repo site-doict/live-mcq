@@ -1157,12 +1157,23 @@
     }
   };
 
-  // Font Size Adjustments
+  // Universal Font Size Controller
   let currentFontScale = parseFloat(localStorage.getItem('ebk_font_scale')) || 1.0;
-  function applyFontScale(scale) {
-    currentFontScale = Math.min(1.35, Math.max(0.85, Math.round(scale * 100) / 100));
-    try { localStorage.setItem('ebk_font_scale', currentFontScale); } catch(e){}
+  if (isNaN(currentFontScale) || currentFontScale < 0.75 || currentFontScale > 1.5) {
+    currentFontScale = 1.0;
+  }
 
+  function applyFontScale(scale) {
+    currentFontScale = Math.min(1.4, Math.max(0.8, Math.round(scale * 100) / 100));
+    try {
+      localStorage.setItem('ebk_font_scale', currentFontScale);
+    } catch (e) {}
+
+    // 1. Scale document root so ALL rem units scale proportionally
+    document.documentElement.style.fontSize = (currentFontScale * 100) + '%';
+    document.documentElement.style.setProperty('--font-scale', currentFontScale);
+
+    // 2. High specificity fallback rule in head
     let styleEl = document.getElementById('ebk-font-scale-override');
     if (!styleEl) {
       styleEl = document.createElement('style');
@@ -1170,11 +1181,33 @@
       document.head.appendChild(styleEl);
     }
     styleEl.textContent = `
-      body, p, li, td, th, .quiz-question, .quiz-option, .note, .card, main {
-        font-size: calc(1rem * ${currentFontScale}) !important;
+      :root {
+        --font-scale: ${currentFontScale};
+        font-size: ${currentFontScale * 100}% !important;
       }
     `;
+
+    // 3. Update drawer indicator if present
+    const indicator = document.getElementById('ebk-font-indicator');
+    if (indicator) {
+      indicator.textContent = Math.round(currentFontScale * 100) + '%';
+    }
   }
+
+  // Unified global button handlers - connect all buttons on all pages!
+  window.adjustFontSize = function (delta) {
+    const step = delta > 0 ? 0.08 : -0.08;
+    applyFontScale(currentFontScale + step);
+  };
+
+  window.changeFontSize = function (delta) {
+    if (delta === 0) {
+      applyFontScale(1.0);
+    } else {
+      const step = delta > 0 ? 0.08 : -0.08;
+      applyFontScale(currentFontScale + step);
+    }
+  };
 
   window.ebkAdjustFontSize = function (delta) {
     applyFontScale(currentFontScale + delta);
@@ -1184,9 +1217,8 @@
     applyFontScale(1.0);
   };
 
-  if (localStorage.getItem('ebk_font_scale')) {
-    applyFontScale(currentFontScale);
-  }
+  // Immediately apply saved font scale on page load
+  applyFontScale(currentFontScale);
 
   // Theme Toggle Button
   function setupThemeToggle() {
