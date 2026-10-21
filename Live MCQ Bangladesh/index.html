@@ -1,0 +1,1048 @@
+<!-- DESIGN PLAN:
+(১) বিষয়ের ধরন: বিসিএস প্রিলিমিনারি প্রস্তুতিমূলক "বাংলাদেশ বিষয়াবলি" (পৃষ্ঠা ৪০১-৫৬৪) পূর্ণাঙ্গ সূচিপত্র ও সিলেবাস নেভিগেটর।
+(২) কঠিন/গুলিয়ে ফেলার জায়গা: জাতীয় ইতিহাস থেকে শুরু করে অর্থনীতি, বাণিজ্য, সংবিধান ও জাতীয় অর্জনের ক্রম মনে রাখা এবং বইয়ের মুদ্রণজনিত ত্রুটিপূর্ণ পৃষ্ঠা নম্বর (যেমন: ৪৪৫-৪০/৪৫৮, ১৫৯-৪৭২, ১৬৩-৪৬৪)।
+(৩) বাছাই করা মডিউল: সিলেবাস ট্র্যাকার চেকলিস্ট, লাইভ টপিক সার্চ, অধ্যায়ভিত্তিক পৃষ্ঠা ব্যাপ্তির বার ও ইন্টারেক্টিভ কুইজ।
+(৪) রঙের মেজাজ: বাংলাদেশ বিষয়াবলির উপযোগী গাঢ় সবুজ ও লালচে মেরুন অ্যাকসেন্ট (Forest Green & Crimson) এবং স্পষ্ট ও পরিষ্কার কার্ড লেআউট।
+(৫) হিরো ও মাসকটের ধরন: জাতীয় মানচিত্র ও লাল-সবুজ আবহ সম্বলিত মাস্টার রোডম্যাপ ড্যাশবোর্ড; প্রতীকী গাইড "বিসিএস মেন্টর" (🏛️)।
+-->
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বাংলাদেশ বিষয়াবলি (৪০১-৫৬৪) সিলেবাস গাইড ও স্টাডি ট্র্যাকার</title>
+  <style>
+    :root {
+      --bg: #f4f7f6;
+      --surface: #ffffff;
+      --surface-2: #e8f0ec;
+      --text: #1a2e22;
+      --text-muted: #4b6354;
+      --border: #c2d6cb;
+      --primary: #15803d;
+      --primary-dark: #166534;
+      --primary-light: #dcfce7;
+      --accent: #dc2626;
+      --accent-light: #fee2e2;
+      --warning: #d97706;
+      --warning-light: #fef3c7;
+      --success: #16a34a;
+      --success-light: #dcfce7;
+      --danger: #b91c1c;
+      --danger-light: #fef2f2;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --font-scale: 1;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0b1510;
+      --surface: #13221b;
+      --surface-2: #1b3026;
+      --text: #f0fdf4;
+      --text-muted: #94a3b8;
+      --border: #284436;
+      --primary: #4ade80;
+      --primary-dark: #22c55e;
+      --primary-light: #052e16;
+      --accent: #f87171;
+      --accent-light: #450a0a;
+      --warning: #fbbf24;
+      --warning-light: #451a03;
+      --success: #4ade80;
+      --success-light: #052e16;
+      --danger: #f87171;
+      --danger-light: #450a0a;
+      --shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    body {
+      font-family: 'Noto Sans Bengali', 'Kalpurush', Vrinda, sans-serif;
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.8;
+      background-color: var(--bg);
+      color: var(--text);
+      padding-bottom: 80px;
+    }
+
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: transparent;
+      z-index: 1001;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .control-bar {
+      position: sticky;
+      top: 5px;
+      z-index: 1000;
+      background: var(--surface);
+      border-bottom: 2px solid var(--border);
+      padding: 10px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    button {
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      padding: 6px 14px;
+      font-size: calc(14px * var(--font-scale));
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+    }
+
+    button:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #166534, #14532d);
+      color: #ffffff;
+      padding: 32px 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: calc(26px * var(--font-scale));
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: calc(15px * var(--font-scale));
+      opacity: 0.95;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8125rem;
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #fff;
+    }
+
+    .search-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+      font-size: calc(16px * var(--font-scale));
+      font-family: inherit;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+    }
+
+    .section-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .section-header {
+      padding: 16px 20px;
+      background: var(--surface-2);
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .section-header h2 {
+      font-size: calc(18px * var(--font-scale));
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-body {
+      padding: 20px;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      margin: 12px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      font-size: calc(15px * var(--font-scale));
+    }
+
+    th {
+      background-color: var(--surface-2);
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    [data-theme="dark"] tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    .page-num {
+      font-family: monospace;
+      font-weight: bold;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 2px 8px;
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    [data-theme="dark"] .page-num {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .quiz-card {
+      background: var(--surface-2);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .quiz-question {
+      font-weight: bold;
+      margin-bottom: 12px;
+      font-size: calc(16px * var(--font-scale));
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .quiz-opt {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      font-size: calc(15px * var(--font-scale));
+      font-family: inherit;
+    }
+
+    .quiz-opt:hover {
+      border-color: var(--primary);
+    }
+
+    .quiz-opt.correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+      color: var(--text);
+      font-weight: bold;
+    }
+
+    .quiz-opt.incorrect {
+      background: var(--danger-light) !important;
+      border-color: var(--danger) !important;
+      color: var(--text);
+    }
+
+    .quiz-feedback {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      display: none;
+      font-size: calc(14px * var(--font-scale));
+    }
+
+    .discrepancy-card {
+      background: var(--surface);
+      border: 2px dashed var(--accent);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-top: 30px;
+    }
+
+    @media print {
+      .control-bar, #progress-container, .btn-group, .search-card, button, input[type="checkbox"] {
+        display: none !important;
+      }
+      body {
+        background: #fff;
+        color: #000;
+        font-size: 11pt;
+      }
+      .section-card {
+        border: 1px solid #777;
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+    }
+  
+/* Universal Mobile Optimization (Samsung A23 & small screens) */
+@media (max-width: 600px) {
+  .print-btn, button[onclick*="print"], .btn-ctrl:has(span:contains('🖨️')) {
+    display: none !important;
+  }
+  .container {
+    padding: 6px 8px 24px 8px !important;
+  }
+  .hero-box, .hero, .hero-banner {
+    padding: 16px 12px !important;
+    margin-top: 8px !important;
+    margin-bottom: 14px !important;
+  }
+  .table-responsive, .table-container {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+  }
+  .table-responsive table th, .table-responsive table td,
+  .table-container table th, .table-container table td {
+    padding: 7px 6px !important;
+  }
+}
+
+</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Reading Progress Bar -->
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <!-- Sticky Control Bar -->
+  <div class="control-bar">
+    <div class="btn-group">
+      <a href="../Live MCQ Bangla Literature/index.html" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px; background:#881337; color:#fff; padding:6px 12px; border-radius:6px; font-weight:700; font-size:0.85rem;">🏛️ মাস্টার পোর্টাল</a>
+      <a href="../index.html" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px; background:#0f766e; color:#fff; padding:6px 12px; border-radius:6px; font-weight:700; font-size:0.85rem;">📚 বাংলা সাহিত্য</a>
+      <button id="themeToggle" title="থিম পরিবর্তন">🌓 থিম</button>
+      <button id="fontDown" title="ফন্ট ছোট">A-</button>
+      <button id="fontReset" title="স্বাভাবিক ফন্ট">A</button>
+      <button id="fontUp" title="ফন্ট বড়">A+</button>
+    </div>
+    <div class="btn-group">
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆️ উপরে</button>
+      <button onclick="window.print()">🖨️ প্রিন্ট / PDF</button>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Hero Section -->
+    <div class="hero">
+      <div style="font-size: 2.375rem; margin-bottom: 6px;">🏛️</div>
+      <h1>বাংলাদেশ বিষয়াবলি: পূর্ণাঙ্গ সিলেবাস রোডম্যাপ</h1>
+      <p>বিসিএস প্রিলিমিনারি প্রস্তুতির জন্য বাংলাদেশ অংশের (পৃষ্ঠা ৪০১-৫৬৪) অধ্যায়ভিত্তিক সূচিপত্র ও ট্র্যাকার।</p>
+      <div class="hero-meta">
+        <span class="badge">মোট পৃষ্ঠা পরিসর: ৪০১ – ৫৬৪</span>
+        <span class="badge">মোট উপ-বিভাগ: ৬টি প্রধান অধ্যায়</span>
+        <span class="badge">ইন-ডেপথ চেকলিস্ট</span>
+      </div>
+    </div>
+
+    <!-- Search Tool -->
+    <div class="search-card">
+      <label for="topicSearch" style="font-weight: bold; display: block; margin-bottom: 8px;">🔍 বিষয় বা টপিক খুঁজুন:</label>
+      <input type="text" id="topicSearch" class="search-input" placeholder="যেমন: সংবিধান, ভাষা আন্দোলন, কৃষিজ সম্পদ, বাজেট, ভাস্কর্য...">
+    </div>
+
+    <!-- সেকশন ১: জাতীয় বিষয়াবলি -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>📜 ১. বাংলাদেশের জাতীয় বিষয়াবলি</h2>
+        <span class="page-num">পৃষ্ঠা: ৪০১ – ৪৪৪</span>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: প্রাচীন ইতিহাস থেকে স্বাধীনতা সংগ্রামের কালানুক্রমিক ঘটনাপ্রবাহ আয়ত্ত করা। (আনুমানিক পাঠ সময়: ৪৫ মিনিট) (আমার অনুমান)
+        </p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>টপিক / বিষয়</th>
+                <th>পৃষ্ঠা নম্বর</th>
+                <th>স্ট্যাটাস</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%9A%E0%A7%80%E0%A6%A8%20%E0%A6%95%E0%A6%BE%E0%A6%B2%20(%E0%A6%87%E0%A6%A4%E0%A6%BF%E0%A6%B9%E0%A6%BE%E0%A6%B8,%20%E0%A6%9C%E0%A6%A8%E0%A6%AA%E0%A6%A6%20%E0%A6%93%20%E0%A6%AC%E0%A6%BF%E0%A6%AD%E0%A6%BF%E0%A6%A8%E0%A7%8D%E0%A6%A8%20%E0%A6%B0%E0%A6%BE%E0%A6%9C%E0%A6%AC%E0%A6%82%E0%A6%B6).html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> প্রাচীন কাল (ইতিহাস, জনপদ ও বিভিন্ন রাজবংশ)
+                  </a>
+                </td>
+                <td><span class="page-num">৪০১-৪০৭</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%AE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%AF%E0%A7%81%E0%A6%97%20(%E0%A6%AE%E0%A7%81%E0%A6%98%E0%A6%B2,%20%E0%A6%B8%E0%A7%81%E0%A6%B2%E0%A6%A4%E0%A6%BE%E0%A6%A8%20%E0%A6%93%20%E0%A6%A8%E0%A6%AC%E0%A6%BE%E0%A6%AC%E0%A7%80%20%E0%A6%86%E0%A6%AE%E0%A6%B2).html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> মধ্যযুগ (মুঘল, সুলতান ও নবাবী আমল)
+                  </a>
+                </td>
+                <td><span class="page-num">৪০৭-৪১৩</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%87%E0%A6%89%E0%A6%B0%E0%A7%8B%E0%A6%AA%E0%A7%80%E0%A7%9F%E0%A6%A6%E0%A7%87%E0%A6%B0%20%E0%A6%86%E0%A6%97%E0%A6%AE%E0%A6%A8%20%E0%A6%93%20%E0%A6%AC%E0%A7%8D%E0%A6%B0%E0%A6%BF%E0%A6%9F%E0%A6%BF%E0%A6%B6%20%E0%A6%B6%E0%A6%BE%E0%A6%B8%E0%A6%A8%E0%A6%BE%E0%A6%AE%E0%A6%B2.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> ইউরোপীয়দের আগমন ও ব্রিটিশ শাসনামল
+                  </a>
+                </td>
+                <td><span class="page-num">৪১৪-৪২১</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%AA%E0%A6%BE%E0%A6%95%E0%A6%BF%E0%A6%B8%E0%A7%8D%E0%A6%A4%E0%A6%BE%E0%A6%A8%20%E0%A6%86%E0%A6%AE%E0%A6%B2-%20%E0%A6%AD%E0%A6%BE%E0%A6%B7%E0%A6%BE%20%E0%A6%86%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8B%E0%A6%B2%E0%A6%A8.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> পাকিস্তান আমল
+                  </a>
+                </td>
+                <td><span class="page-num">৪২২-৪২২</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%AA%E0%A6%BE%E0%A6%95%E0%A6%BF%E0%A6%B8%E0%A7%8D%E0%A6%A4%E0%A6%BE%E0%A6%A8%20%E0%A6%86%E0%A6%AE%E0%A6%B2-%20%E0%A6%AD%E0%A6%BE%E0%A6%B7%E0%A6%BE%20%E0%A6%86%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8B%E0%A6%B2%E0%A6%A8.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> ভাষা আন্দোলন
+                  </a>
+                </td>
+                <td><span class="page-num">৪২২-৪২৬</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%AF%E0%A7%81%E0%A6%95%E0%A7%8D%E0%A6%A4%E0%A6%AB%E0%A7%8D%E0%A6%B0%E0%A6%A8%E0%A7%8D%E0%A6%9F%20%E0%A6%A8%E0%A6%BF%E0%A6%B0%E0%A7%8D%E0%A6%AC%E0%A6%BE%E0%A6%9A%E0%A6%A8%20%E0%A6%93%20%E0%A7%A7%E0%A7%AF%E0%A7%AB%E0%A7%AC-%E0%A6%8F%E0%A6%B0%20%E0%A6%B6%E0%A6%BE%E0%A6%B8%E0%A6%A8%E0%A6%A4%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A7%8D%E0%A6%B0%20%E0%A6%86%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8B%E0%A6%B2%E0%A6%A8.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> যুক্তফ্রন্ট নির্বাচন ও ১৯৫৬-এর শাসনতন্ত্র আন্দোলন
+                  </a>
+                </td>
+                <td><span class="page-num">৪২৬-৪২৭</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%9B%E0%A7%9F%20%E0%A6%A6%E0%A6%AB%E0%A6%BE%20%E0%A6%86%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8B%E0%A6%B2%E0%A6%A8.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> ছয় দফা আন্দোলন
+                  </a>
+                </td>
+                <td><span class="page-num">৪২৮-৪২৯</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%AE%E0%A7%81%E0%A6%95%E0%A7%8D%E0%A6%A4%E0%A6%BF%E0%A6%AF%E0%A7%81%E0%A6%A6%E0%A7%8D%E0%A6%A7_%E0%A7%AA%E0%A7%A9%E0%A7%A6-%E0%A7%AA%E0%A7%AA%E0%A7%AA.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> ঊনসত্তরের গণঅভ্যুত্থান থেকে মুক্তিযুদ্ধ
+                  </a>
+                </td>
+                <td><span class="page-num">৪৩০-৪৪৪</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- সেকশন ২: কৃষিজ সম্পদ -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>🌾 ২. বাংলাদেশের কৃষিজ সম্পদ</h2>
+        <span class="page-num">পৃষ্ঠা: ৪৪৫ – ৪৫৮</span>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: ফসল, ফসলের জাত এবং কৃষি প্রতিষ্ঠান সম্পর্কিত তথ্য নিশ্চিত করা। (আনুমানিক পাঠ সময়: ২৫ মিনিট) (আমার অনুমান)
+        </p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>টপিক / বিষয়</th>
+                <th>পৃষ্ঠা নম্বর</th>
+                <th>স্ট্যাটাস</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%95%E0%A7%83%E0%A6%B7%E0%A6%BF%E0%A6%9C%20%E0%A6%B8%E0%A6%AE%E0%A7%8D%E0%A6%AA%E0%A6%A6%20(%E0%A6%AB%E0%A6%B8%E0%A6%B2,%20%E0%A6%AC%E0%A6%A8,%20%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%A3%E0%A6%BF%E0%A6%B8%E0%A6%AE%E0%A7%8D%E0%A6%AA%E0%A6%A6,%20%E0%A6%AE%E0%A7%8E%E0%A6%B8%E0%A7%8D%E0%A6%AF%E0%A6%B8%E0%A6%AE%E0%A7%8D%E0%A6%AA%E0%A6%A6).html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> কৃষিজ সম্পদ (ফসল, বন, প্রাণিসম্পদ, মৎস্যসম্পদ)
+                  </a>
+                </td>
+                <td><span class="page-num">৪৪৫-৪৫১</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%AB%E0%A6%B8%E0%A6%B2%E0%A7%87%E0%A6%B0%20%E0%A6%9C%E0%A6%BE%E0%A6%A4.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> ফসলের জাত
+                  </a>
+                </td>
+                <td><span class="page-num">৪৫০-৪৫৪</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%95%E0%A7%83%E0%A6%B7%E0%A6%BF%20%E0%A6%B8%E0%A6%82%E0%A6%B6%E0%A7%8D%E0%A6%B2%E0%A6%BF%E0%A6%B7%E0%A7%8D%E0%A6%9F%20%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%A4%E0%A6%BF%E0%A6%B7%E0%A7%8D%E0%A6%A0%E0%A6%BE%E0%A6%A8.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> কৃষি সংশ্লিষ্ট প্রতিষ্ঠান
+                  </a>
+                </td>
+                <td><span class="page-num">৪৫৫-৪৫৬</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%95%E0%A7%83%E0%A6%B7%E0%A6%BF%20%E0%A6%B8%E0%A6%AE%E0%A7%8D%E0%A6%AA%E0%A6%A6%20(%E0%A6%85%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A8%E0%A7%8D%E0%A6%AF).html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> অন্যান্য (কৃষি সম্পর্কিত)
+                  </a>
+                </td>
+                <td><span class="page-num">৪৫৭-৪৫৮</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- সেকশন ৩: বাংলাদেশের অর্থনীতি -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>💰 ৩. বাংলাদেশের অর্থনীতি</h2>
+        <span class="page-num">পৃষ্ঠা: ৪৫৯ – ৪৭২</span>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: অর্থনৈতিক সমীক্ষা, বাজেট ও পরিকল্পনা কাঠামোর পৃষ্ঠাভিত্তিক অধ্যয়ন। (আনুমানিক পাঠ সময়: ২০ মিনিট) (আমার অনুমান)
+        </p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>টপিক / বিষয়</th>
+                <th>পৃষ্ঠা নম্বর</th>
+                <th>স্ট্যাটাস</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%85%E0%A6%B0%E0%A7%8D%E0%A6%A5%E0%A6%A8%E0%A7%88%E0%A6%A4%E0%A6%BF%E0%A6%95%20%E0%A6%B8%E0%A6%AE%E0%A7%80%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A6%BE%20%E0%A6%93%20%E0%A6%AC%E0%A6%BE%E0%A6%9C%E0%A7%87%E0%A6%9F.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> অর্থনৈতিক সমীক্ষা ও বাজেট
+                  </a>
+                </td>
+                <td><span class="page-num">৪৫৯-৪৬৩</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A7%87%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A6%BF%E0%A6%A4%20%E0%A6%AA%E0%A6%B0%E0%A6%BF%E0%A6%95%E0%A6%B2%E0%A7%8D%E0%A6%AA%E0%A6%A8%E0%A6%BE%20%E0%A6%93%20%E0%A6%AA%E0%A6%9E%E0%A7%8D%E0%A6%9A%E0%A6%AC%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%B7%E0%A6%BF%E0%A6%95%20%E0%A6%AA%E0%A6%B0%E0%A6%BF%E0%A6%95%E0%A6%B2%E0%A7%8D%E0%A6%AA%E0%A6%A8%E0%A6%BE.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> প্রেক্ষিত পরিকল্পনা ও পঞ্চবার্ষিক পরিকল্পনা
+                  </a>
+                </td>
+                <td><span class="page-num">৪৬৩-৪৬৪</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%B6%20%E0%A6%AC%E0%A6%BF%E0%A6%B7%E0%A7%9F%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A6%BF-%20%E0%A6%85%E0%A6%B0%E0%A7%8D%E0%A6%A5%E0%A6%A8%E0%A7%80%E0%A6%A4%E0%A6%BF,%20%E0%A6%B0%E0%A6%BE%E0%A6%9C%E0%A6%B8%E0%A7%8D%E0%A6%AC%20%E0%A6%93%20%E0%A6%89%E0%A6%A8%E0%A7%8D%E0%A6%A8%E0%A7%9F%E0%A6%A8%20%E0%A6%AA%E0%A6%B0%E0%A6%BF%E0%A6%95%E0%A6%B2%E0%A7%8D%E0%A6%AA%E0%A6%A8%E0%A6%BE.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> অন্যান্য (অর্থনীতি সম্পর্কিত)
+                  </a>
+                </td>
+                <td><span class="page-num">৪৬৫-৪৭২</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- সেকশন ৪: শিল্প, বাণিজ্য ও জনমিতি -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>🏭 ৪. শিল্প, বাণিজ্য ও জনমিতিক বিষয়সমূহ</h2>
+        <span class="page-num">পৃষ্ঠা: ৪৭৩ – ৪৯৪</span>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: শিল্প উৎপাদন, বৈদেশিক লেনদেন, আদমশুমারি ও ক্ষুদ্র নৃগোষ্ঠীর তথ্য পড়া। (আনুমানিক পাঠ সময়: ৩৫ মিনিট) (আমার অনুমান)
+        </p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>টপিক / বিষয়</th>
+                <th>পৃষ্ঠা নম্বর</th>
+                <th>স্ট্যাটাস</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%B6%E0%A7%87%E0%A6%B0%20%E0%A6%B6%E0%A6%BF%E0%A6%B2%E0%A7%8D%E0%A6%AA%20%E0%A6%93%20%E0%A6%AC%E0%A6%BE%E0%A6%A3%E0%A6%BF%E0%A6%9C%E0%A7%8D%E0%A6%AF%20%E0%A6%B6%E0%A6%BF%E0%A6%B2%E0%A7%8D%E0%A6%AA%20%E0%A6%89%E0%A7%8E%E0%A6%AA%E0%A6%BE%E0%A6%A6%E0%A6%A8.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> শিল্প উৎপাদন
+                  </a>
+                </td>
+                <td><span class="page-num">৪৭৩-৪৭৭</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%B6%E0%A6%95%E0%A7%8D%E0%A6%A4%E0%A6%BF%20%E0%A6%93%20%E0%A6%96%E0%A6%A8%E0%A6%BF%E0%A6%9C%20%E0%A6%B8%E0%A6%AE%E0%A7%8D%E0%A6%AA%E0%A6%A6.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> শক্তি সম্পদ
+                  </a>
+                </td>
+                <td><span class="page-num">৪৭৭-৪৭৯</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%AA%E0%A6%A3%E0%A7%8D%E0%A6%AF%20%E0%A6%86%E0%A6%AE%E0%A6%A6%E0%A6%BE%E0%A6%A8%E0%A6%BF%20%E0%A6%93%20%E0%A6%B0%E0%A6%AA%E0%A7%8D%E0%A6%A4%E0%A6%BE%E0%A6%A8%E0%A6%BF.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> পণ্য আমদানি ও রপ্তানি
+                  </a>
+                </td>
+                <td><span class="page-num">৪৭৯-৪৮২</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%AC%E0%A7%88%E0%A6%A6%E0%A7%87%E0%A6%B6%E0%A6%BF%E0%A6%95%20%E0%A6%B2%E0%A7%87%E0%A6%A8%E0%A6%A6%E0%A7%87%E0%A6%A8%20%E0%A6%93%20%E0%A6%85%E0%A6%B0%E0%A7%8D%E0%A6%A5%20%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A7%87%E0%A6%B0%E0%A6%A3.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> বৈদেশিক লেনদেন ও অর্থ প্রেরণ
+                  </a>
+                </td>
+                <td><span class="page-num">৪৮২-৪৮৩</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%B6%E0%A7%87%E0%A6%B0%20%E0%A6%AC%E0%A6%BE%E0%A6%A3%E0%A6%BF%E0%A6%9C%E0%A7%8D%E0%A6%AF%20%E0%A6%93%20%E0%A6%AC%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%82%E0%A6%95%E0%A6%BF%E0%A6%82%20%E0%A6%AC%E0%A7%8D%E0%A6%AF%E0%A6%AC%E0%A6%B8%E0%A7%8D%E0%A6%A5%E0%A6%BE.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> বাংলাদেশের বাণিজ্য
+                  </a>
+                </td>
+                <td><span class="page-num">৪৮৪-৪৮৬</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%9C%E0%A6%A8%E0%A6%AE%E0%A6%BF%E0%A6%A4%E0%A6%BF%E0%A6%95%20%E0%A6%B6%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A6%B0%E0%A6%BF%20%E0%A6%93%20%E0%A6%9C%E0%A6%A8%E0%A6%B8%E0%A6%82%E0%A6%96%E0%A7%8D%E0%A6%AF%E0%A6%BE%20%E0%A6%B8%E0%A6%82%E0%A6%95%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%A8%E0%A7%8D%E0%A6%A4.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> জনমিতিক শুমারি ও জনসংখ্যা সংক্রান্ত
+                  </a>
+                </td>
+                <td><span class="page-num">৪৮৬-৪৮৯</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A7%81%E0%A6%A6%E0%A7%8D%E0%A6%B0%20%E0%A6%A8%E0%A7%83%E0%A6%97%E0%A7%8B%E0%A6%B7%E0%A7%8D%E0%A6%A0%E0%A7%80.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> ক্ষুদ্র নৃগোষ্ঠী
+                  </a>
+                </td>
+                <td><span class="page-num">৪৮৯-৪৯৩</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%89%E0%A6%9A%E0%A7%8D%E0%A6%9A%E0%A6%B6%E0%A6%BF%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A6%BE%20%E0%A6%93%20%E0%A6%B8%E0%A7%8D%E0%A6%AC%E0%A6%BE%E0%A6%B8%E0%A7%8D%E0%A6%A5%E0%A7%8D%E0%A6%AF%E0%A6%B8%E0%A7%87%E0%A6%AC%E0%A6%BE%20%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%A4%E0%A6%BF%E0%A6%B7%E0%A7%8D%E0%A6%A0%E0%A6%BE%E0%A6%A8.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> অন্যান্য (জনমিতিক: উচ্চশিক্ষা ও স্বাস্থ্যসেবা)
+                  </a>
+                </td>
+                <td><span class="page-num">৪৯৩-৪৯৪</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- সেকশন ৫: সংবিধান, রাজনীতি ও সরকার -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>⚖️ ৫. সংবিধান, রাজনীতি ও সরকার ব্যবস্থা</h2>
+        <span class="page-num">পৃষ্ঠা: ৪৯৫ – ৫২৬</span>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: শাসনতন্ত্র, রাষ্ট্রীয় অঙ্গসমূহ ও রাজনৈতিক কাঠামো পরিষ্কার করা। (আনুমানিক পাঠ সময়: ৩০ মিনিট) (আমার অনুমান)
+        </p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>টপিক / বিষয়</th>
+                <th>পৃষ্ঠা নম্বর</th>
+                <th>স্ট্যাটাস</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%97%E0%A6%A3%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%9C%E0%A6%BE%E0%A6%A4%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A7%8D%E0%A6%B0%E0%A7%80%20%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%B6%E0%A7%87%E0%A6%B0%20%E0%A6%B8%E0%A6%82%E0%A6%AC%E0%A6%BF%E0%A6%A7%E0%A6%BE%E0%A6%A8.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> বাংলাদেশের সংবিধান
+                  </a>
+                </td>
+                <td><span class="page-num">৪৯৫-৫১০</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%B6%E0%A7%87%E0%A6%B0%20%E0%A6%B0%E0%A6%BE%E0%A6%9C%E0%A6%A8%E0%A7%88%E0%A6%A4%E0%A6%BF%E0%A6%95%20%E0%A6%AC%E0%A7%8D%E0%A6%AF%E0%A6%AC%E0%A6%B8%E0%A7%8D%E0%A6%A5%E0%A6%BE.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> বাংলাদেশের রাজনৈতিক ব্যবস্থা
+                  </a>
+                </td>
+                <td><span class="page-num">৫১০-৫১৩</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%B6%E0%A7%87%E0%A6%B0%20%E0%A6%B8%E0%A6%B0%E0%A6%95%E0%A6%BE%E0%A6%B0%20%E0%A6%AC%E0%A7%8D%E0%A6%AF%E0%A6%AC%E0%A6%B8%E0%A7%8D%E0%A6%A5%E0%A6%BE.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> বাংলাদেশের সরকার ব্যবস্থা
+                  </a>
+                </td>
+                <td><span class="page-num">৫১৪-৫২৬</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- সেকশন ৬: জাতীয় অর্জন ও অন্যান্য -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>🏆 ৬. বাংলাদেশের জাতীয় অর্জন ও অন্যান্য</h2>
+        <span class="page-num">পৃষ্ঠা: ৫২৭ – ৫৬৪</span>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: যোগাযোগ, ভৌগোলিক রূপরেখা, সংস্কৃতি ও ভাস্কর্য আয়ত্ত করা। (আনুমানিক পাঠ সময়: ৩০ মিনিট) (আমার অনুমান)
+        </p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>টপিক / বিষয়</th>
+                <th>পৃষ্ঠা নম্বর</th>
+                <th>স্ট্যাটাস</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%B6%E0%A7%87%E0%A6%B0_%E0%A6%9C%E0%A6%BE%E0%A6%A4%E0%A7%80%E0%A6%AF%E0%A6%BC_%E0%A6%85%E0%A6%B0%E0%A7%8D%E0%A6%9C%E0%A6%A8_%E0%A6%93_%E0%A6%85%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A8%E0%A7%8D%E0%A6%AF.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> জাতীয় অর্জন ও অন্যান্য
+                  </a>
+                </td>
+                <td><span class="page-num">৫২৭-৫৩৮</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%96%E0%A7%87%E0%A6%B2%E0%A6%BE%E0%A6%A7%E0%A7%81%E0%A6%B2%E0%A6%BE.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> খেলাধুলা
+                  </a>
+                </td>
+                <td><span class="page-num">৫৩৮-৫৪০</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%AF%E0%A7%8B%E0%A6%97%E0%A6%BE%E0%A6%AF%E0%A7%8B%E0%A6%97%20%E0%A6%AC%E0%A7%8D%E0%A6%AF%E0%A6%AC%E0%A6%B8%E0%A7%8D%E0%A6%A5%E0%A6%BE.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> যোগাযোগ ব্যবস্থা
+                  </a>
+                </td>
+                <td><span class="page-num">৫৪০-৫৪৪</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%AD%E0%A7%8C%E0%A6%97%E0%A7%8B%E0%A6%B2%E0%A6%BF%E0%A6%95_%E0%A6%AC%E0%A6%BF%E0%A6%B7%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%A6%E0%A6%BF_%E0%A6%AA%E0%A7%83%E0%A7%AB%E0%A7%AA%E0%A7%AB-%E0%A7%AB%E0%A7%AB%E0%A7%AC_%E0%A6%AB%E0%A6%BE%E0%A6%87%E0%A6%A8%E0%A6%BE%E0%A6%B2.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> ভৌগোলিক বিষয়াদি
+                  </a>
+                </td>
+                <td><span class="page-num">৫৪৫-৫৫৬</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%B8%E0%A6%82%E0%A6%B8%E0%A7%8D%E0%A6%95%E0%A7%83%E0%A6%A4%E0%A6%BF%20%E0%A6%93%20%E0%A6%97%E0%A6%A3%E0%A6%AE%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%AE.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> সংস্কৃতি ও গণমাধ্যম
+                  </a>
+                </td>
+                <td><span class="page-num">৫৫৭-৫৬১</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+              <tr class="searchable-row">
+                <td>
+                  <a href="%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%B6%E0%A7%87%E0%A6%B0%20%E0%A6%AD%E0%A6%BE%E0%A6%B8%E0%A7%8D%E0%A6%95%E0%A6%B0%E0%A7%8D%E0%A6%AF%20%E0%A6%93%20%E0%A6%B8%E0%A7%8D%E0%A6%AE%E0%A6%BE%E0%A6%B0%E0%A6%95%20%E0%A6%B8%E0%A7%8D%E0%A6%A5%E0%A6%BE%E0%A6%AA%E0%A6%A4%E0%A7%8D%E0%A6%AF.html" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>📖</span> ভাস্কর্য ও স্মারক স্থাপত্য
+                  </a>
+                </td>
+                <td><span class="page-num">৫৬২-৫৬৪</span></td>
+                <td><label><input type="checkbox"> পড়া শেষ</label></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- কুইজ সেকশন -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>⚡ সিলেবাস তথ্য যাচাই কুইজ</h2>
+        <span class="page-num">৩টি প্রশ্ন</span>
+      </div>
+      <div class="section-body">
+        
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-question">১. "ক্ষুদ্র নৃগোষ্ঠী" সম্পর্কিত বিষয়াবলি সূচিপত্রের কোন পৃষ্ঠায় আলোচনা করা হয়েছে?</div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="checkAnswer(this, 'ক')">ক) ৪৮৬-৪৮৯</button>
+            <button class="quiz-opt" onclick="checkAnswer(this, 'খ')">খ) ৪৮৯-৪৯৩</button>
+            <button class="quiz-opt" onclick="checkAnswer(this, 'গ')">গ) ৪৯৫-৫১০</button>
+            <button class="quiz-opt" onclick="checkAnswer(this, 'ঘ')">ঘ) ৫১০-৫১৩</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-question">২. "ভাস্কর্য" টপিকটি বইয়ের কোন পৃষ্ঠায় রয়েছে?</div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="checkAnswer(this, 'ক')">ক) ৫৪০-৫৪৪</button>
+            <button class="quiz-opt" onclick="checkAnswer(this, 'খ')">খ) ৫৪৫-৫৫৬</button>
+            <button class="quiz-opt" onclick="checkAnswer(this, 'গ')">গ) ৫৬২-৫৬৪</button>
+            <button class="quiz-opt" onclick="checkAnswer(this, 'ঘ')">ঘ) ৫৫৭-৫৬১</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-question">৩. "বাংলাদেশের সংবিধান" অধ্যায়টি কত পৃষ্ঠা জুড়ে বিস্তৃত?</div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="checkAnswer(this, 'ক')">ক) ৪৯৫-৫১০</button>
+            <button class="quiz-opt" onclick="checkAnswer(this, 'খ')">খ) ৫১৪-৫২৬</button>
+            <button class="quiz-opt" onclick="checkAnswer(this, 'গ')">গ) ৪৭৩-৪৮৬</button>
+            <button class="quiz-opt" onclick="checkAnswer(this, 'ঘ')">ঘ) ৪০১-৪৪৪</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- বইয়ের অসঙ্গতি ও যাচাই তালিকা -->
+    <div class="discrepancy-card">
+      <h3 style="color: var(--danger); margin-bottom: 10px;">⚠️ বইয়ের অসঙ্গতি ও সতর্কবার্তা</h3>
+      <p style="font-size: 0.875rem; margin-bottom: 12px;">প্রদত্ত পাতায় মুদ্রণ বিভ্রাট ও ডিজিট সংক্রান্ত ত্রুটিসমূহ নিম্নরূপ:</p>
+      <div class="table-container">
+        <table>
+        <thead>
+          
+              <th>বিষয়</th>
+              <th>প্রদত্ত পাতা</th>
+              <th>সমস্যা / অসংগতি</th>
+              <th>সঠিক রূপ ও ব্যাখ্যা</th>
+            
+        </thead>
+        <tbody>
+          <tr>
+              <td>বাংলাদেশের অর্থনীতি</a></a></td>
+              <td>পাতা ১</td>
+              <td>মুদ্রণ বিভ্রাটে "১৫৯-৪৭২" লেখা রয়েছে।</td>
+              <td>পূর্ববর্তী অধ্যায় ৪৫৮-তে শেষ হওয়ায় এটি নিশ্চিতভাবেই <strong>৪৫৯-৪৭২</strong> হবে (আমার অনুমান)।</td>
+            </tr>
+          <tr>
+              <td>প্রেক্ষিত পরিকল্পনা ও পঞ্চবার্ষিক পরিকল্পনা</a></td>
+              <td>পাতা ১</td>
+              <td>মুদ্রণে "১৬৩-৪৬৪" লেখা রয়েছে।</td>
+              <td>এর পূর্বের অনুচ্ছেদ ৪৫৯-৪৬৩ হওয়ায় এটি নিশ্চিতভাবেই <strong>৪৬৩-৪৬৪</strong> হবে (আমার অনুমান)।</td>
+            </tr>
+          <tr>
+              <td>বাংলাদেশের কৃষিজ সম্পদ</td>
+              <td>পাতা ১</td>
+              <td>পৃষ্ঠা কলামে "৪৪৫-৪০" এবং নিচে বিচ্ছিন্নভাবে "৪৫৮" লেখা।</td>
+              <td>অধ্যায়ের প্রকৃত বিস্তার <strong>৪৪৫-৪৫৮</strong> পৃষ্ঠা।</td>
+            </tr>
+          <tr>
+              <td>বানান বিভ্রাট</td>
+              <td>পাতা ১</td>
+              <td>"ইউরোপীয়দের অয়াগমন" এবং "শাসনতন্ত্র অন্দোলন" ছাপা হয়েছে।</td>
+              <td>শব্দ দুটি যথাক্রমে "আগমন" এবং "আন্দোলন"।</td>
+            </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Theme Toggle
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      try {
+        localStorage.setItem('bd_affairs_theme', newTheme);
+      } catch (e) {}
+    });
+
+    try {
+      const savedTheme = localStorage.getItem('bd_affairs_theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      }
+    } catch (e) {}
+
+    // Font Scaling
+    let currentScale = 1;
+    const updateScale = (delta, reset = false) => {
+      if (reset) currentScale = 1;
+      else currentScale = Math.min(Math.max(currentScale + delta, 0.8), 1.4);
+      document.documentElement.style.setProperty('--font-scale', currentScale);
+    };
+
+    document.getElementById('fontDown').addEventListener('click', () => updateScale(-0.1));
+    document.getElementById('fontReset').addEventListener('click', () => updateScale(0, true));
+    document.getElementById('fontUp').addEventListener('click', () => updateScale(0.1));
+
+    // Progress Bar
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    // Real-time Search
+    const searchInput = document.getElementById('topicSearch');
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      const rows = document.querySelectorAll('.searchable-row');
+      rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(query) ? '' : 'none';
+      });
+    });
+
+    // Quiz Verification
+    function checkAnswer(btn, selectedOpt) {
+      const card = btn.closest('.quiz-card');
+      const correctAns = card.getAttribute('data-answer');
+      const opts = card.querySelectorAll('.quiz-opt');
+      const feedback = card.querySelector('.quiz-feedback');
+
+      opts.forEach(b => {
+        b.disabled = true;
+        b.classList.remove('correct', 'incorrect');
+      });
+
+      if (selectedOpt === correctAns) {
+        btn.classList.add('correct');
+        feedback.style.display = 'block';
+        feedback.style.background = 'var(--success-light)';
+        feedback.style.color = 'var(--text)';
+        feedback.textContent = '🎉 চমৎকার! সূচিপত্র অনুযায়ী উত্তরটি শতভাগ সঠিক।';
+      } else {
+        btn.classList.add('incorrect');
+        opts.forEach(b => {
+          if (b.textContent.trim().startsWith(correctAns)) {
+            b.classList.add('correct');
+          }
+        });
+        feedback.style.display = 'block';
+        feedback.style.background = 'var(--danger-light)';
+        feedback.style.color = 'var(--text)';
+        feedback.textContent = '❌ ভুল হয়েছে! সঠিক বিকল্পটি সবুজ রঙে নির্দেশ করা হলো।';
+      }
+    }
+  </script>
+  <script src="nav-component.js"></script>
+</body>
+</html>

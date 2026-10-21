@@ -1,646 +1,831 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="bn" data-theme="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>বাংলা সাহিত্য সূচিপত্র ও পাঠ পরিকল্পনা (পৃষ্ঠা ৭৩–২০২)</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Noto Serif Bengali -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>বিসিএস পূর্ণাঙ্গ স্মার্ট ইবুক লাইব্রেরি পোর্টাল | Live MCQ</title>
+  <meta name="description" content="বিসিএস ও সরকারি চাকরি পরীক্ষার পূর্ণাঙ্গ স্মার্ট ইবুক লাইব্রেরি ড্যাশবোর্ড - বাংলা সাহিত্য ও বাংলাদেশ বিষয়াবলি।">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            bengali: ['"Noto Serif Bengali"', 'serif'],
-            serifBn: ['"Noto Serif Bengali"', 'serif']
-          },
-          colors: {
-            emeraldTrad: {
-              50: '#f0fdf4',
-              100: '#dcfce7',
-              700: '#15803d',
-              800: '#166534',
-              900: '#0f3a24',
-              950: '#072416'
-            },
-            vintageGold: {
-              100: '#fef3c7',
-              300: '#fcd34d',
-              500: '#f59e0b',
-              600: '#d97706',
-              700: '#b45309'
-            },
-            paperBg: '#faf8f5',
-            cardBg: '#ffffff'
-          }
-        }
-      }
-    }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    html {
-      overflow-x: clip;
-      -webkit-text-size-adjust: 100%;
-      text-size-adjust: 100%;
+    :root {
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --primary-bangla: #0f766e;
+      --primary-bangla-light: #ccfbf1;
+      --primary-bd: #881337;
+      --primary-bd-light: #ffe4e6;
+      --accent-gold: #f59e0b;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 28px rgba(0,0,0,0.12);
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
+
+    [data-theme="dark"] {
+      --bg-base: #090d16;
+      --bg-surface: #111827;
+      --bg-card: #151f32;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #1e293b;
+      --primary-bangla: #14b8a6;
+      --primary-bangla-light: rgba(20, 184, 166, 0.15);
+      --primary-bd: #fb7185;
+      --primary-bd-light: rgba(251, 113, 133, 0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.4);
+      --shadow-lg: 0 10px 28px rgba(0,0,0,0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
+      background: var(--bg-base);
+      color: var(--text-main);
       font-family: 'Noto Serif Bengali', serif;
-      background-color: #f7f5f0;
-      background-image: radial-gradient(#e5dec9 0.75px, transparent 0.75px);
-      background-size: 20px 20px;
-      overflow-x: clip;
-      padding-bottom: env(safe-area-inset-bottom, 0px);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.3s, color 0.3s;
     }
-    /* Touch target optimizations for mobile */
-    button, a, input, [role="button"] {
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
+
+    /* Top Control Bar */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(8px);
     }
-    .serif-title {
-      font-family: 'Noto Serif Bengali', serif;
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--text-main);
+      text-decoration: none;
     }
-    /* Smooth transitions */
-    .accordion-content {
-      transition: max-height 0.35s ease-in-out, opacity 0.3s ease-in-out;
+
+    .brand-badge {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #0f766e, #881337);
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
+
+    .theme-toggle-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
     }
-    ::-webkit-scrollbar-track {
-      background: #f1ede4;
+
+    .theme-toggle-btn:hover {
+      background: var(--border-color);
     }
-    ::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 4px;
+
+    /* Container */
+    .container {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 24px 16px 48px 16px;
+      width: 100%;
+      flex: 1;
     }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #94a3b8;
+
+    /* Hero Banner */
+    .hero-portal {
+      background: linear-gradient(135deg, rgba(15,118,110,0.08) 0%, rgba(136,19,55,0.08) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      margin-bottom: 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
     }
-    /* Print Styles */
-    @media print {
-      body {
-        background: white !important;
-        color: black !important;
+
+    .hero-portal h1 {
+      font-size: 1.95rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #0f766e, #881337);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    [data-theme="dark"] .hero-portal h1 {
+      background: linear-gradient(135deg, #2dd4bf, #fb7185);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-portal p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 20px auto;
+    }
+
+    /* Global Progress Card */
+    .overall-progress-card {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      max-width: 640px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-md);
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .progress-bar-bg {
+      height: 10px;
+      background: var(--border-color);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #0f766e, #881337);
+      width: 0%;
+      border-radius: 999px;
+      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .progress-caption {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Search Bar */
+    .search-wrapper {
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 14px 18px 14px 44px;
+      font-size: 1.02rem;
+      font-family: inherit;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      box-shadow: var(--shadow-sm);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-input:focus {
+      border-color: #0f766e;
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.15rem;
+      opacity: 0.6;
+    }
+
+    /* Subject Cards Grid */
+    .subject-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 22px;
+      margin-bottom: 32px;
+    }
+
+    .subject-card {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .subject-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .subject-card.bangla {
+      border-top: 6px solid #0f766e;
+    }
+
+    .subject-card.bangladesh {
+      border-top: 6px solid #881337;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+
+    .subject-card.bangla .card-icon {
+      background: var(--primary-bangla-light);
+    }
+
+    .subject-card.bangladesh .card-icon {
+      background: var(--primary-bd-light);
+    }
+
+    .card-title-group h2 {
+      font-size: 1.38rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.25;
+    }
+
+    .card-page-range {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .card-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .feature-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .tag-chip {
+      font-size: 0.76rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: var(--bg-base);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* Mini Subject Progress */
+    .sub-progress-wrap {
+      background: var(--bg-base);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      margin-bottom: 18px;
+      border: 1px solid var(--border-color);
+    }
+
+    .sub-prog-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .sub-prog-bar-bg {
+      height: 6px;
+      background: var(--border-color);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .sub-prog-fill-bangla {
+      height: 100%;
+      background: #0f766e;
+      width: 0%;
+      border-radius: 999px;
+      transition: width 0.6s;
+    }
+
+    .sub-prog-fill-bd {
+      height: 100%;
+      background: #881337;
+      width: 0%;
+      border-radius: 999px;
+      transition: width 0.6s;
+    }
+
+    /* Card Actions */
+    .card-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-action {
+      flex: 1;
+      text-align: center;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .btn-bangla-main {
+      background: #0f766e;
+      color: #fff;
+    }
+
+    .btn-bangla-main:hover {
+      background: #115e59;
+    }
+
+    .btn-bd-main {
+      background: #881337;
+      color: #fff;
+    }
+
+    .btn-bd-main:hover {
+      background: #701a75;
+    }
+
+    .btn-secondary {
+      background: var(--bg-base);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background: var(--border-color);
+    }
+
+    /* Quick Filter Section */
+    .search-results-section {
+      display: none;
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .result-item {
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: var(--bg-base);
+      text-decoration: none;
+      color: var(--text-main);
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+
+    .result-item:hover {
+      border-color: #0f766e;
+      background: var(--bg-surface);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      padding: 20px 16px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Mobile Responsive (Samsung A23 Standards) */
+    @media (max-width: 600px) {
+      .container {
+        padding: 10px 8px 30px 8px;
       }
-      .no-print {
-        display: none !important;
+      .hero-portal {
+        padding: 20px 14px;
+        margin-bottom: 18px;
       }
-      .print-expanded {
-        display: block !important;
-        max-height: none !important;
-        opacity: 1 !important;
+      .hero-portal h1 {
+        font-size: 1.45rem;
       }
-      .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl {
-        box-shadow: none !important;
+      .hero-portal p {
+        font-size: 0.88rem;
+        margin-bottom: 14px;
       }
-      .card-item {
-        break-inside: avoid;
+      .subject-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .subject-card {
+        padding: 16px 14px;
+      }
+      .card-actions {
+        flex-direction: column;
       }
     }
   </style>
 </head>
-<body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+<body>
 
-  <!-- Header Banner -->
-  <header class="bg-gradient-to-r from-emerald-950 via-emerald-900 to-emerald-950 text-white border-b-4 border-amber-600 shadow-md">
-    <div class="max-w-5xl mx-auto px-4 py-8 md:py-12">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-        <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-200 text-sm font-medium mb-3">
-            <i class="fa-solid fa-feather-pointed"></i> বিসিএস ও প্রতিযোগিতামূলক প্রস্তুতি
-          </div>
-          <h1 class="serif-title text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-amber-100">
-            বাংলা সাহিত্য সূচিপত্র
-          </h1>
-          <p class="text-emerald-200 text-base md:text-lg mt-2 font-light">
-            পৃষ্ঠা ৭৩ থেকে ২০২ পর্যন্ত পূর্ণাঙ্গ অধ্যায়ভিত্তিক সংকলন ও স্টাডি ট্র্যাকার
-          </p>
-        </div>
-
-        <!-- Quick Action Buttons -->
-        <div class="flex flex-wrap items-center gap-2.5 no-print">
-          <a href="Master Portal Index.html" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 font-bold text-slate-950 rounded-lg text-sm flex items-center gap-2 transition shadow-md">
-            <i class="fa-solid fa-layer-group"></i> 🏛️ মাস্টার পোর্টাল
-          </a>
-          <button onclick="window.print()" class="px-4 py-2 bg-emerald-800/80 hover:bg-emerald-800 border border-emerald-600 rounded-lg text-sm text-emerald-100 flex items-center gap-2 transition shadow-sm hover:shadow">
-            <i class="fa-solid fa-print"></i> প্রিন্ট ভিউ
-          </button>
-          <button onclick="resetAllProgress()" class="px-4 py-2 bg-amber-600/20 hover:bg-amber-600/30 border border-amber-400/40 rounded-lg text-sm text-amber-200 flex items-center gap-2 transition">
-            <i class="fa-solid fa-rotate-left"></i> রিসেট প্রগ্রেস
-          </button>
-        </div>
-      </div>
-    </div>
+  <!-- Top Sticky Navigation -->
+  <header class="topbar">
+    <a href="#" class="brand-logo">
+      <span>🏛️</span>
+      <span>বিসিএস লাইব্রেরি পোর্টাল</span>
+      <span class="brand-badge">PRO E-BOOK</span>
+    </a>
+    <button class="theme-toggle-btn" id="themeBtn" onclick="togglePortalTheme()">
+      <span id="themeIcon">🌓</span>
+      <span id="themeText">থিম পরিবর্তন</span>
+    </button>
   </header>
 
-  <!-- Main Container -->
-  <main class="max-w-5xl mx-auto px-4 py-8 flex-grow w-full">
+  <main class="container">
 
-    <!-- Progress Tracker & Stats Bar -->
-    <section class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-      
-      <!-- Progress Bar Card -->
-      <div class="md:col-span-2 bg-white rounded-xl p-5 border border-amber-900/10 shadow-sm relative overflow-hidden">
-        <div class="flex items-center justify-between mb-2">
-          <div class="flex items-center gap-2">
-            <span class="p-2 bg-emerald-100 text-emerald-800 rounded-lg">
-              <i class="fa-solid fa-chart-line text-sm"></i>
-            </span>
-            <span class="font-semibold text-slate-800">পড়ার অগ্রগতি (Progress)</span>
-          </div>
-          <span id="progress-percent" class="serif-title text-emerald-800 font-bold text-lg">০%</span>
-        </div>
-        
-        <!-- Progress Bar Track -->
-        <div class="w-full bg-slate-100 h-3.5 rounded-full overflow-hidden mt-3 border border-slate-200">
-          <div id="progress-fill" class="bg-gradient-to-r from-emerald-600 to-teal-500 h-full rounded-full transition-all duration-500 w-0"></div>
-        </div>
+    <!-- Hero Portal Section -->
+    <section class="hero-portal">
+      <h1>পূর্ণাঙ্গ বিসিএস সিলেবাস স্মার্ট ইবুক</h1>
+      <p>পিডিএফ বই থেকে রূপান্তরকৃত সম্পূর্ণ বিজ্ঞাপনহীন, ইন্টারঅ্যাক্টিভ ও চোখ-বান্ধব ডিজিটাল রিডিং প্ল্যাটফর্ম।</p>
 
-        <div class="flex justify-between items-center text-xs text-slate-500 mt-2 font-medium">
-          <span id="progress-count">সম্পন্ন: ০ / ৩০</span>
-          <span id="progress-status" class="text-amber-700">শুরু করা হয়নি</span>
+      <!-- Overall Reading Progress Card -->
+      <div class="overall-progress-card">
+        <div class="progress-meta">
+          <span>📚 সার্বিক সিলেবাস সমাপ্তির অগ্রগতি</span>
+          <span id="overallPercentage" style="color:#0f766e; font-family:'Inter',sans-serif;">০%</span>
         </div>
-      </div>
-
-      <!-- Quick Stats Card: Chapters -->
-      <div class="bg-white rounded-xl p-5 border border-amber-900/10 shadow-sm flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 text-xl font-bold serif-title shrink-0">
-          ৫
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="overallFill"></div>
         </div>
-        <div>
-          <div class="text-xs text-slate-500 font-medium">মোট প্রধান অধ্যায়</div>
-          <div class="text-lg font-bold text-slate-800 serif-title">৫টি মৌলিক যুগ/অংশ</div>
+        <div class="progress-caption">
+          <span id="completedCountText">সম্পন্ন: ০ / ৬২টি অধ্যায়</span>
+          <span>লক্ষ্য: ১০০% রিভিশন</span>
         </div>
-      </div>
-
-      <!-- Quick Stats Card: Page Count -->
-      <div class="bg-white rounded-xl p-5 border border-amber-900/10 shadow-sm flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 text-xl font-bold serif-title shrink-0">
-          ১৩০
-        </div>
-        <div>
-          <div class="text-xs text-slate-500 font-medium">মোট অধ্যয়ন পৃষ্ঠা</div>
-          <div class="text-lg font-bold text-slate-800 serif-title">পৃষ্ঠা ৭৩ – ২০২</div>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- Controls Toolbar (Search & Expand/Collapse) -->
-    <section class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 no-print">
-      
-      <!-- Live Search Bar -->
-      <div class="relative w-full sm:w-80">
-        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </span>
-        <input 
-          type="text" 
-          id="search-input" 
-          placeholder="লেখক বা টপিক খুঁজুন (যেমন: নজরুল, মঙ্গলকাব্য)..." 
-          class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700/30 focus:border-emerald-700 transition"
-          oninput="handleSearch(this.value)"
-        >
-      </div>
-
-      <!-- Expand/Collapse Toggles -->
-      <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
-        <button onclick="toggleAllAccordions(true)" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs md:text-sm font-medium transition flex items-center gap-1.5">
-          <i class="fa-solid fa-angles-down text-xs"></i> সব খুলুন
-        </button>
-        <button onclick="toggleAllAccordions(false)" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs md:text-sm font-medium transition flex items-center gap-1.5">
-          <i class="fa-solid fa-angles-up text-xs"></i> সব বন্ধ করুন
-        </button>
       </div>
     </section>
 
-    <!-- Search feedback info -->
-    <div id="search-feedback" class="hidden mb-4 px-4 py-2 bg-amber-50 border border-amber-200 text-amber-800 rounded-lg text-sm flex items-center justify-between">
-      <span id="search-feedback-text"></span>
-      <button onclick="clearSearch()" class="text-amber-900 font-semibold text-xs underline hover:text-amber-700">ফিল্টার মুছুন</button>
+    <!-- Global Live Search -->
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="masterSearchInput" class="search-input" placeholder="যেকোনো বিষয় বা অধ্যায় খুঁজুন (যেমন: রবীন্দ্রনাথ, সংবিধান, বঙ্কিমচন্দ্র, মুক্তিযুদ্ধ, বাজেট, চর্যাপদ)...">
     </div>
 
-    <!-- Index Chapters Container -->
-    <div id="chapters-list" class="space-y-5">
-      <!-- Chapters will be rendered by JavaScript -->
-    </div>
+    <!-- Live Search Results (Shows dynamically when typing) -->
+    <section class="search-results-section" id="searchResultsSection">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h3 style="font-size:1.1rem; font-weight:700;">🔎 অনুসন্ধান ফলাফল</h3>
+        <span id="searchResultCount" style="font-size:0.85rem; color:var(--text-muted);"></span>
+      </div>
+      <div class="results-grid" id="resultsGrid"></div>
+    </section>
 
-    <!-- Study Guide & Tips Card -->
-    <section class="mt-10 bg-gradient-to-br from-amber-50 to-orange-50/50 rounded-2xl p-6 border border-amber-200 shadow-sm">
-      <div class="flex items-start gap-4">
-        <div class="p-3 bg-amber-500 text-white rounded-xl text-xl shrink-0 shadow-sm">
-          <i class="fa-solid fa-lightbulb"></i>
-        </div>
-        <div>
-          <h3 class="serif-title text-xl font-bold text-amber-950">রিভিশন ও পড়ার কার্যকর কৌশল</h3>
-          <p class="text-slate-600 text-sm mt-1 leading-relaxed">
-            বাংলা সাহিত্যের প্রস্তুতিতে সর্বোচ্চ নম্বর পাওয়ার জন্য নিয়মিত অধ্যায়ভিত্তিক রিভিশন দেওয়া জরুরি:
-          </p>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4 text-xs sm:text-sm">
-            <div class="bg-white/80 p-3 rounded-lg border border-amber-200/70">
-              <span class="font-bold text-amber-900 block mb-1">১. যুগভিত্তিক পার্থক্য:</span>
-              প্রাচীন ও মধ্যযুগের সন-তারিখ, পুঁথি আবিষ্কারক ও পৃষ্ঠপোষক রাজাদের নাম নোটবুকে আলাদা রাখুন।
-            </div>
-            <div class="bg-white/80 p-3 rounded-lg border border-amber-200/70">
-              <span class="font-bold text-amber-900 block mb-1">২. পঞ্চপাণ্ডব ও প্রধান কবি:</span>
-              রবীন্দ্রনাথ, নজরুল ও আধুনিক সাহিত্যের দিকপালদের উপন্যাস, কাব্যগ্রন্থ ও বিখ্যাত কবিতা বারবার রিভিশন দিন।
-            </div>
-            <div class="bg-white/80 p-3 rounded-lg border border-amber-200/70">
-              <span class="font-bold text-amber-900 block mb-1">৩. উক্তি ও মুক্তিযুদ্ধ:</span>
-              নাটক ও উপন্যাসের আলোচিত চরিত্র এবং মুক্তিযুদ্ধভিত্তিক সাহিত্যের নাম ও লেখকদের তালিকায় বিশেষ নজর দিন।
-            </div>
+    <!-- Subjects Cards Grid -->
+    <section class="subject-grid">
+
+      <!-- Subject 1: বাংলা সাহিত্য -->
+      <article class="subject-card bangla">
+        <div class="card-top">
+          <div class="card-icon">📚</div>
+          <div class="card-title-group">
+            <h2>বাংলা সাহিত্য</h2>
+            <div class="card-page-range">পৃষ্ঠা ৭৩ হতে ২০২ • ৩১টি পরিচ্ছেদ</div>
           </div>
         </div>
-      </div>
+
+        <p class="card-desc">
+          প্রাচীন যুগ (চর্যাপদ), মধ্যযুগ (শ্রীকৃষ্ণকীর্তন, মঙ্গলকাব্য, বৈষ্ণব পদাবলী), আধুনিক যুগের পঞ্চপাণ্ডব, রবীন্দ্রনাথ, নজরুল এবং অমর উক্তি ও চরিত্র-ম্যাট্রিক্সের পূর্ণাঙ্গ বিসিএস প্রস্তুতি।
+        </p>
+
+        <div class="feature-tags">
+          <span class="tag-chip">📜 চর্যাপদ</span>
+          <span class="tag-chip">👑 মধ্যযুগ</span>
+          <span class="tag-chip">✍️ রবীন্দ্রনাথ ও নজরুল</span>
+          <span class="tag-chip">🎭 কালজয়ী চরিত্র</span>
+          <span class="tag-chip">📝 স্মার্ট কুইজ</span>
+        </div>
+
+        <!-- Subject Progress -->
+        <div class="sub-progress-wrap">
+          <div class="sub-prog-header">
+            <span>পড়ার অগ্রগতি:</span>
+            <span id="banglaProgressText" style="color:#0f766e; font-family:'Inter',sans-serif;">০%</span>
+          </div>
+          <div class="sub-prog-bar-bg">
+            <div class="sub-prog-fill-bangla" id="banglaProgressFill"></div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <a href="Live MCQ Bangla Literature/রবীন্দ্রনাথ ঠাকুর.html" class="btn-action btn-bangla-main">
+            📖 পড়া শুরু করুন
+          </a>
+          <a href="Live MCQ Bangla Literature/index.html" class="btn-action btn-secondary">
+            📑 সূচিপত্র
+          </a>
+        </div>
+      </article>
+
+      <!-- Subject 2: বাংলাদেশ বিষয়াবলি -->
+      <article class="subject-card bangladesh">
+        <div class="card-top">
+          <div class="card-icon">🇧🇩</div>
+          <div class="card-title-group">
+            <h2>বাংলাদেশ বিষয়াবলি</h2>
+            <div class="card-page-range">পৃষ্ঠা ৪০১ হতে ৫৬৪ • ৩১টি পরিচ্ছেদ</div>
+          </div>
+        </div>
+
+        <p class="card-desc">
+          প্রাচীন বাংলার ইতিহাস, সুলতানি ও মুঘল আমল, ব্রিটিশ বিরোধী আন্দোলন, ভাষা আন্দোলন, ৭ মার্চের ভাষণ, মুক্তিযুদ্ধ, সংবিধানের ১৫৩ অনুচ্ছেদ, অর্থনীতি, বাজেট ও জাতীয় অর্জনের পূর্ণাঙ্গ প্রস্তুতি।
+        </p>
+
+        <div class="feature-tags">
+          <span class="tag-chip">⚔️ মুক্তিযুদ্ধ ও সংগ্রাম</span>
+          <span class="tag-chip">⚖️ পূর্ণাঙ্গ সংবিধান</span>
+          <span class="tag-chip">💰 অর্থনীতি ও বাজেট</span>
+          <span class="tag-chip">🌾 কৃষিজ সম্পদ</span>
+          <span class="tag-chip">🏆 জাতীয় অর্জন</span>
+        </div>
+
+        <!-- Subject Progress -->
+        <div class="sub-progress-wrap">
+          <div class="sub-prog-header">
+            <span>পড়ার অগ্রগতি:</span>
+            <span id="bdProgressText" style="color:#881337; font-family:'Inter',sans-serif;">০%</span>
+          </div>
+          <div class="sub-prog-bar-bg">
+            <div class="sub-prog-fill-bd" id="bdProgressFill"></div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <a href="Live MCQ Bangladesh/গণপ্রজাতন্ত্রী বাংলাদেশের সংবিধান.html" class="btn-action btn-bd-main">
+            📖 পড়া শুরু করুন
+          </a>
+          <a href="Live MCQ Bangladesh/index.html" class="btn-action btn-secondary">
+            📑 সূচিপত্র
+          </a>
+        </div>
+      </article>
+
     </section>
 
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
-    <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-      <div>বাংলা সাহিত্য (পৃষ্ঠা ৭৩–২০২) • ব্যক্তিগত অধ্যয়ন সহায়িকা ও রিভিশন ড্যাশবোর্ড</div>
-      <div class="text-slate-400">আপনার প্রগ্রেস স্বয়ংক্রিয়ভাবে ব্রাউজারে সংরক্ষিত থাকবে</div>
-    </div>
+  <footer>
+    <p>বিসিএস পূর্ণাঙ্গ স্মার্ট ইবুক রিপোজিটরি • সকল তথ্য ও পাঠ্যক্রম ১০০% সংরক্ষিত ও মোবাইল-অপটিমাইজড 🚀</p>
   </footer>
 
-  <!-- Script for Dynamic Logic, State, and Search -->
   <script>
-    // Bengali Number Converter
-    const toBengaliNumber = (num) => {
-      const bnNumbers = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
-      return num.toString().replace(/[0-9]/g, digit => bnNumbers[digit]);
-    };
+    // Chapter Manifest for Search
+    const ALL_TOPICS = [
+      // বাংলা সাহিত্য (৩১টি)
+      { title: "বাংলা সাহিত্যের প্রাচীন যুগ (চর্যাপদ)", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/বাংলা সাহিত্যের প্রাচীন যুগ.html" },
+      { title: "শ্রীকৃষ্ণকীর্তন ও মধ্যযুগীয় বৈষ্ণব পদাবলী", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/শ্রীকৃষ্ণকীর্তন ও মধ্যযুগীয় বৈষ্ণব পদাবলী.html" },
+      { title: "মঙ্গলকাব্য (মনসামঙ্গল, চণ্ডীমঙ্গল, অন্নদামঙ্গল)", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/মঙ্গলকাব্য.html" },
+      { title: "বৈষ্ণব পদাবলী ও পদকর্তাগণ", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/বৈষ্ণব পদাবলি.html" },
+      { title: "লোকসাহিত্য (ছড়া, প্রবাদ, ধাঁধা, পালাগান)", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/লোকসাহিত্য.html" },
+      { title: "গীতিকা ও লোকসাহিত্য (মৈমনসিংহ গীতিকা)", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/গীতিকা ও লোকসাহিত্য.html" },
+      { title: "মধ্যযুগের গুরুত্বপূর্ণ সাহিত্যকর্ম ও লেখকগণ", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/মধ্যযুগের গুরুত্বপূর্ণ সাহিত্যকর্ম ও লেখকগণ.html" },
+      { title: "বাংলা সাহিত্যের আধুনিক যুগের বিকাশ", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/বাংলা সাহিত্যের আধুনিক যুগের বিকাশ.html" },
+      { title: "রবীন্দ্রনাথ ঠাকুর: জীবন ও সৃষ্টিসমগ্র", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/রবীন্দ্রনাথ ঠাকুর.html" },
+      { title: "কাজী নজরুল ইসলাম: বিদ্রোহী কবি ও সৃষ্টিসমগ্র", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/কাজী নজরুল ইসলাম.html" },
+      { title: "মাইকেল মধুসূদন দত্ত", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/মাইকেল মধুসূদন দত্ত.html" },
+      { title: "ঈশ্বরচন্দ্র বিদ্যাসাগর", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/ঈশ্বরচন্দ্র বিদ্যাসাগর.html" },
+      { title: "বঙ্কিমচন্দ্র চট্টোপাধ্যায়", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/বঙ্কিমচন্দ্র চট্টোপাধ্যায়.html" },
+      { title: "শরৎচন্দ্র চট্টোপাধ্যায়, কায়কোবাদ ও দীনবন্ধু মিত্র", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/শরৎচন্দ্র চট্টোপাধ্যায়, কায়কোবাদ ও দীনবন্ধু মিত্র.html" },
+      { title: "জসীম উদ্দীন, বেগম রোকেয়া, ফররুখ আহমেদ", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/জসীম উদ্দীন, বেগম রোকেয়া, ফররুখ আহমেদ.html" },
+      { title: "মীর মশাররফ হোসেন ও সৈয়দ মুজতবা আলী", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/মীর মশাররফ হোসেন ও সৈয়দ মুজতবা আলী.html" },
+      { title: "প্রমথ চৌধুরী, মানিক বন্দ্যোপাধ্যায়, বিভূতিভূষণ", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/প্রমথ চৌধুরী, মানিক বন্দ্যোপাধ্যায়, বিভূতিভূষণ বন্দ্যোপাধ্যায়.html" },
+      { title: "কল্লোল যুগ ও বাংলা সাহিত্যের পঞ্চপাণ্ডব", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/কল্লোল যুগ ও বাংলা সাহিত্যের পঞ্চপাণ্ডব.html" },
+      { title: "মুসলিম সাহিত্য সমাজ — সোজা গাইড", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/মুসলিম সাহিত্য সমাজ — সোজা গাইড.html" },
+      { title: "শওকত ওসমান, শামসুর রাহমান, আল মাহমুদ", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/শওকত ওসমান, শামসুর রাহমান, আল মাহমুদ — সোজা গাইড.html" },
+      { title: "সৈয়দ শামসুল হক, সেলিম আল দীন, হুমায়ূন আহমেদ", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/সৈয়দ শামসুল হক, সেলিম আল দীন, হুমায়ুন আজাদ, হুমায়ূন আহমেদ.html" },
+      { title: "সৈয়দ ওয়ালীউল্লাহ ও আখতারুজ্জামান ইলিয়াস", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/ওয়ালীউল্লাহ ও ইলিয়াস.html" },
+      { title: "ড. সুনীতিকুমার, শহীদুল্লাহ, এনামুল হক ও আবদুল হাই", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/ড. সুনীতিকুমার, শহীদুল্লাহ, এনামুল হক ও আবদুল হাই.html" },
+      { title: "বাংলা সাহিত্যের গুরুত্বপূর্ণ নারী লেখক", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/বাংলা সাহিত্যের গুরুত্বপূর্ণ নারী লেখক.html" },
+      { title: "আধুনিক যুগের অন্যান্য লেখক ও তাদের সাহিত্যকর্ম", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/আধুনিক যুগের অন্যান্য লেখক ও তাদের সাহিত্যকর্ম.html" },
+      { title: "সাহিত্যিক ছদ্মনাম ও উপাধি", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/সাহিত্যিক ছদ্মনাম ও উপাধি.html" },
+      { title: "পত্রিকা-সাময়িকী ও সম্পাদক", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/পত্রিকা-সাময়িকী ও সম্পাদক.html" },
+      { title: "ভাষা আন্দোলন ও মুক্তিযুদ্ধভিত্তিক সাহিত্য", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/ভাষা আন্দোলন ও মুক্তিযুদ্ধভিত্তিক সাহিত্য.html" },
+      { title: "বাংলা সাহিত্যের কালজয়ী চরিত্র", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/বাংলা সাহিত্যের চরিত্র.html" },
+      { title: "বাংলা সাহিত্যের অমর উক্তি ও সংলাপ", sub: "বাংলা সাহিত্য", href: "Live MCQ Bangla Literature/বাংলা সাহিত্যের অমর উক্তি ও সংলাপ.html" },
 
-    // Table of Contents Data Structure
-    const indexData = [
-      {
-        id: "ch-1",
-        number: "১",
-        title: "বাংলা সাহিত্যের প্রাচীন যুগ",
-        pages: "পৃষ্ঠা ৭৩–৭৯",
-        badgeColor: "emerald",
-        topics: [
-          { id: "t-1-1", title: "বাংলা সাহিত্যের প্রাচীন যুগ (চর্যাপদ ও প্রাথমিক বিকাশ)", pages: "পৃষ্ঠা ৭৩–৭৯", file: "বাংলা সাহিত্যের প্রাচীন যুগ.html" }
-        ]
-      },
-      {
-        id: "ch-2",
-        number: "২",
-        title: "বাংলা সাহিত্যের মধ্যযুগ",
-        pages: "পৃষ্ঠা ৭৯–৯৯",
-        badgeColor: "teal",
-        topics: [
-          { id: "t-2-1", title: "শ্রীকৃষ্ণকীর্তন কাব্য", pages: "পৃষ্ঠা ৭৯–৮১", file: "শ্রীকৃষ্ণকীর্তন ও মধ্যযুগীয় বৈষ্ণব পদাবলী.html" },
-          { id: "t-2-2", title: "মঙ্গলকাব্য (মনসামঙ্গল, চণ্ডীমঙ্গল, অন্নদামঙ্গল ইত্যাদি)", pages: "পৃষ্ঠা ৮১–৮৩", file: "মঙ্গলকাব্য.html" },
-          { id: "t-2-3", title: "বৈষ্ণব পদাবলী ও পদকর্তাগণ", pages: "পৃষ্ঠা ৮৪–৮৫", file: "বৈষ্ণব পদাবলি.html" },
-          { id: "t-2-4", title: "লোকসাহিত্য (ছড়া, প্রবাদ, ধাঁধা, পালাগান)", pages: "পৃষ্ঠা ৮৫–৮৮", file: "লোকসাহিত্য.html" },
-          { id: "t-2-5", title: "গীতিকা (মৈমনসিংহ গীতিকা ও অন্যান্য)", pages: "পৃষ্ঠা ৮৮–৮৯", file: "গীতিকা ও লোকসাহিত্য.html" },
-          { id: "t-2-6", title: "মধ্যযুগের গুরুত্বপূর্ণ সাহিত্যকর্ম ও লেখকগণ", pages: "পৃষ্ঠা ৯০–৯৯", file: "মধ্যযুগের গুরুত্বপূর্ণ সাহিত্যকর্ম ও লেখকগণ.html" }
-        ]
-      },
-      {
-        id: "ch-3",
-        number: "৩",
-        title: "বাংলা সাহিত্যের আধুনিক যুগ",
-        pages: "পৃষ্ঠা ১০০–১৮৮",
-        badgeColor: "blue",
-        topics: [
-          { id: "t-3-1", title: "বাংলা সাহিত্যের আধুনিক যুগের বিকাশ ও পটভূমি", pages: "পৃষ্ঠা ১০০–১০৭", file: "বাংলা সাহিত্যের আধুনিক যুগের বিকাশ.html" },
-          { id: "t-3-2", title: "রবীন্দ্রনাথ ঠাকুর: জীবন ও সৃষ্টিসমগ্র", pages: "পৃষ্ঠা ১০৭–১১৪", file: "রবীন্দ্রনাথ ঠাকুর.html" },
-          { id: "t-3-3", title: "কাজী নজরুল ইসলাম: বিদ্রোহী কবি ও সৃষ্টিসমগ্র", pages: "পৃষ্ঠা ১১৫–১২১", file: "কাজী নজরুল ইসলাম.html" },
-          { id: "t-3-4", title: "মাইকেল মধুসূদন দত্ত", pages: "পৃষ্ঠা ১২২–১২৪", file: "মাইকেল মধুসূদন দত্ত.html" },
-          { id: "t-3-5", title: "ঈশ্বরচন্দ্র বিদ্যাসাগর", pages: "পৃষ্ঠা ১২৪–১২৫", file: "ঈশ্বরচন্দ্র বিদ্যাসাগর.html" },
-          { id: "t-3-6", title: "বঙ্কিমচন্দ্র চট্টোপাধ্যায়", pages: "পৃষ্ঠা ১২৫–১২৯", file: "বঙ্কিমচন্দ্র চট্টোপাধ্যায়.html" },
-          { id: "t-3-7", title: "শরৎচন্দ্র চট্টোপাধ্যায়, কায়কোবাদ, দীনবন্ধু মিত্র", pages: "পৃষ্ঠা ১২৯–১৩১", file: "শরৎচন্দ্র চট্টোপাধ্যায়, কায়কোবাদ ও দীনবন্ধু মিত্র.html" },
-          { id: "t-3-8", title: "জসীম উদ্দীন, বেগম রোকেয়া, ফররুখ আহমদ", pages: "পৃষ্ঠা ১৩২–১৩৬", file: "জসীম উদ্দীন, বেগম রোকেয়া, ফররুখ আহমেদ.html" },
-          { id: "t-3-9", title: "মীর মশাররফ হোসেন, সৈয়দ মুজতবা আলী", pages: "পৃষ্ঠা ১৩৭–১৩৯", file: "মীর মশাররফ হোসেন ও সৈয়দ মুজতবা আলী.html" },
-          { id: "t-3-10", title: "প্রমথ চৌধুরী, মানিক বন্দ্যোপাধ্যায়, বিভূতিভূষণ বন্দ্যোপাধ্যায়", pages: "পৃষ্ঠা ১৪০–১৪২", file: "প্রমথ চৌধুরী, মানিক বন্দ্যোপাধ্যায়, বিভূতিভূষণ বন্দ্যোপাধ্যায়.html" },
-          { id: "t-3-11", title: "কল্লোল যুগ ও বাংলা সাহিত্যের পঞ্চপাণ্ডব", pages: "পৃষ্ঠা ১৪২–১৪৪", file: "কল্লোল যুগ ও বাংলা সাহিত্যের পঞ্চপাণ্ডব.html" },
-          { id: "t-3-12", title: "মুসলিম সাহিত্য সমাজের সাহিত্যিকগণ", pages: "পৃষ্ঠা ১৪৫–১৪৭", file: "মুসলিম সাহিত্য সমাজ — সোজা গাইড.html" },
-          { id: "t-3-13", title: "শওকত ওসমান, শামসুর রাহমান, আল মাহমুদ", pages: "পৃষ্ঠা ১৪৮–১৫১", file: "শওকত ওসমান, শামসুর রাহমান, আল মাহমুদ — সোজা গাইড.html" },
-          { id: "t-3-14", title: "সৈয়দ শামসুল হক, সেলিম আল দীন, হুমায়ুন আজাদ, হুমায়ূন আহমেদ", pages: "পৃষ্ঠা ১৫২–১৫৫", file: "সৈয়দ শামসুল হক, সেলিম আল দীন, হুমায়ুন আজাদ, হুমায়ূন আহমেদ.html" },
-          { id: "t-3-15", title: "সৈয়দ ওয়ালীউল্লাহ, আখতারুজ্জামান ইলিয়াস", pages: "পৃষ্ঠা ১৫৫–১৫৮", file: "ওয়ালীউল্লাহ ও ইলিয়াস.html" },
-          { id: "t-3-16", title: "ড. সুনীতিকুমার চট্টোপাধ্যায়, ড. মুহম্মদ শহীদুল্লাহ, মুহম্মদ এনামুল হক, মুহম্মদ আবদুল হাই", pages: "পৃষ্ঠা ১৫৮–১৬০", file: "ড. সুনীতিকুমার, শহীদুল্লাহ, এনামুল হক ও আবদুল হাই.html" },
-          { id: "t-3-17", title: "বাংলা সাহিত্যের গুরুত্বপূর্ণ নারী লেখক", pages: "পৃষ্ঠা ১৬১–১৬৩", file: "বাংলা সাহিত্যের গুরুত্বপূর্ণ নারী লেখক.html" },
-          { id: "t-3-18", title: "আধুনিক যুগের অন্যান্য লেখক ও তাঁদের সাহিত্যকর্ম", pages: "পৃষ্ঠা ১৬৩–১৭৮", file: "আধুনিক যুগের অন্যান্য লেখক ও তাদের সাহিত্যকর্ম.html" },
-          { id: "t-3-19", title: "সাহিত্যিক ছদ্মনাম ও উপাধি", pages: "পৃষ্ঠা ১৭৯–১৮১", file: "সাহিত্যিক ছদ্মনাম ও উপাধি.html" },
-          { id: "t-3-20", title: "পত্রিকা-সাময়িকী ও সম্পাদক", pages: "পৃষ্ঠা ১৮১–১৮৮", file: "পত্রিকা-সাময়িকী ও সম্পাদক.html" }
-        ]
-      },
-      {
-        id: "ch-4",
-        number: "৪",
-        title: "ভাষা আন্দোলন ও মুক্তিযুদ্ধভিত্তিক সাহিত্য",
-        pages: "পৃষ্ঠা ১৮৯–১৯৫",
-        badgeColor: "rose",
-        topics: [
-          { id: "t-4-1", title: "ভাষা আন্দোলনভিত্তিক সাহিত্য (কবিতা, নাটক, গান ও উপন্যাস)", pages: "পৃষ্ঠা ১৮৯–১৯১", file: "ভাষা আন্দোলন ও মুক্তিযুদ্ধভিত্তিক সাহিত্য.html" },
-          { id: "t-4-2", title: "মুক্তিযুদ্ধভিত্তিক সাহিত্য (উপন্যাস, স্মৃতিচারণ, দলিল ও নাটক)", pages: "পৃষ্ঠা ১৯১–১৯৫", file: "ভাষা আন্দোলন ও মুক্তিযুদ্ধভিত্তিক সাহিত্য.html" }
-        ]
-      },
-      {
-        id: "ch-5",
-        number: "৫",
-        title: "বাংলা সাহিত্যের চরিত্র, উক্তি ও সংলাপ",
-        pages: "পৃষ্ঠা ১৯৬–২০২",
-        badgeColor: "amber",
-        topics: [
-          { id: "t-5-1", title: "বাংলা সাহিত্যের কালজয়ী চরিত্রসমূহ", pages: "পৃষ্ঠা ১৯৬–১৯৭", file: "বাংলা সাহিত্যের চরিত্র.html" },
-          { id: "t-5-2", title: "বাংলা সাহিত্যের স্মরণীয় উক্তি ও সংলাপ", pages: "পৃষ্ঠা ১৯৭–২০২", file: "বাংলা সাহিত্যের অমর উক্তি ও সংলাপ.html" }
-        ]
-      }
+      // বাংলাদেশ বিষয়াবলি (৩১টি)
+      { title: "প্রাচীন কাল (ইতিহাস, জনপদ ও বিভিন্ন রাজবংশ)", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/প্রাচীন কাল (ইতিহাস, জনপদ ও বিভিন্ন রাজবংশ).html" },
+      { title: "মধ্যযুগ (মুঘল, সুলতান ও নবাবী আমল)", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/মধ্যযুগ (মুঘল, সুলতান ও নবাবী আমল).html" },
+      { title: "ইউরোপীয়দের আগমন ও ব্রিটিশ শাসনামল", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/ইউরোপীয়দের আগমন ও ব্রিটিশ শাসনামল.html" },
+      { title: "পাকিস্তান আমল- ভাষা আন্দোলন", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/পাকিস্তান আমল- ভাষা আন্দোলন.html" },
+      { title: "যুক্তফ্রন্ট নির্বাচন ও ১৯৫৬-এর শাসনতন্ত্র আন্দোলন", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/যুক্তফ্রন্ট নির্বাচন ও ১৯৫৬-এর শাসনতন্ত্র আন্দোলন.html" },
+      { title: "ছয় দফা আন্দোলন", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/ছয় দফা আন্দোলন.html" },
+      { title: "মুক্তিযুদ্ধ ও স্বাধীনতা সংগ্রাম (৪৩০-৪৪৪)", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/মুক্তিযুদ্ধ_৪৩০-৪৪৪.html" },
+      { title: "কৃষিজ সম্পদ (ফসল, বন, প্রাণিসম্পদ, মৎস্যসম্পদ)", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/কৃষিজ সম্পদ (ফসল, বন, প্রাণিসম্পদ, মৎস্যসম্পদ).html" },
+      { title: "ফসলের জাত", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/ফসলের জাত.html" },
+      { title: "কৃষি সংশ্লিষ্ট প্রতিষ্ঠান", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/কৃষি সংশ্লিষ্ট প্রতিষ্ঠান.html" },
+      { title: "কৃষি সম্পদ (অন্যান্য)", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/কৃষি সম্পদ (অন্যান্য).html" },
+      { title: "অর্থনৈতিক সমীক্ষা ও বাজেট", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/অর্থনৈতিক সমীক্ষা ও বাজেট.html" },
+      { title: "প্রেক্ষিত পরিকল্পনা ও পঞ্চবার্ষিক পরিকল্পনা", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/প্রেক্ষিত পরিকল্পনা ও পঞ্চবার্ষিক পরিকল্পনা.html" },
+      { title: "বাংলাদেশ বিষয়াবলি- অর্থনীতি, রাজস্ব ও উন্নয়ন পরিকল্পনা", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/বাংলাদেশ বিষয়াবলি- অর্থনীতি, রাজস্ব ও উন্নয়ন পরিকল্পনা.html" },
+      { title: "বাংলাদেশের শিল্প ও বাণিজ্য শিল্প উৎপাদন", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/বাংলাদেশের শিল্প ও বাণিজ্য শিল্প উৎপাদন.html" },
+      { title: "শক্তি ও খনিজ সম্পদ", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/শক্তি ও খনিজ সম্পদ.html" },
+      { title: "পণ্য আমদানি ও রপ্তানি", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/পণ্য আমদানি ও রপ্তানি.html" },
+      { title: "বৈদেশিক লেনদেন ও অর্থ প্রেরণ", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/বৈদেশিক লেনদেন ও অর্থ প্রেরণ.html" },
+      { title: "বাংলাদেশের বাণিজ্য ও ব্যাংকিং ব্যবস্থা", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/বাংলাদেশের বাণিজ্য ও ব্যাংকিং ব্যবস্থা.html" },
+      { title: "জনমিতিক শুমারি ও জনসংখ্যা সংক্রান্ত", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/জনমিতিক শুমারি ও জনসংখ্যা সংক্রান্ত.html" },
+      { title: "ক্ষুদ্র নৃগোষ্ঠী", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/ক্ষুদ্র নৃগোষ্ঠী.html" },
+      { title: "উচ্চশিক্ষা ও স্বাস্থ্যসেবা প্রতিষ্ঠান", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/উচ্চশিক্ষা ও স্বাস্থ্যসেবা প্রতিষ্ঠান.html" },
+      { title: "গণপ্রজাতন্ত্রী বাংলাদেশের সংবিধান", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/গণপ্রজাতন্ত্রী বাংলাদেশের সংবিধান.html" },
+      { title: "বাংলাদেশের রাজনৈতিক ব্যবস্থা", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/বাংলাদেশের রাজনৈতিক ব্যবস্থা.html" },
+      { title: "বাংলাদেশের সরকার ব্যবস্থা", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/বাংলাদেশের সরকার ব্যবস্থা.html" },
+      { title: "বাংলাদেশের জাতীয় অর্জন ও অন্যান্য", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/বাংলাদেশের_জাতীয়_অর্জন_ও_অন্যান্য.html" },
+      { title: "খেলাধুলা", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/খেলাধুলা.html" },
+      { title: "যোগাযোগ ব্যবস্থা", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/যোগাযোগ ব্যবস্থা.html" },
+      { title: "ভৌগোলিক বিষয়াদি", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/ভৌগোলিক_বিষয়াদি_পৃ৫৪৫-৫৫৬_ফাইনাল.html" },
+      { title: "সংস্কৃতি ও গণমাধ্যম", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/সংস্কৃতি ও গণমাধ্যম.html" },
+      { title: "বাংলাদেশের ভাস্কর্য ও স্মারক স্থাপত্য", sub: "বাংলাদেশ বিষয়াবলি", href: "Live MCQ Bangladesh/বাংলাদেশের ভাস্কর্য ও স্মারক স্থাপত্য.html" }
     ];
 
-    // Local Storage Progress Key
-    const STORAGE_KEY = 'bangla_lit_progress_data_v1';
-    let progressState = {};
+    // Numbers in Bengali
+    function toBn(num) {
+      const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+      return String(num).replace(/\d/g, d => bnDigits[d]);
+    }
 
-    // Load progress from localStorage
-    function loadProgress() {
+    // Read Progress from LocalStorage
+    function updateProgressUI() {
+      let banglaDone = 0;
+      let bdDone = 0;
+
       try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-          progressState = JSON.parse(saved);
-        }
-      } catch (e) {
-        console.error('Error loading progress from storage', e);
-        progressState = {};
-      }
-    }
+        const banglaStored = JSON.parse(localStorage.getItem('ebk_bangla_lit_progress') || '{}');
+        banglaDone = Object.keys(banglaStored).filter(k => banglaStored[k]).length;
+      } catch(e) {}
 
-    // Save progress to localStorage
-    function saveProgress() {
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(progressState));
-      } catch (e) {
-        console.error('Error saving progress to storage', e);
-      }
-      updateProgressStats();
+        const bdStored = JSON.parse(localStorage.getItem('ebk_bd_progress') || '{}');
+        bdDone = Object.keys(bdStored).filter(k => bdStored[k]).length;
+      } catch(e) {}
+
+      const totalDone = banglaDone + bdDone;
+      const totalCount = 62;
+
+      const pctTotal = Math.round((totalDone / totalCount) * 100);
+      const pctBangla = Math.round((banglaDone / 31) * 100);
+      const pctBd = Math.round((bdDone / 31) * 100);
+
+      document.getElementById('overallPercentage').innerText = toBn(pctTotal) + '%';
+      document.getElementById('overallFill').style.width = pctTotal + '%';
+      document.getElementById('completedCountText').innerText = `সম্পন্ন: ${toBn(totalDone)} / ${toBn(totalCount)}টি অধ্যায়`;
+
+      document.getElementById('banglaProgressText').innerText = toBn(pctBangla) + '% (' + toBn(banglaDone) + '/৩১)';
+      document.getElementById('banglaProgressFill').style.width = pctBangla + '%';
+
+      document.getElementById('bdProgressText').innerText = toBn(pctBd) + '% (' + toBn(bdDone) + '/৩১)';
+      document.getElementById('bdProgressFill').style.width = pctBd + '%';
     }
 
-    // Toggle topic completion
-    function toggleTopic(id) {
-      progressState[id] = !progressState[id];
-      saveProgress();
+    // Search Filtering
+    const searchInput = document.getElementById('masterSearchInput');
+    const resultsSection = document.getElementById('searchResultsSection');
+    const resultsGrid = document.getElementById('resultsGrid');
+    const resultCount = document.getElementById('searchResultCount');
 
-      // UI update for topic item
-      const itemEl = document.getElementById(`item-${id}`);
-      const checkbox = document.getElementById(`chk-${id}`);
-      if (itemEl && checkbox) {
-        checkbox.checked = !!progressState[id];
-        if (progressState[id]) {
-          itemEl.classList.add('bg-emerald-50/60');
-          itemEl.querySelector('.topic-title')?.classList.add('line-through', 'text-slate-400');
-        } else {
-          itemEl.classList.remove('bg-emerald-50/60');
-          itemEl.querySelector('.topic-title')?.classList.remove('line-through', 'text-slate-400');
-        }
-      }
-    }
-
-    // Calculate and update progress bar
-    function updateProgressStats() {
-      let totalTopics = 0;
-      let completedTopics = 0;
-
-      indexData.forEach(chapter => {
-        chapter.topics.forEach(t => {
-          totalTopics++;
-          if (progressState[t.id]) {
-            completedTopics++;
-          }
-        });
-      });
-
-      const percentage = totalTopics > 0 ? Math.round((completedTopics / totalTopics) * 100) : 0;
-      
-      const percentEl = document.getElementById('progress-percent');
-      const fillEl = document.getElementById('progress-fill');
-      const countEl = document.getElementById('progress-count');
-      const statusEl = document.getElementById('progress-status');
-
-      if (percentEl) percentEl.textContent = `${toBengaliNumber(percentage)}%`;
-      if (fillEl) fillEl.style.width = `${percentage}%`;
-      if (countEl) countEl.textContent = `সম্পন্ন: ${toBengaliNumber(completedTopics)} / ${toBengaliNumber(totalTopics)}`;
-
-      if (statusEl) {
-        if (percentage === 0) {
-          statusEl.textContent = "এখনও শুরু করা হয়নি";
-          statusEl.className = "text-amber-700 font-medium";
-        } else if (percentage < 50) {
-          statusEl.textContent = "অধ্যয়ন চলমান রয়েছে";
-          statusEl.className = "text-sky-700 font-medium";
-        } else if (percentage < 100) {
-          statusEl.textContent = "অর্ধেকের বেশি সম্পন্ন!";
-          statusEl.className = "text-teal-700 font-medium";
-        } else {
-          statusEl.textContent = "অভিনন্দন! সম্পূর্ণ রিভিশন শেষ 🎉";
-          statusEl.className = "text-emerald-700 font-bold";
-        }
-      }
-    }
-
-    // Reset All Progress
-    function resetAllProgress() {
-      if (window.confirm("আপনি কি নিশ্চিত যে আপনার সমস্ত পাঠ ও চেকমার্ক রিসেট করতে চান?")) {
-        progressState = {};
-        saveProgress();
-        renderChapters();
-      }
-    }
-
-    // Render Chapters & Accordions
-    function renderChapters(filterQuery = "") {
-      const container = document.getElementById('chapters-list');
-      if (!container) return;
-
-      const query = filterQuery.trim().toLowerCase();
-      let matchCount = 0;
-      let html = "";
-
-      indexData.forEach((chapter, chapIndex) => {
-        // Filter topics
-        const filteredTopics = chapter.topics.filter(t => {
-          if (!query) return true;
-          return t.title.toLowerCase().includes(query) || 
-                 t.pages.toLowerCase().includes(query) ||
-                 chapter.title.toLowerCase().includes(query);
-        });
-
-        if (filteredTopics.length > 0) {
-          matchCount += filteredTopics.length;
-          const isInitiallyOpen = !query || filteredTopics.length < 10;
-
-          html += `
-            <div class="card-item bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden transition-all duration-300 hover:border-slate-300" id="chapter-card-${chapter.id}">
-              <!-- Chapter Header -->
-              <div 
-                onclick="toggleChapterAccordion('${chapter.id}')"
-                class="px-3.5 sm:px-5 py-3.5 sm:py-4 bg-gradient-to-r from-slate-50 via-white to-slate-50 flex items-center justify-between cursor-pointer select-none border-b border-slate-100 hover:bg-slate-100/70 transition"
-              >
-                <div class="flex items-center gap-3 sm:gap-4 flex-1 pr-2 sm:pr-3">
-                  <span class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-900 text-amber-300 font-bold flex items-center justify-center shrink-0 serif-title shadow-sm text-sm sm:text-base">
-                    ${chapter.number}
-                  </span>
-                  <div>
-                    <h2 class="serif-title font-bold text-slate-800 text-sm sm:text-lg tracking-tight">
-                      ${chapter.title}
-                    </h2>
-                    <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-slate-500 mt-0.5">
-                      <span class="inline-flex items-center gap-1 font-medium text-emerald-800 bg-emerald-50 px-1.5 sm:px-2 py-0.5 rounded border border-emerald-200/50">
-                        <i class="fa-regular fa-bookmark text-[10px] sm:text-[11px]"></i> ${chapter.pages}
-                      </span>
-                      <span>${toBengaliNumber(chapter.topics.length)} টি অনুচ্ছেদ</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="flex items-center gap-2">
-                  <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-slate-400 bg-slate-100 transition-transform duration-300" id="icon-${chapter.id}">
-                    <i class="fa-solid fa-chevron-down text-xs sm:text-sm transition-transform duration-300"></i>
-                  </span>
-                </div>
-              </div>
-
-              <!-- Topic Items (Accordion Body) -->
-              <div id="content-${chapter.id}" class="accordion-content divide-y divide-slate-100 transition-all ${isInitiallyOpen ? '' : 'hidden'}">
-                ${filteredTopics.map((topic, idx) => {
-                  const isChecked = !!progressState[topic.id];
-                  const fileUrl = topic.file ? encodeURI(topic.file) : '#';
-                  return `
-                    <div 
-                      id="item-${topic.id}"
-                      class="px-3 sm:px-5 py-3 sm:py-3.5 flex items-center justify-between gap-2.5 sm:gap-4 hover:bg-slate-50/80 transition group ${isChecked ? 'bg-emerald-50/40' : ''}"
-                    >
-                      <div class="flex items-center gap-2.5 sm:gap-3 flex-1 min-w-0">
-                        <input 
-                          type="checkbox" 
-                          id="chk-${topic.id}"
-                          ${isChecked ? 'checked' : ''}
-                          onchange="toggleTopic('${topic.id}')"
-                          class="w-4 h-4 text-emerald-700 bg-slate-100 border-slate-300 rounded focus:ring-emerald-600 focus:ring-2 cursor-pointer transition shrink-0"
-                          title="পড়া সম্পন্ন হিসেবে চিহ্নিত করুন"
-                        >
-                        <a 
-                          href="${fileUrl}" 
-                          class="topic-title text-sm sm:text-base font-normal text-slate-700 hover:text-emerald-800 hover:underline transition leading-snug flex-1 select-none ${isChecked ? 'line-through text-slate-400' : ''}"
-                          title="পাঠটি পড়তে ক্লিক করুন"
-                        >
-                          ${topic.title}
-                        </a>
-                      </div>
-                      
-                      <div class="shrink-0 flex items-center gap-2">
-                        <span class="text-xs px-2.5 py-1 rounded-full bg-slate-100 group-hover:bg-amber-100/70 text-slate-600 group-hover:text-amber-900 font-medium transition border border-slate-200/60 hidden sm:inline-block">
-                          ${topic.pages}
-                        </span>
-                        <a 
-                          href="${fileUrl}" 
-                          class="text-xs px-3 py-1.5 rounded-lg bg-emerald-800 hover:bg-emerald-900 text-white font-medium transition flex items-center gap-1.5 shadow-sm hover:shadow"
-                          title="পড়া শুরু করুন"
-                        >
-                          <span>পড়ুন</span>
-                          <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </a>
-                      </div>
-                    </div>
-                  `;
-                }).join('')}
-              </div>
-            </div>
-          `;
-        }
-      });
-
-      if (!html) {
-        html = `
-          <div class="text-center py-12 bg-white rounded-2xl border border-dashed border-slate-300 p-8">
-            <i class="fa-regular fa-face-frown text-4xl text-slate-300 mb-3"></i>
-            <h3 class="serif-title text-lg font-bold text-slate-700">কোনো ফলাফল পাওয়া যায়নি</h3>
-            <p class="text-slate-500 text-sm mt-1">"${filterQuery}" এর সাথে সম্পর্কিত কোনো অধ্যায় বা লেখক সূচিতে মেলেনি।</p>
-            <button onclick="clearSearch()" class="mt-4 px-4 py-2 bg-emerald-800 text-white rounded-lg text-xs font-semibold hover:bg-emerald-900 transition">
-              সব অধ্যায় পুনরায় দেখুন
-            </button>
-          </div>
-        `;
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      if (!query) {
+        resultsSection.style.display = 'none';
+        return;
       }
 
-      container.innerHTML = html;
+      const matches = ALL_TOPICS.filter(t => t.title.toLowerCase().includes(query) || t.sub.toLowerCase().includes(query));
+      resultsGrid.innerHTML = '';
 
-      // Handle search feedback
-      const feedback = document.getElementById('search-feedback');
-      const feedbackText = document.getElementById('search-feedback-text');
-      if (feedback && feedbackText) {
-        if (query) {
-          feedback.classList.remove('hidden');
-          feedbackText.innerHTML = `অনুসন্ধান: "<strong>${filterQuery}</strong>" — ${toBengaliNumber(matchCount)} টি টপিক পাওয়া গেছে`;
-        } else {
-          feedback.classList.add('hidden');
-        }
-      }
-    }
-
-    // Toggle Single Chapter Accordion
-    function toggleChapterAccordion(chapterId) {
-      const content = document.getElementById(`content-${chapterId}`);
-      const icon = document.getElementById(`icon-${chapterId}`);
-      if (!content) return;
-
-      const isHidden = content.classList.contains('hidden');
-      if (isHidden) {
-        content.classList.remove('hidden');
-        if (icon) icon.querySelector('i')?.classList.add('rotate-180');
+      if (matches.length === 0) {
+        resultsGrid.innerHTML = '<div style="color:var(--text-muted); font-size:0.9rem;">কোনো অধ্যায় খুঁজে পাওয়া যায়নি।</div>';
+        resultCount.innerText = '০টি ফলাফল';
       } else {
-        content.classList.add('hidden');
-        if (icon) icon.querySelector('i')?.classList.remove('rotate-180');
+        resultCount.innerText = `${toBn(matches.length)}টি ফলাফল`;
+        matches.forEach(m => {
+          const item = document.createElement('a');
+          item.href = m.href;
+          item.className = 'result-item';
+          item.innerHTML = `
+            <span>📖 ${m.title}</span>
+            <span style="font-size:0.75rem; padding:2px 6px; border-radius:4px; background:${m.sub==='বাংলা সাহিত্য'?'rgba(15,118,110,0.1)':'rgba(136,19,55,0.1)'}; color:${m.sub==='বাংলা সাহিত্য'?'#0f766e':'#881337'};">${m.sub}</span>
+          `;
+          resultsGrid.appendChild(item);
+        });
       }
+
+      resultsSection.style.display = 'block';
+    });
+
+    // Theme Toggle
+    function togglePortalTheme() {
+      const cur = document.documentElement.getAttribute('data-theme') || 'light';
+      const target = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      document.getElementById('themeIcon').innerText = target === 'dark' ? '☀️' : '🌓';
+      document.getElementById('themeText').innerText = target === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
+      try {
+        localStorage.setItem('ebk_portal_theme', target);
+      } catch(e) {}
     }
 
-    // Expand / Collapse All
-    function toggleAllAccordions(shouldOpen) {
-      indexData.forEach(chapter => {
-        const content = document.getElementById(`content-${chapter.id}`);
-        const icon = document.getElementById(`icon-${chapter.id}`);
-        if (content) {
-          if (shouldOpen) {
-            content.classList.remove('hidden');
-            if (icon) icon.querySelector('i')?.classList.add('rotate-180');
-          } else {
-            content.classList.add('hidden');
-            if (icon) icon.querySelector('i')?.classList.remove('rotate-180');
-          }
-        }
-      });
-    }
+    // Load saved theme
+    try {
+      const savedTheme = localStorage.getItem('ebk_portal_theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('themeIcon').innerText = savedTheme === 'dark' ? '☀️' : '🌓';
+        document.getElementById('themeText').innerText = savedTheme === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
+      }
+    } catch(e) {}
 
-    // Search Handler
-    function handleSearch(val) {
-      renderChapters(val);
-    }
-
-    // Clear Search Input
-    function clearSearch() {
-      const input = document.getElementById('search-input');
-      if (input) input.value = '';
-      renderChapters("");
-    }
-
-    // Initialization
-    window.onload = function() {
-      loadProgress();
-      renderChapters();
-      updateProgressStats();
-    };
+    // Init UI
+    updateProgressUI();
   </script>
 </body>
 </html>

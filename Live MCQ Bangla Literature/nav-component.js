@@ -988,8 +988,8 @@
         <span style="font-weight: 700; color: var(--ebk-primary);">বিষয় পরিবর্তন:</span>
         <select onchange="if(this.value!=='current') window.location.href=this.value;" style="padding: 3px 6px; border-radius: 6px; border: 1px solid var(--ebk-border); background: var(--ebk-card-bg); color: var(--ebk-text-main); font-family: inherit; font-size: 12px; cursor: pointer;">
           <option value="current" selected>📚 বাংলা সাহিত্য</option>
-          <option value="Live MCQ Bangladesh/বাংলাদেশ বিষয়াবলি (৪০১-৫৬৪) index.html">🇧🇩 বাংলাদেশ বিষয়াবলি</option>
-          <option value="Master Portal Index.html">🏛️ মাস্টার লাইব্রেরি পোর্টাল</option>
+          <option value="../Live MCQ Bangladesh/index.html">🇧🇩 বাংলাদেশ বিষয়াবলি</option>
+          <option value="../index.html">🏛️ মাস্টার লাইব্রেরি পোর্টাল</option>
         </select>
       </div>
 

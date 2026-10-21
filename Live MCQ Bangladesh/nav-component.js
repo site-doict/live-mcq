@@ -186,8 +186,8 @@
           <span style="font-weight:700;color:#881337;">বিষয় পরিবর্তন:</span>
           <select id="ebk-subject-switch" style="padding:4px 8px;border-radius:6px;border:1px solid #cbd5e1;background:#fff;font-family:inherit;font-size:0.85rem;cursor:pointer;">
             <option value="current" selected>🇧🇩 বাংলাদেশ বিষয়াবলি</option>
-            <option value="../index.html">📚 বাংলা সাহিত্য</option>
-            <option value="../Master Portal Index.html">🏛️ মাস্টার পোর্টাল</option>
+            <option value="../Live MCQ Bangla Literature/index.html">📚 বাংলা সাহিত্য</option>
+            <option value="../index.html">🏛️ মাস্টার পোর্টাল</option>
           </select>
         </div>
 
