@@ -399,6 +399,53 @@
       margin-top: 32px;
     }
 
+    /* ফ্ল্যাশকার্ড স্টাইল */
+    .flash-card-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .flash-item {
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .flash-item:hover {
+      border-color: var(--primary);
+    }
+
+    .flash-question {
+      font-weight: 700;
+      color: var(--primary-dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    [data-theme="dark"] .flash-question {
+      color: var(--primary);
+    }
+
+    .flash-answer {
+      display: none;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border);
+      color: var(--text);
+      font-size: calc(15px * var(--font-scale));
+      line-height: 1.7;
+    }
+
+    .flash-item.open .flash-answer {
+      display: block;
+    }
+
     /* প্রিন্ট লেআউট */
     @media print {
       .control-bar, #progress-container, .btn-group, button {
@@ -461,6 +508,7 @@
     </div>
     <div class="btn-group">
       <button onclick="document.getElementById('quiz-section').scrollIntoView({behavior: 'smooth'})">📝 সব MCQ কুইজ</button>
+      <button onclick="document.getElementById('flash-section').scrollIntoView({behavior: 'smooth'})">⚡ ফ্ল্যাশকার্ড</button>
       <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆️ উপরে</button>
       <button onclick="window.print()">🖨️ প্রিন্ট / PDF</button>
     </div>
@@ -571,7 +619,7 @@
           একটি নির্দিষ্ট সময়ে (সাধারণত এক বছরে) একটি দেশের ভৌগোলিক সীমানার মধ্যে মোট যে পরিমাণ চূড়ান্ত দ্রব্য ও সেবা উৎপাদিত হয়, তার বাজার দামের সমষ্টিকে GDP বলে।<br>
           • <strong>অন্তর্ভুক্ত:</strong> দেশের অভ্যন্তরীণ আয়, দেশের অভ্যন্তরে বিদেশিদের আয়, চূড়ান্ত সেবা ও বিদেশিদের দেশে বিনিয়োগ থেকে আয়।<br>
           • <strong>বাদ যায় (Excludes):</strong> বিদেশে অবস্থানকারী দেশীয় নাগরিক কর্তৃক বিদেশ হতে প্রেরিত অর্থ (রেমিট্যান্স)।<br>
-          • <strong>সূত্র:</strong> $\text{GDP} = \text{GNP} + \text{দেশে বিদেশিদের অর্জিত আয়} - \text{বিদেশে দেশীয় নাগরিকদের আয়}$।
+          • <strong>জিডিপির গাণিতিক সূত্র:</strong> $\text{GDP} = \text{GNP} + \text{দেশে বিদেশিদের অর্জিত আয়} - \text{বিদেশে দেশীয় নাগরিকদের আয়}$
         </div>
 
         <div class="table-container">
@@ -789,28 +837,45 @@
                 <td>৭ লাখ ৯০ হাজার কোটি টাকা (জিডিপির ১২.৭%)</td>
               </tr>
               <tr>
-                <td><strong>জিডিপির আকার (বাজেট ২০২৫-২৬)</strong></td>
-                <td>৬২ লাখ ৪৪ হাজার ৫৭৮ কোটি টাকা</td>
+                <td><strong>জিডিপির আকার ও প্রবৃদ্ধি</strong></td>
+                <td>
+                  • বাজেট ২০২৫-২৬ প্রাক্কলিত আকার: ৬২ লাখ ৪৪ হাজার ৫৭৮ কোটি টাকা (জিডিপি প্রবৃদ্ধি লক্ষ্যমাত্রা: ৫.৫%)।<br>
+                  • <strong>স্থির মূল্যে জিডিপি (চূড়ান্ত হিসাব):</strong> ২০২৪-২৫ অর্থবছরে স্থির মূল্যে জিডিপির আকার <strong>৩৮,৬২৭,৯০৭ কোটি টাকা</strong>।
+                </td>
               </tr>
               <tr>
-                <td><strong>বার্ষিক উন্নয়ন কর্মসূচি (ADP)</strong></td>
-                <td>২ লাখ ৩০ হাজার কোটি টাকা (জিডিপির ৩.৭%)</td>
+                <td><strong>উন্নয়ন বাজেট ও বার্ষিক উন্নয়ন কর্মসূচি (ADP)</strong></td>
+                <td>
+                  • <strong>উন্নয়ন বাজেটের মোট বরাদ্দের পরিমাণ:</strong> জাতীয় বাজেট ২০২৫-২৬ এ উন্নয়ন বাজেটের মোট বরাদ্দের পরিমাণ <strong>২,৪৫,৬০৯ কোটি টাকা</strong>।<br>
+                  • এর মধ্যে বার্ষিক উন্নয়ন কর্মসূচি (ADP) বরাদ্দ ২ লাখ ৩০ হাজার কোটি টাকা (জিডিপির ৩.৭%)।
+                </td>
               </tr>
               <tr>
                 <td><strong>রাজস্ব প্রাপ্তির লক্ষ্যমাত্রা</strong></td>
-                <td>৫ লাখ ৬৪ হাজার কোটি টাকা</td>
+                <td>
+                  • <strong>রাজস্ব প্রাপ্তির লক্ষ্যমাত্রা:</strong> জাতীয় বাজেট ২০২৫-২৬ এ রাজস্ব প্রাপ্তির লক্ষ্যমাত্রা <strong>৫,৪৮,০০০ কোটি টাকা</strong> (সংশোধিত/প্রাক্কলিত রূপরেখা: ৫ লাখ ৬৪ হাজার কোটি টাকা)।
+                </td>
               </tr>
               <tr>
                 <td><strong>বাজেট ঘাটতি</strong></td>
-                <td>অনুদান ব্যতীত: ২ লাখ ২৬ হাজার কোটি টাকা (৩.৬২%); অনুদানসহ: ২ লাখ ২১ হাজার কোটি টাকা।</td>
+                <td>
+                  • <strong>অনুদান সহ বাজেট ঘাটতি:</strong> জাতীয় বাজেট ২০২৫-২৬ এ 'অনুদান সহ বাজেট ঘাটতি' <strong>২,২১,০০০ কোটি টাকা</strong> (বা ২ লাখ ২১ হাজার কোটি টাকা)।<br>
+                  • <strong>অনুদান ব্যতীত বাজেট ঘাটতি:</strong> ২ লাখ ২৬ হাজার কোটি টাকা (জিডিপির ৩.৬২%)।
+                </td>
               </tr>
               <tr>
-                <td><strong>অনুমিত জিডিপি প্রবৃদ্ধি ও মুদ্রাস্ফীতি</strong></td>
-                <td>জিডিপি প্রবৃদ্ধি: ৫.৫%; অনুমিত মুদ্রাস্ফীতি: ৬.৫%।</td>
+                <td><strong>সামাজিক নিরাপত্তার হার বৃদ্ধি</strong></td>
+                <td>
+                  • <strong>সামাজিক নিরাপত্তার হার বৃদ্ধি:</strong> জাতীয় বাজেট ২০২৫-২৬ এ সামাজিক নিরাপত্তার হার বৃদ্ধি <strong>১২.১৮%</strong>।
+                </td>
               </tr>
               <tr>
-                <td><strong>মাথাপিছু আয় (Per Capita Income)</strong></td>
-                <td>সমীক্ষা ২০২৫ সাময়িক: ২,৮২০ মার্কিন ডলার (৩,৩৯,২১১ টাকা); বিবিএস চূড়ান্ত: ২,৭৬৯ মার্কিন ডলার।</td>
+                <td><strong>মাথাপিছু জাতীয় আয় (Per Capita Income)</strong></td>
+                <td>
+                  • <strong>চলতি মূল্যে মাথাপিছু জাতীয় আয় (চূড়ান্ত হিসাব):</strong> ২০২৪-২৫ অর্থবছরে চলতি মূল্যে মাথাপিছু জাতীয় আয় <strong>৩,৩৪,৫১১ টাকা (বা ২,৭৬৯ মার্কিন ডলার)</strong>।<br>
+                  • <strong>পূর্ববর্তী ২০২৩-২৪ অর্থবছরের মাথাপিছু আয়:</strong> ২০২৩-২৪ অর্থবছরে মাথাপিছু জাতীয় আয় ছিল <strong>৩,০৪,১০২ টাকা (বা ২,৭৩৮ মার্কিন ডলার)</strong>।<br>
+                  • <em>(উল্লেখ্য, সমীক্ষা ২০২৫ সাময়িক প্রাক্কলনে ছিল ৩,৩৯,২১১ টাকা বা ২,৮২০ মার্কিন ডলার)</em>।
+                </td>
               </tr>
               <tr>
                 <td><strong>মাথাপিছু জিডিপি (Per Capita GDP)</strong></td>
@@ -1085,7 +1150,9 @@
           </div>
           <div class="quiz-feedback">
             <strong>উত্তর: গ (১৭৭০ ডলার — বইয়ে 'উ. ঘ' মুদ্রিত হলেও টিকচিহ্ন ১৭৭০ ডলারে)</strong><br>
-            <strong>ব্যাখ্যা:</strong> ইউএনডিপি রিপোর্ট সেপ্টেম্বর ২০০৫ অনুযায়ী বাংলাদেশের মাথাপিছু আয় ছিল ১৭৭০ ডলার।
+            <strong>ব্যাখ্যা:</strong> ইউএনডিপি রিপোর্ট সেপ্টেম্বর ২০০৫ অনুযায়ী বাংলাদেশের মাথাপিছু আয় ছিল ১৭৭০ ডলার।<br>
+            • <strong>সর্বশেষ পরিসংখ্যান:</strong> ২০২৪-২৫ অর্থবছরে চলতি মূল্যে মাথাপিছু জাতীয় আয় (চূড়ান্ত হিসাব) ৩,৩৪,৫১১ টাকা (বা ২,৭৬৯ মার্কিন ডলার)।<br>
+            • <strong>পূর্ববর্তী ২০২৩-২৪ অর্থবছর:</strong> ২০২৩-২৪ অর্থবছরে মাথাপিছু জাতীয় আয় ছিল ৩,০৪,১০২ টাকা (বা ২,৭৩৮ মার্কিন ডলার)।
           </div>
         </div>
 
@@ -1103,7 +1170,8 @@
           </div>
           <div class="quiz-feedback">
             <strong>উত্তর: ক (২০,৩০০ কোটি টাকা)</strong><br>
-            <strong>ব্যাখ্যা:</strong> ২০০৩-০৪ সনের বার্ষিক উন্নয়ন কর্মসূচির মোট ব্যয় ছিল ২০,৩০০ কোটি টাকা।
+            <strong>ব্যাখ্যা:</strong> ২০০৩-০৪ সনের বার্ষিক উন্নয়ন কর্মসূচির মোট ব্যয় ছিল ২০,৩০০ কোটি টাকা।<br>
+            • <strong>সর্বশেষ ২০২৫-২৬ বাজেট:</strong> জাতীয় বাজেট ২০২৫-২৬ এ উন্নয়ন বাজেটের মোট বরাদ্দের পরিমাণ <strong>২,৪৫,৬০৯ কোটি টাকা</strong> (যার মধ্যে বার্ষিক উন্নয়ন কর্মসূচি বা ADP বরাদ্দ ২ লাখ ৩০ হাজার কোটি টাকা)।
           </div>
         </div>
 
@@ -1121,7 +1189,9 @@
           </div>
           <div class="quiz-feedback">
             <strong>উত্তর: সাম্প্রতিক তথ্যের ভিত্তিতে সঠিক উত্তর নেই!</strong><br>
-            <strong>ব্যাখ্যা:</strong> ২১তম বিসিএসের প্রশ্নে তৎকালীন মান থাকলেও বর্তমান সমীক্ষা ২০২৫ অনুযায়ী মাথাপিছু জাতীয় আয় ২,৮২০ মার্কিন ডলার (সাময়িক) এবং চূড়ান্ত ২,৭৬৯ ডলার।
+            <strong>ব্যাখ্যা:</strong> ২১তম বিসিএসের প্রশ্নে তৎকালীন মান ছিল ভিন্ন।<br>
+            • <strong>চলতি মূল্যে মাথাপিছু জাতীয় আয় (চূড়ান্ত হিসাব):</strong> ২০২৪-২৫ অর্থবছরে চলতি মূল্যে মাথাপিছু জাতীয় আয় ৩,৩৪,৫১১ টাকা (বা ২,৭৬৯ মার্কিন ডলার)।<br>
+            • <strong>পূর্ববর্তী ২০২৩-২৪ অর্থবছরের মাথাপিছু আয়:</strong> ২০২৩-২৪ অর্থবছরে মাথাপিছু জাতীয় আয় ছিল ৩,০৪,১০২ টাকা (বা ২,৭৩৮ মার্কিন ডলার)।
           </div>
         </div>
 
@@ -1157,10 +1227,62 @@
           </div>
           <div class="quiz-feedback">
             <strong>উত্তর: খ (১,৮৭৬ কোটি টাকা — বইয়ে 'উ. গ' মুদ্রিত হলেও ব্যাখ্যা অনুযায়ী ১,৮৭৬ কোটি)</strong><br>
-            <strong>ব্যাখ্যা:</strong> ১৯৯৪-৯৫ সালের বাজেটে শিক্ষা খাতে বরাদ্দ ছিল ১,৮৭৬ কোটি টাকা। (উল্লেখ্য, জাতীয় বাজেট ২০২৫-২৬ এ শিক্ষা ও প্রযুক্তি খাতে বরাদ্দ ১ লাখ ১০ হাজার ৬৫৭ কোটি টাকা, যা মোট বাজেটের ১৪%)।
+            <strong>ব্যাখ্যা:</strong> ১৯৯৪-৯৫ সালের বাজেটে শিক্ষা খাতে বরাদ্দ ছিল ১,৮৭৬ কোটি টাকা।<br>
+            • <strong>সর্বশেষ বাজেট ২০২৫-২৬:</strong> শিক্ষা ও প্রযুক্তি খাতে বরাদ্দ ১ লাখ ১০ হাজার ৬৫৭ কোটি টাকা (মোট বাজেটের ১৪%)। জাতীয় বাজেট ২০২৫-২৬ এ সামাজিক নিরাপত্তার হার বৃদ্ধি ১২.১৮%।
           </div>
         </div>
 
+      </div>
+    </div>
+
+    <!-- ফ্ল্যাশকার্ড রিভিশন সেকশন -->
+    <div class="section-card" id="flash-section">
+      <div class="section-header">
+        <h2>⚡ ৩০ সেকেন্ডের ঝটপট রিভিশন ফ্ল্যাশকার্ড</h2>
+        <span class="badge">ক্লিক করে উত্তর দেখুন</span>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 14px; color: var(--text-muted);">
+          ট্যাপ বা ক্লিক করে অর্থনৈতিক সমীক্ষা ও বাজেটের অতিগুরুত্বপূর্ণ তথ্যগুলো ঝটপট রিভিশন দিন:
+        </p>
+        <div class="flash-card-list">
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ জিডিপির গাণিতিক সূত্রটি কী?</span> <span>➕</span></div>
+            <div class="flash-answer">জিডিপির গাণিতিক সূত্র: $\text{GDP} = \text{GNP} + \text{দেশে বিদেশিদের অর্জিত আয়} - \text{বিদেশে দেশীয় নাগরিকদের আয়}$</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ২০২৪-২৫ অর্থবছরে চলতি মূল্যে মাথাপিছু জাতীয় আয় (চূড়ান্ত হিসাব) কত?</span> <span>➕</span></div>
+            <div class="flash-answer">চলতি মূল্যে মাথাপিছু জাতীয় আয় (চূড়ান্ত হিসাব): ২০২৪-২৫ অর্থবছরে চলতি মূল্যে মাথাপিছু জাতীয় আয় ৩,৩৪,৫১১ টাকা (বা ২,৭৬৯ মার্কিন ডলার)।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ পূর্ববর্তী ২০২৩-২৪ অর্থবছরের মাথাপিছু জাতীয় আয় কত ছিল?</span> <span>➕</span></div>
+            <div class="flash-answer">পূর্ববর্তী ২০২৩-২৪ অর্থবছরের মাথাপিছু আয়: ২০২৩-২৪ অর্থবছরে মাথাপিছু জাতীয় আয় ছিল ৩,০৪,১০২ টাকা (বা ২,৭৩৮ মার্কিন ডলার)।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ ২০২৪-২৫ অর্থবছরে স্থির মূল্যে জিডিপির আকার (চূড়ান্ত হিসাব) কত?</span> <span>➕</span></div>
+            <div class="flash-answer">স্থির মূল্যে জিডিপি (চূড়ান্ত হিসাব): ২০২৪-২৫ অর্থবছরে স্থির মূল্যে জিডিপির আকার ৩৮,৬২৭,৯০৭ কোটি টাকা।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ জাতীয় বাজেট ২০২৫-২৬ এ 'অনুদান সহ বাজেট ঘাটতি' কত?</span> <span>➕</span></div>
+            <div class="flash-answer">অনুদান সহ বাজেট ঘাটতি: জাতীয় বাজেট ২০২৫-২৬ এ 'অনুদান সহ বাজেট ঘাটতি' ২,২১,০০০ কোটি টাকা (উল্লেখ্য, অনুদান ব্যতিত বাজেট ঘাটতি ২ লাখ ২৬ হাজার কোটি টাকা)।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ জাতীয় বাজেট ২০২৫-২৬ এ রাজস্ব প্রাপ্তির লক্ষ্যমাত্রা কত ধরা হয়েছে?</span> <span>➕</span></div>
+            <div class="flash-answer">রাজস্ব প্রাপ্তির লক্ষ্যমাত্রা: জাতীয় বাজেট ২০২৫-২৬ এ রাজস্ব প্রাপ্তির লক্ষ্যমাত্রা ৫,৪৮,০০০ কোটি টাকা।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ জাতীয় বাজেট ২০২৫-২৬ এ সামাজিক নিরাপত্তার হার বৃদ্ধি কত?</span> <span>➕</span></div>
+            <div class="flash-answer">সামাজিক নিরাপত্তার হার বৃদ্ধি: জাতীয় বাজেট ২০২৫-২৬ এ সামাজিক নিরাপত্তার হার বৃদ্ধি ১২.১৮%।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ জাতীয় বাজেট ২০২৫-২৬ এ উন্নয়ন বাজেটের মোট বরাদ্দের পরিমাণ কত?</span> <span>➕</span></div>
+            <div class="flash-answer">উন্নয়ন বাজেটের মোট বরাদ্দের পরিমাণ: জাতীয় বাজেট ২০২৫-২৬ এ উন্নয়ন বাজেটের মোট বরাদ্দের পরিমাণ ২,৪৫,৬০৯ কোটি টাকা (এর মধ্যে এডিপি বরাদ্দ ২ লাখ ৩০ হাজার কোটি টাকা)।</div>
+          </div>
+          <div class="flash-item" onclick="toggleFlash(this)">
+            <div class="flash-question"><span>❓ জাতীয় আয়ে কোন খাতের অবদান সর্বোচ্চ এবং কোন খাতে কর্মসংস্থান সর্বাধিক?</span> <span>➕</span></div>
+            <div class="flash-answer">জিডিপিতে সর্বোচ্চ অবদান সেবা খাতের (৫৩.৪২% চূড়ান্ত); এবং সর্বাধিক কর্মসংস্থান হয় কৃষি খাতে (৪৪.৬৭%)।</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1265,6 +1387,15 @@
       }
 
       document.getElementById('quiz-score').textContent = `স্কোর: ${correctCount} / ১৮`;
+    }
+
+    // ফ্ল্যাশকার্ড টগল ফাংশন
+    function toggleFlash(card) {
+      card.classList.toggle('open');
+      const span = card.querySelector('.flash-question span:last-child');
+      if (span) {
+        span.textContent = card.classList.contains('open') ? '➖' : '➕';
+      }
     }
   </script>
   <script src="nav-component.js"></script>
