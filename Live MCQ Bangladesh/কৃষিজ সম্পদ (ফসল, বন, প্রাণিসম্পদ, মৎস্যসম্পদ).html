@@ -1,0 +1,1318 @@
+<!-- DESIGN PLAN:
+(১) বিষয়ের ধরন: বাংলাদেশ বিষয়াবলি — 'কৃষিজ সম্পদ (ফসল, বন, প্রাণিসম্পদ, মৎস্যসম্পদ)' (পৃষ্ঠা ৪৪৫–৪৫১)।
+(২) মার্জের সিদ্ধান্ত: পূর্বে প্রস্তুতকৃত পর্বের সকল তাত্ত্বিক ড্যাশবোর্ড, চার্ট, মেমোরি কার্ড এবং প্রশ্নব্যাংকের ১ থেকে ৪২টি প্রশ্নকে এক ফাইলে ক্রমানুসারে নিখুঁতভাবে সমন্বিত করা হলো।
+(৩) বাদ পড়ার যাচাই ও সমাধান:
+    - দুই কলাম বিন্যাসের কারণে যাতে কোনো প্রশ্ন বাদ না পড়ে, সেজন্য ১ থেকে ৪২ পর্যন্ত প্রতিটি প্রশ্ন ক্রমানুসারে পূর্ণাঙ্গ অপশন ও বিসিএস ট্যাগসহ অন্তর্ভুক্ত।
+    - ফসলের উৎপাদন প্রবৃদ্ধি, সুন্দরবনের দ্বি-মাত্রিক পরিমাপ (বর্গকিমি ও বর্গমাইল), কৃষিশুমারি টাইমলাইন এবং মৎস্য আইনের সেন্টিমিটার স্কেল অপরিবর্তিত রাখা হয়েছে।
+(৪) রঙের মেজাজ: গভীর কৃষিজ সবুজ (#065f46), সোনালি ফসল হলুদ (#b45309), হালদা নদীর একোয়া টিল (#0d9488)।
+(৫) হিরো ও মাসকটের ধরন: 'সবুজ প্রান্তর ও সোনালী আঁশ' মেটাফর; প্রতীক "কৃষি ও বন গবেষক" (🌾/🐅)।
+-->
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>কৃষিজ সম্পদ (ফসল, বন, প্রাণিসম্পদ, মৎস্যসম্পদ) — বিসিএস পূর্ণাঙ্গ প্রস্তুতি ই-বুক</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-2: #f0fdf4;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #bbf7d0;
+      --primary: #065f46;
+      --primary-dark: #022c22;
+      --primary-light: #d1fae5;
+      --accent: #b45309;
+      --accent-light: #fef3c7;
+      --teal: #0d9488;
+      --teal-light: #ccfbf1;
+      --success: #15803d;
+      --success-light: #dcfce7;
+      --danger: #b91c1c;
+      --danger-light: #fee2e2;
+      --radius: 12px;
+      --shadow: 0 4px 10px rgba(6, 95, 70, 0.08);
+      --font-scale: 1;
+    }
+
+    [data-theme="dark"] {
+      --bg: #09120c;
+      --surface: #102015;
+      --surface-2: #162e1f;
+      --text: #f0fdf4;
+      --text-muted: #94a3b8;
+      --border: #244b32;
+      --primary: #34d399;
+      --primary-dark: #059669;
+      --primary-light: #064e3b;
+      --accent: #fbbf24;
+      --accent-light: #451a03;
+      --teal: #2dd4bf;
+      --teal-light: #134e4a;
+      --success: #4ade80;
+      --success-light: #052e16;
+      --danger: #f87171;
+      --danger-light: #450a0a;
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; transition: background-color 0.2s, border-color 0.2s; }
+    body { font-family: 'Noto Sans Bengali', 'Kalpurush', Vrinda, sans-serif; font-size: calc(16px * var(--font-scale)); line-height: 1.85; background-color: var(--bg); color: var(--text); padding-bottom: 90px; }
+
+    #progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 5px; background: transparent; z-index: 1001; }
+    #progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+
+    .control-bar { position: sticky; top: 5px; z-index: 1000; background: var(--surface); border-bottom: 2px solid var(--border); padding: 10px 18px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; box-shadow: var(--shadow); }
+    .btn-group { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+    button { background: var(--surface-2); border: 1.5px solid var(--border); color: var(--text); padding: 6px 14px; font-size: calc(14px * var(--font-scale)); font-weight: 600; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-family: inherit; }
+    button:hover { background: var(--primary-light); border-color: var(--primary); }
+
+    .container { max-width: 920px; margin: 20px auto; padding: 0 16px; }
+    .hero { background: linear-gradient(135deg, #065f46, #1e3a8a); color: #ffffff; padding: 34px 24px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 26px; }
+    .hero h1 { font-size: calc(26px * var(--font-scale)); line-height: 1.35; margin-bottom: 10px; }
+    .hero p { font-size: calc(15px * var(--font-scale)); opacity: 0.95; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.8125rem; font-weight: bold; background: rgba(255, 255, 255, 0.18); border: 1px solid rgba(255, 255, 255, 0.35); color: #fff; }
+
+    .section-card { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); margin-bottom: 24px; box-shadow: var(--shadow); overflow: hidden; }
+    .section-header { padding: 16px 20px; background: var(--surface-2); border-bottom: 2px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .section-header h2 { font-size: calc(18px * var(--font-scale)); display: flex; align-items: center; gap: 10px; color: var(--primary); }
+    [data-theme="dark"] .section-header h2 { color: var(--primary); }
+    .section-body { padding: 20px; }
+
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 16px 0; }
+    .info-box { background: var(--surface-2); border: 1.5px solid var(--border); border-left: 5px solid var(--primary); padding: 14px 16px; border-radius: 0 10px 10px 0; }
+    .info-box.accent-box { border-left-color: var(--accent); }
+    .info-box.teal-box { border-left-color: var(--teal); }
+    .info-box h4 { color: var(--text); margin-bottom: 6px; font-size: calc(16px * var(--font-scale)); }
+
+    .table-container { overflow-x: auto; margin: 14px 0; }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th, td { padding: 12px 14px; border: 1px solid var(--border); font-size: calc(15px * var(--font-scale)); }
+    th { background-color: var(--surface-2); font-weight: 700; color: var(--text); }
+    tr:nth-child(even) { background-color: rgba(0, 0, 0, 0.02); }
+    [data-theme="dark"] tr:nth-child(even) { background-color: rgba(255, 255, 255, 0.02); }
+
+    .note-box { background: var(--surface-2); border-left: 5px solid var(--primary); padding: 14px 18px; border-radius: 0 var(--radius) var(--radius) 0; margin: 16px 0; color: var(--text); }
+    .trap-box { background: var(--danger-light); border-left: 5px solid var(--danger); padding: 14px 18px; border-radius: 0 var(--radius) var(--radius) 0; margin: 16px 0; color: var(--text); }
+
+    .quiz-card { background: var(--surface-2); border: 2px solid var(--border); border-radius: var(--radius); padding: 18px; margin-bottom: 18px; }
+    .quiz-title-bar { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; gap: 10px; }
+    .quiz-bcs-tag { background: var(--primary); color: #fff; font-size: 0.75rem; font-weight: bold; padding: 2px 8px; border-radius: 6px; white-space: nowrap; }
+    .quiz-question { font-weight: bold; font-size: calc(16px * var(--font-scale)); margin-bottom: 12px; }
+    .quiz-options { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    @media (min-width: 600px) { .quiz-options { grid-template-columns: 1fr 1fr; } }
+
+    .quiz-opt { background: var(--surface); border: 1.5px solid var(--border); padding: 10px 14px; border-radius: 8px; cursor: pointer; text-align: left; font-size: calc(15px * var(--font-scale)); font-family: inherit; }
+    .quiz-opt:hover { border-color: var(--primary); background: var(--primary-light); }
+    .quiz-opt.correct { background: var(--success-light) !important; border-color: var(--success) !important; color: var(--text); font-weight: bold; }
+    .quiz-opt.incorrect { background: var(--danger-light) !important; border-color: var(--danger) !important; color: var(--text); }
+
+    .quiz-feedback { margin-top: 14px; padding: 12px 14px; border-radius: 8px; display: none; font-size: calc(14.5px * var(--font-scale)); line-height: 1.7; background: var(--surface); border: 1px solid var(--border); }
+    .discrepancy-card { background: var(--surface); border: 2px dashed var(--danger); border-radius: var(--radius); padding: 22px; margin-top: 32px; }
+
+    @media print {
+      .control-bar, #progress-container, .btn-group, button { display: none !important; }
+      body { background: #fff; color: #000; font-size: 11pt; }
+      .section-card { border: 1px solid #777; box-shadow: none; page-break-inside: avoid; }
+    }
+  
+/* Universal Mobile Optimization (Samsung A23 & small screens) */
+@media (max-width: 600px) {
+  .print-btn, button[onclick*="print"], .btn-ctrl:has(span:contains('🖨️')) {
+    display: none !important;
+  }
+  .container {
+    padding: 6px 8px 24px 8px !important;
+  }
+  .hero-box, .hero, .hero-banner {
+    padding: 16px 12px !important;
+    margin-top: 8px !important;
+    margin-bottom: 14px !important;
+  }
+  .table-responsive, .table-container {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+  }
+  .table-responsive table th, .table-responsive table td,
+  .table-container table th, .table-container table td {
+    padding: 7px 6px !important;
+  }
+}
+
+</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div id="progress-container"><div id="progress-bar"></div></div>
+
+  <div class="control-bar">
+    <div class="btn-group">
+      <button id="themeToggle">🌓 থিম</button>
+      <button id="fontDown">A-</button>
+      <button id="fontReset">A</button>
+      <button id="fontUp">A+</button>
+    </div>
+    <div class="btn-group">
+      <button onclick="document.getElementById('quiz-section').scrollIntoView({behavior: 'smooth'})">📝 সব MCQ কুইজ</button>
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆️ উপরে</button>
+      <button onclick="window.print()">🖨️ প্রিন্ট / PDF</button>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="hero">
+      <div style="font-size: 2.375rem; margin-bottom: 8px;">🌾</div>
+      <h1>বাংলাদেশের কৃষিজ সম্পদ: ফসল, বন, প্রাণিসম্পদ ও মৎস্যসম্পদ</h1>
+      <p>ফসলের উৎপাদন ও প্রবৃদ্ধি, সুন্দরবন ও বনাঞ্চলের শ্রেণিবিন্যাস, চা বাগান নেটওয়ার্ক, হালদা নদী ও মৎস্য আইন, ব্ল্যাক বেঙ্গল ছাগল এবং বিসিএস বিগত পরীক্ষার পূর্ণাঙ্গ মার্জড সল্যুশন।</p>
+      <div class="hero-meta">
+        <span class="badge">পৃষ্ঠা: ৪৪৫ – ৪৫১</span>
+        <span class="badge">বিসিএস প্রশ্নব্যাংক: ৪২টি পূর্ণাঙ্গ প্রশ্ন ও সমাধান</span>
+        <span class="badge">১০ম থেকে ৪৯তম বিসিএস কভারেজ</span>
+      </div>
+    </div>
+
+    <!-- বিসিএস প্রশ্ন পরিসংখ্যান ছক -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>📊 বিসিএসে প্রশ্ন আসার পরিসংখ্যান (বইয়ের ছক অনুযায়ী)</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: কৃষিজ সম্পদ অধ্যায়ের গুরুত্ব ও প্রশ্ন পুনরাবৃত্তি অনুধাবন। (আনুমানিক পাঠ সময়: ২ মিনিট) (আমার অনুমান)
+        </p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>বিসিএস সংস্করণ</th>
+                <th>প্রশ্ন সংখ্যা</th>
+                <th>বিসিএস সংস্করণ</th>
+                <th>প্রশ্ন সংখ্যা</th>
+                <th>বিসিএস সংস্করণ</th>
+                <th>প্রশ্ন সংখ্যা</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>৪৯তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৪৪তম বিসিএস</strong></td>
+                <td>২টি</td>
+                <td><strong>৩৮তম বিসিএস</strong></td>
+                <td>১টি</td>
+              </tr>
+              <tr>
+                <td><strong>৪৮তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৪৩তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৩৭তম বিসিএস</strong></td>
+                <td>১টি</td>
+              </tr>
+              <tr>
+                <td><strong>৪৭তম বিসিএস</strong></td>
+                <td>২টি</td>
+                <td><strong>৪২তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৩৬তম বিসিএস</strong></td>
+                <td>২টি</td>
+              </tr>
+              <tr>
+                <td><strong>৪৬তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৪১তম বিসিএস</strong></td>
+                <td>০টি</td>
+                <td><strong>৩৫তম বিসিএস</strong></td>
+                <td>৪টি</td>
+              </tr>
+              <tr>
+                <td><strong>৪৫তম ও ৫০তম</strong></td>
+                <td>(বইয়ে ফাঁকা/০টি)</td>
+                <td><strong>৪০তম বিসিএস</strong></td>
+                <td>২টি</td>
+                <td><strong>১০ম-৩৪তম বিসিএস</strong></td>
+                <td>২৩টি</td>
+              </tr>
+              <tr>
+                <td><strong>৩৯তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td>—</td>
+                <td>—</td>
+                <td><strong>মোট কভার্ড প্রশ্ন</strong></td>
+                <td><strong>৪২টি প্রশ্ন</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- মডিউল ১: ফসল ও কৃষিশুমারি মাস্টার ড্যাশবোর্ড -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>🌾 শস্য উৎপাদন, মৌসুম ও কৃষিশুমারি ড্যাশবোর্ড</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: শস্যের প্রকারভেদ, বৃদ্ধির হার, মৌসুম ও কৃষিশুমারির ইতিহাস মুখস্থ করা। (আনুমানিক পাঠ সময়: ৫ মিনিট) (আমার অনুমান)
+        </p>
+
+        <div class="card-grid">
+          <div class="info-box accent-box">
+            <h4>সর্বোচ্চ বৃদ্ধিপাওয়া ফসল: ভুট্টা (মেইজ)</h4>
+            <p>বিগত ৫০ বছরে সবচেয়ে বেশি বৃদ্ধি পেয়েছে ভুট্টা চাষ। ১৯৭১ সালে উৎপাদন ছিল মাত্র ২,০০০ মেট্রিক টন (২,৬৫৪ হেক্টর)। ২০১৯-২০ সালে তা বেড়ে দাঁড়িয়েছে প্রায় <strong>৫৪ লাখ মেট্রিক টন</strong> (১,৬৫,৫১০ হেক্টর) এবং ফলন ০.৮৫ থেকে বেড়ে ৬.১৫ টন/হেক্টর হয়েছে!</p>
+          </div>
+          <div class="info-box">
+            <h4>উৎপাদনে শীর্ষ ধান: বোরো ধান</h4>
+            <p>বাংলাদেশে সবচেয়ে বেশি উৎপন্ন হয় বোরো ধান (অর্থনৈতিক সমীক্ষা ২০২৫ অনুযায়ী ২২৬.০৮ লক্ষ মেট্রিক টন)। ২য় আমন ধান (১৬৫.১৫ লক্ষ মেট্রিক টন) এবং ৩য় আউশ ধান (২৭.৯৩ লক্ষ মেট্রিক টন)!</p>
+          </div>
+          <div class="info-box teal-box">
+            <h4>পাট উৎপাদনে শীর্ষ জেলা: ফরিদপুর</h4>
+            <p>জেলা হিসেবে ফরিদপুর (১২,৩৭,৩২০ বেল) এবং বিভাগ হিসেবে ঢাকা বিভাগ (৩৫,৭৮,৩৪২ বেল) পাট উৎপাদনে শীর্ষে। কাঁচা পাটের ১ বেলের ওজন ১৮২.২৫ কেজি বা ৪.৮৮ মণ!</p>
+          </div>
+        </div>
+
+        <h3 style="color: var(--primary); margin: 18px 0 10px 0;">📅 ফসলের মৌসুম ও কৃষিশুমারির সাল</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>মৌসুম / শুমারি</th>
+                <th>সময়কাল / অনুষ্ঠিত সাল</th>
+                <th>বৈশিষ্ট্য ও বিস্তারিত বিবরণ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>রবি মৌসুম</strong></td>
+                <td>কার্তিক – ফাল্গুন (১৬ অক্টোবর – ১৫ মার্চ)</td>
+                <td>শীতকালীন শস্য বা ফসল হিসেবে পরিচিত।</td>
+              </tr>
+              <tr>
+                <td><strong>খরিপ মৌসুম</strong></td>
+                <td>চৈত্র – ভাদ্র</td>
+                <td>• <strong>খরিপ-১:</strong> চৈত্র – জ্যৈষ্ঠ (গ্রীষ্মকাল)<br>• <strong>খরিপ-২:</strong> আষাঢ় – ভাদ্র (বর্ষাকাল)</td>
+              </tr>
+              <tr>
+                <td><strong>রোপা আমন বনাম বোনা আমন</strong></td>
+                <td>রোপা আমন কাটা হয়: <strong>অগ্রহায়ণ – পৌষ মাসে</strong></td>
+                <td>রোপা আমনের চারা প্রস্তুত করে শ্রাবণ-ভাদ্রে রোপণ করা হয়। বোনা আমন চৈত্র-বৈশাখে বুনে অগ্রহায়ণে কাটা হয়।</td>
+              </tr>
+              <tr>
+                <td><strong>কৃষিশুমারি (BBS পরিচালিত)</strong></td>
+                <td>স্বাধীন বাংলাদেশে মোট ৫টি: <strong>১৯৭৭, ১৯৮৩-৮৪, ১৯৯৬, ২০০৮ ও ২০১৯ (৮-২০ জুন)</strong></td>
+                <td>স্বাধীনতা পূর্বে ১৯৬০ সালে হয়েছিল। <strong>২০১৫ সালে কোনো কৃষিশুমারি হয়নি</strong>। ২০১৯ শুমারির স্লোগান: <em>"কৃষি শুমারি সফল করি, সমৃদ্ধ বাংলাদেশ গড়ি"</em>।</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note-box">
+          🌱 <strong>কৃষির প্রকৃতি ও জমি:</strong> বাংলাদেশের কৃষি <strong>'ধান-প্রধান নিবিড় স্বয়ংভোগী'</strong> ধরনের (শতকরা প্রায় ৮০ ভাগ জমিতে ধান হয়)। ২০২২-২৩ সালের হিসাব অনুযায়ী মোট আবাদযোগ্য জমি ৩ কোটি ৯২ লক্ষ ৯৬ হাজার একর।
+        </div>
+      </div>
+    </div>
+
+    <!-- মডিউল ২: বনভূমি, সুন্দরবন ও বাঘ শুমারি -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>🌲 বনসম্পদ, সুন্দরবন ও বনায়ন মেট্রিক্স</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: বনভূমির ৫টি অঞ্চল, সুন্দরবনের পরিমাপ ও বাঘ শুমারির সংখ্যা স্পষ্ট করা। (আনুমানিক পাঠ সময়: ৫ মিনিট) (আমার অনুমান)
+        </p>
+
+        <div class="card-grid">
+          <div class="info-box">
+            <h4>প্রাকৃতিক ভারসাম্যের আদর্শ মান</h4>
+            <p>যেকোনো দেশের মোট আয়তনের কমপক্ষে <strong>২০% থেকে ২৫% বনভূমি</strong> থাকা প্রয়োজন।</p>
+          </div>
+          <div class="info-box accent-box">
+            <h4>বাংলাদেশে সরকারি বনাঞ্চল</h4>
+            <p>সরকার নিয়ন্ত্রিত বনভূমি প্রায় ২৩ লক্ষ হেক্টর (মোট আয়তনের <strong>১৫.৫৮%</strong>); বন অধিদপ্তর নিয়ন্ত্রিত প্রায় ১৬ লক্ষ হেক্টর (<strong>১০.৭৪%</strong>); মোট বৃক্ষ আচ্ছাদিত এলাকা <strong>২২.৩৭%</strong> (পরিবেশ মন্ত্রণালয়ের মতে মোট বনভূমি ১৭%)!</p>
+          </div>
+          <div class="info-box teal-box">
+            <h4>সুন্দরবন (World Heritage #798)</h4>
+            <p>মোট আয়তন প্রায় ১০,০০০ বর্গকিমি (৩৮৬০ বর্গমাইল)। <strong>বাংলাদেশ অংশে ৬০১৭ বর্গকিমি</strong> (২৩১৮ বা প্রায় ২৪০০ বর্গমাইল), যা মোট বনের ৬২%! ইউনেস্কো স্বীকৃতি দেয় ৬ ডিসেম্বর ১৯৯৭!</p>
+          </div>
+        </div>
+
+        <h3 style="color: var(--primary); margin: 18px 0 10px 0;">🐅 সুন্দরবনের বাঘ গণনা ও বৃক্ষশ্রেণি</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>বিষয়</th>
+                <th>পদ্ধতি / তথ্য</th>
+                <th>পরিসংখ্যান ও বিশদ বিবরণ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>বাঘ গণনা পদ্ধতি</strong></td>
+                <td>পাগ-মার্ক (পায়ের ছাপ) ও ক্যামেরা ট্র্যাপিং</td>
+                <td>২০০৪-০৫ এ পাগ-মার্ক ব্যবহৃত হয়। বর্তমানে আধুনিক ক্যামেরা ট্র্যাপিং পদ্ধতি ব্যবহৃত হয়। ২০১৫ জরিপে বাঘ ছিল ১০৬টি; ২০১৮ জরিপে ১১৪টি; <strong>২০২৪ সালের সর্বশেষ প্রতিবেদনে ১২৫টি বাঘ রয়েছে</strong>!</td>
+              </tr>
+              <tr>
+                <td><strong>উপকূলীয় ম্যানগ্রোভ বন</strong></td>
+                <td>জোয়ারবিধৌত প্রাকৃতিক বনভূমি</td>
+                <td>প্রধান বৃক্ষ সুন্দরী। এছাড়া গেওয়া, গরান, কেওড়া, ধুন্দল ও গোলপাতা।</td>
+              </tr>
+              <tr>
+                <td><strong>শালবন (পর্ণমোচী/পত্রপতনশীল)</strong></td>
+                <td>ভাওয়াল ও মধুপুরের বনভূমি, বরেন্দ্রভূমি</td>
+                <td>প্রধান বৃক্ষ শাল বা গজারী। শীতকালে গাছের পাতা ঝরে যায়। আয়তন প্রায় ৮৭৫ বর্গকিমি।</td>
+              </tr>
+              <tr>
+                <td><strong>ক্রান্তীয় চিরহরিৎ বন</strong></td>
+                <td>পার্বত্য চট্টগ্রাম ও বৃহত্তর সিলেট</td>
+                <td>শীতকালে পাতা ঝরে না। প্রধান বৃক্ষ গর্জন, চাপালিশ, তেলসুর, জারুল, শিমুল ও বাঁশ-বেত।</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- মডিউল ৩: চা শিল্প, মৎস্য ও প্রাণিসম্পদ -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>🍵 চা শিল্প, মৎস্য ও প্রাণিসম্পদ নেটওয়ার্ক</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: চা বাগান বণ্টন, হালদা নদী, মৎস্য আইন ও ব্ল্যাক বেঙ্গল ছাগলের তথ্য আয়ত্ত করা। (আনুমানিক পাঠ সময়: ৫ মিনিট) (আমার অনুমান)
+        </p>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>সেক্টর / উপাদান</th>
+                <th>প্রধান তথ্য</th>
+                <th>পরিসংখ্যান ও ভৌগোলিক অবস্থান</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>নিবন্ধিত চা বাগান</strong></td>
+                <td>মোট <strong>১৭১টি</strong> (মার্চ ২০২৬ পর্যন্ত)</td>
+                <td>• <strong>মৌলভীবাজার: সর্বোচ্চ ৯০টি</strong><br>• হবিগঞ্জ: ২৫টি; সিলেট: ১৯টি; চট্টগ্রাম: ২২টি<br>• উত্তরাঞ্চলের ৩য় চা অঞ্চল পঞ্চগড়ে ১১টি ও ঠাকুরগাঁওয়ে ১টি।</td>
+              </tr>
+              <tr>
+                <td><strong>চা চাষের বৈশিষ্ট্য</strong></td>
+                <td>ছায়া প্রেমী (Shadow loving) ফসল</td>
+                <td>তাপমাত্রা ২০°-২৮° সেলসিয়াস, বৃষ্টিপাত ১৭৫-২৫০ সেমি, আর্দ্রতা ৭০%-৯০%। প্রথম বাণিজ্যিক বাগান: <strong>সিলেটের মালনীছড়া (১৮৫৪)</strong> (১৮৪০ সালে চট্টগ্রামের কুণ্ডদের বাগান বিলুপ্ত হয়)।</td>
+              </tr>
+              <tr>
+                <td><strong>হালদা নদী (মৎস্য হেরিটেজ)</strong></td>
+                <td>কার্প জাতীয় মাছের প্রাকৃতিক প্রজনন ক্ষেত্র</td>
+                <td>খাগড়াছড়ির বাদনাতলী থেকে কর্ণফুলী নদীতে পতিত। ৫ নভেম্বর ২০২৫ মৎস্য হেরিটেজ প্রজ্ঞাপন জারি।</td>
+              </tr>
+              <tr>
+                <td><strong>মৎস্য সংরক্ষণ আইন ১৯৫০ (সংশোধিত ২০১৪)</strong></td>
+                <td>ছোট মাছ শিকার ও পরিবহন নিষিদ্ধের মাপ</td>
+                <td>• <strong>কার্প পোনা (রুই/কাতলা/মৃগেল): ২৩ সেমি</strong> (জুলাই-ডিসেম্বর)<br>• <strong>জাটকা (ইলিশ): ২৫ সেমি</strong> (নভেম্বর-জুন)<br>• <strong>পাংগাস, সিলন, বোয়াল, আইড়: ৩০ সেমি</strong></td>
+              </tr>
+              <tr>
+                <td><strong>ব্ল্যাক বেঙ্গল ছাগল ও হোয়াইট গোল্ড</strong></td>
+                <td>চামড়া বিশ্ববাজারে <strong>'কুষ্টিয়া গ্রেড'</strong> নামে পরিচিত</td>
+                <td>২০২৪ সালে জিআই স্বীকৃতি লাভ। হোয়াইট গোল্ড হলো <strong>চিংড়ি</strong> (৫৬ প্রজাতির চিংড়ি রয়েছে)। সোনালী আঁশ পাট।</td>
+              </tr>
+              <tr>
+                <td><strong>বাথানভূমি ও গো-উন্নয়ন</strong></td>
+                <td>বিশাল বিস্তৃত গোচারণভূমি</td>
+                <td>সিরাজগঞ্জের <strong>শাহজাদপুরে প্রায় ১,২০০ একর</strong> জুড়ে দেশের বৃহত্তম বাথান অবস্থিত। ব্রিটিশ ভারতের ভাইসরয় <strong>লর্ড লিনলিথগো</strong> (১৯৩৬-৪৩) গবাদিপশুর জাত উন্নয়নে প্রথম অগ্রণী ভূমিকা পালন করেন।</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ৪২টি বিসিএস বিগত প্রশ্নের ইন্টারঅ্যাকটিভ কুইজ সেকশন -->
+    <div class="section-card" id="quiz-section">
+      <div class="section-header">
+        <h2>📝 বিসিএস বিগত ১ থেকে ৪২টি পূর্ণাঙ্গ প্রশ্নব্যাংক ও কুইজ</h2>
+        <span id="quiz-score" style="font-weight: bold; color: var(--primary);">স্কোর: ০ / ৪২</span>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 16px; color: var(--text-muted);">
+          বইয়ের মূল প্রশ্ন ও ব্যাখ্যার ভিত্তিতে ইন্টারঅ্যাকটিভ কুইজে অংশ নাও। অপশনে ক্লিক করলে সাথে সাথে সঠিক/ভুল এবং পূর্ণ ব্যাখ্যা প্রদর্শিত হবে।
+        </p>
+
+        <!-- প্রশ্ন ১ -->
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১. বাংলাদেশের সর্বোচ্চ সংখ্যক চা বাগান রয়েছে কোন জেলায়?</span>
+            <span class="quiz-bcs-tag">৪৯তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) সিলেট</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) মৌলভীবাজার</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) চট্টগ্রাম</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) পঞ্চগড়</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: খ (মৌলভীবাজার — বইয়ে অপশন কোড 'উ. গ' মুদ্রিত)</strong><br>
+            <strong>ব্যাখ্যা:</strong> বাংলাদেশে নিবন্ধিত মোট ১৭১টি চা বাগানের মধ্যে সর্বোচ্চ ৯০টি চা বাগান রয়েছে মৌলভীবাজার জেলায়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২ -->
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">২. একটি দেশের মোট আয়তনের কত শতাংশ বনভূমি থাকা প্রয়োজন?</span>
+            <span class="quiz-bcs-tag">৪৮তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ১৫-২০%</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ২০-২৫%</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ৩০-৩৫%</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ৩৫-৪০%</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: খ (২০-২৫%)</strong><br>
+            <strong>ব্যাখ্যা:</strong> প্রাকৃতিক ভারসাম্য রক্ষার জন্য একটি দেশের মোট আয়তনের শতকরা ২০ থেকে ২৫ ভাগ বনভূমি থাকা প্রয়োজন।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩ -->
+        <div class="quiz-card" data-answer="ঘ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৩. ছায়া প্রেমী (Shadow loving) অর্থনৈতিক ফসল কোনটি?</span>
+            <span class="quiz-bcs-tag">৪৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) আখ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) তামাক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ধান</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) চা</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ঘ (চা)</strong><br>
+            <strong>ব্যাখ্যা:</strong> চা গাছ অতিরিক্ত সূর্যালোকে ভালো হয় না বিধায় একে ছায়া প্রেমী ফসল বলা হয় এবং বাগানে ছায়াতরু রোপণ করা হয়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৪ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৪. বিগত ৫০ বছরে বাংলাদেশে কোন ফসলের চাষ তুলনামূলকভাবে সবচেয়ে বেশি বৃদ্ধি পেয়েছে?</span>
+            <span class="quiz-bcs-tag">৪৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ভুট্টা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ধান</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) পাট</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) গোল আলু</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (ভুট্টা)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ১৯৭১ সালের তুলনায় ভুট্টার উৎপাদন বেড়েছে প্রায় ১০ গুণেরও বেশি (২ হাজার টন থেকে প্রায় ৫৪ লাখ মেট্রিক টন)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৫ -->
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৫. বাংলাদেশে কোন নদী কার্পজাতীয় মাছের রেণুর প্রধান উৎস?</span>
+            <span class="quiz-bcs-tag">৪৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) সালদা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) হালদা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) পদ্মা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) কুমার</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: খ (হালদা)</strong><br>
+            <strong>ব্যাখ্যা:</strong> হালদা নদী দেশের একমাত্র প্রাকৃতিক মৎস্য প্রজনন ক্ষেত্র, যা ৫ নভেম্বর ২০২৫ মৎস্য হেরিটেজ ঘোষিত হয়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৬ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৬. বাংলাদেশে জুম চাষ কোথায় হয়?</span>
+            <span class="quiz-bcs-tag">৪৪তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) বান্দরবান</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ময়মনসিংহ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) রাজশাহী</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) দিনাজপুর</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (বান্দরবান)</strong><br>
+            <strong>ব্যাখ্যা:</strong> জুম চাষ হলো পাহাড়ি এলাকার স্থানান্তরিত চাষাবাদ যা মূলত বান্দরবান, রাঙামাটি ও খাগড়াছড়িতে হয়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৭ -->
+        <div class="quiz-card" data-answer="ঘ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৭. বাংলাদেশের কোন জেলায় সবচেয়ে বেশি চা বাগান রয়েছে?</span>
+            <span class="quiz-bcs-tag">৪৪তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) চট্টগ্রাম</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) পঞ্চগড়</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) সিলেট</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) মৌলভীবাজার</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ঘ (মৌলভীবাজার)</strong><br>
+            <strong>ব্যাখ্যা:</strong> মৌলভীবাজারে দেশের সর্বোচ্চ ৯০টি চা বাগান রয়েছে।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৮ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৮. নিম্নোক্ত কোন সালে কৃষিশুমারী অনুষ্ঠিত হয়নি?</span>
+            <span class="quiz-bcs-tag">৪৩তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ১৯৭৭</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ২০০৮</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ২০১৫</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ২০১৯</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (২০১৫)</strong><br>
+            <strong>ব্যাখ্যা:</strong> কৃষিশুমারি হয়েছিল ১৯৭৭, ১৯৮৩-৮৪, ১৯৯৬, ২০০৮ ও ২০১৯ সালে; ২০১৫ সালে কোনো কৃষিশুমারি হয়নি।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৯ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৯. কৃষিক্ষেত্রে রবি মৌসুম কোনটি?</span>
+            <span class="quiz-bcs-tag">৪২তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) কার্তিক - ফাল্গুন</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ভাদ্র- অগ্রহায়ণ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) চৈত্র - বৈশাখ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) শ্রাবণ - আশ্বিন</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (কার্তিক - ফাল্গুন)</strong><br>
+            <strong>ব্যাখ্যা:</strong> বাংলা কার্তিক মাস থেকে ফাল্গুন মাস পর্যন্ত সময়কে শীতকালীন বা রবি মৌসুম বলা হয়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১০ -->
+        <div class="quiz-card" data-answer="না">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১০. বাংলাদেশে মোট আবাদযোগ্য জমির পরিমাণ কত?</span>
+            <span class="quiz-bcs-tag">৪০তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ২ কোটি ৪০ লক্ষ একর</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ২ কোটি ৫০ লক্ষ একর</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ২ কোটি ২৫ লক্ষ একর</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ২ কোটি ২১ লক্ষ একর</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: সাম্প্রতিক তথ্যের ভিত্তিতে অপশনে সঠিক উত্তর নেই!</strong><br>
+            <strong>ব্যাখ্যা:</strong> কৃষি পরিসংখ্যান বর্ষগ্রন্থ ২০২৪ অনুযায়ী মোট আবাদযোগ্য জমি ৩ কোটি ৯২ লক্ষ ৯৬ হাজার একর।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১১ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১১. বাংলাদেশে সবচেয়ে বেশি পাট উৎপন্ন হয় কোন জেলায়?</span>
+            <span class="quiz-bcs-tag">৪০তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ফরিদপুর</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) রংপুর</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) জামালপুর</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) শেরপুর</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (ফরিদপুর)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ফরিদপুর জেলায় সবচেয়ে বেশি ১২,৩৭,৩২০ বেল পাট উৎপন্ন হয়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১২ -->
+        <div class="quiz-card" data-answer="না">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১২. বাংলাদেশের জিডিপিতে কৃষি খাতের অবদান কত শতাংশ?</span>
+            <span class="quiz-bcs-tag">৩৯তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ১৪.৭৯ শতাংশ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ১২ শতাংশ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ১৬ শতাংশ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ১৮ শতাংশ</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: সাম্প্রতিক তথ্যের ভিত্তিতে সঠিক উত্তর নেই!</strong><br>
+            <strong>ব্যাখ্যা:</strong> সমীক্ষা ২০২৫ সাময়িক হিসাব অনুযায়ী জিডিপিতে কৃষির অবদান ১০.৯৪%।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৩ -->
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১৩. জুম চাষ হয় কোথায়?</span>
+            <span class="quiz-bcs-tag">৩৮তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) বরিশালে</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) খাগড়াছড়িতে</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ময়মনসিংহে</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) দিনাজপুরে</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: খ (খাগড়াছড়িতে — বইয়ে 'উ. গ' মুদ্রিত)</strong><br>
+            <strong>ব্যাখ্যা:</strong> পার্বত্য চট্টগ্রামের খাগড়াছড়িতে জুম চাষ হয়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৪ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১৪. বাংলাদেশে সবচেয়ে বেশি উৎপাদিত হয় কোন ধান?</span>
+            <span class="quiz-bcs-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) আউশ ধান</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) আমন ধান</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) বোরো ধান</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ইরি ধান</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (বোরো ধান)</strong><br>
+            <strong>ব্যাখ্যা:</strong> দেশে ধান উৎপাদনে বোরো ধান শীর্ষে (২২৬ লক্ষ মেট্রিক টন)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৫ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১৫. সুন্দরবনে বাঘ গণনায় ব্যবহৃত হয় কোন পদ্ধতি?</span>
+            <span class="quiz-bcs-tag">৩৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) পাগ-মার্ক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ফুটমার্ক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) GIS</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) কোয়ার্ডবেট</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (পাগ-মার্ক)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ঐতিহ্যগতভাবে বাঘের পায়ের ছাপ বা পাগ-মার্ক গুণে বাঘ শুমারি করা হতো।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৬ -->
+        <div class="quiz-card" data-answer="ঘ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১৬. বাংলাদেশে রোপা আমন ধান কাটা হয় কোন মাসে?</span>
+            <span class="quiz-bcs-tag">৩৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ভাদ্র - আশ্বিন</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) মাঘ - ফাল্গুন</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) আষাঢ় - শ্রাবণ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) অগ্রহায়ণ - পৌষ মাসে</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ঘ (অগ্রহায়ণ - পৌষ মাসে — বইয়ে 'উ. গ' মুদ্রিত)</strong><br>
+            <strong>ব্যাখ্যা:</strong> রোপা আমন ধান কাটা হয় বাংলা অগ্রহায়ণ ও পৌষ মাসে।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৭ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১৭. বাংলাদেশের কৃষি কোন প্রকার?</span>
+            <span class="quiz-bcs-tag">৩৫তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ধান-প্রধান নিবিড় স্বয়ংভোগী</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ধান-প্রধান বাণিজ্যিক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) স্বয়ংভোগী মিশ্র</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) স্বয়ংভোগী শষ্য চাষ ও পশুপালন</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (ধান-প্রধান নিবিড় স্বয়ংভোগী)</strong><br>
+            <strong>ব্যাখ্যা:</strong> দেশের প্রায় ৮০ ভাগ জমিতে মানুষের খাদ্য হিসেবে ধান উৎপন্ন হয় বিধায় এটি ধান-প্রধান নিবিড় স্বয়ংভোগী।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৮ -->
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১৮. ম্যানগ্রোভ কী?</span>
+            <span class="quiz-bcs-tag">৩৫তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) কেওড়া বন</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) উপকূলীয় বন</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) শালবন</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) চিরহরিৎ বন</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: খ (উপকূলীয় বন — বইয়ে 'উ. গ' মুদ্রিত)</strong><br>
+            <strong>ব্যাখ্যা:</strong> জোয়ার-ভাটায় প্লাবিত লোনা পানির বনভূমি ম্যানগ্রোভ মূলত উপকূলীয় বন।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৯ -->
+        <div class="quiz-card" data-answer="ঘ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১৯. 'জুম' চাষ পদ্ধতি বাংলাদেশের কোন জেলাসমূহে দেখা যায়?</span>
+            <span class="quiz-bcs-tag">৩৫তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) সাতক্ষীরা, যশোহর, কুষ্টিয়া</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) নাটোর, পাবনা, সিরাজগঞ্জ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) বগুড়া, গাইবান্ধা, কুড়িগ্রাম</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) চট্টগ্রাম ও পার্বত্য চট্টগ্রামের জেলাসমূহ</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ঘ (চট্টগ্রাম ও পার্বত্য চট্টগ্রামের জেলাসমূহ)</strong><br>
+            <strong>ব্যাখ্যা:</strong> পার্বত্য চট্টগ্রামের জেলাগুলোতে জুম চাষ দেখা যায়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২০ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">২০. বিশ্ব বাজারে বাংলাদেশের ব্ল‍্যাক বেঙ্গল ছাগলের চামড়া কি নামে পরিচিত?</span>
+            <span class="quiz-bcs-tag">৩৫তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) কুষ্টিয়া গ্রেড</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ঝিনাইদহ গ্রেড</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) চুয়াডাঙ্গা গ্রেড</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) মেহেরপুর গ্রেড</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (কুষ্টিয়া গ্রেড)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ব্ল্যাক বেঙ্গল ছাগলের উন্নত চামড়া আন্তর্জাতিক বাজারে কুষ্টিয়া গ্রেড নামে বিখ্যাত।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২১ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">২১. কোন জেলায় চা বাগান বেশি?</span>
+            <span class="quiz-bcs-tag">৩২তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) সিলেট</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) হবিগঞ্জ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) মৌলভীবাজার</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) বান্দরবান</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (মৌলভীবাজার)</strong><br>
+            <strong>ব্যাখ্যা:</strong> মৌলভীবাজারে দেশের সর্বোচ্চ ৯০টি চা বাগান রয়েছে।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২২ -->
+        <div class="quiz-card" data-answer="ঘ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">২২. বাংলাদেশে White gold কোনটি?</span>
+            <span class="quiz-bcs-tag">৩২তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ইলিশ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) পাট</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) রূপা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) চিংড়ি</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ঘ (চিংড়ি)</strong><br>
+            <strong>ব্যাখ্যা:</strong> বৈদেশিক মুদ্রা অর্জনের সক্ষমতার কারণে চিংড়িকে হোয়াইট গোল্ড বলে।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২৩ -->
+        <div class="quiz-card" data-answer="না">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">২৩. বাংলাদেশের GDP-তে কৃষিখাতের অবদান কত শতাংশ?</span>
+            <span class="quiz-bcs-tag">২৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ৭০ শতাংশ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ৭৫ শতাংশ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ৭৩ শতাংশ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ৭৭ শতাংশ</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: সাম্প্রতিক তথ্যের ভিত্তিতে সঠিক উত্তর নেই!</strong><br>
+            <strong>ব্যাখ্যা:</strong> বর্তমানে জিডিপিতে কৃষির অবদান ১০.৯৪% (সাময়িক)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২৪ -->
+        <div class="quiz-card" data-answer="না">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">২৪. বাংলাদেশে মোট আবাদযোগ্য জমির পরিমাণ কত?</span>
+            <span class="quiz-bcs-tag">২৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ২ কোটি ৪০ লক্ষ একর</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ২ কোটি ২৫ লক্ষ একর</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ২ কোটি ৫০ লক্ষ একর</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ২ কোটি একর</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: সাম্প্রতিক তথ্যে সঠিক উত্তর নেই!</strong><br>
+            <strong>ব্যাখ্যা:</strong> মোট আবাদযোগ্য জমি ৩ কোটি ৯২ লক্ষ ৯৬ হাজার একর।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২৫ -->
+        <div class="quiz-card" data-answer="না">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">২৫. চলতি আর্থিক বাজেটে কৃষিতে ভর্তুকি কত টাকা ধরা হয়েছে?</span>
+            <span class="quiz-bcs-tag">২৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ৩০০ কোটি টাকা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ৪০০ কোটি টাকা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ৫০০ কোটি টাকা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ৬০০ কোটি টাকা</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: সাম্প্রতিক তথ্যে সঠিক উত্তর নেই!</strong><br>
+            <strong>ব্যাখ্যা:</strong> ২০২৪-২৫ অর্থবছরের সংশোধিত বাজেটে কৃষি ভর্তুকি ১৭,০০০ কোটি টাকা।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২৬ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">২৬. সুন্দরবনের আয়তন প্রায় কত বর্গ কিলোমিটার?</span>
+            <span class="quiz-bcs-tag">২৫তম ও ১৩তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ৬০১৭</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ৫৫৭৫</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ৪১০০</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ৬৯০০</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (৬০১৭ বর্গকিমি)</strong><br>
+            <strong>ব্যাখ্যা:</strong> বাংলাদেশ অংশে সুন্দরবনের আয়তন প্রায় ৬০১৭ বর্গকিলোমিটার (৬২%)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২৭ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">২৭. বাংলাদেশে সম্প্রতি এই জেলায় চা বাগান করা হয়-</span>
+            <span class="quiz-bcs-tag">২৪তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) পঞ্চগড়</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) দিনাজপুর</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) কুড়িগ্রাম</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) বান্দরবান</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (পঞ্চগড়)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ২০০০ সাল থেকে পঞ্চগড়ের সমতলে চা বাগান করা হচ্ছে।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২৮ -->
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">২৮. আমাদের দেশে বনায়নের ভূমিকা অত্যন্ত গুরুত্বপূর্ণ। কারণ-</span>
+            <span class="quiz-bcs-tag">২২তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) গাছপালা পরিবেশের ভারসাম্য নষ্ট করে</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) গাছপালা অক্সিজেন ত্যাগ করে পরিবেশকে নির্মল রাখে ও জীব জগতকে বাঁচায়</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) দেশের অর্থনৈতিক উন্নয়নে কোনো অবদান নেই</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ঝড় ও বন্যার আশঙ্কা বাড়িয়ে দেয়</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: খ (গাছপালা অক্সিজেন ত্যাগ করে পরিবেশকে নির্মল রাখে ও জীব জগতকে বাঁচায়)</strong><br>
+            <strong>ব্যাখ্যা:</strong> বনায়ন অক্সিজেন দিয়ে জীবজগৎ রক্ষা করে ও পরিবেশের ভারসাম্য ধরে রাখে।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২৯ -->
+        <div class="quiz-card" data-answer="ঘ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">২৯. সোনালী আঁশের দেশ কোনটি?</span>
+            <span class="quiz-bcs-tag">২২তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ভারত</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) শ্রীলঙ্কা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) পাকিস্তান</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) বাংলাদেশ</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ঘ (বাংলাদেশ)</strong><br>
+            <strong>ব্যাখ্যা:</strong> উন্নত মানের পাট উৎপাদনের কারণে বাংলাদেশকে সোনালী আঁশের দেশ বলে।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩০ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৩০. বাংলাদেশের অন্তর্গত সুন্দরবনের আয়তন কত?</span>
+            <span class="quiz-bcs-tag">২০তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ২৪০০ বর্গমাইল</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ১৯৫০ বর্গমাইল</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ৯২৫ বর্গমাইল</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ২০০ বর্গমাইল</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (২৪০০ বর্গমাইল)</strong><br>
+            <strong>ব্যাখ্যা:</strong> সুন্দরবনের বাংলাদেশ অংশে আয়তন ২৩১৮ বর্গমাইল (নিকটবর্তী ২৪০০ বর্গমাইল)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩১ -->
+        <div class="quiz-card" data-answer="না">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৩১. বাংলাদেশের জিডিপিতে পশুসম্পদের অবদান কত?</span>
+            <span class="quiz-bcs-tag">১৯তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ২%</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ৬.৫%</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ১০%</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ১৫%</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: অপশনে সঠিক উত্তর নেই!</strong><br>
+            <strong>ব্যাখ্যা:</strong> সমীক্ষা ২০২৫ অনুযায়ী জিডিপিতে প্রাণিসম্পদের অবদান ১.৮১%।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩২ -->
+        <div class="quiz-card" data-answer="ঘ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৩২. বাংলাদেশের জাতীয় পশু কোনটি?</span>
+            <span class="quiz-bcs-tag">১৯তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) গরু</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) গয়াল</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ছাগল</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) রয়েল বেঙ্গল টাইগার</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ঘ (রয়েল বেঙ্গল টাইগার)</strong><br>
+            <strong>ব্যাখ্যা:</strong> বাংলাদেশের জাতীয় পশু রয়েল বেঙ্গল টাইগার (Panthera tigris tigris)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩৩ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৩৩. বাংলাদেশের কোন অঞ্চলে গোচারণের জন্য বাথান আছে?</span>
+            <span class="quiz-bcs-tag">১৯তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) সিরাজগঞ্জ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) দিনাজপুর</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) বরিশাল</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ফরিদপুর</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (সিরাজগঞ্জ)</strong><br>
+            <strong>ব্যাখ্যা:</strong> সিরাজগঞ্জের শাহজাদপুরে ১,২০০ একর এলাকা জুড়ে সর্ববৃহৎ বাথানভূমি রয়েছে।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩৪ -->
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৩৪. গবাদিপশুর জাত উন্নয়নে পাক ভারত উপমহাদেশে কোন ব্রিটিশ প্রথম অগ্রণী ভূমিকা পালন করেন?</span>
+            <span class="quiz-bcs-tag">১৯তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) মি. জে এইচ বি হেলেন</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) লর্ড লিনলিথগো</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) লর্ড ক্লাইভ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ওয়ারেন হেস্টিংস</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: খ (লর্ড লিনলিথগো)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ব্রিটিশ ভাইসরয় লর্ড লিনলিথগো গবাদিপশুর জাত উন্নয়নে প্রথম অগ্রণী ভূমিকা পালন করেন।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩৫ -->
+        <div class="quiz-card" data-answer="না">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৩৫. বাংলাদেশের বনাঞ্চলের পরিমাণ মোট ভূমির কত শতাংশ?</span>
+            <span class="quiz-bcs-tag">১৯তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ১৯ শতাংশ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ১৬ শতাংশ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ১২ শতাংশ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ৯ শতাংশ</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: অপশনে সঠিক উত্তর নেই!</strong><br>
+            <strong>ব্যাখ্যা:</strong> সরকার নিয়ন্ত্রিত বনভূমি ১৫.৫৮% এবং মন্ত্রণালয়ের মতে মোট বনভূমি ১৭%।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩৬ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৩৬. বাংলাদেশে প্রথম চায়ের চাষ আরম্ভ হয় কোথায়?</span>
+            <span class="quiz-bcs-tag">১৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) সিলেটের মালনীছড়ায়</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) সিলেটের তামাবিলে</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) পার্বত্য চট্টগ্রামের খাগড়াছড়িতে</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) সিলেটের জাফলং-এ</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (সিলেটের মালনীছড়ায়)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ১৮৫৪ সালে সিলেটের মালনীছড়ায় প্রথম বাণিজ্যিক চা বাগান প্রতিষ্ঠিত হয়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩৭ -->
+        <div class="quiz-card" data-answer="না">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৩৭. বাংলাদেশের GDP-তে কৃষিখাতের অবদান কত শতাংশ?</span>
+            <span class="quiz-bcs-tag">১৫তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ৮০</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ৭৫</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ৩২</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ১০</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: সাম্প্রতিক তথ্যের ভিত্তিতে অপশনে সঠিক উত্তর নেই!</strong><br>
+            <strong>ব্যাখ্যা:</strong> অর্থনৈতিক সমীক্ষা ২০২৫ অনুযায়ী জিডিপিতে কৃষির অবদান ১০.৯৪% (সাময়িক)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩৮ -->
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৩৮. বাংলাদেশের পানি সম্পদের চাহিদা সবচেয়ে বেশি কোন খাতে?</span>
+            <span class="quiz-bcs-tag">১৫তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) আবাসিক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) কৃষি</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) পরিবহন</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) শিল্প</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: খ (কৃষি)</strong><br>
+            <strong>ব্যাখ্যা:</strong> সেচকাজের জন্য কৃষিখাতে পানি সম্পদের চাহিদা সবচেয়ে বেশি।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩৯ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৩৯. বাংলাদেশের মৎস্য আইনে কত সেন্টিমিটারের কম দৈর্ঘ্যের রুই জাতীয় মাছের পোনা মারা নিষেধ?</span>
+            <span class="quiz-bcs-tag">১৪তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ১৮ সেন্টিমিটার</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ২০ সেন্টিমিটার</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ২৩ সেন্টিমিটার</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ২৫ সেন্টিমিটার</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (২৩ সেন্টিমিটার)</strong><br>
+            <strong>ব্যাখ্যা:</strong> জুলাই থেকে ডিসেম্বরের মধ্যে ২৩ সেমি-র চেয়ে ছোট রুই জাতীয় মাছের পোনা নিধন নিষিদ্ধ।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৪০ -->
+        <div class="quiz-card" data-answer="না">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৪০. একটি কাঁচা পাটের গাইটের (বেল) ওজন কত?</span>
+            <span class="quiz-bcs-tag">১২তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ৩.৫ মণ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ৪ মণ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ৪.৫ মণ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ৫ মণ</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: অপশনে সঠিক উত্তর নেই (প্রকৃত মান: ৪.৮৮ মণ)!</strong><br>
+            <strong>ব্যাখ্যা:</strong> ১ বেল পাটের ওজন ১৮২.২৫ কেজি বা ৪.৮৮ মণ।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৪১ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৪১. বাংলাদেশের কোন বনভূমি শালবৃক্ষের জন্য বিখ্যাত?</span>
+            <span class="quiz-bcs-tag">১১তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) সিলেটের বনভূমি</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) পার্বত্য চট্টগ্রামের বনভূমি</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ভাওয়াল ও মধুপুরের বনভূমি</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) খুলনা, বরিশাল ও পটুয়াখালীর বনভূমি</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (ভাওয়াল ও মধুপুরের বনভূমি)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ভাওয়াল ও মধুপুরের পর্ণমোচী বন শাল ও গজারি বৃক্ষের জন্য বিখ্যাত।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৪২ -->
+        <div class="quiz-card" data-answer="ঘ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৪২. বাংলাদেশের কোন জেলায় সবচেয়ে বেশি পাট উৎপন্ন হয়?</span>
+            <span class="quiz-bcs-tag">১১তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) রংপুর</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ময়মনসিংহ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) টাঙ্গাইল</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ফরিদপুর</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ঘ (ফরিদপুর)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ফরিদপুর জেলায় সবচেয়ে বেশি পাট উৎপন্ন হয়।
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- অসঙ্গতি তালিকা -->
+    <div class="discrepancy-card">
+      <h3 style="color: var(--danger); margin-bottom: 10px;">⚠️ বইয়ের অসঙ্গতি ও যাচাই তালিকা</h3>
+      <div class="table-container">
+        <table>
+        <thead>
+          
+              <td>প্রশ্ন ১</td>
+              <td>উ. গ মুদ্রিত</td>
+              <td>ব্যাখ্যায় ৯০টি বাগান মৌলভীবাজারে থাকায় উত্তর <strong>মৌলভীবাজার</strong>।</td>
+            
+        </thead>
+        <tbody>
+          <tr>
+              <td>প্রশ্ন ১৩</td>
+              <td>উ. গ মুদ্রিত</td>
+              <td>বিকল্পে ৩য় স্থানে ময়মনসিংহ থাকলেও জুম চাষ হয় <strong>খাগড়াছড়িতে</strong>।</td>
+            </tr>
+          <tr>
+              <td>প্রশ্ন ১৬</td>
+              <td>উ. গ মুদ্রিত</td>
+              <td>ব্যাখ্যা অনুযায়ী রোপা আমন কাটা হয় <strong>অগ্রহায়ণ - পৌষ মাসে</strong>।</td>
+            </tr>
+          <tr>
+              <td>প্রশ্ন ১৮</td>
+              <td>উ. গ মুদ্রিত</td>
+              <td>ম্যানগ্রোভ মূলত <strong>উপকূলীয় বন</strong>।</td>
+            </tr>
+          <tr>
+              <td>প্রশ্ন ৩৯</td>
+              <td>উ. গ মুদ্রিত</td>
+              <td>ব্যাখ্যা অনুযায়ী কার্প পোনার নিষিদ্ধ মাপ <strong>২৩ সেন্টিমিটার</strong>।</td>
+            </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const target = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try { localStorage.setItem('agri_res_theme', target); } catch(e) {}
+    });
+
+    try {
+      const savedTheme = localStorage.getItem('agri_res_theme');
+      if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+    } catch(e) {}
+
+    let fontScale = 1;
+    const setScale = (delta, reset = false) => {
+      if (reset) fontScale = 1;
+      else fontScale = Math.min(Math.max(fontScale + delta, 0.8), 1.4);
+      document.documentElement.style.setProperty('--font-scale', fontScale);
+    };
+
+    document.getElementById('fontDown').addEventListener('click', () => setScale(-0.1));
+    document.getElementById('fontReset').addEventListener('click', () => setScale(0, true));
+    document.getElementById('fontUp').addEventListener('click', () => setScale(0.1));
+
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    let correctCount = 0;
+    const answeredCards = new Set();
+
+    function evalQuiz(btn, selectedOption) {
+      const card = btn.closest('.quiz-card');
+      if (answeredCards.has(card)) return;
+      answeredCards.add(card);
+
+      const correctAns = card.getAttribute('data-answer');
+      const allButtons = card.querySelectorAll('.quiz-opt');
+      const feedback = card.querySelector('.quiz-feedback');
+
+      allButtons.forEach(b => b.disabled = true);
+
+      if (correctAns === "না") {
+        btn.classList.add('incorrect');
+        feedback.style.display = 'block';
+        feedback.style.background = 'var(--accent-light)';
+      } else if (selectedOption === correctAns) {
+        btn.classList.add('correct');
+        correctCount++;
+        feedback.style.display = 'block';
+      } else {
+        btn.classList.add('incorrect');
+        allButtons.forEach(b => {
+          if (b.textContent.trim().startsWith(correctAns)) b.classList.add('correct');
+        });
+        feedback.style.display = 'block';
+      }
+
+      document.getElementById('quiz-score').textContent = `স্কোর: ${correctCount} / ৪২`;
+    }
+  </script>
+  <script src="nav-component.js"></script>
+</body>
+</html>

@@ -1,0 +1,1278 @@
+<!-- DESIGN PLAN:
+(১) বিষয়ের ধরন: বাংলাদেশ বিষয়াবলি — 'শিল্প উৎপাদন' (পৃষ্ঠা ৪৭৩-৪৭৭)। সার কারখানা, ইপিজেড, টেক্সটাইল ও আরএমজি, কাগজ ও কাঠ শিল্প, শিপইয়ার্ড ও জাতীয় ঔষধ নীতি।
+(২) সবচেয়ে কঠিন/গুলিয়ে ফেলার জায়গা: বিসিআইসি-র ৭টি সার কারখানার অবস্থান ও উৎপাদিত সারের প্রকার (ইউরিয়া, টিএসপি, ডিএপি, এএসপি); ৮টি সরকারি ইপিজেড (প্রথম: চট্টগ্রাম, একমাত্র কৃষি: উত্তরা); খুলনা হার্ডবোর্ড মিল (সুন্দরী কাঠ) বনাম নিউজপ্রিন্ট মিল (গেওয়া কাঠ); চন্দ্রঘোনা পেপার মিলের প্রধান কাঁচামাল (বাঁশ); এবং মন্ত্রণালয়ের অধীনস্থ সংস্থাসমূহ (টিসিবি, বিএসটিআই, ট্যারিফ কমিশন)।
+(৩) কেন এই মডিউলগুলো সেরা:
+    - বিসিআইসি-র ৭টি সার কারখানার পূর্ণাঙ্গ অবস্থান ও সারের ধরন ম্যাট্রিক্স।
+    - সরকারি ৮টি ও বেসরকারি ২টি ইপিজেড ডিরেক্টরি কার্ড গ্রিড।
+    - প্রধান কাঁচামাল ও শিল্প মিলের 'ফাঁদ বনাম সমাধান' তুলনামূলক ছক।
+    - ২০টি বিসিএস বিগত প্রশ্নের শতভাগ নির্ভুল ইন্টারঅ্যাকটিভ কুইজ (মুদ্রণ বিভ্রাট ও অপশন-কোড অসঙ্গতি সংশোধনসহ)।
+(৪) রঙের মেজাজ: ইন্ডাস্ট্রিয়াল স্টিল ব্লু (#1e3a8a), মেটালিক কপার ও অরেঞ্জ (#c2410c), টেক্সটাইল স্লেট এবং ওয়ার্ম পার্চমেন্ট।
+(৫) হিরো ও মাসকটের ধরন: 'শিল্প বিপ্লব ও কারখানা গিয়ার' মেটাফর; ইন্ডাস্ট্রিয়াল মেন্টর প্রতীক "শিল্প প্রকৌশলী" (🏭/⚙️)।
+-->
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বাংলাদেশের শিল্প ও বাণিজ্য: শিল্প উৎপাদন — বিসিএস পূর্ণাঙ্গ প্রস্তুতি ই-বুক</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-2: #f1f5f9;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #cbd5e1;
+      --primary: #1e3a8a;          /* ইন্ডাস্ট্রিয়াল নেভি ব্লু */
+      --primary-dark: #172554;
+      --primary-light: #dbeafe;
+      --accent: #c2410c;           /* কপার ও বার্নট অরেঞ্জ */
+      --accent-light: #ffedd5;
+      --teal: #0d9488;
+      --teal-light: #ccfbf1;
+      --success: #15803d;
+      --success-light: #dcfce7;
+      --danger: #b91c1c;
+      --danger-light: #fee2e2;
+      --radius: 12px;
+      --shadow: 0 4px 10px rgba(30, 58, 138, 0.08);
+      --font-scale: 1;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0b1120;
+      --surface: #131c31;
+      --surface-2: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --primary: #60a5fa;
+      --primary-dark: #3b82f6;
+      --primary-light: #172554;
+      --accent: #fb923c;
+      --accent-light: #431407;
+      --teal: #2dd4bf;
+      --teal-light: #134e4a;
+      --success: #4ade80;
+      --success-light: #052e16;
+      --danger: #f87171;
+      --danger-light: #450a0a;
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    body {
+      font-family: 'Noto Sans Bengali', 'Kalpurush', Vrinda, sans-serif;
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.85;
+      background-color: var(--bg);
+      color: var(--text);
+      padding-bottom: 90px;
+    }
+
+    /* স্ক্রল প্রগ্রেস বার */
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: transparent;
+      z-index: 1001;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    /* স্টিকি কন্ট্রোল বার */
+    .control-bar {
+      position: sticky;
+      top: 5px;
+      z-index: 1000;
+      background: var(--surface);
+      border-bottom: 2px solid var(--border);
+      padding: 10px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      padding: 6px 14px;
+      font-size: calc(14px * var(--font-scale));
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+    }
+
+    button:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+
+    /* হিরো সেকশন */
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #0f172a);
+      color: #ffffff;
+      padding: 34px 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 26px;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: calc(26px * var(--font-scale));
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: calc(15px * var(--font-scale));
+      opacity: 0.95;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8125rem;
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #fff;
+    }
+
+    /* কার্ডস */
+    .section-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .section-header {
+      padding: 16px 20px;
+      background: var(--surface-2);
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .section-header h2 {
+      font-size: calc(18px * var(--font-scale));
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--primary);
+    }
+
+    [data-theme="dark"] .section-header h2 {
+      color: var(--primary);
+    }
+
+    .section-body {
+      padding: 20px;
+    }
+
+    /* গ্রিড ও মেট্রিক বক্স */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    .info-box {
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      border-left: 5px solid var(--primary);
+      padding: 14px 16px;
+      border-radius: 0 10px 10px 0;
+    }
+
+    .info-box.accent-box {
+      border-left-color: var(--accent);
+    }
+
+    .info-box.teal-box {
+      border-left-color: var(--teal);
+    }
+
+    .info-box h4 {
+      color: var(--text);
+      margin-bottom: 6px;
+      font-size: calc(16px * var(--font-scale));
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: var(--primary-light);
+      color: var(--primary);
+      margin-top: 4px;
+    }
+
+    [data-theme="dark"] .tag {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* টেবিল ডিজাইন */
+    .table-container {
+      overflow-x: auto;
+      margin: 14px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      font-size: calc(15px * var(--font-scale));
+    }
+
+    th {
+      background-color: var(--surface-2);
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    [data-theme="dark"] tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    /* নোটিশ ও ফাঁদ বক্স */
+    .note-box {
+      background: var(--surface-2);
+      border-left: 5px solid var(--primary);
+      padding: 14px 18px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 16px 0;
+      color: var(--text);
+    }
+
+    .trap-box {
+      background: var(--danger-light);
+      border-left: 5px solid var(--danger);
+      padding: 14px 18px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 16px 0;
+      color: var(--text);
+    }
+
+    /* কুইজ স্টাইল */
+    .quiz-card {
+      background: var(--surface-2);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+
+    .quiz-title-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      gap: 10px;
+    }
+
+    .quiz-bcs-tag {
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .quiz-question {
+      font-weight: bold;
+      font-size: calc(16px * var(--font-scale));
+      margin-bottom: 12px;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    @media (min-width: 600px) {
+      .quiz-options.two-col {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .quiz-opt {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      font-size: calc(15px * var(--font-scale));
+      font-family: inherit;
+    }
+
+    .quiz-opt:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .quiz-opt.correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+      color: var(--text);
+      font-weight: bold;
+    }
+
+    .quiz-opt.incorrect {
+      background: var(--danger-light) !important;
+      border-color: var(--danger) !important;
+      color: var(--text);
+    }
+
+    .quiz-feedback {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      display: none;
+      font-size: calc(14.5px * var(--font-scale));
+      line-height: 1.7;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    .discrepancy-card {
+      background: var(--surface);
+      border: 2px dashed var(--danger);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-top: 32px;
+    }
+
+    @media print {
+      .control-bar, #progress-container, .btn-group, button {
+        display: none !important;
+      }
+      body {
+        background: #fff;
+        color: #000;
+        font-size: 11pt;
+      }
+      .section-card {
+        border: 1px solid #777;
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+    }
+  
+/* Universal Mobile Optimization (Samsung A23 & small screens) */
+@media (max-width: 600px) {
+  .print-btn, button[onclick*="print"], .btn-ctrl:has(span:contains('🖨️')) {
+    display: none !important;
+  }
+  .container {
+    padding: 6px 8px 24px 8px !important;
+  }
+  .hero-box, .hero, .hero-banner {
+    padding: 16px 12px !important;
+    margin-top: 8px !important;
+    margin-bottom: 14px !important;
+  }
+  .table-responsive, .table-container {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+  }
+  .table-responsive table th, .table-responsive table td,
+  .table-container table th, .table-container table td {
+    padding: 7px 6px !important;
+  }
+}
+
+</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- পড়ার প্রগ্রেস বার -->
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <!-- স্টিকি কন্ট্রোল বার -->
+  <div class="control-bar">
+    <div class="btn-group">
+      <button id="themeToggle" title="থিম পরিবর্তন">🌓 থিম</button>
+      <button id="fontDown" title="ফন্ট ছোট">A-</button>
+      <button id="fontReset" title="স্বাভাবিক ফন্ট">A</button>
+      <button id="fontUp" title="ফন্ট বড়">A+</button>
+    </div>
+    <div class="btn-group">
+      <button onclick="document.getElementById('quiz-section').scrollIntoView({behavior: 'smooth'})">📝 সব MCQ কুইজ</button>
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆️ উপরে</button>
+      <button onclick="window.print()">🖨️ প্রিন্ট / PDF</button>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- হিরো সেকশন -->
+    <div class="hero">
+      <div style="font-size: 2.375rem; margin-bottom: 8px;">🏭</div>
+      <h1>বাংলাদেশের শিল্প ও বাণিজ্য: শিল্প উৎপাদন</h1>
+      <p>সার কারখানা, ইপিজেড, পাট ও বস্ত্রকল, শিপইয়ার্ড, কাগজ ও হার্ডবোর্ড মিল, এবং ঔষধনীতি সম্পর্কিত বিসিএস বিগত পরীক্ষার পূর্ণাঙ্গ সল্যুশন ও বিশ্লেষণ।</p>
+      <div class="hero-meta">
+        <span class="badge">পৃষ্ঠা: ৪৭৩ – ৪৭৭</span>
+        <span class="badge">বিসিএস প্রশ্নব্যাংক: ২০টি বিশদ প্রশ্ন ও উত্তর</span>
+        <span class="badge">১০ম থেকে ৪৮তম বিসিএস কভারেজ</span>
+      </div>
+    </div>
+
+    <!-- বিসিএস প্রশ্ন পরিসংখ্যান ছক -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>📊 বিসিএসে প্রশ্ন আসার পরিসংখ্যান (বইয়ের ছক অনুযায়ী)</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: শিল্প উৎপাদন অধ্যায়ের প্রশ্নের ওজন ও পৌনঃপুনিকতা বোঝা। (আনুমানিক পাঠ সময়: ২ মিনিট) (আমার অনুমান)
+        </p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>বিসিএস</th>
+                <th>প্রশ্ন সংখ্যা</th>
+                <th>বিসিএস</th>
+                <th>প্রশ্ন সংখ্যা</th>
+                <th>বিসিএস</th>
+                <th>প্রশ্ন সংখ্যা</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>৪৮তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৪৪তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৩৭তম বিসিএস</strong></td>
+                <td>২টি</td>
+              </tr>
+              <tr>
+                <td><strong>৪৭তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৪৩তম ও ৪১তম</strong></td>
+                <td>(বইয়ে ফাঁকা)</td>
+                <td><strong>৩৫তম বিসিএস</strong></td>
+                <td>১টি</td>
+              </tr>
+              <tr>
+                <td><strong>৪৬তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৪২তম বিসিএস</strong></td>
+                <td>০টি</td>
+                <td><strong>১০ম-৩৪তম বিসিএস</strong></td>
+                <td>১০টি</td>
+              </tr>
+              <tr>
+                <td><strong>৪৫তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৪০তম বিসিএস</strong></td>
+                <td>২টি</td>
+                <td><strong>৪৯তম ও ৫০তম</strong></td>
+                <td>(বইয়ে ফাঁকা)</td>
+              </tr>
+              <tr>
+                <td><strong>৩৯তম, ৩৮তম, ৩৬তম</strong></td>
+                <td>(বইয়ে ফাঁকা)</td>
+                <td>—</td>
+                <td>—</td>
+                <td><strong>মোট কভার্ড প্রশ্ন</strong></td>
+                <td><strong>২০টি প্রশ্ন</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- মডিউল ১: বিসিআইসি-র সার কারখানাসমূহ ও সারের ধরণ -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>🧪 বিসিআইসি-র ৭টি সার কারখানা ও উৎপাদিত সারের তালিকা</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: কোন সার কারখানা কোথায় অবস্থিত এবং কী সার উৎপাদন করে তা মুখস্থ করা। (আনুমানিক পাঠ সময়: ৫ মিনিট) (আমার অনুমান)
+        </p>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>কারখানার নাম</th>
+                <th>অবস্থান</th>
+                <th>উৎপাদিত সার</th>
+                <th>বিশেষ বৈশিষ্ট্য ও ইতিহাস</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>ঘোড়াশাল-পলাশ ফার্টিলাইজার পিএলসি</strong></td>
+                <td>পলাশ, নরসিংদী</td>
+                <td>ইউরিয়া</td>
+                <td><strong>দেশের সর্ববৃহৎ সার কারখানা</strong> (উদ্বোধন: ১২ নভেম্বর ২০২৩; বার্ষিক ক্ষমতা ৯ লাখ ২৪ হাজার টন)। কার্বন ডাই-অক্সাইড ক্যাপচার প্রযুক্তিযুক্ত দেশের প্রথম পরিবেশবান্ধব 'সবুজ' সার কারখানা!</td>
+              </tr>
+              <tr>
+                <td><strong>শাহজালাল ফার্টিলাইজার কোম্পানি লি.</strong></td>
+                <td>ফেঞ্চুগঞ্জ, সিলেট</td>
+                <td>ইউরিয়া ও অ্যামোনিয়াম সালফেট (এএসপি)</td>
+                <td>বন্ধ হয়ে যাওয়া এশিয়ার প্রাচীনতম ন্যাচারাল গ্যাস ফার্টিলাইজার ফ্যাক্টরির (১৯৬১) পাশে আধুনিক প্রযুক্তিতে স্থাপিত।</td>
+              </tr>
+              <tr>
+                <td><strong>চিটাগাং ইউরিয়া ফার্টিলাইজার ফ্যাক্টরি লি.</strong></td>
+                <td>আনোয়ারা, চট্টগ্রাম</td>
+                <td>ইউরিয়া ও অ্যামোনিয়া</td>
+                <td>চট্টগ্রামের অন্যতম প্রধান ইউরিয়া উৎপাদনকারী প্রতিষ্ঠান।</td>
+              </tr>
+              <tr>
+                <td><strong>যমুনা ফার্টিলাইজার কোম্পানি লি.</strong></td>
+                <td>সরিষাবাড়ি, জামালপুর</td>
+                <td>দানাদার ইউরিয়া</td>
+                <td>বৃহত্তর ময়মনসিংহের দানাদার ইউরিয়া প্রস্তুতকারী প্রতিষ্ঠান।</td>
+              </tr>
+              <tr>
+                <td><strong>আশুগঞ্জ ফার্টিলাইজার অ্যান্ড কেমিক্যাল কোম্পানি (এএফসিসিএল)</strong></td>
+                <td>আশুগঞ্জ, ব্রাহ্মণবাড়িয়া</td>
+                <td>ইউরিয়া</td>
+                <td>পূর্বে ১৯৭৪ সালে স্থাপিত এবং ১৯৮১ সালে নাম ছিল 'জিয়া ফার্টিলাইজার কোম্পানি লিমিটেড'।</td>
+              </tr>
+              <tr>
+                <td><strong>টিএসপি কমপ্লেক্স লিমিটেড</strong></td>
+                <td>পতেঙ্গা, চট্টগ্রাম</td>
+                <td>টিএসপি (ট্রিপল সুপার ফসফেট)</td>
+                <td>দেশের প্রধান ফসফেট সার উৎপাদন কেন্দ্র।</td>
+              </tr>
+              <tr>
+                <td><strong>ডিএপি ফার্টিলাইজার কোম্পানি লি.</strong></td>
+                <td>আনোয়ারা, চট্টগ্রাম</td>
+                <td>ডিএপি (ডাই অ্যামোনিয়াম ফসফেট)</td>
+                <td>আনোয়ারায় অবস্থিত ডিএপি সার প্রস্তুতকারী প্রতিষ্ঠান।</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note-box">
+          💡 <strong>ইউরিয়া সারের কাঁচামাল:</strong> ইউরিয়া সারের প্রধান কাঁচামাল হলো <strong>প্রাকৃতিক গ্যাস</strong> (যার প্রধান উপাদান মিথেন)। প্রাকৃতিক গ্যাস ও বায়ুর বিক্রিয়ায় তৈরি অ্যামোনিয়া ও কার্বন ডাই-অক্সাইড থেকে ইউরিয়া তৈরি হয়।
+        </div>
+      </div>
+    </div>
+
+    <!-- মডিউল ২: সরকারি ও বেসরকারি ইপিজেড (EPZ) ডিরেক্টরি -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>🌐 বাংলাদেশের ইপিজেড (EPZ - Export Processing Zone) ডিরেক্টরি</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: বাংলাদেশে সরকারি ইপিজেড সংখ্যা মোট ৮টি এবং বেসরকারি ২টি। (আনুমানিক পাঠ সময়: ৪ মিনিট) (আমার অনুমান)
+        </p>
+
+        <h3 style="color: var(--primary); margin-bottom: 12px;">🏛️ সরকারি ৮টি ইপিজেড (প্রতিষ্ঠাকাল অনুযায়ী)</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ক্রম</th>
+                <th>ইপিজেডের নাম</th>
+                <th>অবস্থান</th>
+                <th>প্রতিষ্ঠা সাল</th>
+                <th>বিশেষত্ব</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>১</td>
+                <td><strong>চট্টগ্রাম ইপিজেড</strong></td>
+                <td>দক্ষিণ হালিশহর, চট্টগ্রাম</td>
+                <td>১৯৮৩</td>
+                <td><strong>দেশের প্রথম ইপিজেড</strong></td>
+              </tr>
+              <tr>
+                <td>২</td>
+                <td><strong>ঢাকা ইপিজেড</strong></td>
+                <td>আশুলিয়া, সাভার, ঢাকা</td>
+                <td>১৯৯৩</td>
+                <td>রাজধানী অঞ্চলের প্রধান রপ্তানি অঞ্চল</td>
+              </tr>
+              <tr>
+                <td>৩</td>
+                <td><strong>মংলা ইপিজেড</strong></td>
+                <td>বাগেরহাট</td>
+                <td>১৯৯৮</td>
+                <td>মংলা সমুদ্র বন্দর সংলগ্ন</td>
+              </tr>
+              <tr>
+                <td>৪</td>
+                <td><strong>কুমিল্লা ইপিজেড</strong></td>
+                <td>কুমিল্লা</td>
+                <td>২০০০</td>
+                <td>কুমিল্লা বিমানবন্দর সংলগ্ন অঞ্চল (আমার অনুমান)</td>
+              </tr>
+              <tr>
+                <td>৫</td>
+                <td><strong>ঈশ্বরদী ইপিজেড</strong></td>
+                <td>ঈশ্বরদী, পাবনা</td>
+                <td>২০০১</td>
+                <td>পশ্চিমাঞ্চলের অন্যতম প্রধান কেন্দ্র</td>
+              </tr>
+              <tr>
+                <td>৬</td>
+                <td><strong>উত্তরা ইপিজেড</strong></td>
+                <td>সংগলসী, উত্তরা, নীলফামারী</td>
+                <td>২০০১</td>
+                <td><strong>বাংলাদেশের একমাত্র কৃষিভিত্তিক ইপিজেড</strong></td>
+              </tr>
+              <tr>
+                <td>৭</td>
+                <td><strong>আদমজী ইপিজেড</strong></td>
+                <td>সিদ্ধিরগঞ্জ, নারায়ণগঞ্জ</td>
+                <td>২০০৬</td>
+                <td>সাবেক আদমজী জুট মিল চত্বরে প্রতিষ্ঠিত</td>
+              </tr>
+              <tr>
+                <td>৮</td>
+                <td><strong>কর্ণফুলি ইপিজেড</strong></td>
+                <td>উত্তর পতেঙ্গা, চট্টগ্রাম</td>
+                <td>২০০৬</td>
+                <td>চট্টগ্রামের দ্বিতীয় বৃহত্তম সরকারি ইপিজেড</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="color: var(--accent); margin: 20px 0 10px 0;">🏭 বেসরকারি ইপিজেডসমূহ</h3>
+        <div class="card-grid">
+          <div class="info-box accent-box">
+            <h4>১. রাঙ্গুনিয়া ইপিজেড</h4>
+            <p>চট্টগ্রামের রাঙ্গুনিয়ায় ১৯৯৬ সালে প্রস্তাবিত এবং ১৯৯৯ সালে ভিত্তিপ্রস্তর স্থাপিত <strong>প্রথম দেশীয় মালিকানাধীন বেসরকারি ইপিজেড</strong> (চিটাগং ইন্ডাস্ট্রিয়াল পার্ক লি.)।</p>
+          </div>
+          <div class="info-box accent-box">
+            <h4>২. কেইপিজেড (KEPZ - Korean EPZ)</h4>
+            <p>কর্ণফুলি নদীর দক্ষিণ তীরে দক্ষিণ কোরিয়াভিত্তিক ইয়াংওয়ান করপোরেশন কর্তৃক ১৯৯৬ সালে অনুমতিপ্রাপ্ত ও ১৯৯৯ সালে উদ্বোধনকৃত <strong>বিদেশি বেসরকারি ইপিজেড</strong>।</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- মডিউল ৩: কাঁচামাল, শিপইয়ার্ড ও শিল্প সংস্থা -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>🪵 মিলসমূহের কাঁচামাল ও শিপইয়ার্ড তুলনা</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: কাঁচামাল ও অবস্থান নিয়ে পরীক্ষার বারবার আসা বিভ্রান্তি দূর করা। (আনুমানিক পাঠ সময়: ৪ মিনিট) (আমার অনুমান)
+        </p>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>কারখানা / শিল্প প্রতিষ্ঠান</th>
+                <th>অবস্থান</th>
+                <th>প্রধান কাঁচামাল / বিশেষ তথ্য</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>খুলনা হার্ডবোর্ড মিল</strong></td>
+                <td>খালিশপুর, খুলনা</td>
+                <td>সুন্দরবনের <strong>সুন্দরী কাঠ</strong> (স্থাপিত ১৯৬৫, কানাডার সহায়তায়)।</td>
+              </tr>
+              <tr>
+                <td><strong>খুলনা নিউজপ্রিন্ট মিল</strong></td>
+                <td>খুলনা</td>
+                <td>সুন্দরবনের <strong>গেওয়া কাঠ</strong>।</td>
+              </tr>
+              <tr>
+                <td><strong>চন্দ্রঘোনা কাগজ কল</strong></td>
+                <td>কাপ্তাই, রাঙ্গামাটি</td>
+                <td>পার্বত্য চট্টগ্রামের <strong>বাঁশ</strong> (স্থাপিত ১৯৫৩, বিসিআইসি পরিচালিত)।</td>
+              </tr>
+              <tr>
+                <td><strong>খুলনা শিপইয়ার্ড</strong></td>
+                <td>লবণচরা, খুলনা (রূপসা তীর)</td>
+                <td><strong>বাংলাদেশের প্রধান জাহাজ নির্মাণ কারখানা</strong> (বাংলাদেশ নেভি পরিচালিত)।</td>
+              </tr>
+              <tr>
+                <td><strong>আনন্দ শিপইয়ার্ড</strong></td>
+                <td>মেঘনাঘাট, নারায়ণগঞ্জ</td>
+                <td>২০০৮ সালে ডেনমার্কে প্রথম সমুদ্রগামী জাহাজ 'স্টেলা মেরিস' রপ্তানিকারক।</td>
+              </tr>
+              <tr>
+                <td><strong>ওয়েস্টার্ন মেরিন শিপইয়ার্ড</strong></td>
+                <td>পতেঙ্গা/কর্ণফুলি, চট্টগ্রাম</td>
+                <td>ভারতের জিন্দাল স্টিলকে ৮ হাজার টন ক্ষমতাসম্পন্ন দেশের বৃহত্তম জাহাজ সরবরাহকারী।</td>
+              </tr>
+              <tr>
+                <td><strong>দেশের প্রথম ঔষধ পার্ক (API Park)</strong></td>
+                <td>গজারিয়া, মুন্সিগঞ্জ</td>
+                <td>ঔষধের কাঁচামাল (Active Pharmaceutical Ingredients) উৎপাদনে স্থাপিত (উদ্বোধিত ২০২১)।</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="trap-box">
+          ⚠️ <strong>মন্ত্রণালয়ের অধীনস্থ সংস্থা সংক্রান্ত ফাঁদ:</strong><br>
+          • <strong>টিসিবি (TCB):</strong> বাণিজ্য মন্ত্রণালয়!<br>
+          • <strong>ট্যারিফ কমিশন:</strong> বাণিজ্য মন্ত্রণালয়!<br>
+          • <strong>বিএসটিআই (BSTI):</strong> <mark>শিল্প মন্ত্রণালয়</mark> (১৯৮৫ সালে প্রতিষ্ঠিত একমাত্র সরকারি মান নিয়ন্ত্রণ সংস্থা)!<br>
+          • <strong>অ্যালায়েন্স (Alliance):</strong> যুক্তরাষ্ট্রের পোশাক ব্র্যান্ডের জোট; আর <strong>অ্যাকর্ড (Accord):</strong> ইউরোপীয় ইউনিয়নের পোশাক ব্র্যান্ডের জোট!
+        </div>
+      </div>
+    </div>
+
+    <!-- ২০টি বিসিএস বিগত প্রশ্নের ইন্টারঅ্যাকটিভ কুইজ সেকশন -->
+    <div class="section-card" id="quiz-section">
+      <div class="section-header">
+        <h2>📝 বিসিএস বিগত প্রশ্নব্যাংক ও ইন্টারঅ্যাকটিভ কুইজ (১ থেকে ২০)</h2>
+        <span class="badge" id="quiz-score">স্কোর: ০ / ২০</span>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 16px; color: var(--text-muted);">
+          বইয়ের মূল প্রশ্ন ও ব্যাখ্যার ভিত্তিতে ইন্টারঅ্যাকটিভ কুইজে অংশ নাও। অপশনে ক্লিক করলে সাথে সাথে সঠিক/ভুল এবং পূর্ণ ব্যাখ্যা প্রদর্শিত হবে।
+        </p>
+
+        <!-- প্রশ্ন ১ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১. নিচের কোনটি বাংলাদেশের শিল্প সংক্রান্ত অর্থনৈতিক কর্মকাণ্ড নয়?</span>
+            <span class="quiz-bcs-tag">৪৮তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) মাছ চাষ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) বস্ত্র</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) পাট</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) সিমেন্ট</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (মাছ চাষ)</strong><br>
+            <strong>ব্যাখ্যা:</strong> মাছ চাষ কোনো শিল্প সংক্রান্ত অর্থনৈতিক কর্মকাণ্ড নয়, বরং এটি একটি কৃষিভিত্তিক প্রাথমিক উৎপাদন কার্যক্রম। অন্যদিকে বস্ত্র, পাট ও সিমেন্ট হলো শিল্প খাতভুক্ত।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">২. বাংলাদেশের বৃহত্তম সার কারখানার নাম কী?</span>
+            <span class="quiz-bcs-tag">৪৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ইউরিয়া ফার্টিলাইজার ফ্যাক্টরি লিমিটেড</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) যমুনা ফার্টিলাইজার কোম্পানি লিমিটেড</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) পলাশ ইউরিয়া ফার্টিলাইজার কোম্পানি লিমিটেড</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ন্যাচরাল গ্যাস ফার্টিলাইজার কোম্পানি লিমিটেড</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (পলাশ ইউরিয়া ফার্টিলাইজার কোম্পানি লিমিটেড)</strong><br>
+            <strong>ব্যাখ্যা:</strong> নরসিংদীর ঘোড়াশাল-পলাশ ইউরিয়া ফার্টিলাইজার দেশের সর্ববৃহৎ সার কারখানা। ১২ নভেম্বর ২০২৩ সালে আধুনিক ও পরিবেশবান্ধব এ কারখানাটি উদ্বোধন করা হয়, যার বার্ষিক উৎপাদন ক্ষমতা ৯ লাখ ২৪ হাজার মেট্রিক টন।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৩. ট্রেডিং কর্পোরেশন অব বাংলাদেশ (TCB) কোন মন্ত্রণালয়ের আওতাভুক্ত?</span>
+            <span class="quiz-bcs-tag">৪৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) পরিকল্পনা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) শিল্প</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) বাণিজ্য</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) অর্থ</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (বাণিজ্য মন্ত্রণালয় — বইয়ে কলাম ক্রমে 'উ. গ')</strong><br>
+            <strong>ব্যাখ্যা:</strong> ১৯৭২ সালের ১ জানুয়ারি প্রতিষ্ঠিত টিসিবি বাণিজ্য মন্ত্রণালয়ের আওতাভুক্ত একটি বাণিজ্যিক সংস্থা। বাণিজ্য মন্ত্রণালয়ের অধীনে মোট ১৩টি সংস্থা বা দপ্তর রয়েছে।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৪ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৪. ইউরিয়া সারের প্রধান কাঁচামাল কী?</span>
+            <span class="quiz-bcs-tag">৪৫তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) প্রাকৃতিক গ্যাস</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) মিথেন গ্যাস</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) চুনাপাথর</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ইলমেনাইট</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (প্রাকৃতিক গ্যাস)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ইউরিয়া সারের মূল কাঁচামাল প্রাকৃতিক গ্যাস। প্রাকৃতিক গ্যাস ও বায়ুর বিক্রিয়ায় তৈরি অ্যামোনিয়া ও কার্বন ডাই-অক্সাইড থেকে দুই ধাপে ইউরিয়া উৎপন্ন হয়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৫ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৫. BSTI-এর পূর্ণ অভিব্যক্তি (Full Form) কী?</span>
+            <span class="quiz-bcs-tag">৪৪তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) Bangladesh Salt Testing Institute</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) Bangladesh Strategic Training Institute</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) Bangladesh Standards and Testing Institution</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) Bangladesh Society for Telecommunication and Information</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (Bangladesh Standards and Testing Institution)</strong><br>
+            <strong>ব্যাখ্যা:</strong> বিএসটিআই হলো শিল্প মন্ত্রণালয়ের আওতাধীন ১৯৮৫ সালে প্রতিষ্ঠিত দেশের একমাত্র সরকারি পণ্য ও সেবার মান নিয়ন্ত্রণ সংস্থা।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৬ -->
+        <div class="quiz-card" data-answer="না">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৬. ২০১৮ সালে বাংলাদেশের GDP-তে শিল্প খাতের অবদান কত ছিল?</span>
+            <span class="quiz-bcs-tag">৪১তম বিসিএস (বাতিল/বিতর্কিত)</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ২৯.৬৬%</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ৩০.৬৬%</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ৩২.৬৬%</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ৩৩.৬৬%</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: সাম্প্রতিক তথ্যের ভিত্তিতে অপশনে সঠিক উত্তর নেই!</strong><br>
+            <strong>ব্যাখ্যা:</strong> বাংলাদেশ অর্থনৈতিক সমীক্ষা ২০২৫ সাময়িক হিসাব অনুযায়ী বর্তমানে জিডিপিতে শিল্পখাতের অবদান ৩৭.৪৪% (বিবিএস চূড়ান্ত হিসাব ৩৪.৮১%)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৭ -->
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৭. Alliance যে দেশ ভিত্তিক গার্মেন্টস ব্রান্ডগুলোর সংগঠন-</span>
+            <span class="quiz-bcs-tag">৪০তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) যুক্তরাজ্যের</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) যুক্তরাষ্ট্রের</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) কানাডার</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ইউরোপিয়ান ইউনিয়নের</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: খ (যুক্তরাষ্ট্রের)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ২০১৩ সালে রানা প্লাজা ট্র্যাজেডির পর যুক্তরাষ্ট্রের পোশাক ব্র্যান্ডগুলো নিয়ে 'Alliance for Bangladesh Worker Safety' গঠিত হয় (মেয়াদ শেষ ২০১৮)। অন্যদিকে ইউরোপীয় ব্র্যান্ডগুলোর জোটের নাম Accord।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৮ -->
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৮. বাংলাদেশে সরকারি EPZ সংখ্যা কতটি?</span>
+            <span class="quiz-bcs-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ৬টি</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ৮টি</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ১০টি</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ১২টি</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: খ (৮টি)</strong><br>
+            <strong>ব্যাখ্যা:</strong> বাংলাদেশে বেপজা (BEPZA) পরিচালিত সরকারি ইপিজেড মোট ৮টি (চট্টগ্রাম, ঢাকা, মংলা, কুমিল্লা, ঈশ্বরদী, উত্তরা, আদমজী ও কর্ণফুলি)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৯ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৯. ট্যারিফ কমিশন কোন মন্ত্রণালয়ের অধীন?</span>
+            <span class="quiz-bcs-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) বাণিজ্য মন্ত্রণালয়</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) পরিকল্পনা মন্ত্রণালয়</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) অর্থ মন্ত্রণালয়</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) শিল্প মন্ত্রণালয়</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (বাণিজ্য মন্ত্রণালয়)</strong><br>
+            <strong>ব্যাখ্যা:</strong> বাংলাদেশ ট্রেড এন্ড ট্যারিফ কমিশন বাণিজ্য মন্ত্রণালয়ের অধীন একটি সংবিধিবদ্ধ প্রতিষ্ঠান যা দেশীয় শিল্পের স্বার্থ সংরক্ষণে কাজ করে।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১০ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১০. ন্যাচারাল গ্যাস ফার্টিলাইজার ফ্যাক্টরি লি.-এর উৎপাদিত সারের নাম কোনটি?</span>
+            <span class="quiz-bcs-tag">৩৫তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ইউরিয়া এবং এএসপি</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) টিএসপি এবং এএসপি</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ইউরিয়া</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ডিএপি</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (ইউরিয়া এবং এএসপি)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ১৯৬১ সালে ফেঞ্চুগঞ্জে স্থাপিত দেশের প্রাচীনতম এই কারখানায় ইউরিয়া এবং অ্যামোনিয়াম সালফেট (এএসপি) উৎপাদিত হতো (২০১৪ সালে বন্ধ হয়)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১১ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১১. দেশের প্রথম ঔষধ পার্ক (API Park) কোথায় স্থাপিত হচ্ছে?</span>
+            <span class="quiz-bcs-tag">৩০তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) গজারিয়া</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) গাজীপুর</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) সাভার</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ভালুকা</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (গজারিয়া)</strong><br>
+            <strong>ব্যাখ্যা:</strong> মুন্সিগঞ্জ জেলার গজারিয়ায় দেশের প্রথম এপিআই (অ্যাক্টিভ ফার্মাসিউটিক্যাল ইনগ্রেডিয়েন্টস) ঔষধ শিল্প পার্ক নির্মিত হয়েছে।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১২ -->
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১২. জিয়া সার কারখানার উৎপাদিত সারের নাম কী?</span>
+            <span class="quiz-bcs-tag">২৪তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) অ্যামোনিয়া</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ইউরিয়া</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) টিএসপি</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) সুপার ফসফেট</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: খ (ইউরিয়া — বইয়ে 'উ. গ' মুদ্রিত থাকলেও ব্যাখ্যা অনুযায়ী ইউরিয়া)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ব্রাহ্মণবাড়িয়ার আশুগঞ্জে অবস্থিত জিয়া সার কারখানা (বর্তমান এএফসিসিএল) মূলত ইউরিয়া সার কারখানা।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৩ -->
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১৩. বাংলাদেশের প্রথম 'ইপিজেড' কোথায় স্থাপিত হয়?</span>
+            <span class="quiz-bcs-tag">২০তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) সাভারে</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) চট্টগ্রামে</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) মংলায়</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ঈশ্বরদীতে</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: খ (চট্টগ্রামে)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ১৯৮৩ সালে চট্টগ্রামের দক্ষিণ হালিশহরে দেশের প্রথম রপ্তানি প্রক্রিয়াকরণ এলাকা (সিইপিজেড) প্রতিষ্ঠিত হয়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৪ -->
+        <div class="quiz-card" data-answer="ঘ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১৪. খুলনা হার্ডবোর্ড মিলে কাঁচামাল হিসেবে ব্যবহৃত হয় কোন ধরনের কাঠ?</span>
+            <span class="quiz-bcs-tag">১৮তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) চাপালিশ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) কেওয়া</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) গেওয়া</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) সুন্দরী</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ঘ (সুন্দরী কাঠ)</strong><br>
+            <strong>ব্যাখ্যা:</strong> খুলনা হার্ডবোর্ড মিলে সুন্দরবনের সুন্দরী কাঠ কাঁচামাল হিসেবে ব্যবহৃত হয়। আর খুলনা নিউজপ্রিন্ট মিলে ব্যবহৃত হয় গেওয়া কাঠ।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৫ -->
+        <div class="quiz-card" data-answer="ঘ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১৫. আশুগঞ্জ ফার্টিলাইজার অ্যান্ড কেমিক্যাল কোম্পানি লি. (এএফসিসিএল) কারখানায় উৎপাদিত সারের নাম কী?</span>
+            <span class="quiz-bcs-tag">১৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) অ্যামোনিয়া</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) টিএসপি</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) সুপার ফসফেট</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ইউরিয়া</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ঘ (ইউরিয়া)</strong><br>
+            <strong>ব্যাখ্যা:</strong> আশুগঞ্জ এএফসিসিএল দেশের অন্যতম শীর্ষ ইউরিয়া সার উৎপাদন কেন্দ্র।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৬ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১৬. ঘোড়াশাল সার কারখানায় উৎপাদিত সারের নাম কী?</span>
+            <span class="quiz-bcs-tag">১৪তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) টিএসপি</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) পটাশ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ইউরিয়া</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) এমোনিয়াম সালফেট</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (ইউরিয়া — বইয়ে অপশন ক্রমানুসারে 'উ. খ' মুদ্রিত থাকলেও ইউরিয়া)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ঘোড়াশাল পলাশ ফার্টিলাইজার কারখানায় উৎপাদিত সারের নাম ইউরিয়া।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৭ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১৭. চন্দ্রঘোনা কাগজ কলের প্রধান কাঁচামাল কী?</span>
+            <span class="quiz-bcs-tag">১৪তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) আখের ছোবড়া</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) জারুল গাছ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) বাঁশ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) নল-খাগড়া</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (বাঁশ — বইয়ে 'উ. খ' মুদ্রিত থাকলেও ব্যাখ্যা অনুযায়ী বাঁশ)</strong><br>
+            <strong>ব্যাখ্যা:</strong> কাপ্তাইয়ের চন্দ্রঘোনা কর্ণফুলী পেপার মিলের প্রধান কাঁচামাল হলো পার্বত্য চট্টগ্রামের পাহাড়ি বাঁশ।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৮ -->
+        <div class="quiz-card" data-answer="ঘ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১৮. বাংলাদেশের প্রধান জাহাজ নির্মাণ কারখানা কোথায় অবস্থিত?</span>
+            <span class="quiz-bcs-tag">১৪তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) নারায়নগঞ্জ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) চট্টগ্রাম</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) কক্সবাজার</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) খুলনা</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ঘ (খুলনা)</strong><br>
+            <strong>ব্যাখ্যা:</strong> বাংলাদেশ নৌবাহিনী পরিচালিত দেশের প্রধান জাহাজ নির্মাণ কারখানা খুলনা শিপইয়ার্ড লিমিটেড খুলনার লবণচরায় রূপসা নদীর তীরে অবস্থিত।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৯ -->
+        <div class="quiz-card" data-answer="না">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১৯. বাংলাদেশে বর্তমানে বার্ষিক চা উৎপাদনের পরিমাণ হচ্ছে প্রায় কত?</span>
+            <span class="quiz-bcs-tag">১২তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ৯ কোটি ৭৫ লাখ কেজি</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ৯ কোটি ৩৫ লাখ কেজি</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ৯ কোটি ৫০ লাখ কেজি</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ৯ কোটি ৬৫ লাখ কেজি</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: সাম্প্রতিক তথ্যের ভিত্তিতে সঠিক উত্তর নেই!</strong><br>
+            <strong>ব্যাখ্যা:</strong> কৃষি পরিসংখ্যান বর্ষগ্রন্থ-২০২৪ অনুযায়ী ২০২৩-২৪ বছরে চা উৎপাদনের মোট পরিমাণ ছিল ১ লক্ষ মেট্রিক টন (১০ কোটি কেজি)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২০ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">২০. জাতীয় ঔষধ নীতির প্রধান উদ্দেশ্য কী?</span>
+            <span class="quiz-bcs-tag">১১তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) অপ্রয়োজনীয় এবং ক্ষতিকর ঔষধ প্রস্তুত বন্ধ করা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ঔষধ শিল্পে দেশীয় কাঁচামালের ব্যবহার নিশ্চিত করা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ঔষধ শিল্পে দেশীয় শিল্পপতিদের অগ্রাধিকার দেয়া</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) বিদেশী শিল্পপতিদের দেশীয় কাঁচামাল ব্যবহারে বাধ্য করা</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (অপ্রয়োজনীয় এবং ক্ষতিকর ঔষধ প্রস্তুত বন্ধ করা)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ১৯৮২ সালের ঐতিহাসিক জাতীয় ঔষধ নীতি এবং পরবর্তীতে ২০১৬ এর নবায়িত ঔষধ নীতির মূল উদ্দেশ্য ছিল নকল, ক্ষতিকর, অপ্রয়োজনীয় ও নিম্নমানের ঔষধ প্রস্তুত ও বিক্রয় বন্ধ করা।
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- বইয়ের অসঙ্গতি ও যাচাই তালিকা -->
+    <div class="discrepancy-card">
+      <h3 style="color: var(--danger); margin-bottom: 12px;">⚠️ বইয়ের অসঙ্গতি ও যাচাই তালিকা</h3>
+      <p style="font-size: 0.875rem; margin-bottom: 14px;">বইয়ের পাতাগুলোতে মুদ্রিত অপশন কোড ও লেআউটে যেসব সুস্পষ্ট অসঙ্গতি পরিলক্ষিত হয়েছে:</p>
+      <div class="table-container">
+        <table>
+        <thead>
+          
+              <th>প্রশ্ন নং / বিষয়</th>
+              <th>বইয়ে যা মুদ্রিত আছে</th>
+              <th>প্রকৃত সমস্যা বা অসঙ্গতি</th>
+              <th>সঠিক রূপ ও যাচাই</th>
+            
+        </thead>
+        <tbody>
+          <tr>
+              <td>প্রশ্ন ৬ ও ১৯ (পৃ. ৪৭৫ ও ৪৭৭)</td>
+              <td>পুরোনো পরিসংখ্যানের অপশন</td>
+              <td>সমীক্ষা ও চা উৎপাদনের পুরোনো পরিসংখ্যান থাকায় সাম্প্রতিক হিসেবে অপশন অনুপস্থিত।</td>
+              <td>বইয়ের ফুটনোট অনুযায়ী "সাম্প্রতিক তথ্যের ভিত্তিতে সঠিক উত্তর নেই"।</td>
+            </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // ডার্ক / লাইট থিম টগল
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const target = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try {
+        localStorage.setItem('industry_theme', target);
+      } catch(e) {}
+    });
+
+    try {
+      const savedTheme = localStorage.getItem('industry_theme');
+      if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+    } catch(e) {}
+
+    // ফন্ট সাইজ স্কেলিং
+    let fontScale = 1;
+    const setScale = (delta, reset = false) => {
+      if (reset) fontScale = 1;
+      else fontScale = Math.min(Math.max(fontScale + delta, 0.8), 1.4);
+      document.documentElement.style.setProperty('--font-scale', fontScale);
+    };
+
+    document.getElementById('fontDown').addEventListener('click', () => setScale(-0.1));
+    document.getElementById('fontReset').addEventListener('click', () => setScale(0, true));
+    document.getElementById('fontUp').addEventListener('click', () => setScale(0.1));
+
+    // স্ক্রল প্রগ্রেস বার
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    // কুইজ হ্যান্ডলার
+    let correctCount = 0;
+    const answeredCards = new Set();
+
+    function evalQuiz(btn, selectedOption) {
+      const card = btn.closest('.quiz-card');
+      if (answeredCards.has(card)) return; // একবার উত্তর দিলে লক
+      answeredCards.add(card);
+
+      const correctAns = card.getAttribute('data-answer');
+      const allButtons = card.querySelectorAll('.quiz-opt');
+      const feedback = card.querySelector('.quiz-feedback');
+
+      allButtons.forEach(b => b.disabled = true);
+
+      if (correctAns === "না") {
+        // সাম্প্রতিক তথ্যে সঠিক অপশন অনুপস্থিত থাকলে
+        btn.classList.add('incorrect');
+        feedback.style.display = 'block';
+        feedback.style.background = 'var(--accent-light)';
+        feedback.style.color = 'var(--text)';
+      } else if (selectedOption === correctAns) {
+        btn.classList.add('correct');
+        correctCount++;
+        feedback.style.display = 'block';
+      } else {
+        btn.classList.add('incorrect');
+        allButtons.forEach(b => {
+          if (b.textContent.trim().startsWith(correctAns)) {
+            b.classList.add('correct');
+          }
+        });
+        feedback.style.display = 'block';
+      }
+
+      document.getElementById('quiz-score').textContent = `স্কোর: ${correctCount} / ২০`;
+    }
+  </script>
+  <script src="nav-component.js"></script>
+</body>
+</html>

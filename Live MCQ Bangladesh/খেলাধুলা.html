@@ -1,0 +1,1085 @@
+<!-- DESIGN PLAN:
+(১) বিষয়ের ধরন: বাংলাদেশ বিষয়াবলি — 'খেলাধুলা' (পৃষ্ঠা ৫৩৮–৫৪০)। মূলত ক্রিকেট (টেস্ট, ওয়ানডে, টি-টোয়েন্টি, বিশ্বকাপ), ফুটবল (সাফ চ্যাম্পিয়নশিপ), অলিম্পিক গেমস এবং ক্রীড়া প্রতিষ্ঠান (বিকেএসপি, স্টেডিয়াম)।
+(২) সবচেয়ে কঠিন/গুলিয়ে ফেলার জায়গা: বিভিন্ন ফরম্যাটে বাংলাদেশের প্রথম সেঞ্চুরিয়ান ও ডাবল সেঞ্চুরিয়ান (টেস্ট: আমিনুল ইসলাম বুলবুল বনাম মুশফিকুর রহিম; ওয়ানডে: মেহরাব হোসেন অপি; টি-টোয়েন্টি: তামিম ইকবাল; নারী ক্রিকেট: ফারজানা হক পিংকি); বিভিন্ন ফরম্যাটে প্রথম অধিনায়ক (MCC: আনোয়ারুল করিম শামীম; ওয়ানডে: গাজী আশরাফ লিপু; প্রথম বিশ্বকাপ: আমিনুল ইসলাম বুলবুল; প্রথম টেস্ট: নাইমুর রহমান দুর্জয়; প্রথম টি-টোয়েন্টি: শাহরিয়ার নাফীস); এবং ওয়ানডে অভিষেক ম্যাচে পাঁচ উইকেট (তাসকিন আহমেদ)।
+(৩) বাছাই করা মডিউল:
+    - ক্রিকেট রেকর্ডস ম্যাট্রিক্স (প্রথম সেঞ্চুরি, ডাবল সেঞ্চুরি, প্রথম জয় ও সিরিজ জয়)।
+    - বিভিন্ন ফরম্যাট ও ঐতিহাসিক ম্যাচের প্রথম অধিনায়কদের প্রোফাইল গ্রিড।
+    - বিকেএসপি ও ক্রীড়া প্রতিযোগিতার বিশেষ তথ্য কার্ড।
+    - ১৪টি বিসিএস বিগত প্রশ্নের শতভাগ নির্ভুল ইন্টারঅ্যাকটিভ কুইজ (OCR যাচাই ও অপশন-কোড অসঙ্গতি সংশোধনসহ)।
+(৪) রঙের মেজাজ: স্পোর্টস এনার্জির উপযোগী ডিপ ক্রিকেট গ্রাস গ্রিন (#166534), স্পোর্টস জার্সি গোল্ড (#d97706), অ্যাথলেটিক নেভি ব্লু এবং রিফ্রেশিং পুদিনা পাতা।
+(৫) হিরো ও মাসকটের ধরন: 'বিজয়ের স্মারক ও ক্রিকেট ট্রফি' মেটাফর; স্পোর্টস মেন্টর প্রতীক "কোচ চ্যাম্পিয়ন" (🏏/🏆)।
+-->
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>খেলাধুলা — বিসিএস পূর্ণাঙ্গ প্রস্তুতি ই-বুক</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-2: #f0fdf4;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #bbf7d0;
+      --primary: #166534;          /* গ্রাস গ্রিন */
+      --primary-dark: #14532d;
+      --primary-light: #dcfce7;
+      --accent: #d97706;           /* ট্রফি গোল্ড */
+      --accent-light: #fef3c7;
+      --navy: #1e3a8a;
+      --navy-light: #dbeafe;
+      --success: #15803d;
+      --success-light: #dcfce7;
+      --danger: #b91c1c;
+      --danger-light: #fee2e2;
+      --radius: 12px;
+      --shadow: 0 4px 10px rgba(22, 101, 52, 0.08);
+      --font-scale: 1;
+    }
+
+    [data-theme="dark"] {
+      --bg: #09120c;
+      --surface: #102015;
+      --surface-2: #162e1f;
+      --text: #f0fdf4;
+      --text-muted: #94a3b8;
+      --border: #244b32;
+      --primary: #4ade80;
+      --primary-dark: #22c55e;
+      --primary-light: #052e16;
+      --accent: #fbbf24;
+      --accent-light: #451a03;
+      --navy: #60a5fa;
+      --navy-light: #172554;
+      --success: #4ade80;
+      --success-light: #052e16;
+      --danger: #f87171;
+      --danger-light: #450a0a;
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    body {
+      font-family: 'Noto Sans Bengali', 'Kalpurush', Vrinda, sans-serif;
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.85;
+      background-color: var(--bg);
+      color: var(--text);
+      padding-bottom: 90px;
+    }
+
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: transparent;
+      z-index: 1001;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .control-bar {
+      position: sticky;
+      top: 5px;
+      z-index: 1000;
+      background: var(--surface);
+      border-bottom: 2px solid var(--border);
+      padding: 10px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      padding: 6px 14px;
+      font-size: calc(14px * var(--font-scale));
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+    }
+
+    button:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #166534, #1e3a8a);
+      color: #ffffff;
+      padding: 34px 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 26px;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: calc(26px * var(--font-scale));
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: calc(15px * var(--font-scale));
+      opacity: 0.95;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8125rem;
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #fff;
+    }
+
+    .section-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .section-header {
+      padding: 16px 20px;
+      background: var(--surface-2);
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .section-header h2 {
+      font-size: calc(18px * var(--font-scale));
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--primary);
+    }
+
+    [data-theme="dark"] .section-header h2 {
+      color: var(--primary);
+    }
+
+    .section-body {
+      padding: 20px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    .info-box {
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      border-left: 5px solid var(--primary);
+      padding: 14px 16px;
+      border-radius: 0 10px 10px 0;
+    }
+
+    .info-box.gold-box {
+      border-left-color: var(--accent);
+    }
+
+    .info-box.navy-box {
+      border-left-color: var(--navy);
+    }
+
+    .info-box h4 {
+      color: var(--text);
+      margin-bottom: 6px;
+      font-size: calc(16px * var(--font-scale));
+    }
+
+    .table-container {
+      overflow-x: auto;
+      margin: 14px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      font-size: calc(15px * var(--font-scale));
+    }
+
+    th {
+      background-color: var(--surface-2);
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    [data-theme="dark"] tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    .note-box {
+      background: var(--surface-2);
+      border-left: 5px solid var(--primary);
+      padding: 14px 18px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 16px 0;
+      color: var(--text);
+    }
+
+    .trap-box {
+      background: var(--danger-light);
+      border-left: 5px solid var(--danger);
+      padding: 14px 18px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 16px 0;
+      color: var(--text);
+    }
+
+    .quiz-card {
+      background: var(--surface-2);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+
+    .quiz-title-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      gap: 10px;
+    }
+
+    .quiz-bcs-tag {
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .quiz-question {
+      font-weight: bold;
+      font-size: calc(16px * var(--font-scale));
+      margin-bottom: 12px;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    @media (min-width: 600px) {
+      .quiz-options.two-col {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .quiz-opt {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      font-size: calc(15px * var(--font-scale));
+      font-family: inherit;
+    }
+
+    .quiz-opt:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .quiz-opt.correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+      color: var(--text);
+      font-weight: bold;
+    }
+
+    .quiz-opt.incorrect {
+      background: var(--danger-light) !important;
+      border-color: var(--danger) !important;
+      color: var(--text);
+    }
+
+    .quiz-feedback {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      display: none;
+      font-size: calc(14.5px * var(--font-scale));
+      line-height: 1.7;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    .discrepancy-card {
+      background: var(--surface);
+      border: 2px dashed var(--danger);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-top: 32px;
+    }
+
+    @media print {
+      .control-bar, #progress-container, .btn-group, button {
+        display: none !important;
+      }
+      body {
+        background: #fff;
+        color: #000;
+        font-size: 11pt;
+      }
+      .section-card {
+        border: 1px solid #777;
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+    }
+  
+/* Universal Mobile Optimization (Samsung A23 & small screens) */
+@media (max-width: 600px) {
+  .print-btn, button[onclick*="print"], .btn-ctrl:has(span:contains('🖨️')) {
+    display: none !important;
+  }
+  .container {
+    padding: 6px 8px 24px 8px !important;
+  }
+  .hero-box, .hero, .hero-banner {
+    padding: 16px 12px !important;
+    margin-top: 8px !important;
+    margin-bottom: 14px !important;
+  }
+  .table-responsive, .table-container {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+  }
+  .table-responsive table th, .table-responsive table td,
+  .table-container table th, .table-container table td {
+    padding: 7px 6px !important;
+  }
+}
+
+</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- পড়ার প্রগ্রেস বার -->
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <!-- স্টিকি কন্ট্রোল বার -->
+  <div class="control-bar">
+    <div class="btn-group">
+      <button id="themeToggle" title="থিম পরিবর্তন">🌓 থিম</button>
+      <button id="fontDown" title="ফন্ট ছোট">A-</button>
+      <button id="fontReset" title="স্বাভাবিক ফন্ট">A</button>
+      <button id="fontUp" title="ফন্ট বড়">A+</button>
+    </div>
+    <div class="btn-group">
+      <button onclick="document.getElementById('quiz-section').scrollIntoView({behavior: 'smooth'})">📝 সব MCQ কুইজ</button>
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆️ উপরে</button>
+      <button onclick="window.print()">🖨️ প্রিন্ট / PDF</button>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- হিরো সেকশন -->
+    <div class="hero">
+      <div style="font-size: 2.375rem; margin-bottom: 8px;">🏏</div>
+      <h1>বাংলাদেশের জাতীয় অর্জন: খেলাধুলা</h1>
+      <p>টেস্ট ও ওয়ানডে ক্রিকেট ইতিহাস, প্রথম সেঞ্চুরিয়ান ও ডাবল সেঞ্চুরিয়ান, ঐতিহাসিক অধিনায়কবৃন্দ, বিশ্বকাপ ক্রিকেট ২০২৩, সাফ ফুটবল ও বিকেএসপি সংক্রান্ত বিসিএস বিগত পরীক্ষার পূর্ণাঙ্গ সংকলন।</p>
+      <div class="hero-meta">
+        <span class="badge">পৃষ্ঠা: ৫৩৮ – ৫৪০</span>
+        <span class="badge">বিসিএস প্রশ্নব্যাংক: ১৪টি পূর্ণাঙ্গ সমাধান</span>
+        <span class="badge">১০ম থেকে ৪৭তম বিসিএস কভারেজ</span>
+      </div>
+    </div>
+
+    <!-- বিসিএস প্রশ্ন পরিসংখ্যান ছক -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>📊 বিসিএসে প্রশ্ন আসার পরিসংখ্যান (বইয়ের ছক অনুযায়ী)</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: খেলাধুলা অংশের গুরুত্ব অনুধাবন। (আনুমানিক পাঠ সময়: ২ মিনিট) (আমার অনুমান)
+        </p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>বিসিএস সংস্করণ</th>
+                <th>প্রশ্ন সংখ্যা</th>
+                <th>বিসিএস সংস্করণ</th>
+                <th>প্রশ্ন সংখ্যা</th>
+                <th>বিসিএস সংস্করণ</th>
+                <th>প্রশ্ন সংখ্যা</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>৪৭তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৩৭তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>১০ম-৩৪তম বিসিএস</strong></td>
+                <td>৮টি</td>
+              </tr>
+              <tr>
+                <td><strong>৪৬তম বিসিএস</strong></td>
+                <td>২টি</td>
+                <td><strong>৩৬তম ও ৪৫তম</strong></td>
+                <td>০টি</td>
+                <td><strong>৩৯তম, ৪০তম, ৪১তম, ৪২তম, ৪৩তম, ৪৪তম</strong></td>
+                <td>(বইয়ে ফাঁকা)</td>
+              </tr>
+              <tr>
+                <td><strong>৩৮তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৩৫তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৪৮তম, ৪৯তম, ৫০তম</strong></td>
+                <td>(বইয়ে ফাঁকা)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- মডিউল ১: ক্রিকেট রেকর্ডের মাস্টার টেবিল -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>🏏 বাংলাদেশ ক্রিকেটের প্রথম ও ঐতিহাসিক মাইলফলক</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: ফরম্যাটভিত্তিক প্রথম সেঞ্চুরি, ডাবল সেঞ্চুরি ও ঐতিহাসিক অর্জন মুখস্থ করা। (আনুমানিক পাঠ সময়: ৫ মিনিট) (আমার অনুমান)
+        </p>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ক্রিকেটের মাইলফলক / বিষয়</th>
+                <th>রেকর্ডধারী খেলোয়াড় / দেশ</th>
+                <th>তারিখ ও প্রতিপক্ষ দল</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>টেস্ট ক্রিকেটে প্রথম ডাবল সেঞ্চুরি</strong></td>
+                <td><strong>মুশফিকুর রহিম</strong></td>
+                <td>মার্চ ২০১৩; গল, শ্রীলঙ্কা। (তিনি টেস্টে ৩টি ডাবল সেঞ্চুরির মালিক এবং প্রথম বাংলাদেশি হিসেবে ৫০০০ রান স্পর্শ করেন)।</td>
+              </tr>
+              <tr>
+                <td><strong>টেস্টে প্রথম সেঞ্চুরি</strong></td>
+                <td><strong>আমিনুল ইসলাম বুলবুল</strong></td>
+                <td>১০ নভেম্বর ২০০০; ভারতের বিপক্ষে অভিষেক টেস্টে।</td>
+              </tr>
+              <tr>
+                <td><strong>ওয়ানডেতে প্রথম সেঞ্চুরি</strong></td>
+                <td><strong>মেহরাব হোসেন অপি</strong></td>
+                <td>জিম্বাবুয়ের বিপক্ষে (আমার অনুমান)।</td>
+              </tr>
+              <tr>
+                <td><strong>টি-টোয়েন্টিতে প্রথম সেঞ্চুরি</strong></td>
+                <td><strong>তামিম ইকবাল খান</strong></td>
+                <td>আন্তর্জাতিক টি-টোয়েন্টি আসরে (আমার অনুমান)।</td>
+              </tr>
+              <tr>
+                <td><strong>ওয়ানডেতে প্রথম নারী সেঞ্চুরিয়ান</strong></td>
+                <td><strong>ফারজানা হক পিংকি</strong></td>
+                <td>বাংলাদেশ নারী ক্রিকেট দল।</td>
+              </tr>
+              <tr>
+                <td><strong>টেস্টে কনিষ্ঠতম সেঞ্চুরিয়ান</strong></td>
+                <td><strong>মোহাম্মদ আশরাফুল</strong></td>
+                <td>২০০১ সালে শ্রীলঙ্কার বিপক্ষে বিশ্বরেকর্ড গড়েন।</td>
+              </tr>
+              <tr>
+                <td><strong>টেস্টে প্রথম ব্যক্তিগত ১০০০ রান</strong></td>
+                <td><strong>হাবিবুল বাশার</strong></td>
+                <td>বাংলাদেশ টেস্ট দলের সাবেক অধিনায়ক (আমার অনুমান)।</td>
+              </tr>
+              <tr>
+                <td><strong>শততম টেস্টে সেঞ্চুরি</strong></td>
+                <td><strong>সাকিব আল হাসান</strong></td>
+                <td>২০১৭ সালে শ্রীলঙ্কার কলম্বোতে অনুষ্ঠিত ঐতিহাসিক শততম টেস্টে।</td>
+              </tr>
+              <tr>
+                <td><strong>ওয়ানডে অভিষেকে ৫ উইকেট</strong></td>
+                <td><strong>তাসকিন আহমেদ</strong></td>
+                <td>১৭ জুন ২০১৪; ভারতের বিপক্ষে প্রথম বাংলাদেশি হিসেবে অভিষেক ম্যাচেই ৫ উইকেট।</td>
+              </tr>
+              <tr>
+                <td><strong>বিশ্বকাপ ২০২৩-এ সর্বোচ্চ রান ও উইকেট</strong></td>
+                <td>রান: <strong>মাহমুদুল্লাহ রিয়াদ</strong> (৩২৮ রান)<br>উইকেট: <strong>শরিফুল ইসলাম</strong> (১০ উইকেট)</td>
+                <td>ভারত বিশ্বকাপ ২০২৩ (বাংলাদেশ ৯ ম্যাচে ২ জয় পায়)।</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- মডিউল ২: ঐতিহাসিক প্রথম অধিনায়ক ও স্ট্যাটাস প্রাপ্তি -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>👑 বাংলাদেশ জাতীয় দলের প্রথম অধিনায়কবৃন্দ ও স্ট্যাটাস প্রাপ্তি</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: বিভিন্ন ফরম্যাটের প্রথম অধিনায়ক ও সিরিজ জয়ের তারিখ আয়ত্ত করা। (আনুমানিক পাঠ সময়: ৪ মিনিট) (আমার অনুমান)
+        </p>
+
+        <div class="card-grid">
+          <div class="info-box">
+            <h4>প্রথম জাতীয় অধিনায়ক</h4>
+            <p><strong>আনোয়ারুল করিম শামীম</strong></p>
+            <small>১৯৭৭ সালে এমসিসি (MCC)-এর বিপক্ষে নেতৃত্ব দেন।</small>
+          </div>
+
+          <div class="info-box gold-box">
+            <h4>আইসিসি ট্রফিতে প্রথম অধিনায়ক</h4>
+            <p><strong>রাকিবুল হাসান</strong> (১৯৭৯)</p>
+            <small>২য় বার ১৯৮২ সালে অধিনায়ক ছিলেন শফিকুল হক হীরা।</small>
+          </div>
+
+          <div class="info-box navy-box">
+            <h4>ওয়ানডেতে প্রথম অধিনায়ক</h4>
+            <p><strong>গাজী আশরাফ হোসেন লিপু</strong></p>
+            <small>সর্বপ্রথম ওয়ানডে ম্যাচ: ৩১ মার্চ ১৯৮৬ (পাকিস্তানের বিপক্ষে)।</small>
+          </div>
+
+          <div class="info-box">
+            <h4>বিশ্বকাপে প্রথম অধিনায়ক</h4>
+            <p><strong>আমিনুল ইসলাম বুলবুল</strong></p>
+            <small>১৯৯৯ সালের বিশ্বকাপ ওয়ানডে ক্রিকেট আসরে (আমার অনুমান)।</small>
+          </div>
+
+          <div class="info-box gold-box">
+            <h4>টেস্টে প্রথম অধিনায়ক</h4>
+            <p><strong>নাইমুর রহমান দুর্জয়</strong></p>
+            <small>১০ নভেম্বর ২০০০ (ভারতের বিপক্ষে অভিষেক টেস্ট)।</small>
+          </div>
+
+          <div class="info-box navy-box">
+            <h4>টি-টোয়েন্টিতে প্রথম অধিনায়ক</h4>
+            <p><strong>শাহরিয়ার নাফীস</strong></p>
+            <small>বাংলাদেশের অভিষেক আন্তর্জাতিক টি-টোয়েন্টি ম্যাচে।</small>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ফরম্যাট / দল</th>
+                <th>স্ট্যাটাস প্রাপ্তির তারিখ</th>
+                <th>প্রথম ম্যাচ ও প্রথম জয়</th>
+                <th>প্রথম সিরিজ জয়</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>ওয়ানডে ক্রিকেট</strong></td>
+                <td>১৯৯৭ সালে ওয়ানডে স্ট্যাটাস লাভ।</td>
+                <td>প্রথম ওয়ানডে: ৩১ মার্চ ১৯৮৬ (বনাম পাকিস্তান)।<br>প্রথম জয়: ১৭ মে ১৯৯৮ (বনাম কেনিয়া)।</td>
+                <td><strong>২০০৫ সালে জিম্বাবুয়ের বিপক্ষে</strong>।</td>
+              </tr>
+              <tr>
+                <td><strong>টেস্ট ক্রিকেট</strong></td>
+                <td><strong>২৬ জুন ২০০০</strong> (আইসিসির ১০ম পূর্ণাঙ্গ সদস্য হিসেবে)।</td>
+                <td>প্রথম টেস্ট: ১০ নভেম্বর ২০০০ (বনাম ভারত)।<br>প্রথম টেস্ট জয়: ২০০৫ সালে চট্টগ্রামে (বনাম জিম্বাবুয়ে)।</td>
+                <td><strong>১০ জানুয়ারি ২০০৫ (জিম্বাবুয়ের বিপক্ষে)</strong>।</td>
+              </tr>
+              <tr>
+                <td><strong>নারী ক্রিকেট দল</strong></td>
+                <td>২০১১ সালে ওয়ানডে স্ট্যাটাস (যুক্তরাষ্ট্রকে হারিয়ে); ২০২১ সালে টেস্ট স্ট্যাটাস লাভ।</td>
+                <td>২০১৮ সালে এশিয়া কাপের শিরোপা জয় লাভ করে।</td>
+                <td>ঐতিহাসিক এশিয়া কাপ জয় ২০১৮।</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- মডিউল ৩: ফুটবল, অলিম্পিক, ভেন্যু ও বিকেএসপি -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>⚽ ফুটবল, অলিম্পিক ও জাতীয় ক্রীড়া সংস্থা</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: সাফ চ্যাম্পিয়নশিপ, অলিম্পিক ইতিহাস, ভেন্যু ও বিকেএসপির তথ্য আয়ত্ত করা। (আনুমানিক পাঠ সময়: ৪ মিনিট) (আমার অনুমান)
+        </p>
+
+        <div class="card-grid">
+          <div class="info-box">
+            <h4>সাফ ফুটবল (SAFF) চ্যাম্পিয়ন</h4>
+            <p>• <strong>২০০৩:</strong> বাংলাদেশে অনুষ্ঠিত ৩য় সাফে মালদ্বীপকে টাইব্রেকারে ৫-৩ গোলে হারিয়ে পুরুষ দল চ্যাম্পিয়ন হয়।<br>• <strong>২০২৪:</strong> নেপালের দশরথ রঙ্গশালায় নেপালকে ২-১ গোলে হারিয়ে বাংলাদেশ নারী ফুটবল দল চ্যাম্পিয়ন হয়!</p>
+          </div>
+
+          <div class="info-box gold-box">
+            <h4>অলিম্পিক গেমসে বাংলাদেশ</h4>
+            <p>• ১৯৮০ সালে বিশ্ব অলিম্পিক অ্যাসোসিয়েশনের সদস্যপদ পায়।<br>• <strong>প্রথম অংশগ্রহণ:</strong> <strong>১৯৮৪ সালে</strong> যুক্তরাষ্ট্রের <strong>লস এঞ্জেলেস</strong> ৩৪তম গ্রীষ্মকালীন অলিম্পিকে!</p>
+          </div>
+
+          <div class="info-box navy-box">
+            <h4>বিকেএসপি (BKSP)</h4>
+            <p>• সাভারের জিরানীতে ১১৯ একর জমিতে অবস্থিত একমাত্র সমন্বিত ক্রীড়া শিক্ষা প্রতিষ্ঠান।<br>• ১৯৭৪ সালে পরিকল্পনা (BIS), ১৯৭৬ সালে শুরু, <strong>১৯৮৩ সালে অধ্যাদেশে বিকেএসপি</strong> নাম এবং ১৯৮৬ সালে পূর্ণাঙ্গ কার্যক্রম শুরু!</p>
+          </div>
+
+          <div class="info-box">
+            <h4>স্টেডিয়াম ও টুর্নামেন্ট</h4>
+            <p>• <strong>শহীদ চান্দু স্টেডিয়াম:</strong> বগুড়া শহরে অবস্থিত (ধারণক্ষমতা ২০,০০০; টেস্ট অভিষেক ২০০৬)!<br>• <strong>মা ও মনি:</strong> ১৯৯২ সালে ঢাকায় অনুষ্ঠিত একটি আন্তর্জাতিক ফুটবল ক্লাব টুর্নামেন্ট (মা ও মনি গোল্ডকাপ)!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ১৪টি বিসিএস বিগত প্রশ্নের ইন্টারঅ্যাকটিভ কুইজ সেকশন -->
+    <div class="section-card" id="quiz-section">
+      <div class="section-header">
+        <h2>📝 বিসিএস বিগত প্রশ্নব্যাংক ও ইন্টারঅ্যাকটিভ কুইজ (১ থেকে ১৪)</h2>
+        <span class="badge" id="quiz-score">স্কোর: ০ / ১৪</span>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 16px; color: var(--text-muted);">
+          বইয়ের মূল প্রশ্ন ও ব্যাখ্যার ভিত্তিতে ইন্টারঅ্যাকটিভ কুইজে অংশ নাও। অপশনে ক্লিক করলে তাৎক্ষণিক সঠিক/ভুল এবং পূর্ণ ব্যাখ্যা প্রদর্শিত হবে।
+        </p>
+
+        <!-- প্রশ্ন ১ -->
+        <div class="quiz-card" data-answer="ঘ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১. টেস্ট ক্রিকেটে প্রথম বাংলাদেশি হিসেবে ডাবল সেঞ্চুরি করেন কে?</span>
+            <span class="quiz-bcs-tag">৪৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) সাকিব আল হাসান</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) নাজমুল হোসেন শান্ত</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) মমিনুল হক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) মুশফিকুর রহিম</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ঘ (মুশফিকুর রহিম)</strong><br>
+            <strong>ব্যাখ্যা:</strong> টেস্ট ক্রিকেটে বাংলাদেশের পক্ষে প্রথম ডাবল সেঞ্চুরির কৃতিত্ব অর্জন করেন মুশফিকুর রহিম। টেস্টে বাংলাদেশের পক্ষে প্রথম সেঞ্চুরি করেন আমিনুল ইসলাম বুলবুল।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২ -->
+        <div class="quiz-card" data-answer="ঘ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">২. বিশ্বকাপ ক্রিকেট ২০২৩-এ বাংলাদেশের কোন খেলোয়াড় সর্বোচ্চ রান করেন?</span>
+            <span class="quiz-bcs-tag">৪৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) লিটন দাস</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) সাকিব আল হাসান</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) মুশফিকুর রহিম</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) মাহমুদুল্লাহ রিয়াদ</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ঘ (মাহমুদুল্লাহ রিয়াদ)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ২০২৩ বিশ্বকাপ ক্রিকেটে বাংলাদেশের পক্ষে সর্বোচ্চ রান সংগ্রহ করেন মাহমুদুল্লাহ রিয়াদ (৩২৮ রান) এবং সর্বোচ্চ উইকেট নেন শরিফুল ইসলাম (১০ উইকেট)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩ -->
+        <div class="quiz-card" data-answer="ঘ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৩. বাংলাদেশ প্রথম ওয়ানডে এবং টেস্ট সিরিজ জয় করে কোন দেশের বিপক্ষে?</span>
+            <span class="quiz-bcs-tag">৪৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) পাকিস্তান</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) দক্ষিণ আফ্রিকা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ভারত</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) জিম্বাবুয়ে</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ঘ (জিম্বাবুয়ে)</strong><br>
+            <strong>ব্যাখ্যা:</strong> বাংলাদেশ প্রথম ওয়ানডে ও টেস্ট সিরিজ উভয়ই জয় করে জিম্বাবুয়ের বিপক্ষে (২০০৫ সালে)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৪ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৪. টেস্ট ক্রিকেটে বাংলাদেশের পক্ষে কে প্রথম ডাবল সেঞ্চুরি করেন?</span>
+            <span class="quiz-bcs-tag">৩৮তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) মুশফিক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) তামিম</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) সাব্বির</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) লিটন দাস</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (মুশফিক)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ২০১৩ সালের মার্চে শ্রীলঙ্কার গলে প্রথম বাংলাদেশি ক্রিকেটার হিসেবে টেস্টে ডাবল সেঞ্চুরি করেন মুশফিকুর রহিম।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৫ -->
+        <div class="quiz-card" data-answer="ঘ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৫. ক্রিকেটে বাংলাদেশ টেস্ট মর্যাদা পায় কোন সালে?</span>
+            <span class="quiz-bcs-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ১৯৯৭ সালে</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ১৯৯৯ সালে</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ২০০১ সালে</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ২০০০ সালে</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ঘ (২০০০ সালে)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ২৬ জুন ২০০০ সালে আইসিসির দশম পূর্ণাঙ্গ সদস্য হিসেবে বাংলাদেশ টেস্ট স্ট্যাটাস লাভ করে।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৬ -->
+        <div class="quiz-card" data-answer="ঘ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৬. বাংলাদেশের পক্ষে ওয়ানডে অভিষেকে কোন ক্রিকেটার পাঁচ উইকেট পেয়েছেন?</span>
+            <span class="quiz-bcs-tag">৩৫তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) সোহাগ গাজী</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) তাইজুল ইসলাম</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) রুবেল হোসেন</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) তাসকিন আহমেদ</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ঘ (তাসকিন আহমেদ)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ফাস্ট বোলার তাসকিন আহমেদ ১৭ জুন ২০১৪ তারিখে ভারতের বিপক্ষে অভিষেক ম্যাচে প্রথম বাংলাদেশি বোলার হিসেবে ৫ উইকেট লাভ করেন।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৭ -->
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৭. এশিয়া কাপ ক্রিকেট, ২০১২ কোন স্টেডিয়ামে অনুষ্ঠিত হয়?</span>
+            <span class="quiz-bcs-tag">৩৩তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) বঙ্গবন্ধু জাতীয় স্টেডিয়াম</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) শেরে বাংলা জাতীয় স্টেডিয়াম</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) বাংলাদেশ আর্মি স্টেডিয়াম</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) রাজশাহী স্টেডিয়াম</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: খ (শেরে বাংলা জাতীয় স্টেডিয়াম)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ২০১২ সালের ১১-২২ মার্চ ১১তম এশিয়া কাপ ক্রিকেট মিরপুরের শেরে বাংলা জাতীয় স্টেডিয়ামে অনুষ্ঠিত হয়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৮ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৮. ক্রিকেটে বাংলাদেশ কোন সালে টেস্ট মর্যাদা পায়?</span>
+            <span class="quiz-bcs-tag">৩০তম ও ২৫তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ১৯৯৮</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ১৯৯৯</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ২০০০</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ২০০১</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (২০০০)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ২৬ জুন ২০০০ সালে আইসিসির দশম পূর্ণাঙ্গ সদস্য হিসেবে বাংলাদেশ টেস্ট স্ট্যাটাস লাভ করে।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৯ -->
+        <div class="quiz-card" data-answer="রাকিবুল হাসান">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৯. প্রথম আইসিসি ট্রফিতে বাংলাদেশ দলের অধিনায়ক কে ছিলেন?</span>
+            <span class="quiz-bcs-tag">২৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) গাজী আশরাফ হোসেন লীপু</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) আমিনুল ইসলাম বুলবুল</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) আকরাম খান</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) শফিকুল হক হীরা</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: অপশনে সঠিক উত্তর নেই (প্রকৃত উত্তর: রকিবুল হাসান)!</strong><br>
+            <strong>ব্যাখ্যা:</strong> ১৯৭৯ সালে অনুষ্ঠিত ১ম আইসিসি ট্রফিতে বাংলাদেশ দলের অধিনায়ক ছিলেন <strong>রকিবুল হাসান</strong>। ১৯৮২ সালে ২য় আসরে অধিনায়ক ছিলেন শফিকুল হক হীরা।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১০ -->
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১০. শহীদ চান্দু স্টেডিয়াম কোন শহরে অবস্থিত?</span>
+            <span class="quiz-bcs-tag">২৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) রাজশাহী</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) বগুড়া</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) কুমিল্লা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) চট্টগ্রাম</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: খ (বগুড়া)</strong><br>
+            <strong>ব্যাখ্যা:</strong> শহীদ চান্দু স্টেডিয়াম বগুড়া শহরে অবস্থিত। ২০০৬ সালে এখানে বাংলাদেশ-শ্রীলঙ্কা টেস্ট ম্যাচ অনুষ্ঠিত হয়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১১ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১১. সম্প্রতি 'সাফ' ফুটবলে এই দেশের সাথে খেলে বাংলাদেশ শিরোপা পায়-</span>
+            <span class="quiz-bcs-tag">২৪তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) মালদ্বীপ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) পাকিস্তান</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ভারত</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) নেপাল</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (মালদ্বীপ)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ২০০৩ সালে ঢাকায় অনুষ্ঠিত ৩য় সাফ ফুটবলের ফাইনালে বাংলাদেশ টাইব্রেকারে মালদ্বীপকে ৫-৩ গোলে হারিয়ে চ্যাম্পিয়ন হয়। (নারী সাফ ২০২৪-এ নেপালকে হারিয়ে চ্যাম্পিয়ন হয় বাংলাদেশ)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১২ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১২. বাংলাদেশ কোন অলিম্পিক গেমসে প্রথম অংশগ্রহণ করে?</span>
+            <span class="quiz-bcs-tag">২১তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) লসএঞ্জেলস</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) মস্কো</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) আটলান্টা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) মেক্সিকো সিটি</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (লসএঞ্জেলস)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ১৯৮৪ সালে যুক্তরাষ্ট্রের লস এঞ্জেলেসে অনুষ্ঠিত গ্রীষ্মকালীন অলিম্পিকে বাংলাদেশ প্রথম অংশগ্রহণ করে।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৩ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১৩. বিকেএসপি (BKSP) হলো-</span>
+            <span class="quiz-bcs-tag">১১তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) একটি ক্রীড়া শিক্ষা সংস্থার নাম</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) একটি সংবাদ সংস্থার নাম</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) একটি কিশোর ফুটবল টিমের নাম</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) একটি সঙ্গীত শিক্ষা প্রতিষ্ঠানের নাম</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (একটি ক্রীড়া শিক্ষা সংস্থার নাম)</strong><br>
+            <strong>ব্যাখ্যা:</strong> বাংলাদেশ ক্রীড়া শিক্ষা প্রতিষ্ঠান (বিকেএসপি) সাভারের জিরানীতে অবস্থিত দেশের একমাত্র জাতীয় ক্রীড়া শিক্ষা সংস্থা।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ১৪ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১৪. 'মা ও মনি' হলো-</span>
+            <span class="quiz-bcs-tag">১১তম বিসিএস</span>
+          </div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) একটি উপন্যাসের নাম</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) একটি প্রসাধনী শিল্পের নাম</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) একটি ক্রীড়া প্রতিযোগিতার নাম</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) একটি গরিব মা ও মেয়ের গল্প কাহিনী</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (একটি ক্রীড়া প্রতিযোগিতার নাম)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ১৯৯২ সালে ঢাকায় ক্লাব দলগুলোকে নিয়ে 'মা ও মনি গোল্ডকাপ' আন্তর্জাতিক ফুটবল টুর্নামেন্ট অনুষ্ঠিত হয়েছিল।
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- বইয়ের অসঙ্গতি ও যাচাই তালিকা -->
+    <div class="discrepancy-card">
+      <h3 style="color: var(--danger); margin-bottom: 12px;">⚠️ বইয়ের অসঙ্গতি ও যাচাই তালিকা</h3>
+      <p style="font-size: 0.875rem; margin-bottom: 14px;">বইয়ের পাতাগুলোতে মুদ্রিত অপশন কোড ও তথ্যে যেসব ত্রুটি পরিলক্ষিত হয়েছে:</p>
+      <div class="table-container">
+        <table>
+        <thead>
+          
+              <td>প্রশ্ন ৯ (পৃ. ৫৩৯)</td>
+              <td>অপশনে 'রাকিবুল হাসান' নেই এবং কোনো উত্তর সংকেত (উ.) ছাপা হয়নি।</td>
+              <td>প্রথম আইসিসি ট্রফিতে (১৯৭৯) অধিনায়ক ছিলেন রকিবুল হাসান, যা অপশনে অনুপস্থিত ছিল।</td>
+              <td>সঠিক উত্তর <strong>রকিবুল হাসান</strong> (বিকল্পে না থাকলে বাতিল প্রশ্ন)।</td>
+            
+        </thead>
+        <tbody>
+          <tr>
+              <td>প্রশ্ন ৭ (পৃ. ৫৩৯)</td>
+              <td>"২০১২ সালের ১১-১২ মার্চ"</td>
+              <td>তারিখ বিভ্রাট: এশিয়া কাপ সাধারণত দীর্ঘ সময় ধরে চলে; ১১-২২ মার্চ হবে (আমার অনুমান)।</td>
+              <td>মিরপুর শেরে বাংলা স্টেডিয়ামে টুর্নামেন্টটি অনুষ্ঠিত হয়।</td>
+            </tr>
+          <tr>
+              <td>সাফ ফুটবল ব্যাখ্যা (পৃ. ৫৪০)</td>
+              <td>"নেপালের দশরফ রঙ্গশালা"</td>
+              <td>টাইপো বা বানান ভুল।</td>
+              <td>সঠিক নাম <strong>দশরথ রঙ্গশালা</strong> স্টেডিয়াম (আমার অনুমান)।</td>
+            </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const target = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try {
+        localStorage.setItem('sports_theme', target);
+      } catch(e) {}
+    });
+
+    try {
+      const savedTheme = localStorage.getItem('sports_theme');
+      if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+    } catch(e) {}
+
+    let fontScale = 1;
+    const setScale = (delta, reset = false) => {
+      if (reset) fontScale = 1;
+      else fontScale = Math.min(Math.max(fontScale + delta, 0.8), 1.4);
+      document.documentElement.style.setProperty('--font-scale', fontScale);
+    };
+
+    document.getElementById('fontDown').addEventListener('click', () => setScale(-0.1));
+    document.getElementById('fontReset').addEventListener('click', () => setScale(0, true));
+    document.getElementById('fontUp').addEventListener('click', () => setScale(0.1));
+
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    let correctCount = 0;
+    const answeredCards = new Set();
+
+    function evalQuiz(btn, selectedOption) {
+      const card = btn.closest('.quiz-card');
+      if (answeredCards.has(card)) return;
+      answeredCards.add(card);
+
+      const correctAns = card.getAttribute('data-answer');
+      const allButtons = card.querySelectorAll('.quiz-opt');
+      const feedback = card.querySelector('.quiz-feedback');
+
+      allButtons.forEach(b => b.disabled = true);
+
+      if (correctAns === "রাকিবুল হাসান") {
+        btn.classList.add('incorrect');
+        feedback.style.display = 'block';
+        feedback.style.background = 'var(--accent-light)';
+        feedback.style.color = 'var(--text)';
+      } else if (selectedOption === correctAns) {
+        btn.classList.add('correct');
+        correctCount++;
+        feedback.style.display = 'block';
+      } else {
+        btn.classList.add('incorrect');
+        allButtons.forEach(b => {
+          if (b.textContent.trim().startsWith(correctAns)) {
+            b.classList.add('correct');
+          }
+        });
+        feedback.style.display = 'block';
+      }
+
+      document.getElementById('quiz-score').textContent = `স্কোর: ${correctCount} / ১৪`;
+    }
+  </script>
+  <script src="nav-component.js"></script>
+</body>
+</html>

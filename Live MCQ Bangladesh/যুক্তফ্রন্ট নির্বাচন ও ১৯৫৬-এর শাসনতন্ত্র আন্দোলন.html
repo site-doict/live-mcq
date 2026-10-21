@@ -1,0 +1,914 @@
+<!-- DESIGN PLAN:
+(১) বিষয়ের ধরন: বাংলাদেশ বিষয়াবলি — 'যুক্তফ্রন্ট নির্বাচন ও ১৯৫৬-এর শাসনতন্ত্র আন্দোলন' (পৃষ্ঠা ৪২৬-৪২৭)। রাজনৈতিক ইতিহাস, নির্বাচনী পরিসংখ্যান, ঐতিহাসিক ২১ দফা ও ঐতিহাসিক কাগমারী সম্মেলন।
+(২) সবচেয়ে কঠিন/গুলিয়ে ফেলার জায়গা: মুসলিম আসন (২৩৭) বনাম অমুসলিম আসন (৭২) বনাম সর্বমোট আসন (৩০৯); যুক্তফ্রন্টের মোট জয় (২৩৬: মুসলিম ২২৩ + অমুসলিম ১৩) বনাম শরীক দলগুলোর একক আসন বণ্টন (আওয়ামী মুসলিম লীগ ১৪৩, কৃষক-শ্রমিক পার্টি ৪৮, নেজামে ইসলাম ১৯, গণতন্ত্রী দল ১৩); এবং কাগমারী সম্মেলন বনাম যুক্তফ্রন্টের রাজনৈতিক পটভূমি।
+(৩) বাছাই করা মডিউল:
+    - নির্বাচনী পরিসংখ্যান ও আসন বণ্টনের স্পষ্ট গ্রিড ও ম্যাট্রিক্স চার্ট।
+    - ৪টি শরীক দল ও শীর্ষ নেতাদের প্রোফাইল কার্ড।
+    - যুক্তফ্রন্ট সরকারের সময়কাল ও কালানুক্রমিক টাইমলাইন ফ্লো (গঠন → মন্ত্রিসভা → বরখাস্ত)।
+    - ঐতিহাসিক ২১ দফা ও কাগমারী সম্মেলনের কি-পয়েন্ট কার্ড।
+    - ৫টি বিসিএস বিগত প্রশ্নের ইন্টারঅ্যাকটিভ কুইজ (OCR যাচাই ও অপশন-কোড অসঙ্গতি সংশোধনসহ)।
+(৪) রঙের মেজাজ: নির্বাচনী ও রাজনৈতিক ঐতিহ্যের মেজাজে গাঢ় সবুজ (#065f46), সোনালি নৌকার হলুদ-কমলা (#d97706) এবং হালকা মিন্ট পার্চমেন্ট।
+(৫) হিরো ও মাসকটের ধরন: 'নৌকা প্রতীক ও নির্বাচনী ম্যান্ডেট' মেটাফর; হিস্ট্রি মেন্টর প্রতীক "ঐতিহাসিক গবেষক" (🗳️/📜)।
+-->
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>যুক্তফ্রন্ট নির্বাচন ও ১৯৫৬-এর শাসনতন্ত্র আন্দোলন — বিসিএস পূর্ণাঙ্গ ই-বুক</title>
+  <style>
+    :root {
+      --bg: #f7faf8;
+      --surface: #ffffff;
+      --surface-2: #edf5f0;
+      --text: #132a1e;
+      --text-muted: #4a6356;
+      --border: #c3d9cc;
+      --primary: #065f46;
+      --primary-dark: #022c22;
+      --primary-light: #d1fae5;
+      --accent: #d97706;
+      --accent-light: #fef3c7;
+      --danger: #b91c1c;
+      --danger-light: #fee2e2;
+      --success: #15803d;
+      --success-light: #dcfce7;
+      --radius: 12px;
+      --shadow: 0 4px 10px rgba(6, 95, 70, 0.08);
+      --font-scale: 1;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0a140f;
+      --surface: #122119;
+      --surface-2: #1b3026;
+      --text: #ecfdf5;
+      --text-muted: #93b5a1;
+      --border: #2c4a39;
+      --primary: #34d399;
+      --primary-dark: #059669;
+      --primary-light: #064e3b;
+      --accent: #fbbf24;
+      --accent-light: #451a03;
+      --danger: #f87171;
+      --danger-light: #450a0a;
+      --success: #4ade80;
+      --success-light: #052e16;
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    body {
+      font-family: 'Noto Sans Bengali', 'Kalpurush', Vrinda, sans-serif;
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.85;
+      background-color: var(--bg);
+      color: var(--text);
+      padding-bottom: 90px;
+    }
+
+    /* স্ক্রল প্রগ্রেস বার */
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: transparent;
+      z-index: 1001;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    /* স্টিকি কন্ট্রোল বার */
+    .control-bar {
+      position: sticky;
+      top: 5px;
+      z-index: 1000;
+      background: var(--surface);
+      border-bottom: 2px solid var(--border);
+      padding: 10px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      padding: 6px 14px;
+      font-size: calc(14px * var(--font-scale));
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+    }
+
+    button:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+
+    /* হিরো সেকশন */
+    .hero {
+      background: linear-gradient(135deg, #065f46, #022c22);
+      color: #ffffff;
+      padding: 34px 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 26px;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: calc(26px * var(--font-scale));
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: calc(15px * var(--font-scale));
+      opacity: 0.95;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8125rem;
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #fff;
+    }
+
+    /* কার্ডস */
+    .section-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .section-header {
+      padding: 16px 20px;
+      background: var(--surface-2);
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .section-header h2 {
+      font-size: calc(18px * var(--font-scale));
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--primary);
+    }
+
+    [data-theme="dark"] .section-header h2 {
+      color: var(--primary);
+    }
+
+    .section-body {
+      padding: 20px;
+    }
+
+    /* গ্রিড ও কার্ড লেআউট */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    .info-card {
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      border-left: 4px solid var(--primary);
+      padding: 14px 16px;
+      border-radius: 0 10px 10px 0;
+    }
+
+    .info-card h4 {
+      color: var(--primary);
+      margin-bottom: 6px;
+      font-size: calc(16px * var(--font-scale));
+    }
+
+    .stat-number {
+      font-size: calc(24px * var(--font-scale));
+      font-weight: bold;
+      color: var(--accent);
+      display: block;
+      margin: 4px 0;
+    }
+
+    /* টাইমলাইন ফ্লো */
+    .timeline-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .flow-step {
+      background: var(--surface-2);
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .flow-date {
+      font-weight: bold;
+      color: var(--primary);
+      font-size: calc(15px * var(--font-scale));
+    }
+
+    /* টেবিল ডিজাইন */
+    .table-container {
+      overflow-x: auto;
+      margin: 14px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      font-size: calc(15px * var(--font-scale));
+    }
+
+    th {
+      background-color: var(--surface-2);
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    [data-theme="dark"] tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    /* নোটিশ বক্স */
+    .note-box {
+      background: var(--surface-2);
+      border-left: 5px solid var(--accent);
+      padding: 14px 18px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 16px 0;
+      color: var(--text);
+    }
+
+    .trap-box {
+      background: var(--danger-light);
+      border-left: 5px solid var(--danger);
+      padding: 14px 18px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 16px 0;
+      color: var(--text);
+    }
+
+    /* কুইজ স্টাইল */
+    .quiz-card {
+      background: var(--surface-2);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+
+    .quiz-title-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      gap: 10px;
+    }
+
+    .quiz-bcs-tag {
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .quiz-question {
+      font-weight: bold;
+      font-size: calc(16px * var(--font-scale));
+      margin-bottom: 12px;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    @media (min-width: 600px) {
+      .quiz-options.two-col {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .quiz-opt {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      font-size: calc(15px * var(--font-scale));
+      font-family: inherit;
+    }
+
+    .quiz-opt:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .quiz-opt.correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+      color: var(--text);
+      font-weight: bold;
+    }
+
+    .quiz-opt.incorrect {
+      background: var(--danger-light) !important;
+      border-color: var(--danger) !important;
+      color: var(--text);
+    }
+
+    .quiz-feedback {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      display: none;
+      font-size: calc(14.5px * var(--font-scale));
+      line-height: 1.7;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    .discrepancy-card {
+      background: var(--surface);
+      border: 2px dashed var(--danger);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-top: 32px;
+    }
+
+    /* প্রিন্ট লেআউট */
+    @media print {
+      .control-bar, #progress-container, .btn-group, button {
+        display: none !important;
+      }
+      body {
+        background: #fff;
+        color: #000;
+        font-size: 11pt;
+      }
+      .section-card {
+        border: 1px solid #777;
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+    }
+  
+/* Universal Mobile Optimization (Samsung A23 & small screens) */
+@media (max-width: 600px) {
+  .print-btn, button[onclick*="print"], .btn-ctrl:has(span:contains('🖨️')) {
+    display: none !important;
+  }
+  .container {
+    padding: 6px 8px 24px 8px !important;
+  }
+  .hero-box, .hero, .hero-banner {
+    padding: 16px 12px !important;
+    margin-top: 8px !important;
+    margin-bottom: 14px !important;
+  }
+  .table-responsive, .table-container {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+  }
+  .table-responsive table th, .table-responsive table td,
+  .table-container table th, .table-container table td {
+    padding: 7px 6px !important;
+  }
+}
+
+</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- পড়ার প্রগ্রেস বার -->
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <!-- স্টিকি কন্ট্রোল বার -->
+  <div class="control-bar">
+    <div class="btn-group">
+      <button id="themeToggle" title="থিম পরিবর্তন">🌓 থিম</button>
+      <button id="fontDown" title="ফন্ট ছোট">A-</button>
+      <button id="fontReset" title="স্বাভাবিক ফন্ট">A</button>
+      <button id="fontUp" title="ফন্ট বড়">A+</button>
+    </div>
+    <div class="btn-group">
+      <button onclick="document.getElementById('quiz-section').scrollIntoView({behavior: 'smooth'})">📝 সব MCQ কুইজ</button>
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆️ উপরে</button>
+      <button onclick="window.print()">🖨️ প্রিন্ট / PDF</button>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- হিরো সেকশন -->
+    <div class="hero">
+      <div style="font-size: 2.375rem; margin-bottom: 8px;">🗳️</div>
+      <h1>যুক্তফ্রন্ট নির্বাচন ও ১৯৫৬-এর শাসনতন্ত্র আন্দোলন</h1>
+      <p>১৯৫৪ সালের ঐতিহাসিক নির্বাচন, নির্বাচনী ইশতেহার ২১ দফা, যুক্তফ্রন্ট মন্ত্রিসভা এবং ১৯৫৭ সালের ঐতিহাসিক কাগমারী সম্মেলন সংক্রান্ত পূর্ণাঙ্গ সংকলন ও ইন্টারঅ্যাকটিভ কুইজ।</p>
+      <div class="hero-meta">
+        <span class="badge">পৃষ্ঠা: ৪২৬ – ৪২৭</span>
+        <span class="badge">বিসিএস প্রশ্ন: ৫টি পূর্ণাঙ্গ ব্যাখ্যাসহ</span>
+        <span class="badge">টপিক: বাংলাদেশ বিষয়াবলি</span>
+      </div>
+    </div>
+
+    <!-- বিসিএস প্রশ্ন পরিসংখ্যান ছক -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>📊 বিসিএসে প্রশ্ন আসার পরিসংখ্যান (বইয়ের চার্ট অনুযায়ী)</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: অধ্যায়ের গুরুত্ব ও পুনরাবৃত্তি বোঝা। (আনুমানিক পাঠ সময়: ২ মিনিট) (আমার অনুমান)
+        </p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>বিসিএস</th>
+                <th>প্রশ্ন সংখ্যা</th>
+                <th>বিসিএস</th>
+                <th>প্রশ্ন সংখ্যা</th>
+                <th>বিসিএস</th>
+                <th>প্রশ্ন সংখ্যা</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>৪৬তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৪১তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৩৮তম বিসিএস</strong></td>
+                <td>১টি</td>
+              </tr>
+              <tr>
+                <td><strong>৪৭তম, ৪৮তম, ৪৯তম, ৫০তম</strong></td>
+                <td>(বইয়ে ফাঁকা)</td>
+                <td><strong>৩৯তম, ৪০তম, ৪২তম, ৪৩তম, ৪৪তম, ৪৫তম</strong></td>
+                <td>(বইয়ে ফাঁকা)</td>
+                <td><strong>১০ম-৩৪তম বিসিএস</strong></td>
+                <td>২টি</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- মডিউল ১: যুক্তফ্রন্টের ৪টি শরীক দল ও শীর্ষ নেতৃবৃন্দ -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>🤝 যুক্তফ্রন্টের ৪টি সমমনা দল ও প্রধান নেতা (গঠন: ৪ ডিসেম্বর ১৯৫৩)</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: ৪টি রাজনৈতিক দল ও তাঁদের শীর্ষ নেতাদের নাম নির্ভুলভাবে মনে রাখা। (আনুমানিক পাঠ সময়: ৩ মিনিট) (আমার অনুমান)
+        </p>
+        <div class="card-grid">
+          <div class="info-card">
+            <h4>১. আওয়ামী মুসলিম লীগ</h4>
+            <p><strong>প্রধান নেতা:</strong> মওলানা আব্দুল হামিদ খান ভাসানী</p>
+            <span class="stat-number">১৪৩ আসন</span>
+            <small style="color: var(--text-muted);">মুসলিম আসনে জয়ী</small>
+          </div>
+          <div class="info-card">
+            <h4>২. কৃষক-শ্রমিক পার্টি</h4>
+            <p><strong>প্রধান নেতা:</strong> শেরে বাংলা এ কে ফজলুল হক</p>
+            <span class="stat-number">৪৮ আসন</span>
+            <small style="color: var(--text-muted);">মুসলিম আসনে জয়ী</small>
+          </div>
+          <div class="info-card">
+            <h4>৩. নেজামে ইসলাম</h4>
+            <p><strong>প্রধান নেতা:</strong> মওলানা আতহার আলী</p>
+            <span class="stat-number">১৯ আসন</span>
+            <small style="color: var(--text-muted);">মুসলিম আসনে জয়ী</small>
+          </div>
+          <div class="info-card">
+            <h4>৪. বামপন্থী গণতন্ত্রী দল</h4>
+            <p><strong>প্রধান নেতা:</strong> হাজী দানেশ</p>
+            <span class="stat-number">১৩ আসন</span>
+            <small style="color: var(--text-muted);">মুসলিম আসনে জয়ী</small>
+          </div>
+        </div>
+
+        <div class="note-box">
+          📌 <strong>যুক্তফ্রন্টের প্রতীক ও মূলমন্ত্র:</strong><br>
+          • <strong>প্রতীক:</strong> নৌকা<br>
+          • <strong>মূলমন্ত্র:</strong> প্রাদেশিক স্বায়ত্তশাসন<br>
+          • <strong>শীর্ষ তিন নেতা:</strong> মওলানা ভাসানী, শেরে বাংলা এ কে ফজলুল হক এবং হোসেন শহীদ সোহরাওয়ার্দী। (নবাব স্যার সলিমুল্লাহ এই নির্বাচনে যুক্ত ছিলেন না)।
+        </div>
+      </div>
+    </div>
+
+    <!-- মডিউল ২: ১৯৫৪ সালের নির্বাচনের পূর্ণাঙ্গ আসন ও ফলাফলের সারসংক্ষেপ -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>📊 ১৯৫৪ সালের প্রাদেশিক পরিষদ নির্বাচনের ফলাফলের সারসংক্ষেপ</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: আসন সংখ্যার নিখুঁত হিসাব ও বিভ্রান্তি দূর করা। (নির্বাচন অনুষ্ঠিত: ৮-১২ মার্চ ১৯৫৪)। (আনুমানিক পাঠ সময়: ৪ মিনিট) (আমার অনুমান)
+        </p>
+        
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>আসন ক্যাটাগরি</th>
+                <th>যুক্তফ্রন্ট</th>
+                <th>অন্যান্য</th>
+                <th>মোট আসন</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>মুসলিম আসন</strong></td>
+                <td><strong style="color: var(--primary);">২২৩</strong></td>
+                <td>১৪</td>
+                <td><strong>২৩৭</strong></td>
+              </tr>
+              <tr>
+                <td><strong>অমুসলিম আসন (সংরক্ষিত)</strong></td>
+                <td>১৩</td>
+                <td>৫৯</td>
+                <td><strong>৭২</strong></td>
+              </tr>
+              <tr style="background: var(--surface-2); font-weight: bold;">
+                <td>সর্বমোট আসন</td>
+                <td><mark>২৩৬</mark></td>
+                <td>৭৩</td>
+                <td><strong>৩০৯</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="trap-box">
+          ⚠️ <strong>পরীক্ষার ফাঁদ:</strong> প্রশ্ন যদি বলে "মুসলিম আসনে যুক্তফ্রন্ট কতটি পেয়েছিল?" — উত্তর হবে <strong>২২৩টি</strong>! আর যদি সরাসরি প্রশ্ন করে যুক্তফ্রন্ট মোট মুসলিম আসনে কতটি পায় তবে ২২৩টি; অমুসলিম আসনে পায় ১৩টি; এবং দুই ক্যাটাগরি মিলিয়ে মোট আসন ছিল ৩০৯টির মধ্যে ২৩৬টি।
+        </div>
+      </div>
+    </div>
+
+    <!-- মডিউল ৩: ঐতিহাসিক ২১ দফা ও যুক্তফ্রন্ট মন্ত্রিসভা -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>📜 ঐতিহাসিক ২১ দফা ও সংক্ষিপ্ত মন্ত্রিসভা টাইমলাইন</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: ২১ দফার মূল বক্তব্য ও মন্ত্রিসভার উত্থান-পতন আয়ত্ত করা। (আনুমানিক পাঠ সময়: ৫ মিনিট) (আমার অনুমান)
+        </p>
+
+        <div class="info-card" style="margin-bottom: 16px;">
+          <h4>📝 ২১ দফা নির্বাচনী ইশতেহার</h4>
+          <p>• <strong>প্রণেতা:</strong> আবুল মনসুর আহমদ ।</p>
+          <p>• <strong>প্রথম দফা:</strong> বাংলাকে পাকিস্তানের অন্যতম রাষ্ট্রভাষার স্বীকৃতি প্রদান ।</p>
+          <p>• <strong>ভাষা সংক্রান্ত মোট দফা:</strong> <mark>৫টি</mark> (যথা: ১, ১০, ১৬, ১৭ ও ১৮নং দফা) ।</p>
+        </div>
+
+        <h3 style="color: var(--primary); margin: 18px 0 10px 0;">⏱️ যুক্তফ্রন্ট সরকারের সংক্ষিপ্ত স্থায়িত্বকাল (ফ্লোচার্ট)</h3>
+        <div class="timeline-flow">
+          <div class="flow-step">
+            <div class="flow-date">৩ এপ্রিল ১৯৫৪</div>
+            <p><strong>চার সদস্যের মন্ত্রিসভা গঠন:</strong> শেরে বাংলা এ. কে. ফজলুল হক চার সদস্য বিশিষ্ট যুক্তফ্রন্ট মন্ত্রিসভা গঠন করেন ।</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-date">১৫ মে ১৯৫৪</div>
+            <p><strong>পূর্ণাঙ্গ মন্ত্রিসভা:</strong> আওয়ামী লীগের ৭ জন এবং কৃষক-শ্রমিক পার্টির আরও ৩ জনসহ মোট <strong>১৪ সদস্যের</strong> পূর্ণাঙ্গ মন্ত্রিসভা গঠিত হয়। এই মন্ত্রিসভায় <strong>বঙ্গবন্ধু শেখ মুজিবুর রহমান</strong> কৃষি, সমবায় এবং পল্লী উন্নয়ন মন্ত্রণালয়ের দায়িত্ব পান ।</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-date">৩০ মে ১৯৫৪</div>
+            <p><strong>মন্ত্রিসভা বরখাস্ত:</strong> পাকিস্তানের গভর্নর জেনারেল গোলাম মোহাম্মদ এ. কে. ফজলুল হকের মন্ত্রিসভা ভেঙে দিয়ে পূর্ব বাংলায় কেন্দ্রের শাসন জারি করেন । (মাত্র ৫৬-৫৭ দিনের মন্ত্রিসভা) (আমার অনুমান)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- মডিউল ৪: ঐতিহাসিক কাগমারী সম্মেলন (১৯৫৭) -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>🔥 কাগমারী সম্মেলন ও ন্যাপ (NAP) প্রতিষ্ঠা</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: আওয়ামী লীগের বিভাজন ও পররাষ্ট্রনীতির দ্বন্দ্ব স্পষ্ট করা। (আনুমানিক পাঠ সময়: ৩ মিনিট) (আমার অনুমান)
+        </p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>বিষয়</th>
+                <th>ঐতিহাসিক বিবরণ ও তথ্য</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>স্থান ও তারিখ</strong></td>
+                <td>টাঙ্গাইল জেলার <strong>সন্তোষে</strong>; ১৯৫৭ সালের ৬-১০ ফেব্রুয়ারি।</td>
+              </tr>
+              <tr>
+                <td><strong>নেতৃত্ব ও চরিত্র</strong></td>
+                <td>মওলানা আব্দুল হামিদ খান ভাসানীর নেতৃত্বে আওয়ামী লীগের কাউন্সিল অধিবেশন ও সাংস্কৃতিক সম্মেলন।</td>
+              </tr>
+              <tr>
+                <td><strong>ঐতিহাসিক ঘোষণা</strong></td>
+                <td>পশ্চিম পাকিস্তানি শাসকদের প্রতি মওলানা ভাসানী সর্বপ্রথম <strong>'আসসালামু আলাইকুম'</strong> বলে বিচ্ছেদের ঐতিহাসিক ঘণ্টা বাজান।</td>
+              </tr>
+              <tr>
+                <td><strong>আলোচ্য বিষয় ও বিরোধ</strong></td>
+                <td>পূর্ব পাকিস্তানের পূর্ণ স্বায়ত্তশাসন ও জোট নিরপেক্ষ পররাষ্ট্রনীতি। তবে সিয়াটো (SEATO) ও সেন্টো (CENTO) সামরিক চুক্তির প্রতি প্রধানমন্ত্রী হোসেন শহীদ সোহরাওয়ার্দী সমর্থন দিলে তীব্র মতবিরোধ হয়।</td>
+              </tr>
+              <tr>
+                <td><strong>পদত্যাগ ও নতুন দল গঠন</strong></td>
+                <td>১৮ মার্চ ১৯৫৭ মওলানা ভাসানী আওয়ামী লীগ থেকে পদত্যাগ করেন। পরবর্তীতে ২৪-২৫ জুলাই ১৯৫৭ ঢাকার রূপমহল সিনেমা হলে কর্মী সম্মেলনের মাধ্যমে <strong>ন্যাশনাল আওয়ামী পার্টি (ন্যাপ)</strong> গঠন করেন।</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ইন্টারঅ্যাকটিভ কুইজ সেকশন -->
+    <div class="section-card" id="quiz-section">
+      <div class="section-header">
+        <h2>📝 বিসিএস বিগত প্রশ্নব্যাংক ও ইন্টারঅ্যাকটিভ কুইজ (১ থেকে ৫)</h2>
+        <span class="badge" id="quiz-score">স্কোর: ০ / ৫</span>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 16px; color: var(--text-muted);">
+          বইয়ের মূল প্রশ্ন ও উত্তরের ভিত্তিতে কুইজে অংশ নাও। অপশনে ক্লিক করলে সাথে সাথে সঠিক/ভুল এবং পূর্ণ ব্যাখ্যা ভেসে উঠবে।
+        </p>
+
+        <!-- প্রশ্ন ১ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১. ১৯৫৪ সালের নির্বাচনে যুক্তফ্রন্ট কতটি আসনে জয়লাভ করেছিল?</span>
+            <span class="quiz-bcs-tag">৪৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ২২১</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ২১৯</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ২২৩</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ২২৫</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (২২৩টি)</strong><br>
+            <strong>পূর্ণ ব্যাখ্যা:</strong> ১৯৫৪ সালের ৮-১২ মার্চ অনুষ্ঠিত নির্বাচনে ২৩৭টি মুসলিম আসনের মধ্যে যুক্তফ্রন্ট জয়ী হয় ২২৩টিতে। তন্মধ্যে আওয়ামী মুসলিম লীগ ১৪৩টি, কৃষক-শ্রমিক পার্টি ৪৮টি, নেজামে ইসলাম ১৯টি এবং গণতন্ত্রী দল ১৩টি আসন পায়। এছাড়া সংরক্ষিত অমুসলিম আসনে যুক্তফ্রন্ট আরও ১৩টি আসনে জয় পায়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২ -->
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">২. কাগমারী সম্মেলন অনুষ্ঠিত হয় কোথায়?</span>
+            <span class="quiz-bcs-tag">৪১তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) রোজ গার্ডেন</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) সন্তোষে</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) সিরাজগঞ্জে</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) সুনামগঞ্জ</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: খ (সন্তোষে — বইয়ে 'উ. গ' মুদ্রিত থাকলেও ব্যাখ্যা অনুযায়ী সন্তোষ)</strong><br>
+            <strong>পূর্ণ ব্যাখ্যা:</strong> টাঙ্গাইল জেলার সন্তোষে ১৯৫৭ সালের ৬-১০ ফেব্রুয়ারি মওলানা আব্দুল হামিদ খান ভাসানীর নেতৃত্বে আওয়ামী লীগের কাউন্সিল অধিবেশন ও কাগমারী সম্মেলন অনুষ্ঠিত হয়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩ -->
+        <div class="quiz-card" data-answer="ঘ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৩. ১৯৫৪ সালের পূর্ববাংলা প্রাদেশিক পরিষদ নির্বাচনে যুক্ত ছিলেন না কে?</span>
+            <span class="quiz-bcs-tag">৩৮তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) শেরে বাংলা এ কে ফজলুল হক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) হোসেন শহীদ সোহরাওয়ার্দী</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) মাওলানা আব্দুল হামিদ খান ভাসানী</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) নবাব স্যার সলিমুল্লাহ</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ঘ (নবাব স্যার সলিমুল্লাহ)</strong><br>
+            <strong>পূর্ণ ব্যাখ্যা:</strong> নবাব স্যার সলিমুল্লাহ ১৯১৫ সালে মৃত্যুবরণ করায় ১৯৫৪ সালের নির্বাচনে যুক্ত ছিলেন না (আমার অনুমান)। যুক্তফ্রন্টের প্রধান তিন দিকপাল নেতা ছিলেন মওলানা ভাসানী, শেরে বাংলা এ কে ফজলুল হক এবং হোসেন শহীদ সোহরাওয়ার্দী।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৪ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৪. ১৯৫৪ সালে পূর্ব পাকিস্তান প্রাদেশিক পরিষদ নির্বাচনে যুক্তফ্রন্টের প্রতীক ছিল কোনটি?</span>
+            <span class="quiz-bcs-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ধানের শীষ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) লাঙল</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) নৌকা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) বাইসাইকেল</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (নৌকা — বইয়ে কলাম ক্রমে 'উ. খ' মুদ্রিত থাকলেও প্রতীক নৌকা)</strong><br>
+            <strong>পূর্ণ ব্যাখ্যা:</strong> ১৯৫৪ সালের নির্বাচনে যুক্তফ্রন্টের নির্বাচনী প্রতীক ছিল নৌকা এবং মূলমন্ত্র ছিল প্রাদেশিক স্বায়ত্তশাসন।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৫ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৫. ঐতিহাসিক ২১-দফা দাবীর প্রথম দাবীটি কী ছিল?</span>
+            <span class="quiz-bcs-tag">২৮তম / ২১তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) বাংলাকে অন্যতম রাষ্ট্রভাষা করা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) প্রাদেশিক স্বায়ত্তশাসন</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) পূর্ববাংলার অর্থনৈতিক বৈষম্য দূরীকরণ</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) বিনা ক্ষতিপূরণে জমিদারী উচ্ছেদ</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (বাংলাকে অন্যতম রাষ্ট্রভাষা করা)</strong><br>
+            <strong>পূর্ণ ব্যাখ্যা:</strong> আবুল মনসুর আহমদ প্রণীত ২১ দফার ১ম দফা ছিল বাংলাকে পাকিস্তানের অন্যতম রাষ্ট্রভাষার স্বীকৃতি প্রদান। এতে ভাষা সম্পর্কিত দফা ছিল ৫টি (১, ১০, ১৬, ১৭ ও ১৮নং দফা)।
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- বইয়ের অসঙ্গতি ও যাচাই তালিকা -->
+    <div class="discrepancy-card">
+      <h3 style="color: var(--danger); margin-bottom: 12px;">⚠️ বইয়ের অসঙ্গতি ও যাচাই তালিকা</h3>
+      <p style="font-size: 0.875rem; margin-bottom: 14px;">বইটির পাতা দুটিতে মুদ্রিত অপশন কোড ও লেআউটে কিছু সুস্পষ্ট মুদ্রণ ত্রুটি রয়েছে:</p>
+      <div class="table-container">
+        <table>
+        <thead>
+          
+              <td>মন্ত্রিসভা বর্ণনা (পৃ. ৪২৭)</td>
+              <td>"শেরে বাংলা এ. কে. ফজলুক হক"</td>
+              <td>বানান টাইপো ("ফজলুক")।</td>
+              <td>সঠিক বানান <strong>শেরে বাংলা এ. কে. ফজলুল হক</strong>।</td>
+            
+        </thead>
+        <tbody>
+          <tr>
+              <td>কাগমারী সম্মেলনের বানান (পৃ. ৪২৭)</td>
+              <td>প্রশ্নে "কাগমারী" বনাম ব্যাখ্যায় "কাগমারি"</td>
+              <td>একই পৃষ্ঠায় হ্রস্ব-ই ও দীর্ঘ-ঈ কারের বানানভেদ।</td>
+              <td>উভয় রূপই প্রচলিত (আমার অনুমান)।</td>
+            </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // ডার্ক / লাইট থিম টগল
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const target = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try {
+        localStorage.setItem('yuktafront_theme', target);
+      } catch(e) {}
+    });
+
+    try {
+      const savedTheme = localStorage.getItem('yuktafront_theme');
+      if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+    } catch(e) {}
+
+    // ফন্ট সাইজ স্কেলিং
+    let fontScale = 1;
+    const setScale = (delta, reset = false) => {
+      if (reset) fontScale = 1;
+      else fontScale = Math.min(Math.max(fontScale + delta, 0.8), 1.4);
+      document.documentElement.style.setProperty('--font-scale', fontScale);
+    };
+
+    document.getElementById('fontDown').addEventListener('click', () => setScale(-0.1));
+    document.getElementById('fontReset').addEventListener('click', () => setScale(0, true));
+    document.getElementById('fontUp').addEventListener('click', () => setScale(0.1));
+
+    // স্ক্রল প্রগ্রেস বার
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    // কুইজ হ্যান্ডলার
+    let correctCount = 0;
+    const answeredCards = new Set();
+
+    function evalQuiz(btn, selectedOption) {
+      const card = btn.closest('.quiz-card');
+      if (answeredCards.has(card)) return; // একবার উত্তর দিলে লক
+      answeredCards.add(card);
+
+      const correctAns = card.getAttribute('data-answer');
+      const allButtons = card.querySelectorAll('.quiz-opt');
+      const feedback = card.querySelector('.quiz-feedback');
+
+      allButtons.forEach(b => b.disabled = true);
+
+      if (selectedOption === correctAns) {
+        btn.classList.add('correct');
+        correctCount++;
+      } else {
+        btn.classList.add('incorrect');
+        allButtons.forEach(b => {
+          if (b.textContent.trim().startsWith(correctAns)) {
+            b.classList.add('correct');
+          }
+        });
+      }
+
+      feedback.style.display = 'block';
+      document.getElementById('quiz-score').textContent = `স্কোর: ${correctCount} / ৫`;
+    }
+  </script>
+  <script src="nav-component.js"></script>
+</body>
+</html>

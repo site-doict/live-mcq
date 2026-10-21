@@ -1,0 +1,1012 @@
+<!-- DESIGN PLAN:
+(১) বিষয়ের ধরন: বাংলাদেশ বিষয়াবলি — 'বাংলাদেশের বাণিজ্য' (পৃষ্ঠা ৪৮৪–৪৮৬)। ব্যাংকিং ব্যবস্থা, মুদ্রা ও ব্যাংক নোট, তফসিলি ও অ-তফসিলি ব্যাংক, গ্রামীণ ব্যাংক ও নোবেল জয়, মোবাইল ব্যাংকিং এবং বিগত বিসিএস সমাধান।
+(২) সবচেয়ে কঠিন/গুলিয়ে ফেলার জায়গা: 
+    - সরকারি নোট (১, ২, ৫ টাকা; অর্থ সচিবের স্বাক্ষর) বনাম ব্যাংক নোট (১০ থেকে ১০০০ টাকা; গভর্নরের স্বাক্ষর)।
+    - তফসিলি ব্যাংক সংখ্যা (৫৮টি তফসিলি; অর্থনৈতিক সমীক্ষায় ৬১টি) বনাম অ-তফসিলি ৫টি ব্যাংক (আনসার ভিডিপি, কর্মসংস্থান, গ্রামীণ, জুবিলি, পল্লী সঞ্চয়)।
+    - বিভিন্ন ব্যাংকের প্রথম কৃতিত্ব (প্রথম বেসরকারি ব্যাংক: এবি ব্যাংক; প্রথম মোবাইল ব্যাংকিং: ডাচ-বাংলা; প্রথম এটিএম: এবি ব্যাংক গুলশান ক্লাবে)।
+    - গ্রামীণ ব্যাংকের ইতিহাস (১৯৭৬ জোবরা প্রকল্প → ১৯৮৩ ব্যাংক রূপ → ১৯৯৭ ক্ষুদ্রঋণ সম্মেলন → ২০০৬ নোবেল জয়)।
+(৩) বাছাই করা মডিউল:
+    - মুদ্রা ও নোট তুলনামূলক ম্যাট্রিক্স এবং বিভিন্ন টাকার নোট প্রবর্তনের টাইমলাইন ফ্লো।
+    - তফসিলি ব্যাংকের পূর্ণাঙ্গ শ্রেণিবিন্যাস গ্রিড (রাষ্ট্রায়ত্ত, বিশেষায়িত, ইসলামিক, ডিজিটাল, বিদেশি)।
+    - অ-তফসিলি ৫টি ব্যাংকের সালসহ ডিরেক্টরি কার্ড।
+    - ৯টি বিসিএস বিগত প্রশ্নের শতভাগ সঠিক ইন্টারঅ্যাকটিভ কুইজ (OCR মুদ্রণ বিভ্রাট ও অপশন-কোড অসঙ্গতি সমাধানসহ)।
+(৪) রঙের মেজাজ: আধুনিক ব্যাংকিং ও বাণিজ্যের মেজাজে ডিপ স্যাফায়ার ব্লু (#1e3a8a), গোল্ডেন কারেন্সি (#b45309), মিন্ট গ্রিন ও পার্চমেন্ট।
+(৫) হিরো ও মাসকটের ধরন: 'স্মার্ট ব্যাংকিং ও কারেন্সি ভল্ট' মেটাফর; কমার্স মেন্টর প্রতীক "ব্যাংকার গাইড" (🏦/💳)।
+-->
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বাংলাদেশের বাণিজ্য ও ব্যাংকিং ব্যবস্থা — বিসিএস পূর্ণাঙ্গ প্রস্তুতি ই-বুক</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-2: #f1f5f9;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #cbd5e1;
+      --primary: #1e3a8a;          /* ব্যাংকিং নেভি ব্লু */
+      --primary-dark: #172554;
+      --primary-light: #dbeafe;
+      --accent: #b45309;           /* সোনালি মুদ্রা */
+      --accent-light: #fef3c7;
+      --teal: #0d9488;
+      --teal-light: #ccfbf1;
+      --success: #15803d;
+      --success-light: #dcfce7;
+      --danger: #b91c1c;
+      --danger-light: #fee2e2;
+      --radius: 12px;
+      --shadow: 0 4px 10px rgba(30, 58, 138, 0.08);
+      --font-scale: 1;
+    }
+
+    [data-theme="dark"] {
+      --bg: #090e17;
+      --surface: #0f172a;
+      --surface-2: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --primary: #60a5fa;
+      --primary-dark: #3b82f6;
+      --primary-light: #172554;
+      --accent: #fbbf24;
+      --accent-light: #451a03;
+      --teal: #2dd4bf;
+      --teal-light: #134e4a;
+      --success: #4ade80;
+      --success-light: #052e16;
+      --danger: #f87171;
+      --danger-light: #450a0a;
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    body {
+      font-family: 'Noto Sans Bengali', 'Kalpurush', Vrinda, sans-serif;
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.85;
+      background-color: var(--bg);
+      color: var(--text);
+      padding-bottom: 90px;
+    }
+
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: transparent;
+      z-index: 1001;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .control-bar {
+      position: sticky;
+      top: 5px;
+      z-index: 1000;
+      background: var(--surface);
+      border-bottom: 2px solid var(--border);
+      padding: 10px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      padding: 6px 14px;
+      font-size: calc(14px * var(--font-scale));
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+    }
+
+    button:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #0f172a);
+      color: #ffffff;
+      padding: 34px 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 26px;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: calc(26px * var(--font-scale));
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: calc(15px * var(--font-scale));
+      opacity: 0.95;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8125rem;
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #fff;
+    }
+
+    .section-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .section-header {
+      padding: 16px 20px;
+      background: var(--surface-2);
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .section-header h2 {
+      font-size: calc(18px * var(--font-scale));
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--primary);
+    }
+
+    [data-theme="dark"] .section-header h2 {
+      color: var(--primary);
+    }
+
+    .section-body {
+      padding: 20px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    .info-box {
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      border-left: 5px solid var(--primary);
+      padding: 14px 16px;
+      border-radius: 0 10px 10px 0;
+    }
+
+    .info-box.accent-box {
+      border-left-color: var(--accent);
+    }
+
+    .info-box.teal-box {
+      border-left-color: var(--teal);
+    }
+
+    .info-box h4 {
+      color: var(--text);
+      margin-bottom: 6px;
+      font-size: calc(16px * var(--font-scale));
+    }
+
+    .table-container {
+      overflow-x: auto;
+      margin: 14px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      font-size: calc(15px * var(--font-scale));
+    }
+
+    th {
+      background-color: var(--surface-2);
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    [data-theme="dark"] tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    .timeline-chain {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .chain-item {
+      background: var(--surface-2);
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .chain-year {
+      font-weight: bold;
+      color: var(--accent);
+      font-size: calc(15px * var(--font-scale));
+    }
+
+    .note-box {
+      background: var(--surface-2);
+      border-left: 5px solid var(--primary);
+      padding: 14px 18px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 16px 0;
+      color: var(--text);
+    }
+
+    .trap-box {
+      background: var(--danger-light);
+      border-left: 5px solid var(--danger);
+      padding: 14px 18px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 16px 0;
+      color: var(--text);
+    }
+
+    .quiz-card {
+      background: var(--surface-2);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+
+    .quiz-title-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      gap: 10px;
+    }
+
+    .quiz-bcs-tag {
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .quiz-question {
+      font-weight: bold;
+      font-size: calc(16px * var(--font-scale));
+      margin-bottom: 12px;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    @media (min-width: 600px) {
+      .quiz-options.two-col {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .quiz-opt {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      font-size: calc(15px * var(--font-scale));
+      font-family: inherit;
+    }
+
+    .quiz-opt:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .quiz-opt.correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+      color: var(--text);
+      font-weight: bold;
+    }
+
+    .quiz-opt.incorrect {
+      background: var(--danger-light) !important;
+      border-color: var(--danger) !important;
+      color: var(--text);
+    }
+
+    .quiz-feedback {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      display: none;
+      font-size: calc(14.5px * var(--font-scale));
+      line-height: 1.7;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    .discrepancy-card {
+      background: var(--surface);
+      border: 2px dashed var(--danger);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-top: 32px;
+    }
+
+    @media print {
+      .control-bar, #progress-container, .btn-group, button {
+        display: none !important;
+      }
+      body {
+        background: #fff;
+        color: #000;
+        font-size: 11pt;
+      }
+      .section-card {
+        border: 1px solid #777;
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+    }
+  
+/* Universal Mobile Optimization (Samsung A23 & small screens) */
+@media (max-width: 600px) {
+  .print-btn, button[onclick*="print"], .btn-ctrl:has(span:contains('🖨️')) {
+    display: none !important;
+  }
+  .container {
+    padding: 6px 8px 24px 8px !important;
+  }
+  .hero-box, .hero, .hero-banner {
+    padding: 16px 12px !important;
+    margin-top: 8px !important;
+    margin-bottom: 14px !important;
+  }
+  .table-responsive, .table-container {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+  }
+  .table-responsive table th, .table-responsive table td,
+  .table-container table th, .table-container table td {
+    padding: 7px 6px !important;
+  }
+}
+
+</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <div class="control-bar">
+    <div class="btn-group">
+      <button id="themeToggle" title="থিম পরিবর্তন">🌓 থিম</button>
+      <button id="fontDown" title="ফন্ট ছোট">A-</button>
+      <button id="fontReset" title="স্বাভাবিক ফন্ট">A</button>
+      <button id="fontUp" title="ফন্ট বড়">A+</button>
+    </div>
+    <div class="btn-group">
+      <button onclick="document.getElementById('quiz-section').scrollIntoView({behavior: 'smooth'})">📝 সব MCQ কুইজ</button>
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆️ উপরে</button>
+      <button onclick="window.print()">🖨️ প্রিন্ট / PDF</button>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="hero">
+      <div style="font-size: 2.375rem; margin-bottom: 8px;">🏦</div>
+      <h1>বাংলাদেশের বাণিজ্য: ব্যাংকিং ও মুদ্রা ব্যবস্থা</h1>
+      <p>সরকারি নোট বনাম ব্যাংক নোট, তফসিলি ও অ-তফসিলি ব্যাংক, গ্রামীণ ব্যাংকের ক্ষুদ্রঋণ বিপ্লব, মোবাইল ব্যাংকিং ও বিগত বিসিএস সমাধান।</p>
+      <div class="hero-meta">
+        <span class="badge">পৃষ্ঠা: ৪৮৪ – ৪৮৬</span>
+        <span class="badge">বিসিএস প্রশ্নব্যাংক: ৯টি পূর্ণাঙ্গ সমাধান</span>
+        <span class="badge">১০ম থেকে ৪৩তম বিসিএস কভারেজ</span>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <h2>📊 বিসিএসে প্রশ্ন আসার পরিসংখ্যান (বইয়ের ছক অনুযায়ী)</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: বাংলাদেশের বাণিজ্য অধ্যায়ের গুরুত্ব অনুধাবন। (আনুমানিক পাঠ সময়: ২ মিনিট) (আমার অনুমান)
+        </p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>বিসিএস সংস্করণ</th>
+                <th>প্রশ্ন সংখ্যা</th>
+                <th>বিসিএস সংস্করণ</th>
+                <th>প্রশ্ন সংখ্যা</th>
+                <th>বিসিএস সংস্করণ</th>
+                <th>প্রশ্ন সংখ্যা</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>৪৩তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৩৭তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>১০ম-৩৪তম বিসিএস</strong></td>
+                <td>৬টি</td>
+              </tr>
+              <tr>
+                <td><strong>৩৮তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৪৪তম, ৪২তম, ৪১তম, ৪০তম, ৩৬তম</strong></td>
+                <td>০টি</td>
+                <td><strong>৪৫তম-৫০তম বিসিএস</strong></td>
+                <td>(বইয়ে ফাঁকা)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <h2>💵 সরকারি নোট বনাম ব্যাংক নোট এবং মুদ্রা প্রবর্তনের ইতিহাস</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: বাংলাদেশে প্রচলিত কাগুজে মুদ্রার বৈশিষ্ট্য ও প্রবর্তনের সাল আয়ত্ত করা। (আনুমানিক পাঠ সময়: ৫ মিনিট) (আমার অনুমান)
+        </p>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>তুলনার বিষয়</th>
+                <th>সরকারি নোট (Government Notes)</th>
+                <th>ব্যাংক নোট (Bank Notes)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>ইস্যুকারী কর্তৃপক্ষ</strong></td>
+                <td>অর্থ মন্ত্রণালয়, গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</td>
+                <td>বাংলাদেশ ব্যাংক (কেন্দ্রীয় ব্যাংক)</td>
+              </tr>
+              <tr>
+                <td><strong>স্বাক্ষরকারী</strong></td>
+                <td>অর্থসচিব</td>
+                <td>বাংলাদেশ ব্যাংকের গভর্নর</td>
+              </tr>
+              <tr>
+                <td><strong>প্রচলিত নোটসমূহ</strong></td>
+                <td><strong>৩টি নোট:</strong> ১ টাকা, ২ টাকা ও ৫ টাকার নোট</td>
+                <td><strong>৭টি নোট:</strong> ১০, ২০, ৫০, ১০০, ২০০, ৫০০ এবং ১০০০ টাকার নোট</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="color: var(--primary); margin: 20px 0 10px 0;">⏱️ স্বাধীন বাংলাদেশে বিভিন্ন নোট চালুর ঐতিহাসিক টাইমলাইন</h3>
+        <div class="timeline-chain">
+          <div class="chain-item">
+            <div class="chain-year">৪ মার্চ ১৯৭২</div>
+            <p><strong>সর্বপ্রথম কাগুজে নোট:</strong> স্বাধীন বাংলাদেশে প্রথম ১ টাকা ও ১০০ টাকার নোট চালু করা হয়। পরবর্তীতে একই বছর ৫ টাকা ও ১০ টাকার নোট চালু হয়!</p>
+          </div>
+          <div class="chain-item">
+            <div class="chain-year">১৯৭৬</div>
+            <p><strong>৫০ টাকা ও ৫০০ টাকা:</strong> দেশে প্রথম ৫০ টাকা ও ৫০০ টাকার নোট চালু করা হয়।</p>
+          </div>
+          <div class="chain-item">
+            <div class="chain-year">১৯৭৯</div>
+            <p><strong>২০ টাকা:</strong> ২০ টাকার ব্যাংক নোট প্রবর্তন করা হয়।</p>
+          </div>
+          <div class="chain-item">
+            <div class="chain-year">১৯৮৮</div>
+            <p><strong>২ টাকা:</strong> ২ টাকার সরকারি নোট চালু করা হয়।</p>
+          </div>
+          <div class="chain-item">
+            <div class="chain-year">২০০৮ ও ২০২০</div>
+            <p><strong>১০০০ টাকা ও ২০০ টাকা:</strong> ২০০৮ সালে ১০০০ টাকার নোট এবং ২০২০ সালে ২০০ টাকার স্মারক/নিয়মিত নোট চালু করা হয়।</p>
+          </div>
+        </div>
+
+        <div class="trap-box">
+          ⚠️ <strong>বিসিএস পরীক্ষার ফাঁদ:</strong> "কোনটি ব্যাংক নোট নয়?" — উত্তর হবে ১, ২ বা ৫ টাকার নোট! কারণ এগুলো সরকারি নোট। আর ১০ টাকা থেকে শুরু করে ১০০০ টাকা পর্যন্ত বাকি সব নোটই ব্যাংক নোট।
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <h2>🏛️ তফসিলি ব্যাংকের শ্রেণিবিন্যাস (মোট ৫৮টি ব্যাংক)</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: বাংলাদেশে কার্যরত তফসিলি ও অ-তফসিলি ব্যাংকের সংখ্যা ও ধরন আয়ত্ত করা। (আনুমানিক পাঠ সময়: ৫ মিনিট) (আমার অনুমান)
+        </p>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ব্যাংকের ধরন</th>
+                <th>সংখ্যা</th>
+                <th>ব্যাংকসমূহের নাম</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>রাষ্ট্রীয় মালিকানাধীন বাণিজ্যিক ব্যাংক</strong></td>
+                <td>৭টি</td>
+                <td>১. সোনালী ব্যাংক পিএলসি, ২. জনতা ব্যাংক পিএলসি, ৩. অগ্রণী ব্যাংক পিএলসি, ৪. রূপালী ব্যাংক পিএলসি, ৫. বেসিক ব্যাংক পিএলসি, ৬. বাংলাদেশ ডেভেলপমেন্ট ব্যাংক পিএলসি, ৭. সম্মিলিত ইসলামী ব্যাংক পিএলসি।</td>
+              </tr>
+              <tr>
+                <td><strong>বিশেষায়িত ব্যাংক</strong></td>
+                <td>৩টি</td>
+                <td>১. <strong>বাংলাদেশ কৃষি ব্যাংক</strong>, ২. <strong>রাজশাহী কৃষি উন্নয়ন ব্যাংক</strong>, ৩. <strong>প্রবাসী কল্যাণ ব্যাংক</strong>।</td>
+              </tr>
+              <tr>
+                <td><strong>বেসরকারি প্রচলিত ধারার বাণিজ্যিক ব্যাংক</strong></td>
+                <td>৩৩টি</td>
+                <td>প্রচলিত ধারার বেসরকারি বাণিজ্যিক ব্যাংকসমূহ।</td>
+              </tr>
+              <tr>
+                <td><strong>সম্মিলিত ইসলামী ব্যাংক</strong></td>
+                <td>৫টি</td>
+                <td>ফার্স্ট সিকিউরিটি ইসলামী ব্যাংক, ইউনিয়ন ব্যাংক, গ্লোবাল ইসলামী ব্যাংক, সোশ্যাল ইসলামী ব্যাংক, এক্সিম ব্যাংক।</td>
+              </tr>
+              <tr>
+                <td><strong>স্থানীয় বেসরকারি ডিজিটাল ব্যাংক</strong></td>
+                <td>১টি</td>
+                <td>নগদ ডিজিটাল ব্যাংক পিএলসি।</td>
+              </tr>
+              <tr>
+                <td><strong>বিদেশি বাণিজ্যিক ব্যাংক</strong></td>
+                <td>৯টি</td>
+                <td>স্ট্যান্ডার্ড চার্টার্ড, ব্যাংক আল ফালাহ, সিটি ব্যাংক, কমার্শিয়াল ব্যাংক অব সিলন, হাবিব ব্যাংক, এইচএসবিসি, ন্যাশনাল ব্যাংক অব পাকিস্তান, স্টেট ব্যাংক অব ইন্ডিয়া, উরি ব্যাংক লিমিটেড।</td>
+              </tr>
+              <tr style="background: var(--surface-2); font-weight: bold;">
+                <td>মোট তফসিলি ব্যাংক</td>
+                <td>৫৮টি</td>
+                <td>(অর্থনৈতিক সমীক্ষা ২০২৫ অনুসারে মোট তফসিলি ব্যাংক ৬১টি)।</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="color: var(--accent); margin: 20px 0 10px 0;">🏢 অ-তফসিলি ব্যাংক (Non-Scheduled Banks) — মোট ৫টি</h3>
+        <p style="margin-bottom: 12px; font-size: 0.875rem;">বাংলাদেশ ব্যাংকের তালিকাভুক্ত নয় কিন্তু বিশেষ উদ্দেশ্যে আইন দ্বারা গঠিত ৫টি ব্যাংক:</p>
+        <div class="card-grid">
+          <div class="info-box accent-box">
+            <h4>১. আনসার ভিডিপি উন্নয়ন ব্যাংক</h4>
+            <p>প্রতিষ্ঠা: ১৯৯৫ সাল।</p>
+          </div>
+          <div class="info-box accent-box">
+            <h4>২. কর্মসংস্থান ব্যাংক</h4>
+            <p>প্রতিষ্ঠা: ১৯৯৮ সাল (বেকার যুবকদের জন্য)।</p>
+          </div>
+          <div class="info-box accent-box">
+            <h4>৩. গ্রামীণ ব্যাংক</h4>
+            <p>প্রতিষ্ঠা: ১৯৮৩ সাল (ক্ষুদ্রঋণ বিশেষায়িত)।</p>
+          </div>
+          <div class="info-box accent-box">
+            <h4>৪. জুবিলি ব্যাংক</h4>
+            <p>প্রতিষ্ঠা: ১৯১৩ সাল।</p>
+          </div>
+          <div class="info-box accent-box">
+            <h4>৫. পল্লী সঞ্চয় ব্যাংক</h4>
+            <p>প্রতিষ্ঠা: ২০১৪ সাল।</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <h2>💡 ব্যাংকিং ব্যবস্থার বিশেষ মাইলফলক ও ব্যক্তিত্ব</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: প্রথম বেসরকারি ব্যাংক, মোবাইল ব্যাংকিং ও গ্রামীণ ব্যাংকের নোবেল জয় সংক্রান্ত তথ্য। (আনুমানিক পাঠ সময়: ৪ মিনিট) (আমার অনুমান)
+        </p>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>প্রতিষ্ঠান / সেবা</th>
+                <th>সাল / তারিখ</th>
+                <th>ঐতিহাসিক গুরুত্ব ও বিশদ বিবরণ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>বাংলাদেশ ব্যাংক</strong></td>
+                <td>১৯৭২ (কার্যকর ১৬ ডিসে ১৯৭১)</td>
+                <td>রাষ্ট্রপতির আদেশে গঠিত কেন্দ্রীয় ব্যাংক। প্রথম গভর্নর <strong>এএন হামিদুল্লাহ</strong>। বর্তমান ১৪তম গভর্নর <strong>মো. মোস্তাকুর রহমান</strong> (নিযুক্ত: ২৫ ফেব্রুয়ারি ২০২৬)।</td>
+              </tr>
+              <tr>
+                <td><strong>আরব-বাংলাদেশ ব্যাংক (AB Bank)</strong></td>
+                <td>৩১ ডিসেম্বর ১৯৮১</td>
+                <td><strong>প্রথম বেসরকারি বাণিজ্যিক ব্যাংক</strong>। ১৯৯৬ সালে গুলশান ক্লাবে প্রথম এটিএম (ATM) এবং ২০১১ সালে উত্তরায় প্রথম সৌরশক্তি চালিত এটিএম চালু করে।</td>
+              </tr>
+              <tr>
+                <td><strong>ডাচ-বাংলা ব্যাংক (DBBL)</strong></td>
+                <td>৩১ মার্চ ২০১১</td>
+                <td>বাংলাদেশে <strong>সর্বপ্রথম মোবাইল ব্যাংকিং</strong> চালু করে (বর্তমানে রকেট নামে পরিচিত)।</td>
+              </tr>
+              <tr>
+                <td><strong>গ্রামীণ ব্যাংক ও ক্ষুদ্রঋণ</strong></td>
+                <td>১৯৭৬ (জোবরা) / ১৯৮৩ (ব্যাংক)</td>
+                <td>ড. মুহাম্মদ ইউনূস কর্তৃক প্রবর্তিত জামানতবিহীন ক্ষুদ্রঋণ। ১৯৯৭ সালের ২-৪ ফেব্রুয়ারি প্রথম আন্তর্জাতিক মাইক্রোক্রেডিট সম্মেলন অনুষ্ঠিত হয়। <strong>২০০৬ সালে ড. ইউনূস ও গ্রামীণ ব্যাংক যৌথভাবে শান্তিতে নোবেল পুরস্কার লাভ করেন</strong>।</td>
+              </tr>
+              <tr>
+                <td><strong>আইএফআইসি ব্যাংক (IFIC)</strong></td>
+                <td>১৯৮২</td>
+                <td>মালদ্বীপে প্রথম বৈদেশিক যৌথ উদ্যোগ ব্যাংক (ব্যাংক অব মালদ্বীপ) স্থাপন করে এবং দীর্ঘদিন সেদেশের কেন্দ্রীয় ব্যাংক হিসেবে কাজ করে।</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note-box">
+          📚 <strong>ড. মুহাম্মদ ইউনূসের উল্লেখযোগ্য বইসমূহ:</strong><br>
+          • <em>A World of Three Zeros</em> (অ্যা ওয়ার্ল্ড অব থ্রি জিরোস)<br>
+          • <em>Three Farmers of Jobra</em> (থ্রি ফারমার্স অব জোবরা)<br>
+          • <em>Banker to the Poor</em> (ব্যাংকার টু দ্য পুওর)<br>
+          • <em>Creating a World Without Poverty</em> (ক্রিয়েটিং এ ওয়ার্ল্ড উইদাউট পোভার্টি)
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card" id="quiz-section">
+      <div class="section-header">
+        <h2>📝 বিসিএস বিগত প্রশ্নব্যাংক ও ইন্টারঅ্যাকটিভ কুইজ (১ থেকে ৯)</h2>
+        <span class="badge" id="quiz-score">স্কোর: ০ / ৯</span>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 16px; color: var(--text-muted);">
+          বইয়ের মূল প্রশ্ন ও ব্যাখ্যার ভিত্তিতে ইন্টারঅ্যাকটিভ কুইজে অংশ নাও। অপশনে ক্লিক করলে সঠিক/ভুল এবং পূর্ণ ব্যাখ্যা সাথে সাথে দেখা যাবে।
+        </p>
+
+        <!-- প্রশ্ন ১ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১. বাংলাদেশে কোনটি ব্যাংক নোট নয়?</span>
+            <span class="quiz-bcs-tag">৪৩তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ২ টাকা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ১০ টাকা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ৫০ টাকা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ১০০ টাকা</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (২ টাকা)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ২ টাকার নোট একটি সরকারি নোট। ১, ২ ও ৫ টাকার নোটে অর্থসচিবের স্বাক্ষর থাকে এবং এগুলো সরকারি মুদ্রা। ১০ থেকে ১০০০ টাকা পর্যন্ত নোটগুলোতে গভর্নরের স্বাক্ষর থাকে এবং সেগুলো ব্যাংক নোট।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">২. বাংলাদেশের অন্যতম বিশেষায়িত ব্যাংক কোনটি?</span>
+            <span class="quiz-bcs-tag">৩৮তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) বাংলাদেশ কৃষি ব্যাংক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) সোনালী ব্যাংক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) অগ্রণী ব্যাংক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) রূপালী ব্যাংক</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (বাংলাদেশ কৃষি ব্যাংক)</strong><br>
+            <strong>ব্যাখ্যা:</strong> বাংলাদেশে বিশেষায়িত ব্যাংক ৩টি: বাংলাদেশ কৃষি ব্যাংক, রাজশাহী কৃষি উন্নয়ন ব্যাংক ও প্রবাসী কল্যাণ ব্যাংক। অন্যদিকে সোনালী, অগ্রণী ও রূপালী হলো রাষ্ট্রায়ত্ত বাণিজ্যিক ব্যাংক।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৩. বাংলাদেশে প্রথম মোবাইল ব্যাংকিং শুরু করে কোন ব্যাংক?</span>
+            <span class="quiz-bcs-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ব্র্যাক ব্যাংক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) এবি ব্যাংক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ডাচ-বাংলা ব্যাংক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) সোনালী ব্যাংক</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (ডাচ-বাংলা ব্যাংক — বইয়ে 'উ. খ' মুদ্রিত থাকলেও ব্যাখ্যা অনুযায়ী ডাচ-বাংলা ব্যাংক)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ডাচ-বাংলা ব্যাংক ২০১১ সালের ৩১ মার্চ বাংলাদেশে সর্বপ্রথম মোবাইল ব্যাংকিং সেবা চালু করে (বর্তমানে এটি রকেট নামে পরিচিত)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৪ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৪. কর্মসংস্থান ব্যাংক প্রতিষ্ঠিত হয় কোন সনে?</span>
+            <span class="quiz-bcs-tag">২৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ১৯৯৫</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ১৯৯৬</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ১৯৯৮</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ২০০১</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (১৯৯৮)</strong><br>
+            <strong>ব্যাখ্যা:</strong> বেকার যুবকদের কর্মসংস্থান সৃষ্টি ও উৎপাদনমুখী কাজে ঋণ সহায়তার লক্ষ্যে ১৯৯৮ সালে কর্মসংস্থান ব্যাংক প্রতিষ্ঠিত হয়। এটি একটি অ-তফসিলি ব্যাংক।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৫ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৫. বাংলাদেশের প্রথম বেসরকারি ব্যাংক কোনটি?</span>
+            <span class="quiz-bcs-tag">২৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ন্যাশনাল ব্যাংক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) আইএফআইসি ব্যাংক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) আরব-বাংলাদেশ ব্যাংক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) দি সিটি ব্যাংক</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (আরব-বাংলাদেশ ব্যাংক — বইয়ে 'উ. খ' মুদ্রিত থাকলেও ব্যাখ্যা অনুযায়ী এবি ব্যাংক)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ১৯৮১ সালের ৩১ ডিসেম্বর বাংলাদেশের প্রথম বেসরকারি বাণিজ্যিক ব্যাংক হিসেবে আরব-বাংলাদেশ (এবি) ব্যাংক লিমিটেড প্রতিষ্ঠিত হয় এবং ১৯৮২ সালে কার্যক্রম শুরু করে।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৬ -->
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৬. বাংলাদেশের কোন প্রতিষ্ঠান মাইক্রোক্রেডিট সম্মেলনের অন্যতম উদ্যোক্তা?</span>
+            <span class="quiz-bcs-tag">২৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) চাটার্ট ব্যাংক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) গ্রামীণ ব্যাংক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ন্যাশনাল ব্যাংক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) এবি ব্যাংক</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: খ (গ্রামীণ ব্যাংক — বইয়ে 'উ. গ' মুদ্রিত থাকলেও ব্যাখ্যা অনুযায়ী গ্রামীণ ব্যাংক)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ১৯৯৭ সালের ২-৪ ফেব্রুয়ারি অনুষ্ঠিত প্রথম মাইক্রোক্রেডিট সম্মেলনের অন্যতম প্রধান উদ্যোক্তা ছিল গ্রামীণ ব্যাংক।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৭ -->
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৭. বাংলাদেশে সবচেয়ে বেশি বৈদেশিক মুদ্রা অর্জিত হয় কোন খাত থেকে?</span>
+            <span class="quiz-bcs-tag">২৩তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) চা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) তৈরি পোশাক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) পাট ও পাট জাত দ্রব্য</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) চিংড়ি মাছ</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: খ (তৈরি পোশাক — বইয়ে অপশন কোড 'উ. গ' মুদ্রিত থাকলেও ২য় অপশন তৈরি পোশাক)</strong><br>
+            <strong>ব্যাখ্যা:</strong> তৈরি পোশাক (RMG) খাত থেকে বাংলাদেশ সবচেয়ে বেশি বৈদেশিক মুদ্রা অর্জন করে। ২০২৪-২৫ অর্থবছরে এ খাত থেকে ৩৯.৩৫ বিলিয়ন মার্কিন ডলার রপ্তানি আয় অর্জিত হয়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৮ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৮. স্বাধীন বাংলাদেশে ১০০ টাকার নোট কবে প্রথম চালু করা হয়?</span>
+            <span class="quiz-bcs-tag">১৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ১৬ মার্চ, ১৯৭২</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ১৬ ডিসেম্বর, ১৯৭২</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ৪ মার্চ, ১৯৭২</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ৪ জানুয়ারি, ১৯৭৩</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (৪ মার্চ, ১৯৭২)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ১৯৭২ সালের ৪ মার্চ স্বাধীন বাংলাদেশে সর্বপ্রথম ১ টাকা ও ১০০ টাকার নোট চালু করা হয়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৯ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৯. কোন ব্যাংক বাংলাদেশের দরিদ্রতম জনগোষ্ঠীকে ঋণ দিয়ে দেশ ও বিদেশে সুনাম কুড়িয়েছে?</span>
+            <span class="quiz-bcs-tag">১৪তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) কৃষি ব্যাংক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) সমবায় ব্যাংক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) গ্রামীণ ব্যাংক</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ইসলামী ব্যাংক</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (গ্রামীণ ব্যাংক — বইয়ে 'উ. খ' মুদ্রিত থাকলেও ব্যাখ্যা অনুযায়ী গ্রামীণ ব্যাংক)</strong><br>
+            <strong>ব্যাখ্যা:</strong> গ্রামীণ ব্যাংক জামানতবিহীন ক্ষুদ্রঋণ কার্যক্রমের মাধ্যমে প্রান্তিক ও দরিদ্রতম জনগোষ্ঠীকে স্বাবলম্বী করে দেশে ও বিশ্বজুড়ে অনন্য সুনাম অর্জন করেছে।
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="discrepancy-card">
+      <h3 style="color: var(--danger); margin-bottom: 12px;">⚠️ বইয়ের অসঙ্গতি ও যাচাই তালিকা</h3>
+      <p style="font-size: 0.875rem; margin-bottom: 14px;">বইয়ের পাতাগুলোতে মুদ্রিত অপশন কোড ও কলাম লেআউটে ব্যাপক মুদ্রণ বিভ্রাট লক্ষ্য করা গেছে:</p>
+      <div class="table-container">
+        <table>
+        <thead>
+          
+              <th>প্রশ্ন নং / বিষয়</th>
+              <th>বইয়ে যা মুদ্রিত আছে</th>
+              <th>প্রকৃত সমস্যা বা অসঙ্গতি</th>
+              <th>সঠিক রূপ ও ব্যাখ্যা</th>
+            
+        </thead>
+        <tbody>
+          <tr>
+              <td>সরকারি নোটের ব্যাখ্যা (পৃ. ৪৮৪)</td>
+              <td>"বর্তমানে দেশে তিনটি (১, ২ ও ৫ টাকার নোট) ব্যাংক নোট প্রচলিত রয়েছে"</td>
+              <td>বাক্যের শেষে 'সরকারি নোট'-এর জায়গায় অসাবধানতাবশত 'ব্যাংক নোট' শব্দটি ছাপা হয়েছে।</td>
+              <td>এটি সরকারি নোট হবে।</td>
+            </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const target = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try {
+        localStorage.setItem('trade_theme', target);
+      } catch(e) {}
+    });
+
+    try {
+      const savedTheme = localStorage.getItem('trade_theme');
+      if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+    } catch(e) {}
+
+    let fontScale = 1;
+    const setScale = (delta, reset = false) => {
+      if (reset) fontScale = 1;
+      else fontScale = Math.min(Math.max(fontScale + delta, 0.8), 1.4);
+      document.documentElement.style.setProperty('--font-scale', fontScale);
+    };
+
+    document.getElementById('fontDown').addEventListener('click', () => setScale(-0.1));
+    document.getElementById('fontReset').addEventListener('click', () => setScale(0, true));
+    document.getElementById('fontUp').addEventListener('click', () => setScale(0.1));
+
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    let correctCount = 0;
+    const answeredCards = new Set();
+
+    function evalQuiz(btn, selectedOption) {
+      const card = btn.closest('.quiz-card');
+      if (answeredCards.has(card)) return;
+      answeredCards.add(card);
+
+      const correctAns = card.getAttribute('data-answer');
+      const allButtons = card.querySelectorAll('.quiz-opt');
+      const feedback = card.querySelector('.quiz-feedback');
+
+      allButtons.forEach(b => b.disabled = true);
+
+      if (selectedOption === correctAns) {
+        btn.classList.add('correct');
+        correctCount++;
+        feedback.style.display = 'block';
+      } else {
+        btn.classList.add('incorrect');
+        allButtons.forEach(b => {
+          if (b.textContent.trim().startsWith(correctAns)) {
+            b.classList.add('correct');
+          }
+        });
+        feedback.style.display = 'block';
+      }
+
+      document.getElementById('quiz-score').textContent = `স্কোর: ${correctCount} / ৯`;
+    }
+  </script>
+  <script src="nav-component.js"></script>
+</body>
+</html>

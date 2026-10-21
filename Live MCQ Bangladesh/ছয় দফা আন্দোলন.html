@@ -1,0 +1,944 @@
+<!-- DESIGN PLAN:
+(১) বিষয়ের ধরন: বাংলাদেশ বিষয়াবলি — 'ছয় দফা আন্দোলন' (পৃষ্ঠা ৪২৮-৪২৯)। এটি বাঙালির মুক্তির সনদ, ম্যাগনাকার্টা ও স্বাধিকার আন্দোলনের ভিত্তি।
+(২) সবচেয়ে কঠিন/গুলিয়ে ফেলার জায়গা: ৫-৬ ফেব্রুয়ারি লাহোর পেশ বনাম ২৩ মার্চ আনুষ্ঠানিক ঘোষণা; ৬টি দফার বিষয়ভিত্তিক শ্রেণিবিভাগ (অর্থনৈতিক দফা কয়টি = ৩টি, রাজনৈতিক/নিরাপত্তা = ৩টি); কেন্দ্রীয় সরকারের ক্ষমতা (প্রতিরক্ষা ও বৈদেশিক বিষয়) এবং অন্তর্ভুক্ত না-থাকা বিষয় (বিচার ব্যবস্থা); হরতালে শহীদ ব্যক্তিবর্গের নাম (মনু মিয়া, শামসুল হক প্রমুখ)।
+(৩) বাছাই করা মডিউল:
+    - ৬টি দফার সচিত্র ইন্টারঅ্যাকটিভ কার্ড ড্যাশবোর্ড (দফাভিত্তিক স্পষ্ট বিশ্লেষণ)।
+    - টাইমলাইন চেইন (লাহোর পেশ → আনুষ্ঠানিক উত্থাপন → গ্রেফতার → ৭ই জুনের হরতাল ও রক্তদান)।
+    - অর্থনীতি বনাম প্রশাসন দফা তুলনা ম্যাট্রিক্স।
+    - ৮টি বিসিএস বিগত প্রশ্নের ইন্টারঅ্যাকটিভ কুইজ (OCR যাচাই ও অপশন-কোড অসঙ্গতি সংশোধনসহ)।
+(৪) রঙের মেজাজ: স্বাধীনতা ও স্বাধিকারের প্রতীক গাঢ় সবুজ (#047857), রক্তের আত্মত্যাগের ক্রিমসন লাল (#b91c1c), এবং উষ্ণ সোনালি অ্যাকসেন্ট।
+(৫) হিরো ও মাসকটের ধরন: 'বাঙালির মুক্তির সনদ ও ম্যাগনাকার্টা' মেটাফর; হিস্ট্রি মেন্টর প্রতীক "স্বাধীনতা গাইড" (📜/✊)।
+-->
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ছয় দফা আন্দোলন — বিসিএস পূর্ণাঙ্গ প্রস্তুতি ই-বুক</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-2: #f1f5f9;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #cbd5e1;
+      --primary: #047857;          /* স্বাধিকারের সবুজ */
+      --primary-dark: #064e3b;
+      --primary-light: #d1fae5;
+      --accent: #b91c1c;           /* ৭ই জুনের রক্তিম ত্যাগ */
+      --accent-light: #fee2e2;
+      --gold: #d97706;
+      --gold-light: #fef3c7;
+      --success: #15803d;
+      --success-light: #dcfce7;
+      --danger: #b91c1c;
+      --danger-light: #fee2e2;
+      --radius: 12px;
+      --shadow: 0 4px 10px rgba(4, 120, 87, 0.08);
+      --font-scale: 1;
+    }
+
+    [data-theme="dark"] {
+      --bg: #090e11;
+      --surface: #111b18;
+      --surface-2: #192723;
+      --text: #f0fdf4;
+      --text-muted: #94a3b8;
+      --border: #243932;
+      --primary: #34d399;
+      --primary-dark: #059669;
+      --primary-light: #064e3b;
+      --accent: #f87171;
+      --accent-light: #450a0a;
+      --gold: #fbbf24;
+      --gold-light: #451a03;
+      --success: #4ade80;
+      --success-light: #052e16;
+      --danger: #f87171;
+      --danger-light: #450a0a;
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    body {
+      font-family: 'Noto Sans Bengali', 'Kalpurush', Vrinda, sans-serif;
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.85;
+      background-color: var(--bg);
+      color: var(--text);
+      padding-bottom: 90px;
+    }
+
+    /* স্ক্রল প্রগ্রেস বার */
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: transparent;
+      z-index: 1001;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    /* স্টিকি কন্ট্রোল বার */
+    .control-bar {
+      position: sticky;
+      top: 5px;
+      z-index: 1000;
+      background: var(--surface);
+      border-bottom: 2px solid var(--border);
+      padding: 10px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      padding: 6px 14px;
+      font-size: calc(14px * var(--font-scale));
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+    }
+
+    button:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+
+    /* হিরো সেকশন */
+    .hero {
+      background: linear-gradient(135deg, #047857, #064e3b);
+      color: #ffffff;
+      padding: 34px 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 26px;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: calc(26px * var(--font-scale));
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: calc(15px * var(--font-scale));
+      opacity: 0.95;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8125rem;
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #fff;
+    }
+
+    /* কার্ডস */
+    .section-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .section-header {
+      padding: 16px 20px;
+      background: var(--surface-2);
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .section-header h2 {
+      font-size: calc(18px * var(--font-scale));
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--primary);
+    }
+
+    [data-theme="dark"] .section-header h2 {
+      color: var(--primary);
+    }
+
+    .section-body {
+      padding: 20px;
+    }
+
+    /* ৬ দফা সচিত্র কার্ড গ্রিড */
+    .dofa-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    @media (min-width: 680px) {
+      .dofa-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .dofa-card {
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      border-left: 5px solid var(--primary);
+      padding: 16px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .dofa-card.eco {
+      border-left-color: var(--gold);
+    }
+
+    .dofa-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .dofa-badge.eco-badge {
+      background: var(--gold-light);
+      color: #b45309;
+    }
+
+    [data-theme="dark"] .dofa-badge.eco-badge {
+      background: #451a03;
+      color: #fbbf24;
+    }
+
+    .dofa-title {
+      font-weight: bold;
+      font-size: calc(16px * var(--font-scale));
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    /* টাইমলাইন ফ্লো */
+    .timeline-chain {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .chain-item {
+      background: var(--surface-2);
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .chain-date {
+      font-weight: bold;
+      color: var(--accent);
+      font-size: calc(15px * var(--font-scale));
+    }
+
+    /* টেবিল ডিজাইন */
+    .table-container {
+      overflow-x: auto;
+      margin: 14px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      font-size: calc(15px * var(--font-scale));
+    }
+
+    th {
+      background-color: var(--surface-2);
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    [data-theme="dark"] tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    /* নোটিশ ও ফাঁদ বক্স */
+    .note-box {
+      background: var(--surface-2);
+      border-left: 5px solid var(--primary);
+      padding: 14px 18px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 16px 0;
+      color: var(--text);
+    }
+
+    .trap-box {
+      background: var(--danger-light);
+      border-left: 5px solid var(--danger);
+      padding: 14px 18px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 16px 0;
+      color: var(--text);
+    }
+
+    /* কুইজ স্টাইল */
+    .quiz-card {
+      background: var(--surface-2);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+
+    .quiz-title-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      gap: 10px;
+    }
+
+    .quiz-bcs-tag {
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .quiz-question {
+      font-weight: bold;
+      font-size: calc(16px * var(--font-scale));
+      margin-bottom: 12px;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    @media (min-width: 600px) {
+      .quiz-options.two-col {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .quiz-opt {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      font-size: calc(15px * var(--font-scale));
+      font-family: inherit;
+    }
+
+    .quiz-opt:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .quiz-opt.correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+      color: var(--text);
+      font-weight: bold;
+    }
+
+    .quiz-opt.incorrect {
+      background: var(--danger-light) !important;
+      border-color: var(--danger) !important;
+      color: var(--text);
+    }
+
+    .quiz-feedback {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      display: none;
+      font-size: calc(14.5px * var(--font-scale));
+      line-height: 1.7;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    .discrepancy-card {
+      background: var(--surface);
+      border: 2px dashed var(--danger);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-top: 32px;
+    }
+
+    /* প্রিন্ট লেআউট */
+    @media print {
+      .control-bar, #progress-container, .btn-group, button {
+        display: none !important;
+      }
+      body {
+        background: #fff;
+        color: #000;
+        font-size: 11pt;
+      }
+      .section-card {
+        border: 1px solid #777;
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+    }
+  
+/* Universal Mobile Optimization (Samsung A23 & small screens) */
+@media (max-width: 600px) {
+  .print-btn, button[onclick*="print"], .btn-ctrl:has(span:contains('🖨️')) {
+    display: none !important;
+  }
+  .container {
+    padding: 6px 8px 24px 8px !important;
+  }
+  .hero-box, .hero, .hero-banner {
+    padding: 16px 12px !important;
+    margin-top: 8px !important;
+    margin-bottom: 14px !important;
+  }
+  .table-responsive, .table-container {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+  }
+  .table-responsive table th, .table-responsive table td,
+  .table-container table th, .table-container table td {
+    padding: 7px 6px !important;
+  }
+}
+
+</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- পড়ার প্রগ্রেস বার -->
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <!-- স্টিকি কন্ট্রোল বার -->
+  <div class="control-bar">
+    <div class="btn-group">
+      <button id="themeToggle" title="থিম পরিবর্তন">🌓 থিম</button>
+      <button id="fontDown" title="ফন্ট ছোট">A-</button>
+      <button id="fontReset" title="স্বাভাবিক ফন্ট">A</button>
+      <button id="fontUp" title="ফন্ট বড়">A+</button>
+    </div>
+    <div class="btn-group">
+      <button onclick="document.getElementById('quiz-section').scrollIntoView({behavior: 'smooth'})">📝 সব MCQ কুইজ</button>
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆️ উপরে</button>
+      <button onclick="window.print()">🖨️ প্রিন্ট / PDF</button>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- হিরো সেকশন -->
+    <div class="hero">
+      <div style="font-size: 2.375rem; margin-bottom: 8px;">📜</div>
+      <h1>ঐতিহাসিক ছয় দফা আন্দোলন (১৯৬৬)</h1>
+      <p>বাঙালির স্বাধিকার আন্দোলনের ম্যাগনাকার্টা, বঙ্গবন্ধু শেখ মুজিবুর রহমানের ঐতিহাসিক ৬ দফা দাবি, প্রেক্ষাপট, রক্তঝরা ৭ই জুন এবং বিসিএস বিগত পরীক্ষার পূর্ণাঙ্গ সল্যুশন।</p>
+      <div class="hero-meta">
+        <span class="badge">পৃষ্ঠা: ৪২৮ – ৪২৯</span>
+        <span class="badge">বিসিএস প্রশ্ন: ৮টি পূর্ণাঙ্গ সমাধান</span>
+        <span class="badge">টপিক: বাংলাদেশ বিষয়াবলি</span>
+      </div>
+    </div>
+
+    <!-- বিসিএস প্রশ্ন পরিসংখ্যান ছক -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>📊 বিসিএসে প্রশ্ন আসার পরিসংখ্যান (বইয়ের ছক অনুযায়ী)</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: ছয় দফা অধ্যায়ের পৌনঃপুনিক গুরুত্ব যাচাই। (আনুমানিক পাঠ সময়: ২ মিনিট) (আমার অনুমান)
+        </p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>বিসিএস</th>
+                <th>প্রশ্ন সংখ্যা</th>
+                <th>বিসিএস</th>
+                <th>প্রশ্ন সংখ্যা</th>
+                <th>বিসিএস</th>
+                <th>প্রশ্ন সংখ্যা</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>৪৬তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৪১তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৩৬তম বিসিএস</strong></td>
+                <td>১টি</td>
+              </tr>
+              <tr>
+                <td><strong>৪৫তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৪০তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৩৫তম বিসিএস</strong></td>
+                <td>(বইয়ে ফাঁকা)</td>
+              </tr>
+              <tr>
+                <td><strong>৪৪তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৩৯তম বিসিএস</strong></td>
+                <td>০টি</td>
+                <td><strong>১০ম-৩৪তম বিসিএস</strong></td>
+                <td>৪টি</td>
+              </tr>
+              <tr>
+                <td><strong>৪৩তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৩৮তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>৪৭তম-৫০তম বিসিএস</strong></td>
+                <td>(বইয়ে ফাঁকা)</td>
+              </tr>
+              <tr>
+                <td><strong>৪২তম বিসিএস</strong></td>
+                <td>(বইয়ে ফাঁকা)</td>
+                <td><strong>৩৭তম বিসিএস</strong></td>
+                <td>১টি</td>
+                <td><strong>মোট সমাধান</strong></td>
+                <td><strong>৮টি মাস্টার প্রশ্ন</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- মডিউল ১: ঐতিহাসিক ৬টি দফার খুঁটিনাটি কার্ড -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>📑 ঐতিহাসিক ছয়টি দফার পুঙ্খানুপুঙ্খ বিবরণ</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: কোন দফায় কী বলা হয়েছে তা নিখুঁতভাবে আত্মস্থ করা। (আনুমানিক পাঠ সময়: ৫ মিনিট) (আমার অনুমান)
+        </p>
+
+        <div class="dofa-grid">
+          <!-- দফা ১ -->
+          <div class="dofa-card">
+            <span class="dofa-badge">দফা ১ • শাসনতান্ত্রিক কাঠামো</span>
+            <div class="dofa-title">প্রাদেশিক স্বায়ত্তশাসন ও সংসদীয় সরকার</div>
+            <p>লাহোর প্রস্তাবের ভিত্তিতে সংবিধান রচনা করে পাকিস্তানকে একটি ফেডারেশনে পরিণত করতে হবে, যেখানে সংসদীয় পদ্ধতির সরকার থাকবে এবং প্রাপ্তবয়স্কদের সর্বজনীন ভোটাধিকারে নির্বাচিত আইন পরিষদ সার্বভৌম হবে।</p>
+          </div>
+
+          <!-- দফা ২ -->
+          <div class="dofa-card">
+            <span class="dofa-badge">দফা ২ • কেন্দ্রীয় সরকারের ক্ষমতা</span>
+            <div class="dofa-title">প্রতিরক্ষা ও বৈদেশিক সম্পর্ক</div>
+            <p>ফেডারেল (কেন্দ্রীয়) সরকারের হাতে থাকবে মাত্র দুটি বিষয়: <strong>প্রতিরক্ষা ও বৈদেশিক সম্পর্ক</strong>। অবশিষ্ট সব বিষয় ফেডারেশনে অন্তর্ভুক্ত রাজ্যসমূহের (প্রদেশগুলোর) হাতে ন্যস্ত থাকবে!</p>
+          </div>
+
+          <!-- দফা ৩ -->
+          <div class="dofa-card eco">
+            <span class="dofa-badge eco-badge">দফা ৩ • অর্থনীতি ও মুদ্রা</span>
+            <div class="dofa-title">পৃথক ও সহজে বিনিময়যোগ্য মুদ্রা</div>
+            <p>দুই অঞ্চলের জন্য দুটি পৃথক অথচ সহজে বিনিময়যোগ্য মুদ্রা চালু করতে হবে। অথবা সমগ্র পাকিস্তানের জন্য একটি মুদ্রাব্যবস্থা থাকলেও সংবিধানে এমন কঠোর বিধান রাখতে হবে যাতে পূর্ব পাকিস্তান থেকে পশ্চিম পাকিস্তানে <strong>পুঁজি পাচার</strong> হতে না পারে। এক্ষেত্রে একটি ফেডারেল রিজার্ভ ব্যাংক ও দুটি আঞ্চলিক রিজার্ভ ব্যাংক থাকবে।</p>
+          </div>
+
+          <!-- দফা ৪ -->
+          <div class="dofa-card eco">
+            <span class="dofa-badge eco-badge">দফা ৪ • অর্থনীতি ও কর</span>
+            <div class="dofa-title">ট্যাক্স, খাজনা ও বৈদেশিক মুদ্রা নিয়ন্ত্রণ</div>
+            <p>রাজ্যগুলোর অর্জিত বৈদেশিক মুদ্রার হিসাব ও নিয়ন্ত্রণ তাদের নিজেদের হাতে থাকবে। ফেডারেল সরকারের খরচের জন্য প্রয়োজনীয় বৈদেশিক মুদ্রা উভয় অঞ্চল থেকে সমানভাবে বা স্বীকৃত হারে আদায় করা হবে।</p>
+          </div>
+
+          <!-- দফা ৫ -->
+          <div class="dofa-card eco">
+            <span class="dofa-badge eco-badge">দফা ৫ • অর্থনীতি ও বৈদেশিক বাণিজ্য</span>
+            <div class="dofa-title">শুল্কমুক্ত অভ্যন্তরীণ পণ্য ও বৈদেশিক বাণিজ্য</div>
+            <p>দুই অংশের মধ্যকার দেশি পণ্য বিনিময়ে কোনো শুল্ক ধার্য করা যাবে না এবং প্রদেশগুলো যাতে সরাসরি যেকোনো বিদেশি রাষ্ট্রের সাথে বাণিজ্যিক সম্পর্ক ও চুক্তি স্থাপন করতে পারে তার বিধান রাখতে হবে!</p>
+          </div>
+
+          <!-- দফা ৬ -->
+          <div class="dofa-card">
+            <span class="dofa-badge">দফা ৬ • আঞ্চলিক নিরাপত্তা</span>
+            <div class="dofa-title">প্যারা-মিলিশিয়া ও নৌবাহিনীর সদর দপ্তর</div>
+            <p>প্রতিরক্ষায় পূর্ব পাকিস্তানকে স্বাবলম্বী করার লক্ষ্যে আধা-সামরিক রক্ষীবাহিনী (প্যারা-মিলিশিয়া) গঠন, পূর্ব পাকিস্তানে অস্ত্র কারখানা স্থাপন এবং কেন্দ্রীয় নৌবাহিনীর সদর দফতর পূর্ব পাকিস্তানে স্থাপন করতে হবে!</p>
+          </div>
+        </div>
+
+        <div class="trap-box">
+          ⚠️ <strong>পরীক্ষার প্রধান ফাঁদ:</strong><br>
+          • <strong>অর্থনীতি বিষয়ক দফা কয়টি?</strong> ঠিক ৩টি (দফা ৩, ৪ ও ৫)!<br>
+          • <strong>শাসন ও নিরাপত্তা বিষয়ক দফা কয়টি?</strong> ঠিক ৩টি (দফা ১, ২ ও ৬)!<br>
+          • <strong>ছয় দফায় কোন বিষয়টি অন্তর্ভুক্ত ছিল না?</strong> <mark>বিচার ব্যবস্থা</mark>!
+        </div>
+      </div>
+    </div>
+
+    <!-- মডিউল ২: ঐতিহাসিক টাইমলাইন ও রক্তঝরা ৭ই জুন -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>⏱️ কালানুক্রমিক ছয় দফা টাইমলাইন (১৯৬৬)</h2>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 12px; color: var(--text-muted);">
+          🎯 লক্ষ্য: বিভিন্ন তারিখ ও ঘটনার ক্রম মনে রাখা। (আনুমানিক পাঠ সময়: ৩ মিনিট) (আমার অনুমান)
+        </p>
+
+        <div class="timeline-chain">
+          <div class="chain-item">
+            <div class="chain-date">৫ ও ৬ ফেব্রুয়ারি ১৯৬৬</div>
+            <p><strong>লাহোরে প্রথম উত্থাপন:</strong> তাসখন্দ-উত্তর রাজনীতি পর্যালোচনায় লাহোরে পাকিস্তানের বিরোধী দলগুলোর জাতীয় সম্মেলনের ৫ ফেব্রুয়ারি সাবজেক্ট কমিটির সভায় বঙ্গবন্ধু শেখ মুজিবুর রহমান সর্বপ্রথম ৬ দফা দাবি উত্থাপন করেন। সম্মেলনের উদ্যোক্তারা এটি প্রত্যাখ্যান করে শেখ মুজিবকে বিচ্ছিন্নতাবাদী হিসেবে চিত্রিত করায় তিনি ৬ ফেব্রুয়ারির সম্মেলন বর্জন করেন!</p>
+          </div>
+          <div class="chain-item">
+            <div class="chain-date">২৩ মার্চ ১৯৬৬</div>
+            <p><strong>আনুষ্ঠানিক ঘোষণা:</strong> ঐতিহাসিক লাহোর প্রস্তাবের দিনের (২৩ মার্চ) সাথে সামঞ্জস্য রেখে বঙ্গবন্ধু আনুষ্ঠানিকভাবে ছয় দফা দাবি ঘোষণা করেন!</p>
+          </div>
+          <div class="chain-item">
+            <div class="chain-date">১৭ এপ্রিল ১৯৬৬</div>
+            <p><strong>বঙ্গবন্ধুকে গ্রেফতার:</strong> ছয় দফা পেশের অভিযোগে শেখ মুজিবুর রহমানকে ৪৭(৫) ধারায় গ্রেফতার করা হয়!</p>
+          </div>
+          <div class="chain-item">
+            <div class="chain-date">৭ জুন ১৯৬৬</div>
+            <p><strong>ঐতিহাসিক ৬ দফা দিবস ও হরতাল:</strong> দেশব্যাপী তীব্র গণ-আন্দোলনের সূচনা। আওয়ামী লীগের ডাকা সর্বাত্মক হরতালে ঢাকা, টঙ্গী ও নারায়ণগঞ্জে পুলিশ ও ইপিআরের গুলিতে <strong>মনু মিয়া, শামসুল হক, মুজিবুল হক, শফিক</strong> সহ অনেকেই শহিদ হন!</p>
+          </div>
+        </div>
+
+        <div class="note-box">
+          💡 <strong>ঐতিহাসিক উপাধি:</strong> লাহোর প্রস্তাবের ভিত্তিতে রচিত এই ৬ দফাকে ব্রিটিশ ইতিহাসের <strong>'ম্যাগনাকার্টা' (Magna Carta)</strong>-র সাথে তুলনা করা হয় এবং এটিকে বাঙালি জাতির <strong>'মুক্তির সনদ'</strong> বলা হয়!
+        </div>
+      </div>
+    </div>
+
+    <!-- ইন্টারঅ্যাকটিভ কুইজ সেকশন -->
+    <div class="section-card" id="quiz-section">
+      <div class="section-header">
+        <h2>📝 বিসিএস বিগত প্রশ্নব্যাংক ও ইন্টারঅ্যাকটিভ কুইজ (১ থেকে ৮)</h2>
+        <span class="badge" id="quiz-score">স্কোর: ০ / ৮</span>
+      </div>
+      <div class="section-body">
+        <p style="margin-bottom: 16px; color: var(--text-muted);">
+          বইয়ের মূল প্রশ্ন ও ব্যাখ্যার ভিত্তিতে ইন্টারঅ্যাকটিভ কুইজে অংশ নাও। অপশনে ক্লিক করলে সঠিক/ভুল এবং পূর্ণাঙ্গ ব্যাখ্যা দৃশ্যমান হবে।
+        </p>
+
+        <!-- প্রশ্ন ১ -->
+        <div class="quiz-card" data-answer="ঘ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">১. ঐতিহাসিক ৬-দফা দাবিতে কোন দু'টি বিষয় কেন্দ্রীয় সরকারের হাতে রাখার প্রস্তাব ছিল?</span>
+            <span class="quiz-bcs-tag">৪৬তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) বৈদেশিক বাণিজ্য ও প্রতিরক্ষা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) অর্থ ও পররাষ্ট্র</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) স্বরাষ্ট্র ও পরিকল্পনা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) প্রতিরক্ষা ও পররাষ্ট্র</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ঘ (প্রতিরক্ষা ও পররাষ্ট্র)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ঐতিহাসিক ছয় দফা দাবির ২য় দফায় প্রতিরক্ষা ও পররাষ্ট্র (বৈদেশিক সম্পর্ক) — এই বিষয় দুটি কেন্দ্রীয় সরকারের হাতে রাখার এবং অবশিষ্ট সব বিষয় প্রদেশগুলোর হাতে ন্যস্ত রাখার প্রস্তাব ছিল।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ২ -->
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">২. ঐতিহাসিক 'ছয়-দফা' বঙ্গবন্ধু শেখ মুজিবুর রহমান আনুষ্ঠানিকভাবে ঘোষণা করেন কোন তারিখে?</span>
+            <span class="quiz-bcs-tag">৪৫তম / ৪৪তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ৫ ফেব্রুয়ারি ১৯৬৬</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ২৩ মার্চ ১৯৬৬</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ২৬ মার্চ ১৯৬৬</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ৩১ মার্চ ১৯৬৬</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: খ (২৩ মার্চ ১৯৬৬ — বইয়ের কলাম ক্রমানুসারে ২৩ মার্চ)</strong><br>
+            <strong>ব্যাখ্যা:</strong> লাহোর প্রস্তাবের সাথে মিল রেখে ১৯৬৬ সালের ২৩ মার্চ বঙ্গবন্ধু শেখ মুজিবুর রহমান আনুষ্ঠানিকভাবে ঐতিহাসিক ছয় দফা দাবি ঘোষণা করেন। (উল্লেখ্য, প্রথম উত্থাপন করেছিলেন ৫ ফেব্রুয়ারি)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৩ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৩. ১৯৬৬ সালের ৬ দফার কয়টি দফা অর্থনীতি বিষয়ক ছিল?</span>
+            <span class="quiz-bcs-tag">৪৩তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ৩টি</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ৪টি</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ৫টি</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ৬টি</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (৩টি)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ৬ দফার মধ্যে ৩টি দফা (দফা ৩: মুদ্রা, দফা ৪: কর ও রাজস্ব, দফা ৫: বৈদেশিক বাণিজ্য) অর্থনীতি বিষয়ক ছিল এবং বাকি ৩টি (১, ২, ৬) ছিল শাসনতান্ত্রিক ও নিরাপত্তা বিষয়ক।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৪ -->
+        <div class="quiz-card" data-answer="ঘ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৪. ঐতিহাসিক “ছয় দফা” দাবিতে যে বিষয়টি অন্তর্ভুক্ত ছিল না-</span>
+            <span class="quiz-bcs-tag">৪১তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) শাসনতান্ত্রিক কাঠামো</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) কেন্দ্রীয় সরকারের ক্ষমতা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) স্বতন্ত্র মুদ্রা ব্যবস্থা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) বিচার ব্যবস্থা</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ঘ (বিচার ব্যবস্থা)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ঐতিহাসিক ৬ দফা কর্মসূচিতে শাসনতন্ত্র, কেন্দ্রের ক্ষমতা, মুদ্রা, কর, বাণিজ্য ও মিলিশিয়া বাহিনী গঠনের কথা থাকলেও আলাদা বিচার ব্যবস্থার কোনো দফা অন্তর্ভুক্ত ছিল না।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৫ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৫. আওয়ামী লীগের ৬-দফা পেশ করা হয়েছিলো কত সালে?</span>
+            <span class="quiz-bcs-tag">৪০তম / ৩৬তম / ১৩তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ১৯৬৬ সালে</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ১৯৬৭ সালে</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ১৯৬৮ সালে</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ১৯৬৯ সালে</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (১৯৬৬ সালে)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ১৯৬৬ সালের ৫ই ফেব্রুয়ারি লাহোরে বিরোধী দলগুলোর জাতীয় সম্মেলনের সাবজেক্ট কমিটির সভায় বঙ্গবন্ধু শেখ মুজিবুর রহমান ৬ দফা দাবি প্রথম পেশ করেন।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৬ -->
+        <div class="quiz-card" data-answer="ক">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৬. ঐতিহাসিক ছয় দফা ঘোষণা করা হয় ১৯৬৬ সালের কোন মাসে?</span>
+            <span class="quiz-bcs-tag">৩৮তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ফেব্রুয়ারিতে</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) মে মাসে</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) জুলাই মাসে</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) আগস্টে</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: ক (ফেব্রুয়ারিতে)</strong><br>
+            <strong>ব্যাখ্যা:</strong> বঙ্গবন্ধু শেখ মুজিবুর রহমান ১৯৬৬ সালের ৫ ফেব্রুয়ারি পাকিস্তানের লাহোরে প্রথম ছয় দফা দাবি পেশ করেন। (পরবর্তীতে ২৩ মার্চ আনুষ্ঠানিকভাবে ঘোষণা করা হয়)।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৭ -->
+        <div class="quiz-card" data-answer="গ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৭. ঐতিহাসিক ৬-দফাকে কিসের সাথে তুলনা করা হয়?</span>
+            <span class="quiz-bcs-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) বিল অব রাইটস</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) পিটিশন অব রাইটস</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ম্যাগনাকার্টা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) মুখ্য আইন</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: গ (ম্যাগনাকার্টা — বইয়ে 'উ. খ' মুদ্রিত থাকলেও ব্যাখ্যা অনুযায়ী ম্যাগনাকার্টা)</strong><br>
+            <strong>ব্যাখ্যা:</strong> ঐতিহাসিক ৬-দফাকে ১২১৫ সালের বিখ্যাত ব্রিটিশ অধিকার সনদ 'ম্যাগনাকার্টা'-র সাথে তুলনা করা হয়। এটিকে বাঙালি জাতির মুক্তির সনদও বলা হয়।
+          </div>
+        </div>
+
+        <!-- প্রশ্ন ৮ -->
+        <div class="quiz-card" data-answer="খ">
+          <div class="quiz-title-bar">
+            <span class="quiz-question">৮. ৬-দফা দাবি প্রথম কোথায় উত্থাপিত হয়?</span>
+            <span class="quiz-bcs-tag">৩০তম / ২২তম / ১৮তম বিসিএস</span>
+          </div>
+          <div class="quiz-options two-col">
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ঢাকা</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) লাহোর</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) দিল্লি</button>
+            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) চট্টগ্রাম</button>
+          </div>
+          <div class="quiz-feedback">
+            <strong>উত্তর: খ (লাহোর)</strong><br>
+            <strong>ব্যাখ্যা:</strong> পাকিস্তানের লাহোরে ১৯৬৬ সালের ৫ই ফেব্রুয়ারি বিরোধী রাজনৈতিক দলগুলোর জাতীয় সম্মেলনে শেখ মুজিবুর রহমান সর্বপ্রথম ৬ দফা দাবি উত্থাপন করেন।
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- বইয়ের অসঙ্গতি ও যাচাই তালিকা -->
+    <div class="discrepancy-card">
+      <h3 style="color: var(--danger); margin-bottom: 12px;">⚠️ বইয়ের অসঙ্গতি ও যাচাই তালিকা</h3>
+      <p style="font-size: 0.875rem; margin-bottom: 14px;">বইয়ের পাতাগুলোতে মুদ্রিত অপশন কোড ও লেআউটে যেসব অসংগতি পরিলক্ষিত হয়েছে:</p>
+      <div class="table-container">
+        <table>
+        <thead>
+          
+              <td>বিসিএস পরিসংখ্যান ছক (পৃ. ৪২৮)</td>
+              <td>৪৪তম বিসিএসে একটি আরবি সংকেত সদৃশ অক্ষর মুদ্রিত</td>
+              <td>৪৪তম ঘরে '১' না লিখে প্রিন্টিং ত্রুটিতে অন্য প্রতীক এসেছে।</td>
+              <td>প্রশ্ন ২-এ ৪৪তম বিসিএসের প্রশ্ন অন্তর্ভুক্ত থাকায় এটি <strong>১টি</strong> প্রশ্ন হবে।</td>
+            
+        </thead>
+        <tbody>
+          <tr>
+              <td>আওয়ামী লীগ বানান (পৃ. ৪২৮ বনাম ৪২৯)</td>
+              <td>"আওয়ামী লীগ" বনাম "আওয়ামীলীগ"</td>
+              <td>পৃষ্ঠার ভেতরে স্থানভেদে স্পেসসহ ও স্পেসছাড়া লেখা হয়েছে।</td>
+              <td>প্রমিত বানান "আওয়ামী লীগ" (আমার অনুমান)।</td>
+            </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // ডার্ক / লাইট থিম টগল
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const target = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try {
+        localStorage.setItem('choydofa_theme', target);
+      } catch(e) {}
+    });
+
+    try {
+      const savedTheme = localStorage.getItem('choydofa_theme');
+      if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+    } catch(e) {}
+
+    // ফন্ট সাইজ স্কেলিং
+    let fontScale = 1;
+    const setScale = (delta, reset = false) => {
+      if (reset) fontScale = 1;
+      else fontScale = Math.min(Math.max(fontScale + delta, 0.8), 1.4);
+      document.documentElement.style.setProperty('--font-scale', fontScale);
+    };
+
+    document.getElementById('fontDown').addEventListener('click', () => setScale(-0.1));
+    document.getElementById('fontReset').addEventListener('click', () => setScale(0, true));
+    document.getElementById('fontUp').addEventListener('click', () => setScale(0.1));
+
+    // স্ক্রল প্রগ্রেস বার
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    // কুইজ হ্যান্ডলার
+    let correctCount = 0;
+    const answeredCards = new Set();
+
+    function evalQuiz(btn, selectedOption) {
+      const card = btn.closest('.quiz-card');
+      if (answeredCards.has(card)) return; // একবার উত্তর দিলে লক
+      answeredCards.add(card);
+
+      const correctAns = card.getAttribute('data-answer');
+      const allButtons = card.querySelectorAll('.quiz-opt');
+      const feedback = card.querySelector('.quiz-feedback');
+
+      allButtons.forEach(b => b.disabled = true);
+
+      if (selectedOption === correctAns) {
+        btn.classList.add('correct');
+        correctCount++;
+      } else {
+        btn.classList.add('incorrect');
+        allButtons.forEach(b => {
+          if (b.textContent.trim().startsWith(correctAns)) {
+            b.classList.add('correct');
+          }
+        });
+      }
+
+      feedback.style.display = 'block';
+      document.getElementById('quiz-score').textContent = `স্কোর: ${correctCount} / ৮`;
+    }
+  </script>
+  <script src="nav-component.js"></script>
+</body>
+</html>

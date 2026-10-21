@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+<!-- DESIGN PLAN:
+(১) বিষয়ের ধরন: বাংলাদেশ বিষয়াবলি - পাকিস্তান আমল: ভাষা আন্দোলন (পৃষ্ঠা ৪২২ হতে ৪২৬)।
+(২) সবচেয়ে কঠিন/গুলিয়ে ফেলার জায়গা:
+    - বিভিন্ন রাষ্ট্রভাষা সংগ্রাম পরিষদের গঠন তারিখ ও আহ্বায়ক (১৯৪৭-এর নুরুল হক ভূঁইয়া বনাম ১৯৪৮-এর শামসুল হক বনাম ১৯৫০-এর আব্দুল মতিন বনাম ১৯৫২-এর কাজী গোলাম মাহবুব)।
+    - গণপরিষদে স্বীকৃতি (৯ মে ১৯৫৪) বনাম সংবিধানে সাংবিধানিক স্বীকৃতি (১৯৫৬)।
+    - 'আমার ভাইয়ের রক্তে রাঙানো' গানের আদি সুরকার (আব্দুল লতিফ) বনাম বর্তমান জনপ্রিয় সুরকার (আলতাফ মাহমুদ)।
+    - প্রথম শহিদ মিনার নির্মাণ (২৩ ফেব্রুয়ারি ১৯৫২), প্রথম আনুষ্ঠানিক ও অনানুষ্ঠানিক উদ্বোধন (২৪ ফেব্রুয়ারি মাহবুবুর রহমান, ২৬ ফেব্রুয়ারি আবুল কালাম শামসুদ্দীন) এবং বর্তমান কেন্দ্রীয় শহিদ মিনারের স্থপতি (হামিদুর রহমান ও ভাস্কর নভেরা আহমদ)।
+(৩) বাছাই করা মডিউল:
+    - হুক: ভাষা আন্দোলনের মূল ৭টি রক্তাক্ষর তথ্য (Quick Mega Facts)।
+    - টাইমলাইন ও সংগ্রাম পরিষদ ম্যাট্রিক্স কার্ড (HTML/CSS Flexbox ভিত্তিক)।
+    - ভাষা আন্দোলনভিত্তিক কালজয়ী সাহিত্য ও সংগীতের সম্পূর্ণ তালিকা ছক।
+    - পরীক্ষার ফাঁদ বাক্স (Trap Box): পরীক্ষার চরম বিভ্রান্তিকর সাল ও নাম দূরীকরণ।
+    - ইন্টারঅ্যাকটিভ কুইজ: ১৭টি বিসিএস প্রিলিমিনারি প্রশ্নের লাইভ স্কোরিং ও পূর্ণাঙ্গ ড্রয়ার সমাধান।
+    - অসঙ্গতি ও যাচাই তালিকা: বইয়ের কলাম বিন্যাস ও মুদ্রণ কোড অসঙ্গতির স্বচ্ছ বিশ্লেষণ।
+(৪) রঙের মেজাজ: একুশের স্মারক কৃষ্ণচূড়া ও রক্তিম বর্ণমালা থিম (Crimson Red: #991B1B, Deep Maroon: #7F1D1D, Amber Gold: #D97706, Charcoal Black: #1F2937, Crisp Parchment: #FDFBF7)।
+(৫) হিরো ও মাসকট: একুশের স্মারক শহীদ মিনার ও বর্ণমালা গবেষক আইকন (🏛️ 🩸 📜 ✒️)।
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>পাকিস্তান আমল: ভাষা আন্দোলন - বিসিএস জব সল্যুশন ই-বুক</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalpurush&family=Noto+Sans+Bengali:wght@400;600;700;800&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #991B1B;
+  --primary-light: #DC2626;
+  --secondary: #B45309;
+  --accent-gold: #D97706;
+  --accent-soft: #FEF2F2;
+  --bg-main: #FDFBF7;
+  --bg-card: #FFFFFF;
+  --text-main: #1F2937;
+  --text-muted: #57534E;
+  --border-color: #E7E0D8;
+  --correct-bg: #ECFDF5;
+  --correct-color: #047857;
+  --wrong-bg: #FEF2F2;
+  --wrong-color: #B91C1C;
+  --shadow-sm: 0 2px 6px rgba(153, 27, 27, 0.06);
+  --shadow-md: 0 6px 18px rgba(153, 27, 27, 0.1);
+  --base-font-size: 1rem;
+  --radius: 12px;
+}
+
+[data-theme="dark"] {
+  --primary: #F87171;
+  --primary-light: #FCA5A5;
+  --secondary: #FBBF24;
+  --accent-gold: #FCD34D;
+  --accent-soft: #2D1A1A;
+  --bg-main: #141010;
+  --bg-card: #1F1717;
+  --text-main: #F5EEEC;
+  --text-muted: #C7B5B0;
+  --border-color: #3D2B2B;
+  --correct-bg: #132E20;
+  --correct-color: #6EE7B7;
+  --wrong-bg: #3E1616;
+  --wrong-color: #FCA5A5;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.4);
+  --shadow-md: 0 6px 20px rgba(0,0,0,0.6);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans Bengali', 'Kalpurush', sans-serif;
+  font-size: var(--base-font-size);
+  line-height: 1.85;
+  color: var(--text-main);
+  background-color: var(--bg-main);
+  transition: background-color 0.25s ease, color 0.25s ease;
+  overflow-x: hidden;
+}
+
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent-gold));
+  width: 0%;
+  z-index: 9999;
+  transition: width 0.1s ease-out;
+}
+
+.top-control-bar {
+  position: sticky;
+  top: 0;
+  background: var(--bg-card);
+  border-bottom: 2px solid var(--border-color);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  z-index: 1000;
+  box-shadow: var(--shadow-sm);
+  flex-wrap: wrap;
+}
+
+.brand-title {
+  font-weight: 800;
+  color: var(--primary);
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.control-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-ctrl {
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-ctrl:hover {
+  background: var(--primary);
+  color: #FFFFFF;
+  border-color: var(--primary);
+}
+
+.container {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+
+.hero-box {
+  background: linear-gradient(135deg, rgba(153, 27, 27, 0.08), rgba(217, 119, 6, 0.08));
+  border: 2px solid var(--primary);
+  border-radius: var(--radius);
+  padding: 26px 20px;
+  margin-bottom: 26px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-box::before {
+  content: "🏛️";
+  font-size: 90px;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.badge-tag {
+  display: inline-block;
+  background: var(--primary);
+  color: #FFFFFF;
+  padding: 4px 14px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.hero-title {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 1.95rem;
+  color: var(--primary);
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+
+.hero-subtitle {
+  font-size: 1.02rem;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+
+.study-steps {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 18px;
+  font-size: 0.94rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.stat-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--primary);
+  display: block;
+}
+
+.stat-desc {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+}
+
+.study-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-left: 6px solid var(--primary);
+  border-radius: var(--radius);
+  padding: 22px 18px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.section-title {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 1.35rem;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.target-badge {
+  font-size: 0.82rem;
+  background: rgba(153, 27, 27, 0.08);
+  color: var(--primary);
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+.bite-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media(min-width: 650px) {
+  .bite-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.bite-box {
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 14px 16px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.bite-box:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary-light);
+}
+
+.bite-box h4 {
+  color: var(--secondary);
+  margin-bottom: 6px;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.trap-box {
+  background: rgba(185, 28, 28, 0.06);
+  border: 2px solid var(--wrong-color);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 14px 0;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.trap-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.teaching-note {
+  background: var(--accent-soft);
+  border-left: 4px solid var(--primary);
+  padding: 12px 16px;
+  border-radius: 4px 8px 8px 4px;
+  margin: 14px 0;
+  font-size: 0.95rem;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  margin: 14px 0;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.94rem;
+}
+
+th {
+  background: var(--primary);
+  color: #FFFFFF;
+  padding: 10px 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: top;
+}
+
+tr:nth-child(even) td {
+  background: rgba(153, 27, 27, 0.03);
+}
+
+.quiz-dashboard {
+  background: var(--bg-card);
+  border: 2px solid var(--primary);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.score-display {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.mcq-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s;
+}
+
+.mcq-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.mcq-question {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--text-main);
+  flex: 1;
+}
+
+.mcq-bcs-tag {
+  background: var(--accent-gold);
+  color: #FFFFFF;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+@media(min-width: 580px) {
+  .options-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.option-btn {
+  background: var(--bg-main);
+  border: 1.5px solid var(--border-color);
+  color: var(--text-main);
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.95rem;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s ease-in-out;
+}
+
+.option-btn:hover:not(:disabled) {
+  background: rgba(153, 27, 27, 0.06);
+  border-color: var(--primary-light);
+}
+
+.option-btn.correct-choice {
+  background: var(--correct-bg) !important;
+  border-color: var(--correct-color) !important;
+  color: var(--correct-color) !important;
+  font-weight: 700;
+}
+
+.option-btn.wrong-choice {
+  background: var(--wrong-bg) !important;
+  border-color: var(--wrong-color) !important;
+  color: var(--wrong-color) !important;
+  font-weight: 700;
+}
+
+.explanation-drawer {
+  display: none;
+  background: var(--bg-main);
+  border-left: 4px solid var(--accent-gold);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  margin-top: 12px;
+  font-size: 0.93rem;
+  line-height: 1.75;
+}
+
+.flash-card-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.flash-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.flash-question {
+  font-weight: 700;
+  color: var(--secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flash-answer {
+  display: none;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border-color);
+  color: var(--text-main);
+  font-size: 0.95rem;
+}
+
+.flash-item.open .flash-answer {
+  display: block;
+}
+
+.discrepancy-card {
+  background: #FFF8F6;
+  border: 2px solid #FFAB91;
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-top: 30px;
+}
+
+[data-theme="dark"] .discrepancy-card {
+  background: #261616;
+  border-color: #7A2828;
+}
+
+@media print {
+  .top-control-bar, #progress-bar, .btn-ctrl, .quiz-dashboard, #quiz-reset-btn {
+    display: none !important;
+  }
+  body {
+    background: #FFFFFF;
+    color: #000000;
+    font-size: 11pt;
+  }
+  .study-card, .mcq-card {
+    border: 1px solid #777777;
+    page-break-inside: avoid;
+    box-shadow: none;
+  }
+  .explanation-drawer {
+    display: block !important;
+  }
+}
+
+/* Universal Mobile Optimization (Samsung A23 & small screens) */
+@media (max-width: 600px) {
+  .print-btn, button[onclick*="print"], .btn-ctrl:has(span:contains('🖨️')) {
+    display: none !important;
+  }
+  .container {
+    padding: 6px 8px 24px 8px !important;
+  }
+  .hero-box, .hero, .hero-banner {
+    padding: 16px 12px !important;
+    margin-top: 8px !important;
+    margin-bottom: 14px !important;
+  }
+  .table-responsive, .table-container {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+  }
+  .table-responsive table th, .table-responsive table td,
+  .table-container table th, .table-container table td {
+    padding: 7px 6px !important;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- কন্ট্রোল বার -->
+<header class="top-control-bar">
+  <div class="brand-title">
+    <span>🏛️</span> পাকিস্তান আমল: ভাষা আন্দোলন
+  </div>
+  <div class="control-buttons">
+    <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn">🌓 থিম</button>
+    <button class="btn-ctrl" onclick="adjustFont(-1)">A-</button>
+    <button class="btn-ctrl" onclick="adjustFont(1)">A+</button>
+    <button class="btn-ctrl" onclick="window.print()">🖨️ প্রিন্ট</button>
+    <a href="#toc" class="btn-ctrl" style="text-decoration:none;">📖 সূচি</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- হিরো সেকশন -->
+  <section class="hero-box">
+    <span class="badge-tag">বিসিএস জব সল্যুশন | বাংলাদেশ বিষয়াবলি</span>
+    <h1 class="hero-title">পাকিস্তান আমল: ভাষা আন্দোলন</h1>
+    <p class="hero-subtitle">পৃষ্ঠা ৪২২ হতে ৪২৬ | ১০ম থেকে ৫০তম বিসিএস পরীক্ষার বিশ্লেষণ ও সম্পূর্ণ ইন্টারঅ্যাকটিভ মাস্টারবুক</p>
+
+    <div class="study-steps">
+      <strong>🎯 ভাষা আন্দোলন প্রস্তুতির ৩টি অব্যর্থ ধাপ:</strong>
+      <ol style="margin-left: 20px; margin-top: 4px;">
+        <li>তমদ্দুন মজলিস ও চারটি রাষ্ট্রভাষা সংগ্রাম পরিষদের গঠন-তারিখ ও আহ্বায়ক মুখস্থ করো।</li>
+        <li>আন্তর্জাতিক মাতৃভাষা দিবসের স্বীকৃতির সাল ও বিভিন্ন সাংবিধানিক তারিখের ফাঁদ দেখে নাও।</li>
+        <li>বিগত বছরের ১৭টি বিসিএস এমসিকিউ নিজে সমাধান করে পূর্ণাঙ্গ ব্যাখ্যা আত্মস্থ করো।</li>
+      </ol>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-item">
+        <span class="stat-num">১৭ টি</span>
+        <span class="stat-desc">মোট বিসিএস MCQ</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">৪৯তম</span>
+        <span class="stat-desc">সর্বশেষ বিসিএস সংযোজন</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">৪ টি</span>
+        <span class="stat-desc">সংগ্রাম পরিষদ</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">১৯৫৬</span>
+        <span class="stat-desc">সাংবিধানিক স্বীকৃতি</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- দ্রুত নেভিগেশন সূচি -->
+  <nav id="toc" class="study-card" style="border-left-color: var(--secondary);">
+    <h3 style="color: var(--secondary); margin-bottom: 12px;">📑 দ্রুত নেভিগেশন সূচি</h3>
+    <ul style="list-style-type: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 8px; font-size: 0.95rem;">
+      <li>🩸 <a href="#sec-facts" style="color: inherit; text-decoration: none;">১. ভাষা আন্দোলনের মূল ৭টি মেগা-ফ্যাক্ট</a></li>
+      <li>📋 <a href="#sec-councils" style="color: inherit; text-decoration: none;">২. তমদ্দুন মজলিস ও ৪টি সংগ্রাম পরিষদ ছক</a></li>
+      <li>🎵 <a href="#sec-literature" style="color: inherit; text-decoration: none;">৩. কালজয়ী গান, সাহিত্য ও প্রথম কর্মসমূহ</a></li>
+      <li>🌍 <a href="#sec-international" style="color: inherit; text-decoration: none;">৪. আন্তর্জাতিক স্বীকৃতি ও শহীদ মিনার ইতিহাস</a></li>
+      <li>⚠️ <a href="#sec-traps" style="color: inherit; text-decoration: none;">৫. বিসিএস পরীক্ষার মারাত্মক ফাঁদ (Trap Box)</a></li>
+      <li>📝 <a href="#sec-quiz" style="color: inherit; text-decoration: none;">৬. পূর্ণাঙ্গ ১৭টি বিসিএস MCQ কুইজ</a></li>
+      <li>⚡ <a href="#sec-revision" style="color: inherit; text-decoration: none;">৭. ৩০ সেকেন্ডের রিভিশন ফ্ল্যাশকার্ড</a></li>
+      <li>🔍 <a href="#sec-verify" style="color: inherit; text-decoration: none;">৮. বইয়ের অসঙ্গতি ও তথ্য যাচাই তালিকা</a></li>
+    </ul>
+  </nav>
+
+  <!-- ১. মূল ৭টি মেগা-ফ্যাক্ট -->
+  <section id="sec-facts" class="study-card">
+    <div class="section-head">
+      <h2 class="section-title">🩸 ১. এক নজরে ভাষা আন্দোলনের মূল ৭টি মেগা-ফ্যাক্ট</h2>
+      <span class="target-badge">শুরুতেই এগুলো মাথায় গেঁথে নাও</span>
+    </div>
+
+    <div class="bite-grid">
+      <div class="bite-box">
+        <h4>১. প্রথম সংগঠন ও প্রতিষ্ঠাতা</h4>
+        <p>ভাষা আন্দোলনের প্রথম সাংস্কৃতিক সংগঠন <mark>তমদ্দুন মজলিস</mark> (প্রতিষ্ঠা: ২ সেপ্টেম্বর ১৯৪৭)। প্রতিষ্ঠাতা অধ্যাপক আবুল কাশেম ছিলেন ঢাবির <strong>পদার্থবিজ্ঞান</strong> বিভাগের শিক্ষক!</p>
+      </div>
+
+      <div class="bite-box">
+        <h4>২. প্রথম পুস্তিকা ও মুখপত্র</h4>
+        <p>তমদ্দুন মজলিসের পুস্তিকা: <em>"পাকিস্তানের রাষ্ট্রভাষা: বাংলা না উর্দু"</em> (লেখক ৩ জন: আবুল কাশেম, কাজী মোতাহার হোসেন, আবুল মনসুর আহমদ)। মুখপত্র: <strong>সাপ্তাহিক সৈনিক পত্রিকা</strong> (সম্পাদক শাহেদ আলী)!</p>
+      </div>
+
+      <div class="bite-box">
+        <h4>৩. গণপরিষদে প্রথম দাবি</h4>
+        <p>২৩ ফেব্রুয়ারি ১৯৪৮ সালে পাকিস্তানের গণপরিষদে বাংলাকে রাষ্ট্রভাষা করার প্রথম আনুষ্ঠানিক দাবি জানান কুমিল্লার কংগ্রেস দলীয় সদস্য <mark>ধীরেন্দ্রনাথ দত্ত</mark>!</p>
+      </div>
+
+      <div class="bite-box">
+        <h4>৪. ১৯৫২ সালের পদাধিকারীগণ</h4>
+        <p>• পাকিস্তানের গভর্নর জেনারেল: <strong>মালিক গোলাম মোহাম্মদ</strong><br>
+           • পাকিস্তানের প্রধানমন্ত্রী: <strong>খাজা নাজিমউদ্দীন</strong><br>
+           • পূর্ব বাংলার মুখ্যমন্ত্রী: <strong>নুরুল আমিন</strong>!</p>
+      </div>
+
+      <div class="bite-box">
+        <h4>৫. ভাষা আন্দোলনের ভিত্তি</h4>
+        <p>পূর্ব বাংলায় ভাষা আন্দোলন সংঘটিত হয়েছিল <mark>বাঙালি জাতীয়তাবাদ</mark> ও অসাম্প্রদায়িক চেতনার ভিত্তিতে, যা ছিল বাংলাদেশের স্বাধীনতার প্রথম সোপান!</p>
+      </div>
+
+      <div class="bite-box">
+        <h4>৬. স্বীকৃতি অর্জনের দুই ধাপ</h4>
+        <p>• গণপরিষদের অধিবেশনে স্বীকৃতি: <strong>৯ মে ১৯৫৪</strong>।<br>
+           • সংবিধানে অন্যতম রাষ্ট্রভাষা হিসেবে চূড়ান্ত স্বীকৃতি: <strong>১৯৫৬ সালের সংবিধানে</strong> (প্রস্তাবক আদেল উদ্দিন আহমেদ)!</p>
+      </div>
+
+      <div class="bite-box">
+        <h4>৭. বিদেশে বাংলার স্বীকৃতি</h4>
+        <p>পশ্চিম আফ্রিকার দেশ <mark>সিয়েরা লিওন</mark> ২০০২ সালে তাদের দেশে শান্তি প্রতিষ্ঠায় নিয়োজিত বাংলাদেশি শান্তিরক্ষী সেনাদের অবদানের স্বীকৃতি হিসেবে বাংলাকে অন্যতম সরকারি ভাষার মর্যাদা দেয়!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ২. সংগ্রাম পরিষদ ম্যাট্রিক্স -->
+  <section id="sec-councils" class="study-card">
+    <div class="section-head">
+      <h2 class="section-title">📋 ২. বাংলাকে রাষ্ট্রভাষার দাবিতে গঠিত সংগ্রাম পরিষদসমূহ</h2>
+      <span class="target-badge">সাল ও আহ্বায়কের তুলনামূলক ছক</span>
+    </div>
+
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>সংগঠনের নাম [বইয়ের পৃষ্ঠা ৪২৩ অনুযায়ী]</th>
+            <th>গঠনের তারিখ</th>
+            <th>আহ্বায়ক / নেতৃত্ব</th>
+            <th>গুরুত্বপূর্ণ ঐতিহাসিক প্রেক্ষাপট</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>রাষ্ট্রভাষা সংগ্রাম পরিষদ (১ম বার)</strong></td>
+            <td>১ অক্টোবর ১৯৪৭</td>
+            <td><strong>অধ্যাপক নূরুল হক ভূঁইয়া</strong></td>
+            <td>তমদ্দুন মজলিসের উদ্যোগে গঠিত প্রথম সংগ্রাম পরিষদ।</td>
+          </tr>
+          <tr>
+            <td><strong>রাষ্ট্রভাষা সংগ্রাম পরিষদ (২য় বার)</strong></td>
+            <td>২ মার্চ ১৯৪৮</td>
+            <td><strong>শামসুল হক</strong></td>
+            <td>ধীরেন্দ্রনাথ দত্তের দাবি প্রত্যাখ্যানের পর ছাত্র-জনতার আন্দোলন সমন্বয়ে গঠিত।</td>
+          </tr>
+          <tr>
+            <td><strong>ঢাকা বিশ্ববিদ্যালয় রাষ্ট্রভাষা সংগ্রাম পরিষদ</strong></td>
+            <td>১১ মার্চ ১৯৫০</td>
+            <td><strong>আব্দুল মতিন</strong></td>
+            <td>ভাষা মতিন নামে পরিচিত আব্দুল মতিনের নেতৃত্বে ঢাবি কেন্দ্রিক সংগ্রাম তীব্র হয়।</td>
+          </tr>
+          <tr>
+            <td><strong>সর্বদলীয় কেন্দ্রীয় রাষ্ট্রভাষা সংগ্রাম পরিষদ</strong></td>
+            <td>৩১ জানুয়ারি ১৯৫২</td>
+            <td><strong>কাজী গোলাম মাহবুব</strong></td>
+            <td>মওলানা ভাসানীর সভাপতিত্বে অনুষ্ঠিত সভায় ৪০ সদস্য বিশিষ্ট এই কেন্দ্রীয় পরিষদ গঠিত হয়।</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="teaching-note">
+      <strong>💡 নোট:</strong> ১৯৫২ সালের ২১ ফেব্রুয়ারি ছিল বৃহস্পতিবার (৮ ফাল্গুন ১৩৫৮ বঙ্গাব্দ)। ছাত্ররা ১৪৪ ধারা অমান্য করে মিছিল বের করলে পুলিশ গুলি চালায়। প্রথম শহিদ হন রফিকউদ্দিন আহমদ ও আব্দুল জব্বার, রাতে আবুল বরকত এবং পরে শফিউর ও সালাম শহিদ হন!
+    </div>
+  </section>
+
+  <!-- ৩. সাহিত্য ও সংগীত -->
+  <section id="sec-literature" class="study-card">
+    <div class="section-head">
+      <h2 class="section-title">🎵 ৩. ভাষা আন্দোলনভিত্তিক গান ও প্রথম সাহিত্যকর্ম</h2>
+      <span class="target-badge">গীতিকার, সুরকার ও রচয়িতা তালিকা</span>
+    </div>
+
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>গান / সংগীত</th>
+            <th>গীতিকার</th>
+            <th>সুরকার</th>
+            <th>বিশেষ তথ্য [পৃষ্ঠা ৪২৩]</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>আমার ভাইয়ের রক্তে রাঙানো একুশে ফেব্রুয়ারি</strong></td>
+            <td>আবদুল গাফফার চৌধুরী</td>
+            <td><strong>আলতাফ মাহমুদ</strong><br>(*প্রথম সুরকার: আব্দুল লতিফ)</td>
+            <td>প্রথমে কবিতা হিসেবে লেখা হয়। ১৯৫৪ সালের প্রভাতফেরিতে আলতাফ মাহমুদের সুরে প্রথম গাওয়া হয়। জহির রায়হানের 'জীবন থেকে নেয়া' চলচ্চিত্রে ব্যবহৃত।</td>
+          </tr>
+          <tr>
+            <td><strong>সালাম সালাম হাজার সালাম</strong></td>
+            <td>ফজল-এ-খোদা</td>
+            <td>আব্দুল জব্বার</td>
+            <td>কালজয়ী ভাষা ও দেশাত্মবোধক গান।</td>
+          </tr>
+          <tr>
+            <td><strong>ওরা আমার মুখের ভাষা কাইরা নিতে চায়</strong></td>
+            <td>আব্দুল লতিফ</td>
+            <td>আব্দুল লতিফ</td>
+            <td>গীতিকার ও সুরকার একই ব্যক্তি।</td>
+          </tr>
+          <tr>
+            <td><strong>দাম দিয়ে কিনেছি বাংলা</strong></td>
+            <td>আব্দুল লতিফ</td>
+            <td>আব্দুল লতিফ</td>
+            <td>ভাষা আন্দোলনের চেতনাদীপ্ত গান।</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top: 14px;">
+      <h4 style="color: var(--secondary); margin-bottom: 8px;">📚 সাহিত্যের বিভিন্ন ধারায় ভাষা আন্দোলন নিয়ে রচিত প্রথম কর্ম [পৃষ্ঠা ৪২৪]:</h4>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>সাহিত্যের ধারা</th>
+              <th>শিরোনাম</th>
+              <th>রচয়িতা / শিল্পী</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>প্রথম উপন্যাস</strong></td>
+              <td>আরেক ফাল্গুন</td>
+              <td>জহির রায়হান</td>
+            </tr>
+            <tr>
+              <td><strong>প্রথম নাটক</strong></td>
+              <td>কবর</td>
+              <td>মুনীর চৌধুরী</td>
+            </tr>
+            <tr>
+              <td><strong>প্রথম কবিতা</strong></td>
+              <td>কাঁদতে আসিনি ফাঁসির দাবী নিয়ে এসেছি</td>
+              <td>মাহবুব উল আলম চৌধুরী</td>
+            </tr>
+            <tr>
+              <td><strong>প্রথম গান</strong></td>
+              <td>ভুলব না, ভুলব না, একুশে ফেব্রুয়ারি ভুলব না</td>
+              <td>আ. ন. ম. গাজীউল হক</td>
+            </tr>
+            <tr>
+              <td><strong>প্রথম প্রভাতফেরির গান</strong></td>
+              <td>মৃত্যুকে যারা তুচ্ছ করিল</td>
+              <td>মোশারেফ উদ্দিন আহমদ</td>
+            </tr>
+            <tr>
+              <td><strong>প্রথম চলচ্চিত্র</strong></td>
+              <td>জীবন থেকে নেয়া</td>
+              <td>জহির রায়হান</td>
+            </tr>
+            <tr>
+              <td><strong>প্রথম সংকলন</strong></td>
+              <td>একুশে ফেব্রুয়ারী (১৯৫৩)</td>
+              <td>হাসান হাফিজুর রহমান</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ৪. আন্তর্জাতিক স্বীকৃতি ও শহীদ মিনার -->
+  <section id="sec-international" class="study-card">
+    <div class="section-head">
+      <h2 class="section-title">🌍 ৪. আন্তর্জাতিক মাতৃভাষা দিবস ও শহীদ মিনার</h2>
+      <span class="target-badge">বৈশ্বিক অর্জন ও স্থাপত্য ইতিহাস</span>
+    </div>
+
+    <div class="bite-grid">
+      <div class="bite-box">
+        <h4><mark>আন্তর্জাতিক মাতৃভাষা দিবস (UNESCO)</mark></h4>
+        <p>• <strong>উদ্যোক্তা:</strong> কানাডার ভ্যানকুভারে বসবাসরত দুই প্রবাসী বাঙালি রফিকুল ইসলাম ও আবদুস সালাম (সংগঠন: <em>The Mother Language Lovers of the World</em>)!</p>
+        <p>• <strong>স্বীকৃতি:</strong> <mark>১৭ নভেম্বর ১৯৯৯</mark> ইউনেস্কোর ৩০তম অধিবেশনে ২১ ফেব্রুয়ারিকে আন্তর্জাতিক মাতৃভাষা দিবস ঘোষণা করা হয়।</p>
+        <p>• <strong>বিশ্বব্যাপী পালন:</strong> ২০০০ সালের ২১ ফেব্রুয়ারি বিশ্বের ১৮৮টি দেশে প্রথম পালিত হয়। ২০০৮ সালকে আন্তর্জাতিক মাতৃভাষা বর্ষ ঘোষণা করা হয় এবং ২০১০ সালে জাতিসংঘের ৬৫তম সাধারণ অধিবেশনে চূড়ান্ত আনুষ্ঠানিক প্রস্তাব গৃহীত হয়!</p>
+      </div>
+
+      <div class="bite-box">
+        <h4><mark>শহীদ মিনারের স্থাপত্য ও উন্মোচন</mark></h4>
+        <p>• <strong>প্রথম নির্মাণ:</strong> ২৩ ফেব্রুয়ারি ১৯৫২ (ঢাকা মেডিকেল প্রাঙ্গণে)। ২৪ ফেব্রুয়ারি অনানুষ্ঠানিক উদ্বোধন করেন শহিদ শফিউরের পিতা মাহবুবুর রহমান; ২৬ ফেব্রুয়ারি উদ্বোধন করেন দৈনিক আজাদের সম্পাদক আবুল কালাম শামসুদ্দীন!</p>
+        <p>• <strong>স্থপতি:</strong> বর্তমান কেন্দ্রীয় শহীদ মিনারের স্থপতি <strong>শিল্পী হামিদুর রহমান</strong>; তাঁর সহকর্মী ছিলেন ভাস্কর <strong>নভেরা আহমদ</strong>!</p>
+        <p>• <strong>উদ্বোধন:</strong> ১৯৬৩ সালের ২১ ফেব্রুয়ারি কেন্দ্রীয় শহীদ মিনার উদ্বোধন করেন শহিদ বরকতের মা হাসিনা বেগম!</p>
+        <p>• <strong>সর্বোচ্চ শহীদ মিনার:</strong> জাহাঙ্গীরনগর বিশ্ববিদ্যালয় (৭১ ফুট)।</p>
+        <p>• <strong>বিদেশে প্রথম:</strong> ১৯৯৭ সালে যুক্তরাজ্যের ম্যানচেস্টারের ওল্ডহ্যামে। সরকারি অর্থায়নে প্রথম: জাপানের টোকিও শহরের ইকেবুকুরো নিশিগুচি পার্কে!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ৫. পরীক্ষার ফাঁদ -->
+  <section id="sec-traps" class="study-card" style="border-left-color: var(--wrong-color);">
+    <div class="section-head">
+      <h2 class="section-title" style="color: var(--wrong-color);">⚠️ ৫. বিসিএস পরীক্ষার মারাত্মক ফাঁদ (Trap Box)</h2>
+      <span class="target-badge" style="background: rgba(185,28,28,0.1); color: var(--wrong-color);">একটু ভুলেই নম্বর কাটা!</span>
+    </div>
+
+    <div class="trap-box">
+      <div class="trap-icon">🚨</div>
+      <div>
+        <strong>ফাঁদ ১: গণপরিষদের স্বীকৃতি বনাম সাংবিধানিক স্বীকৃতি!</strong><br>
+        • পাকিস্তান <em>গণপরিষদ</em> অধিবেশনে বাংলাকে অন্যতম রাষ্ট্রভাষার স্বীকৃতি দেয়: <strong>৯ মে ১৯৫৪</strong> (যুক্তফ্রন্টের প্রতিশ্রুতি অনুযায়ী)!<br>
+        • কিন্তু পাকিস্তান সংবিধানে <em>আনুষ্ঠানিক সাংবিধানিক স্বীকৃতি</em> প্রদান করা হয়: <strong>১৯৫৬ সালে</strong> (১৬ ফেব্রুয়ারি ১৯৫৬ জাতীয় পরিষদে প্রস্তাব গৃহীত হয়)!
+      </div>
+    </div>
+
+    <div class="trap-box">
+      <div class="trap-icon">🚨</div>
+      <div>
+        <strong>ফাঁদ ২: 'আমার ভাইয়ের রক্তে রাঙানো' গানের সুরকার!</strong><br>
+        • গানটির <strong>প্রথম সুরকার</strong> হলেন: <strong>আব্দুল লতিফ</strong>!<br>
+        • কিন্তু গানটির <strong>বর্তমান ও প্রাতিষ্ঠানিক সুরকার</strong> হলেন: <strong>আলতাফ মাহমুদ</strong> (১৯৫৪ সালের প্রভাতফেরিতে প্রথম গাওয়া হয়)!
+      </div>
+    </div>
+
+    <div class="trap-box">
+      <div class="trap-icon">🚨</div>
+      <div>
+        <strong>ফাঁদ ৩: ইউনেস্কোর স্বীকৃতি বনাম জাতিসংঘের সাধারণ পরিষদ!</strong><br>
+        • <strong>UNESCO স্বীকৃতি দেয়:</strong> ১৭ নভেম্বর ১৯৯৯ (প্যারিসে ৩০তম সম্মেলন)।<br>
+        • <strong>জাতিসংঘ সাধারণ পরিষদে আনুষ্ঠানিক প্রস্তাব পাস:</strong> ২০১০ সালে (৬৫তম অধিবেশন)। সাল দুটি আলাদা করে মনে রাখতে হবে!
+      </div>
+    </div>
+
+    <div class="trap-box">
+      <div class="trap-icon">🚨</div>
+      <div>
+        <strong>ফাঁদ ৪: তমুদ্দুন মজলিস বনাম সর্বদলীয় সংগ্রাম পরিষদের আহ্বায়ক!</strong><br>
+        • তমুদ্দুন মজলিসের প্রতিষ্ঠাতা ও সাধারণ সম্পাদক: <strong>অধ্যাপক আবুল কাশেম</strong> (পদার্থবিজ্ঞান বিভাগ)। সভাপতি ছিলেন <strong>দেওয়ান মোহাম্মদ আজরফ</strong>।<br>
+        • ১৯৫২ সালের 'সর্বদলীয় কেন্দ্রীয় রাষ্ট্রভাষা সংগ্রাম পরিষদ'-এর আহ্বায়ক: <strong>কাজী গোলাম মাহবুব</strong>!
+      </div>
+    </div>
+  </section>
+
+  <!-- ৬. বিসিএস কুইজ প্র্যাকটিস -->
+  <section id="sec-quiz">
+    <div class="quiz-dashboard">
+      <div>
+        <h3 style="color: var(--primary); font-size: 1.25rem;">📝 পূর্ণাঙ্গ বিসিএস কুইজ প্র্যাকটিস</h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted);">পৃষ্ঠা ৪২২ থেকে ৪২৬-এর মোট ১৭টি বিগত বছরের বিসিএস এমসিকিউ</p>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <span class="score-display" id="live-score">স্কোর: ০ / ১৭</span>
+        <button class="btn-ctrl" id="quiz-reset-btn" onclick="resetQuiz()">🔄 রিসেট</button>
+      </div>
+    </div>
+
+    <div id="quiz-container">
+      <!-- JavaScript will inject cards here -->
+    </div>
+  </section>
+
+  <!-- ৭. ৩০ সেকেন্ড রিভিশন -->
+  <section id="sec-revision" class="study-card">
+    <div class="section-head">
+      <h2 class="section-title">⚡ ৭. ৩০ সেকেন্ডের ঝটপট রিভিশন ফ্ল্যাশকার্ড</h2>
+      <span class="target-badge">ক্লিক করে উত্তর দেখুন</span>
+    </div>
+    <div class="flash-card-list">
+      <div class="flash-item" onclick="toggleFlash(this)">
+        <div class="flash-question"><span>❓ অধ্যাপক আবুল কাশেম ঢাকা বিশ্ববিদ্যালয়ের কোন বিভাগের শিক্ষক ছিলেন?</span> <span>➕</span></div>
+        <div class="flash-answer">পদার্থবিজ্ঞান বিভাগের শিক্ষক ছিলেন।</div>
+      </div>
+      <div class="flash-item" onclick="toggleFlash(this)">
+        <div class="flash-question"><span>❓ 'পাকিস্তানের রাষ্ট্রভাষা: বাংলা না উর্দু' পুস্তিকার লেখক কয়জন ও কারা?</span> <span>➕</span></div>
+        <div class="flash-answer">৩ জন: অধ্যাপক আবুল কাশেম, কাজী মোতাহার হোসেন এবং আবুল মনসুর আহমদ।</div>
+      </div>
+      <div class="flash-item" onclick="toggleFlash(this)">
+        <div class="flash-question"><span>❓ ভাষা আন্দোলনের সময় পাকিস্তানের প্রধানমন্ত্রী ও পূর্ব বাংলার মুখ্যমন্ত্রী কে ছিলেন?</span> <span>➕</span></div>
+        <div class="flash-answer">পাকিস্তানের প্রধানমন্ত্রী খাজা নাজিমউদ্দীন এবং পূর্ব বাংলার মুখ্যমন্ত্রী নুরুল আমিন।</div>
+      </div>
+      <div class="flash-item" onclick="toggleFlash(this)">
+        <div class="flash-question"><span>❓ কেন্দ্রীয় শহীদ মিনারের স্থপতি কে এবং তাঁর সহকর্মী কে ছিলেন?</span> <span>➕</span></div>
+        <div class="flash-answer">স্থপতি শিল্পী হামিদুর রহমান এবং তাঁর সহকর্মী ছিলেন ভাস্কর নভেরা আহমদ।</div>
+      </div>
+      <div class="flash-item" onclick="toggleFlash(this)">
+        <div class="flash-question"><span>❓ আন্তর্জাতিক মাতৃভাষা ইনস্টিটিউট কোথায় অবস্থিত এবং কবে চালু হয়?</span> <span>➕</span></div>
+        <div class="flash-answer">ঢাকার সেগুনবাগিচায় অবস্থিত; ২১ ফেব্রুয়ারি ২০১০ সালে আনুষ্ঠানিকভাবে চালু হয়।</div>
+      </div>
+      <div class="flash-item" onclick="toggleFlash(this)">
+        <div class="flash-question"><span>❓ দেশের বাইরে প্রথম শহীদ মিনার কোথায় এবং বাংলাদেশ সরকারের অর্থায়নে প্রথম কোথায় নির্মিত হয়?</span> <span>➕</span></div>
+        <div class="flash-answer">বিদেশে প্রথম: ১৯৯৭ সালে যুক্তরাজ্যের ম্যানচেস্টারের ওল্ডহ্যামে। সরকারি অর্থায়নে প্রথম: জাপানের টোকিওর ইকেবুকুরো নিশিগুচি পার্কে।</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ৮. অসঙ্গতি ও তথ্য যাচাই তালিকা -->
+  <section id="sec-verify" class="discrepancy-card">
+    <h3 style="color: var(--wrong-color); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+      🔍 ৮. বইয়ের অসঙ্গতি ও তথ্য যাচাই তালিকা
+    </h3>
+    <p style="font-size: 0.94rem; margin-bottom: 14px;">
+      বইয়ের মুদ্রিত পাতার প্রশ্ন, উত্তর কোড ও ব্যাখ্যার মধ্যকার অসামঞ্জস্য ও কলাম বিন্যাস বিভ্রান্তির স্পষ্ট তালিকা:
+    </p>
+
+    <div class="table-responsive">
+      <table>
+        <thead>
+          
+            <th>প্রশ্ন নং ও পৃষ্ঠা</th>
+            <th>বইয়ে যা মুদ্রিত আছে</th>
+            <th>অসঙ্গতির কারণ</th>
+            <th>সঠিক সিদ্ধান্ত ও সমাধান</th>
+          
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>প্রশ্ন ৯ বনাম ১৭ (পৃষ্ঠা ৪২৪ ও ৪২৬)</strong><br>ভাষা আন্দোলনের প্রধানমন্ত্রী</td>
+            <td>প্রশ্ন ৯-এ উত্তর ছাপা "উ. ক" এবং প্রশ্ন ১৭-তে উত্তর ছাপা "উ. ঘ"।</td>
+            <td>দুটি ভিন্ন বিসিএস প্রশ্নের অপশন পুনর্বিন্যাসের কারণে অক্ষর আলাদা হয়েছে, কিন্তু উভয় প্রশ্নের ব্যাখ্যায় প্রধানমন্ত্রী হিসেবে <strong>খাজা নাজিমউদ্দীন</strong>-কেই নির্দেশ করা হয়েছে।</td>
+            <td>উভয় প্রশ্নেই সঠিক উত্তর <strong>খাজা নাজিমউদ্দীন</strong>।</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// পৃষ্ঠা ৪২২ হতে ৪২৬-এর সম্পূর্ণ ১৭টি বিসিএস প্রশ্ন ডাটাবেজ
+const bcsLanguageQuestions = [
+  {
+    id: 1,
+    q: "১. ১৯৫২ সালের ভাষা আন্দোলনে নেতৃস্থানীয় ভূমিকা পালন করে সাংস্কৃতিক সংগঠন 'তমুদ্দুন মজলিস'। তমুদ্দুন মজলিস এর প্রতিষ্ঠাতা অধ্যাপক আবুল কাশেম ঢাকা বিশ্ববিদ্যালয়ের কোন বিভাগের শিক্ষক ছিলেন?",
+    tag: "৪৯তম/৪৭তম বিসিএস",
+    options: ["রসায়ন", "পদার্থ বিজ্ঞান", "অর্থনীতি", "ইসলামী শিক্ষা"],
+    correct: 1, // পদার্থ বিজ্ঞান
+    exp: "ব্যাখ্যা: 'তমদ্দুন মজলিস'-এর নেতা জনাব আবুল কাশেম ঢাকা বিশ্ববিদ্যালয়ের পদার্থবিজ্ঞান বিভাগের অধ্যাপক ছিলেন। ১৯৪৭ সালের ২ সেপ্টেম্বর তাঁর উদ্যোগে এটি প্রতিষ্ঠিত হয়। দেওয়ান মোহাম্মদ আজরফ এর সভাপতি এবং অধ্যাপক আবুল কাশেম প্রতিষ্ঠাতা সাধারণ সম্পাদক ছিলেন।"
+  },
+  {
+    id: 2,
+    q: "২. কোন বছর পাকিস্তান সরকার বাংলাকে অন্যতম রাষ্ট্রভাষা হিসেবে স্বীকৃতি দেন?",
+    tag: "৪৭তম বিসিএস",
+    options: ["১৯৫২", "১৯৫৪", "১৯৫৬", "১৯৬৯"],
+    correct: 2, // ১৯৫৬
+    exp: "ব্যাখ্যা: ১৯৫৬ সালে পাকিস্তান সরকার বাংলাকে অন্যতম রাষ্ট্রভাষা হিসেবে সাংবিধানিক স্বীকৃতি দেয়। উল্লেখ্য, ১৯৫৪ সালের ৯ মে যুক্তফ্রন্ট সরকারের প্রতিশ্রুতি অনুসারে পাকিস্তানের গণপরিষদে বাংলাকে স্বীকৃতি দেওয়া হয়েছিল, তবে তা কেন্দ্রীয় সরকারের চূড়ান্ত সাংবিধানিক স্বীকৃতি ছিল না। ১৯৫৬ সালের সংবিধানে তা অন্তর্ভুক্ত হয়।"
+  },
+  {
+    id: 3,
+    q: "৩. 'সর্বদলীয় রাষ্ট্রভাষা সংগ্রাম কমিটি' গঠিত হয়-",
+    tag: "৪৫তম বিসিএস",
+    options: ["১৯৪৮ সালে", "১৯৫০ সালে", "১৯৫২ সালে", "১৯৫৪ সালে"],
+    correct: 2, // ১৯৫২ সালে
+    exp: "ব্যাখ্যা: ১৯৫২ সালের ৩১ জানুয়ারি মওলানা ভাসানীর সভাপতিত্বে অনুষ্ঠিত সভায় ৪০ সদস্য বিশিষ্ট 'সর্বদলীয় কেন্দ্রীয় রাষ্ট্রভাষা সংগ্রাম পরিষদ' গঠিত হয়, যার আহ্বায়ক ছিলেন কাজী গোলাম মাহবুব।"
+  },
+  {
+    id: 4,
+    q: "৪. \"আমার ভাইয়ের রক্তে রাঙানো একুশে ফেব্রুয়ারি, আমি কি ভুলিতে পারি\" গানটি কে রচনা করেন?",
+    tag: "৪৪তম বিসিএস",
+    options: ["মুনীর চৌধুরী", "জহির রায়হান", "আবদুল গাফফার চৌধুরী", "কাজী নজরুল ইসলাম"],
+    correct: 2, // আবদুল গাফফার চৌধুরী
+    exp: "ব্যাখ্যা: গানটির রচয়িতা আবদুল গাফফার চৌধুরী। কবিতা হিসেবে লেখা এই গানটিতে প্রথম সুর করেন আব্দুল লতিফ। পরবর্তীতে আলতাফ মাহমুদের করা সুরটি সর্বাধিক জনপ্রিয়তা পায় এবং প্রাতিষ্ঠানিক রূপ লাভ করে।"
+  },
+  {
+    id: 5,
+    q: "৫. 'তমদ্দুন মজলিশ' কে প্রতিষ্ঠা করেন?",
+    tag: "৪৪তম বিসিএস",
+    options: ["হাজী শরিয়ত উল্লাহ", "শেরে বাংলা এ কে ফজলুল হক", "আবুল কাশেম", "মাওলানা আবদুল হামিদ খান ভাসানী"],
+    correct: 2, // আবুল কাশেম
+    exp: "ব্যাখ্যা: ১৯৪৭ সালের ২ সেপ্টেম্বর ঢাকা বিশ্ববিদ্যালয়ের পদার্থবিজ্ঞান বিভাগের শিক্ষক অধ্যাপক আবুল কাশেমের নেতৃত্বে ৩ সদস্যবিশিষ্ট 'তমদ্দুন মজলিস' গঠিত হয়। এটি ছিল বাংলা ভাষার দাবিতে প্রতিষ্ঠিত প্রথম সাংস্কৃতিক প্রতিষ্ঠান।"
+  },
+  {
+    id: 6,
+    q: "৬. UNESCO কত তারিখে ২১ ফেব্রুয়ারিকে আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে স্বীকৃতি দেয়?",
+    tag: "৪৪তম/২৬তম বিসিএস",
+    options: ["১৮ নভেম্বর ১৯৯৯", "১৭ নভেম্বর ১৯৯৯", "১৯ নভেম্বর ২০০১", "২০ নভেম্বর ২০০১"],
+    correct: 1, // ১৭ নভেম্বর ১৯৯৯
+    exp: "ব্যাখ্যা: ফ্রান্সের রাজধানী প্যারিসে অনুষ্ঠিত ইউনেস্কোর ৩০তম অধিবেশনে ১৭ নভেম্বর ১৯৯৯ সালে ২১ ফেব্রুয়ারিকে আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে স্বীকৃতি দেওয়া হয়। ২০০০ সালের ২১ ফেব্রুয়ারি থেকে এটি বিশ্বজুড়ে পালিত হচ্ছে।"
+  },
+  {
+    id: 7,
+    q: "৭. কোন দেশ বাংলা ভাষাকে তাদের অন্যতম রাষ্ট্রভাষা হিসেবে স্বীকৃতি দিয়েছে?",
+    tag: "৪৪তম বিসিএস",
+    options: ["লাইবেরিয়া", "হাইতি", "নামিবিয়া", "সিয়েরা লিওন"],
+    correct: 3, // সিয়েরা লিওন
+    exp: "ব্যাখ্যা: পশ্চিম আফ্রিকার দেশ সিয়েরা লিওন ২০০২ সালে বাংলাকে অন্যতম রাষ্ট্রভাষার স্বীকৃতি দেয়। গৃহযুদ্ধবিধ্বস্ত সিয়েরা লিওনে শান্তি প্রতিষ্ঠায় বাংলাদেশ সেনাবাহিনীর অসামান্য অবদানের প্রতি কৃতজ্ঞতা স্বরূপ দেশটির প্রেসিডেন্ট আহমাদ তেজান কাব্বাহ এই সিদ্ধান্ত নেন।"
+  },
+  {
+    id: 8,
+    q: "৮. রাষ্ট্রভাষা আন্দোলনে কোন সংস্থা গুরুত্বপূর্ণ ভূমিকা পালন করে?",
+    tag: "৪২তম বিশেষ বিসিএস স্বাস্থ্য",
+    options: ["তমদ্দুন মজলিস", "মাতৃভাষা পরিষদ", "ভাষা পরিষদ", "আমরা বাঙালি"],
+    correct: 0, // তমদ্দুন মজলিস
+    exp: "ব্যাখ্যা: রাষ্ট্রভাষা আন্দোলনে সাংস্কৃতিক সংগঠন 'তমদ্দুন মজলিস' অগ্রণী ভূমিকা পালন করে। এটি ১৯৪৭ সালের ১ সেপ্টেম্বর প্রতিষ্ঠিত হয়ে ১৫ সেপ্টেম্বর 'পাকিস্তানের রাষ্ট্রভাষা: বাংলা না উর্দু' পুস্তিকা প্রকাশ করে।"
+  },
+  {
+    id: 9,
+    q: "৯. ভাষা আন্দোলনের সময় পাকিস্তানের প্রধানমন্ত্রী কে ছিলেন?",
+    tag: "৪১তম বিসিএস",
+    options: ["খাজা নাজিম উদ্দীন", "নুরুল আমিন", "লিয়াকত আলী খান", "মোহাম্মদ আলী জিন্নাহ"],
+    correct: 0, // খাজা নাজিম উদ্দীন
+    exp: "ব্যাখ্যা: ১৯৫২ সালের ভাষা আন্দোলনের সময় পাকিস্তানের প্রধানমন্ত্রী ছিলেন খাজা নাজিম উদ্দীন। তিনি ১৯৫২ সালের ২৭ জানুয়ারি পল্টন ময়দানে ঘোষণা করেন 'উর্দুই হবে পাকিস্তানের একমাত্র রাষ্ট্রভাষা'।"
+  },
+  {
+    id: 10,
+    q: "১০. কিসের ভিত্তিতে পূর্ব বাংলায় ভাষা আন্দোলন হয়েছিল?",
+    tag: "৩৮তম বিসিএস",
+    options: ["দ্বি-জাতি তত্ত্ব", "অসাম্প্রদায়িকতা", "সামাজিক চেতনা", "বাঙালি জাতীয়তাবাদ"],
+    correct: 3, // বাঙালি জাতীয়তাবাদ
+    exp: "ব্যাখ্যা: ভাষা আন্দোলন সংঘটিত হয়েছিল বাঙালি জাতীয়তাবাদের ভিত্তিতে। ভাষা ও সংস্কৃতির ঐক্যকে কেন্দ্র করে যে জাতীয়তাবাদী চেতনার উন্মেষ ঘটেছিল, তা-ই পরবর্তীতে ১৯৭১ সালের মহান মুক্তিযুদ্ধের মূল ভিত্তি হিসেবে কাজ করে।"
+  },
+  {
+    id: 11,
+    q: "১১. সর্বদলীয় কেন্দ্রীয় রাষ্ট্রভাষা সংগ্রাম পরিষদ গঠিত হয়?",
+    tag: "৩৬তম বিসিএস",
+    options: ["৩১ জানুয়ারি ১৯৫২", "১৮ ফেব্রুয়ারি ১৯৫২", "২ ফেব্রুয়ারি ১৯৫২", "২০ জানুয়ারি ১৯৫২"],
+    correct: 0, // ৩১ জানুয়ারি ১৯৫২
+    exp: "ব্যাখ্যা: ১৯৫২ সালের ৩১ জানুয়ারি মওলানা আবদুল হামিদ খান ভাসানীর সভাপতিত্বে কাজী গোলাম মাহবুবকে আহ্বায়ক করে ৪০ সদস্যের সর্বদলীয় কেন্দ্রীয় রাষ্ট্রভাষা সংগ্রাম পরিষদ গঠিত হয়।"
+  },
+  {
+    id: 12,
+    q: "১২. বাংলা ভাষাকে পাকিস্তান গণপরিষদ কোন তারিখে অন্যতম রাষ্ট্রভাষা হিসেবে স্বীকৃতি দেয়?",
+    tag: "৩৬তম বিসিএস",
+    options: ["৯ মে ১৯৫৪", "২২ ফেব্রুয়ারি ১৯৫৩", "১৬ ফেব্রুয়ারি ১৯৫৬", "২১ ফেব্রুয়ারি ১৯৫২"],
+    correct: 0, // ৯ মে ১৯৫৪
+    exp: "ব্যাখ্যা: ১৯৫৪ সালের ৯ মে অনুষ্ঠিত পাকিস্তানের গণপরিষদের অধিবেশনে বাংলাকে অন্যতম রাষ্ট্রভাষার স্বীকৃতি দেওয়া হয়। পরবর্তীতে ১৬ ফেব্রুয়ারি ১৯৫৬ সালে জাতীয় পরিষদে গৃহীত হয়ে ১৯৫৬ সালের সংবিধানে এটি চূড়ান্ত রূপ পায়।"
+  },
+  {
+    id: 13,
+    q: "১৩. পাকিস্তানের গণপরিষদের অধিবেশনে বাংলাকে রাষ্ট্রভাষা করার প্রথম দাবি কে উত্থাপন করেন?",
+    tag: "৩৫তম/২৪তম বিসিএস বাতিল",
+    options: ["আব্দুল মতিন", "ধীরেন্দ্রনাথ দত্ত", "শেরে বাংলা এ. কে. ফজলুল হক", "হোসেন শহীদ সোহরাওয়ার্দী"],
+    correct: 1, // ধীরেন্দ্রনাথ দত্ত
+    exp: "ব্যাখ্যা: কুমিল্লার কৃতী সন্তান ও গণপরিষদের কংগ্রেস দলীয় সদস্য ধীরেন্দ্রনাথ দত্ত ১৯৪৮ সালের ২৩ ফেব্রুয়ারি করাচিতে গণপরিষদের প্রথম অধিবেশনে উর্দু ও ইংরেজির পাশাপাশি বাংলাকেও পরিষদের ভাষা হিসেবে ব্যবহারের প্রথম দাবি উত্থাপন করেন।"
+  },
+  {
+    id: 14,
+    q: "১৪. নিচের কোন সংস্থাটি ২১ ফেব্রুয়ারিকে আন্তর্জাতিক মাতৃভাষা দিবস হিসাবে স্বীকৃতি দিয়েছে?",
+    tag: "৩৪তম বিসিএস",
+    options: ["UNDP", "UNESCO", "UNICEF", "UNCTAD"],
+    correct: 1, // UNESCO
+    exp: "ব্যাখ্যা: ১৯৯৯ সালের ১৭ নভেম্বর প্যারিসে অনুষ্ঠিত জাতিসংঘের শিক্ষা, বিজ্ঞান ও সংস্কৃতি বিষয়ক সংস্থা ইউনেস্কো (UNESCO)-র ৩০তম সাধারণ সম্মেলনে ২১ ফেব্রুয়ারিকে আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে ঘোষণা করা হয়।"
+  },
+  {
+    id: 15,
+    q: "১৫. কেন্দ্রীয় শহীদ মিনারের স্থপতি কে?",
+    tag: "২৭তম বিসিএস",
+    options: ["তানভীর কবীর", "হামিদুর রহমান", "হামিদুজ্জামান", "অস্কার বাদল"],
+    correct: 1, // হামিদুর রহমান
+    exp: "ব্যাখ্যা: কেন্দ্রীয় শহীদ মিনারের মূল নকশা ও স্থপতি শিল্পী হামিদুর রহমান, তাঁর সহকর্মী ছিলেন ভাস্কর নভেরা আহমদ। ১৯৫৭ সালে এর নির্মাণ কাজ শুরু হয়ে ১৯৬৩ সালে সম্পন্ন হয় এবং শহিদ বরকতের মা হাসিনা বেগম এটি উদ্বোধন করেন।"
+  },
+  {
+    id: 16,
+    q: "১৬. ১৯৫২ সালে তৎকালীন ভাষা আন্দোলন কিসের জন্ম দিয়েছিল?",
+    tag: "১৪তম বিসিএস",
+    options: ["এক রাজনৈতিক মতবাদের", "এক সাংস্কৃতিক আন্দোলনের", "এক নতুন জাতীয় চেতনার", "এক নতুন সমাজ ব্যবস্থার"],
+    correct: 2, // এক নতুন জাতীয় চেতনার
+    exp: "ব্যাখ্যা: ১৯৫২ সালের ভাষা আন্দোলন বাঙালি সমাজে এক নতুন জাতীয় চেতনার (বাঙালি জাতীয়তাবাদ) জন্ম দিয়েছিল। এই আন্দোলনের মাধ্যমেই পাকিস্তানি শাসনের শৃঙ্খল ভাঙার প্রথম রাজনৈতিক ঐক্য গড়ে ওঠে।"
+  },
+  {
+    id: 17,
+    q: "১৭. ১৯৫২ সালের ২১ ফেব্রুয়ারি তারিখে তৎকালীন পাকিস্তানের প্রধানমন্ত্রী কে ছিলেন?",
+    tag: "১৩তম বিসিএস",
+    options: ["নুরুল আমিন", "মোহাম্মদ আলী", "লিয়াকত আলী খান", "খাজা নাজিমউদ্দীন"],
+    correct: 3, // খাজা নাজিমউদ্দীন
+    exp: "ব্যাখ্যা: ১৯৫২ সালের ২১ ফেব্রুয়ারি পাকিস্তানের প্রধানমন্ত্রী ছিলেন খাজা নাজিমউদ্দীন (যিনি ১৯৫১ সালের ২৪ অক্টোবর লিয়াকত আলীর মৃত্যুর পর দায়িত্ব নেন)। উর্দুর পক্ষে উসকানিমূলক বক্তব্য দিয়ে তিনি তীব্র নিন্দিত হন।"
+  }
+];
+
+let userLanguageExamAnswers = {};
+
+function renderLanguageQuiz() {
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = '';
+
+  bcsLanguageQuestions.forEach((item) => {
+    const card = document.createElement('div');
+    card.className = 'mcq-card';
+    card.id = `q-${item.id}`;
+
+    const isAnswered = userLanguageExamAnswers[item.id] !== undefined;
+    const selectedChoice = userLanguageExamAnswers[item.id];
+
+    let optButtons = '';
+    item.options.forEach((optText, optIdx) => {
+      let extraClass = '';
+      if (isAnswered) {
+        if (optIdx === item.correct) {
+          extraClass = ' correct-choice';
+        } else if (selectedChoice === optIdx) {
+          extraClass = ' wrong-choice';
+        }
+      }
+
+      optButtons += `
+        <button class="option-btn${extraClass}" 
+                onclick="answerLanguageQuestion(${item.id}, ${optIdx})" 
+                ${isAnswered ? 'disabled' : ''}>
+          <span>${String.fromCharCode(0x0995 + optIdx)}.</span> ${optText}
+        </button>
+      `;
+    });
+
+    card.innerHTML = `
+      <div class="mcq-header">
+        <div class="mcq-question">${item.q}</div>
+        <span class="mcq-bcs-tag">${item.tag}</span>
+      </div>
+      <div class="options-grid">
+        ${optButtons}
+      </div>
+      <div class="explanation-drawer" style="display: ${isAnswered ? 'block' : 'none'}">
+        <strong>💡 সমাধান বিশ্লেষণ:</strong> ${item.exp}
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+
+  updateLanguageExamScore();
+}
+
+function answerLanguageQuestion(qId, choiceIdx) {
+  if (userLanguageExamAnswers[qId] !== undefined) return;
+  userLanguageExamAnswers[qId] = choiceIdx;
+  renderLanguageQuiz();
+}
+
+function updateLanguageExamScore() {
+  let score = 0;
+  for (let id in userLanguageExamAnswers) {
+    const q = bcsLanguageQuestions.find(i => i.id == id);
+    if (q && userLanguageExamAnswers[id] === q.correct) {
+      score++;
+    }
+  }
+  document.getElementById('live-score').textContent = `স্কোর: ${score} / ${bcsLanguageQuestions.length}`;
+}
+
+function resetQuiz() {
+  userLanguageExamAnswers = {};
+  renderLanguageQuiz();
+}
+
+function toggleFlash(card) {
+  card.classList.toggle('open');
+  const span = card.querySelector('.flash-question span:last-child');
+  span.textContent = card.classList.contains('open') ? '➖' : '➕';
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const target = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', target);
+  try {
+    localStorage.setItem('language_ebook_theme', target);
+  } catch(e) {}
+}
+
+let fontBase = 16;
+function adjustFont(delta) {
+  fontBase = Math.max(14, Math.min(22, fontBase + delta));
+  document.documentElement.style.setProperty('--base-font-size', fontBase + 'px');
+}
+
+window.addEventListener('scroll', () => {
+  const scroll = document.documentElement.scrollTop || document.body.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const pct = (scroll / height) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  try {
+    const saved = localStorage.getItem('language_ebook_theme');
+    if (saved) {
+      document.documentElement.setAttribute('data-theme', saved);
+    }
+  } catch(e) {}
+  renderLanguageQuiz();
+});
+</script>
+  <script src="nav-component.js"></script>
+</body>
+</html>
