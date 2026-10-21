@@ -15,7 +15,16 @@ const mimeTypes = {
 };
 
 const server = http.createServer((req, res) => {
-  let reqPath = decodeURI(req.url.split('?')[0]);
+  let reqPath = '/index.html';
+  try {
+    reqPath = decodeURIComponent(req.url.split('?')[0]);
+  } catch(e) {
+    try {
+      reqPath = decodeURI(req.url.split('?')[0]);
+    } catch(err) {
+      reqPath = req.url.split('?')[0];
+    }
+  }
   if (reqPath === '/' || reqPath === '') reqPath = '/index.html';
   const filePath = path.join(__dirname, reqPath);
 
