@@ -1,0 +1,808 @@
+/**
+ * Sketchnote Visual Notes CSS Library (Pure CSS)
+ * Hand-drawn Aesthetic Callouts, Sticky Notes, Flows, Tables & Diagrams
+ * Version: 1.0.0
+ * Zero JavaScript dependency. Full Dark Mode & Responsive Support.
+ */
+
+/* ==========================================================================
+   1. Google Fonts & CSS Tokens
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Atma:wght@500;600;700&family=Baloo+Da+2:wght@500;600;700&family=Caveat:wght@600;700&family=Galada&family=Hind+Siliguri:wght@500;600;700&family=Kalam:wght@700&family=Patrick+Hand&display=swap');
+
+:root {
+  /* Fonts */
+  --sk-font-bn: 'Atma', 'Baloo Da 2', 'Hind Siliguri', 'Noto Serif Bengali', cursive, sans-serif;
+  --sk-font-en: 'Caveat', 'Patrick Hand', 'Kalam', cursive, sans-serif;
+  --sk-font-body: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans Bengali', sans-serif;
+
+  /* Light Mode Palette */
+  --sk-paper: #fdfbf3;
+  --sk-paper-grid: #f9f6ea;
+  --sk-line: #cfe0ee;
+  --sk-margin: #f2a0a0;
+  --sk-ink: #1f2a44;
+  --sk-ink-muted: #475569;
+  
+  /* Primary Accent Inks */
+  --sk-blue: #2b5fb8;
+  --sk-green: #2e8b57;
+  --sk-orange: #e67e22;
+  --sk-purple: #7a4fb5;
+  --sk-red: #d63a3a;
+  
+  /* Highlighters */
+  --sk-yellow-hl: rgba(255, 230, 109, 0.7);
+  --sk-pink-hl: rgba(255, 183, 178, 0.7);
+  --sk-green-hl: rgba(181, 234, 215, 0.7);
+  --sk-blue-hl: rgba(199, 206, 234, 0.7);
+  
+  /* Stickies & Cards */
+  --sk-sticky-yellow: #fff5a6;
+  --sk-sticky-blue: #d6ecff;
+  --sk-card-bg: rgba(255, 255, 255, 0.85);
+  --sk-border-color: #2b3a4a;
+  --sk-shadow: rgba(31, 42, 68, 0.08);
+  --sk-shadow-deep: rgba(31, 42, 68, 0.16);
+
+  /* Parchment Variant (Image 5 Theme) */
+  --sk-parchment: #f4ecdc;
+  --sk-parchment-ink: #1a273b;
+  --sk-gold: #b3822a;
+  --sk-gold-light: #f6e7c1;
+}
+
+/* Dark Mode Adaptation */
+[data-theme="dark"], 
+body.dark-mode, 
+body.dark-theme,
+.theme-dark {
+  --sk-paper: #161c26;
+  --sk-paper-grid: #131720;
+  --sk-line: #243044;
+  --sk-margin: #6b3333;
+  --sk-ink: #e5edf7;
+  --sk-ink-muted: #94a3b8;
+
+  --sk-blue: #60a5fa;
+  --sk-green: #4ade80;
+  --sk-orange: #fb923c;
+  --sk-purple: #c084fc;
+  --sk-red: #f87171;
+
+  --sk-yellow-hl: rgba(250, 204, 21, 0.28);
+  --sk-pink-hl: rgba(244, 114, 182, 0.28);
+  --sk-green-hl: rgba(74, 222, 128, 0.28);
+  --sk-blue-hl: rgba(96, 165, 250, 0.28);
+
+  --sk-sticky-yellow: #292415;
+  --sk-sticky-blue: #162438;
+  --sk-card-bg: rgba(26, 34, 48, 0.85);
+  --sk-border-color: #7b8fa7;
+  --sk-shadow: rgba(0, 0, 0, 0.35);
+  --sk-shadow-deep: rgba(0, 0, 0, 0.55);
+
+  --sk-parchment: #1f1d18;
+  --sk-parchment-ink: #f0e6d6;
+  --sk-gold: #eab308;
+  --sk-gold-light: #383018;
+}
+
+/* Base Isolation: apply font ONLY inside .sk-* elements */
+[class^="sk-"], [class*=" sk-"] {
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   2. Page Wrappers (.sk-page, .sk-page--grid, .sk-page--spiral, .sk-theme-parchment)
+   ========================================================================== */
+.sk-page {
+  position: relative;
+  background-color: var(--sk-paper);
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 31px,
+    var(--sk-line) 31px,
+    var(--sk-line) 32px
+  );
+  border: 1px solid var(--sk-line);
+  border-radius: 8px;
+  padding: 2.2rem 2rem 2.2rem 3.5rem;
+  margin: 2.2rem 0;
+  color: var(--sk-ink);
+  box-shadow: 0 4px 20px var(--sk-shadow);
+  overflow: hidden;
+  font-family: var(--sk-font-bn);
+  line-height: 1.8;
+}
+
+/* Left Red Margin Line */
+.sk-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 2.5rem;
+  width: 2px;
+  background-color: var(--sk-margin);
+  opacity: 0.85;
+}
+
+/* Grid Paper Variant */
+.sk-page--grid {
+  background-color: var(--sk-paper-grid);
+  background-image: 
+    linear-gradient(to right, var(--sk-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--sk-line) 1px, transparent 1px);
+  background-size: 26px 26px;
+  padding-left: 2rem;
+}
+.sk-page--grid::before {
+  display: none;
+}
+
+/* Spiral Notebook Binding (Image 3) */
+.sk-page--spiral {
+  padding-left: 4.2rem;
+}
+.sk-page--spiral::before {
+  left: 3.2rem;
+}
+.sk-page--spiral::after {
+  content: '';
+  position: absolute;
+  top: 15px;
+  bottom: 15px;
+  left: 10px;
+  width: 18px;
+  background-image: radial-gradient(circle, #2d3748 5px, #1a202c 6px, transparent 7px);
+  background-size: 18px 32px;
+  opacity: 0.9;
+}
+
+/* Parchment Vintage Theme (Image 5) */
+.sk-theme-parchment {
+  background-color: var(--sk-parchment);
+  background-image: radial-gradient(#d3c6ab 1px, transparent 1px), radial-gradient(#d3c6ab 1px, var(--sk-parchment) 1px);
+  background-size: 28px 28px;
+  background-position: 0 0, 14px 14px;
+  color: var(--sk-parchment-ink);
+  border: 2px solid var(--sk-gold);
+  border-radius: 12px;
+  padding: 2.2rem 2.2rem;
+}
+.sk-theme-parchment::before {
+  display: none;
+}
+
+/* ==========================================================================
+   3. Hand-drawn Boxes (.sk-box, variants)
+   ========================================================================== */
+.sk-box {
+  position: relative;
+  background: var(--sk-card-bg);
+  color: var(--sk-ink);
+  border: 2.5px solid var(--sk-border-color);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  padding: 1.25rem 1.4rem;
+  margin: 1.4rem 0;
+  box-shadow: 2px 3px 0 var(--sk-border-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sk-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 3px 5px 0 var(--sk-border-color);
+}
+
+/* Box Color Variants */
+.sk-box--blue {
+  border-color: var(--sk-blue);
+  box-shadow: 2.5px 3.5px 0 var(--sk-blue);
+}
+.sk-box--green {
+  border-color: var(--sk-green);
+  box-shadow: 2.5px 3.5px 0 var(--sk-green);
+}
+.sk-box--orange {
+  border-color: var(--sk-orange);
+  box-shadow: 2.5px 3.5px 0 var(--sk-orange);
+}
+.sk-box--purple {
+  border-color: var(--sk-purple);
+  box-shadow: 2.5px 3.5px 0 var(--sk-purple);
+}
+.sk-box--red {
+  border-color: var(--sk-red);
+  box-shadow: 2.5px 3.5px 0 var(--sk-red);
+}
+.sk-box--dashed {
+  border-style: dashed;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   4. Titles & Section Headings (.sk-title, .sk-section-head, .sk-numbered)
+   ========================================================================== */
+.sk-title {
+  font-family: var(--sk-font-bn);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--sk-ink);
+  margin-top: 0.5rem;
+  margin-bottom: 1.2rem;
+  display: inline-block;
+  position: relative;
+}
+
+/* Double Wobbly Underline */
+.sk-title::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 5px;
+  background: var(--sk-blue);
+  border-radius: 4px;
+  margin-top: 4px;
+  box-shadow: 0 4px 0 var(--sk-blue);
+}
+
+.sk-section-head {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: var(--sk-font-bn);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--sk-ink);
+  margin: 1.5rem 0 1rem 0;
+}
+
+.sk-section-head::before {
+  content: '✏️';
+  font-size: 1.1rem;
+}
+
+.sk-section-head::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, var(--sk-green), transparent);
+  border-radius: 2px;
+}
+
+/* Numbered Section Header (Image 2) */
+.sk-numbered {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin: 1.2rem 0;
+}
+
+.sk-numbered__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  background: var(--sk-blue);
+  color: #fff;
+  border-radius: 50% 45% 55% 48%;
+  font-family: var(--sk-font-bn);
+  font-weight: 700;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  box-shadow: 1.5px 2px 0 var(--sk-border-color);
+}
+
+.sk-numbered--green .sk-numbered__badge { background: var(--sk-green); }
+.sk-numbered--orange .sk-numbered__badge { background: var(--sk-orange); }
+.sk-numbered--purple .sk-numbered__badge { background: var(--sk-purple); }
+.sk-numbered--red .sk-numbered__badge { background: var(--sk-red); }
+
+.sk-numbered__content {
+  flex: 1;
+}
+
+/* ==========================================================================
+   5. Sticky Notes (.sk-sticky, .sk-pin, scotch tape)
+   ========================================================================== */
+.sk-sticky {
+  position: relative;
+  background-color: var(--sk-sticky-yellow);
+  color: var(--sk-ink);
+  padding: 1.6rem 1.4rem 1.2rem 1.4rem;
+  margin: 1.6rem auto;
+  border-radius: 2px 2px 18px 2px;
+  box-shadow: 0 8px 16px var(--sk-shadow-deep);
+  transform: rotate(-1.5deg);
+  transition: transform 0.2s ease;
+  font-family: var(--sk-font-bn);
+  max-width: 480px;
+}
+
+.sk-sticky:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.sk-sticky--blue {
+  background-color: var(--sk-sticky-blue);
+  transform: rotate(1.2deg);
+}
+
+/* Pushpin Doodle */
+.sk-pin {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
+  background: var(--sk-red);
+  border-radius: 50%;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.3), inset 0 -2px 4px rgba(0,0,0,0.3);
+  z-index: 2;
+}
+
+.sk-pin::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 5px;
+  height: 5px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 50%;
+}
+
+.sk-pin--purple { background: var(--sk-purple); }
+.sk-pin--blue { background: var(--sk-blue); }
+
+/* Translucent Tape Variant */
+.sk-sticky--tape::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  backdrop-filter: blur(2px);
+  border-left: 2px dashed rgba(0,0,0,0.1);
+  border-right: 2px dashed rgba(0,0,0,0.1);
+}
+
+/* ==========================================================================
+   6. Marker Highlighters & Inks
+   ========================================================================== */
+mark.sk-mark {
+  background: linear-gradient(104deg, rgba(255,230,109,0) 0.9%, var(--sk-yellow-hl) 2.4%, var(--sk-yellow-hl) 97%, rgba(255,230,109,0) 99%);
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+  color: inherit;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+mark.sk-mark--pink {
+  background: linear-gradient(104deg, rgba(255,183,178,0) 0.9%, var(--sk-pink-hl) 2.4%, var(--sk-pink-hl) 97%, rgba(255,183,178,0) 99%);
+}
+mark.sk-mark--green {
+  background: linear-gradient(104deg, rgba(181,234,215,0) 0.9%, var(--sk-green-hl) 2.4%, var(--sk-green-hl) 97%, rgba(181,234,215,0) 99%);
+}
+mark.sk-mark--blue {
+  background: linear-gradient(104deg, rgba(199,206,234,0) 0.9%, var(--sk-blue-hl) 2.4%, var(--sk-blue-hl) 97%, rgba(199,206,234,0) 99%);
+}
+
+.sk-c-blue { color: var(--sk-blue); font-weight: 600; }
+.sk-c-green { color: var(--sk-green); font-weight: 600; }
+.sk-c-orange { color: var(--sk-orange); font-weight: 600; }
+.sk-c-purple { color: var(--sk-purple); font-weight: 600; }
+.sk-c-red { color: var(--sk-red); font-weight: 600; }
+
+.sk-underline {
+  text-decoration: underline wavy var(--sk-blue);
+  text-underline-offset: 4px;
+}
+.sk-doodle-underline {
+  position: relative;
+  display: inline-block;
+}
+.sk-doodle-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 3px;
+  background: var(--sk-orange);
+  border-radius: 3px 6px 4px 5px;
+}
+
+/* ==========================================================================
+   7. Lists & Checklists (.sk-arrow-list, .sk-checklist)
+   ========================================================================== */
+.sk-arrow-list {
+  list-style: none;
+  padding-left: 0.5rem;
+  margin: 1rem 0;
+}
+.sk-arrow-list li {
+  position: relative;
+  padding-left: 1.8rem;
+  margin-bottom: 0.65rem;
+  line-height: 1.7;
+}
+.sk-arrow-list li::before {
+  content: '➔';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--sk-blue);
+  font-weight: bold;
+}
+.sk-arrow-list--green li::before { color: var(--sk-green); }
+.sk-arrow-list--orange li::before { color: var(--sk-orange); }
+.sk-arrow-list--purple li::before { color: var(--sk-purple); }
+
+/* Hand-drawn Checklists */
+.sk-checklist {
+  list-style: none;
+  padding-left: 0;
+  margin: 1rem 0;
+}
+.sk-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.65rem;
+}
+.sk-check-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border: 2px solid var(--sk-ink);
+  border-radius: 4px 6px 3px 5px;
+  background: var(--sk-card-bg);
+  flex-shrink: 0;
+  font-weight: bold;
+}
+.sk-checklist--done .sk-check-box,
+li.sk-done .sk-check-box {
+  border-color: var(--sk-green);
+  color: var(--sk-green);
+  background: rgba(46, 139, 87, 0.12);
+}
+.sk-checklist--done .sk-check-box::before,
+li.sk-done .sk-check-box::before {
+  content: '✓';
+  font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   8. Tables (.sk-table, .sk-table--long, .sk-compare)
+   ========================================================================== */
+.sk-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 2px solid var(--sk-border-color);
+  border-radius: 10px;
+  background: var(--sk-card-bg);
+  margin: 1.4rem 0;
+  font-family: var(--sk-font-bn);
+  overflow: hidden;
+}
+
+.sk-table th {
+  background-color: var(--sk-yellow-hl);
+  color: var(--sk-ink);
+  padding: 0.9rem 1rem;
+  font-weight: 700;
+  text-align: left;
+  border-bottom: 2px solid var(--sk-border-color);
+}
+
+.sk-table td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1.5px dashed var(--sk-line);
+  color: var(--sk-ink);
+}
+
+.sk-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Long Revision Table (Image 4) */
+.sk-table--long {
+  border-color: #8b4513;
+}
+.sk-table--long th {
+  background: #f7ede2;
+  color: #5c2c16;
+  border-bottom: 2px solid #8b4513;
+}
+[data-theme="dark"] .sk-table--long th {
+  background: #33231a;
+  color: #f7ede2;
+}
+.sk-table--long td:first-child {
+  text-align: center;
+  font-weight: 700;
+  width: 4rem;
+  border-right: 1.5px dashed var(--sk-line);
+}
+
+/* Comparison Table (Image 5 Vintage Parchment Style) */
+.sk-compare {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--sk-card-bg);
+  border: 2px solid var(--sk-gold);
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+.sk-compare th {
+  background: #1a273b;
+  color: #fff;
+  padding: 0.9rem 1.2rem;
+  font-weight: 700;
+  border-bottom: 2px solid var(--sk-gold);
+}
+.sk-compare td {
+  padding: 0.85rem 1.2rem;
+  border-bottom: 1px dotted var(--sk-gold);
+}
+.sk-compare td:first-child {
+  font-weight: 600;
+  background: rgba(179, 130, 42, 0.08);
+  width: 25%;
+  border-right: 1px solid var(--sk-gold);
+}
+
+/* ==========================================================================
+   9. Formulas & Equations (.sk-formula, .sk-equation, .sk-defbox, .sk-pill)
+   ========================================================================== */
+.sk-formula {
+  background: var(--sk-card-bg);
+  border: 2.5px solid var(--sk-blue);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem auto;
+  text-align: center;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--sk-blue);
+  box-shadow: 3px 4px 0 var(--sk-blue);
+  max-width: 600px;
+}
+
+.sk-equation {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  background: rgba(46, 139, 87, 0.08);
+  border: 2px solid var(--sk-green);
+  border-radius: 30px;
+  padding: 0.6rem 1.5rem;
+  margin: 0.8rem 0;
+  font-weight: 700;
+  color: var(--sk-green);
+}
+
+.sk-defbox {
+  background: var(--sk-card-bg);
+  border: 2px dashed var(--sk-purple);
+  border-radius: 10px;
+  padding: 0.9rem 1.2rem;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+.sk-pill {
+  display: inline-block;
+  background: rgba(43, 95, 184, 0.1);
+  border: 1.5px solid var(--sk-blue);
+  color: var(--sk-blue);
+  padding: 0.2rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0.2rem;
+}
+
+/* ==========================================================================
+   10. Key Points & Reminders (.sk-remember, .sk-keystrip, .sk-conclusion)
+   ========================================================================== */
+.sk-remember {
+  background: var(--sk-sticky-yellow);
+  color: var(--sk-ink);
+  border: 2.5px solid var(--sk-orange);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  padding: 1.2rem 1.4rem;
+  margin: 1.8rem 0;
+  box-shadow: 2px 3px 0 var(--sk-orange);
+  position: relative;
+  font-family: var(--sk-font-bn);
+}
+
+.sk-remember::before {
+  content: '💡 মনে রাখুন:';
+  display: block;
+  font-weight: 700;
+  color: var(--sk-orange);
+  font-size: 1.15rem;
+  margin-bottom: 0.4rem;
+}
+
+.sk-remember--blue {
+  border-color: var(--sk-blue);
+  box-shadow: 2px 3px 0 var(--sk-blue);
+}
+.sk-remember--blue::before {
+  content: '📌 বিসিএস স্পেশাল:';
+  color: var(--sk-blue);
+}
+
+.sk-keystrip {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 230, 109, 0.25);
+  border: 2px solid var(--sk-border-color);
+  border-radius: 10px;
+  padding: 0.75rem 1.2rem;
+  margin: 1.5rem 0;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.sk-keystrip__icon {
+  font-size: 1.5rem;
+}
+
+.sk-keystrip__points {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.sk-keystrip__item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.sk-keystrip__item::before {
+  content: '✓';
+  color: var(--sk-green);
+  font-weight: bold;
+}
+
+.sk-conclusion {
+  color: var(--sk-red);
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-top: 2px solid var(--sk-red);
+  padding-top: 0.6rem;
+  margin-top: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sk-conclusion::before {
+  content: '⭐ সারসংক্ষেপ:';
+}
+
+/* ==========================================================================
+   11. Process Flows (.sk-flow, .sk-flow--chips)
+   ========================================================================== */
+.sk-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.sk-flow__step {
+  background: var(--sk-card-bg);
+  border: 2px solid var(--sk-blue);
+  border-radius: 10px;
+  padding: 0.6rem 1.1rem;
+  font-family: var(--sk-font-bn);
+  font-weight: 600;
+  color: var(--sk-ink);
+  box-shadow: 2px 2px 0 var(--sk-blue);
+}
+
+.sk-arrow {
+  color: var(--sk-blue);
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.sk-arrow::after {
+  content: '→';
+}
+
+/* Flow Chips (Compact rounded capsules with arrows) */
+.sk-flow--chips .sk-flow__step {
+  border-radius: 20px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.95rem;
+  background: rgba(43, 95, 184, 0.08);
+}
+
+/* Mobile Responsive Flow */
+@media (max-width: 640px) {
+  .sk-flow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .sk-flow__step {
+    text-align: center;
+  }
+  .sk-arrow {
+    text-align: center;
+  }
+  .sk-arrow::after {
+    content: '↓';
+  }
+  .sk-page {
+    padding-left: 1.5rem;
+    padding-right: 1rem;
+  }
+  .sk-page::before {
+    left: 1rem;
+  }
+  .sk-page--spiral {
+    padding-left: 2.2rem;
+  }
+  .sk-page--spiral::before {
+    left: 1.8rem;
+  }
+  .sk-keystrip__points {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ==========================================================================
+   12. Badges & Doodles (.sk-badge, .sk-def-card, .sk-star)
+   ========================================================================== */
+.sk-badge {
+  display: inline-block;
+  background: var(--sk-ink);
+  color: #fff;
+  padding: 0.25rem 0.8rem;
+  border-radius: 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 1px 2px 0 var(--sk-border-color);
+}
+.sk-badge--gold {
+  background: var(--sk-gold);
+  color: #1a273b;
+}
+
+.sk-def-card {
+  background: var(--sk-card-bg);
+  border: 2px solid var(--sk-border-color);
+  border-radius: 10px;
+  padding: 1.2rem;
+  margin: 1rem 0;
+  box-shadow: 2px 3px 0 var(--sk-border-color);
+}
+.sk-def-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
