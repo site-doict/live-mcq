@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<!-- DESIGN PLAN:
+(১) কন্টেন্ট বিশ্লেষণ ও বিন্যাস:
+    - উৎস: Live MCQ আন্তর্জাতিক বিষয়াবলি - খণ্ড ১: আঞ্চলিক ও আন্তর্জাতিক ব্যবস্থা, ভূ-রাজনীতি [বইয়ের পৃষ্ঠা ৫৮৮-৫৯২ / ৫-৯.pdf]।
+    - মোট বিসিএস এমসিকিউ: ১৭টি (৪৯তম থেকে ১২তম বিসিএস পর্যন্ত)।
+    - তাত্ত্বিক বিশ্লেষণ: দ্বি-জাতি তত্ত্ব ও ইতিহাস, আন্তর্জাতিক সম্পর্কের মূল তত্ত্বত্রয়ী (উদারবাদ, বাস্তববাদ, মার্ক্সবাদ), জিরো-সাম গেম ও নৈরাজ্য, বাংলাদেশ-ভারত স্থল সীমান্ত প্রটোকল ও ছিটমহল বিনিময়, নেকড়েযোদ্ধা কূটনীতি ও নিউ সিল্ক রোড, জোট নিরপেক্ষ আন্দোলন (ন্যাম), কমেকন ও পূর্ব ইউরোপ, কূটনীতিতে Persona-non-grata, Straw vote, হংকংয়ে 'এক দেশ, দুই নীতি' এবং সোভিয়েত ইউনিয়নের ৫০০ দিনের প্ল্যান।
+(২) ভিজ্যুয়াল ও পেডাগজিক্যাল কম্পোনেন্ট:
+    - বিসিএস প্রশ্ন বিশ্লেষণ গ্রিড (৫০তম থেকে ১০ম বিসিএস)।
+    - আন্তর্জাতিক সম্পর্কের মূল ৩টি তত্ত্বের তুলনামূলক ম্যাট্রিক্স ছক।
+    - দ্বি-জাতি তত্ত্বের ক্রমবিকাশ টাইমলাইন কার্ড।
+    - কূটনীতি ও বিশ্বব্যবস্থার প্রধান সংজ্ঞার্থ কার্ড (Wolf Warrior, Persona-non-grata, Straw vote, One Country Two Systems)।
+    - ছিটমহল ও সীমান্ত চুক্তির গুরুত্বপূর্ণ সাল ও পরিসংখ্যান বক্স।
+    - ইন্টারেক্টিভ কুইজ ইঞ্জিন: ১৭টি প্রশ্ন, তাৎক্ষণিক উত্তর যাচাই ও অ্যানসার ড্রয়ার, লাইভ স্কোর এবং ফিল্টার।
+(৩) কালার প্যালেট (Global Geopolitics Theme):
+    - Primary: #0F3966 (Diplomatic Navy)
+    - Secondary: #0284C7 (Ocean Geopolitics Blue)
+    - Accent Gold: #D97706 (Historic Bronze)
+    - Background: #F8FAFC (Clean Paper Off-White)
+    - Card: #FFFFFF, Border: #E2E8F0
+(৪) ফন্ট ও টাইপোগ্রাফি:
+    - 'Noto Serif Bengali' & 'Noto Sans Bengali', rem ইউনিট স্কেলিং, পূর্ণ ডার্ক মোড সাপোর্ট।
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>আঞ্চলিক ও আন্তর্জাতিক ব্যবস্থা, ভূ-রাজনীতি - বিসিএস আন্তর্জাতিক বিষয়াবলি</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalpurush&family=Noto+Sans+Bengali:wght@400;600;700;800&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary-color: #0F3966;
+  --primary-light: #1D5B96;
+  --secondary-color: #0284C7;
+  --accent-gold: #D97706;
+  --accent-soft: #FEF3C7;
+  --bg-main: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --text-main: #0F172A;
+  --text-muted: #475569;
+  --border-color: #E2E8F0;
+  --correct-bg: #DCFCE7;
+  --correct-color: #166534;
+  --wrong-bg: #FEE2E2;
+  --wrong-color: #991B1B;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.03);
+  --base-font-size: 1rem;
+  --radius: 12px;
+}
+
+[data-theme="dark"] {
+  --primary-color: #60A5FA;
+  --primary-light: #93C5FD;
+  --secondary-color: #38BDF8;
+  --accent-gold: #FBBF24;
+  --accent-soft: #2D2214;
+  --bg-main: #0B0F19;
+  --bg-card: #151D2E;
+  --text-main: #F1F5F9;
+  --text-muted: #94A3B8;
+  --border-color: #243048;
+  --correct-bg: #143522;
+  --correct-color: #86EFAC;
+  --wrong-bg: #451A1A;
+  --wrong-color: #FCA5A5;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Noto Sans Bengali', 'Kalpurush', sans-serif;
+  font-size: var(--base-font-size);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.7;
+  overflow-x: clip;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.serif-font {
+  font-family: 'Noto Serif Bengali', serif;
+}
+
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--secondary-color), var(--accent-gold));
+  width: 0%;
+  z-index: 9999;
+  transition: width 0.1s;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 5rem 1rem;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #0F3966 0%, #08203E 100%);
+  color: #FFFFFF;
+  padding: 2.25rem 1.75rem;
+  border-radius: var(--radius);
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "🌐";
+  position: absolute;
+  right: -10px;
+  bottom: -20px;
+  font-size: 8rem;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.hero-tag {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  padding: 0.25rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #BAE6FD;
+  margin-bottom: 0.75rem;
+}
+
+.hero h1 {
+  font-size: 1.85rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 0.5rem;
+}
+
+.hero p {
+  font-size: 0.975rem;
+  color: #CBD5E1;
+  max-width: 650px;
+}
+
+/* Section Header */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 2.5rem 0 1.25rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.section-title span.badge {
+  font-size: 0.8rem;
+  background: var(--accent-soft);
+  color: var(--accent-gold);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* BCS Analysis Grid */
+.bcs-table-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.bcs-table-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bcs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.6rem;
+}
+
+.bcs-pill {
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.bcs-pill .num {
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.bcs-pill .cnt {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.bcs-pill.has-q {
+  background: #EFF6FF;
+  border-color: #BFDBFE;
+}
+[data-theme="dark"] .bcs-pill.has-q {
+  background: #1E293B;
+  border-color: #3B82F6;
+}
+
+/* Theory Cards & Summary Grid */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.info-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.info-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.info-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.info-card-icon {
+  font-size: 1.35rem;
+}
+
+.info-card h4 {
+  font-size: 1.05rem;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.info-card ul {
+  list-style: none;
+  font-size: 0.925rem;
+  color: var(--text-muted);
+}
+
+.info-card ul li {
+  margin-bottom: 0.4rem;
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.info-card ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--accent-gold);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* Responsive Table */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  margin-bottom: 1.5rem;
+  background: var(--bg-card);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.925rem;
+  text-align: left;
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+th {
+  background: #F1F5F9;
+  color: var(--primary-color);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] th {
+  background: #1E293B;
+  color: var(--secondary-color);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* Timeline Cards */
+.timeline-card {
+  background: var(--bg-card);
+  border-left: 4px solid var(--secondary-color);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  border-top: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.85rem;
+}
+
+.timeline-card .year {
+  display: inline-block;
+  background: #E0F2FE;
+  color: #0369A1;
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 6px;
+  margin-bottom: 0.35rem;
+}
+[data-theme="dark"] .timeline-card .year {
+  background: #0C4A6E;
+  color: #BAE6FD;
+}
+
+.timeline-card h4 {
+  font-size: 1rem;
+  color: var(--primary-color);
+  margin-bottom: 0.25rem;
+}
+
+.timeline-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* Fact-check & Mnemonic Boxes */
+.mnemonic-box {
+  background: #FFFBEB;
+  border-left: 4px solid var(--accent-gold);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  font-size: 0.925rem;
+  color: #78350F;
+}
+
+[data-theme="dark"] .mnemonic-box {
+  background: #272015;
+  color: #FDE68A;
+}
+
+.fact-check-box {
+  background: #EFF6FF;
+  border-left: 4px solid var(--primary-light);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  font-size: 0.925rem;
+  color: #1E3A8A;
+}
+
+[data-theme="dark"] .fact-check-box {
+  background: #172554;
+  color: #BFDBFE;
+}
+
+/* Interactive Quiz Section */
+.quiz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--bg-card);
+  padding: 0.9rem 1.25rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.quiz-score-badge {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.btn-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn {
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  background: var(--border-color);
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: #FFFFFF;
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background: var(--primary-light);
+}
+
+/* MCQ Card */
+.mcq-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.mcq-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.mcq-num {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--primary-color);
+  background: #EEF2FF;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  line-height: 1.3;
+}
+[data-theme="dark"] .mcq-num {
+  background: #1E293B;
+  color: var(--secondary-color);
+}
+
+.mcq-question {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-main);
+  flex: 1;
+}
+
+.bcs-tag {
+  font-size: 0.775rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  background: var(--accent-soft);
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  display: inline-block;
+  margin-left: 0.4rem;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 600px) {
+  .options-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.opt-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  padding: 0.65rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--text-main);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s;
+}
+
+.opt-btn:hover:not(:disabled) {
+  background: #E2E8F0;
+  border-color: #CBD5E1;
+}
+[data-theme="dark"] .opt-btn:hover:not(:disabled) {
+  background: #1E293B;
+  border-color: #334155;
+}
+
+.opt-letter {
+  font-weight: 700;
+  color: var(--text-muted);
+  width: 1.3rem;
+}
+
+.opt-btn.correct {
+  background-color: var(--correct-bg) !important;
+  color: var(--correct-color) !important;
+  border-color: #86EFAC !important;
+  font-weight: 700;
+}
+
+.opt-btn.wrong {
+  background-color: var(--wrong-bg) !important;
+  color: var(--wrong-color) !important;
+  border-color: #FCA5A5 !important;
+}
+
+/* MCQ Drawer / Explanation */
+.explanation-drawer {
+  display: none;
+  background: var(--bg-main);
+  border: 1px dashed var(--border-color);
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+  margin-top: 0.75rem;
+  font-size: 0.92rem;
+  color: var(--text-main);
+  line-height: 1.65;
+}
+
+.explanation-drawer.open {
+  display: block;
+}
+
+.exp-header {
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.exp-source {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Footer info */
+.chapter-footer {
+  text-align: center;
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+</style>
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <div class="container">
+    <!-- Hero Header -->
+    <header class="hero">
+      <span class="hero-tag">আন্তর্জাতিক বিষয়াবলি • অধ্যায় ০২</span>
+      <h1 class="serif-font">আঞ্চলিক ও আন্তর্জাতিক ব্যবস্থা, ভূ-রাজনীতি</h1>
+      <p>আন্তর্জাতিক সম্পর্কের মূল তত্ত্বত্রয়ী (উদারবাদ, বাস্তববাদ, মার্ক্সবাদ), দ্বি-জাতি তত্ত্বের বিকাশ, বৈশ্বিক কূটনীতি, ছিটমহল চুক্তি ও এশীয় পরাশক্তি রাজনীতির পূর্ণাঙ্গ বিশ্লেষণ।</p>
+    </header>
+
+    <!-- BCS Analysis Breakdown -->
+    <section class="bcs-table-card">
+      <h3 class="serif-font">📊 বিসিএস প্রিলিমিনারি প্রশ্ন বিশ্লেষণ (৫০তম - ১০ম)</h3>
+      <div class="bcs-grid">
+        <div class="bcs-pill"><div class="num">৫০তম</div><div class="cnt">০টি</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪৯তম</div><div class="cnt">১টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill"><div class="num">৪৮তম</div><div class="cnt">০টি</div></div>
+        <div class="bcs-pill"><div class="num">৪৭তম</div><div class="cnt">০টি</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪৬তম</div><div class="cnt">২টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill"><div class="num">৪৫তম</div><div class="cnt">০টি</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪৪তম</div><div class="cnt">১টি প্রশ্ন</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪৩তম</div><div class="cnt">১টি প্রশ্ন</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪২তম</div><div class="cnt">১টি প্রশ্ন</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪১তম</div><div class="cnt">১টি প্রশ্ন</div></div>
+        <div class="bcs-pill"><div class="num">৪০তম</div><div class="cnt">০টি</div></div>
+        <div class="bcs-pill has-q"><div class="num">৩৯তম</div><div class="cnt">১টি প্রশ্ন</div></div>
+        <div class="bcs-pill has-q"><div class="num">৩৮তম</div><div class="cnt">২টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill"><div class="num">৩৭তম</div><div class="cnt">০টি</div></div>
+        <div class="bcs-pill"><div class="num">৩৬তম</div><div class="cnt">০টি</div></div>
+        <div class="bcs-pill has-q"><div class="num">৩৫তম</div><div class="cnt">২টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill has-q"><div class="num">১০ম-৩৪তম</div><div class="cnt">৬টি প্রশ্ন 🔥</div></div>
+      </div>
+    </section>
+
+    <!-- Core High-Yield Summary: Theories of International Relations -->
+    <h2 class="section-title serif-font">
+      🌐 আন্তর্জাতিক সম্পর্কের মূল তত্ত্বত্রয়ী
+      <span class="badge">হাই-ইল্ড ম্যাট্রিক্স</span>
+    </h2>
+
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>তত্ত্বের নাম</th>
+            <th>মূল প্রত্যয় ও বিশ্বাস</th>
+            <th>আন্তর্জাতিক প্রতিষ্ঠানের ভূমিকা</th>
+            <th>বিসিএস কী-ওয়ার্ড</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>উদারবাদ (Liberalism)</strong></td>
+            <td>শান্তিপূর্ণ সহাবস্থান, রাষ্ট্রসমূহের মধ্যে সহযোগিতা এবং যুদ্ধ পরিহার।</td>
+            <td><strong>কার্যকরী ও ইতিবাচক:</strong> জাতিসংঘ, লিগ অব নেশনস, আইএমএফ ও বিশ্বব্যাংকের ভূমিকা অত্যন্ত গুরুত্বপূর্ণ।</td>
+            <td>সহযোগিতা, আন্তর্জাতিক প্রতিষ্ঠান, ইতিবাচক ভূমিকা [৪৬তম বিসিএস]</td>
+          </tr>
+          <tr>
+            <td><strong>বাস্তববাদ (Realism)</strong></td>
+            <td>বিশ্বব্যবস্থা <strong>নৈরাজ্যপূর্ণ (Anarchy)</strong>; জাতীয় স্বার্থ, ক্ষমতা ও নিরাপত্তা রক্ষাই রাষ্ট্রের প্রধান চালিকাশক্তি।</td>
+            <td>প্রতিযোগিতাকে অনিবার্য মনে করে; কোনো কেন্দ্রীয় বৈশ্বিক সরকার নেই।</td>
+            <td>নৈরাজ্য (Anarchy), জিরো-সাম গেম (Zero-Sum Game), ক্ষমতার দ্বন্দ্ব [৩৯তম, ৩৮তম বিসিএস]</td>
+          </tr>
+          <tr>
+            <td><strong>মার্ক্সবাদ (Marxism)</strong></td>
+            <td>আন্তর্জাতিক সম্পর্ককে পুঁজিবাদী অর্থনৈতিক কাঠামো ও <strong>শ্রেণিসংগ্রামের</strong> দৃষ্টিকোণ থেকে বিশ্লেষণ করে।</td>
+            <td>আন্তর্জাতিক সংস্থাসমূহকে পুঁজিবাদী স্বার্থরক্ষাকারী প্রতিষ্ঠান হিসেবে সমালোচনামূলকভাবে দেখে।</td>
+            <td>শ্রেণিসংগ্রাম, পুঁজিবাদী ব্যবস্থা, অর্থনৈতিক শোষণ</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Timeline: Two-Nation Theory -->
+    <h2 class="section-title serif-font">
+      📜 দ্বি-জাতি তত্ত্বের ঐতিহাসিক ক্রমবিকাশ
+      <span class="badge">টাইমলাইন</span>
+    </h2>
+
+    <div class="timeline-card">
+      <span class="year">১৮৮৮ সাল (১৬ মার্চ)</span>
+      <h4>স্যার সৈয়দ আহমদ খান • মীরাট ভাষণ</h4>
+      <p>মীরাটে এক ঐতিহাসিক বক্তৃতায় হিন্দু ও মুসলমানকে দুটি পৃথক জাতি ('two nations') হিসেবে উল্লেখ করেন এবং মুসলমানদের পৃথক রাজনৈতিক পরিচয়ের প্রয়োজনীয়তা তুলে ধরেন।</p>
+    </div>
+
+    <div class="timeline-card">
+      <span class="year">১৯৩০ সাল</span>
+      <h4>আল্লামা ড. মুহাম্মদ ইকবাল • এলাহাবাদ অধিবেশন</h4>
+      <p>মুসলিম লীগের এলাহাবাদ সম্মেলনে সভাপতির ভাষণে উত্তর-পশ্চিম ভারতের মুসলিম সংখ্যাগরিষ্ঠ প্রদেশগুলোকে একত্র করে স্বশাসিত মুসলিম রাষ্ট্র গঠনের রূপরেখা পেশ করেন।</p>
+    </div>
+
+    <div class="timeline-card">
+      <span class="year">১৯৪০ সাল (২৩ মার্চ)</span>
+      <h4>মুহাম্মদ আলী জিন্নাহ ও এ কে ফজলুল হক • লাহোর প্রস্তাব</h4>
+      <p>মুহাম্মদ আলী জিন্নাহর সভাপতিত্বে এবং শেরে বাংলা এ কে ফজলুল হক কর্তৃক ঐতিহাসিক লাহোর প্রস্তাব উত্থাপনের মাধ্যমে দ্বি-জাতি তত্ত্ব প্রাতিষ্ঠানিক রূপ নেয় এবং পৃথক রাষ্ট্র প্রতিষ্ঠার ভিত্তি স্থাপিত হয়।</p>
+    </div>
+
+    <!-- Core Cards: Diplomatic & Geopolitical Concepts -->
+    <h2 class="section-title serif-font">
+      🧭 কূটনীতি ও ভূ-রাজনীতির গুরুত্বপূর্ণ পরিভাষা
+      <span class="badge">কনসেপ্ট কার্ড</span>
+    </h2>
+
+    <div class="summary-grid">
+      <div class="info-card">
+        <div class="info-card-header">
+          <span class="info-card-icon">🐺</span>
+          <h4>নেকড়েযোদ্ধা কূটনীতি (Wolf Warrior)</h4>
+        </div>
+        <ul>
+          <li><strong>সংশ্লিষ্ট দেশ:</strong> চীন (গণচীন)।</li>
+          <li><strong>উৎস:</strong> চীনা ব্লকবাস্টার সিনেমা 'উলফ ওয়ারিয়র-২'।</li>
+          <li><strong>প্রবক্তা:</strong> প্রেসিডেন্ট শি জিনপিং।</li>
+          <li><strong>বৈশিষ্ট্য:</strong> পশ্চিমা নিষেধাজ্ঞা ও সমালোচনার বিরুদ্ধে আক্রমণাত্মক ও আত্মবিশ্বাসী জবাব।</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-header">
+          <span class="info-card-icon">🚫</span>
+          <h4>Persona-non-grata</h4>
+        </div>
+        <ul>
+          <li><strong>উৎপত্তি:</strong> ল্যাটিন শব্দগুচ্ছ (অর্থ: 'অবাঞ্ছিত ব্যক্তি')।</li>
+          <li><strong>প্রযোজ্য ক্ষেত্র:</strong> কূটনৈতিক ব্যক্তিত্বদের ক্ষেত্রে।</li>
+          <li><strong>আইনি ভিত্তি:</strong> ১৯৬১ সালের কূটনৈতিক সম্পর্ক বিষয়ক ভিয়েনা কনভেনশন।</li>
+          <li><strong>ফলাফল:</strong> স্বাগতিক দেশ কর্তৃক বহিষ্কার ও নিজ দেশে প্রত্যাহার।</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-header">
+          <span class="info-card-icon">📊</span>
+          <h4>Straw Vote (স্ট্র ভোট)</h4>
+        </div>
+        <ul>
+          <li><strong>সংজ্ঞা:</strong> অনানুষ্ঠানিক জনমত যাচাই (Unofficial poll of public opinion)।</li>
+          <li><strong>উদ্দেশ্য:</strong> নির্বাচনের প্রাক্কালে ভোটারদের মনোভাব বা জনমতের প্রাথমিক ট্রেন্ড বোঝা।</li>
+          <li><strong>আইনি মর্যাদা:</strong> কোনো আইনি বা প্রাতিষ্ঠানিক বাধ্যবাধকতা নেই।</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-header">
+          <span class="info-card-icon">🇨🇳</span>
+          <h4>এক দেশ, দুই নীতি ও নিউ সিল্ক রোড</h4>
+        </div>
+        <ul>
+          <li><strong>এক দেশ, দুই নীতি:</strong> হংকং শাসনের জন্য ১৯৯৭ সালে চালু হয় (কার্যকর ২০৪৭ পর্যন্ত)।</li>
+          <li><strong>নিউ সিল্ক রোড (BRI):</strong> ২০১৩-১৪ সালে চীনা প্রেসিডেন্ট শি জিনপিং কর্তৃক ঘোষিত বৈশ্বিক অবকাঠামো প্রকল্প।</li>
+          <li><strong>প্রাচীন সিল্ক রোড:</strong> খ্রিষ্টপূর্ব ১ম শতকে হান রাজবংশের সময় শুরু হয়েছিল।</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Fact-check & Discrepancy Boxes -->
+    <div class="fact-check-box">
+      <strong>💡 সীমান্ত চুক্তি ও ছিটমহল বিনিময় সংক্রান্ত ৩টি গুরুত্বপূর্ণ সাল:</strong>
+      <br>১. <strong>১৯৭৪ সাল:</strong> মুজিব-ইন্দিরা বাংলাদেশ-ভারত স্থল সীমান্ত চুক্তি স্বাক্ষরিত হয়।
+      <br>২. <strong>২০১১ সাল (৬ সেপ্টেম্বর):</strong> ভারতের প্রধানমন্ত্রী ড. মনমোহন সিংয়ের ঢাকা সফরকালে স্থল সীমান্ত প্রটোকল স্বাক্ষরিত হয়।
+      <br>৩. <strong>২০১৫ সাল (৩১ জুলাই মধ্যরাত):</strong> ঐতিহাসিক ছিটমহল বিনিময় কার্যকর হয় (বাংলাদেশের অভ্যন্তরে ভারতের ১১১টি এবং ভারতের অভ্যন্তরে বাংলাদেশের ৫১টি ছিটমহল বিনিময়)।
+    </div>
+
+    <div class="mnemonic-box">
+      <strong>💡 সহজ স্মৃতিকৌশল (জিরো-সাম গেম):</strong> 
+      বাস্তববাদে <strong>Zero-Sum Game</strong> মানে: <strong>একজন যা অর্জন করে (+১), অপরজন ঠিক সমান পরিমাণ হারায় (-১)</strong>। মোট যোগফল শূন্য। এখানে আপস বা উইন-উইন (Win-Win) পরিস্থিতির সুযোগ নেই!
+    </div>
+
+    <!-- Interactive MCQs -->
+    <h2 class="section-title serif-font">
+      📝 বিসিএস প্রিলিমিনারি প্রশ্নাবলি ও ব্যাখ্যা
+      <span class="badge">১৭টি প্রশ্ন</span>
+    </h2>
+
+    <div class="quiz-controls">
+      <div class="quiz-score-badge" id="live-score">
+        🏆 স্কোর: ০ / ১৭
+      </div>
+      <div class="btn-group">
+        <button class="btn" onclick="filterQuestions('all')">সকল প্রশ্ন</button>
+        <button class="btn" onclick="resetQuiz()">পুনরায় পরীক্ষা দিন</button>
+      </div>
+    </div>
+
+    <div id="quiz-container">
+      <!-- MCQs dynamically rendered here -->
+    </div>
+
+    <footer class="chapter-footer">
+      <p>লাইভ এমসিকিউ বিসিএস প্রিলিমিনারি ই-বুক সিরিজ • আন্তর্জাতিক বিষয়াবলি</p>
+    </footer>
+  </div>
+
+  <script>
+    const bcsQuestions = [
+      {
+        id: 1,
+        bcs: "৪৯তম বিসিএস",
+        question: "আশিস নন্দী, শশী থারুর প্রমুখ লেখকের মতে দ্বি-জাতি তত্ত্বের প্রথম প্রবক্তা কোন সংগঠনটি?",
+        options: [
+          "মুসলিম লীগ",
+          "সর্ব ভারতীয় জাতীয় কংগ্রেস",
+          "আর.এস.এস.",
+          "জমিয়তে-ই-হিন্দ"
+        ],
+        correct: 0,
+        explanation: "আশিস নন্দী, শশী থারুর প্রমুখ বিশিষ্ট লেখকের মতে দ্বি-জাতি তত্ত্বের প্রথম প্রবক্তা মুসলিম লীগ। যদিও বিনায়ক দামোদর সাভারকার হিন্দু মহাসভার পক্ষ থেকে পৃথক জাতিসত্তার কথা বলেছিলেন, কিন্তু রাজনৈতিকভাবে পাকিস্তান প্রতিষ্ঠার মূল ভিত্তি হিসেবে মুসলিম লীগই দ্বি-জাতি তত্ত্বকে সামনে নিয়ে আসে। এর পূর্বে ১৮৮৮ সালে স্যার সৈয়দ আহমদ খান মীরাট বক্তৃতায় হিন্দু ও মুসলমানকে দুটি পৃথক জাতি হিসেবে উল্লেখ করেছিলেন।",
+        source: "Shashi Tharoor Website, Ashis Nandy, বাংলাপিডিয়া ও উন্মুক্ত ইতিহাস পাঠ।"
+      },
+      {
+        id: 2,
+        bcs: "৪৬তম বিসিএস",
+        question: "বাংলাদেশ ভারত স্থল সীমান্ত সম্পর্কিত প্রটোকলটি কত সালে স্বাক্ষরিত হয়?",
+        options: [
+          "১৯৭৪",
+          "২০১১",
+          "২০১৩",
+          "২০১৫"
+        ],
+        correct: 1,
+        explanation: "২০১১ সালের ৬ সেপ্টেম্বর ভারতের তৎকালীন প্রধানমন্ত্রী ড. মনমোহন সিংয়ের বাংলাদেশ সফরের সময় বাংলাদেশ ও ভারতের মধ্যে স্থল সীমান্ত প্রটোকল স্বাক্ষরিত হয়। এর মাধ্যমে অচিহ্নিত সীমানা নির্ধারণ ও ছিটমহল সমস্যার সমাধানের রূপরেখা তৈরি হয়। পরবর্তীতে ২০১৫ সালের ৩১ জুলাই ছিটমহল বিনিময় কার্যকর হয় (বাংলাদেশের অভ্যন্তরে ভারতের ১১১টি এবং ভারতের অভ্যন্তরে বাংলাদেশের ৫১টি ছিটমহল)। উল্লেখ্য, ১৯৭৪ সালে মূল মুজিব-ইন্দিরা স্থল সীমান্ত চুক্তি স্বাক্ষরিত হয়েছিল।",
+        source: "বাংলাদেশ-ভারত দ্বিপাক্ষিক সম্পর্ক ও পররাষ্ট্র মন্ত্রণালয় আর্কাইভ।"
+      },
+      {
+        id: 3,
+        bcs: "৪৬তম বিসিএস",
+        question: "আন্তর্জাতিক সম্পর্কের কোন তত্ত্বটি আন্তর্জাতিক প্রতিষ্ঠানের কার্যকরী ভূমিকার বিষয়ে ইতিবাচক ধারণা প্রদান করে?",
+        options: [
+          "উদারবাদ",
+          "বাস্তববাদ",
+          "মার্ক্সবাদ",
+          "কোনোটিই নয়"
+        ],
+        correct: 0,
+        explanation: "আন্তর্জাতিক সম্পর্কের ক্ষেত্রে উদারবাদ (Liberalism) তত্ত্বটি আন্তর্জাতিক প্রতিষ্ঠানের ইতিবাচক ও কার্যকর ভূমিকার ওপর গভীর আস্থা রাখে। উদারবাদে বিশ্বাস করা হয় যে, আন্তর্জাতিক সংস্থাগুলোর (যেমন লিগ অব নেশনস, জাতিসংঘ, বিশ্বব্যাংক, আইএমএফ) মাধ্যমে রাষ্ট্রগুলোর পারস্পরিক সহযোগিতা বাড়ানো এবং সংঘাত-যুদ্ধ এড়ানো সম্ভব। অপরদিকে, বাস্তববাদ রাষ্ট্রগুলোর মধ্যকার প্রতিযোগিতাকে প্রাধান্য দেয়।",
+        source: "আন্তর্জাতিক সম্পর্ক তত্ত্ব ও রাষ্ট্রবিজ্ঞান পাঠ্যপুস্তক।"
+      },
+      {
+        id: 4,
+        bcs: "৪৪তম বিসিএস",
+        question: "'নেকড়েযোদ্ধা কূটনীতি' কোন দেশের সাথে সংশ্লিষ্ট?",
+        options: [
+          "ভিয়েতনাম",
+          "উত্তর কোরিয়া",
+          "চীন",
+          "রাশিয়া"
+        ],
+        correct: 2,
+        explanation: "'নেকড়েযোদ্ধা কূটনীতি' (Wolf Warrior Diplomacy) মূলত চীনের আগ্রাসী ও আত্মবিশ্বাসী কূটনীতির সাথে সংশ্লিষ্ট। চীনের বিখ্যাত সিনেমা 'উলফ ওয়ারিয়র-২' থেকে এই পরিভাষাটি এসেছে। প্রেসিডেন্ট শি জিনপিংয়ের নেতৃত্বে চীনা কূটনীতিকরা আন্তর্জাতিক মহলে নিজ দেশের সার্বভৌমত্ব ও স্বার্থ রক্ষায় দৃঢ় ও আক্রমণাত্মক অবস্থান গ্রহণ করার এই কৌশল অনুসরণ করছেন।",
+        source: "আন্তর্জাতিক ভূ-রাজনীতি ও সমসাময়িক কূটনীতি।"
+      },
+      {
+        id: 5,
+        bcs: "৪৩তম বিসিএস",
+        question: "চীন থেকে ক্রয়কৃত বাংলাদেশ নৌবাহিনীর ডুবোজাহাজ দুটি নিম্নোক্ত কোন শ্রেণির?",
+        options: [
+          "কিলো-ক্লাস",
+          "মিং-ক্লাস",
+          "ডলফিন-ক্লাস",
+          "শ্যাং-ক্লাস"
+        ],
+        correct: 1,
+        explanation: "বাংলাদেশ নৌবাহিনীর জন্য ২০১৬ সালে চীন থেকে সংগৃহীত সাবমেরিন দুটি টাইপ ০৩৫জি (Type 035G) শ্রেণির, যা ন্যাটোর সামরিক কোড অনুযায়ী 'মিং-ক্লাস' (Ming-class) নামে পরিচিত। সাবমেরিন দুটির নাম রাখা হয়েছে বানৌজা 'নবযাত্রা' ও বানৌজা 'জয়যাত্রা'।",
+        source: "বাংলাদেশ নৌবাহিনী ও প্রতিরক্ষা বিষয়ক তথ্য।"
+      },
+      {
+        id: 6,
+        bcs: "৪২তম বিশেষ বিসিএস",
+        question: "বঙ্গবন্ধু কত সালে এবং কোন শহরে জোট নিরপেক্ষ আন্দোলনের শীর্ষ সম্মেলনে অংশগ্রহণ করেন?",
+        options: [
+          "১৯৭২, কায়রো",
+          "১৯৭৪, নয়া দিল্লী",
+          "১৯৭৫, বেলগ্রেড",
+          "১৯৭৩, আলজিয়ার্স"
+        ],
+        correct: 3,
+        explanation: "বঙ্গবন্ধু শেখ মুজিবুর রহমান ১৯৭৩ সালের ৫-৯ সেপ্টেম্বর আলজেরিয়ার রাজধানী আলজিয়ার্সে অনুষ্ঠিত জোট নিরপেক্ষ আন্দোলনের (NAM) ৪র্থ শীর্ষ সম্মেলনে অংশগ্রহণ করেন। এই সম্মেলনেই তিনি বিশ্বকে দুই ভাগে বিভক্ত (শোষক ও শোষিত) উল্লেখ করে শোষিতদের পক্ষে থাকার ঐতিহাসিক ঘোষণা দেন।",
+        source: "বঙ্গবন্ধু ও বাংলাদেশ পররাষ্ট্রনীতি।"
+      },
+      {
+        id: 7,
+        bcs: "৪১তম বিসিএস",
+        question: "ব্রিটিশ ভারতের রাজধানী কলকাতা থেকে দিল্লীতে স্থানান্তরিত হয় কত সালে?",
+        options: [
+          "১৯১২ সালে",
+          "১৯১৩ সালে",
+          "১৯১৪ সালে",
+          "১৯১৫ সালে"
+        ],
+        correct: 0,
+        explanation: "১৯১২ সালে ব্রিটিশ ভারতের রাজধানী কলকাতা থেকে দিল্লিতে স্থানান্তরিত হয়। ১৯১১ সালের ১২ ডিসেম্বর দিল্লির রাজকীয় দরবারে সম্রাট পঞ্চম জর্জ রাজধানী স্থানান্তরের আনুষ্ঠানিক ঘোষণা দেন এবং ১৯১২ সালে প্রশাসনিক কার্যক্রম দিল্লিতে শুরু হয়। পূর্ণাঙ্গ নতুন দিল্লি রাজধানী হিসেবে উদ্বোধন করা হয় ১৯৩১ সালে।",
+        source: "আধুনিক ভারতের ইতিহাস ও ব্রিটিশ ঔপনিবেশিক শাসন।"
+      },
+      {
+        id: 8,
+        bcs: "৩৯তম বিসিএস",
+        question: "জিরোসাম গেম (Zero-Sum Game) আন্তর্জাতিক সম্পর্কে কোন তত্ত্বের সঙ্গে সংশ্লিষ্ট?",
+        options: [
+          "বাস্তববাদ",
+          "মার্ক্সবাদ",
+          "গঠনবাদ",
+          "উদারতাবাদ"
+        ],
+        correct: 0,
+        explanation: "জিরো-সাম গেম (Zero-Sum Game) আন্তর্জাতিক সম্পর্কের বাস্তববাদ (Realism) তত্ত্বের সাথে জড়িত। বাস্তববাদ তত্ত্ব অনুযায়ী, আন্তর্জাতিক পরিমণ্ডলে এক রাষ্ট্রের লাভ মানেই অন্য রাষ্ট্রের সমপরিমাণ ক্ষতি। অর্থাৎ লাভের মোট যোগফল শূন্য। তাই রাষ্ট্রসমূহ অস্তিত্ব টিকিয়ে রাখতে নিরবচ্ছিন্ন শক্তির প্রতিযোগিতায় লিপ্ত থাকে।",
+        source: "আন্তর্জাতিক সম্পর্ক ও গেম থিওরি।"
+      },
+      {
+        id: 9,
+        bcs: "৩৮তম বিসিএস",
+        question: "নৈরাজ্য যে তত্ত্বের মূল উপাদান সেটি হচ্ছে:",
+        options: [
+          "নয়া উদারতাবাদ",
+          "গঠনবাদ",
+          "বাস্তববাদ",
+          "নব্য মার্ক্সবাদ"
+        ],
+        correct: 2,
+        explanation: "আন্তর্জাতিক সম্পর্কে 'নৈরাজ্য' (Anarchy) হলো বাস্তববাদ (Realism) তত্ত্বের প্রধানতম ভিত্তি। বাস্তববাদীদের মতে, আন্তর্জাতিক ব্যবস্থার শীর্ষে কোনো একক কেন্দ্রীয় কর্তৃত্ব বা বিশ্ব সরকার না থাকায় বিশ্বব্যবস্থা জন্মগতভাবেই নৈরাজ্যপূর্ণ। এ অবস্থায় প্রতিটি রাষ্ট্রকে টিকে থাকার জন্য নিজস্ব সামরিক ও জাতীয় শক্তির ওপর নির্ভর করতে হয়।",
+        source: "আন্তর্জাতিক রাজনীতি ও রাষ্ট্রতত্ত্ব।"
+      },
+      {
+        id: 10,
+        bcs: "৩৫তম বিসিএস",
+        question: "দ্বিতীয় বিশ্বযুদ্ধের পর পূর্ব-পশ্চিম দ্বন্দ্বের ফলে সৃষ্ট পূর্বের অর্থনৈতিক জোটটির নাম ছিল-",
+        options: [
+          "কমিন্টার্ন",
+          "কমিনফর্ম",
+          "কমেকন",
+          "কোনোটিই নয়"
+        ],
+        correct: 2,
+        explanation: "দ্বিতীয় বিশ্বযুদ্ধের পর স্নায়ুযুদ্ধের প্রেক্ষাপটে সোভিয়েত ইউনিয়নের নেতৃত্বে পূর্ব ইউরোপের সমাজতান্ত্রিক দেশগুলোর মধ্যে অর্থনৈতিক সহযোগিতার জন্য ১৯৪৯ সালে কমেকন (COMECON: Council for Mutual Economic Assistance) গঠিত হয়। ১৯৯১ সালে সোভিয়েত ইউনিয়নের পতনের পর এটি বিলুপ্ত হয়।",
+        source: "স্নায়ুযুদ্ধের ইতিহাস ও আন্তর্জাতিক জোট।"
+      },
+      {
+        id: 11,
+        bcs: "৩৫তম বিসিএস",
+        question: "বর্তমান বিশ্বে 'নিউ সিল্ক রোড'-এর প্রবক্তা-",
+        options: [
+          "জাপান",
+          "ভারত",
+          "আফগানিস্তান",
+          "চীন"
+        ],
+        correct: 3,
+        explanation: "বর্তমান বিশ্বে 'নিউ সিল্ক রোড' বা 'বেল্ট অ্যান্ড রোড ইনিশিয়েটিভ' (BRI)-এর স্বপ্নদ্রষ্টা ও প্রবক্তা হলো চীন। ২০১৩ সালে চীনের প্রেসিডেন্ট শি জিনপিং এশিয়া, ইউরোপ ও আফ্রিকার মধ্যে বাণিজ্য ও অবকাঠামোগত সংযোগ স্থাপনের জন্য এই ঐতিহাসিক উদ্যোগের প্রস্তাব করেন।",
+        source: "বৈশ্বিক বাণিজ্য ও চীনের পররাষ্ট্রনীতি।"
+      },
+      {
+        id: 12,
+        bcs: "১৭তম বিসিএস",
+        question: "Persona-non-grata শব্দসমষ্টি যে বিশেষ ব্যক্তির ক্ষেত্রে প্রযোজ্য-",
+        options: [
+          "রাজনীতিবিদ",
+          "ক্রীড়াবিদ",
+          "ব্যবসায়ী",
+          "কূটনীতিক"
+        ],
+        correct: 3,
+        explanation: "Persona-non-grata একটি ল্যাটিন শব্দবন্ধ, যার অর্থ 'অবাঞ্ছিত ব্যক্তি' বা 'অগ্রহণযোগ্য ব্যক্তি'। কূটনৈতিক অঙ্গনে যখন কোনো কূটনীতিক স্বাগতিক দেশের নিরাপত্তা বা আইনের পরিপন্থী কাজে লিপ্ত হন, তখন তাকে Persona-non-grata ঘোষণা করে নিজ দেশে ফেরত যাওয়ার নির্দেশ দেওয়া হয়। এটি ১৯৬১ সালের ভিয়েনা কনভেনশনের ৯ নম্বর অনুচ্ছেদে অন্তর্ভুক্ত।",
+        source: "কূটনৈতিক আইন ও ভিয়েনা কনভেনশন।"
+      },
+      {
+        id: 13,
+        bcs: "১৬তম বিসিএস",
+        question: "Straw vote বলতে কী বোঝায়?",
+        options: [
+          "Unofficial poll of public opinion",
+          "Poll based on random representation",
+          "'Yes-no' vote",
+          "Manipulated elections"
+        ],
+        correct: 0,
+        explanation: "Straw vote বা Straw poll হলো কোনো আনুষ্ঠানিক ভোট ছাড়া সাধারণ জনগণের মতামত বা পছন্দ জানার জন্য পরিচালিত অনানুষ্ঠানিক জনমত জরিপ (Unofficial poll of public opinion)। নির্বাচনের প্রাক্কালে কোনো প্রার্থীর জনপ্রিয়তার গতিপ্রকৃতি যাচাই করতে এটি ব্যবহৃত হয়।",
+        source: "পলিটিক্যাল সায়েন্স ও পোলিং মেথডোলজি।"
+      },
+      {
+        id: 14,
+        bcs: "১৪তম বিসিএস",
+        question: "এশিয়ায় যুক্তরাষ্ট্রের পররাষ্ট্রনীতির মূল ভিত্তি কী?",
+        options: [
+          "জাপানকে সাহায্য করা",
+          "ভিয়েতনামকে দমন করা",
+          "'আসিয়ান' জোটকে সমর্থন করা",
+          "দক্ষিণ কোরিয়াকে রক্ষা করা"
+        ],
+        correct: 2,
+        explanation: "দক্ষিণ-পূর্ব এশিয়া অঞ্চলে প্রভাব ও ভারসাম্য রক্ষা করার লক্ষ্যে যুক্তরাষ্ট্রের পররাষ্ট্রনীতির অন্যতম মূল ভিত্তি হলো 'আসিয়ান' (ASEAN) জোটকে দৃঢ় সমর্থন ও সহযোগিতা প্রদান করা। আসিয়ান ১৯৬৭ সালের ৮ আগস্ট ব্যাংকক ঘোষণার মাধ্যমে গঠিত হয়েছিল।",
+        source: "মার্কিন পররাষ্ট্রনীতি ও এশীয় রাজনীতি।"
+      },
+      {
+        id: 15,
+        bcs: "১৪তম বিসিএস",
+        question: "কোনটি দক্ষিণ এশিয়ার রাজনৈতিক ক্ষেত্রে সবচেয়ে কম সংশ্লিষ্ট বিষয়?",
+        options: [
+          "ধর্ম",
+          "জাতি",
+          "সংস্কৃতি",
+          "ভাষা"
+        ],
+        correct: 2,
+        explanation: "দক্ষিণ এশিয়ার রাজনীতিতে প্রত্যক্ষ রাজনৈতিক সংঘাত বা রাষ্ট্র গঠনের ক্ষেত্রে সংস্কৃতি সবচেয়ে কম প্রভাব ফেলেছে। পক্ষান্তরে ধর্ম (১৯৪৭ সালের দেশভাগ), ভাষা (১৯৫২ ভাষা আন্দোলন) এবং জাতিগত সংঘাত এ অঞ্চলের প্রধান রাজনৈতিক ইস্যু হিসেবে কাজ করেছে।",
+        source: "দক্ষিণ এশিয়ার তুলনামূলক রাজনীতি।"
+      },
+      {
+        id: 16,
+        bcs: "১৪তম বিসিএস",
+        question: "১৯৯৭ সালে এশিয়ার কোন রাষ্ট্রে 'এক দেশ, দুই নীতি' চালু হবে?",
+        options: [
+          "লাওস",
+          "ভিয়েতনাম",
+          "মঙ্গোলিয়া",
+          "গণচীন"
+        ],
+        correct: 3,
+        explanation: "১৯৯৭ সালের ১ জুলাই যুক্তরাজ্যের সাথে চুক্তি মোতাবেক দীর্ঘ ১৫৬ বছরের ঔপনিবেশিক শাসন শেষে হংকং চীনের নিয়ন্ত্রণে ফিরে আসে। তখন হংকংয়ের নিজস্ব মুক্তবাজার ব্যবস্থা ও আইন বজায় রাখার জন্য গণচীনে 'এক দেশ, দুই নীতি' (One Country, Two Systems) কাঠামো কার্যকর করা হয়, যা ২০৪৭ সাল পর্যন্ত বহাল থাকবে।",
+        source: "চীন-হংকং সম্পর্ক ও আন্তর্জাতিক চুক্তি।"
+      },
+      {
+        id: 17,
+        bcs: "১২তম বিসিএস",
+        question: "'৫০০ দিনের প্ল্যান' বলতে বোঝায় যে এ সময়ের মধ্যে-",
+        options: [
+          "'ওয়ারশ' জোট ভেঙ্গে দেয়ার প্রকল্প সম্পন্ন করা",
+          "রুমানিয়াতে গণতান্ত্রিক প্রথা প্রচলন সম্পন্ন করা",
+          "সোভিয়েত ইউনিয়নে প্রস্তাবিত বাজার অর্থনীতি প্রচলন সম্পন্ন করা",
+          "পূর্ব জার্মানি হতে সোভিয়েত সৈন্য প্রত্যাহার সম্পন্ন করা"
+        ],
+        correct: 2,
+        explanation: "'৫০০ দিনের প্ল্যান' (500 Days Programme) ছিল ১৯৯০ সালে সোভিয়েত ইউনিয়নের রাষ্ট্রপতি মিখাইল গর্বাচেভের আমলে স্তানিস্লাভ সাতালিনের নেতৃত্বে প্রস্তুতকৃত একটি দ্রুত অর্থনৈতিক সংস্কার পরিকল্পনা। এর উদ্দেশ্য ছিল ৫০০ দিনের মধ্যে সোভিয়েত ইউনিয়নের কেন্দ্রীভূত সমাজতান্ত্রিক অর্থনীতিকে মুক্ত বাজার অর্থনীতিতে রূপান্তরিত করা।",
+        source: "সোভিয়েত ইউনিয়নের অর্থনৈতিক ইতিহাস ও পতন।"
+      }
+    ];
+
+    let userAnswers = {};
+
+    function renderQuizCards() {
+      const container = document.getElementById('quiz-container');
+      container.innerHTML = '';
+
+      bcsQuestions.forEach((q, index) => {
+        const card = document.createElement('div');
+        card.className = 'mcq-card';
+        card.id = `mcq-${q.id}`;
+
+        const optionLetters = ['ক', 'খ', 'গ', 'ঘ'];
+        let optionsHtml = '';
+
+        q.options.forEach((opt, optIdx) => {
+          optionsHtml += `
+            <button class="opt-btn" onclick="selectAnswer(${q.id}, ${optIdx})" id="opt-${q.id}-${optIdx}">
+              <span class="opt-letter">${optionLetters[optIdx]}</span>
+              <span>${opt}</span>
+            </button>
+          `;
+        });
+
+        card.innerHTML = `
+          <div class="mcq-header">
+            <span class="mcq-num">${index + 1}</span>
+            <div class="mcq-question">
+              ${q.question}
+              <span class="bcs-tag">${q.bcs}</span>
+            </div>
+          </div>
+          <div class="options-grid">
+            ${optionsHtml}
+          </div>
+          <div class="explanation-drawer" id="exp-${q.id}">
+            <div class="exp-header">
+              <span>💡 বিস্তারিত ব্যাখ্যা:</span>
+            </div>
+            <p>${q.explanation}</p>
+            <div class="exp-source">উৎস: ${q.source}</div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    function selectAnswer(qId, selectedIdx) {
+      if (userAnswers[qId] !== undefined) return;
+
+      userAnswers[qId] = selectedIdx;
+      const q = bcsQuestions.find(item => item.id === qId);
+      const isCorrect = selectedIdx === q.correct;
+
+      const selectedBtn = document.getElementById(`opt-${qId}-${selectedIdx}`);
+      const correctBtn = document.getElementById(`opt-${qId}-${q.correct}`);
+      const drawer = document.getElementById(`exp-${qId}`);
+
+      if (isCorrect) {
+        selectedBtn.classList.add('correct');
+      } else {
+        selectedBtn.classList.add('wrong');
+        correctBtn.classList.add('correct');
+      }
+
+      q.options.forEach((_, idx) => {
+        const btn = document.getElementById(`opt-${qId}-${idx}`);
+        btn.disabled = true;
+      });
+
+      drawer.classList.add('open');
+      updateScore();
+    }
+
+    function updateScore() {
+      let score = 0;
+      for (let qId in userAnswers) {
+        const q = bcsQuestions.find(item => item.id == qId);
+        if (q && userAnswers[qId] === q.correct) {
+          score++;
+        }
+      }
+      document.getElementById('live-score').innerHTML = `🏆 স্কোর: ${score} / ${bcsQuestions.length}`;
+    }
+
+    function resetQuiz() {
+      userAnswers = {};
+      renderQuizCards();
+      updateScore();
+    }
+
+    function filterQuestions(type) {
+      resetQuiz();
+    }
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = (scrollTop / docHeight) * 100;
+      document.getElementById('reading-progress').style.width = pct + '%';
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderQuizCards();
+    });
+  </script>
+  <script src="nav-component.js"></script>
+</body>
+</html>

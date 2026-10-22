@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<!-- DESIGN PLAN:
+(১) কন্টেন্ট বিশ্লেষণ ও বিন্যাস:
+    - উৎস: Live MCQ আন্তর্জাতিক বিষয়াবলি - খণ্ড ১: বৈশ্বিক ইতিহাস (সভ্যতা, প্রাচীন ও মধ্যযুগ ইত্যাদি) [বইয়ের পৃষ্ঠা ৫৮৫-৫৮৭ / ২-৪.pdf]।
+    - মোট বিসিএস এমসিকিউ: ১১টি (৪৭তম থেকে ১৮তম বিসিএস পর্যন্ত)।
+    - তাত্ত্বিক বিশ্লেষণ: সিন্ধু সভ্যতা, মেসোপটেমিয়া (সুমেরীয়, ব্যাবিলনীয়, অ্যাসিরীয়, ক্যালডীয়), প্রাচীন গ্রিস ও গণতন্ত্র, রোমান আইন ও ১২ বিধি, মায়া সভ্যতা, ইনকা সভ্যতা ও পেনিকো আবিষ্কার, আধুনিক রাষ্ট্রব্যবস্থা (১৬০০-১৮০০)।
+(২) হাই-ইল্ড মডিউল:
+    - বিসিএস প্রশ্ন বিশ্লেষণ গ্রিড (৫০তম থেকে ১০ম বিসিএস)।
+    - সভ্যতার তুলনামূলক ম্যাট্রিক্স (মেসোপটেমিয়ার ৪টি পর্যায় ও প্রধান আবিষ্কার)।
+    - আমেরিকার প্রাচীন ৩ সভ্যতা (মায়া, ইনকা, আজটেক) ও সাম্প্রতিক প্রত্নতাত্ত্বিক আবিষ্কার (পেনিকো)।
+    - মেমোরি ট্রিক বক্স (💡 সহজ স্মৃতিকৌশল) ও সন্দেহ নিরসন তথ্য বক্স।
+    - ইন্টারেক্টিভ কুইজ ইঞ্জিন: ১১টি প্রশ্ন, অপশন শাফলিং/রিসেন্ট চয়েস, ইনস্ট্যান্ট অ্যানসার ড্রয়ার, ফিল্টার ও লাইভ স্কোর।
+(৩) রঙের মেজাজ (International Diplomacy & History Theme):
+    - Primary: #1E3A8A (Deep Royal Navy)
+    - Secondary: #0284C7 (Ocean Blue)
+    - Accent Gold: #D97706 (Historical Bronze/Gold)
+    - Background: #F8FAFC (Clean Paper Off-White)
+    - Card: #FFFFFF, Border: #E2E8F0
+(৪) ফন্ট ও টাইপোগ্রাফি:
+    - 'Noto Serif Bengali' & 'Noto Sans Bengali', rem ইউনিট স্কেলিং, পূর্ণ ডার্ক মোড সাপোর্ট।
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>বৈশ্বিক ইতিহাস (সভ্যতা, প্রাচীন ও মধ্যযুগ ইত্যাদি) - বিসিএস আন্তর্জাতিক বিষয়াবলি</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalpurush&family=Noto+Sans+Bengali:wght@400;600;700;800&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary-color: #1E3A8A;
+  --primary-light: #2563EB;
+  --secondary-color: #0284C7;
+  --accent-gold: #D97706;
+  --accent-soft: #FEF3C7;
+  --bg-main: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --text-main: #0F172A;
+  --text-muted: #475569;
+  --border-color: #E2E8F0;
+  --correct-bg: #DCFCE7;
+  --correct-color: #166534;
+  --wrong-bg: #FEE2E2;
+  --wrong-color: #991B1B;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.03);
+  --base-font-size: 1rem;
+  --radius: 12px;
+}
+
+[data-theme="dark"] {
+  --primary-color: #60A5FA;
+  --primary-light: #93C5FD;
+  --secondary-color: #38BDF8;
+  --accent-gold: #FBBF24;
+  --accent-soft: #2D2214;
+  --bg-main: #0B0F19;
+  --bg-card: #151D2E;
+  --text-main: #F1F5F9;
+  --text-muted: #94A3B8;
+  --border-color: #243048;
+  --correct-bg: #143522;
+  --correct-color: #86EFAC;
+  --wrong-bg: #451A1A;
+  --wrong-color: #FCA5A5;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Noto Sans Bengali', 'Kalpurush', sans-serif;
+  font-size: var(--base-font-size);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.7;
+  overflow-x: clip;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.serif-font {
+  font-family: 'Noto Serif Bengali', serif;
+}
+
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--secondary-color), var(--accent-gold));
+  width: 0%;
+  z-index: 9999;
+  transition: width 0.1s;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 5rem 1rem;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #1E3A8A 0%, #0F172A 100%);
+  color: #FFFFFF;
+  padding: 2.25rem 1.75rem;
+  border-radius: var(--radius);
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "🏛️";
+  position: absolute;
+  right: -10px;
+  bottom: -20px;
+  font-size: 8rem;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.hero-tag {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  padding: 0.25rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #BAE6FD;
+  margin-bottom: 0.75rem;
+}
+
+.hero h1 {
+  font-size: 1.85rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 0.5rem;
+}
+
+.hero p {
+  font-size: 0.975rem;
+  color: #CBD5E1;
+  max-width: 650px;
+}
+
+/* Section Header */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 2.5rem 0 1.25rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.section-title span.badge {
+  font-size: 0.8rem;
+  background: var(--accent-soft);
+  color: var(--accent-gold);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* BCS Analysis Grid */
+.bcs-table-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.bcs-table-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bcs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.6rem;
+}
+
+.bcs-pill {
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.bcs-pill .num {
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.bcs-pill .cnt {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.bcs-pill.has-q {
+  background: #EFF6FF;
+  border-color: #BFDBFE;
+}
+[data-theme="dark"] .bcs-pill.has-q {
+  background: #1E293B;
+  border-color: #3B82F6;
+}
+
+/* Theory Cards & Summary Grid */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.info-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.info-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.info-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.info-card-icon {
+  font-size: 1.35rem;
+}
+
+.info-card h4 {
+  font-size: 1.05rem;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.info-card ul {
+  list-style: none;
+  font-size: 0.925rem;
+  color: var(--text-muted);
+}
+
+.info-card ul li {
+  margin-bottom: 0.4rem;
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.info-card ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--accent-gold);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* Responsive Table */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  margin-bottom: 1.5rem;
+  background: var(--bg-card);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.925rem;
+  text-align: left;
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+th {
+  background: #F1F5F9;
+  color: var(--primary-color);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] th {
+  background: #1E293B;
+  color: var(--secondary-color);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* Fact-check & Mnemonic Boxes */
+.mnemonic-box {
+  background: #FFFBEB;
+  border-left: 4px solid var(--accent-gold);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  font-size: 0.925rem;
+  color: #78350F;
+}
+
+[data-theme="dark"] .mnemonic-box {
+  background: #272015;
+  color: #FDE68A;
+}
+
+.fact-check-box {
+  background: #EFF6FF;
+  border-left: 4px solid var(--primary-light);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  font-size: 0.925rem;
+  color: #1E3A8A;
+}
+
+[data-theme="dark"] .fact-check-box {
+  background: #172554;
+  color: #BFDBFE;
+}
+
+/* Interactive Quiz Section */
+.quiz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--bg-card);
+  padding: 0.9rem 1.25rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.quiz-score-badge {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.btn-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn {
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  background: var(--border-color);
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: #FFFFFF;
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background: var(--primary-light);
+}
+
+/* MCQ Card */
+.mcq-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.mcq-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.mcq-num {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--primary-color);
+  background: #EEF2FF;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  line-height: 1.3;
+}
+[data-theme="dark"] .mcq-num {
+  background: #1E293B;
+  color: var(--secondary-color);
+}
+
+.mcq-question {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-main);
+  flex: 1;
+}
+
+.bcs-tag {
+  font-size: 0.775rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  background: var(--accent-soft);
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  display: inline-block;
+  margin-left: 0.4rem;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 600px) {
+  .options-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.opt-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  padding: 0.65rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--text-main);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s;
+}
+
+.opt-btn:hover:not(:disabled) {
+  background: #E2E8F0;
+  border-color: #CBD5E1;
+}
+[data-theme="dark"] .opt-btn:hover:not(:disabled) {
+  background: #1E293B;
+  border-color: #334155;
+}
+
+.opt-letter {
+  font-weight: 700;
+  color: var(--text-muted);
+  width: 1.3rem;
+}
+
+.opt-btn.correct {
+  background-color: var(--correct-bg) !important;
+  color: var(--correct-color) !important;
+  border-color: #86EFAC !important;
+  font-weight: 700;
+}
+
+.opt-btn.wrong {
+  background-color: var(--wrong-bg) !important;
+  color: var(--wrong-color) !important;
+  border-color: #FCA5A5 !important;
+}
+
+/* MCQ Drawer / Explanation */
+.explanation-drawer {
+  display: none;
+  background: var(--bg-main);
+  border: 1px dashed var(--border-color);
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+  margin-top: 0.75rem;
+  font-size: 0.92rem;
+  color: var(--text-main);
+  line-height: 1.65;
+}
+
+.explanation-drawer.open {
+  display: block;
+}
+
+.exp-header {
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.exp-source {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Footer info */
+.chapter-footer {
+  text-align: center;
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+</style>
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <div class="container">
+    <!-- Hero Header -->
+    <header class="hero">
+      <span class="hero-tag">আন্তর্জাতিক বিষয়াবলি • অধ্যায় ০১</span>
+      <h1 class="serif-font">বৈশ্বিক ইতিহাস (সভ্যতা, প্রাচীন ও মধ্যযুগ ইত্যাদি)</h1>
+      <p>সিন্ধু, মেসোপটেমিয়া, মিশরীয়, গ্রিক ও রোমান সভ্যতা, আমেরিকার মায়া ও ইনকা সভ্যতা এবং আধুনিক রাষ্ট্রব্যবস্থার বিসিএস প্রিলিমিনারি বিশ্লেষণ ও পূর্ণাঙ্গ সমাধান।</p>
+    </header>
+
+    <!-- BCS Analysis Breakdown -->
+    <section class="bcs-table-card">
+      <h3 class="serif-font">📊 বিসিএস প্রিলিমিনারি প্রশ্ন বিশ্লেষণ (৫০তম - ১০ম)</h3>
+      <div class="bcs-grid">
+        <div class="bcs-pill"><div class="num">৫০তম</div><div class="cnt">০টি</div></div>
+        <div class="bcs-pill"><div class="num">৪৯তম</div><div class="cnt">০টি</div></div>
+        <div class="bcs-pill"><div class="num">৪৮তম</div><div class="cnt">০টি</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪৭তম</div><div class="cnt">২টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪৬তম</div><div class="cnt">১টি প্রশ্ন</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪৫তম</div><div class="cnt">১টি প্রশ্ন</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪৪তম</div><div class="cnt">১টি প্রশ্ন</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪৩তম</div><div class="cnt">১টি প্রশ্ন</div></div>
+        <div class="bcs-pill"><div class="num">৪২তম</div><div class="cnt">০টি</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪১তম</div><div class="cnt">১টি প্রশ্ন</div></div>
+        <div class="bcs-pill"><div class="num">৪০তম</div><div class="cnt">০টি</div></div>
+        <div class="bcs-pill has-q"><div class="num">৩৯তম</div><div class="cnt">৩টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill"><div class="num">৩৮তম</div><div class="cnt">০টি</div></div>
+        <div class="bcs-pill"><div class="num">৩৭তম</div><div class="cnt">০টি</div></div>
+        <div class="bcs-pill"><div class="num">৩৬তম</div><div class="cnt">০টি</div></div>
+        <div class="bcs-pill"><div class="num">৩৫তম</div><div class="cnt">০টি</div></div>
+        <div class="bcs-pill has-q"><div class="num">১০ম-৩৪তম</div><div class="cnt">২টি প্রশ্ন</div></div>
+      </div>
+    </section>
+
+    <!-- Core High-Yield Summary -->
+    <h2 class="section-title serif-font">
+      🏛️ গুরুত্বপূর্ণ প্রাচীন সভ্যতা ও বৈশিষ্ট্য
+      <span class="badge">হাই-ইল্ড নোটস</span>
+    </h2>
+
+    <div class="summary-grid">
+      <div class="info-card">
+        <div class="info-card-header">
+          <span class="info-card-icon">🌊</span>
+          <h4>মেসোপটেমীয় সভ্যতা</h4>
+        </div>
+        <ul>
+          <li><strong>অবস্থান:</strong> টাইগ্রিস (দজলা) ও ইউফ্রেটিস (ফোরাত) নদীর অববাহিকায় (প্রধানত বর্তমান ইরাক)।</li>
+          <li><strong>অর্থ:</strong> গ্রিক শব্দ 'মেসোস' (মধ্যবর্তী) ও 'পটামোস' (নদী) = দুই নদীর মধ্যবর্তী অঞ্চল।</li>
+          <li><strong>মর্যাদা:</strong> বিশ্বের সবচেয়ে প্রাচীন নদীমাতৃক সভ্যতা।</li>
+          <li><strong>পর্যায়:</strong> ৪টি প্রধান ধারা (সুমেরীয়, ব্যাবিলনীয়, অ্যাসিরীয় ও ক্যালডীয়)।</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-header">
+          <span class="info-card-icon">📐</span>
+          <h4>সিন্ধু সভ্যতা</h4>
+        </div>
+        <ul>
+          <li><strong>অবস্থান:</strong> পাকিস্তান ও ভারতের সিন্ধু নদের উপত্যকায় (মহেঞ্জোদারো ও হরপ্পা)।</li>
+          <li><strong>আবিष्कार:</strong> ওজন পরিমাপ ও নির্দিষ্ট ঘর কাটা স্কেল (দৈর্ঘ্য পরিমাপ)।</li>
+          <li><strong>বৈশিষ্ট্য:</strong> নিখুঁত নগর পরিকল্পনা, পোড়ামাটির ইটের বাড়ি, পয়ঃনিষ্কাশন ড্রেন।</li>
+          <li><strong>বাটখারা:</strong> চারকোণা ও গোল পাথর দিয়ে সূক্ষ্ম পরিমাপের বাটখারা তৈরি হতো।</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-header">
+          <span class="info-card-icon">⚖️</span>
+          <h4>গ্রিক ও রোমান সভ্যতা</h4>
+        </div>
+        <ul>
+          <li><strong>প্রাচীন গ্রিস:</strong> গণতন্ত্রের আদি সূতিকাগার (এথেন্স নগররাষ্ট্র, খ্রিষ্টপূর্ব ৬ষ্ঠ শতক)।</li>
+          <li><strong>রোমান সভ্যতা:</strong> ইতালির টাইবার নদীর তীরে প্রতিষ্ঠিত (প্রতিষ্ঠাতা রোমিউলাস)।</li>
+          <li><strong>১২ বিধি (Twelve Tables):</strong> রোমান আইনের মূল ভিত্তি (খ্রিষ্টপূর্ব ৪৫০ অব্দে প্রণীত)।</li>
+          <li><strong>অবদান:</strong> বিশ্ব আইন ব্যবস্থা, সামরিক কৌশল ও বাস্তু প্রকৌশল বিদ্যা।</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-header">
+          <span class="info-card-icon">🌽</span>
+          <h4>আমেরিকার প্রাচীন সভ্যতা</h4>
+        </div>
+        <ul>
+          <li><strong>মায়া সভ্যতা:</strong> মধ্য আমেরিকা (মেক্সিকো, গুয়াতেমালা, বেলিজ, হন্ডুরাস)। প্রধান কেন্দ্র চেচেন ইত্জা।</li>
+          <li><strong>ইনকা সভ্যতা:</strong> দক্ষিণ আমেরিকার আন্দিজ পর্বতমালা (পেরু)। প্রধান কেন্দ্র মাচুপিচু।</li>
+          <li><strong>পেনিকো (Penico):</strong> পেরুতে আবিষ্কৃত ৩৫০০ বছরের পুরোনো বাণিজ্যিক শহর (২০২৫ সালে উন্মোচিত)।</li>
+          <li><strong>আজটেক সভ্যতা:</strong> মেক্সিকো উপত্যকায় গড়ে ওঠা সামরিক ও কৃষিভিত্তিক সভ্যতা।</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Comparative Table: Mesopotamian Phases -->
+    <h3 class="serif-font" style="margin-bottom: 0.75rem; color: var(--primary-color);">📊 মেসোপটেমীয় সভ্যতার ৪টি পর্যায় ও অমর অবদান</h3>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>সভ্যতার নাম</th>
+            <th>মূল পরিচিতি</th>
+            <th>মানব ইতিহাসে কালজয়ী অবদান</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>সুমেরীয় সভ্যতা</strong></td>
+            <td>মেসোপটেমিয়ার প্রাচীনতম পর্যায়</td>
+            <td>চাকা আবিষ্কার, জলঘড়ি, চন্দ্র পঞ্জিকা ও কিউনিফর্ম (কিলক লিপি)।</td>
+          </tr>
+          <tr>
+            <td><strong>ব্যাবিলনীয় সভ্যতা</strong></td>
+            <td>রাজা হাম্মুরাবির শাসনকাল</td>
+            <td>হাম্মুরাবি আইন (বিশ্বের প্রথম লিখিত আইন সংহতি), বার্ষিক পঞ্জিকা।</td>
+          </tr>
+          <tr>
+            <td><strong>অ্যাসিরীয় সভ্যতা</strong></td>
+            <td>যুদ্ধংদেহী ও প্রযুক্তিমনস্ক</td>
+            <td>বৃত্তকে ৩৬০° কোণে ভাগ, সামরিক লৌহ অস্ত্র ও রণকৌশল তৈরি।</td>
+          </tr>
+          <tr>
+            <td><strong>ক্যালডীয় সভ্যতা</strong></td>
+            <td>নব্য ব্যাবিলনীয় পর্যায় (নেবুচাদনেজার)</td>
+            <td>সপ্তাহকে ৭ দিনে ভাগ, দিনকে ১২ জোড়া (২৪ ঘণ্টা) ভাগে ভাগ, শূন্য উদ্যান।</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Disambiguation & Memory Tricks -->
+    <div class="mnemonic-box">
+      <strong>💡 সহজ স্মৃতিকৌশল (মেসোপটেমিয়ার ক্রম):</strong> 
+      <strong>"সু-ব্যা-অ্যা-ক্যা"</strong> → <strong>সু</strong>মেরীয় (চাকা/লিপি) ➔ <strong>ব্যা</strong>বিলনীয় (লিখিত আইন) ➔ <strong>অ্যা</strong>সিরীয় (৩৬০° বৃত্ত) ➔ <strong>ক্যা</strong>লডীয় (৭ দিনে সপ্তাহ)।
+    </div>
+
+    <div class="fact-check-box">
+      <strong>💡 সন্দেহ নিরসন ও সঠিক তথ্য (আমেরিকার তিন সভ্যতা):</strong>
+      <br>১. <strong>মায়া:</strong> মধ্য আমেরিকা (মেক্সিকোর ইউকাতান উপদ্বীপ ও গুয়াতেমালা)।
+      <br>২. <strong>আজটেক:</strong> উত্তর/মধ্য আমেরিকা (মূল মেক্সিকো অঞ্চল)।
+      <br>৩. <strong>ইনকা:</strong> দক্ষিণ আমেরিকা (পেরু, আন্দিজ পর্বতমালা, মাচুপিচু)।
+      <br>৪. <strong>পেনিকো (Penico):</strong> পেরুর রাজধানী লিমার উত্তরে কারাল সংস্কৃতি ঘেঁষে আবিষ্কৃত ৩৫০০ বছরের প্রাচীন বাণিজ্য কেন্দ্র।
+    </div>
+
+    <!-- Interactive MCQs -->
+    <h2 class="section-title serif-font">
+      📝 বিসিএস প্রিলিমিনারি প্রশ্নাবলি ও ব্যাখ্যা
+      <span class="badge">১১টি প্রশ্ন</span>
+    </h2>
+
+    <div class="quiz-controls">
+      <div class="quiz-score-badge" id="live-score">
+        🏆 স্কোর: ০ / ১১
+      </div>
+      <div class="btn-group">
+        <button class="btn" onclick="filterQuestions('all')">সকল প্রশ্ন</button>
+        <button class="btn" onclick="resetQuiz()">পুনরায় পরীক্ষা দিন</button>
+      </div>
+    </div>
+
+    <div id="quiz-container">
+      <!-- MCQs will be dynamically rendered here -->
+    </div>
+
+    <footer class="chapter-footer">
+      <p>লাইভ এমসিকিউ বিসিএস প্রিলিমিনারি ই-বুক সিরিজ • আন্তর্জাতিক বিষয়াবলি</p>
+    </footer>
+  </div>
+
+  <script>
+    const bcsQuestions = [
+      {
+        id: 1,
+        bcs: "৪৭তম বিসিএস",
+        question: "নিচের কোন সভ্যতার সময়কালে ওজন পরিমাপ ও দৈর্ঘ্য মাপার পদ্ধতি আবিষ্কার হয়েছিল?",
+        options: [
+          "সিন্ধু সভ্যতা",
+          "মিশরীয় সভ্যতা",
+          "গ্রিক সভ্যতা",
+          "অ্যাসোরীয় সভ্যতা"
+        ],
+        correct: 0,
+        explanation: "সিন্ধু সভ্যতার সময়কালে ওজন পরিমাপ ও দৈর্ঘ্য মাপার পদ্ধতি আবিষ্কৃত হয়েছিল। সিন্ধু নদের অববাহিকায় গড়ে ওঠা মহেঞ্জোদারো ও হরপ্পার অধিবাসীরা চারকোণা ও গোলাকার নিখুঁত বাটখারা এবং নির্দিষ্ট দাগ কাটা স্কেলের মাধ্যমে দৈর্ঘ্য ও ওজন পরিমাপের পদ্ধতি উদ্ভাবন করেছিল।",
+        source: "বাংলাদেশ ইতিহাস ও বিশ্বসভ্যতা (এসএসসি প্রোগ্রাম), উন্মুক্ত বিশ্ববিদ্যালয় ও ব্রিটানিকা।"
+      },
+      {
+        id: 2,
+        bcs: "৪৭তম বিসিএস",
+        question: "সম্প্রতি পেরুতে খুঁজে পাওয়া ৩৫০০ বছরের পুরোনো শহরের নাম কী?",
+        options: [
+          "মাচুপিচু",
+          "কোরাল",
+          "পেনিকো",
+          "কুস্কো"
+        ],
+        correct: 2,
+        explanation: "সম্প্রতি পেরুতে প্রত্নতাত্ত্বিকদের দীর্ঘ গবেষণায় খুঁজে পাওয়া ৩৫০০ বছরের পুরোনো প্রাচীন শহরের নাম 'পেনিকো' (Penico)। এটি পেরুর রাজধানী লিমার উত্তরে হুয়াওরা প্রদেশে কারাল সংস্কৃতির ধারায় প্রায় খ্রিষ্টপূর্ব ১৮০০ অব্দে গড়ে উঠেছিল। পেরুর অন্যান্য বিখ্যাত প্রত্নতাত্ত্বিক নিদর্শন হলো ইনকাদের মাচু পিচু ও নাজকা রেখা।",
+        source: "প্রথম আলো ও বিবিসি আন্তর্জাতিক সংবাদ।"
+      },
+      {
+        id: 3,
+        bcs: "৪৬তম বিসিএস",
+        question: "'বার বিধি' (The Twelve Tables) কী?",
+        options: [
+          "রোমান আইনের ভিত্তি",
+          "স্থাপত্যের ১২টি নির্দেশনা",
+          "ফুটবল খেলার নিয়মাবলি",
+          "স্থানীয়/দেশি খেলা"
+        ],
+        correct: 0,
+        explanation: "'বার বিধি' (The Twelve Tables) হলো প্রাচীন রোমান আইনের মূল ভিত্তি। খ্রিষ্টপূর্ব ৪৫০ অব্দে রোমান সমাজে সমতা ও ন্যায়বিচার প্রতিষ্ঠার উদ্দেশ্যে ১২টি ব্রোঞ্জ ফলকে লিখিত এই আইন সংহতি প্রণীত হয়, যা পরবর্তীকালে সমগ্র পশ্চিমা আধুনিক আইনের ভিত্তিমূল রচনা করে।",
+        source: "ইতিহাস ও সমাজবিজ্ঞান, স্নাতক ও উন্মুক্ত পাঠ্য।"
+      },
+      {
+        id: 4,
+        bcs: "৪৫তম/২৪তম বিসিএস",
+        question: "কোনটি প্রাচীন সভ্যতা?",
+        options: [
+          "গ্রিস",
+          "মেসোপটেমিয়া",
+          "রোম",
+          "সিন্ধু"
+        ],
+        correct: 1,
+        explanation: "মেসোপটেমিয়া হলো পৃথিবীর সবচেয়ে প্রাচীন নদীমাতৃক সভ্যতা। গ্রিক শব্দ 'মেসোপটেমিয়া' অর্থ 'দুই নদীর মধ্যবর্তী দেশ'—যা বর্তমান ইরাকের টাইগ্রিস ও ইউফ্রেটিস নদীর তীরে গড়ে উঠেছিল। এর অন্তর্ভুক্ত ছিল সুমেরীয়, ব্যাবিলনীয়, অ্যাসিরীয় ও ক্যালডীয় সভ্যতা।",
+        source: "বিশ্বসভ্যতার ইতিহাস ও ব্রিটানিকা এনসাইক্লোপিডিয়া।"
+      },
+      {
+        id: 5,
+        bcs: "৪৪তম বিসিএস",
+        question: "গণতন্ত্রের ধারণা উৎসারিত হয় প্রথম কোন দেশে?",
+        options: [
+          "যুক্তরাষ্ট্র",
+          "প্রাচীন গ্রিস",
+          "প্রাচীন রোম",
+          "প্রাচীন ভারত"
+        ],
+        correct: 1,
+        explanation: "খ্রিষ্টপূর্ব ৬ষ্ঠ শতাব্দীর শুরুতে প্রাচীন গ্রিসের এথেন্স নগররাষ্ট্রে সর্বপ্রথম প্রত্যক্ষ গণতন্ত্রের সূচনা ঘটে। সাধারণ জনগণের ভোটাধিকার প্রয়োগের মাধ্যমে সরকার পরিচালনার এই ধারণাই পরবর্তীতে আধুনিক প্রতিনিধিত্বমূলক গণতন্ত্রের মূল উৎসে পরিণত হয়।",
+        source: "রাষ্ট্রবিজ্ঞান ও প্রাচীন সমাজতত্ত্ব।"
+      },
+      {
+        id: 6,
+        bcs: "৪৩তম বিসিএস",
+        question: "মায়া সভ্যতাটি আবিষ্কৃত হয়-",
+        options: [
+          "উত্তর আমেরিকায়",
+          "দক্ষিণ আমেরিকায়",
+          "মধ্য আফ্রিকায়",
+          "মধ্য আমেরিকায়"
+        ],
+        correct: 3,
+        explanation: "মায়া সভ্যতা মধ্য আমেরিকায় আবিষ্কৃত হয়েছিল। বর্তমান মেক্সিকোর দক্ষিণাঞ্চল, গুয়াতেমালা, বেলিজ, এল সালভাদর ও হন্ডুরাস অঞ্চলে আনুমানিক খ্রিষ্টপূর্ব ১৮০০ অব্দে এই সমৃদ্ধ পাথুরে স্থাপত্য, জ্যোতির্বিদ্যা ও লিপির অধিকারী সভ্যতার বিকাশ ঘটেছিল। প্রধান নগর ছিল চেচেন ইত্জা।",
+        source: "আমেরিকান আর্কিওলজিক্যাল স্টাডিজ ও এনসাইক্লোপিডিয়া।"
+      },
+      {
+        id: 7,
+        bcs: "৪১তম বিসিএস",
+        question: "ইনকা সভ্যতা কোন অঞ্চলে বিরাজমান ছিল?",
+        options: [
+          "দক্ষিণ আমেরিকা",
+          "আফ্রিকা",
+          "মধ্যপ্রাচ্য",
+          "ইউরোপ"
+        ],
+        correct: 0,
+        explanation: "ইনকা সভ্যতা দক্ষিণ আমেরিকার পশ্চিম উপকূল বরাবর আন্দিজ পর্বতমালায় (বর্তমান পেরু, চিলি ও ইকুয়েডর) গড়ে উঠেছিল। ১২০০ খ্রিস্টাব্দ থেকে ষোড়শ শতকে স্প্যানিশ বিজেতা ফ্রান্সিসকো পিজারোর আক্রমণে ধ্বংস হওয়ার পূর্ব পর্যন্ত রেড ইন্ডিয়ানদের এই উন্নত স্থাপত্য ও কৃষি ব্যবস্থা টিকে ছিল। প্রধান নিদর্শন মাচুপিচু।",
+        source: "দক্ষিণ আমেরিকার ইতিহাস।"
+      },
+      {
+        id: 8,
+        bcs: "৩৯তম বিসিএস",
+        question: "মেসোপটেমীয় সভ্যতা গড়ে উঠেছিল কোথায়?",
+        options: [
+          "হোয়াংহো নদীর তীরে",
+          "ইয়াংসিকিয়াং নদীর তীরে",
+          "নীলনদের তীরে",
+          "টাইগ্রিস ও ইউফ্রেটিস নদীর তীরে"
+        ],
+        correct: 3,
+        explanation: "মেসোপটেমীয় সভ্যতা টাইগ্রিস (দজলা) ও ইউফ্রেটিস (ফোরাত) নদীর মধ্যবর্তী অববাহিকায় গড়ে উঠেছিল। অপরদিকে, হোয়াংহো ও ইয়াংসিকিয়াং নদীর তীরে চীনা সভ্যতা এবং নীলনদের তীরে প্রাচীন মিশরীয় সভ্যতা গড়ে উঠেছিল।",
+        source: "মাধ্যমিক ও উচ্চ মাধ্যমিক ইতিহাস পাঠ্যপুস্তক।"
+      },
+      {
+        id: 9,
+        bcs: "৩৯তম বিসিএস",
+        question: "আধুনিক রাষ্ট্রব্যবস্থা উদ্ভবের সময়কাল কোনটি?",
+        options: [
+          "প্রাচীন গ্রিস সময়কাল",
+          "প্রথম বিশ্বযুদ্ধ পরবর্তীকাল",
+          "১৬০০-১৮০০ সাল",
+          "প্রাচীন রোম শাসনকাল"
+        ],
+        correct: 2,
+        explanation: "আধুনিক সার্বভৌম জাতিরাষ্ট্র ব্যবস্থার উদ্ভব মূলত ১৬০০ থেকে ১৮০০ সালের মধ্যে ঘটে। বিশেষত ১৬৪৮ সালের 'ওয়েস্টফেলিয়া শান্তি চুক্তি' (Treaty of Westphalia) এবং ইউরোপের নবজাগরণের তাত্ত্বিকদের (ম্যাকিয়াভেলি, টমাস হবস, জন লক) চিন্তার ফসল হিসেবে সামন্তপ্রথার বিলুপ্তি ঘটে আধুনিক সার্বভৌমিক রাষ্ট্রের সূচনা হয়।",
+        source: "আন্তর্জাতিক সম্পর্ক ও রাষ্ট্রবিজ্ঞান তত্ত্ব।"
+      },
+      {
+        id: 10,
+        bcs: "৩৯তম বিসিএস",
+        question: "মায়া সভ্যতা বিশ্বের কোন অঞ্চলে বিরাজমান ছিল?",
+        options: [
+          "পূর্ব এশিয়া",
+          "মধ্য আমেরিকা",
+          "মধ্যপ্রাচ্য",
+          "পূর্ব আফ্রিকা"
+        ],
+        correct: 1,
+        explanation: "মায়া সভ্যতা মধ্য আমেরিকায় অবস্থিত ছিল। মেক্সিকোর ইউকাতান উপদ্বীপ, গুয়াতেমালা এবং বেলিজ অঞ্চলে এই সভ্যতা বিকাশ লাভ করেছিল।",
+        source: "বিসিএস পূর্ববর্তী প্রশ্ন সমাধান ও বিশ্ব ইতিহাস।"
+      },
+      {
+        id: 11,
+        bcs: "১৮তম বিসিএস",
+        question: "'মেসোপটেমিয়া' এলাকার বেশিরভাগ অংশ বর্তমানে কোন দেশ?",
+        options: [
+          "ইরাক",
+          "ইরান",
+          "তুরস্ক",
+          "সিরিয়া"
+        ],
+        correct: 0,
+        explanation: "প্রাচীন মেসোপটেমিয়া অঞ্চলের সিংহভাগ বর্তমান ইরাকের ভূখণ্ডে অবস্থিত। এছাড়া এর কিছু পার্শ্ববর্তী অংশ আধুনিক সিরিয়া, তুরস্ক ও কুয়েতের মধ্যে বিস্তৃত ছিল।",
+        source: "ভূগোল ও বৈশ্বিক ইতিহাস।"
+      }
+    ];
+
+    let userAnswers = {};
+
+    function renderQuizCards() {
+      const container = document.getElementById('quiz-container');
+      container.innerHTML = '';
+
+      bcsQuestions.forEach((q, index) => {
+        const card = document.createElement('div');
+        card.className = 'mcq-card';
+        card.id = `mcq-${q.id}`;
+
+        const optionLetters = ['ক', 'খ', 'গ', 'ঘ'];
+        let optionsHtml = '';
+
+        q.options.forEach((opt, optIdx) => {
+          optionsHtml += `
+            <button class="opt-btn" onclick="selectAnswer(${q.id}, ${optIdx})" id="opt-${q.id}-${optIdx}">
+              <span class="opt-letter">${optionLetters[optIdx]}</span>
+              <span>${opt}</span>
+            </button>
+          `;
+        });
+
+        card.innerHTML = `
+          <div class="mcq-header">
+            <span class="mcq-num">${index + 1}</span>
+            <div class="mcq-question">
+              ${q.question}
+              <span class="bcs-tag">${q.bcs}</span>
+            </div>
+          </div>
+          <div class="options-grid">
+            ${optionsHtml}
+          </div>
+          <div class="explanation-drawer" id="exp-${q.id}">
+            <div class="exp-header">
+              <span>💡 বিস্তারিত ব্যাখ্যা:</span>
+            </div>
+            <p>${q.explanation}</p>
+            <div class="exp-source">উৎস: ${q.source}</div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    function selectAnswer(qId, selectedIdx) {
+      if (userAnswers[qId] !== undefined) return;
+
+      userAnswers[qId] = selectedIdx;
+      const q = bcsQuestions.find(item => item.id === qId);
+      const isCorrect = selectedIdx === q.correct;
+
+      const selectedBtn = document.getElementById(`opt-${qId}-${selectedIdx}`);
+      const correctBtn = document.getElementById(`opt-${qId}-${q.correct}`);
+      const drawer = document.getElementById(`exp-${qId}`);
+
+      if (isCorrect) {
+        selectedBtn.classList.add('correct');
+      } else {
+        selectedBtn.classList.add('wrong');
+        correctBtn.classList.add('correct');
+      }
+
+      q.options.forEach((_, idx) => {
+        const btn = document.getElementById(`opt-${qId}-${idx}`);
+        btn.disabled = true;
+      });
+
+      drawer.classList.add('open');
+      updateScore();
+    }
+
+    function updateScore() {
+      let score = 0;
+      for (let qId in userAnswers) {
+        const q = bcsQuestions.find(item => item.id == qId);
+        if (q && userAnswers[qId] === q.correct) {
+          score++;
+        }
+      }
+      document.getElementById('live-score').innerHTML = `🏆 স্কোর: ${score} / ${bcsQuestions.length}`;
+    }
+
+    function resetQuiz() {
+      userAnswers = {};
+      renderQuizCards();
+      updateScore();
+    }
+
+    function filterQuestions(type) {
+      resetQuiz();
+    }
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = (scrollTop / docHeight) * 100;
+      document.getElementById('reading-progress').style.width = pct + '%';
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderQuizCards();
+    });
+  </script>
+  <script src="nav-component.js"></script>
+</body>
+</html>
