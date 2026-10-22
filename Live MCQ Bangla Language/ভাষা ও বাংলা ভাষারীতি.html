@@ -1,1093 +1,925 @@
-<!-- DESIGN PLAN:
-1. বিষয়ের ধরন: বাংলা ভাষা ও ভাষারীতি (ভাষা ও ব্যাকরণের উদ্ভব, ইন্দো-ইউরোপীয় শাখা, সাধু ও চলিত রীতি, উপভাষা, লিপির ইতিহাস এবং বিসিএস প্রশ্নাবলি)।
-2. গুরুত্বপূর্ণ বিষয় ও সূক্ষ্ম পার্থক্য:
-   - ব্যাকরণ ইতিহাস: ১৭৪৩ সালে মনোএল দা আসসুম্পসাঁউ কর্তৃক পর্তুগিজ ভাষায় প্রথম বাংলা ব্যাকরণ; ১৭৭৮ সালে হ্যালহেড কর্তৃক ইংরেজি ভাষায় প্রথম পূর্ণাঙ্গ বাংলা ব্যাকরণ; ১৮৩৩ সালে রামমোহন রায় কর্তৃক বাংলা ভাষায় রচিত প্রথম 'গৌড়ীয় ব্যাকরণ'।
-   - ভাষার উৎপত্তি বিতর্ক: ড. মুহম্মদ শহীদুল্লাহর মতে গৌড়ী প্রাকৃত ও গৌড় অপভ্রংশ থেকে (সপ্তম শতক, ৬৫০ খ্রি.); ড. সুনীতিকুমার চট্টোপাধ্যায়ের মতে মাগধী প্রাকৃত ও মাগধী অপভ্রংশ থেকে (দশম শতক, ৯৫০ খ্রি.)।
-   - কেন্তুম বনাম শতম: কেন্তুমের এশীয় শাখা ২টি (হিত্তিক ও তোখারিক/তুখারিক); শতম শাখার অন্তর্ভুক্ত ভারতীয় আর্য ভাষা থেকে বাংলার জন্ম।
-   - উপভাষা: বরেন্দ্র (উত্তর-পশ্চিম), রাঢ় (পশ্চিমবঙ্গ), বঙ্গালী (মধ্য ও দক্ষিণ বাংলা - বরিশাল, ঢাকা ইত্যাদি), কামরূপী (রংপুর, আসাম, উত্তরবঙ্গ), ঝাড়খণ্ডী (মানভূম, পুরুলিয়া)।
-   - সাধু বনাম চলিত: সাধু ভাষায় ক্রিয়াপদ ও সর্বনাম পদ দীর্ঘতর ও হ-যুক্ত, নাটকের সংলাপে অনুপযোগী; চলিত রীতিতে সংক্ষিপ্ত ও পরিবর্তনশীল।
-   - লিপির ইতিহাস: ব্রাহ্মী লিপি -> পূর্ব-ভারতীয় শাখা -> কুটিল লিপি -> বাংলা লিপি (বর্ণ সংখ্যা ৫০টি: স্বরবর্ণ ১১, ব্যঞ্জনবর্ণ ৩৯)।
-3. বিশেষ মডিউল:
-   - বিসিএস প্রশ্ন পরিসংখ্যান ছক (৫০তম থেকে ১০ম বিসিএস)।
-   - ব্যাকরণ ও ভাষা বিবর্তনের কালক্রমিক মাইলফলক কার্ড।
-   - ইন্দো-ইউরোপীয় শাখা ও উপভাষার তুলনামূলক ম্যাট্রিক্স।
-   - গুরুচণ্ডালী দোষ নিরসন ও শুদ্ধ রূপের সারণি।
-   - ১৮টি আসল বিসিএস প্রশ্নের পূর্ণাঙ্গ লাইভ কুইজ ইঞ্জিন।
-4. রঙের মেজাজ: ভাষা ও ব্যাকরণের একাডেমিক মেজাজে রয়্যাল টিল ও পান্না সবুজ (#0f766e, #115e59), ওয়ার্ম পার্চমেন্ট ব্যাকগ্রাউন্ড (#f8fafc / ডার্ক মোডে #0f172a), ব্রোঞ্জ অ্যাকসেন্ট (#d97706)।
--->
 <!DOCTYPE html>
 <html lang="bn" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ভাষা ও বাংলা ভাষারীতি - বিসিএস পূর্ণাঙ্গ স্মার্ট ইবুক</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root {
-  --font-base: 'Noto Serif Bengali', serif, system-ui, sans-serif;
-  --bg-primary: #f8fafc;
-  --bg-card: #ffffff;
-  --text-main: #1e293b;
-  --text-muted: #64748b;
-  --primary: #0f766e;
-  --primary-light: #ccfbf1;
-  --primary-dark: #115e59;
-  --accent: #d97706;
-  --accent-light: #fef3c7;
-  --success: #16a34a;
-  --success-bg: #dcfce7;
-  --danger: #dc2626;
-  --danger-bg: #fee2e2;
-  --border: #e2e8f0;
-  --border-strong: #cbd5e1;
-  --shadow: 0 4px 14px rgba(15, 118, 110, 0.08);
-  --radius: 12px;
-  --font-scale: 1rem;
-}
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch(e) {}
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+  <title>ভাষা ও বাংলা ভাষারীতি | বিসিএস প্রিলিমিনারি স্মার্ট ই-বুক</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --font-scale: 1;
+      --bg-primary: #F8FAFC;
+      --bg-surface: #FFFFFF;
+      --text-primary: #0F172A;
+      --text-secondary: #475569;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --primary: #0F766E;
+      --primary-light: #CCFBF1;
+      --accent: #D97706;
+      --accent-light: #FEF3C7;
+      --success: #15803D;
+      --success-light: #DCFCE7;
+      --danger: #B91C1C;
+      --danger-light: #FEE2E2;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+      --radius-sm: 0.375rem;
+      --radius-md: 0.625rem;
+      --radius-lg: 0.875rem;
+    }
 
-[data-theme="dark"] {
-  --bg-primary: #0f172a;
-  --bg-card: #1e293b;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --primary: #14b8a6;
-  --primary-light: #134e4a;
-  --primary-dark: #2dd4bf;
-  --accent: #fbbf24;
-  --accent-light: #451a03;
-  --success: #22c55e;
-  --success-bg: #14532d;
-  --danger: #f87171;
-  --danger-bg: #7f1d1d;
-  --border: #334155;
-  --border-strong: #475569;
-  --shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
-}
+    [data-theme="dark"] {
+      --bg-primary: #090D16;
+      --bg-surface: #111827;
+      --text-primary: #F8FAFC;
+      --text-secondary: #CBD5E1;
+      --text-muted: #94A3B8;
+      --border-color: #1E293B;
+      --primary: #14B8A6;
+      --primary-light: rgba(20, 184, 166, 0.15);
+      --accent: #F59E0B;
+      --accent-light: rgba(245, 158, 11, 0.15);
+      --success: #22C55E;
+      --success-light: rgba(34, 197, 94, 0.15);
+      --danger: #EF4444;
+      --danger-light: rgba(239, 68, 68, 0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.4);
+    }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  overflow-wrap: break-word;
-  margin: 0;
-  padding: 0;
-  font-family: var(--font-base);
-}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { max-width: 100vw; overflow-x: clip; box-sizing: border-box; }
+    body {
+      font-family: 'Noto Serif Bengali', serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: calc(1rem * var(--font-scale));
+      line-height: 1.65;
+      padding-bottom: 5rem;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
 
-html {
-  overflow-x: clip;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  font-size: var(--font-scale);
-}
+    .container { max-width: 52rem; margin: 0 auto; padding: 1rem 0.85rem; }
 
-body {
-  background-color: var(--bg-primary);
-  color: var(--text-main);
-  line-height: 1.8;
-  padding-bottom: 80px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  overflow-x: clip;
-}
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
 
-/* Reading Progress Bar */
-#progress-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 5px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  width: 0%;
-  z-index: 10000;
-  transition: width 0.12s ease-out;
-}
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 0.4rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Inter', inherit;
+    }
 
-/* Top Control Bar */
-.top-control-bar {
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  background: var(--bg-card);
-  border-bottom: 1.5px solid var(--border);
-  padding: 8px 14px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  box-shadow: var(--shadow);
-}
+    .nav-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-light);
+    }
 
-.brand-badge {
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--primary);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+    .nav-actions { display: flex; align-items: center; gap: 0.5rem; }
 
-.controls {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+    .header-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
 
-button.ctrl-btn {
-  background: var(--bg-primary);
-  color: var(--text-main);
-  border: 1px solid var(--border-strong);
-  padding: 5px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 600;
-  transition: all 0.2s;
-  touch-action: manipulation;
-}
+    .header-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
 
-button.ctrl-btn:hover {
-  background: var(--primary-light);
-  border-color: var(--primary);
-  color: var(--primary);
-}
+    .ch-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      padding: 0.2rem 0.65rem;
+      border-radius: 9999px;
+      margin-bottom: 0.5rem;
+    }
 
-/* Container & Layout */
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 10px 12px 40px 12px;
-}
+    .ch-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.01em;
+    }
 
-@media (max-width: 600px) {
-  .container {
-    padding: 6px 8px 30px 8px;
-  }
-}
+    .ch-subtitle {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
 
-/* Hero Section */
-.hero-card {
-  background: linear-gradient(135deg, rgba(15, 118, 110, 0.08) 0%, rgba(217, 119, 6, 0.06) 100%);
-  border: 1.5px solid var(--border);
-  border-left: 6px solid var(--primary);
-  border-radius: var(--radius);
-  padding: 18px 20px;
-  margin-bottom: 22px;
-  box-shadow: var(--shadow);
-}
+    .bcs-table-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      overflow-x: auto;
+    }
 
-.hero-title {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--primary);
-  margin-bottom: 6px;
-  line-height: 1.35;
-}
+    .bcs-table-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
 
-.hero-subtitle {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+      text-align: center;
+    }
 
-/* BCS Frequency Table */
-.bcs-table-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px;
-  margin-bottom: 24px;
-  box-shadow: var(--shadow);
-}
+    .bcs-table th, .bcs-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.4rem 0.25rem;
+      white-space: nowrap;
+    }
 
-.card-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--primary);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 600;
+    }
 
-.table-responsive {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  margin-bottom: 8px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-}
+    .score-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.6rem 1rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: sticky;
+      top: 0.5rem;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+    }
 
-table.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center;
-  font-size: 0.92rem;
-  background: var(--bg-card);
-}
+    .score-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8125rem; font-weight: 600; }
+    .score-val { font-size: 1rem; font-weight: 800; font-family: 'Inter', inherit; }
+    .score-total .score-val { color: var(--primary); }
+    .score-correct .score-val { color: var(--success); }
+    .score-wrong .score-val { color: var(--danger); }
 
-table.data-table th {
-  background: var(--primary);
-  color: #ffffff;
-  padding: 8px 10px;
-  font-weight: 700;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  white-space: nowrap;
-}
+    .q-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
 
-table.data-table td {
-  padding: 7px 10px;
-  border: 1px solid var(--border);
-  color: var(--text-main);
-  white-space: nowrap;
-}
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+    }
 
-table.data-table tr:nth-child(even) {
-  background-color: var(--bg-primary);
-}
+    .q-text {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
 
-/* Theory Content Cards */
-.theory-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px 18px;
-  margin-bottom: 20px;
-  box-shadow: var(--shadow);
-}
+    .bcs-tag {
+      flex-shrink: 0;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.725rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 9999px;
+      white-space: nowrap;
+    }
 
-.section-head {
-  font-size: 1.22rem;
-  font-weight: 700;
-  color: var(--primary);
-  border-bottom: 2px solid var(--primary-light);
-  padding-bottom: 6px;
-  margin-bottom: 12px;
-}
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
 
-.key-point {
-  margin-bottom: 10px;
-  line-height: 1.75;
-}
+    @media (max-width: 580px) {
+      .options-grid { grid-template-columns: 1fr; }
+    }
 
-.key-point strong {
-  color: var(--accent);
-}
+    .opt-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem 0.65rem;
+      text-align: left;
+      font-family: inherit;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+    }
 
-/* Highlight Boxes */
-.note-box {
-  background: var(--accent-light);
-  border-left: 4px solid var(--accent);
-  padding: 10px 14px;
-  border-radius: 6px;
-  margin: 12px 0;
-  font-size: 0.92rem;
-  line-height: 1.7;
-}
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
 
-[data-theme="dark"] .note-box {
-  background: rgba(217, 119, 6, 0.15);
-  border-left-color: var(--accent);
-  color: #fef3c7;
-}
+    .opt-prefix {
+      font-weight: 700;
+      color: var(--primary);
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--primary-light);
+      font-size: 0.8125rem;
+    }
 
-.info-box {
-  background: var(--primary-light);
-  border-left: 4px solid var(--primary);
-  padding: 10px 14px;
-  border-radius: 6px;
-  margin: 12px 0;
-  font-size: 0.92rem;
-  line-height: 1.7;
-}
+    .opt-btn.correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+      color: var(--success) !important;
+      font-weight: 600;
+    }
 
-[data-theme="dark"] .info-box {
-  background: rgba(20, 184, 166, 0.15);
-  border-left-color: var(--primary);
-  color: #ccfbf1;
-}
+    .opt-btn.correct .opt-prefix {
+      background: var(--success);
+      color: #FFFFFF;
+    }
 
-/* Quiz Section */
-.quiz-section-header {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: #ffffff;
-  padding: 14px 18px;
-  border-radius: var(--radius) var(--radius) 0 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
+    .opt-btn.wrong {
+      background: var(--danger-light) !important;
+      border-color: var(--danger) !important;
+      color: var(--danger) !important;
+    }
 
-.quiz-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-}
+    .opt-btn.wrong .opt-prefix {
+      background: var(--danger);
+      color: #FFFFFF;
+    }
 
-.score-tracker {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.88rem;
-  font-weight: 600;
-}
+    .explanation-drawer {
+      display: none;
+      margin-top: 0.75rem;
+      padding: 0.875rem;
+      background: var(--primary-light);
+      border-radius: var(--radius-md);
+      border-left: 3px solid var(--primary);
+      font-size: 0.875rem;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
 
-.quiz-container {
-  border: 1px solid var(--border);
-  border-top: none;
-  border-radius: 0 0 var(--radius) var(--radius);
-  padding: 16px 14px;
-  background: var(--bg-card);
-  margin-bottom: 30px;
-}
+    .explanation-drawer.show { display: block; animation: fadeIn 0.2s ease-in; }
 
-.quiz-card {
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 14px;
-  margin-bottom: 16px;
-  transition: all 0.2s ease;
-}
+    .explanation-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
 
-.quiz-card.answered-correct {
-  border-color: var(--success);
-  background: rgba(22, 163, 74, 0.04);
-}
+    .exp-toggle-btn {
+      margin-top: 0.25rem;
+      background: transparent;
+      border: 1px dashed var(--primary);
+      color: var(--primary);
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: inherit;
+    }
 
-.quiz-card.answered-wrong {
-  border-color: var(--danger);
-  background: rgba(220, 38, 38, 0.04);
-}
+    .exp-toggle-btn:hover { background: var(--primary-light); }
 
-.question-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 8px;
-  margin-bottom: 12px;
-}
+    .footer-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+    }
 
-.q-text {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--text-main);
-  line-height: 1.6;
-  flex: 1;
-}
+    .footer-btn {
+      flex: 1;
+      padding: 0.65rem 0.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+    }
 
-.q-tag {
-  background: var(--primary-light);
-  color: var(--primary-dark);
-  padding: 2px 8px;
-  border-radius: 6px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  white-space: nowrap;
-}
+    .footer-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
 
-[data-theme="dark"] .q-tag {
-  background: var(--primary-dark);
-  color: #ccfbf1;
-}
-
-.options-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-
-@media (max-width: 600px) {
-  .options-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-button.opt-btn {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text-main);
-  padding: 10px 12px;
-  border-radius: 8px;
-  text-align: left;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  touch-action: manipulation;
-}
-
-button.opt-btn:hover:not(:disabled) {
-  border-color: var(--primary);
-  background: var(--primary-light);
-  color: var(--primary);
-}
-
-button.opt-btn.correct-choice {
-  background: var(--success-bg) !important;
-  border-color: var(--success) !important;
-  color: var(--success) !important;
-  font-weight: 700;
-}
-
-button.opt-btn.wrong-choice {
-  background: var(--danger-bg) !important;
-  border-color: var(--danger) !important;
-  color: var(--danger) !important;
-  font-weight: 700;
-}
-
-.explanation-box {
-  display: none;
-  margin-top: 10px;
-  padding: 10px 12px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--primary);
-  border-radius: 6px;
-  font-size: 0.9rem;
-  line-height: 1.7;
-  color: var(--text-main);
-}
-
-.explanation-box strong {
-  color: var(--primary);
-}
-
-.quiz-footer-actions {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 14px;
-}
-
-.reset-btn {
-  background: var(--primary);
-  color: white;
-  border: none;
-  padding: 8px 18px;
-  border-radius: 8px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.reset-btn:hover {
-  opacity: 0.9;
-}
-</style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <nav class="top-nav">
+      <a href="index.html" class="nav-btn">← সূচিপত্র</a>
+      <div class="nav-actions">
+        <button class="nav-btn" onclick="adjustFont(-0.05)" title="ফন্ট ছোট করুন">A-</button>
+        <button class="nav-btn" onclick="resetFont()" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="nav-btn" onclick="adjustFont(0.05)" title="ফন্ট বড় করুন">A+</button>
+        <button class="nav-btn" onclick="toggleTheme()" id="themeBtn" title="থিম পরিবর্তন">🌙</button>
+        <button class="nav-btn" onclick="resetQuiz()" title="কুইজ পুনরায় শুরু">↺ রিসেট</button>
+      </div>
+    </nav>
 
-<div id="progress-bar"></div>
+    <header class="header-card">
+      <span class="ch-badge">অধ্যায় ০১</span>
+      <h1 class="ch-title">ভাষা ও বাংলা ভাষারীতি</h1>
+      <p class="ch-subtitle">ভাষার রূপভেদ, সাধু ও চলিত রীতি, উৎপত্তি ও ক্রমবিকাশ (পৃষ্ঠা ০১–০৫)</p>
+    </header>
 
-<div class="top-control-bar">
-  <div class="brand-badge">
-    <span>📖</span> বাংলা ভাষা ও ব্যাকরণ
+    <section class="bcs-table-card">
+      <h2 class="bcs-table-title">📊 বিগত বিসিএস পরীক্ষায় এ অধ্যায়ের প্রশ্ন বিশ্লেষণ</h2>
+      <table class="bcs-table">
+        <thead>
+          <tr>
+            <th>বিসিএস</th><th>প্রশ্ন</th>
+            <th>বিসিএস</th><th>প্রশ্ন</th>
+            <th>বিসিএস</th><th>প্রশ্ন</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td>৫০তম</td><td>০</td>
+              <td>৪৪তম</td><td>০</td>
+              <td>৩৮তম</td><td>০</td>
+            </tr>
+            <tr>
+              <td>৪৯তম</td><td>০</td>
+              <td>৪৩তম</td><td>১</td>
+              <td>৩৭তম</td><td>০</td>
+            </tr>
+            <tr>
+              <td>৪৮তম</td><td>০</td>
+              <td>৪২তম</td><td>২</td>
+              <td>৩৬তম</td><td>০</td>
+            </tr>
+            <tr>
+              <td>৪৭তম</td><td>২</td>
+              <td>৪১তম</td><td>১</td>
+              <td>৩৫তম</td><td>১</td>
+            </tr>
+            <tr>
+              <td>৪৬তম</td><td>১</td>
+              <td>৪০তম</td><td>০</td>
+              <td>১০ম-৩৪তম</td><td>৮</td>
+            </tr>
+            <tr>
+              <td>৪৫তম</td><td>২</td>
+              <td>৩৯তম</td><td>১</td>
+              <td>মোট</td><td>১৮</td>
+            </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Sticky Score Tracker -->
+    <div class="score-card">
+      <div class="score-item score-total">
+        <span>মোট প্রশ্ন:</span>
+        <span class="score-val" id="totalQuestions">১৮</span>
+      </div>
+      <div class="score-item score-correct">
+        <span>সঠিক:</span>
+        <span class="score-val" id="correctCount">০</span>
+      </div>
+      <div class="score-item score-wrong">
+        <span>ভুল:</span>
+        <span class="score-val" id="wrongCount">০</span>
+      </div>
+    </div>
+
+    <!-- Questions Section -->
+    <main id="quizContainer">
+      <!-- Q1 -->
+      <article class="q-card" id="q1" data-correct="গ">
+        <div class="q-header">
+          <h2 class="q-text">১. মনোএল দ্যা আসসুম্পসাঁও অভিধান প্রকাশের আগে কত বছর ধরে শব্দ সংগ্রহ করেন?</h2>
+          <span class="bcs-tag">৪৭তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q1', 'ক')"><span class="opt-prefix">ক</span><span>২-৩ বছর</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q1', 'খ')"><span class="opt-prefix">খ</span><span>৫-৭ বছর</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q1', 'গ')"><span class="opt-prefix">গ</span><span>৯-১০ বছর</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q1', 'ঘ')"><span class="opt-prefix">ঘ</span><span>১৪-১৫ বছর</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q1')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q1">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>‘Vocabulario em idioma Bengalla, e Portuguez dividido em duas partes’ – গ্রন্থ রচনার জন্য ৯-১০ বছর ধরে শব্দ সংগ্রহ করেছেন। মনোএল ভাওয়ালের একটি গির্জায় ধর্মযাজকের দায়িত্ব পালনকালে ১৭৩৪-৪২ খ্রিষ্টাব্দের মধ্যে Vocabulario em idioma Bengalla, e Portuguez dividido em duas partes শীর্ষক গ্রন্থটি রচনা করেন। এটি ১৭৪৩ সালে প্রকাশ করেন।</p>
+        </div>
+      </article>
+
+      <!-- Q2 -->
+      <article class="q-card" id="q2" data-correct="ক">
+        <div class="q-header">
+          <h2 class="q-text">২. গৌড়ী প্রাকৃত বলতে বোঝায়-</h2>
+          <span class="bcs-tag">৪৭তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q2', 'ক')"><span class="opt-prefix">ক</span><span>গৌড় অঞ্চলের মুখের ভাষা</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q2', 'খ')"><span class="opt-prefix">খ</span><span>গৌড় সাহিত্যের স্বাভাবিক রীতি</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q2', 'গ')"><span class="opt-prefix">গ</span><span>গৌড় ভাষার লিখিত নমুনা</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q2', 'ঘ')"><span class="opt-prefix">ঘ</span><span>গৌড় ভাষার বিকৃত উচ্চারণ</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q2')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q2">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>গৌড়ী প্রাকৃত বলতে বোঝায় গৌড় অঞ্চলের সাধারণ মানুষের মুখের ভাষা। ড. মুহম্মদ শহীদুল্লাহর মতে, গৌড় অঞ্চলের সাধারণ মানুষের মুখের ভাষা অর্থ প্রাকৃতজনের মুখের ভাষা থেকে বাংলা ভাষার উৎপত্তি হয়েছে। অর্থাৎ বাংলা ভাষার উৎপত্তি গৌড়ীয় প্রাকৃত থেকে। মুহম্মদ শহীদুল্লাহ মনে করেন ৬৫০ খ্রিষ্টাব্দের কাছাকাছি কোনো সময়ে, অর্থাৎ সপ্তম শতকে গৌড়ি প্রাকৃত থেকে জন্ম নিয়েছিল আধুনিকতম প্রাকৃত বাংলা ভাষা।</p>
+        </div>
+      </article>
+
+      <!-- Q3 -->
+      <article class="q-card" id="q3" data-correct="গ">
+        <div class="q-header">
+          <h2 class="q-text">৩. বাংলা শব্দ ভাণ্ডারে অনার্য জাতির ব্যবহৃত শব্দ-</h2>
+          <span class="bcs-tag">৪৬তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q3', 'ক')"><span class="opt-prefix">ক</span><span>তৎসম</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q3', 'খ')"><span class="opt-prefix">খ</span><span>তদ্ভব</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q3', 'গ')"><span class="opt-prefix">গ</span><span>দেশি</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q3', 'ঘ')"><span class="opt-prefix">ঘ</span><span>বিদেশি</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q3')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q3">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>প্রাচীনকালে এদেশের অধিবাসী ছিল অনার্য, দ্রাবিড়, কোল প্রভৃতি জাতি। তাদের ভাষা ও সংস্কৃতির কিছু শব্দ আর্যদের প্রভাবে পরিবর্তিত না হয়ে অবিকৃতভাবে বাংলা ভাষায় রক্ষিত হয়েছে। এগুলোকে দেশি শব্দ বলা হয়। উদাহরণ- পেট, ডাব, জারুল, টোপ, ডিঙা, চাউল ইত্যাদি। উল্লেখ্য, অনেক সময় দেশি শব্দের মূল নির্ণয় করা যায় না।</p>
+        </div>
+      </article>
+
+      <!-- Q4 -->
+      <article class="q-card" id="q4" data-correct="ক">
+        <div class="q-header">
+          <h2 class="q-text">৪. সর্বপ্রথম বাংলা ভাষার ব্যাকরণ রচনা করেন কে?</h2>
+          <span class="bcs-tag">৪৫তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q4', 'ক')"><span class="opt-prefix">ক</span><span>মানোএল দা আসসুম্পসাঁউ</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q4', 'খ')"><span class="opt-prefix">খ</span><span>রাজা রামমোহন রায়</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q4', 'গ')"><span class="opt-prefix">গ</span><span>রামেন্দ্র সুন্দর ত্রিবেদী</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q4', 'ঘ')"><span class="opt-prefix">ঘ</span><span>নাথানিয়েল ব্রাসি হ্যালহেড</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q4')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q4">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>প্রথম বাংলা ভাষার ব্যাকরণ রচনা করেন মানোএল দা আসসুম্পসাঁউ। পর্তুগালের রাজধানী লিসবন থেকে ১৭৪৩ সালে পর্তুগিজ ভাষায় প্রকাশিত গ্রন্থের নাম ছিল “Vocabulario em Idioma Bengalla E Portugues”। যদিও এটি বাংলা ভাষার ব্যাকরণের পূর্ণাঙ্গ কোনো গ্রন্থ ছিল না, একটা অধ্যায়ে বাংলা ভাষা নিয়ে কিছু আলোচনা করেছিলেন মাত্র। অন্যদিকে, বাংলা ভাষার প্রথম ব্যাকরণ গ্রন্থ রচনা করেন নাথানিয়েল ব্রাসি হ্যালহেড। ইংরেজি ভাষায় রচিত এই গ্রন্থের নাম ছিল “A Grammar of the Bengal Language”, গ্রন্থটি ১৭৭৮ সালে হুগলি থেকে প্রকাশিত হয়। এছাড়া ১৮০১ সালে উইলিয়াম কেরী ইংরেজি ভাষায় রচনা করেন “A Grammar of the Bengalee Language”। ১৮৪৬ সালে এর বঙ্গানুবাদ করেন জন রবিনসন। আবার, বাংলা ভাষায় বাংলা ব্যাকরণগ্রন্থ প্রথম রচনা করেন রাজা রামমোহন রায়। তাঁর রচিত বইয়ের নাম ছিল “গৌড়ীয় ব্যাকরণ”। গৌড়ীয় ব্যাকরণ প্রকাশিত হয় ১৮৩৩ সালে।</p>
+        </div>
+      </article>
+
+      <!-- Q5 -->
+      <article class="q-card" id="q5" data-correct="ঘ">
+        <div class="q-header">
+          <h2 class="q-text">৫. "ভাষা চিন্তার শুধু বাহনই নয়, চিন্তার প্রসূতিও।" মন্তব্যটি কোন ভাষা-চিন্তকের?</h2>
+          <span class="bcs-tag">৪৫তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q5', 'ক')"><span class="opt-prefix">ক</span><span>সুনীতিকুমার চট্টোপাধ্যায়</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q5', 'খ')"><span class="opt-prefix">খ</span><span>মুহম্মদ শহীদুল্লাহ্</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q5', 'গ')"><span class="opt-prefix">গ</span><span>মুহম্মদ এনামুল হক</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q5', 'ঘ')"><span class="opt-prefix">ঘ</span><span>সুকুমার সেন</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q5')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q5">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>প্রশ্নে উল্লিখিত মন্তব্যটি করেন প্রখ্যাত ভাষা-চিন্তক সুকুমার সেন। তিনি তাঁর ‘ভাষার ইতিবৃত্ত’ গ্রন্থের ‘ভাষা ও উপভাষা’ নামক অধ্যায়ে মন্তব্যটি করেন। গ্রন্থটি সর্বপ্রথম ১৯৩৯ সালে প্রকাশিত হয়।</p>
+        </div>
+      </article>
+
+      <!-- Q6 -->
+      <article class="q-card" id="q6" data-correct="ক">
+        <div class="q-header">
+          <h2 class="q-text">৬. কেন্তুমের কোন দুটি শাখা এশিয়ার অন্তর্গত?</h2>
+          <span class="bcs-tag">৪৩তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q6', 'ক')"><span class="opt-prefix">ক</span><span>হিত্তিক ও তুখারিক</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q6', 'খ')"><span class="opt-prefix">খ</span><span>তামিল ও দ্রাবিড়</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q6', 'গ')"><span class="opt-prefix">গ</span><span>আর্য ও অনার্য</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q6', 'ঘ')"><span class="opt-prefix">ঘ</span><span>মাগধী ও গৌড়ী</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q6')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q6">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>ইন্দো-ইউরোপীয় ভাষা গোষ্ঠীর প্রাচীন শাখা ৯টি। আধুনিককালে অনেকে ১০টি বলেও উল্লেখ করেছেন। ভাষাতাত্ত্বিক অধ্যাপক অ্যাসকোলি আদি ইন্দো-ইউরোপীয় ভাষাগোষ্ঠী থেকে সৃষ্ট ভাষাগুলোকে দুটো প্রধান ভাগে ভাগ করেছেন- শতম (Satam) ও কেন্তুম (Centum)। কেন্তুম ও শতম, এই বিভাজন হয়েছিল মূলত কণ্ঠবর্ণের উচ্চারণ বৈশিষ্ট্য লক্ষ্য করে। এই বিভাজনের ফলে ইন্দো-ইউরোপীয় ভাষা গোষ্ঠীর অন্তর্ভুক্ত ভাষাগুলোর ভেতর একটি ভৌগোলিক বিভাজনও পরিলক্ষিত হয়। অ্যাসকোলির মতানুসারে, কেন্তুম গোষ্ঠীর ভাষাগুলো সব পশ্চিমের আর শতম গোষ্ঠীর ভাষাগুলো সব পূর্বের। কিন্তু, তোখারিয়ান (তুখারিক) ও হিত্তি ভাষা আবিষ্কারের পর অনেক পণ্ডিতের কাছে এ ধরনের ভৌগোলিক বিভাগের ধারণা সমালোচনার মুখে পড়ে। বর্তমান কালে হিত্তি বা হিত্তিক (Hittic) ভাষা ইন্দো-ইউরোপীয় গোষ্ঠীর দশম শাখা হিসাবে পরিচিত। ড. মুহম্মদ শহীদুল্লাহর মতে, এশিয়া মাইনরে প্রায় দেড় হাজার খ্রিষ্টপূর্বে হিত্তি ভাষা প্রচলিত ছিল। তোখারিক ভাষা মধ্য এশিয়ায় খ্রিষ্টীয় অষ্টম শতক পর্যন্ত জীবিত ছিল।</p>
+        </div>
+      </article>
+
+      <!-- Q7 -->
+      <article class="q-card" id="q7" data-correct="ক">
+        <div class="q-header">
+          <h2 class="q-text">৭. মানুষের দেহের যে সব অঙ্গ-প্রত্যঙ্গ ধ্বনি তৈরিতে সহায়তা করে তাকে বলে?</h2>
+          <span class="bcs-tag">৪২তম বিশেষ বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q7', 'ক')"><span class="opt-prefix">ক</span><span>বাক প্রত্যঙ্গ</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q7', 'খ')"><span class="opt-prefix">খ</span><span>অঙ্গধ্বনি</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q7', 'গ')"><span class="opt-prefix">গ</span><span>স্বরতন্ত্রী</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q7', 'ঘ')"><span class="opt-prefix">ঘ</span><span>নাসিকাতন্ত্র</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q7')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q7">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>মানবদেহের যেসব অঙ্গ-প্রত্যঙ্গ ধ্বনি তৈরিতে সহায়তা করে তাদের বাক প্রত্যঙ্গ বলা হয়। বাক প্রত্যঙ্গগুলোকে একসঙ্গে বলা হয় বাগযন্ত্র। বাগযন্ত্রের মধ্যে আছে ফুসফুস, স্বরতন্ত্রী, গলনালি, জিভ, তালু, মাড়ি, দাঁত, ঠোঁট, নাক ইত্যাদি।</p>
+        </div>
+      </article>
+
+      <!-- Q8 -->
+      <article class="q-card" id="q8" data-correct="ঘ">
+        <div class="q-header">
+          <h2 class="q-text">৮. বাঙালি উপভাষা অঞ্চল কোনটি?</h2>
+          <span class="bcs-tag">৪২তম বিশেষ বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q8', 'ক')"><span class="opt-prefix">ক</span><span>নদীয়া</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q8', 'খ')"><span class="opt-prefix">খ</span><span>ত্রিপুরা</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q8', 'গ')"><span class="opt-prefix">গ</span><span>পুরুলিয়া</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q8', 'ঘ')"><span class="opt-prefix">ঘ</span><span>বরিশাল</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q8')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q8">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>ঝাড়খণ্ড থেকে শুরু করে কামরূপ পর্যন্ত বিস্তৃত অঞ্চলের কথ্য ভাষা হলো বাংলা। কথ্য রীতির পার্থক্য অঞ্চল ভেদে সহজেই বোঝা যায়। অঞ্চল ভেদে ভাষার এই ভিন্নতা উপভাষা নামে পরিচিত। অর্থাৎ, উপভাষা হলো একটি ভাষার আঞ্চলিক রূপ। কয়েকটি উপভাষার নাম- ১. বাঙ্গালি (বাংলাদেশের মধ্য ও দক্ষিণ অঞ্চল), ২. পূর্বি (বাংলাদেশের পূর্ব অঞ্চল, ত্রিপুরা এবং আসামের বরাক অঞ্চল), ৩. বরেন্দ্রি (বাংলাদেশের উত্তর-পশ্চিম অঞ্চল), ৪. কামরূপি (বিহারের পূর্ব অঞ্চল, পশ্চিমবঙ্গের উত্তর অঞ্চল এবং বাংলাদেশের রংপুর অঞ্চল), ৫. রাঢ়ি (পশ্চিমবঙ্গ), ৬. ঝাড়খণ্ডি (পশ্চিমবঙ্গের পশ্চিম অঞ্চল ও ঝাড়খণ্ডের পূর্ব অঞ্চল) প্রভৃতি। এই হিসেবে 'বাঙ্গালি' উপভাষা বাংলাদেশের মধ্য ও দক্ষিণ অঞ্চলে যে সকল জেলা রয়েছে, সেই সব অঞ্চলের ভাষা হিসেবে ব্যবহৃত হয়ে থাকে। উপযুক্ত আলোচনার প্রেক্ষিতে বলা যায়, প্রদত্ত অপশনগুলোর মধ্যে 'বরিশাল'ই সবচেয়ে যুক্তিসঙ্গত উত্তর।</p>
+        </div>
+      </article>
+
+      <!-- Q9 -->
+      <article class="q-card" id="q9" data-correct="ক">
+        <div class="q-header">
+          <h2 class="q-text">৯. বাংলা ভাষায় প্রথম অভিধান সংকলন করেন কে?</h2>
+          <span class="bcs-tag">৪১তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q9', 'ক')"><span class="opt-prefix">ক</span><span>রামচন্দ্র বিদ্যাবাগীশ</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q9', 'খ')"><span class="opt-prefix">খ</span><span>রাজশেখর বসু</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q9', 'গ')"><span class="opt-prefix">গ</span><span>হরিচরণ দে</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q9', 'ঘ')"><span class="opt-prefix">ঘ</span><span>অশোক মুখোপাধ্যায়</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q9')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q9">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>রামচন্দ্র বিদ্যাবাগীশ (১৭৮৬-১৮৪৫) একজন আভিধানিক ও পণ্ডিত। তিনি বাংলা ভাষার প্রথম অভিধান সংকলন করেন। তাঁর আদি নিবাস নদীয়া। ১৮১৮ সালে তিনি বাংলা ভাষার প্রথম অভিধান সংকলন করেন। তাঁর রচিত গ্রন্থ: জ্যোতিষ সংগ্রহার, পরমেশ্বরের উপাসনা-বিষয়ে প্রথম আখ্যান, বর্ণমালা, নীতিদর্শন প্রভৃতি।</p>
+        </div>
+      </article>
+
+      <!-- Q10 -->
+      <article class="q-card" id="q10" data-correct="ঘ">
+        <div class="q-header">
+          <h2 class="q-text">১০. সাধু ও চলিত ভাষার মূল পার্থক্য কোন পদে বেশি বেশি দেখা যায়?</h2>
+          <span class="bcs-tag">৩৯তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q10', 'ক')"><span class="opt-prefix">ক</span><span>বিশেষ্য ও ক্রিয়া</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q10', 'খ')"><span class="opt-prefix">খ</span><span>বিশেষণ ও ক্রিয়া</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q10', 'গ')"><span class="opt-prefix">গ</span><span>বিশেষ্য ও বিশেষণ পদে</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q10', 'ঘ')"><span class="opt-prefix">ঘ</span><span>ক্রিয়া ও সর্বনাম</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q10')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q10">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>সাধু রীতির সাধারণ বৈশিষ্ট্য: ১. সাধু রীতিতে ক্রিয়ারূপ দীর্ঘতর (যেমন- করা ক্রিয়ার রূপ: করিতেছে, করিয়াছে, করিল, করিলে, করিলাম, করিত, করিতেছিল, করিয়াছিল, করিব, করিবে, করিতে, করিয়া, করিলে, করিবার)। ২. সাধু রীতির বহু সর্বনামে 'হ'-বর্ণ যুক্ত থাকে (যেমন- তাহারা, ইহাদের, যাহা, তাহা, উহা, কেহ ইত্যাদি)। সুতরাং সাধু ভাষা ও চলিত ভাষার পার্থক্য ক্রিয়াপদ ও সর্বনাম পদের রূপে বেশি বেশি দেখা যায়।</p>
+        </div>
+      </article>
+
+      <!-- Q11 -->
+      <article class="q-card" id="q11" data-correct="খ">
+        <div class="q-header">
+          <h2 class="q-text">১১. বাংলা ভাষায় শব্দ সাধন হয় না নিম্নোক্ত কোন উপায়ে?</h2>
+          <span class="bcs-tag">৩৫তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q11', 'ক')"><span class="opt-prefix">ক</span><span>সমাস দ্বারা</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q11', 'খ')"><span class="opt-prefix">খ</span><span>লিঙ্গ পরিবর্তন দ্বারা</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q11', 'গ')"><span class="opt-prefix">গ</span><span>উপসর্গ যোগে</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q11', 'ঘ')"><span class="opt-prefix">ঘ</span><span>ক, খ, ও গ তিন উপায়েই হয়</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q11')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q11">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>বাংলা শব্দ গঠনের কয়েকটি উপায়: সমাসের মাধ্যমে, বহুবচনের মাধ্যমে, উপসর্গ যোগে, প্রত্যয় সহযোগে ইত্যাদি। লিঙ্গ পরিবর্তনের মাধ্যমে নতুন অর্থবাচক শব্দ তৈরি হয় না, কেবল পুরুষবাচক বা স্ত্রীবাচক ব্যাকরণিক রূপ নির্দেশিত হয়। তাই লিঙ্গ পরিবর্তন দ্বারা শব্দ সাধন হয় না।</p>
+        </div>
+      </article>
+
+      <!-- Q12 -->
+      <article class="q-card" id="q12" data-correct="খ">
+        <div class="q-header">
+          <h2 class="q-text">১২. 'তৎসম' শব্দের ব্যবহার কোন রীতিতে বেশি হয়?</h2>
+          <span class="bcs-tag">২৯তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q12', 'ক')"><span class="opt-prefix">ক</span><span>চলিত রীতি</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q12', 'খ')"><span class="opt-prefix">খ</span><span>সাধু রীতি</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q12', 'গ')"><span class="opt-prefix">গ</span><span>মিশ্র রীতি</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q12', 'ঘ')"><span class="opt-prefix">ঘ</span><span>আঞ্চলিক রীতি</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q12')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q12">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>সাধু রীতি: বাংলা লেখ্য সাধু রীতি সুনির্ধারিত ব্যাকরণের নিয়ম অনুসরণ করে চলে এবং এর পদবিন্যাস সুনিয়ন্ত্রিত ও সুনির্দিষ্ট। এ রীতি গুরুগম্ভীর ও তৎসম শব্দবহুল। এ রীতি নাটকের সংলাপ ও বক্তৃতায় অনুপযোগী। এ রীতিতে সর্বনাম ও ক্রিয়াপদ এক বিশেষ গঠন পদ্ধতি মেনে চলে।</p>
+        </div>
+      </article>
+
+      <!-- Q13 -->
+      <article class="q-card" id="q13" data-correct="ঘ">
+        <div class="q-header">
+          <h2 class="q-text">১৩. সাধু ভাষা সাধারণত কোথায় অনুপযোগী?</h2>
+          <span class="bcs-tag">১৮তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q13', 'ক')"><span class="opt-prefix">ক</span><span>কবিতার পংক্তিতে</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q13', 'খ')"><span class="opt-prefix">খ</span><span>গানের কলিতে</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q13', 'গ')"><span class="opt-prefix">গ</span><span>গল্পের কলিতে</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q13', 'ঘ')"><span class="opt-prefix">ঘ</span><span>নাটকের সংলাপে</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q13')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q13">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>সাধু রীতির অন্যতম প্রধান বৈশিষ্ট্য হলো এটি কৃত্রিম ও গুরুগম্ভীর। তাই নাটকের সংলাপ ও বক্তৃতায় সাধু ভাষা সম্পূর্ণ অনুপযোগী।</p>
+        </div>
+      </article>
+
+      <!-- Q14 -->
+      <article class="q-card" id="q14" data-correct="গ">
+        <div class="q-header">
+          <h2 class="q-text">১৪. বাংলা ভাষার উদ্ভব হয়েছে নিম্নোক্ত একটি ভাষা থেকে-</h2>
+          <span class="bcs-tag">১৭তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q14', 'ক')"><span class="opt-prefix">ক</span><span>সংস্কৃত</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q14', 'খ')"><span class="opt-prefix">খ</span><span>পালি</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q14', 'গ')"><span class="opt-prefix">গ</span><span>প্রাকৃত</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q14', 'ঘ')"><span class="opt-prefix">ঘ</span><span>অপভ্রংশ</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q14')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q14">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>বাঙালি জনগোষ্ঠী যে ভাষা দিয়ে তাদের মনের ভাব প্রকাশ করে তার নাম বাংলা ভাষা। ইন্দো-ইউরোপীয় আদি ভাষা বহু বিবর্তনের মধ্য দিয়ে বাংলা ভাষায় পরিণত হয়েছে। এই বিবর্তনে যেসব গুরুত্বপূর্ণ স্তর অতিক্রম করতে হয়েছে, সেগুলো হলো: ইন্দো-ইউরোপীয় → ইন্দো-ইরানীয় → ভারতীয় আর্য → প্রাকৃত → বাংলা। আনুমানিক এক হাজার বছর আগে পূর্ব ভারতীয় প্রাকৃত ভাষা থেকে বাংলা ভাষার জন্ম হয়েছে।</p>
+        </div>
+      </article>
+
+      <!-- Q15 -->
+      <article class="q-card" id="q15" data-correct="ঘ">
+        <div class="q-header">
+          <h2 class="q-text">১৫. সাধু ভাষা ও চলিত ভাষার পার্থক্য-</h2>
+          <span class="bcs-tag">১৬তম ও ১৫তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q15', 'ক')"><span class="opt-prefix">ক</span><span>বাক্যের সরল ও জটিলরূপে</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q15', 'খ')"><span class="opt-prefix">খ</span><span>শব্দের রূপগত ভিন্নতায়</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q15', 'গ')"><span class="opt-prefix">গ</span><span>তৎসম ও অতৎসম শব্দের ব্যবহারে</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q15', 'ঘ')"><span class="opt-prefix">ঘ</span><span>ক্রিয়াপদ ও সর্বনাম পদের রূপগত ভিন্নতায়</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q15')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q15">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>সাধু ভাষা ও চলিত ভাষার প্রধান পার্থক্য ক্রিয়াপদ ও সর্বনাম পদের রূপগত ভিন্নতায় পরিলক্ষিত হয়। যেমন: সাধু 'তাহারা করিতেছে' বনাম চলিত 'তারা করছে'।</p>
+        </div>
+      </article>
+
+      <!-- Q16 -->
+      <article class="q-card" id="q16" data-correct="ক">
+        <div class="q-header">
+          <h2 class="q-text">১৬. বাংলা ভাষার আদিস্তরের স্থিতিকাল কোনটি?</h2>
+          <span class="bcs-tag">১৪তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q16', 'ক')"><span class="opt-prefix">ক</span><span>দশম থেকে চতুর্দশ শতাব্দী</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q16', 'খ')"><span class="opt-prefix">খ</span><span>একাদশ থেকে পঞ্চাদশ শতাব্দী</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q16', 'গ')"><span class="opt-prefix">গ</span><span>দ্বাদশ থেকে ষোড়শ শতাব্দী</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q16', 'ঘ')"><span class="opt-prefix">ঘ</span><span>ত্রয়োদশ থেকে সপ্তাদশ শতাব্দী</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q16')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q16">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>বর্তমানে অনেক ভাষাবিদের মতে, বাংলা ভাষা দশম শতকে উৎপত্তি লাভ করেছে। দশম থেকে চতুর্দশ শতাব্দী পর্যন্ত বাংলা ভাষার আদিস্তরের স্থিতিকাল বিবেচনা করা হয়। বাংলা ভাষার কালক্রম: প্রাচীন বাংলা: ১০ম থেকে ১৩৫০ শতক; মধ্যযুগ: ১৩৫০ থেকে ১৮ শতক; আধুনিক যুগের বাংলা: ১৯ শতক থেকে বর্তমান।</p>
+        </div>
+      </article>
+
+      <!-- Q17 -->
+      <article class="q-card" id="q17" data-correct="ঘ">
+        <div class="q-header">
+          <h2 class="q-text">১৭. বাংলা লিপির উৎস কি?</h2>
+          <span class="bcs-tag">১৪তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q17', 'ক')"><span class="opt-prefix">ক</span><span>সংস্কৃত লিপি</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q17', 'খ')"><span class="opt-prefix">খ</span><span>চীনা লিপি</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q17', 'গ')"><span class="opt-prefix">গ</span><span>আরবি লিপি</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q17', 'ঘ')"><span class="opt-prefix">ঘ</span><span>ব্রাহ্মী লিপি</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q17')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q17">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>বাংলা লিপির উৎপত্তি: বাংলা ভাষার নিজস্ব লিপি রয়েছে। এই লিপির নাম বাংলা লিপি। বাংলা লিপির আদি উৎস ব্রাহ্মীলিপি। প্রায় আড়াই হাজার বছর আগে উপমহাদেশে ব্রাহ্মী লিপির জন্ম হয়। ব্রাহ্মী লিপির পূর্ব-ভারতীয় শাখা দশম শতক নাগাদ কুটিল লিপি নামে পরিচিতি লাভ করে। বাংলা লিপি এই কুটিল লিপির পরিবর্তিত রূপ। ব্রাহ্মী লিপির তিনটি রূপ রয়েছে- সারদা, নাগর ও কুটিল।</p>
+        </div>
+      </article>
+
+      <!-- Q18 -->
+      <article class="q-card" id="q18" data-correct="গ">
+        <div class="q-header">
+          <h2 class="q-text">১৮. গুরুচণ্ডালী দোষমুক্ত কোনটি?</h2>
+          <span class="bcs-tag">১০ম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q18', 'ক')"><span class="opt-prefix">ক</span><span>শবপোড়া</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q18', 'খ')"><span class="opt-prefix">খ</span><span>মড়াদাহ</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q18', 'গ')"><span class="opt-prefix">গ</span><span>শবদাহ</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q18', 'ঘ')"><span class="opt-prefix">ঘ</span><span>শবমড়া</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q18')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q18">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>গুরুচণ্ডালী দোষ: বাংলা ভাষায় তৎসম শব্দের সঙ্গে দেশীয় শব্দের মিশ্রণ ঘটলে যে সমস্যার সৃষ্টি হয় তাকে গুরুচণ্ডালী দোষ বলে। এ দোষে দুষ্ট শব্দ তার যোগ্যতা হারায়। উদাহরণ- শবপোড়া: শব (তৎসম) + পোড়া (দেশি), মড়াদাহ: মড়া (দেশি) + দাহ (তৎসম), শবমড়া: শব (তৎসম) + মড়া (দেশি)। আর 'শবদাহ': শব (তৎসম) + দাহ (তৎসম) হওয়ায় এটি সম্পূর্ণ নির্দোষ ও শুদ্ধ।</p>
+        </div>
+      </article>
+
+    </main>
+
+    <footer class="footer-nav">
+      <a href="index.html" class="footer-btn">← সূচিপত্র</a>
+      <a href="index.html" class="footer-btn">🏠 সূচিপত্র</a>
+      <a href="ধ্বনি ও বর্ণ-প্রকরণ.html" class="footer-btn">ধ্বনি ও বর্ণ-প্রকরণ →</a>
+    </footer>
   </div>
-  <div class="controls">
-    <button class="ctrl-btn" onclick="adjustFontSize(-0.05)" title="লেখা ছোট করুন">A-</button>
-    <button class="ctrl-btn" onclick="resetFontSize()" title="স্বাভাবিক ফন্ট">A</button>
-    <button class="ctrl-btn" onclick="adjustFontSize(0.05)" title="লেখা বড় করুন">A+</button>
-    <button class="ctrl-btn" onclick="toggleTheme()" id="theme-btn" title="ডার্ক/লাইট থিম">🌙</button>
-  </div>
-</div>
 
-<div class="container">
+  <script>
+    var answeredQuestions = {};
+    var correctScore = 0;
+    var wrongScore = 0;
 
-  <!-- Hero Header -->
-  <header class="hero-card">
-    <h1 class="hero-title">০১. ভাষা ও বাংলা ভাষারীতি</h1>
-    <p class="hero-subtitle">বাংলা ব্যাকরণ ও নির্মিতি • বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ প্রস্তুতি (পৃষ্ঠা ০১–০৫)</p>
-  </header>
+    function checkAnswer(qId, selectedOpt) {
+      if (answeredQuestions[qId]) return;
+      var card = document.getElementById(qId);
+      var correctOpt = card.getAttribute('data-correct');
+      var btns = card.querySelectorAll('.opt-btn');
 
-  <!-- BCS Question Distribution Table -->
-  <section class="bcs-table-card">
-    <h2 class="card-title">📊 বিগত বিসিএস পরীক্ষায় এ অধ্যায়ের প্রশ্ন বিশ্লেষণ</h2>
-    <div class="table-responsive">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
-            <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
-            <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>৫০তম</td><td>০</td><td>৪৪তম</td><td>০</td><td>৩৮তম</td><td>০</td></tr>
-          <tr><td>৪৯তম</td><td>০</td><td>৪৩তম</td><td>১</td><td>৩৭তম</td><td>০</td></tr>
-          <tr><td>৪৮তম</td><td>০</td><td>৪২তম</td><td>২</td><td>৩৬তম</td><td>০</td></tr>
-          <tr><td>৪৭তম</td><td>২</td><td>৪১তম</td><td>১</td><td>৩৫তম</td><td>১</td></tr>
-          <tr><td>৪৬তম</td><td>১</td><td>৪০তম</td><td>০</td><td>১০ম-৩৪তম</td><td>৮</td></tr>
-          <tr><td>৪৫তম</td><td>২</td><td>৩৯তম</td><td>১</td><td><strong>মোট প্রশ্ন</strong></td><td><strong>১৮টি</strong></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+      answeredQuestions[qId] = selectedOpt;
 
-  <!-- Theory Module 1: Grammar Evolution -->
-  <article class="theory-card">
-    <h2 class="section-head">📚 বাংলা ব্যাকরণ রচনার ঐতিহাসিক রূপরেখা</h2>
-    <div class="key-point">
-      <strong>১. প্রথম পর্যায় (পর্তুগিজ ভাষায় প্রথম বাংলা ব্যাকরণ):</strong> ১৭৪৩ সালে পর্তুগালের রাজধানী লিসবন থেকে পর্তুগিজ ভাষায় রচিত প্রথম বাংলা ব্যাকরণ প্রকাশিত হয়। লেখক ছিলেন রোমান ক্যাথলিক ধর্মযাজক <strong>মানোএল দা আসসুম্পসাঁউ</strong> (Manoel da Assumpcam)। তিনি ভাওয়ালের গির্জায় কর্মরত অবস্থায় ১৭৩৪-১৭৪২ সালের মধ্যে ৯-১০ বছর ধরে শব্দ সংগ্রহ করে তাঁর বাংলা-পর্তুগিজ অভিধানের ভূমিকাংশ হিসেবে ‘Vocabulario em idioma Bengalla, e Portuguez dividido em duas partes’ শীর্ষক এই ব্যাকরণটি রচনা করেন।
-    </div>
-    <div class="key-point">
-      <strong>২. ইংরেজি ভাষায় রচিত বাংলা ব্যাকরণ:</strong> ১৭৭৮ সালে প্রকাশিত হয় <strong>নাথানিয়েল ব্রাসি হ্যালহেড</strong> প্রণীত ‘A Grammar of the Bengal Language’। এটি ইংরেজি ভাষায় রচিত <em>প্রথম পূর্ণাঙ্গ বাংলা ব্যাকরণ</em>, যা হুগলি থেকে চার্লস উইলকিন্সের বাংলা ধাতব হরফে মুদ্রিত হয়। পরবর্তীতে ১৮০১ সালে উইলিয়াম কেরি রচনা করেন ‘A Grammar of the Bengalee Language’, যার বঙ্গানুবাদ করেন জন রবিনসন (১৮৪৬)।
-    </div>
-    <div class="key-point">
-      <strong>৩. বাংলা ভাষায় রচিত প্রথম ব্যাকরণ:</strong> ১৮৩৩ সালে প্রকাশিত হয় রাজা রামমোহন রায়ের <strong>‘গৌড়ীয় ব্যাকরণ’</strong>। এটিই <em>বাঙালির দ্বারা বাংলা ভাষায় রচিত প্রথম বাংলা ব্যাকরণ</em> (ইংরেজি সংস্করণ ১৮২৬ সালে প্রকাশিত হয়েছিল)।
-    </div>
-    <div class="info-box">
-      <strong>💡 মনে রাখার কৌশল:</strong> মনোএল (১৭৪৩, পর্তুগিজ) ➔ হ্যালহেড (১৭৭৮, ইংরেজি) ➔ রামমোহন রায় (১৮৩৩, বাংলায় গৌড়ীয় ব্যাকরণ)।
-    </div>
-  </article>
+      btns.forEach(function(btn) {
+        btn.disabled = true;
+        var opt = btn.getAttribute('data-opt');
+        if (opt === correctOpt) {
+          btn.classList.add('correct');
+        } else if (opt === selectedOpt) {
+          btn.classList.add('wrong');
+        }
+      });
 
-  <!-- Theory Module 2: Origin of Bangla Language -->
-  <article class="theory-card">
-    <h2 class="section-head">🌐 বাংলা ভাষার উৎপত্তি ও বিবর্তন ধারা</h2>
-    <div class="key-point">
-      <strong>ভাষাগোষ্ঠী:</strong> বাংলা ভাষা বিশ্বের অন্যতম প্রধান ভাষাবংশ <strong>ইন্দো-ইউরোপীয় ভাষাগোষ্ঠীর</strong> অন্তর্ভুক্ত। ইন্দো-ইউরোপীয় ভাষার মূল দুটি শাখা হলো:
-      <ul style="margin-left: 20px; margin-top: 6px;">
-        <li><strong>শতম (Satam):</strong> পূর্বাঞ্চলীয় শাখা—যার অন্তর্ভুক্ত ইন্দো-ইরানীয় এবং তা থেকে ভারতীয় আর্য হয়ে বাংলার উৎপত্তি।</li>
-        <li><strong>কেন্তুম (Centum):</strong> পশ্চিমাঞ্চলীয় শাখা—তবে কেন্তুমের ২টি শাখা এশিয়ায় অবস্থিত: <strong>হিত্তিক (Hittic)</strong> এবং <strong>তোখারিক/তুখারিক (Tocharian)</strong>।</li>
-      </ul>
-    </div>
-    <div class="key-point">
-      <strong>বিবর্তন ক্রম:</strong> ইন্দো-ইউরোপীয় ➔ ইন্দো-ইরানীয় ➔ ভারতীয় আর্য ➔ প্রাকৃত ➔ অপভ্রংশ ➔ বাংলা।
-    </div>
-    
-    <div class="table-responsive">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>ভাষাতাত্ত্বিক পণ্ডিত</th>
-            <th>মূল উৎস ও অপভ্রংশ</th>
-            <th>উৎপত্তিকাল</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>ড. মুহম্মদ শহীদুল্লাহ</strong></td>
-            <td>গৌড়ী প্রাকৃত ➔ গৌড় অপভ্রংশ</td>
-            <td>সপ্তম শতাব্দী (আনুমানিক ৬৫০ খ্রি.)</td>
-          </tr>
-          <tr>
-            <td><strong>ড. সুনীতিকুমার চট্টোপাধ্যায়</strong></td>
-            <td>মাগধী প্রাকৃত ➔ মাগধী অপভ্রংশ</td>
-            <td>দশম শতাব্দী (আনুমানিক ৯৫০ খ্রি.)</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="note-box">
-      <strong>💡 বিশেষ তথ্য:</strong> ড. সুকুমার সেনের মতে বাংলা ভাষার আদিস্তরের স্থিতিকাল <strong>দশম থেকে চতুর্দশ শতাব্দী</strong> (৯০০-১৩৫০ খ্রি.)। অন্যদিকে সুকুমার সেন তাঁর 'ভাষার ইতিবৃত্ত' গ্রন্থে বলেছেন: <em>"ভাষা চিন্তার শুধু বাহনই নয়, চিন্তার প্রসূতিও।"</em>
-    </div>
-  </article>
-
-  <!-- Theory Module 3: Bangla Dialects & Script -->
-  <article class="theory-card">
-    <h2 class="section-head">🗺️ বাংলা উপভাষা ও লিপি প্রকরণ</h2>
-    <div class="key-point">
-      <strong>উপভাষা (Dialect):</strong> অঞ্চলভেদে ভাষার আঞ্চলিক রূপকে উপভাষা বলে। ড. সুকুমার সেন বাংলা উপভাষাকে ৫টি প্রধান শাখায় ভাগ করেছেন:
-      <ol style="margin-left: 20px; margin-top: 6px;">
-        <li><strong>রাঢ়ি:</strong> পশ্চিমবঙ্গের দক্ষিণ-পশ্চিম অংশ (কলকাতা, নদীয়া, হাওড়া, হুগলি ইত্যাদি)।</li>
-        <li><strong>বাঙ্গালি:</strong> বাংলাদেশের মধ্য ও দক্ষিণ অঞ্চল (বরিশাল, ঢাকা, ফরিদপুর, খুলনা, ময়মনসিংহ ইত্যাদি)।</li>
-        <li><strong>বরেন্দ্রি:</strong> উত্তর-পশ্চিম বঙ্গ (রাজশাহী, মালদহ, পাবনা, দিনাজপুর ইত্যাদি)।</li>
-        <li><strong>কামরূপি:</strong> রংপুর, জলপাইগুড়ি, আসামের কাছাড় ও বরাক অঞ্চল।</li>
-        <li><strong>ঝাড়খণ্ডি:</strong> পুরুলিয়া, মেদিনীপুর ও ঝাড়খণ্ডের সাঁওতাল পরগনা।</li>
-      </ol>
-    </div>
-
-    <div class="key-point">
-      <strong>বাংলা লিপি:</strong> বাংলা লিপির আদি উৎস <strong>ব্রাহ্মী লিপি</strong>। ব্রাহ্মী লিপির তিনটি রূপ রয়েছে: সারদা, নাগর ও কুটিল। ব্রাহ্মী লিপির পূর্ব-ভারতীয় কুটিল রূপ থেকে খ্রিস্টীয় দশম শতাব্দীতে বাংলা লিপির উৎপত্তি। বাংলা লিপিতে মোট বর্ণ ৫০টি (স্বরবর্ণ ১১টি এবং ব্যঞ্জনবর্ণ ৩৯টি)।
-    </div>
-
-    <div class="info-box">
-      <strong>💡 অনার্য ও দেশি শব্দ:</strong> বাংলার আদি অধিবাসীদের অনার্য বা অস্ট্রিক ভাষা থেকে অবিকৃতভাবে যে শব্দগুলো বাংলায় টিকে আছে সেগুলোকে <strong>দেশি শব্দ</strong> বলে (যেমন: ডাব, কুলা, পেট, চুলা, ডিঙা, চাল ইত্যাদি)।
-    </div>
-  </article>
-
-  <!-- Theory Module 4: Sadhu vs Cholito & Guru-Chandali -->
-  <article class="theory-card">
-    <h2 class="section-head">⚖️ সাধু ও চলিত ভাষার তুলনা এবং গুরুচণ্ডালী দোষ</h2>
-    <div class="table-responsive">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>বৈশিষ্ট্য</th>
-            <th>সাধু রীতি</th>
-            <th>চলিত / প্রমিত রীতি</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>রূপ ও পদবিন্যাস</strong></td>
-            <td>সুনিয়ন্ত্রিত, ব্যাকরণসিদ্ধ ও অপরিবর্তনীয়</td>
-            <td>পরিবর্তনশীল ও জীবন্ত মুখের ভাষা</td>
-          </tr>
-          <tr>
-            <td><strong>শব্দভাণ্ডার</strong></td>
-            <td>তৎসম (সংস্কৃত) শব্দবহুল ও গুরুগম্ভীর</td>
-            <td>তদ্ভব, দেশি ও বিদেশি শব্দের প্রাচুর্য</td>
-          </tr>
-          <tr>
-            <td><strong>সর্বনাম পদ</strong></td>
-            <td>দীর্ঘরূপ ও 'হ' যুক্ত (তাহারা, ইহাদের, যাহা)</td>
-            <td>হ্রস্বরূপ (তারা, এদের, যা)</td>
-          </tr>
-          <tr>
-            <td><strong>ক্রিয়াপদ</strong></td>
-            <td>পূর্ণাঙ্গ দীর্ঘরূপ (করিতেছি, খাইয়াছে)</td>
-            <td>সংক্ষিপ্ত হ্রস্বরূপ (করছি, খেয়েছে)</td>
-          </tr>
-          <tr>
-            <td><strong>প্রয়োগ উপযোগিতা</strong></td>
-            <td>নাটকের সংলাপ ও বক্তৃতায় সম্পূর্ণ অনুপযোগী</td>
-            <td>নাটকের সংলাপ ও বক্তৃতার জন্য অত্যন্ত উপযোগী</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="key-point" style="margin-top: 14px;">
-      <strong>গুরুচণ্ডালী দোষ:</strong> বাংলা ভাষায় তৎসম (সংস্কৃত) শব্দের সাথে খাঁটি দেশি শব্দের অনুপযুক্ত মিশ্রণকে <em>গুরুচণ্ডালী দোষ</em> বলে। এ দোষে দুষ্ট শব্দ তার ভাব ও সৌন্দর্য হারায়।
-    </div>
-
-    <div class="table-responsive">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>দোষযুক্ত শব্দ</th>
-            <th>মিশ্রণের ধরন (অশুদ্ধ)</th>
-            <th>শুদ্ধ রূপ (তৎসম / দেশি)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>শবপোড়া</td><td>শব (তৎসম) + পোড়া (দেশি)</td><td><strong>শবদাহ</strong> (তৎসম) বা <strong>মড়াপোড়া</strong> (দেশি)</td></tr>
-          <tr><td>মড়াদাহ</td><td>মড়া (দেশি) + দাহ (তৎসম)</td><td><strong>শবদাহ</strong> (তৎসম) বা <strong>মড়াপোড়া</strong> (দেশি)</td></tr>
-          <tr><td>শবমড়া</td><td>শব (তৎসম) + মড়া (দেশি)</td><td><strong>শবদাহ</strong> (তৎসম)</td></tr>
-          <tr><td>গরুর শকট</td><td>গরু (দেশি) + শকট (তৎসম)</td><td><strong>গরুর গাড়ি</strong> (দেশি) বা <strong>গো-শকট</strong> (তৎসম)</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </article>
-
-  <!-- Interactive Quiz Engine -->
-  <section class="quiz-section-header">
-    <div class="quiz-title">🎯 বিসিএস প্রিলিমিনারি আসল প্রশ্নব্যাংক (MCQ)</div>
-    <div class="score-tracker">
-      অগ্রগতি: <span id="answered-count">০</span> / <span id="total-count">18</span> | সঠিক: <span id="correct-count">০</span>
-    </div>
-  </section>
-
-  <section class="quiz-container">
-    <div id="quiz-cards-wrapper"></div>
-    <div class="quiz-footer-actions">
-      <button class="reset-btn" onclick="resetQuiz()">🔄 পুনরায় অনুশীলন করুন</button>
-    </div>
-  </section>
-
-</div>
-
-<script>
-// Universal Font Scaler Engine
-let currentScale = 1.0;
-function adjustFontSize(delta) {
-  currentScale = Math.min(1.4, Math.max(0.8, currentScale + delta));
-  document.documentElement.style.setProperty('--font-scale', currentScale + 'rem');
-  try {
-    localStorage.setItem('ebk_font_scale', currentScale);
-  } catch(e) {}
-}
-
-function resetFontSize() {
-  currentScale = 1.0;
-  document.documentElement.style.setProperty('--font-scale', '1rem');
-  try {
-    localStorage.setItem('ebk_font_scale', 1.0);
-  } catch(e) {}
-}
-
-// Theme Switcher Engine
-function toggleTheme() {
-  const htmlEl = document.documentElement;
-  const currentTheme = htmlEl.getAttribute('data-theme') || 'light';
-  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-  htmlEl.setAttribute('data-theme', newTheme);
-  const themeBtn = document.getElementById('theme-btn');
-  if (themeBtn) {
-    themeBtn.innerText = newTheme === 'light' ? '🌙' : '☀️';
-  }
-  try {
-    localStorage.setItem('theme', newTheme);
-  } catch(e) {}
-}
-
-// Scroll Progress Tracker
-window.addEventListener('scroll', () => {
-  const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-  const bar = document.getElementById('progress-bar');
-  if (bar) bar.style.width = scrolled + '%';
-});
-
-// Authentic Quiz Data
-const quizData = [
-  {
-    "id": 1,
-    "tag": "৪৭তম বিসিএস",
-    "q": "মনোএল দ্যা আসসুম্পসাঁও অভিধান প্রকাশের আগে কত বছর ধরে শব্দ সংগ্রহ করেন?",
-    "opts": [
-      "২-৩ বছর",
-      "৫-৭ বছর",
-      "৯-১০ বছর",
-      "১৪-১৫ বছর"
-    ],
-    "ans": 2,
-    "exp": "‘Vocabulario em idioma Bengalla, e Portuguez dividido em duas partes’ – গ্রন্থ রচনার জন্য ৯-১০ বছর ধরে শব্দ সংগ্রহ করেছেন। মনোএল ভাওয়ালের একটি গির্জায় ধর্মযাজকের দায়িত্ব পালনকালে ১৭৩৪-৪২ খ্রিষ্টাব্দের মধ্যে Vocabulario em idioma Bengalla, e Portuguez dividido em duas partes শীর্ষক গ্রন্থটি রচনা করেন। এটি ১৭৪৩ সালে প্রকাশ করেন।"
-  },
-  {
-    "id": 2,
-    "tag": "৪৭তম বিসিএস",
-    "q": "গৌড়ী প্রাকৃত বলতে বোঝায়-",
-    "opts": [
-      "গৌড় অঞ্চলের মুখের ভাষা",
-      "গৌড় সাহিত্যের স্বাভাবিক রীতি",
-      "গৌড় ভাষার লিখিত নমুনা",
-      "গৌড় ভাষার বিকৃত উচ্চারণ"
-    ],
-    "ans": 0,
-    "exp": "গৌড়ী প্রাকৃত বলতে বোঝায় গৌড় অঞ্চলের সাধারণ মানুষের মুখের ভাষা। ড. মুহম্মদ শহীদুল্লাহর মতে, গৌড় অঞ্চলের সাধারণ মানুষের মুখের ভাষা অর্থ প্রাকৃতজনের মুখের ভাষা থেকে বাংলা ভাষার উৎপত্তি হয়েছে। অর্থাৎ বাংলা ভাষার উৎপত্তি গৌড়ীয় প্রাকৃত থেকে। মুহম্মদ শহীদুল্লাহ মনে করেন ৬৫০ খ্রিষ্টাব্দের কাছাকাছি কোনো সময়ে, অর্থাৎ সপ্তম শতকে গৌড়ি প্রাকৃত থেকে জন্ম নিয়েছিল আধুনিকতম প্রাকৃত বাংলা ভাষা।"
-  },
-  {
-    "id": 3,
-    "tag": "৪৬তম বিসিএস",
-    "q": "বাংলা শব্দ ভাণ্ডারে অনার্য জাতির ব্যবহৃত শব্দ-",
-    "opts": [
-      "তৎসম",
-      "তদ্ভব",
-      "দেশি",
-      "বিদেশি"
-    ],
-    "ans": 2,
-    "exp": "প্রাচীনকালে এদেশের অধিবাসী ছিল অনার্য, দ্রাবিড়, কোল প্রভৃতি জাতি। তাদের ভাষা ও সংস্কৃতির কিছু শব্দ আর্যদের প্রভাবে পরিবর্তিত না হয়ে অবিকৃতভাবে বাংলা ভাষায় রক্ষিত হয়েছে। এগুলোকে দেশি শব্দ বলা হয়। উদাহরণ- পেট, ডাব, জারুল, টোপ, ডিঙা, চাউল ইত্যাদি। উল্লেখ্য, অনেক সময় দেশি শব্দের মূল নির্ণয় করা যায় না।"
-  },
-  {
-    "id": 4,
-    "tag": "৪৫তম বিসিএস",
-    "q": "সর্বপ্রথম বাংলা ভাষার ব্যাকরণ রচনা করেন কে?",
-    "opts": [
-      "মানোএল দা আসসুম্পসাঁউ",
-      "রাজা রামমোহন রায়",
-      "রামেন্দ্র সুন্দর ত্রিবেদী",
-      "নাথানিয়েল ব্রাসি হ্যালহেড"
-    ],
-    "ans": 0,
-    "exp": "প্রথম বাংলা ভাষার ব্যাকরণ রচনা করেন মানোএল দা আসসুম্পসাঁউ। পর্তুগালের রাজধানী লিসবন থেকে ১৭৪৩ সালে পর্তুগিজ ভাষায় প্রকাশিত গ্রন্থের নাম ছিল “Vocabulario em Idioma Bengalla E Portugues”। যদিও এটি বাংলা ভাষার ব্যাকরণের পূর্ণাঙ্গ কোনো গ্রন্থ ছিল না, একটা অধ্যায়ে বাংলা ভাষা নিয়ে কিছু আলোচনা করেছিলেন মাত্র। অন্যদিকে, বাংলা ভাষার প্রথম ব্যাকরণ গ্রন্থ রচনা করেন নাথানিয়েল ব্রাসি হ্যালহেড। ইংরেজি ভাষায় রচিত এই গ্রন্থের নাম ছিল “A Grammar of the Bengal Language”, গ্রন্থটি ১৭৭৮ সালে হুগলি থেকে প্রকাশিত হয়। এছাড়া ১৮০১ সালে উইলিয়াম কেরী ইংরেজি ভাষায় রচনা করেন “A Grammar of the Bengalee Language”। ১৮৪৬ সালে এর বঙ্গানুবাদ করেন জন রবিনসন। আবার, বাংলা ভাষায় বাংলা ব্যাকরণগ্রন্থ প্রথম রচনা করেন রাজা রামমোহন রায়। তাঁর রচিত বইয়ের নাম ছিল “গৌড়ীয় ব্যাকরণ”। গৌড়ীয় ব্যাকরণ প্রকাশিত হয় ১৮৩৩ সালে।"
-  },
-  {
-    "id": 5,
-    "tag": "৪৫তম বিসিএস",
-    "q": "\"ভাষা চিন্তার শুধু বাহনই নয়, চিন্তার প্রসূতিও।\" মন্তব্যটি কোন ভাষা-চিন্তকের?",
-    "opts": [
-      "সুনীতিকুমার চট্টোপাধ্যায়",
-      "মুহম্মদ শহীদুল্লাহ্",
-      "মুহম্মদ এনামুল হক",
-      "সুকুমার সেন"
-    ],
-    "ans": 3,
-    "exp": "প্রশ্নে উল্লিখিত মন্তব্যটি করেন প্রখ্যাত ভাষা-চিন্তক সুকুমার সেন। তিনি তাঁর ‘ভাষার ইতিবৃত্ত’ গ্রন্থের ‘ভাষা ও উপভাষা’ নামক অধ্যায়ে মন্তব্যটি করেন। গ্রন্থটি সর্বপ্রথম ১৯৩৯ সালে প্রকাশিত হয়।"
-  },
-  {
-    "id": 6,
-    "tag": "৪৩তম বিসিএস",
-    "q": "কেন্তুমের কোন দুটি শাখা এশিয়ার অন্তর্গত?",
-    "opts": [
-      "হিত্তিক ও তুখারিক",
-      "তামিল ও দ্রাবিড়",
-      "আর্য ও অনার্য",
-      "মাগধী ও গৌড়ী"
-    ],
-    "ans": 0,
-    "exp": "ইন্দো-ইউরোপীয় ভাষা গোষ্ঠীর প্রাচীন শাখা ৯টি। আধুনিককালে অনেকে ১০টি বলেও উল্লেখ করেছেন। ভাষাতাত্ত্বিক অধ্যাপক অ্যাসকোলি আদি ইন্দো-ইউরোপীয় ভাষাগোষ্ঠী থেকে সৃষ্ট ভাষাগুলোকে দুটো প্রধান ভাগে ভাগ করেছেন- শতম (Satam) ও কেন্তুম (Centum)। কেন্তুম ও শতম, এই বিভাজন হয়েছিল মূলত কণ্ঠবর্ণের উচ্চারণ বৈশিষ্ট্য লক্ষ্য করে। এই বিভাজনের ফলে ইন্দো-ইউরোপীয় ভাষা গোষ্ঠীর অন্তর্ভুক্ত ভাষাগুলোর ভেতর একটি ভৌগোলিক বিভাজনও পরিলক্ষিত হয়। অ্যাসকোলির মতানুসারে, কেন্তুম গোষ্ঠীর ভাষাগুলো সব পশ্চিমের আর শতম গোষ্ঠীর ভাষাগুলো সব পূর্বের। কিন্তু, তোখারিয়ান (তুখারিক) ও হিত্তি ভাষা আবিষ্কারের পর অনেক পণ্ডিতের কাছে এ ধরনের ভৌগোলিক বিভাগের ধারণা সমালোচনার মুখে পড়ে। বর্তমান কালে হিত্তি বা হিত্তিক (Hittic) ভাষা ইন্দো-ইউরোপীয় গোষ্ঠীর দশম শাখা হিসাবে পরিচিত। ড. মুহম্মদ শহীদুল্লাহর মতে, এশিয়া মাইনরে প্রায় দেড় হাজার খ্রিষ্টপূর্বে হিত্তি ভাষা প্রচলিত ছিল। তোখারিক ভাষা মধ্য এশিয়ায় খ্রিষ্টীয় অষ্টম শতক পর্যন্ত জীবিত ছিল।"
-  },
-  {
-    "id": 7,
-    "tag": "৪২তম বিশেষ বিসিএস",
-    "q": "মানুষের দেহের যে সব অঙ্গ-প্রত্যঙ্গ ধ্বনি তৈরিতে সহায়তা করে তাকে বলে?",
-    "opts": [
-      "বাক প্রত্যঙ্গ",
-      "অঙ্গধ্বনি",
-      "স্বরতন্ত্রী",
-      "নাসিকাতন্ত্র"
-    ],
-    "ans": 0,
-    "exp": "মানবদেহের যেসব অঙ্গ-প্রত্যঙ্গ ধ্বনি তৈরিতে সহায়তা করে তাদের বাক প্রত্যঙ্গ বলা হয়। বাক প্রত্যঙ্গগুলোকে একসঙ্গে বলা হয় বাগযন্ত্র। বাগযন্ত্রের মধ্যে আছে ফুসফুস, স্বরতন্ত্রী, গলনালি, জিভ, তালু, মাড়ি, দাঁত, ঠোঁট, নাক ইত্যাদি।"
-  },
-  {
-    "id": 8,
-    "tag": "৪২তম বিশেষ বিসিএস",
-    "q": "বাঙালি উপভাষা অঞ্চল কোনটি?",
-    "opts": [
-      "নদীয়া",
-      "ত্রিপুরা",
-      "পুরুলিয়া",
-      "বরিশাল"
-    ],
-    "ans": 3,
-    "exp": "ঝাড়খণ্ড থেকে শুরু করে কামরূপ পর্যন্ত বিস্তৃত অঞ্চলের কথ্য ভাষা হলো বাংলা। কথ্য রীতির পার্থক্য অঞ্চল ভেদে সহজেই বোঝা যায়। অঞ্চল ভেদে ভাষার এই ভিন্নতা উপভাষা নামে পরিচিত। অর্থাৎ, উপভাষা হলো একটি ভাষার আঞ্চলিক রূপ। কয়েকটি উপভাষার নাম- ১. বাঙ্গালি (বাংলাদেশের মধ্য ও দক্ষিণ অঞ্চল), ২. পূর্বি (বাংলাদেশের পূর্ব অঞ্চল, ত্রিপুরা এবং আসামের বরাক অঞ্চল), ৩. বরেন্দ্রি (বাংলাদেশের উত্তর-পশ্চিম অঞ্চল), ৪. কামরূপি (বিহারের পূর্ব অঞ্চল, পশ্চিমবঙ্গের উত্তর অঞ্চল এবং বাংলাদেশের রংপুর অঞ্চল), ৫. রাঢ়ি (পশ্চিমবঙ্গ), ৬. ঝাড়খণ্ডি (পশ্চিমবঙ্গের পশ্চিম অঞ্চল ও ঝাড়খণ্ডের পূর্ব অঞ্চল) প্রভৃতি। এই হিসেবে 'বাঙ্গালি' উপভাষা বাংলাদেশের মধ্য ও দক্ষিণ অঞ্চলে যে সকল জেলা রয়েছে, সেই সব অঞ্চলের ভাষা হিসেবে ব্যবহৃত হয়ে থাকে। উপযুক্ত আলোচনার প্রেক্ষিতে বলা যায়, প্রদত্ত অপশনগুলোর মধ্যে 'বরিশাল'ই সবচেয়ে যুক্তিসঙ্গত উত্তর।"
-  },
-  {
-    "id": 9,
-    "tag": "৪১তম বিসিএস",
-    "q": "বাংলা ভাষায় প্রথম অভিধান সংকলন করেন কে?",
-    "opts": [
-      "রামচন্দ্র বিদ্যাবাগীশ",
-      "রাজশেখর বসু",
-      "হরিচরণ দে",
-      "অশোক মুখোপাধ্যায়"
-    ],
-    "ans": 0,
-    "exp": "রামচন্দ্র বিদ্যাবাগীশ (১৭৮৬-১৮৪৫) একজন আভিধানিক ও পণ্ডিত। তিনি বাংলা ভাষার প্রথম অভিধান সংকলন করেন। তাঁর আদি নিবাস নদীয়া। ১৮১৮ সালে তিনি বাংলা ভাষার প্রথম অভিধান সংকলন করেন। তাঁর রচিত গ্রন্থ: জ্যোতিষ সংগ্রহার, পরমেশ্বরের উপাসনা-বিষয়ে প্রথম আখ্যান, বর্ণমালা, নীতিদর্শন প্রভৃতি।"
-  },
-  {
-    "id": 10,
-    "tag": "৩৯তম বিসিএস",
-    "q": "সাধু ও চলিত ভাষার মূল পার্থক্য কোন পদে বেশি বেশি দেখা যায়?",
-    "opts": [
-      "বিশেষ্য ও ক্রিয়া",
-      "বিশেষণ ও ক্রিয়া",
-      "বিশেষ্য ও বিশেষণ পদে",
-      "ক্রিয়া ও সর্বনাম"
-    ],
-    "ans": 3,
-    "exp": "সাধু রীতির সাধারণ বৈশিষ্ট্য: ১. সাধু রীতিতে ক্রিয়ারূপ দীর্ঘতর (যেমন- করা ক্রিয়ার রূপ: করিতেছে, করিয়াছে, করিল, করিলে, করিলাম, করিত, করিতেছিল, করিয়াছিল, করিব, করিবে, করিতে, করিয়া, করিলে, করিবার)। ২. সাধু রীতির বহু সর্বনামে 'হ'-বর্ণ যুক্ত থাকে (যেমন- তাহারা, ইহাদের, যাহা, তাহা, উহা, কেহ ইত্যাদি)। সুতরাং সাধু ভাষা ও চলিত ভাষার পার্থক্য ক্রিয়াপদ ও সর্বনাম পদের রূপে বেশি বেশি দেখা যায়।"
-  },
-  {
-    "id": 11,
-    "tag": "৩৫তম বিসিএস",
-    "q": "বাংলা ভাষায় শব্দ সাধন হয় না নিম্নোক্ত কোন উপায়ে?",
-    "opts": [
-      "সমাস দ্বারা",
-      "লিঙ্গ পরিবর্তন দ্বারা",
-      "উপসর্গ যোগে",
-      "ক, খ, ও গ তিন উপায়েই হয়"
-    ],
-    "ans": 1,
-    "exp": "বাংলা শব্দ গঠনের কয়েকটি উপায়: সমাসের মাধ্যমে, বহুবচনের মাধ্যমে, উপসর্গ যোগে, প্রত্যয় সহযোগে ইত্যাদি। লিঙ্গ পরিবর্তনের মাধ্যমে নতুন অর্থবাচক শব্দ তৈরি হয় না, কেবল পুরুষবাচক বা স্ত্রীবাচক ব্যাকরণিক রূপ নির্দেশিত হয়। তাই লিঙ্গ পরিবর্তন দ্বারা শব্দ সাধন হয় না।"
-  },
-  {
-    "id": 12,
-    "tag": "২৯তম বিসিএস",
-    "q": "'তৎসম' শব্দের ব্যবহার কোন রীতিতে বেশি হয়?",
-    "opts": [
-      "চলিত রীতি",
-      "সাধু রীতি",
-      "মিশ্র রীতি",
-      "আঞ্চলিক রীতি"
-    ],
-    "ans": 1,
-    "exp": "সাধু রীতি: বাংলা লেখ্য সাধু রীতি সুনির্ধারিত ব্যাকরণের নিয়ম অনুসরণ করে চলে এবং এর পদবিন্যাস সুনিয়ন্ত্রিত ও সুনির্দিষ্ট। এ রীতি গুরুগম্ভীর ও তৎসম শব্দবহুল। এ রীতি নাটকের সংলাপ ও বক্তৃতায় অনুপযোগী। এ রীতিতে সর্বনাম ও ক্রিয়াপদ এক বিশেষ গঠন পদ্ধতি মেনে চলে।"
-  },
-  {
-    "id": 13,
-    "tag": "১৮তম বিসিএস",
-    "q": "সাধু ভাষা সাধারণত কোথায় অনুপযোগী?",
-    "opts": [
-      "কবিতার পংক্তিতে",
-      "গানের কলিতে",
-      "গল্পের কলিতে",
-      "নাটকের সংলাপে"
-    ],
-    "ans": 3,
-    "exp": "সাধু রীতির অন্যতম প্রধান বৈশিষ্ট্য হলো এটি কৃত্রিম ও গুরুগম্ভীর। তাই নাটকের সংলাপ ও বক্তৃতায় সাধু ভাষা সম্পূর্ণ অনুপযোগী।"
-  },
-  {
-    "id": 14,
-    "tag": "১৭তম বিসিএস",
-    "q": "বাংলা ভাষার উদ্ভব হয়েছে নিম্নোক্ত একটি ভাষা থেকে-",
-    "opts": [
-      "সংস্কৃত",
-      "পালি",
-      "প্রাকৃত",
-      "অপভ্রংশ"
-    ],
-    "ans": 2,
-    "exp": "বাঙালি জনগোষ্ঠী যে ভাষা দিয়ে তাদের মনের ভাব প্রকাশ করে তার নাম বাংলা ভাষা। ইন্দো-ইউরোপীয় আদি ভাষা বহু বিবর্তনের মধ্য দিয়ে বাংলা ভাষায় পরিণত হয়েছে। এই বিবর্তনে যেসব গুরুত্বপূর্ণ স্তর অতিক্রম করতে হয়েছে, সেগুলো হলো: ইন্দো-ইউরোপীয় → ইন্দো-ইরানীয় → ভারতীয় আর্য → প্রাকৃত → বাংলা। আনুমানিক এক হাজার বছর আগে পূর্ব ভারতীয় প্রাকৃত ভাষা থেকে বাংলা ভাষার জন্ম হয়েছে।"
-  },
-  {
-    "id": 15,
-    "tag": "১৬তম ও ১৫তম বিসিএস",
-    "q": "সাধু ভাষা ও চলিত ভাষার পার্থক্য-",
-    "opts": [
-      "বাক্যের সরল ও জটিলরূপে",
-      "শব্দের রূপগত ভিন্নতায়",
-      "তৎসম ও অতৎসম শব্দের ব্যবহারে",
-      "ক্রিয়াপদ ও সর্বনাম পদের রূপগত ভিন্নতায়"
-    ],
-    "ans": 3,
-    "exp": "সাধু ভাষা ও চলিত ভাষার প্রধান পার্থক্য ক্রিয়াপদ ও সর্বনাম পদের রূপগত ভিন্নতায় পরিলক্ষিত হয়। যেমন: সাধু 'তাহারা করিতেছে' বনাম চলিত 'তারা করছে'।"
-  },
-  {
-    "id": 16,
-    "tag": "১৪তম বিসিএস",
-    "q": "বাংলা ভাষার আদিস্তরের স্থিতিকাল কোনটি?",
-    "opts": [
-      "দশম থেকে চতুর্দশ শতাব্দী",
-      "একাদশ থেকে পঞ্চাদশ শতাব্দী",
-      "দ্বাদশ থেকে ষোড়শ শতাব্দী",
-      "ত্রয়োদশ থেকে সপ্তাদশ শতাব্দী"
-    ],
-    "ans": 0,
-    "exp": "বর্তমানে অনেক ভাষাবিদের মতে, বাংলা ভাষা দশম শতকে উৎপত্তি লাভ করেছে। দশম থেকে চতুর্দশ শতাব্দী পর্যন্ত বাংলা ভাষার আদিস্তরের স্থিতিকাল বিবেচনা করা হয়। বাংলা ভাষার কালক্রম: প্রাচীন বাংলা: ১০ম থেকে ১৩৫০ শতক; মধ্যযুগ: ১৩৫০ থেকে ১৮ শতক; আধুনিক যুগের বাংলা: ১৯ শতক থেকে বর্তমান।"
-  },
-  {
-    "id": 17,
-    "tag": "১৪তম বিসিএস",
-    "q": "বাংলা লিপির উৎস কি?",
-    "opts": [
-      "সংস্কৃত লিপি",
-      "চীনা লিপি",
-      "আরবি লিপি",
-      "ব্রাহ্মী লিপি"
-    ],
-    "ans": 3,
-    "exp": "বাংলা লিপির উৎপত্তি: বাংলা ভাষার নিজস্ব লিপি রয়েছে। এই লিপির নাম বাংলা লিপি। বাংলা লিপির আদি উৎস ব্রাহ্মীলিপি। প্রায় আড়াই হাজার বছর আগে উপমহাদেশে ব্রাহ্মী লিপির জন্ম হয়। ব্রাহ্মী লিপির পূর্ব-ভারতীয় শাখা দশম শতক নাগাদ কুটিল লিপি নামে পরিচিতি লাভ করে। বাংলা লিপি এই কুটিল লিপির পরিবর্তিত রূপ। ব্রাহ্মী লিপির তিনটি রূপ রয়েছে- সারদা, নাগর ও কুটিল।"
-  },
-  {
-    "id": 18,
-    "tag": "১০ম বিসিএস",
-    "q": "গুরুচণ্ডালী দোষমুক্ত কোনটি?",
-    "opts": [
-      "শবপোড়া",
-      "মড়াদাহ",
-      "শবদাহ",
-      "শবমড়া"
-    ],
-    "ans": 2,
-    "exp": "গুরুচণ্ডালী দোষ: বাংলা ভাষায় তৎসম শব্দের সঙ্গে দেশীয় শব্দের মিশ্রণ ঘটলে যে সমস্যার সৃষ্টি হয় তাকে গুরুচণ্ডালী দোষ বলে। এ দোষে দুষ্ট শব্দ তার যোগ্যতা হারায়। উদাহরণ- শবপোড়া: শব (তৎসম) + পোড়া (দেশি), মড়াদাহ: মড়া (দেশি) + দাহ (তৎসম), শবমড়া: শব (তৎসম) + মড়া (দেশি)। আর 'শবদাহ': শব (তৎসম) + দাহ (তৎসম) হওয়ায় এটি সম্পূর্ণ নির্দোষ ও শুদ্ধ।"
-  }
-];
-
-let userAnswers = {};
-
-function renderQuiz() {
-  const container = document.getElementById('quiz-cards-wrapper');
-  container.innerHTML = '';
-  const letters = ['ক', 'খ', 'গ', 'ঘ'];
-  
-  quizData.forEach((qItem, idx) => {
-    const card = document.createElement('div');
-    card.className = 'quiz-card';
-    card.id = `qcard-${qItem.id}`;
-    
-    let optsHtml = '';
-    qItem.opts.forEach((opt, oIdx) => {
-      optsHtml += `
-        <button class="opt-btn" onclick="checkAnswer(${qItem.id}, ${oIdx})" id="opt-${qItem.id}-${oIdx}">
-          <strong>${letters[oIdx]}.</strong> ${opt}
-        </button>
-      `;
-    });
-    
-    card.innerHTML = `
-      <div class="question-header">
-        <div class="q-text">${idx + 1}. ${qItem.q}</div>
-        <span class="q-tag">${qItem.tag}</span>
-      </div>
-      <div class="options-grid">
-        ${optsHtml}
-      </div>
-      <div class="explanation-box" id="exp-${qItem.id}">
-        <strong>💡 ব্যাখ্যা:</strong> ${qItem.exp}
-      </div>
-    `;
-    container.appendChild(card);
-  });
-  
-  const totalCountEl = document.getElementById('total-count');
-  if (totalCountEl) totalCountEl.innerText = quizData.length;
-}
-
-function checkAnswer(qId, selectedOpt) {
-  if (userAnswers[qId] !== undefined) return;
-  userAnswers[qId] = selectedOpt;
-  
-  const qData = quizData.find(d => d.id === qId);
-  const card = document.getElementById(`qcard-${qId}`);
-  const isCorrect = selectedOpt === qData.ans;
-  
-  for(let i = 0; i < qData.opts.length; i++) {
-    const btn = document.getElementById(`opt-${qId}-${i}`);
-    if (btn) {
-      btn.disabled = true;
-      if (i === qData.ans) {
-        btn.classList.add('correct-choice');
-      } else if (i === selectedOpt) {
-        btn.classList.add('wrong-choice');
+      if (selectedOpt === correctOpt) {
+        correctScore++;
+      } else {
+        wrongScore++;
       }
-    }
-  }
-  
-  if (card) {
-    if (isCorrect) {
-      card.classList.add('answered-correct');
-    } else {
-      card.classList.add('answered-wrong');
-    }
-  }
-  
-  const expBox = document.getElementById(`exp-${qId}`);
-  if (expBox) expBox.style.display = 'block';
-  updateScore();
-}
 
-function updateScore() {
-  const answeredTotal = Object.keys(userAnswers).length;
-  let correctTotal = 0;
-  for(let qId in userAnswers) {
-    const qData = quizData.find(d => d.id == qId);
-    if(qData && userAnswers[qId] === qData.ans) {
-      correctTotal++;
-    }
-  }
-  const ansEl = document.getElementById('answered-count');
-  const corEl = document.getElementById('correct-count');
-  if (ansEl) ansEl.innerText = answeredTotal;
-  if (corEl) corEl.innerText = correctTotal;
-}
+      document.getElementById('correctCount').innerText = correctScore.toLocaleString('bn-BD');
+      document.getElementById('wrongCount').innerText = wrongScore.toLocaleString('bn-BD');
 
-function resetQuiz() {
-  userAnswers = {};
-  renderQuiz();
-  updateScore();
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  renderQuiz();
-  try {
-    const savedScale = localStorage.getItem('ebk_font_scale');
-    if (savedScale) {
-      currentScale = parseFloat(savedScale);
-      document.documentElement.style.setProperty('--font-scale', currentScale + 'rem');
+      var exp = document.getElementById('exp-' + qId);
+      if (exp) exp.classList.add('show');
     }
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      const themeBtn = document.getElementById('theme-btn');
-      if (themeBtn) themeBtn.innerText = savedTheme === 'light' ? '🌙' : '☀️';
-    }
-  } catch(e) {}
-});
-</script>
 
-<!-- Smart E-Book Navigation Component -->
-<script src="nav-component.js"></script>
+    function toggleExp(qId) {
+      var exp = document.getElementById('exp-' + qId);
+      if (exp) exp.classList.toggle('show');
+    }
+
+    function resetQuiz() {
+      answeredQuestions = {};
+      correctScore = 0;
+      wrongScore = 0;
+      document.getElementById('correctCount').innerText = '০';
+      document.getElementById('wrongCount').innerText = '০';
+
+      document.querySelectorAll('.opt-btn').forEach(function(btn) {
+        btn.disabled = false;
+        btn.classList.remove('correct', 'wrong');
+      });
+
+      document.querySelectorAll('.explanation-drawer').forEach(function(drawer) {
+        drawer.classList.remove('show');
+      });
+    }
+
+    function toggleTheme() {
+      var current = document.documentElement.getAttribute('data-theme') || 'light';
+      var next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      var btn = document.getElementById('themeBtn');
+      if (btn) btn.innerText = next === 'light' ? '🌙' : '☀️';
+      try {
+        localStorage.setItem('theme', next);
+        localStorage.setItem('ebk_portal_theme', next);
+      } catch(e) {}
+    }
+
+    var fontScale = 1;
+    function adjustFont(delta) {
+      fontScale = Math.min(Math.max(fontScale + delta, 0.85), 1.3);
+      document.documentElement.style.setProperty('--font-scale', fontScale);
+    }
+    function resetFont() {
+      fontScale = 1;
+      document.documentElement.style.setProperty('--font-scale', 1);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var saved = document.documentElement.getAttribute('data-theme') || 'light';
+      var btn = document.getElementById('themeBtn');
+      if (btn) btn.innerText = saved === 'light' ? '🌙' : '☀️';
+    });
+  </script>
+  <!-- Smart E-Book Navigation Component -->
+  <script src="nav-component.js"></script>
 </body>
 </html>

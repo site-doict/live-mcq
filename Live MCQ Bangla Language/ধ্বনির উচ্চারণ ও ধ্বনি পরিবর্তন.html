@@ -1,1005 +1,868 @@
-<!-- DESIGN PLAN:
-1. বিষয়ের ধরন: ধ্বনিতত্ত্ব (ধ্বনির উচ্চারণ বিধি ও ধ্বনি পরিবর্তন - স্বরাগম, স্বরলোপ, অপিনিহিতি, অভিশ্রুতি, স্বরসঙ্গতি, সমীভবন, বিষমীভবন, ধ্বনি বিপর্যয় এবং বিসিএস প্রশ্নাবলি)।
-2. গুরুত্বপূর্ণ বিষয় ও সূক্ষ্ম পার্থক্য:
-   - অপিনিহিতি বনাম অভিশ্রুতি: পরের ই/উ আগে এলে অপিনিহিতি (করিয়া > কইরা); আর বিপর্যস্থ ই/উ মিলে গিয়ে সংকুচিত হলে অভিশ্রুতি (কইরা > করে)।
-   - স্বরসঙ্গতি: এক স্বরের প্রভাবে অন্য স্বরের পরিবর্তন (দেশি > দিশি, বিলাতি > বিলিতি)।
-   - সমীভবন: দুটি ভিন্ন ব্যঞ্জনের এক রূপ ধারণ (জন্ম > জম্ম, কাঁদনা > কান্না)।
-   - বিষমীভবন: দুটি সমব্যঞ্জনের একটির পরিবর্তন (শরীর > শরীল, লাল > নাল)।
-   - বর্ণ বিপর্যয়: পাশাপাশি দুটি ব্যঞ্জনের স্থানবদল (পিশাচ > পিচাশ, বাক্স > বাস্ ক)।
-   - এ-কারের উচ্চারণ: রবীন্দ্রনাথের সংস্কার—বিবৃত [অ্যা] বোঝাতে মাত্রাযুক্ত এবং স্বাভাবিক [এ] বোঝাতে মাত্রাহীন এ-কার।
-3. বিশেষ মডিউল:
-   - বিসিএস প্রশ্ন পরিসংখ্যান ছক (৫০তম থেকে ১০ম বিসিএস পর্যন্ত ১৫টি প্রশ্ন)।
-   - ধ্বনি পরিবর্তনের মহাধারা তুলনামূলক সারণি।
-   - উচ্চারণ স্থান ও বাগযন্ত্রের অঙ্গসমূহ।
-   - ১৫টি আসল বিসিএস প্রশ্নের পূর্ণাঙ্গ লাইভ কুইজ ইঞ্জিন।
-4. রঙের মেজাজ: ধ্বনি ও রূপান্তরের জন্য ডিপ এমেরাল্ড ও ওশান সায়ান (#0f766e, #0e7490), পার্চমেন্ট ব্যাকগ্রাউন্ড, গোল্ডেন অ্যাম্বার অ্যাকসেন্ট।
--->
 <!DOCTYPE html>
 <html lang="bn" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ধ্বনির উচ্চারণ ও ধ্বনি পরিবর্তন - বিসিএস পূর্ণাঙ্গ স্মার্ট ইবুক</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root {
-  --font-base: 'Noto Serif Bengali', serif, system-ui, sans-serif;
-  --bg-primary: #f8fafc;
-  --bg-card: #ffffff;
-  --text-main: #1e293b;
-  --text-muted: #64748b;
-  --primary: #0e7490;
-  --primary-light: #cffafe;
-  --primary-dark: #155e75;
-  --accent: #d97706;
-  --accent-light: #fef3c7;
-  --success: #16a34a;
-  --success-bg: #dcfce7;
-  --danger: #dc2626;
-  --danger-bg: #fee2e2;
-  --border: #e2e8f0;
-  --border-strong: #cbd5e1;
-  --shadow: 0 4px 14px rgba(14, 116, 144, 0.08);
-  --radius: 12px;
-  --font-scale: 1rem;
-}
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch(e) {}
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+  <title>ধ্বনির উচ্চারণ ও ধ্বনি পরিবর্তন | বিসিএস প্রিলিমিনারি স্মার্ট ই-বুক</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --font-scale: 1;
+      --bg-primary: #F8FAFC;
+      --bg-surface: #FFFFFF;
+      --text-primary: #0F172A;
+      --text-secondary: #475569;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --primary: #0F766E;
+      --primary-light: #CCFBF1;
+      --accent: #D97706;
+      --accent-light: #FEF3C7;
+      --success: #15803D;
+      --success-light: #DCFCE7;
+      --danger: #B91C1C;
+      --danger-light: #FEE2E2;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+      --radius-sm: 0.375rem;
+      --radius-md: 0.625rem;
+      --radius-lg: 0.875rem;
+    }
 
-[data-theme="dark"] {
-  --bg-primary: #0f172a;
-  --bg-card: #1e293b;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --primary: #38bdf8;
-  --primary-light: #164e63;
-  --primary-dark: #0284c7;
-  --accent: #fbbf24;
-  --accent-light: #451a03;
-  --success: #22c55e;
-  --success-bg: #14532d;
-  --danger: #f87171;
-  --danger-bg: #7f1d1d;
-  --border: #334155;
-  --border-strong: #475569;
-  --shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
-}
+    [data-theme="dark"] {
+      --bg-primary: #090D16;
+      --bg-surface: #111827;
+      --text-primary: #F8FAFC;
+      --text-secondary: #CBD5E1;
+      --text-muted: #94A3B8;
+      --border-color: #1E293B;
+      --primary: #14B8A6;
+      --primary-light: rgba(20, 184, 166, 0.15);
+      --accent: #F59E0B;
+      --accent-light: rgba(245, 158, 11, 0.15);
+      --success: #22C55E;
+      --success-light: rgba(34, 197, 94, 0.15);
+      --danger: #EF4444;
+      --danger-light: rgba(239, 68, 68, 0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.4);
+    }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  overflow-wrap: break-word;
-  margin: 0;
-  padding: 0;
-  font-family: var(--font-base);
-}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { max-width: 100vw; overflow-x: clip; box-sizing: border-box; }
+    body {
+      font-family: 'Noto Serif Bengali', serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: calc(1rem * var(--font-scale));
+      line-height: 1.65;
+      padding-bottom: 5rem;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
 
-html {
-  overflow-x: clip;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  font-size: var(--font-scale);
-}
+    .container { max-width: 52rem; margin: 0 auto; padding: 1rem 0.85rem; }
 
-body {
-  background-color: var(--bg-primary);
-  color: var(--text-main);
-  line-height: 1.8;
-  padding-bottom: 80px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  overflow-x: clip;
-}
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
 
-#progress-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 5px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  width: 0%;
-  z-index: 10000;
-  transition: width 0.12s ease-out;
-}
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 0.4rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Inter', inherit;
+    }
 
-.top-control-bar {
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  background: var(--bg-card);
-  border-bottom: 1.5px solid var(--border);
-  padding: 8px 14px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  box-shadow: var(--shadow);
-}
+    .nav-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-light);
+    }
 
-.brand-badge {
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--primary);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+    .nav-actions { display: flex; align-items: center; gap: 0.5rem; }
 
-.controls {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+    .header-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
 
-button.ctrl-btn {
-  background: var(--bg-primary);
-  color: var(--text-main);
-  border: 1px solid var(--border-strong);
-  padding: 5px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 600;
-  transition: all 0.2s;
-  touch-action: manipulation;
-}
+    .header-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
 
-button.ctrl-btn:hover {
-  background: var(--primary-light);
-  border-color: var(--primary);
-  color: var(--primary);
-}
+    .ch-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      padding: 0.2rem 0.65rem;
+      border-radius: 9999px;
+      margin-bottom: 0.5rem;
+    }
 
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 10px 12px 40px 12px;
-}
+    .ch-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.01em;
+    }
 
-@media (max-width: 600px) {
-  .container {
-    padding: 6px 8px 30px 8px;
-  }
-}
+    .ch-subtitle {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
 
-.hero-card {
-  background: linear-gradient(135deg, rgba(14, 116, 144, 0.08) 0%, rgba(217, 119, 6, 0.06) 100%);
-  border: 1.5px solid var(--border);
-  border-left: 6px solid var(--primary);
-  border-radius: var(--radius);
-  padding: 18px 20px;
-  margin-bottom: 22px;
-  box-shadow: var(--shadow);
-}
+    .bcs-table-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      overflow-x: auto;
+    }
 
-.hero-title {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--primary);
-  margin-bottom: 6px;
-  line-height: 1.35;
-}
+    .bcs-table-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
 
-.hero-subtitle {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+      text-align: center;
+    }
 
-.bcs-table-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px;
-  margin-bottom: 24px;
-  box-shadow: var(--shadow);
-}
+    .bcs-table th, .bcs-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.4rem 0.25rem;
+      white-space: nowrap;
+    }
 
-.card-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--primary);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 600;
+    }
 
-.table-responsive {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  margin-bottom: 8px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-}
+    .score-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.6rem 1rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: sticky;
+      top: 0.5rem;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+    }
 
-table.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center;
-  font-size: 0.92rem;
-  background: var(--bg-card);
-}
+    .score-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8125rem; font-weight: 600; }
+    .score-val { font-size: 1rem; font-weight: 800; font-family: 'Inter', inherit; }
+    .score-total .score-val { color: var(--primary); }
+    .score-correct .score-val { color: var(--success); }
+    .score-wrong .score-val { color: var(--danger); }
 
-table.data-table th {
-  background: var(--primary);
-  color: #ffffff;
-  padding: 8px 10px;
-  font-weight: 700;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  white-space: nowrap;
-}
+    .q-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
 
-table.data-table td {
-  padding: 7px 10px;
-  border: 1px solid var(--border);
-  color: var(--text-main);
-  white-space: nowrap;
-}
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+    }
 
-table.data-table tr:nth-child(even) {
-  background-color: var(--bg-primary);
-}
+    .q-text {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
 
-.theory-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px 18px;
-  margin-bottom: 20px;
-  box-shadow: var(--shadow);
-}
+    .bcs-tag {
+      flex-shrink: 0;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.725rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 9999px;
+      white-space: nowrap;
+    }
 
-.section-head {
-  font-size: 1.22rem;
-  font-weight: 700;
-  color: var(--primary);
-  border-bottom: 2px solid var(--primary-light);
-  padding-bottom: 6px;
-  margin-bottom: 12px;
-}
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
 
-.key-point {
-  margin-bottom: 10px;
-  line-height: 1.75;
-}
+    @media (max-width: 580px) {
+      .options-grid { grid-template-columns: 1fr; }
+    }
 
-.key-point strong {
-  color: var(--accent);
-}
+    .opt-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem 0.65rem;
+      text-align: left;
+      font-family: inherit;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+    }
 
-.note-box {
-  background: var(--accent-light);
-  border-left: 4px solid var(--accent);
-  padding: 10px 14px;
-  border-radius: 6px;
-  margin: 12px 0;
-  font-size: 0.92rem;
-  line-height: 1.7;
-}
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
 
-[data-theme="dark"] .note-box {
-  background: rgba(217, 119, 6, 0.15);
-  border-left-color: var(--accent);
-  color: #fef3c7;
-}
+    .opt-prefix {
+      font-weight: 700;
+      color: var(--primary);
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--primary-light);
+      font-size: 0.8125rem;
+    }
 
-.info-box {
-  background: var(--primary-light);
-  border-left: 4px solid var(--primary);
-  padding: 10px 14px;
-  border-radius: 6px;
-  margin: 12px 0;
-  font-size: 0.92rem;
-  line-height: 1.7;
-}
+    .opt-btn.correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+      color: var(--success) !important;
+      font-weight: 600;
+    }
 
-[data-theme="dark"] .info-box {
-  background: rgba(56, 189, 248, 0.15);
-  border-left-color: var(--primary);
-  color: #cffafe;
-}
+    .opt-btn.correct .opt-prefix {
+      background: var(--success);
+      color: #FFFFFF;
+    }
 
-/* Quiz Section */
-.quiz-section-header {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: #ffffff;
-  padding: 14px 18px;
-  border-radius: var(--radius) var(--radius) 0 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
+    .opt-btn.wrong {
+      background: var(--danger-light) !important;
+      border-color: var(--danger) !important;
+      color: var(--danger) !important;
+    }
 
-.quiz-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-}
+    .opt-btn.wrong .opt-prefix {
+      background: var(--danger);
+      color: #FFFFFF;
+    }
 
-.score-tracker {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.88rem;
-  font-weight: 600;
-}
+    .explanation-drawer {
+      display: none;
+      margin-top: 0.75rem;
+      padding: 0.875rem;
+      background: var(--primary-light);
+      border-radius: var(--radius-md);
+      border-left: 3px solid var(--primary);
+      font-size: 0.875rem;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
 
-.quiz-container {
-  border: 1px solid var(--border);
-  border-top: none;
-  border-radius: 0 0 var(--radius) var(--radius);
-  padding: 16px 14px;
-  background: var(--bg-card);
-  margin-bottom: 30px;
-}
+    .explanation-drawer.show { display: block; animation: fadeIn 0.2s ease-in; }
 
-.quiz-card {
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 14px;
-  margin-bottom: 16px;
-  transition: all 0.2s ease;
-}
+    .explanation-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
 
-.quiz-card.answered-correct {
-  border-color: var(--success);
-  background: rgba(22, 163, 74, 0.04);
-}
+    .exp-toggle-btn {
+      margin-top: 0.25rem;
+      background: transparent;
+      border: 1px dashed var(--primary);
+      color: var(--primary);
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: inherit;
+    }
 
-.quiz-card.answered-wrong {
-  border-color: var(--danger);
-  background: rgba(220, 38, 38, 0.04);
-}
+    .exp-toggle-btn:hover { background: var(--primary-light); }
 
-.question-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 8px;
-  margin-bottom: 12px;
-}
+    .footer-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+    }
 
-.q-text {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--text-main);
-  line-height: 1.6;
-  flex: 1;
-}
+    .footer-btn {
+      flex: 1;
+      padding: 0.65rem 0.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+    }
 
-.q-tag {
-  background: var(--primary-light);
-  color: var(--primary-dark);
-  padding: 2px 8px;
-  border-radius: 6px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  white-space: nowrap;
-}
+    .footer-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
 
-[data-theme="dark"] .q-tag {
-  background: var(--primary-dark);
-  color: #cffafe;
-}
-
-.options-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-
-@media (max-width: 600px) {
-  .options-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-button.opt-btn {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text-main);
-  padding: 10px 12px;
-  border-radius: 8px;
-  text-align: left;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  touch-action: manipulation;
-}
-
-button.opt-btn:hover:not(:disabled) {
-  border-color: var(--primary);
-  background: var(--primary-light);
-  color: var(--primary);
-}
-
-button.opt-btn.correct-choice {
-  background: var(--success-bg) !important;
-  border-color: var(--success) !important;
-  color: var(--success) !important;
-  font-weight: 700;
-}
-
-button.opt-btn.wrong-choice {
-  background: var(--danger-bg) !important;
-  border-color: var(--danger) !important;
-  color: var(--danger) !important;
-  font-weight: 700;
-}
-
-.explanation-box {
-  display: none;
-  margin-top: 10px;
-  padding: 10px 12px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--primary);
-  border-radius: 6px;
-  font-size: 0.9rem;
-  line-height: 1.7;
-  color: var(--text-main);
-}
-
-.explanation-box strong {
-  color: var(--primary);
-}
-
-.quiz-footer-actions {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 14px;
-}
-
-.reset-btn {
-  background: var(--primary);
-  color: white;
-  border: none;
-  padding: 8px 18px;
-  border-radius: 8px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.reset-btn:hover {
-  opacity: 0.9;
-}
-</style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <nav class="top-nav">
+      <a href="index.html" class="nav-btn">← সূচিপত্র</a>
+      <div class="nav-actions">
+        <button class="nav-btn" onclick="adjustFont(-0.05)" title="ফন্ট ছোট করুন">A-</button>
+        <button class="nav-btn" onclick="resetFont()" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="nav-btn" onclick="adjustFont(0.05)" title="ফন্ট বড় করুন">A+</button>
+        <button class="nav-btn" onclick="toggleTheme()" id="themeBtn" title="থিম পরিবর্তন">🌙</button>
+        <button class="nav-btn" onclick="resetQuiz()" title="কুইজ পুনরায় শুরু">↺ রিসেট</button>
+      </div>
+    </nav>
 
-<div id="progress-bar"></div>
+    <header class="header-card">
+      <span class="ch-badge">অধ্যায় ০৩</span>
+      <h1 class="ch-title">ধ্বনির উচ্চারণ ও ধ্বনি পরিবর্তন</h1>
+      <p class="ch-subtitle">অপিনিহিতি, বিষমীভবন, সমীকরণ, স্বরভক্তি বা বিপ্রকর্ষ (পৃষ্ঠা ১০–১২)</p>
+    </header>
 
-<div class="top-control-bar">
-  <div class="brand-badge">
-    <span>📖</span> বাংলা ভাষা ও ব্যাকরণ
+    <section class="bcs-table-card">
+      <h2 class="bcs-table-title">📊 বিগত বিসিএস পরীক্ষায় এ অধ্যায়ের প্রশ্ন বিশ্লেষণ</h2>
+      <table class="bcs-table">
+        <thead>
+          <tr>
+            <th>বিসিএস</th><th>প্রশ্ন</th>
+            <th>বিসিএস</th><th>প্রশ্ন</th>
+            <th>বিসিএস</th><th>প্রশ্ন</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td>৫০তম</td><td>১</td>
+              <td>৪৪তম</td><td>১</td>
+              <td>৩৮তম</td><td>১</td>
+            </tr>
+            <tr>
+              <td>৪৯তম</td><td>২</td>
+              <td>৪৩তম</td><td>২</td>
+              <td>৩৭তম</td><td>০</td>
+            </tr>
+            <tr>
+              <td>৪৮তম</td><td>০</td>
+              <td>৪২তম</td><td>০</td>
+              <td>৩৬তম</td><td>১</td>
+            </tr>
+            <tr>
+              <td>৪৭তম</td><td>১</td>
+              <td>৪১তম</td><td>১</td>
+              <td>৩৫তম</td><td>১</td>
+            </tr>
+            <tr>
+              <td>৪৬তম</td><td>১</td>
+              <td>৪০তম</td><td>০</td>
+              <td>১০ম-৩৪তম</td><td>২</td>
+            </tr>
+            <tr>
+              <td>৪৫তম</td><td>১</td>
+              <td>৩৯তম</td><td>০</td>
+              <td>মোট</td><td>১৫</td>
+            </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Sticky Score Tracker -->
+    <div class="score-card">
+      <div class="score-item score-total">
+        <span>মোট প্রশ্ন:</span>
+        <span class="score-val" id="totalQuestions">১৫</span>
+      </div>
+      <div class="score-item score-correct">
+        <span>সঠিক:</span>
+        <span class="score-val" id="correctCount">০</span>
+      </div>
+      <div class="score-item score-wrong">
+        <span>ভুল:</span>
+        <span class="score-val" id="wrongCount">০</span>
+      </div>
+    </div>
+
+    <!-- Questions Section -->
+    <main id="quizContainer">
+      <!-- Q1 -->
+      <article class="q-card" id="q1" data-correct="ঘ">
+        <div class="q-header">
+          <h2 class="q-text">১. একটি স্বরধ্বনির প্রভাবে শব্দে অপর স্বরের পরিবর্তন ঘটলে তাকে বলে-</h2>
+          <span class="bcs-tag">৫০তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q1', 'ক')"><span class="opt-prefix">ক</span><span>অভিশ্রুতি</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q1', 'খ')"><span class="opt-prefix">খ</span><span>অপিনিহিতি</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q1', 'গ')"><span class="opt-prefix">গ</span><span>সমীভবন</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q1', 'ঘ')"><span class="opt-prefix">ঘ</span><span>স্বরসঙ্গতি</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q1')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q1">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>একটি স্বরধ্বনির প্রভাবে শব্দে অন্য স্বরধ্বনির সংগতি বা পরিবর্তন ঘটলে তাকে স্বরসঙ্গতি (Vowel Harmony) বলে। যেমন- দেশি > দিশি, বিলাতি > বিলিতি, মূলা > মুলো ইত্যাদি। অন্যদিকে পরের ই-কার বা উ-কার আগে উচ্চারিত হলে অপিনিহিতি (আজি > আইজ); দুটি ভিন্ন ব্যঞ্জন একে অপরের প্রভাবে সমতা লাভ করলে সমীভবন (জন্ম > জন্ম, কাঁদনা > কান্না); এবং বিপর্যস্থ স্বরধ্বনি পূর্ববর্তী স্বরের সাথে মিলে গেলে অভিশ্রুতি (করিয়া > কইরা > করে) হয়।</p>
+        </div>
+      </article>
+
+      <!-- Q2 -->
+      <article class="q-card" id="q2" data-correct="গ">
+        <div class="q-header">
+          <h2 class="q-text">২. কোন ধ্বনি পরিবর্তনটি যথাযথ নয়?</h2>
+          <span class="bcs-tag">৪৯তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q2', 'ক')"><span class="opt-prefix">ক</span><span>ক্রন্দন > কাঁদা</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q2', 'খ')"><span class="opt-prefix">খ</span><span>অঞ্চল > আঁচল</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q2', 'গ')"><span class="opt-prefix">গ</span><span>সংগীত > গীতিকা</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q2', 'ঘ')"><span class="opt-prefix">ঘ</span><span>দন্ত > দাঁত</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q2')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q2">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>তৎসম শব্দ থেকে তদ্ভব শব্দ গঠনের প্রক্রিয়ায় ধ্বনি পরিবর্তন ঘটে। যেমন: ক্রন্দন > কাঁদা, অঞ্চল > আঁচল, দন্ত > দাঁত (নাসিক্যীভবন ও স্বরভক্তি)। কিন্তু 'সংগীত > গীতিকা' কোনো সরাসরি ধ্বনি পরিবর্তনের উদাহরণ নয়; এটি প্রত্যয়যোগে (গীত + ইকা) গঠিত নতুন শব্দ।</p>
+        </div>
+      </article>
+
+      <!-- Q3 -->
+      <article class="q-card" id="q3" data-correct="ঘ">
+        <div class="q-header">
+          <h2 class="q-text">৩. রবীন্দ্রনাথ ঠাকুর শব্দের শুরুতে মাত্রাযুক্ত এ-কার ব্যবহার করতেন কেন?</h2>
+          <span class="bcs-tag">৪৯তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q3', 'ক')"><span class="opt-prefix">ক</span><span>এ-কার মাত্রা যুক্ত বলে</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q3', 'খ')"><span class="opt-prefix">খ</span><span>'এ' মাত্রাহীন বর্ণ বলে</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q3', 'গ')"><span class="opt-prefix">গ</span><span>'এ' উচ্চারণ বোঝাতে</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q3', 'ঘ')"><span class="opt-prefix">ঘ</span><span>'অ্যা' উচ্চারণ বোঝাতে</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q3')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q3">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>বাংলায় 'এ'-কারের উচ্চারণ দুই রকম: সংবৃত বা স্বাভাবিক [এ] এবং বিবৃত [অ্যা]। শব্দের শুরুতে মাত্রাহীন এ-কার স্বাভাবিক [এ] এবং রবীন্দ্রনাথ ঠাকুর শব্দের শুরুতে বিবৃত [অ্যা] উচ্চারণ নির্দেশ করতে মাত্রাযুক্ত এ-কার ব্যবহারের প্রস্তাব ও প্রচলন করেছিলেন।</p>
+        </div>
+      </article>
+
+      <!-- Q4 -->
+      <article class="q-card" id="q4" data-correct="ক">
+        <div class="q-header">
+          <h2 class="q-text">৪. পূর্ববঙ্গীয় উচ্চারণে 'স্মরণ' শব্দের ক্ষেত্রে কোনটি ঘটে?</h2>
+          <span class="bcs-tag">৪৭তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q4', 'ক')"><span class="opt-prefix">ক</span><span>স-এর উচ্চারণ শ হয়ে যায়</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q4', 'খ')"><span class="opt-prefix">খ</span><span>ণ-এর উচ্চারণ ন হয়ে যায়</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q4', 'গ')"><span class="opt-prefix">গ</span><span>ম-ফলার উচ্চারণ ম হয়ে যায়</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q4', 'ঘ')"><span class="opt-prefix">ঘ</span><span>শুরুতে নাসিক্য উচ্চারণ হয় না</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q4')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q4">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>পূর্ববঙ্গীয় (ঢাকাইয়া, কুমিল্লা, নোয়াখালী ইত্যাদি) আঞ্চলিক উচ্চারণে 'স্ম' ধ্বনির শুরুতে থাকা দন্ত্য 'স' প্রমিত 'শ'-এর মতো উচ্চারিত হয়ে 'শঁরোন্' রূপ ধারণ করে।</p>
+        </div>
+      </article>
+
+      <!-- Q5 -->
+      <article class="q-card" id="q5" data-correct="গ">
+        <div class="q-header">
+          <h2 class="q-text">৫. বাংলা ভাষায় কোন স্বরধ্বনি উচ্চারণকালে জিহ্বা উচ্চ অবস্থানে থাকে?</h2>
+          <span class="bcs-tag">৪৬তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q5', 'ক')"><span class="opt-prefix">ক</span><span>আ</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q5', 'খ')"><span class="opt-prefix">খ</span><span>এ</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q5', 'গ')"><span class="opt-prefix">গ</span><span>উ</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q5', 'ঘ')"><span class="opt-prefix">ঘ</span><span>ও</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q5')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q5">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>উচ্চ স্বরধ্বনি উচ্চারণের সময় জিহ্বা মুখের তালুর দিকে সবচেয়ে উঁচুতে অবস্থান করে। বাংলা ভাষায় উচ্চ স্বরধ্বনি দুটি: সম্মুখ উচ্চ স্বরধ্বনি [ই] এবং পশ্চাৎ উচ্চ স্বরধ্বনি [উ]।</p>
+        </div>
+      </article>
+
+      <!-- Q6 -->
+      <article class="q-card" id="q6" data-correct="ঘ">
+        <div class="q-header">
+          <h2 class="q-text">৬. উচ্চারণের রীতি অনুযায়ী নিচের কোনটি উচ্চমধ্য-সম্মুখ স্বরধ্বনি?</h2>
+          <span class="bcs-tag">৪৫তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q6', 'ক')"><span class="opt-prefix">ক</span><span>অ</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q6', 'খ')"><span class="opt-prefix">খ</span><span>আ</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q6', 'গ')"><span class="opt-prefix">গ</span><span>ও</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q6', 'ঘ')"><span class="opt-prefix">ঘ</span><span>এ</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q6')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q6">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>উচ্চ-মধ্য সম্মুখ স্বরধ্বনি হলো [এ]। জিহ্বার সম্মুখ ভাগে এবং উচ্চ ও মধ্যম স্তরের মধ্যবর্তী স্থানে এর উচ্চারণ সাধিত হয়।</p>
+        </div>
+      </article>
+
+      <!-- Q7 -->
+      <article class="q-card" id="q7" data-correct="গ">
+        <div class="q-header">
+          <h2 class="q-text">৭. ধ্বনি-পরিবর্তনের নিয়মে কোনটি বর্ণ-বিপর্যয়-এর দৃষ্টান্ত?</h2>
+          <span class="bcs-tag">৪৪তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q7', 'ক')"><span class="opt-prefix">ক</span><span>রতন</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q7', 'খ')"><span class="opt-prefix">খ</span><span>কবাট</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q7', 'গ')"><span class="opt-prefix">গ</span><span>পিচাশ</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q7', 'ঘ')"><span class="opt-prefix">ঘ</span><span>মুলুক</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q7')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q7">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>শব্দের মধ্যে দুটি ব্যঞ্জনের পরস্পর স্থান পরিবর্তন ঘটলে তাকে বর্ণ-বিপর্যয় বা ধ্বনি-বিপর্যয় বলে। যেমন: পিশাচ > পিচাশ, লাফ > ফাল, বাক্স > বাস্‌ক, রিকশা > রিস্কা ইত্যাদি।</p>
+        </div>
+      </article>
+
+      <!-- Q8 -->
+      <article class="q-card" id="q8" data-correct="গ">
+        <div class="q-header">
+          <h2 class="q-text">৮. বড় > বড্ড - এটি কোন ধরনের পরিবর্তন?</h2>
+          <span class="bcs-tag">৪৩তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q8', 'ক')"><span class="opt-prefix">ক</span><span>বিষমীভবন</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q8', 'খ')"><span class="opt-prefix">খ</span><span>সমীভবন</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q8', 'গ')"><span class="opt-prefix">গ</span><span>ব্যঞ্জনদ্বিত্ব</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q8', 'ঘ')"><span class="opt-prefix">ঘ</span><span>ব্যঞ্জন-বিকৃতি</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q8')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q8">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>কখনও কখনও কথার ওপর জোর দেওয়ার জন্য শব্দের মধ্যস্থিত ব্যঞ্জনের দ্বিত্ব উচ্চারণ ঘটে, একে ব্যঞ্জনদ্বিত্ব বা দ্বিত্ব ব্যঞ্জন বলে। যেমন: বড় > বড্ড, পাকা > পাক্কা, সকাল > সক্কাল ইত্যাদি।</p>
+        </div>
+      </article>
+
+      <!-- Q9 -->
+      <article class="q-card" id="q9" data-correct="ঘ">
+        <div class="q-header">
+          <h2 class="q-text">৯. বাগযন্ত্রের অংশ কোনটি?</h2>
+          <span class="bcs-tag">৪৩তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q9', 'ক')"><span class="opt-prefix">ক</span><span>স্বরযন্ত্র</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q9', 'খ')"><span class="opt-prefix">খ</span><span>ফুসফুস</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q9', 'গ')"><span class="opt-prefix">গ</span><span>দাঁত</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q9', 'ঘ')"><span class="opt-prefix">ঘ</span><span>উপরের সবকটি</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q9')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q9">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>ধ্বনি উচ্চারণে মানবদেহের যেসব প্রত্যঙ্গ সরাসরি কাজ করে সেগুলোকে একত্রে বাগযন্ত্র বলে। ফুসফুস, শ্বাসনালি, স্বরযন্ত্র, গলনালি, জিভ, তালু, মূর্ধা, দাঁত, ওষ্ঠ, নাসিকা সবই বাগযন্ত্রের অবিচ্ছেদ্য অংশ।</p>
+        </div>
+      </article>
+
+      <!-- Q10 -->
+      <article class="q-card" id="q10" data-correct="খ">
+        <div class="q-header">
+          <h2 class="q-text">১০. অপিনিহিতির উদাহরণ কোনটি?</h2>
+          <span class="bcs-tag">৪১তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q10', 'ক')"><span class="opt-prefix">ক</span><span>জন্ম > জম্ম</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q10', 'খ')"><span class="opt-prefix">খ</span><span>আজি > আইজ</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q10', 'গ')"><span class="opt-prefix">গ</span><span>ডেস্ক > ডেস্‌ক</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q10', 'ঘ')"><span class="opt-prefix">ঘ</span><span>অলাবু > লাবু > লাউ</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q10')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q10">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>পরের ই-কার বা উ-কার আগে উচ্চারিত হলে কিংবা যুক্ত ব্যঞ্জনধ্বনির আগে ই-কার বা উ-কার উচ্চারিত হলে তাকে অপিনিহিতি বলে। যেমন: আজি > আইজ, সাধু > সাউধ, মারি > মাইর, চারি > চার্য়ি ইত্যাদি।</p>
+        </div>
+      </article>
+
+      <!-- Q11 -->
+      <article class="q-card" id="q11" data-correct="ক">
+        <div class="q-header">
+          <h2 class="q-text">১১. ‘হ্ম’ যুক্তবর্ণটি কিভাবে গঠিত হয়েছে?</h2>
+          <span class="bcs-tag">৩৮তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q11', 'ক')"><span class="opt-prefix">ক</span><span>হ্+ম</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q11', 'খ')"><span class="opt-prefix">খ</span><span>ক্+ম</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q11', 'গ')"><span class="opt-prefix">গ</span><span>ষ্+ম</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q11', 'ঘ')"><span class="opt-prefix">ঘ</span><span>ম্+হ</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q11')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q11">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>‘হ্ম’ যুক্তবর্ণটি হ্ + ম এর সমন্বয়ে গঠিত (যেমন: ব্রহ্ম, ব্রাহ্মণ, ব্রাহ্মপুত্র)। এর উচ্চারণ 'মভো' (ব্রাম্‌ভন)।</p>
+        </div>
+      </article>
+
+      <!-- Q12 -->
+      <article class="q-card" id="q12" data-correct="খ">
+        <div class="q-header">
+          <h2 class="q-text">১২. ‘বন্ধন’ শব্দের সঠিক অক্ষর বিন্যাস কোনটি?</h2>
+          <span class="bcs-tag">৩৬তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q12', 'ক')"><span class="opt-prefix">ক</span><span>ব্ + ন্ + ধ্ + ন্</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q12', 'খ')"><span class="opt-prefix">খ</span><span>বন্ + ধন্</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q12', 'গ')"><span class="opt-prefix">গ</span><span>ব + ধ্ + ন</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q12', 'ঘ')"><span class="opt-prefix">ঘ</span><span>বান্ + ধন্</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q12')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q12">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>অক্ষর হলো এক ঝোঁকে উচ্চারিত ধ্বনিগুচ্ছ। 'বন্ধন' শব্দের উচ্চারণ: বন্-ধন্। এখানে দুটি বদ্ধাক্ষর রয়েছে: 'বন্' এবং 'ধন্'।</p>
+        </div>
+      </article>
+
+      <!-- Q13 -->
+      <article class="q-card" id="q13" data-correct="ক">
+        <div class="q-header">
+          <h2 class="q-text">১৩. নিচের কোনটি ধ্বনি-পরিবর্তনের উদাহরণ নয়?</h2>
+          <span class="bcs-tag">৩৫তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q13', 'ক')"><span class="opt-prefix">ক</span><span>প্রাতিপদিক</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q13', 'খ')"><span class="opt-prefix">খ</span><span>অভিশ্রুতি</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q13', 'গ')"><span class="opt-prefix">গ</span><span>অপিনিহিতি</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q13', 'ঘ')"><span class="opt-prefix">ঘ</span><span>ধ্বনি-বিপর্যয়</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q13')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q13">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>বিভক্তিহীন নাম শব্দকে প্রাতিপদিক বলে (যেমন: হাত, বই, কলম)। এটি রূপতত্ত্ব বা শব্দতত্ত্বের আলোচ্য বিষয়, ধ্বনি পরিবর্তনের কোনো নিয়ম নয়।</p>
+        </div>
+      </article>
+
+      <!-- Q14 -->
+      <article class="q-card" id="q14" data-correct="ঘ">
+        <div class="q-header">
+          <h2 class="q-text">১৪. নিচের কোনটি অঘোষ অল্পপ্রাণ ধ্বনি?</h2>
+          <span class="bcs-tag">৩০তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q14', 'ক')"><span class="opt-prefix">ক</span><span>ভ</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q14', 'খ')"><span class="opt-prefix">খ</span><span>ঠ</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q14', 'গ')"><span class="opt-prefix">গ</span><span>ফ</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q14', 'ঘ')"><span class="opt-prefix">ঘ</span><span>চ</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q14')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q14">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>বর্গের ১ম বর্ণগুলো অঘোষ অল্পপ্রাণ ধ্বনি। ক-বর্গের 'ক', চ-বর্গের 'চ', ট-বর্গের 'ট', ত-বর্গের 'ত', প-বর্গের 'প' হলো অঘোষ অল্পপ্রাণ ধ্বনি।</p>
+        </div>
+      </article>
+
+      <!-- Q15 -->
+      <article class="q-card" id="q15" data-correct="ক">
+        <div class="q-header">
+          <h2 class="q-text">১৫. কোন দুটি অঘোষ ধ্বনি?</h2>
+          <span class="bcs-tag">১৩তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q15', 'ক')"><span class="opt-prefix">ক</span><span>চ ছ</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q15', 'খ')"><span class="opt-prefix">খ</span><span>ড ঢ</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q15', 'গ')"><span class="opt-prefix">গ</span><span>ব ড</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q15', 'ঘ')"><span class="opt-prefix">ঘ</span><span>দ ধ</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q15')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q15">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>বর্গের প্রথম দুটি বর্ণ অঘোষ ধ্বনি। চ-বর্গের 'চ' এবং 'ছ' দুটিই অঘোষ ধ্বনি (চ হলো অঘোষ অল্পপ্রাণ, ছ হলো অঘোষ মহাপ্রাণ)।</p>
+        </div>
+      </article>
+
+    </main>
+
+    <footer class="footer-nav">
+      <a href="ধ্বনি ও বর্ণ-প্রকরণ.html" class="footer-btn">← ধ্বনি ও বর্ণ-প্রকরণ</a>
+      <a href="index.html" class="footer-btn">🏠 সূচিপত্র</a>
+      <a href="ণ-ত্ব ও ষ-ত্ব বিধান.html" class="footer-btn">ণ-ত্ব ও ষ-ত্ব বিধান →</a>
+    </footer>
   </div>
-  <div class="controls">
-    <button class="ctrl-btn" onclick="adjustFontSize(-0.05)" title="লেখা ছোট করুন">A-</button>
-    <button class="ctrl-btn" onclick="resetFontSize()" title="স্বাভাবিক ফন্ট">A</button>
-    <button class="ctrl-btn" onclick="adjustFontSize(0.05)" title="লেখা বড় করুন">A+</button>
-    <button class="ctrl-btn" onclick="toggleTheme()" id="theme-btn" title="ডার্ক/লাইট থিম">🌙</button>
-  </div>
-</div>
 
-<div class="container">
+  <script>
+    var answeredQuestions = {};
+    var correctScore = 0;
+    var wrongScore = 0;
 
-  <!-- Hero Header -->
-  <header class="hero-card">
-    <h1 class="hero-title">০৩. ধ্বনির উচ্চারণ ও ধ্বনি পরিবর্তন</h1>
-    <p class="hero-subtitle">ধ্বনিতত্ত্ব • বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ প্রস্তুতি (পৃষ্ঠা ১০–১২)</p>
-  </header>
+    function checkAnswer(qId, selectedOpt) {
+      if (answeredQuestions[qId]) return;
+      var card = document.getElementById(qId);
+      var correctOpt = card.getAttribute('data-correct');
+      var btns = card.querySelectorAll('.opt-btn');
 
-  <!-- BCS Question Distribution Table -->
-  <section class="bcs-table-card">
-    <h2 class="card-title">📊 বিগত বিসিএস পরীক্ষায় এ অধ্যায়ের প্রশ্ন বিশ্লেষণ</h2>
-    <div class="table-responsive">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
-            <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
-            <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>৫০তম</td><td>১</td><td>৪৪তম</td><td>১</td><td>৩৮তম</td><td>১</td></tr>
-          <tr><td>৪৯তম</td><td>২</td><td>৪৩তম</td><td>২</td><td>৩৭তম</td><td>০</td></tr>
-          <tr><td>৪৮তম</td><td>০</td><td>৪২তম</td><td>০</td><td>৩৬তম</td><td>১</td></tr>
-          <tr><td>৪৭তম</td><td>১</td><td>৪১তম</td><td>১</td><td>৩৫তম</td><td>১</td></tr>
-          <tr><td>৪৬তম</td><td>১</td><td>৪০তম</td><td>০</td><td>১০ম-৩৪তম</td><td>২</td></tr>
-          <tr><td>৪৫তম</td><td>১</td><td>৩৯তম</td><td>০</td><td><strong>মোট প্রশ্ন</strong></td><td><strong>১৫টি</strong></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+      answeredQuestions[qId] = selectedOpt;
 
-  <!-- Theory Module 1: Sound Changes Matrix -->
-  <article class="theory-card">
-    <h2 class="section-head">🔄 ধ্বনি পরিবর্তনের প্রধান নিয়ম ও উদাহরণ</h2>
-    <div class="table-responsive">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>পরিবর্তনের নিয়ম</th>
-            <th>সংজ্ঞা ও বৈশিষ্ট্য</th>
-            <th>উদাহরণ</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>স্বরাগম</strong></td>
-            <td>উচ্চারণের সুবিধার জন্য শব্দের মধ্যে স্বরধ্বনি আসা (আদি, মধ্য, অন্ত)</td>
-            <td>স্কুল > ইস্কুল (আদি), রত্ন > রতন (মধ্য/বিপ্রকর্ষ), দিশ্ > দিশা (অন্ত)</td>
-          </tr>
-          <tr>
-            <td><strong>স্বরলোপ</strong></td>
-            <td>শব্দ উচ্চারণে স্বরধ্বনি বিলুপ্ত হওয়া</td>
-            <td>অলাবু > লাবু > লাউ (আদি), সুবর্ণ > স্বর্ণ (মধ্য), আশা > আশ (অন্ত)</td>
-          </tr>
-          <tr>
-            <td><strong>অপিনিহিতি</strong></td>
-            <td>পরের ই-কার বা উ-কার আগে উচ্চারিত হওয়া</td>
-            <td>আজি > আইজ, সাধু > সাউধ, মারি > মাইর, চারি > চার্য়ি</td>
-          </tr>
-          <tr>
-            <td><strong>অভিশ্রুতি</strong></td>
-            <td>বিপর্যস্ত ই/উ পূর্ববর্তী স্বরের সাথে মিলে গিয়ে পরবর্তী স্বরকে বদলে ফেলা</td>
-            <td>করিয়া > কইরা > করে, শুনিয়া > শুইনা > শুনে, হাটুয়া > হাউটা > হেটো</td>
-          </tr>
-          <tr>
-            <td><strong>স্বরসঙ্গতি</strong></td>
-            <td>একটি স্বরধ্বনির প্রভাবে শব্দের অন্য স্বরের রূপান্তর</td>
-            <td>দেশি > দিশি, বিলাতি > বিলিতি, মূলা > মুলো, শিকা > শিকে</td>
-          </tr>
-          <tr>
-            <td><strong>সমীভবন</strong></td>
-            <td>দুটি ভিন্ন ব্যঞ্জন একে অপরের প্রভাবে সমতা লাভ করা</td>
-            <td>জন্ম > জম্ম, কাঁদনা > কান্না, চন্দন > চন্নন, রাধ্‌না > রান্না</td>
-          </tr>
-          <tr>
-            <td><strong>বিষমীভবন</strong></td>
-            <td>দুটি সমব্যঞ্জনের একটি ভিন্ন ব্যঞ্জনে পরিবর্তিত হওয়া</td>
-            <td>শরীর > শরীল, লাল > নাল</td>
-          </tr>
-          <tr>
-            <td><strong>ধ্বনি বিপর্যয়</strong></td>
-            <td>শব্দের ভেতরের দুটি ব্যঞ্জনের স্থান অদলবদল</td>
-            <td>পিশাচ > পিচাশ, লাফ > ফাল, বাক্স > বাস্ ক, রিকশা > রিস্কা</td>
-          </tr>
-          <tr>
-            <td><strong>ব্যঞ্জনদ্বিত্ব</strong></td>
-            <td>জোর দেওয়ার জন্য ব্যঞ্জনের দ্বিগুণ উচ্চারণ</td>
-            <td>বড় > বড্ড, পাকা > পাক্কা, সকাল > সক্কাল</td>
-          </tr>
-          <tr>
-            <td><strong>ব্যঞ্জনবিকৃতি</strong></td>
-            <td>শব্দের মধ্যস্থিত ব্যঞ্জন পরিবর্তিত হয়ে নতুন ব্যঞ্জন হওয়া</td>
-            <td>কবাট > কপাট, ধোবা > ধোপা, শাক > শাগ</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </article>
+      btns.forEach(function(btn) {
+        btn.disabled = true;
+        var opt = btn.getAttribute('data-opt');
+        if (opt === correctOpt) {
+          btn.classList.add('correct');
+        } else if (opt === selectedOpt) {
+          btn.classList.add('wrong');
+        }
+      });
 
-  <!-- Theory Module 2: Articulation Table -->
-  <article class="theory-card">
-    <h2 class="section-head">🗣️ উচ্চারণ স্থান অনুযায়ী স্পর্শ বর্ণের শ্রেণিবিন্যাস</h2>
-    <div class="table-responsive">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>উচ্চারণ স্থান</th>
-            <th>অঘোষ অল্পপ্রাণ</th>
-            <th>অঘোষ মহাপ্রাণ</th>
-            <th>ঘোষ অল্পপ্রাণ</th>
-            <th>ঘোষ মহাপ্রাণ</th>
-            <th>নাসিক্য</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>কণ্ঠ / জিহ্বামূলীয়</strong></td><td>ক</td><td>খ</td><td>গ</td><td>ঘ</td><td>ঙ</td></tr>
-          <tr><td><strong>তালব্য</strong></td><td>চ</td><td>ছ</td><td>জ</td><td>ঝ</td><td>ঞ</td></tr>
-          <tr><td><strong>মূর্ধন্য / পশ্চাদ্দন্তমূলীয়</strong></td><td>ট</td><td>ঠ</td><td>ড</td><td>ঢ</td><td>ণ</td></tr>
-          <tr><td><strong>দন্ত্য</strong></td><td>ত</td><td>থ</td><td>দ</td><td>ধ</td><td>ন</td></tr>
-          <tr><td><strong>ওষ্ঠ্য</strong></td><td>প</td><td>ফ</td><td>ব</td><td>ভ</td><td>ম</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="note-box">
-      <strong>💡 বিশেষ ধ্বনি:</strong> কম্পনজাত ধ্বনি: <strong>‘র’</strong>; পার্শ্বিক ধ্বনি: <strong>‘ল’</strong>; তাড়নজাত ধ্বনি: <strong>‘ড়’, ‘ঢ়’</strong>; উষ্ম বা শিষ ধ্বনি: <strong>‘শ’, ‘ষ’, ‘স’, ‘হ’</strong>।
-    </div>
-  </article>
-
-  <!-- Theory Module 3: Rabindranath E-kar Reform -->
-  <article class="theory-card">
-    <h2 class="section-head">✍️ রবীন্দ্রনাথ ঠাকুরের ‘এ’-কার উচ্চারণ রীতি</h2>
-    <div class="key-point">
-      বাংলা ভাষায় ‘এ’-কারের উচ্চারণ দুই প্রকার:
-      <ul style="margin-left: 20px; margin-top: 6px;">
-        <li><strong>সংবৃত (স্বাভাবিক [এ]):</strong> যেমন- মেঘ, দেশ, মেলা (মিলন), গেল ইত্যাদি।</li>
-        <li><strong>বিবৃত (বিকৃত [অ্যা]):</strong> যেমন- খেলা [খ্যালা], দেখা [দ্যাখা], বেলা [ব্যালা], মেলা (অনেক) ইত্যাদি।</li>
-      </ul>
-    </div>
-    <div class="info-box">
-      <strong>💡 বিসিএস প্রশ্ন ক্লু:</strong> রবীন্দ্রনাথ ঠাকুর শব্দের আদিতে <strong>বিবৃত [অ্যা]</strong> উচ্চারণ স্পষ্ট করতে <em>মাত্রাযুক্ত ‘এ’-কার</em> এবং সংবৃত স্বাভাবিক [এ] বোঝাতে <em>মাত্রাহীন ‘এ’-কার</em> ব্যবহারের প্রবর্তন করেছিলেন।
-    </div>
-  </article>
-
-  <!-- Interactive Quiz Engine -->
-  <section class="quiz-section-header">
-    <div class="quiz-title">🎯 বিসিএস প্রিলিমিনারি আসল প্রশ্নব্যাংক (MCQ)</div>
-    <div class="score-tracker">
-      অগ্রগতি: <span id="answered-count">০</span> / <span id="total-count">15</span> | সঠিক: <span id="correct-count">০</span>
-    </div>
-  </section>
-
-  <section class="quiz-container">
-    <div id="quiz-cards-wrapper"></div>
-    <div class="quiz-footer-actions">
-      <button class="reset-btn" onclick="resetQuiz()">🔄 পুনরায় অনুশীলন করুন</button>
-    </div>
-  </section>
-
-</div>
-
-<script>
-let currentScale = 1.0;
-function adjustFontSize(delta) {
-  currentScale = Math.min(1.4, Math.max(0.8, currentScale + delta));
-  document.documentElement.style.setProperty('--font-scale', currentScale + 'rem');
-  try {
-    localStorage.setItem('ebk_font_scale', currentScale);
-  } catch(e) {}
-}
-
-function resetFontSize() {
-  currentScale = 1.0;
-  document.documentElement.style.setProperty('--font-scale', '1rem');
-  try {
-    localStorage.setItem('ebk_font_scale', 1.0);
-  } catch(e) {}
-}
-
-function toggleTheme() {
-  const htmlEl = document.documentElement;
-  const currentTheme = htmlEl.getAttribute('data-theme') || 'light';
-  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-  htmlEl.setAttribute('data-theme', newTheme);
-  const themeBtn = document.getElementById('theme-btn');
-  if (themeBtn) {
-    themeBtn.innerText = newTheme === 'light' ? '🌙' : '☀️';
-  }
-  try {
-    localStorage.setItem('theme', newTheme);
-  } catch(e) {}
-}
-
-window.addEventListener('scroll', () => {
-  const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-  const bar = document.getElementById('progress-bar');
-  if (bar) bar.style.width = scrolled + '%';
-});
-
-const quizData = [
-  {
-    "id": 1,
-    "tag": "৫০তম বিসিএস",
-    "q": "একটি স্বরধ্বনির প্রভাবে শব্দে অপর স্বরের পরিবর্তন ঘটলে তাকে বলে-",
-    "opts": [
-      "অভিশ্রুতি",
-      "অপিনিহিতি",
-      "সমীভবন",
-      "স্বরসঙ্গতি"
-    ],
-    "ans": 3,
-    "exp": "একটি স্বরধ্বনির প্রভাবে শব্দে অন্য স্বরধ্বনির সংগতি বা পরিবর্তন ঘটলে তাকে স্বরসঙ্গতি (Vowel Harmony) বলে। যেমন- দেশি > দিশি, বিলাতি > বিলিতি, মূলা > মুলো ইত্যাদি। অন্যদিকে পরের ই-কার বা উ-কার আগে উচ্চারিত হলে অপিনিহিতি (আজি > আইজ); দুটি ভিন্ন ব্যঞ্জন একে অপরের প্রভাবে সমতা লাভ করলে সমীভবন (জন্ম > জন্ম, কাঁদনা > কান্না); এবং বিপর্যস্থ স্বরধ্বনি পূর্ববর্তী স্বরের সাথে মিলে গেলে অভিশ্রুতি (করিয়া > কইরা > করে) হয়।"
-  },
-  {
-    "id": 2,
-    "tag": "৪৯তম বিসিএস",
-    "q": "কোন ধ্বনি পরিবর্তনটি যথাযথ নয়?",
-    "opts": [
-      "ক্রন্দন > কাঁদা",
-      "অঞ্চল > আঁচল",
-      "সংগীত > গীতিকা",
-      "দন্ত > দাঁত"
-    ],
-    "ans": 2,
-    "exp": "তৎসম শব্দ থেকে তদ্ভব শব্দ গঠনের প্রক্রিয়ায় ধ্বনি পরিবর্তন ঘটে। যেমন: ক্রন্দন > কাঁদা, অঞ্চল > আঁচল, দন্ত > দাঁত (নাসিক্যীভবন ও স্বরভক্তি)। কিন্তু 'সংগীত > গীতিকা' কোনো সরাসরি ধ্বনি পরিবর্তনের উদাহরণ নয়; এটি প্রত্যয়যোগে (গীত + ইকা) গঠিত নতুন শব্দ।"
-  },
-  {
-    "id": 3,
-    "tag": "৪৯তম বিসিএস",
-    "q": "রবীন্দ্রনাথ ঠাকুর শব্দের শুরুতে মাত্রাযুক্ত এ-কার ব্যবহার করতেন কেন?",
-    "opts": [
-      "এ-কার মাত্রা যুক্ত বলে",
-      "'এ' মাত্রাহীন বর্ণ বলে",
-      "'এ' উচ্চারণ বোঝাতে",
-      "'অ্যা' উচ্চারণ বোঝাতে"
-    ],
-    "ans": 3,
-    "exp": "বাংলায় 'এ'-কারের উচ্চারণ দুই রকম: সংবৃত বা স্বাভাবিক [এ] এবং বিবৃত [অ্যা]। শব্দের শুরুতে মাত্রাহীন এ-কার স্বাভাবিক [এ] এবং রবীন্দ্রনাথ ঠাকুর শব্দের শুরুতে বিবৃত [অ্যা] উচ্চারণ নির্দেশ করতে মাত্রাযুক্ত এ-কার ব্যবহারের প্রস্তাব ও প্রচলন করেছিলেন।"
-  },
-  {
-    "id": 4,
-    "tag": "৪৭তম বিসিএস",
-    "q": "পূর্ববঙ্গীয় উচ্চারণে 'স্মরণ' শব্দের ক্ষেত্রে কোনটি ঘটে?",
-    "opts": [
-      "স-এর উচ্চারণ শ হয়ে যায়",
-      "ণ-এর উচ্চারণ ন হয়ে যায়",
-      "ম-ফলার উচ্চারণ ম হয়ে যায়",
-      "শুরুতে নাসিক্য উচ্চারণ হয় না"
-    ],
-    "ans": 0,
-    "exp": "পূর্ববঙ্গীয় (ঢাকাইয়া, কুমিল্লা, নোয়াখালী ইত্যাদি) আঞ্চলিক উচ্চারণে 'স্ম' ধ্বনির শুরুতে থাকা দন্ত্য 'স' প্রমিত 'শ'-এর মতো উচ্চারিত হয়ে 'শঁরোন্' রূপ ধারণ করে।"
-  },
-  {
-    "id": 5,
-    "tag": "৪৬তম বিসিএস",
-    "q": "বাংলা ভাষায় কোন স্বরধ্বনি উচ্চারণকালে জিহ্বা উচ্চ অবস্থানে থাকে?",
-    "opts": [
-      "আ",
-      "এ",
-      "উ",
-      "ও"
-    ],
-    "ans": 2,
-    "exp": "উচ্চ স্বরধ্বনি উচ্চারণের সময় জিহ্বা মুখের তালুর দিকে সবচেয়ে উঁচুতে অবস্থান করে। বাংলা ভাষায় উচ্চ স্বরধ্বনি দুটি: সম্মুখ উচ্চ স্বরধ্বনি [ই] এবং পশ্চাৎ উচ্চ স্বরধ্বনি [উ]।"
-  },
-  {
-    "id": 6,
-    "tag": "৪৫তম বিসিএস",
-    "q": "উচ্চারণের রীতি অনুযায়ী নিচের কোনটি উচ্চমধ্য-সম্মুখ স্বরধ্বনি?",
-    "opts": [
-      "অ",
-      "আ",
-      "ও",
-      "এ"
-    ],
-    "ans": 3,
-    "exp": "উচ্চ-মধ্য সম্মুখ স্বরধ্বনি হলো [এ]। জিহ্বার সম্মুখ ভাগে এবং উচ্চ ও মধ্যম স্তরের মধ্যবর্তী স্থানে এর উচ্চারণ সাধিত হয়।"
-  },
-  {
-    "id": 7,
-    "tag": "৪৪তম বিসিএস",
-    "q": "ধ্বনি-পরিবর্তনের নিয়মে কোনটি বর্ণ-বিপর্যয়-এর দৃষ্টান্ত?",
-    "opts": [
-      "রতন",
-      "কবাট",
-      "পিচাশ",
-      "মুলুক"
-    ],
-    "ans": 2,
-    "exp": "শব্দের মধ্যে দুটি ব্যঞ্জনের পরস্পর স্থান পরিবর্তন ঘটলে তাকে বর্ণ-বিপর্যয় বা ধ্বনি-বিপর্যয় বলে। যেমন: পিশাচ > পিচাশ, লাফ > ফাল, বাক্স > বাস্‌ক, রিকশা > রিস্কা ইত্যাদি।"
-  },
-  {
-    "id": 8,
-    "tag": "৪৩তম বিসিএস",
-    "q": "বড় > বড্ড - এটি কোন ধরনের পরিবর্তন?",
-    "opts": [
-      "বিষমীভবন",
-      "সমীভবন",
-      "ব্যঞ্জনদ্বিত্ব",
-      "ব্যঞ্জন-বিকৃতি"
-    ],
-    "ans": 2,
-    "exp": "কখনও কখনও কথার ওপর জোর দেওয়ার জন্য শব্দের মধ্যস্থিত ব্যঞ্জনের দ্বিত্ব উচ্চারণ ঘটে, একে ব্যঞ্জনদ্বিত্ব বা দ্বিত্ব ব্যঞ্জন বলে। যেমন: বড় > বড্ড, পাকা > পাক্কা, সকাল > সক্কাল ইত্যাদি।"
-  },
-  {
-    "id": 9,
-    "tag": "৪৩তম বিসিএস",
-    "q": "বাগযন্ত্রের অংশ কোনটি?",
-    "opts": [
-      "স্বরযন্ত্র",
-      "ফুসফুস",
-      "দাঁত",
-      "উপরের সবকটি"
-    ],
-    "ans": 3,
-    "exp": "ধ্বনি উচ্চারণে মানবদেহের যেসব প্রত্যঙ্গ সরাসরি কাজ করে সেগুলোকে একত্রে বাগযন্ত্র বলে। ফুসফুস, শ্বাসনালি, স্বরযন্ত্র, গলনালি, জিভ, তালু, মূর্ধা, দাঁত, ওষ্ঠ, নাসিকা সবই বাগযন্ত্রের অবিচ্ছেদ্য অংশ।"
-  },
-  {
-    "id": 10,
-    "tag": "৪১তম বিসিএস",
-    "q": "অপিনিহিতির উদাহরণ কোনটি?",
-    "opts": [
-      "জন্ম > জম্ম",
-      "আজি > আইজ",
-      "ডেস্ক > ডেস্‌ক",
-      "অলাবু > লাবু > লাউ"
-    ],
-    "ans": 1,
-    "exp": "পরের ই-কার বা উ-কার আগে উচ্চারিত হলে কিংবা যুক্ত ব্যঞ্জনধ্বনির আগে ই-কার বা উ-কার উচ্চারিত হলে তাকে অপিনিহিতি বলে। যেমন: আজি > আইজ, সাধু > সাউধ, মারি > মাইর, চারি > চার্য়ি ইত্যাদি।"
-  },
-  {
-    "id": 11,
-    "tag": "৩৮তম বিসিএস",
-    "q": "‘হ্ম’ যুক্তবর্ণটি কিভাবে গঠিত হয়েছে?",
-    "opts": [
-      "হ্+ম",
-      "ক্+ম",
-      "ষ্+ম",
-      "ম্+হ"
-    ],
-    "ans": 0,
-    "exp": "‘হ্ম’ যুক্তবর্ণটি হ্ + ম এর সমন্বয়ে গঠিত (যেমন: ব্রহ্ম, ব্রাহ্মণ, ব্রাহ্মপুত্র)। এর উচ্চারণ 'মভো' (ব্রাম্‌ভন)।"
-  },
-  {
-    "id": 12,
-    "tag": "৩৬তম বিসিএস",
-    "q": "‘বন্ধন’ শব্দের সঠিক অক্ষর বিন্যাস কোনটি?",
-    "opts": [
-      "ব্ + ন্ + ধ্ + ন্",
-      "বন্ + ধন্",
-      "ব + ধ্ + ন",
-      "বান্ + ধন্"
-    ],
-    "ans": 1,
-    "exp": "অক্ষর হলো এক ঝোঁকে উচ্চারিত ধ্বনিগুচ্ছ। 'বন্ধন' শব্দের উচ্চারণ: বন্-ধন্। এখানে দুটি বদ্ধাক্ষর রয়েছে: 'বন্' এবং 'ধন্'।"
-  },
-  {
-    "id": 13,
-    "tag": "৩৫তম বিসিএস",
-    "q": "নিচের কোনটি ধ্বনি-পরিবর্তনের উদাহরণ নয়?",
-    "opts": [
-      "প্রাতিপদিক",
-      "অভিশ্রুতি",
-      "অপিনিহিতি",
-      "ধ্বনি-বিপর্যয়"
-    ],
-    "ans": 0,
-    "exp": "বিভক্তিহীন নাম শব্দকে প্রাতিপদিক বলে (যেমন: হাত, বই, কলম)। এটি রূপতত্ত্ব বা শব্দতত্ত্বের আলোচ্য বিষয়, ধ্বনি পরিবর্তনের কোনো নিয়ম নয়।"
-  },
-  {
-    "id": 14,
-    "tag": "৩০তম বিসিএস",
-    "q": "নিচের কোনটি অঘোষ অল্পপ্রাণ ধ্বনি?",
-    "opts": [
-      "ভ",
-      "ঠ",
-      "ফ",
-      "চ"
-    ],
-    "ans": 3,
-    "exp": "বর্গের ১ম বর্ণগুলো অঘোষ অল্পপ্রাণ ধ্বনি। ক-বর্গের 'ক', চ-বর্গের 'চ', ট-বর্গের 'ট', ত-বর্গের 'ত', প-বর্গের 'প' হলো অঘোষ অল্পপ্রাণ ধ্বনি।"
-  },
-  {
-    "id": 15,
-    "tag": "১৩তম বিসিএস",
-    "q": "কোন দুটি অঘোষ ধ্বনি?",
-    "opts": [
-      "চ ছ",
-      "ড ঢ",
-      "ব ড",
-      "দ ধ"
-    ],
-    "ans": 0,
-    "exp": "বর্গের প্রথম দুটি বর্ণ অঘোষ ধ্বনি। চ-বর্গের 'চ' এবং 'ছ' দুটিই অঘোষ ধ্বনি (চ হলো অঘোষ অল্পপ্রাণ, ছ হলো অঘোষ মহাপ্রাণ)।"
-  }
-];
-
-let userAnswers = {};
-
-function renderQuiz() {
-  const container = document.getElementById('quiz-cards-wrapper');
-  container.innerHTML = '';
-  const letters = ['ক', 'খ', 'গ', 'ঘ'];
-  
-  quizData.forEach((qItem, idx) => {
-    const card = document.createElement('div');
-    card.className = 'quiz-card';
-    card.id = `qcard-${qItem.id}`;
-    
-    let optsHtml = '';
-    qItem.opts.forEach((opt, oIdx) => {
-      optsHtml += `
-        <button class="opt-btn" onclick="checkAnswer(${qItem.id}, ${oIdx})" id="opt-${qItem.id}-${oIdx}">
-          <strong>${letters[oIdx]}.</strong> ${opt}
-        </button>
-      `;
-    });
-    
-    card.innerHTML = `
-      <div class="question-header">
-        <div class="q-text">${idx + 1}. ${qItem.q}</div>
-        <span class="q-tag">${qItem.tag}</span>
-      </div>
-      <div class="options-grid">
-        ${optsHtml}
-      </div>
-      <div class="explanation-box" id="exp-${qItem.id}">
-        <strong>💡 ব্যাখ্যা:</strong> ${qItem.exp}
-      </div>
-    `;
-    container.appendChild(card);
-  });
-  
-  const totalCountEl = document.getElementById('total-count');
-  if (totalCountEl) totalCountEl.innerText = quizData.length;
-}
-
-function checkAnswer(qId, selectedOpt) {
-  if (userAnswers[qId] !== undefined) return;
-  userAnswers[qId] = selectedOpt;
-  
-  const qData = quizData.find(d => d.id === qId);
-  const card = document.getElementById(`qcard-${qId}`);
-  const isCorrect = selectedOpt === qData.ans;
-  
-  for(let i = 0; i < qData.opts.length; i++) {
-    const btn = document.getElementById(`opt-${qId}-${i}`);
-    if (btn) {
-      btn.disabled = true;
-      if (i === qData.ans) {
-        btn.classList.add('correct-choice');
-      } else if (i === selectedOpt) {
-        btn.classList.add('wrong-choice');
+      if (selectedOpt === correctOpt) {
+        correctScore++;
+      } else {
+        wrongScore++;
       }
-    }
-  }
-  
-  if (card) {
-    if (isCorrect) {
-      card.classList.add('answered-correct');
-    } else {
-      card.classList.add('answered-wrong');
-    }
-  }
-  
-  const expBox = document.getElementById(`exp-${qId}`);
-  if (expBox) expBox.style.display = 'block';
-  updateScore();
-}
 
-function updateScore() {
-  const answeredTotal = Object.keys(userAnswers).length;
-  let correctTotal = 0;
-  for(let qId in userAnswers) {
-    const qData = quizData.find(d => d.id == qId);
-    if(qData && userAnswers[qId] === qData.ans) {
-      correctTotal++;
-    }
-  }
-  const ansEl = document.getElementById('answered-count');
-  const corEl = document.getElementById('correct-count');
-  if (ansEl) ansEl.innerText = answeredTotal;
-  if (corEl) corEl.innerText = correctTotal;
-}
+      document.getElementById('correctCount').innerText = correctScore.toLocaleString('bn-BD');
+      document.getElementById('wrongCount').innerText = wrongScore.toLocaleString('bn-BD');
 
-function resetQuiz() {
-  userAnswers = {};
-  renderQuiz();
-  updateScore();
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  renderQuiz();
-  try {
-    const savedScale = localStorage.getItem('ebk_font_scale');
-    if (savedScale) {
-      currentScale = parseFloat(savedScale);
-      document.documentElement.style.setProperty('--font-scale', currentScale + 'rem');
+      var exp = document.getElementById('exp-' + qId);
+      if (exp) exp.classList.add('show');
     }
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      const themeBtn = document.getElementById('theme-btn');
-      if (themeBtn) themeBtn.innerText = savedTheme === 'light' ? '🌙' : '☀️';
-    }
-  } catch(e) {}
-});
-</script>
 
-<script src="nav-component.js"></script>
+    function toggleExp(qId) {
+      var exp = document.getElementById('exp-' + qId);
+      if (exp) exp.classList.toggle('show');
+    }
+
+    function resetQuiz() {
+      answeredQuestions = {};
+      correctScore = 0;
+      wrongScore = 0;
+      document.getElementById('correctCount').innerText = '০';
+      document.getElementById('wrongCount').innerText = '০';
+
+      document.querySelectorAll('.opt-btn').forEach(function(btn) {
+        btn.disabled = false;
+        btn.classList.remove('correct', 'wrong');
+      });
+
+      document.querySelectorAll('.explanation-drawer').forEach(function(drawer) {
+        drawer.classList.remove('show');
+      });
+    }
+
+    function toggleTheme() {
+      var current = document.documentElement.getAttribute('data-theme') || 'light';
+      var next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      var btn = document.getElementById('themeBtn');
+      if (btn) btn.innerText = next === 'light' ? '🌙' : '☀️';
+      try {
+        localStorage.setItem('theme', next);
+        localStorage.setItem('ebk_portal_theme', next);
+      } catch(e) {}
+    }
+
+    var fontScale = 1;
+    function adjustFont(delta) {
+      fontScale = Math.min(Math.max(fontScale + delta, 0.85), 1.3);
+      document.documentElement.style.setProperty('--font-scale', fontScale);
+    }
+    function resetFont() {
+      fontScale = 1;
+      document.documentElement.style.setProperty('--font-scale', 1);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var saved = document.documentElement.getAttribute('data-theme') || 'light';
+      var btn = document.getElementById('themeBtn');
+      if (btn) btn.innerText = saved === 'light' ? '🌙' : '☀️';
+    });
+  </script>
+  <!-- Smart E-Book Navigation Component -->
+  <script src="nav-component.js"></script>
 </body>
 </html>

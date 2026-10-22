@@ -1,1173 +1,1077 @@
-<!-- DESIGN PLAN:
-1. বিষয়ের ধরন: ধ্বনিতত্ত্ব (ধ্বনি ও বর্ণ-প্রকরণ, মাত্রাভেদ, স্বরধ্বনি ও ব্যঞ্জনধ্বনির বিজ্ঞানসম্মত শ্রেণিবিন্যাস, অক্ষর, রূপমূল ও বিসিএস প্রশ্নাবলি)।
-2. গুরুত্বপূর্ণ বিষয় ও সূক্ষ্ম পার্থক্য:
-   - চোটন বনাম আঁকড়ি: বর্ণের মাথার টিকিকে চোটন (ই, উ, ট ইত্যাদি) এবং ডান পাশের বাঁককে আঁকড়ি (ক, ফ) বলে।
-   - ধ্বনি বনাম বর্ণ: ধ্বনি শ্রুতিগ্রাহ্য (Auditory), বর্ণ দৃষ্টিগ্রাহ্য (Visual)।
-   - রূপমূল: ভাষার ক্ষুদ্রতম অর্থযুক্ত একক রূপমূল (Morpheme), ভাষার ক্ষুদ্রতম একক ধ্বনি (Phoneme)।
-   - স্বরধ্বনির বর্গীকরণ: জিভের উচ্চতা ও অবস্থান এবং ঠোঁটের উন্মুক্তি ছক (সংবৃত, বিবৃত, সম্মুখ, পশ্চাৎ)।
-   - বর্ণমালার মাত্রাভেদ: পূর্ণমাত্রা ৩২টি, অর্ধমাত্রা ৮টি, মাত্রাহীন ১০টি।
-   - যুক্তবর্ণের বিশ্লিষ্ট রূপ: জ্ঞ = জ্ + ঞ, হ্ম = হ্ + ম, ক্ষ = ক্ + ষ।
-3. বিশেষ মডিউল:
-   - বিসিএস প্রশ্ন পরিসংখ্যান ছক (৫০তম থেকে ১০ম বিসিএস পর্যন্ত ২৬টি প্রশ্ন)।
-   - মাত্রাভেদ ও বর্ণমালার পূর্ণাঙ্গ সারণি।
-   - স্বরধ্বনির চতুর্ভুজ ও বৈজ্ঞানিক উচ্চারণ ছক।
-   - ২৬টি আসল বিসিএস প্রশ্নের পূর্ণাঙ্গ লাইভ কুইজ ইঞ্জিন।
-4. রঙের মেজাজ: ধ্বনিতাত্ত্বিক স্পষ্টতার জন্য ডিপ সায়ান ও পান্না টিল (#0d9488, #115e59), পার্চমেন্ট হোয়াইট ব্যাকগ্রাউন্ড, গোল্ডেন অ্যাম্বার অ্যাকসেন্ট।
--->
 <!DOCTYPE html>
 <html lang="bn" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ধ্বনি ও বর্ণ-প্রকরণ - বিসিএস পূর্ণাঙ্গ স্মার্ট ইবুক</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root {
-  --font-base: 'Noto Serif Bengali', serif, system-ui, sans-serif;
-  --bg-primary: #f8fafc;
-  --bg-card: #ffffff;
-  --text-main: #1e293b;
-  --text-muted: #64748b;
-  --primary: #0d9488;
-  --primary-light: #ccfbf1;
-  --primary-dark: #115e59;
-  --accent: #d97706;
-  --accent-light: #fef3c7;
-  --success: #16a34a;
-  --success-bg: #dcfce7;
-  --danger: #dc2626;
-  --danger-bg: #fee2e2;
-  --border: #e2e8f0;
-  --border-strong: #cbd5e1;
-  --shadow: 0 4px 14px rgba(13, 148, 136, 0.08);
-  --radius: 12px;
-  --font-scale: 1rem;
-}
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch(e) {}
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+  <title>ধ্বনি ও বর্ণ-প্রকরণ | বিসিএস প্রিলিমিনারি স্মার্ট ই-বুক</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --font-scale: 1;
+      --bg-primary: #F8FAFC;
+      --bg-surface: #FFFFFF;
+      --text-primary: #0F172A;
+      --text-secondary: #475569;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --primary: #0F766E;
+      --primary-light: #CCFBF1;
+      --accent: #D97706;
+      --accent-light: #FEF3C7;
+      --success: #15803D;
+      --success-light: #DCFCE7;
+      --danger: #B91C1C;
+      --danger-light: #FEE2E2;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+      --radius-sm: 0.375rem;
+      --radius-md: 0.625rem;
+      --radius-lg: 0.875rem;
+    }
 
-[data-theme="dark"] {
-  --bg-primary: #0f172a;
-  --bg-card: #1e293b;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --primary: #2dd4bf;
-  --primary-light: #134e4a;
-  --primary-dark: #14b8a6;
-  --accent: #fbbf24;
-  --accent-light: #451a03;
-  --success: #22c55e;
-  --success-bg: #14532d;
-  --danger: #f87171;
-  --danger-bg: #7f1d1d;
-  --border: #334155;
-  --border-strong: #475569;
-  --shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
-}
+    [data-theme="dark"] {
+      --bg-primary: #090D16;
+      --bg-surface: #111827;
+      --text-primary: #F8FAFC;
+      --text-secondary: #CBD5E1;
+      --text-muted: #94A3B8;
+      --border-color: #1E293B;
+      --primary: #14B8A6;
+      --primary-light: rgba(20, 184, 166, 0.15);
+      --accent: #F59E0B;
+      --accent-light: rgba(245, 158, 11, 0.15);
+      --success: #22C55E;
+      --success-light: rgba(34, 197, 94, 0.15);
+      --danger: #EF4444;
+      --danger-light: rgba(239, 68, 68, 0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.4);
+    }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  overflow-wrap: break-word;
-  margin: 0;
-  padding: 0;
-  font-family: var(--font-base);
-}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { max-width: 100vw; overflow-x: clip; box-sizing: border-box; }
+    body {
+      font-family: 'Noto Serif Bengali', serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: calc(1rem * var(--font-scale));
+      line-height: 1.65;
+      padding-bottom: 5rem;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
 
-html {
-  overflow-x: clip;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  font-size: var(--font-scale);
-}
+    .container { max-width: 52rem; margin: 0 auto; padding: 1rem 0.85rem; }
 
-body {
-  background-color: var(--bg-primary);
-  color: var(--text-main);
-  line-height: 1.8;
-  padding-bottom: 80px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  overflow-x: clip;
-}
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
 
-#progress-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 5px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  width: 0%;
-  z-index: 10000;
-  transition: width 0.12s ease-out;
-}
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 0.4rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Inter', inherit;
+    }
 
-.top-control-bar {
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  background: var(--bg-card);
-  border-bottom: 1.5px solid var(--border);
-  padding: 8px 14px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  box-shadow: var(--shadow);
-}
+    .nav-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-light);
+    }
 
-.brand-badge {
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--primary);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+    .nav-actions { display: flex; align-items: center; gap: 0.5rem; }
 
-.controls {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+    .header-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
 
-button.ctrl-btn {
-  background: var(--bg-primary);
-  color: var(--text-main);
-  border: 1px solid var(--border-strong);
-  padding: 5px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 600;
-  transition: all 0.2s;
-  touch-action: manipulation;
-}
+    .header-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
 
-button.ctrl-btn:hover {
-  background: var(--primary-light);
-  border-color: var(--primary);
-  color: var(--primary);
-}
+    .ch-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      padding: 0.2rem 0.65rem;
+      border-radius: 9999px;
+      margin-bottom: 0.5rem;
+    }
 
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 10px 12px 40px 12px;
-}
+    .ch-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.01em;
+    }
 
-@media (max-width: 600px) {
-  .container {
-    padding: 6px 8px 30px 8px;
-  }
-}
+    .ch-subtitle {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
 
-.hero-card {
-  background: linear-gradient(135deg, rgba(13, 148, 136, 0.08) 0%, rgba(217, 119, 6, 0.06) 100%);
-  border: 1.5px solid var(--border);
-  border-left: 6px solid var(--primary);
-  border-radius: var(--radius);
-  padding: 18px 20px;
-  margin-bottom: 22px;
-  box-shadow: var(--shadow);
-}
+    .bcs-table-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      overflow-x: auto;
+    }
 
-.hero-title {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--primary);
-  margin-bottom: 6px;
-  line-height: 1.35;
-}
+    .bcs-table-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
 
-.hero-subtitle {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+      text-align: center;
+    }
 
-.bcs-table-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px;
-  margin-bottom: 24px;
-  box-shadow: var(--shadow);
-}
+    .bcs-table th, .bcs-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.4rem 0.25rem;
+      white-space: nowrap;
+    }
 
-.card-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--primary);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 600;
+    }
 
-.table-responsive {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  margin-bottom: 8px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-}
+    .score-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.6rem 1rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: sticky;
+      top: 0.5rem;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+    }
 
-table.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center;
-  font-size: 0.92rem;
-  background: var(--bg-card);
-}
+    .score-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8125rem; font-weight: 600; }
+    .score-val { font-size: 1rem; font-weight: 800; font-family: 'Inter', inherit; }
+    .score-total .score-val { color: var(--primary); }
+    .score-correct .score-val { color: var(--success); }
+    .score-wrong .score-val { color: var(--danger); }
 
-table.data-table th {
-  background: var(--primary);
-  color: #ffffff;
-  padding: 8px 10px;
-  font-weight: 700;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  white-space: nowrap;
-}
+    .q-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
 
-table.data-table td {
-  padding: 7px 10px;
-  border: 1px solid var(--border);
-  color: var(--text-main);
-  white-space: nowrap;
-}
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+    }
 
-table.data-table tr:nth-child(even) {
-  background-color: var(--bg-primary);
-}
+    .q-text {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
 
-.theory-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px 18px;
-  margin-bottom: 20px;
-  box-shadow: var(--shadow);
-}
+    .bcs-tag {
+      flex-shrink: 0;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.725rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 9999px;
+      white-space: nowrap;
+    }
 
-.section-head {
-  font-size: 1.22rem;
-  font-weight: 700;
-  color: var(--primary);
-  border-bottom: 2px solid var(--primary-light);
-  padding-bottom: 6px;
-  margin-bottom: 12px;
-}
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
 
-.key-point {
-  margin-bottom: 10px;
-  line-height: 1.75;
-}
+    @media (max-width: 580px) {
+      .options-grid { grid-template-columns: 1fr; }
+    }
 
-.key-point strong {
-  color: var(--accent);
-}
+    .opt-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem 0.65rem;
+      text-align: left;
+      font-family: inherit;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+    }
 
-.note-box {
-  background: var(--accent-light);
-  border-left: 4px solid var(--accent);
-  padding: 10px 14px;
-  border-radius: 6px;
-  margin: 12px 0;
-  font-size: 0.92rem;
-  line-height: 1.7;
-}
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
 
-[data-theme="dark"] .note-box {
-  background: rgba(217, 119, 6, 0.15);
-  border-left-color: var(--accent);
-  color: #fef3c7;
-}
+    .opt-prefix {
+      font-weight: 700;
+      color: var(--primary);
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--primary-light);
+      font-size: 0.8125rem;
+    }
 
-.info-box {
-  background: var(--primary-light);
-  border-left: 4px solid var(--primary);
-  padding: 10px 14px;
-  border-radius: 6px;
-  margin: 12px 0;
-  font-size: 0.92rem;
-  line-height: 1.7;
-}
+    .opt-btn.correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+      color: var(--success) !important;
+      font-weight: 600;
+    }
 
-[data-theme="dark"] .info-box {
-  background: rgba(45, 212, 191, 0.15);
-  border-left-color: var(--primary);
-  color: #ccfbf1;
-}
+    .opt-btn.correct .opt-prefix {
+      background: var(--success);
+      color: #FFFFFF;
+    }
 
-/* Quiz Section */
-.quiz-section-header {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: #ffffff;
-  padding: 14px 18px;
-  border-radius: var(--radius) var(--radius) 0 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
+    .opt-btn.wrong {
+      background: var(--danger-light) !important;
+      border-color: var(--danger) !important;
+      color: var(--danger) !important;
+    }
 
-.quiz-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-}
+    .opt-btn.wrong .opt-prefix {
+      background: var(--danger);
+      color: #FFFFFF;
+    }
 
-.score-tracker {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.88rem;
-  font-weight: 600;
-}
+    .explanation-drawer {
+      display: none;
+      margin-top: 0.75rem;
+      padding: 0.875rem;
+      background: var(--primary-light);
+      border-radius: var(--radius-md);
+      border-left: 3px solid var(--primary);
+      font-size: 0.875rem;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
 
-.quiz-container {
-  border: 1px solid var(--border);
-  border-top: none;
-  border-radius: 0 0 var(--radius) var(--radius);
-  padding: 16px 14px;
-  background: var(--bg-card);
-  margin-bottom: 30px;
-}
+    .explanation-drawer.show { display: block; animation: fadeIn 0.2s ease-in; }
 
-.quiz-card {
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 14px;
-  margin-bottom: 16px;
-  transition: all 0.2s ease;
-}
+    .explanation-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
 
-.quiz-card.answered-correct {
-  border-color: var(--success);
-  background: rgba(22, 163, 74, 0.04);
-}
+    .exp-toggle-btn {
+      margin-top: 0.25rem;
+      background: transparent;
+      border: 1px dashed var(--primary);
+      color: var(--primary);
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: inherit;
+    }
 
-.quiz-card.answered-wrong {
-  border-color: var(--danger);
-  background: rgba(220, 38, 38, 0.04);
-}
+    .exp-toggle-btn:hover { background: var(--primary-light); }
 
-.question-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 8px;
-  margin-bottom: 12px;
-}
+    .footer-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+    }
 
-.q-text {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--text-main);
-  line-height: 1.6;
-  flex: 1;
-}
+    .footer-btn {
+      flex: 1;
+      padding: 0.65rem 0.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+    }
 
-.q-tag {
-  background: var(--primary-light);
-  color: var(--primary-dark);
-  padding: 2px 8px;
-  border-radius: 6px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  white-space: nowrap;
-}
+    .footer-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
 
-[data-theme="dark"] .q-tag {
-  background: var(--primary-dark);
-  color: #ccfbf1;
-}
-
-.options-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-
-@media (max-width: 600px) {
-  .options-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-button.opt-btn {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text-main);
-  padding: 10px 12px;
-  border-radius: 8px;
-  text-align: left;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  touch-action: manipulation;
-}
-
-button.opt-btn:hover:not(:disabled) {
-  border-color: var(--primary);
-  background: var(--primary-light);
-  color: var(--primary);
-}
-
-button.opt-btn.correct-choice {
-  background: var(--success-bg) !important;
-  border-color: var(--success) !important;
-  color: var(--success) !important;
-  font-weight: 700;
-}
-
-button.opt-btn.wrong-choice {
-  background: var(--danger-bg) !important;
-  border-color: var(--danger) !important;
-  color: var(--danger) !important;
-  font-weight: 700;
-}
-
-.explanation-box {
-  display: none;
-  margin-top: 10px;
-  padding: 10px 12px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--primary);
-  border-radius: 6px;
-  font-size: 0.9rem;
-  line-height: 1.7;
-  color: var(--text-main);
-}
-
-.explanation-box strong {
-  color: var(--primary);
-}
-
-.quiz-footer-actions {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 14px;
-}
-
-.reset-btn {
-  background: var(--primary);
-  color: white;
-  border: none;
-  padding: 8px 18px;
-  border-radius: 8px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.reset-btn:hover {
-  opacity: 0.9;
-}
-</style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <nav class="top-nav">
+      <a href="index.html" class="nav-btn">← সূচিপত্র</a>
+      <div class="nav-actions">
+        <button class="nav-btn" onclick="adjustFont(-0.05)" title="ফন্ট ছোট করুন">A-</button>
+        <button class="nav-btn" onclick="resetFont()" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="nav-btn" onclick="adjustFont(0.05)" title="ফন্ট বড় করুন">A+</button>
+        <button class="nav-btn" onclick="toggleTheme()" id="themeBtn" title="থিম পরিবর্তন">🌙</button>
+        <button class="nav-btn" onclick="resetQuiz()" title="কুইজ পুনরায় শুরু">↺ রিসেট</button>
+      </div>
+    </nav>
 
-<div id="progress-bar"></div>
+    <header class="header-card">
+      <span class="ch-badge">অধ্যায় ০২</span>
+      <h1 class="ch-title">ধ্বনি ও বর্ণ-প্রকরণ</h1>
+      <p class="ch-subtitle">স্বরবর্ণ, ব্যঞ্জনবর্ণ, বর্গীয় ধ্বনি, উচ্চারণ স্থান, মাত্রা (পৃষ্ঠা ০৫–০৯)</p>
+    </header>
 
-<div class="top-control-bar">
-  <div class="brand-badge">
-    <span>📖</span> বাংলা ভাষা ও ব্যাকরণ
+    <section class="bcs-table-card">
+      <h2 class="bcs-table-title">📊 বিগত বিসিএস পরীক্ষায় এ অধ্যায়ের প্রশ্ন বিশ্লেষণ</h2>
+      <table class="bcs-table">
+        <thead>
+          <tr>
+            <th>বিসিএস</th><th>প্রশ্ন</th>
+            <th>বিসিএস</th><th>প্রশ্ন</th>
+            <th>বিসিএস</th><th>প্রশ্ন</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td>৫০তম</td><td>১</td>
+              <td>৪৪তম</td><td>০</td>
+              <td>৩৮তম</td><td>১</td>
+            </tr>
+            <tr>
+              <td>৪৯তম</td><td>২</td>
+              <td>৪৩তম</td><td>১</td>
+              <td>৩৭তম</td><td>২</td>
+            </tr>
+            <tr>
+              <td>৪৮তম</td><td>২</td>
+              <td>৪২তম</td><td>০</td>
+              <td>৩৬তম</td><td>২</td>
+            </tr>
+            <tr>
+              <td>৪৭তম</td><td>২</td>
+              <td>৪১তম</td><td>৩</td>
+              <td>৩৫তম</td><td>১</td>
+            </tr>
+            <tr>
+              <td>৪৬তম</td><td>২</td>
+              <td>৪০তম</td><td>০</td>
+              <td>১০ম-৩৪তম</td><td>৫</td>
+            </tr>
+            <tr>
+              <td>৪৫তম</td><td>২</td>
+              <td>৩৯তম</td><td>০</td>
+              <td>মোট</td><td>২৬</td>
+            </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Sticky Score Tracker -->
+    <div class="score-card">
+      <div class="score-item score-total">
+        <span>মোট প্রশ্ন:</span>
+        <span class="score-val" id="totalQuestions">২৬</span>
+      </div>
+      <div class="score-item score-correct">
+        <span>সঠিক:</span>
+        <span class="score-val" id="correctCount">০</span>
+      </div>
+      <div class="score-item score-wrong">
+        <span>ভুল:</span>
+        <span class="score-val" id="wrongCount">০</span>
+      </div>
+    </div>
+
+    <!-- Questions Section -->
+    <main id="quizContainer">
+      <!-- Q1 -->
+      <article class="q-card" id="q1" data-correct="ক">
+        <div class="q-header">
+          <h2 class="q-text">১. 'ই' এর মাত্রার উপরের অংশের নাম কী?</h2>
+          <span class="bcs-tag">৫০তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q1', 'ক')"><span class="opt-prefix">ক</span><span>চোটন</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q1', 'খ')"><span class="opt-prefix">খ</span><span>আঁকড়ি</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q1', 'গ')"><span class="opt-prefix">গ</span><span>পাগড়ি</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q1', 'ঘ')"><span class="opt-prefix">ঘ</span><span>জোড় আঁকড়ি</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q1')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q1">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>চোটন, আঁকড়ি, পাগড়ি, জোড় আঁকড়ি ইত্যাদি বাংলা বর্ণের বিশেষ চিহ্ন। চোটন হলো বাংলা বর্ণের মাথার ওপর থাকা বাঁকানো চিহ্ন, যা দেখতে অনেকটা উড়ে বামুনদের মাথার টিকি বা চুলের গোছার মতো। চোটনযুক্ত বর্ণ: ই, ঈ, উ, ঊ, ঐ, ঔ, ট, ঠ প্রভৃতি বর্ণের মাথায় চোটন থাকে। চোটনের অন্যান্য নাম— টিকি, উড়নি, উড়ানি, উড়না, শিখা। অন্যদিকে ক, ফ, ঋ, ্ত প্রভৃতির ডান পাশের বাঁকানো অংশ হলো 'আঁকড়ি'।</p>
+        </div>
+      </article>
+
+      <!-- Q2 -->
+      <article class="q-card" id="q2" data-correct="খ">
+        <div class="q-header">
+          <h2 class="q-text">২. ভাষার অর্থযুক্ত ক্ষুদ্রতম একক কোনটি?</h2>
+          <span class="bcs-tag">৪৯তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q2', 'ক')"><span class="opt-prefix">ক</span><span>অক্ষর</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q2', 'খ')"><span class="opt-prefix">খ</span><span>রূপমূল</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q2', 'গ')"><span class="opt-prefix">গ</span><span>শব্দ</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q2', 'ঘ')"><span class="opt-prefix">ঘ</span><span>বর্ণ</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q2')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q2">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>শব্দ ও রূপমূল: শব্দকে আরও ক্ষুদ্রতর অংশে বিভক্ত করলে এমন উপাদান পাওয়া যায় যা অর্থ প্রকাশে অংশগ্রহণ করে। ভাষার এই ক্ষুদ্রতম অর্থযুক্ত একককে বলা হয় রূপমূল (Morpheme)। অন্যদিকে ভাষার সবচেয়ে ক্ষুদ্রতম একক বা উপাদান হলো ধ্বনিমূল, তবে ধ্বনিমূলের কোনো নিজস্ব অর্থ নেই। রূপমূল দুই প্রকার: মুক্ত রূপমূল (Free Morpheme) এবং বদ্ধ রূপমূল (Bound Morpheme)।</p>
+        </div>
+      </article>
+
+      <!-- Q3 -->
+      <article class="q-card" id="q3" data-correct="ঘ">
+        <div class="q-header">
+          <h2 class="q-text">৩. ধ্বনি ও বর্ণের পার্থক্য কোথায়?</h2>
+          <span class="bcs-tag">৪৯তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q3', 'ক')"><span class="opt-prefix">ক</span><span>লেখার ধরনে</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q3', 'খ')"><span class="opt-prefix">খ</span><span>উচ্চারণের বিশিষ্টতায়</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q3', 'গ')"><span class="opt-prefix">গ</span><span>সংখ্যাগত পরিমাপে</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q3', 'ঘ')"><span class="opt-prefix">ঘ</span><span>ইন্দ্রিয় গ্রাহ্যে</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q3')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q3">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>বাংলা ব্যাকরণে ধ্বনি ও বর্ণ দুটি ভিন্ন ধারণা এবং এদের পার্থক্য মূলত তাদের প্রকৃতি ও ইন্দ্রিয়গ্রাহ্যতার মধ্যে নিহিত। ধ্বনি হলো মানুষের মুখ নিঃসৃত বাকপ্রত্যঙ্গজাত আওয়াজ, যা কান দিয়ে শোনা যায় অর্থাৎ এটি একটি শ্রুতিগ্রাহ্য (auditory) উপাদান। আর বর্ণ হলো ধ্বনির লিখিত রূপ বা প্রতীক, যা চোখ দিয়ে দেখা যায় অর্থাৎ এটি দৃষ্টিগ্রাহ্য (visual) উপাদান।</p>
+        </div>
+      </article>
+
+      <!-- Q4 -->
+      <article class="q-card" id="q4" data-correct="গ">
+        <div class="q-header">
+          <h2 class="q-text">৪. কোন শব্দে দ্বিধ্বনি রয়েছে?</h2>
+          <span class="bcs-tag">৪৮তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q4', 'ক')"><span class="opt-prefix">ক</span><span>তিসি</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q4', 'খ')"><span class="opt-prefix">খ</span><span>মালি</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q4', 'গ')"><span class="opt-prefix">গ</span><span>লাউ</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q4', 'ঘ')"><span class="opt-prefix">ঘ</span><span>মেয়ে</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q4')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q4">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>দ্বিধ্বনি বা যৌগিক স্বরধ্বনি: পূর্ণ স্বরধ্বনি ও অর্ধস্বরধ্বনি একত্রে উচ্চারিত হলে দ্বিধ্বনি হয়। যেমন- 'লাউ' শব্দের [আ] পূর্ণ স্বরধ্বনি এবং [উ্] অর্ধস্বরধ্বনি মিলে দ্বিধ্বনি [আউ্] তৈরি হয়েছে। বাংলা বর্ণমালায় দুটি দ্বিধ্বনির জন্য আলাদা বর্ণ নির্ধারিত আছে— ঐ ([অ/ও] + [ই্]) এবং ঔ ([অ/ও] + [উ্])।</p>
+        </div>
+      </article>
+
+      <!-- Q5 -->
+      <article class="q-card" id="q5" data-correct="খ">
+        <div class="q-header">
+          <h2 class="q-text">৫. ‘অন্তর্ভুক্তিমূলক’ শব্দ উচ্চারণে কয়টি অক্ষর পাওয়া যায়?</h2>
+          <span class="bcs-tag">৪৮তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q5', 'ক')"><span class="opt-prefix">ক</span><span>৫</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q5', 'খ')"><span class="opt-prefix">খ</span><span>৬</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q5', 'গ')"><span class="opt-prefix">গ</span><span>৭</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q5', 'ঘ')"><span class="opt-prefix">ঘ</span><span>৮</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q5')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q5">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>অক্ষর (Syllable) হলো অল্প প্রয়াসে এক ঝোঁকে উচ্চারিত ধ্বনি বা ধ্বনিগুচ্ছ। 'অন্তর্ভুক্তিমূলক' শব্দের উচ্চারণ বিশ্লেষণ: অন্-তোর-ভুক্-তি-মু-লক্। এখানে মোট ৬টি অক্ষর রয়েছে। এর মধ্যে ৩টি বদ্ধাক্ষর (অন্, ভুক্, লক্) এবং ৩টি মুক্তাক্ষর (তোর/তো, তি, মু)।</p>
+        </div>
+      </article>
+
+      <!-- Q6 -->
+      <article class="q-card" id="q6" data-correct="ক">
+        <div class="q-header">
+          <h2 class="q-text">৬. বিবৃত স্বরধ্বনি বলতে বোঝায়-</h2>
+          <span class="bcs-tag">৪৭তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q6', 'ক')"><span class="opt-prefix">ক</span><span>যে স্বরধ্বনি উচ্চারণে ঠোঁট বেশি খোলে</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q6', 'খ')"><span class="opt-prefix">খ</span><span>যে স্বরধ্বনির উচ্চারণে জিভ উঁচু হয়</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q6', 'গ')"><span class="opt-prefix">গ</span><span>যে স্বরধ্বনি অবিকৃতভাবে উচ্চারিত হয়</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q6', 'ঘ')"><span class="opt-prefix">ঘ</span><span>যে স্বরধ্বনি উচ্চারণে বিকৃতি ঘটে</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q6')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q6">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>যে স্বরধ্বনি উচ্চারণে ঠোঁট বেশি খোলে তাকে বিবৃত স্বরধ্বনি বলে (যেমন- 'আ')। আর যে স্বরধ্বনি উচ্চারণে ঠোঁট কম খোলে তাকে সংবৃত স্বরধ্বনি বলে (যেমন- 'ই', 'উ')। জিভের উচ্চতা ও ঠোঁটের উন্মুক্তির ভিত্তিতে স্বরধ্বনিকে চার ভাগে ভাগ করা হয়: সংবৃত, অর্ধ-সংবৃত, অর্ধ-বিবৃত এবং বিবৃত।</p>
+        </div>
+      </article>
+
+      <!-- Q7 -->
+      <article class="q-card" id="q7" data-correct="খ">
+        <div class="q-header">
+          <h2 class="q-text">৭. অভিধানে ৎ, ঃ, ঁ এই বর্ণগুলোর অবস্থান কোথায়?</h2>
+          <span class="bcs-tag">৪৭তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q7', 'ক')"><span class="opt-prefix">ক</span><span>স্বরবর্ণের আগে</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q7', 'খ')"><span class="opt-prefix">খ</span><span>স্বরবর্ণের শেষে</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q7', 'গ')"><span class="opt-prefix">গ</span><span>ব্যঞ্জনবর্ণের শেষে</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q7', 'ঘ')"><span class="opt-prefix">ঘ</span><span>এদের নির্দিষ্ট অবস্থান নেই</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q7')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q7">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>বাংলা একাডেমি আধুনিক বাংলা অভিধানে অনুসৃত বর্ণানুক্রমে ৎ, ঃ, ঁ বর্ণগুলো স্বরবর্ণের পরে এবং ব্যঞ্জনবর্ণের শুরুতে স্থান পেয়েছে। এছাড়া খণ্ড-ত (ৎ)-কে স্বতন্ত্র বর্ণ হিসেবে 'ত'-এর পরে স্থান দেওয়া হয়েছে।</p>
+        </div>
+      </article>
+
+      <!-- Q8 -->
+      <article class="q-card" id="q8" data-correct="খ">
+        <div class="q-header">
+          <h2 class="q-text">৮. বাংলা বর্ণমালায় যৌগিক স্বর কয়টি?</h2>
+          <span class="bcs-tag">৪৬তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q8', 'ক')"><span class="opt-prefix">ক</span><span>১টি</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q8', 'খ')"><span class="opt-prefix">খ</span><span>২টি</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q8', 'গ')"><span class="opt-prefix">গ</span><span>৩টি</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q8', 'ঘ')"><span class="opt-prefix">ঘ</span><span>৪টি</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q8')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q8">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>বাংলা ভাষায় যৌগিক স্বরধ্বনির সংখ্যা ২৫টি। তবে বাংলা বর্ণমালায় যৌগিক স্বরজ্ঞাপক বর্ণ রয়েছে মাত্র ২টি— 'ঐ' (অ+ই) এবং 'ঔ' (অ+উ)।</p>
+        </div>
+      </article>
+
+      <!-- Q9 -->
+      <article class="q-card" id="q9" data-correct="ক">
+        <div class="q-header">
+          <h2 class="q-text">৯. ‘ধ্বনিবিজ্ঞান ও বাংলা ধ্বনিতত্ত্ব’ গ্রন্থের রচয়িতা-</h2>
+          <span class="bcs-tag">৪৬তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q9', 'ক')"><span class="opt-prefix">ক</span><span>মুহম্মদ আবদুল হাই</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q9', 'খ')"><span class="opt-prefix">খ</span><span>মুহম্মদ শহীদুল্লাহ্</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q9', 'গ')"><span class="opt-prefix">গ</span><span>মুনীর চৌধুরী</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q9', 'ঘ')"><span class="opt-prefix">ঘ</span><span>মুহম্মদ এনামুল হক</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q9')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q9">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>মুহম্মদ আবদুল হাই রচিত বাংলা ধ্বনিবিজ্ঞানের দিশারি গ্রন্থ হলো 'ধ্বনিবিজ্ঞান ও বাংলা ধ্বনিতত্ত্ব' (১৯৬৪)। এ গ্রন্থে বাংলা ভাষার ধ্বনির গঠন, উচ্চারণরীতি ও আন্তর্জাতিক ধ্বনিলিপির প্রয়োগ বিজ্ঞানসম্মতভাবে ব্যাখ্যা করা হয়েছে।</p>
+        </div>
+      </article>
+
+      <!-- Q10 -->
+      <article class="q-card" id="q10" data-correct="ক">
+        <div class="q-header">
+          <h2 class="q-text">১০. ‘ধ্বনি’ সম্পর্কে নিচের কোন বাক্যটি সঠিক নয়?</h2>
+          <span class="bcs-tag">৪৫তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q10', 'ক')"><span class="opt-prefix">ক</span><span>ধ্বনি দৃশ্যমান</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q10', 'খ')"><span class="opt-prefix">খ</span><span>মানুষের ভাষার মূলে আছে কতগুলো ধ্বনি</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q10', 'গ')"><span class="opt-prefix">গ</span><span>ধ্বনি উচ্চারণীয় ও শ্রবণীয়</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q10', 'ঘ')"><span class="opt-prefix">ঘ</span><span>অর্থবোধক ধ্বনিগুলোই মানুষের বিভিন্ন ভাষার বাগধ্বনি</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q10')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q10">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>ধ্বনি কখনোই দৃশ্যমান নয়। ধ্বনি হলো মানুষের বাগযন্ত্রের সাহায্যে উচ্চারিত এবং কান দিয়ে শ্রবণযোগ্য আওয়াজ। ধ্বনিকে দৃশ্যমান বা দৃষ্টিগ্রাহ্য করার জন্য যে প্রতীক বা চিহ্ন ব্যবহার করা হয় তাকে 'বর্ণ' বলে।</p>
+        </div>
+      </article>
+
+      <!-- Q11 -->
+      <article class="q-card" id="q11" data-correct="খ">
+        <div class="q-header">
+          <h2 class="q-text">১১. স্বরান্ত অক্ষরকে কী বলে?</h2>
+          <span class="bcs-tag">৪৫তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q11', 'ক')"><span class="opt-prefix">ক</span><span>একাক্ষর</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q11', 'খ')"><span class="opt-prefix">খ</span><span>মুক্তাক্ষর</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q11', 'গ')"><span class="opt-prefix">গ</span><span>বদ্ধাক্ষর</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q11', 'ঘ')"><span class="opt-prefix">ঘ</span><span>যুক্তাক্ষর</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q11')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q11">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>যেসব অক্ষরের শেষে স্বরধ্বনি থাকে অর্থাৎ স্বরান্ত অক্ষরকে 'মুক্তাক্ষর' বলে। মুক্তাক্ষর উচ্চারণের পর মুখ খোলা থাকে এবং স্বর প্রলম্বিত করা যায় (চিহ্ন: U)। আর ব্যঞ্জনান্ত অক্ষরকে 'বদ্ধাক্ষর' বলে (চিহ্ন: -)।</p>
+        </div>
+      </article>
+
+      <!-- Q12 -->
+      <article class="q-card" id="q12" data-correct="ক">
+        <div class="q-header">
+          <h2 class="q-text">১২. নিম্নবিবৃত স্বরধ্বনি কোনটি?</h2>
+          <span class="bcs-tag">৪৩তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q12', 'ক')"><span class="opt-prefix">ক</span><span>আ</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q12', 'খ')"><span class="opt-prefix">খ</span><span>ই</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q12', 'গ')"><span class="opt-prefix">গ</span><span>এ</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q12', 'ঘ')"><span class="opt-prefix">ঘ</span><span>অ্যা</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q12')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q12">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>জিভের অবস্থান ও উচ্চতা অনুযায়ী 'আ' হলো নিম্ন-মধ্যস্থ কেন্দ্রীয় বিবৃত স্বরধ্বনি। 'আ' উচ্চারণে জিভ নিচে থাকে এবং মুখবিবর ও ঠোঁট সবচেয়ে বেশি উন্মুক্ত হয়।</p>
+        </div>
+      </article>
+
+      <!-- Q13 -->
+      <article class="q-card" id="q13" data-correct="গ">
+        <div class="q-header">
+          <h2 class="q-text">১৩. ধ্বনিতত্ত্ব ও শব্দতত্ত্বকে বাক্যে যথাযথভাবে ব্যবহার করার বিধানের নামই-</h2>
+          <span class="bcs-tag">৪১তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q13', 'ক')"><span class="opt-prefix">ক</span><span>রসতত্ত্ব</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q13', 'খ')"><span class="opt-prefix">খ</span><span>রূপতত্ত্ব</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q13', 'গ')"><span class="opt-prefix">গ</span><span>বাক্যতত্ত্ব</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q13', 'ঘ')"><span class="opt-prefix">ঘ</span><span>ক্রিয়ার কাল</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q13')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q13">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>ব্যাকরণের যে অংশে পদ, পদের অন্বয়, পদক্রম এবং বাক্যের গঠনপ্রণালী বিশদভাবে আলোচিত হয় তাকে বাক্যতত্ত্ব (Syntax) বা পদক্রম বলে। ধ্বনিতত্ত্ব ও শব্দতত্ত্বের উপাদানকে বাক্যে অর্থপূর্ণভাবে সাজানোর নিয়মই বাক্যতত্ত্ব।</p>
+        </div>
+      </article>
+
+      <!-- Q14 -->
+      <article class="q-card" id="q14" data-correct="ঘ">
+        <div class="q-header">
+          <h2 class="q-text">১৪. ব্যঞ্জন ধ্বনির সংক্ষিপ্ত রূপকে বলে-</h2>
+          <span class="bcs-tag">৪১তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q14', 'ক')"><span class="opt-prefix">ক</span><span>রেফ</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q14', 'খ')"><span class="opt-prefix">খ</span><span>হসন্ত</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q14', 'গ')"><span class="opt-prefix">গ</span><span>কার</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q14', 'ঘ')"><span class="opt-prefix">ঘ</span><span>ফলা</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q14')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q14">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>ব্যঞ্জনবর্ণের সংক্ষিপ্ত রূপকে 'ফলা' বলে। বাংলা ভাষায় ফলা ৬টি: ন-ফলা, ব-ফলা, ম-ফলা, য-ফলা, র-ফলা এবং ল-ফলা। অন্যদিকে স্বরবর্ণের সংক্ষিপ্ত রূপকে 'কার' বলে (কার ১০টি, 'অ' বর্ণের কোনো কার চিহ্ন নেই)।</p>
+        </div>
+      </article>
+
+      <!-- Q15 -->
+      <article class="q-card" id="q15" data-correct="খ">
+        <div class="q-header">
+          <h2 class="q-text">১৫. নিঃশ্বাসের স্বল্পতম প্রয়াসে উচ্চারিত ধ্বনি বা ধ্বনিগুচ্ছকে কী বলে?</h2>
+          <span class="bcs-tag">৪১তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q15', 'ক')"><span class="opt-prefix">ক</span><span>যৌগিক ধ্বনি</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q15', 'খ')"><span class="opt-prefix">খ</span><span>অক্ষর</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q15', 'গ')"><span class="opt-prefix">গ</span><span>বর্ণ</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q15', 'ঘ')"><span class="opt-prefix">ঘ</span><span>মৌলিক স্বরধ্বনি</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q15')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q15">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>বাগযন্ত্রের স্বল্পতম প্রয়াসে বা এক ঝোঁকে যতটুকু ধ্বনি বা ধ্বনিসমষ্টি একবারে উচ্চারিত হয় তাকে অক্ষর (Syllable) বলে।</p>
+        </div>
+      </article>
+
+      <!-- Q16 -->
+      <article class="q-card" id="q16" data-correct="ক">
+        <div class="q-header">
+          <h2 class="q-text">১৬. বাংলা ভাষায় ব্যবহৃত মৌলিক স্বরধ্বনি কয়টি?</h2>
+          <span class="bcs-tag">৩৮তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q16', 'ক')"><span class="opt-prefix">ক</span><span>৭টি</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q16', 'খ')"><span class="opt-prefix">খ</span><span>৮টি</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q16', 'গ')"><span class="opt-prefix">গ</span><span>৬টি</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q16', 'ঘ')"><span class="opt-prefix">ঘ</span><span>১১টি</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q16')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q16">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>বাংলা ভাষায় মৌলিক স্বরধ্বনি ৭টি— অ, আ, ই, উ, এ, ও এবং অ্যা। তবে বাংলা বর্ণমালায় স্বরবর্ণের সংখ্যা ১১টি।</p>
+        </div>
+      </article>
+
+      <!-- Q17 -->
+      <article class="q-card" id="q17" data-correct="ক">
+        <div class="q-header">
+          <h2 class="q-text">১৭. ‘ঔ’ কোন ধরনের স্বরধ্বনি?</h2>
+          <span class="bcs-tag">৩৭তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q17', 'ক')"><span class="opt-prefix">ক</span><span>যৌগিক স্বরধ্বনি</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q17', 'খ')"><span class="opt-prefix">খ</span><span>তালব্য স্বরধ্বনি</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q17', 'গ')"><span class="opt-prefix">গ</span><span>মিলিত স্বরধ্বনি</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q17', 'ঘ')"><span class="opt-prefix">ঘ</span><span>কোনটি নয়</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q17')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q17">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>'ঔ' একটি যৌগিক স্বরধ্বনি বা সান্ধ্য স্বর। এটি দুটি স্বরধ্বনির (অ/ও + উ) মিলনে সৃষ্টি হয়েছে।</p>
+        </div>
+      </article>
+
+      <!-- Q18 -->
+      <article class="q-card" id="q18" data-correct="খ">
+        <div class="q-header">
+          <h2 class="q-text">১৮. বর্গের কোন বর্ণসমূহের ধ্বনি মহাপ্রাণধ্বনি?</h2>
+          <span class="bcs-tag">৩৭তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q18', 'ক')"><span class="opt-prefix">ক</span><span>তৃতীয় বর্ণ</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q18', 'খ')"><span class="opt-prefix">খ</span><span>দ্বিতীয় ও চতুর্থ বর্ণ</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q18', 'গ')"><span class="opt-prefix">গ</span><span>প্রথম ও দ্বিতীয় বর্ণ</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q18', 'ঘ')"><span class="opt-prefix">ঘ</span><span>দ্বিতীয় ও তৃতীয় বর্ণ</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q18')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q18">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>যেসব ধ্বনি উচ্চারণে বাতাসের চাপের আধিক্য থাকে এবং হ-কার জাতীয় ধ্বনি শোনা যায় সেগুলোকে মহাপ্রাণ ধ্বনি বলে। স্পর্শ বর্ণের প্রতি বর্গের ২য় ও ৪র্থ বর্ণ (যেমন- খ, ঘ, ছ, ঝ, ঠ, ঢ, থ, ধ, ফ, ভ) মহাপ্রাণ ধ্বনি।</p>
+        </div>
+      </article>
+
+      <!-- Q19 -->
+      <article class="q-card" id="q19" data-correct="ঘ">
+        <div class="q-header">
+          <h2 class="q-text">১৯. বাংলা বর্ণমালায় অর্ধমাত্রার বর্ণ কয়টি?</h2>
+          <span class="bcs-tag">৩৬তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q19', 'ক')"><span class="opt-prefix">ক</span><span>৭টি</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q19', 'খ')"><span class="opt-prefix">খ</span><span>৯টি</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q19', 'গ')"><span class="opt-prefix">গ</span><span>১০টি</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q19', 'ঘ')"><span class="opt-prefix">ঘ</span><span>৮টি</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q19')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q19">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>বাংলা বর্ণমালার ৫০টি বর্ণের মধ্যে মাত্রাভেদ: পূর্ণমাত্রা ৩২টি (স্বরবর্ণ ৬টি, ব্যঞ্জনবর্ণ ২৬টি); অর্ধমাত্রা ৮টি (স্বরবর্ণ ১টি 'ঋ', ব্যঞ্জনবর্ণ ৭টি খ, গ, ণ, থ, ধ, প, শ); মাত্রাহীন ১০টি (স্বরবর্ণ ৪টি এ, ঐ, ও, ঔ, ব্যঞ্জনবর্ণ ৬টি ঙ, ঞ, ৎ, ং, ঃ, ঁ)।</p>
+        </div>
+      </article>
+
+      <!-- Q20 -->
+      <article class="q-card" id="q20" data-correct="ক">
+        <div class="q-header">
+          <h2 class="q-text">২০. ‘বিজ্ঞান’ শব্দের যুক্তবর্ণের সঠিক রূপ কোনটি?</h2>
+          <span class="bcs-tag">৩৬তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q20', 'ক')"><span class="opt-prefix">ক</span><span>জ্ + ঞ</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q20', 'খ')"><span class="opt-prefix">খ</span><span>ঞ্ + গ</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q20', 'গ')"><span class="opt-prefix">গ</span><span>ঞ্ + জ</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q20', 'ঘ')"><span class="opt-prefix">ঘ</span><span>গ্ + ঞ</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q20')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q20">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>‘বিজ্ঞান’ শব্দের 'জ্ঞ' যুক্তবর্ণটির বিশ্লিষ্ট রূপ হলো: জ্ + ঞ। উচ্চারণ: বিগ্‌গ্যাঁন্।</p>
+        </div>
+      </article>
+
+      <!-- Q21 -->
+      <article class="q-card" id="q21" data-correct="ক">
+        <div class="q-header">
+          <h2 class="q-text">২১. বাংলা ভাষায় মৌলিক স্বরধ্বনির সংখ্যা কত?</h2>
+          <span class="bcs-tag">৩৫তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q21', 'ক')"><span class="opt-prefix">ক</span><span>৭টি</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q21', 'খ')"><span class="opt-prefix">খ</span><span>৯টি</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q21', 'গ')"><span class="opt-prefix">গ</span><span>১১টি</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q21', 'ঘ')"><span class="opt-prefix">ঘ</span><span>১৩টি</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q21')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q21">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>বাংলা ভাষায় মৌলিক ধ্বনি মোট ৩৭টি। এর মধ্যে মৌলিক স্বরধ্বনি ৭টি এবং মৌলিক ব্যঞ্জনধ্বনি ৩০টি।</p>
+        </div>
+      </article>
+
+      <!-- Q22 -->
+      <article class="q-card" id="q22" data-correct="ঘ">
+        <div class="q-header">
+          <h2 class="q-text">২২. ভাষার ক্ষুদ্রতম একক কোনটি?</h2>
+          <span class="bcs-tag">৩২তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q22', 'ক')"><span class="opt-prefix">ক</span><span>বর্ণ</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q22', 'খ')"><span class="opt-prefix">খ</span><span>শব্দ</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q22', 'গ')"><span class="opt-prefix">গ</span><span>অক্ষর</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q22', 'ঘ')"><span class="opt-prefix">ঘ</span><span>ধ্বনি</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q22')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q22">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>ভাষার মূল উপাদান বা ক্ষুদ্রতম একক হলো 'ধ্বনি'। বাক্যের ক্ষুদ্রতম একক শব্দ, এবং শব্দের ক্ষুদ্রতম অর্থপূর্ণ একক রূপমূল। আর ধ্বনি নির্দেশক প্রতীক হলো বর্ণ।</p>
+        </div>
+      </article>
+
+      <!-- Q23 -->
+      <article class="q-card" id="q23" data-correct="ঘ">
+        <div class="q-header">
+          <h2 class="q-text">২৩. বাংলা বর্ণমালায় স্বরবর্ণ কয়টি?</h2>
+          <span class="bcs-tag">২৯তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q23', 'ক')"><span class="opt-prefix">ক</span><span>১৩ টি</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q23', 'খ')"><span class="opt-prefix">খ</span><span>১০ টি</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q23', 'গ')"><span class="opt-prefix">গ</span><span>১২ টি</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q23', 'ঘ')"><span class="opt-prefix">ঘ</span><span>১১ টি</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q23')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q23">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>বাংলা বর্ণমালায় মোট ৫০টি বর্ণের মধ্যে স্বরবর্ণ ১১টি এবং ব্যঞ্জনবর্ণ ৩৯টি।</p>
+        </div>
+      </article>
+
+      <!-- Q24 -->
+      <article class="q-card" id="q24" data-correct="ঘ">
+        <div class="q-header">
+          <h2 class="q-text">২৪. ‘হ্ম’-এর বিশ্লিষ্ট রূপ-</h2>
+          <span class="bcs-tag">২৩তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q24', 'ক')"><span class="opt-prefix">ক</span><span>ক্ + ষ</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q24', 'খ')"><span class="opt-prefix">খ</span><span>ক্ + ষ + ণ</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q24', 'গ')"><span class="opt-prefix">গ</span><span>ক্ + ষ + ম</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q24', 'ঘ')"><span class="opt-prefix">ঘ</span><span>হ্ + ম</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q24')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q24">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>‘হ্ম’ যুক্তবর্ণটির সঠিক বিশ্লিষ্ট রূপ হলো: হ্ + ম (যেমন- ব্রাহ্মণ, ব্রহ্মা)। অপরদিকে ক্ + ষ = ক্ষ (যেমন- শিক্ষক, ক্ষমা)।</p>
+        </div>
+      </article>
+
+      <!-- Q25 -->
+      <article class="q-card" id="q25" data-correct="গ">
+        <div class="q-header">
+          <h2 class="q-text">২৫. বাংলা বর্ণমালায় মাত্রাহীন বর্ণের সংখ্যা কয়টি?</h2>
+          <span class="bcs-tag">১৮তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q25', 'ক')"><span class="opt-prefix">ক</span><span>এগারটি</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q25', 'খ')"><span class="opt-prefix">খ</span><span>নয়টি</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q25', 'গ')"><span class="opt-prefix">গ</span><span>দশটি</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q25', 'ঘ')"><span class="opt-prefix">ঘ</span><span>আটটি</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q25')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q25">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>বাংলা বর্ণমালায় মাত্রাহীন বর্ণ মোট ১০টি। স্বরবর্ণ ৪টি (এ, ঐ, ও, ঔ) এবং ব্যঞ্জনবর্ণ ৬টি (ঙ, ঞ, ৎ, ং, ঃ, ঁ)।</p>
+        </div>
+      </article>
+
+      <!-- Q26 -->
+      <article class="q-card" id="q26" data-correct="গ">
+        <div class="q-header">
+          <h2 class="q-text">২৬. বর্ণ হচ্ছে?</h2>
+          <span class="bcs-tag">১৪তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক" onclick="checkAnswer('q26', 'ক')"><span class="opt-prefix">ক</span><span>শব্দের ক্ষুদ্রতম অংশ</span></button>
+          <button class="opt-btn" data-opt="খ" onclick="checkAnswer('q26', 'খ')"><span class="opt-prefix">খ</span><span>একসঙ্গে উচ্চারিত ধ্বনিগুচ্ছ</span></button>
+          <button class="opt-btn" data-opt="গ" onclick="checkAnswer('q26', 'গ')"><span class="opt-prefix">গ</span><span>ধ্বনি নির্দেশক প্রতীক</span></button>
+          <button class="opt-btn" data-opt="ঘ" onclick="checkAnswer('q26', 'ঘ')"><span class="opt-prefix">ঘ</span><span>ধ্বনির শ্রুতিগ্রাহ্য রূপ</span></button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp('q26')">💡 ব্যাখ্যা দেখুন</button>
+        <div class="explanation-drawer" id="exp-q26">
+          <div class="explanation-title">ব্যাখ্যা:</div>
+          <p>মানুষের মুখনিঃসৃত ধ্বনিকে লিখে প্রকাশ করার জন্য যে সাংকেতিক চিহ্ন বা প্রতীক ব্যবহার করা হয় তাকে 'বর্ণ' বলে।</p>
+        </div>
+      </article>
+
+    </main>
+
+    <footer class="footer-nav">
+      <a href="ভাষা ও বাংলা ভাষারীতি.html" class="footer-btn">← ভাষা ও বাংলা ভাষারীতি</a>
+      <a href="index.html" class="footer-btn">🏠 সূচিপত্র</a>
+      <a href="ধ্বনির উচ্চারণ ও ধ্বনি পরিবর্তন.html" class="footer-btn">ধ্বনির উচ্চারণ ও ধ্বনি পরিবর্তন →</a>
+    </footer>
   </div>
-  <div class="controls">
-    <button class="ctrl-btn" onclick="adjustFontSize(-0.05)" title="লেখা ছোট করুন">A-</button>
-    <button class="ctrl-btn" onclick="resetFontSize()" title="স্বাভাবিক ফন্ট">A</button>
-    <button class="ctrl-btn" onclick="adjustFontSize(0.05)" title="লেখা বড় করুন">A+</button>
-    <button class="ctrl-btn" onclick="toggleTheme()" id="theme-btn" title="ডার্ক/লাইট থিম">🌙</button>
-  </div>
-</div>
 
-<div class="container">
+  <script>
+    var answeredQuestions = {};
+    var correctScore = 0;
+    var wrongScore = 0;
 
-  <!-- Hero Header -->
-  <header class="hero-card">
-    <h1 class="hero-title">০২. ধ্বনি ও বর্ণ-প্রকরণ</h1>
-    <p class="hero-subtitle">ধ্বনিতত্ত্ব • বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ প্রস্তুতি (পৃষ্ঠা ০৫–০৯)</p>
-  </header>
+    function checkAnswer(qId, selectedOpt) {
+      if (answeredQuestions[qId]) return;
+      var card = document.getElementById(qId);
+      var correctOpt = card.getAttribute('data-correct');
+      var btns = card.querySelectorAll('.opt-btn');
 
-  <!-- BCS Question Distribution Table -->
-  <section class="bcs-table-card">
-    <h2 class="card-title">📊 বিগত বিসিএস পরীক্ষায় এ অধ্যায়ের প্রশ্ন বিশ্লেষণ</h2>
-    <div class="table-responsive">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
-            <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
-            <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>৫০তম</td><td>১</td><td>৪৪তম</td><td>০</td><td>৩৮তম</td><td>১</td></tr>
-          <tr><td>৪৯তম</td><td>২</td><td>৪৩তম</td><td>১</td><td>৩৭তম</td><td>২</td></tr>
-          <tr><td>৪৮তম</td><td>২</td><td>৪২তম</td><td>০</td><td>৩৬তম</td><td>২</td></tr>
-          <tr><td>৪৭তম</td><td>২</td><td>৪১তম</td><td>৩</td><td>৩৫তম</td><td>১</td></tr>
-          <tr><td>৪৬তম</td><td>২</td><td>৪০তম</td><td>০</td><td>১০ম-৩৪তম</td><td>৫</td></tr>
-          <tr><td>৪৫তম</td><td>২</td><td>৩৯তম</td><td>০</td><td><strong>মোট প্রশ্ন</strong></td><td><strong>২৬টি</strong></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+      answeredQuestions[qId] = selectedOpt;
 
-  <!-- Theory Module 1: Special Letter Signs -->
-  <article class="theory-card">
-    <h2 class="section-head">🔤 বাংলা বর্ণের বিশেষ চিহ্নাদি</h2>
-    <div class="key-point">
-      <strong>১. চোটন (টিকি/উড়নি/শিখা):</strong> বাংলা বর্ণের মাথার ওপর থাকা বাঁকানো চিহ্নকে চোটন বলে। ই, ঈ, উ, ঊ, ঐ, ঔ, ট, ঠ প্রভৃতি বর্ণের মাথায় চোটন থাকে (যেমন: ট-এর ওপর চোটন দিলে 'ট', ড-এর ওপর দিলে 'উ')।
-    </div>
-    <div class="key-point">
-      <strong>২. আঁকড়ি:</strong> বর্ণের ডান পাশের বাঁকানো অংশকে আঁকড়ি বলে (যেমন: ব + আঁকড়ি = ক, ব-এর মাথার বামে উল্টো আঁকড়ি = ধ)।
-    </div>
-    <div class="key-point">
-      <strong>৩. পাগড়ি:</strong> বাংলা বর্ণমালায় 'ঙ' বর্ণের ওপরে যে বাঁকানো অংশ থাকে, তাকে কথ্য বা ব্যাকরণগতভাবে 'পাগড়ি' বলে।
-    </div>
-    <div class="key-point">
-      <strong>৪. জোড়-আঁকড়ি:</strong> 'এ'-এর পিঠে দুটি আঁকড়ি দিলে 'ঞ' হয়। তাই একে 'জোড়-আঁকড়ি' বলা হয়।
-    </div>
-  </article>
+      btns.forEach(function(btn) {
+        btn.disabled = true;
+        var opt = btn.getAttribute('data-opt');
+        if (opt === correctOpt) {
+          btn.classList.add('correct');
+        } else if (opt === selectedOpt) {
+          btn.classList.add('wrong');
+        }
+      });
 
-  <!-- Theory Module 2: Matra Division Table -->
-  <article class="theory-card">
-    <h2 class="section-head">📏 বাংলা বর্ণমালার মাত্রাভেদ</h2>
-    <div class="table-responsive">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>মাত্রাভেদ</th>
-            <th>স্বরবর্ণ</th>
-            <th>ব্যঞ্জনবর্ণ</th>
-            <th>মোট বর্ণ</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>পূর্ণমাত্রা</strong></td>
-            <td>৬টি (অ, আ, ই, ঈ, উ, ঊ)</td>
-            <td>২৬টি</td>
-            <td><strong>৩২টি</strong></td>
-          </tr>
-          <tr>
-            <td><strong>অর্ধমাত্রা</strong></td>
-            <td>১টি (ঋ)</td>
-            <td>৭টি (খ, গ, ণ, থ, ধ, প, শ)</td>
-            <td><strong>৮টি</strong></td>
-          </tr>
-          <tr>
-            <td><strong>মাত্রাহীন</strong></td>
-            <td>৪টি (এ, ঐ, ও, ঔ)</td>
-            <td>৬টি (ঙ, ঞ, ৎ, ং, ঃ, ঁ)</td>
-            <td><strong>১০টি</strong></td>
-          </tr>
-          <tr>
-            <td><strong>সর্বমোট</strong></td>
-            <td><strong>১১টি</strong></td>
-            <td><strong>৩৯টি</strong></td>
-            <td><strong>৫০টি</strong></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </article>
-
-  <!-- Theory Module 3: Vowel Phoneme Matrix -->
-  <article class="theory-card">
-    <h2 class="section-head">🗣️ স্বরধ্বনির অবস্থান ও বৈজ্ঞানিক শ্রেণিবিন্যাস</h2>
-    <div class="table-responsive">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>জিভের উচ্চতা</th>
-            <th>সম্মুখ স্বরধ্বনি</th>
-            <th>মধ্য স্বরধ্বনি</th>
-            <th>পশ্চাৎ স্বরধ্বনি</th>
-            <th>ঠোঁটের উন্মুক্তি</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>উচ্চ</strong></td>
-            <td>ই</td>
-            <td>—</td>
-            <td>উ</td>
-            <td><strong>সংবৃত</strong></td>
-          </tr>
-          <tr>
-            <td><strong>উচ্চ-মধ্য</strong></td>
-            <td>এ</td>
-            <td>—</td>
-            <td>ও</td>
-            <td><strong>অর্ধ-সংবৃত</strong></td>
-          </tr>
-          <tr>
-            <td><strong>নিম্ন-মধ্য</strong></td>
-            <td>অ্যা</td>
-            <td>—</td>
-            <td>অ</td>
-            <td><strong>অর্ধ-বিবৃত</strong></td>
-          </tr>
-          <tr>
-            <td><strong>নিম্ন</strong></td>
-            <td>—</td>
-            <td>আ</td>
-            <td>—</td>
-            <td><strong>বিবৃত</strong></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="info-box">
-      <strong>💡 মনে রাখার সূত্র:</strong> উচ্চ স্বরধ্বনি (ই, উ) উচ্চারণে ঠোঁট সবচেয়ে কম খোলে (সংবৃত); আর নিম্ন স্বরধ্বনি (আ) উচ্চারণে ঠোঁট সবচেয়ে বেশি খোলে (বিবৃত)।
-    </div>
-  </article>
-
-  <!-- Theory Module 4: Consonant Classification & Conjuncts -->
-  <article class="theory-card">
-    <h2 class="section-head">🧩 স্পর্শবর্ণ, উচ্চারণ স্থান ও গুরুত্বপূর্ণ যুক্তবর্ণ</h2>
-    <div class="key-point">
-      <strong>বর্গীয় ধ্বনি:</strong> স্পর্শ বর্ণের প্রতি বর্গের ১ম ও ৩য় বর্ণ <em>অল্পপ্রাণ</em>; ২য় ও ৪র্থ বর্ণ <em>মহাপ্রাণ</em>। ১ম ও ২য় বর্ণ <em>অঘোষ</em>; ৩য়, ৪র্থ ও ৫ম বর্ণ <em>ঘোষ</em>। ৫ম বর্ণটি <em>নাসিক্য ধ্বনি</em>।
-    </div>
-    <div class="table-responsive">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>যুক্তবর্ণ</th>
-            <th>বিশ্লিষ্ট রূপ</th>
-            <th>উদাহরণ ও উচ্চারণ</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>জ্ঞ</strong></td><td>জ্ + ঞ</td><td>জ্ঞান (গ্যাঁন্), বিজ্ঞান, অজ্ঞ</td></tr>
-          <tr><td><strong>হ্ম</strong></td><td>হ্ + ম</td><td>ব্রাহ্মণ (ব্রাম্‌ভন), ব্রহ্মা</td></tr>
-          <tr><td><strong>ক্ষ</strong></td><td>ক্ + ষ</td><td>ক্ষমা (খমা), শিক্ষক</td></tr>
-          <tr><td><strong>হ্ণ / হ্ন</strong></td><td>হ্ + ণ / হ্ + ন</td><td>অপরাহ্ণ, মধ্যাহ্ন</td></tr>
-          <tr><td><strong>ঞ্চ / ঞ্ছ / ঞ্জ</strong></td><td>ঞ্ + চ / ঞ্ + ছ / ঞ্ + জ</td><td>পঞ্চম, বাঞ্ছা, রঞ্জন</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </article>
-
-  <!-- Interactive Quiz Engine -->
-  <section class="quiz-section-header">
-    <div class="quiz-title">🎯 বিসিএস প্রিলিমিনারি আসল প্রশ্নব্যাংক (MCQ)</div>
-    <div class="score-tracker">
-      অগ্রগতি: <span id="answered-count">০</span> / <span id="total-count">26</span> | সঠিক: <span id="correct-count">০</span>
-    </div>
-  </section>
-
-  <section class="quiz-container">
-    <div id="quiz-cards-wrapper"></div>
-    <div class="quiz-footer-actions">
-      <button class="reset-btn" onclick="resetQuiz()">🔄 পুনরায় অনুশীলন করুন</button>
-    </div>
-  </section>
-
-</div>
-
-<script>
-let currentScale = 1.0;
-function adjustFontSize(delta) {
-  currentScale = Math.min(1.4, Math.max(0.8, currentScale + delta));
-  document.documentElement.style.setProperty('--font-scale', currentScale + 'rem');
-  try {
-    localStorage.setItem('ebk_font_scale', currentScale);
-  } catch(e) {}
-}
-
-function resetFontSize() {
-  currentScale = 1.0;
-  document.documentElement.style.setProperty('--font-scale', '1rem');
-  try {
-    localStorage.setItem('ebk_font_scale', 1.0);
-  } catch(e) {}
-}
-
-function toggleTheme() {
-  const htmlEl = document.documentElement;
-  const currentTheme = htmlEl.getAttribute('data-theme') || 'light';
-  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-  htmlEl.setAttribute('data-theme', newTheme);
-  const themeBtn = document.getElementById('theme-btn');
-  if (themeBtn) {
-    themeBtn.innerText = newTheme === 'light' ? '🌙' : '☀️';
-  }
-  try {
-    localStorage.setItem('theme', newTheme);
-  } catch(e) {}
-}
-
-window.addEventListener('scroll', () => {
-  const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-  const bar = document.getElementById('progress-bar');
-  if (bar) bar.style.width = scrolled + '%';
-});
-
-const quizData = [
-  {
-    "id": 1,
-    "tag": "৫০তম বিসিএস",
-    "q": "'ই' এর মাত্রার উপরের অংশের নাম কী?",
-    "opts": [
-      "চোটন",
-      "আঁকড়ি",
-      "পাগড়ি",
-      "জোড় আঁকড়ি"
-    ],
-    "ans": 0,
-    "exp": "চোটন, আঁকড়ি, পাগড়ি, জোড় আঁকড়ি ইত্যাদি বাংলা বর্ণের বিশেষ চিহ্ন। চোটন হলো বাংলা বর্ণের মাথার ওপর থাকা বাঁকানো চিহ্ন, যা দেখতে অনেকটা উড়ে বামুনদের মাথার টিকি বা চুলের গোছার মতো। চোটনযুক্ত বর্ণ: ই, ঈ, উ, ঊ, ঐ, ঔ, ট, ঠ প্রভৃতি বর্ণের মাথায় চোটন থাকে। চোটনের অন্যান্য নাম— টিকি, উড়নি, উড়ানি, উড়না, শিখা। অন্যদিকে ক, ফ, ঋ, ্ত প্রভৃতির ডান পাশের বাঁকানো অংশ হলো 'আঁকড়ি'।"
-  },
-  {
-    "id": 2,
-    "tag": "৪৯তম বিসিএস",
-    "q": "ভাষার অর্থযুক্ত ক্ষুদ্রতম একক কোনটি?",
-    "opts": [
-      "অক্ষর",
-      "রূপমূল",
-      "শব্দ",
-      "বর্ণ"
-    ],
-    "ans": 1,
-    "exp": "শব্দ ও রূপমূল: শব্দকে আরও ক্ষুদ্রতর অংশে বিভক্ত করলে এমন উপাদান পাওয়া যায় যা অর্থ প্রকাশে অংশগ্রহণ করে। ভাষার এই ক্ষুদ্রতম অর্থযুক্ত একককে বলা হয় রূপমূল (Morpheme)। অন্যদিকে ভাষার সবচেয়ে ক্ষুদ্রতম একক বা উপাদান হলো ধ্বনিমূল, তবে ধ্বনিমূলের কোনো নিজস্ব অর্থ নেই। রূপমূল দুই প্রকার: মুক্ত রূপমূল (Free Morpheme) এবং বদ্ধ রূপমূল (Bound Morpheme)।"
-  },
-  {
-    "id": 3,
-    "tag": "৪৯তম বিসিএস",
-    "q": "ধ্বনি ও বর্ণের পার্থক্য কোথায়?",
-    "opts": [
-      "লেখার ধরনে",
-      "উচ্চারণের বিশিষ্টতায়",
-      "সংখ্যাগত পরিমাপে",
-      "ইন্দ্রিয় গ্রাহ্যে"
-    ],
-    "ans": 3,
-    "exp": "বাংলা ব্যাকরণে ধ্বনি ও বর্ণ দুটি ভিন্ন ধারণা এবং এদের পার্থক্য মূলত তাদের প্রকৃতি ও ইন্দ্রিয়গ্রাহ্যতার মধ্যে নিহিত। ধ্বনি হলো মানুষের মুখ নিঃসৃত বাকপ্রত্যঙ্গজাত আওয়াজ, যা কান দিয়ে শোনা যায় অর্থাৎ এটি একটি শ্রুতিগ্রাহ্য (auditory) উপাদান। আর বর্ণ হলো ধ্বনির লিখিত রূপ বা প্রতীক, যা চোখ দিয়ে দেখা যায় অর্থাৎ এটি দৃষ্টিগ্রাহ্য (visual) উপাদান।"
-  },
-  {
-    "id": 4,
-    "tag": "৪৮তম বিসিএস",
-    "q": "কোন শব্দে দ্বিধ্বনি রয়েছে?",
-    "opts": [
-      "তিসি",
-      "মালি",
-      "লাউ",
-      "মেয়ে"
-    ],
-    "ans": 2,
-    "exp": "দ্বিধ্বনি বা যৌগিক স্বরধ্বনি: পূর্ণ স্বরধ্বনি ও অর্ধস্বরধ্বনি একত্রে উচ্চারিত হলে দ্বিধ্বনি হয়। যেমন- 'লাউ' শব্দের [আ] পূর্ণ স্বরধ্বনি এবং [উ্] অর্ধস্বরধ্বনি মিলে দ্বিধ্বনি [আউ্] তৈরি হয়েছে। বাংলা বর্ণমালায় দুটি দ্বিধ্বনির জন্য আলাদা বর্ণ নির্ধারিত আছে— ঐ ([অ/ও] + [ই্]) এবং ঔ ([অ/ও] + [উ্])।"
-  },
-  {
-    "id": 5,
-    "tag": "৪৮তম বিসিএস",
-    "q": "‘অন্তর্ভুক্তিমূলক’ শব্দ উচ্চারণে কয়টি অক্ষর পাওয়া যায়?",
-    "opts": [
-      "৫",
-      "৬",
-      "৭",
-      "৮"
-    ],
-    "ans": 1,
-    "exp": "অক্ষর (Syllable) হলো অল্প প্রয়াসে এক ঝোঁকে উচ্চারিত ধ্বনি বা ধ্বনিগুচ্ছ। 'অন্তর্ভুক্তিমূলক' শব্দের উচ্চারণ বিশ্লেষণ: অন্-তোর-ভুক্-তি-মু-লক্। এখানে মোট ৬টি অক্ষর রয়েছে। এর মধ্যে ৩টি বদ্ধাক্ষর (অন্, ভুক্, লক্) এবং ৩টি মুক্তাক্ষর (তোর/তো, তি, মু)।"
-  },
-  {
-    "id": 6,
-    "tag": "৪৭তম বিসিএস",
-    "q": "বিবৃত স্বরধ্বনি বলতে বোঝায়-",
-    "opts": [
-      "যে স্বরধ্বনি উচ্চারণে ঠোঁট বেশি খোলে",
-      "যে স্বরধ্বনির উচ্চারণে জিভ উঁচু হয়",
-      "যে স্বরধ্বনি অবিকৃতভাবে উচ্চারিত হয়",
-      "যে স্বরধ্বনি উচ্চারণে বিকৃতি ঘটে"
-    ],
-    "ans": 0,
-    "exp": "যে স্বরধ্বনি উচ্চারণে ঠোঁট বেশি খোলে তাকে বিবৃত স্বরধ্বনি বলে (যেমন- 'আ')। আর যে স্বরধ্বনি উচ্চারণে ঠোঁট কম খোলে তাকে সংবৃত স্বরধ্বনি বলে (যেমন- 'ই', 'উ')। জিভের উচ্চতা ও ঠোঁটের উন্মুক্তির ভিত্তিতে স্বরধ্বনিকে চার ভাগে ভাগ করা হয়: সংবৃত, অর্ধ-সংবৃত, অর্ধ-বিবৃত এবং বিবৃত।"
-  },
-  {
-    "id": 7,
-    "tag": "৪৭তম বিসিএস",
-    "q": "অভিধানে ৎ, ঃ, ঁ এই বর্ণগুলোর অবস্থান কোথায়?",
-    "opts": [
-      "স্বরবর্ণের আগে",
-      "স্বরবর্ণের শেষে",
-      "ব্যঞ্জনবর্ণের শেষে",
-      "এদের নির্দিষ্ট অবস্থান নেই"
-    ],
-    "ans": 1,
-    "exp": "বাংলা একাডেমি আধুনিক বাংলা অভিধানে অনুসৃত বর্ণানুক্রমে ৎ, ঃ, ঁ বর্ণগুলো স্বরবর্ণের পরে এবং ব্যঞ্জনবর্ণের শুরুতে স্থান পেয়েছে। এছাড়া খণ্ড-ত (ৎ)-কে স্বতন্ত্র বর্ণ হিসেবে 'ত'-এর পরে স্থান দেওয়া হয়েছে।"
-  },
-  {
-    "id": 8,
-    "tag": "৪৬তম বিসিএস",
-    "q": "বাংলা বর্ণমালায় যৌগিক স্বর কয়টি?",
-    "opts": [
-      "১টি",
-      "২টি",
-      "৩টি",
-      "৪টি"
-    ],
-    "ans": 1,
-    "exp": "বাংলা ভাষায় যৌগিক স্বরধ্বনির সংখ্যা ২৫টি। তবে বাংলা বর্ণমালায় যৌগিক স্বরজ্ঞাপক বর্ণ রয়েছে মাত্র ২টি— 'ঐ' (অ+ই) এবং 'ঔ' (অ+উ)।"
-  },
-  {
-    "id": 9,
-    "tag": "৪৬তম বিসিএস",
-    "q": "‘ধ্বনিবিজ্ঞান ও বাংলা ধ্বনিতত্ত্ব’ গ্রন্থের রচয়িতা-",
-    "opts": [
-      "মুহম্মদ আবদুল হাই",
-      "মুহম্মদ শহীদুল্লাহ্",
-      "মুনীর চৌধুরী",
-      "মুহম্মদ এনামুল হক"
-    ],
-    "ans": 0,
-    "exp": "মুহম্মদ আবদুল হাই রচিত বাংলা ধ্বনিবিজ্ঞানের দিশারি গ্রন্থ হলো 'ধ্বনিবিজ্ঞান ও বাংলা ধ্বনিতত্ত্ব' (১৯৬৪)। এ গ্রন্থে বাংলা ভাষার ধ্বনির গঠন, উচ্চারণরীতি ও আন্তর্জাতিক ধ্বনিলিপির প্রয়োগ বিজ্ঞানসম্মতভাবে ব্যাখ্যা করা হয়েছে।"
-  },
-  {
-    "id": 10,
-    "tag": "৪৫তম বিসিএস",
-    "q": "‘ধ্বনি’ সম্পর্কে নিচের কোন বাক্যটি সঠিক নয়?",
-    "opts": [
-      "ধ্বনি দৃশ্যমান",
-      "মানুষের ভাষার মূলে আছে কতগুলো ধ্বনি",
-      "ধ্বনি উচ্চারণীয় ও শ্রবণীয়",
-      "অর্থবোধক ধ্বনিগুলোই মানুষের বিভিন্ন ভাষার বাগধ্বনি"
-    ],
-    "ans": 0,
-    "exp": "ধ্বনি কখনোই দৃশ্যমান নয়। ধ্বনি হলো মানুষের বাগযন্ত্রের সাহায্যে উচ্চারিত এবং কান দিয়ে শ্রবণযোগ্য আওয়াজ। ধ্বনিকে দৃশ্যমান বা দৃষ্টিগ্রাহ্য করার জন্য যে প্রতীক বা চিহ্ন ব্যবহার করা হয় তাকে 'বর্ণ' বলে।"
-  },
-  {
-    "id": 11,
-    "tag": "৪৫তম বিসিএস",
-    "q": "স্বরান্ত অক্ষরকে কী বলে?",
-    "opts": [
-      "একাক্ষর",
-      "মুক্তাক্ষর",
-      "বদ্ধাক্ষর",
-      "যুক্তাক্ষর"
-    ],
-    "ans": 1,
-    "exp": "যেসব অক্ষরের শেষে স্বরধ্বনি থাকে অর্থাৎ স্বরান্ত অক্ষরকে 'মুক্তাক্ষর' বলে। মুক্তাক্ষর উচ্চারণের পর মুখ খোলা থাকে এবং স্বর প্রলম্বিত করা যায় (চিহ্ন: U)। আর ব্যঞ্জনান্ত অক্ষরকে 'বদ্ধাক্ষর' বলে (চিহ্ন: -)।"
-  },
-  {
-    "id": 12,
-    "tag": "৪৩তম বিসিএস",
-    "q": "নিম্নবিবৃত স্বরধ্বনি কোনটি?",
-    "opts": [
-      "আ",
-      "ই",
-      "এ",
-      "অ্যা"
-    ],
-    "ans": 0,
-    "exp": "জিভের অবস্থান ও উচ্চতা অনুযায়ী 'আ' হলো নিম্ন-মধ্যস্থ কেন্দ্রীয় বিবৃত স্বরধ্বনি। 'আ' উচ্চারণে জিভ নিচে থাকে এবং মুখবিবর ও ঠোঁট সবচেয়ে বেশি উন্মুক্ত হয়।"
-  },
-  {
-    "id": 13,
-    "tag": "৪১তম বিসিএস",
-    "q": "ধ্বনিতত্ত্ব ও শব্দতত্ত্বকে বাক্যে যথাযথভাবে ব্যবহার করার বিধানের নামই-",
-    "opts": [
-      "রসতত্ত্ব",
-      "রূপতত্ত্ব",
-      "বাক্যতত্ত্ব",
-      "ক্রিয়ার কাল"
-    ],
-    "ans": 2,
-    "exp": "ব্যাকরণের যে অংশে পদ, পদের অন্বয়, পদক্রম এবং বাক্যের গঠনপ্রণালী বিশদভাবে আলোচিত হয় তাকে বাক্যতত্ত্ব (Syntax) বা পদক্রম বলে। ধ্বনিতত্ত্ব ও শব্দতত্ত্বের উপাদানকে বাক্যে অর্থপূর্ণভাবে সাজানোর নিয়মই বাক্যতত্ত্ব।"
-  },
-  {
-    "id": 14,
-    "tag": "৪১তম বিসিএস",
-    "q": "ব্যঞ্জন ধ্বনির সংক্ষিপ্ত রূপকে বলে-",
-    "opts": [
-      "রেফ",
-      "হসন্ত",
-      "কার",
-      "ফলা"
-    ],
-    "ans": 3,
-    "exp": "ব্যঞ্জনবর্ণের সংক্ষিপ্ত রূপকে 'ফলা' বলে। বাংলা ভাষায় ফলা ৬টি: ন-ফলা, ব-ফলা, ম-ফলা, য-ফলা, র-ফলা এবং ল-ফলা। অন্যদিকে স্বরবর্ণের সংক্ষিপ্ত রূপকে 'কার' বলে (কার ১০টি, 'অ' বর্ণের কোনো কার চিহ্ন নেই)।"
-  },
-  {
-    "id": 15,
-    "tag": "৪১তম বিসিএস",
-    "q": "নিঃশ্বাসের স্বল্পতম প্রয়াসে উচ্চারিত ধ্বনি বা ধ্বনিগুচ্ছকে কী বলে?",
-    "opts": [
-      "যৌগিক ধ্বনি",
-      "অক্ষর",
-      "বর্ণ",
-      "মৌলিক স্বরধ্বনি"
-    ],
-    "ans": 1,
-    "exp": "বাগযন্ত্রের স্বল্পতম প্রয়াসে বা এক ঝোঁকে যতটুকু ধ্বনি বা ধ্বনিসমষ্টি একবারে উচ্চারিত হয় তাকে অক্ষর (Syllable) বলে।"
-  },
-  {
-    "id": 16,
-    "tag": "৩৮তম বিসিএস",
-    "q": "বাংলা ভাষায় ব্যবহৃত মৌলিক স্বরধ্বনি কয়টি?",
-    "opts": [
-      "৭টি",
-      "৮টি",
-      "৬টি",
-      "১১টি"
-    ],
-    "ans": 0,
-    "exp": "বাংলা ভাষায় মৌলিক স্বরধ্বনি ৭টি— অ, আ, ই, উ, এ, ও এবং অ্যা। তবে বাংলা বর্ণমালায় স্বরবর্ণের সংখ্যা ১১টি।"
-  },
-  {
-    "id": 17,
-    "tag": "৩৭তম বিসিএস",
-    "q": "‘ঔ’ কোন ধরনের স্বরধ্বনি?",
-    "opts": [
-      "যৌগিক স্বরধ্বনি",
-      "তালব্য স্বরধ্বনি",
-      "মিলিত স্বরধ্বনি",
-      "কোনটি নয়"
-    ],
-    "ans": 0,
-    "exp": "'ঔ' একটি যৌগিক স্বরধ্বনি বা সান্ধ্য স্বর। এটি দুটি স্বরধ্বনির (অ/ও + উ) মিলনে সৃষ্টি হয়েছে।"
-  },
-  {
-    "id": 18,
-    "tag": "৩৭তম বিসিএস",
-    "q": "বর্গের কোন বর্ণসমূহের ধ্বনি মহাপ্রাণধ্বনি?",
-    "opts": [
-      "তৃতীয় বর্ণ",
-      "দ্বিতীয় ও চতুর্থ বর্ণ",
-      "প্রথম ও দ্বিতীয় বর্ণ",
-      "দ্বিতীয় ও তৃতীয় বর্ণ"
-    ],
-    "ans": 1,
-    "exp": "যেসব ধ্বনি উচ্চারণে বাতাসের চাপের আধিক্য থাকে এবং হ-কার জাতীয় ধ্বনি শোনা যায় সেগুলোকে মহাপ্রাণ ধ্বনি বলে। স্পর্শ বর্ণের প্রতি বর্গের ২য় ও ৪র্থ বর্ণ (যেমন- খ, ঘ, ছ, ঝ, ঠ, ঢ, থ, ধ, ফ, ভ) মহাপ্রাণ ধ্বনি।"
-  },
-  {
-    "id": 19,
-    "tag": "৩৬তম বিসিএস",
-    "q": "বাংলা বর্ণমালায় অর্ধমাত্রার বর্ণ কয়টি?",
-    "opts": [
-      "৭টি",
-      "৯টি",
-      "১০টি",
-      "৮টি"
-    ],
-    "ans": 3,
-    "exp": "বাংলা বর্ণমালার ৫০টি বর্ণের মধ্যে মাত্রাভেদ: পূর্ণমাত্রা ৩২টি (স্বরবর্ণ ৬টি, ব্যঞ্জনবর্ণ ২৬টি); অর্ধমাত্রা ৮টি (স্বরবর্ণ ১টি 'ঋ', ব্যঞ্জনবর্ণ ৭টি খ, গ, ণ, থ, ধ, প, শ); মাত্রাহীন ১০টি (স্বরবর্ণ ৪টি এ, ঐ, ও, ঔ, ব্যঞ্জনবর্ণ ৬টি ঙ, ঞ, ৎ, ং, ঃ, ঁ)।"
-  },
-  {
-    "id": 20,
-    "tag": "৩৬তম বিসিএস",
-    "q": "‘বিজ্ঞান’ শব্দের যুক্তবর্ণের সঠিক রূপ কোনটি?",
-    "opts": [
-      "জ্ + ঞ",
-      "ঞ্ + গ",
-      "ঞ্ + জ",
-      "গ্ + ঞ"
-    ],
-    "ans": 0,
-    "exp": "‘বিজ্ঞান’ শব্দের 'জ্ঞ' যুক্তবর্ণটির বিশ্লিষ্ট রূপ হলো: জ্ + ঞ। উচ্চারণ: বিগ্‌গ্যাঁন্।"
-  },
-  {
-    "id": 21,
-    "tag": "৩৫তম বিসিএস",
-    "q": "বাংলা ভাষায় মৌলিক স্বরধ্বনির সংখ্যা কত?",
-    "opts": [
-      "৭টি",
-      "৯টি",
-      "১১টি",
-      "১৩টি"
-    ],
-    "ans": 0,
-    "exp": "বাংলা ভাষায় মৌলিক ধ্বনি মোট ৩৭টি। এর মধ্যে মৌলিক স্বরধ্বনি ৭টি এবং মৌলিক ব্যঞ্জনধ্বনি ৩০টি।"
-  },
-  {
-    "id": 22,
-    "tag": "৩২তম বিসিএস",
-    "q": "ভাষার ক্ষুদ্রতম একক কোনটি?",
-    "opts": [
-      "বর্ণ",
-      "শব্দ",
-      "অক্ষর",
-      "ধ্বনি"
-    ],
-    "ans": 3,
-    "exp": "ভাষার মূল উপাদান বা ক্ষুদ্রতম একক হলো 'ধ্বনি'। বাক্যের ক্ষুদ্রতম একক শব্দ, এবং শব্দের ক্ষুদ্রতম অর্থপূর্ণ একক রূপমূল। আর ধ্বনি নির্দেশক প্রতীক হলো বর্ণ।"
-  },
-  {
-    "id": 23,
-    "tag": "২৯তম বিসিএস",
-    "q": "বাংলা বর্ণমালায় স্বরবর্ণ কয়টি?",
-    "opts": [
-      "১৩ টি",
-      "১০ টি",
-      "১২ টি",
-      "১১ টি"
-    ],
-    "ans": 3,
-    "exp": "বাংলা বর্ণমালায় মোট ৫০টি বর্ণের মধ্যে স্বরবর্ণ ১১টি এবং ব্যঞ্জনবর্ণ ৩৯টি।"
-  },
-  {
-    "id": 24,
-    "tag": "২৩তম বিসিএস",
-    "q": "‘হ্ম’-এর বিশ্লিষ্ট রূপ-",
-    "opts": [
-      "ক্ + ষ",
-      "ক্ + ষ + ণ",
-      "ক্ + ষ + ম",
-      "হ্ + ম"
-    ],
-    "ans": 3,
-    "exp": "‘হ্ম’ যুক্তবর্ণটির সঠিক বিশ্লিষ্ট রূপ হলো: হ্ + ম (যেমন- ব্রাহ্মণ, ব্রহ্মা)। অপরদিকে ক্ + ষ = ক্ষ (যেমন- শিক্ষক, ক্ষমা)।"
-  },
-  {
-    "id": 25,
-    "tag": "১৮তম বিসিএস",
-    "q": "বাংলা বর্ণমালায় মাত্রাহীন বর্ণের সংখ্যা কয়টি?",
-    "opts": [
-      "এগারটি",
-      "নয়টি",
-      "দশটি",
-      "আটটি"
-    ],
-    "ans": 2,
-    "exp": "বাংলা বর্ণমালায় মাত্রাহীন বর্ণ মোট ১০টি। স্বরবর্ণ ৪টি (এ, ঐ, ও, ঔ) এবং ব্যঞ্জনবর্ণ ৬টি (ঙ, ঞ, ৎ, ং, ঃ, ঁ)।"
-  },
-  {
-    "id": 26,
-    "tag": "১৪তম বিসিএস",
-    "q": "বর্ণ হচ্ছে?",
-    "opts": [
-      "শব্দের ক্ষুদ্রতম অংশ",
-      "একসঙ্গে উচ্চারিত ধ্বনিগুচ্ছ",
-      "ধ্বনি নির্দেশক প্রতীক",
-      "ধ্বনির শ্রুতিগ্রাহ্য রূপ"
-    ],
-    "ans": 2,
-    "exp": "মানুষের মুখনিঃসৃত ধ্বনিকে লিখে প্রকাশ করার জন্য যে সাংকেতিক চিহ্ন বা প্রতীক ব্যবহার করা হয় তাকে 'বর্ণ' বলে।"
-  }
-];
-
-let userAnswers = {};
-
-function renderQuiz() {
-  const container = document.getElementById('quiz-cards-wrapper');
-  container.innerHTML = '';
-  const letters = ['ক', 'খ', 'গ', 'ঘ'];
-  
-  quizData.forEach((qItem, idx) => {
-    const card = document.createElement('div');
-    card.className = 'quiz-card';
-    card.id = `qcard-${qItem.id}`;
-    
-    let optsHtml = '';
-    qItem.opts.forEach((opt, oIdx) => {
-      optsHtml += `
-        <button class="opt-btn" onclick="checkAnswer(${qItem.id}, ${oIdx})" id="opt-${qItem.id}-${oIdx}">
-          <strong>${letters[oIdx]}.</strong> ${opt}
-        </button>
-      `;
-    });
-    
-    card.innerHTML = `
-      <div class="question-header">
-        <div class="q-text">${idx + 1}. ${qItem.q}</div>
-        <span class="q-tag">${qItem.tag}</span>
-      </div>
-      <div class="options-grid">
-        ${optsHtml}
-      </div>
-      <div class="explanation-box" id="exp-${qItem.id}">
-        <strong>💡 ব্যাখ্যা:</strong> ${qItem.exp}
-      </div>
-    `;
-    container.appendChild(card);
-  });
-  
-  const totalCountEl = document.getElementById('total-count');
-  if (totalCountEl) totalCountEl.innerText = quizData.length;
-}
-
-function checkAnswer(qId, selectedOpt) {
-  if (userAnswers[qId] !== undefined) return;
-  userAnswers[qId] = selectedOpt;
-  
-  const qData = quizData.find(d => d.id === qId);
-  const card = document.getElementById(`qcard-${qId}`);
-  const isCorrect = selectedOpt === qData.ans;
-  
-  for(let i = 0; i < qData.opts.length; i++) {
-    const btn = document.getElementById(`opt-${qId}-${i}`);
-    if (btn) {
-      btn.disabled = true;
-      if (i === qData.ans) {
-        btn.classList.add('correct-choice');
-      } else if (i === selectedOpt) {
-        btn.classList.add('wrong-choice');
+      if (selectedOpt === correctOpt) {
+        correctScore++;
+      } else {
+        wrongScore++;
       }
-    }
-  }
-  
-  if (card) {
-    if (isCorrect) {
-      card.classList.add('answered-correct');
-    } else {
-      card.classList.add('answered-wrong');
-    }
-  }
-  
-  const expBox = document.getElementById(`exp-${qId}`);
-  if (expBox) expBox.style.display = 'block';
-  updateScore();
-}
 
-function updateScore() {
-  const answeredTotal = Object.keys(userAnswers).length;
-  let correctTotal = 0;
-  for(let qId in userAnswers) {
-    const qData = quizData.find(d => d.id == qId);
-    if(qData && userAnswers[qId] === qData.ans) {
-      correctTotal++;
-    }
-  }
-  const ansEl = document.getElementById('answered-count');
-  const corEl = document.getElementById('correct-count');
-  if (ansEl) ansEl.innerText = answeredTotal;
-  if (corEl) corEl.innerText = correctTotal;
-}
+      document.getElementById('correctCount').innerText = correctScore.toLocaleString('bn-BD');
+      document.getElementById('wrongCount').innerText = wrongScore.toLocaleString('bn-BD');
 
-function resetQuiz() {
-  userAnswers = {};
-  renderQuiz();
-  updateScore();
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  renderQuiz();
-  try {
-    const savedScale = localStorage.getItem('ebk_font_scale');
-    if (savedScale) {
-      currentScale = parseFloat(savedScale);
-      document.documentElement.style.setProperty('--font-scale', currentScale + 'rem');
+      var exp = document.getElementById('exp-' + qId);
+      if (exp) exp.classList.add('show');
     }
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      const themeBtn = document.getElementById('theme-btn');
-      if (themeBtn) themeBtn.innerText = savedTheme === 'light' ? '🌙' : '☀️';
-    }
-  } catch(e) {}
-});
-</script>
 
-<script src="nav-component.js"></script>
+    function toggleExp(qId) {
+      var exp = document.getElementById('exp-' + qId);
+      if (exp) exp.classList.toggle('show');
+    }
+
+    function resetQuiz() {
+      answeredQuestions = {};
+      correctScore = 0;
+      wrongScore = 0;
+      document.getElementById('correctCount').innerText = '০';
+      document.getElementById('wrongCount').innerText = '০';
+
+      document.querySelectorAll('.opt-btn').forEach(function(btn) {
+        btn.disabled = false;
+        btn.classList.remove('correct', 'wrong');
+      });
+
+      document.querySelectorAll('.explanation-drawer').forEach(function(drawer) {
+        drawer.classList.remove('show');
+      });
+    }
+
+    function toggleTheme() {
+      var current = document.documentElement.getAttribute('data-theme') || 'light';
+      var next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      var btn = document.getElementById('themeBtn');
+      if (btn) btn.innerText = next === 'light' ? '🌙' : '☀️';
+      try {
+        localStorage.setItem('theme', next);
+        localStorage.setItem('ebk_portal_theme', next);
+      } catch(e) {}
+    }
+
+    var fontScale = 1;
+    function adjustFont(delta) {
+      fontScale = Math.min(Math.max(fontScale + delta, 0.85), 1.3);
+      document.documentElement.style.setProperty('--font-scale', fontScale);
+    }
+    function resetFont() {
+      fontScale = 1;
+      document.documentElement.style.setProperty('--font-scale', 1);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var saved = document.documentElement.getAttribute('data-theme') || 'light';
+      var btn = document.getElementById('themeBtn');
+      if (btn) btn.innerText = saved === 'light' ? '🌙' : '☀️';
+    });
+  </script>
+  <!-- Smart E-Book Navigation Component -->
+  <script src="nav-component.js"></script>
 </body>
 </html>
