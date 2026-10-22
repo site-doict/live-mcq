@@ -290,9 +290,9 @@
     activeFont: null,
     activeTexture: null,
     options: {
-      autoRandomizeOnLoad: true,
+      autoRandomizeOnLoad: false, // Strictly false: respect static build-time HTML classes on refresh
       targetSelector: '.paper-container, .sk-page, [data-paper-randomize]',
-      persistSelection: false, // if true, uses sessionStorage
+      persistSelection: false,
       storageKey: 'paperEngine_state'
     }
   };
@@ -656,23 +656,47 @@
   function init(customOptions = {}) {
     Object.assign(state.options, customOptions);
 
-    let initialFont = null;
-    let initialTexture = null;
-
-    if (state.options.persistSelection) {
-      const persisted = loadPersistedState();
-      if (persisted) {
-        initialFont = BANGLA_FONTS.find(f => f.id === persisted.fontId);
-        initialTexture = PAPER_TEXTURES.find(t => t.id === persisted.textureId);
+    // Detect statically baked classes from the DOM
+    const target = document.querySelector(state.options.targetSelector);
+    if (target) {
+      for (const t of PAPER_TEXTURES) {
+        if (target.classList.contains(t.className)) {
+          state.activeTexture = t;
+          break;
+        }
+      }
+      for (const f of BANGLA_FONTS) {
+        if (target.classList.contains(f.className) || document.body.classList.contains(f.className)) {
+          state.activeFont = f;
+          break;
+        }
       }
     }
 
-    // Default to pure random on load if not persisted
-    if (!initialFont) initialFont = pickRandom(BANGLA_FONTS);
-    if (!initialTexture) initialTexture = pickRandom(PAPER_TEXTURES);
+    // Only randomize if explicitly instructed via autoRandomizeOnLoad: true
+    if (state.options.autoRandomizeOnLoad) {
+      let initialFont = null;
+      let initialTexture = null;
 
-    setFont(initialFont);
-    setTexture(initialTexture);
+      if (state.options.persistSelection) {
+        const persisted = loadPersistedState();
+        if (persisted) {
+          initialFont = BANGLA_FONTS.find(f => f.id === persisted.fontId);
+          initialTexture = PAPER_TEXTURES.find(t => t.id === persisted.textureId);
+        }
+      }
+
+      if (!initialFont) initialFont = pickRandom(BANGLA_FONTS);
+      if (!initialTexture) initialTexture = pickRandom(PAPER_TEXTURES);
+
+      setFont(initialFont);
+      setTexture(initialTexture);
+    } else {
+      // Keep static authoring stable, do not alter classes on page refresh
+      if (!state.activeFont) state.activeFont = BANGLA_FONTS[0];
+      if (!state.activeTexture) state.activeTexture = PAPER_TEXTURES[0];
+      dispatchChangeEvent();
+    }
 
     if (state.options.renderControlBar) {
       createControlBar(state.options.controlBarMount);
