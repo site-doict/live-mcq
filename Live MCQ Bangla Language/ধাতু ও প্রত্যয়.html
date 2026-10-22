@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ধাতু ও প্রত্যয় - Live MCQ Interactive Smart E-Book</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --border-subtle: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --primary-color: #0369a1;
+      --primary-hover: #0284c7;
+      --primary-subtle: #e0f2fe;
+      --accent-color: #059669;
+      --accent-subtle: #d1fae5;
+      --danger-color: #dc2626;
+      --danger-subtle: #fee2e2;
+      --warning-color: #d97706;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --font-scale: 1;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #090d16;
+      --bg-surface: #0f172a;
+      --bg-card: #131d35;
+      --border-subtle: #1e293b;
+      --border-strong: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --primary-color: #38bdf8;
+      --primary-hover: #7dd3fc;
+      --primary-subtle: #082f49;
+      --accent-color: #34d399;
+      --accent-subtle: #064e3b;
+      --danger-color: #f87171;
+      --danger-subtle: #450a0a;
+      --warning-color: #fbbf24;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Noto Serif Bengali', serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: clip;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-size: calc(1rem * var(--font-scale));
+    }
+
+    .reading-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      z-index: 1000;
+      transition: width 0.1s ease;
+    }
+
+    .top-header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.6rem 0.8rem;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .btn-nav {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      padding: 0.35rem 0.6rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: all 0.2s;
+    }
+
+    .btn-nav:hover {
+      background: var(--primary-subtle);
+      border-color: var(--primary-color);
+    }
+
+    .header-title-box {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 170px;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .font-btn, .theme-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.45rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .font-btn:hover, .theme-btn:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0.5rem 0.5rem 3rem 0.5rem;
+      flex-grow: 1;
+    }
+
+    .chapter-hero {
+      text-align: center;
+      margin-bottom: 1rem;
+      padding: 1.25rem 0.8rem;
+      background: linear-gradient(135deg, rgba(3, 105, 161, 0.08) 0%, rgba(5, 150, 105, 0.08) 100%);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .chapter-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      background: var(--primary-subtle);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      margin-bottom: 0.4rem;
+    }
+
+    .chapter-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .chapter-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .score-banner {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .score-stat {
+      text-align: center;
+    }
+
+    .score-val {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .score-lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      margin-bottom: 0.85rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.35rem;
+    }
+
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      margin: 0.5rem 0;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: center;
+    }
+
+    .custom-table th, .custom-table td {
+      border: 1px solid var(--border-subtle);
+      padding: 0.45rem 0.4rem;
+      line-height: 1.4;
+      white-space: normal;
+      word-break: normal;
+    }
+
+    .custom-table th {
+      background: var(--primary-subtle);
+      color: var(--primary-color);
+      font-weight: 700;
+    }
+
+    .custom-table tr:nth-child(even) td {
+      background: rgba(0, 0, 0, 0.015);
+    }
+
+    [data-theme="dark"] .custom-table tr:nth-child(even) td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .theory-box {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: var(--text-secondary);
+    }
+
+    .theory-box p {
+      margin-bottom: 0.5rem;
+    }
+
+    .theory-box ul {
+      padding-left: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .theory-box li {
+      margin-bottom: 0.3rem;
+    }
+
+    .highlight-pill {
+      background: var(--primary-subtle);
+      color: var(--primary-color);
+      padding: 0.1rem 0.35rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .mcq-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      margin-bottom: 0.85rem;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s;
+    }
+
+    .mcq-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .mcq-num {
+      font-weight: 700;
+      color: var(--primary-color);
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .mcq-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      flex-grow: 1;
+      line-height: 1.5;
+    }
+
+    .exam-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: var(--primary-subtle);
+      color: var(--primary-color);
+      padding: 0.08rem 0.4rem;
+      border-radius: var(--radius-sm);
+      margin-left: 0.3rem;
+      white-space: nowrap;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.45rem;
+      margin-bottom: 0.6rem;
+    }
+
+    @media (min-width: 480px) {
+      .options-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .option-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem 0.65rem;
+      text-align: left;
+      font-family: inherit;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.45rem;
+      transition: all 0.15s ease;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .option-btn:hover:not(.locked) {
+      background: var(--primary-subtle);
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .opt-prefix {
+      font-weight: 700;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .option-btn.correct {
+      background: var(--accent-subtle) !important;
+      border-color: var(--accent-color) !important;
+      color: var(--accent-color) !important;
+      font-weight: 700;
+    }
+
+    .option-btn.wrong {
+      background: var(--danger-subtle) !important;
+      border-color: var(--danger-color) !important;
+      color: var(--danger-color) !important;
+    }
+
+    .mcq-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.4rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed var(--border-subtle);
+    }
+
+    .btn-explain {
+      background: transparent;
+      border: none;
+      color: var(--primary-color);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.25rem 0.4rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .btn-explain:hover {
+      background: var(--primary-subtle);
+    }
+
+    .status-indicator {
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .status-indicator.correct {
+      color: var(--accent-color);
+    }
+
+    .status-indicator.wrong {
+      color: var(--danger-color);
+    }
+
+    .explanation-box {
+      margin-top: 0.6rem;
+      padding: 0.7rem;
+      background: var(--primary-subtle);
+      border-left: 3px solid var(--primary-color);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      display: none;
+    }
+
+    .explanation-box.active {
+      display: block;
+      animation: fadeIn 0.25s ease-in;
+    }
+
+    .exp-title {
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-3px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--border-subtle);
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="reading-progress-bar" id="progressBar"></div>
+
+  <header class="top-header">
+    <div class="header-left">
+      <button class="btn-nav" id="menuToggleBtn" aria-label="সূচিপত্র খুলুন">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <span>সূচিপত্র</span>
+      </button>
+      <div class="header-title-box">ধাতু ও প্রত্যয়</div>
+    </div>
+    <div class="header-controls">
+      <button class="font-btn" id="fontDecrease" title="ফন্ট ছোট করুন">A-</button>
+      <button class="font-btn" id="fontReset" title="স্বাভাবিক ফন্ট">A</button>
+      <button class="font-btn" id="fontIncrease" title="ফন্ট বড় করুন">A+</button>
+      <button class="theme-btn" id="themeToggle" title="থিম পরিবর্তন">🌓</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="chapter-hero">
+      <span class="chapter-badge">অধ্যায় ৭</span>
+      <h1 class="chapter-title">ধাতু ও প্রত্যয়</h1>
+      <p class="chapter-subtitle">মৌলিক, সাধিত ও সংযোগমূলক ধাতু এবং কৃৎ ও তদ্ধিত প্রত্যয়ের বিশদ আলোচনা</p>
+    </section>
+
+    <!-- Score Live Tracker -->
+    <div class="score-banner">
+      <div class="score-stat">
+        <div class="score-val" id="answered-count">০</div>
+        <div class="score-lbl">উত্তর দিয়েছ</div>
+      </div>
+      <div class="score-stat">
+        <div class="score-val" id="correct-count">০</div>
+        <div class="score-lbl">সঠিক হয়েছে</div>
+      </div>
+      <div class="score-stat">
+        <div class="score-val" id="accuracy-rate">০%</div>
+        <div class="score-lbl">নির্ভুলতা</div>
+      </div>
+    </div>
+
+    <!-- BCS Analysis Table -->
+    <div class="card">
+      <div class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+        বিসিএস প্রিলিমিনারি প্রশ্ন বিশ্লেষণ ছক
+      </div>
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>বিসিএস</th>
+              <th>প্রশ্ন সংখ্যা</th>
+              <th>বিসিএস</th>
+              <th>প্রশ্ন সংখ্যা</th>
+              <th>বিসিএস</th>
+              <th>প্রশ্ন সংখ্যা</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>৫০তম</td>
+              <td>১</td>
+              <td>৪৪তম</td>
+              <td>১</td>
+              <td>৩৮তম</td>
+              <td>২</td>
+            </tr>
+            <tr>
+              <td>৪৯তম</td>
+              <td>১</td>
+              <td>৪৩তম</td>
+              <td>১</td>
+              <td>৩৭তম</td>
+              <td>০</td>
+            </tr>
+            <tr>
+              <td>৪৮তম</td>
+              <td>২</td>
+              <td>৪২তম</td>
+              <td>১</td>
+              <td>৩৬তম</td>
+              <td>১</td>
+            </tr>
+            <tr>
+              <td>৪৭তম</td>
+              <td>০</td>
+              <td>৪১তম</td>
+              <td>১</td>
+              <td>৩৫তম</td>
+              <td>১</td>
+            </tr>
+            <tr>
+              <td>৪৬তম</td>
+              <td>১</td>
+              <td>৪০তম</td>
+              <td>২</td>
+              <td>১০ম-৩৪তম</td>
+              <td>১০</td>
+            </tr>
+            <tr>
+              <td>৪৫তম</td>
+              <td>১</td>
+              <td>৩৯তম</td>
+              <td>০</td>
+              <td>মোট</td>
+              <td>২৬</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Core Theory Summary -->
+    <div class="card">
+      <div class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+        </svg>
+        ধাতু ও প্রত্যয় সংক্ষেপ
+      </div>
+      <div class="theory-box">
+        <p><strong>ধাতু (ক্রিয়ামূল):</strong> ক্রিয়াপদের মূল অবিভাজ্য অংশকে ধাতু বা ক্রিয়ামূল বলে। ধাতু ৩ প্রকার: <span class="highlight-pill">মৌলিক ধাতু</span>, <span class="highlight-pill">সাধিত ধাতু</span> ও <span class="highlight-pill">যৌগিক/সংযোগমূলক ধাতু</span>। মৌলিক ধাতু আবার ৩ প্রকার: বাংলা ধাতু (কহ্, কর্, কাদ্), সংস্কৃত ধাতু (কৃ, কথ্, গঠ্) ও বিদেশি ধাতু (টুট্, বিগ্ড়্)।</p>
+        <p><strong>সাধিত ধাতু (৩ প্রকার):</strong> ১. নামধাতু (বিশেষ্য/বিশেষণের পর 'আ' যোগে, যেমন: ঘুমা, বেতা), ২. প্রযোজক/ণিজন্ত ধাতু (প্রেরণার্থে 'আ' যোগে, যেমন: করা, হারায়), ৩. কর্মবাচ্যের ধাতু।</p>
+        <p><strong>প্রত্যয় (২ প্রকার):</strong></p>
+        <ul>
+          <li><strong>কৃৎ প্রত্যয়:</strong> ধাতুর পরে যুক্ত হয়ে নতুন শব্দ তৈরি করে। কৃৎ প্রত্যয় সাধিত পদকে <span class="highlight-pill">কৃদন্ত পদ</span> বলে (যেমন: √দুল্ + অনা = দোলনা, √কৃ + তব্য = কর্তব্য)। কৃদন্ত পদের পূর্ববর্তী পদকে <span class="highlight-pill">উপপদ</span> বলে।</li>
+          <li><strong>তদ্ধিত প্রত্যয়:</strong> শব্দের (প্রাতিপদিকের) পরে যুক্ত হয়ে নতুন শব্দ তৈরি করে। তদ্ধিত প্রত্যয় সাধিত পদকে <span class="highlight-pill">তদ্ধিতান্ত পদ</span> বলে (যেমন: ডাক্তার + খানা = ডাক্তারখানা, এক + ইক = ঐকিক)।</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Questions Section -->
+    <section id="mcq-container">
+
+      <!-- Q1 -->
+      <div class="mcq-card" data-qindex="1">
+        <div class="mcq-header">
+          <span class="mcq-num">১.</span>
+          <div class="mcq-text">কোন বাক্যে সমধাতুজ কর্ম রয়েছে? <span class="exam-tag">৫০তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 1, 'গ')"><span class="opt-prefix">(ক)</span> সে বই পড়ছে।</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 1, 'গ')"><span class="opt-prefix">(খ)</span> সে গভীর চিন্তায় মগ্ন।</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 1, 'গ')"><span class="opt-prefix">(গ)</span> আজ এমন ঘুম ঘুমিয়েছি!</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 1, 'গ')"><span class="opt-prefix">(ঘ)</span> সে খেলা করছে।</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(1)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-1"></div>
+        </div>
+        <div class="explanation-box" id="explain-1">
+          <div class="exp-title">উত্তর: (গ) আজ এমন ঘুম ঘুমিয়েছি!</div>
+          <p><strong>ব্যাখ্যা:</strong> বাক্যের ক্রিয়া ও কর্ম পদ একই ধাতু থেকে গঠিত হলে ঐ কর্মপদকে <strong>সমধাতুজ কর্ম বা ধাত্বর্থক কর্মপদ</strong> বলে। যেমন- 'আমি বেশ এক ঘুম ঘুমিয়েছি'- বাক্যে কর্মপদ 'ঘুম' এবং ক্রিয়াপদ 'ঘুমিয়েছি' একই ধাতু <strong>√ঘুম্</strong> থেকে গঠিত হয়েছে।</p>
+          <p><strong>অন্যান্য অপশন বিশ্লেষণ:</strong></p>
+          <ul>
+            <li>সে বই পড়ছে। (কর্ম: বই, ধাতু: √পড়্ - কোনো সমধাতু সম্পর্ক নেই)।</li>
+            <li>সে গভীর চিন্তায় মগ্ন। (ক্রিয়া: মগ্ন, ধাতু: √মগ্জ - সমধাতুজ কর্ম নেই)।</li>
+            <li>সে খেলা করছে। (কর্ম: খেলা, ধাতু: √কৃ - সমধাতু নেই)।</li>
+          </ul>
+          <p><em>উৎস:</em> বাংলা ভাষার ব্যাকরণ, নবম-দশম শ্রেণি (২০১৯ সংস্করণ); ভাষা শিক্ষা - ড. হায়াৎ মামুদ।</p>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="mcq-card" data-qindex="2">
+        <div class="mcq-header">
+          <span class="mcq-num">২.</span>
+          <div class="mcq-text">কোন শব্দটি প্রত্যয়যোগে গঠিত? <span class="exam-tag">৪৯তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 2, 'ক')"><span class="opt-prefix">(ক)</span> ডাক্তারখানা</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 2, 'ক')"><span class="opt-prefix">(খ)</span> হাসপাতাল</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 2, 'ক')"><span class="opt-prefix">(গ)</span> আকাশছোঁয়া</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 2, 'ক')"><span class="opt-prefix">(ঘ)</span> গুণমান</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(2)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-2"></div>
+        </div>
+        <div class="explanation-box" id="explain-2">
+          <div class="exp-title">উত্তর: (ক) ডাক্তারখানা</div>
+          <p><strong>ব্যাখ্যা:</strong></p>
+          <ul>
+            <li><strong>ডাক্তারখানা:</strong> এটি প্রত্যয়যোগে গঠিত। 'ডাক্তার' শব্দটির সঙ্গে '-খানা' (বিদেশি তদ্ধিত প্রত্যয়) যুক্ত হয়ে 'ডাক্তারখানা' গঠিত হয়েছে।</li>
+            <li><strong>হাসপাতাল:</strong> ইংরেজি 'hospital' শব্দ থেকে আগত পূর্ণাঙ্গ শব্দ, প্রত্যয়যোগে গঠিত নয়।</li>
+            <li><strong>আকাশছোঁয়া:</strong> সমাসবদ্ধ শব্দ (আকাশকে ছোঁয়া = আকাশছোঁয়া, তৎপুরুষ সমাস)।</li>
+            <li><strong>গুণমান:</strong> সঠিক শব্দ নয়, এর শুদ্ধরূপ হবে 'গুণবান'।</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="mcq-card" data-qindex="3">
+        <div class="mcq-header">
+          <span class="mcq-num">৩.</span>
+          <div class="mcq-text">প্রত্যয়যোগে গঠিত শব্দ কোনটি? <span class="exam-tag">৪৮তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 3, 'ক')"><span class="opt-prefix">(ক)</span> ডাক্তারখানা</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 3, 'ক')"><span class="opt-prefix">(খ)</span> অনুগমন</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 3, 'ক')"><span class="opt-prefix">(গ)</span> দিলখোলা</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 3, 'ক')"><span class="opt-prefix">(ঘ)</span> সম্রাট</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(3)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-3"></div>
+        </div>
+        <div class="explanation-box" id="explain-3">
+          <div class="exp-title">উত্তর: (ক) ডাক্তারখানা</div>
+          <p><strong>ব্যাখ্যা:</strong> বিদেশি তদ্ধিত প্রত্যয়যোগে গঠিত শব্দ — <strong>ডাক্তার + খানা = ডাক্তারখানা</strong>।</p>
+          <ul>
+            <li><strong>অনুগমন:</strong> অনু (উপসর্গ) + √গম্ (ধাতু) + অন (প্রত্যয়)। এটি মূলত উপসর্গ ও প্রত্যয় উভয়যোগে গঠিত।</li>
+            <li><strong>দিলখোলা:</strong> সমাসবদ্ধ পদ।</li>
+            <li><strong>সম্রাট:</strong> সং + রাজ্ (উপসর্গযোগে গঠিত)।</li>
+          </ul>
+          <p>শুধু প্রত্যয় দ্বারা গঠিত খাঁটি প্রত্যয়সাধিত শব্দ হিসেবে <strong>ডাক্তারখানা</strong> সর্বাধিক সঠিক উত্তর।</p>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="mcq-card" data-qindex="4">
+        <div class="mcq-header">
+          <span class="mcq-num">৪.</span>
+          <div class="mcq-text">ক্রিয়াপদের মূল অংশকে কী বলে? <span class="exam-tag">৪৮তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 4, 'খ')"><span class="opt-prefix">(ক)</span> কর্ম</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 4, 'খ')"><span class="opt-prefix">(খ)</span> ধাতু</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 4, 'খ')"><span class="opt-prefix">(গ)</span> প্রত্যয়</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 4, 'খ')"><span class="opt-prefix">(ঘ)</span> বিভক্তি</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(4)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-4"></div>
+        </div>
+        <div class="explanation-box" id="explain-4">
+          <div class="exp-title">উত্তর: (খ) ধাতু</div>
+          <p><strong>ব্যাখ্যা: ধাতু বা ক্রিয়ামূল:</strong> যে পদ দ্বারা কোনো কার্য সম্পাদন করা বোঝায়, তাকে ক্রিয়াপদ বলে। ক্রিয়াপদ থেকে ক্রিয়া বিভক্তি বাদ দিলে যা অবশিষ্ট থাকে তাই <strong>ধাতু</strong>। ক্রিয়াপদকে বিশ্লেষণ করলে দুটো অংশ পাওয়া যায়— ধাতু বা ক্রিয়ামূল এবং ক্রিয়া বিভক্তি।</p>
+          <p>ধাতু তিন প্রকার— মৌলিক ধাতু, সাধিত ধাতু ও যৌগিক বা সংযোগমূলক ধাতু।</p>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="mcq-card" data-qindex="5">
+        <div class="mcq-header">
+          <span class="mcq-num">৫.</span>
+          <div class="mcq-text">কোনটি প্রত্যয়-সাধিত শব্দ? <span class="exam-tag">৪৬তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 5, 'ঘ')"><span class="opt-prefix">(ক)</span> ভাইবোন</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 5, 'ঘ')"><span class="opt-prefix">(খ)</span> রাজপথ</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 5, 'ঘ')"><span class="opt-prefix">(গ)</span> বকলম</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 5, 'ঘ')"><span class="opt-prefix">(ঘ)</span> ঐকিক</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(5)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-5"></div>
+        </div>
+        <div class="explanation-box" id="explain-5">
+          <div class="exp-title">উত্তর: (ঘ) ঐকিক</div>
+          <p><strong>ব্যাখ্যা:</strong> 'ঐকিক' একটি সংস্কৃত তদ্ধিত প্রত্যয়যোগে গঠিত শব্দ। এর সঠিক প্রকৃতি-প্রত্যয় → <strong>এক + ইক = ঐকিক</strong>।</p>
+          <p>অন্যান্য অপশন:</p>
+          <ul>
+            <li>ভাই ও বোন = ভাইবোন (দ্বন্দ্ব সমাস)</li>
+            <li>রাজার পথ = রাজপথ (তৎপুরুষ সমাস)</li>
+            <li>বকলম: 'ব' ফারসি উপসর্গযোগে গঠিত শব্দ</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="mcq-card" data-qindex="6">
+        <div class="mcq-header">
+          <span class="mcq-num">৬.</span>
+          <div class="mcq-text">কৃদন্ত পদের পূর্ববর্তী পদকে কী বলে? <span class="exam-tag">৪৫তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 6, 'ক')"><span class="opt-prefix">(ক)</span> উপপদ</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 6, 'ক')"><span class="opt-prefix">(খ)</span> প্রাতিপদিক</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 6, 'ক')"><span class="opt-prefix">(গ)</span> প্রপদ</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 6, 'ক')"><span class="opt-prefix">(ঘ)</span> পূর্বপদ</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(6)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-6"></div>
+        </div>
+        <div class="explanation-box" id="explain-6">
+          <div class="exp-title">উত্তর: (ক) উপপদ</div>
+          <p><strong>ব্যাখ্যা:</strong> কৃৎ-প্রত্যয় সাধিত পদকে বলা হয় কৃদন্ত পদ। আর কৃদন্ত পদের পূর্বের পদকে বলা হয় <strong>উপপদ</strong>। অন্যভাবে বলা যায়, কৃৎ-প্রত্যয়ান্ত শব্দের আগে উপসর্গ ছাড়া অন্য কোনো নামপদ থাকলে তাকে উপপদ বলে। যেমন- কুম্ভকার = কুম্ভ + কৃ + অ; এখানে 'কুম্ভ' হলো উপপদ।</p>
+        </div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="mcq-card" data-qindex="7">
+        <div class="mcq-header">
+          <span class="mcq-num">৭.</span>
+          <div class="mcq-text">নিচের কোনটি বাংলা ধাতুর দৃষ্টান্ত? <span class="exam-tag">৪৪তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 7, 'ক')"><span class="opt-prefix">(ক)</span> কহ্</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 7, 'ক')"><span class="opt-prefix">(খ)</span> কথ্</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 7, 'ক')"><span class="opt-prefix">(গ)</span> বুধ্</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 7, 'ক')"><span class="opt-prefix">(ঘ)</span> গঠ্</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(7)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-7"></div>
+        </div>
+        <div class="explanation-box" id="explain-7">
+          <div class="exp-title">উত্তর: (ক) কহ্</div>
+          <p><strong>ব্যাখ্যা:</strong> যেসব ধাতু বা ক্রিয়ামূল প্রাকৃতের মধ্য দিয়ে পরিবর্তিত হয়ে বাংলা ভাষায় ব্যবহৃত হচ্ছে, সেগুলোকে <strong>বাংলা ধাতু বা খাঁটি বাংলা ধাতু</strong> বলে। যেমন— কাদ্, কাট্, নাচ্, আঁক্, <strong>কহ্</strong>, কর্ ইত্যাদি।</p>
+          <p>অন্যান্য অপশনে— কথ্, বুধ্ ও গঠ্ সংস্কৃত (তৎসম) ধাতুর উদাহরণ।</p>
+        </div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="mcq-card" data-qindex="8">
+        <div class="mcq-header">
+          <span class="mcq-num">৮.</span>
+          <div class="mcq-text">কোনটি নামধাতুর উদাহরণ? <span class="exam-tag">৪৩তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 8, 'গ')"><span class="opt-prefix">(ক)</span> চল্</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 8, 'গ')"><span class="opt-prefix">(খ)</span> কর্</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 8, 'গ')"><span class="opt-prefix">(গ)</span> বেতা</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 8, 'গ')"><span class="opt-prefix">(ঘ)</span> পড়্</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(8)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-8"></div>
+        </div>
+        <div class="explanation-box" id="explain-8">
+          <div class="exp-title">উত্তর: (গ) বেতা</div>
+          <p><strong>ব্যাখ্যা: নামধাতু:</strong> বিশেষ্য, বিশেষণ ও ধ্বন্যাত্মক অব্যয়ের পর 'আ' প্রত্যয়যোগে যে সব ধাতু গঠিত হয়, সেগুলোকে নামধাতু বলা হয়। যেমন— 'বেত' (বিশেষ্য) + 'আ' প্রত্যয় = <strong>বেতা</strong> (নামধাতু)।</p>
+          <p>অন্যান্য উদাহরণ: ঘুম + আ = ঘুমা, ধমক + আ = ধমকা, হাত + আ = হাতা। আর চল্, কর্, পড়্ মৌলিক ধাতু।</p>
+        </div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="mcq-card" data-qindex="9">
+        <div class="mcq-header">
+          <span class="mcq-num">৯.</span>
+          <div class="mcq-text">কৃষ্টি শব্দের সঠিক প্রকৃতি-প্রত্যয়— <span class="exam-tag">৪২তম বিশেষ বিসিএস (স্বাস্থ্য)</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 9, 'ক')"><span class="opt-prefix">(ক)</span> কৃষ + তি</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 9, 'ক')"><span class="opt-prefix">(খ)</span> কৃষ + টি</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 9, 'ক')"><span class="opt-prefix">(গ)</span> কৃ + ইষ্টি</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 9, 'ক')"><span class="opt-prefix">(ঘ)</span> কৃষ + ইষ্টি</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(9)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-9"></div>
+        </div>
+        <div class="explanation-box" id="explain-9">
+          <div class="exp-title">উত্তর: (ক) কৃষ + তি</div>
+          <p><strong>ব্যাখ্যা:</strong> কৃষ্টি (সংস্কৃত শব্দ; অর্থ— হালচাষ, কর্ষণ, সংস্কৃতি)। এর সঠিক প্রকৃতি-প্রত্যয়: <strong>√কৃষ্ + তি = কৃষ্টি</strong> (ষ-এর পর ত থাকলে তা 'ট' হয়ে যায়)।</p>
+          <p>অনুরূপ: √বৃষ্ + তি = বৃষ্টি; √তুষ্ + তি = তুষ্টি; √দৃষ্টি = √দৃশ্ + তি।</p>
+        </div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="mcq-card" data-qindex="10">
+        <div class="mcq-header">
+          <span class="mcq-num">১০.</span>
+          <div class="mcq-text">প্রচুর + য = প্রাচুর্য; কোন প্রত্যয়? <span class="exam-tag">৪১তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 10, 'খ')"><span class="opt-prefix">(ক)</span> কৃৎ প্রত্যয়</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 10, 'খ')"><span class="opt-prefix">(খ)</span> তদ্ধিত প্রত্যয়</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 10, 'খ')"><span class="opt-prefix">(গ)</span> বাংলা কৃৎ প্রত্যয়</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 10, 'খ')"><span class="opt-prefix">(ঘ)</span> সংস্কৃত কৃৎ প্রত্যয়</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(10)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-10"></div>
+        </div>
+        <div class="explanation-box" id="explain-10">
+          <div class="exp-title">উত্তর: (খ) তদ্ধিত প্রত্যয়</div>
+          <p><strong>ব্যাখ্যা:</strong> 'প্রচুর' একটি বিশেষণ পদ (শব্দ বা প্রাতিপদিক)। শব্দের শেষে প্রত্যয় যুক্ত হলে তাকে তদ্ধিত প্রত্যয় বলে। সুতরাং 'প্রচুর + য = প্রাচুর্য' হলো <strong>সংস্কৃত তদ্ধিত প্রত্যয়</strong>।</p>
+          <p>অনুরূপ: সম + য = সাম্য; মধুর + য = মাধুর্য; কবি + য = কাব্য।</p>
+        </div>
+      </div>
+
+      <!-- Q11 -->
+      <div class="mcq-card" data-qindex="11">
+        <div class="mcq-header">
+          <span class="mcq-num">১১.</span>
+          <div class="mcq-text">বাংলা কৃৎ-প্রত্যয় সাধিত শব্দ কোনটি? <span class="exam-tag">৪০তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 11, 'ঘ')"><span class="opt-prefix">(ক)</span> কারক</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 11, 'ঘ')"><span class="opt-prefix">(খ)</span> লিখিত</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 11, 'ঘ')"><span class="opt-prefix">(গ)</span> বেদনা</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 11, 'ঘ')"><span class="opt-prefix">(ঘ)</span> খেলনা</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(11)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-11"></div>
+        </div>
+        <div class="explanation-box" id="explain-11">
+          <div class="exp-title">উত্তর: (ঘ) খেলনা</div>
+          <p><strong>ব্যাখ্যা:</strong> বাংলা কৃৎ-প্রত্যয় সাধিত শব্দ হলো <strong>খেলনা (√খেল্ + অনা)</strong>।</p>
+          <p>অন্যান্য অপশনগুলো সংস্কৃত কৃৎ-প্রত্যয় সাধিত:</p>
+          <ul>
+            <li>কারক = √কৃ + অক (ণ্বুল্)</li>
+            <li>লিখিত = √লিখ্ + ইত (ক্ত)</li>
+            <li>বেদনা = √বিদ্ + অন + আ</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Q12 -->
+      <div class="mcq-card" data-qindex="12">
+        <div class="mcq-header">
+          <span class="mcq-num">১২.</span>
+          <div class="mcq-text">'সর্বাঙ্গীণ' শব্দের সঠিক প্রকৃতি-প্রত্যয়- <span class="exam-tag">৪০তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 12, 'ঘ')"><span class="opt-prefix">(ক)</span> সর্বঙ্গ + ঈন</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 12, 'ঘ')"><span class="opt-prefix">(খ)</span> সর্ব + অঙ্গীন</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 12, 'ঘ')"><span class="opt-prefix">(গ)</span> সর্ব + ঙ্গীন</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 12, 'ঘ')"><span class="opt-prefix">(ঘ)</span> সর্বাঙ্গ + ঈন</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(12)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-12"></div>
+        </div>
+        <div class="explanation-box" id="explain-12">
+          <div class="exp-title">উত্তর: (ঘ) সর্বাঙ্গ + ঈন</div>
+          <p><strong>ব্যাখ্যা:</strong> 'সর্বাঙ্গীণ' শব্দের সঠিক প্রকৃতি-প্রত্যয়: <strong>সর্বাঙ্গ + ঈন (নীন)</strong>। এর অর্থ সর্বাঙ্গব্যাপী।</p>
+          <p>অনুরূপ: সর্বজন + ঈন = সর্বজনীন, কুল + ঈন = কুলীন, নব + ঈন = নবীন।</p>
+        </div>
+      </div>
+
+      <!-- Q13 -->
+      <div class="mcq-card" data-qindex="13">
+        <div class="mcq-header">
+          <span class="mcq-num">১৩.</span>
+          <div class="mcq-text">'শ্রদ্ধা' শব্দের সঠিক প্রকৃতি-প্রত্যয় কোনটি? <span class="exam-tag">৩৮তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 13, 'ক')"><span class="opt-prefix">(ক)</span> শ্রৎ + ধা + অ + আ</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 13, 'ক')"><span class="opt-prefix">(খ)</span> শ্রৎ + ধা + আ</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 13, 'ক')"><span class="opt-prefix">(গ)</span> শ্র + ধা + আ</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 13, 'ক')"><span class="opt-prefix">(ঘ)</span> শ্রু + ধা + আ</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(13)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-13"></div>
+        </div>
+        <div class="explanation-box" id="explain-13">
+          <div class="exp-title">উত্তর: (ক) শ্রৎ + ধা + অ + আ</div>
+          <p><strong>ব্যাখ্যা:</strong> সংস্কৃত কৃৎ প্রত্যয়: অ (অঙ্) + স্ত্রী প্রত্যয় (আ/টাপ্) যোগে গঠিত শব্দ: <strong>শ্রৎ + √ধা + অ (অঙ্) + আ (টাপ্) = শ্রদ্ধা</strong>।</p>
+          <p>অনুরূপ: √ব্যথ্ + অ + আ = ব্যথা, √কৃপ্ + অ + আ = কৃপা।</p>
+        </div>
+      </div>
+
+      <!-- Q14 -->
+      <div class="mcq-card" data-qindex="14">
+        <div class="mcq-header">
+          <span class="mcq-num">১৪.</span>
+          <div class="mcq-text">বাংলা কৃৎ-প্রত্যয় সাধিত শব্দ কোনটি? <span class="exam-tag">৩৮তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 14, 'গ')"><span class="opt-prefix">(ক)</span> চামার</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 14, 'গ')"><span class="opt-prefix">(খ)</span> ধারালো</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 14, 'গ')"><span class="opt-prefix">(গ)</span> মোড়ক</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 14, 'গ')"><span class="opt-prefix">(ঘ)</span> পোঁষ্টাই</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(14)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-14"></div>
+        </div>
+        <div class="explanation-box" id="explain-14">
+          <div class="exp-title">উত্তর: (গ) মোড়ক</div>
+          <p><strong>ব্যাখ্যা:</strong> বাংলা কৃৎ-প্রত্যয় ('অক') যোগে গঠিত শব্দ হলো: <strong>√মুড়্ + অক = মোড়ক</strong>।</p>
+          <p>অন্যান্য অপশনে: চামার = চাম + আর (তদ্ধিত), ধারালো = ধার + আলু (তদ্ধিত), পোঁষ্টাই = পোঁষ্টা + আই (তদ্ধিত)।</p>
+        </div>
+      </div>
+
+      <!-- Q15 -->
+      <div class="mcq-card" data-qindex="15">
+        <div class="mcq-header">
+          <span class="mcq-num">১৫.</span>
+          <div class="mcq-text">নিচের কোন শব্দটি প্রত্যয়যোগে গঠিত হয়নি? <span class="exam-tag">৩৬তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 15, 'খ')"><span class="opt-prefix">(ক)</span> সভাসদ</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 15, 'খ')"><span class="opt-prefix">(খ)</span> শুভেচ্ছা</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 15, 'খ')"><span class="opt-prefix">(গ)</span> ফলবান</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 15, 'খ')"><span class="opt-prefix">(ঘ)</span> তন্বী</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(15)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-15"></div>
+        </div>
+        <div class="explanation-box" id="explain-15">
+          <div class="exp-title">উত্তর: (খ) শুভেচ্ছা</div>
+          <p><strong>ব্যাখ্যা:</strong> <strong>'শুভেচ্ছা'</strong> শব্দটি প্রত্যয়যোগে নয়, বরং স্বরসন্ধি সাধিত শব্দ (শুভ + ইচ্ছা = শুভেচ্ছা)।</p>
+          <p>অন্যদিকে, সভাসদ (সভা + সদ), ফলবান (ফল + বান) এবং তন্বী (তনু + ঈ) প্রত্যয়যোগে গঠিত শব্দ।</p>
+        </div>
+      </div>
+
+      <!-- Q16 -->
+      <div class="mcq-card" data-qindex="16">
+        <div class="mcq-header">
+          <span class="mcq-num">১৬.</span>
+          <div class="mcq-text">নিচের কোন শব্দটি প্রত্যয়সাধিত? <span class="exam-tag">৩৫তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 16, 'খ')"><span class="opt-prefix">(ক)</span> প্রলয়</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 16, 'খ')"><span class="opt-prefix">(খ)</span> খণ্ডিত</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 16, 'খ')"><span class="opt-prefix">(গ)</span> নিঃশ্বাস</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 16, 'খ')"><span class="opt-prefix">(ঘ)</span> অনুপম</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(16)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-16"></div>
+        </div>
+        <div class="explanation-box" id="explain-16">
+          <div class="exp-title">উত্তর: (খ) খণ্ডিত</div>
+          <p><strong>ব্যাখ্যা:</strong> <strong>"খণ্ডিত"</strong> শব্দটি কৃৎপ্রত্যয় সাধিত। এর প্রকৃতি-প্রত্যয়: <strong>√খণ্ড্ + ত (ক্ত) = খণ্ডিত</strong>। অর্থ— খণ্ডন করা হয়েছে এমন।</p>
+          <p>অন্যদিকে প্রলয়, নিঃশ্বাস, অনুপম উপসর্গযোগে গঠিত শব্দ।</p>
+        </div>
+      </div>
+
+      <!-- Q17 -->
+      <div class="mcq-card" data-qindex="17">
+        <div class="mcq-header">
+          <span class="mcq-num">১৭.</span>
+          <div class="mcq-text">'সাহচর্য' শব্দের শুদ্ধ গঠন কোনটি? <span class="exam-tag">৩০তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 17, 'গ')"><span class="opt-prefix">(ক)</span> সহ + চর + র্য</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 17, 'গ')"><span class="opt-prefix">(খ)</span> সহচর + ৎ ফ্যলা</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 17, 'গ')"><span class="opt-prefix">(গ)</span> সহচর + য</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 17, 'গ')"><span class="opt-prefix">(ঘ)</span> কোনটিই নয়</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(17)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-17"></div>
+        </div>
+        <div class="explanation-box" id="explain-17">
+          <div class="exp-title">উত্তর: (গ) সহচর + য</div>
+          <p><strong>ব্যাখ্যা:</strong> সাহচর্য (বিশেষ্য পদ); এর প্রকৃতি-প্রত্যয় : <strong>সহচর + য (ষ্ণ্য)</strong>। অর্থ— সংস্রব, সঙ্গ, সহায়তা।</p>
+        </div>
+      </div>
+
+      <!-- Q18 -->
+      <div class="mcq-card" data-qindex="18">
+        <div class="mcq-header">
+          <span class="mcq-num">১৮.</span>
+          <div class="mcq-text">'মেছো' শব্দের প্রকৃতি-প্রত্যয় কি? <span class="exam-tag">২৭তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 18, 'ঘ')"><span class="opt-prefix">(ক)</span> মাছ + ও</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 18, 'ঘ')"><span class="opt-prefix">(খ)</span> মেছ + ও</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 18, 'ঘ')"><span class="opt-prefix">(গ)</span> মাছি + উয়া > ও</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 18, 'ঘ')"><span class="opt-prefix">(ঘ)</span> মাছ + উয়া > ও</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(18)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-18"></div>
+        </div>
+        <div class="explanation-box" id="explain-18">
+          <div class="exp-title">উত্তর: (ঘ) মাছ + উয়া > ও</div>
+          <p><strong>ব্যাখ্যা:</strong> 'মেছো' শব্দের প্রকৃতি-প্রত্যয় : <strong>মাছ + উয়া &gt; ও = মাছুয়া &gt; মেছো</strong> (উপজীবিকা অর্থে তদ্ধিত প্রত্যয়)।</p>
+          <p>অনুরূপ: গাঁ + উয়া &gt; গেঁয়ো, মাঠ + উয়া &gt; মেঠো, জ্বর + উয়া &gt; জুরো।</p>
+        </div>
+      </div>
+
+      <!-- Q19 -->
+      <div class="mcq-card" data-qindex="19">
+        <div class="mcq-header">
+          <span class="mcq-num">১৯.</span>
+          <div class="mcq-text">'যা কিছু হারায় গিন্নী বলেন, কেষ্টা বেটাই চোর'- এখানে 'হারায়' কোন ধাতু? <span class="exam-tag">২৬তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 19, 'ক')"><span class="opt-prefix">(ক)</span> প্রযোজ্য ধাতু</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 19, 'ক')"><span class="opt-prefix">(খ)</span> ভাববাচ্যের ধাতু</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 19, 'ক')"><span class="opt-prefix">(গ)</span> সংযোগমূলক ধাতু</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 19, 'ক')"><span class="opt-prefix">(ঘ)</span> নাম ধাতু</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(19)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-19"></div>
+        </div>
+        <div class="explanation-box" id="explain-19">
+          <div class="exp-title">উত্তর: (ক) প্রযোজ্য ধাতু</div>
+          <p><strong>ব্যাখ্যা: প্রযোজক ধাতু (বা ণিজন্ত ধাতু):</strong> মৌলিক ধাতুর পর প্রেরণার্থে বা কর্মবাচ্যে 'আ' প্রত্যয় যোগ করে প্রযোজক ধাতু গঠিত হয়। যেমন— হার্ + আ = হারা &gt; হারায়। ব্যাকরণবিদগণের মতে কর্মবাচ্যের ধাতু মূলত প্রযোজক ধাতুরই অংশবিশেষ। তাই 'হারায়' হলো <strong>প্রযোজক (বা প্রযোজ্য) ধাতু</strong>।</p>
+        </div>
+      </div>
+
+      <!-- Q20 -->
+      <div class="mcq-card" data-qindex="20">
+        <div class="mcq-header">
+          <span class="mcq-num">২০.</span>
+          <div class="mcq-text">'নবান্ন' শব্দটি কোন প্রক্রিয়ায় গঠিত? <span class="exam-tag">২৬তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 20, 'ক')"><span class="opt-prefix">(ক)</span> সমাস</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 20, 'ক')"><span class="opt-prefix">(খ)</span> সন্ধি</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 20, 'ক')"><span class="opt-prefix">(গ)</span> প্রত্যয়</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 20, 'ক')"><span class="opt-prefix">(ঘ)</span> উপসর্গ</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(20)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-20"></div>
+        </div>
+        <div class="explanation-box" id="explain-20">
+          <div class="exp-title">উত্তর: (ক) সমাস</div>
+          <p><strong>ব্যাখ্যা:</strong> নবান্ন = নব যে অন্ন; এটি <strong>কর্মধারয় সমাস</strong> যোগে গঠিত। সন্ধি মূলত একটি ধ্বনিতাত্ত্বিক প্রক্রিয়া, শব্দ গঠনকারী প্রত্যয় বা সমাস প্রক্রিয়ার মধ্যে সমাসসাধিত হিসেবে এটি গৃহীত হয়।</p>
+        </div>
+      </div>
+
+      <!-- Q21 -->
+      <div class="mcq-card" data-qindex="21">
+        <div class="mcq-header">
+          <span class="mcq-num">২১.</span>
+          <div class="mcq-text">ধাতুর পর কোন প্রত্যয় যুক্ত করে ভাব বাচক বিশেষ্য বুঝায়? <span class="exam-tag">১৮তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 21, 'ঘ')"><span class="opt-prefix">(ক)</span> আন</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 21, 'ঘ')"><span class="opt-prefix">(খ)</span> ই</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 21, 'ঘ')"><span class="opt-prefix">(গ)</span> আল</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 21, 'ঘ')"><span class="opt-prefix">(ঘ)</span> আও</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(21)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-21"></div>
+        </div>
+        <div class="explanation-box" id="explain-21">
+          <div class="exp-title">উত্তর: (ঘ) আও</div>
+          <p><strong>ব্যাখ্যা:</strong> ভাববাচক বিশেষ্য গঠনে 'আই' এবং <strong>'আও'</strong> এই দুটি প্রত্যয় ব্যবহৃত হয়। যেমন— √চড়্ + আও = চড়াও, √ঘের্ + আও = ঘেরাও।</p>
+        </div>
+      </div>
+
+      <!-- Q22 -->
+      <div class="mcq-card" data-qindex="22">
+        <div class="mcq-header">
+          <span class="mcq-num">২২.</span>
+          <div class="mcq-text">'দোলনা' শব্দের সঠিক প্রকৃতি-প্রত্যয় কোনটি? <span class="exam-tag">১৮তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 22, 'ক')"><span class="opt-prefix">(ক)</span> √দুল্ + অনা</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 22, 'ক')"><span class="opt-prefix">(খ)</span> দোল্ + না</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 22, 'ক')"><span class="opt-prefix">(গ)</span> দোল্ + অনা</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 22, 'ক')"><span class="opt-prefix">(ঘ)</span> দোলনা + আ</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(22)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-22"></div>
+        </div>
+        <div class="explanation-box" id="explain-22">
+          <div class="exp-title">উত্তর: (ক) √দুল্ + অনা</div>
+          <p><strong>ব্যাখ্যা:</strong> 'দোলনা' একটি কৃদন্ত শব্দ। এর সঠিক প্রকৃতি-প্রত্যয়: <strong>√দুল্ + অনা = দোলনা</strong> (গুণ বৃদ্ধির নিয়মে উ-কার ও-কার হয়েছে)।</p>
+        </div>
+      </div>
+
+      <!-- Q23 -->
+      <div class="mcq-card" data-qindex="23">
+        <div class="mcq-header">
+          <span class="mcq-num">২৩.</span>
+          <div class="mcq-text">প্রত্যয়গতভাবে শুদ্ধ কোনটি? <span class="exam-tag">১৬তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 23, 'খ')"><span class="opt-prefix">(ক)</span> উৎকর্ষতা</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 23, 'খ')"><span class="opt-prefix">(খ)</span> উৎকর্ষ</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 23, 'খ')"><span class="opt-prefix">(গ)</span> উৎকৃষ্ট</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 23, 'খ')"><span class="opt-prefix">(ঘ)</span> উৎকৃষ্টতা</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(23)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-23"></div>
+        </div>
+        <div class="explanation-box" id="explain-23">
+          <div class="exp-title">উত্তর: (খ) উৎকর্ষ</div>
+          <p><strong>ব্যাখ্যা:</strong> 'উৎকর্ষ' (উৎ + √কৃষ্ + অ) একটি প্রত্যয় সাধিত বিশেষ্য পদ। 'উৎকর্ষ' শব্দের সাথে পুনরায় 'তা' প্রত্যয় যুক্ত করলে 'উৎকর্ষতা' হয়, যা প্রত্যয়জনিত বাহুল্য দোষে দুষ্ট। তাই <strong>'উৎকর্ষ'</strong> প্রত্যয়গতভাবে শুদ্ধ।</p>
+        </div>
+      </div>
+
+      <!-- Q24 -->
+      <div class="mcq-card" data-qindex="24">
+        <div class="mcq-header">
+          <span class="mcq-num">২৪.</span>
+          <div class="mcq-text">ক্রিয়া পদের মূল অংশকে বলা হয়- <span class="exam-tag">১২তম ও ১০তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 24, 'খ')"><span class="opt-prefix">(ক)</span> বিভক্তি</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 24, 'খ')"><span class="opt-prefix">(খ)</span> ধাতু</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 24, 'খ')"><span class="opt-prefix">(গ)</span> প্রত্যয়</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 24, 'খ')"><span class="opt-prefix">(ঘ)</span> কৃৎ</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(24)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-24"></div>
+        </div>
+        <div class="explanation-box" id="explain-24">
+          <div class="exp-title">উত্তর: (খ) ধাতু</div>
+          <p><strong>ব্যাখ্যা:</strong> ক্রিয়াপদের অবিভাজ্য মূল অংশকে <strong>ধাতু বা ক্রিয়ামূল</strong> বলা হয়। যেমন— 'পড়িতেছে' ক্রিয়াপদের মূল অংশ হলো √পড়্ (ধাতু)।</p>
+        </div>
+      </div>
+
+      <!-- Q25 -->
+      <div class="mcq-card" data-qindex="25">
+        <div class="mcq-header">
+          <span class="mcq-num">২৫.</span>
+          <div class="mcq-text">কোন শব্দে ধাতুর সঙ্গে প্রত্যয় যুক্ত হয়েছে? <span class="exam-tag">১২তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 25, 'গ')"><span class="opt-prefix">(ক)</span> ঠগী</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 25, 'গ')"><span class="opt-prefix">(খ)</span> পানাস</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 25, 'গ')"><span class="opt-prefix">(গ)</span> পাঠক</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 25, 'গ')"><span class="opt-prefix">(ঘ)</span> সেলামী</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(25)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-25"></div>
+        </div>
+        <div class="explanation-box" id="explain-25">
+          <div class="exp-title">উত্তর: (গ) পাঠক</div>
+          <p><strong>ব্যাখ্যা:</strong> <strong>√পাঠ্ (ধাতু) + অক (কৃৎ প্রত্যয়) = পাঠক</strong>। এখানে ধাতুর সঙ্গে প্রত্যয় যুক্ত হয়েছে।</p>
+          <p>অন্যদিকে ঠগী (ঠগ + ই), পানসা (পানি + সা), সেলামী (সালাম + ই) শব্দগুলো প্রাতিপদিক বা নামের শেষে তদ্ধিত প্রত্যয়যোগে গঠিত।</p>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>Live MCQ Interactive Smart E-Book • 100% Textbook Fidelity</p>
+  </footer>
+
+  <!-- Nav Component Script for Drawer and Features -->
+  <script src="nav-component.js"></script>
+
+  <script>
+    // Quiz Engine Logic
+    let totalQuestions = 25;
+    let answeredQuestions = new Set();
+    let correctQuestions = new Set();
+
+    function checkAnswer(btn, qIndex, correctOpt) {
+      const parentCard = btn.closest('.mcq-card');
+      const allBtns = parentCard.querySelectorAll('.option-btn');
+      const statusEl = document.getElementById(`status-${qIndex}`);
+      const selectedOpt = btn.getAttribute('data-opt');
+
+      if (btn.classList.contains('locked')) return;
+
+      allBtns.forEach(b => b.classList.add('locked'));
+      answeredQuestions.add(qIndex);
+
+      if (selectedOpt === correctOpt) {
+        btn.classList.add('correct');
+        statusEl.innerHTML = '<span class="status-indicator correct">✓ সঠিক উত্তর</span>';
+        correctQuestions.add(qIndex);
+      } else {
+        btn.classList.add('wrong');
+        statusEl.innerHTML = '<span class="status-indicator wrong">✗ ভুল উত্তর</span>';
+        allBtns.forEach(b => {
+          if (b.getAttribute('data-opt') === correctOpt) {
+            b.classList.add('correct');
+          }
+        });
+      }
+
+      updateScoreBoard();
+    }
+
+    function toggleExplanation(qIndex) {
+      const expBox = document.getElementById(`explain-${qIndex}`);
+      if (expBox) {
+        expBox.classList.toggle('active');
+      }
+    }
+
+    function updateScoreBoard() {
+      const ansCount = answeredQuestions.size;
+      const corrCount = correctQuestions.size;
+      const accuracy = ansCount > 0 ? Math.round((corrCount / ansCount) * 100) : 0;
+
+      const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+      const toBn = num => num.toString().split('').map(d => bnDigits[parseInt(d)] || d).join('');
+
+      document.getElementById('answered-count').innerText = toBn(ansCount);
+      document.getElementById('correct-count').innerText = toBn(corrCount);
+      document.getElementById('accuracy-rate').innerText = toBn(accuracy) + '%';
+    }
+
+    // Scroll progress bar
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      const bar = document.getElementById('progressBar');
+      if (bar) bar.style.width = scrolled + '%';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,822 @@
+<!-- DESIGN PLAN:
+1. বিষয়ের ধরন: ধ্বনিতত্ত্ব (ণ-ত্ব ও ষ-ত্ব বিধান - নিয়মাবলি, ব্যতিক্রম, স্বভাবতই মূর্ধন্য ণ ও ষ, এবং বিসিএস প্রশ্নাবলি)।
+2. গুরুত্বপূর্ণ বিষয় ও সূক্ষ্ম পার্থক্য:
+   - প্রয়োগ ক্ষেত্র: ণ-ত্ব ও ষ-ত্ব বিধান কেবল তৎসম (সংস্কৃত) শব্দে প্রযোজ্য। তদ্ভব, দেশি ও বিদেশি শব্দে কখনোই খাটে না (স্টেশন, মাস্টার, পোস্ট, কান, সোনা)।
+   - সমাসবদ্ধ শব্দে ব্যতিক্রম: সমাসবদ্ধ শব্দে ণ-ত্ব বিধান খাটে না (ত্রিনয়ন, সর্বনাম, দুর্নীতি, দুর্নাম, দুর্নিবার)।
+   - ত-বর্গের সংযোগ: ত-বর্গের সাথে যুক্ত ন সর্বদাই দন্ত্য 'ন' (অন্ত, শান্ত, গ্রন্থ, ক্রন্দন)।
+   - স্বভাবতই ণ: চাণক্য, মাণিক্য, বাণিজ্য, লবণ, মণ, বেণু, বীণা, কঙ্কণ, লাবণ্য, পুণ্য, কল্যাণ, বিপণি ইত্যাদি।
+   - পরিষ্কার বনাম পুরস্কার: অ/আ ভিন্ন স্বরের পর মূর্ধন্য 'ষ' (পরিষ্কার, আবিষ্কার); অ/আ স্বরের পর দন্ত্য 'স' (পুরস্কার, তিরস্কার, নমস্কার)।
+3. বিশেষ মডিউল:
+   - বিসিএস প্রশ্ন পরিসংখ্যান ছক।
+   - ণ-ত্ব ও ষ-ত্ব বিধানের সম্পূর্ণ নিয়ম ও ব্যতিক্রম সারণি।
+   - স্বভাবতই মূর্ধন্য ণ-এর ক্লাসিক ছক ও শব্দ তালিকা।
+   - ৩টি আসল বিসিএস প্রশ্নের পূর্ণাঙ্গ লাইভ কুইজ ইঞ্জিন।
+4. রঙের মেজাজ: ব্যাকরণিক অনুশাসনের জন্য গাঢ় নীল ও মেটালিক টিল (#1e40af, #0f766e), পার্চমেন্ট ব্যাকগ্রাউন্ড, গোল্ডেন অ্যাম্বার অ্যাকসেন্ট।
+-->
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ণ-ত্ব ও ষ-ত্ব বিধান - বিসিএস পূর্ণাঙ্গ স্মার্ট ইবুক</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --font-base: 'Noto Serif Bengali', serif, system-ui, sans-serif;
+  --bg-primary: #f8fafc;
+  --bg-card: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --primary: #1e40af;
+  --primary-light: #dbeafe;
+  --primary-dark: #1e3a8a;
+  --accent: #d97706;
+  --accent-light: #fef3c7;
+  --success: #16a34a;
+  --success-bg: #dcfce7;
+  --danger: #dc2626;
+  --danger-bg: #fee2e2;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --shadow: 0 4px 14px rgba(30, 64, 175, 0.08);
+  --radius: 12px;
+  --font-scale: 1rem;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0f172a;
+  --bg-card: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --primary: #60a5fa;
+  --primary-light: #1e3a8a;
+  --primary-dark: #3b82f6;
+  --accent: #fbbf24;
+  --accent-light: #451a03;
+  --success: #22c55e;
+  --success-bg: #14532d;
+  --danger: #f87171;
+  --danger-bg: #7f1d1d;
+  --border: #334155;
+  --border-strong: #475569;
+  --shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-base);
+}
+
+html {
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-size: var(--font-scale);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  line-height: 1.8;
+  padding-bottom: 80px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: clip;
+}
+
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  width: 0%;
+  z-index: 10000;
+  transition: width 0.12s ease-out;
+}
+
+.top-control-bar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: var(--bg-card);
+  border-bottom: 1.5px solid var(--border);
+  padding: 8px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow);
+}
+
+.brand-badge {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+button.ctrl-btn {
+  background: var(--bg-primary);
+  color: var(--text-main);
+  border: 1px solid var(--border-strong);
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  touch-action: manipulation;
+}
+
+button.ctrl-btn:hover {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 10px 12px 40px 12px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 6px 8px 30px 8px;
+  }
+}
+
+.hero-card {
+  background: linear-gradient(135deg, rgba(30, 64, 175, 0.08) 0%, rgba(217, 119, 6, 0.06) 100%);
+  border: 1.5px solid var(--border);
+  border-left: 6px solid var(--primary);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow);
+}
+
+.hero-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.hero-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.bcs-table-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+table.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 0.92rem;
+  background: var(--bg-card);
+}
+
+table.data-table th {
+  background: var(--primary);
+  color: #ffffff;
+  padding: 8px 10px;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  white-space: nowrap;
+}
+
+table.data-table td {
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+table.data-table tr:nth-child(even) {
+  background-color: var(--bg-primary);
+}
+
+.theory-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+
+.section-head {
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary-light);
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+}
+
+.key-point {
+  margin-bottom: 10px;
+  line-height: 1.75;
+}
+
+.key-point strong {
+  color: var(--accent);
+}
+
+.note-box {
+  background: var(--accent-light);
+  border-left: 4px solid var(--accent);
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin: 12px 0;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+[data-theme="dark"] .note-box {
+  background: rgba(217, 119, 6, 0.15);
+  border-left-color: var(--accent);
+  color: #fef3c7;
+}
+
+.info-box {
+  background: var(--primary-light);
+  border-left: 4px solid var(--primary);
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin: 12px 0;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+[data-theme="dark"] .info-box {
+  background: rgba(96, 165, 250, 0.15);
+  border-left-color: var(--primary);
+  color: #dbeafe;
+}
+
+/* Quiz Section */
+.quiz-section-header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #ffffff;
+  padding: 14px 18px;
+  border-radius: var(--radius) var(--radius) 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.quiz-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.score-tracker {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.quiz-container {
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 16px 14px;
+  background: var(--bg-card);
+  margin-bottom: 30px;
+}
+
+.quiz-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 16px;
+  transition: all 0.2s ease;
+}
+
+.quiz-card.answered-correct {
+  border-color: var(--success);
+  background: rgba(22, 163, 74, 0.04);
+}
+
+.quiz-card.answered-wrong {
+  border-color: var(--danger);
+  background: rgba(220, 38, 38, 0.04);
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.q-text {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.q-tag {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .q-tag {
+  background: var(--primary-dark);
+  color: #dbeafe;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+button.opt-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 10px 12px;
+  border-radius: 8px;
+  text-align: left;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  touch-action: manipulation;
+}
+
+button.opt-btn:hover:not(:disabled) {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+button.opt-btn.correct-choice {
+  background: var(--success-bg) !important;
+  border-color: var(--success) !important;
+  color: var(--success) !important;
+  font-weight: 700;
+}
+
+button.opt-btn.wrong-choice {
+  background: var(--danger-bg) !important;
+  border-color: var(--danger) !important;
+  color: var(--danger) !important;
+  font-weight: 700;
+}
+
+.explanation-box {
+  display: none;
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-main);
+}
+
+.explanation-box strong {
+  color: var(--primary);
+}
+
+.quiz-footer-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.reset-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.reset-btn:hover {
+  opacity: 0.9;
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="top-control-bar">
+  <div class="brand-badge">
+    <span>📖</span> বাংলা ভাষা ও ব্যাকরণ
+  </div>
+  <div class="controls">
+    <button class="ctrl-btn" onclick="adjustFontSize(-0.05)" title="লেখা ছোট করুন">A-</button>
+    <button class="ctrl-btn" onclick="resetFontSize()" title="স্বাভাবিক ফন্ট">A</button>
+    <button class="ctrl-btn" onclick="adjustFontSize(0.05)" title="লেখা বড় করুন">A+</button>
+    <button class="ctrl-btn" onclick="toggleTheme()" id="theme-btn" title="ডার্ক/লাইট থিম">🌙</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Hero Header -->
+  <header class="hero-card">
+    <h1 class="hero-title">০৪. ণ-ত্ব ও ষ-ত্ব বিধান</h1>
+    <p class="hero-subtitle">ধ্বনিতত্ত্ব • বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ প্রস্তুতি (পৃষ্ঠা ১৩)</p>
+  </header>
+
+  <!-- BCS Question Distribution Table -->
+  <section class="bcs-table-card">
+    <h2 class="card-title">📊 বিগত বিসিএস পরীক্ষায় এ অধ্যায়ের প্রশ্ন বিশ্লেষণ</h2>
+    <div class="table-responsive">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
+            <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
+            <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>৫০তম</td><td>০</td><td>৪৪তম</td><td>০</td><td>৩৮তম</td><td>০</td></tr>
+          <tr><td>৪৯তম</td><td>০</td><td>৪৩তম</td><td>০</td><td>৩৭তম</td><td>০</td></tr>
+          <tr><td>৪৮তম</td><td>০</td><td>৪২তম</td><td>০</td><td>৩৬তম</td><td>১</td></tr>
+          <tr><td>৪৭তম</td><td>০</td><td>৪১তম</td><td>০</td><td>৩৫তম</td><td>০</td></tr>
+          <tr><td>৪৬তম</td><td>০</td><td>৪০তম</td><td>০</td><td>১০ম-৩৪তম</td><td>৩</td></tr>
+          <tr><td>৪৫তম</td><td>০</td><td>৩৯তম</td><td>০</td><td><strong>মোট প্রশ্ন</strong></td><td><strong>৩টি (৪ বার)</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Theory Module 1: Natwa Bidhan -->
+  <article class="theory-card">
+    <h2 class="section-head">📏 ণ-ত্ব বিধানের মূল নিয়মাবলি</h2>
+    <div class="key-point">
+      <strong>১. ট-বর্গীয় সংযোগ:</strong> ট-বর্গীয় ধ্বনির (ট, ঠ, ড, ঢ) পূর্বে তৎসম শব্দে যুক্ত ব্যঞ্জন হিসেবে সর্বদা মূর্ধন্য 'ণ' হয়। যেমন: ঘণ্টা, লণ্ঠন, কাণ্ড, কণ্ঠ ইত্যাদি।
+    </div>
+    <div class="key-point">
+      <strong>২. ঋ, র, ষ এর পরবর্তী রূপ:</strong> তৎসম শব্দে ঋ, র (বা র-ফলা, রেফ) এবং ষ-এর পরে মূর্ধন্য 'ণ' হয়। যেমন: ঋণ, তৃণ, বর্ণ, বর্ণনা, কারণ, মরণ, ব্যাকরণ, ভীষণ, ভাষণ, উষ্ণ ইত্যাদি।
+    </div>
+    <div class="key-point">
+      <strong>৩. মধ্যবর্তী ধ্বনির নিয়ম:</strong> ঋ, র, ষ-এর পর স্বরধ্বনি, য, য়, ব, হ, অনুস্বার এবং ক-বর্গীয় (ক, খ, গ, ঘ, ঙ) ও প-বর্গীয় (প, ফ, ব, ভ, ম) ধ্বনি ব্যবধানে থাকলেও পরবর্তী দন্ত্য 'ন' মূর্ধন্য 'ণ' হয়। যেমন: কৃপণ, হরিণ, লক্ষণ, রুক্মিণী, ব্রাহ্মণ, প্রবণ ইত্যাদি।
+    </div>
+
+    <div class="note-box">
+      <strong>⚠️ ণ-ত্ব বিধানের ব্যতিক্রম:</strong>
+      <ol style="margin-left: 20px; margin-top: 6px;">
+        <li><strong>সমাসবদ্ধ শব্দে</strong> ণ-ত্ব বিধি খাটে না (দন্ত্য 'ন' হয়): ত্রিনয়ন, সর্বনাম, দুর্নীতি, দুর্নাম, দুর্নিবার, পরনিন্দা, অগ্রনায়ক ইত্যাদি।</li>
+        <li><strong>ত-বর্গীয় বর্ণের</strong> (ত, থ, দ, ধ) সাথে যুক্ত 'ন' সর্বদাই দন্ত্য 'ন' হয় (কখনও 'ণ' হয় না): অন্ত, শান্ত, গ্রন্থ, ক্রন্দন, পন্থী।</li>
+        <li><strong>বিদেশি ও দেশি শব্দে</strong> ণ-ত্ব বিধান প্রযোজ্য নয়: স্টেশন, কর্নেল, গভর্নর, গ্রিন, কোরআন, কান, সোনা ইত্যাদি।</li>
+      </ol>
+    </div>
+  </article>
+
+  <!-- Theory Module 2: Shobhabotoi Na -->
+  <article class="theory-card">
+    <h2 class="section-head">📜 স্বভাবতই মূর্ধন্য ‘ণ’ যুক্ত শব্দ (চাণক্য-মাণিক্য ছড়া)</h2>
+    <div class="note-box" style="font-style: italic; line-height: 1.9;">
+      “চাণক্য মাণিক্য গণ বাণিজ্য লবণ মণ<br>
+      বেণু বীণা কঙ্কণ কণিকা।<br>
+      কল্যাণ শোণিত মণি স্থাণু গুণ পুণ্য বেণী<br>
+      ফণী অণু বিপণি গণিকা।<br>
+      আপন লাবণ্য বাণী নিপুণ ভণিতা পানি<br>
+      গৌণ কোণ বাণ পণ শাণ।<br>
+      চিক্কণ নিক্কণ তূণ কফণি (কনুই) বণিক গুণ<br>
+      গণনা পিনাক পণ্য বাণ।”
+    </div>
+    <div class="info-box">
+      <strong>💡 মনে রাখুন:</strong> এই শব্দগুলোতে ব্যাকরণের কোনো নিয়ম ব্যতিরেকেই স্বভাবতই মূর্ধন্য ‘ণ’ ব্যবহৃত হয়।
+    </div>
+  </article>
+
+  <!-- Theory Module 3: Shatwa Bidhan -->
+  <article class="theory-card">
+    <h2 class="section-head">📏 ষ-ত্ব বিধানের নিয়মাবলি ও স্বভাবতই মূর্ধন্য ‘ষ’</h2>
+    <div class="key-point">
+      <strong>১. স্বরধ্বনির নিয়ম:</strong> অ, আ ভিন্ন অন্য স্বরধ্বনি এবং ক ও র-এর পরে প্রত্যয়ের দন্ত্য 'স' মূর্ধন্য 'ষ' হয়। যেমন: ভবিষ্যৎ, মুমূর্ষু, চক্ষুष्मान, চিক্ষীর্যা ইত্যাদি।
+    </div>
+    <div class="key-point">
+      <strong>২. ই/উ-কারান্ত উপসর্গ:</strong> ই-কারান্ত এবং উ-কারান্ত উপসর্গের পর কতিপয় ধাতুতে 'ষ' হয়। যেমন: অভি + সেক = অভিষেক, সু + সুপ্ত = সুষুপ্ত, অনু + সঙ্গ = অনুষঙ্গ, প্রতি + সেধক = প্রতিষেধক, অনু + স্থান = অনুষ্ঠান, বি + সম = বিষম, সু + সমা = সুষমা ইত্যাদি।
+    </div>
+    <div class="key-point">
+      <strong>৩. ঋ-কার ও র-এর পর:</strong> 'ঋ' এবং ঋ-কারের পর 'ষ' হয় (ঋষি, কৃষক, উৎকৃষ্ট, দৃষ্টি, সৃষ্টি)। তৎসম শব্দে 'র'-এর পর 'ষ' হয় (বর্ষা, ঘর্ষণ, বর্ষণ)।
+    </div>
+    <div class="key-point">
+      <strong>৪. ট-বর্গীয় সংযোগ:</strong> ট-বর্গীয় ধ্বনির সঙ্গে যুক্ত হলে সর্বদা মূর্ধন্য 'ষ' হয়। যেমন: কষ্ট, স্পষ্ট, নষ্ট, কাষ্ঠ, ওষ্ঠ ইত্যাদি।
+    </div>
+
+    <div class="table-responsive">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>তুলনা</th>
+            <th>পরিষ্কার (মূর্ধন্য 'ষ')</th>
+            <th>পুরস্কার (দন্ত্য 'স')</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>সন্ধি নিয়ম</strong></td>
+            <td>পরি + কার = পরিষ্কার (ই-কারের পর 'ষ')</td>
+            <td>পুরঃ + কার = পুরস্কার (অ-কারের পর 'স')</td>
+          </tr>
+          <tr>
+            <td><strong>সদৃশ উদাহরণ</strong></td>
+            <td>আবিষ্কার, নিস্তার (ই-কারান্ত)</td>
+            <td>তিরস্কার, নমস্কার, ভাস্কর (অ-কারান্ত)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="info-box" style="margin-top: 12px;">
+      <strong>💡 স্বভাবতই মূর্ধন্য-ষ:</strong> আষাঢ়, রোষ, কোষ, পৌষ, মানুষ, ভূষণ, ভাষণ, ভাষা, পাষাণ, ঔষধ, ঊষা, ষড়যন্ত্র, ষড়ঋতু, কলুষ, দ্বেষ ইত্যাদি।
+    </div>
+  </article>
+
+  <!-- Interactive Quiz Engine -->
+  <section class="quiz-section-header">
+    <div class="quiz-title">🎯 বিসিএস প্রিলিমিনারি আসল প্রশ্নব্যাংক (MCQ)</div>
+    <div class="score-tracker">
+      অগ্রগতি: <span id="answered-count">০</span> / <span id="total-count">3</span> | সঠিক: <span id="correct-count">০</span>
+    </div>
+  </section>
+
+  <section class="quiz-container">
+    <div id="quiz-cards-wrapper"></div>
+    <div class="quiz-footer-actions">
+      <button class="reset-btn" onclick="resetQuiz()">🔄 পুনরায় অনুশীলন করুন</button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+let currentScale = 1.0;
+function adjustFontSize(delta) {
+  currentScale = Math.min(1.4, Math.max(0.8, currentScale + delta));
+  document.documentElement.style.setProperty('--font-scale', currentScale + 'rem');
+  try {
+    localStorage.setItem('ebk_font_scale', currentScale);
+  } catch(e) {}
+}
+
+function resetFontSize() {
+  currentScale = 1.0;
+  document.documentElement.style.setProperty('--font-scale', '1rem');
+  try {
+    localStorage.setItem('ebk_font_scale', 1.0);
+  } catch(e) {}
+}
+
+function toggleTheme() {
+  const htmlEl = document.documentElement;
+  const currentTheme = htmlEl.getAttribute('data-theme') || 'light';
+  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  htmlEl.setAttribute('data-theme', newTheme);
+  const themeBtn = document.getElementById('theme-btn');
+  if (themeBtn) {
+    themeBtn.innerText = newTheme === 'light' ? '🌙' : '☀️';
+  }
+  try {
+    localStorage.setItem('theme', newTheme);
+  } catch(e) {}
+}
+
+window.addEventListener('scroll', () => {
+  const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+  const bar = document.getElementById('progress-bar');
+  if (bar) bar.style.width = scrolled + '%';
+});
+
+const quizData = [
+  {
+    "id": 1,
+    "tag": "৩৬তম বিসিএস",
+    "q": "নিচের কোন শব্দে ণত্ব বিধি অনুসারে ‘ণ’-এর ব্যবহার হয়েছে?",
+    "opts": [
+      "কল্যাণ",
+      "প্রবণ",
+      "নিক্বণ",
+      "বিপণি"
+    ],
+    "ans": 1,
+    "exp": "ণ-ত্ব বিধানের নিয়ম অনুযায়ী: ঋ, র, ষ-এর পর স্বরধ্বনি, য, য়, ব, হ এবং ক-বর্গীয় ও প-বর্গীয় ধ্বনি থাকলে তার পরবর্তী দন্ত্য 'ন' মূর্ধন্য 'ণ' হয়। 'প্রবণ' শব্দে প্র (প+র) এর পর ব (প-বর্গীয়) থাকায় নিয়ম অনুসারে 'ণ' হয়েছে। অন্যদিকে কল্যাণ, নিক্বণ ও বিপণি শব্দগুলোতে কোনো নিয়ম ছাড়াই স্বভাবতই মূর্ধন্য 'ণ' ব্যবহৃত হয়েছে।"
+  },
+  {
+    "id": 2,
+    "tag": "২৪তম ও ২০তম বিসিএস",
+    "q": "নিত্য মূর্ধন্য-ষ কোন শব্দে বর্তমান?",
+    "opts": [
+      "কষ্ট",
+      "উপনিষৎ",
+      "কল্যাণীয়েষু",
+      "আষাঢ়"
+    ],
+    "ans": 3,
+    "exp": "যেসব শব্দে ব্যাকরণের কোনো নিয়ম ছাড়া আপনা-আপনি বা স্বভাবতই মূর্ধন্য 'ষ' ব্যবহৃত হয় সেগুলোকে নিত্য মূর্ধন্য-ষ বলে। যেমন: আষাঢ়, রোষ, কোষ, পৌষ, মানুষ, ভূষণ, ঔষধ, পাষাণ, ঊষা, ষড়যন্ত্র ইত্যাদি। অন্যদিকে 'কষ্ট' শব্দে ট-বর্গীয় ধ্বনির নিয়মে এবং 'উপনিষৎ' ও 'কল্যাণীয়েষু' শব্দে স্বরধ্বনির নিয়মে 'ষ' হয়েছে।"
+  },
+  {
+    "id": 3,
+    "tag": "২১তম বিসিএস",
+    "q": "ণ-ত্ব বিধি সাধারণত কোন শব্দে প্রযোজ্য?",
+    "opts": [
+      "দেশী",
+      "বিদেশী",
+      "তৎসম",
+      "তদ্ভব"
+    ],
+    "ans": 2,
+    "exp": "তৎসম বা খাঁটি সংস্কৃত শব্দের বানানে মূর্ধন্য 'ণ' ও মূর্ধন্য 'ষ' ব্যবহারের নিয়মকেই যথাক্রমে ণ-ত্ব ও ষ-ত্ব বিধান বলে। বাংলা (দেশি), তদ্ভব ও বিদেশি ভাষার শব্দের বানানে ণ-ত্ব ও ষ-ত্ব বিধান খাটে না (যেমন: কোরআন, গভর্নর, স্টেশন, কান, সোনা ইত্যাদি)।"
+  }
+];
+
+let userAnswers = {};
+
+function renderQuiz() {
+  const container = document.getElementById('quiz-cards-wrapper');
+  container.innerHTML = '';
+  const letters = ['ক', 'খ', 'গ', 'ঘ'];
+  
+  quizData.forEach((qItem, idx) => {
+    const card = document.createElement('div');
+    card.className = 'quiz-card';
+    card.id = `qcard-${qItem.id}`;
+    
+    let optsHtml = '';
+    qItem.opts.forEach((opt, oIdx) => {
+      optsHtml += `
+        <button class="opt-btn" onclick="checkAnswer(${qItem.id}, ${oIdx})" id="opt-${qItem.id}-${oIdx}">
+          <strong>${letters[oIdx]}.</strong> ${opt}
+        </button>
+      `;
+    });
+    
+    card.innerHTML = `
+      <div class="question-header">
+        <div class="q-text">${idx + 1}. ${qItem.q}</div>
+        <span class="q-tag">${qItem.tag}</span>
+      </div>
+      <div class="options-grid">
+        ${optsHtml}
+      </div>
+      <div class="explanation-box" id="exp-${qItem.id}">
+        <strong>💡 ব্যাখ্যা:</strong> ${qItem.exp}
+      </div>
+    `;
+    container.appendChild(card);
+  });
+  
+  const totalCountEl = document.getElementById('total-count');
+  if (totalCountEl) totalCountEl.innerText = quizData.length;
+}
+
+function checkAnswer(qId, selectedOpt) {
+  if (userAnswers[qId] !== undefined) return;
+  userAnswers[qId] = selectedOpt;
+  
+  const qData = quizData.find(d => d.id === qId);
+  const card = document.getElementById(`qcard-${qId}`);
+  const isCorrect = selectedOpt === qData.ans;
+  
+  for(let i = 0; i < qData.opts.length; i++) {
+    const btn = document.getElementById(`opt-${qId}-${i}`);
+    if (btn) {
+      btn.disabled = true;
+      if (i === qData.ans) {
+        btn.classList.add('correct-choice');
+      } else if (i === selectedOpt) {
+        btn.classList.add('wrong-choice');
+      }
+    }
+  }
+  
+  if (card) {
+    if (isCorrect) {
+      card.classList.add('answered-correct');
+    } else {
+      card.classList.add('answered-wrong');
+    }
+  }
+  
+  const expBox = document.getElementById(`exp-${qId}`);
+  if (expBox) expBox.style.display = 'block';
+  updateScore();
+}
+
+function updateScore() {
+  const answeredTotal = Object.keys(userAnswers).length;
+  let correctTotal = 0;
+  for(let qId in userAnswers) {
+    const qData = quizData.find(d => d.id == qId);
+    if(qData && userAnswers[qId] === qData.ans) {
+      correctTotal++;
+    }
+  }
+  const ansEl = document.getElementById('answered-count');
+  const corEl = document.getElementById('correct-count');
+  if (ansEl) ansEl.innerText = answeredTotal;
+  if (corEl) corEl.innerText = correctTotal;
+}
+
+function resetQuiz() {
+  userAnswers = {};
+  renderQuiz();
+  updateScore();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderQuiz();
+  try {
+    const savedScale = localStorage.getItem('ebk_font_scale');
+    if (savedScale) {
+      currentScale = parseFloat(savedScale);
+      document.documentElement.style.setProperty('--font-scale', currentScale + 'rem');
+    }
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      const themeBtn = document.getElementById('theme-btn');
+      if (themeBtn) themeBtn.innerText = savedTheme === 'light' ? '🌙' : '☀️';
+    }
+  } catch(e) {}
+});
+</script>
+
+<script src="nav-component.js"></script>
+</body>
+</html>

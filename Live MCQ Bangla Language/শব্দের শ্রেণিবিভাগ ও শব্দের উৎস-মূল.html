@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>শব্দের শ্রেণিবিভাগ ও শব্দের উৎস-মূল - Live MCQ Interactive Smart E-Book</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --border-subtle: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --primary-color: #0369a1;
+      --primary-hover: #0284c7;
+      --primary-subtle: #e0f2fe;
+      --accent-color: #059669;
+      --accent-subtle: #d1fae5;
+      --danger-color: #dc2626;
+      --danger-subtle: #fee2e2;
+      --warning-color: #d97706;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --font-scale: 1;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #090d16;
+      --bg-surface: #0f172a;
+      --bg-card: #131d35;
+      --border-subtle: #1e293b;
+      --border-strong: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --primary-color: #38bdf8;
+      --primary-hover: #7dd3fc;
+      --primary-subtle: #082f49;
+      --accent-color: #34d399;
+      --accent-subtle: #064e3b;
+      --danger-color: #f87171;
+      --danger-subtle: #450a0a;
+      --warning-color: #fbbf24;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Noto Serif Bengali', serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: clip;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-size: calc(1rem * var(--font-scale));
+    }
+
+    .reading-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      z-index: 1000;
+      transition: width 0.1s ease;
+    }
+
+    .top-header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.6rem 0.8rem;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .btn-nav {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      padding: 0.35rem 0.6rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: all 0.2s;
+    }
+
+    .btn-nav:hover {
+      background: var(--primary-subtle);
+      border-color: var(--primary-color);
+    }
+
+    .header-title-box {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 170px;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .font-btn, .theme-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.45rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .font-btn:hover, .theme-btn:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0.5rem 0.5rem 3rem 0.5rem;
+      flex-grow: 1;
+    }
+
+    .chapter-hero {
+      text-align: center;
+      margin-bottom: 1rem;
+      padding: 1.25rem 0.8rem;
+      background: linear-gradient(135deg, rgba(3, 105, 161, 0.08) 0%, rgba(5, 150, 105, 0.08) 100%);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .chapter-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      background: var(--primary-subtle);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      margin-bottom: 0.4rem;
+    }
+
+    .chapter-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .chapter-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .score-banner {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .score-stat {
+      text-align: center;
+    }
+
+    .score-val {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .score-lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      margin-bottom: 0.85rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.35rem;
+    }
+
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      margin: 0.5rem 0;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: center;
+    }
+
+    .custom-table th, .custom-table td {
+      border: 1px solid var(--border-subtle);
+      padding: 0.45rem 0.4rem;
+      line-height: 1.4;
+      white-space: normal;
+      word-break: normal;
+    }
+
+    .custom-table th {
+      background: var(--primary-subtle);
+      color: var(--primary-color);
+      font-weight: 700;
+    }
+
+    .custom-table tr:nth-child(even) td {
+      background: rgba(0, 0, 0, 0.015);
+    }
+
+    [data-theme="dark"] .custom-table tr:nth-child(even) td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .theory-box {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: var(--text-secondary);
+    }
+
+    .theory-box p {
+      margin-bottom: 0.5rem;
+    }
+
+    .theory-box ul {
+      padding-left: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .theory-box li {
+      margin-bottom: 0.3rem;
+    }
+
+    .highlight-pill {
+      background: var(--primary-subtle);
+      color: var(--primary-color);
+      padding: 0.1rem 0.35rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .mcq-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      margin-bottom: 0.85rem;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s;
+    }
+
+    .mcq-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .mcq-num {
+      font-weight: 700;
+      color: var(--primary-color);
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .mcq-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      flex-grow: 1;
+      line-height: 1.5;
+    }
+
+    .exam-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: var(--primary-subtle);
+      color: var(--primary-color);
+      padding: 0.08rem 0.4rem;
+      border-radius: var(--radius-sm);
+      margin-left: 0.3rem;
+      white-space: nowrap;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.45rem;
+      margin-bottom: 0.6rem;
+    }
+
+    @media (min-width: 480px) {
+      .options-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .option-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem 0.65rem;
+      text-align: left;
+      font-family: inherit;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.45rem;
+      transition: all 0.15s ease;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .option-btn:hover:not(.locked) {
+      background: var(--primary-subtle);
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .opt-prefix {
+      font-weight: 700;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .option-btn.correct {
+      background: var(--accent-subtle) !important;
+      border-color: var(--accent-color) !important;
+      color: var(--accent-color) !important;
+      font-weight: 700;
+    }
+
+    .option-btn.wrong {
+      background: var(--danger-subtle) !important;
+      border-color: var(--danger-color) !important;
+      color: var(--danger-color) !important;
+    }
+
+    .mcq-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.4rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed var(--border-subtle);
+    }
+
+    .btn-explain {
+      background: transparent;
+      border: none;
+      color: var(--primary-color);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.25rem 0.4rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .btn-explain:hover {
+      background: var(--primary-subtle);
+    }
+
+    .status-indicator {
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .status-indicator.correct {
+      color: var(--accent-color);
+    }
+
+    .status-indicator.wrong {
+      color: var(--danger-color);
+    }
+
+    .explanation-box {
+      margin-top: 0.6rem;
+      padding: 0.7rem;
+      background: var(--primary-subtle);
+      border-left: 3px solid var(--primary-color);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      display: none;
+    }
+
+    .explanation-box.active {
+      display: block;
+      animation: fadeIn 0.25s ease-in;
+    }
+
+    .exp-title {
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-3px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--border-subtle);
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="reading-progress-bar" id="progressBar"></div>
+
+  <header class="top-header">
+    <div class="header-left">
+      <button class="btn-nav" id="menuToggleBtn" aria-label="সূচিপত্র খুলুন">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <span>সূচিপত্র</span>
+      </button>
+      <div class="header-title-box">শব্দের শ্রেণিবিভাগ</div>
+    </div>
+    <div class="header-controls">
+      <button class="font-btn" id="fontDecrease" title="ফন্ট ছোট করুন">A-</button>
+      <button class="font-btn" id="fontReset" title="স্বাভাবিক ফন্ট">A</button>
+      <button class="font-btn" id="fontIncrease" title="ফন্ট বড় করুন">A+</button>
+      <button class="theme-btn" id="themeToggle" title="থিম পরিবর্তন">🌓</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="chapter-hero">
+      <span class="chapter-badge">অধ্যায় ৬ • শব্দ প্রকরণ</span>
+      <h1 class="chapter-title">শব্দের শ্রেণিবিভাগ ও শব্দের উৎস-মূল</h1>
+      <p class="chapter-subtitle">গঠনমূলক, অর্থমূলক ও উৎসমূলক শব্দের সম্পূর্ণ আলোচনা</p>
+    </section>
+
+    <!-- Score Live Tracker -->
+    <div class="score-banner">
+      <div class="score-stat">
+        <div class="score-val" id="answered-count">০</div>
+        <div class="score-lbl">উত্তর দিয়েছ</div>
+      </div>
+      <div class="score-stat">
+        <div class="score-val" id="correct-count">০</div>
+        <div class="score-lbl">সঠিক হয়েছে</div>
+      </div>
+      <div class="score-stat">
+        <div class="score-val" id="accuracy-rate">০%</div>
+        <div class="score-lbl">নির্ভুলতা</div>
+      </div>
+    </div>
+
+    <!-- BCS Analysis Table -->
+    <div class="card">
+      <div class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+        বিসিএস প্রিলিমিনারি প্রশ্ন বিশ্লেষণ ছক
+      </div>
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>বিসিএস</th>
+              <th>প্রশ্ন সংখ্যা</th>
+              <th>বিসিএস</th>
+              <th>প্রশ্ন সংখ্যা</th>
+              <th>বিসিএস</th>
+              <th>প্রশ্ন সংখ্যা</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>৫০তম</td>
+              <td>১</td>
+              <td>৪৪তম</td>
+              <td>২</td>
+              <td>৩৮তম</td>
+              <td>২</td>
+            </tr>
+            <tr>
+              <td>৪৯তম</td>
+              <td>০</td>
+              <td>৪৩তম</td>
+              <td>১</td>
+              <td>৩৭তম</td>
+              <td>১</td>
+            </tr>
+            <tr>
+              <td>৪৮তম</td>
+              <td>০</td>
+              <td>৪২তম</td>
+              <td>১</td>
+              <td>৩৬তম</td>
+              <td>১</td>
+            </tr>
+            <tr>
+              <td>৪৭তম</td>
+              <td>০</td>
+              <td>৪১তম</td>
+              <td>১</td>
+              <td>৩৫তম</td>
+              <td>০</td>
+            </tr>
+            <tr>
+              <td>৪৬তম</td>
+              <td>১</td>
+              <td>৪০তম</td>
+              <td>২</td>
+              <td>১০ম-৩৪তম</td>
+              <td>১৭</td>
+            </tr>
+            <tr>
+              <td>৪৫তম</td>
+              <td>২</td>
+              <td>৩৯তম</td>
+              <td>০</td>
+              <td>মোট</td>
+              <td>৩১</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Core Theory Summary -->
+    <div class="card">
+      <div class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+        </svg>
+        শব্দের শ্রেণিবিভাগ সারসংক্ষেপ
+      </div>
+      <div class="theory-box">
+        <p><strong>১. গঠনমূলক শ্রেণিবিভাগ (২ প্রকার):</strong></p>
+        <ul>
+          <li><strong>মৌলিক শব্দ:</strong> যেসব শব্দ ভাঙা বা বিশ্লেষণ করা যায় না (যেমন: গোলাপ, নাক, লাল, হাত, তিন)।</li>
+          <li><strong>সাধিত শব্দ:</strong> যেসব শব্দকে বিশ্লেষণ করলে আলাদা অর্থবোধক অংশ পাওয়া যায় (যেমন: হাতল, ফুলেল, পানসা, চলন্ত)।</li>
+        </ul>
+        <p><strong>২. অর্থমূলক শ্রেণিবিভাগ (৩ প্রকার):</strong></p>
+        <ul>
+          <li><strong>যৌগিক শব্দ:</strong> ব্যুৎপত্তিগত ও ব্যবহারিক অর্থ অভিন্ন (যেমন: গায়ক, কর্তব্য, বাবুয়ানা, মধুর, দৌহিত্র, মিতালি)।</li>
+          <li><strong>রূঢ় বা রূঢ়ি শব্দ:</strong> প্রত্যয়/উপসর্গজাত অর্থ না বুঝিয়ে ভিন্ন বিশিষ্ট অর্থ বোঝায় (যেমন: হস্তী, গবেষণা, বাঁশি, তৈল, প্রবীণ, সন্দেশ)।</li>
+          <li><strong>যোগরূঢ় শব্দ:</strong> সমাসনিষ্পন্ন পদ সমস্যমান পদের অনুগামী না হয়ে বিশিষ্ট অর্থ গ্রহণ করে (যেমন: পঙ্কজ, রাজপুত, মহাযাত্রা, জলধি, শাখামৃগ)।</li>
+        </ul>
+        <p><strong>৩. উৎসমূলক শ্রেণিবিভাগ (৫ প্রকার):</strong> তৎসম, অর্ধ-তৎসম, তদ্ভব (খাঁটি বাংলা), দেশি ও বিদেশি শব্দ।</p>
+      </div>
+    </div>
+
+    <!-- Questions Section -->
+    <section id="mcq-container">
+
+      <!-- Q1 -->
+      <div class="mcq-card" data-qindex="1">
+        <div class="mcq-header">
+          <span class="mcq-num">১.</span>
+          <div class="mcq-text">'ময়দান, মুনাফা, বই' শব্দ তিনটি কোন ভাষা থেকে আগত? <span class="exam-tag">৫০তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 1, 'গ')"><span class="opt-prefix">(ক)</span> উর্দু</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 1, 'গ')"><span class="opt-prefix">(খ)</span> ফারসি</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 1, 'গ')"><span class="opt-prefix">(গ)</span> আরবি</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 1, 'গ')"><span class="opt-prefix">(ঘ)</span> পর্তুগীজ</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(1)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-1"></div>
+        </div>
+        <div class="explanation-box" id="explain-1">
+          <div class="exp-title">উত্তর: (গ) আরবি</div>
+          <p><strong>ব্যাখ্যা:</strong></p>
+          <ul>
+            <li><strong>ময়দান</strong> (আরবি ভাষার শব্দ) শব্দটি বিশেষ্য পদ। অর্থ: মাঠ, প্রান্তর।</li>
+            <li><strong>মুনাফা</strong> (আরবি ভাষার শব্দ) শব্দটি বিশেষ্য পদ। অর্থ: লাভ; লভ্যাংশ।</li>
+            <li><strong>বই</strong> (আরবি ভাষার শব্দ) শব্দটি বিশেষ্য পদ। অর্থ: একসঙ্গে গেঁথে সেলাই করা (বা আঠা দিয়ে জোড়া) এবং মোড়কে আবৃত লিখিত বা মুদ্রিত পৃষ্ঠার সংকলন, পুস্তক।</li>
+          </ul>
+          <p><strong>আরবি ভাষার আরো কিছু শব্দ:</strong> এলাকা, এলাহি, কয়েদ, কসাই, কসরত, খারাবি, খারাপ, খারিজ, খাসমহল, খাসলত, খালাস, খাসদখল, তুফান, তকদির, ময়না, মুমিন, মুনিব, মুন্শি ইত্যাদি।</p>
+          <p><em>উৎস:</em> বাংলা একাডেমি, আধুনিক বাংলা অভিধান।</p>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="mcq-card" data-qindex="2">
+        <div class="mcq-header">
+          <span class="mcq-num">২.</span>
+          <div class="mcq-text">যোগরূঢ় শব্দ কোনটি? <span class="exam-tag">৪৬তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 2, 'ঘ')"><span class="opt-prefix">(ক)</span> কলম</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 2, 'ঘ')"><span class="opt-prefix">(খ)</span> মলম</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 2, 'ঘ')"><span class="opt-prefix">(গ)</span> বাঁশি</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 2, 'ঘ')"><span class="opt-prefix">(ঘ)</span> শাখামৃগ</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(2)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-2"></div>
+        </div>
+        <div class="explanation-box" id="explain-2">
+          <div class="exp-title">উত্তর: (ঘ) শাখামৃগ</div>
+          <p><strong>ব্যাখ্যা:</strong> সমাস নিষ্পন্ন যে সকল শব্দ সম্পূর্ণভাবে সমস্যমান পদসমূহের অনুগামী না হয়ে কোনো বিশিষ্ট অর্থ গ্রহণ করে, তাদের <strong>যোগরূঢ় শব্দ</strong> বলে। যেমন-</p>
+          <ul>
+            <li><strong>শাখামৃগ</strong> = শাখার মৃগ (উপপদ তৎপুরুষ সমাস); শাখায় বিচরণকারী যেকোনো জন্তুকে না বুঝিয়ে এটি কেবল <em>বানর</em>-কে বোঝায়। তাই এটি যোগরূঢ় শব্দ।</li>
+            <li><strong>পঙ্কজ</strong> = পঙ্কে জন্মে যা; শৈবাল বা শালুক না বুঝিয়ে একমাত্র <em>পদ্মফুল</em> অর্থেই ব্যবহৃত হয়।</li>
+            <li><strong>রাজপুত</strong> = রাজার পুত্র অর্থ পরিত্যাগ করে <em>জাতিবিশেষ</em> বোঝায়।</li>
+            <li><strong>মহাযাত্রা</strong> = মহাসমারোহে যাত্রা ত্যাগ করে <em>মৃত্যু</em> অর্থ গ্রহণ করে।</li>
+            <li><strong>জলধি</strong> = জল ধারণ করে এমন অর্থ পরিহার করে একমাত্র <em>সমুদ্র</em> অর্থ বোঝায়।</li>
+          </ul>
+          <p>অন্যদিকে, 'কলম' ও 'মলম' যৌগিক শব্দ; এবং 'বাঁশি' (বাঁশ দিয়ে তৈরি বিশেষ বাদ্যযন্ত্র) রূঢ়ি শব্দ।</p>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="mcq-card" data-qindex="3">
+        <div class="mcq-header">
+          <span class="mcq-num">৩.</span>
+          <div class="mcq-text">নিচের কোনটি যৌগিক শব্দ? <span class="exam-tag">৪৫তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 3, 'ঘ')"><span class="opt-prefix">(ক)</span> প্রবীণ</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 3, 'ঘ')"><span class="opt-prefix">(খ)</span> জ্যাঠামি</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 3, 'ঘ')"><span class="opt-prefix">(গ)</span> সরোজ</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 3, 'ঘ')"><span class="opt-prefix">(ঘ)</span> মিতালি</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(3)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-3"></div>
+        </div>
+        <div class="explanation-box" id="explain-3">
+          <div class="exp-title">উত্তর: (ঘ) মিতালি</div>
+          <p><strong>ব্যাখ্যা:</strong> যে সকল শব্দের ব্যুৎপত্তিগত অর্থ ও ব্যবহারিক অর্থ একই রকম, সেগুলোকে যৌগিক শব্দ বলে। যেমন- <strong>মিতালি = মিতা + আলি — অর্থ: সখ্য, বন্ধুত্ব, বন্ধুতা</strong>।</p>
+          <p><strong>অন্যান্য অপশন:</strong></p>
+          <ul>
+            <li><strong>প্রবীণ</strong>: রূঢ়ি শব্দ (বীণা বাজাতে পারদর্শী ব্যক্তি না বুঝিয়ে অভিজ্ঞ বয়স্ক ব্যক্তি বোঝায়)।</li>
+            <li><strong>জ্যাঠামি</strong>: রূঢ়ি শব্দ (জ্যাঠা + আমি; অপ্রাপ্তবয়সে বয়স্কের মতো চালচলন বা ধৃষ্টতা)।</li>
+            <li><strong>সরোজ</strong>: যোগরূঢ় শব্দ (সরোবরে জন্মে যা = পদ্ম)।</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="mcq-card" data-qindex="4">
+        <div class="mcq-header">
+          <span class="mcq-num">৪.</span>
+          <div class="mcq-text">আরবি 'কলম' শব্দটি 'কলমোস' শব্দ থেকে এসেছে। 'কলমোস' কোন ভাষার শব্দ? <span class="exam-tag">৪৫তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 4, 'গ')"><span class="opt-prefix">(ক)</span> পাঞ্জাবি</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 4, 'গ')"><span class="opt-prefix">(খ)</span> ফরাসি</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 4, 'গ')"><span class="opt-prefix">(গ)</span> গ্রিক</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 4, 'গ')"><span class="opt-prefix">(ঘ)</span> স্পেনিশ</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(4)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-4"></div>
+        </div>
+        <div class="explanation-box" id="explain-4">
+          <div class="exp-title">উত্তর: (গ) গ্রিক</div>
+          <p><strong>ব্যাখ্যা:</strong> আরবি কলম (qalam) শব্দটির আদি উৎস কলমোস (Kalamos/Kálamos); যা মূলত <strong>গ্রিক ভাষার শব্দ</strong>। Kalamos/Kálamos শব্দের অর্থ- a reed, a pen.</p>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="mcq-card" data-qindex="5">
+        <div class="mcq-header">
+          <span class="mcq-num">৫.</span>
+          <div class="mcq-text">'হরতাল' কোন ভাষা থেকে আগত শব্দ? <span class="exam-tag">৪৪তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 5, 'গ')"><span class="opt-prefix">(ক)</span> পর্তুগিজ</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 5, 'গ')"><span class="opt-prefix">(খ)</span> হিন্দি</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 5, 'গ')"><span class="opt-prefix">(গ)</span> গুজরাটি</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 5, 'গ')"><span class="opt-prefix">(ঘ)</span> ফরাসি</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(5)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-5"></div>
+        </div>
+        <div class="explanation-box" id="explain-5">
+          <div class="exp-title">উত্তর: (গ) গুজরাটি</div>
+          <p><strong>ব্যাখ্যা:</strong> 'হরতাল' এবং 'খদ্দর' শব্দ দুটি <strong>গুজরাটি ভাষা</strong> থেকে বাংলা ভাষায় এসেছে।</p>
+          <p><strong>অন্যান্য বিদেশি শব্দ:</strong></p>
+          <ul>
+            <li><strong>পর্তুগিজ:</strong> আলমারি, আনারস, আলপিন, গির্জা, চাবি, পাউরুটি, পেঁপে, পেরেক, পেয়ারা, সাবান, বালতি, বোতাম।</li>
+            <li><strong>ফরাসি:</strong> কুপন, ডিপো, রেস্তোরাঁ, আঁতাত, কার্তুজ, বুর্জোয়া, রেনেসাঁস।</li>
+            <li><strong>হিন্দি:</strong> পানি, চাচা, দাদা, দাদি, ফুফা, ছিনতাই, দাঙ্গা, কহলা।</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="mcq-card" data-qindex="6">
+        <div class="mcq-header">
+          <span class="mcq-num">৬.</span>
+          <div class="mcq-text">নিচের কোনটি তৎসম শব্দ? <span class="exam-tag">৪৪তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 6, 'গ')"><span class="opt-prefix">(ক)</span> পছন্দ</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 6, 'গ')"><span class="opt-prefix">(খ)</span> হিসাব</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 6, 'গ')"><span class="opt-prefix">(গ)</span> ধূলি</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 6, 'গ')"><span class="opt-prefix">(ঘ)</span> শৌখিন</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(6)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-6"></div>
+        </div>
+        <div class="explanation-box" id="explain-6">
+          <div class="exp-title">উত্তর: (গ) ধূলি</div>
+          <p><strong>ব্যাখ্যা:</strong> ধূলি (বিশেষ্য) : অর্থ- শুকনো মাটির সূক্ষ্ম কণা, রেণু। শব্দটি সংস্কৃত বা <strong>তৎসম ভাষা</strong> থেকে অবিকৃতভাবে আগত।</p>
+          <ul>
+            <li><strong>পছন্দ:</strong> ফারসি শব্দ।</li>
+            <li><strong>হিসাব:</strong> আরবি শব্দ।</li>
+            <li><strong>শৌখিন:</strong> আরবি 'শৌকিন' থেকে আগত শব্দ।</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="mcq-card" data-qindex="7">
+        <div class="mcq-header">
+          <span class="mcq-num">৭.</span>
+          <div class="mcq-text">আসমান কোন ভাষা থেকে আগত শব্দ? <span class="exam-tag">৪৩তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 7, 'ঘ')"><span class="opt-prefix">(ক)</span> পর্তুগিজ</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 7, 'ঘ')"><span class="opt-prefix">(খ)</span> ফরাসি</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 7, 'ঘ')"><span class="opt-prefix">(গ)</span> আরবি</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 7, 'ঘ')"><span class="opt-prefix">(ঘ)</span> ফারসি</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(7)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-7"></div>
+        </div>
+        <div class="explanation-box" id="explain-7">
+          <div class="exp-title">উত্তর: (ঘ) ফারসি</div>
+          <p><strong>ব্যাখ্যা:</strong> আসমান (বিশেষ্য; অর্থ- আকাশ) শব্দটি <strong>ফারসি ভাষা</strong> থেকে আগত।</p>
+          <p>বাংলায় ব্যবহৃত ফারসি শব্দাবলি: বেহেশত, দোজখ, ফেরেশতা, নামাজ, খোদা, গুনাহ, পয়গম্বর, কারখানা, চশমা, দোকান, দস্তখত, দরবার ইত্যাদি।</p>
+        </div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="mcq-card" data-qindex="8">
+        <div class="mcq-header">
+          <span class="mcq-num">৮.</span>
+          <div class="mcq-text">'বাবা' কোন ভাষা থেকে আগত শব্দ? <span class="exam-tag">৪২তম বিশেষ বিসিএস (স্বাস্থ্য) / ৩৮তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 8, 'ঘ')"><span class="opt-prefix">(ক)</span> সংস্কৃত</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 8, 'ঘ')"><span class="opt-prefix">(খ)</span> হিন্দি</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 8, 'ঘ')"><span class="opt-prefix">(গ)</span> অহমিয়া</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 8, 'ঘ')"><span class="opt-prefix">(ঘ)</span> তুর্কি</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(8)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-8"></div>
+        </div>
+        <div class="explanation-box" id="explain-8">
+          <div class="exp-title">উত্তর: (ঘ) তুর্কি</div>
+          <p><strong>ব্যাখ্যা:</strong> 'বাবা' (পিতা, জনক) শব্দটি <strong>তুর্কি ভাষা</strong> থেকে আগত।</p>
+          <p>বাংলায় ব্যবহৃত উল্লেখযোগ্য তুর্কি শব্দ: উজবুক, কাঁচি, কাবু, কুর্নিশ, কুলি, কোর্মা, খাতুন, চকমক, চাকু, তালাশ, তোপ, বন্দুক, বাবুর্চি, বারুদ, বাহাদুর, বেগম, মুচলেকা, লাশ, সওগাত ইত্যাদি। ড. সুনীতিকুমার চট্টোপাধ্যায়ের মতে, বাংলায় তুর্কি শব্দের সংখ্যা ৪০টির বেশি হবে না।</p>
+        </div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="mcq-card" data-qindex="9">
+        <div class="mcq-header">
+          <span class="mcq-num">৯.</span>
+          <div class="mcq-text">'সোমত্ত' শব্দটির উৎপত্তি কোন শব্দ থেকে? <span class="exam-tag">৪১তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 9, 'খ')"><span class="opt-prefix">(ক)</span> সোপান</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 9, 'খ')"><span class="opt-prefix">(খ)</span> সমর্থ</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 9, 'খ')"><span class="opt-prefix">(গ)</span> সোল্লাস</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 9, 'খ')"><span class="opt-prefix">(ঘ)</span> সওয়ার</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(9)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-9"></div>
+        </div>
+        <div class="explanation-box" id="explain-9">
+          <div class="exp-title">উত্তর: (খ) সমর্থ</div>
+          <p><strong>ব্যাখ্যা:</strong> সোমত্ত [শোমোতোতো] (বিশেষণ); {(তৎসম বা সংস্কৃত থেকে উৎপন্ন) <strong>সমর্থ</strong>} &gt; অর্থ: ১. বিয়ের উপযুক্ত (ঘরে আমার সোমত্ত মেয়ে)। ২. যৌবনপ্রাপ্ত; বয়ঃপ্রাপ্ত; সমর্থ।</p>
+        </div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="mcq-card" data-qindex="10">
+        <div class="mcq-header">
+          <span class="mcq-num">১০.</span>
+          <div class="mcq-text">'গির্জা' কোন ভাষার শব্দ? <span class="exam-tag">৪০তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 10, 'খ')"><span class="opt-prefix">(ক)</span> ফারসি</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 10, 'খ')"><span class="opt-prefix">(খ)</span> পর্তুগিজ</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 10, 'খ')"><span class="opt-prefix">(গ)</span> ওলন্দাজ</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 10, 'খ')"><span class="opt-prefix">(ঘ)</span> পাঞ্জাবি</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(10)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-10"></div>
+        </div>
+        <div class="explanation-box" id="explain-10">
+          <div class="exp-title">উত্তর: (খ) পর্তুগিজ</div>
+          <p><strong>ব্যাখ্যা:</strong> গির্জা (ইগরেজা &gt; গির্জা) শব্দটি <strong>পর্তুগিজ ভাষা</strong> থেকে বাংলা ভাষায় এসেছে। পর্তুগিজ শব্দাবলি: আলমারি, আনারস, আতা, আলকাতরা, আলপিন, ইস্ত্রি, কামিজ, কেদারা, কেরানি, গামলা, গুদাম, গির্জা, চাবি, জানালা, তামাক, তোয়ালে, পাদ্রি, পাউরুটি, পেয়ারা, পিস্তল, ফিতে, বালতি, সাবান, বোতাম ইত্যাদি।</p>
+        </div>
+      </div>
+
+      <!-- Q11 -->
+      <div class="mcq-card" data-qindex="11">
+        <div class="mcq-header">
+          <span class="mcq-num">১১.</span>
+          <div class="mcq-text">'জোছনা' কোন শ্রেণীর শব্দ ? <span class="exam-tag">৪০তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 11, 'ঘ')"><span class="opt-prefix">(ক)</span> যৌগিক</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 11, 'ঘ')"><span class="opt-prefix">(খ)</span> তৎসম</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 11, 'ঘ')"><span class="opt-prefix">(গ)</span> দেশী</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 11, 'ঘ')"><span class="opt-prefix">(ঘ)</span> অর্ধ-তৎসম</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(11)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-11"></div>
+        </div>
+        <div class="explanation-box" id="explain-11">
+          <div class="exp-title">উত্তর: (ঘ) অর্ধ-তৎসম</div>
+          <p><strong>ব্যাখ্যা: অর্ধ-তৎসম শব্দ:</strong> বাংলা ভাষায় কিছু সংস্কৃত শব্দ কিঞ্চিৎ পরিবর্তিত আকারে ব্যবহৃত হয়। এগুলোকে বলে অর্ধ-তৎসম (আধা সংস্কৃত) শব্দ। যেমন-</p>
+          <div class="table-responsive">
+            <table class="custom-table">
+              <thead><tr><th>তৎসম (সংস্কৃত)</th><th>অর্ধ-তৎসম</th></tr></thead>
+              <tbody>
+                <tr><td>জ্যোৎস্না</td><td><strong>জোছনা</strong></td></tr>
+                <tr><td>গৃহিণী</td><td>গিন্নী</td></tr>
+                <tr><td>কুৎসিত</td><td>কুচ্ছিত</td></tr>
+                <tr><td>শ্রাদ্ধ</td><td>ছেরাদ্দ</td></tr>
+                <tr><td>বৈষ্ণব</td><td>বোষ্টম</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q12 -->
+      <div class="mcq-card" data-qindex="12">
+        <div class="mcq-header">
+          <span class="mcq-num">১২.</span>
+          <div class="mcq-text">'গিন্নি' কোন শ্রেণির শব্দ? <span class="exam-tag">৩৮তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 12, 'ঘ')"><span class="opt-prefix">(ক)</span> দেশি</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 12, 'ঘ')"><span class="opt-prefix">(খ)</span> বিদেশী</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 12, 'ঘ')"><span class="opt-prefix">(গ)</span> তদ্ভব</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 12, 'ঘ')"><span class="opt-prefix">(ঘ)</span> অর্ধ-তৎসম</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(12)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-12"></div>
+        </div>
+        <div class="explanation-box" id="explain-12">
+          <div class="exp-title">উত্তর: (ঘ) অর্ধ-তৎসম</div>
+          <p><strong>ব্যাখ্যা:</strong> সংস্কৃত 'গৃহিণী' শব্দটি কিছুটা বিকৃত হয়ে বাংলায় 'গিন্নী' রূপ ধারণ করেছে। তাই এটি একটি <strong>অর্ধ-তৎসম শব্দ</strong>।</p>
+        </div>
+      </div>
+
+      <!-- Q13 -->
+      <div class="mcq-card" data-qindex="13">
+        <div class="mcq-header">
+          <span class="mcq-num">১৩.</span>
+          <div class="mcq-text">কোনটি মৌলিক শব্দ? <span class="exam-tag">৩৭তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 13, 'খ')"><span class="opt-prefix">(ক)</span> মানব</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 13, 'খ')"><span class="opt-prefix">(খ)</span> গোলাপ</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 13, 'খ')"><span class="opt-prefix">(গ)</span> একাঙ্গ</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 13, 'খ')"><span class="opt-prefix">(ঘ)</span> ধাতব</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(13)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-13"></div>
+        </div>
+        <div class="explanation-box" id="explain-13">
+          <div class="exp-title">উত্তর: (খ) গোলাপ</div>
+          <p><strong>ব্যাখ্যা: মৌলিক শব্দ:</strong> যেসব শব্দ বিশ্লেষণ করা যায় না বা ভেঙ্গে আলাদা করা যায় না, সেগুলোকে মৌলিক শব্দ বলে। যেমন- গোলাপ, নাক, তিল, হাত, ফুল ইত্যাদি।</p>
+          <p>অন্যদিকে, মানব (মনু + ষ্ণ), একাঙ্গ (এক + অঙ্গ), ধাতব (ধাতু + ব) প্রত্যয় বা সমাস নিষ্পন্ন সাধিত শব্দ।</p>
+        </div>
+      </div>
+
+      <!-- Q14 -->
+      <div class="mcq-card" data-qindex="14">
+        <div class="mcq-header">
+          <span class="mcq-num">১৪.</span>
+          <div class="mcq-text">'হেড মৌলভী' কোন কোন ভাষার শব্দ যোগে গঠিত হয়েছে? <span class="exam-tag">৩৬তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 14, 'খ')"><span class="opt-prefix">(ক)</span> ইংরেজি + ফার্সি</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 14, 'খ')"><span class="opt-prefix">(খ)</span> ইংরেজি + আরবি</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 14, 'খ')"><span class="opt-prefix">(গ)</span> তুর্কি + আরবি</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 14, 'খ')"><span class="opt-prefix">(ঘ)</span> ইংরেজি + পর্তুগিজ</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(14)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-14"></div>
+        </div>
+        <div class="explanation-box" id="explain-14">
+          <div class="exp-title">উত্তর: (খ) ইংরেজি + আরবি</div>
+          <p><strong>ব্যাখ্যা:</strong> বাংলা একাডেমি আধুনিক বাংলা অভিধান অনুসারে, হেড-মৌলভী : <strong>(ইংরেজি + আরবি)</strong> শব্দ। এখানে, 'হেড' ইংরেজি শব্দ (অর্থ- প্রধান) এবং 'মৌলবি' আরবি শব্দ (অর্থ- ইসলাম ধর্মশাস্ত্রে পারদর্শী ব্যক্তি)।</p>
+          <p><em>উল্লেখ্য:</em> মাধ্যমিক বাংলা ব্যাকরণ (নবম-দশম শ্রেণি; ২০১৯ সংস্করণ) অনুসারে হেড-মৌলভী শব্দটিকে ইংরেজি + ফারসি উল্লেখ করা হয়েছিল। তবে আধুনিক মান্য অভিধান অনুযায়ী সঠিক উত্তর ইংরেজি + আরবি।</p>
+        </div>
+      </div>
+
+      <!-- Q15 -->
+      <div class="mcq-card" data-qindex="15">
+        <div class="mcq-header">
+          <span class="mcq-num">১৫.</span>
+          <div class="mcq-text">কোনটি সাধিত শব্দ নয়? <span class="exam-tag">৩২তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 15, 'গ')"><span class="opt-prefix">(ক)</span> পানসা</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 15, 'গ')"><span class="opt-prefix">(খ)</span> ফুলেল</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 15, 'গ')"><span class="opt-prefix">(গ)</span> গোলাপ</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 15, 'গ')"><span class="opt-prefix">(ঘ)</span> হাতল</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(15)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-15"></div>
+        </div>
+        <div class="explanation-box" id="explain-15">
+          <div class="exp-title">উত্তর: (গ) গোলাপ</div>
+          <p><strong>ব্যাখ্যা:</strong> অপশন পর্যালোচনা:</p>
+          <ul>
+            <li>পানি + সা = পানসা (প্রত্যয় সাধিত)</li>
+            <li>হাত + ল = হাতল (প্রত্যয় সাধিত)</li>
+            <li>ফুল + এল = ফুলেল (প্রত্যয় সাধিত)</li>
+          </ul>
+          <p><strong>গোলাপ</strong> একটি অবিভাজ্য মৌলিক শব্দ, যা কোনো প্রত্যয় বা সমাস দ্বারা গঠিত নয়।</p>
+        </div>
+      </div>
+
+      <!-- Q16 -->
+      <div class="mcq-card" data-qindex="16">
+        <div class="mcq-header">
+          <span class="mcq-num">১৬.</span>
+          <div class="mcq-text">কোনটি ইংরেজি শব্দ? <span class="exam-tag">৩২তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 16, 'ঘ')"><span class="opt-prefix">(ক)</span> ম্যাজেন্টা</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 16, 'ঘ')"><span class="opt-prefix">(খ)</span> পিস্তল</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 16, 'ঘ')"><span class="opt-prefix">(গ)</span> আলমারি</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 16, 'ঘ')"><span class="opt-prefix">(ঘ)</span> কমা</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(16)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-16"></div>
+        </div>
+        <div class="explanation-box" id="explain-16">
+          <div class="exp-title">উত্তর: (ঘ) কমা</div>
+          <p><strong>ব্যাখ্যা:</strong> পিস্তল ও আলমারি পর্তুগিজ শব্দ; ম্যাজেন্টা ইতালীয় শব্দ; এবং <strong>কমা (Comma) ইংরেজি শব্দ</strong>।</p>
+        </div>
+      </div>
+
+      <!-- Q17 -->
+      <div class="mcq-card" data-qindex="17">
+        <div class="mcq-header">
+          <span class="mcq-num">১৭.</span>
+          <div class="mcq-text">'উজবুক' শব্দটি কোন ভাষা থেকে বাংলা ভাষায় এসেছে? <span class="exam-tag">৩১তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 17, 'খ')"><span class="opt-prefix">(ক)</span> ফার্সি</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 17, 'খ')"><span class="opt-prefix">(খ)</span> তুর্কি</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 17, 'খ')"><span class="opt-prefix">(গ)</span> পর্তুগিজ</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 17, 'খ')"><span class="opt-prefix">(ঘ)</span> আরবি</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(17)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-17"></div>
+        </div>
+        <div class="explanation-box" id="explain-17">
+          <div class="exp-title">উত্তর: (খ) তুর্কি</div>
+          <p><strong>ব্যাখ্যা:</strong> 'উজবুক' শব্দটি <strong>তুর্কি ভাষা</strong> থেকে বাংলা ভাষায় এসেছে। এর অর্থ বোকা, নির্বোধ বা আনাড়ি ব্যক্তি।</p>
+        </div>
+      </div>
+
+      <!-- Q18 -->
+      <div class="mcq-card" data-qindex="18">
+        <div class="mcq-header">
+          <span class="mcq-num">১৮.</span>
+          <div class="mcq-text">গ্রিক শব্দ কোনটি? <span class="exam-tag">২৭তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 18, 'ঘ')"><span class="opt-prefix">(ক)</span> তুফান</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 18, 'ঘ')"><span class="opt-prefix">(খ)</span> লুঙ্গী</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 18, 'ঘ')"><span class="opt-prefix">(গ)</span> কুশন</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 18, 'ঘ')"><span class="opt-prefix">(ঘ)</span> দাম</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(18)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-18"></div>
+        </div>
+        <div class="explanation-box" id="explain-18">
+          <div class="exp-title">উত্তর: (ঘ) দাম</div>
+          <p><strong>ব্যাখ্যা:</strong> <strong>দাম (মূল্য)</strong> গ্রিক শব্দ 'দ্রাখমে' (Drakhme) থেকে উৎপন্ন। বাংলায় অন্যান্য গ্রিক শব্দ: সুরঙ্গ (সুরিংক্স), ইউনানি (আইওনিয়ন), সেমাই (সেমাদালিম)।</p>
+          <p>অন্যদিকে, তুফান চীনা/আরবি শব্দ, এবং লুঙ্গি ও ফুঙ্গি মিয়ানমার (বর্মি) শব্দ।</p>
+        </div>
+      </div>
+
+      <!-- Q19 -->
+      <div class="mcq-card" data-qindex="19">
+        <div class="mcq-header">
+          <span class="mcq-num">১৯.</span>
+          <div class="mcq-text">দাপ্তরিক কোন শব্দটি ইংরেজি ভাষা থেকে আগত? <span class="exam-tag">২৬তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 19, 'গ')"><span class="opt-prefix">(ক)</span> আইন</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 19, 'গ')"><span class="opt-prefix">(খ)</span> দাখিল</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 19, 'গ')"><span class="opt-prefix">(গ)</span> এজেন্ট</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 19, 'গ')"><span class="opt-prefix">(ঘ)</span> মুচলেকা</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(19)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-19"></div>
+        </div>
+        <div class="explanation-box" id="explain-19">
+          <div class="exp-title">উত্তর: (গ) এজেন্ট</div>
+          <p><strong>ব্যাখ্যা:</strong> 'এজেন্ট' (Agent) শব্দটি <strong>ইংরেজি ভাষা</strong> থেকে আগত; এর অর্থ প্রতিনিধি, ব্যবসায়ী সংস্থার প্রতিনিধি।</p>
+          <p>অন্যদিকে, 'আইন' ফারসি শব্দ, 'দাখিল' আরবি শব্দ, এবং 'মুচলেকা' তুর্কি শব্দ।</p>
+        </div>
+      </div>
+
+      <!-- Q20 -->
+      <div class="mcq-card" data-qindex="20">
+        <div class="mcq-header">
+          <span class="mcq-num">২০.</span>
+          <div class="mcq-text">'চৌ-হদ্দি' শব্দটি কোন কোন ভাষার শব্দ মিলে হয়েছে? <span class="exam-tag">২৬তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 20, 'ক')"><span class="opt-prefix">(ক)</span> বাংলা + ফারসি</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 20, 'ক')"><span class="opt-prefix">(খ)</span> সংস্কৃত + ফারসি</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 20, 'ক')"><span class="opt-prefix">(গ)</span> ফারসি + আরবি</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 20, 'ক')"><span class="opt-prefix">(ঘ)</span> সংস্কৃত + আরবি</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(20)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-20"></div>
+        </div>
+        <div class="explanation-box" id="explain-20">
+          <div class="exp-title">উত্তর: (ক) বাংলা + ফারসি</div>
+          <p><strong>ব্যাখ্যা:</strong> চৌহদ্দি (বিশেষ্য): শব্দটি গঠিত হয়েছে <strong>(বাংলা 'চৌ' + ফারসি 'হদ্দি')</strong> যোগে। যার অর্থ: চারদিকের সীমানা; চতুঃসীমা।</p>
+          <p>• বাংলা একাডেমি আধুনিক বাংলা অভিধান অনুসারে- শব্দটি বাংলা + ফারসি ভাষার সংমিশ্রণে তৈরি মিশ্র শব্দ।</p>
+          <p>• মাধ্যমিক বাংলা ব্যাকরণে একে ফারসি + আরবি হিসেবে চিহ্নিত করা হয়েছিল। তবে বাংলা একাডেমির গবেষণা অনুযায়ী <strong>বাংলা + ফারসি</strong> অধিক গ্রহণযোগ্য উত্তর।</p>
+        </div>
+      </div>
+
+      <!-- Q21 -->
+      <div class="mcq-card" data-qindex="21">
+        <div class="mcq-header">
+          <span class="mcq-num">২১.</span>
+          <div class="mcq-text">কোন শব্দটি ফারসি? <span class="exam-tag">২৫তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 21, 'গ')"><span class="opt-prefix">(ক)</span> মুসাফির</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 21, 'গ')"><span class="opt-prefix">(খ)</span> তকদির</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 21, 'গ')"><span class="opt-prefix">(গ)</span> পেরেশান</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 21, 'গ')"><span class="opt-prefix">(ঘ)</span> মজলুম</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(21)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-21"></div>
+        </div>
+        <div class="explanation-box" id="explain-21">
+          <div class="exp-title">উত্তর: (গ) পেরেশান</div>
+          <p><strong>ব্যাখ্যা:</strong> <strong>'পেরেশান'</strong> শব্দটি ফারসি শব্দ। এর অর্থ— উদ্বিগ্ন বা চিন্তিত।</p>
+          <p>অন্যদিকে, তকদির (ভাগ্য), মুসাফির (ভ্রমণকারী), মজলুম (অত্যাচারিত) তিনটিই আরবি শব্দ।</p>
+        </div>
+      </div>
+
+      <!-- Q22 -->
+      <div class="mcq-card" data-qindex="22">
+        <div class="mcq-header">
+          <span class="mcq-num">২২.</span>
+          <div class="mcq-text">'কাঁচি' কোন ধরনের শব্দ? <span class="exam-tag">২৪তম বিসিএস বাতিল</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 22, 'ঘ')"><span class="opt-prefix">(ক)</span> আরবি</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 22, 'ঘ')"><span class="opt-prefix">(খ)</span> ফারসি</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 22, 'ঘ')"><span class="opt-prefix">(গ)</span> হিন্দি</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 22, 'ঘ')"><span class="opt-prefix">(ঘ)</span> তুর্কি</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(22)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-22"></div>
+        </div>
+        <div class="explanation-box" id="explain-22">
+          <div class="exp-title">উত্তর: (ঘ) তুর্কি</div>
+          <p><strong>ব্যাখ্যা:</strong> 'কাঁচি' <strong>তুর্কি ভাষার শব্দ</strong>। অর্থ— কাগজ, কাপড় প্রভৃতি কাটার জন্য ব্যবহৃত দুটি হাতল যুক্ত ইস্পাতের ফলা একত্রে জুড়ে তৈরি ধারালো অস্ত্রবিশেষ।</p>
+        </div>
+      </div>
+
+      <!-- Q23 -->
+      <div class="mcq-card" data-qindex="23">
+        <div class="mcq-header">
+          <span class="mcq-num">২৩.</span>
+          <div class="mcq-text">'বেটাইম' শব্দটি গঠিত হয়েছে- <span class="exam-tag">২৪তম বিসিএস বাতিল</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 23, 'ক')"><span class="opt-prefix">(ক)</span> ফারসি ও ইংরেজি শব্দে</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 23, 'ক')"><span class="opt-prefix">(খ)</span> ফরাসি ও ইংরেজি শব্দে</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 23, 'ক')"><span class="opt-prefix">(গ)</span> ফারসি ও ফরাসি শব্দে</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 23, 'ক')"><span class="opt-prefix">(ঘ)</span> ফারসি ও হিন্দি শব্দে</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(23)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-23"></div>
+        </div>
+        <div class="explanation-box" id="explain-23">
+          <div class="exp-title">উত্তর: (ক) ফারসি ও ইংরেজি শব্দে</div>
+          <p><strong>ব্যাখ্যা:</strong> 'বেটাইম' একটি মিশ্র শব্দ। এখানে 'বে' হলো <strong>ফারসি উপসর্গ</strong> এবং 'টাইম' (Time) হলো <strong>ইংরেজি শব্দ</strong>। সুতরাং ফারসি উপসর্গ ও ইংরেজি শব্দের সমন্বয়ে বেটাইম শব্দটি গঠিত হয়েছে।</p>
+        </div>
+      </div>
+
+      <!-- Q24 -->
+      <div class="mcq-card" data-qindex="24">
+        <div class="mcq-header">
+          <span class="mcq-num">২৪.</span>
+          <div class="mcq-text">'পেয়ারা' কোন ভাষা থেকে আগত শব্দ? <span class="exam-tag">২৩তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 24, 'গ')"><span class="opt-prefix">(ক)</span> হিন্দি</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 24, 'গ')"><span class="opt-prefix">(খ)</span> উর্দু</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 24, 'গ')"><span class="opt-prefix">(গ)</span> পর্তুগিজ</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 24, 'গ')"><span class="opt-prefix">(ঘ)</span> গ্রিক</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(24)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-24"></div>
+        </div>
+        <div class="explanation-box" id="explain-24">
+          <div class="exp-title">উত্তর: (গ) পর্তুগিজ</div>
+          <p><strong>ব্যাখ্যা:</strong> 'পেয়ারা' <strong>পর্তুগিজ ভাষার শব্দ</strong>। একইভাবে আনারস, আতা, পেঁপে, পেরেক, চাবি, আলমারি, পাউরুটি ইত্যাদিও পর্তুগিজ শব্দ।</p>
+        </div>
+      </div>
+
+      <!-- Q25 -->
+      <div class="mcq-card" data-qindex="25">
+        <div class="mcq-header">
+          <span class="mcq-num">২৫.</span>
+          <div class="mcq-text">'বামেতর' শব্দটির অর্থ- <span class="exam-tag">২৩তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 25, 'খ')"><span class="opt-prefix">(ক)</span> বামচোখ</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 25, 'খ')"><span class="opt-prefix">(খ)</span> ডান</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 25, 'খ')"><span class="opt-prefix">(গ)</span> इतर</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 25, 'খ')"><span class="opt-prefix">(ঘ)</span> বাম দিক</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(25)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-25"></div>
+        </div>
+        <div class="explanation-box" id="explain-25">
+          <div class="exp-title">উত্তর: (খ) ডান</div>
+          <p><strong>ব্যাখ্যা:</strong> বামেতর (বাম + इतर = যা বাম নয়); অর্থ— <strong>ডান, দাহিন, দক্ষিণ</strong>। কবিতায় ব্যবহার: <em>"প্রমীলার বামেতর নয়ন নাচিল"</em> — মাইকেল মধুসূদন দত্ত (মেঘনাদবধ কাব্য)।</p>
+        </div>
+      </div>
+
+      <!-- Q26 -->
+      <div class="mcq-card" data-qindex="26">
+        <div class="mcq-header">
+          <span class="mcq-num">২৬.</span>
+          <div class="mcq-text">শব্দার্থ অনুসারে বাংলা ভাষার শব্দ সমষ্টিকে ভাগ করা যায়- <span class="exam-tag">১৭তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 26, 'খ')"><span class="opt-prefix">(ক)</span> দুই ভাগে</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 26, 'খ')"><span class="opt-prefix">(খ)</span> তিন ভাগে</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 26, 'খ')"><span class="opt-prefix">(গ)</span> চার ভাগে</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 26, 'খ')"><span class="opt-prefix">(ঘ)</span> পাঁচ ভাগে</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(26)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-26"></div>
+        </div>
+        <div class="explanation-box" id="explain-26">
+          <div class="exp-title">উত্তর: (খ) তিন ভাগে</div>
+          <p><strong>ব্যাখ্যা:</strong> শব্দার্থ (বা অর্থমূলক) অনুসারে বাংলা ভাষার শব্দসমূহকে <strong>তিন ভাগে</strong> ভাগ করা যায়। যথা— (১) যৌগিক শব্দ, (২) রূঢ় বা রূঢ়ি শব্দ, এবং (৩) যোগরূঢ় শব্দ।</p>
+          <p><em>স্মরণীয়:</em> গঠন অনুসারে ২ প্রকার (মৌলিক ও সাধিত) এবং উৎস অনুসারে ৫ প্রকার (তৎসম, অর্ধ-তৎসম, তদ্ভব, দেশি ও বিদেশি)।</p>
+        </div>
+      </div>
+
+      <!-- Q27 -->
+      <div class="mcq-card" data-qindex="27">
+        <div class="mcq-header">
+          <span class="mcq-num">২৭.</span>
+          <div class="mcq-text">পর্তুগিজ ভাষা থেকে নিম্নোক্ত একটি শব্দ বাংলা ভাষায় আত্তীকরণ করা হয়েছে- <span class="exam-tag">১৭তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 27, 'গ')"><span class="opt-prefix">(ক)</span> টেবিল</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 27, 'গ')"><span class="opt-prefix">(খ)</span> চেয়ার</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 27, 'গ')"><span class="opt-prefix">(গ)</span> বালতি</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 27, 'গ')"><span class="opt-prefix">(ঘ)</span> শরবত</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(27)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-27"></div>
+        </div>
+        <div class="explanation-box" id="explain-27">
+          <div class="exp-title">উত্তর: (গ) বালতি</div>
+          <p><strong>ব্যাখ্যা:</strong> <strong>'বালতি'</strong> পর্তুগিজ ভাষা থেকে আগত শব্দ। অর্থ- হাতলযুক্ত জলের পাত্র। অন্যদিকে, 'টেবিল' ও 'চেয়ার' ইংরেজি শব্দ এবং 'শরবত' আরবি শব্দ।</p>
+        </div>
+      </div>
+
+      <!-- Q28 -->
+      <div class="mcq-card" data-qindex="28">
+        <div class="mcq-header">
+          <span class="mcq-num">২৮.</span>
+          <div class="mcq-text">মৌলিক শব্দ কোনটি? <span class="exam-tag">১৪তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 28, 'ক')"><span class="opt-prefix">(ক)</span> গোলাপ</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 28, 'ক')"><span class="opt-prefix">(খ)</span> শীতল</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 28, 'ক')"><span class="opt-prefix">(গ)</span> নেয়ে</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 28, 'ক')"><span class="opt-prefix">(ঘ)</span> গৌরব</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(28)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-28"></div>
+        </div>
+        <div class="explanation-box" id="explain-28">
+          <div class="exp-title">উত্তর: (ক) গোলাপ</div>
+          <p><strong>ব্যাখ্যা:</strong> যেসব শব্দকে বিশ্লেষণ করা যায় না বা ভেঙে আলাদা অর্থবোধক অংশ পাওয়া যায় না, সেগুলোকে <strong>মৌলিক শব্দ</strong> বলে। যেমন- গোলাপ, নাক, লাল, হাত ইত্যাদি। শীতল, নেয়ে, গৌরব প্রত্যয়সাধিত শব্দ।</p>
+        </div>
+      </div>
+
+      <!-- Q29 -->
+      <div class="mcq-card" data-qindex="29">
+        <div class="mcq-header">
+          <span class="mcq-num">২৯.</span>
+          <div class="mcq-text">বাংলা ভাষা কোন দুটি শব্দ চীনা ভাষা হতে গ্রহণ করেছে? <span class="exam-tag">১২তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 29, 'গ')"><span class="opt-prefix">(ক)</span> চাকু, চাকর</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 29, 'গ')"><span class="opt-prefix">(খ)</span> খদ্দর, হরতাল</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 29, 'গ')"><span class="opt-prefix">(গ)</span> চা, চিনি</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 29, 'গ')"><span class="opt-prefix">(ঘ)</span> রিকশা, রেস্তোরা</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(29)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-29"></div>
+        </div>
+        <div class="explanation-box" id="explain-29">
+          <div class="exp-title">উত্তর: (গ) চা, চিনি</div>
+          <p><strong>ব্যাখ্যা:</strong> বাংলা ভাষার ব্যাকরণ অনুযায়ী <strong>চা এবং চিনি</strong> চীনা ভাষার শব্দ।</p>
+          <ul>
+            <li>চাকু, চাকর: তুর্কি শব্দ।</li>
+            <li>খদ্দর, হরতাল: গুজরাটি শব্দ।</li>
+            <li>রিকশা: জাপানি শব্দ; রেস্তোরাঁ: ফরাসি শব্দ।</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Q30 -->
+      <div class="mcq-card" data-qindex="30">
+        <div class="mcq-header">
+          <span class="mcq-num">৩০.</span>
+          <div class="mcq-text">'আনারস' এবং 'চাবি' শব্দ দুটি বাংলা ভাষা গ্রহণ করেছে--- <span class="exam-tag">১০তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 30, 'ক')"><span class="opt-prefix">(ক)</span> পর্তুগিজ ভাষা থেকে</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 30, 'ক')"><span class="opt-prefix">(খ)</span> আরবি ভাষা থেকে</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 30, 'ক')"><span class="opt-prefix">(গ)</span> দেশী ভাষা থেকে</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 30, 'ক')"><span class="opt-prefix">(ঘ)</span> ওলন্দাজ ভাষা থেকে</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(30)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-30"></div>
+        </div>
+        <div class="explanation-box" id="explain-30">
+          <div class="exp-title">উত্তর: (ক) পর্তুগিজ ভাষা থেকে</div>
+          <p><strong>ব্যাখ্যা:</strong> 'আনারস' এবং 'চাবি' শব্দ দুটি <strong>পর্তুগিজ ভাষা</strong> থেকে বাংলা ভাষা গ্রহণ করেছে। অন্যদিকে, চুলা, কুলা, ডাব, ঢেঁকি, টোপর ইত্যাদি দেশি শব্দ।</p>
+        </div>
+      </div>
+
+      <!-- Q31 -->
+      <div class="mcq-card" data-qindex="31">
+        <div class="mcq-header">
+          <span class="mcq-num">৩১.</span>
+          <div class="mcq-text">কোনটি তদ্ভব শব্দ? <span class="exam-tag">১০তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 31, 'ক')"><span class="opt-prefix">(ক)</span> চাঁদ</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 31, 'ক')"><span class="opt-prefix">(খ)</span> সূর্য</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 31, 'ক')"><span class="opt-prefix">(গ)</span> নক্ষত্র</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 31, 'ক')"><span class="opt-prefix">(ঘ)</span> গগন</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(31)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-31"></div>
+        </div>
+        <div class="explanation-box" id="explain-31">
+          <div class="exp-title">উত্তর: (ক) চাঁদ</div>
+          <p><strong>ব্যাখ্যা:</strong> যেসব শব্দের মূল সংস্কৃত ভাষায় পাওয়া যায়, কিন্তু ভাষার স্বাভাবিক বিবর্তন ধারায় প্রাকৃতের মাধ্যমে পরিবর্তিত হয়ে আধুনিক বাংলায় স্থান করে নিয়েছে, সেগুলোকে <strong>তদ্ভব (খাঁটি বাংলা) শব্দ</strong> বলে।</p>
+          <p>চাঁদ শব্দের উৎপত্তি: <strong>(তৎসম/সংস্কৃত) চন্দ্র &gt; (প্রাকৃত) চন্দ &gt; (তদ্ভব) চাঁদ</strong>।</p>
+          <p>অন্যদিকে সূর্য, নক্ষত্র, গগন শব্দগুলো অবিকৃত সংস্কৃত বা তৎসম শব্দ।</p>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>Live MCQ Interactive Smart E-Book • 100% Textbook Fidelity</p>
+  </footer>
+
+  <!-- Nav Component Script for Drawer and Features -->
+  <script src="nav-component.js"></script>
+
+  <script>
+    // Quiz Engine Logic
+    let totalQuestions = 31;
+    let answeredQuestions = new Set();
+    let correctQuestions = new Set();
+
+    function checkAnswer(btn, qIndex, correctOpt) {
+      const parentCard = btn.closest('.mcq-card');
+      const allBtns = parentCard.querySelectorAll('.option-btn');
+      const statusEl = document.getElementById(`status-${qIndex}`);
+      const selectedOpt = btn.getAttribute('data-opt');
+
+      if (btn.classList.contains('locked')) return;
+
+      allBtns.forEach(b => b.classList.add('locked'));
+      answeredQuestions.add(qIndex);
+
+      if (selectedOpt === correctOpt) {
+        btn.classList.add('correct');
+        statusEl.innerHTML = '<span class="status-indicator correct">✓ সঠিক উত্তর</span>';
+        correctQuestions.add(qIndex);
+      } else {
+        btn.classList.add('wrong');
+        statusEl.innerHTML = '<span class="status-indicator wrong">✗ ভুল উত্তর</span>';
+        allBtns.forEach(b => {
+          if (b.getAttribute('data-opt') === correctOpt) {
+            b.classList.add('correct');
+          }
+        });
+      }
+
+      updateScoreBoard();
+    }
+
+    function toggleExplanation(qIndex) {
+      const expBox = document.getElementById(`explain-${qIndex}`);
+      if (expBox) {
+        expBox.classList.toggle('active');
+      }
+    }
+
+    function updateScoreBoard() {
+      const ansCount = answeredQuestions.size;
+      const corrCount = correctQuestions.size;
+      const accuracy = ansCount > 0 ? Math.round((corrCount / ansCount) * 100) : 0;
+
+      const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+      const toBn = num => num.toString().split('').map(d => bnDigits[parseInt(d)] || d).join('');
+
+      document.getElementById('answered-count').innerText = toBn(ansCount);
+      document.getElementById('correct-count').innerText = toBn(corrCount);
+      document.getElementById('accuracy-rate').innerText = toBn(accuracy) + '%';
+    }
+
+    // Scroll progress bar
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      const bar = document.getElementById('progressBar');
+      if (bar) bar.style.width = scrolled + '%';
+    });
+  </script>
+</body>
+</html>

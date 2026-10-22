@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>সন্ধি - Live MCQ Interactive Smart E-Book</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --border-subtle: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --primary-color: #0369a1;
+      --primary-hover: #0284c7;
+      --primary-subtle: #e0f2fe;
+      --accent-color: #059669;
+      --accent-subtle: #d1fae5;
+      --danger-color: #dc2626;
+      --danger-subtle: #fee2e2;
+      --warning-color: #d97706;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --font-scale: 1;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #090d16;
+      --bg-surface: #0f172a;
+      --bg-card: #131d35;
+      --border-subtle: #1e293b;
+      --border-strong: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --primary-color: #38bdf8;
+      --primary-hover: #7dd3fc;
+      --primary-subtle: #082f49;
+      --accent-color: #34d399;
+      --accent-subtle: #064e3b;
+      --danger-color: #f87171;
+      --danger-subtle: #450a0a;
+      --warning-color: #fbbf24;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Noto Serif Bengali', serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: clip;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-size: calc(1rem * var(--font-scale));
+    }
+
+    .reading-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      z-index: 1000;
+      transition: width 0.1s ease;
+    }
+
+    .top-header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.6rem 0.8rem;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .btn-nav {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      padding: 0.35rem 0.6rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: all 0.2s;
+    }
+
+    .btn-nav:hover {
+      background: var(--primary-subtle);
+      border-color: var(--primary-color);
+    }
+
+    .header-title-box {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 170px;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .font-btn, .theme-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.45rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .font-btn:hover, .theme-btn:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0.5rem 0.5rem 3rem 0.5rem;
+      flex-grow: 1;
+    }
+
+    .chapter-hero {
+      text-align: center;
+      margin-bottom: 1rem;
+      padding: 1.25rem 0.8rem;
+      background: linear-gradient(135deg, rgba(3, 105, 161, 0.08) 0%, rgba(5, 150, 105, 0.08) 100%);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .chapter-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      background: var(--primary-subtle);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      margin-bottom: 0.4rem;
+    }
+
+    .chapter-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .chapter-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .score-banner {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .score-stat {
+      text-align: center;
+    }
+
+    .score-val {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .score-lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      margin-bottom: 0.85rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.35rem;
+    }
+
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      margin: 0.5rem 0;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: center;
+    }
+
+    .custom-table th, .custom-table td {
+      border: 1px solid var(--border-subtle);
+      padding: 0.45rem 0.4rem;
+      line-height: 1.4;
+      white-space: normal;
+      word-break: normal;
+    }
+
+    .custom-table th {
+      background: var(--primary-subtle);
+      color: var(--primary-color);
+      font-weight: 700;
+    }
+
+    .custom-table tr:nth-child(even) td {
+      background: rgba(0, 0, 0, 0.015);
+    }
+
+    [data-theme="dark"] .custom-table tr:nth-child(even) td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .theory-box {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: var(--text-secondary);
+    }
+
+    .theory-box p {
+      margin-bottom: 0.5rem;
+    }
+
+    .theory-box ul {
+      padding-left: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .theory-box li {
+      margin-bottom: 0.3rem;
+    }
+
+    .highlight-pill {
+      background: var(--primary-subtle);
+      color: var(--primary-color);
+      padding: 0.1rem 0.35rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .mcq-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      margin-bottom: 0.85rem;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s;
+    }
+
+    .mcq-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .mcq-num {
+      font-weight: 700;
+      color: var(--primary-color);
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .mcq-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      flex-grow: 1;
+      line-height: 1.5;
+    }
+
+    .exam-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: var(--primary-subtle);
+      color: var(--primary-color);
+      padding: 0.08rem 0.4rem;
+      border-radius: var(--radius-sm);
+      margin-left: 0.3rem;
+      white-space: nowrap;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.45rem;
+      margin-bottom: 0.6rem;
+    }
+
+    @media (min-width: 480px) {
+      .options-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .option-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem 0.65rem;
+      text-align: left;
+      font-family: inherit;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.45rem;
+      transition: all 0.15s ease;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .option-btn:hover:not(.locked) {
+      background: var(--primary-subtle);
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .opt-prefix {
+      font-weight: 700;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .option-btn.correct {
+      background: var(--accent-subtle) !important;
+      border-color: var(--accent-color) !important;
+      color: var(--accent-color) !important;
+      font-weight: 700;
+    }
+
+    .option-btn.wrong {
+      background: var(--danger-subtle) !important;
+      border-color: var(--danger-color) !important;
+      color: var(--danger-color) !important;
+    }
+
+    .mcq-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.4rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed var(--border-subtle);
+    }
+
+    .btn-explain {
+      background: transparent;
+      border: none;
+      color: var(--primary-color);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.25rem 0.4rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .btn-explain:hover {
+      background: var(--primary-subtle);
+    }
+
+    .status-indicator {
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .status-indicator.correct {
+      color: var(--accent-color);
+    }
+
+    .status-indicator.wrong {
+      color: var(--danger-color);
+    }
+
+    .explanation-box {
+      margin-top: 0.6rem;
+      padding: 0.7rem;
+      background: var(--primary-subtle);
+      border-left: 3px solid var(--primary-color);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      display: none;
+    }
+
+    .explanation-box.active {
+      display: block;
+      animation: fadeIn 0.25s ease-in;
+    }
+
+    .exp-title {
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-3px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--border-subtle);
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="reading-progress-bar" id="progressBar"></div>
+
+  <header class="top-header">
+    <div class="header-left">
+      <button class="btn-nav" id="menuToggleBtn" aria-label="সূচিপত্র খুলুন">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <span>সূচিপত্র</span>
+      </button>
+      <div class="header-title-box">সন্ধি</div>
+    </div>
+    <div class="header-controls">
+      <button class="font-btn" id="fontDecrease" title="ফন্ট ছোট করুন">A-</button>
+      <button class="font-btn" id="fontReset" title="স্বাভাবিক ফন্ট">A</button>
+      <button class="font-btn" id="fontIncrease" title="ফন্ট বড় করুন">A+</button>
+      <button class="theme-btn" id="themeToggle" title="থিম পরিবর্তন">🌓</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="chapter-hero">
+      <span class="chapter-badge">অধ্যায় ৫</span>
+      <h1 class="chapter-title">সন্ধি</h1>
+      <p class="chapter-subtitle">স্বরসন্ধি, ব্যঞ্জনসন্ধি, বিসর্গসন্ধি ও নিপাতনে সিদ্ধ সন্ধি</p>
+    </section>
+
+    <!-- Score Live Tracker -->
+    <div class="score-banner">
+      <div class="score-stat">
+        <div class="score-val" id="answered-count">০</div>
+        <div class="score-lbl">উত্তর দিয়েছ</div>
+      </div>
+      <div class="score-stat">
+        <div class="score-val" id="correct-count">০</div>
+        <div class="score-lbl">সঠিক হয়েছে</div>
+      </div>
+      <div class="score-stat">
+        <div class="score-val" id="accuracy-rate">০%</div>
+        <div class="score-lbl">নির্ভুলতা</div>
+      </div>
+    </div>
+
+    <!-- BCS Analysis Table -->
+    <div class="card">
+      <div class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+        বিসিএস প্রিলিমিনারি প্রশ্ন বিশ্লেষণ ছক
+      </div>
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>বিসিএস</th>
+              <th>প্রশ্ন সংখ্যা</th>
+              <th>বিসিএস</th>
+              <th>প্রশ্ন সংখ্যা</th>
+              <th>বিসিএস</th>
+              <th>প্রশ্ন সংখ্যা</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>৫০তম</td>
+              <td>১</td>
+              <td>৪৪তম</td>
+              <td>১</td>
+              <td>৩৮তম</td>
+              <td>১</td>
+            </tr>
+            <tr>
+              <td>৪৯তম</td>
+              <td>১</td>
+              <td>৪৩তম</td>
+              <td>০</td>
+              <td>৩৭তম</td>
+              <td>০</td>
+            </tr>
+            <tr>
+              <td>৪৮তম</td>
+              <td>০</td>
+              <td>৪২তম</td>
+              <td>০</td>
+              <td>৩৬তম</td>
+              <td>১</td>
+            </tr>
+            <tr>
+              <td>৪৭তম</td>
+              <td>০</td>
+              <td>৪১তম</td>
+              <td>০</td>
+              <td>৩৫তম</td>
+              <td>১</td>
+            </tr>
+            <tr>
+              <td>৪৬তম</td>
+              <td>১</td>
+              <td>৪০তম</td>
+              <td>০</td>
+              <td>১০ম-৩৪তম</td>
+              <td>১০</td>
+            </tr>
+            <tr>
+              <td>৪৫তম</td>
+              <td>০</td>
+              <td>৩৯তম</td>
+              <td>১</td>
+              <td>মোট</td>
+              <td>১৮</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Core Theory Summary -->
+    <div class="card">
+      <div class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+        </svg>
+        সন্ধি সংক্ষেপ ও মূল তত্ত্ব
+      </div>
+      <div class="theory-box">
+        <p><strong>সন্ধির সংজ্ঞা ও উদ্দেশ্য:</strong> সন্নিহিত দুটি ধ্বনির মিলনকে সন্ধি বলে। সন্ধির প্রধান উদ্দেশ্য স্বাভাবিক উচ্চারণের সহজপ্রবণতা এবং ধ্বনিগত মাধুর্য সম্পাদন। সন্ধির প্রধান সুবিধা হলো <span class="highlight-pill">উচ্চারণের সুবিধা</span>।</p>
+        <p><strong>সন্ধির প্রকারভেদ:</strong> বাংলা ভাষায় সন্ধি প্রধানত দুই প্রকার: <em>তৎসম বা সংস্কৃত সন্ধি</em> এবং <em>খাঁটি বাংলা সন্ধি</em>। তৎসম সন্ধি ৩ প্রকার:</p>
+        <ul>
+          <li><strong>স্বরসন্ধি:</strong> স্বরধ্বনির সাথে স্বরধ্বনির মিলন। যেমন: বিদ্যা + আলয় = বিদ্যালয়, পরম + ঈশ = পরমেশ।</li>
+          <li><strong>ব্যঞ্জনসন্ধি:</strong> স্বর + ব্যঞ্জন, ব্যঞ্জন + স্বর কিংবা ব্যঞ্জন + ব্যঞ্জনের মিলন। যেমন: দিক্ + অন্ত = দিগন্ত, বাক্ + আড়ম্বর = বাগাড়ম্বর।</li>
+          <li><strong>বিসর্গসন্ধি:</strong> বিসর্গের সাথে (র্ ও স্-এর স্থলে জাত) স্বর বা ব্যঞ্জনধ্বনির মিলন। যেমন: নিঃ + রব = নীরব, শিরঃ + ছেদ = শিরশ্ছেদ।</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Questions Section -->
+    <section id="mcq-container">
+
+      <!-- Q1 -->
+      <div class="mcq-card" data-qindex="1">
+        <div class="mcq-header">
+          <span class="mcq-num">১.</span>
+          <div class="mcq-text">'পরমেশ' শব্দটির সঠিক সন্ধি বিচ্ছেদ কোনটি? <span class="exam-tag">৫০তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 1, 'খ')"><span class="opt-prefix">(ক)</span> পরম + এশ</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 1, 'খ')"><span class="opt-prefix">(খ)</span> পরম + ঈশ</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 1, 'খ')"><span class="opt-prefix">(গ)</span> পরম + ইশ</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 1, 'খ')"><span class="opt-prefix">(ঘ)</span> পরম + ইস</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(1)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-1"></div>
+        </div>
+        <div class="explanation-box" id="explain-1">
+          <div class="exp-title">উত্তর: (খ) পরম + ঈশ</div>
+          <p><strong>ব্যাখ্যা:</strong> স্বরসন্ধির নিয়ম অনুসারে, অ-কার কিংবা আ-কারের পর ই-কার কিংবা ঈ-কার থাকলে উভয়ে মিলে এ-কার হয়; এ-কার পূর্ববর্তী ব্যঞ্জনের সঙ্গে যুক্ত হয়। যেমন-</p>
+          <ul>
+            <li>অ + ই = এ; শুভ + ইচ্ছা = শুভেচ্ছা।</li>
+            <li>আ + ই = এ; যথা + ইষ্ট = যথেষ্ট।</li>
+            <li>অ + ঈ = এ; পরম + ঈশ = পরমেশ।</li>
+            <li>আ + ঈ = এ; মহা + ঈশ = মহেশ।</li>
+          </ul>
+          <p>এরূপ- ঢাকেশ্বরী, পূর্ণেন্দু, শ্রবণেন্দ্রিয়, স্বেচ্ছা, রমেশ, নরেন্দ্র ইত্যাদি।</p>
+          <p><em>উৎস:</em> বাংলা ভাষার ব্যাকরণ, নবম-দশম শ্রেণি (২০১৯-সংস্করণ)।</p>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="mcq-card" data-qindex="2">
+        <div class="mcq-header">
+          <span class="mcq-num">২.</span>
+          <div class="mcq-text">কোন শব্দটি বিসর্গ সন্ধির মাধ্যমে গঠিত? <span class="exam-tag">৪৯তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 2, 'ক')"><span class="opt-prefix">(ক)</span> নীরব</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 2, 'ক')"><span class="opt-prefix">(খ)</span> উজ্জ্বল</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 2, 'ক')"><span class="opt-prefix">(গ)</span> মনোত্তীর্ণ</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 2, 'ক')"><span class="opt-prefix">(ঘ)</span> সংগ্রাম</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(2)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-2"></div>
+        </div>
+        <div class="explanation-box" id="explain-2">
+          <div class="exp-title">উত্তর: (ক) নীরব</div>
+          <p><strong>ব্যাখ্যা:</strong> বিসর্গ সন্ধির মাধ্যমে গঠিত শব্দটি হলো <strong>নীরব</strong>। শব্দটির সঠিক সন্ধিবিচ্ছেদ: <strong>নিঃ + রব = নীরব</strong>।</p>
+          <p><strong>অন্যান্য বিকল্পের নিয়ম:</strong></p>
+          <ul>
+            <li><strong>ব্যঞ্জন + ব্যঞ্জন = ব্যঞ্জনসন্ধি:</strong> আগে ৎ বা দ্ এবং পরে চ্ বা ছ্ থাকলে ৎ বা দ্ স্থানে চ্ হয়; ৎ বা দ্-এর পরে জ্ বা ঝ্ থাকলে ৎ ও দ্ স্থানে জ্ হয়। যেমন- উৎ + জ্বল = উজ্জ্বল।</li>
+            <li><strong>ব্যঞ্জন + ব্যঞ্জন = ব্যঞ্জনসন্ধি:</strong> ম্-এর পর অন্তঃস্থ ধ্বনি য, র, ল, ব কিংবা শ, ষ, স, হ থাকলে, ম্ স্থলে অনুস্বার হয়। যেমন- সম্ + সার = সংসার, সম্ + গ্রাম = সংগ্রাম।</li>
+            <li><strong>স্বরসন্ধি:</strong> প্রথম পদের শেষের অ-ধ্বনি বা আ-ধ্বনির সঙ্গে দ্বিতীয় পদের প্রথম হ্রস্ব-উ ধ্বনি বা দীর্ঘ-ঊ ধ্বনির যোগে ও-ধ্বনি হয়। বানানে তা ও-কারের রূপ নিয়ে আগের বর্ণে যুক্ত হয়। যেমন- কাল + উত্তীর্ণ = কালোত্তীর্ণ, মন + উত্তীর্ণ = মনোত্তীর্ণ।</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="mcq-card" data-qindex="3">
+        <div class="mcq-header">
+          <span class="mcq-num">৩.</span>
+          <div class="mcq-text">'শিরশ্ছেদ' শব্দের সন্ধিবিচ্ছেদ- <span class="exam-tag">৪৬তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 3, 'খ')"><span class="opt-prefix">(ক)</span> শির + ছেদ</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 3, 'খ')"><span class="opt-prefix">(খ)</span> শিরঃ + ছেদ</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 3, 'খ')"><span class="opt-prefix">(গ)</span> শিরশ + ছেদ</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 3, 'খ')"><span class="opt-prefix">(ঘ)</span> শির + উচ্ছেদ</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(3)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-3"></div>
+        </div>
+        <div class="explanation-box" id="explain-3">
+          <div class="exp-title">উত্তর: (খ) শিরঃ + ছেদ</div>
+          <p><strong>ব্যাখ্যা:</strong> বিসর্গ সন্ধির নিয়ম : বিসর্গের পর অঘোষ অল্পপ্রাণ কিংবা মহাপ্রাণ তালব্য ব্যঞ্জন থাকলে বিসর্গের স্থলে তালব্য শিস্ ধ্বনি (শ্) হয়, অঘোষ মূর্ধন্য ব্যঞ্জন থাকলে মূর্ধন্য শিস্ ধ্বনি (ষ্) হয়, অঘোষ দন্ত্য ব্যঞ্জন থাকলে দন্ত্য শিস্ ধ্বনি (স্) হয়। যেমন-</p>
+          <ul>
+            <li><strong>সূত্র: (ঃ + চ / ছ = শ + চ / ছ);</strong> নিঃ + চয় = নিশ্চয়, শিরঃ + ছেদ = শিরশ্ছেদ, নিঃ + ছিদ্র = নিশ্ছিদ্র, দুঃ + চিন্তা = দুশ্চিন্তা।</li>
+            <li><strong>সূত্র: (ঃ + ট / ঠ = ষ + ট / ঠ);</strong> ধনুঃ + টঙ্কার = ধনুষ্টঙ্কার, নিঃ + ঠুর = নিষ্ঠুর।</li>
+            <li><strong>সূত্র: (ঃ + ত / থ = স + ত / থ);</strong> দুঃ + তর = দুস্তর, দুঃ + থ = দুস্থ।</li>
+          </ul>
+          <p><em>উৎস:</em> ভাষা-শিক্ষা, ড. হায়াৎ মামুদ এবং বাংলা ভাষার ব্যাকরণ ও নির্মিতি, নবম-দশম শ্রেণি (২০১৯-সংস্করণ)।</p>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="mcq-card" data-qindex="4">
+        <div class="mcq-header">
+          <span class="mcq-num">৪.</span>
+          <div class="mcq-text">নিপাতনে সিদ্ধ স্বরসন্ধির দৃষ্টান্ত কোনটি? <span class="exam-tag">৪৪তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 4, 'ক')"><span class="opt-prefix">(ক)</span> গো + অক্ষ = গবাক্ষ</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 4, 'ক')"><span class="opt-prefix">(খ)</span> পৌ + অক = পাবক</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 4, 'ক')"><span class="opt-prefix">(গ)</span> বি + অঙ্গ = ব্যঙ্গ</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 4, 'ক')"><span class="opt-prefix">(ঘ)</span> যতি + ইন্দ্র = যতীন্দ্র</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(4)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-4"></div>
+        </div>
+        <div class="explanation-box" id="explain-4">
+          <div class="exp-title">উত্তর: (ক) গো + অক্ষ = গবাক্ষ</div>
+          <p><strong>ব্যাখ্যা: নিপাতনে সিদ্ধ স্বরসন্ধি:</strong> স্বরধ্বনির সাথে স্বরধ্বনির মিলনকে স্বরসন্ধি বলে। কতগুলো সন্ধি এই নিয়মের অনুসরণ করে না। এগুলোকে নিপাতনে সিদ্ধ স্বরসন্ধি বলে। যেমন-</p>
+          <div class="table-responsive">
+            <table class="custom-table">
+              <tr><td>কুলটা = কুল + অটা</td><td>বিশ্বৌষ্ঠ = বিশ্ব + ওষ্ঠ</td></tr>
+              <tr><td>গবাক্ষ = গো + অক্ষ</td><td>অক্ষৌহিণী = অক্ষ + উহিণী</td></tr>
+              <tr><td>প্রৌঢ় = প্র + ঊঢ়</td><td>রক্তোষ্ঠ = রক্ত + ওষ্ঠ</td></tr>
+              <tr><td>অন্যান্য = অন্য + অন্য</td><td>গবাক্ষি = গো + অক্ষি</td></tr>
+              <tr><td>মার্তণ্ড = মার্ত + অণ্ড</td><td>গবেন্দ্র = গো + ইন্দ্র</td></tr>
+              <tr><td>শুদ্ধোদন = শুদ্ধ + ওদন</td><td>পরস্পর = পর + পর</td></tr>
+              <tr><td>স্বৈর = স্ব + ঈর</td><td>প্রেষণ = প্র + এষণ</td></tr>
+              <tr><td>সীমন্ত = সীমন + অন্ত</td><td>সারঙ্গ = সার + অঙ্গ</td></tr>
+              <tr><td>স্বৈরিণী = স্ব + ঈরিণী</td><td></td></tr>
+            </table>
+          </div>
+          <p>অন্যদিকে, পৌ + অক = পাবক, যতি + ইন্দ্র = যতীন্দ্র উপর্যুক্ত শব্দগুলো সাধারণ স্বরসন্ধির নিয়ম অনুসারে গঠিত হয়েছে।</p>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="mcq-card" data-qindex="5">
+        <div class="mcq-header">
+          <span class="mcq-num">৫.</span>
+          <div class="mcq-text">'দুরবস্থা' শব্দটি সন্ধি বিচ্ছেদ করা হলে নিচের কোনটি পাওয়া যায়? <span class="exam-tag">৩৯তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 5, 'ক')"><span class="opt-prefix">(ক)</span> দুঃ + অবস্থা</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 5, 'ক')"><span class="opt-prefix">(খ)</span> দূর + বস্থা</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 5, 'ক')"><span class="opt-prefix">(গ)</span> দুর + অবস্থা</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 5, 'ক')"><span class="opt-prefix">(ঘ)</span> দূর + অবস্থা</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(5)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-5"></div>
+        </div>
+        <div class="explanation-box" id="explain-5">
+          <div class="exp-title">উত্তর: (ক) দুঃ + অবস্থা</div>
+          <p><strong>ব্যাখ্যা: বিসর্গ সন্ধি:</strong> বিসর্গের সাথে অর্থাৎ র্ ও স্-এর সাথে স্বরধ্বনির কিংবা ব্যঞ্জনধ্বনির যে সন্ধি হয় তাকে বিসর্গ সন্ধি বলে।</p>
+          <p><strong>নিয়ম:</strong> পূর্বপদের শেষে যদি অ/আ ভিন্ন অন্য স্বরধ্বনির পর বিসর্গ (র-জাত) থাকে এবং পরপদের প্রথমে যদি স্বরধ্বনি থাকে তবে সন্ধির ফলে বিসর্গ র হয়ে যায় এবং পরের স্বরধ্বনির সঙ্গে যুক্ত হয়। જેમন-</p>
+          <p>উঃ + অ = উ + র → <strong>দুঃ + অবস্থা = দুরবস্থা</strong>, চতুঃ + অঙ্গ = চতুরঙ্গ।</p>
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="mcq-card" data-qindex="6">
+        <div class="mcq-header">
+          <span class="mcq-num">৬.</span>
+          <div class="mcq-text">'সদ্যোজাত' শব্দটি কিভাবে গঠিত হয়েছে? <span class="exam-tag">৩৮তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 6, 'গ')"><span class="opt-prefix">(ক)</span> সৎ + জাত</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 6, 'গ')"><span class="opt-prefix">(খ)</span> সদ্যো + জাত</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 6, 'গ')"><span class="opt-prefix">(গ)</span> সদ্যঃ + জাত</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 6, 'গ')"><span class="opt-prefix">(ঘ)</span> সদ্য + জাত</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(6)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-6"></div>
+        </div>
+        <div class="explanation-box" id="explain-6">
+          <div class="exp-title">উত্তর: (গ) সদ্যঃ + জাত</div>
+          <p><strong>ব্যাখ্যা:</strong> অ-কারের পরস্থিত স-জাত বিসর্গের পর ঘোষ অল্পপ্রাণ ও ঘোষ মহাপ্রাণ ব্যঞ্জনধ্বনি, নাসিক্য ধ্বনি কিংবা অন্তঃস্থ য, অন্তঃস্থ ব, র, ল, হ থাকলে অ-কার ও স-জাত বিসর্গ স্থলে ও-কার হয়। যেমন-</p>
+          <div class="table-responsive">
+            <table class="custom-table">
+              <tr><td>সদ্যঃ + জাত = সদ্যোজাত</td><td>মনঃ + হর = মনোহর</td></tr>
+              <tr><td>তিরঃ + ধান = তিরোধান</td><td>তপঃ + বন = তপোবন</td></tr>
+              <tr><td>মনঃ + রম = মনোরম</td><td></td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="mcq-card" data-qindex="7">
+        <div class="mcq-header">
+          <span class="mcq-num">৭.</span>
+          <div class="mcq-text">'রবীন্দ্র'-এর সঠিক সন্ধি বিচ্ছেদ কোনটি? <span class="exam-tag">৩৬তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 7, 'গ')"><span class="opt-prefix">(ক)</span> রবী + ইন্দ্র</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 7, 'গ')"><span class="opt-prefix">(খ)</span> রবী + ঈন্দ্র</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 7, 'গ')"><span class="opt-prefix">(গ)</span> রবি + ইন্দ্র</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 7, 'গ')"><span class="opt-prefix">(ঘ)</span> রবি + ঈন্দ্র</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(7)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-7"></div>
+        </div>
+        <div class="explanation-box" id="explain-7">
+          <div class="exp-title">উত্তর: (গ) রবি + ইন্দ্র</div>
+          <p><strong>ব্যাখ্যা:</strong> ই/ঈ + ই/ঈ = 'ঈ'-কার (ী) হয়। যেমন-</p>
+          <div class="table-responsive">
+            <table class="custom-table">
+              <tr><td>সুধী + ইন্দ্র = সুধীন্দ্র</td><td>সতী + ইন্দ্র = সতীন্দ্র</td></tr>
+              <tr><td>পরি + ঈক্ষা = পরীক্ষা</td><td>প্রতি + ঈক্ষা = প্রতীক্ষা</td></tr>
+              <tr><td>অতি + ইত = অতীত</td><td>মহী + ইন্দ্র = মহীন্দ্র</td></tr>
+              <tr><td><strong>রবি + ইন্দ্র = রবীন্দ্র</strong></td><td>সতী + ঈশ = সতীশ</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="mcq-card" data-qindex="8">
+        <div class="mcq-header">
+          <span class="mcq-num">৮.</span>
+          <div class="mcq-text">'দ্বৈপায়ন' শব্দের শুদ্ধ সন্ধিবিচ্ছেদ কোনটি? <span class="exam-tag">৩৫তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 8, 'ক')"><span class="opt-prefix">(ক)</span> দ্বীপ + আয়ন</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 8, 'ক')"><span class="opt-prefix">(খ)</span> দ্বীপ + অয়ন</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 8, 'ক')"><span class="opt-prefix">(গ)</span> দ্বিপ + অনট</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 8, 'ক')"><span class="opt-prefix">(ঘ)</span> দ্বীপ + অনট</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(8)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-8"></div>
+        </div>
+        <div class="explanation-box" id="explain-8">
+          <div class="exp-title">উত্তর: (ক) দ্বীপ + আয়ন</div>
+          <p><strong>ব্যাখ্যা: আয়ন (&lt; ফক্):</strong></p>
+          <p>(ক) <em>বংশধর অর্থে:</em> বাৎস + আয়ন = বাৎসায়ন, বদর + আয়ন = বাদরায়ণ, ('রামায়ণ' এই 'আয়ন' প্রত্যয়যোগে সিদ্ধ নয়। রাম অয়ন যার এই অর্থে রামায়ণ)।</p>
+          <p>(খ) <em>এই স্থানে জাত অর্থে:</em> <strong>দ্বীপ + আয়ন = দ্বৈপায়ন</strong>।</p>
+          <p>এই 'আয়ন'-এর সঙ্গে কৃদন্ত আয় + অন = আয়নের পার্থক্য লক্ষণীয়। দুগ্ধতায়ন, বনায়ন, দুর্বৃত্তায়ন, বিশ্বায়ন প্রভৃতি শব্দ 'আয়ন' যোগে গঠিত নয়। এ বিষয়ে অন, কৃৎপ্রত্যয় দ্রষ্টব্য। দ্বৈপায়ন শব্দটি মূলত প্রত্যয় সাধিত শব্দ যার প্রকৃতি প্রত্যয় দ্বীপ + আয়ন।</p>
+          <p>এটি সন্ধি সাধিত শব্দ নয়, সংস্কৃত তদ্ধিত প্রত্যয় সাধিত শব্দ। ৩৫তম বিসিএস প্রিলিমিনারি পরীক্ষায় এ প্রশ্নটি আসার পর থেকে বিভিন্ন প্রতিযোগিতামূলক পরীক্ষায় এসে থাকে। এটি পরীক্ষায় আসলে <strong>দ্বীপ + আয়ন = দ্বৈপায়ন</strong> উত্তর করবেন।</p>
+        </div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="mcq-card" data-qindex="9">
+        <div class="mcq-header">
+          <span class="mcq-num">৯.</span>
+          <div class="mcq-text">সন্ধি-সাধিত শব্দ 'পরস্পর' কোন ধরনের সন্ধির দৃষ্টান্ত? <span class="exam-tag">৩১তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 9, 'গ')"><span class="opt-prefix">(ক)</span> ব্যঞ্জন ধ্বনি</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 9, 'গ')"><span class="opt-prefix">(খ)</span> স্বরধ্বনি</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 9, 'গ')"><span class="opt-prefix">(গ)</span> নিপাতনে সিদ্ধ</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 9, 'গ')"><span class="opt-prefix">(ঘ)</span> বিসর্গ সন্ধি</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(9)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-9"></div>
+        </div>
+        <div class="explanation-box" id="explain-9">
+          <div class="exp-title">উত্তর: (গ) নিপাতনে সিদ্ধ</div>
+          <p><strong>ব্যাখ্যা:</strong> কতগুলো ব্যঞ্জন সন্ধি কোনো নিয়ম অনুসারে হয় না, এগুলোকে <strong>নিপাতনে সিদ্ধ ব্যঞ্জনসন্ধি</strong> বলে।</p>
+          <div class="table-responsive">
+            <table class="custom-table">
+              <tr><td>আ + চর্য = আশ্চর্য</td><td>এক্ + দশ = একাদশ</td></tr>
+              <tr><td>গো + পদ = গোষ্পদ</td><td>পতৎ + অঞ্জলি = পতঞ্জলি</td></tr>
+              <tr><td>বন্ + পতি = বনস্পতি</td><td>হরি + চন্দ্র = হরিশ্চন্দ্র</td></tr>
+              <tr><td>বৃহৎ + পতি = বৃহস্পতি</td><td>দিব্ + লোক = দ্যুলোক</td></tr>
+              <tr><td>তৎ + কর = তস্কর</td><td>আ + পদ = আস্পদ</td></tr>
+              <tr><td><strong>পর্ + পর = পরস্পর</strong></td><td>বিশ্ব + মিত্র = বিশ্বামিত্র</td></tr>
+              <tr><td>মনস্ + ঈষা = মনীষা</td><td>পশ্চাৎ + অর্ধ = পশ্চার্ধ</td></tr>
+              <tr><td>ষট্ + দশ = ষোড়শ</td><td>বাক্ + ঈশ্বরী = বাগেশ্বরী</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="mcq-card" data-qindex="10">
+        <div class="mcq-header">
+          <span class="mcq-num">১০.</span>
+          <div class="mcq-text">বাগাড়ম্বর শব্দের সন্ধি-বিচ্ছেদ- <span class="exam-tag">৩০তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 10, 'ঘ')"><span class="opt-prefix">(ক)</span> বাগ + অম্বর</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 10, 'ঘ')"><span class="opt-prefix">(খ)</span> বাগ + আড়ম্বর</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 10, 'ঘ')"><span class="opt-prefix">(গ)</span> বাক + অম্বর</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 10, 'ঘ')"><span class="opt-prefix">(ঘ)</span> বাক্ + আড়ম্বর</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(10)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-10"></div>
+        </div>
+        <div class="explanation-box" id="explain-10">
+          <div class="exp-title">উত্তর: (ঘ) বাক্ + আড়ম্বর</div>
+          <p><strong>ব্যাখ্যা:</strong> ক, চ, ট, ত, প থাকলে এবং তাদের পরে স্বরধ্বনি থাকলে সেগুলো যথাক্রমে গ, জ, ড (ড়), দ, ব হয়। পরবর্তী স্বরধ্বনিটি পূর্ববর্তী ব্যঞ্জনধ্বনির সঙ্গে যুক্ত হয়। যেমন-</p>
+          <ul>
+            <li><strong>ক্ + আ = গ; বাক্ + আড়ম্বর = বাগাড়ম্বর</strong></li>
+            <li>ক্ + অ = গ; দিক্ + অন্ত = দিগন্ত</li>
+            <li>ক্ + ঈ = গ; বাক্ + ঈশ = বাগীশ</li>
+            <li>চ্ + অ = জ; পিচ্ + অন্ত = পিজন্ত</li>
+            <li>ট্ + আ = ড়; ষট্ + আনন = ষড়ানন</li>
+            <li>ত্ + অ = দ; তৎ + অবধি = তদবধি</li>
+            <li>প্ + অ = ব; সুপ্ + অন্ত = সুবন্ত</li>
+          </ul>
+          <p>এরূপ- তদন্ত, কৃদন্ত, সদানন্দ, সদুপায়, সদুপদেশ, জগদিন্দ্র ইত্যাদি।</p>
+        </div>
+      </div>
+
+      <!-- Q11 -->
+      <div class="mcq-card" data-qindex="11">
+        <div class="mcq-header">
+          <span class="mcq-num">১১.</span>
+          <div class="mcq-text">'জনৈক' শব্দটির সন্ধি বিচ্ছেদ- <span class="exam-tag">২৯তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 11, 'খ')"><span class="opt-prefix">(ক)</span> জন + ইক</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 11, 'খ')"><span class="opt-prefix">(খ)</span> জন + এক</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 11, 'খ')"><span class="opt-prefix">(গ)</span> জনে + এক</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 11, 'খ')"><span class="opt-prefix">(ঘ)</span> জন + ঈক</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(11)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-11"></div>
+        </div>
+        <div class="explanation-box" id="explain-11">
+          <div class="exp-title">উত্তর: (খ) জন + এক</div>
+          <p><strong>ব্যাখ্যা:</strong> অ/আ + এ/ঐ = ঐ (ৈ)-কার হয়। যেমন-</p>
+          <ul>
+            <li><strong>অ + এ = ঐ; জন + এক = জনৈক</strong></li>
+            <li>আ + এ = ঐ; সদা + এব = সদৈব</li>
+            <li>অ + ঐ = ঐ; মত + ঐক্য = মতৈক্য</li>
+            <li>আ + ঐ = ঐ; মহা + ঐশ্বর্য = মহৈশ্বর্য</li>
+          </ul>
+          <p>এরূপ- হিতৈষী, সর্বৈব, অতুলৈশ্বর্য ইত্যাদি।</p>
+        </div>
+      </div>
+
+      <!-- Q12 -->
+      <div class="mcq-card" data-qindex="12">
+        <div class="mcq-header">
+          <span class="mcq-num">১২.</span>
+          <div class="mcq-text">কোন সন্ধিটি নিপাতনে সিদ্ধ? <span class="exam-tag">২৭তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 12, 'গ')"><span class="opt-prefix">(ক)</span> বাক্ + দান = বাগদান</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 12, 'গ')"><span class="opt-prefix">(খ)</span> উৎ + ছেদ = উচ্ছেদ</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 12, 'গ')"><span class="opt-prefix">(গ)</span> পর + পর = পরস্পর</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 12, 'গ')"><span class="opt-prefix">(ঘ)</span> সম + সার = সংসার</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(12)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-12"></div>
+        </div>
+        <div class="explanation-box" id="explain-12">
+          <div class="exp-title">উত্তর: (গ) পর + পর = পরস্পর</div>
+          <p><strong>ব্যাখ্যা:</strong> কতগুলো সন্ধি কোনো নিয়ম অনুসারে হয় না, এগুলোকে নিপাতনে সিদ্ধ সন্ধি বলে। যেমন- পর + পর = পরস্পর।</p>
+          <p>অন্যদিকে, সম + সার = সংসার; উৎ + ছেদ = উচ্ছেদ; বাক্ + দান = বাগদান ইত্যাদি নিয়মমাফিক ব্যঞ্জনসন্ধির উদাহরণ।</p>
+        </div>
+      </div>
+
+      <!-- Q13 -->
+      <div class="mcq-card" data-qindex="13">
+        <div class="mcq-header">
+          <span class="mcq-num">১৩.</span>
+          <div class="mcq-text">'প্রাতরাশ' এর সন্ধি - <span class="exam-tag">২৩তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 13, 'গ')"><span class="opt-prefix">(ক)</span> প্রাত + রাশ</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 13, 'গ')"><span class="opt-prefix">(খ)</span> প্রাতঃ + রাশ</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 13, 'গ')"><span class="opt-prefix">(গ)</span> প্রাতঃ + আশ</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 13, 'গ')"><span class="opt-prefix">(ঘ)</span> প্রাত + আশ</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(13)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-13"></div>
+        </div>
+        <div class="explanation-box" id="explain-13">
+          <div class="exp-title">উত্তর: (গ) প্রাতঃ + আশ</div>
+          <p><strong>ব্যাখ্যা:</strong> কিছু বিসর্গ সন্ধির উদাহরণ হলো-</p>
+          <div class="table-responsive">
+            <table class="custom-table">
+              <tr><td><strong>প্রাতঃ + আশ = প্রাতরাশ</strong></td><td>অন্তঃ + গত = অন্তর্গত</td></tr>
+              <tr><td>পুনঃ + আয় = পুনরায়</td><td>পুনঃ + উক্ত = পুনরুক্ত</td></tr>
+              <tr><td>অন্তঃ + ধান = অন্তর্ধান</td><td>অহঃ + অহ = অহরহ</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q14 -->
+      <div class="mcq-card" data-qindex="14">
+        <div class="mcq-header">
+          <span class="mcq-num">১৪.</span>
+          <div class="mcq-text">'সন্ধি' ব্যাকরণের কোন অংশের আলোচ্য বিষয়? <span class="exam-tag">১৮তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 14, 'খ')"><span class="opt-prefix">(ক)</span> রূপতত্ত্ব</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 14, 'খ')"><span class="opt-prefix">(খ)</span> ধ্বনিতত্ত্ব</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 14, 'খ')"><span class="opt-prefix">(গ)</span> পদক্রম</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 14, 'খ')"><span class="opt-prefix">(ঘ)</span> বাক্য প্রকরণ</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(14)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-14"></div>
+        </div>
+        <div class="explanation-box" id="explain-14">
+          <div class="exp-title">উত্তর: (খ) ধ্বনিতত্ত্ব</div>
+          <p><strong>ব্যাখ্যা:</strong> ধ্বনিতত্ত্বের আলোচ্য বিষয় সমূহ: ধ্বনির উচ্চারণ প্রণালী, উচ্চারণ স্থান, ধ্বনির প্রতীক বা বর্ণবিন্যাস, <strong>সন্ধি</strong>, ধ্বনি পরিবর্তন, ণ-ত্ব ও ষ-ত্ব বিধান ইত্যাদি। যেহেতু সন্ধি মূলত সন্নিহিত দুটি ধ্বনির মিলন, তাই এটি ব্যাকরণের <strong>ধ্বনিতত্ত্বে (Phonology)</strong> আলোচিত হয়।</p>
+        </div>
+      </div>
+
+      <!-- Q15 -->
+      <div class="mcq-card" data-qindex="15">
+        <div class="mcq-header">
+          <span class="mcq-num">১৫.</span>
+          <div class="mcq-text">সন্ধির প্রধান সুবিধা কি? <span class="exam-tag">১৮তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 15, 'গ')"><span class="opt-prefix">(ক)</span> পড়ার সুবিধা</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 15, 'গ')"><span class="opt-prefix">(খ)</span> লেখার সুবিধা</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 15, 'গ')"><span class="opt-prefix">(গ)</span> উচ্চারণের সুবিধা</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 15, 'গ')"><span class="opt-prefix">(ঘ)</span> শোনার সুবিধা</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(15)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-15"></div>
+        </div>
+        <div class="explanation-box" id="explain-15">
+          <div class="exp-title">উত্তর: (গ) উচ্চারণের সুবিধা</div>
+          <p><strong>ব্যাখ্যা:</strong> সন্ধি : সন্নিহিত দুটি ধ্বনির মিলনকে সন্ধি বলে। সন্ধির প্রধান উদ্দেশ্য স্বাভাবিক উচ্চারণের সহজপ্রবণতা এবং ধ্বনিগত মাধুর্য সম্পাদন। সন্ধির প্রধান সুবিধা হলো <strong>উচ্চারণের সুবিধা</strong>।</p>
+        </div>
+      </div>
+
+      <!-- Q16 -->
+      <div class="mcq-card" data-qindex="16">
+        <div class="mcq-header">
+          <span class="mcq-num">১৬.</span>
+          <div class="mcq-text">ষড়ঋতু শব্দের সন্ধি বিচ্ছেদ- <span class="exam-tag">১৭তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 16, 'ঘ')"><span class="opt-prefix">(ক)</span> ষড় + ঋতু</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 16, 'ঘ')"><span class="opt-prefix">(খ)</span> ষড়ু + ঋতু</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 16, 'ঘ')"><span class="opt-prefix">(গ)</span> ষট + ঋতু</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 16, 'ঘ')"><span class="opt-prefix">(ঘ)</span> ষট্ + ঋতু</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(16)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-16"></div>
+        </div>
+        <div class="explanation-box" id="explain-16">
+          <div class="exp-title">উত্তর: (ঘ) ষট্ + ঋতু</div>
+          <p><strong>ব্যাখ্যা:</strong> এ রকম আরো কিছু উদাহরণ :</p>
+          <div class="table-responsive">
+            <table class="custom-table">
+              <tr><td>দিক্ + অন্ত = দিগন্ত</td><td><strong>ষট্ + ঋতু = ষড়ঋতু</strong></td></tr>
+              <tr><td>বাক্ + ঈশ = বাগীশ</td><td>সৎ + ইচ্ছা = সদিচ্ছা</td></tr>
+              <tr><td>পিচ্ + অন্ত = পিজন্ত</td><td>তৎ + অন্ত = তদন্ত</td></tr>
+              <tr><td>ষট্ + আনন = ষড়ানন</td><td>সুপ্ + অন্ত = সুবন্ত</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q17 -->
+      <div class="mcq-card" data-qindex="17">
+        <div class="mcq-header">
+          <span class="mcq-num">১৭.</span>
+          <div class="mcq-text">দ্যুলোক শব্দের যথার্থ সন্ধি-বিচ্ছেদ কোনটি? <span class="exam-tag">১৫তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 17, 'খ')"><span class="opt-prefix">(ক)</span> দুঃ + লোক</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 17, 'খ')"><span class="opt-prefix">(খ)</span> দিব্ + লোক</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 17, 'খ')"><span class="opt-prefix">(গ)</span> দ্বি + লোক</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 17, 'খ')"><span class="opt-prefix">(ঘ)</span> দ্বিঃ + লোক</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(17)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-17"></div>
+        </div>
+        <div class="explanation-box" id="explain-17">
+          <div class="exp-title">উত্তর: (খ) দিব্ + লোক</div>
+          <p><strong>ব্যাখ্যা:</strong> দ্যুলোক শব্দের যথার্থ সন্ধি বিচ্ছেদ হলো <strong>দিব্ + লোক = দ্যুলোক</strong>। এটি একটি নিপাতনে সিদ্ধ সন্ধি।</p>
+        </div>
+      </div>
+
+      <!-- Q18 -->
+      <div class="mcq-card" data-qindex="18">
+        <div class="mcq-header">
+          <span class="mcq-num">১৮.</span>
+          <div class="mcq-text">'রত্নাকর' শব্দটির সন্ধি বিচ্ছেদ- <span class="exam-tag">১০তম বিসিএস</span></div>
+        </div>
+        <div class="options-grid">
+          <button class="option-btn" data-opt="ক" onclick="checkAnswer(this, 18, 'ঘ')"><span class="opt-prefix">(ক)</span> রত্না + কর</button>
+          <button class="option-btn" data-opt="খ" onclick="checkAnswer(this, 18, 'ঘ')"><span class="opt-prefix">(খ)</span> রত্ন + কর</button>
+          <button class="option-btn" data-opt="গ" onclick="checkAnswer(this, 18, 'ঘ')"><span class="opt-prefix">(গ)</span> রত্না + আকার</button>
+          <button class="option-btn" data-opt="ঘ" onclick="checkAnswer(this, 18, 'ঘ')"><span class="opt-prefix">(ঘ)</span> রত্ন + আকর</button>
+        </div>
+        <div class="mcq-actions">
+          <button class="btn-explain" onclick="toggleExplanation(18)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            ব্যাখ্যা দেখুন
+          </button>
+          <div class="status-indicator" id="status-18"></div>
+        </div>
+        <div class="explanation-box" id="explain-18">
+          <div class="exp-title">উত্তর: (ঘ) রত্ন + আকর</div>
+          <p><strong>ব্যাখ্যা:</strong> অ/আ + অ/আ = আ (-া) - কার হয়। যেমন-</p>
+          <ul>
+            <li><strong>অ + অ = আ:</strong> নর + অধম = নরাধম। এরূপ- হিমাচল, প্রাণাধিক, হস্তান্তর, হিতাহিত ইত্যাদি।</li>
+            <li><strong>অ + আ = আ:</strong> হিম + আলয় = হিমালয়। <strong>রত্ন + আকর = রত্নাকর</strong>। এরূপ- দেবালয়, সিংহাসন ইত্যাদি।</li>
+            <li><strong>আ + অ = আ:</strong> যথা + অর্থ = যথার্থ। এরূপ- আশাতীত, কথামৃত, মহার্ঘ ইত্যাদি।</li>
+            <li><strong>আ + আ = আ:</strong> বিদ্যা + আলয় = বিদ্যালয়। এরূপ- কারাগার, মহাশয়, সদানন্দ ইত্যাদি।</li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>Live MCQ Interactive Smart E-Book • 100% Textbook Fidelity</p>
+  </footer>
+
+  <!-- Nav Component Script for Drawer and Features -->
+  <script src="nav-component.js"></script>
+
+  <script>
+    // Quiz Engine Logic
+    let totalQuestions = 18;
+    let answeredQuestions = new Set();
+    let correctQuestions = new Set();
+
+    function checkAnswer(btn, qIndex, correctOpt) {
+      const parentCard = btn.closest('.mcq-card');
+      const allBtns = parentCard.querySelectorAll('.option-btn');
+      const statusEl = document.getElementById(`status-${qIndex}`);
+      const selectedOpt = btn.getAttribute('data-opt');
+
+      // If already answered, ignore
+      if (btn.classList.contains('locked')) return;
+
+      // Lock buttons
+      allBtns.forEach(b => b.classList.add('locked'));
+      answeredQuestions.add(qIndex);
+
+      if (selectedOpt === correctOpt) {
+        btn.classList.add('correct');
+        statusEl.innerHTML = '<span class="status-indicator correct">✓ সঠিক উত্তর</span>';
+        correctQuestions.add(qIndex);
+      } else {
+        btn.classList.add('wrong');
+        statusEl.innerHTML = '<span class="status-indicator wrong">✗ ভুল উত্তর</span>';
+        // Highlight correct
+        allBtns.forEach(b => {
+          if (b.getAttribute('data-opt') === correctOpt) {
+            b.classList.add('correct');
+          }
+        });
+      }
+
+      updateScoreBoard();
+    }
+
+    function toggleExplanation(qIndex) {
+      const expBox = document.getElementById(`explain-${qIndex}`);
+      if (expBox) {
+        expBox.classList.toggle('active');
+      }
+    }
+
+    function updateScoreBoard() {
+      const ansCount = answeredQuestions.size;
+      const corrCount = correctQuestions.size;
+      const accuracy = ansCount > 0 ? Math.round((corrCount / ansCount) * 100) : 0;
+
+      const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+      const toBn = num => num.toString().split('').map(d => bnDigits[parseInt(d)] || d).join('');
+
+      document.getElementById('answered-count').innerText = toBn(ansCount);
+      document.getElementById('correct-count').innerText = toBn(corrCount);
+      document.getElementById('accuracy-rate').innerText = toBn(accuracy) + '%';
+    }
+
+    // Scroll progress bar
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      const bar = document.getElementById('progressBar');
+      if (bar) bar.style.width = scrolled + '%';
+    });
+  </script>
+</body>
+</html>
