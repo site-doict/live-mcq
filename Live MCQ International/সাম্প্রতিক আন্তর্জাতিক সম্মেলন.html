@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>সাম্প্রতিক আন্তর্জাতিক সম্মেলন - লাইভ এমসিকিউ আন্তর্জাতিক</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-scale: 1rem;
+      --bg-primary: #0a0f1d;
+      --bg-secondary: #10192e;
+      --bg-card: rgba(19, 31, 56, 0.85);
+      --card-border: rgba(148, 163, 184, 0.14);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-gold: #fbbf24;
+      --gold-glow: rgba(251, 191, 36, 0.25);
+      --accent-cyan: #38bdf8;
+      --accent-emerald: #10b981;
+      --accent-rose: #f43f5e;
+      --nav-bg: rgba(10, 15, 29, 0.92);
+      --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #f1f5f9;
+      --bg-card: rgba(255, 255, 255, 0.92);
+      --card-border: rgba(203, 213, 225, 0.8);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --accent-gold: #d97706;
+      --gold-glow: rgba(217, 119, 6, 0.15);
+      --accent-cyan: #0284c7;
+      --accent-emerald: #059669;
+      --accent-rose: #e11d48;
+      --nav-bg: rgba(248, 250, 252, 0.95);
+      --shadow-soft: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Hind Siliguri', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-size: var(--font-scale);
+      line-height: 1.65;
+      padding-bottom: 5rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .progress-bar-container { position: fixed; top: 0; left: 0; width: 100%; height: 4px; z-index: 1000; }
+    .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #38bdf8, #fbbf24, #10b981); }
+
+    header.sticky-header {
+      position: sticky; top: 4px; z-index: 900;
+      backdrop-filter: blur(14px);
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--card-border);
+      padding: 0.75rem 1rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+    }
+    .brand-group { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
+    .book-badge {
+      display: inline-flex; align-items: center;
+      background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 9999px;
+      padding: 0.2rem 0.65rem; font-size: 0.75rem; font-weight: 700; white-space: nowrap;
+    }
+    .chapter-heading-bar {
+      font-size: 0.95rem; font-weight: 700; color: var(--text-main);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .controls-group { display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
+    .control-btn {
+      background: var(--bg-card); border: 1px solid var(--card-border); color: var(--text-main);
+      padding: 0.35rem 0.65rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+    }
+    .control-btn:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+
+    .main-container { max-width: 960px; margin: 1.5rem auto; padding: 0 1rem; }
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(16, 25, 46, 0.95), rgba(30, 58, 138, 0.4));
+      border: 1px solid var(--card-border); border-radius: 20px;
+      padding: 2rem 1.5rem; text-align: center; margin-bottom: 2rem;
+      box-shadow: var(--shadow-soft);
+    }
+    [data-theme="light"] .hero-banner { background: linear-gradient(135deg, #ffffff, #f0f9ff); }
+    .unit-tag { color: var(--accent-cyan); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; display: block; }
+    .hero-title { font-size: clamp(1.3rem, 3.8vw, 2.0rem); font-weight: 700; color: var(--text-main); line-height: 1.3; margin-bottom: 0.75rem; }
+    .hero-desc { color: var(--text-muted); font-size: 0.95rem; max-width: 760px; margin: 0 auto 1.25rem; }
+    .hero-stats { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+    .stat-pill { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); padding: 0.4rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; }
+    .stat-pill span { color: var(--accent-cyan); font-weight: 700; }
+
+    .infographic-wrapper { margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    .section-title { font-size: 1.25rem; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 0.65rem; }
+    .card { background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 16px; padding: 1.25rem; box-shadow: var(--shadow-soft); backdrop-filter: blur(8px); }
+
+    .data-table-container { overflow-x: auto; border-radius: 12px; border: 1px solid var(--card-border); margin-top: 0.75rem; }
+    table.data-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem; }
+    table.data-table th, table.data-table td { padding: 0.8rem 1rem; border-bottom: 1px solid var(--card-border); }
+    table.data-table th { background: rgba(56, 189, 248, 0.08); color: var(--accent-cyan); font-weight: 700; white-space: nowrap; }
+    .badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-cyan { background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan); border: 1px solid rgba(56, 189, 248, 0.3); }
+    .badge-gold { background: rgba(251, 191, 36, 0.15); color: var(--accent-gold); border: 1px solid rgba(251, 191, 36, 0.3); }
+
+    .quiz-stats-card {
+      background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 14px;
+      padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .stats-indicators { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+    .indicator-item { display: flex; flex-direction: column; }
+    .indicator-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
+    .indicator-val { font-size: 1.2rem; font-weight: 700; color: var(--text-main); }
+    .indicator-val.cyan { color: var(--accent-cyan); }
+    .indicator-val.gold { color: var(--accent-gold); }
+
+    .filter-pills { display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+    .filter-btn { background: var(--bg-card); border: 1px solid var(--card-border); color: var(--text-muted); padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .filter-btn.active, .filter-btn:hover { background: var(--accent-cyan); color: #000; border-color: var(--accent-cyan); font-weight: 700; }
+
+    .mcq-card { background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 16px; padding: 1.25rem; margin-bottom: 1.25rem; box-shadow: var(--shadow-soft); }
+    .mcq-card:hover { border-color: rgba(56, 189, 248, 0.3); }
+    .q-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.85rem; }
+    .q-num-title { display: flex; gap: 0.65rem; font-size: 1.05rem; font-weight: 600; color: var(--text-main); line-height: 1.45; }
+    .q-number { background: linear-gradient(135deg, var(--accent-cyan), #0284c7); color: #fff; width: 28px; height: 28px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .bcs-tag { background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan); border: 1px solid rgba(56, 189, 248, 0.3); font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
+
+    .options-grid { display: grid; grid-template-columns: 1fr; gap: 0.6rem; margin-top: 0.85rem; }
+    @media (min-width: 640px) { .options-grid { grid-template-columns: 1fr 1fr; } }
+    .opt-btn { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--card-border); color: var(--text-main); border-radius: 10px; padding: 0.75rem 1rem; text-align: left; font-size: 0.92rem; cursor: pointer; display: flex; align-items: center; gap: 0.75rem; }
+    .opt-btn:hover:not(.locked) { background: rgba(56, 189, 248, 0.08); border-color: var(--accent-cyan); }
+    .opt-letter { width: 24px; height: 24px; border-radius: 50%; background: rgba(148, 163, 184, 0.15); display: inline-flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; flex-shrink: 0; }
+    .opt-btn.correct { background: rgba(16, 185, 129, 0.18) !important; border-color: var(--accent-emerald) !important; color: #34d399 !important; font-weight: 600; }
+    .opt-btn.correct .opt-letter { background: var(--accent-emerald); color: #fff; }
+    .opt-btn.wrong { background: rgba(244, 63, 94, 0.18) !important; border-color: var(--accent-rose) !important; color: #fb7185 !important; }
+    .opt-btn.wrong .opt-letter { background: var(--accent-rose); color: #fff; }
+
+    .exp-drawer { margin-top: 0.85rem; padding: 1rem; background: rgba(15, 23, 42, 0.6); border: 1px solid var(--card-border); border-left: 3px solid var(--accent-cyan); border-radius: 10px; font-size: 0.88rem; color: var(--text-muted); display: none; }
+    [data-theme="light"] .exp-drawer { background: #f8fafc; }
+    .exp-drawer.open { display: block; }
+    .exp-title { font-weight: 700; color: var(--accent-cyan); margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.4rem; }
+    .exp-toggle-btn { margin-top: 0.75rem; background: transparent; border: none; color: var(--accent-cyan); font-size: 0.82rem; font-weight: 600; cursor: pointer; }
+  </style>
+</head>
+<body data-theme="dark">
+
+  <div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+
+  <header class="sticky-header">
+    <div class="brand-group">
+      <span class="book-badge">আন্তর্জাতিক বিষয়াবলি</span>
+      <div class="chapter-heading-bar">অধ্যায় ২১: সাম্প্রতিক আন্তর্জাতিক সম্মেলন</div>
+    </div>
+    <div class="controls-group">
+      <button class="control-btn" id="fontDecBtn">A-</button>
+      <button class="control-btn" id="fontResetBtn">A</button>
+      <button class="control-btn" id="fontIncBtn">A+</button>
+      <button class="control-btn" id="themeToggleBtn">🌙</button>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <section class="hero-banner">
+      <span class="unit-tag">ইউনিট ৫: বিশ্বের সাম্প্রতিক ও চলমান ঘটনা প্রবাহ (পৃষ্ঠা ৬৯৭–৬৯৮)</span>
+      <h1 class="hero-title">সাম্প্রতিক আন্তর্জাতিক সম্মেলন</h1>
+      <p class="hero-desc">জি-২০ (G20), জি-৭ (G7), মিউনিখ নিরাপত্তা সম্মেলন (MSC), জোট নিরপেক্ষ আন্দোলন (NAM), বিশ্ব নারী সম্মেলন এবং বাংলাদেশ-ভারত দ্বিপাক্ষিক শীর্ষ বৈঠক সম্পর্কিত বিসিএস পরীক্ষার অত্যন্ত গুরুত্বপূর্ণ প্রশ্ন ও বিশদ সমাধান।</p>
+      <div class="hero-stats">
+        <div class="stat-pill">মোট প্রশ্ন: <span>9 টি</span></div>
+        <div class="stat-pill">পাঠ্যবই পৃষ্ঠা: <span>৬৯৭–৬৯৮</span></div>
+        <div class="stat-pill">সমাপ্তি: <span>আন্তর্জাতিক বিষয়াবলি বইয়ের সর্বশেষ অধ্যায়</span></div>
+      </div>
+    </section>
+
+    <!-- Master Presentation Infographics -->
+    <div class="infographic-wrapper">
+      <div class="card">
+        <div class="section-title"><span>🌐</span> ১. সাম্প্রতিক শীর্ষ সম্মেলন ও বৈশ্বিক ফোরামের গুরুত্বপূর্ণ তালিকা</div>
+        <div class="data-table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>সম্মেলন / ফোরাম</th>
+                <th>সাম্প্রতিক ও ঐতিহাসিক ভেন্যু</th>
+                <th>মূল তাৎপর্য ও বিসিএস তথ্য</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>জি-২০ (G20) শীর্ষ সম্মেলন</strong></td>
+                <td>২০২২: বালি, ইন্দোনেশিয়া<br>২০২৩: নয়া দিল্লি, ভারত<br>২০২৪: রিও ডি জেনিরো, ব্রাজিল</td>
+                <td>বিশ্বের ১৯টি প্রধান দেশ ও ইউরোপীয় ইউনিয়ন এবং আফ্রিকান ইউনিয়ন (যুক্ত ২০২৩) নিয়ে গঠিত অর্থনৈতিক মঞ্চ। ২০২৩ সালে নয়া দিল্লি সম্মেলনে আফ্রিকান ইউনিয়ন ২১তম সদস্য হিসেবে যোগ দেয়।</td>
+              </tr>
+              <tr>
+                <td><strong>মিউনিখ নিরাপত্তা সম্মেলন (MSC)</strong></td>
+                <td>মিউনিখ, জার্মানি (প্রতি বছর ফেব্রুয়ারি)</td>
+                <td>আন্তর্জাতিক নিরাপত্তা ও ভূ-রাজনীতির অন্যতম প্রভাবশালী বেসরকারি থিংক-ট্যাঙ্ক আলোচনা ফোরাম। ১৯৬৩ সাল থেকে আয়োজিত হচ্ছে।</td>
+              </tr>
+              <tr>
+                <td><strong>জি-সেভেন (G7) শীর্ষ সম্মেলন</strong></td>
+                <td>২০১৮: চার্লেভয়, কানাডা<br>২০২৩: হিরোশিমা, জাপান<br>২০২৪: আপুলিয়া, ইতালি</td>
+                <td>২০১৮ সালের কানাডা সম্মেলনের পর মার্কিন প্রেসিডেন্ট ডোনাল্ড ট্রাম্প বাণিজ্য বিরোধের কারণে যৌথ ঘোষণায় স্বাক্ষর করা থেকে বিরত থাকেন।</td>
+              </tr>
+              <tr>
+                <td><strong>জোট নিরপেক্ষ আন্দোলন (NAM) ১ম সম্মেলন</strong></td>
+                <td>১–৬ সেপ্টেম্বর ১৯৬১ (বেলগ্রেড, যুগোস্লাভিয়া)</td>
+                <td>২৫টি প্রতিষ্ঠাতা সদস্য দেশ অংশগ্রহণ করে। উদ্যোক্তা: মার্শাল টিটো, জওহরলাল নেহরু, গামাল আবদেল নাসের, আহমেদ সুকর্ণ।</td>
+              </tr>
+              <tr>
+                <td><strong>চতুর্থ বিশ্ব নারী সম্মেলন</strong></td>
+                <td>৪–১৫ সেপ্টেম্বর ১৯৯৫ (বেইজিং, চীন)</td>
+                <td>জাতিসংঘ কর্তৃক আয়োজিত। মূল ঐতিহাসিক স্লোগান ছিল: <strong>'নারীর চোখে বিশ্ব দেখুন' (Look at the world through women's eyes)</strong>। গৃহীত হয় ঐতিহাসিক 'বেইজিং ঘোষণা ও কর্মপরিকল্পনা'।</td>
+              </tr>
+              <tr>
+                <td><strong>ক্লাইমেট অ্যাডাপটেশন সামিট (CAS)</strong></td>
+                <td>জানুয়ারি ২০২১ (ভার্চুয়াল)</td>
+                <td>নেদারল্যান্ডসের উদ্যোগে আয়োজিত বৈশ্বিক জলবায়ু অভিযোজন শীর্ষ সম্মেলন।</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title"><span>📚</span> ২. লাইভ এমসিকিউ আন্তর্জাতিক বিষয়াবলি সহায়ক গ্রন্থপঞ্জি ও তথ্যসূত্র</div>
+        <div class="data-table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ক্র.</th>
+                <th>প্রধান রেফারেন্স ও তথ্যউৎস</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>১</td>
+                <td>উন্মুক্ত বিশ্ববিদ্যালয় এইচএসসি ইতিহাস (১ম ও ২য় পত্র) ও পৌরনীতি পাঠ্যবই</td>
+              </tr>
+              <tr>
+                <td>২</td>
+                <td>আন্তর্জাতিক রাজনীতিকোষ এবং বিশ্বরাজনীতির ১০০ বছর – ড. তারেক শামসুর রেহমান</td>
+              </tr>
+              <tr>
+                <td>৩</td>
+                <td>আন্তর্জাতিক বিশ্বকোষ: এনসাইক্লোপিডিয়া ব্রিটানিকা, ন্যাশনাল জিওগ্রাফিক ও বিবিসি হিস্ট্রি</td>
+              </tr>
+              <tr>
+                <td>৪</td>
+                <td>জাতিসংঘ, বিশ্বব্যাংক, আইএমএফ, ডব্লিউটিও, সার্ক ও ওআইসি অফিসিয়াল ডাটাবেজ</td>
+              </tr>
+              <tr>
+                <td>৫</td>
+                <td>সিআইএ ওয়ার্ল্ড ফ্যাক্টবুক (The World Factbook) ও ইনস্টিটিউট ফর ইকোনমিকস অ্যান্ড পিস (IEP)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz Engine Section -->
+    <div class="quiz-stats-card">
+      <div class="stats-indicators">
+        <div class="indicator-item">
+          <span class="indicator-label">অনুশীলন অগ্রগতি</span>
+          <span class="indicator-val cyan" id="scoreCount">0 / 9</span>
+        </div>
+        <div class="indicator-item">
+          <span class="indicator-label">সঠিকতার হার</span>
+          <span class="indicator-val gold" id="accuracyRate">0%</span>
+        </div>
+      </div>
+      <div class="stat-pill">অধ্যায়: <span>আন্তর্জাতিক সম্মেলন</span></div>
+    </div>
+
+    <div class="filter-pills">
+      <button class="filter-btn active" data-category="all">সব প্রশ্ন (9টি)</button>
+      <button class="filter-btn" data-category="g-summits">জি-২০ ও জি-৭ সম্মেলন</button>
+      <button class="filter-btn" data-category="global-conferences">মিউনিখ, ন্যাম ও নারী সম্মেলন</button>
+      <button class="filter-btn" data-category="bilateral-summits">বাংলাদেশ-ভারত দ্বিপাক্ষিক শীর্ষ বৈঠক</button>
+    </div>
+
+    <div class="questions-list">
+
+      <article class="mcq-card" data-category="summits" data-ans="ঘ">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">১</span>
+            <span>২০২২ সালে 0-20 শীর্ষ বৈঠ</span>
+          </div>
+          
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>োথায় অনুষ্ঠিত হয়? (</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>অপশন খ</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>তম
+বিসিএস]</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>সিংগাপুর ও) জাকার্তা ৫ ম্যানিলা ও বালী</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: ঘ</div>
+          <p>২০২২ সালে ইন্দোনেশিয়ার বালিতে এ২০ রাষ্ট্র বা
+সরকার প্রধান পর্যায়ের - ১৭-তম শীর্ষ সম্মেলন অনুষ্ঠিত হয়।
+0০%॥ সম্পর্কে বিস্তারিত:
+0০20 (01001 0117"0110)
+সব মহাদেশের উন্নত ও উন্নয়নশীল দেশের অর্থনৈতিক
+সহযোগিতা ও বৈশ্বিক অর্থনীতি সম্পর্কিত আলোচনার জন্য
+সর্বোচ্চ ফোরাম। এটি বিশ্ব জিডিপির প্রায় ৮৫%,
+বাণিজ্যের ৭৫% এবং বিশ্ব জনসংখ্যার দুই-তৃতীয়াংশের
+প্রতিনিধিত্ব করে।
+_ ব্রতি্ঠার বন ৷ বিন, জার্মান
+শ, ইউরোপীয় ইউনিয়ন
+ল্ম্গ্্ ২১টি (১৯টি দে ই
+এবং আফ্রিকান ইউনিয়ন)
+ম
+ওয়াশিংটন ডিসি, যুক্তরাষ্ট্র ।
+(২০০৮)
+সর্বশেষ জোহানেসবার্গ , দক্ষিণ আফ্রিকা (২০তম)
+সম্মেলন | পরবর্তী সম্মেলন (২০২৬)-
+(২০২৫) | মায়ামি, যুক্তরাষ্ট্র (২১তম)
+
+২, 17-8 01881178001) 01100110116 (00100130011
+বা ])8 এর দশম শীর্ষ সম্মেলন কোথায় অনুষ্ঠিত হয়? (৪২তম
+বিশেষ বিসিএস স্বাস্থ্য]
+
+ও আবুজা ও তেহরান ৫ ইস্তাম্বুল ঢাকা উ.ঘ
+ব্যাখ্যা : ২০২১ সালের ৮ এপ্রিল ঢাকায় দশম উ-৮ সম্মেলন
+অনুষ্ঠিত হ্য়।</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="bilateral-summits" data-ans="গ">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">৩</span>
+            <span>ডিসেম্বর-২০২০ এ অনুষ্ঠিত বাংলাদেশ-ভারত দ্বিপা</span>
+          </div>
+          
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>্ষিক
+ভার্চুয়াল শীর্ষ সম্মেলনে কয়টি সমোঝতা স্মারক স্বাক্ষরিত হয়?
+(</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>২তম বিশেষ বিসিএস স্বাস্থ্য]
+9৩টি ৪</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>টি ৭টি</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>৯টি</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: গ</div>
+          <p>১৭ ডিসেম্বর, ২০২০ তারিখে বাংলাদেশের তৎকালীন
+প্রধানমন্ত্রী শেখ হাসিনা ও ভারতের প্রধানমন্ত্রী নরেন্দ্র মোদির
+
+=== ch21_p_1_right.txt ===
+লি 147 ৬৯৭
+তিক সম্মেলন
+প্রশ্ন সংখ্যা প্রশ্ন সংখ্যা
+আমান মা হেত কা
+না লারা
+মত্ত ঢায জা ঢা
+০৩তম ০৮
+হ
+১ 8 ৬5০০০
+দুই দেশের প্রধানমন্ত্রীর এই ভার্চুয়াল শীর্ষ বৈঠকের আগে
+জ্বালানি, সামাজিক উন্নয়ন, কৃষিসহ সাতটি বিষয়ে সহযোগিতার
+লক্ষ্যে মোট সাতটি কাঠামো চুক্তি, প্রটোকল ও সমঝোতা
+স্মারকে স্বাক্ষর করা হয়।</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="summits" data-ans="ক">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">৪</span>
+            <span>(0০10031 "300116 ১1 অনুষ্ঠিত হয়- /৪২তম বিশেষ</span>
+          </div>
+          
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>অপশন ক</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>অপশন খ</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>অপশন গ</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>অপশন ঘ</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: ক</div>
+          <p>৪ জুন ২০২০ তারিখে যুক্তরাজ্যে 01088] খ8০০0116
+ডয110 অনুষ্ঠিত হয়েছিল।
+এই সম্মেলনে বিশ্ব নেতারা 0 া[া0-19 মহামারির
+প্রেক্ষাপটে সকলের জন্য টিকার সমান প্রবেশাধিকার নিশ্চিত
+করার জন্য প্রতিশ্রুতি প্রদান করেন। এটি বৈশ্বিক স্বাস্থ্য
+সহযোগিতার একটি নতুন যুগের সূচনা করে। বিশ্ব নেতারা
+নিশ্চিত করে যে তারা সকলের জন্য টিকার সমান সুযোগ
+দেওয়ার ব্যাপারে অঙ্গীকারবদ্ধ ।
+উল্লেখ্য, ২০২৫ সালের ১৩-১৫ নভেম্বর 01088] 8০০16
+ও যুক্তরাষ্ট্রের বোস্টনে অনুষ্ঠিত হয়।</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="g-summits" data-ans="ক">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">৫</span>
+            <span>নিচের কোন দেশে ২০২২ সালে 0-20 বাৎসরিক সম্মেলন</span>
+          </div>
+          <span class="bcs-tag">৪০তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>অপশন ক</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>অপশন খ</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>অপশন গ</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>অপশন ঘ</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: ক</div>
+          <p>২০২২ সালে জি-২০ সম্মেলন ১৭তম সম্মেলন
+ইন্দোনেশিয়া, ২০২৩ সালে ১৮তম সম্মেলন ভারতে অনুষ্ঠিত
+হ্য়।
+উল্লেখ্য, ২০২৪ সালে ১৯তম সম্মেলন ব্রাজিলে অনুষ্ঠিত হয়
+এবং ২০২৫ সালের ২০তম জি-২০ শীর্ষ সম্মেলন অনুষ্ঠিত হয়
+জোহানেসবার্গ, দক্ষিণ আফ্রিকা । ২০২৬ সালের ২১তম জি-
+তু ক সক দর টা
+
+=== ch21_p_2_left.txt ===</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="global-conferences" data-ans="ক">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">৬</span>
+            <span>সর্বশেষ মিউনিখ নিরাপত্তা সম্মেলন</span>
+          </div>
+          
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>োন সালের কোন মান
+অনুষ্ঠিত হয়েছে? (</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>০তম বিসিএস]
+ও সেপ্টেম্বর, ২০১৮ ও মার্চ, ২০১৯</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>ফেব্রুয়ারি, ২০১৯</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>ডিসেম্বর, ২০১৮
+উত্তর: অপশনে সঠিক উত্তর নেই।</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: ক</div>
+          <p>জার্মানিতে ১৫ ফেব্রুয়ারি ২০১৯ অনুষ্ঠিত মিউনি'
+নিরাপত্তা সম্মেলন হয়েছে।
+উল্লেখ্য , সর্বশেষ ৬২তম মিখনিখ নিরাপত্তা সম্মেলন ২০২
+সালের ১৩ ফেব্রুয়ারি থেকে ১৫ ফেব্রুয়ারি ।</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="g-summits" data-ans="ক">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">৭</span>
+            <span>২০১৮ সালে অনুষ্ঠিত জি-সেভেন শীর্ষ সম্মেলনের পর যৌ:ং</span>
+          </div>
+          
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>অপশন ক</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>অপশন খ</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>অপশন গ</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>অপশন ঘ</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: ক</div>
+          <p>২০১৮ সালে কানাডার কুইবেক অঙ্গরাজ্যে অনুষ্ঠিত
+জি-৭ সম্মেলনের পর গৃহীত যৌথ ঘোষণায় স্বাক্ষর প্রদানে
+যুক্তরাষ্ট্র বিরত ছিল।
+উলেখ্য, সর্বশেষ ৫১তম জি-সেভেন সম্মেলন ২০২৫ সালে
+১৫-১৭ জুন কানাডা'তে অনুষ্ঠিত হয়। পরবর্তী ৫২তম সম্মেল
+অনুষ্ঠিত হবে ২০২৬ সালে ফ্রাঙ্গে ।</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="summits" data-ans="ক">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">৮</span>
+            <span>এ বছর তামাক নিয়ন্ত্রণে আন্তর্জাতিক জেনেভা সম্মেল-</span>
+          </div>
+          
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>অপশন ক</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>অপশন খ</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>অপশন গ</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>অপশন ঘ</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: ক</div>
+          <p>প্রশ্নে উল্লিখিত এ বছর বলতে ২০০৪ সালবে
+বোঝানো হয়েছে। ২০০৪ সালে তামাক নিয়ন্ত্রণে আন্তর্জাতি
+জেনেভা সম্মেলনে সভাপতিত্ব করেন পাকিস্তানের স্বাস্থ্য মন
+মোহাম্মদ নাসের খান।
+উল্লেখ্য, সর্বশেষ ২০২১ সালের আন্তর্জাতিক তামাক নিয়ন্্
+সম্মেলন আয়ারল্যান্ডের ডাবলিনে অনুষ্ঠিত হয়। এর সভাপতি
+করেন আয়ারল্যান্ডের স্টিফেন ডনেলি।</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="summits" data-ans="ক">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">৯</span>
+            <span>জোট নিরপে</span>
+          </div>
+          
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>্ষ দেশসমূহের প্রথম শীর্ষ সম্মেলন কোথা
+অনুষ্ঠিত হয়? [২৫তম বিসিএস|</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>দিল্লি ও কায়রো € বেল</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>্নেড</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>জাকার্তা</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: ক</div>
+          <p>১৯৬১ সালে যুগোস্লাভিয়ার রাজধানী বেলগ্রেডে, জো
+নিরপেক্ষ আন্দোলন (4/4) এর প্রথম শীর্ষ সম্মেলন অনুষ্ঠি
+হ্য়।
+উল্লেখ্য, সর্বশেষ ১৯তম সম্মেলন উগান্ডার ক্যামপালা'দে
+অনুষ্ঠিত হয়। ২০২৭ সালে জোট নিরপেক্ষ আন্দোলনে
+২০তম শীর্ষ সম্মেলন অনুষ্ঠিত হবে উজবেকিস্তানে।
+
+=== ch21_p_2_right.txt ===</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="bilateral-summits" data-ans="ক">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">১০</span>
+            <span>১৯৯৫ সালে বেইজিং-এ অনুষ্ঠিত চতুর্থ বিশ্ব নারী সম্মেলনের</span>
+          </div>
+          
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>অপশন ক</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>অপশন খ</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>অপশন গ</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>অপশন ঘ</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: ক</div>
+          <p>১৯৯৫ সালে বেইজিং এ অনুষ্ঠিত চতুর্থ বিশ্ব নারী
+সম্মেলন হয়। যার মুল প্লোগান ছিল নারীর দৃষ্টিতে বিশ্বকে
+দেখো।
+[16 1001 আ্যাপ থেকে ঢা এ [|
+এই টপিকের আরও 100 দে
+অনুশীলন করতে পাশে থাকা ৮. দ্র! পন
+01২ কোডটি 30311 করুন। 07125
+0810:181861
+
+চা '
+
+বিষয়ের প্রশ্নসমূহের উত্তর ও ব্যাখ্যার উৎস/গ্রন্থপঞ্জি:
+
+১, বাংলাদেশের ইতিহাস ও বিশ্বসভ্যতা, নবম-দশম শ্রেণি _</p>
+        </div>
+      </article>
+
+    </div>
+
+  </main>
+
+  <script>
+    let answered = 0;
+    let correct = 0;
+
+    function toggleExp(btn) {
+      const drawer = btn.nextElementSibling;
+      drawer.classList.toggle('open');
+      btn.textContent = drawer.classList.contains('open') ? '🔼 ব্যাখ্যা সংক্ষেপ করুন' : '💡 ব্যাখ্যা দেখুন';
+    }
+
+    document.querySelectorAll('.mcq-card').forEach(card => {
+      const correctAns = card.getAttribute('data-ans');
+      const optBtns = card.querySelectorAll('.opt-btn');
+      const drawer = card.querySelector('.exp-drawer');
+      const toggleBtn = card.querySelector('.exp-toggle-btn');
+
+      optBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.classList.contains('locked')) return;
+
+          optBtns.forEach(b => b.classList.add('locked'));
+          const chosen = btn.getAttribute('data-opt');
+
+          answered++;
+          if (chosen === correctAns) {
+            btn.classList.add('correct');
+            correct++;
+          } else {
+            btn.classList.add('wrong');
+            optBtns.forEach(b => {
+              if (b.getAttribute('data-opt') === correctAns) b.classList.add('correct');
+            });
+          }
+
+          drawer.classList.add('open');
+          toggleBtn.textContent = '🔼 ব্যাখ্যা সংক্ষেপ করুন';
+
+          document.getElementById('scoreCount').textContent = `${correct} / ${answered}`;
+          const pct = Math.round((correct / answered) * 100);
+          document.getElementById('accuracyRate').textContent = `${pct}%`;
+        });
+      });
+    });
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.getAttribute('data-category');
+        document.querySelectorAll('.mcq-card').forEach(card => {
+          if (cat === 'all' || card.getAttribute('data-category') === cat) card.style.display = 'block';
+          else card.style.display = 'none';
+        });
+      });
+    });
+
+    const themeBtn = document.getElementById('themeToggleBtn');
+    themeBtn.addEventListener('click', () => {
+      const current = document.body.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', next);
+      themeBtn.textContent = next === 'dark' ? '🌙' : '☀️';
+    });
+
+    let currentScale = 1.0;
+    const updateFontScale = (scale) => {
+      currentScale = scale;
+      document.documentElement.style.setProperty('--font-scale', scale + 'rem');
+    };
+    document.getElementById('fontDecBtn').addEventListener('click', () => {
+      if (currentScale > 0.8) updateFontScale(+(currentScale - 0.05).toFixed(2));
+    });
+    document.getElementById('fontIncBtn').addEventListener('click', () => {
+      if (currentScale < 1.35) updateFontScale(+(currentScale + 0.05).toFixed(2));
+    });
+    document.getElementById('fontResetBtn').addEventListener('click', () => updateFontScale(1.0));
+
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const st = h.scrollTop || document.body.scrollTop;
+      const sh = h.scrollHeight || document.body.scrollHeight;
+      const percent = (st / (sh - h.clientHeight)) * 100;
+      document.getElementById('progressBar').style.width = Math.min(100, Math.max(0, percent)) + '%';
+    });
+  </script>
+
+  <script src="nav-component.js"></script>
+</body>
+</html>

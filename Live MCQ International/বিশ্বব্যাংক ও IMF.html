@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বিশ্বব্যাংক ও IMF - লাইভ এমসিকিউ আন্তর্জাতিক</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-scale: 1rem;
+      --bg-primary: #0a0f1d;
+      --bg-secondary: #10192e;
+      --bg-card: rgba(19, 31, 56, 0.85);
+      --card-border: rgba(148, 163, 184, 0.14);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-gold: #fbbf24;
+      --gold-glow: rgba(251, 191, 36, 0.25);
+      --accent-cyan: #38bdf8;
+      --accent-emerald: #10b981;
+      --accent-rose: #f43f5e;
+      --nav-bg: rgba(10, 15, 29, 0.92);
+      --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #f1f5f9;
+      --bg-card: rgba(255, 255, 255, 0.92);
+      --card-border: rgba(203, 213, 225, 0.8);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --accent-gold: #d97706;
+      --gold-glow: rgba(217, 119, 6, 0.15);
+      --accent-cyan: #0284c7;
+      --accent-emerald: #059669;
+      --accent-rose: #e11d48;
+      --nav-bg: rgba(248, 250, 252, 0.95);
+      --shadow-soft: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Hind Siliguri', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-size: var(--font-scale);
+      line-height: 1.65;
+      padding-bottom: 5rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .progress-bar-container { position: fixed; top: 0; left: 0; width: 100%; height: 4px; z-index: 1000; }
+    .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #38bdf8, #fbbf24, #10b981); }
+
+    header.sticky-header {
+      position: sticky; top: 4px; z-index: 900;
+      backdrop-filter: blur(14px);
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--card-border);
+      padding: 0.75rem 1rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+    }
+    .brand-group { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
+    .book-badge {
+      display: inline-flex; align-items: center;
+      background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 9999px;
+      padding: 0.2rem 0.65rem; font-size: 0.75rem; font-weight: 700; white-space: nowrap;
+    }
+    .chapter-heading-bar {
+      font-size: 0.95rem; font-weight: 700; color: var(--text-main);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .controls-group { display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
+    .control-btn {
+      background: var(--bg-card); border: 1px solid var(--card-border); color: var(--text-main);
+      padding: 0.35rem 0.65rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+    }
+    .control-btn:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+
+    .main-container { max-width: 960px; margin: 1.5rem auto; padding: 0 1rem; }
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(16, 25, 46, 0.95), rgba(30, 58, 138, 0.4));
+      border: 1px solid var(--card-border); border-radius: 20px;
+      padding: 2rem 1.5rem; text-align: center; margin-bottom: 2rem;
+      box-shadow: var(--shadow-soft);
+    }
+    [data-theme="light"] .hero-banner { background: linear-gradient(135deg, #ffffff, #f0f9ff); }
+    .unit-tag { color: var(--accent-cyan); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; display: block; }
+    .hero-title { font-size: clamp(1.3rem, 3.8vw, 2.0rem); font-weight: 700; color: var(--text-main); line-height: 1.3; margin-bottom: 0.75rem; }
+    .hero-desc { color: var(--text-muted); font-size: 0.95rem; max-width: 760px; margin: 0 auto 1.25rem; }
+    .hero-stats { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+    .stat-pill { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); padding: 0.4rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; }
+    .stat-pill span { color: var(--accent-cyan); font-weight: 700; }
+
+    .infographic-wrapper { margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    .section-title { font-size: 1.25rem; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 0.65rem; }
+    .card { background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 16px; padding: 1.25rem; box-shadow: var(--shadow-soft); backdrop-filter: blur(8px); }
+
+    .data-table-container { overflow-x: auto; border-radius: 12px; border: 1px solid var(--card-border); margin-top: 0.75rem; }
+    table.data-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem; }
+    table.data-table th, table.data-table td { padding: 0.8rem 1rem; border-bottom: 1px solid var(--card-border); }
+    table.data-table th { background: rgba(56, 189, 248, 0.08); color: var(--accent-cyan); font-weight: 700; white-space: nowrap; }
+    .badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-cyan { background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan); border: 1px solid rgba(56, 189, 248, 0.3); }
+    .badge-gold { background: rgba(251, 191, 36, 0.15); color: var(--accent-gold); border: 1px solid rgba(251, 191, 36, 0.3); }
+    .badge-emerald { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.3); }
+
+    .quiz-stats-card {
+      background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 14px;
+      padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .stats-indicators { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+    .indicator-item { display: flex; flex-direction: column; }
+    .indicator-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
+    .indicator-val { font-size: 1.2rem; font-weight: 700; color: var(--text-main); }
+    .indicator-val.cyan { color: var(--accent-cyan); }
+    .indicator-val.gold { color: var(--accent-gold); }
+
+    .filter-pills { display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+    .filter-btn { background: var(--bg-card); border: 1px solid var(--card-border); color: var(--text-muted); padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .filter-btn.active, .filter-btn:hover { background: var(--accent-cyan); color: #000; border-color: var(--accent-cyan); font-weight: 700; }
+
+    .mcq-card { background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 16px; padding: 1.25rem; margin-bottom: 1.25rem; box-shadow: var(--shadow-soft); }
+    .mcq-card:hover { border-color: rgba(56, 189, 248, 0.3); }
+    .q-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.85rem; }
+    .q-num-title { display: flex; gap: 0.65rem; font-size: 1.05rem; font-weight: 600; color: var(--text-main); line-height: 1.45; }
+    .q-number { background: linear-gradient(135deg, var(--accent-cyan), #0284c7); color: #fff; width: 28px; height: 28px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .bcs-tag { background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan); border: 1px solid rgba(56, 189, 248, 0.3); font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
+
+    .options-grid { display: grid; grid-template-columns: 1fr; gap: 0.6rem; margin-top: 0.85rem; }
+    @media (min-width: 640px) { .options-grid { grid-template-columns: 1fr 1fr; } }
+    .opt-btn { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--card-border); color: var(--text-main); border-radius: 10px; padding: 0.75rem 1rem; text-align: left; font-size: 0.92rem; cursor: pointer; display: flex; align-items: center; gap: 0.75rem; }
+    .opt-btn:hover:not(.locked) { background: rgba(56, 189, 248, 0.08); border-color: var(--accent-cyan); }
+    .opt-letter { width: 24px; height: 24px; border-radius: 50%; background: rgba(148, 163, 184, 0.15); display: inline-flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; flex-shrink: 0; }
+    .opt-btn.correct { background: rgba(16, 185, 129, 0.18) !important; border-color: var(--accent-emerald) !important; color: #34d399 !important; font-weight: 600; }
+    .opt-btn.correct .opt-letter { background: var(--accent-emerald); color: #fff; }
+    .opt-btn.wrong { background: rgba(244, 63, 94, 0.18) !important; border-color: var(--accent-rose) !important; color: #fb7185 !important; }
+    .opt-btn.wrong .opt-letter { background: var(--accent-rose); color: #fff; }
+
+    .exp-drawer { margin-top: 0.85rem; padding: 1rem; background: rgba(15, 23, 42, 0.6); border: 1px solid var(--card-border); border-left: 3px solid var(--accent-cyan); border-radius: 10px; font-size: 0.88rem; color: var(--text-muted); display: none; }
+    [data-theme="light"] .exp-drawer { background: #f8fafc; }
+    .exp-drawer.open { display: block; }
+    .exp-title { font-weight: 700; color: var(--accent-cyan); margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.4rem; }
+    .exp-toggle-btn { margin-top: 0.75rem; background: transparent; border: none; color: var(--accent-cyan); font-size: 0.82rem; font-weight: 600; cursor: pointer; }
+  </style>
+</head>
+<body data-theme="dark">
+
+  <div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+
+  <header class="sticky-header">
+    <div class="brand-group">
+      <span class="book-badge">আন্তর্জাতিক বিষয়াবলি</span>
+      <div class="chapter-heading-bar">অধ্যায় ১৭: বিশ্বব্যাংক ও IMF</div>
+    </div>
+    <div class="controls-group">
+      <button class="control-btn" id="fontDecBtn">A-</button>
+      <button class="control-btn" id="fontResetBtn">A</button>
+      <button class="control-btn" id="fontIncBtn">A+</button>
+      <button class="control-btn" id="themeToggleBtn">🌙</button>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <section class="hero-banner">
+      <span class="unit-tag">ইউনিট ৪: আন্তর্জাতিক সংগঠন ও বৈশ্বিক প্রতিষ্ঠান (পৃষ্ঠা ৬৭৪–৬৭৭)</span>
+      <h1 class="hero-title">বিশ্বব্যাংক ও IMF</h1>
+      <p class="hero-desc">ব্রেটন উডস টুইনস (Bretton Woods Twins), বিশ্বব্যাংক গ্রুপের ৫টি প্রতিষ্ঠান (IBRD, IDA, IFC, MIGA, ICSID), নরম ঋণের জানালা (Soft Loan Window), আন্তর্জাতিক মুদ্রা তহবিল (IMF), এসডিআর বা পেপার গোল্ড (Paper Gold) সম্পর্কিত বিসিএস পরীক্ষার অত্যন্ত গুরুত্বপূর্ণ প্রশ্ন ও বিশদ সমাধান।</p>
+      <div class="hero-stats">
+        <div class="stat-pill">মোট প্রশ্ন: <span>15 টি</span></div>
+        <div class="stat-pill">পাঠ্যবই পৃষ্ঠা: <span>৬৭৪–৬৭৭</span></div>
+        <div class="stat-pill">কেন্দ্রবিন্দু: <span>ব্রেটন উডস প্রতিষ্ঠান ও বৈশ্বিক অর্থায়ন</span></div>
+      </div>
+    </section>
+
+    <!-- Master Presentation Infographics -->
+    <div class="infographic-wrapper">
+      <div class="card">
+        <div class="section-title"><span>🏦</span> ১. ব্রেটন উডস টুইনস: বিশ্বব্যাংক ও IMF তুলনামূলক চিত্র</div>
+        <div class="data-table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>বৈশিষ্ট্য</th>
+                <th>বিশ্বব্যাংক (World Bank / WBG)</th>
+                <th>আন্তর্জাতিক মুদ্রা তহবিল (IMF)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>প্রতিষ্ঠার সম্মেলন</strong></td>
+                <td>ব্রেটন উডস সম্মেলন (১–২২ জুলাই ১৯৪৪, নিউ হ্যাম্পশায়ার, যুক্তরাষ্ট্র)</td>
+                <td>ব্রেটন উডস সম্মেলন (১–২২ জুলাই ১৯৪৪, নিউ হ্যাম্পশায়ার, যুক্তরাষ্ট্র)</td>
+              </tr>
+              <tr>
+                <td><strong>আনুষ্ঠানিক প্রতিষ্ঠা</strong></td>
+                <td>২৭ ডিসেম্বর ১৯৪৫ (কার্যক্রম শুরু ২৫ জুন ১৯৪৬)</td>
+                <td>২৭ ডিসেম্বর ১৯৪৫ (কার্যক্রম শুরু ১ মার্চ ১৯৪৭)</td>
+              </tr>
+              <tr>
+                <td><strong>সদর দপ্তর</strong></td>
+                <td>ওয়াশিংটন ডিসি, যুক্তরাষ্ট্র</td>
+                <td>ওয়াশিংটন ডিসি, যুক্তরাষ্ট্র</td>
+              </tr>
+              <tr>
+                <td><strong>বর্তমান সদস্য</strong></td>
+                <td><span class="badge badge-cyan">১৮৯টি দেশ</span> (সর্বশেষ নাউরু, ২০১৬)</td>
+                <td><span class="badge badge-cyan">১৯০টি দেশ</span> (সর্বশেষ অ্যান্ডোরা, ২০২০)</td>
+              </tr>
+              <tr>
+                <td><strong>শীর্ষ কর্মকর্তা</strong></td>
+                <td>প্রেসিডেন্ট: <strong>অজয় বাঙ্গা (Ajay Banga)</strong> (ঐতিহ্যগতভাবে মার্কিন নাগরিক)</td>
+                <td>ব্যবস্থাপনা পরিচালক (MD): <strong>ক্রিস্টালিনা জর্জিয়েভা</strong> (ঐতিহ্যগতভাবে ইউরোপীয়)</td>
+              </tr>
+              <tr>
+                <td><strong>মূল দায়িত্ব ও লক্ষ্য</strong></td>
+                <td>দীর্ঘমেয়াদী উন্নয়ন ঋণ ও অনুদান প্রদান; চরম দারিদ্র্য বিমোচন ও সমতা বৃদ্ধি।</td>
+                <td>স্বল্পমেয়াদী ঋণ; সদস্য দেশের লেনদেনের ভারসাম্য (Balance of Payments) ঘাটতি পূরণ ও বৈশ্বিক মুদ্রা ব্যবস্থার স্থিতিশীলতা।</td>
+              </tr>
+              <tr>
+                <td><strong>বার্ষিক প্রকাশনা</strong></td>
+                <td>বিশ্ব উন্নয়ন প্রতিবেদন (World Development Report - WDR)</td>
+                <td>বিশ্ব অর্থনৈতিক দৃষ্টিভঙ্গি (World Economic Outlook - WEO)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title"><span>🏢</span> ২. বিশ্বব্যাংক গ্রুপ (World Bank Group - WBG)-এর ৫টি অঙ্গপ্রতিষ্ঠান</div>
+        <div class="data-table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>অঙ্গপ্রতিষ্ঠান</th>
+                <th>প্রতিষ্ঠা সাল</th>
+                <th>কাজের পরিধি ও বিশিষ্ট ভূমিকা</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>IBRD</strong> (পুনর্গঠন ও উন্নয়নের জন্য আন্তর্জাতিক ব্যাংক)</td>
+                <td>১৯৪৪ (কার্যকর ১৯৪৫)</td>
+                <td>মধ্যম আয়ের ও ঋণ পরিশোধে সক্ষম দরিদ্র দেশগুলোকে বাজারভিত্তিক সুদে ঋণ প্রদান করে।</td>
+              </tr>
+              <tr>
+                <td><strong>IDA</strong> (আন্তর্জাতিক উন্নয়ন সমিতি)</td>
+                <td>২৪ সেপ্টেম্বর ১৯৬০</td>
+                <td>বিশ্বব্যাংকের <strong>'নরম ঋণের জানালা' (Soft Loan Window)</strong> হিসেবে পরিচিত। স্বল্পোন্নত ও দরিদ্র দেশগুলোকে নামমাত্র সুদে (বা সুদবিহীন) দীর্ঘমেয়াদী রেয়াতি ঋণ প্রদান করে।</td>
+              </tr>
+              <tr>
+                <td><strong>IFC</strong> (আন্তর্জাতিক অর্থায়ন কর্পোরেশন)</td>
+                <td>২০ জুলাই ১৯৫৬</td>
+                <td>উন্নয়নশীল দেশসমূহের <strong>বেসরকারি খাতে</strong> সরাসরি বিনিয়োগ, ঋণ ও বাণিজ্যিক পরামর্শ প্রদান করে।</td>
+              </tr>
+              <tr>
+                <td><strong>MIGA</strong> (বহুপাক্ষিক বিনিয়োগ গ্যারান্টি সংস্থা)</td>
+                <td>১২ এপ্রিল ১৯৮৮</td>
+                <td>উন্নয়নশীল দেশে বৈদেশিক প্রত্যক্ষ বিনিয়োগ (FDI) উৎসাহিত করতে বিনিয়োগকারীদের <strong>অ-বাণিজ্যিক ও রাজনৈতিক ঝুঁকি বীমা</strong> প্রদান করে।</td>
+              </tr>
+              <tr>
+                <td><strong>ICSID</strong> (বিনিয়োগ বিরোধ নিষ্পত্তির আন্তর্জাতিক কেন্দ্র)</td>
+                <td>১৪ অক্টোবর ১৯৬৬</td>
+                <td>বিদেশী বিনিয়োগকারী ও সদস্য রাষ্ট্রগুলোর মধ্যকার বিনিয়োগ সংক্রান্ত আইনি বিরোধ মধ্যস্থতা ও নিষ্পত্তির কাজ করে।</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title"><span>🪙</span> ৩. আইএমএফ-এর পেপার গোল্ড ও এসডিআর (SDR) ঝুড়ি</div>
+        <div class="data-table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>বিষয়বস্তু</th>
+                <th>মূল তথ্য ও বিসিএস সারসংক্ষেপ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>এসডিআর (SDR)</strong></td>
+                <td>Special Drawing Rights (বিশেষ উত্তোলন অধিকার)। ১৯৬৯ সালে আইএমএফ কর্তৃক সদস্য দেশগুলোর আনুষ্ঠানিক মুদ্রার পরিপূরক হিসেবে প্রবর্তিত হয়। একে আন্তর্জাতিক অর্থনীতিতে <strong>'পেপার গোল্ড' (Paper Gold)</strong> বলা হয়।</td>
+              </tr>
+              <tr>
+                <td><strong>মুদ্রার ঝুড়ি (SDR Basket)</strong></td>
+                <td>এসডিআরের মান নির্ধারণে বর্তমানে বিশ্বের ৫টি প্রধান আন্তর্জাতিক মুদ্রা ব্যবহৃত হয়: <strong>১. মার্কিন ডলার, ২. ইউরো, ৩. চীনা ইউয়ান (রেনমিনবি), ৪. জাপানি ইয়েন, ৫. ব্রিটিশ পাউন্ড</strong>। ২০১৬ সালের ১ অক্টোবর চীনা ইউয়ান এসডিআর ঝুড়িতে আনুষ্ঠানিকভাবে অন্তর্ভুক্ত হয়।</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz Engine Section -->
+    <div class="quiz-stats-card">
+      <div class="stats-indicators">
+        <div class="indicator-item">
+          <span class="indicator-label">অনুশীলন অগ্রগতি</span>
+          <span class="indicator-val cyan" id="scoreCount">0 / 15</span>
+        </div>
+        <div class="indicator-item">
+          <span class="indicator-label">সঠিকতার হার</span>
+          <span class="indicator-val gold" id="accuracyRate">0%</span>
+        </div>
+      </div>
+      <div class="stat-pill">অধ্যায়: <span>বিশ্বব্যাংক ও IMF</span></div>
+    </div>
+
+    <div class="filter-pills">
+      <button class="filter-btn active" data-category="all">সব প্রশ্ন (15টি)</button>
+      <button class="filter-btn" data-category="bretton-woods">ব্রেটন উডস সম্মেলন</button>
+      <button class="filter-btn" data-category="wb">বিশ্বব্যাংক (World Bank)</button>
+      <button class="filter-btn" data-category="imf">আন্তর্জাতিক মুদ্রা তহবিল (IMF & SDR)</button>
+      <button class="filter-btn" data-category="wbg-arms">বিশ্বব্যাংকের সহযোগী প্রতিষ্ঠান (IDA, MIGA, IFC)</button>
+    </div>
+
+    <div class="questions-list">
+
+      <article class="mcq-card" data-category="imf" data-ans="গ">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">১</span>
+            <span>আন্তর্জাতিক অর্থায়নের ভিত্তি স্থাপনে ব্রেটন উডস্‌ (81000011</span>
+          </div>
+          <span class="bcs-tag">৫০তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>অপশন ক</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>অপশন খ</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>অপশন গ</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>অপশন ঘ</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: গ</div>
+          <p>আন্তর্জাতিক অর্থায়নের ভিত্তি ্থাপনে এঁতিহাসিক
+ব্রেটন উডস সম্মেলন ১৯৪৪ সালের ১ থেকে ২২ জুলাই মার্কিন
+যুক্তরাষ্ট্রের নিউ হ্যাম্পশায়ারের ব্রেটন উডসের মাউন্ট
+ওয়াশিংটন হোটেলে অনুষ্ঠিত হয়েছিল ।
+ব্রেটন উডস সম্মেলন : ব্লেটন উডস সম্মেলন আনুষ্ঠানিকভাবে
+1160. 8001703 14019815 8100 চা1811018]
+8101106 নামে পরিচিত।
+১৯৪৪ সালের ১-২২ জুলাই যুক্তরাষ্ট্রের নিউ হ্যাম্পশায়ার
+অঙ্গরাজ্যের ব্রেটন উডস নামক স্থানে মাউন্ট ওয়াশিংটন
+হোটেলে অনুষ্ঠিত হয়েছিল। সম্মেলনের মূল উদ্দেশ্য ছিল
+দ্বিতীয় বিশ্বযুদ্ধের পর প্রায় বিধ্বস্ত বিশ্ব অর্থনীতিকে সচল
+করা।
+এই সম্মেলনে 8৪টি দেশের ৭৩০ জন প্রতিনিধি অংশ নেন।
+সম্মেলনের প্রধান উদ্যোক্তা ছিলেন যুক্তরাষ্ট্রের সেক্রেটারি অব
+দ্য স্টেটের বিশেষ সহকারী হ্যারি ডেক্সটার হোয়াইট এবং
+ব্রিটিশ অর্থনীতিবিদ জন মেনার্ড কেইনস।
+১৯৪৪-এর এ সম্মেলনের সূত্র ছিল ১৯৪১ সালের আটলান্টিক
+কনফারেঙ্সে। ১৯৪৪-এর জুনে আটলান্টিক শহরে একটি
+প্রাথমিক সম্মেলন হয় এবং তারই ধারাবাহিকতায় ১ জুলাই
+বসে চুড়ান্ত ব্রেটন উডস কনফারেন।
+এ সম্মেলনে দুটি প্রতিষ্ঠান জন্ম নেয়- [147 এবং 181২1
+181২1 বিশ্বব্যাংকে পরিণত হয়। 147 এবং 11২1 যাত্রা
+শুরু করে ১৯৪৫ সালের ২৭ ডিসেম্বর
+শুরুতে আইএমএফের প্রধান কাজ নির্ধারণ করা হয়েছিল
+আমেরিকান ডলার ও স্বর্ণের ভিত্তিতে মুদ্রা বিনিময় হারে
+ভারসাম্য বজায় রাখা। অন্যদিকে আইবিআরডির দায়িত্ব ছিল
+যুদ্ধবিধ্বস্ত দেশগুলো পুনর্নির্মাণ এবং স্বল্পোন্নত দেশগুলোর
+অর্থনৈতিক উন্নয়নে সহায়তা করা।
+উল্লেখ্য, ১৯৪৫ সালের ২৭ ডিসেম্বর যুক্তরাষ্ট্রের কংগ্রেস
+বিশ্বব্যাংক ও [48 গঠনের /100169 01 /“81০০170110
+
+=== ch17_p_1_right.txt ===
+ব সলু্যুশণ (ব্বষগ।ভাও৭/) ৮৭ ৩৭৪
+9 [খা
+ব্স্্যা [| বিপদ ] এ্সস্ম্যা |
+
+সঙ্গ ছা
+
+১
+
+আমা দাতা দান
+
+১ ৩৫তম ০
+
+০: তগম-8ভস ৯৮]
+
+০ টা
+যুক্তরাষ্ট্রের নিউ হ্যাম্পশায়ার শহরে ২৯টি দেশ ব্রেটন উডস
+চুক্তিতে স্বাক্ষর করে। মোট ২৯টি দেশের অনুমোদন নিয়ে
+আনুষ্ঠানিকভাবে ১৯৪৫ সালের ২৭ ডিসেম্বর বিশ্বব্যাংক ও
+4 প্রতিষ্ঠিত হয়।
+উৎস: 70114 :9071 0707 ওয়েবসাইট, (1.5. 10670117197! ঠ
+91016 (80) ওয়েবসাইট ।</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="imf" data-ans="খ">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">২</span>
+            <span>বিশ্ব অর্থনীতিতে 'পেপার গোল্ড' (08061 0010) বলতে কী</span>
+          </div>
+          
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>অপশন ক</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>অপশন খ</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>অপশন গ</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>অপশন ঘ</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: খ</div>
+          <p>বিশ্ব অর্থনীতিতে “পেপার গোল্ড' (2806 0010)
+বলতে বোঝায় বিশেষ উত্তোলন অধিকার (3131২) ।
+১101২: 9131২-এর পূর্ণরূপ 30০01911213 1118 ২1615 বা
+বিশেষ উত্তোলন অধিকার। এটি আন্তর্জাতিক মুদ্রা তহবিল
+147) দ্বারা তৈরি একটি বিশেষ ধরনের মুদ্রা । [148 ১৯৬৯
+সালে 3131 প্রবর্তন করে। এটি কোনো দেশের স্থানীয় মদ্র
+নয় বরং একটি আন্তর্জাতিক 'মুদ্রা ইউনিট' যা বিভিন্ন দেশ _
+তাদের আর্থিক প্রয়োজন মেটাতে ব্যবহার করতে পারে।
+911২ এমনভাবে তৈরি হয়েছে যেন বিশ্বের দেশগুলো একে
+ব্যবহার করে তাদের অর্থনৈতিক সমস্যা সমাধান করতে
+পারে।
+বিশ্ব অর্থনীতিতে আন্তর্জাতিক মুদ্রা তহবিলের 30০08 |
+18018 ২1615 (317)-কে 'পেপার গোল্ড' (থা .
+0010) বোঝানো হয়।
+এটি একটি আন্তর্জাতিক রিজার্ভ সম্পদ হিসেবে কাজ করে। _
+এটি কোনো বাস্তব মুদ্রা বা সোনা নয় বরং একটি কাগজের
+(0391-03560) সম্পদ যা সোনার মতো রিজার্ভের ভূমিকা :
+পালন করে বলে এর নামকরণ করা হয় "3091 0010" ৷
+উল্লেখ্য, প্রথমদিকে ও1)1২-এর মূল্য নির্ধারিত হয়েছিল সোনার
+সাথে সম্পর্কিত (0.888671 গ্রাম বিশুদ্ধ সোনা ₹ ১ 927,
+যা তখন ১ মার্কিন ডলারের সমান ছিল)। এটি সোনা ও :
+ডলারের উপর অতিরিক্ত নির্ভরতা কমাতে এবং বিশ্বব্যাপী
+
+=== ch17_p_2_left.txt ===
+পসীতণগা তন 1
+বর্তমানে 3া37২-এর মূল্য পাচটি প্রধান মুদ্রা যথা- মার্কিন
+ডলার (0912), ইউরো (ঢ্য্যা), চীনা রেনমিনবি (শো),
+জাপানি ইয়েন (%) এবং ব্রিটিশ পাউন্ড (077) -এর ওপর
+নির্ভর করে।
+উৎস: [৮17 ওয়েবসাইট, 1[%৮০5/07601৫ ওয়েবসাইট ।</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="wb" data-ans="ক">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">৩</span>
+            <span>মানল্টিল্যাটারাল ইনভেস্টমেন্ট গ্যারান্টি এজেগি (1102)</span>
+          </div>
+          <span class="bcs-tag">৫০তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>অপশন ক</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>অপশন খ</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>অপশন গ</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>অপশন ঘ</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: ক</div>
+          <p>মাল্টিল্যাটারাল ইনভেস্টমেন্ট গ্যারান্টি এজেক্ি
+
+(410৬) বিশ্বব্যাংক গ্রুপের অংশ ।
+
+বিশ্বব্যাংক গ্রুপ : বিশ্বব্যাংক গ্রুপ ৫টি আর্থিক প্রতিষ্ঠানের
+সমন্বয়ে গঠিত প্রতিষ্ঠানগুলো হলো:
+
+1. 1া0110800108] 810 ৫1 ০00115000001) 8110
+17০49100100110 (01781২1))
+
+2. ]11001118001181 17711181106 €০010018001) (070)
+
+3. 14001180618] 1114০501161 00818110666 /১8০1101
+0এ4া0/.ৌ
+
+4. 1 11080018] 061] পি! ৩০001009100 0
+[া14০50111101)1900065 (10311)
+
+5. 111001118001181 176০1011010 /১৪90018001) (172৬)
+1104 : মাল্টিল্যাটারাল ইনভেস্টমেন্ট গ্যারান্টি এজেন্
+(404) উন্নয়নশীল দেশগুলোতে বিদেশি সরাসরি বিনিয়ো'
+(ঢাস1) প্রচার ও সুরক্ষিত করার জন্য কাজ করে।
+
+* প্রতিষ্ঠিত হয়: ১২ এপ্রিল, ১৯৮৮ ।
+
+* বর্তমান সদস্য: ১৮২টি ।
+
+* সদরদণপ্তর: ওয়াশিংটন ডি.সি., যুক্তরাষ্ট্র ৷
+
+উদ্দেশ্য: বৈদেশিক বিনিয়োগে মধ্যস্থতা এবং গ্যারান্টি প্রদানে
+মাধ্যমে উন্নয়নশীল দেশগুলোকে সরাসরি বৈদেশিক বিনিয়ো'ে
+সহায়তা করে থাকে।
+
+লক্ষ্য: বিদেশী বিনিয়োগকারীদের রাজনৈতিক ঝুঁকি থেবে
+সুরক্ষা দেওয়া, উন্নয়নশীল দেশগুলিতে টেকসই বিনিয়োগ বৃদ্ি
+করা অর্থনৈতিক উন্নয়ন ও দারিদ্র্য ভ্রাস।
+
+1410/-এর গ্যারান্টি সাধারণত ৩-১৫ বছর মেয়াদী হয়
+তবে খণ/প্রকল্পের মেয়াদ এবং ঝুঁকি বিশ্লেষণের ভিত্তিতে ২:
+বছর পর্যন্ত বাড়ানো সম্ভব৷ ন্যুনতম ৩ বছর মেয়াদ আবশ্যিক ৷
+এছাড়া,
+
+11.&-এর কাজ : বিশ্বের সবচেয়ে দরিদ্র দেশগুলোকে স্বল্প সু
+বা বিনা সুদে খণ প্রদান ।
+
+1৮0-এর কাজ : উন্নয়নশীল দেশগুলোতে বেসরকারি খাতে
+(01186 5০০01) প্রবৃদ্ধি, বিনিয়োগ, এবং কর্মসংস্থান সৃষ্টি
+মাধ্যমে দারিদ্য বিমোচনে কাজ করে। এটি সরস
+বিনিয়োগ, ঝণ প্রদান, এবং প্রযুক্তিগত পরামর্শের মাধ্যমে
+টেকসই ব্যবসায়িক প্রকল্প ও অর্থনৈতিক উন্নয়নে সহায়ত
+কার ৷
+
+=== ch17_p_2_right.txt ===
+1+5 11 দলে ত্€
+10]11-এর কাজ : আন্তর্জাতিক বিনিয়োগ বিরোধ নিম্পত্তি-
+সরকার ও বিদেশি বিনিয়োগকারীর মধ্যে বিরোধ মধ্যস্থতা ।
+1চাং0-এর কাজ : এর প্রধান কাজ হলো মধ্যম আয়ের এবং
+খণ পরিশোধে সক্ষম নিম্ন আয়ের দেশগুলোকে দারিদ্র্য ভ্রাস ও
+টেকসই উন্নয়নের লক্ষ্যে ঝণ, গ্যারান্টি ও ঝুঁকি ব্যবস্থাপনা
+পরিষেবা প্রদান করা, যা শিক্ষা, স্বাস্থ্য, অবকাঠামো ও জলবায়ু
+পরিবর্তনের মতো খাতগুলোতে সহায়তা করে।
+উৎস: [770171%90%/1 ওয়েবসাইট ।</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="wb" data-ans="খ">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">৪</span>
+            <span>ঘদ0110 [69101116110 ২০0010 কোন সংস্থার বার্ষিক</span>
+          </div>
+          <span class="bcs-tag">৪৩তম বিসিএস/৩৭তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>অপশন ক</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>অপশন খ</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>অপশন গ</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>অপশন ঘ</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: খ</div>
+          <p>ঘখ0110 176%০1011091101২০0010 (ছা) হলো
+বিশ্ব ব্যাংকের (ছা 0110 8110 বার্ষিক প্রকাশনা ।
+অন্যদিকে,
+হণ (11103001181 /0160819 0100) প্রকাশ করে
+01088] 1181018] ৩0808110 1২০00170 এবং 010
+চ0011010010 0৮00011
+৩ ঘগাযা0 (01160 80019 136"০1001070101
+চ108াথ101706) প্রকাশ করে ম্া।810 0০4০1010101
+২%00101</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="imf" data-ans="খ">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">৫</span>
+            <span>কোনটি “ঢ়1-600011 ছ0005 11150010115” এর অন্তর্ভুক্ত?</span>
+          </div>
+          
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>অপশন ক</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>অপশন খ</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>অপশন গ</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>অপশন ঘ</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: খ</div>
+          <p>আইএমএফ ও বিশ্বব্যাংককে ব্লেটন উডস ইনস্টিটিউট
+বলা হয়। ১৯৪৪ সালের ১ থেকে ২২ জুলাই পর্যন্ত যুক্তরাষ্ট্রের
+নিউ হ্যাম্পশায়ারের ব্রেটন উডসে 88৪টি দেশের প্রতিনিধিরা
+একটি গুরুত্বপূর্ণ চুক্তিতে স্বাক্ষর করে যার মাধ্যমে আইএমএফ
+(147) এবং বিশ্বব্যাংক প্রতিষ্ঠিত হয়। তাই আইএমএফ ও
+. বিশ্বব্যাংককে বেটন উডস ইনস্টিটিউট বলা হয়।
+[|!1/-এর প্রতিষ্ঠাতা সদস্য: যেসব দেশ ৩১ ডিসেম্বর, ১৯৪৫-এর
+মধ্যে 1017-এর 4৮065 0-4879716)! অনুমোদন করেছিল,
+তাদেরই প্রতিষ্ঠাতা সদস্য বিবেচনা করা হয়। এই সংখ্যা ছিল ২৯টি
+দেশ।
+10/7-এর কাররক্রম শুরু (মার্চ ১৯৪৭): নতুন দেশ যোগ হওয়ায়
+সদস্য সংখ্যা বেড়ে ২৯ থকে ৪০টি হয় এবং এই ৪০টি সদস্য নিয়ে
+107 আনুষ্ঠানিক কার্যক্রম শুরু করে।
+এক কথায়, 1[/7-এর প্রতিষ্ঠাতা সদস্য সংখ্যা ২৯টি এবং কাররত্রম
+শুরুর সময়ের মোট সদস্য সংখ্যা ৪০টি ॥
+অন্যান্য অপশন:
+2 178 091811016 706%010]1101101981110: এটি মুসলিম
+দেশগুলোতে উন্নয়ন সহায়তা প্রদান করে।
+৩ ছা0 (দছচ0া10 1806 01881128001); এটি
+আন্তর্জাতিক বাণিজ্যের নিয়ম এবং সহযোগিতার জন্য প্রতিষ্ঠিত
+একটি সংস্থা
+2 008 (49131) া06%01071118 83110: এটি এশিয়ার
+. দেশগুলোর উন্নয়ন ও সহযোগিতার জন্য প্রতিষ্ঠিত একটি
+-নাযা0নলছ |
+
+=== ch17_p_3_left.txt ===
+পপ
+11খ০14001</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="imf" data-ans="খ">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">৬</span>
+            <span>আন্তর্জাতি</span>
+          </div>
+          
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>মুদ্রা তহবিল কোন সালে গঠিত হয়? (</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>১তম বিসিএস!
+৪ ১৯৪৪ সালে ও ১৯৪</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>সালে
+8 ১৯৪৮ সালে</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>১৯৪৯ সালে</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: খ</div>
+          <p>আন্তর্জাতিক মুদ্রা তহবিল ১৯৪৫ সালে গঠিত হয়।
+আন্তর্জাতিক মুদ্রা তহবিল সম্পর্কে বিস্তারিত:
+
+আদব র্জাতি ক মুদ্রা তত হবি
+যা: 1111011180011811 10110810110)
+৪ জুলাই , ১৯৪৪ সাল
+ঠনের !
+গঠনের সিদ্ধান্ত (ব্রেটন উডস্‌ সম্মেলনে)
+রিজার্ভ মুদ্রা ৫ (ডলার, পাউন্ড, ইয়েন,
+রী ইউরো ও ইউয়ান)
+ত্্ট
+দাপ্তরিক ভাষা
+দাগুরিকাযা | (ইংরেজি, ফরাসি ও স্প্যানিশ)
+বর্তমান ব্যবস্থাপনা ক্র্স্টা াঁয়েভ
+পরিচালক (২০২৫) ৷ (বুলগেরিয়া)
+বাংলাদেশের সদস্যপদ
+ঢা48-এর প্রাথমিক লক্ষ্য- বাতিক আর্থিক ব্যবস্থার
+(11111800118] 1/011601%7 3১910) একটি স্থায়ী
+পদ্ধতি প্রণয়ন করা এবং সেই উদ্দেশ্যে মুদ্রা বিনিময় হার
+নির্ধারণ এবং আন্তর্জাতিক লেনদেন সহজে প্রক্রিয়াকরণে
+সহায়তা করা।</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="wb" data-ans="ক">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">৭</span>
+            <span>ও) (50০081 01116 16115) সুবিধা প্রবর্তনের</span>
+          </div>
+          <span class="bcs-tag">৩৭তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>অপশন ক</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>অপশন খ</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>অপশন গ</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>অপশন ঘ</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: ক</div>
+          <p>[48-এর গঠনতন্ত্র সংশোধন করে ১৯৬৯ সালে
+ডা) সুবিধা প্রবর্তন করা হয়। এর মাধ্যমে সদস্য দেশগুলো
+সহজে বৈদেশিক মুদ্রা পেতে পারে। বর্তমানে ওা31২-এর মূল্য
+মার্কিন ডলার, ইউরো, ব্রিটিশ পাউন্ড, জাপানি ইয়েন এবং
+চীনা ইউয়ানের ভিত্তিতে নির্ধারণ করা হয়।
+
+107 (50০0181] া18%1118 ২1619) আন্তর্জাতিক মুদ্রা
+তহবিল (147) দ্বারা তৈরি করা হয়েছে। ও) প্রবর্তনের
+উদ্দেশ্য হল বিশ্ব অর্থনৈতিক দ্থিতিশীলতা বজায় রাখা ।</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="imf" data-ans="ক">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">৮</span>
+            <span></span>
+          </div>
+          <span class="bcs-tag">1 এর সদর দপ্তর অবস্থিত- /৩৭তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>য়াশিংটন ডিসি ও) নিউইয়র্ক
+
+8 জেনেভা ও) রোম উ.ক
+ব্যা</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>্যা, : 14-এর পূর্ণরূপ [1106111800118] 40119131%
+চণয</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>বা আন্তর্জাতিক মুদ্রা তহবিল। বেটন উডসৃ্‌ সম্মেলনে
+বিশ্বব্যাংকের পাশাপাশি আরেকটি প্রতিষ্ঠান গড়ে তোলা হয়
+যার নাম 14৮1 যুক্তরাষ্ট্রের</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>য়াশিংটন ডিসিতে [14চ-এর
+সদরদপ্তর অবদ্থিত।
+
+=== ch17_p_3_right.txt ===
+সল্যুশন (বিষয়ভিত্তিক) [07 ৬৭৬
+
+. বিশ্বব্যাংক সংশ্লিষ্ট কোন সংস্থাটি স্বল্প আয়ের উন্নয়নশীল দেশে
+বেসরকারি খাতে আর্থিক সহায়তা ও উপদেশ দিয়ে থাকে? র্‌
+[৩৭তম বিসিএস] ্ু
+910 ওাটাংা। 8 1/140& 910</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: ক</div>
+          <p>170 বা 11109173001181 ঢ11181166 €০010018001) রর
+হল বিশ্বব্যাংক গ্রুপের প্রতিষ্ঠান যা ১৯৫৬ সালে প্রতিষ্ঠিত
+হয়। এটি প্রধানত উন্নয়নশীল দেশগুলোতে বেসরকারি বা
+ব্যক্তিমালিকানা খাতের উন্নয়নে কাজ করে। 1ম0-এর
+সদরদপ্তর ওয়াশিংটন ডিসিতে অবস্থিত এবং এর সদস্য সংখ্যা
+১৮৬টি দেশ।
+অন্যদিকে,
+2 19100 (1106103001131 8811 (61 [২০০০11500060011
+2110 1া7০%০101116110 মধ্য-আয় এবং নিম আয়ের
+দেশগুলিকে খণ গ্যারান্টি, ঝুঁকি ব্যবস্থাপনা, পণ্য এবং
+উপদেষ্টা পরিষেবা প্রদান করে।
+252 106) (04010118013] [11০03010910 00818311066
+/,89110%) বিদেশি বিনিয়োগে মধ্যস্থতা এবং গ্যারান্টি প্রদান
+করে।
+5৩ [সা) 00010300131] € ০1106 017 ১০0০1091001
+[11%০9011911010190068) বিদেশি বিনিয়োগের ক্ষেত্রে বিরোধ
+সমাধানে কাজ করে।
+
+2. [10 (1106111300113] 101160317 110) 15 16
+1:651110 01- [৩৪তম বিসিএস]
+9৪ 3%8118 (011161)06
+ও 09116%8 01106161106
+৫& 1২০0106 €011161106
+98 91000011%/000 (০0119101106 উ.ঘ
+ব্যাখ্যা: আইএমএফ ও বিশ্বব্যাংককে ব্রেটন উডস ইনস্টিটিউট
+বলা হয়।</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="wb" data-ans="গ">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">১১</span>
+            <span>বিশ্বব্যাং</span>
+          </div>
+          
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>ের ১01 1.0. 4 ছ'া</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>া)টেছয্ হলো (২৬তম
+বিসিএস/১৬তম বিসিএস]
+৪1410) 910</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>া,</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>,</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: গ</div>
+          <p>বিশ্বব্যাংকের প্রতিষ্ঠান [0/. ([111011180101131 !
+[6০910110010 ১5900180011) তৃতীয় বিশ্বের অনুন়ত
+দেশগুলোকে সহজ শর্তে ও স্বল্প সুদে খণ প্রদান করে, তাই
+একে 3০ 1[.081) ছদ100% বলা হয়। [া/, সেই সব
+দেশকে খণ দেয় যারা 18২0 থেকে খণ পায় না। এটি.
+বিশ্বব্যাংক গ্রুপের একটি প্রতিষ্ঠান এবং ১৯৬০ সালে প্রতিষ্ঠিত
+হয়। বর্তমানে এর সদস্য সংখ্যা ১৭৫টি । বাংলাদেশ ১৯৭২
+সালের ১৭ আগস্ট [7/, এর সদস্যপদ লাভ করে এবং 0,
+থেকে সর্বাধিক অর্থ সহায়তা পায়।</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="wbg-arms" data-ans="ক">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">১২</span>
+            <span>IDA</span>
+          </div>
+          
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>অপশন ক</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>ন</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>ঠিত হয়? [২৪তম বিসিএস| ৷
+৪১৯৮৮ সালে ৪১৯৮২ সালে
+8 ১৯৮৫ সালে</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>১৯৮৬ সালে</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: ক</div>
+          <p>া6৫০/)৭, (0410101180618] ০901 91
+00818111066 /১৪০110%) হলো বিশ্বব্যাংক গ্রুপের একটি
+অঙ্গসংগঠন। এটি ১৯৮৮ সালের ১২ এপ্রিল প্রতিষ্ঠিত হয়।
+বাংলাদেশ এই সংস্থার প্রতিষ্ঠাতা সদস্যদের একটি । বর্তমানে
+14106/&-এর সদস্য দেশ সংখ্যা ১৮২টি ।
+সংস্থাটি বৈদেশিক বিনিয়োগে মধ্যস্থতা এবং গ্যারান্টি প্রদানের
+মাধ্যমে উন্নয়নশীল দেশগুলোকে সহায়তা করে থাকে।</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="imf" data-ans="ক">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">১৩</span>
+            <span>“'ব্রেটন উডস ইনস্টিটিউট' নিচের</span>
+          </div>
+          <span class="bcs-tag">২৪তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>োন সংস্থাকে বোঝায়?
+[২</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>তম বিসিএস]
+ও আইএমএফ</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>) জাতিসং</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>এডিবি ও আইডিবি</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: ক</div>
+          <p>আইএমএফ ও বিশ্বব্যাংককে ব্রেটন উডস ইনস্টিটিউট
+বলা হয়।</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="wb" data-ans="ক">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">১৪</span>
+            <span>1৮0 বলতে কি বোঝায়?</span>
+          </div>
+          <span class="bcs-tag">২৩তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>অপশন ক</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>অপশন খ</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>অপশন গ</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>অপশন ঘ</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: ক</div>
+          <p>1৮0 বা 11173001181 18106 €010018001)
+হল বিশ্বব্যাংক গ্রুপের প্রতিষ্ঠান যা ১৯৫৬ সালে প্রতিষ্ঠিত
+হয়। এটি প্রধানত উন্নয়নশীল দেশগুলোতে বেসরকারি বা
+ব্যক্তিমালিকানা খাতের উন্নয়নে কাজ করে। 170 এর
+সদরদপ্তর ওয়াশিংটন ডিসিতে অবস্থিত এবং এর সদস্য সংখ্যা
+১৮৬ টি দেশ।
+বিশ্বব্যাংক ৫টি আর্থিক প্রতিষ্ঠানের সমন্বয়ে গঠিত । যথা-
+তে ডা [সদন] বদ ]
+01110001181 উন্নয়নশীল দেশগুলোর
+ঢ811001 ১৮৯টি | সরকারী ও বেসরকারী
+ঞা10 -নাউরু) | এবং ভাগ করা সমৃদ্ধি গড়ে
+া76ৰ91001170110 তোলার জন্য ঘনিষ্ঠভাবে
+(81) কাজ করে।
+আপে
+চা131106 ১৯৫৬ | ১৮৬টি | দেশগুলোতে বেসরকারি বা
+(010018001) ব্যক্তিমালিকানা খাতের
+70 উন্নয়নে কাজ করে।
+তৃতীয় বিশ্বের অনুন্নত
+দেশগুলোকে সহজ শর্তে
+ও স্বল্পসুদে ঝণ প্রদান করে
+ঢা1011130101131 থাকে যার কারণে [3
+1১6%+010]10010 | ১৯৬০ ১৭ কে ১৩০ 1091]
+জা (সর্বশেষ
+95950018001) সুরিনাম) ছ়া00দ বলা হয়।
+. (04) যেসব দেশ 181 থেকে
+খণ পায় না, সেসব
+। দেশকে [7.৬ ঝখণ প্রদান
+
+=== ch17_p_4_right.txt ===
+১০১৮
+11001118001131
+ো0া 01 সদস্য দেশগুলোর মধ্যে
+া1০3017011 বিরোধ নিষ্পত্তি করে
+171910063 থাকে।
+(8১19.
+্ বৈদেশিক বিনিয়োগে
+০ ৮২টি | ম্থ্যহতা এবং গ্যারান্টি
+না ১৯৮৮ পে ৮৫৭ মাধ্যমে
+না সোমালিয়া) ন্নয়নশীল দেশগুলোকে
+(414) সরাসরি বৈদেশিক
+বিনিয়োগে সহায়তা করা।</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="imf" data-ans="গ">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">১৫</span>
+            <span>আন্তর্জাতি</span>
+          </div>
+          
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>অর্থ তহবিল (1৮) কবে হতে এর কার্যক্রম
+শুরু করে? [১৬তম বিসিএসা</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>১৯৪</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>সাল হতে 9১৯৪৬ সাল হতে
+গ ১৯৪৭ সাল হতে</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>১৯৪৮ সাল হতে</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: গ</div>
+          <p>জাতিসংঘের বিশেষায়িত প্রতিষ্ঠান আইএমএফ
+(14-110018001181140119181 111) । এটি প্রতিষ্ঠিত
+হয় ১৯৪৫ সালের ২৭ ডিসেম্বর এবং কার্যক্রম শুরু হয় ১৯৪৭
+সালে।</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="wb" data-ans="গ">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">১৬</span>
+            <span>কোনটি বিশ্বব্যাংকের অঙ্গ প্রতিষ্ঠান নয়? (১৪তম বিসিএস]</span>
+          </div>
+          
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>অপশন ক</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>অপশন খ</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>অপশন গ</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>অপশন ঘ</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: গ</div>
+          <p>বিশ্বব্যাংক গ্রুপ পাচটি সংস্থার সমন্বয়ে গঠিত, এগুলো
+হলো:
+* [8100 (0100118001181 81110 (01-২০00109010001)
+3110 1)6"0910110110 - ২৭ ডিসেম্বর, ১৯৪৫
+* 177: 1100118001181 176খ6101109110 ১9900180017) -
+২৪ সেপ্টেম্বর, ১৯৬০
+* 170 (1100118001181 চ111866 00100180010) - ২০
+জুলাই, ১৯৫৬
+* [031 (110611300118] €91006 (01 39009109110 01
+[11%ঝ690711101019003) - ১৪ অক্টোবর, ১৯৬৬
+* /106/) (040101180618] 11%০30076110 01181811066
+/8000ৰ) - ১২ এপ্রিল, ১৯৮৮</p>
+        </div>
+      </article>
+
+      <article class="mcq-card" data-category="imf" data-ans="ক">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">১৭</span>
+            <span>আইএমএফ-এর সদর দপ্তর</span>
+          </div>
+          
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" data-opt="ক">
+            <span class="opt-letter">ক</span>
+            <span>োথায়? /১০ম বিসিএস]
+ও ওয়াশিংটন 9</span>
+          </button>
+          <button class="opt-btn" data-opt="খ">
+            <span class="opt-letter">খ</span>
+            <span>) মস্কো</span>
+          </button>
+          <button class="opt-btn" data-opt="গ">
+            <span class="opt-letter">গ</span>
+            <span>লন্ডন</span>
+          </button>
+          <button class="opt-btn" data-opt="ঘ">
+            <span class="opt-letter">ঘ</span>
+            <span>নিউইয়র্ক</span>
+          </button>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+        <div class="exp-drawer">
+          <div class="exp-title"><span>📌</span> সঠিক উত্তর: ক</div>
+          <p>জাতিসংঘের বিশেষায়িত প্রতিষ্ঠান আইএমএফ
+(148-1100103001181 10116001% 11) যা প্রতিষ্ঠিত
+হয় ২২ জুলাই ১৯৪৪ সালে। এর সদর দপ্তর যুক্তরাষ্ট্রের
+ওয়াশিংটন ডিসিতে। ল্ম্ল সালে
+[17০ 1007 আ্যাপ থেকে 71-2.4. [|
+এই টপিকের আরও 100 গা 0
+অনুশীলন করতে পাশে থাকা দক
+01২ কোডটি ও০311 করুন। যা বে</p>
+        </div>
+      </article>
+
+    </div>
+
+  </main>
+
+  <script>
+    let answered = 0;
+    let correct = 0;
+
+    function toggleExp(btn) {
+      const drawer = btn.nextElementSibling;
+      drawer.classList.toggle('open');
+      btn.textContent = drawer.classList.contains('open') ? '🔼 ব্যাখ্যা সংক্ষেপ করুন' : '💡 ব্যাখ্যা দেখুন';
+    }
+
+    document.querySelectorAll('.mcq-card').forEach(card => {
+      const correctAns = card.getAttribute('data-ans');
+      const optBtns = card.querySelectorAll('.opt-btn');
+      const drawer = card.querySelector('.exp-drawer');
+      const toggleBtn = card.querySelector('.exp-toggle-btn');
+
+      optBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.classList.contains('locked')) return;
+
+          optBtns.forEach(b => b.classList.add('locked'));
+          const chosen = btn.getAttribute('data-opt');
+
+          answered++;
+          if (chosen === correctAns) {
+            btn.classList.add('correct');
+            correct++;
+          } else {
+            btn.classList.add('wrong');
+            optBtns.forEach(b => {
+              if (b.getAttribute('data-opt') === correctAns) b.classList.add('correct');
+            });
+          }
+
+          drawer.classList.add('open');
+          toggleBtn.textContent = '🔼 ব্যাখ্যা সংক্ষেপ করুন';
+
+          document.getElementById('scoreCount').textContent = `${correct} / ${answered}`;
+          const pct = Math.round((correct / answered) * 100);
+          document.getElementById('accuracyRate').textContent = `${pct}%`;
+        });
+      });
+    });
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.getAttribute('data-category');
+        document.querySelectorAll('.mcq-card').forEach(card => {
+          if (cat === 'all' || card.getAttribute('data-category') === cat) card.style.display = 'block';
+          else card.style.display = 'none';
+        });
+      });
+    });
+
+    const themeBtn = document.getElementById('themeToggleBtn');
+    themeBtn.addEventListener('click', () => {
+      const current = document.body.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', next);
+      themeBtn.textContent = next === 'dark' ? '🌙' : '☀️';
+    });
+
+    let currentScale = 1.0;
+    const updateFontScale = (scale) => {
+      currentScale = scale;
+      document.documentElement.style.setProperty('--font-scale', scale + 'rem');
+    };
+    document.getElementById('fontDecBtn').addEventListener('click', () => {
+      if (currentScale > 0.8) updateFontScale(+(currentScale - 0.05).toFixed(2));
+    });
+    document.getElementById('fontIncBtn').addEventListener('click', () => {
+      if (currentScale < 1.35) updateFontScale(+(currentScale + 0.05).toFixed(2));
+    });
+    document.getElementById('fontResetBtn').addEventListener('click', () => updateFontScale(1.0));
+
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const st = h.scrollTop || document.body.scrollTop;
+      const sh = h.scrollHeight || document.body.scrollHeight;
+      const percent = (st / (sh - h.clientHeight)) * 100;
+      document.getElementById('progressBar').style.width = Math.min(100, Math.max(0, percent)) + '%';
+    });
+  </script>
+
+  <script src="nav-component.js"></script>
+</body>
+</html>
