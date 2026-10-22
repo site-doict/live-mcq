@@ -1,1411 +1,1283 @@
-<!-- DESIGN PLAN:
-(১) বিষয়ের ধরন: বাংলাদেশ বিষয়াবলি — 'অর্থনৈতিক সমীক্ষা ও বাজেট' (পৃষ্ঠা ৪৫৯–৪৬৩)। বিসিএসের অন্যতম গুরুত্বপূর্ণ ও তথ্যবহুল অর্থনৈতিক অধ্যায়।
-(২) সবচেয়ে কঠিন/গুলিয়ে ফেলার জায়গা: জিডিপি গণনার খাত সংখ্যা (পুরোনো ভিত্তিতে ১৫টি বনাম বর্তমান ২০১৫-১৬ ভিত্তিতে ১৯টি বৃহৎ ৩টি খাতের অধীনে); কৃষি, শিল্প ও সেবা খাতের অবদান ও প্রবৃদ্ধির শতকরা হার (সাময়িক বনাম চূড়ান্ত রিপোর্ট); মাথাপিছু আয় বনাম মাথাপিছু জিডিপি; এবং জাতীয় বাজেট ২০২৫-২৬ এর সূচকসমূহ।
-(৩) বাছাই করা মডিউল:
-    - জিডিপি ও জাতীয় আয় পরিমাপের মূল সংজ্ঞা ও সূত্র কার্ড।
-    - বর্তমান ১৯টি খাতের পূর্ণাঙ্গ ম্যাট্রিক্স ও ৩টি বৃহৎ খাতের তুলনামূলক ছক।
-    - জাতীয় বাজেট ২০২৫-২৬ এর এক্সক্লুসিভ ডেটা ড্যাশবোর্ড।
-    - ১৮টি বিসিএস বিগত প্রশ্নের পূর্ণাঙ্গ ইন্টারঅ্যাকটিভ কুইজ (OCR যাচাই, লেআউট অসঙ্গতি ও হালনাগাদ তথ্যের ট্র্যাকারসহ)।
-(৪) রঙের মেজাজ: অর্থনৈতিক সমৃদ্ধি ও প্রবৃদ্ধির প্রতিনিধিত্বকারী ডিপ ফরেস্ট গ্রিন (#0f766e), স্বর্ণালী অরেঞ্জ-গোল্ড (#b45309), নেভি ব্লু এবং ক্লাসিক পার্চমেন্ট।
-(৫) হিরো ও মাসকটের ধরন: 'ইকোনমিক গ্রোথ ও বাজেট অ্যানালাইসিস' মেটাফর; অর্থনৈতিক মেন্টর প্রতীক "ইকোনমিক অ্যানালিস্ট" (📈/💰).
--->
 <!DOCTYPE html>
-<html lang="bn" data-theme="light">
+<html lang="bn">
 <head>
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch(e) {}
+    })();
+  </script>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>অর্থনৈতিক সমীক্ষা ও বাজেট — বিসিএস পূর্ণাঙ্গ প্রস্তুতি ই-বুক</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+  <title>অর্থনৈতিক সমীক্ষা ও বাজেট - বিসিএস বাংলাদেশ বিষয়াবলি | Live MCQ</title>
+  <meta name="description" content="বিসিএস বাংলাদেশ বিষয়াবলি: অর্থনৈতিক সমীক্ষা ও বাজেট অধ্যায়ের বিগত বিসিএস পরীক্ষার ১৮টি আসল প্রশ্ন ও বিশদ ব্যাখ্যা।">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../sketchnote.css">
+
   <style>
-    :root {
-  --font-base: 'Noto Serif Bengali', 'Kalpurush', Vrinda, sans-serif;
-      --bg: #f8fafc;
-      --surface: #ffffff;
-      --surface-2: #f0fdfa;
-      --text: #0f172a;
-      --text-muted: #334155;
-      --border: #99f6e4;
-      --primary: #0f766e;          /* ডিপ টিল-গ্রিন */
-      --primary-dark: #134e4a;
-      --primary-light: #ccfbf1;
-      --accent: #b45309;           /* সোনালি অর্থনীতি */
-      --accent-light: #fef3c7;
-      --indigo: #4338ca;
-      --indigo-light: #e0e7ff;
-      --success: #15803d;
-      --success-light: #dcfce7;
-      --danger: #b91c1c;
-      --danger-light: #fee2e2;
-      --radius: 12px;
-      --shadow: 0 4px 10px rgba(15, 118, 110, 0.08);
+    :root, [data-theme="light"], body[data-theme="light"] {
       --font-scale: 1;
+      --bg-primary: #F8FAFC;
+      --bg-surface: #FFFFFF;
+      --bg-card: #FFFFFF;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --primary: #15803D;
+      --primary-light: #DCFCE7;
+      --primary-dark: #166534;
+      --accent-gold: #D97706;
+      --accent-gold-light: #FEF3C7;
+      --success: #15803D;
+      --success-light: #DCFCE7;
+      --wrong: #DC2626;
+      --wrong-light: #FEE2E2;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+      --radius-sm: 0.375rem;
+      --radius-md: 0.625rem;
+      --radius-lg: 0.875rem;
     }
 
-    [data-theme="dark"] {
-      --bg: #071311;
-      --surface: #0e201c;
-      --surface-2: #142d27;
-      --text: #f0fdfa;
-      --text-muted: #94a3b8;
-      --border: #1f4e43;
-      --primary: #2dd4bf;
-      --primary-dark: #0f766e;
-      --primary-light: #042f2e;
-      --accent: #fbbf24;
-      --accent-light: #451a03;
-      --indigo: #818cf8;
-      --indigo-light: #1e1b4b;
-      --success: #4ade80;
-      --success-light: #052e16;
-      --danger: #f87171;
-      --danger-light: #450a0a;
-      --shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+    [data-theme="dark"], body[data-theme="dark"] {
+      --bg-primary: #0B1510;
+      --bg-surface: #13221B;
+      --bg-card: #182B22;
+      --text-main: #F0FDF4;
+      --text-muted: #94A3B8;
+      --border-color: #284436;
+      --primary: #4ADE80;
+      --primary-light: rgba(74, 222, 128, 0.15);
+      --primary-dark: #22C55E;
+      --accent-gold: #FBBF24;
+      --accent-gold-light: rgba(251, 191, 36, 0.15);
+      --success: #4ADE80;
+      --success-light: rgba(74, 222, 128, 0.15);
+      --wrong: #F87171;
+      --wrong-light: rgba(239, 68, 68, 0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.4);
     }
 
-    * {
-      box-sizing: border-box; overflow-wrap: break-word;
-      margin: 0;
-      padding: 0;
-      transition: background-color 0.2s ease, border-color 0.2s ease;
-    }
-
-    body {
-      font-family: var(--font-base);
-      font-size: calc(16px * var(--font-scale));
-      line-height: 1.85;
-      background-color: var(--bg);
-      color: var(--text);
-      padding-bottom: 90px;
-    }
-
-    /* স্ক্রল প্রগ্রেস বার */
-    #progress-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 5px;
-      background: transparent;
-      z-index: 1001;
-    }
-
-    #progress-bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-    }
-
-    /* স্টিকি কন্ট্রোল বার */
-    .control-bar {
-      position: sticky;
-      top: 5px;
-      z-index: 1000;
-      background: var(--surface);
-      border-bottom: 2px solid var(--border);
-      padding: 10px 18px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      box-shadow: var(--shadow);
-    }
-
-    .btn-group {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    button {
-      background: var(--surface-2);
-      border: 1.5px solid var(--border);
-      color: var(--text);
-      padding: 6px 14px;
-      font-size: calc(14px * var(--font-scale));
-      font-weight: 600;
-      border-radius: 8px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: inherit;
-    }
-
-    button:hover {
-      background: var(--primary-light);
-      border-color: var(--primary);
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      max-width: 100vw;
+      overflow-x: clip;
+      background: var(--bg-primary);
+      color: var(--text-main);
+      font-family: 'Noto Serif Bengali', serif;
+      line-height: 1.7;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     .container {
-      max-width: 920px;
-      margin: 20px auto;
-      padding: 0 16px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem 1rem 4rem 1rem;
     }
 
-    /* হিরো সেকশন */
-    .hero {
-      background: linear-gradient(135deg, #0f766e, #134e4a);
-      color: #ffffff;
-      padding: 34px 24px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      margin-bottom: 26px;
-      position: relative;
+    /* Hero Section */
+    .hero-section {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.25rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
     }
 
-    .hero h1 {
-      font-size: calc(26px * var(--font-scale));
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 0.2rem 0.65rem;
+      border-radius: 9999px;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text-main);
       line-height: 1.35;
-      margin-bottom: 10px;
+      margin-bottom: 0.5rem;
     }
 
-    .hero p {
-      font-size: calc(15px * var(--font-scale));
-      opacity: 0.95;
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.5;
     }
 
-    .hero-meta {
+    /* Controls Bar */
+    .controls-bar {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.8125rem;
-      font-weight: bold;
-      background: rgba(255, 255, 255, 0.18);
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      color: #fff;
-    }
-
-    /* কার্ডস */
-    .section-card {
-      background: var(--surface);
-      border: 2px solid var(--border);
-      border-radius: var(--radius);
-      margin-bottom: 24px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .section-header {
-      padding: 16px 20px;
-      background: var(--surface-2);
-      border-bottom: 2px solid var(--border);
-      display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
+      gap: 0.75rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
     }
 
-    .section-header h2 {
-      font-size: calc(18px * var(--font-scale));
+    .controls-left, .controls-right {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 0.5rem;
+    }
+
+    .btn-tool {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.4rem 0.75rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.2s;
+    }
+
+    .btn-tool:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* BCS Analysis Table */
+    .bcs-table-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .bcs-card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       color: var(--primary);
     }
 
-    [data-theme="dark"] .section-header h2 {
-      color: var(--primary);
-    }
-
-    .section-body {
-      padding: 20px;
-    }
-
-    /* গ্রিড ও মেট্রিক বক্স */
-    .metric-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 14px;
-      margin: 16px 0;
-    }
-
-    .metric-box {
-      background: var(--surface-2);
-      border: 1.5px solid var(--border);
-      border-left: 5px solid var(--primary);
-      padding: 14px 16px;
-      border-radius: 0 10px 10px 0;
-    }
-
-    .metric-box.gold {
-      border-left-color: var(--accent);
-    }
-
-    .metric-box.indigo {
-      border-left-color: var(--indigo);
-    }
-
-    .metric-val {
-      font-size: calc(22px * var(--font-scale));
-      font-weight: bold;
-      color: var(--accent);
-      display: block;
-      margin: 4px 0;
-    }
-
-    [data-theme="dark"] .metric-val {
-      color: var(--accent);
-    }
-
-    /* টেবিল ডিজাইন */
-    .table-container {
+    .table-responsive {
       overflow-x: auto;
-      margin: 14px 0;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      text-align: left;
-    }
-
-    th, td {
-      padding: 12px 14px;
-      border: 1px solid var(--border);
-      font-size: calc(15px * var(--font-scale));
+      text-align: center;
+      font-size: 0.9rem;
     }
 
     th {
-      background-color: var(--surface-2);
+      background: var(--primary-light);
+      color: var(--primary-dark);
       font-weight: 700;
-      color: var(--text);
+      padding: 0.6rem 0.5rem;
+      border: 1px solid var(--border-color);
     }
 
-    tr:nth-child(even) {
-      background-color: rgba(0, 0, 0, 0.02);
+    td {
+      padding: 0.55rem 0.5rem;
+      border: 1px solid var(--border-color);
     }
 
-    [data-theme="dark"] tr:nth-child(even) {
-      background-color: rgba(255, 255, 255, 0.02);
+    /* Sticky Score Bar */
+    .sticky-bar {
+      position: sticky;
+      top: 1rem;
+      z-index: 50;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.6rem 1rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(8px);
     }
 
-    /* নোটিশ ও ফাঁদ বক্স */
-    .note-box {
-      background: var(--surface-2);
-      border-left: 5px solid var(--primary);
-      padding: 14px 18px;
-      border-radius: 0 var(--radius) var(--radius) 0;
-      margin: 16px 0;
-      color: var(--text);
+    .score-badge {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
     }
 
-    .trap-box {
-      background: var(--danger-light);
-      border-left: 5px solid var(--danger);
-      padding: 14px 18px;
-      border-radius: 0 var(--radius) var(--radius) 0;
-      margin: 16px 0;
-      color: var(--text);
+    .score-num {
+      color: var(--primary);
+      font-weight: 800;
     }
 
-    /* কুইজ স্টাইল */
-    .quiz-card {
-      background: var(--surface-2);
-      border: 2px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px;
-      margin-bottom: 18px;
+    .btn-reset {
+      background: var(--primary);
+      color: #FFFFFF;
+      border: none;
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.2s;
     }
 
-    .quiz-title-bar {
+    .btn-reset:hover {
+      background: var(--primary-dark);
+    }
+
+    /* MCQ Cards */
+    .quiz-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .q-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .q-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 10px;
-      gap: 10px;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
     }
 
-    .quiz-bcs-tag {
-      background: var(--primary);
-      color: #fff;
+    .q-num-title {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--text-main);
+    }
+
+    .q-number {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: var(--radius-sm);
+      line-height: 1.4;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    .bcs-tag {
+      background: var(--accent-gold-light);
+      color: var(--accent-gold);
       font-size: 0.75rem;
-      font-weight: bold;
-      padding: 2px 8px;
-      border-radius: 6px;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
-    .quiz-question {
-      font-weight: bold;
-      font-size: calc(16px * var(--font-scale));
-      margin-bottom: 12px;
-    }
-
-    .quiz-options {
+    .options-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 8px;
+      gap: 0.6rem;
+      margin-bottom: 0.75rem;
     }
 
     @media (min-width: 600px) {
-      .quiz-options.two-col {
+      .options-grid {
         grid-template-columns: 1fr 1fr;
       }
     }
 
-    .quiz-opt {
-      background: var(--surface);
-      border: 1.5px solid var(--border);
-      padding: 10px 14px;
-      border-radius: 8px;
-      cursor: pointer;
+    .opt-btn {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.65rem 0.85rem;
       text-align: left;
-      font-size: calc(15px * var(--font-scale));
       font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      transition: all 0.15s ease;
     }
 
-    .quiz-opt:hover {
+    .opt-btn:hover:not(:disabled) {
       border-color: var(--primary);
       background: var(--primary-light);
     }
 
-    .quiz-opt.correct {
+    .opt-letter {
+      width: 1.6rem;
+      height: 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .opt-btn.correct {
       background: var(--success-light) !important;
       border-color: var(--success) !important;
-      color: var(--text);
-      font-weight: bold;
-    }
-
-    .quiz-opt.incorrect {
-      background: var(--danger-light) !important;
-      border-color: var(--danger) !important;
-      color: var(--text);
-    }
-
-    .quiz-feedback {
-      margin-top: 14px;
-      padding: 12px 14px;
-      border-radius: 8px;
-      display: none;
-      font-size: calc(14.5px * var(--font-scale));
-      line-height: 1.7;
-      background: var(--surface);
-      border: 1px solid var(--border);
-    }
-
-    .discrepancy-card {
-      background: var(--surface);
-      border: 2px dashed var(--danger);
-      border-radius: var(--radius);
-      padding: 22px;
-      margin-top: 32px;
-    }
-
-    /* ফ্ল্যাশকার্ড স্টাইল */
-    .flash-card-list {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    .flash-item {
-      background: var(--surface-2);
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      padding: 14px 16px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .flash-item:hover {
-      border-color: var(--primary);
-    }
-
-    .flash-question {
+      color: var(--success) !important;
       font-weight: 700;
-      color: var(--primary-dark);
+    }
+
+    .opt-btn.correct .opt-letter {
+      background: var(--success);
+      color: #FFFFFF;
+      border-color: var(--success);
+    }
+
+    .opt-btn.wrong {
+      background: var(--wrong-light) !important;
+      border-color: var(--wrong) !important;
+      color: var(--wrong) !important;
+    }
+
+    .opt-btn.wrong .opt-letter {
+      background: var(--wrong);
+      color: #FFFFFF;
+      border-color: var(--wrong);
+    }
+
+    .exp-toggle-wrap {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 0.5rem;
     }
 
-    [data-theme="dark"] .flash-question {
+    .exp-toggle-btn {
+      background: none;
+      border: none;
       color: var(--primary);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
     }
 
-    .flash-answer {
+    .exp-drawer {
       display: none;
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px dashed var(--border);
-      color: var(--text);
-      font-size: calc(15px * var(--font-scale));
-      line-height: 1.7;
+      margin-top: 0.75rem;
+      padding: 0.85rem 1rem;
+      background: var(--bg-primary);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.925rem;
+      line-height: 1.6;
     }
 
-    .flash-item.open .flash-answer {
+    .exp-drawer.open {
       display: block;
+      animation: fadeIn 0.2s ease-in-out;
     }
 
-    /* প্রিন্ট লেআউট */
-    @media print {
-      .control-bar, #progress-container, .btn-group, button {
-        display: none !important;
-      }
-      body {
-        background: #fff;
-        color: #000;
-        font-size: 11pt;
-      }
-      .section-card {
-        border: 1px solid #777;
-        box-shadow: none;
-        page-break-inside: avoid;
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-  
-/* Universal Mobile Optimization (Samsung A23 & small screens) */
-@media (max-width: 600px) {
-  .print-btn, button[onclick*="print"], .btn-ctrl:has(span:contains('🖨️')) {
-    display: none !important;
-  }
-  .container {
-    padding: 6px 8px 24px 8px !important;
-  }
-  .hero-box, .hero, .hero-banner {
-    padding: 16px 12px !important;
-    margin-top: 8px !important;
-    margin-bottom: 14px !important;
-  }
-  .table-responsive, .table-container {
-    -webkit-overflow-scrolling: touch;
-    overflow-x: auto;
-  }
-  .table-responsive table th, .table-responsive table td,
-  .table-container table th, .table-container table td {
-    padding: 7px 6px !important;
-  }
-}
-
-
-/* Universal Text Box Bleed & Alignment Protection */
-.card, .quote-box, .doubt-box, .info-box, .mcq-card, .table-responsive, .data-table-container, .study-section, .flash-item {
-  max-width: 100%;
-  overflow-wrap: break-word;
-  word-break: break-word;
-}
-</style>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  </style>
 </head>
 <body>
-
-  <!-- পড়ার প্রগ্রেস বার -->
-  <div id="progress-container">
-    <div id="progress-bar"></div>
-  </div>
-
-  <!-- স্টিকি কন্ট্রোল বার -->
-  <div class="control-bar">
-    <div class="btn-group">
-      <button id="themeToggle" title="থিম পরিবর্তন">🌓 থিম</button>
-      <button id="fontDown" title="ফন্ট ছোট">A-</button>
-      <button id="fontReset" title="স্বাভাবিক ফন্ট">A</button>
-      <button id="fontUp" title="ফন্ট বড়">A+</button>
-    </div>
-    <div class="btn-group">
-      <button onclick="document.getElementById('quiz-section').scrollIntoView({behavior: 'smooth'})">📝 সব MCQ কুইজ</button>
-      <button onclick="document.getElementById('flash-section').scrollIntoView({behavior: 'smooth'})">⚡ ফ্ল্যাশকার্ড</button>
-      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆️ উপরে</button>
-      <button onclick="window.print()">🖨️ প্রিন্ট / PDF</button>
-    </div>
-  </div>
-
   <div class="container">
+    <!-- Hero Section -->
+    <header class="hero-section">
+      <span class="hero-badge">বিসিএস বাংলাদেশ বিষয়াবলি</span>
+      <h1 class="hero-title">অর্থনৈতিক সমীক্ষা ও বাজেট</h1>
+      <p class="hero-subtitle">বিসিএস প্রিলিমিনারি পরীক্ষার বিগত বছরের সকল আসল প্রশ্ন, সঠিক উত্তর ও প্রামাণ্য ব্যাখ্যা (পৃষ্ঠা ৪৫৯–৪৬৩)</p>
+    </header>
 
-    <!-- হিরো সেকশন -->
-    <div class="hero">
-      <div style="font-size: 2.375rem; margin-bottom: 8px;">📈</div>
-      <h1>বাংলাদেশের অর্থনীতি: অর্থনৈতিক সমীক্ষা ও বাজেট</h1>
-      <p>জিডিপি (GDP), জিএনআই (GNI), জাতীয় আয়ের ১৯টি প্রধান খাত, অর্থনৈতিক সমীক্ষা ২০২৫ এবং জাতীয় বাজেট ২০২৫-২৬ এর পুঙ্খানুপুঙ্খ তথ্য ও বিগত বিসিএস সমাধান।</p>
-      <div class="hero-meta">
-        <span class="badge">পৃষ্ঠা: ৪৫৯ – ৪৬৩</span>
-        <span class="badge">বিসিএস প্রশ্নব্যাংক: ১৮টি বিশদ প্রশ্ন ও উত্তর</span>
-        <span class="badge">১০ম থেকে ৫০তম বিসিএস কভারেজ</span>
+    <!-- Controls Bar -->
+    <div class="controls-bar">
+      <div class="controls-left">
+        <button class="btn-tool" onclick="changeFontSize(1)" title="ফন্ট বড় করুন">A+</button>
+        <button class="btn-tool" onclick="changeFontSize(-1)" title="ফন্ট ছোট করুন">A-</button>
+        <button class="btn-tool" onclick="resetFontSize()" title="স্বাভাবিক ফন্ট">A</button>
+      </div>
+      <div class="controls-right">
+        <button class="btn-tool" id="theme-btn" onclick="toggleTheme()">🌓 থিম পরিবর্তন</button>
       </div>
     </div>
 
-    <!-- বিসিএস প্রশ্ন পরিসংখ্যান ছক -->
-    <div class="section-card">
-      <div class="section-header">
-        <h2>📊 বিসিএসে প্রশ্ন আসার পরিসংখ্যান (বইয়ের ছক অনুযায়ী)</h2>
+    <!-- Authentic BCS Analysis Table from Page 459 -->
+    <section class="bcs-table-card">
+      <div class="bcs-card-title">📊 বিসিএস প্রিলিমিনারি প্রশ্ন বিশ্লেষণ (পৃষ্ঠা ৪৫৯)</div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>৫০তম</td><td>১</td><td>৪৪তম</td><td>২</td><td>৩৮তম</td><td>২</td></tr>
+            <tr><td>৪৯তম</td><td>০</td><td>৪৩তম</td><td>০</td><td>৩৭তম</td><td>১</td></tr>
+            <tr><td>৪৮তম</td><td>২</td><td>৪২তম</td><td>১</td><td>৩৬তম</td><td>০</td></tr>
+            <tr><td>৪৭তম</td><td>০</td><td>৪১তম</td><td>০</td><td>৩৫তম</td><td>০</td></tr>
+            <tr><td>৪৬তম</td><td>০</td><td>৪০তম</td><td>২</td><td rowspan="2">১০ম-৩৪তম</td><td rowspan="2">৫</td></tr>
+            <tr><td>৪৫তম</td><td>০</td><td>৩৯তম</td><td>২</td></tr>
+          </tbody>
+        </table>
       </div>
-      <div class="section-body">
-        <p style="margin-bottom: 12px; color: var(--text-muted);">
-          🎯 লক্ষ্য: অধ্যায়ের গুরুত্ব ও প্রশ্ন পুনরাবৃত্তি অনুধাবন। (আনুমানিক পাঠ সময়: ২ মিনিট) (আমার অনুমান)
-        </p>
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>বিসিএস সংস্করণ</th>
-                <th>প্রশ্ন সংখ্যা</th>
-                <th>বিসিএস সংস্করণ</th>
-                <th>প্রশ্ন সংখ্যা</th>
-                <th>বিসিএস সংস্করণ</th>
-                <th>প্রশ্ন সংখ্যা</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>৫০তম বিসিএস</strong></td>
-                <td>১টি</td>
-                <td><strong>৪৪তম বিসিএস</strong></td>
-                <td>২টি</td>
-                <td><strong>৩৮তম বিসিএস</strong></td>
-                <td>২টি</td>
-              </tr>
-              <tr>
-                <td><strong>৪৯তম বিসিএস</strong></td>
-                <td>(বইয়ে ফাঁকা)</td>
-                <td><strong>৪৩তম বিসিএস</strong></td>
-                <td>(বইয়ে ফাঁকা)</td>
-                <td><strong>৩৭তম বিসিএস</strong></td>
-                <td>১টি</td>
-              </tr>
-              <tr>
-                <td><strong>৪৮তম বিসিএস</strong></td>
-                <td>২টি</td>
-                <td><strong>৪২তম বিসিএস</strong></td>
-                <td>১টি</td>
-                <td><strong>৩৬তম বিসিএস</strong></td>
-                <td>(বইয়ে ফাঁকা)</td>
-              </tr>
-              <tr>
-                <td><strong>৪৭তম বিসিএস</strong></td>
-                <td>(বইয়ে ফাঁকা)</td>
-                <td><strong>৪১তম বিসিএস</strong></td>
-                <td>(বইয়ে ফাঁকা)</td>
-                <td><strong>৩৫তম বিসিএস</strong></td>
-                <td>১৪টি</td>
-              </tr>
-              <tr>
-                <td><strong>৪৬তম ও ৪৫তম</strong></td>
-                <td>(বইয়ে ফাঁকা)</td>
-                <td><strong>৪০তম বিসিএস</strong></td>
-                <td>২টি</td>
-                <td><strong>১০ম-৩৪তম বিসিএস</strong></td>
-                <td>৫টি</td>
-              </tr>
-              <tr>
-                <td><strong>৩৯তম বিসিএস</strong></td>
-                <td>২টি</td>
-                <td>—</td>
-                <td>—</td>
-                <td><strong>মোট সমাধান</strong></td>
-                <td><strong>১৮টি প্রশ্ন</strong></td>
-              </tr>
-            </tbody>
-          </table>
+    </section>
+
+    <!-- Authentic Sketchnote Visual Note -->
+    <section class="sk-page" style="margin-bottom: 1.5rem;">
+      <div class="sk-box">
+        <div class="sk-title">📈 বাংলাদেশের জিডিপি ও অর্থনৈতিক খাতের কাঠামো ছক</div>
+        <div class="sk-grid">
+          <div class="sk-sticky">
+            🏛️ <strong>জিডিপি প্রাক্কলন:</strong><br>
+            • হিসাবকারী সংস্থা: <strong>বাংলাদেশ পরিসংখ্যান ব্যুরো (BBS)</strong><br>
+            • প্রধান ৩ খাত: <strong>কৃষি, শিল্প ও সেবা</strong><br>
+            • ভিত্তি বছর: <strong>২০১৫-১৬</strong> (মোট ১৯টি উপখাত)
+          </div>
+          <div class="sk-sticky">
+            💼 <strong>খাতভিত্তিক অবদান:</strong><br>
+            • জিডিপিতে সর্বাধিক অবদান: <strong>সেবা খাত</strong> (৫০% এর বেশি)<br>
+            • প্রবৃদ্ধির হারে দ্রুততম: <strong>শিল্প খাত</strong><br>
+            • সর্বাধিক কর্মসংস্থান: <strong>কৃষি খাত</strong>
+          </div>
+          <div class="sk-sticky">
+            📋 <strong>বাজেট ও উন্নয়ন:</strong><br>
+            • বার্ষিক উন্নয়ন কর্মসূচি (ADP) বরাদ্দ থাকে <strong>উন্নয়ন বাজেটে</strong><br>
+            • মাথাপিছু আয় নির্ধারণের একক দায়িত্ব: <strong>BBS</strong>
+          </div>
         </div>
       </div>
+
+      <div class="sk-remember">
+        💡 <strong>বিসিএস বিশেষ পয়েন্ট:</strong> বাংলাদেশ পরিসংখ্যান ব্যুরো (BBS) কর্তৃক প্রাক্কলিত জাতীয় আয় ও জিডিপির উপাত্তই বিসিএস পরীক্ষায় একমাত্র প্রামাণ্য ভিত্তি হিসেবে গৃহীত হয়।
+      </div>
+    </section>
+
+    <!-- Sticky Score Bar -->
+    <div class="sticky-bar">
+      <div class="score-badge">
+        <span>🏆 সঠিক উত্তর:</span>
+        <span class="score-num" id="score-counter">০</span>
+        <span>/ 18</span>
+      </div>
+      <button class="btn-reset" onclick="resetQuiz()">🔄 পুনরায় চেষ্টা</button>
     </div>
 
-    <!-- মডিউল ১: জিডিপি গণনা ও প্রধান অর্থনৈতিক প্রতিষ্ঠানসমূহ -->
-    <div class="section-card">
-      <div class="section-header">
-        <h2>🏛️ জিডিপি পরিমাপ পদ্ধতি ও দায়িত্বশীল সংস্থাসমূহ</h2>
-      </div>
-      <div class="section-body">
-        <p style="margin-bottom: 12px; color: var(--text-muted);">
-          🎯 লক্ষ্য: জিডিপির সংজ্ঞা ও কোন প্রতিষ্ঠান কী কাজ করে তা ক্লিয়ার করা। (আনুমানিক পাঠ সময়: ৪ মিনিট) (আমার অনুমান)
-        </p>
-
-        <div class="note-box">
-          <strong>মোট দেশজ উৎপাদন (GDP - Gross Domestic Product):</strong><br>
-          একটি নির্দিষ্ট সময়ে (সাধারণত এক বছরে) একটি দেশের ভৌগোলিক সীমানার মধ্যে মোট যে পরিমাণ চূড়ান্ত দ্রব্য ও সেবা উৎপাদিত হয়, তার বাজার দামের সমষ্টিকে GDP বলে।<br>
-          • <strong>অন্তর্ভুক্ত:</strong> দেশের অভ্যন্তরীণ আয়, দেশের অভ্যন্তরে বিদেশিদের আয়, চূড়ান্ত সেবা ও বিদেশিদের দেশে বিনিয়োগ থেকে আয়।<br>
-          • <strong>বাদ যায় (Excludes):</strong> বিদেশে অবস্থানকারী দেশীয় নাগরিক কর্তৃক বিদেশ হতে প্রেরিত অর্থ (রেমিট্যান্স)।<br>
-          • <strong>জিডিপির গাণিতিক সূত্র:</strong> $\text{GDP} = \text{GNP} + \text{দেশে বিদেশিদের অর্জিত আয়} - \text{বিদেশে দেশীয় নাগরিকদের আয়}$
-        </div>
-
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>সরকারি সংস্থা</th>
-                <th>মূল দায়িত্ব ও কার্যক্রম</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>বাংলাদেশ পরিসংখ্যান ব্যুরো (BBS)</strong></td>
-                <td>বাংলাদেশে প্রতি বছর চলতি ও স্থির মূল্যে GDP এবং GNI গণনা করে। এটি <strong>উৎপাদন পদ্ধতি</strong> ও <strong>ব্যয় পদ্ধতি</strong> ব্যবহার করে।</td>
-              </tr>
-              <tr>
-                <td><strong>বাংলাদেশ ব্যাংক (কেন্দ্রীয় ব্যাংক)</strong></td>
-                <td>মুদ্রানীতি প্রণয়ন, বৈদেশিক মুদ্রা রিজার্ভ ব্যবস্থাপনা, ব্যাংকিং সেক্টর নিয়ন্ত্রণ ও মুদ্রাস্ফীতি নিয়ন্ত্রণ করে।</td>
-              </tr>
-              <tr>
-                <td><strong>অর্থ বিভাগ (অর্থ মন্ত্রণালয়)</strong></td>
-                <td>জাতীয় বাজেট প্রণয়ন, রাজস্ব সংগ্রহ, ব্যয় বরাদ্দ ও ফিসকাল পলিসি নির্ধারণ করে।</td>
-              </tr>
-              <tr>
-                <td><strong>বাংলাদেশ পরিকল্পনা কমিশন</strong></td>
-                <td>পঞ্চবার্ষিক পরিকল্পনা তৈরি, উন্নয়ন প্রকল্প অনুমোদন ও উন্নয়ন বাজেট বরাদ্দ করে।</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- মডিউল ২: অর্থনীতির প্রধান ১৯টি খাত ও ৩টি বৃহৎ খাত -->
-    <div class="section-card">
-      <div class="section-header">
-        <h2>📊 জাতীয় আয়ের খাত বিভাজন (১৯টি প্রধান খাত ও ৩টি বৃহৎ খাত)</h2>
-      </div>
-      <div class="section-body">
-        <p style="margin-bottom: 12px; color: var(--text-muted);">
-          🎯 লক্ষ্য: ২০০৫-০৬ ভিত্তির ১৫টি খাতের সাথে বর্তমান ১৯টি খাতের পার্থক্য ও অবদান আয়ত্ত করা। (আনুমানিক পাঠ সময়: ৫ মিনিট) (আমার অনুমান)
-        </p>
-
-        <div class="metric-grid">
-          <div class="metric-box">
-            <h4>১. বৃহৎ কৃষি খাত</h4>
-            <span class="metric-val">১০.৯৪%</span>
-            <small>জিডিপিতে অবদান (সমীক্ষা ২০২৫ সাময়িক)<br>চূড়ান্ত: ১১.৭১% | কর্মসংস্থান: ৪৪.৬৭%</small>
+    <!-- 18 Static MCQ Cards -->
+    <div class="quiz-container">
+      <!-- Question 1 -->
+      <article class="q-card" id="q-1">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">1</span>
+            <span>কোন সংস্থা বাংলাদেশের GDP হিসাব করে?</span>
           </div>
-          <div class="metric-box gold">
-            <h4>২. বৃহৎ শিল্প খাত</h4>
-            <span class="metric-val">৩৭.৪৪%</span>
-            <small>জিডিপিতে অবদান (সমীক্ষা ২০২৫ সাময়িক)<br>চূড়ান্ত: ৩৪.৮৭% | কর্মসংস্থান: ১৭.৩৭%</small>
-          </div>
-          <div class="metric-box indigo">
-            <h4>৩. বৃহৎ সেবা খাত</h4>
-            <span class="metric-val">৫১.৬২%</span>
-            <small>জিডিপিতে সর্বোচ্চ অবদান (সমীক্ষা ২০২৫ সাময়িক)<br>চূড়ান্ত: ৫৩.৪২% | কর্মসংস্থান: ৩৭.৯৬%</small>
-          </div>
+          <span class="bcs-tag">৫০তম বিসিএস</span>
         </div>
-
-        <h3 style="margin: 18px 0 10px 0; color: var(--primary);">📋 উৎপাদন পদ্ধতিতে জিডিপির ১৯টি প্রধান খাত ও উপখাত</h3>
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>ক্রম</th>
-                <th>বৃহৎ খাত</th>
-                <th>খাতের নাম</th>
-                <th>প্রধান উপখাতসমূহ</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>১</td>
-                <td><strong>কৃষি</strong></td>
-                <td>কৃষি, বনজ এবং মৎস্য সম্পদ</td>
-                <td>শস্য ও শাকসবজি, প্রাণি সম্পদ, বনজ সম্পদ ও সহায়ক সেবা, মৎস্য সম্পদ</td>
-              </tr>
-              <tr>
-                <td>২</td>
-                <td rowspan="5"><strong>শিল্প</strong></td>
-                <td>খনিজ ও খনন</td>
-                <td>প্রাকৃতিক গ্যাস ও অপরিশোধিত তেল, অন্যান্য খনিজ সম্পদ ও কয়লা</td>
-              </tr>
-              <tr>
-                <td>৩</td>
-                <td>শিল্প (ম্যানুফ্যাকচারিং)</td>
-                <td>বৃহৎ শিল্প, ছোট, মাঝারি ও ক্ষুদ্র শিল্প, কুটির শিল্প</td>
-              </tr>
-              <tr>
-                <td>৪</td>
-                <td>বিদ্যুৎ, গ্যাস, বাষ্প এবং শীতাতপ নিয়ন্ত্রণ</td>
-                <td>বিদ্যুৎ, গ্যাস</td>
-              </tr>
-              <tr>
-                <td>৫</td>
-                <td>পানি সরবরাহ; পয়ঃনিষ্কাশন, বর্জ্য ব্যবস্থাপনা ও পুনর্ব্যবহার</td>
-                <td>—</td>
-              </tr>
-              <tr>
-                <td>৬</td>
-                <td>নির্মাণ</td>
-                <td>—</td>
-              </tr>
-              <tr>
-                <td>৭</td>
-                <td rowspan="13"><strong>সেবা</strong></td>
-                <td>পাইকারি ও খুচরা ব্যবসা; যানবাহন ও মোটরসাইকেল মেরামত</td>
-                <td>—</td>
-              </tr>
-              <tr>
-                <td>৮</td>
-                <td>পরিবহণ এবং সংরক্ষণ</td>
-                <td>স্থল পথ, পানি পথ ও আকাশ পথ পরিবহণ</td>
-              </tr>
-              <tr>
-                <td>৯</td>
-                <td>আবাসন এবং খাদ্য পরিবেশন কার্যক্রম</td>
-                <td>সংরক্ষণ ও সহায়ক সেবা, ডাক ও কুরিয়ার যোগাযোগ</td>
-              </tr>
-              <tr>
-                <td>১০</td>
-                <td>তথ্য ও যোগাযোগ</td>
-                <td>—</td>
-              </tr>
-              <tr>
-                <td>১১</td>
-                <td>আর্থিক এবং বীমা কার্যক্রম</td>
-                <td>আর্থিক মধ্যস্থতা (ব্যাংক), বীমা, অন্যান্য আর্থিক সহায়তা</td>
-              </tr>
-              <tr>
-                <td>১২</td>
-                <td>রিয়েল এস্টেট কার্যক্রম</td>
-                <td>—</td>
-              </tr>
-              <tr>
-                <td>১৩</td>
-                <td>পেশাদার, বৈজ্ঞানিক এবং প্রযুক্তিগত কার্যক্রম</td>
-                <td>—</td>
-              </tr>
-              <tr>
-                <td>১৪</td>
-                <td>প্রশাসনিক ও সহায়তামূলক পরিষেবা কার্যক্রম</td>
-                <td>(সর্বোচ্চ প্রবৃদ্ধি ৯.৬৭% অর্জিত)</td>
-              </tr>
-              <tr>
-                <td>১৫</td>
-                <td>জনপ্রশাসন ও প্রতিরক্ষা; বাধ্যতামূলক সামাজিক নিরাপত্তা</td>
-                <td>—</td>
-              </tr>
-              <tr>
-                <td>১৬</td>
-                <td>শিক্ষা</td>
-                <td>—</td>
-              </tr>
-              <tr>
-                <td>১৭</td>
-                <td>মানব স্বাস্থ্য ও সামাজিক সেবা কার্যক্রম</td>
-                <td>—</td>
-              </tr>
-              <tr>
-                <td>১৮</td>
-                <td>শিল্পকলা ও বিনোদন</td>
-                <td>—</td>
-              </tr>
-              <tr>
-                <td>১৯</td>
-                <td>অন্যান্য সেবা কার্যক্রম</td>
-                <td>—</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 1, 0, 0)">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">বাংলাদেশ পরিসংখ্যান ব্যুরো</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 1, 1, 0)">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">বাংলাদেশ ব্যাংক</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 1, 2, 0)">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">অর্থ বিভাগ</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 1, 3, 0)">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">বাংলাদেশ পরিকল্পনা কমিশন</span>
+          </button>
         </div>
-
-        <div class="trap-box">
-          ⚠️ <strong>বিসিএস পরীক্ষার ফাঁদ:</strong><br>
-          • <strong>জিডিপিতে কোন খাতের অবদান সর্বোচ্চ?</strong> সেবা খাত (৫১.৬২% সাময়িক / ৫৩.৪২% চূড়ান্ত)!<br>
-          • <strong>কোন খাতে সবচেয়ে বেশি কর্মসংস্থান হয়?</strong> কৃষি খাত (৪৪.৬৭%)!<br>
-          • <strong>জিডিপিতে কৃষিখাতের অবদান কেমন?</strong> ক্রমহ্রাসমান (২০২২-২৩ এ ১১.৩০%, ২০২৩-২৪ এ ১১.১৯%, ২০২৪-২৫ এ ১০.০৩% চূড়ান্ত)!<br>
-          • <strong>খাত সংখ্যা কতটি?</strong> পুরোনো ভিত্তিতে ১৫টি; কিন্তু ২০১৫-১৬ ভিত্তি বছর অনুসারে বর্তমানে ১৯টি!
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp(1)">💡 ব্যাখ্যা দেখুন ▾</button>
         </div>
-      </div>
-    </div>
-
-    <!-- মডিউল ৩: জাতীয় বাজেট ২০২৫-২৬ ও অর্থনৈতিক সমীক্ষা ২০২৫ এর কি-পয়েন্ট -->
-    <div class="section-card">
-      <div class="section-header">
-        <h2>💰 জাতীয় বাজেট ২০২৫-২৬ ও অর্থনৈতিক সমীক্ষা ২০২৫ ড্যাশবোর্ড</h2>
-      </div>
-      <div class="section-body">
-        <p style="margin-bottom: 12px; color: var(--text-muted);">
-          🎯 লক্ষ্য: সাম্প্রতিকতম বাজেট ও অর্থনৈতিক সমীক্ষার গুরুত্বপূর্ণ সূচকসমূহ মুখস্থ করা। (আনুমানিক পাঠ সময়: ৫ মিনিট) (আমার অনুমান)
-        </p>
-
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>বাজেট / সমীক্ষা নির্দেশক</th>
-                <th>পরিমাণ / হার (বইয়ের তথ্যসূত্র)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>বাজেটের ক্রম ও শিরোনাম</strong></td>
-                <td>৫৪তম (অন্তর্বর্তীকালীনসহ ৫৫তম); শিরোনাম: <em>'বৈষম্যহীন ও টেকসই অর্থনৈতিক ব্যবস্থা গড়ার প্রত্যয়'</em>।</td>
-              </tr>
-              <tr>
-                <td><strong>বাজেট পেশকারী ও তারিখ</strong></td>
-                <td>ড. সালেহউদ্দিন আহমেদ (উপদেষ্টা); উত্থাপন: ২ জুন ২০২৫; অনুমোদন: ২২ জুন; কার্যকর: ১ জুলাই ২০২৫।</td>
-              </tr>
-              <tr>
-                <td><strong>বাজেটের মোট আকার</strong></td>
-                <td>৭ লাখ ৯০ হাজার কোটি টাকা (জিডিপির ১২.৭%)</td>
-              </tr>
-              <tr>
-                <td><strong>জিডিপির আকার ও প্রবৃদ্ধি</strong></td>
-                <td>
-                  • বাজেট ২০২৫-২৬ প্রাক্কলিত আকার: ৬২ লাখ ৪৪ হাজার ৫৭৮ কোটি টাকা (জিডিপি প্রবৃদ্ধি লক্ষ্যমাত্রা: ৫.৫%)।<br>
-                  • <strong>স্থির মূল্যে জিডিপি (চূড়ান্ত হিসাব):</strong> ২০২৪-২৫ অর্থবছরে স্থির মূল্যে জিডিপির আকার <strong>৩৮,৬২৭,৯০৭ কোটি টাকা</strong>।
-                </td>
-              </tr>
-              <tr>
-                <td><strong>উন্নয়ন বাজেট ও বার্ষিক উন্নয়ন কর্মসূচি (ADP)</strong></td>
-                <td>
-                  • <strong>উন্নয়ন বাজেটের মোট বরাদ্দের পরিমাণ:</strong> জাতীয় বাজেট ২০২৫-২৬ এ উন্নয়ন বাজেটের মোট বরাদ্দের পরিমাণ <strong>২,৪৫,৬০৯ কোটি টাকা</strong>।<br>
-                  • এর মধ্যে বার্ষিক উন্নয়ন কর্মসূচি (ADP) বরাদ্দ ২ লাখ ৩০ হাজার কোটি টাকা (জিডিপির ৩.৭%)।
-                </td>
-              </tr>
-              <tr>
-                <td><strong>রাজস্ব প্রাপ্তির লক্ষ্যমাত্রা</strong></td>
-                <td>
-                  • <strong>রাজস্ব প্রাপ্তির লক্ষ্যমাত্রা:</strong> জাতীয় বাজেট ২০২৫-২৬ এ রাজস্ব প্রাপ্তির লক্ষ্যমাত্রা <strong>৫,৪৮,০০০ কোটি টাকা</strong> (সংশোধিত/প্রাক্কলিত রূপরেখা: ৫ লাখ ৬৪ হাজার কোটি টাকা)।
-                </td>
-              </tr>
-              <tr>
-                <td><strong>বাজেট ঘাটতি</strong></td>
-                <td>
-                  • <strong>অনুদান সহ বাজেট ঘাটতি:</strong> জাতীয় বাজেট ২০২৫-২৬ এ 'অনুদান সহ বাজেট ঘাটতি' <strong>২,২১,০০০ কোটি টাকা</strong> (বা ২ লাখ ২১ হাজার কোটি টাকা)।<br>
-                  • <strong>অনুদান ব্যতীত বাজেট ঘাটতি:</strong> ২ লাখ ২৬ হাজার কোটি টাকা (জিডিপির ৩.৬২%)।
-                </td>
-              </tr>
-              <tr>
-                <td><strong>সামাজিক নিরাপত্তার হার বৃদ্ধি</strong></td>
-                <td>
-                  • <strong>সামাজিক নিরাপত্তার হার বৃদ্ধি:</strong> জাতীয় বাজেট ২০২৫-২৬ এ সামাজিক নিরাপত্তার হার বৃদ্ধি <strong>১২.১৮%</strong>।
-                </td>
-              </tr>
-              <tr>
-                <td><strong>মাথাপিছু জাতীয় আয় (Per Capita Income)</strong></td>
-                <td>
-                  • <strong>চলতি মূল্যে মাথাপিছু জাতীয় আয় (চূড়ান্ত হিসাব):</strong> ২০২৪-২৫ অর্থবছরে চলতি মূল্যে মাথাপিছু জাতীয় আয় <strong>৩,৩৪,৫১১ টাকা (বা ২,৭৬৯ মার্কিন ডলার)</strong>।<br>
-                  • <strong>পূর্ববর্তী ২০২৩-২৪ অর্থবছরের মাথাপিছু আয়:</strong> ২০২৩-২৪ অর্থবছরে মাথাপিছু জাতীয় আয় ছিল <strong>৩,০৪,১০২ টাকা (বা ২,৭৩৮ মার্কিন ডলার)</strong>।<br>
-                  • <em>(উল্লেখ্য, সমীক্ষা ২০২৫ সাময়িক প্রাক্কলনে ছিল ৩,৩৯,২১১ টাকা বা ২,৮২০ মার্কিন ডলার)</em>।
-                </td>
-              </tr>
-              <tr>
-                <td><strong>মাথাপিছু জিডিপি (Per Capita GDP)</strong></td>
-                <td>চলতি মূল্যে ২,৬২৫ মার্কিন ডলার (৩,১৭,১০০ টাকা)</td>
-              </tr>
-              <tr>
-                <td><strong>বাজেটে সর্বোচ্চ বরাদ্দ প্রাপ্ত খাতসমূহ</strong></td>
-                <td>১ম: জনপ্রশাসন (২৩.৫%); ২য়: শিক্ষা ও প্রযুক্তি (১৪% - ১ লাখ ১০ হাজার ৬৫৭ কোটি টাকা); ৩য়: পরিবহন ও যোগাযোগ (৯%)। পরিচালন বাজেটে সর্বোচ্চ বরাদ্দ খাত: সুদ।</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- ইন্টারঅ্যাকটিভ কুইজ সেকশন -->
-    <div class="section-card" id="quiz-section">
-      <div class="section-header">
-        <h2>📝 বিসিএস বিগত প্রশ্নব্যাংক ও ইন্টারঅ্যাকটিভ কুইজ (১ থেকে ১৮)</h2>
-        <span class="badge" id="quiz-score">স্কোর: ০ / ১৮</span>
-      </div>
-      <div class="section-body">
-        <p style="margin-bottom: 16px; color: var(--text-muted);">
-          বইয়ের মূল প্রশ্ন ও ব্যাখ্যার ভিত্তিতে ইন্টারঅ্যাকটিভ কুইজে অংশ নাও। অপশনে ক্লিক করলে তাৎক্ষণিক সঠিক/ভুল এবং পূর্ণ ব্যাখ্যা প্রদর্শিত হবে।
-        </p>
-
-        <!-- প্রশ্ন ১ -->
-        <div class="quiz-card" data-answer="ক">
-          <div class="quiz-title-bar">
-            <span class="quiz-question">১. কোন সংস্থা বাংলাদেশের GDP হিসাব করে?</span>
-            <span class="quiz-bcs-tag">৫০তম বিসিএস</span>
-          </div>
-          <div class="quiz-options two-col">
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) বাংলাদেশ পরিসংখ্যান ব্যুরো</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) বাংলাদেশ ব্যাংক</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) অর্থ বিভাগ</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) বাংলাদেশ পরিকল্পনা কমিশন</button>
-          </div>
-          <div class="quiz-feedback">
+        <div class="exp-drawer" id="exp-1">
+          <div class="exp-content">
             <strong>উত্তর: ক (বাংলাদেশ পরিসংখ্যান ব্যুরো)</strong><br>
             <strong>ব্যাখ্যা:</strong> বাংলাদেশ পরিসংখ্যান ব্যুরো (BBS) প্রতি বছর উৎপাদন পদ্ধতি ও ব্যয় পদ্ধতি ব্যবহার করে চলতি ও স্থির মূল্যে জিডিপি গণনা করে।
           </div>
         </div>
+      </article>
 
-        <!-- প্রশ্ন ২ -->
-        <div class="quiz-card" data-answer="গ">
-          <div class="quiz-title-bar">
-            <span class="quiz-question">২. বাংলাদেশের মোট দেশজ উৎপাদন (জিডিপি)-এর জন্য অর্থনীতিকে মোট কতটি প্রধান খাতে বিভক্ত করা হয়?</span>
-            <span class="quiz-bcs-tag">৪৮তম বিসিএস</span>
+      <!-- Question 2 -->
+      <article class="q-card" id="q-2">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">2</span>
+            <span>বাংলাদেশের মোট দেশজ উৎপাদন (জিডিপি)-এর জন্য অর্থনীতিকে মোট কতটি প্রধান খাতে বিভক্ত করা হয়?</span>
           </div>
-          <div class="quiz-options two-col">
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ০৫টি</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ১০টি</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ১৫টি</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ২০টি</button>
-          </div>
-          <div class="quiz-feedback">
+          <span class="bcs-tag">৪৮তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 2, 0, 2)">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">০৫টি</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 2, 1, 2)">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">১০টি</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 2, 2, 2)">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">১৫টি</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 2, 3, 2)">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">২০টি</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp(2)">💡 ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp-2">
+          <div class="exp-content">
             <strong>উত্তর: গ (১৫টি — পুরোনো তথ্যমতে)</strong><br>
             <strong>ব্যাখ্যা:</strong> ২০০৫-০৬ ভিত্তি বছরে অর্থনীতিকে ১৫টি খাতে বিভক্ত করা হয়েছিল। তবে সাম্প্রতিক বিবিএস তথ্য অনুযায়ী বর্তমানে খাত সংখ্যা ১৯টি, যা ৩টি বৃহৎ খাতের অন্তর্ভুক্ত।
           </div>
         </div>
+      </article>
 
-        <!-- প্রশ্ন ৩ -->
-        <div class="quiz-card" data-answer="ঘ">
-          <div class="quiz-title-bar">
-            <span class="quiz-question">৩. বাংলাদেশের জাতীয় আয়ের (জিডিপি-র) কত শতাংশ কৃষি থেকে আসে?</span>
-            <span class="quiz-bcs-tag">৪৮তম বিসিএস</span>
+      <!-- Question 3 -->
+      <article class="q-card" id="q-3">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">3</span>
+            <span>বাংলাদেশের জাতীয় আয়ের (জিডিপি-র) কত শতাংশ কৃষি থেকে আসে?</span>
           </div>
-          <div class="quiz-options two-col">
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ১২.৪০%</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ১২.৮৯%</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ১৩.০২%</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ১৩.৩৫%</button>
-          </div>
-          <div class="quiz-feedback">
+          <span class="bcs-tag">৪৮তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 3, 0, 3)">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">১২.৪০%</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 3, 1, 3)">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">১২.৮৯%</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 3, 2, 3)">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">১৩.০২%</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 3, 3, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">১৩.৩৫%</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp(3)">💡 ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp-3">
+          <div class="exp-content">
             <strong>উত্তর: ঘ (১৩.৩৫% — পুরোনো তথ্যমতে; বর্তমানে সঠিক উত্তর নেই)</strong><br>
             <strong>ব্যাখ্যা:</strong> প্রশ্নটির সমসাময়িক সময়ে উত্তর ছিল ১৩.৩৫%। তবে অর্থনৈতিক সমীক্ষা ২০২৫ অনুযায়ী বর্তমানে কৃষির অবদান সাময়িক ১০.৯৪% এবং চূড়ান্ত ১১.৭১%।
           </div>
         </div>
+      </article>
 
-        <!-- প্রশ্ন ৪ -->
-        <div class="quiz-card" data-answer="ঘ">
-          <div class="quiz-title-bar">
-            <span class="quiz-question">৪. বাংলাদেশের জিডিপি (GDP)-তে কোন খাতের অবদান সবচেয়ে বেশি?</span>
-            <span class="quiz-bcs-tag">৪৪তম বিসিএস</span>
+      <!-- Question 4 -->
+      <article class="q-card" id="q-4">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">4</span>
+            <span>বাংলাদেশের জিডিপি (GDP)-তে কোন খাতের অবদান সবচেয়ে বেশি?</span>
           </div>
-          <div class="quiz-options two-col">
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) কৃষি</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) শিল্প</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) বাণিজ্য</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) সেবা</button>
-          </div>
-          <div class="quiz-feedback">
+          <span class="bcs-tag">৪৪তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 4, 0, 3)">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">কৃষি</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 4, 1, 3)">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">শিল্প</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 4, 2, 3)">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">বাণিজ্য</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 4, 3, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">সেবা</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp(4)">💡 ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp-4">
+          <div class="exp-content">
             <strong>উত্তর: ঘ (সেবা)</strong><br>
             <strong>ব্যাখ্যা:</strong> জিডিপিতে সেবা খাতের অবদান সর্বোচ্চ (সমীক্ষা ২০২৫ অনুযায়ী ৫১.৬২% সাময়িক এবং বিবিএস চূড়ান্ত অনুযায়ী ৫৩.৪২%)।
           </div>
         </div>
+      </article>
 
-        <!-- প্রশ্ন ৫ -->
-        <div class="quiz-card" data-answer="ঘ">
-          <div class="quiz-title-bar">
-            <span class="quiz-question">৫. ২০২০-২০২১ অর্থবছরে জিডিপি (GDP) প্রবৃদ্ধির হার কত ছিল?</span>
-            <span class="quiz-bcs-tag">৪৪তম বিসিএস</span>
+      <!-- Question 5 -->
+      <article class="q-card" id="q-5">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">5</span>
+            <span>২০২০-২০২১ অর্থবছরে জিডিপি (GDP) প্রবৃদ্ধির হার কত ছিল?</span>
           </div>
-          <div class="quiz-options two-col">
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ৫.৬৮%</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ৯.৯৪%</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ৭.৬৬%</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ৬.৯৪%</button>
-          </div>
-          <div class="quiz-feedback">
+          <span class="bcs-tag">৪৪তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 5, 0, 3)">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">৫.৬৮%</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 5, 1, 3)">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">৯.৯৪%</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 5, 2, 3)">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">৭.৬৬%</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 5, 3, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">৬.৯৪%</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp(5)">💡 ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp-5">
+          <div class="exp-content">
             <strong>উত্তর: ঘ (৬.৯৪%)</strong><br>
             <strong>ব্যাখ্যা:</strong> ২০২০-২১ অর্থবছরে প্রবৃদ্ধির হার ছিল ৬.৯৪%। (উল্লেখ্য, ২০২৪-২৫ অর্থবছরে স্থির মূল্যে চূড়ান্ত প্রবৃদ্ধির হার ৩.৪৯%)।
           </div>
         </div>
+      </article>
 
-        <!-- প্রশ্ন ৬ -->
-        <div class="quiz-card" data-answer="ঘ">
-          <div class="quiz-title-bar">
-            <span class="quiz-question">৬. বাংলাদেশের জাতীয় আয়ে কোন খাতে প্রবৃদ্ধির হার সবচেয়ে বেশি?</span>
-            <span class="quiz-bcs-tag">৪২তম বিসিএস</span>
+      <!-- Question 6 -->
+      <article class="q-card" id="q-6">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">6</span>
+            <span>বাংলাদেশের জাতীয় আয়ে কোন খাতে প্রবৃদ্ধির হার সবচেয়ে বেশি?</span>
           </div>
-          <div class="quiz-options two-col">
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) কৃষি ও বনজ</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) শিল্প</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) মৎস্য</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) স্বাস্থ্য ও সামাজিক সেবা</button>
-          </div>
-          <div class="quiz-feedback">
+          <span class="bcs-tag">৪২তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 6, 0, 3)">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">কৃষি ও বনজ</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 6, 1, 3)">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">শিল্প</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 6, 2, 3)">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">মৎস্য</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 6, 3, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">স্বাস্থ্য ও সামাজিক সেবা</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp(6)">💡 ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp-6">
+          <div class="exp-content">
             <strong>উত্তর: ঘ (স্বাস্থ্য ও সামাজিক সেবা — ৪২তম বিসিএস অনুযায়ী)</strong><br>
             <strong>ব্যাখ্যা:</strong> ৪২তম বিশেষ বিসিএসে উত্তর ছিল ঘ। বর্তমানে প্রধান ১৯টি খাতের মধ্যে 'প্রশাসনিক ও সহায়তামূলক পরিষেবা কার্যক্রমে' সর্বোচ্চ ৯.৬৭% প্রবৃদ্ধি অর্জিত হয়েছে।
           </div>
         </div>
+      </article>
 
-        <!-- প্রশ্ন ৭ -->
-        <div class="quiz-card" data-answer="খ">
-          <div class="quiz-title-bar">
-            <span class="quiz-question">৭. বাংলাদেশের অর্থনৈতিক সেক্টরগুলোর মধ্যে কোন খাতে বেশি কর্মসংস্থান হয়?</span>
-            <span class="quiz-bcs-tag">৪০তম বিসিএস</span>
+      <!-- Question 7 -->
+      <article class="q-card" id="q-7">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">7</span>
+            <span>বাংলাদেশের অর্থনৈতিক সেক্টরগুলোর মধ্যে কোন খাতে বেশি কর্মসংস্থান হয়?</span>
           </div>
-          <div class="quiz-options two-col">
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) নির্মাণ খাত</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) কৃষি খাত</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) সেবা খাত</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) শিল্প কারখানা খাত</button>
-          </div>
-          <div class="quiz-feedback">
+          <span class="bcs-tag">৪০তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 7, 0, 1)">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">নির্মাণ খাত</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 7, 1, 1)">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">কৃষি খাত</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 7, 2, 1)">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">সেবা খাত</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 7, 3, 1)">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">শিল্প কারখানা খাত</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp(7)">💡 ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp-7">
+          <div class="exp-content">
             <strong>উত্তর: খ (কৃষি খাত — বইয়ের কলাম ক্রমানুসারে কৃষি খাত)</strong><br>
             <strong>ব্যাখ্যা:</strong> অর্থনৈতিক সেক্টরগুলোর মধ্যে কৃষি খাতে সর্বাধিক কর্মসংস্থান হয় (৪৪.৬৭%)। ২য় অবস্থানে সেবা খাত (৩৭.৯৬%)।
           </div>
         </div>
+      </article>
 
-        <!-- প্রশ্ন ৮ -->
-        <div class="quiz-card" data-answer="না">
-          <div class="quiz-title-bar">
-            <span class="quiz-question">৮. ২০১৮ সালে বাংলাদেশের Per Capita GDP (nominal) কত?</span>
-            <span class="quiz-bcs-tag">৪০তম বিসিএস</span>
+      <!-- Question 8 -->
+      <article class="q-card" id="q-8">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">8</span>
+            <span>২০১৮ সালে বাংলাদেশের Per Capita GDP (nominal) কত?</span>
           </div>
-          <div class="quiz-options two-col">
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ১,৭৫০ মার্কিন ডলার</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ১,৭৫১ মার্কিন ডলার</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ১,৭৫২ মার্কিন ডলার</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ১,৭৫৩ মার্কিন ডলার</button>
-          </div>
-          <div class="quiz-feedback">
+          <span class="bcs-tag">৪০তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 8, 0, -1)">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">১,৭৫০ মার্কিন ডলার</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 8, 1, -1)">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">১,৭৫১ মার্কিন ডলার</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 8, 2, -1)">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">১,৭৫২ মার্কিন ডলার</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 8, 3, -1)">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">১,৭৫৩ মার্কিন ডলার</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp(8)">💡 ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp-8">
+          <div class="exp-content">
             <strong>উত্তর: সাম্প্রতিক তথ্যের ভিত্তিতে সঠিক উত্তর নেই!</strong><br>
             <strong>ব্যাখ্যা:</strong> ২০১৭-১৮ অর্থবছরে Per Capita GDP ছিল ১৬৭৫ ডলার এবং Per Capita GNI ছিল ১৭৫১ ডলার। (অর্থনৈতিক সমীক্ষা ২০২৫ অনুযায়ী বর্তমানে মাথাপিছু আয় ২,৮২০ ডলার সাময়িক এবং চূড়ান্ত ২,৭৬৯ ডলার)।
           </div>
         </div>
+      </article>
 
-        <!-- প্রশ্ন ৯ -->
-        <div class="quiz-card" data-answer="খ">
-          <div class="quiz-title-bar">
-            <span class="quiz-question">৯. বাংলাদেশের ২০১৮-১৯ অর্থবছরের প্রস্তাবিত বাজেটে বার্ষিক উন্নয়ন কর্মসূচির (ADP) জন্য কত বরাদ্দ আছে?</span>
-            <span class="quiz-bcs-tag">৩৯তম বিসিএস</span>
+      <!-- Question 9 -->
+      <article class="q-card" id="q-9">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">9</span>
+            <span>বাংলাদেশের ২০১৮-১৯ অর্থবছরের প্রস্তাবিত বাজেটে বার্ষিক উন্নয়ন কর্মসূচির (ADP) জন্য কত বরাদ্দ আছে?</span>
           </div>
-          <div class="quiz-options two-col">
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ১,৭৩,০০০ কোটি টাকা</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ১,৭১,০০০ কোটি টাকা</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ১,৭২,০০০ কোটি টাকা</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ১,৭০,০০০ কোটি টাকা</button>
-          </div>
-          <div class="quiz-feedback">
+          <span class="bcs-tag">৩৯তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 9, 0, 1)">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">১,৭৩,০০০ কোটি টাকা</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 9, 1, 1)">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">১,৭১,০০০ কোটি টাকা</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 9, 2, 1)">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">১,৭২,০০০ কোটি টাকা</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 9, 3, 1)">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">১,৭০,০০০ কোটি টাকা</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp(9)">💡 ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp-9">
+          <div class="exp-content">
             <strong>উত্তর: খ (১,৭৩,০০০ কোটি টাকা — বইয়ে অপশন ক্রমানুসারে 'উ. খ' মুদ্রিত)</strong><br>
             <strong>ব্যাখ্যা:</strong> ২০১৮-১৯ অর্থবছরে এডিপির বরাদ্দ ছিল ১,৭৩,০০০ কোটি টাকা। (চলতি ২০২৫-২৬ অর্থবছরের বাজেটে এডিপি বরাদ্দ ২ লাখ ৩০ হাজার কোটি টাকা)।
           </div>
         </div>
+      </article>
 
-        <!-- প্রশ্ন ১০ -->
-        <div class="quiz-card" data-answer="ক">
-          <div class="quiz-title-bar">
-            <span class="quiz-question">১০. বাংলাদেশের ২০১৮-১৯ অর্থবছরে বাজেটে জিডিপির প্রক্ষেপিত প্রবৃদ্ধির হার কত?</span>
-            <span class="quiz-bcs-tag">৩৯তম বিসিএস</span>
+      <!-- Question 10 -->
+      <article class="q-card" id="q-10">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">10</span>
+            <span>বাংলাদেশের ২০১৮-১৯ অর্থবছরে বাজেটে জিডিপির প্রক্ষেপিত প্রবৃদ্ধির হার কত?</span>
           </div>
-          <div class="quiz-options two-col">
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ৭.৮০ শতাংশ</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ৮.০০ শতাংশ</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ৭.২৮ শতাংশ</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ৭.৬৫ শতাংশ</button>
-          </div>
-          <div class="quiz-feedback">
+          <span class="bcs-tag">৩৯তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 10, 0, 0)">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">৭.৮০ শতাংশ</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 10, 1, 0)">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">৮.০০ শতাংশ</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 10, 2, 0)">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">৭.২৮ শতাংশ</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 10, 3, 0)">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">৭.৬৫ শতাংশ</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp(10)">💡 ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp-10">
+          <div class="exp-content">
             <strong>উত্তর: ক (৭.৮০ শতাংশ)</strong><br>
             <strong>ব্যাখ্যা:</strong> ২০১৮-১৯ বাজেটে প্রক্ষেপিত প্রবৃদ্ধি ছিল ৭.৮০%। (জাতীয় বাজেট ২০২৫-২৬ অনুযায়ী অনুমিত প্রবৃদ্ধি ৫.৫%)।
           </div>
         </div>
+      </article>
 
-        <!-- প্রশ্ন ১১ -->
-        <div class="quiz-card" data-answer="গ">
-          <div class="quiz-title-bar">
-            <span class="quiz-question">১১. বাংলাদেশে মোট দেশজ উৎপাদনে কৃষিখাতের অবদান-</span>
-            <span class="quiz-bcs-tag">৩৮তম বিসিএস</span>
+      <!-- Question 11 -->
+      <article class="q-card" id="q-11">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">11</span>
+            <span>বাংলাদেশে মোট দেশজ উৎপাদনে কৃষিখাতের অবদান-</span>
           </div>
-          <div class="quiz-options two-col">
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) নিয়মিতভাবে বৃদ্ধি পাচ্ছে</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) অনিয়মিতভাবে বৃদ্ধি পাচ্ছে</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ক্রমহ্রাসমান</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) অপরিবর্তিত থাকছে</button>
-          </div>
-          <div class="quiz-feedback">
+          <span class="bcs-tag">৩৮তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 11, 0, 2)">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">নিয়মিতভাবে বৃদ্ধি পাচ্ছে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 11, 1, 2)">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">অনিয়মিতভাবে বৃদ্ধি পাচ্ছে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 11, 2, 2)">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">ক্রমহ্রাসমান</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 11, 3, 2)">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">অপরিবর্তিত থাকছে</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp(11)">💡 ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp-11">
+          <div class="exp-content">
             <strong>উত্তর: গ (ক্রমহ্রাসমান)</strong><br>
             <strong>ব্যাখ্যা:</strong> জিডিপিতে কৃষিখাতের অবদান ক্রমান্বয়ে কমছে (২০২২-২৩ এ ১১.৩০%, ২০২৩-২৪ এ ১১.১৯%, ২০২৪-২৫ এ ১০.০৩% চূড়ান্ত)।
           </div>
         </div>
+      </article>
 
-        <!-- প্রশ্ন ১২ -->
-        <div class="quiz-card" data-answer="না">
-          <div class="quiz-title-bar">
-            <span class="quiz-question">১২. বাংলাদেশের জাতীয় আয় গণনায় দেশের অর্থনীতিকে ক'টি খাতে ভাগ করা হয়?</span>
-            <span class="quiz-bcs-tag">৩৮তম বিসিএস</span>
+      <!-- Question 12 -->
+      <article class="q-card" id="q-12">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">12</span>
+            <span>বাংলাদেশের জাতীয় আয় গণনায় দেশের অর্থনীতিকে ক'টি খাতে ভাগ করা হয়?</span>
           </div>
-          <div class="quiz-options two-col">
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ১২</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ১৩</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ১৪</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ১৫</button>
-          </div>
-          <div class="quiz-feedback">
+          <span class="bcs-tag">৩৮তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 12, 0, -1)">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">১২</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 12, 1, -1)">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">১৩</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 12, 2, -1)">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">১৪</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 12, 3, -1)">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">১৫</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp(12)">💡 ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp-12">
+          <div class="exp-content">
             <strong>উত্তর: সাম্প্রতিক তথ্যের ভিত্তিতে অপশনে সঠিক উত্তর নেই!</strong><br>
             <strong>ব্যাখ্যা:</strong> পূর্বে ১৫টি খাত থাকলেও ২০১৫-১৬ ভিত্তি বছর অনুসারে বর্তমানে খাত সংখ্যা মোট ১৯টি, যা ৩টি বৃহৎ খাতের অন্তর্ভুক্ত।
           </div>
         </div>
+      </article>
 
-        <!-- প্রশ্ন ১৩ -->
-        <div class="quiz-card" data-answer="ঘ">
-          <div class="quiz-title-bar">
-            <span class="quiz-question">১৩. ২০১৫-১৬ অর্থবছরে বাংলাদেশের অর্জিত অর্থনৈতিক প্রবৃদ্ধির হার কত ছিল?</span>
-            <span class="quiz-bcs-tag">৩৭তম বিসিএস</span>
+      <!-- Question 13 -->
+      <article class="q-card" id="q-13">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">13</span>
+            <span>২০১৫-১৬ অর্থবছরে বাংলাদেশের অর্জিত অর্থনৈতিক প্রবৃদ্ধির হার কত ছিল?</span>
           </div>
-          <div class="quiz-options two-col">
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ৬.৮৫%</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ৬.৯৭%</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ৭.০০%</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ৭.৫%</button>
-          </div>
-          <div class="quiz-feedback">
+          <span class="bcs-tag">৩৭তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 13, 0, 3)">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">৬.৮৫%</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 13, 1, 3)">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">৬.৯৭%</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 13, 2, 3)">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">৭.০০%</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 13, 3, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">৭.৫%</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp(13)">💡 ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp-13">
+          <div class="exp-content">
             <strong>উত্তর: ঘ (৭.৫% — বইয়ের উত্তর অনুযায়ী)</strong><br>
             <strong>ব্যাখ্যা:</strong> ২০১৫-১৬ অর্থবছরে অর্জিত প্রবৃদ্ধির হার ছিল ৭.৫%।
           </div>
         </div>
+      </article>
 
-        <!-- প্রশ্ন ১৪ -->
-        <div class="quiz-card" data-answer="গ">
-          <div class="quiz-title-bar">
-            <span class="quiz-question">১৪. UNDP রিপোর্ট সেপ্টেম্বর ২০০৫ সাল মোতাবেক বাংলাদেশের মাথাপিছু আয় কত ছিল?</span>
-            <span class="quiz-bcs-tag">২৭তম বিসিএস</span>
+      <!-- Question 14 -->
+      <article class="q-card" id="q-14">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">14</span>
+            <span>UNDP রিপোর্ট সেপ্টেম্বর ২০০৫ সাল মোতাবেক বাংলাদেশের মাথাপিছু আয় কত ছিল?</span>
           </div>
-          <div class="quiz-options two-col">
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ৪৪৪ ডলার</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ৭৭০ ডলার</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ১৭৭০ ডলার</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ১০৭০ ডলার</button>
-          </div>
-          <div class="quiz-feedback">
+          <span class="bcs-tag">২৭তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 14, 0, 2)">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">৪৪৪ ডলার</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 14, 1, 2)">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">৭৭০ ডলার</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 14, 2, 2)">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">১৭৭০ ডলার</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 14, 3, 2)">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">১০৭০ ডলার</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp(14)">💡 ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp-14">
+          <div class="exp-content">
             <strong>উত্তর: গ (১৭৭০ ডলার — বইয়ে 'উ. ঘ' মুদ্রিত হলেও টিকচিহ্ন ১৭৭০ ডলারে)</strong><br>
             <strong>ব্যাখ্যা:</strong> ইউএনডিপি রিপোর্ট সেপ্টেম্বর ২০০৫ অনুযায়ী বাংলাদেশের মাথাপিছু আয় ছিল ১৭৭০ ডলার।<br>
             • <strong>সর্বশেষ পরিসংখ্যান:</strong> ২০২৪-২৫ অর্থবছরে চলতি মূল্যে মাথাপিছু জাতীয় আয় (চূড়ান্ত হিসাব) ৩,৩৪,৫১১ টাকা (বা ২,৭৬৯ মার্কিন ডলার)।<br>
             • <strong>পূর্ববর্তী ২০২৩-২৪ অর্থবছর:</strong> ২০২৩-২৪ অর্থবছরে মাথাপিছু জাতীয় আয় ছিল ৩,০৪,১০২ টাকা (বা ২,৭৩৮ মার্কিন ডলার)।
           </div>
         </div>
+      </article>
 
-        <!-- প্রশ্ন ১৫ -->
-        <div class="quiz-card" data-answer="ক">
-          <div class="quiz-title-bar">
-            <span class="quiz-question">১৫. ২০০৩-০৪ সনের বার্ষিক উন্নয়ন কর্মসূচির (ADP) মোট ব্যয় কত ছিল?</span>
-            <span class="quiz-bcs-tag">২৪তম বিসিএস</span>
+      <!-- Question 15 -->
+      <article class="q-card" id="q-15">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">15</span>
+            <span>২০০৩-০৪ সনের বার্ষিক উন্নয়ন কর্মসূচির (ADP) মোট ব্যয় কত ছিল?</span>
           </div>
-          <div class="quiz-options two-col">
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ২০,৩০০ কোটি টাকা</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ১৭,১০০ কোটি টাকা</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ১৯,২০০ কোটি টাকা</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ১৯,৫০০ কোটি টাকা</button>
-          </div>
-          <div class="quiz-feedback">
+          <span class="bcs-tag">২৪তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 15, 0, 0)">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">২০,৩০০ কোটি টাকা</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 15, 1, 0)">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">১৭,১০০ কোটি টাকা</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 15, 2, 0)">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">১৯,২০০ কোটি টাকা</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 15, 3, 0)">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">১৯,৫০০ কোটি টাকা</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp(15)">💡 ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp-15">
+          <div class="exp-content">
             <strong>উত্তর: ক (২০,৩০০ কোটি টাকা)</strong><br>
             <strong>ব্যাখ্যা:</strong> ২০০৩-০৪ সনের বার্ষিক উন্নয়ন কর্মসূচির মোট ব্যয় ছিল ২০,৩০০ কোটি টাকা।<br>
             • <strong>সর্বশেষ ২০২৫-২৬ বাজেট:</strong> জাতীয় বাজেট ২০২৫-২৬ এ উন্নয়ন বাজেটের মোট বরাদ্দের পরিমাণ <strong>২,৪৫,৬০৯ কোটি টাকা</strong> (যার মধ্যে বার্ষিক উন্নয়ন কর্মসূচি বা ADP বরাদ্দ ২ লাখ ৩০ হাজার কোটি টাকা)।
           </div>
         </div>
+      </article>
 
-        <!-- প্রশ্ন ১৬ -->
-        <div class="quiz-card" data-answer="না">
-          <div class="quiz-title-bar">
-            <span class="quiz-question">১৬. বর্তমানে বাংলাদেশে গড়পড়তা মাথাপিছু আয় কত মার্কিন ডলার?</span>
-            <span class="quiz-bcs-tag">২১তম বিসিএস</span>
+      <!-- Question 16 -->
+      <article class="q-card" id="q-16">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">16</span>
+            <span>বর্তমানে বাংলাদেশে গড়পড়তা মাথাপিছু আয় কত মার্কিন ডলার?</span>
           </div>
-          <div class="quiz-options two-col">
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ২৪২</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ৩০০</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ২৮৯</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ৪০০</button>
-          </div>
-          <div class="quiz-feedback">
+          <span class="bcs-tag">২১তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 16, 0, -1)">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">২৪২</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 16, 1, -1)">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">৩০০</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 16, 2, -1)">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">২৮৯</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 16, 3, -1)">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">৪০০</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp(16)">💡 ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp-16">
+          <div class="exp-content">
             <strong>উত্তর: সাম্প্রতিক তথ্যের ভিত্তিতে সঠিক উত্তর নেই!</strong><br>
             <strong>ব্যাখ্যা:</strong> ২১তম বিসিএসের প্রশ্নে তৎকালীন মান ছিল ভিন্ন।<br>
             • <strong>চলতি মূল্যে মাথাপিছু জাতীয় আয় (চূড়ান্ত হিসাব):</strong> ২০২৪-২৫ অর্থবছরে চলতি মূল্যে মাথাপিছু জাতীয় আয় ৩,৩৪,৫১১ টাকা (বা ২,৭৬৯ মার্কিন ডলার)।<br>
             • <strong>পূর্ববর্তী ২০২৩-২৪ অর্থবছরের মাথাপিছু আয়:</strong> ২০২৩-২৪ অর্থবছরে মাথাপিছু জাতীয় আয় ছিল ৩,০৪,১০২ টাকা (বা ২,৭৩৮ মার্কিন ডলার)।
           </div>
         </div>
+      </article>
 
-        <!-- প্রশ্ন ১৭ -->
-        <div class="quiz-card" data-answer="ঘ">
-          <div class="quiz-title-bar">
-            <span class="quiz-question">১৭. বিশ্বব্যাংকের ১৯৯৭ সালের হিসাব অনুসারে বাংলাদেশের মানুষের মাথাপিছু আয় কত ছিল?</span>
-            <span class="quiz-bcs-tag">১৯তম বিসিএস</span>
+      <!-- Question 17 -->
+      <article class="q-card" id="q-17">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">17</span>
+            <span>বিশ্বব্যাংকের ১৯৯৭ সালের হিসাব অনুসারে বাংলাদেশের মানুষের মাথাপিছু আয় কত ছিল?</span>
           </div>
-          <div class="quiz-options two-col">
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ২০০ মার্কিন ডলার</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ২৪০ মার্কিন ডলার</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ২২৫ মার্কিন ডলার</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ২৬০ মার্কিন ডলার</button>
-          </div>
-          <div class="quiz-feedback">
+          <span class="bcs-tag">১৯তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 17, 0, 3)">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">২০০ মার্কিন ডলার</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 17, 1, 3)">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">২৪০ মার্কিন ডলার</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 17, 2, 3)">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">২২৫ মার্কিন ডলার</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 17, 3, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">২৬০ মার্কিন ডলার</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp(17)">💡 ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp-17">
+          <div class="exp-content">
             <strong>উত্তর: ঘ (২৬০ মার্কিন ডলার)</strong><br>
             <strong>ব্যাখ্যা:</strong> বিশ্বব্যাংকের ১৯৯৭ সালের হিসাব অনুসারে মাথাপিছু আয় ছিল ২৬০ মার্কিন ডলার।
           </div>
         </div>
+      </article>
 
-        <!-- প্রশ্ন ১৮ -->
-        <div class="quiz-card" data-answer="খ">
-          <div class="quiz-title-bar">
-            <span class="quiz-question">১৮. বাংলাদেশের ১৯৯৪-৯৫ সালের বাজেটে শিক্ষা খাতে বরাদ্দের পরিমাণ কত ছিল?</span>
-            <span class="quiz-bcs-tag">১৬তম বিসিএস</span>
+      <!-- Question 18 -->
+      <article class="q-card" id="q-18">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">18</span>
+            <span>বাংলাদেশের ১৯৯৪-৯৫ সালের বাজেটে শিক্ষা খাতে বরাদ্দের পরিমাণ কত ছিল?</span>
           </div>
-          <div class="quiz-options two-col">
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ক')">ক) ১,৮২৪ কোটি টাকা</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'খ')">খ) ১,৮৭৬ কোটি টাকা</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'গ')">গ) ১,৮৪২ কোটি টাকা</button>
-            <button class="quiz-opt" onclick="evalQuiz(this, 'ঘ')">ঘ) ১,৮৬৭ কোটি টাকা</button>
-          </div>
-          <div class="quiz-feedback">
+          <span class="bcs-tag">১৬তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 18, 0, 1)">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">১,৮২৪ কোটি টাকা</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 18, 1, 1)">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">১,৮৭৬ কোটি টাকা</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 18, 2, 1)">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">১,৮৪২ কোটি টাকা</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 18, 3, 1)">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">১,৮৬৭ কোটি টাকা</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp(18)">💡 ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp-18">
+          <div class="exp-content">
             <strong>উত্তর: খ (১,৮৭৬ কোটি টাকা — বইয়ে 'উ. গ' মুদ্রিত হলেও ব্যাখ্যা অনুযায়ী ১,৮৭৬ কোটি)</strong><br>
             <strong>ব্যাখ্যা:</strong> ১৯৯৪-৯৫ সালের বাজেটে শিক্ষা খাতে বরাদ্দ ছিল ১,৮৭৬ কোটি টাকা।<br>
             • <strong>সর্বশেষ বাজেট ২০২৫-২৬:</strong> শিক্ষা ও প্রযুক্তি খাতে বরাদ্দ ১ লাখ ১০ হাজার ৬৫৭ কোটি টাকা (মোট বাজেটের ১৪%)। জাতীয় বাজেট ২০২৫-২৬ এ সামাজিক নিরাপত্তার হার বৃদ্ধি ১২.১৮%।
           </div>
         </div>
-
-      </div>
+      </article>
     </div>
-
-    <!-- ফ্ল্যাশকার্ড রিভিশন সেকশন -->
-    <div class="section-card" id="flash-section">
-      <div class="section-header">
-        <h2>⚡ ৩০ সেকেন্ডের ঝটপট রিভিশন ফ্ল্যাশকার্ড</h2>
-        <span class="badge">ক্লিক করে উত্তর দেখুন</span>
-      </div>
-      <div class="section-body">
-        <p style="margin-bottom: 14px; color: var(--text-muted);">
-          ট্যাপ বা ক্লিক করে অর্থনৈতিক সমীক্ষা ও বাজেটের অতিগুরুত্বপূর্ণ তথ্যগুলো ঝটপট রিভিশন দিন:
-        </p>
-        <div class="flash-card-list">
-          <div class="flash-item" onclick="toggleFlash(this)">
-            <div class="flash-question"><span>❓ জিডিপির গাণিতিক সূত্রটি কী?</span> <span>➕</span></div>
-            <div class="flash-answer">জিডিপির গাণিতিক সূত্র: $\text{GDP} = \text{GNP} + \text{দেশে বিদেশিদের অর্জিত আয়} - \text{বিদেশে দেশীয় নাগরিকদের আয়}$</div>
-          </div>
-          <div class="flash-item" onclick="toggleFlash(this)">
-            <div class="flash-question"><span>❓ ২০২৪-২৫ অর্থবছরে চলতি মূল্যে মাথাপিছু জাতীয় আয় (চূড়ান্ত হিসাব) কত?</span> <span>➕</span></div>
-            <div class="flash-answer">চলতি মূল্যে মাথাপিছু জাতীয় আয় (চূড়ান্ত হিসাব): ২০২৪-২৫ অর্থবছরে চলতি মূল্যে মাথাপিছু জাতীয় আয় ৩,৩৪,৫১১ টাকা (বা ২,৭৬৯ মার্কিন ডলার)।</div>
-          </div>
-          <div class="flash-item" onclick="toggleFlash(this)">
-            <div class="flash-question"><span>❓ পূর্ববর্তী ২০২৩-২৪ অর্থবছরের মাথাপিছু জাতীয় আয় কত ছিল?</span> <span>➕</span></div>
-            <div class="flash-answer">পূর্ববর্তী ২০২৩-২৪ অর্থবছরের মাথাপিছু আয়: ২০২৩-২৪ অর্থবছরে মাথাপিছু জাতীয় আয় ছিল ৩,০৪,১০২ টাকা (বা ২,৭৩৮ মার্কিন ডলার)।</div>
-          </div>
-          <div class="flash-item" onclick="toggleFlash(this)">
-            <div class="flash-question"><span>❓ ২০২৪-২৫ অর্থবছরে স্থির মূল্যে জিডিপির আকার (চূড়ান্ত হিসাব) কত?</span> <span>➕</span></div>
-            <div class="flash-answer">স্থির মূল্যে জিডিপি (চূড়ান্ত হিসাব): ২০২৪-২৫ অর্থবছরে স্থির মূল্যে জিডিপির আকার ৩৮,৬২৭,৯০৭ কোটি টাকা।</div>
-          </div>
-          <div class="flash-item" onclick="toggleFlash(this)">
-            <div class="flash-question"><span>❓ জাতীয় বাজেট ২০২৫-২৬ এ 'অনুদান সহ বাজেট ঘাটতি' কত?</span> <span>➕</span></div>
-            <div class="flash-answer">অনুদান সহ বাজেট ঘাটতি: জাতীয় বাজেট ২০২৫-২৬ এ 'অনুদান সহ বাজেট ঘাটতি' ২,২১,০০০ কোটি টাকা (উল্লেখ্য, অনুদান ব্যতিত বাজেট ঘাটতি ২ লাখ ২৬ হাজার কোটি টাকা)।</div>
-          </div>
-          <div class="flash-item" onclick="toggleFlash(this)">
-            <div class="flash-question"><span>❓ জাতীয় বাজেট ২০২৫-২৬ এ রাজস্ব প্রাপ্তির লক্ষ্যমাত্রা কত ধরা হয়েছে?</span> <span>➕</span></div>
-            <div class="flash-answer">রাজস্ব প্রাপ্তির লক্ষ্যমাত্রা: জাতীয় বাজেট ২০২৫-২৬ এ রাজস্ব প্রাপ্তির লক্ষ্যমাত্রা ৫,৪৮,০০০ কোটি টাকা।</div>
-          </div>
-          <div class="flash-item" onclick="toggleFlash(this)">
-            <div class="flash-question"><span>❓ জাতীয় বাজেট ২০২৫-২৬ এ সামাজিক নিরাপত্তার হার বৃদ্ধি কত?</span> <span>➕</span></div>
-            <div class="flash-answer">সামাজিক নিরাপত্তার হার বৃদ্ধি: জাতীয় বাজেট ২০২৫-২৬ এ সামাজিক নিরাপত্তার হার বৃদ্ধি ১২.১৮%।</div>
-          </div>
-          <div class="flash-item" onclick="toggleFlash(this)">
-            <div class="flash-question"><span>❓ জাতীয় বাজেট ২০২৫-২৬ এ উন্নয়ন বাজেটের মোট বরাদ্দের পরিমাণ কত?</span> <span>➕</span></div>
-            <div class="flash-answer">উন্নয়ন বাজেটের মোট বরাদ্দের পরিমাণ: জাতীয় বাজেট ২০২৫-২৬ এ উন্নয়ন বাজেটের মোট বরাদ্দের পরিমাণ ২,৪৫,৬০৯ কোটি টাকা (এর মধ্যে এডিপি বরাদ্দ ২ লাখ ৩০ হাজার কোটি টাকা)।</div>
-          </div>
-          <div class="flash-item" onclick="toggleFlash(this)">
-            <div class="flash-question"><span>❓ জাতীয় আয়ে কোন খাতের অবদান সর্বোচ্চ এবং কোন খাতে কর্মসংস্থান সর্বাধিক?</span> <span>➕</span></div>
-            <div class="flash-answer">জিডিপিতে সর্বোচ্চ অবদান সেবা খাতের (৫৩.৪২% চূড়ান্ত); এবং সর্বাধিক কর্মসংস্থান হয় কৃষি খাতে (৪৪.৬৭%)।</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- বইয়ের অসঙ্গতি ও যাচাই তালিকা -->
-    <div class="discrepancy-card">
-      <h3 style="color: var(--danger); margin-bottom: 12px;">⚠️ বইয়ের অসঙ্গতি ও যাচাই তালিকা</h3>
-      <p style="font-size: 0.875rem; margin-bottom: 14px;">বইয়ের পাতাগুলোতে মুদ্রিত অপশন কোড, পৃষ্ঠা নম্বর ও লেআউটে যেসব অসঙ্গতি পরিলক্ষিত হয়েছে:</p>
-      <div class="table-container">
-        <table>
-        <thead>
-          
-              <td>পৃষ্ঠার হেডার (পৃ. ৪৫৯)</td>
-              <td>"বাংলাদেশ বিষয়াবলি ৪৫৯svil"</td>
-              <td>হেডারের সাথে অতিরিক্ত শব্দ "svil" টাইপো এসেছে।</td>
-              <td>এটি পৃষ্ঠা ৪৫৯ হবে (আমার অনুমান)।</td>
-            
-        </thead>
-        <tbody>
-          <tr>
-              <td>মাথাপিছু জিডিপি মান (পৃ. ৪৬১)</td>
-              <td>চলতি মূল্যে মাথাপিছু জিডিপি "৩,১৭,১০০ কোটি টাকা"</td>
-              <td>মাথাপিছু মান লিখতে গিয়ে 'কোটি টাকা' ভুলবশত মুদ্রিত হয়েছে।</td>
-              <td>এটি একক ব্যক্তির ক্ষেত্রে ৩,১৭,১০০ টাকা হবে (আমার অনুমান)।</td>
-            </tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
-
   </div>
 
   <script>
-    // ডার্ক / লাইট থিম টগল
-    const themeBtn = document.getElementById('themeToggle');
-    themeBtn.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme');
+    const totalQuestions = 18;
+    let answeredSet = new Set();
+    let correctCount = 0;
+
+    function checkAnswer(btn, qId, chosenIdx, correctIdx) {
+      const card = document.getElementById('q-' + qId);
+      if (card.dataset.answered === 'true') return;
+      card.dataset.answered = 'true';
+
+      const buttons = card.querySelectorAll('.opt-btn');
+      buttons.forEach(b => b.disabled = true);
+
+      if (correctIdx === -1) {
+        btn.classList.add('wrong');
+      } else if (chosenIdx === correctIdx) {
+        btn.classList.add('correct');
+        correctCount++;
+      } else {
+        btn.classList.add('wrong');
+        if (correctIdx >= 0 && buttons[correctIdx]) {
+          buttons[correctIdx].classList.add('correct');
+        }
+      }
+
+      answeredSet.add(qId);
+      document.getElementById('score-counter').textContent = correctCount;
+
+      const expDrawer = document.getElementById('exp-' + qId);
+      if (expDrawer) expDrawer.classList.add('open');
+    }
+
+    function toggleExp(qId) {
+      const drawer = document.getElementById('exp-' + qId);
+      if (drawer) drawer.classList.toggle('open');
+    }
+
+    function resetQuiz() {
+      answeredSet.clear();
+      correctCount = 0;
+      document.getElementById('score-counter').textContent = '০';
+
+      document.querySelectorAll('.q-card').forEach(card => {
+        card.removeAttribute('data-answered');
+        const buttons = card.querySelectorAll('.opt-btn');
+        buttons.forEach(b => {
+          b.disabled = false;
+          b.classList.remove('correct', 'wrong');
+        });
+        const drawer = card.querySelector('.exp-drawer');
+        if (drawer) drawer.classList.remove('open');
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Font Scaling Logic
+    let currentScale = 1;
+    function changeFontSize(delta) {
+      currentScale += delta * 0.1;
+      if (currentScale < 0.8) currentScale = 0.8;
+      if (currentScale > 1.4) currentScale = 1.4;
+      document.documentElement.style.setProperty('--font-scale', currentScale);
+      document.body.style.fontSize = (currentScale * 100) + '%';
+    }
+
+    function resetFontSize() {
+      currentScale = 1;
+      document.documentElement.style.setProperty('--font-scale', 1);
+      document.body.style.fontSize = '100%';
+    }
+
+    // Theme Toggle Logic
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
       const target = current === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', target);
       try {
-        localStorage.setItem('economy_theme', target);
+        localStorage.setItem('theme', target);
+        localStorage.setItem('ebk_portal_theme', target);
       } catch(e) {}
-    });
-
-    try {
-      const savedTheme = localStorage.getItem('economy_theme');
-      if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
-    } catch(e) {}
-
-    // ফন্ট সাইজ স্কেলিং
-    let fontScale = 1;
-    const setScale = (delta, reset = false) => {
-      if (reset) fontScale = 1;
-      else fontScale = Math.min(Math.max(fontScale + delta, 0.8), 1.4);
-      document.documentElement.style.setProperty('--font-scale', fontScale);
-    };
-
-    document.getElementById('fontDown').addEventListener('click', () => setScale(-0.1));
-    document.getElementById('fontReset').addEventListener('click', () => setScale(0, true));
-    document.getElementById('fontUp').addEventListener('click', () => setScale(0.1));
-
-    // স্ক্রল প্রগ্রেস বার
-    window.addEventListener('scroll', () => {
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      document.getElementById('progress-bar').style.width = scrolled + '%';
-    });
-
-    // কুইজ হ্যান্ডলার
-    let correctCount = 0;
-    const answeredCards = new Set();
-
-    function evalQuiz(btn, selectedOption) {
-      const card = btn.closest('.quiz-card');
-      if (answeredCards.has(card)) return; // একবার উত্তর দিলে লক
-      answeredCards.add(card);
-
-      const correctAns = card.getAttribute('data-answer');
-      const allButtons = card.querySelectorAll('.quiz-opt');
-      const feedback = card.querySelector('.quiz-feedback');
-
-      allButtons.forEach(b => b.disabled = true);
-
-      if (correctAns === "না") {
-        // সাম্প্রতিক তথ্যের ভিত্তিতে সঠিক উত্তর না থাকা প্রশ্নসমূহের ক্ষেত্রে
-        btn.classList.add('incorrect');
-        feedback.style.display = 'block';
-        feedback.style.background = 'var(--accent-light)';
-        feedback.style.color = 'var(--text)';
-      } else if (selectedOption === correctAns) {
-        btn.classList.add('correct');
-        correctCount++;
-        feedback.style.display = 'block';
-      } else {
-        btn.classList.add('incorrect');
-        allButtons.forEach(b => {
-          if (b.textContent.trim().startsWith(correctAns)) {
-            b.classList.add('correct');
-          }
-        });
-        feedback.style.display = 'block';
-      }
-
-      document.getElementById('quiz-score').textContent = `স্কোর: ${correctCount} / ১৮`;
-    }
-
-    // ফ্ল্যাশকার্ড টগল ফাংশন
-    function toggleFlash(card) {
-      card.classList.toggle('open');
-      const span = card.querySelector('.flash-question span:last-child');
-      if (span) {
-        span.textContent = card.classList.contains('open') ? '➖' : '➕';
-      }
     }
   </script>
+
   <script src="nav-component.js"></script>
 </body>
 </html>

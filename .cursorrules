@@ -1,0 +1,72 @@
+# Project Rules: Bangla Handwritten Fonts & Dynamic Paper Textures System
+
+## 1. System Overview & Philosophy
+To eliminate repetitive layouts and provide an immersive, tactile stationery reading experience for competitive exam notes (BCS, Bank, Govt jobs), every newly generated page or reading layout must automatically integrate the **Bangla Handwritten Font Randomizer** and the **10 Realistic Paper Textures System**.
+
+## 2. Core Assets & Include Requirements
+Any newly created HTML e-book page, review layout, or interactive note must include the following assets:
+
+```html
+<!-- 1. Google Font Fallbacks (Optional but Recommended) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atma:wght@500;600;700&family=Baloo+Da+2:wght@500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- 2. Core Stylesheets -->
+<link rel="stylesheet" href="sketchnote.css">
+<link rel="stylesheet" href="bangla-fonts.css">
+<link rel="stylesheet" href="paper-textures.css">
+
+<!-- 3. Dynamic Randomization Engine (Place before </body> or in <head>) -->
+<script src="paper-engine.js"></script>
+```
+
+*(Note: For files located in subfolders such as `Live MCQ Bangla Literature/`, adjust relative paths accordingly: `../bangla-fonts.css`, `../paper-textures.css`, `../paper-engine.js`).*
+
+## 3. Dynamic Font Randomization Rules
+- **Automatic Assignment:** On every page render or refresh, `paper-engine.js` automatically picks a random font from `Fonts/` / `font/` and dynamically assigns it to CSS variables:
+  - `--paper-font-active`
+  - `--sk-font-bn`
+  - `--paper-font`
+- **Fallback Font Stack:** The font stack must always fall back gracefully:
+  `'<SelectedFont>', 'Nirlipta', 'FNRayhanHosthoshoily', 'Atma', 'Baloo Da 2', 'Hind Siliguri', cursive, sans-serif`
+- **Manual Font Override Classes:** If a component requires a specific font, apply utility classes:
+  - `.font-nirlipta` (নির্লিপ্ত)
+  - `.font-rayhan` (রায়হান হস্তশৈলী)
+  - `.font-durbar` (দুর্বার)
+  - `.font-begum-zia` (বেগম জিয়া)
+  - `.font-anirban` (অনির্বাণ)
+  - `.font-badhon-ador` (বাঁধন আদর)
+  - `.font-shorif-rafid` (শরীফ রাফিদ)
+  - `.font-hasan` (হাসান কলকাতা)
+  - `.font-ahasan` (আহসান নীলাঞ্জনা)
+  - `.font-mamun` (মামুন বর্ণলিপি)
+  - `.font-gedamala` (বাঁধন গেঁদামালা)
+  - `.font-kornofuli` (কর্ণফুলী)
+  - `.font-shadhinata` (স্বাধীনতা ২.০)
+  - `.font-trimohona` (ত্রিমোহনা)
+  - `.font-prapti` (প্রাপ্তি)
+  - `.font-abu-sayed` (কোডপত্র আবু সাঈদ)
+  - `.font-ekush` (একুশ)
+  - `.font-priotoma` (প্রিয়তমা)
+  - `.font-priotoma-2` (প্রিয়তমা ২)
+  - `.font-dinar` (দিনার বর্ণ)
+
+## 4. 10 High-Fidelity Paper Textures Specification
+Use base container `.paper-container` or `.sk-page`. The engine randomly assigns one of the following 10 styles, or they can be explicitly styled:
+
+1. `.paper-lined-notebook` (দাগটানা খাতা): Left double red vertical margin line (at 4.2rem) and 32px blue horizontal ruled lines.
+2. `.paper-old-aged` (পুরাতন কাগজ): Warm sepia/cream base, subtle grunge grain overlay, and edge oxidation vignette.
+3. `.paper-torn` (ছেঁড়া পাতা): Realistic jagged multi-vertex polygon clip-path with exposed white cellulose fiber underlayer.
+4. `.paper-dot-grid` (ডট গ্রিড খাতা): Modern bullet journal layout with 24px clean radial-gradient dot matrix.
+5. `.paper-graph` (গ্রাফ পেপার): Technical drafting layout with 100px major and 20px minor blueprint grid lines.
+6. `.paper-crumpled` (কুঁচকানো কাগজ): Multi-faceted angular linear-gradients and 3D shadows simulating crinkled paper.
+7. `.paper-coffee-stained` (কফি বা চায়ের দাগযুক্ত কাগজ): Concentric radial gradients simulating dried coffee mug rings and droplet splatters.
+8. `.paper-legal-pad` (হলুদ আইনি প্যাড): Canary yellow paper background with double red margin line and faux-leather top binding strip.
+9. `.paper-burnt-edge` (পোড়া কাগজের স্ক্রোল): Ancient scroll parchment with deep smoky charred-brown perimeter vignette.
+10. `.paper-kraft` (কার্ডবোর্ড বা ক্রাফট কাগজ): Organic fibrous brown recycled kraft paper with tactile cross-hatch texture.
+
+## 5. Coding Standards & Integrity
+- **Responsive Mobile First:** Always support Samsung A23 and mobile viewports (`overflow-x: clip`, fluid padding, compact margins on mobile).
+- **Full Dark Mode:** All 10 textures and fonts must adapt automatically when `[data-theme="dark"]`, `body.dark-mode`, or `.theme-dark` is toggled.
+- **Zero Fabrication:** The paper styling is an aesthetic visual presentation layer. Never alter or fabricate original exam questions or authentic answers.
