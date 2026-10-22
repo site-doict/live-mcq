@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
+  <script>
+  (function() {
+    try {
+      var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    } catch(e) {}
+  })();
+</script>
 <!-- DESIGN PLAN:
 (১) কন্টেন্ট বিশ্লেষণ ও বিন্যাস:
     - উৎস: Live MCQ আন্তর্জাতিক বিষয়াবলি - খণ্ড ১: গুরুত্বপূর্ণ মহাদেশ, দেশ (রাজধানী, মুদ্রা), স্থান, বন্দর ইত্যাদি সম্পর্কিত [বইয়ের পৃষ্ঠা ৫৯২–৬০০ / ৯-৩৭.pdf]।
@@ -53,7 +61,7 @@
   --radius: 12px;
 }
 
-[data-theme="dark"] {
+[data-theme="dark"], body[data-theme="dark"] {
   --primary-color: #60A5FA;
   --primary-light: #93C5FD;
   --secondary-color: #38BDF8;
@@ -617,10 +625,10 @@ tr:nth-child(even) {
 }
 
 /* Universal Text Box Bleed & Alignment Protection */
-.card, .quote-box, .doubt-box, .info-box, .mcq-card, .table-responsive, .data-table-container, .study-section, .flash-item {
+.card, .quote-box, .doubt-box, .info-box, .mcq-card, .study-section, .flash-item, .bcs-card, .visual-card, .concept-box, .mnemonic-box, .fact-check-box {
   max-width: 100%;
   overflow-wrap: break-word;
-  word-break: break-word;
+  word-break: normal;
 }
 
   /* ══════ Universal Mobile Screen Layout Optimization (Samsung A23 / 360px-480px) ══════ */
@@ -689,7 +697,7 @@ tr:nth-child(even) {
       max-width: 100% !important;
       box-sizing: border-box !important;
       overflow-wrap: break-word !important;
-      word-break: break-word !important;
+      word-break: normal!important;
     }
 
     /* 3. Hero Banner: slim down vertical space */
@@ -762,6 +770,162 @@ tr:nth-child(even) {
     }
   }
 
+
+/* BCS Question Analysis Card & Table */
+.bcs-table-card {
+  background: var(--bg-card);
+  border: 1px solid var(--card-border, var(--border-color, rgba(148, 163, 184, 0.2)));
+  border-radius: var(--radius, 16px);
+  padding: 1.25rem;
+  margin-bottom: 1.75rem;
+  box-shadow: var(--shadow-soft, var(--shadow-sm, 0 4px 12px rgba(0,0,0,0.05)));
+  backdrop-filter: blur(8px);
+}
+
+.bcs-table-card .bcs-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+  color: var(--accent-cyan, var(--primary-color, #0284c7));
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-left: 4px solid var(--accent-cyan, var(--primary-color, #0284c7));
+  padding-left: 0.6rem;
+}
+
+.bcs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.bcs-pill {
+  background: var(--bg-surface, var(--bg-main, rgba(255, 255, 255, 0.03)));
+  border: 1px solid var(--card-border, var(--border-color, rgba(148, 163, 184, 0.15)));
+  padding: 0.45rem 0.55rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.bcs-pill .num {
+  font-weight: 700;
+  color: var(--accent-cyan, var(--primary-color, #38bdf8));
+  font-size: 0.82rem;
+}
+
+.bcs-pill .cnt {
+  font-size: 0.8rem;
+  color: var(--text-muted, #94a3b8);
+}
+
+.bcs-pill.has-q {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.bcs-pill.has-q .cnt {
+  color: var(--accent-gold, #fbbf24);
+  font-weight: 700;
+}
+
+[data-theme="dark"] .bcs-pill.has-q {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: #38bdf8;
+}
+
+.bcs-table-container {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid var(--card-border, var(--border-color, rgba(148, 163, 184, 0.18)));
+  margin-top: 0.75rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.bcs-table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.bcs-table-container th, .bcs-table-container td {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--card-border, var(--border-color, rgba(148, 163, 184, 0.15)));
+}
+
+.bcs-table-container th {
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--accent-cyan, var(--primary-color, #38bdf8));
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.bcs-table-container td strong {
+  color: var(--accent-cyan, var(--primary-color, #38bdf8));
+}
+
+.bcs-table-container td.has-q-td {
+  font-weight: 700;
+  color: var(--accent-gold, #fbbf24);
+}
+
+
+/* ══════ Responsive Smart Table Protection (No Word Breaking & Smooth Horizontal Touch Scroll) ══════ */
+.table-responsive, .data-table-container, .table-container, .bcs-table-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  display: block !important;
+  margin: 1rem 0 !important;
+  border-radius: 8px !important;
+  box-sizing: border-box !important;
+}
+
+table, .pro-table, .data-table, .custom-table, .bcs-table {
+  width: 100% !important;
+  min-width: 540px !important;
+  border-collapse: collapse !important;
+  table-layout: auto !important;
+  box-sizing: border-box !important;
+}
+
+table th, table td,
+.pro-table th, .pro-table td,
+.data-table th, .data-table td,
+.custom-table th, .custom-table td,
+.bcs-table th, .bcs-table td {
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  white-space: normal !important;
+  hyphens: none !important;
+  text-align: left !important;
+  vertical-align: top !important;
+  line-height: 1.5 !important;
+}
+
+table th, .pro-table th, .data-table th, .custom-table th, .bcs-table th {
+  white-space: nowrap !important;
+  font-weight: 700 !important;
+}
+
+@media (max-width: 600px) {
+  table th, table td,
+  .pro-table th, .pro-table td,
+  .data-table th, .data-table td,
+  .custom-table th, .custom-table td,
+  .bcs-table th, .bcs-table td {
+    padding: 7px 8px !important;
+    font-size: 0.85rem !important;
+  }
+  table, .pro-table, .data-table, .custom-table, .bcs-table {
+    min-width: 500px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -775,6 +939,73 @@ tr:nth-child(even) {
     <h1>গুরুত্বপূর্ণ মহাদেশ, দেশ (রাজধানী, মুদ্রা), স্থান, বন্দর ইত্যাদি সম্পর্কিত</h1>
     <p>বইয়ের পৃষ্ঠা: ৫৯২–৬০০ | বিসিএস প্রিলিমিনারি সিলেবাসের একক বৃহত্তম অধ্যায় | মোট প্রশ্ন: ২০৩টি | পূর্ণাঙ্গ অ্যানালাইসিস, ডায়াগ্রাম, চার্ট ও ইন্টারেক্টিভ কুইজ</p>
   </header>
+
+    <!-- BCS Analysis Breakdown -->
+    <section class="bcs-table-card">
+      <div class="bcs-card-title">📊 বিগত বিসিএস পরীক্ষার প্রশ্ন বিশ্লেষণ ছক (বইয়ের মূল ছক অনুযায়ী)</div>
+      <div class="bcs-grid">
+        <div class="bcs-pill has-q"><div class="num">৫০তম</div><div class="cnt">১টি প্রশ্ন</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪৯তম</div><div class="cnt">৪টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪৮তম</div><div class="cnt">৪টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪৭তম</div><div class="cnt">৩টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill"><div class="num">৪৬তম</div><div class="cnt">০টি</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪৫তম</div><div class="cnt">৭টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪৪তম</div><div class="cnt">৩টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪৩তম</div><div class="cnt">৪টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪২তম</div><div class="cnt">২টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪১তম</div><div class="cnt">৫টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill has-q"><div class="num">৪০তম</div><div class="cnt">৫টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill has-q"><div class="num">৩৯তম</div><div class="cnt">৯টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill has-q"><div class="num">৩৮তম</div><div class="cnt">৪টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill has-q"><div class="num">৩৭তম</div><div class="cnt">৫টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill has-q"><div class="num">৩৬তম</div><div class="cnt">২টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill has-q"><div class="num">৩৫তম</div><div class="cnt">৫টি প্রশ্ন 🔥</div></div>
+        <div class="bcs-pill has-q"><div class="num">১০ম-৩৪তম</div><div class="cnt">১৫১টি প্রশ্ন 🔥</div></div>
+      </div>
+      <div class="bcs-table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
+              <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
+              <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>৫০তম</strong></td><td class="has-q-td">১টি</td>
+              <td><strong>৪৪তম</strong></td><td class="has-q-td">৩টি</td>
+              <td><strong>৩৮তম</strong></td><td class="has-q-td">৪টি</td>
+            </tr>
+            <tr>
+              <td><strong>৪৯তম</strong></td><td class="has-q-td">৪টি</td>
+              <td><strong>৪৩তম</strong></td><td class="has-q-td">৪টি</td>
+              <td><strong>৩৭তম</strong></td><td class="has-q-td">৫টি</td>
+            </tr>
+            <tr>
+              <td><strong>৪৮তম</strong></td><td class="has-q-td">৪টি</td>
+              <td><strong>৪২তম</strong></td><td class="has-q-td">২টি</td>
+              <td><strong>৩৬তম</strong></td><td class="has-q-td">২টি</td>
+            </tr>
+            <tr>
+              <td><strong>৪৭তম</strong></td><td class="has-q-td">৩টি</td>
+              <td><strong>৪১তম</strong></td><td class="has-q-td">৫টি</td>
+              <td><strong>৩৫তম</strong></td><td class="has-q-td">৫টি</td>
+            </tr>
+            <tr>
+              <td><strong>৪৬তম</strong></td><td>০টি</td>
+              <td><strong>৪০তম</strong></td><td class="has-q-td">৫টি</td>
+              <td><strong>১০ম-৩৪তম</strong></td><td class="has-q-td">১৫১টি</td>
+            </tr>
+            <tr>
+              <td><strong>৪৫তম</strong></td><td class="has-q-td">৭টি</td>
+              <td><strong>৩৯তম</strong></td><td class="has-q-td">৯টি</td>
+              <td><strong>মোট প্রশ্ন</strong></td><td class="has-q-td"><strong>২১৪টি</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
   <!-- Control Bar -->
   <div class="control-bar">
@@ -10475,5 +10706,52 @@ window.addEventListener('scroll', () => {
 </script>
 
 <script src="nav-component.js"></script>
+
+  <!-- Universal E-Book Theme Persistence & Controller -->
+  <script>
+    (function() {
+      function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        if (document.body) document.body.setAttribute('data-theme', theme);
+        try {
+          localStorage.setItem('theme', theme);
+          localStorage.setItem('ebk_portal_theme', theme);
+        } catch(e) {}
+        var btns = document.querySelectorAll('#themeBtn, #theme-btn, #themeToggleBtn, .btn-ctrl[onclick*="toggleTheme"], button[onclick*="toggleTheme"], .btn-theme-toggle');
+        btns.forEach(function(b) {
+          if (b.id === 'themeToggleBtn' || b.classList.contains('icon-only')) {
+            b.textContent = theme === 'dark' ? '☀️' : '🌙';
+          } else {
+            b.innerHTML = theme === 'dark' ? '☀️ মোড' : '🌓 মোড';
+          }
+        });
+      }
+
+      window.toggleTheme = function() {
+        var cur = document.documentElement.getAttribute('data-theme') || (document.body && document.body.getAttribute('data-theme')) || 'light';
+        var next = cur === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+      };
+
+      var saved = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || 'light';
+      applyTheme(saved);
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          applyTheme(saved);
+          var toggleBtn = document.getElementById('themeToggleBtn') || document.getElementById('themeBtn') || document.getElementById('theme-btn');
+          if (toggleBtn) {
+            toggleBtn.onclick = window.toggleTheme;
+          }
+        });
+      } else {
+        var toggleBtn = document.getElementById('themeToggleBtn') || document.getElementById('themeBtn') || document.getElementById('theme-btn');
+        if (toggleBtn) {
+          toggleBtn.onclick = window.toggleTheme;
+        }
+      }
+    })();
+  </script>
+
 </body>
 </html>
