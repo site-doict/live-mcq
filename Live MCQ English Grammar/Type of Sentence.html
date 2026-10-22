@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+  <title>বাক্যের প্রকারভেদ (Type of Sentence) | English Grammar বিসিএস প্রিলিমিনারি স্মার্ট ই-বুক</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../bangla-fonts.css">
+  <link rel="stylesheet" href="../paper-textures.css">
+  <style>
+    :root {
+      --font-scale: 1;
+      --primary-color: #1a5276;
+      --secondary-color: #2980b9;
+      --accent-color: #e74c3c;
+      --success-color: #27ae60;
+      --warning-color: #f39c12;
+      --bg-color: #f8fafc;
+      --card-bg: rgba(255, 255, 255, 0.82);
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --text-color: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border-color: #e2e8f0;
+      --correct-bg: #d4edda;
+      --correct-border: #28a745;
+      --correct-text: #155724;
+      --wrong-bg: #f8d7da;
+      --wrong-border: #dc3545;
+      --wrong-text: #721c24;
+      --drawer-bg: #f1f5f9;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+      --radius: 10px;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.82);
+      --bg-surface: rgba(15, 23, 42, 0.85);
+      --text-color: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      --correct-bg: rgba(39, 174, 96, 0.2);
+      --correct-border: #27ae60;
+      --correct-text: #a6f4c5;
+      --wrong-bg: rgba(231, 76, 60, 0.2);
+      --wrong-border: #e74c3c;
+      --wrong-text: #fca5a5;
+      --drawer-bg: #0f172a;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+
+    body {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: calc(1rem * var(--font-scale));
+      padding-top: 60px;
+      padding-bottom: 80px;
+      overflow-x: clip;
+    }
+
+    /* Reading Progress Bar */
+    .progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: transparent;
+      z-index: 1001;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+      transition: width 0.1s linear;
+    }
+
+    /* Top Control Header */
+    .top-bar {
+      position: fixed;
+      top: 4px;
+      left: 0;
+      width: 100%;
+      height: 54px;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      z-index: 1000;
+    
+      backdrop-filter: blur(6px);
+    }
+
+    .top-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .top-bar-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 220px;
+    }
+    [data-theme="dark"] .top-bar-title {
+      color: #38bdf8;
+    }
+
+    .controls-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-control {
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      border-radius: 6px;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .btn-control:hover {
+      background: var(--border-color);
+    }
+
+    /* Main Container */
+    .main-container {
+      max-width: 900px;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+    }
+
+    /* Chapter Header Card */
+    .chapter-hero {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    
+      backdrop-filter: blur(6px);
+    }
+    .chapter-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, #1a5276, #2980b9);
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.75rem;
+    }
+    .chapter-title .ch-en, .ch-title .ch-en, .ch-en {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 0.2rem;
+      font-family: 'Inter', sans-serif !important;
+    }
+
+    .chapter-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+      font-family: inherit;
+    }
+    [data-theme="dark"] .chapter-title .ch-en, .ch-title .ch-en, .ch-en {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 0.2rem;
+      font-family: 'Inter', sans-serif !important;
+    }
+
+    .chapter-title {
+      color: #38bdf8;
+    }
+    .chapter-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* Interactive Stats Bar - Noto Serif Bengali */
+    .stats-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      text-align: center;
+      font-family: 'Noto Serif Bengali', serif !important;
+    
+      backdrop-filter: blur(6px);
+    }
+    .stat-item {
+      padding: 0.25rem;
+    }
+    .stat-val {
+      font-size: 1.25rem;
+      font-weight: 800;
+      line-height: 1.2;
+      font-family: 'Inter', inherit;
+    }
+    .stat-lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+    .stat-total .stat-val { color: var(--secondary-color); }
+    .stat-correct .stat-val { color: var(--success-color); }
+    .stat-wrong .stat-val { color: var(--accent-color); }
+    .stat-remaining .stat-val { color: var(--warning-color); }
+
+    /* Grammar Rules Box */
+    .grammar-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--secondary-color);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    
+      backdrop-filter: blur(6px);
+    }
+    .grammar-box-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    [data-theme="dark"] .grammar-box-title {
+      color: #38bdf8;
+    }
+
+    /* Tables - Noto Serif Bengali */
+    .table-responsive {
+      overflow-x: auto;
+      margin: 1rem 0;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+    .bcs-table, .reference-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      text-align: center;
+      font-family: 'Noto Serif Bengali', serif !important;
+    }
+    .reference-table {
+      text-align: left;
+    }
+    .bcs-table th, .bcs-table td,
+    .reference-table th, .reference-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.55rem 0.5rem;
+    }
+    .bcs-table th, .reference-table th {
+      background: rgba(41, 128, 185, 0.1);
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    [data-theme="dark"] .bcs-table th,
+    [data-theme="dark"] .reference-table th {
+      color: #38bdf8;
+    }
+
+    /* CRITICAL REQUIREMENT: Question Cards & Options MUST use Noto Serif Bengali */
+    .q-card, .q-text, .opt-btn, .opt-text, .answer-drawer, .drawer-content {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    
+      backdrop-filter: blur(6px);
+    }
+    .q-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .q-num-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .q-num {
+      font-size: 1rem;
+      font-weight: 800;
+      background: rgba(41, 128, 185, 0.12);
+      color: var(--secondary-color);
+      padding: 0.15rem 0.55rem;
+      border-radius: 6px;
+    }
+    .bcs-badge {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #d97706;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 0.15rem 0.5rem;
+      border-radius: 12px;
+      font-family: 'Noto Serif Bengali', serif !important;
+    }
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    /* Options Grid (2x2) */
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 600px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .opt-btn {
+      background: var(--bg-color);
+      border: 1.5px solid var(--border-color);
+      color: var(--text-color);
+      border-radius: 8px;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.95rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      line-height: 1.4;
+      transition: all 0.15s ease-in-out;
+    }
+    .opt-btn:hover:not(.locked) {
+      border-color: var(--secondary-color);
+      background: rgba(41, 128, 185, 0.05);
+      transform: translateY(-1px);
+    }
+    .opt-prefix {
+      font-weight: 700;
+      color: var(--secondary-color);
+      min-width: 1.25rem;
+    }
+    .opt-btn.correct-choice {
+      background: var(--correct-bg) !important;
+      border-color: var(--correct-border) !important;
+      color: var(--correct-text) !important;
+      font-weight: 600;
+    }
+    .opt-btn.wrong-choice {
+      background: var(--wrong-bg) !important;
+      border-color: var(--wrong-border) !important;
+      color: var(--wrong-text) !important;
+    }
+    .opt-btn.locked {
+      cursor: default;
+    }
+
+    /* Answer & Explanation Drawer */
+    .answer-drawer {
+      margin-top: 0.75rem;
+      background: var(--drawer-bg);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+    }
+    .drawer-header {
+      padding: 0.6rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+    .ans-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--success-color);
+    }
+    .drawer-toggle-btn {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--secondary-color);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .drawer-content {
+      padding: 0.85rem 1rem;
+      border-top: 1px dashed var(--border-color);
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: var(--text-color);
+      display: none;
+    }
+    .drawer-content.open {
+      display: block;
+    }
+    .drawer-content strong {
+      color: var(--primary-color);
+    }
+    [data-theme="dark"] .drawer-content strong {
+      color: #38bdf8;
+    }
+
+    /* Footer Navigation */
+    .chapter-nav-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2.5rem;
+      padding: 1.25rem 0;
+      border-top: 1px solid var(--border-color);
+    }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--primary-color);
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: var(--shadow-sm);
+      font-family: 'Noto Serif Bengali', serif !important;
+    }
+    .nav-btn:hover {
+      background: var(--border-color);
+    }
+  
+    /* Mandatory Exam Question & Analysis Typography Protection (Noto Serif Bengali) */
+    .q-card,
+    .q-card *,
+    .q-text,
+    .q-text *,
+    .opt-btn,
+    .opt-btn *,
+    .opt-text,
+    .answer-drawer,
+    .answer-drawer *,
+    .explanation-content,
+    .explanation-content *,
+    .bcs-table,
+    .bcs-table *,
+    .bcs-tag,
+    .score-bar,
+    .score-bar *,
+    .stats-card,
+    .stats-card *,
+    .doubt-box,
+    .doubt-box * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container paper-container paper-torn font-kornofuli">
+
+  <!-- Reading Progress Bar -->
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Sticky Top Control Bar -->
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <button class="btn-control" id="drawerOpenBtn" onclick="toggleNavDrawer()" title="অধ্যায় সূচিপত্র">
+        ☰ সূচিপত্র
+      </button>
+      <div class="top-bar-title" title="Type of Sentence">Type of Sentence</div>
+    </div>
+    <div class="controls-group">
+      <button class="btn-control" onclick="scaleFont(-0.1)" title="ফন্ট ছোট করুন">A-</button>
+      <button class="btn-control" onclick="resetFont()" title="স্বাভাবিক ফন্ট">A</button>
+      <button class="btn-control" onclick="scaleFont(0.1)" title="ফন্ট বড় করুন">A+</button>
+      <button class="btn-control" onclick="toggleTheme()" id="themeToggleBtn" title="থিম পরিবর্তন">🌙</button>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <!-- Chapter Hero -->
+    <section class="chapter-hero">
+      <span class="chapter-tag font-kornofuli">অধ্যায় ১৩ • English Grammar</span>
+      <h1 class="chapter-title font-kornofuli">বাক্যের প্রকারভেদ <span class="ch-en">(Type of Sentence)</span></h1>
+      <p class="chapter-subtitle font-kornofuli">Live MCQ™ বিসিএস প্রিলিমিনারি বিষয়ভিত্তিক জব সলিউশন (পৃষ্ঠা ২৫০–২৫৩)</p>
+    </section>
+
+    <!-- BCS Analysis Matrix Table -->
+    <div class="grammar-box">
+      <div class="grammar-box-title">📊 বিসিএস প্রিলিমিনারি প্রশ্ন বিশ্লেষণ ছক (Types of Sentence)</div>
+      <div class="table-responsive">
+        <table class="bcs-table">
+          <thead>
+            <tr>
+              <th>৫০তম</th><th>৪৯তম</th><th>৪৮তম</th><th>৪৭তম</th><th>৪৬তম</th><th>৪৫তম</th><th>৪৪তম</th><th>৪৩তম</th><th>৪২তম</th><th>৪১তম</th><th>৪০তম</th><th>৩৯তম</th><th>৩৮তম</th><th>৩৭তম</th><th>৩৬তম</th><th>৩৫তম</th><th>১০ম-৩৪তম</th><th>মোট</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>১</td><td>০</td><td>১</td><td>১</td><td>২</td><td>২</td><td>০</td><td>০</td><td>০</td><td>০</td><td>১</td><td>০</td><td>১</td><td>১</td><td>১</td><td>০</td><td>৪</td><td><strong>১৪</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Special Grammar Reference Box: বাক্যের গঠনগত শ্রেণিবিভাগ -->
+    <div class="grammar-box">
+      <div class="grammar-box-title">📌 Simple, Complex ও Compound Sentence চেনার উপায়</div>
+      <div class="table-responsive">
+        <table class="reference-table">
+          <thead>
+            <tr>
+              <th style="width: 25%;">বাক্যের প্রকার</th>
+              <th style="width: 35%;">গঠন বৈশিষ্ট্য</th>
+              <th style="width: 40%;">সংযোজক ও উদাহরণ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Simple Sentence</strong></td>
+              <td>একটি মাত্র Subject এবং একটি মাত্র Finite Verb থাকে।</td>
+              <td>I saw an old man walking past me. / In spite of his poverty, he is honest.</td>
+            </tr>
+            <tr>
+              <td><strong>Complex Sentence</strong></td>
+              <td>একটি Principal Clause এবং এক বা একাধিক Subordinate Clause থাকে।</td>
+              <td><strong>Conjunctions:</strong> if, though, although, since, as, because, so that, that, unless, until, lest, when, who, which.</td>
+            </tr>
+            <tr>
+              <td><strong>Compound Sentence</strong></td>
+              <td>দুই বা ততোধিক Independent/Co-ordinate Clause থাকে।</td>
+              <td><strong>Conjunctions:</strong> and, but, or, yet, so, therefore, otherwise, else, both...and, either...or, neither...nor, not only...but also.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Live MCQ Quiz Stats Bar -->
+    <div class="stats-card">
+      <div class="stat-item stat-total">
+        <div class="stat-val" id="totalQuestions">14</div>
+        <div class="stat-lbl">মোট প্রশ্ন</div>
+      </div>
+      <div class="stat-item stat-correct">
+        <div class="stat-val" id="correctAnswers">0</div>
+        <div class="stat-lbl">সঠিক উত্তর</div>
+      </div>
+      <div class="stat-item stat-wrong">
+        <div class="stat-val" id="wrongAnswers">0</div>
+        <div class="stat-lbl">ভুল উত্তর</div>
+      </div>
+      <div class="stat-item stat-remaining">
+        <div class="stat-val" id="remainingQuestions">14</div>
+        <div class="stat-lbl">অনুত্তরিত</div>
+      </div>
+    </div>
+
+    <!-- Question Cards Container -->
+    <div class="questions-list">
+      <!-- Question ১ -->
+      <article class="q-card" data-qnum="১">
+        <div class="q-header">
+          <div class="q-num-wrap">
+            <span class="q-num">১</span>
+            <span class="bcs-badge">৫০তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="q-text">Identify the compound sentence:</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 'ক', 'ক/গ/ঘ')">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">Either you do it or you will be fined</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'খ', 'ক/গ/ঘ')">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Unless you do it, you will be fined</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'গ', 'ক/গ/ঘ')">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Do it or I shall fine you</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'ঘ', 'ক/গ/ঘ')">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">You have to do it, otherwise I will fine you</span>
+          </button>
+        </div>
+        <div class="answer-drawer">
+          <div class="drawer-header" onclick="toggleDrawer(this)">
+            <div class="ans-indicator">
+              <span>সঠিক উত্তর: <strong>(ক/গ/ঘ)</strong></span>
+            </div>
+            <button class="drawer-toggle-btn" type="button">ব্যাখ্যা দেখুন ▼</button>
+          </div>
+          <div class="drawer-content">
+            <strong>ব্যাখ্যা:</strong> প্রশ্ন অনুসারে সঠিক উত্তর <strong>(ক), (গ) এবং (ঘ)</strong> তিনটিই Compound sentence। প্রশ্নটি 'Identify the Complex sentence' হলে সঠিক উত্তর হতো (খ)।<br><br><strong>অপশন বিশ্লেষণ:</strong><br>• <strong>(ক) Either you do it or you will be fined:</strong> এখানে দুটি independent clause 'either...or' দ্বারা যুক্ত। এটি compound sentence।<br>• <strong>(খ) Unless you do it, you will be fined:</strong> এখানে 'Unless you do it' একটি dependent clause, তাই এটি complex sentence।<br>• <strong>(গ) Do it or I shall fine you:</strong> দুটি independent clause 'or' দ্বারা যুক্ত, এটি compound sentence।<br>• <strong>(ঘ) You have to do it, otherwise I will fine you:</strong> দুটি independent clause 'otherwise' দ্বারা যুক্ত, এটি compound sentence।
+          </div>
+        </div>
+      </article>
+
+      <!-- Question ২ -->
+      <article class="q-card" data-qnum="২">
+        <div class="q-header">
+          <div class="q-num-wrap">
+            <span class="q-num">২</span>
+            <span class="bcs-badge">৪৮তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="q-text">What type of sentence is &#x27;Do or die&#x27;?</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 'ক', 'গ')">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">Complex</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'খ', 'গ')">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Simple</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'গ', 'গ')">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Compound</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'ঘ', 'গ')">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">Exclamatory</span>
+          </button>
+        </div>
+        <div class="answer-drawer">
+          <div class="drawer-header" onclick="toggleDrawer(this)">
+            <div class="ans-indicator">
+              <span>সঠিক উত্তর: <strong>(গ)</strong></span>
+            </div>
+            <button class="drawer-toggle-btn" type="button">ব্যাখ্যা দেখুন ▼</button>
+          </div>
+          <div class="drawer-content">
+            <strong>ব্যাখ্যা:</strong> 'Do or die' হলো একটি <strong>Compound sentence</strong>। এখানে 'Do' এবং 'die' দুটি independent clause 'or' coordinating conjunction দ্বারা যুক্ত রয়েছে।
+          </div>
+        </div>
+      </article>
+
+      <!-- Question ৩ -->
+      <article class="q-card" data-qnum="৩">
+        <div class="q-header">
+          <div class="q-num-wrap">
+            <span class="q-num">৩</span>
+            <span class="bcs-badge">৪৭তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="q-text">&#x27;Five years have passed since his father died&#x27;. Identify the correct simple form of the sentence from the following options:</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 'ক', 'খ')">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">His father has died five years ago.</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'খ', 'খ')">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">His father died five years ago.</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'গ', 'খ')">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">His father has died for five years.</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'ঘ', 'খ')">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">His father died since five years.</span>
+          </button>
+        </div>
+        <div class="answer-drawer">
+          <div class="drawer-header" onclick="toggleDrawer(this)">
+            <div class="ans-indicator">
+              <span>সঠিক উত্তর: <strong>(খ)</strong></span>
+            </div>
+            <button class="drawer-toggle-btn" type="button">ব্যাখ্যা দেখুন ▼</button>
+          </div>
+          <div class="drawer-content">
+            <strong>ব্যাখ্যা:</strong> প্রদত্ত বাক্যটি একটি Complex sentence ('Five years have passed' + 'since his father died')। একে Simple sentence-এ রূপান্তর করতে হলে একটিমাত্র Subject ও একটিমাত্র Finite verb থাকতে হবে। 'Five years ago' অতীত নির্দেশক সময় হওয়ায় এর সাথে Past Indefinite tense হবে। সুতরাং সঠিক রূপ: <strong>His father died five years ago</strong>।
+          </div>
+        </div>
+      </article>
+
+      <!-- Question ৪ -->
+      <article class="q-card" data-qnum="৪">
+        <div class="q-header">
+          <div class="q-num-wrap">
+            <span class="q-num">৪</span>
+            <span class="bcs-badge">৪৬তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="q-text">Which of the following is a correct simple sentence?</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 'ক', 'ঘ')">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">All that glitters is not gold</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'খ', 'ঘ')">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">All&#x27;s well that ends well</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'গ', 'ঘ')">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Do or die</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'ঘ', 'ঘ')">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">I saw an old man walking past me</span>
+          </button>
+        </div>
+        <div class="answer-drawer">
+          <div class="drawer-header" onclick="toggleDrawer(this)">
+            <div class="ans-indicator">
+              <span>সঠিক উত্তর: <strong>(ঘ)</strong></span>
+            </div>
+            <button class="drawer-toggle-btn" type="button">ব্যাখ্যা দেখুন ▼</button>
+          </div>
+          <div class="drawer-content">
+            <strong>ব্যাখ্যা:</strong> <strong>I saw an old man walking past me</strong> বাক্যটি একটি <strong>Simple sentence</strong>। এতে একটিমাত্র subject (I) এবং একটিমাত্র finite verb (saw) রয়েছে; 'walking' হলো present participle (non-finite verb)।<br><br>অন্যান্য অপশন:<br>• (ক) ও (খ): 'that' যুক্ত Relative clause থাকায় <em>Complex sentence</em>。<br>• (গ) 'or' দ্বারা যুক্ত থাকায় <em>Compound sentence</em>।
+          </div>
+        </div>
+      </article>
+
+      <!-- Question ৫ -->
+      <article class="q-card" data-qnum="৫">
+        <div class="q-header">
+          <div class="q-num-wrap">
+            <span class="q-num">৫</span>
+            <span class="bcs-badge">৪৬তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="q-text">Which is the correct complex form of the sentence? &#x27;A corrupt man cannot win the respect of others.&#x27;</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 'ক', 'গ')">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">A man who is corrupt cannot respect others.</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'খ', 'গ')">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">A man does not respect others who are corrupt.</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'গ', 'গ')">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">A man who is corrupt cannot win the respect of others.</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'ঘ', 'গ')">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">A man who can win the respect of others cannot be corrupt.</span>
+          </button>
+        </div>
+        <div class="answer-drawer">
+          <div class="drawer-header" onclick="toggleDrawer(this)">
+            <div class="ans-indicator">
+              <span>সঠিক উত্তর: <strong>(গ)</strong></span>
+            </div>
+            <button class="drawer-toggle-btn" type="button">ব্যাখ্যা দেখুন ▼</button>
+          </div>
+          <div class="drawer-content">
+            <strong>ব্যাখ্যা:</strong> 'A corrupt man cannot win the respect of others'-এর সঠিক complex রূপ হলো <strong>A man who is corrupt cannot win the respect of others</strong>।<br><br><em>নিয়ম:</em> Adjective + Noun যুক্ত Simple sentence-কে Complex করতে Noun-এর পর Relative pronoun (who/which/that) + Be verb + Adjective বসাতে হয়।
+          </div>
+        </div>
+      </article>
+
+      <!-- Question ৬ -->
+      <article class="q-card" data-qnum="৬">
+        <div class="q-header">
+          <div class="q-num-wrap">
+            <span class="q-num">৬</span>
+            <span class="bcs-badge">৪৫তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="q-text">&#x27;Walk fast lest you should miss the train&#x27;. This is a ——</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 'ক', 'গ')">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">Simple sentence</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'খ', 'গ')">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Compound sentence</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'গ', 'গ')">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Complex sentence</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'ঘ', 'গ')">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">Interrogative sentence</span>
+          </button>
+        </div>
+        <div class="answer-drawer">
+          <div class="drawer-header" onclick="toggleDrawer(this)">
+            <div class="ans-indicator">
+              <span>সঠিক উত্তর: <strong>(গ)</strong></span>
+            </div>
+            <button class="drawer-toggle-btn" type="button">ব্যাখ্যা দেখুন ▼</button>
+          </div>
+          <div class="drawer-content">
+            <strong>ব্যাখ্যা:</strong> বাক্যে <strong>lest</strong> একটি Subordinating conjunction যা Principal clause ('Walk fast') এর সাথে Subordinate clause ('you should miss the train')-কে যুক্ত করেছে। তাই এটি একটি <strong>Complex sentence</strong>।
+          </div>
+        </div>
+      </article>
+
+      <!-- Question ৭ -->
+      <article class="q-card" data-qnum="৭">
+        <div class="q-header">
+          <div class="q-num-wrap">
+            <span class="q-num">৭</span>
+            <span class="bcs-badge">৪৫তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="q-text">Identify the imperative sentence:</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 'ক', 'ক')">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">Shut up!</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'খ', 'ক')">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Shahin is playing football.</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'গ', 'ক')">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">I shall cook dinner now.</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'ঘ', 'ক')">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">What is your name?</span>
+          </button>
+        </div>
+        <div class="answer-drawer">
+          <div class="drawer-header" onclick="toggleDrawer(this)">
+            <div class="ans-indicator">
+              <span>সঠিক উত্তর: <strong>(ক)</strong></span>
+            </div>
+            <button class="drawer-toggle-btn" type="button">ব্যাখ্যা দেখুন ▼</button>
+          </div>
+          <div class="drawer-content">
+            <strong>ব্যাখ্যা:</strong> যে বাক্যে আদেশ, নিষেধ, উপদেশ বা অনুরোধ প্রকাশ করা হয় তাকে <strong>Imperative sentence</strong> বলে। এতে সাধারণত Subject (You) উহ্য থাকে। <strong>Shut up!</strong> একটি সরাসরি আদেশ, তাই এটি Imperative sentence।<br><br>অন্যান্য বাক্যে: (খ) ও (গ) Assertive sentence; (ঘ) Interrogative sentence।
+          </div>
+        </div>
+      </article>
+
+      <!-- Question ৮ -->
+      <article class="q-card" data-qnum="৮">
+        <div class="q-header">
+          <div class="q-num-wrap">
+            <span class="q-num">৮</span>
+            <span class="bcs-badge">৪০তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="q-text">‘We must not be late, else we will miss the train.’ This is a ——</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 'ক', 'ক')">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">Compound sentence</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'খ', 'ক')">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Complex sentence</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'গ', 'ক')">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Simple sentence</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'ঘ', 'ক')">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">Interrogative sentence</span>
+          </button>
+        </div>
+        <div class="answer-drawer">
+          <div class="drawer-header" onclick="toggleDrawer(this)">
+            <div class="ans-indicator">
+              <span>সঠিক উত্তর: <strong>(ক)</strong></span>
+            </div>
+            <button class="drawer-toggle-btn" type="button">ব্যাখ্যা দেখুন ▼</button>
+          </div>
+          <div class="drawer-content">
+            <strong>ব্যাখ্যা:</strong> বাক্যে দুটি Independent clause ('We must not be late' এবং 'we will miss the train') Coordinating conjunction <strong>else</strong> দ্বারা যুক্ত রয়েছে, তাই বাক্যটি একটি <strong>Compound sentence</strong>।
+          </div>
+        </div>
+      </article>
+
+      <!-- Question ৯ -->
+      <article class="q-card" data-qnum="৯">
+        <div class="q-header">
+          <div class="q-num-wrap">
+            <span class="q-num">৯</span>
+            <span class="bcs-badge">৩৮তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="q-text">Select the right compound structure of the sentence: ‘Though he is poor, he is honest.’</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 'ক', 'গ')">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">He is poor and honest</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'খ', 'গ')">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">As he is poor, he is honest</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'গ', 'গ')">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">He is poor but honest</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'ঘ', 'গ')">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">Since he is poor, he is honest</span>
+          </button>
+        </div>
+        <div class="answer-drawer">
+          <div class="drawer-header" onclick="toggleDrawer(this)">
+            <div class="ans-indicator">
+              <span>সঠিক উত্তর: <strong>(গ)</strong></span>
+            </div>
+            <button class="drawer-toggle-btn" type="button">ব্যাখ্যা দেখুন ▼</button>
+          </div>
+          <div class="drawer-content">
+            <strong>ব্যাখ্যা:</strong> Though/Although যুক্ত Complex sentence-কে Compound করতে coordinating conjunction <strong>but</strong> ব্যবহার করতে হয়। সুতরাং সঠিক রূপ: <strong>He is poor but honest</strong>।
+          </div>
+        </div>
+      </article>
+
+      <!-- Question ১০ -->
+      <article class="q-card" data-qnum="১০">
+        <div class="q-header">
+          <div class="q-num-wrap">
+            <span class="q-num">১০</span>
+            <span class="bcs-badge">৩৭তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="q-text">&quot;A rolling stone gathers no moss&quot; The complex form of the sentence is ——</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 'ক', 'ঘ')">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">Since a stone is rolling, it gathers no moss.</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'খ', 'ঘ')">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Though a stone rolls, it gathers no moss.</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'গ', 'ঘ')">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">A stone what rolls gathers no moss.</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'ঘ', 'ঘ')">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">A stone that rolls gathers no moss.</span>
+          </button>
+        </div>
+        <div class="answer-drawer">
+          <div class="drawer-header" onclick="toggleDrawer(this)">
+            <div class="ans-indicator">
+              <span>সঠিক উত্তর: <strong>(ঘ)</strong></span>
+            </div>
+            <button class="drawer-toggle-btn" type="button">ব্যাখ্যা দেখুন ▼</button>
+          </div>
+          <div class="drawer-content">
+            <strong>ব্যাখ্যা:</strong> Participle যুক্ত simple sentence-কে complex করতে participle অংশকে relative clause-এ রূপান্তর করতে হয়। 'rolling' present participle হওয়ায় তা <strong>A stone that/which rolls</strong> হবে। সুতরাং সঠিক Complex রূপ: <strong>A stone that rolls gathers no moss</strong>।
+          </div>
+        </div>
+      </article>
+
+      <!-- Question ১১ -->
+      <article class="q-card" data-qnum="১১">
+        <div class="q-header">
+          <div class="q-num-wrap">
+            <span class="q-num">১১</span>
+            <span class="bcs-badge">৩৬তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="q-text">In English grammar, ___ deals with formation of sentences.</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 'ক', 'গ')">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">Morphology</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'খ', 'গ')">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Etymology</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'গ', 'গ')">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Syntax</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'ঘ', 'গ')">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">Semantics</span>
+          </button>
+        </div>
+        <div class="answer-drawer">
+          <div class="drawer-header" onclick="toggleDrawer(this)">
+            <div class="ans-indicator">
+              <span>সঠিক উত্তর: <strong>(গ)</strong></span>
+            </div>
+            <button class="drawer-toggle-btn" type="button">ব্যাখ্যা দেখুন ▼</button>
+          </div>
+          <div class="drawer-content">
+            <strong>ব্যাখ্যা:</strong> ইংরেজি ব্যাকরণে বাক্য গঠন নিয়ে আলোচনা করে <strong>Syntax</strong> (বাক্যতত্ত্ব)।<br><br>অন্যান্য শাখা:<br>• <strong>Morphology:</strong> শব্দ গঠন ও রূপতত্ত্ব (The study of the forms of words)<br>• <strong>Etymology:</strong> শব্দের উৎপত্তি ও ইতিহাস (The origin of words)<br>• <strong>Semantics:</strong> শব্দের অর্থতত্ত্ব (Deals with the meaning of words/sentences)
+          </div>
+        </div>
+      </article>
+
+      <!-- Question ১২ -->
+      <article class="q-card" data-qnum="১২">
+        <div class="q-header">
+          <div class="q-num-wrap">
+            <span class="q-num">১২</span>
+            <span class="bcs-badge">৩২তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="q-text">Not once has our neighbour invited us into his house.</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 'ক', 'খ')">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">Our neighbour has invited us into his house not once but many times.</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'খ', 'খ')">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Our neighbour has never invited us into his house.</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'গ', 'খ')">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Occasionally our neighbour has invited us into his house.</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'ঘ', 'খ')">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">Our neighbour has not always invited us into his house.</span>
+          </button>
+        </div>
+        <div class="answer-drawer">
+          <div class="drawer-header" onclick="toggleDrawer(this)">
+            <div class="ans-indicator">
+              <span>সঠিক উত্তর: <strong>(খ)</strong></span>
+            </div>
+            <button class="drawer-toggle-btn" type="button">ব্যাখ্যা দেখুন ▼</button>
+          </div>
+          <div class="drawer-content">
+            <strong>ব্যাখ্যা:</strong> 'Not once has our neighbour invited us into his house'-বাক্যের অর্থ: আমাদের প্রতিবেশী একবারও আমাদেরকে তার বাসায় দাওয়াত করেনি। যার প্রকৃত অর্থ দাঁড়ায়: <strong>Our neighbour has never invited us into his house</strong>।
+          </div>
+        </div>
+      </article>
+
+      <!-- Question ১৩ -->
+      <article class="q-card" data-qnum="১৩">
+        <div class="q-header">
+          <div class="q-num-wrap">
+            <span class="q-num">১৩</span>
+            <span class="bcs-badge">২৭তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="q-text">Identify the imperative sentence.</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 'ক', 'গ')">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">I shall go to college</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'খ', 'গ')">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Matin is singing a song</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'গ', 'গ')">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Stand up</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'ঘ', 'গ')">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">It has been raining since morning</span>
+          </button>
+        </div>
+        <div class="answer-drawer">
+          <div class="drawer-header" onclick="toggleDrawer(this)">
+            <div class="ans-indicator">
+              <span>সঠিক উত্তর: <strong>(গ)</strong></span>
+            </div>
+            <button class="drawer-toggle-btn" type="button">ব্যাখ্যা দেখুন ▼</button>
+          </div>
+          <div class="drawer-content">
+            <strong>ব্যাখ্যা:</strong> <strong>Stand up</strong> (দাঁড়াও) দ্বারা সরাসরি আদেশ প্রদান করা হয়েছে এবং এতে Subject 'You' উহ্য রয়েছে, তাই এটি একটি <strong>Imperative sentence</strong>।
+          </div>
+        </div>
+      </article>
+
+      <!-- Question ১৪ -->
+      <article class="q-card" data-qnum="১৪">
+        <div class="q-header">
+          <div class="q-num-wrap">
+            <span class="q-num">১৪</span>
+            <span class="bcs-badge">১১তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="q-text">&#x27;May Allah help you&#x27; What kind of sentence is this?</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 'ক', 'ক')">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">Optative</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'খ', 'ক')">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Imperative</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'গ', 'ক')">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Assertive</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'ঘ', 'ক')">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">Exclamatory</span>
+          </button>
+        </div>
+        <div class="answer-drawer">
+          <div class="drawer-header" onclick="toggleDrawer(this)">
+            <div class="ans-indicator">
+              <span>সঠিক উত্তর: <strong>(ক)</strong></span>
+            </div>
+            <button class="drawer-toggle-btn" type="button">ব্যাখ্যা দেখুন ▼</button>
+          </div>
+          <div class="drawer-content">
+            <strong>ব্যাখ্যা:</strong> যে বাক্য দ্বারা মনের ইচ্ছা, আকাঙ্ক্ষা বা প্রার্থনা প্রকাশ পায় তাকে <strong>Optative sentence</strong> (প্রার্থনাসূচক বাক্য) বলে। যেমন- <em>May Allah bless you, Long live Bangladesh</em>।
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Chapter Navigation Footer -->
+    <div class="chapter-nav-footer">
+      <a href="Interchange of Parts of Speech.html" class="nav-btn">← পূর্ববর্তী অধ্যায়: Interchange of Parts of Speech</a>
+      <a href="Clause.html" class="nav-btn">পরবর্তী অধ্যায়: Clause →</a>
+    </div>
+
+  </main>
+
+  <!-- Global Subject Navigation Drawer Component -->
+  <script src="nav-component.js"></script>
+
+  <!-- Quiz Engine & UI Interaction Script -->
+  <script>
+    // State Tracker
+    const totalQ = 14;
+    let answeredQ = 0;
+    let correctQ = 0;
+    let wrongQ = 0;
+
+    function updateStats() {
+      document.getElementById('totalQuestions').textContent = totalQ;
+      document.getElementById('correctAnswers').textContent = correctQ;
+      document.getElementById('wrongAnswers').textContent = wrongQ;
+      document.getElementById('remainingQuestions').textContent = totalQ - answeredQ;
+    }
+
+    function checkAnswer(btn, chosenOpt, correctOpt) {
+      const qCard = btn.closest('.q-card');
+      const allBtns = qCard.querySelectorAll('.opt-btn');
+      
+      // Check if already answered
+      if (btn.classList.contains('locked')) return;
+
+      // Lock all buttons in this card
+      allBtns.forEach(b => b.classList.add('locked'));
+      answeredQ++;
+
+      const isCorrect = correctOpt.includes(chosenOpt);
+      if (isCorrect) {
+        btn.classList.add('correct-choice');
+        correctQ++;
+      } else {
+        btn.classList.add('wrong-choice');
+        wrongQ++;
+        // Highlight the correct option
+        allBtns.forEach(b => {
+          const prefix = b.querySelector('.opt-prefix').textContent;
+          if (correctOpt.split('/').some(opt => prefix.includes(opt))) {
+            b.classList.add('correct-choice');
+          }
+        });
+      }
+
+      // Auto open explanation drawer
+      const drawerContent = qCard.querySelector('.drawer-content');
+      const toggleBtn = qCard.querySelector('.drawer-toggle-btn');
+      if (drawerContent && !drawerContent.classList.contains('open')) {
+        drawerContent.classList.add('open');
+        if (toggleBtn) toggleBtn.textContent = 'ব্যাখ্যা লুকান ▲';
+      }
+
+      updateStats();
+    }
+
+    function toggleDrawer(header) {
+      const drawer = header.nextElementSibling;
+      const toggleBtn = header.querySelector('.drawer-toggle-btn');
+      if (drawer.classList.contains('open')) {
+        drawer.classList.remove('open');
+        toggleBtn.textContent = 'ব্যাখ্যা দেখুন ▼';
+      } else {
+        drawer.classList.add('open');
+        toggleBtn.textContent = 'ব্যাখ্যা লুকান ▲';
+      }
+    }
+
+    // Reading Progress Bar
+    window.addEventListener('scroll', () => {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPos = window.scrollY;
+      const progressPercent = docHeight > 0 ? (scrollPos / docHeight) * 100 : 0;
+      document.getElementById('progressBar').style.width = progressPercent + '%';
+    });
+
+    // Theme Toggle
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      document.getElementById('themeToggleBtn').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+      localStorage.setItem('ebook_theme', newTheme);
+    }
+
+    // Restore Theme Preference
+    (function initTheme() {
+      const savedTheme = localStorage.getItem('ebook_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) btn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    })();
+
+    // Universal Font Scaler (REM-based)
+    let currentScale = 1.0;
+    function scaleFont(step) {
+      currentScale = Math.min(Math.max(0.8, currentScale + step), 1.5);
+      document.documentElement.style.setProperty('--font-scale', currentScale);
+      localStorage.setItem('ebook_font_scale', currentScale);
+    }
+    function resetFont() {
+      currentScale = 1.0;
+      document.documentElement.style.setProperty('--font-scale', currentScale);
+      localStorage.setItem('ebook_font_scale', currentScale);
+    }
+
+    // Restore Font Preference
+    (function initFontScale() {
+      const savedScale = localStorage.getItem('ebook_font_scale');
+      if (savedScale) {
+        currentScale = parseFloat(savedScale);
+        document.documentElement.style.setProperty('--font-scale', currentScale);
+      }
+    })();
+  </script>
+</body>
+</html>

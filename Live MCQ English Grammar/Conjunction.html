@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+  <title>যোজক বা কনজাংশন (Conjunction) | English Grammar বিসিএস প্রিলিমিনারি স্মার্ট ই-বুক</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../bangla-fonts.css">
+  <link rel="stylesheet" href="../paper-textures.css">
+  <style>
+    :root {
+      --font-scale: 1;
+      --primary-color: #1a5276;
+      --secondary-color: #2980b9;
+      --accent-color: #e74c3c;
+      --success-color: #27ae60;
+      --warning-color: #f39c12;
+      --bg-color: #f8fafc;
+      --card-bg: rgba(255, 255, 255, 0.82);
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --text-color: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border-color: #e2e8f0;
+      --correct-bg: #d4edda;
+      --correct-border: #28a745;
+      --correct-text: #155724;
+      --wrong-bg: #f8d7da;
+      --wrong-border: #dc3545;
+      --wrong-text: #721c24;
+      --drawer-bg: #f1f5f9;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+      --radius: 10px;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.82);
+      --bg-surface: rgba(15, 23, 42, 0.85);
+      --text-color: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      --correct-bg: rgba(39, 174, 96, 0.2);
+      --correct-border: #27ae60;
+      --correct-text: #a6f4c5;
+      --wrong-bg: rgba(231, 76, 60, 0.2);
+      --wrong-border: #e74c3c;
+      --wrong-text: #fca5a5;
+      --drawer-bg: #0f172a;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+
+    body {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.7;
+      font-size: calc(1rem * var(--font-scale));
+      padding-top: 60px;
+      padding-bottom: 80px;
+      overflow-x: clip;
+    }
+
+    /* Reading Progress Bar */
+    .progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: transparent;
+      z-index: 1001;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+      transition: width 0.1s linear;
+    }
+
+    /* Top Control Header */
+    .top-bar {
+      position: fixed;
+      top: 4px;
+      left: 0;
+      width: 100%;
+      height: 54px;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      z-index: 1000;
+    
+      backdrop-filter: blur(6px);
+    }
+
+    .top-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .top-bar-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 220px;
+    }
+    [data-theme="dark"] .top-bar-title {
+      color: #38bdf8;
+    }
+
+    .controls-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-control {
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      border-radius: 6px;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .btn-control:hover {
+      background: var(--border-color);
+    }
+
+    /* Main Container */
+    .main-container {
+      max-width: 900px;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+    }
+
+    /* Chapter Header Card - Styled with chapter's distinctive handwritten font */
+    .chapter-hero {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    
+      backdrop-filter: blur(6px);
+    }
+    .chapter-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, #1a5276, #2980b9);
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.75rem;
+    }
+    .chapter-title .ch-en, .ch-title .ch-en, .ch-en {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 0.2rem;
+      font-family: 'Inter', sans-serif !important;
+    }
+
+    .chapter-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+      font-family: inherit;
+    }
+    [data-theme="dark"] .chapter-title .ch-en, .ch-title .ch-en, .ch-en {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 0.2rem;
+      font-family: 'Inter', sans-serif !important;
+    }
+
+    .chapter-title {
+      color: #38bdf8;
+    }
+    .chapter-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* Interactive Stats Bar - Noto Serif Bengali */
+    .stats-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      text-align: center;
+      font-family: 'Noto Serif Bengali', serif !important;
+    
+      backdrop-filter: blur(6px);
+    }
+    .stat-item {
+      padding: 0.25rem;
+    }
+    .stat-val {
+      font-size: 1.25rem;
+      font-weight: 800;
+      line-height: 1.2;
+      font-family: 'Inter', inherit;
+    }
+    .stat-lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+    .stat-total .stat-val { color: var(--secondary-color); }
+    .stat-correct .stat-val { color: var(--success-color); }
+    .stat-wrong .stat-val { color: var(--accent-color); }
+    .stat-remaining .stat-val { color: var(--warning-color); }
+
+    /* Grammar Rules Box */
+    .grammar-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--secondary-color);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    
+      backdrop-filter: blur(6px);
+    }
+    .grammar-box-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    [data-theme="dark"] .grammar-box-title {
+      color: #38bdf8;
+    }
+
+    /* Tables - Noto Serif Bengali */
+    .table-responsive {
+      overflow-x: auto;
+      margin: 1rem 0;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+    .bcs-table, .reference-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      text-align: center;
+      font-family: 'Noto Serif Bengali', serif !important;
+    }
+    .reference-table {
+      text-align: left;
+    }
+    .bcs-table th, .bcs-table td,
+    .reference-table th, .reference-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.55rem 0.5rem;
+    }
+    .bcs-table th, .reference-table th {
+      background: rgba(41, 128, 185, 0.1);
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    [data-theme="dark"] .bcs-table th,
+    [data-theme="dark"] .reference-table th {
+      color: #38bdf8;
+    }
+
+    /* CRITICAL REQUIREMENT: Question Cards & Options MUST use Noto Serif Bengali */
+    .q-card, .q-text, .opt-btn, .opt-text, .answer-drawer, .drawer-content {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    
+      backdrop-filter: blur(6px);
+    }
+    .q-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .q-num-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .q-num {
+      font-size: 1rem;
+      font-weight: 800;
+      background: rgba(41, 128, 185, 0.12);
+      color: var(--secondary-color);
+      padding: 0.15rem 0.55rem;
+      border-radius: 6px;
+    }
+    .bcs-badge {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #d97706;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 0.15rem 0.5rem;
+      border-radius: 12px;
+      font-family: 'Noto Serif Bengali', serif !important;
+    }
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    /* Options Grid (2x2) */
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 600px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .opt-btn {
+      background: var(--bg-color);
+      border: 1.5px solid var(--border-color);
+      color: var(--text-color);
+      border-radius: 8px;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.95rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      line-height: 1.4;
+      transition: all 0.15s ease-in-out;
+    }
+    .opt-btn:hover:not(.locked) {
+      border-color: var(--secondary-color);
+      background: rgba(41, 128, 185, 0.05);
+      transform: translateY(-1px);
+    }
+    .opt-prefix {
+      font-weight: 700;
+      color: var(--secondary-color);
+      min-width: 1.25rem;
+    }
+    .opt-btn.correct-choice {
+      background: var(--correct-bg) !important;
+      border-color: var(--correct-border) !important;
+      color: var(--correct-text) !important;
+      font-weight: 600;
+    }
+    .opt-btn.wrong-choice {
+      background: var(--wrong-bg) !important;
+      border-color: var(--wrong-border) !important;
+      color: var(--wrong-text) !important;
+    }
+    .opt-btn.locked {
+      cursor: default;
+    }
+
+    /* Answer & Explanation Drawer */
+    .answer-drawer {
+      margin-top: 0.75rem;
+      background: var(--drawer-bg);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+    }
+    .drawer-header {
+      padding: 0.6rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+    .ans-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--success-color);
+    }
+    .drawer-toggle-btn {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--secondary-color);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .drawer-content {
+      padding: 0.85rem 1rem;
+      border-top: 1px dashed var(--border-color);
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: var(--text-color);
+      display: none;
+    }
+    .drawer-content.open {
+      display: block;
+    }
+    .drawer-content strong {
+      color: var(--primary-color);
+    }
+    [data-theme="dark"] .drawer-content strong {
+      color: #38bdf8;
+    }
+
+    /* Footer Navigation */
+    .chapter-nav-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2.5rem;
+      padding: 1.25rem 0;
+      border-top: 1px solid var(--border-color);
+    }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--primary-color);
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: var(--shadow-sm);
+      font-family: 'Noto Serif Bengali', serif !important;
+    }
+    .nav-btn:hover {
+      background: var(--border-color);
+    }
+  
+    /* Mandatory Exam Question & Analysis Typography Protection (Noto Serif Bengali) */
+    .q-card,
+    .q-card *,
+    .q-text,
+    .q-text *,
+    .opt-btn,
+    .opt-btn *,
+    .opt-text,
+    .answer-drawer,
+    .answer-drawer *,
+    .explanation-content,
+    .explanation-content *,
+    .bcs-table,
+    .bcs-table *,
+    .bcs-tag,
+    .score-bar,
+    .score-bar *,
+    .stats-card,
+    .stats-card *,
+    .doubt-box,
+    .doubt-box * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container paper-container paper-burnt-edge font-hasan">
+
+  <!-- Reading Progress Bar -->
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Sticky Top Control Bar -->
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <button class="btn-control" id="drawerOpenBtn" onclick="toggleNavDrawer()" title="অধ্যায় সূচিপত্র">
+        ☰ সূচিপত্র
+      </button>
+      <div class="top-bar-title" title="Conjunction">Conjunction</div>
+    </div>
+    <div class="controls-group">
+      <button class="btn-control" onclick="scaleFont(-0.1)" title="ফন্ট ছোট করুন">A-</button>
+      <button class="btn-control" onclick="resetFont()" title="স্বাভাবিক ফন্ট">A</button>
+      <button class="btn-control" onclick="scaleFont(0.1)" title="ফন্ট বড় করুন">A+</button>
+      <button class="btn-control" onclick="toggleTheme()" id="themeToggleBtn" title="থিম পরিবর্তন">🌙</button>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <!-- Chapter Hero -->
+    <section class="chapter-hero">
+      <span class="chapter-tag font-hasan">অধ্যায় ০৯ • English Grammar</span>
+      <h1 class="chapter-title font-hasan">যোজক বা কনজাংশন <span class="ch-en">(Conjunction)</span></h1>
+      <p class="chapter-subtitle font-hasan">Live MCQ™ বিসিএস প্রিলিমিনারি বিষয়ভিত্তিক জব সলিউশন (পৃষ্ঠা ২৪১–২৪২)</p>
+    </section>
+
+    <!-- BCS Analysis Matrix Table -->
+    <div class="grammar-box">
+      <div class="grammar-box-title">📊 বিসিএস প্রিলিমিনারি প্রশ্ন বিশ্লেষণ ছক (Conjunction)</div>
+      <div class="table-responsive">
+        <table class="bcs-table">
+          <thead>
+            <tr>
+              <th>৫০তম</th><th>৪৯তম</th><th>৪৮তম</th><th>৪৭তম</th><th>৪৬তম</th><th>৪৫তম</th><th>৪৪তম</th><th>৪৩তম</th><th>৪২তম</th><th>৪১তম</th><th>৪০তম</th><th>৩৯তম</th><th>৩৮তম</th><th>৩৭তম</th><th>৩৬তম</th><th>৩৫তম</th><th>১০ম-৩৪তম</th><th>মোট</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>১</td><td>০</td><td>০</td><td>০</td><td>০</td><td>০</td><td>০</td><td>০</td><td>০</td><td>১</td><td>০</td><td>০</td><td>০</td><td>০</td><td>০</td><td>০</td><td>২</td><td><strong>৪</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Special Grammar Reference Box: বিভিন্ন Conjunctions -->
+    <div class="grammar-box">
+      <div class="grammar-box-title">📌 বিভিন্ন Conjunctions ও তাদের প্রয়োগ পদ্ধতি</div>
+      <div class="table-responsive">
+        <table class="reference-table">
+          <thead>
+            <tr>
+              <th style="width: 25%;">প্রকারভেদ</th>
+              <th style="width: 35%;">বৈশিষ্ট্য ও কাজ</th>
+              <th style="width: 40%;">তালিকা ও উদাহরণ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Coordinating Conjunction</strong></td>
+              <td>দুটি সমমানের Independent Clause বা Word কে যুক্ত করে।</td>
+              <td><strong>Fanboys:</strong> For, And, Nor, But, Or, Yet, So</td>
+            </tr>
+            <tr>
+              <td><strong>Subordinating Conjunction</strong></td>
+              <td>Subordinate ও Independent Clause কে যুক্ত করে।</td>
+              <td>Before, After, Since, As, Just as, Till, Until, Though, Although, As though, That, In order that, Provided, Provided that, If, Even if, So that, Lest, Because</td>
+            </tr>
+            <tr>
+              <td><strong>Correlative Conjunction</strong></td>
+              <td>জোড়ায় জোড়ায় (Pair হিসেবে) ব্যবহৃত হয়ে Clause বা Word কে যুক্ত করে।</td>
+              <td>Either...or, Neither...nor, Whether...or, No sooner...than, Hardly...when, Scarcely...when, So...that, As...as, Both...and, Not only...but also</td>
+            </tr>
+            <tr>
+              <td><strong>Conjunctive Adverb</strong></td>
+              <td>কিছু Adverb রয়েছে যা Conjunction-এর ন্যায় সংযোগের কাজ করে।</td>
+              <td>After all, Hence, However, In fact, Indeed, For example, In addition, Furthermore, Instead, Likewise, Meanwhile, As a result, Consequently, Finally</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Live MCQ Quiz Stats Bar -->
+    <div class="stats-card">
+      <div class="stat-item stat-total">
+        <div class="stat-val" id="totalQuestions">4</div>
+        <div class="stat-lbl">মোট প্রশ্ন</div>
+      </div>
+      <div class="stat-item stat-correct">
+        <div class="stat-val" id="correctAnswers">0</div>
+        <div class="stat-lbl">সঠিক উত্তর</div>
+      </div>
+      <div class="stat-item stat-wrong">
+        <div class="stat-val" id="wrongAnswers">0</div>
+        <div class="stat-lbl">ভুল উত্তর</div>
+      </div>
+      <div class="stat-item stat-remaining">
+        <div class="stat-val" id="remainingQuestions">4</div>
+        <div class="stat-lbl">অনুত্তরিত</div>
+      </div>
+    </div>
+
+    <!-- Question Cards Container -->
+    <div class="questions-list">
+      <!-- Question ১ -->
+      <article class="q-card" data-qnum="১">
+        <div class="q-header">
+          <div class="q-num-wrap">
+            <span class="q-num">১</span>
+            <span class="bcs-badge">৫০তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="q-text">Which one is a coordinating conjunction?</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 'ক', 'ঘ')">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">since</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'খ', 'ঘ')">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">lest</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'গ', 'ঘ')">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">as</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'ঘ', 'ঘ')">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">so</span>
+          </button>
+        </div>
+        <div class="answer-drawer">
+          <div class="drawer-header" onclick="toggleDrawer(this)">
+            <div class="ans-indicator">
+              <span>সঠিক উত্তর: <strong>(ঘ)</strong></span>
+            </div>
+            <button class="drawer-toggle-btn" type="button">ব্যাখ্যা দেখুন ▼</button>
+          </div>
+          <div class="drawer-content">
+            <strong>ব্যাখ্যা:</strong> The coordinating conjunction is <strong>so</strong>.<br><br><strong>Conjunction :</strong> যে Part of speech দুই বা ততোধিক Word, Phrase বা Clause এর মধ্যে সংযোগ স্থাপন করে, তাকে Conjunction বলে।<br><br><strong>There are three basic types of conjunctions:</strong><br><strong>1. Coordinating Conjunction :</strong> যা সমমানের দুইটি word, phrase বা clause -এর মধ্যে সংযোগ স্থাপন করে। অর্থাৎ Coordinating Conjunctions সমান গুরুত্বসম্পন্ন দুটি word, phrase, বা clause যুক্ত করতে ব্যবহৃত হয়। যেমন- and, or, but, yet, so, nor ইত্যাদি।<br><strong>2. Subordinating Conjunction :</strong> যে Conjunction একটি clause -এর শুরুতে বসে অন্য clause -এর স্থান, কাল, ধরন, মাত্রা, ইত্যাদি বুঝানোর জন্য ব্যবহৃত হয়, তাকে Subordinating Conjunction বলে। অর্থাৎ, একটি clause অন্য clause -এর ওপর নির্ভরশীল হলে, সেখানে Subordinating Conjunction ব্যবহৃত হয়। যেমন- how, if, lest, after, although, as, because, before, even if, even though, once, since, unless, until, when, where, while ইত্যাদি।<br><strong>3. Correlative Conjunction :</strong> পরস্পর সম্পর্কযুক্ত জোড়ায় জোড়ায় ব্যবহৃত conjunction গুলোই হলো Correlative Conjunctions। অর্থাৎ, Correlative Conjunctions গুলো সবসময় জোড়ায় জোড়ায় ব্যবহৃত হয় এবং একই ধরনের word বা phrase যুক্ত করে। যেমন- either...or, neither...nor, not only...but also, both...and, whether...or, as...as ইত্যাদি।
+          </div>
+        </div>
+      </article>
+
+      <!-- Question ২ -->
+      <article class="q-card" data-qnum="২">
+        <div class="q-header">
+          <div class="q-num-wrap">
+            <span class="q-num">২</span>
+            <span class="bcs-badge">৪১তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="q-text">“I shall help you provided you obey me”. Here the underlined word is a/an ——</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 'ক', 'গ')">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">adverb</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'খ', 'গ')">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">adjective</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'গ', 'গ')">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">conjunction</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'ঘ', 'গ')">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">verb</span>
+          </button>
+        </div>
+        <div class="answer-drawer">
+          <div class="drawer-header" onclick="toggleDrawer(this)">
+            <div class="ans-indicator">
+              <span>সঠিক উত্তর: <strong>(গ)</strong></span>
+            </div>
+            <button class="drawer-toggle-btn" type="button">ব্যাখ্যা দেখুন ▼</button>
+          </div>
+          <div class="drawer-content">
+            <strong>ব্যাখ্যা:</strong> Conjunction বাক্যে words/phrases/clauses কে যুক্ত করে। বাক্যের অর্থ: <em>আমি তোমাকে সাহায্য করব যদি তুমি আমার কথা মানো।</em> এখানে <strong>Provided</strong> (যদি) শব্দটি 'I shall help you' এবং 'you obey me'-এই দুটি clause কে যুক্ত করেছে। তাই এটি একটি <strong>conjunction</strong>।
+          </div>
+        </div>
+      </article>
+
+      <!-- Question ৩ -->
+      <article class="q-card" data-qnum="৩">
+        <div class="q-header">
+          <div class="q-num-wrap">
+            <span class="q-num">৩</span>
+            <span class="bcs-badge">৩১তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="q-text">They suffered much ___ tornado had hit their village.</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 'ক', 'খ')">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">untill</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'খ', 'খ')">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">since</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'গ', 'খ')">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">as if</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'ঘ', 'খ')">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">let alone</span>
+          </button>
+        </div>
+        <div class="answer-drawer">
+          <div class="drawer-header" onclick="toggleDrawer(this)">
+            <div class="ans-indicator">
+              <span>সঠিক উত্তর: <strong>(খ)</strong></span>
+            </div>
+            <button class="drawer-toggle-btn" type="button">ব্যাখ্যা দেখুন ▼</button>
+          </div>
+          <div class="drawer-content">
+            <strong>ব্যাখ্যা:</strong> বাক্যটির অর্থ: <em>তারা অনেক কষ্ট ভোগ করেছিলো যেহেতু তাদের গ্রামে টর্নেডো আঘাত হেনেছিল।</em> এখানে বাক্যে 'যেহেতু' (কারণ) অর্থে Subordinating conjunction হিসেবে <strong>since</strong> যুক্ত হয়েছে।
+          </div>
+        </div>
+      </article>
+
+      <!-- Question ৪ -->
+      <article class="q-card" data-qnum="৪">
+        <div class="q-header">
+          <div class="q-num-wrap">
+            <span class="q-num">৪</span>
+            <span class="bcs-badge">২০তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="q-text">___ glass is, for all practical, a solid, its molecular structure is that of a liquid.</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(this, 'ক', 'গ')">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">Because</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'খ', 'গ')">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Since</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'গ', 'গ')">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Although</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, 'ঘ', 'গ')">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">If</span>
+          </button>
+        </div>
+        <div class="answer-drawer">
+          <div class="drawer-header" onclick="toggleDrawer(this)">
+            <div class="ans-indicator">
+              <span>সঠিক উত্তর: <strong>(গ)</strong></span>
+            </div>
+            <button class="drawer-toggle-btn" type="button">ব্যাখ্যা দেখুন ▼</button>
+          </div>
+          <div class="drawer-content">
+            <strong>ব্যাখ্যা:</strong> প্রশ্নটি পড়ে বুঝা যায়, এতে বলা হয়েছে- <em>যদিও কাচ ব্যবহারিক সব দিক থেকে একটি কঠিন পদার্থ, তবুও এর আণবিক গঠন তরল প্রকৃতির।</em> এখানে দুটো বিপরীতধর্মী বাক্যাংশকে একত্রিত করতে Subordinating conjunction <strong>although/though</strong> (যদিও) বসবে।
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Chapter Navigation Footer -->
+    <div class="chapter-nav-footer">
+      <a href="Appropriate Preposition.html" class="nav-btn">← পূর্ববর্তী অধ্যায়: Appropriate Preposition</a>
+      <a href="Article and Determiners.html" class="nav-btn">পরবর্তী অধ্যায়: Article and Determiners →</a>
+    </div>
+
+  </main>
+
+  <!-- Global Subject Navigation Drawer Component -->
+  <script src="nav-component.js"></script>
+
+  <!-- Quiz Engine & UI Interaction Script -->
+  <script>
+    // State Tracker
+    const totalQ = 4;
+    let answeredQ = 0;
+    let correctQ = 0;
+    let wrongQ = 0;
+
+    function updateStats() {
+      document.getElementById('totalQuestions').textContent = totalQ;
+      document.getElementById('correctAnswers').textContent = correctQ;
+      document.getElementById('wrongAnswers').textContent = wrongQ;
+      document.getElementById('remainingQuestions').textContent = totalQ - answeredQ;
+    }
+
+    function checkAnswer(btn, chosenOpt, correctOpt) {
+      const qCard = btn.closest('.q-card');
+      const allBtns = qCard.querySelectorAll('.opt-btn');
+      
+      // Check if already answered
+      if (btn.classList.contains('locked')) return;
+
+      // Lock all buttons in this card
+      allBtns.forEach(b => b.classList.add('locked'));
+      answeredQ++;
+
+      const isCorrect = (chosenOpt === correctOpt);
+      if (isCorrect) {
+        btn.classList.add('correct-choice');
+        correctQ++;
+      } else {
+        btn.classList.add('wrong-choice');
+        wrongQ++;
+        // Highlight the correct option
+        allBtns.forEach(b => {
+          if (b.querySelector('.opt-prefix').textContent.includes(correctOpt)) {
+            b.classList.add('correct-choice');
+          }
+        });
+      }
+
+      // Auto open explanation drawer
+      const drawerContent = qCard.querySelector('.drawer-content');
+      const toggleBtn = qCard.querySelector('.drawer-toggle-btn');
+      if (drawerContent && !drawerContent.classList.contains('open')) {
+        drawerContent.classList.add('open');
+        if (toggleBtn) toggleBtn.textContent = 'ব্যাখ্যা লুকান ▲';
+      }
+
+      updateStats();
+    }
+
+    function toggleDrawer(header) {
+      const drawer = header.nextElementSibling;
+      const toggleBtn = header.querySelector('.drawer-toggle-btn');
+      if (drawer.classList.contains('open')) {
+        drawer.classList.remove('open');
+        toggleBtn.textContent = 'ব্যাখ্যা দেখুন ▼';
+      } else {
+        drawer.classList.add('open');
+        toggleBtn.textContent = 'ব্যাখ্যা লুকান ▲';
+      }
+    }
+
+    // Reading Progress Bar
+    window.addEventListener('scroll', () => {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPos = window.scrollY;
+      const progressPercent = docHeight > 0 ? (scrollPos / docHeight) * 100 : 0;
+      document.getElementById('progressBar').style.width = progressPercent + '%';
+    });
+
+    // Theme Toggle
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      document.getElementById('themeToggleBtn').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+      localStorage.setItem('ebook_theme', newTheme);
+    }
+
+    // Restore Theme Preference
+    (function initTheme() {
+      const savedTheme = localStorage.getItem('ebook_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) btn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    })();
+
+    // Universal Font Scaler (REM-based)
+    let currentScale = 1.0;
+    function scaleFont(step) {
+      currentScale = Math.min(Math.max(0.8, currentScale + step), 1.5);
+      document.documentElement.style.setProperty('--font-scale', currentScale);
+      localStorage.setItem('ebook_font_scale', currentScale);
+    }
+    function resetFont() {
+      currentScale = 1.0;
+      document.documentElement.style.setProperty('--font-scale', currentScale);
+      localStorage.setItem('ebook_font_scale', currentScale);
+    }
+
+    // Restore Font Preference
+    (function initFontScale() {
+      const savedScale = localStorage.getItem('ebook_font_scale');
+      if (savedScale) {
+        currentScale = parseFloat(savedScale);
+        document.documentElement.style.setProperty('--font-scale', currentScale);
+      }
+    })();
+  </script>
+</body>
+</html>

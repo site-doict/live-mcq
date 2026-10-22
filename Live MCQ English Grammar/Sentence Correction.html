@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch(e) {}
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+  <title>বাক্য শুদ্ধিকরণ (Sentence Correction) | English Grammar বিসিএস প্রিলিমিনারি স্মার্ট ই-বুক</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../bangla-fonts.css">
+  <link rel="stylesheet" href="../paper-textures.css">
+  <style>
+    :root, [data-theme="light"] {
+      --font-scale: 1;
+      --bg-primary: #F8FAFC;
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --text-primary: #0F172A;
+      --text-secondary: #334155;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --primary: #4338CA;
+      --primary-light: #EEF2FF;
+      --primary-hover: #3730A3;
+      --accent: #D97706;
+      --accent-light: #FEF3C7;
+      --success: #15803D;
+      --success-light: #DCFCE7;
+      --danger: #B91C1C;
+      --danger-light: #FEE2E2;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+      --radius-sm: 0.375rem;
+      --radius-md: 0.625rem;
+      --radius-lg: 0.875rem;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #090D16;
+      --bg-surface: rgba(17, 24, 39, 0.85);
+      --bg-card: rgba(17, 24, 39, 0.82);
+      --text-primary: #F8FAFC;
+      --text-secondary: #CBD5E1;
+      --text-muted: #94A3B8;
+      --border-color: #1E293B;
+      --primary: #818CF8;
+      --primary-light: rgba(99, 102, 241, 0.15);
+      --primary-hover: #A5B4FC;
+      --accent: #F59E0B;
+      --accent-light: rgba(245, 158, 11, 0.15);
+      --success: #22C55E;
+      --success-light: rgba(34, 197, 94, 0.15);
+      --danger: #EF4444;
+      --danger-light: rgba(239, 68, 68, 0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { max-width: 100vw; overflow-x: clip; box-sizing: border-box; }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: calc(1rem * var(--font-scale));
+      line-height: 1.65;
+      padding-bottom: 5rem;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .container { max-width: 52rem; margin: 0 auto; padding: 0.85rem 0.75rem; }
+
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 0.4rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Inter', inherit;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .nav-actions { display: flex; align-items: center; gap: 0.5rem; }
+
+    .header-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    
+      backdrop-filter: blur(6px);
+    }
+
+    .header-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #DC2626, #F97316, #FBBF24);
+    }
+
+    .ch-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      padding: 0.2rem 0.65rem;
+      border-radius: 9999px;
+      margin-bottom: 0.5rem;
+      font-family: 'Inter', inherit;
+    }
+
+    .ch-title .ch-en, .ch-en {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 0.2rem;
+      font-family: 'Inter', sans-serif !important;
+    }
+
+    .ch-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 0.35rem;
+      line-height: 1.3;
+    }
+
+    .ch-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .bcs-table-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    
+      backdrop-filter: blur(6px);
+    }
+
+    .bcs-table-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 0.45rem 0.55rem;
+      font-weight: 700;
+      border: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    .bcs-table td {
+      padding: 0.45rem 0.55rem;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .info-summary-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .info-summary-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .rule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+    }
+
+    .rule-table th {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 0.5rem 0.65rem;
+      font-weight: 700;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .rule-table td {
+      padding: 0.5rem 0.65rem;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+    }
+
+    .score-bar {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.6rem 1rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: sticky;
+      top: 0.5rem;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+    }
+
+    .score-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8125rem; font-weight: 600; }
+    .score-val { font-size: 1.1rem; font-weight: 800; font-family: 'Inter', inherit; }
+    .score-total .score-val { color: var(--primary); }
+    .score-correct .score-val { color: var(--success); }
+    .score-wrong .score-val { color: var(--danger); }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.1rem;
+      margin-bottom: 1.1rem;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    
+      backdrop-filter: blur(6px);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .q-text {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.55;
+    }
+
+    .bcs-tag {
+      flex-shrink: 0;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.725rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 9999px;
+      white-space: nowrap;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+
+    @media (max-width: 580px) {
+      .options-grid { grid-template-columns: 1fr; }
+    }
+
+    .opt-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.55rem 0.75rem;
+      text-align: left;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.15s ease;
+      width: 100%;
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .opt-btn.correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+      color: var(--success) !important;
+      font-weight: 700;
+    }
+
+    .opt-btn.wrong {
+      background: var(--danger-light) !important;
+      border-color: var(--danger) !important;
+      color: var(--danger) !important;
+      font-weight: 700;
+    }
+
+    .opt-key {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.35rem;
+      height: 1.35rem;
+      border-radius: 50%;
+      background: var(--border-color);
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .opt-btn.correct .opt-key {
+      background: var(--success);
+      color: #fff;
+    }
+
+    .opt-btn.wrong .opt-key {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .answer-drawer {
+      margin-top: 0.75rem;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 0.75rem;
+      display: none;
+    }
+
+    .answer-drawer.open { display: block; }
+
+    .ans-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--success);
+      background: var(--success-light);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-content {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      background: var(--bg-primary);
+      padding: 0.75rem;
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--primary);
+    }
+
+    .exp-toggle-btn {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .exp-toggle-btn:hover { background: var(--primary-light); }
+
+    .footer-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .footer-btn {
+      flex: 1;
+      padding: 0.65rem 0.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+    }
+
+    .footer-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Mandatory Exam Question & Analysis Typography Protection (Noto Serif Bengali) */
+    .q-card,
+    .q-card *,
+    .q-text,
+    .q-text *,
+    .opt-btn,
+    .opt-btn *,
+    .opt-text,
+    .answer-drawer,
+    .answer-drawer *,
+    .exp-content,
+    .exp-content *,
+    .bcs-table,
+    .bcs-table *,
+    .bcs-tag,
+    .score-bar,
+    .score-bar *,
+    .stats-card,
+    .stats-card *,
+    .doubt-box,
+    .doubt-box * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="container paper-container paper-burnt-edge font-priotoma">
+    <nav class="top-nav">
+      <a href="index.html" class="nav-btn">← সূচিপত্র</a>
+      <div class="nav-actions">
+        <button class="nav-btn" onclick="adjustFont(-0.05)" title="ফন্ট ছোট করুন">A-</button>
+        <button class="nav-btn" onclick="resetFont()" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="nav-btn" onclick="adjustFont(0.05)" title="ফন্ট বড় করুন">A+</button>
+        <button class="nav-btn" onclick="toggleTheme()" id="themeBtn" title="থিম পরিবর্তন">🌙</button>
+        <button class="nav-btn" onclick="resetQuiz()" title="কুইজ পুনরায় শুরু">↺ রিসেট</button>
+      </div>
+    </nav>
+
+        <header class="header-card">
+      <span class="ch-badge font-priotoma">অধ্যায় ১৯ • English Grammar</span>
+      <h1 class="ch-title font-priotoma">বাক্য শুদ্ধিকরণ <span class="ch-en">(Sentence Correction)</span></h1>
+      <p class="ch-subtitle font-priotoma">Live MCQ™ বিসিএস প্রিলিমিনারি বিষয়ভিত্তিক জব সলিউশন (পৃষ্ঠা ২৬৭–২৭২)</p>
+    </header>
+
+    <section class="bcs-table-card">
+      <h2 class="bcs-table-title">📊 বিগত বিসিএস পরীক্ষায় এ অধ্যায়ের প্রশ্ন বিশ্লেষণ</h2>
+      <div class="table-wrap">
+        <table class="bcs-table">
+          <thead>
+            <tr>
+              <th>৪৯তম</th><th>৪৮তম</th><th>৪৬তম</th><th>৪৫তম</th><th>৪১তম</th><th>৩৮তম</th><th>৩৫তম</th><th>১০ম-৩৪তম</th><th>মোট</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>১</td><td>২</td><td>২</td><td>১</td><td>১</td><td>১</td><td>১</td><td>২৫</td><td><strong>৩৪</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Essential Grammatical Reference Tables -->
+    <section class="info-summary-card">
+      <h2 class="info-summary-title">📝 সেন্টেন্স কারেকশনের গুরুত্বপূর্ণ নিয়মাবলি ও তালিকা</h2>
+      <div class="table-wrap">
+        <table class="rule-table">
+          <thead>
+            <tr>
+              <th>শ্রেণি</th>
+              <th>গুরুত্বপূর্ণ শব্দসমূহ (Infinitive to+V1 গ্রহণকারী)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>কিছু Verb</strong></td>
+              <td>Agree to, Decide to, Demand to, Hope to, Manage to, Refuse to, Want to, Intend to, Prepare to, Pretend to, Seem to, Threaten to, Hesitate to, Fail to, Forbid to.</td>
+            </tr>
+            <tr>
+              <td><strong>কিছু Adjective</strong></td>
+              <td>Able to, Unable to, Glad to, Happy to, Likely to, Lucky to, Pleased to, Right to, Surprised to, Shocked to, Wrong to.</td>
+            </tr>
+            <tr>
+              <td><strong>কিছু Noun</strong></td>
+              <td>Attempt to, Chance to, Decision to, Desire to, Dream to, Explanation to, Plan to, Wish to.</td>
+            </tr>
+            <tr>
+              <td><strong>Absolute Adjective</strong></td>
+              <td>Unique, perfect, complete, extreme, absolute, universal, supreme — এদের পূর্বে more, most, very বসে না।</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="score-bar">
+      <div class="score-item score-total">মোট প্রশ্ন: <span class="score-val" id="totalCount">33</span></div>
+      <div class="score-item score-correct">সঠিক: <span class="score-val" id="correctCount">0</span></div>
+      <div class="score-item score-wrong">ভুল: <span class="score-val" id="wrongCount">0</span></div>
+    </div>
+
+    <!-- Question 1 -->
+    <article class="q-card" data-qno="1" data-ans="খ">
+      <div class="q-header">
+        <span class="q-text">১. Which sentence is correct?</span>
+        <span class="bcs-tag">৪৯তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> The picture was hanged on the wall.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> The picture was hung on the wall.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> The picture was hunged on the wall.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> The picture had hanged on the wall.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: খ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> কোনো বস্তু বা ছবি দেয়ালে ঝুলিয়ে রাখা অর্থে Hang-এর past tense ও past participle হলো 'hung' (hang - hung - hung)। পক্ষান্তরে ফাঁসি দেওয়া অর্থে 'hanged' ব্যবহৃত হয় (hang - hanged - hanged)। তাই ছবির ক্ষেত্রে সঠিক প্যাসিভ: "The picture was hung on the wall."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 2 -->
+    <article class="q-card" data-qno="2" data-ans="গ">
+      <div class="q-header">
+        <span class="q-text">২. Choose the correct sentence.</span>
+        <span class="bcs-tag">৪৮তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> He resembles like his father.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> He resembles with his father.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> He resembles his father.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> He resembles similar to his father.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: গ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> 'Resemble' (সাদৃশ্যপূর্ণ হওয়া) একটি Transitive Verb। এর পরে সরাসরি Direct Object বসে, কোনো Preposition (like, with, to) বসে না। সুতরাং নির্ভুল বাক্য: "He resembles his father."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 3 -->
+    <article class="q-card" data-qno="3" data-ans="গ">
+      <div class="q-header">
+        <span class="q-text">৩. Choose the correct sentence.</span>
+        <span class="bcs-tag">৪৮তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> Where have you born?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> Where are you born?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> Where were you born?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> Where did you born?</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: গ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> জন্ম নেওয়ার বিষয়টি সর্বদাই অতীতে সম্পন্ন হওয়া ঘটনা এবং তা Passive Voice-এ ব্যবহৃত হয় (to be born)। Past Indefinite Passive interrogative রূপ: "Where were you born?"
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 4 -->
+    <article class="q-card" data-qno="4" data-ans="খ">
+      <div class="q-header">
+        <span class="q-text">৪. Identify the correct sentences:</span>
+        <span class="bcs-tag">৪৬তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> There are trees on the both sides of the road.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> There are trees on both the sides of the road.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> There are trees, on both side of the road.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> There are trees on either sides of the road.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: খ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Both-এর পরে Determiner 'the' বসে (both the sides of the road / both sides of the road)। 'The both' ব্যাকরণগতভাবে অশুদ্ধ।
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 5 -->
+    <article class="q-card" data-qno="5" data-ans="ক">
+      <div class="q-header">
+        <span class="q-text">৫. Identify the correct sentences:</span>
+        <span class="bcs-tag">৪৬তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> The room was darkened by switching off all the lights.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> The room was darkened switching off all the lights.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> The room was darkened to switch off all the lights.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> Switching off all the lights the room was darkened.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ক</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> ঘরটি অন্ধকার হয়েছিল কীভাবে তার উপায় নির্দেশ করতে 'by + gerund' (by switching off all the lights) বসেছে। অপশন (ঘ)-তে ড্যাংলিং মডিফায়ার রয়েছে কারণ ঘর নিজে আলো বন্ধ করেনি।
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 6 -->
+    <article class="q-card" data-qno="6" data-ans="ক">
+      <div class="q-header">
+        <span class="q-text">৬. Choose the correct sentence:</span>
+        <span class="bcs-tag">৪৫তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> He discussed the matter.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> He discussed about the matter.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> He discussed on the matter.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> None of the above</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ক</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Discuss, describe, order, request ইত্যাদি transitive verb-এর পর কোনো preposition (about/on) বসে না। সরাসরি object বসে: "He discussed the matter."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 7 -->
+    <article class="q-card" data-qno="7" data-ans="খ">
+      <div class="q-header">
+        <span class="q-text">৭. Which one is the correct sentence?</span>
+        <span class="bcs-tag">৪১তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> The doctor found my pulse.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> The doctor took my pulse.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> The doctor examined my pulse.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> The doctor saw my pulse.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: খ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> ডাক্তার কর্তৃক রোগীর নাড়ি দেখা বা হৃদস্পন্দন পরিমাপ করার প্রমিত ইংরেজি হলো 'take someone's pulse'। তাই সঠিক রূপ: "The doctor took my pulse."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 8 -->
+    <article class="q-card" data-qno="8" data-ans="ঘ">
+      <div class="q-header">
+        <span class="q-text">৮. Choose the correct sentence?</span>
+        <span class="bcs-tag">৩৮তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> He refrained to take any drastic action</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> He refrained on taking any drastic action</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> He refrained in taking any drastic actions</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> He refrained from taking any drastic action</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ঘ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Refrain-এর পরে সর্বদা preposition 'from' এবং Verb-এর gerund রূপ (V-ing) বসে (refrain from doing something)। তাই: "He refrained from taking any drastic action."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 9 -->
+    <article class="q-card" data-qno="9" data-ans="ক">
+      <div class="q-header">
+        <span class="q-text">৯. Which is the correct sentence?</span>
+        <span class="bcs-tag">৩৫তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> He insisted on seeing her</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> He insisted for seeing her</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> He insisted in seeing her</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> He insisted to seeing her</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ক</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Insist-এর পর Appropriate Preposition 'on' বসে এবং preposition-এর পর Gerund (seeing) বসে। সঠিক বাক্য: "He insisted on seeing her."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 10 -->
+    <article class="q-card" data-qno="10" data-ans="খ">
+      <div class="q-header">
+        <span class="q-text">১০. Identify the incorrect word/phrase indicated by (1), (2), (3) or (4) in the following sentence: A doctor may be able "to diagnose" (1) a problem "perfect" (2) but he may not able to find a drug "to which" (3) the patient "will respond" (4).</span>
+        <span class="bcs-tag">৩২তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> to diagnose (1)</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> perfect (2)</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> to which (3)</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> will respond (4)</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: খ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Verb 'diagnose'-কে modify করতে Adverbial form 'perfectly' প্রয়োজন। Adjective 'perfect' ভুল। তাই অংশ (2) অশুদ্ধ।
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 11 -->
+    <article class="q-card" data-qno="11" data-ans="ঘ">
+      <div class="q-header">
+        <span class="q-text">১১. Identify the incorrect word/phrase indicated by (1), (2), (3) or (4) in the following sentence: According to experts a good way 'to' (1) 'improve' (2) listening skills is 'by' (3) 'watch' (4) television, specially news and documentaries.</span>
+        <span class="bcs-tag">৩২তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> to (1)</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> improve (2)</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> by (3)</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> watch (4)</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ঘ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Preposition (by)-এর পর verb আসলে তা Gerund (watching) হবে: "by watching television"। তাই (4) চিহ্নিত শব্দটি ব্যাকরণগতভাবে ভুল।
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 12 -->
+    <article class="q-card" data-qno="12" data-ans="ক">
+      <div class="q-header">
+        <span class="q-text">১২. One of the four sentences, given below is grammatically wrong. Choose the wrong sentence:</span>
+        <span class="bcs-tag">৩১তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> The land is belonged to an old lady.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> They parted from one another suddenly.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> The leader expressed himself forcibly.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> Mother bought me an icecream.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ক</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> 'Belong' verb-এর কোনো Passive Voice হয় না। সঠিক বাক্য হবে: "The land belongs to an old lady." তাই অপশন (ক) ভুল বাক্য।
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 13 -->
+    <article class="q-card" data-qno="13" data-ans="খ">
+      <div class="q-header">
+        <span class="q-text">১৩. One of the four sentences, given below is grammatically wrong. Choose the wrong sentence:</span>
+        <span class="bcs-tag">৩১তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> He was always arguing with his brother.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> His failure resulted for lack of attention.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> When will you write to him about your plan?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> Who was the boy you were all laughing at?</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: খ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> কোনো কিছু থেকে উদ্ভূত ফলাফল বুঝাতে 'result from' বসে (resulted from a lack of attention)। 'Result for' ব্যাকরণগতভাবে ভুল।
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 14 -->
+    <article class="q-card" data-qno="14" data-ans="খ">
+      <div class="q-header">
+        <span class="q-text">১৪. One of the four sentences given in each question is grammatically wrong. That alternative is your answer:</span>
+        <span class="bcs-tag">৩০তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> Neither you nor I am in a sound position.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> Laziness is detrimental for success.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> He begged the favour of my granting him leave.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> Your action is not in conformity with the law</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: খ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Detrimental-এর পর Appropriate Preposition 'to' বসে (detrimental to success), 'for' নয়। তাই (খ) ভুল বাক্য।
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 15 -->
+    <article class="q-card" data-qno="15" data-ans="খ">
+      <div class="q-header">
+        <span class="q-text">১৫. One of the four sentences given in each question is grammatically wrong. That alternative is your answer:</span>
+        <span class="bcs-tag">৩০তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> He has no desire for fame.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> I intend going to Rajshahi.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> He is too miserly to part with his money.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> He has invited me for dinner.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: খ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> 'Intend'-এর পরে Infinitive (to + V1) বসে: "I intend to go to Rajshahi." Gerund (going) ব্যবহার ভুল। তাই (খ) সঠিক উত্তর।
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 16 -->
+    <article class="q-card" data-qno="16" data-ans="খ">
+      <div class="q-header">
+        <span class="q-text">১৬. Which sentence is correct?</span>
+        <span class="bcs-tag">২৮তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> This is an unique case</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> This is a unique case</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> This is a very unique case</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> This is the most unique case</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: খ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> 'Unique'-এর উচ্চারণ কনসোনেন্ট সাউন্ড 'ইউ'-এর মতো হওয়ায় Article 'a' বসে (a unique case)। তাছাড়া unique চরম নির্দেশক হওয়ায় এর পূর্বে more/most/very বসে না।
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 17 -->
+    <article class="q-card" data-qno="17" data-ans="ক">
+      <div class="q-header">
+        <span class="q-text">১৭. Which of the following sentences is correct?</span>
+        <span class="bcs-tag">২৭তম ও ১৬তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> Why have you done this?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> Why you had done this?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> Why you have done this?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> Why did you done this?</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ক</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Interrogative বাক্যের প্রমিত গঠন: Wh-word + auxiliary verb (have) + subject (you) + principal verb (done) + object (this)? তাই (ক) সঠিক।
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 18 -->
+    <article class="q-card" data-qno="18" data-ans="খ">
+      <div class="q-header">
+        <span class="q-text">১৮. Choose the correct sentence.</span>
+        <span class="bcs-tag">২৬তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> The train is running in time</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> The train is running on time</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> The train is running with time</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> The train is running to time</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: খ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> নির্দিষ্ট সময়সূচি অনুযায়ী ট্রেন বা বাস চলার ক্ষেত্রে Idiom হলো 'on time' (at the scheduled time)। সুতরাং: "The train is running on time."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 19 -->
+    <article class="q-card" data-qno="19" data-ans="গ">
+      <div class="q-header">
+        <span class="q-text">১৯. Select the correct sentence.</span>
+        <span class="bcs-tag">২৬তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> The man was tall who stole my bag.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> The man stole my bag who was tall.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> The man who stole my bag was tall.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> The man was tall who is stealing tall my bag.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: গ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Relative Pronoun (who) সর্বদা তার Antecedent (The man)-এর সন্নিকটে বসে। অন্যথায় অর্থ বিকৃত হয়। তাই সঠিক বাক্য: "The man who stole my bag was tall."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 20 -->
+    <article class="q-card" data-qno="20" data-ans="ঘ">
+      <div class="q-header">
+        <span class="q-text">২০. Which of the following sentences is the correct one?</span>
+        <span class="bcs-tag">২৫তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> My father was in hospital during six weeks in summer</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> In summer during six weeks My father was in hospital</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> My father was in a hospital during six weeks in summer</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> My father was in hospital for six weeks during the summer</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ঘ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> ব্রিটিশ প্রমিত ব্যবহারে চিকিৎসাধীন থাকা অর্থে Article ছাড়া 'in hospital' বসে। সময়সীমার পূর্বে 'for six weeks' এবং নির্দিষ্ট ঋতুর পূর্বে 'during the summer' বসে।
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 21 -->
+    <article class="q-card" data-qno="21" data-ans="ক">
+      <div class="q-header">
+        <span class="q-text">২১. Identify the correct sentence.</span>
+        <span class="bcs-tag">২৩তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> She had faith in and hopes for the future</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> She had faith and hopes for the future</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> She had faith in and hopes in the future</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> She had faith in and hopes in future</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ক</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> দুটি ভিন্ন Noun যখন 'and' দিয়ে যুক্ত হয় এবং ভিন্ন ভিন্ন Preposition গ্রহণ করে, তখন উভয় Preposition-ই স্বতন্ত্রভাবে বসাতে হয় (faith in এবং hope for)। তাই: "She had faith in and hopes for the future."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 22 -->
+    <article class="q-card" data-qno="22" data-ans="ক">
+      <div class="q-header">
+        <span class="q-text">২২. Choose the correct sentence.</span>
+        <span class="bcs-tag">২৩তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> Rahim ate almost the whole fish.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> Rahim almost ate the whole fish.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> Almost Rahim ate whole fish.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> Rahim ate the whole fish almost.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ক</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> 'Almost' যাকে বিশেষিত করে ঠিক তার পূর্বে বসে। রহিম প্রায় সম্পূর্ণ মাছটি খেয়েছিল (ate almost the whole fish)। 'Almost ate' বললে অর্থ দাঁড়ায় খাওয়া শুরু করতে গিয়েও খায়নি।
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 23 -->
+    <article class="q-card" data-qno="23" data-ans="ঘ">
+      <div class="q-header">
+        <span class="q-text">২৩. The correct sentence of the followings ——</span>
+        <span class="bcs-tag">১৭তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> The Nile is longest river in Africa.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> The Nile is Longest river in the Africa.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> Nile is longest river in Africa.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> The Nile is the longest river in Africa.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ঘ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> নদীর নামের পূর্বে Definite Article 'The' (The Nile) এবং Superlative Degree-র পূর্বে 'the' (the longest) বসে: "The Nile is the longest river in Africa."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 24 -->
+    <article class="q-card" data-qno="24" data-ans="ক">
+      <div class="q-header">
+        <span class="q-text">২৪. The sentence with correct punctuations ——</span>
+        <span class="bcs-tag">১৭তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> Maria, my student, is on leave to-day.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> Maria my student, is on leave to-day.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> Maria my student is on leave to-day.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> Maria my student is, on leave to-day.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ক</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Noun in Apposition (my student)-এর পূর্বে ও পরে কমা (comma) বসে মূল বাক্য থেকে পৃথক করতে হয়: "Maria, my student, is on leave to-day."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 25 -->
+    <article class="q-card" data-qno="25" data-ans="ক">
+      <div class="q-header">
+        <span class="q-text">২৫. The correct sentence of the followings ——</span>
+        <span class="bcs-tag">১৭তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> A new cabinet has been sworn in in Dhaka.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> A new cabinet has been sworn in Dhaka.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> A new cabinet has been sworn by in Dhaka.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> A new cabinet has sworn in Dhaka.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ক</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> 'Swear in' অর্থ শপথ বাক্য পাঠ করানো (to swear in a cabinet)। এর প্যাসিভ ফর্ম হলো 'has been sworn in'। আর ঢাকায় শপথ নেওয়া বুঝাতে স্থানবাচক preposition হিসেবে অপর 'in' বসে (in in Dhaka)। তাই (ক) শতভাগ নির্ভুল।
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 26 -->
+    <article class="q-card" data-qno="26" data-ans="ঘ">
+      <div class="q-header">
+        <span class="q-text">২৬. Which of the following sentences is correct?</span>
+        <span class="bcs-tag">১৬তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> That shirt which he bought is blue in colour</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> The shirt that which he bought is blue in colour</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> Which shirt he bought is blue in colour</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> The shirt which he bought is blue in colour</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ঘ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> বস্তুবাচক Antecedent (The shirt)-এর পর relative pronoun 'which' বসে: "The shirt which he bought is blue in colour."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 27 -->
+    <article class="q-card" data-qno="27" data-ans="খ">
+      <div class="q-header">
+        <span class="q-text">২৭. Which of the following sentences is correct?</span>
+        <span class="bcs-tag">১৬তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> I forbade him from going</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> I forbade him to go</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> I forbade him going</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> I forbade him not to go</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: খ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Forbid-এর পরে Person Object এবং তারপরে Infinitive (to + verb) বসে (Forbid someone to do something)। Forbid নিজেই নেতিবাচক হওয়ায় 'not' বসে না। সুতরাং: "I forbade him to go."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 28 -->
+    <article class="q-card" data-qno="28" data-ans="গ">
+      <div class="q-header">
+        <span class="q-text">২৮. Which of the following is a correct sentence?</span>
+        <span class="bcs-tag">১৬তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> He was too clever not to miss the point</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> He was so clever to miss the point</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> He was too clever to miss the point</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> He was too clever to grasp the point</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: গ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> 'Too + adjective + to + verb' গঠনটি স্বয়ং একটি নেতিবাচক তাৎপর্য দেয়। "He was too clever to miss the point" (সে এতই চতুর ছিল যে বিষয়টি তার হাতছাড়া হতে দেয়নি)।
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 29 -->
+    <article class="q-card" data-qno="29" data-ans="খ">
+      <div class="q-header">
+        <span class="q-text">২৯. Choose the correct sentence ——</span>
+        <span class="bcs-tag">১২তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> Let he and you be witnesses</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> Let you and him be witnesses</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> Let you and he be witnesses</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> Let you and he be witness</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: খ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Pronoun-এর 231 নিয়ম অনুযায়ী 2nd person (you) আগে এবং 3rd person (him) পরে বসে। তাছাড়া 'Let'-এর পরে সর্বদা Pronoun-এর Objective form বসে (you and him)। অতএব: "Let you and him be witnesses."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 30 -->
+    <article class="q-card" data-qno="30" data-ans="গ">
+      <div class="q-header">
+        <span class="q-text">৩০. Choose the correct sentence ——</span>
+        <span class="bcs-tag">১১তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> He had been hunged for murder</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> He has been hunged for murder</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> He was hanged for murder</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> He was hunged of murder</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: গ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> মৃত্যুদণ্ড বা ফাঁসি কার্যকর করার ক্ষেত্রে Verb হলো 'hang-hanged-hanged'। Passive form হবে: "He was hanged for murder."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 31 -->
+    <article class="q-card" data-qno="31" data-ans="খ">
+      <div class="q-header">
+        <span class="q-text">৩১. Choose the correct sentence.</span>
+        <span class="bcs-tag">১০ম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> A few of the three boys got a prize</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> Each of the three boys got a prize</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> Every of the three boys got a prize</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> All of the three boys got a prize</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: খ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> 'Every of' ব্যাকরণগতভাবে ভুল রূপ। নির্দিষ্ট সংখ্যার প্রত্যেকের জন্য 'Each of the + plural noun' বসে। সুতরাং সঠিক বাক্য: "Each of the three boys got a prize."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 32 -->
+    <article class="q-card" data-qno="32" data-ans="খ">
+      <div class="q-header">
+        <span class="q-text">৩২. Choose the correct sentence.</span>
+        <span class="bcs-tag">১০ম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> The man that said that was a fool</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> The man who said that was a fool</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> The man that said that was a fool</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> The man which said that was a fool</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: খ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> ব্যক্তিবাচক Antecedent (the man)-এর পরে Relative Pronoun হিসেবে 'who' বসে। তাই: "The man who said that was a fool."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 33 -->
+    <article class="q-card" data-qno="33" data-ans="খ">
+      <div class="q-header">
+        <span class="q-text">৩৩. Choose the correct answer. How long did you wait?</span>
+        <span class="bcs-tag">১০ম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> Till lunch time.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> Till he came.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> Until six o'clock.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> Since this morning.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: খ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> "How long did you wait?" প্রশ্নটি Past Indefinite tense-এ থাকায় উত্তরটিতেও Past Indefinite ক্লজ (Till he came) দিয়ে সম্পন্ন হওয়া সবচেয়ে মানানসই (I waited until/till he came)।
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <div class="footer-nav">
+      <a href="Translation.html" class="footer-btn">← পূর্ববর্তী অধ্যায়</a>
+      <a href="Fill in the blanks.html" class="footer-btn">পরবর্তী অধ্যায় →</a>
+    </div>
+  </div>
+
+  <script src="nav-component.js"></script>
+  <script>
+    var currentScale = parseFloat(localStorage.getItem('ebk_font_scale')) || 1.0;
+    function applyFontScale() {
+      document.documentElement.style.setProperty('--font-scale', currentScale);
+      localStorage.setItem('ebk_font_scale', currentScale);
+    }
+    function adjustFont(delta) {
+      currentScale = Math.min(1.4, Math.max(0.8, currentScale + delta));
+      applyFontScale();
+    }
+    function resetFont() {
+      currentScale = 1.0;
+      applyFontScale();
+    }
+    applyFontScale();
+
+    function toggleTheme() {
+      var current = document.documentElement.getAttribute('data-theme') || 'light';
+      var next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      localStorage.setItem('ebk_portal_theme', next);
+      document.getElementById('themeBtn').textContent = next === 'dark' ? '☀️' : '🌙';
+    }
+
+    var score = { total: 33, correct: 0, wrong: 0, answered: {} };
+
+    function checkAnswer(btn, chosen) {
+      var card = btn.closest('.q-card');
+      var qno = card.getAttribute('data-qno');
+      var correct = card.getAttribute('data-ans');
+
+      if (score.answered[qno]) return;
+      score.answered[qno] = true;
+
+      var buttons = card.querySelectorAll('.opt-btn');
+      buttons.forEach(function(b) {
+        b.disabled = true;
+        var optKey = b.querySelector('.opt-key').textContent.trim();
+        if (optKey === correct) {
+          b.classList.add('correct');
+        }
+      });
+
+      if (chosen === correct) {
+        score.correct++;
+        btn.classList.add('correct');
+      } else {
+        score.wrong++;
+        btn.classList.add('wrong');
+      }
+
+      document.getElementById('correctCount').textContent = score.correct;
+      document.getElementById('wrongCount').textContent = score.wrong;
+
+      var drawer = card.querySelector('.answer-drawer');
+      if (drawer) drawer.classList.add('open');
+    }
+
+    function toggleExp(btn) {
+      var card = btn.closest('.q-card');
+      var drawer = card.querySelector('.answer-drawer');
+      if (drawer) {
+        drawer.classList.toggle('open');
+        btn.textContent = drawer.classList.contains('open') ? '▲ ব্যাখ্যা লুকান' : '💡 ব্যাখ্যা দেখুন';
+      }
+    }
+
+    function resetQuiz() {
+      score = { total: 33, correct: 0, wrong: 0, answered: {} };
+      document.getElementById('correctCount').textContent = '0';
+      document.getElementById('wrongCount').textContent = '0';
+      document.querySelectorAll('.opt-btn').forEach(function(b) {
+        b.disabled = false;
+        b.classList.remove('correct', 'wrong');
+      });
+      document.querySelectorAll('.answer-drawer').forEach(function(d) {
+        d.classList.remove('open');
+      });
+      document.querySelectorAll('.exp-toggle-btn').forEach(function(btn) {
+        btn.textContent = '💡 ব্যাখ্যা দেখুন';
+      });
+    }
+  </script>
+</body>
+</html>

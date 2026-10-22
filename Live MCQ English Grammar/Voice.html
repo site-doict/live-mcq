@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch(e) {}
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+  <title>বাচ্য পরিবর্তন (Voice Change) | English Grammar বিসিএস প্রিলিমিনারি স্মার্ট ই-বুক</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../bangla-fonts.css">
+  <link rel="stylesheet" href="../paper-textures.css">
+  <style>
+    :root, [data-theme="light"] {
+      --font-scale: 1;
+      --bg-primary: #F8FAFC;
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --text-primary: #0F172A;
+      --text-secondary: #334155;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --primary: #4338CA;
+      --primary-light: #EEF2FF;
+      --primary-hover: #3730A3;
+      --accent: #D97706;
+      --accent-light: #FEF3C7;
+      --success: #15803D;
+      --success-light: #DCFCE7;
+      --danger: #B91C1C;
+      --danger-light: #FEE2E2;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+      --radius-sm: 0.375rem;
+      --radius-md: 0.625rem;
+      --radius-lg: 0.875rem;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #090D16;
+      --bg-surface: rgba(17, 24, 39, 0.85);
+      --bg-card: rgba(17, 24, 39, 0.82);
+      --text-primary: #F8FAFC;
+      --text-secondary: #CBD5E1;
+      --text-muted: #94A3B8;
+      --border-color: #1E293B;
+      --primary: #818CF8;
+      --primary-light: rgba(99, 102, 241, 0.15);
+      --primary-hover: #A5B4FC;
+      --accent: #F59E0B;
+      --accent-light: rgba(245, 158, 11, 0.15);
+      --success: #22C55E;
+      --success-light: rgba(34, 197, 94, 0.15);
+      --danger: #EF4444;
+      --danger-light: rgba(239, 68, 68, 0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { max-width: 100vw; overflow-x: clip; box-sizing: border-box; }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: calc(1rem * var(--font-scale));
+      line-height: 1.65;
+      padding-bottom: 5rem;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .container { max-width: 52rem; margin: 0 auto; padding: 0.85rem 0.75rem; }
+
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 0.4rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Inter', inherit;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .nav-actions { display: flex; align-items: center; gap: 0.5rem; }
+
+    .header-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    
+      backdrop-filter: blur(6px);
+    }
+
+    .header-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #10B981, #3B82F6, #6366F1);
+    }
+
+    .ch-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      padding: 0.2rem 0.65rem;
+      border-radius: 9999px;
+      margin-bottom: 0.5rem;
+      font-family: 'Inter', inherit;
+    }
+
+    .ch-title .ch-en, .ch-en {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 0.2rem;
+      font-family: 'Inter', sans-serif !important;
+    }
+
+    .ch-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 0.35rem;
+      line-height: 1.3;
+    }
+
+    .ch-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .bcs-table-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    
+      backdrop-filter: blur(6px);
+    }
+
+    .bcs-table-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 0.825rem;
+    }
+
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 0.45rem 0.5rem;
+      font-weight: 700;
+      border: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    .bcs-table td {
+      padding: 0.45rem 0.5rem;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .info-summary-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .info-summary-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .rule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+    }
+
+    .rule-table th {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 0.5rem 0.65rem;
+      font-weight: 700;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .rule-table td {
+      padding: 0.5rem 0.65rem;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+    }
+
+    .score-bar {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.6rem 1rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: sticky;
+      top: 0.5rem;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+    }
+
+    .score-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8125rem; font-weight: 600; }
+    .score-val { font-size: 1.1rem; font-weight: 800; font-family: 'Inter', inherit; }
+    .score-total .score-val { color: var(--primary); }
+    .score-correct .score-val { color: var(--success); }
+    .score-wrong .score-val { color: var(--danger); }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.1rem;
+      margin-bottom: 1.1rem;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    
+      backdrop-filter: blur(6px);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .q-text {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.55;
+    }
+
+    .bcs-tag {
+      flex-shrink: 0;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.725rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 9999px;
+      white-space: nowrap;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+
+    @media (max-width: 580px) {
+      .options-grid { grid-template-columns: 1fr; }
+    }
+
+    .opt-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.55rem 0.75rem;
+      text-align: left;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.15s ease;
+      width: 100%;
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .opt-btn.correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+      color: var(--success) !important;
+      font-weight: 700;
+    }
+
+    .opt-btn.wrong {
+      background: var(--danger-light) !important;
+      border-color: var(--danger) !important;
+      color: var(--danger) !important;
+      font-weight: 700;
+    }
+
+    .opt-key {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.35rem;
+      height: 1.35rem;
+      border-radius: 50%;
+      background: var(--border-color);
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .opt-btn.correct .opt-key {
+      background: var(--success);
+      color: #fff;
+    }
+
+    .opt-btn.wrong .opt-key {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .answer-drawer {
+      margin-top: 0.75rem;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 0.75rem;
+      display: none;
+    }
+
+    .answer-drawer.open { display: block; }
+
+    .ans-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--success);
+      background: var(--success-light);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-content {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      background: var(--bg-primary);
+      padding: 0.75rem;
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--primary);
+    }
+
+    .exp-toggle-btn {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .exp-toggle-btn:hover { background: var(--primary-light); }
+
+    .footer-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .footer-btn {
+      flex: 1;
+      padding: 0.65rem 0.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+    }
+
+    .footer-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Mandatory Exam Question & Analysis Typography Protection (Noto Serif Bengali) */
+    .q-card,
+    .q-card *,
+    .q-text,
+    .q-text *,
+    .opt-btn,
+    .opt-btn *,
+    .opt-text,
+    .answer-drawer,
+    .answer-drawer *,
+    .exp-content,
+    .exp-content *,
+    .bcs-table,
+    .bcs-table *,
+    .bcs-tag,
+    .score-bar,
+    .score-bar *,
+    .stats-card,
+    .stats-card *,
+    .doubt-box,
+    .doubt-box * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="container paper-container paper-graph font-trimohona">
+    <nav class="top-nav">
+      <a href="index.html" class="nav-btn">← সূচিপত্র</a>
+      <div class="nav-actions">
+        <button class="nav-btn" onclick="adjustFont(-0.05)" title="ফন্ট ছোট করুন">A-</button>
+        <button class="nav-btn" onclick="resetFont()" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="nav-btn" onclick="adjustFont(0.05)" title="ফন্ট বড় করুন">A+</button>
+        <button class="nav-btn" onclick="toggleTheme()" id="themeBtn" title="থিম পরিবর্তন">🌙</button>
+        <button class="nav-btn" onclick="resetQuiz()" title="কুইজ পুনরায় শুরু">↺ রিসেট</button>
+      </div>
+    </nav>
+
+        <header class="header-card">
+      <span class="ch-badge font-trimohona">অধ্যায় ১৫ • English Grammar</span>
+      <h1 class="ch-title font-trimohona">বাচ্য পরিবর্তন <span class="ch-en">(Voice Change)</span></h1>
+      <p class="ch-subtitle font-trimohona">Live MCQ™ বিসিএস প্রিলিমিনারি বিষয়ভিত্তিক জব সলিউশন (পৃষ্ঠা ২৫৭–২৬২)</p>
+    </header>
+
+    <section class="bcs-table-card">
+      <h2 class="bcs-table-title">📊 বিগত বিসিএস পরীক্ষায় এ অধ্যায়ের প্রশ্ন বিশ্লেষণ</h2>
+      <div class="table-wrap">
+        <table class="bcs-table">
+          <thead>
+            <tr>
+              <th>৫০তম</th><th>৪৯তম</th><th>৪৮তম</th><th>৪৭তম</th><th>৪৬তম</th><th>৪৫তম</th><th>৪৪তম</th><th>৪৩তম</th><th>৪২তম</th><th>৪১তম</th><th>৪০তম</th><th>৩৯তম</th><th>৩৮তম</th><th>৩৭তম</th><th>৩৬তম</th><th>৩৫তম</th><th>১০ম-৩৪তম</th><th>মোট</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>১</td><td>১</td><td>১</td><td>১</td><td>০</td><td>২</td><td>২</td><td>১</td><td>০</td><td>১</td><td>১</td><td>১</td><td>১</td><td>১</td><td>০</td><td>১</td><td>৯</td><td><strong>২৪</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Essential Reference Table -->
+    <section class="info-summary-card">
+      <h2 class="info-summary-title">📝 Passive Voice-এর বিভিন্ন Tense-এ Auxiliary ও Main Verb-এর গঠন</h2>
+      <div class="table-wrap">
+        <table class="rule-table">
+          <thead>
+            <tr>
+              <th>Tense</th>
+              <th>Auxiliary Verb</th>
+              <th>Main Verb Form</th>
+              <th>উদাহরণ (Active ➔ Passive)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Present Indefinite</strong></td>
+              <td>am / is / are</td>
+              <td>Past Participle (V3)</td>
+              <td>I know him ➔ He is known to me.</td>
+            </tr>
+            <tr>
+              <td><strong>Present Continuous</strong></td>
+              <td>am being / is being / are being</td>
+              <td>Past Participle (V3)</td>
+              <td>Who is calling me? ➔ By whom am I being called?</td>
+            </tr>
+            <tr>
+              <td><strong>Present Perfect</strong></td>
+              <td>has been / have been</td>
+              <td>Past Participle (V3)</td>
+              <td>Who has broken this? ➔ By whom has this been broken?</td>
+            </tr>
+            <tr>
+              <td><strong>Past Indefinite</strong></td>
+              <td>was / were</td>
+              <td>Past Participle (V3)</td>
+              <td>Who did the work? ➔ By whom was the work done?</td>
+            </tr>
+            <tr>
+              <td><strong>Past Continuous</strong></td>
+              <td>was being / were being</td>
+              <td>Past Participle (V3)</td>
+              <td>Sheila was writing a letter ➔ A letter was being written by Sheila.</td>
+            </tr>
+            <tr>
+              <td><strong>Past Perfect</strong></td>
+              <td>had been</td>
+              <td>Past Participle (V3)</td>
+              <td>They had completed it ➔ It had been completed by them.</td>
+            </tr>
+            <tr>
+              <td><strong>Future Indefinite</strong></td>
+              <td>shall be / will be</td>
+              <td>Past Participle (V3)</td>
+              <td>Who will do the work? ➔ By whom will the work be done?</td>
+            </tr>
+            <tr>
+              <td><strong>Modal Auxiliary</strong></td>
+              <td>can be / must be / may be</td>
+              <td>Past Participle (V3)</td>
+              <td>You must shut these doors ➔ These doors must be shut.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="score-bar">
+      <div class="score-item score-total">মোট প্রশ্ন: <span class="score-val" id="totalCount">24</span></div>
+      <div class="score-item score-correct">সঠিক: <span class="score-val" id="correctCount">0</span></div>
+      <div class="score-item score-wrong">ভুল: <span class="score-val" id="wrongCount">0</span></div>
+    </div>
+
+    <!-- Question 1 -->
+    <article class="q-card" data-qno="1" data-ans="ক">
+      <div class="q-header">
+        <span class="q-text">১. 'The villagers believed that he was an honest leader.' Passive form of this sentence is:</span>
+        <span class="bcs-tag">৫০তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> He was believed to be an honest leader</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> He was believed to have been an honest leader</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> He has been believed to be an honest leader</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> He was believed he was an honest leader</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ক</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> complex বাক্যে that-clause থাকলে passive করার দুটি প্রমিত নিয়ম রয়েছে:
+          <br><strong>১. Personal passive:</strong> Personal object-কে subject ধরে: Subject + auxiliary verb + V3 + to be + complement. যেমন: He was believed to be an honest leader.
+          <br><strong>২. Impersonal passive:</strong> It-কে subject ধরে: It was believed that he was an honest leader.
+          <br>বিকল্পগুলোর মধ্যে অপশন (ক) শতভাগ নির্ভুল Personal passive গঠন।
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 2 -->
+    <article class="q-card" data-qno="2" data-ans="গ">
+      <div class="q-header">
+        <span class="q-text">২. Identify the correct passive form, "People thought that the despot was corrupt".</span>
+        <span class="bcs-tag">৪৯তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> The despot had been thought to be corrupt.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> It was thought that the despot was corrupt.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> The despot was thought to be corrupt.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> The despot is thought to be corrupt.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: গ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> পিএসসি ও প্রামাণ্য পরীক্ষায় Personal Passive ফর্মকে সরাসরি অধিক প্রাধান্য দেওয়া হয়। মূল বাক্যে Past tense (thought) থাকায় Personal Passive হবে: "The despot was thought to be corrupt." (অপশন খ Impersonal passive হলেও আধুনিক ইংরেজি ব্যাকরণে অপশন গ অধিকতর প্রত্যক্ষ ও গ্রহণযোগ্য)।
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 3 -->
+    <article class="q-card" data-qno="3" data-ans="গ">
+      <div class="q-header">
+        <span class="q-text">৩. The passive form of the sentence, "Who did the work?" is ——</span>
+        <span class="bcs-tag">৪৮তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> By whom the work was done?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> Whom had the work done by?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> By whom was the work done?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> Who was the work done?</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: গ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Who যুক্ত Active voice-কে Passive voice করার নিয়ম: By whom + auxiliary verb + object-এর subjective form + V3?
+          <br>এখানে Past Indefinite থাকায় Auxiliary verb 'was' subject-এর আগে বসবে: "By whom was the work done?"
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 4 -->
+    <article class="q-card" data-qno="4" data-ans="ঘ">
+      <div class="q-header">
+        <span class="q-text">৪. Identify the correct passive form: 'I heard her sing.'</span>
+        <span class="bcs-tag">৪৭তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> She was heard sing by me.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> She was heard to be sung by me.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> She was heard sung by me.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> She was heard to sing by me.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ঘ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Perception verb (hear, see, make, watch ইত্যাদি)-এর পরে Active voice-এ bare infinitive (to উহ্য) থাকে, কিন্তু Passive voice করার সময় তা Full infinitive (to + verb)-এ রূপান্তরিত হয়। তাই সঠিক Passive: "She was heard to sing by me."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 5 -->
+    <article class="q-card" data-qno="5" data-ans="ক">
+      <div class="q-header">
+        <span class="q-text">৫. Identify the passive form of the following sentence: "Who has broken this Jug?"</span>
+        <span class="bcs-tag">৪৫তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> By whom has this Jug been broken?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> By whom has this Jug broken?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> By whom this Jug has been broken?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> Whom has this Jug been broken?</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ক</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Present Perfect Interrogative Passive গঠন: By whom + has/have + subject + been + V3?
+          <br>অতএব: "By whom has this Jug been broken?"
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 6 -->
+    <article class="q-card" data-qno="6" data-ans="খ">
+      <div class="q-header">
+        <span class="q-text">৬. She played on the flute. Passive form is ——</span>
+        <span class="bcs-tag">৪৫তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> The flute was played by her.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> The flute was played on by her.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> The flute was played to her.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> The flute was being played by her.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: খ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> বাঁশি বাজানো অর্থে 'play on' একটি Group verb / Phrasal verb। Passive voice-এ Group verb-এর preposition মূল verb-এর সাথে অবিচ্ছেদ্য থাকে। তাই সঠিক রূপ: "The flute was played on by her."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 7 -->
+    <article class="q-card" data-qno="7" data-ans="ক">
+      <div class="q-header">
+        <span class="q-text">৭. Find out the active form of the sentence: "By whom can our country be saved?"</span>
+        <span class="bcs-tag">৪৪তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> Who can save our country?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> Our country has been saved by who?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> Who save our country?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> Who will save our country?</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ক</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Passive-এ 'By whom can + subject + be + V3?' থাকলে Active রূপ হবে: 'Who + can + Base form of verb + object?'
+          <br>সুতরাং সঠিক উত্তর: "Who can save our country?"
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 8 -->
+    <article class="q-card" data-qno="8" data-ans="খ">
+      <div class="q-header">
+        <span class="q-text">৮. Identify the correct passive form: 'Do not close the door.'</span>
+        <span class="bcs-tag">৪৪তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> Let not the door close.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> Let not the door be closed.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> Let not the door close.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> Let not door closed.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: খ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> নেতিবাচক Imperative বাক্যের Passive গঠন: Let not + object + be + V3.
+          <br>অতএব: "Let not the door be closed."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 9 -->
+    <article class="q-card" data-qno="9" data-ans="ঘ">
+      <div class="q-header">
+        <span class="q-text">৯. Change the voice: 'Nobody trusts a traitor.'</span>
+        <span class="bcs-tag">৪৩তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> A traitor is trusted.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> A traitor should not be trusted.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> Everybody hates a traitor.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> A traitor is not trusted by anybody.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ঘ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Present Indefinite-এ 'Nobody' subject হলে Passive-এ Object হিসেবে 'by anybody' এবং verb নেতিবাচক (is not trusted) হবে। তাই সঠিক রূপ: "A traitor is not trusted by anybody."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 10 -->
+    <article class="q-card" data-qno="10" data-ans="ঘ">
+      <div class="q-header">
+        <span class="q-text">১০. Find out the correct passive form of the sentence 'Who taught you French?'</span>
+        <span class="bcs-tag">৪১তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> By whom you were taught French?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> By whom French was taught you?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> French was taught you by whom?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> By whom were you taught French?</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ঘ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Who-যুক্ত প্রশ্নবোধক বাক্যে Interrogative word 'By whom'-এর পরপরই Auxiliary verb 'were' subject 'you'-এর পূর্বে বসে। তাই: "By whom were you taught French?"
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 11 -->
+    <article class="q-card" data-qno="11" data-ans="গ">
+      <div class="q-header">
+        <span class="q-text">১১. Change the voice : 'Who is calling me?'</span>
+        <span class="bcs-tag">৪০তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> By whom am I called?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> By whom I am called?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> By whom am I being called?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> Whom am I called by?</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: গ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Present Continuous Interrogative-এর ক্ষেত্রে Passive গঠন: By whom + am/is/are + subject + being + V3?
+          <br>এখানে Subject 'I' হওয়ায় 'am' আগে বসেছে: "By whom am I being called?"
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 12 -->
+    <article class="q-card" data-qno="12" data-ans="ঘ">
+      <div class="q-header">
+        <span class="q-text">১২. Identify the correct passive form of the sentence below : 'Do you Know them'?</span>
+        <span class="bcs-tag">৩৯তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> Are they known by you?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> Would they be known by you?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> Are they known with you?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> Are they known to you?</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ঘ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> 'Know' verb-এর Passive voice-এ preposition হিসেবে 'by'-এর পরিবর্তে সর্বদা 'to' বসে (known to)। অতএব Interrogative রূপ: "Are they known to you?"
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 13 -->
+    <article class="q-card" data-qno="13" data-ans="ঘ">
+      <div class="q-header">
+        <span class="q-text">১৩. Identify the right passive voice of "It is impossible to do this".</span>
+        <span class="bcs-tag">৩৮তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> Doing this is impossible</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> This is impossible to be done</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> This must be done</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> This can't be done</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ঘ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Adjective (impossible)-এর পরে সাধারণ নিয়মে passive infinitive (to be done) ব্যবহার করা ব্যাকরণগতভাবে অশুদ্ধ। ভাবার্থের বিচারে 'It is impossible to do this'-এর সবচেয়ে যথার্থ প্যাসিভ রূপ হলো "This can't be done" (বা This cannot be done)।
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 14 -->
+    <article class="q-card" data-qno="14" data-ans="ক">
+      <div class="q-header">
+        <span class="q-text">১৪. 'Who planted this tree here?' The correct passive voice of this sentence is ——</span>
+        <span class="bcs-tag">৩৭তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> By whom was the tree planted here?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> Who the tree had been planted hereby?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> The tree was planted here by whom?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> By whom had the tree been planted here?</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ক</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Who planted this tree here? বাক্যটি Past Indefinite। Passive structure: By whom + was + subject + planted + here? প্রশ্নের মুদ্রণে অপশন (ক)-তে 'the tree' থাকায় এটিই গৃহীত সঠিক উত্তর।
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 15 -->
+    <article class="q-card" data-qno="15" data-ans="ঘ">
+      <div class="q-header">
+        <span class="q-text">১৫. The correct passive form of "You must shut these doors" is ——</span>
+        <span class="bcs-tag">৩৫তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> These must be shut doors</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> Shut the doors you must</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> Shut must be the doors</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> These doors must be shut</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ঘ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Modal auxiliary যুক্ত বাক্যে Passive রূপ: Object + modal auxiliary (must) + be + V3 (shut).
+          <br>অতএব: "These doors must be shut."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 16 -->
+    <article class="q-card" data-qno="16" data-ans="ঘ">
+      <div class="q-header">
+        <span class="q-text">১৬. In each of the following questions, a sentence has been given in Active (or Passive) voice. Out of the four alternatives suggested, select the one which best expresses the same sentence in Passive (or Active) voice: I know him.</span>
+        <span class="bcs-tag">৩০তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> He is known by me.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> He was known to me.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> He has been known by me.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> He is known to me.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ঘ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Present Indefinite Tense-এ 'Know'-এর পর Passive voice-এ preposition 'to' বসে: "He is known to me."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 17 -->
+    <article class="q-card" data-qno="17" data-ans="খ">
+      <div class="q-header">
+        <span class="q-text">১৭. A lion may be helped even by a little mouse. (Active voice)</span>
+        <span class="bcs-tag">৩০তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> A little mouse may even help a lion.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> Even a little mouse may help a lion.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> A little mouse can even help a lion.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> Even a little mouse ought to help a lion.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: খ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Passive থেকে Active করার সময় 'by a little mouse'-এর সাথে 'even' সংযুক্ত থাকায় তা Subject-এর শুরুতে বসবে: "Even a little mouse may help a lion."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 18 -->
+    <article class="q-card" data-qno="18" data-ans="খ">
+      <div class="q-header">
+        <span class="q-text">১৮. Give the correct passive form of 'My teacher embodies all the good qualities'.</span>
+        <span class="bcs-tag">২৭তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> All the good qualities are embodied by my teacher.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> All the good qualities are embodied in my teacher.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> All the good qualities are embodied to my teacher.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> All the good qualities are embodied on my teacher.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: খ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> কারো মধ্যে গুণ বা বৈশিষ্ট্য বিদ্যমান থাকা বুঝাতে 'embodied in' ব্যবহৃত হয়। Passive-এ 'by'-এর পরিবর্তে 'in' বসবে: "All the good qualities are embodied in my teacher."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 19 -->
+    <article class="q-card" data-qno="19" data-ans="গ">
+      <div class="q-header">
+        <span class="q-text">১৯. Choose the correct form (passive) of — 'Who will do the work?'</span>
+        <span class="bcs-tag">২৬তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> Who will be done the work?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> Who will done the work?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> By whom will the work be done?</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> Whom will the work be done?</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: গ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Future Indefinite Interrogative Passive গঠন: By whom + will + subject + be + V3?
+          <br>সুতরাং: "By whom will the work be done?"
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 20 -->
+    <article class="q-card" data-qno="20" data-ans="ঘ">
+      <div class="q-header">
+        <span class="q-text">২০. Identify the correct passive form of 'He is going to open a shop.'</span>
+        <span class="bcs-tag">২৬তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> He is being gone to open a shop</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> A shop is being gone opened by him</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> A shop will be opened by him</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> A shop is going to be opened by him</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ঘ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> 'Going to' যুক্ত বাক্যের Passive Voice করার সময়: Subject + be verb + going to + be + V3 + by + object.
+          <br>অতএব: "A shop is going to be opened by him."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 21 -->
+    <article class="q-card" data-qno="21" data-ans="খ">
+      <div class="q-header">
+        <span class="q-text">২১. Identify the correct passive form-Open the window.</span>
+        <span class="bcs-tag">২৩তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> The window should be opened</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> Let the window be opened.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> Let the window be opened by you.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> The window must be opened.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: খ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Imperative sentence-এর মূল নিয়ম: Let + object + be + V3.
+          <br>সুতরাং: "Let the window be opened."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 22 -->
+    <article class="q-card" data-qno="22" data-ans="গ">
+      <div class="q-header">
+        <span class="q-text">২২. The correct passive of 'Sheila was writing a letter' is ——</span>
+        <span class="bcs-tag">১৬তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> A letter was writing by Sheila</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> A letter was being writing by Sheila</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> A letter was being written by Sheila</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> A letter was been written by Sheila</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: গ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Past Continuous Tense-এর Passive রূপ: Object + was being / were being + V3 + by + subject.
+          <br>অতএব: "A letter was being written by Sheila."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 23 -->
+    <article class="q-card" data-qno="23" data-ans="গ">
+      <div class="q-header">
+        <span class="q-text">২৩. The best passive form of the sentence: 'We don't like idle people'-</span>
+        <span class="bcs-tag">১৭তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> We are not liked by idle people.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> Idle people are not like us.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> Idle people are not liked by us.</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> Idle people are not of our liking.</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: গ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Present Indefinite Negative-এর Passive গঠন: Subject (Idle people) + are not + V3 (liked) + by us.
+          <br>সুতরাং: "Idle people are not liked by us."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <!-- Question 24 -->
+    <article class="q-card" data-qno="24" data-ans="ঘ">
+      <div class="q-header">
+        <span class="q-text">২৪. People always remember patriots. Which of the following is the best passive form of the above sentence?</span>
+        <span class="bcs-tag">১৫তম বিসিএস</span>
+      </div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-key">ক</span> The patriots will always be remembered by people</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-key">খ</span> The patriots are always being remembered</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-key">গ</span> People are always remembered by The patriots</button>
+        <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-key">ঘ</span> The patriots are always remembered</button>
+      </div>
+      <div class="answer-drawer">
+        <div class="ans-badge">✓ সঠিক উত্তর: ঘ</div>
+        <div class="exp-content">
+          <strong>ব্যাখ্যা:</strong> Active Voice-এর Subject হিসেবে 'People' থাকলে Passive Voice-এ 'by people' উল্লেখ করার প্রয়োজন হয় না। তাই সবচেয়ে মার্জিত প্যাসিভ রূপ: "The patriots are always remembered."
+        </div>
+      </div>
+      <button class="exp-toggle-btn" onclick="toggleExp(this)">💡 ব্যাখ্যা দেখুন</button>
+    </article>
+
+    <div class="footer-nav">
+      <a href="Clause.html" class="footer-btn">← পূর্ববর্তী অধ্যায়</a>
+      <a href="Degree.html" class="footer-btn">পরবর্তী অধ্যায় →</a>
+    </div>
+  </div>
+
+  <script src="nav-component.js"></script>
+  <script>
+    var currentScale = parseFloat(localStorage.getItem('ebk_font_scale')) || 1.0;
+    function applyFontScale() {
+      document.documentElement.style.setProperty('--font-scale', currentScale);
+      localStorage.setItem('ebk_font_scale', currentScale);
+    }
+    function adjustFont(delta) {
+      currentScale = Math.min(1.4, Math.max(0.8, currentScale + delta));
+      applyFontScale();
+    }
+    function resetFont() {
+      currentScale = 1.0;
+      applyFontScale();
+    }
+    applyFontScale();
+
+    function toggleTheme() {
+      var current = document.documentElement.getAttribute('data-theme') || 'light';
+      var next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      localStorage.setItem('ebk_portal_theme', next);
+      document.getElementById('themeBtn').textContent = next === 'dark' ? '☀️' : '🌙';
+    }
+
+    var score = { total: 24, correct: 0, wrong: 0, answered: {} };
+
+    function checkAnswer(btn, chosen) {
+      var card = btn.closest('.q-card');
+      var qno = card.getAttribute('data-qno');
+      var correct = card.getAttribute('data-ans');
+
+      if (score.answered[qno]) return;
+      score.answered[qno] = true;
+
+      var buttons = card.querySelectorAll('.opt-btn');
+      buttons.forEach(function(b) {
+        b.disabled = true;
+        var optKey = b.querySelector('.opt-key').textContent.trim();
+        if (optKey === correct) {
+          b.classList.add('correct');
+        }
+      });
+
+      if (chosen === correct) {
+        score.correct++;
+        btn.classList.add('correct');
+      } else {
+        score.wrong++;
+        btn.classList.add('wrong');
+      }
+
+      document.getElementById('correctCount').textContent = score.correct;
+      document.getElementById('wrongCount').textContent = score.wrong;
+
+      var drawer = card.querySelector('.answer-drawer');
+      if (drawer) drawer.classList.add('open');
+    }
+
+    function toggleExp(btn) {
+      var card = btn.closest('.q-card');
+      var drawer = card.querySelector('.answer-drawer');
+      if (drawer) {
+        drawer.classList.toggle('open');
+        btn.textContent = drawer.classList.contains('open') ? '▲ ব্যাখ্যা লুকান' : '💡 ব্যাখ্যা দেখুন';
+      }
+    }
+
+    function resetQuiz() {
+      score = { total: 24, correct: 0, wrong: 0, answered: {} };
+      document.getElementById('correctCount').textContent = '0';
+      document.getElementById('wrongCount').textContent = '0';
+      document.querySelectorAll('.opt-btn').forEach(function(b) {
+        b.disabled = false;
+        b.classList.remove('correct', 'wrong');
+      });
+      document.querySelectorAll('.answer-drawer').forEach(function(d) {
+        d.classList.remove('open');
+      });
+      document.querySelectorAll('.exp-toggle-btn').forEach(function(btn) {
+        btn.textContent = '💡 ব্যাখ্যা দেখুন';
+      });
+    }
+  </script>
+</body>
+</html>
