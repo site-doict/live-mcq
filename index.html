@@ -601,7 +601,7 @@
           <div class="progress-bar-fill" id="overallFill"></div>
         </div>
         <div class="progress-caption">
-          <span id="completedCountText">সম্পন্ন: ০ / ৬২টি অধ্যায়</span>
+          <span id="completedCountText">সম্পন্ন: ০ / ১০৪টি অধ্যায়</span>
           <span>লক্ষ্য: ১০০% রিভিশন</span>
         </div>
       </div>
@@ -674,7 +674,7 @@
           <div class="card-icon">📚</div>
           <div class="card-title-group">
             <h2>বাংলা সাহিত্য</h2>
-            <div class="card-page-range">পৃষ্ঠা ৭৩ হতে ২০২ • ৩১টি পরিচ্ছেদ</div>
+            <div class="card-page-range">পৃষ্ঠা ৭৩ হতে ২০২ • ৩০টি পরিচ্ছেদ</div>
           </div>
         </div>
 
@@ -930,35 +930,34 @@
     function updateProgressUI() {
       let banglaLangDone = 0;
       try {
-        const langStored = JSON.parse(localStorage.getItem('ebk_bangla_lang_progress') || '{}');
+        const langStored = JSON.parse(localStorage.getItem('ebk_bangla_lang_progress') || localStorage.getItem('bangla_lang_progress_data_v1') || '{}');
         banglaLangDone = Object.keys(langStored).filter(k => langStored[k]).length;
       } catch(e) {}
 
       let banglaDone = 0;
-      let bdDone = 0;
-
       try {
-        const banglaStored = JSON.parse(localStorage.getItem('ebk_bangla_lit_progress') || '{}');
+        const banglaStored = JSON.parse(localStorage.getItem('ebk_bangla_lit_progress') || localStorage.getItem('bangla_lit_progress_data_v1') || '{}');
         banglaDone = Object.keys(banglaStored).filter(k => banglaStored[k]).length;
       } catch(e) {}
 
+      let bdDone = 0;
       try {
-        const bdStored = JSON.parse(localStorage.getItem('ebk_bd_progress') || '{}');
+        const bdStored = JSON.parse(localStorage.getItem('ebk_bd_progress') || localStorage.getItem('bangladesh_affairs_progress_data_v1') || '{}');
         bdDone = Object.keys(bdStored).filter(k => bdStored[k]).length;
       } catch(e) {}
 
       let intlDone = 0;
       try {
-        const intlStored = JSON.parse(localStorage.getItem('ebk_intl_progress') || '{}');
+        const intlStored = JSON.parse(localStorage.getItem('ebk_intl_progress') || localStorage.getItem('intl_affairs_progress_data_v1') || '{}');
         intlDone = Object.keys(intlStored).filter(k => intlStored[k]).length;
       } catch(e) {}
 
       const totalDone = banglaLangDone + banglaDone + bdDone + intlDone;
-      const totalCount = 105;
+      const totalCount = 104;
 
       const pctTotal = Math.round((totalDone / totalCount) * 100);
       const pctLang = Math.round((banglaLangDone / 22) * 100);
-      const pctBangla = Math.round((banglaDone / 31) * 100);
+      const pctBangla = Math.round((banglaDone / 30) * 100);
       const pctBd = Math.round((bdDone / 31) * 100);
       const pctIntl = Math.round((intlDone / 21) * 100);
 
@@ -971,7 +970,7 @@
         document.getElementById('banglaLangProgressFill').style.width = pctLang + '%';
       }
 
-      document.getElementById('banglaProgressText').innerText = toBn(pctBangla) + '% (' + toBn(banglaDone) + '/৩১)';
+      document.getElementById('banglaProgressText').innerText = toBn(pctBangla) + '% (' + toBn(banglaDone) + '/৩০)';
       document.getElementById('banglaProgressFill').style.width = pctBangla + '%';
 
       document.getElementById('bdProgressText').innerText = toBn(pctBd) + '% (' + toBn(bdDone) + '/৩১)';

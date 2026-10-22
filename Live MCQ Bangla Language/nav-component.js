@@ -156,7 +156,7 @@
   const STORAGE_KEY = 'bangla_lang_progress_data_v1';
   function getProgressState() {
     try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || JSON.parse(localStorage.getItem('ebk_bangla_lang_progress')) || {};
     } catch (e) {
       return {};
     }
@@ -165,6 +165,7 @@
   function setProgressState(state) {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      localStorage.setItem('ebk_bangla_lang_progress', JSON.stringify(state));
     } catch (e) {}
   }
 
@@ -977,9 +978,11 @@
       <!-- Subject Switcher -->
       <div style="padding: 8px 14px; background: rgba(15, 118, 110, 0.08); border-bottom: 1px solid var(--ebk-border); font-size: 12px; display: flex; align-items: center; justify-content: space-between;">
         <span style="font-weight: 700; color: var(--ebk-primary);">বিষয় পরিবর্তন:</span>
-        <select onchange="if(this.value!=='current') window.location.href=this.value;" style="padding: 3px 6px; border-radius: 6px; border: 1px solid var(--ebk-border); background: var(--ebk-card-bg); color: var(--ebk-text-main); font-family: inherit; font-size: 12px; cursor: pointer;">
-          <option value="current" selected>📚 বাংলা ভাষা</option>
+        <select onchange="if(this.value!=='current') window.location.href=this.value;" style="padding: 3px 6px; border-radius: 6px; border: 1px solid var(--ebk-border); background: var(--ebk-card-bg); color: var(--ebk-text-main); font-family: inherit; font-size: 12px; cursor: pointer; max-width: 65%;">
+          <option value="current" selected>✍️ বাংলা ভাষা ও ব্যাকরণ</option>
+          <option value="../Live MCQ Bangla Literature/index.html">📚 বাংলা সাহিত্য</option>
           <option value="../Live MCQ Bangladesh/index.html">🇧🇩 বাংলাদেশ বিষয়াবলি</option>
+          <option value="../Live MCQ International/index.html">🌐 আন্তর্জাতিক বিষয়াবলি</option>
           <option value="../index.html">🏛️ মাস্টার লাইব্রেরি পোর্টাল</option>
         </select>
       </div>

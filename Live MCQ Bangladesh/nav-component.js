@@ -174,7 +174,7 @@
   const STORAGE_KEY = 'bangladesh_affairs_progress_data_v1';
   function getProgressState() {
     try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || JSON.parse(localStorage.getItem('ebk_bd_progress')) || {};
     } catch (e) {
       return {};
     }
@@ -183,6 +183,7 @@
   function setProgressState(state) {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      localStorage.setItem('ebk_bd_progress', JSON.stringify(state));
     } catch (e) {}
   }
 
@@ -995,12 +996,24 @@
       <!-- Subject Switcher -->
       <div style="padding: 8px 14px; background: rgba(136, 19, 55, 0.08); border-bottom: 1px solid var(--ebk-border); font-size: 12px; display: flex; align-items: center; justify-content: space-between;">
         <span style="font-weight: 700; color: var(--ebk-primary);">বিষয় পরিবর্তন:</span>
-        <select onchange="if(this.value!=='current') window.location.href=this.value;" style="padding: 3px 6px; border-radius: 6px; border: 1px solid var(--ebk-border); background: var(--ebk-card-bg); color: var(--ebk-text-main); font-family: inherit; font-size: 12px; cursor: pointer;">
-          <option value="current" selected>🇧🇩 বাংলাদেশ বিষয়াবলি</option>
+        <select onchange="if(this.value!=='current') window.location.href=this.value;" style="padding: 3px 6px; border-radius: 6px; border: 1px solid var(--ebk-border); background: var(--ebk-card-bg); color: var(--ebk-text-main); font-family: inherit; font-size: 12px; cursor: pointer; max-width: 65%;">
+          <option value="../Live MCQ Bangla Language/index.html">✍️ বাংলা ভাষা ও ব্যাকরণ</option>
           <option value="../Live MCQ Bangla Literature/index.html">📚 বাংলা সাহিত্য</option>
+          <option value="current" selected>🇧🇩 বাংলাদেশ বিষয়াবলি</option>
+          <option value="../Live MCQ International/index.html">🌐 আন্তর্জাতিক বিষয়াবলি</option>
           <option value="../index.html">🏛️ মাস্টার লাইব্রেরি পোর্টাল</option>
         </select>
       </div>
+
+      <div class="ebk-drawer-toolbar">
+        <div class="ebk-fontsize-bar">
+          <span style="font-size:12px; font-weight:600; opacity:0.85;">ফন্ট সাইজ:</span>
+          <div style="display:flex; gap:6px;">
+            <button class="ebk-fs-btn" onclick="ebkAdjustFontSize(-0.08)" title="লেখা ছোট করুন">A-</button>
+            <button class="ebk-fs-btn" onclick="ebkResetFontSize()" title="স্বাভাবিক সাইজ">রিসেট</button>
+            <button class="ebk-fs-btn" onclick="ebkAdjustFontSize(0.08)" title="লেখা বড় করুন">A+</button>
+          </div>
+        </div>
 
         <div class="ebk-search-wrap">
           <svg class="ebk-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
