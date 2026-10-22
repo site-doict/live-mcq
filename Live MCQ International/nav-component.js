@@ -150,7 +150,7 @@
 
     let drawerHtml = `
       <div id="ebk-drawer-backdrop" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999990;backdrop-filter:blur(3px);"></div>
-      <div id="ebk-drawer" style="position:fixed;top:0;left:0;bottom:0;width:320px;max-width:85vw;background:var(--bg-card,#fff);color:var(--text-main,#111);z-index:999991;box-shadow:4px 0 24px rgba(0,0,0,0.25);transform:translateX(-100%);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);display:flex;flex-direction:column;font-family:'Noto Sans Bengali','Kalpurush',sans-serif;">
+      <div id="ebk-drawer" style="position:fixed;top:0;left:0;bottom:0;width:320px;max-width:85vw;background:var(--bg-card,#fff);color:var(--text-main,#111);z-index:999991;box-shadow:4px 0 24px rgba(0,0,0,0.25);transform:translateX(-100%);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);display:flex;flex-direction:column;font-family:'Noto Serif Bengali','Kalpurush',sans-serif;">
         
         <!-- Header -->
         <div style="padding:16px;background:linear-gradient(135deg,#0F3966,#08203E);color:#fff;display:flex;justify-content:space-between;align-items:center;">

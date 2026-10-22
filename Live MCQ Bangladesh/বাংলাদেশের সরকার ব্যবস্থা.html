@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>বাংলাদেশের সরকার ব্যবস্থা</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <!-- DESIGN PLAN (চূড়ান্ত — সব ৫০টি MCQ, পাতা ৫১৪–৫২৬)
 (১) বিষয়ের ধরন: সংবিধান/আইন + প্রশাসনিক কাঠামো + সাম্প্রতিক রাজনৈতিক ঘটনা; মোট ৫০টি MCQ। (৬) ধারাবাহিক রঙ-থিম: ইতিহাস=মেরুন, আইন=নেভি, ভূগোল=সবুজ-টিল; কোনো SVG নেই — সব ডায়াগ্রাম HTML+CSS-এ, তাই লেখা কাটে না।
 (২) কঠিন জায়গা: একই বিষয়ে কাছাকাছি সাল/তারিখ (৫ বনাম ৮ আগস্ট ২০২৪; ১৯৭৩ বনাম ১৯৭৬) এবং পদ/ক্ষমতার গোলমাল (রাষ্ট্রপতি = রাষ্ট্রপ্রধান, কিন্তু নিয়মতান্ত্রিক/আলংকারিক)।
@@ -14,11 +14,12 @@
 (৫) হিরো/মাসকট: রাষ্ট্রীয় সিলমোহরের মতো গাঢ় নেভি-টু-ক্রিমসন হিরো; মাসকট = কঠোর বিচারক পেঁচা 🦉 ও দাঁড়িপাল্লা ⚖️।
 -->
 <style>
-:root{--bg:#f6f4ef;--card:#fff;--tx:#1a1a2e;--mut:#43435f;--navy:#1b2a5e;--crim:#a81c36;--gold:#8a5d00;--ok:#0b6e38;--okbg:#e3f5ea;--bad:#a3142d;--badbg:#fde6ea;--bd:#cfc9ba;--warn:#fff1d6;--wb:#d98200;--ib:#e8eeff;--th:#1b2a5e;--zb:#f0ede4;--mk:#ffe27a;--hero1:#1b2a5e;--hero2:#7a1530;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root{
+  --font-base: 'Noto Serif Bengali', 'Kalpurush', Vrinda, sans-serif;--bg:#f6f4ef;--card:#fff;--tx:#1a1a2e;--mut:#43435f;--navy:#1b2a5e;--crim:#a81c36;--gold:#8a5d00;--ok:#0b6e38;--okbg:#e3f5ea;--bad:#a3142d;--badbg:#fde6ea;--bd:#cfc9ba;--warn:#fff1d6;--wb:#d98200;--ib:#e8eeff;--th:#1b2a5e;--zb:#f0ede4;--mk:#ffe27a;--hero1:#1b2a5e;--hero2:#7a1530;box-sizing:border-box; overflow-wrap: break-word;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1322;--card:#182040;--tx:#eef0fa;--mut:#c4c9e8;--navy:#a9baff;--crim:#ff8da1;--gold:#f2c14e;--ok:#79e8a8;--okbg:#12361f;--bad:#ffa3b3;--badbg:#45131f;--bd:#37447a;--warn:#3d3010;--wb:#e0a030;--ib:#1c2850;--th:#2e3f86;--zb:#1d2748;--mk:#6b5600}}
 :root[data-theme="dark"]{--bg:#0e1322;--card:#182040;--tx:#eef0fa;--mut:#c4c9e8;--navy:#a9baff;--crim:#ff8da1;--gold:#f2c14e;--ok:#79e8a8;--okbg:#12361f;--bad:#ffa3b3;--badbg:#45131f;--bd:#37447a;--warn:#3d3010;--wb:#e0a030;--ib:#1c2850;--th:#2e3f86;--zb:#1d2748;--mk:#6b5600}
 html{font-size: 1.0625rem;scroll-behavior:smooth;scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
-body{margin:0;background:var(--bg);color:var(--tx);font-family:'Noto Sans Bengali','Kalpurush',Vrinda,sans-serif;font-size:1rem;line-height:1.8}
+body{margin:0;background:var(--bg);color:var(--tx);font-family: var(--font-base);font-size:1rem;line-height:1.8}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:31}
 mark{background:var(--mk);color:inherit;padding:0 3px;border-radius:4px}
 #bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--card);border-bottom:2px solid var(--bd)}
@@ -151,11 +152,17 @@ th{background:var(--th);color:#fff;padding:6px 10px;text-align:left}td{padding:6
   }
 }
 
+
+/* Universal Text Box Bleed & Alignment Protection */
+.card, .quote-box, .doubt-box, .info-box, .mcq-card, .table-responsive, .data-table-container, .study-section, .flash-item {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
 </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-</head>
+  </head>
 <body>
 <div id="bar"><div id="prog"></div>
 <div class="btns"><button class="cb" id="bt">🌓 থিম</button><button class="cb" id="fm">A-</button><button class="cb" id="fp">A+</button><button class="cb" id="bs">📑 অধ্যায় ওভারভিউ</button><button class="cb" id="bp">🖨️ প্রিন্ট/PDF</button><button class="cb" id="br">🔄 সব রিসেট</button><a href="#sec-revision" class="cb" style="text-decoration:none;display:inline-flex;align-items:center;">⚡ ফ্ল্যাশকার্ড</a><a href="#quiz" class="cb" style="text-decoration:none;display:inline-flex;align-items:center;">🎯 কুইজ</a><span class="chip" style="background:var(--bg);color:var(--tx);border-color:var(--bd)" id="rd">পড়া: ০%</span></div></div>
