@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch(e) {}
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+  <title>বাংলা ভাষা ও ব্যাকরণ (১–৭৩) বিসিএস পূর্ণাঙ্গ স্মার্ট ই-বুক ও প্রশ্নব্যাংক | Live MCQ</title>
+  <meta name="description" content="বিসিএস প্রিলিমিনারি বাংলা ভাষা ও ব্যাকরণ বিষয়ের পূর্ণাঙ্গ স্মার্ট ইন্টারেক্টিভ ই-বুক। সকল অধ্যায়ের তত্ত্ব, ছক, বিগত বছরের বিসিএস এমসিকিউ ও ব্যাখ্যা।">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root, [data-theme="light"], body[data-theme="light"] {
+      --font-scale: 1;
+      --bg-primary: #F8FAFC;
+      --bg-surface: #FFFFFF;
+      --bg-card: #FFFFFF;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --primary: #0F766E;
+      --primary-light: #CCFBF1;
+      --primary-dark: #115E59;
+      --accent-gold: #D97706;
+      --accent-gold-light: #FEF3C7;
+      --success: #15803D;
+      --success-light: #DCFCE7;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 28px rgba(0,0,0,0.12);
+      --radius-sm: 0.375rem;
+      --radius-md: 0.625rem;
+      --radius-lg: 0.875rem;
+    }
+
+    [data-theme="dark"], body[data-theme="dark"] {
+      --bg-primary: #090D16;
+      --bg-surface: #111827;
+      --bg-card: #151F32;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --border-color: #1E293B;
+      --primary: #14B8A6;
+      --primary-light: rgba(20, 184, 166, 0.15);
+      --primary-dark: #2DD4BF;
+      --accent-gold: #F59E0B;
+      --accent-gold-light: rgba(245, 158, 11, 0.15);
+      --success: #22C55E;
+      --success-light: rgba(34, 197, 94, 0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.4);
+      --shadow-lg: 0 10px 28px rgba(0,0,0,0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      max-width: 100vw;
+      overflow-x: clip;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Serif Bengali', serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-size: calc(1rem * var(--font-scale));
+      line-height: 1.65;
+      padding-bottom: 5rem;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .container {
+      max-width: 64rem;
+      margin: 0 auto;
+      padding: 1rem 0.85rem;
+    }
+
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.875rem;
+      padding: 0.4rem 0.75rem;
+      border-radius: var(--radius-sm);
+      background: var(--primary-light);
+      transition: all 0.2s ease;
+    }
+
+    .back-btn:hover {
+      background: var(--primary);
+      color: #FFFFFF;
+    }
+
+    .theme-toggle-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
+    }
+
+    .hero-section {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 1.25rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent-gold));
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      padding: 0.25rem 0.85rem;
+      border-radius: 9999px;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-sub {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      max-width: 42rem;
+      margin: 0 auto 1.25rem auto;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+      max-width: 48rem;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero-title {
+        font-size: 1.4rem;
+      }
+    }
+
+    .stat-chip {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.65rem 0.5rem;
+      text-align: center;
+    }
+
+    .stat-val {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary);
+      display: block;
+    }
+
+    .stat-lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .search-box-wrap {
+      margin-bottom: 1.25rem;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      color: var(--text-main);
+      box-shadow: var(--shadow-sm);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+
+    .chapters-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .chapters-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .chapter-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.1rem;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .chapter-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .ch-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.15rem 0.6rem;
+      border-radius: 9999px;
+    }
+
+    .q-badge {
+      background: var(--accent-gold-light);
+      color: var(--accent-gold);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 9999px;
+    }
+
+    .ch-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.35rem;
+      line-height: 1.4;
+      transition: color 0.2s ease;
+    }
+
+    .chapter-card:hover .ch-title {
+      color: var(--primary);
+    }
+
+    .ch-desc {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+      flex-grow: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.5rem;
+      border-top: 1px dashed var(--border-color);
+      font-size: 0.8125rem;
+    }
+
+    .ch-pages {
+      color: var(--text-muted);
+    }
+
+    .read-link {
+      color: var(--primary);
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 2.5rem 1rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      grid-column: 1 / -1;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="top-nav">
+      <a href="../Master Portal Index.html" class="back-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        <span>মাস্টার পোর্টাল</span>
+      </a>
+      <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="ডার্ক/লাইট মোড পরিবর্তন">🌙</button>
+    </nav>
+
+    <header class="hero-section">
+      <span class="hero-badge">বিসিএস পূর্ণাঙ্গ স্মার্ট ই-বুক • বাংলা ভাষা ও ব্যাকরণ</span>
+      <h1 class="hero-title">বাংলা ভাষা ও ব্যাকরণ (১–৭৩)</h1>
+      <p class="hero-sub">বিসিএস প্রিলিমিনারি সিলেবাস ও বিগত ৫০তম থেকে ১০ম বিসিএসের আসল প্রশ্নব্যাংক, বিশ্লেষণাত্মক ছক এবং বিশদ ব্যাখ্যাসহ সম্পূর্ণ ইন্টারেক্টিভ ই-বুক পোর্টাল।</p>
+      
+      <div class="stats-grid">
+        <div class="stat-chip">
+          <span class="stat-val">২২টি</span>
+          <span class="stat-lbl">সম্পূর্ণ অধ্যায়</span>
+        </div>
+        <div class="stat-chip">
+          <span class="stat-val">৪১০+</span>
+          <span class="stat-lbl">বিসিএস আসল MCQ</span>
+        </div>
+        <div class="stat-chip">
+          <span class="stat-val">১০০%</span>
+          <span class="stat-lbl">পাঠ্যপুস্তক নির্ভর ব্যাখ্যা</span>
+        </div>
+        <div class="stat-chip">
+          <span class="stat-val">স্মার্ট</span>
+          <span class="stat-lbl">কুইজ ইঞ্জিন ট্র্যাকার</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="search-box-wrap">
+      <input type="text" id="chapterSearch" class="search-input" placeholder="🔍 অধ্যায়ের নাম বা টপিক দিয়ে খুঁজুন (যেমন: সন্ধি, সমাস, প্রত্যয়, উপসর্গ, বাক্যশুদ্ধি)..." oninput="filterChapters()">
+    </div>
+
+    <main class="chapters-grid" id="chaptersContainer">
+
+      <a href="ভাষা ও বাংলা ভাষারীতি.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 01</span>
+          <span class="q-badge">১৮টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">ভাষা ও বাংলা ভাষারীতি</h2>
+        <p class="ch-desc">ভাষার রূপভেদ, সাধু ও চলিত রীতি, উৎপত্তি ও ক্রমবিকাশ</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ১–৫</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="ধ্বনি ও বর্ণ-প্রকরণ.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 02</span>
+          <span class="q-badge">২৬টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">ধ্বনি ও বর্ণ-প্রকরণ</h2>
+        <p class="ch-desc">স্বরবর্ণ, ব্যঞ্জনবর্ণ, বর্গীয় ধ্বনি, উচ্চারণ স্থান, মাত্রা</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ৫–৯</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="ধ্বনির উচ্চারণ ও ধ্বনি পরিবর্তন.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 03</span>
+          <span class="q-badge">১৫টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">ধ্বনির উচ্চারণ ও ধ্বনি পরিবর্তন</h2>
+        <p class="ch-desc">অপিঅহিতি, বিষমীভবন, সমীকরণ, স্বরভক্তি বা বিপ্রকর্ষ</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ৯–১২</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="ণ-ত্ব ও ষ-ত্ব বিধান.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 04</span>
+          <span class="q-badge">৪টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">ণ-ত্ব ও ষ-ত্ব বিধান</h2>
+        <p class="ch-desc">ণ-ত্ব ও ষ-ত্ব বিধানের নিয়ম ও ব্যতিক্রমসমূহ</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ১২–১৩</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="সন্ধি.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 05</span>
+          <span class="q-badge">১৮টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">সন্ধি</h2>
+        <p class="ch-desc">স্বরসন্ধি, ব্যঞ্জনসন্ধি ও বিসর্গ সন্ধির সূত্র ও প্রয়োগ</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ১৩–১৬</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="শব্দের শ্রেণিবিভাগ ও শব্দের উৎস-মূল.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 06</span>
+          <span class="q-badge">৩১টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">শব্দের শ্রেণিবিভাগ ও শব্দের উৎস-মূল</h2>
+        <p class="ch-desc">তৎসম, তদ্ভব, দেশি, বিদেশি ও মিশ্র শব্দাবলী</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ১৬–২০</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="ধাতু ও প্রত্যয়.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 07</span>
+          <span class="q-badge">২৫টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">ধাতু ও প্রত্যয়</h2>
+        <p class="ch-desc">কৃৎপ্রত্যয়, তদ্ধিত প্রত্যয়, মৌলিক ও সাধিত ধাতু</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ২০–২৪</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="লিঙ্গ, দ্বিরুক্ত শব্দ, পদাশ্রিত নির্দেশক ও বচন.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 08</span>
+          <span class="q-badge">১২টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">লিঙ্গ, দ্বিরুক্ত শব্দ, পদাশ্রিত নির্দেশক ও বচন</h2>
+        <p class="ch-desc">পুংলিঙ্গ-স্ত্রীলিঙ্গ, দ্বিরুক্তি, টা-টি-খানা-খানি, বহুবচন</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ২৪–২৭</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="সমাস.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 09</span>
+          <span class="q-badge">২৭টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">সমাস</h2>
+        <p class="ch-desc">দ্বন্দ্ব, দ্বিগু, কর্মধারয়, তৎপুরুষ, বহুব্রীহি ও অব্যয়ীভাব</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ২৭–৩১</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="উপসর্গ.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 10</span>
+          <span class="q-badge">১৮টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">উপসর্গ</h2>
+        <p class="ch-desc">বাংলা, সংস্কৃত ও বিদেশি উপসর্গের অর্থদ্যোতকতা</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ৩১–৩৪</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="পদ ও পদের শ্রেণিবিভাগ.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 11</span>
+          <span class="q-badge">২৭টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">পদ ও পদের শ্রেণিবিভাগ</h2>
+        <p class="ch-desc">বিশেষ্য, বিশেষণ, সর্বনাম, ক্রিয়া ও অব্যয় পদ</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ৩৪–৩৯</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="বাক্য প্রকরণ ও বাক্যের প্রকারভেদ.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 12</span>
+          <span class="q-badge">১৯টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">বাক্য প্রকরণ ও বাক্যের প্রকারভেদ</h2>
+        <p class="ch-desc">আকাঙ্ক্ষা, আসত্তি, যোগ্যতা; সরল, জটিল ও যৌগিক বাক্য</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ৩৯–৪৩</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="বাক্য ও উক্তির পরিবর্তন, বাচ্য ও বাচ্যের পরিবর্তন.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 13</span>
+          <span class="q-badge">৬টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">বাক্য ও উক্তির পরিবর্তন, বাচ্য ও বাচ্যের পরিবর্তন</h2>
+        <p class="ch-desc">প্রত্যক্ষ ও পরোক্ষ উক্তি, কর্তৃবাচ্য, কর্মবাচ্য ও ভাববাচ্য</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ৪৩–৪৫</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="কারক ও বিভক্তি.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 14</span>
+          <span class="q-badge">৯টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">কারক ও বিভক্তি</h2>
+        <p class="ch-desc">কর্তা, কর্ম, করণ, অপাদান, সম্প্রদান, অধিকরণ কারক</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ৪৫–৪৭</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="যতিচিহ্ন ও যতিচিহ্নের ব্যবহার.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 15</span>
+          <span class="q-badge">২টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">যতিচিহ্ন ও যতিচিহ্নের ব্যবহার</h2>
+        <p class="ch-desc">কমা, সেমিকোলন, দাঁড়ি, হাইফেন ও থামার সময়</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ৪৭–৪৮</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="বাগধারা ও প্রবাদ প্রবচন.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 16</span>
+          <span class="q-badge">২৯টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">বাগধারা ও প্রবাদ প্রবচন</h2>
+        <p class="ch-desc">বহুল ব্যবহৃত বাগধারা ও প্রচলিত প্রবাদ-প্রবচন</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ৪৮–৫৩</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="সমার্থক শব্দ ও প্রতিশব্দ.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 17</span>
+          <span class="q-badge">৩৪টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">সমার্থক শব্দ ও প্রতিশব্দ</h2>
+        <p class="ch-desc">গুরুত্বপূর্ণ বাংলা প্রতিশব্দ ও ভাবগত সমার্থক পদ</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ৫৩–৫৭</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="বিপরীতার্থক শব্দ ও প্রায় সমোচ্চারিত ভিন্নার্থক শব্দ.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 18</span>
+          <span class="q-badge">১৮টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">বিপরীতার্থক শব্দ ও প্রায় সমোচ্চারিত ভিন্নার্থক শব্দ</h2>
+        <p class="ch-desc">শব্দযুগল, বিপরীত অর্থ ও সমোচ্চারিত শব্দের প্রয়োগ</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ৫৭–৫৯</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="এক কথায় প্রকাশ ও বাক্য সংক্ষেপ.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 19</span>
+          <span class="q-badge">১৮টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">এক কথায় প্রকাশ ও বাক্য সংক্ষেপ</h2>
+        <p class="ch-desc">ইচ্ছা, প্রাণীধ্বনি, অতীত ও অস্তিত্ববাচক বাক্য সংকোচন</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ৫৯–৬১</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="পরিভাষা ও পারিভাষিক শব্দ.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 20</span>
+          <span class="q-badge">১৬টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">পরিভাষা ও পারিভাষিক শব্দ</h2>
+        <p class="ch-desc">প্রশাসনিক, দাপ্তরিক ও বিজ্ঞানবিষয়ক পরিভাষা</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ৬১–৬৩</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="বানান ও বাক্যশুদ্ধি, প্রয়োগ ও অপপ্রয়োগ.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 21</span>
+          <span class="q-badge">৫২টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">বানান ও বাক্যশুদ্ধি, প্রয়োগ ও অপপ্রয়োগ</h2>
+        <p class="ch-desc">প্রমিত বানানরীতি, বাহুল্যদোষ ও শুদ্ধ-অশুদ্ধ রূপ</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ৬৪–৭০</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <a href="ছন্দ ও অলংকার.html" class="chapter-card">
+        <div class="card-top">
+          <span class="ch-badge">অধ্যায় 22</span>
+          <span class="q-badge">৭টি প্রশ্ন</span>
+        </div>
+        <h2 class="ch-title">ছন্দ ও অলংকার</h2>
+        <p class="ch-desc">স্বরবৃত্ত, মাত্রাবৃত্ত, অক্ষরবৃত্ত ও অপহ্নুতি অলংকার</p>
+        <div class="card-footer">
+          <span class="ch-pages">📄 পৃষ্ঠা ৭০–৭২</span>
+          <span class="read-link">অনুশীলন করুন →</span>
+        </div>
+      </a>
+
+      <div class="no-results" id="noResults">
+        <p>দুঃখিত, আপনার অনুসন্ধানের সাথে মিলে এমন কোনো অধ্যায় পাওয়া যায়নি।</p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      var currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      var newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      var btn = document.getElementById('themeToggleBtn');
+      if (btn) btn.innerText = newTheme === 'light' ? '🌙' : '☀️';
+      try {
+        localStorage.setItem('theme', newTheme);
+        localStorage.setItem('ebk_portal_theme', newTheme);
+      } catch(e) {}
+    }
+
+    function filterChapters() {
+      var query = document.getElementById('chapterSearch').value.toLowerCase().trim();
+      var cards = document.querySelectorAll('.chapter-card');
+      var matchedCount = 0;
+
+      cards.forEach(function(card) {
+        var text = card.textContent.toLowerCase();
+        if (text.indexOf(query) !== -1) {
+          card.style.display = 'flex';
+          matchedCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      var noRes = document.getElementById('noResults');
+      if (noRes) {
+        noRes.style.display = matchedCount === 0 ? 'block' : 'none';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var savedTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      var btn = document.getElementById('themeToggleBtn');
+      if (btn) btn.innerText = savedTheme === 'light' ? '🌙' : '☀️';
+    });
+  </script>
+</body>
+</html>
