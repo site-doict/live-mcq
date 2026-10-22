@@ -8,2943 +8,1802 @@
       document.documentElement.setAttribute('data-theme', savedTheme);
     } catch(e) {}
   })();
-</script>
-<!-- DESIGN PLAN:
-(১) কন্টেন্ট বিশ্লেষণ ও বিন্যাস:
-    - উৎস: Live MCQ আন্তর্জাতিক বিষয়াবলি - খণ্ড ১: ইতিহাসের গুরুত্বপূর্ণ ব্যক্তি, ধর্মের অভিযাত্রা ও অন্যান্য [বইয়ের পৃষ্ঠা ৬০৫–৬১০ / ৪২-৪৭.pdf]।
-    - মোট বিসিএস এমসিকিউ: ৩১টি (৪৯তম থেকে ১০ম বিসিএস পর্যন্ত)।
-    - তাত্ত্বিক বিশ্লেষণ: প্রাচীন সিভিল সার্ভিস (চীন), বিশ্বের প্রধান প্রধান ধর্ম ও পবিত্র স্থান (জেরুজালেম, ভ্যাটিকান), বিশ্বনেতৃবৃন্দ (আব্রাহাম লিংকন ও দাসপ্রথা বিলোপ, নেলসন ম্যান্ডেলা ও এএনসি, হিটলার ও নাৎসিবাদ), কালজয়ী অর্থনীতিবিদ (উইলিয়াম রোস্টো ও কার্ল মার্ক্স), অমর শিল্প ও সাহিত্য (মোনালিসা, দ্য লাস্ট সাপার, শাহনামা, মসনবী) এবং আন্তর্জাতিক সাক্ষরতা ও তামাকমুক্ত দিবস।
-(২) ভিজ্যুয়াল ও পেডাগজিক্যাল কম্পোনেন্ট:
-    - বিসিএস প্রশ্নবণ্টন ট্রেন্ড গ্রিড।
-    - টেবিল ১: বিশ্বের প্রধান প্রধান ধর্ম, প্রবক্তা ও পবিত্র তীর্থস্থানের তুলনামূলক ছক।
-    - টেবিল ২: ইতিহাসের যুগান্তকারী রাষ্ট্রনায়ক, চিন্তাবিদ ও তাদের কালজয়ী অবদান।
-    - শেপ ও কার্ড গ্রিড: বিশ্ববিখ্যাত শিল্পকর্ম, স্থাপত্য ও সাহিত্য।
-    - আন্তর্জাতিক গুরুত্বপূর্ণ দিবস ইনফোগ্রাফিক বক্স।
-    - ইন্টারেক্টিভ কুইজ ইঞ্জিন: ৩১টি প্রশ্ন, তাৎক্ষণিক উত্তর যাচাই ও অ্যানসার ড্রয়ার, লাইভ স্কোর এবং ৩টি ক্যাটাগরি ফিল্টার।
-(৩) কালার প্যালেট (Heritage & Civilization Theme):
-    - Primary: #B45309 (Heritage Bronze / Amber)
-    - Secondary: #0F3966 (Diplomatic Navy)
-    - Accent: #0284C7 (Ocean Blue)
-    - Background: #F8FAFC (Clean Paper Off-White)
-    - Card: #FFFFFF, Border: #E2E8F0
-(৪) ফন্ট ও টাইপোগ্রাফি:
-    - 'Kalpurush', rem ইউনিট স্কেলিং, পূর্ণ ডার্ক মোড সাপোর্ট।
--->
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ইতিহাসের গুরুত্বপূর্ণ ব্যক্তি ও ধর্মের অভিযাত্রা - বিসিএস আন্তর্জাতিক বিষয়াবলি</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root {
-  --font-base: 'Noto Serif Bengali', 'Kalpurush', Vrinda, sans-serif;
-  --primary-color: #B45309;
-  --primary-light: #D97706;
-  --secondary-color: #0F3966;
-  --accent-blue: #0284C7;
-  --accent-soft: #FEF3C7;
-  --bg-main: #F8FAFC;
-  --bg-card: #FFFFFF;
-  --text-main: #0F172A;
-  --text-muted: #475569;
-  --border-color: #E2E8F0;
-  --correct-bg: #DCFCE7;
-  --correct-color: #166534;
-  --wrong-bg: #FEE2E2;
-  --wrong-color: #991B1B;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.04);
-  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.03);
-  --base-font-size: 1rem;
-  --radius: 12px;
-}
-
-[data-theme="dark"], body[data-theme="dark"] {
-  --primary-color: #FBBF24;
-  --primary-light: #FCD34D;
-  --secondary-color: #60A5FA;
-  --accent-blue: #38BDF8;
-  --accent-soft: #2D2214;
-  --bg-main: #0B0F19;
-  --bg-card: #151D2E;
-  --text-main: #F1F5F9;
-  --text-muted: #94A3B8;
-  --border-color: #243048;
-  --correct-bg: #143522;
-  --correct-color: #86EFAC;
-  --wrong-bg: #451A1A;
-  --wrong-color: #FCA5A5;
-}
-
-* {
-  box-sizing: border-box; overflow-wrap: break-word;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: var(--font-base);
-  font-size: var(--base-font-size);
-  background-color: var(--bg-main);
-  color: var(--text-main);
-  line-height: 1.7;
-  overflow-x: clip;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-#reading-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--accent-blue));
-  width: 0%;
-  z-index: 9999;
-  transition: width 0.1s;
-}
-
-.container {
-  max-width: 920px;
-  margin: 0 auto;
-  padding: 1.5rem 1rem 5rem 1rem;
-}
-
-.hero {
-  background: linear-gradient(135deg, #B45309 0%, #78350F 100%);
-  color: #FFFFFF;
-  padding: 2.25rem 1.75rem;
-  border-radius: var(--radius);
-  margin-bottom: 2rem;
-  box-shadow: var(--shadow-lg);
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::after {
-  content: "🏛️";
-  position: absolute;
-  right: -10px;
-  bottom: -20px;
-  font-size: 8rem;
-  opacity: 0.08;
-  pointer-events: none;
-}
-
-.hero-tag {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  padding: 0.25rem 0.85rem;
-  border-radius: 999px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #FEF3C7;
-  margin-bottom: 0.75rem;
-}
-
-.hero h1 {
-  font-size: 1.85rem;
-  font-weight: 700;
-  line-height: 1.35;
-  margin-bottom: 0.5rem;
-}
-
-.hero p {
-  font-size: 0.975rem;
-  color: #FDE68A;
-  line-height: 1.6;
-}
-
-.control-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--bg-card);
-  padding: 0.85rem 1.25rem;
-  border-radius: var(--radius);
-  margin-bottom: 1.75rem;
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
-}
-
-.control-group {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.btn-ctrl {
-  background: var(--bg-main);
-  border: 1px solid var(--border-color);
-  color: var(--text-main);
-  padding: 0.4rem 0.75rem;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  font-family: inherit;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  transition: all 0.2s;
-}
-
-.btn-ctrl:hover {
-  background: var(--border-color);
-}
-
-.bcs-card {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  border: 1px solid var(--border-color);
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  box-shadow: var(--shadow-sm);
-}
-
-.bcs-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.bcs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 0.65rem;
-  margin-bottom: 1rem;
-}
-
-.bcs-item {
-  background: var(--bg-main);
-  border: 1px solid var(--border-color);
-  padding: 0.6rem 0.75rem;
-  border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9rem;
-}
-
-.bcs-item .exam {
-  font-weight: 600;
-  color: var(--text-main);
-}
-
-.bcs-item .count {
-  background: var(--primary-color);
-  color: #FFFFFF;
-  padding: 0.15rem 0.55rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 700;
-}
-
-.section-heading {
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  margin: 2rem 0 1rem 0;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--border-color);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.visual-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: var(--shadow-sm);
-}
-
-.visual-card h3 {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  margin-bottom: 0.75rem;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.table-responsive {
-  width: 100%;
-  overflow-x: auto;
-  border-radius: 8px;
-  margin: 1rem 0;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-  font-size: 0.925rem;
-}
-
-th, td {
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--border-color);
-}
-
-th {
-  background: rgba(180, 83, 9, 0.08);
-  font-weight: 700;
-  color: var(--primary-color);
-}
-
-[data-theme="dark"] th {
-  background: rgba(251, 191, 36, 0.12);
-  color: var(--primary-color);
-}
-
-tr:nth-child(even) {
-  background-color: rgba(0, 0, 0, 0.015);
-}
-
-.concept-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1rem;
-  margin: 1rem 0;
-}
-
-.concept-box {
-  background: var(--bg-main);
-  border-left: 4px solid var(--primary-color);
-  border-radius: 0 8px 8px 0;
-  padding: 1rem 1.15rem;
-}
-
-.concept-box.blue {
-  border-left-color: var(--accent-blue);
-}
-
-.concept-box.navy {
-  border-left-color: var(--secondary-color);
-}
-
-.concept-box h4 {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text-main);
-  margin-bottom: 0.4rem;
-}
-
-.concept-box p {
-  font-size: 0.885rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-
-.mnemonic-box {
-  background: var(--accent-soft);
-  border: 1px solid #FCD34D;
-  border-radius: 8px;
-  padding: 1rem 1.25rem;
-  margin: 1.25rem 0;
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-}
-
-[data-theme="dark"] .mnemonic-box {
-  border-color: #78350F;
-}
-
-.mnemonic-icon {
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
-.mnemonic-text {
-  font-size: 0.925rem;
-  color: #92400E;
-}
-
-[data-theme="dark"] .mnemonic-text {
-  color: #FDE68A;
-}
-
-.quiz-header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
-}
-
-.quiz-score-badge {
-  background: var(--primary-color);
-  color: #FFFFFF;
-  padding: 0.45rem 1rem;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-
-.filter-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-bottom: 1.5rem;
-}
-
-.filter-pill {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  color: var(--text-muted);
-  padding: 0.35rem 0.85rem;
-  border-radius: 999px;
-  font-size: 0.825rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.filter-pill.active, .filter-pill:hover {
-  background: var(--primary-color);
-  color: #FFFFFF;
-  border-color: var(--primary-color);
-}
-
-.mcq-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  padding: 1.25rem;
-  margin-bottom: 1.25rem;
-  box-shadow: var(--shadow-sm);
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.mcq-card:hover {
-  border-color: var(--primary-color);
-}
-
-.mcq-card.answered-correct {
-  border-color: #22C55E;
-}
-
-.mcq-card.answered-wrong {
-  border-color: #EF4444;
-}
-
-.mcq-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.75rem;
-}
-
-.mcq-num {
-  font-weight: 700;
-  color: var(--primary-color);
-  font-size: 1.05rem;
-}
-
-.mcq-bcs {
-  font-size: 0.8rem;
-  background: rgba(180, 83, 9, 0.1);
-  color: var(--primary-color);
-  padding: 0.15rem 0.55rem;
-  border-radius: 4px;
-  font-weight: 600;
-}
-
-.mcq-question {
-  font-size: 1.025rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: var(--text-main);
-  line-height: 1.6;
-}
-
-.options-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.option-btn {
-  background: var(--bg-main);
-  border: 1px solid var(--border-color);
-  color: var(--text-main);
-  padding: 0.65rem 0.9rem;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-family: inherit;
-  text-align: left;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  transition: all 0.2s;
-}
-
-.option-btn:hover:not(:disabled) {
-  background: rgba(180, 83, 9, 0.08);
-  border-color: var(--primary-color);
-}
-
-.option-letter {
-  display: inline-flex;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--border-color);
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.825rem;
-  flex-shrink: 0;
-}
-
-.option-btn.correct {
-  background: var(--correct-bg) !important;
-  color: var(--correct-color) !important;
-  border-color: #86EFAC !important;
-  font-weight: 700;
-}
-
-.option-btn.correct .option-letter {
-  background: #22C55E;
-  color: #FFFFFF;
-}
-
-.option-btn.wrong {
-  background: var(--wrong-bg) !important;
-  color: var(--wrong-color) !important;
-  border-color: #FCA5A5 !important;
-}
-
-.option-btn.wrong .option-letter {
-  background: #EF4444;
-  color: #FFFFFF;
-}
-
-.explanation-btn {
-  background: none;
-  border: none;
-  color: var(--primary-color);
-  font-size: 0.875rem;
-  font-weight: 600;
-  font-family: inherit;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.35rem 0;
-}
-
-.explanation-box {
-  margin-top: 0.75rem;
-  padding: 1rem 1.15rem;
-  background: rgba(180, 83, 9, 0.04);
-  border-left: 3px solid var(--primary-color);
-  border-radius: 0 6px 6px 0;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  line-height: 1.65;
-  display: none;
-}
-
-[data-theme="dark"] .explanation-box {
-  background: rgba(251, 191, 36, 0.08);
-}
-
-.explanation-box.open {
-  display: block;
-}
-
-.chapter-nav {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border-color);
-}
-
-.nav-link-btn {
-  text-decoration: none;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  color: var(--text-main);
-  padding: 0.75rem 1.25rem;
-  border-radius: var(--radius);
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: all 0.2s;
-}
-
-.nav-link-btn:hover {
-  background: var(--primary-color);
-  color: #FFFFFF;
-  border-color: var(--primary-color);
-}
-
-@media (max-width: 640px) {
-  .hero {
-    padding: 1.5rem 1.25rem;
-  }
-  .hero h1 {
-    font-size: 1.5rem;
-  }
-  .options-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Universal Text Box Bleed & Alignment Protection */
-.card, .quote-box, .doubt-box, .info-box, .mcq-card, .study-section, .flash-item, .bcs-card, .visual-card, .concept-box, .mnemonic-box, .fact-check-box {
-  max-width: 100%;
-  overflow-wrap: break-word;
-  word-break: normal;
-}
-
-  /* ══════ Universal Mobile Screen Layout Optimization (Samsung A23 / 360px-480px) ══════ */
-  @media (max-width: 600px) {
-    /* 1. Header & Controls: prevent button overflow, slim height */
-    header.sticky-header, .top-control-bar, .control-bar, .site-header {
-      position: sticky !important;
-      top: 0 !important;
-      padding: 6px 8px !important;
-      gap: 6px !important;
-    }
-    .brand-group {
-      gap: 4px !important;
-      min-width: 0 !important;
-    }
-    .book-badge {
-      font-size: 0.7rem !important;
-      padding: 0.15rem 0.45rem !important;
-    }
-    .chapter-heading-bar, .brand-badge, .brand-title {
-      font-size: 0.8rem !important;
-      max-width: 130px !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-      white-space: nowrap !important;
-    }
-    .controls-group, .controls, .control-group {
-      gap: 4px !important;
-      display: flex !important;
-      align-items: center !important;
-    }
-    .control-btn, .ctrl-btn, .btn-ctrl {
-      padding: 4px 7px !important;
-      font-size: 0.78rem !important;
-      border-radius: 6px !important;
-    }
-    .print-btn, button[onclick*="print"], .ctrl-btn[onclick*="print"] {
-      display: none !important;
-    }
-
-    /* 2. Container & Lateral Space: eliminate ~120px wasted empty margins */
-    .main-container, .container {
-      padding-left: 8px !important;
-      padding-right: 8px !important;
-      padding-top: 6px !important;
-      padding-bottom: 24px !important;
-      margin-top: 0.75rem !important;
-      margin-bottom: 1.5rem !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      box-sizing: border-box !important;
-    }
-    .infographic-wrapper, .study-section, .section {
-      margin-bottom: 1.25rem !important;
-      gap: 0.75rem !important;
-    }
-    .section-title {
-      font-size: 1.15rem !important;
-      margin-bottom: 0.75rem !important;
-      padding-left: 0.5rem !important;
-    }
-    .card, .mcq-card, .quiz-stats-card, .study-card, .author-card, .fact-item, .info-box {
-      padding: 12px 10px !important;
-      margin-bottom: 10px !important;
-      border-radius: 10px !important;
-      max-width: 100% !important;
-      box-sizing: border-box !important;
-      overflow-wrap: break-word !important;
-      word-break: normal!important;
-    }
-
-    /* 3. Hero Banner: slim down vertical space */
-    .hero-banner, .hero {
-      padding: 14px 10px !important;
-      margin-bottom: 1.25rem !important;
-      border-radius: 12px !important;
-    }
-    .hero-title {
-      font-size: 1.3rem !important;
-      line-height: 1.3 !important;
-      margin-bottom: 0.5rem !important;
-    }
-    .hero-desc {
-      font-size: 0.85rem !important;
-      line-height: 1.45 !important;
-      margin-bottom: 0.75rem !important;
-    }
-    .hero-stats, .stats-indicators {
-      gap: 6px !important;
-    }
-    .stat-pill, .indicator-item {
-      padding: 4px 8px !important;
-      font-size: 0.76rem !important;
-    }
-
-    /* 4. Tables & Responsiveness */
-    table.data-table th, table.data-table td,
-    table th, table td {
-      padding: 7px 6px !important;
-      font-size: 0.82rem !important;
-      line-height: 1.35 !important;
-    }
-    .data-table-container, .table-responsive, .table-container {
-      -webkit-overflow-scrolling: touch !important;
-      overflow-x: auto !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      display: block !important;
-      border-radius: 8px !important;
-    }
-
-    /* 5. MCQs & Quizzes */
-    .q-header {
-      gap: 0.5rem !important;
-      margin-bottom: 0.65rem !important;
-    }
-    .q-num-title {
-      font-size: 0.95rem !important;
-      gap: 0.5rem !important;
-      line-height: 1.4 !important;
-    }
-    .q-number {
-      width: 24px !important;
-      height: 24px !important;
-      font-size: 0.78rem !important;
-    }
-    .options-grid, .quiz-options {
-      grid-template-columns: 1fr !important;
-      gap: 6px !important;
-    }
-    .opt-btn, .option-btn {
-      padding: 8px 10px !important;
-      font-size: 0.86rem !important;
-      border-radius: 8px !important;
-    }
-    .explanation-drawer, .quiz-explanation {
-      padding: 10px 12px !important;
-      font-size: 0.85rem !important;
-    }
-  }
-
-
-/* BCS Question Analysis Card & Table */
-.bcs-table-card {
-  background: var(--bg-card);
-  border: 1px solid var(--card-border, var(--border-color, rgba(148, 163, 184, 0.2)));
-  border-radius: var(--radius, 16px);
-  padding: 1.25rem;
-  margin-bottom: 1.75rem;
-  box-shadow: var(--shadow-soft, var(--shadow-sm, 0 4px 12px rgba(0,0,0,0.05)));
-  backdrop-filter: blur(8px);
-}
-
-.bcs-table-card .bcs-card-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin-bottom: 0.85rem;
-  color: var(--accent-cyan, var(--primary-color, #0284c7));
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border-left: 4px solid var(--accent-cyan, var(--primary-color, #0284c7));
-  padding-left: 0.6rem;
-}
-
-.bcs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.bcs-pill {
-  background: var(--bg-surface, var(--bg-main, rgba(255, 255, 255, 0.03)));
-  border: 1px solid var(--card-border, var(--border-color, rgba(148, 163, 184, 0.15)));
-  padding: 0.45rem 0.55rem;
-  border-radius: 8px;
-  text-align: center;
-  font-size: 0.85rem;
-}
-
-.bcs-pill .num {
-  font-weight: 700;
-  color: var(--accent-cyan, var(--primary-color, #38bdf8));
-  font-size: 0.82rem;
-}
-
-.bcs-pill .cnt {
-  font-size: 0.8rem;
-  color: var(--text-muted, #94a3b8);
-}
-
-.bcs-pill.has-q {
-  background: rgba(56, 189, 248, 0.12);
-  border-color: rgba(56, 189, 248, 0.35);
-}
-
-.bcs-pill.has-q .cnt {
-  color: var(--accent-gold, #fbbf24);
-  font-weight: 700;
-}
-
-[data-theme="dark"] .bcs-pill.has-q {
-  background: rgba(56, 189, 248, 0.15);
-  border-color: #38bdf8;
-}
-
-.bcs-table-container {
-  overflow-x: auto;
-  border-radius: 10px;
-  border: 1px solid var(--card-border, var(--border-color, rgba(148, 163, 184, 0.18)));
-  margin-top: 0.75rem;
-  -webkit-overflow-scrolling: touch;
-}
-
-.bcs-table-container table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center;
-  font-size: 0.85rem;
-}
-
-.bcs-table-container th, .bcs-table-container td {
-  padding: 0.55rem 0.75rem;
-  border: 1px solid var(--card-border, var(--border-color, rgba(148, 163, 184, 0.15)));
-}
-
-.bcs-table-container th {
-  background: rgba(56, 189, 248, 0.1);
-  color: var(--accent-cyan, var(--primary-color, #38bdf8));
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.bcs-table-container td strong {
-  color: var(--accent-cyan, var(--primary-color, #38bdf8));
-}
-
-.bcs-table-container td.has-q-td {
-  font-weight: 700;
-  color: var(--accent-gold, #fbbf24);
-}
-
-
-/* ══════ Responsive Smart Table Protection (No Word Breaking & Smooth Horizontal Touch Scroll) ══════ */
-.table-responsive, .data-table-container, .table-container, .bcs-table-container {
-  width: 100% !important;
-  max-width: 100% !important;
-  overflow-x: auto !important;
-  -webkit-overflow-scrolling: touch !important;
-  display: block !important;
-  margin: 1rem 0 !important;
-  border-radius: 8px !important;
-  box-sizing: border-box !important;
-}
-
-table, .pro-table, .data-table, .custom-table, .bcs-table {
-  width: 100% !important;
-  min-width: 540px !important;
-  border-collapse: collapse !important;
-  table-layout: auto !important;
-  box-sizing: border-box !important;
-}
-
-table th, table td,
-.pro-table th, .pro-table td,
-.data-table th, .data-table td,
-.custom-table th, .custom-table td,
-.bcs-table th, .bcs-table td {
-  word-break: normal !important;
-  overflow-wrap: normal !important;
-  white-space: normal !important;
-  hyphens: none !important;
-  text-align: left !important;
-  vertical-align: top !important;
-  line-height: 1.5 !important;
-}
-
-table th, .pro-table th, .data-table th, .custom-table th, .bcs-table th {
-  white-space: nowrap !important;
-  font-weight: 700 !important;
-}
-
-@media (max-width: 600px) {
-  table th, table td,
-  .pro-table th, .pro-table td,
-  .data-table th, .data-table td,
-  .custom-table th, .custom-table td,
-  .bcs-table th, .bcs-table td {
-    padding: 7px 8px !important;
-    font-size: 0.85rem !important;
-  }
-  table, .pro-table, .data-table, .custom-table, .bcs-table {
-    min-width: 500px !important;
-  }
-}
-
-
-    /* Live MCQ Design System - Matching Bangla Language */
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ইতিহাসের গুরুত্বপূর্ণ ব্যক্তি, ধর্মের ইতিহাস ও অন্যান্য - লাইভ এমসিকিউ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
     :root {
+      --bg-primary: #f8fafc;
+      --bg-surface: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: #e2e8f0;
+      --card-border: #e2e8f0;
+      --accent-cyan: #0284c7;
+      --accent-gold: #d97706;
+      --correct-bg: #dcfce7;
+      --correct-border: #86efac;
+      --correct-text: #166534;
+      --wrong-bg: #fee2e2;
+      --wrong-border: #fca5a5;
+      --wrong-text: #991b1b;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
       --font-base: 'Noto Serif Bengali', serif;
     }
-    body {
-      font-family: 'Noto Serif Bengali', serif !important;
-    }
-    .bcs-tag, .exam-badge {
-      font-size: 0.75rem !important;
-      font-weight: 600 !important;
-      background: rgba(56, 189, 248, 0.15) !important;
-      color: #0284c7 !important;
-      padding: 0.2rem 0.6rem !important;
-      border-radius: 6px !important;
-      white-space: nowrap !important;
-      height: fit-content !important;
-      flex-shrink: 0 !important;
-      border: 1px solid rgba(56, 189, 248, 0.3) !important;
-    }
-    [data-theme="dark"] .bcs-tag, [data-theme="dark"] .exam-badge {
-      background: rgba(56, 189, 248, 0.15) !important;
-      color: #38bdf8 !important;
-    }
-    .q-header {
-      display: flex !important;
-      justify-content: space-between !important;
-      align-items: flex-start !important;
-      gap: 0.75rem !important;
-      margin-bottom: 0.75rem !important;
-    }
-    .q-num-title {
-      display: flex !important;
-      align-items: flex-start !important;
-      gap: 0.6rem !important;
-      flex: 1 1 auto !important;
-      min-width: 0 !important;
-      overflow-wrap: break-word !important;
-      word-break: normal !important;
-      line-height: 1.55 !important;
-    }
-    .options-grid {
-      display: grid !important;
-      grid-template-columns: 1fr !important;
-      gap: 8px !important;
-      margin-bottom: 0.75rem !important;
-    }
-    @media (min-width: 640px) {
-      .options-grid {
-        grid-template-columns: 1fr 1fr !important;
-      }
-    }
-    .opt-btn {
-      white-space: normal !important;
-      overflow-wrap: break-word !important;
-      word-break: normal !important;
-      text-align: left !important;
-      display: flex !important;
-      align-items: center !important;
-      gap: 0.6rem !important;
-      width: 100% !important;
-      min-height: 44px !important;
-      line-height: 1.4 !important;
-    }
-    .card, .mcq-card {
-      overflow-wrap: break-word !important;
-      word-break: normal !important;
+
+    [data-theme="dark"] {
+      --bg-primary: #0b0f19;
+      --bg-surface: #151d2e;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: #243048;
+      --card-border: #243048;
+      --accent-cyan: #38bdf8;
+      --accent-gold: #fbbf24;
+      --correct-bg: #143522;
+      --correct-border: #22c55e;
+      --correct-text: #86efac;
+      --wrong-bg: #451a1a;
+      --wrong-border: #ef4444;
+      --wrong-text: #fca5a5;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
     }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-base);
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.7;
+      padding: 1rem 0.75rem 4rem;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* Top Navigation Bar */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .nav-link:hover {
+      text-decoration: underline;
+    }
+
+    .theme-toggle-btn {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Chapter Header */
+    .chapter-header {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .unit-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      background: rgba(217, 119, 6, 0.1);
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+    }
+
+    .chapter-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .chapter-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .chapter-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 0.75rem;
+    }
+
+    /* BCS Analysis Table */
+    .bcs-table-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .bcs-table-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.75rem;
+      color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .table-responsive {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    .table-responsive th, .table-responsive td {
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 0.6rem;
+      text-align: center;
+    }
+
+    .table-responsive th {
+      background: rgba(2, 132, 199, 0.08);
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    [data-theme="dark"] .table-responsive th {
+      background: rgba(56, 189, 248, 0.12);
+    }
+
+    .table-responsive td.has-q {
+      font-weight: 700;
+      color: var(--accent-cyan);
+    }
+
+    /* Score Bar */
+    .score-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      margin-bottom: 1.25rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .score-badge {
+      color: var(--accent-cyan);
+    }
+
+    .reset-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.8rem;
+    }
+
+    .reset-btn:hover {
+      background: var(--bg-primary);
+      color: var(--text-main);
+    }
+
+    /* Question Cards */
+    .q-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .q-card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .q-num {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+    }
+
+    .exam-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Option Grid */
+    .opt-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .opt-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      padding: 0.65rem 0.85rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      line-height: 1.5;
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--accent-cyan);
+      background: rgba(2, 132, 199, 0.05);
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.05);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    [data-theme="dark"] .opt-letter {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .opt-text {
+      flex: 1;
+    }
+
+    /* Answer States */
+    .opt-btn.correct {
+      background: var(--correct-bg) !important;
+      border-color: var(--correct-border) !important;
+      color: var(--correct-text) !important;
+      font-weight: 600;
+    }
+
+    .opt-btn.correct .opt-letter {
+      background: var(--correct-border);
+      color: var(--correct-text);
+    }
+
+    .opt-btn.wrong {
+      background: var(--wrong-bg) !important;
+      border-color: var(--wrong-border) !important;
+      color: var(--wrong-text) !important;
+    }
+
+    .opt-btn.wrong .opt-letter {
+      background: var(--wrong-border);
+      color: var(--wrong-text);
+    }
+
+    .opt-btn:disabled {
+      cursor: default;
+    }
+
+    /* Explanation Accordion */
+    .exp-toggle-wrap {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .exp-toggle-btn {
+      background: none;
+      border: none;
+      color: var(--accent-cyan);
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+    }
+
+    .exp-toggle-btn:hover {
+      background: rgba(2, 132, 199, 0.08);
+    }
+
+    .explanation-drawer {
+      display: none;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px dashed var(--border-color);
+      animation: fadeIn 0.2s ease;
+    }
+
+    .explanation-drawer.open {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .exp-content {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .exp-content p {
+      margin-bottom: 0.6rem;
+    }
+
+    .exp-content strong {
+      color: var(--text-main);
+    }
+
+    .exp-source {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 0.4rem;
+      border-top: 1px solid var(--border-color);
+      padding-top: 0.3rem;
+    }
+
+    /* Chapter Footer */
+    .chapter-footer {
+      margin-top: 3rem;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+      padding-top: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .footer-nav a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-nav a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
+  <div class="container">
+    <!-- Top Nav -->
+    <nav class="top-nav">
+      <a href="index.html" class="nav-link">← আন্তর্জাতিক বিষয়াবলি সূচিপত্র</a>
+      <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+        🌓 থিম
+      </button>
+    </nav>
 
-<div id="reading-progress"></div>
-
-<div class="container">
-  <!-- Hero Section -->
-  <header class="hero">
-    <span class="hero-tag">বিসিএস আন্তর্জাতিক বিষয়াবলি • অধ্যায় ৫</span>
-    <h1>ইতিহাসের গুরুত্বপূর্ণ ব্যক্তি, ধর্মের অভিযাত্রা ও অন্যান্য</h1>
-    <p>বইয়ের পৃষ্ঠা: ৬০৫–৬১০ | ঐতিহাসিক রাষ্ট্রনায়ক ও দার্শনিক, প্রধান প্রধান ধর্ম ও সংস্কৃতি, শিল্প ও দিবস | মোট প্রশ্ন: ৩১টি</p>
-  </header>
-
-    <!-- BCS Analysis Breakdown -->
-    <section class="bcs-table-card">
-      <div class="bcs-card-title">📊 বিগত বিসিএস পরীক্ষার প্রশ্ন বিশ্লেষণ ছক (বইয়ের মূল ছক অনুযায়ী)</div>
-      <div class="bcs-grid">
-        <div class="bcs-pill"><div class="num">৫০তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill"><div class="num">৪৯তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill"><div class="num">৪৮তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill"><div class="num">৪৭তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill has-q"><div class="num">৪৬তম</div><div class="cnt">১টি প্রশ্ন</div></div>
-        <div class="bcs-pill"><div class="num">৪৫তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill has-q"><div class="num">৪৪তম</div><div class="cnt">১টি প্রশ্ন</div></div>
-        <div class="bcs-pill has-q"><div class="num">৪৩তম</div><div class="cnt">২টি প্রশ্ন 🔥</div></div>
-        <div class="bcs-pill has-q"><div class="num">৪২তম</div><div class="cnt">১টি প্রশ্ন</div></div>
-        <div class="bcs-pill"><div class="num">৪১তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill"><div class="num">৪০তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill"><div class="num">৩৯তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill has-q"><div class="num">৩৮তম</div><div class="cnt">২টি প্রশ্ন 🔥</div></div>
-        <div class="bcs-pill"><div class="num">৩৭তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill has-q"><div class="num">৩৬তম</div><div class="cnt">২টি প্রশ্ন 🔥</div></div>
-        <div class="bcs-pill has-q"><div class="num">৩৫তম</div><div class="cnt">১টি প্রশ্ন</div></div>
-        <div class="bcs-pill has-q"><div class="num">১০ম-৩৪তম</div><div class="cnt">২০টি প্রশ্ন 🔥</div></div>
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+      <span class="unit-tag">অধ্যায় ৫ • আন্তর্জাতিক বিষয়াবলি</span>
+      <h1 class="chapter-title">ইতিহাসের গুরুত্বপূর্ণ ব্যক্তি, ধর্মের ইতিহাস ও অন্যান্য</h1>
+      <p class="chapter-subtitle">বিখ্যাত মনীষী, দার্শনিক, ঐতিহাসিক গ্রন্থ, আন্তর্জাতিক দিবস ও ধর্মীয় দর্শন</p>
+      <div class="chapter-meta">
+        <span>📖 বইয়ের পৃষ্ঠা: ৬০৫–৬১০</span>
+        <span>📝 মোট প্রশ্ন: ৩১টি</span>
+        <span>🎯 পূর্ণাঙ্গ ব্যাখ্যা ও বিশ্লেষণসহ</span>
       </div>
-      <div class="bcs-table-container">
-        <table class="data-table">
+    </header>
+
+    <!-- BCS Analysis Matrix -->
+    <section class="bcs-table-card">
+      <h3>📊 বিসিএস প্রশ্ন বিশ্লেষণ ছক</h3>
+      <div style="overflow-x: auto;">
+        <table class="table-responsive">
           <thead>
             <tr>
-              <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
-              <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
-              <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
+              <th>বিসিএস</th><th>প্রশ্ন</th>
+              <th>বিসিএস</th><th>প্রশ্ন</th>
+              <th>বিসিএস</th><th>প্রশ্ন</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><strong>৫০তম</strong></td><td>০টি</td>
-              <td><strong>৪৪তম</strong></td><td class="has-q-td">১টি</td>
-              <td><strong>৩৮তম</strong></td><td class="has-q-td">২টি</td>
+              <td>৫০তম</td><td>০</td>
+              <td>৪৪তম</td><td class="has-q">১</td>
+              <td>৩৮তম</td><td class="has-q">২</td>
             </tr>
             <tr>
-              <td><strong>৪৯তম</strong></td><td class="has-q-td">২টি</td>
-              <td><strong>৪৩তম</strong></td><td class="has-q-td">২টি</td>
-              <td><strong>৩৭তম</strong></td><td>০টি</td>
+              <td>৪৯তম</td><td class="has-q">২</td>
+              <td>৪৩তম</td><td class="has-q">২</td>
+              <td>৩৭তম</td><td>০</td>
             </tr>
             <tr>
-              <td><strong>৪৮তম</strong></td><td class="has-q-td">১টি</td>
-              <td><strong>৪২তম</strong></td><td class="has-q-td">১টি</td>
-              <td><strong>৩৬তম</strong></td><td class="has-q-td">২টি</td>
+              <td>৪৮তম</td><td class="has-q">১</td>
+              <td>৪২তম</td><td class="has-q">১</td>
+              <td>৩৬তম</td><td class="has-q">২</td>
             </tr>
             <tr>
-              <td><strong>৪৭তম</strong></td><td>০টি</td>
-              <td><strong>৪১তম</strong></td><td>০টি</td>
-              <td><strong>৩৫তম</strong></td><td class="has-q-td">১টি</td>
+              <td>৪৭তম</td><td>০</td>
+              <td>৪১তম</td><td>০</td>
+              <td>৩৫তম</td><td class="has-q">১</td>
             </tr>
             <tr>
-              <td><strong>৪৬তম</strong></td><td class="has-q-td">১টি</td>
-              <td><strong>৪০তম</strong></td><td class="has-q-td">১টি</td>
-              <td><strong>১০ম-৩৪তম</strong></td><td class="has-q-td">২০টি</td>
+              <td>৪৬তম</td><td class="has-q">১</td>
+              <td>৪০তম</td><td class="has-q">১</td>
+              <td>১০ম–৩৪তম</td><td class="has-q">২০</td>
             </tr>
             <tr>
-              <td><strong>৪৫তম</strong></td><td>০টি</td>
-              <td><strong>৩৯তম</strong></td><td>০টি</td>
-              <td><strong>মোট প্রশ্ন</strong></td><td class="has-q-td"><strong>৩৪টি</strong></td>
+              <td>৪৫তম</td><td>০</td>
+              <td>৩৯তম</td><td>০</td>
+              <td><strong>মোট</strong></td><td class="has-q"><strong>৩১টি</strong></td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
 
-  <!-- Control Bar -->
-  <div class="control-bar">
-    <div class="control-group">
-      <button class="btn-ctrl" onclick="adjustFontSize(-1)">A-</button>
-      <button class="btn-ctrl" onclick="changeFontSize(0)">১০০%</button>
-      <button class="btn-ctrl" onclick="adjustFontSize(1)">A+</button>
+    <!-- Score Bar -->
+    <div class="score-bar">
+      <span class="score-badge" id="scoreDisplay">🏆 সঠিক উত্তর: ০ / ৩১</span>
+      <button class="reset-btn" onclick="resetQuiz()">🔄 পুনরায় শুরু করুন</button>
     </div>
-    <div class="control-group">
-      <button class="btn-ctrl" id="theme-btn" onclick="toggleTheme()">🌓 থিম</button>
-      <button class="btn-ctrl" onclick="toggleAllExplanations()">📖 ব্যাখ্যা টগল</button>
-      <button class="btn-ctrl" onclick="resetQuiz()">🔄 রিসেট কুইজ</button>
-    </div>
+
+    <!-- Questions Container -->
+    <main id="questionsContainer">
+
+      <article class="q-card" id="q1">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১</span>
+          <span class="exam-badge">৪৯তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">প্রাচীনকালে কোন দেশে সিভিল সার্ভিসের ধারণা প্রথম উদ্ভূত হয়?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-1')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">মিশর</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-1')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">গ্রীস</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-1')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">চীন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-1')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">রোম</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-1')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-1">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> গ (চীন)</p>
+<p><strong>ব্যাখ্যা:</strong> প্রাচীনকালে সিভিল সার্ভিসের ধারণা প্রথম উদ্ভূত চীনে।</p>
+<p><strong>সিভিল সার্ভিস :</strong> সিভিল সার্ভিস একটি রাষ্ট্রীয় প্রশাসনিক ব্যবস্থা। এর মাধ্যমে সরকার বিভিন্ন কার্যক্রম পরিচালনা করে এবং নাগরিকদের সেবা প্রদান করে। এটি মূলত একটি পেশাদার, অরাজনৈতিক ও দক্ষ কর্মকর্তা-কর্মচারী বাহিনী, যারা সংবিধান ও সরকারের নীতিমালার আলোকে কাজ করে। এছাড়া, তারা সরকারের নীতিমালা বাস্তবায়নে গুরুত্বপূর্ণ ভূমিকা পালন করেন। এর অন্তর্ভুক্ত কর্মকর্তারা কেন্দ্রীয় ও স্থানীয় প্রশাসনের নানা স্তরে নিয়োজিত থাকেন।</p>
+<p>সিভিল সার্ভিসের উদ্ভব হয়েছে প্রাচীন কালেই; যখন কিনা বিশ্বের বিভিন্ন প্রান্তে রাজতন্ত্র বিদ্যমান ছিল। এনসাইক্লোপিডিয়া ব্রিটানিকার তথ্য অনুসারে, সিভিল সার্ভিসের ধারণার উদ্ভব হয়েছিল প্রাচীন মিশরীয় ও গ্রীক সভ্যতার সময়। পরবর্তীতে, রোমান সাম্রাজ্য প্রশাসনিক দপ্তর নির্মাণের মাধ্যমে একটি বিস্তৃত নেটওয়ার্ক গড়ে তুলেছিল; যা পরবর্তীতে রোমান ক্যাথলিক চার্চগুলোও অনুসরণ করে।</p>
+<p>চীনে খ্রিস্টপূর্ব ২ অব্দে সিভিল সার্ভিসের উদ্ভব হয় যা চীনা সভ্যতা/সাম্রাজ্যকে দুই হাজার বছরের বেশি সময় ধরে স্থায়িত্ব দিয়েছে। যোগ্যতার ভিত্তিতে সিভিল সার্ভিসের প্রাচীনতম উদাহরণগুলির মধ্যে একটি হলো চীনের ইম্পেরিয়াল আমলাতন্ত্র। চীনে সিভিল সার্ভিসের চাকরিকে 'Iron Rice Bowl' বলা হয়। চাকরির নিরাপত্তা ও উচ্চ বেতনের জন্য এই নামকরণ করা হয়েছে। চীনের সিভিল সার্ভিস পরীক্ষা মান্দারিন ভাষায় হয় 'Guako'। খ্রিস্টপূর্ব ২০৬ অব্দে চীনের হান রাজবংশের রাজা গাওজু (Gaozu) এর শাসনামলে মেধাভিত্তিক সিভিল সার্ভিসের উন্মেষ ঘটে। তিনি প্রথম পরীক্ষার মাধ্যমে রাজকর্মচারী নিয়োগের ব্যবস্থা চালু করেন। এই সময়ে ইম্পেরিয়াল পরীক্ষা ব্যবস্থা (Keju বা Civil Service Examination) চালু হয়, যা মেধা ও যোগ্যতার ভিত্তিতে সরকারি কর্মকর্তা নিয়োগের জন্য প্রতিযোগিতামূলক পরীক্ষার উপর নির্ভরশীল ছিল। এই ব্যবস্থা পরবর্তীতে সুই (৫৮১-৬১৮) এবং তাং রাজবংশের (৬১৮-৯০৭) সময়ে আরও উন্নত হয়। পরবর্তীতে অন্যান্য রাজবংশের শাসনের সময় তা বিভিন্ন সংশোধন ও পরিমার্জনের মাধ্যমে পরিবর্তিত হতে থাকে ও অধিক সুসংগঠিত হয়। সং সাম্রাজ্য (Song Dynasty - 960-1279) প্রথম যোগ্যতা (jinshi degree) ও পরীক্ষা পদ্ধতির প্রচলন ঘটায়। মিং সাম্রাজ্যের (Ming dynasty - 1368-1644) সময় সিভিল সার্ভিস সিস্টেম চূড়ান্ত রূপে পৌঁছায় এবং পরবর্তীতে কিং সাম্রাজ্যও এই পদ্ধতিই অনুসরণ করে। এই সময় সিভিল সার্ভিসের কর্মকর্তাগণ নিজের এলাকায় নিয়োগ না পাওয়া, এক স্থানে তিনবছরের বেশি দায়িত্ব পালন না করা ইত্যাদি নিয়ম অন্তর্ভুক্ত হয়। তাছাড়া, উচ্চপদের জন্য যোগ্যতার ক্ষেত্রে বেশ কিছু জিনিস অন্তর্ভুক্ত এবং শৃঙ্খলাভঙ্গের জন্য শাস্তির বিধান করা হয়। চীনে ১৯৪৯ সালে গণপ্রজাতন্ত্র প্রতিষ্ঠার পর মূলত বর্তমান রাষ্ট্রীয় সিভিল সার্ভিসের প্রচলন ঘটে। সাধারণত কমিউনিস্ট পার্টির সাথে সংশ্লিষ্টরাই এই সার্ভিসে যোগদান করে। তাই, সিভিল সার্ভিসের উদ্ভব হিসেবে চীন দেশকেই গণ্য করা হয়।</p>
+<p>উল্লেখ্য, ১৯৪৭ সালের ভারত বিভাগের পর এই কাঠামো দুটি ভাগে বিভক্ত হয়-ভারত ও পাকিস্তানের নিজ নিজ প্রশাসনিক কাঠামোতে। পরবর্তীতে বাংলাদেশের স্বাধীনতার পর, ১৯৭২ সালে সিভিল সার্ভিস পুনর্গঠিত হয়ে বাংলাদেশ সিভিল সার্ভিস (BCS) নামে আত্মপ্রকাশ করে।</p>
+<div class="exp-source">উৎস: Britannica এবং BBC</div>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q2">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২</span>
+          <span class="exam-badge">৪৯তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">“কেবল আয়ের অভাব নয়, বরং সামর্থ্যের অভাবই দারিদ্র্যের মূল কারণ”- অর্থনীতিবিদ অমর্ত্য সেন কোন গ্রন্থে এই যুক্তি তুলে ধরেন?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-2')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">Development as Freedom</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-2')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">Women and Human Development</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-2')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">Development through Disposition</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-2')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">Development, Environment and Power</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-2')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-2">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (Development as Freedom)</p>
+<p><strong>ব্যাখ্যা:</strong> “কেবল আয়ের অভাব নয়, বরং সামর্থ্যের অভাবই দারিদ্র্যের মূল কারণ” অর্থনীতিবিদ অমর্ত্য সেন 'Development as Freedom' গ্রন্থে এই যুক্তি তুলে ধরেন।</p>
+<p><strong>অমর্ত্য সেন :</strong> অমর্ত্য সেন একজন ভারতীয় বাঙালী অর্থনীতিবিদ ও দার্শনিক। ১৯৯৮ সালে তিনি অর্থনীতিতে নোবেল পুরস্কার লাভ করেছিলেন। দারিদ্র এবং দুর্ভিক্ষ নিয়ে গবেষণার জন্য ১৯৯৮ সালে অর্থনীতিতে নোবেল পুরস্কার পান অমর্ত্য সেন।</p>
+<p>১৯৫১ সালে আইএসসি পরীক্ষায় প্রথম হয়ে তিনি ভর্তি হন কলকাতার প্রেসিডেন্সি কলেজে এবং তারপর অর্থনীতি নিয়ে উচ্চতর শিক্ষা গ্রহণ করেন ইংল্যান্ডে কেমব্রিজের ট্রিনিটি কলেজে। এছাড়াও তিনি ১৯৯৮ থেকে ২০০৪ সাল পর্যন্ত ক্যামব্রিজের ট্রিনিটি কলেজের মাস্টার হিসেবে কর্মরত ছিলেন। তিনি ইকোনমিস্ট ফর পিস অ্যান্ড সিকিউরিটির একজন ট্রাস্টি। তিনিই প্রথম ভারতীয় শিক্ষাবিদ যিনি একটি অক্সব্রিজ কলেজের প্রধান হন। ছাড়াও তিনি প্রস্তাবিত নালন্দা আন্তর্জাতিক বিশ্ববিদ্যালয়ের উপাচার্য হিসেবেও কাজ করেছেন। ২০০৬ সালে টাইম ম্যাগাজিন তাকে অনূর্ধ্ব ষাট বছর বয়সী ভারতীয় বীর হিসেবে চিহ্নিত করেছে। ২০১০ সালে তাকে বিশ্বের ১০০ প্রভাবশালী ব্যক্তির তালিকায় স্থান দেওয়া হয়।</p>
+<p>উল্লেখ্য, “কেবল আয়ের অভাব নয়, বরং সামর্থ্যের অভাবই দারিদ্র্যের মূল কারণ”- এই উক্তিটি অর্থনীতিবিদ অমর্ত্য সেন-এর। তিনি তার "Development as Freedom" গ্রন্থে এই যুক্তি তুলে ধরেন। এখানে 'সামর্থ্যের অভাব' বলতে শুধু আর্থিক সংগতিই নয়, বরং মানুষের সক্ষমতার অভাবকেও বোঝানো হয়েছে, যার মধ্যে রয়েছে শিক্ষা, স্বাস্থ্য, সুযোগ এবং স্বাধীনতা লাভের অভাব।</p>
+<p>এছাড়াও, অমর্ত্য সেনের লেখা গ্রন্থাবলি ৩০টিরও বেশি ভাষায় অনূদিত হয়েছে। The Idea Of Justice-গ্রন্থটির রচয়িতা অমর্ত্য সেন। বইটি মূলত জন রলসের 'A Theory of Justice' (1971)-এর মৌলিক ধারণাগুলির একটি সমালোচনা এবং সংশোধন।</p>
+<div class="exp-source">উৎস: Britannica এবং Development as Freedom- Amartya Sen</div>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q3">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ৩</span>
+          <span class="exam-badge">৪৮তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">কে প্রথম 'গ্লোবাল ভিলেজ' ধারণাটির উপস্থাপন করেন?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-3')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">হার্বার্ট মার্শাল ম্যাকলুহান</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-3')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">রবার্ট কিংসলে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-3')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">হেনরি জি. ম্যাকমিলান</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-3')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">ডব্লিউ জি. পেরি</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-3')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-3">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (হার্বার্ট মার্শাল ম্যাকলুহান)</p>
+<p><strong>ব্যাখ্যা:</strong> 'গ্লোবাল ভিলেজ' ধারাটি প্রথম উপস্থাপন করেন কানাডিয়ান গণযোগাযোগ বিশেষজ্ঞ মার্শাল ম্যাকলুহান।</p>
+<p><strong>দগ্লোবাল ভিলেজ বা বিশ্বগ্রাম :</strong> গ্লোবাল ভিলেজ বা বিশ্বগ্রাম হচ্ছে এমন একটি পরিবেশ যেখানে পৃথিবীর সকল মানুষই একটি একক সমাজে বসবাস করে এবং ইলেকট্রনিক মিডিয়া ও তথ্য প্রযুক্তির ব্যবহারের মাধ্যমে একে অপরকে সেবা প্রদান করে থাকে। কানাডার টরেন্টো বিশ্ববিদ্যালয়ের ইংরেজি বিভাগের অধ্যাপক ও বিখ্যাত দার্শনিক 'মার্শাল ম্যাকলুহান' সর্বপ্রথম গ্লোবাল ভিলেজ বা বিশ্বগ্রাম শব্দটি ব্যবহার করেন। মার্শাল ম্যাকলুহান 'দি মিডিয়াম ইজ দি মেসেজ' (the medium is the message) এবং 'গ্লোবাল ভিলেজ' (Global village) এর প্রবক্তা বা উদ্ভাবক হিসাবে পরিচিতি পেয়েছেন। তিনি ১৯৬২ সালে তার প্রকাশিত গ্রন্থ 'The Gutenberg: The Making of Typographic Man' এবং ১৯৬৪ সালে তার প্রকাশিত গ্রন্থ 'Understanding Media' এ গ্লোবাল ভিলেজ বা বিশ্বগ্রাম এর ধারণা দেন। তাঁর সময়ে ইলেকট্রনিক কমিউনিকেশন প্রযুক্তির ব্যাপক বিস্তার লাভ করেছিল। তাঁর মতে, ইলেকট্রনিক কমিউনিকেশন প্রযুক্তির ব্যাপক বিস্তারের ফলে সময় ও দূরত্ব সংকুচিত হয়ে পৃথিবী একটি গ্রামে পরিণত হয়েছে। তিনি এ প্রযুক্তির বিস্তৃতিকে 'ইলেকট্রনিক নার্ভাস সিস্টেম' (Electronic Nervous System) নামে আখ্যায়িত করেছেন। পৃথিবী এ সিস্টেমের সাহায্যে সংযুক্ত হয়ে বিশ্বগ্রাম (Global village) এ রূপান্তরিত হয়েছে।</p>
+<div class="exp-source">উৎস: তথ্য ও যোগাযোগ প্রযুক্তি, একাদশ ও দ্বাদশ শ্রেণি (প্রকৌশলী মুজিবুর রহমান)</div>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q4">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ৪</span>
+          <span class="exam-badge">৪৬তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">কোন দিনটি বিশ্ব শরণার্থী দিবস হিসেবে পালিত হয়?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-4')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">৫ জুন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-4')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">১০ জুন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-4')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">২০ জুন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-4')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">২৫ জুন</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-4')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-4">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> গ (২০ জুন)</p>
+<p><strong>ব্যাখ্যা:</strong> বিশ্ব শরণার্থী দিবস পালিত হয় ২০ জুন। বিশ্বজুড়ে শরণার্থীদের অমানবিক অবস্থানের প্রতি আন্তর্জাতিক নেতৃবৃন্দের সচেতনতা সৃষ্টির জন্য দিবসটি পালন করা হয়। এযাবৎ কালে শরণার্থী সংখ্যা সর্বোচ্চ রেকর্ড ছুঁয়েছে। বর্তমানে বিশ্বে বাস্তুচ্যুত মানুষের সংখ্যা ১২ কোটি ছাড়িয়েছে। মূলত যুদ্ধ, জাতিগত সন্ত্রাসই সাম্প্রতিক সময়ে শরণার্থী সংখ্যা বৃদ্ধির মূল কারণ।</p>
+<p>অন্যদিকে, ৫ই জুন বিশ্ব পরিবেশ দিবস।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q5">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ৫</span>
+          <span class="exam-badge">৪৪তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">ইসলাম ও সুফিমতের প্রভাবে ভারতবর্ষে ঘটেছিল-</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-5')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">বর্ণবাদের পুনরুত্থান</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-5')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">রাষ্ট্রবিপ্লব</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-5')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">চিন্তাবিপ্লব</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-5')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">অভিবাসন বিপ্লব</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-5')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-5">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> গ (চিন্তাবিপ্লব)</p>
+<p><strong>ব্যাখ্যা:</strong> ইসলাম ও সুফি মতবাদের প্রভাব ভারতবর্ষে একটি চিন্তাবিপ্লব সৃষ্টি করেছিল। সুফি দর্শন ও ইসলাম ধর্মের সংমিশ্রণে নতুন চিন্তা ও দার্শনিক ধারার বিকাশ ঘটে। এতে ভারতবর্ষের সমাজ, ধর্ম ও সংস্কৃতির মধ্যে এক নতুন চিন্তার সূচনা হয়।</p>
+<p>সুফি দর্শন মূলত প্রেম ও মানবকতা নিয়ে গঠিত, যেখানে আল্লাহর প্রতি প্রেমকে সর্বোচ্চ মর্যাদা দেওয়া হয়। ভারতবর্ষে সুফি দরবেশরা তাদের মানবিক দৃষ্টিভঙ্গি এবং প্রেমের তত্ত্বের মাধ্যমে সমাজে গুরুত্বপূর্ণ প্রভাব ফেলে। এই সুফি দর্শন ও ইসলাম ধর্মের প্রভাবেই ভারতে নতুন চিন্তার উদ্ভব হয়, যা পরবর্তীতে ভক্তিবাদ ও আধুনিক চিন্তাধারা সৃষ্টি করে। উদাহরণস্বরূপ- রাজা রামমোহন রায় ইসলামের যুক্তিবাদ ও সুফি ভক্তিবাদের মেলবন্ধন করেছিলেন, যা চিন্তাবিপ্লবের ধারাকে আরো শক্তিশালী করেছিল।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q6">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ৬</span>
+          <span class="exam-badge">৪৩তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">আন্তর্জাতিক গণতন্ত্র দিবস কোন তারিখে পালিত হয়?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-6')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">১৫ সেপ্টেম্বর</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-6')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">১৫ অক্টোবর</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-6')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">১৫ নভেম্বর</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-6')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">১৫ ডিসেম্বর</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-6')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-6">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (১৫ সেপ্টেম্বর)</p>
+<p><strong>ব্যাখ্যা:</strong> প্রতি বছর '১৫ সেপ্টেম্বর' তারিখে আন্তর্জাতিক গণতন্ত্র দিবস পালিত হয়। জাতিসংঘের সদস্যভুক্ত দেশগুলোতে গণতন্ত্র সম্পর্কে আগ্রহ সৃষ্টি ও গণতন্ত্র চর্চাকে উৎসাহিত করার জন্য ২০০৭ সাল থেকে এই দিনটিকে উদযাপন করা হয়।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q7">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ৭</span>
+          <span class="exam-badge">৪৩তম/৩৪তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">'The lady with the Lamp' নামে পরিচিত-</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-7')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">হেলেন কেলার</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'খ', 'exp-7')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">ফ্লোরেন্স নাইটিঙ্গেল</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-7')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">মাদার তেরেসা</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-7')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">সরোজিনী নাইডু</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-7')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-7">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> খ (ফ্লোরেন্স নাইটিঙ্গেল)</p>
+<p><strong>ব্যাখ্যা:</strong> ফ্লোরেন্স নাইটিঙ্গেলকে 'লেডি উইথ দ্য ল্যাম্প' বলা হয়। আধুনিক নার্সিংয়ের প্রতিষ্ঠাতা ফ্লোরেন্স নাইটিঙ্গেল (Florence Nightingale) উনবিংশ শতাব্দীর একজন বিখ্যাত নার্স ছিলেন। তাকে 'The lady with the Lamp' নামে ডাকা হয় কারণ তিনি ক্রিমিয়ার যুদ্ধের সময় আহত সৈন্যদের সেবা করতে রাতের অন্ধকারে ল্যাম্প হাতে রোগীদের কাছে যেতেন। এই সাহসিকতা এবং সেবার কারণে তিনি ইতিহাসে অমর হয়ে আছেন। তাকে আধুনিক নার্সিং এর অগ্রদূতও বলা হয়।</p>
+<p><strong>অন্যান্য ব্যক্তিত্ব:</strong><br>
+• সরোজিনী নাইডুকে ভারতকোকিলা বা Nightingale of India বলা হয়।<br>
+• মাদার তেরেসাকে সাধারণত "সেন্ট তেরেসা অফ ক্যালকাটা" (Saint Teresa of Calcutta) নামে ডাকা হয়।<br>
+• হেলেন কেলার ছিলেন একজন প্রখ্যাত আমেরিকান অন্ধ ও বধির লেখিকা ও সমাজকর্মী। তাঁর লেখা "দ্য স্টোরি অব মাই লাইফ" (The Story of My Life) বইটি বিশ্বজুড়ে পরিচিত।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q8">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ৮</span>
+          <span class="exam-badge">৪২তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">ভারতে বছরের কোন দিনটি সিভিল সার্ভিস দিবস (Civil Service Day) হিসেবে পালিত হয়?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-8')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">২১ এপ্রিল</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-8')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">২ অক্টোবর</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-8')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">২৬ জানুয়ারি</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-8')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">১০ মে</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-8')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-8">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (২১ এপ্রিল)</p>
+<p><strong>ব্যাখ্যা:</strong> ভারতে প্রতি বছর ২১ এপ্রিল কে সিভিল সার্ভিস দিবস (Civil Service Day) হিসেবে পালন করা হয়। এই দিনে ভারতের বিভিন্ন সিভিল সার্ভিস কর্মকর্তাদের কাজের জন্য স্বীকৃতি ও সম্মাননা দেওয়া হয়। ১৯৪৭ সালের এই দিনে ভারতের প্রথম স্বরাষ্ট্রমন্ত্রী সর্দার বল্লভভাই প্যাটেল সিভিল সার্ভিস কর্মকর্তাদেরকে জাতির 'স্টিল ফ্রেম' বলে অভিহিত করেছিলেন।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q9">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ৯</span>
+          <span class="exam-badge">৪০তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">'দ্য আইডিয়া অব জাস্টিস' গ্রন্থের রচয়িতা কে?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-9')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">মার্থা ন্যুসবাম</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-9')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">জোসেফ স্টিগলিটজ</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-9')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">অমর্ত্য সেন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-9')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">জন রাউলস</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-9')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-9">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> গ (অমর্ত্য সেন)</p>
+<p><strong>ব্যাখ্যা:</strong> 'দি আইডিয়া অফ জাস্টিস' হলো নোবেল বিজয়ী অমর্ত্য সেনের একটি বিখ্যাত গ্রন্থ। অমর্ত্য সেন হলেন নোবেল বিজয়ী (১৯৯৮ সাল) অর্থনীতিবিদ এবং দার্শনিক। বইটি ২০০৯ সালে প্রকাশিত হয়। এটি জন রাউলসের 'এ থিওরি অফ জাস্টিস'-এর সমালোচনা ও সংশোধন হিসেবে পরিচিত। বইটির মূলকথা হলো, ন্যায্যতা বিমূর্ত ধারণা নয়; বরং এটি বিভিন্ন পরিস্থিতিতে ভিন্ন ভিন্ন মাপকাঠিতে বিচার করা প্রয়োজন। অর্থাৎ, ন্যায় ও অন্যায়ের বিচার করতে হলে বাস্তব পরিস্থিতির দিকে নজর দিতে হবে।</p>
+<p><strong>অন্যান্য বিকল্প:</strong><br>
+• মার্থা ন্যুসবাম: একজন আমেরিকান দার্শনিক, যিনি ন্যায় এবং মানবিক উন্নয়নের ওপর কাজ করেছেন।<br>
+• জোসেফ স্টিগলিটজ: ২০০১ সালে নোবেল বিজয়ী অর্থনীতিবিদ।<br>
+• জন রাউলস: 'A Theory of Justice' নামক বিখ্যাত গ্রন্থের রচয়িতা।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q10">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১০</span>
+          <span class="exam-badge">৩৮তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">Imperialism, the Highest Stage of Capitalism বইটি কার লেখা?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-10')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">টমাস হবসন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'খ', 'exp-10')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">ভি. আই. লেনিন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-10')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">কার্ল মার্কস</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-10')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">এন্টিনিও গ্রামসি</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-10')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-10">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> খ (ভি. আই. লেনিন)</p>
+<p><strong>ব্যাখ্যা:</strong> “Imperialism, the Highest Stage of Capitalism” বইটি রাশিয়ার বিপ্লবী নেতা ভি. আই. লেনিনের লেখা। এই গ্রন্থে লেনিন উল্লেখ করেছেন সাম্রাজ্যবাদ (Imperialism) হলো পুঁজিবাদ (Capitalism)-এর সর্বোচ্চ পর্যায়। তাঁর মতে, সাম্রাজ্যবাদী সম্প্রসারণ মূলত অর্থনৈতিক কারণে ঘটে এবং এতে পুঁজির বিকাশ এবং সম্প্রসারণে গতি পায়। লেনিন বলেন যে, পুঁজিবাদ এবং সাম্রাজ্যবাদ একে অপরের সাথে সম্পর্কিত। অর্থাৎ, যখন পুঁজির জমায়েত ঘটে, তখন সেটা আন্তর্জাতিক আকার ধারণ করে এবং অন্যান্য দেশের উপর নিয়ন্ত্রণ প্রতিষ্ঠার চেষ্টা করে, যা সাম্রাজ্যবাদ সৃষ্টি করে।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q11">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১১</span>
+          <span class="exam-badge">৩৮তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">প্রাকৃতিক আইনের উদ্ভব হয়:</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-11')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">থমাস হবস, হুগো, গ্রোসিয়াস ও জন লক-এর লেখনী থেকে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-11')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">ম্যাগনা কার্টা থেকে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-11')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">গ্রিক, খ্রিস্টান ও মধ্যযুগীয় ধর্মতত্ত্ব থেকে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-11')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">কনফুসিয়ানিজম থেকে</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-11')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-11">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (থমাস হবস, হুগো, গ্রোসিয়াস ও জন লক-এর লেখনী থেকে)</p>
+<p><strong>ব্যাখ্যা:</strong> প্রাকৃতিক আইনের উদ্ভব হয়েছে থমাস হবস, হুগো গ্রোসিয়াস এবং জন লকের মতো দার্শনিকদের লেখনী থেকে। প্রাকৃতিক আইন হলো একটি নৈতিক তত্ত্ব, যেখানে বলা হয়েছে মানব সমাজের সব কিছুতে সার্বজনীন নীতি বিদ্যমান। থমাস হবস এই ধারণাটি তাঁর সামাজিক চুক্তি তত্ত্বের মাধ্যমে ব্যাখ্যা করেছিলেন, যেখানে তিনি 'স্বাভাবিক অবস্থা' থেকে প্রাকৃতিক আইনের ধারণা ব্যাখ্যা করেন। হুগো গ্রোসিয়াস প্রাকৃতিক আইনকে মানব আচরণের সার্বজনীন নীতি হিসেবে দেখিয়েছেন এবং জন লক প্রাকৃতিক অধিকার এবং ব্যক্তিগত স্বাধীনতার ওপর জোর দিয়েছেন।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q12">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১২</span>
+          <span class="exam-badge">৩৬তম/২৬তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">মাদার তেরেসা কোন দেশে জন্মগ্রহণ করেন?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-12')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">মেসিডোনিয়া</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-12')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">আলজেরিয়া</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-12')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">আলবেনিয়া</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-12')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">ফ্রান্স</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-12')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-12">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (মেসিডোনিয়া)</p>
+<p><strong>ব্যাখ্যা:</strong> মাদার তেরেসা মেসিডোনিয়া-তে জন্মগ্রহণ করেন। তাঁর আসল নাম ছিল অ্যানিয়েজ গঞ্জে বোয়াঝিউ (Agnes Gonxha Bojaxhiu)। তিনি কলকাতায় 'মিশনারিজ অব চ্যারিটিজ' প্রতিষ্ঠা করে মানব সেবায় আত্মনিয়োগ করেন। মানবসেবায় অসামান্য অবদানের জন্য তিনি ১৯৭৯ সালে নোবেল শান্তি পুরস্কার লাভ করেন।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q13">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১৩</span>
+          <span class="exam-badge">৩৬তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">'War and Peace' উপন্যাসের রচয়িতা-</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-13')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">লিও টলস্টয়</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-13')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">ডেভিড রিকার্ডো</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-13')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">কার্ল মার্কস</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-13')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">জেন অস্টিন</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-13')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-13">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (লিও টলস্টয়)</p>
+<p><strong>ব্যাখ্যা:</strong> 'War and Peace' উপন্যাসের রচয়িতা হলেন রুশ লেখক লিও টলস্টয়। টলস্টয়ের দুটি অন্যতম সেরা কাজ হলো 'War and Peace' এবং 'Anna Karenina'।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q14">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১৪</span>
+          <span class="exam-badge">৩৫তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">'The Art of War' গ্রন্থের রচয়িতা-</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-14')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">ক্লজউইজ</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-14')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">আলফ্রেড মাহান</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-14')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">সুন জু</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-14')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">কৌটিল্য</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-14')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-14">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> গ (সুন জু)</p>
+<p><strong>ব্যাখ্যা:</strong> 'The Art of War' গ্রন্থের রচয়িতা হলেন সুন জু। এই গ্রন্থটি সামরিক কৌশল, পরিকল্পনা এবং যুদ্ধের মনস্তত্ত্ব নিয়ে আলোচনা করে।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q15">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১৫</span>
+          <span class="exam-badge">৩২তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">'জুলিয়াস সিজার' কেন বিখ্যাত?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-15')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">রোমান সম্রাট হিসেবে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-15')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">বর্ণবাদ বিরোধী হিসেবে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-15')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">ব্রিটেনের রাজা হিসেবে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-15')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">আমেরিকার প্রেসিডেন্ট হিসেবে</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-15')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-15">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (রোমান সম্রাট হিসেবে)</p>
+<p><strong>ব্যাখ্যা:</strong> 'জুলিয়াস সিজার' রোমান সেনাপতি ও একনায়ক (সম্রাট) হিসেবে বিখ্যাত। তিনি রোমের প্রখ্যাত জেনারেল, রাজনীতিবিদ এবং পণ্ডিত ছিলেন। তিনি গল (Gaul) অঞ্চল বিজয়ের জন্য বিখ্যাত, যা আজকের ফ্রান্স এবং এর আশেপাশের এলাকা। তিনি রোমান প্রজাতন্ত্রের পতনের সাথে সাথে রোমান সাম্রাজ্যের ডিক্টেটর হিসেবে নিজেকে প্রতিষ্ঠিত করেন।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q16">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১৬</span>
+          <span class="exam-badge">৩১তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">কার্ল মার্কস কোন দেশে মৃত্যুবরণ করেন?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-16')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">জার্মানি</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-16')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">ফ্রান্স</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-16')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">যুক্তরাজ্য</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-16')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">রাশিয়া</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-16')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-16">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> গ (যুক্তরাজ্য)</p>
+<p><strong>ব্যাখ্যা:</strong> কার্ল মার্কস ১৮৮৩ সালের ১৪ মার্চ যুক্তরাজ্যের লন্ডনে মৃত্যুবরণ করেন। তিনি ১৮১৮ সালের ৫ মে জার্মানির রাইন প্রদেশের ট্রায়ারে জন্মগ্রহণ করেন। মার্কস, সমাজবাদী চিন্তাধারার প্রভাবশালী ব্যক্তি হিসেবে পরিচিত। তাঁর বিখ্যাত গ্রন্থগুলির মধ্যে 'দ্য কমিউনিস্ট মেনিফেস্টো' এবং 'দাস ক্যাপিটাল' উল্লেখযোগ্য। মার্ক্স তাঁর লেখনির মাধ্যমে যে মতবাদকে তুলে ধরেন তা মার্ক্সবাদ নামে পরিচিত।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q17">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১৭</span>
+          <span class="exam-badge">২৬তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">ফিলিস্তিনের প্রেসিডেন্ট ইয়াসির আরাফাত এর আনুষ্ঠানিক অন্ত্যেষ্টিক্রিয়া অনুষ্ঠানে যোগদানের জন্য বিশ্বের বিভিন্ন দেশের রাষ্ট্রপ্রধান/সরকার প্রধানগণ কোথায় মিলিত হন?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-17')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">রামাল্লা</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-17')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">প্যারিস</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-17')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">কায়রো</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-17')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">জেরুজালেম</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-17')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-17">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> গ (কায়রো)</p>
+<p><strong>ব্যাখ্যা:</strong> ফিলিস্তিনের প্রেসিডেন্ট ইয়াসির আরাফাত ১১ নভেম্বর ২০০৪ প্যারিসের পার্সি সামরিক হাসপাতালে ইন্তেকাল করেন। ইসরাইলের নিষেধাজ্ঞার কারণে তাঁর অন্ত্যেষ্টিক্রিয়া অনুষ্ঠিত হয় মিশরের কায়রোতে এবং সেখানে বিশ্বের বিভিন্ন দেশের সরকার ও রাষ্ট্রপ্রধানগণ অন্ত্যেষ্টিক্রিয়া অনুষ্ঠানে যোগদান করেন। অনুষ্ঠান শেষে তাকে রামাল্লায় দাফন করা হয়। ইয়াসির আরাফাত ৭৫ বছর বয়সে মারা যান।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q18">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১৮</span>
+          <span class="exam-badge">২৫তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">রাষ্ট্রপ্রধান না হয়েও কোন ব্যক্তি রাষ্ট্রপ্রধানের মর্যাদা ভোগ করেন?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-18')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">ইয়াসির আরাফাত</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-18')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">কফি আনান</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-18')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">ওসামা বিন লাদেন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-18')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">অ্যারিয়েল শ্যারন</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-18')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-18">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (ইয়াসির আরাফাত)</p>
+<p><strong>ব্যাখ্যা:</strong> ইয়াসির আরাফাত রাষ্ট্রপ্রধান না হয়েও রাষ্ট্রপ্রধানের মর্যাদা ভোগ করেছেন। তিনি ১৯৯৬ থেকে ২০০৪ সাল পর্যন্ত প্যালেস্টাইন অথরিটি নামক সংগঠনের প্রেসিডেন্ট এবং ১৯৬৯ থেকে ২০০৪ সাল পর্যন্ত প্যালেস্টাইন মুক্তি সংস্থার (PLO) চেয়ারম্যান হিসেবে কাজ করেছেন। আরাফাত ১৯৯৩ সালে ইসরায়েল সরকারের সাথে একটি শান্তি চুক্তিতে নেতৃত্ব দেন। এই চুক্তির জন্য তিনি ইসরায়েলের ইৎসহাক রাবিন এবং শিমন পেরেজের সাথে মিলে ১৯৯৪ সালে নোবেল শান্তি পুরস্কার লাভ করেন।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q19">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১৯</span>
+          <span class="exam-badge">২৫তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">কে লৌহমানবী বলে পরিচিত?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-19')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">ইন্দিরা গান্ধী</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-19')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">বেগম খালেদা জিয়া</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-19')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">আংসান সূকী</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ঘ', 'exp-19')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">মার্গারেট থ্যাচার</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-19')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-19">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ঘ (মার্গারেট থ্যাচার)</p>
+<p><strong>ব্যাখ্যা:</strong> ব্রিটেনের প্রথম মহিলা প্রধানমন্ত্রী মার্গারেট থ্যাচার 'লৌহমানবী' (Iron Lady) হিসেবে পরিচিত। তাঁর শক্তিশালী নেতৃত্ব এবং কঠোর রাজনৈতিক সিদ্ধান্তের জন্য তাকে 'লৌহমানবী' উপাধিতে ভূষিত করা হয়।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q20">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২০</span>
+          <span class="exam-badge">২৫তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">'ডিজ আর্মিং ইরাক' গ্রন্থটির রচয়িতা কে?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-20')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">সালমান রুশদী</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-20')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">কুলদ্বীপ নায়ার</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-20')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">হ্যান্স ব্লিক্স</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-20')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">হিলারি ক্লিনটন</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-20')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-20">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> গ (হ্যান্স ব্লিক্স)</p>
+<p><strong>ব্যাখ্যা:</strong> 'ডিজ আর্মিং ইরাক' বইটির রচয়িতা হ্যান্স ব্লিক্স। তিনি একজন সুইডিশ কূটনীতিক যিনি আন্তর্জাতিক পারমাণবিক শক্তি এজেন্সি (IAEA) এর মহাপরিচালক হিসেবে ১৯৮১ থেকে ১৯৯৭ সাল পর্যন্ত দায়িত্ব পালন করেছেন। এছাড়া, তিনি ২০০০ থেকে ২০০৩ সাল পর্যন্ত ইরাকে জাতিসংঘের প্রধান অস্ত্র পরিদর্শক হিসেবে কাজ করেছেন। তাঁর অভিজ্ঞতার ভিত্তিতে 'ডিজ আর্মিং ইরাক' বইটি লিখেছেন।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q21">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২১</span>
+          <span class="exam-badge">২৪তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">'হ্যারি পটার' কি?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-21')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">এক জাতীয় ধাতব পাত্র</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'খ', 'exp-21')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">সর্বাধিক বিক্রীত একটি শিশুতোষ বই</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-21')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">একজাতীয় গুচ্ছবোমা</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-21')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">এক ধরনের খেলনা</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-21')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-21">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> খ (সর্বাধিক বিক্রীত একটি শিশুতোষ বই)</p>
+<p><strong>ব্যাখ্যা:</strong> বিখ্যাত শিশুতোষ সিরিজ Harry Potter-এর রচয়িতা জে. কে. রাওলিং (J. K. Rowling)। এই সিরিজে সাতটি উপন্যাস রয়েছে।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q22">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২২</span>
+          <span class="exam-badge">২৪তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">A Long Walk to Freedom বইটির লেখক কে?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-22')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">হোসে গুসামাও</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-22')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">রবার্ট মুগাবে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-22')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">নেলসন ম্যান্ডেলা</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-22')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">অং সান সুচি</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-22')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-22">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> গ (নেলসন ম্যান্ডেলা)</p>
+<p><strong>ব্যাখ্যা:</strong> ১৯৯৪ সালে নেলসন ম্যান্ডেলার আত্মজীবনী 'A Long Walk to Freedom' প্রকাশিত হয়। এই বইয়ে তিনি তাঁর জীবনের প্রথমাংশ, বর্ণবাদবিরোধী আন্দোলন এবং কারাবাসের সময়কাল সম্পর্কে বিস্তারিত আলোচনা করেছেন।</p>
+<p>অন্যদিকে, 'The Roads to Freedom' উপন্যাসের রচয়িতা Jean-Paul Sartre, 'Proposed Roads to Freedom' বইটির রচয়িতা Bertrand Russell এবং 'India Wins Freedom' বইটি লিখেছেন Maulana Abul Kalam Azad।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q23">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২৩</span>
+          <span class="exam-badge">২৩তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">মাইকেল অ্যাঞ্জেলো কোন দেশের শিল্পী?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-23')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">অস্ট্রিয়া</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-23')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">গ্রিস</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-23')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">সুইডেন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ঘ', 'exp-23')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">ইতালি</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-23')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-23">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ঘ (ইতালি)</p>
+<p><strong>ব্যাখ্যা:</strong> ইতালির মাইকেল অ্যাঞ্জেলো রেনেসাঁ যুগের প্রখ্যাত মূর্তি, চিত্রকলা, স্থাপত্য শিল্পী। তাঁর সবচেয়ে পরিচিত কাজগুলোর মধ্যে রয়েছে 'David', 'The Creation of Adam', 'The Last Judgment' ইত্যাদি।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q24">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২৪</span>
+          <span class="exam-badge">২৩তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">'The Asian Drama' গ্রন্থটির রচয়িতা কে?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-24')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">অমর্ত্য সেন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'খ', 'exp-24')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">গুনার মিরডাল</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-24')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">মাইকেল লিফটন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-24')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">উইলিয়াম রস্টো</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-24')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-24">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> খ (গুনার মিরডাল)</p>
+<p><strong>ব্যাখ্যা:</strong> প্রখ্যাত সুইডিশ অর্থনীতিবিদ ও সমাজবিজ্ঞানী গুনার মিরডালের একটি বিখ্যাত গ্রন্থ 'The Asian Drama'। এই গ্রন্থে তিনি এশিয়ার বিভিন্ন দেশের দারিদ্র্য এবং উন্নয়নের চ্যালেঞ্জ নিয়ে বিশদ আলোচনা করেছেন।</p>
+<p>অন্যদিকে, ভারতের প্রখ্যাত নোবেল বিজয়ী অর্থনীতিবিদ অধ্যাপক অমর্ত্য সেনের বিখ্যাত গ্রন্থের মধ্যে অন্যতম হলো ১৯৮১ সালে প্রকাশিত গবেষণা গ্রন্থ “Poverty and Famines: An Essay on Entitlement and Deprivation”। এছাড়া প্রখ্যাত অর্থনীতিবিদ উইলিয়াম রস্টো এর বিখ্যাত বই “The Stages of Economic Growth: A Non-Communist Manifesto”।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q25">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২৫</span>
+          <span class="exam-badge">২১তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">নেলসন ম্যান্ডেলার রাজনৈতিক দলের নাম কি?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-25')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">ইনকথা ফ্রিডম পার্টি</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-25')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">ন্যাশনালিষ্ট পার্টি</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-25')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">আফ্রিকান সোস্যালিস্ট পার্টি</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ঘ', 'exp-25')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">আফ্রিকান ন্যাশনাল পার্টি</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-25')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-25">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ঘ (আফ্রিকান ন্যাশনাল পার্টি)</p>
+<p><strong>ব্যাখ্যা:</strong> নেলসন ম্যান্ডেলা ছিলেন আফ্রিকান ন্যাশনাল কংগ্রেস (ANC) পার্টির নেতা। তিনি ১৯৪৪ সালে এই দলের সদস্য হন এবং দীর্ঘ সময় ধরে দক্ষিণ আফ্রিকার বর্ণবাদী শাসনের বিরুদ্ধে সংগ্রাম চালান। ১৯৯১-১৯৯৭ সাল পর্যন্ত ANC-এর সভাপতি ছিলেন এবং ১৯৯৪ সালে প্রথম গণতান্ত্রিক নির্বাচনে দক্ষিণ আফ্রিকার প্রেসিডেন্ট হিসেবে নির্বাচিত হন। অপশনগুলোর মধ্যে (ঘ) আফ্রিকান ন্যাশনাল পার্টি সবচেয়ে কাছাকাছি উত্তর। প্রকৃতপক্ষে এটি হবে- আফ্রিকান ন্যাশনাল কংগ্রেস (ANC)।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q26">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২৬</span>
+          <span class="exam-badge">২০তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">“যুদ্ধই জীবন, যুদ্ধই সর্বজনীন”- এটি কার উক্তি?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-26')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">সালজার</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-26')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">ফ্রাঙ্কো</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-26')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">হিটলার</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-26')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">মুসোলিনী</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-26')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-26">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> গ (হিটলার)</p>
+<p><strong>ব্যাখ্যা:</strong> “যুদ্ধই জীবন, যুদ্ধই সর্বজনীন”- এই উক্তিটি আডলফ হিটলার-এর। তিনি ১৯৩২ সালে বলেছেন, “War is eternal, war is universal. There is no beginning and there is no peace. War is life... War is the origin of all things.” এটি তাঁর যুদ্ধের প্রতি তাঁর প্রবল আগ্রহের প্রতিফলন।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q27">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২৭</span>
+          <span class="exam-badge">১৯তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">যুক্তরাষ্ট্রে ক্রীতদাস প্রথা বিলোপকারী প্রেসিডেন্টের নাম কী?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-27')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">জর্জ ওয়াশিংটন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'খ', 'exp-27')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">আব্রাহাম লিংকন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-27')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">রুজভেল্ট</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-27')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">কেনেডী</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-27')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-27">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> খ (আব্রাহাম লিংকন)</p>
+<p><strong>ব্যাখ্যা:</strong> ১৮৬৩ সালের ১ জানুয়ারি যুক্তরাষ্ট্রের ১৬তম প্রেসিডেন্ট আব্রাহাম লিংকন এমানসিপেশন প্রোক্লামেশন (Emancipation Proclamation) জারির মাধ্যমে দাসপ্রথাকে আনুষ্ঠানিকভাবে নিষিদ্ধ করেন। ১৮৬৫ সালে সংবিধানে ১৩তম সংশোধনীর মাধ্যমে যুক্তরাষ্ট্রে দাসপ্রথা পুরোপুরি বিলোপ করা হয়। আব্রাহাম লিংকন গেটিসবার্গ ভাষণের জন্য বিখ্যাত।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q28">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২৮</span>
+          <span class="exam-badge">১৮তম বিসিএস/১৪তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">'মোনালিসা' চিত্রটির চিত্রকর কে?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-28')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">মাইকেল এঞ্জেলো</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'খ', 'exp-28')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">লিওনার্দো দ্য ভিঞ্চি</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-28')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">ভ্যানগগ</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-28')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">পাবলো পিকাসো</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-28')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-28">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> খ (লিওনার্দো দ্য ভিঞ্চি)</p>
+<p><strong>ব্যাখ্যা:</strong> বিশ্বখ্যাত 'মোনালিসা' চিত্রটির চিত্রকর ছিলেন ইতালির বিখ্যাত চিত্রশিল্পী লিওনার্দো দ্য ভিঞ্চি। এটি বর্তমানে ফ্রান্সের ল্যুভর মিউজিয়ামে সংরক্ষিত আছে। এটি পৃথিবীর অন্যতম মূল্যবান শিল্পকর্ম হিসেবে বিবেচিত হয়। ছবিটি তৈরি করতে লিওনার্দো দ্য ভিঞ্চির প্রায় চার বছর সময় লেগেছিল। তাঁর আঁকা আরও একটি বিখ্যাত চিত্রকর্ম 'দ্য লাস্ট সাপার'।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q29">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২৯</span>
+          <span class="exam-badge">১৮তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">'শাহনামা'-এর লেখক কে?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-29')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">কবি ফেরদৌসী</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-29')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">মওলানা রুমী</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-29')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">কবি নিজামী</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-29')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">কবি জামি</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-29')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-29">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (কবি ফেরদৌসী)</p>
+<p><strong>ব্যাখ্যা:</strong> প্রখ্যাত ফার্সি কবি আবুল কাসিম ফেরদৌসী (Abu al-Qasim Ferdowsi) রচিত মহাকাব্য 'শাহনামা'। এটি ইরানের প্রাচীন কিংবদন্তি এবং ইতিহাস নিয়ে রচিত। ফেরদৌসী এই মহাকাব্য রচনায় প্রায় ৩০ বছর সময় ব্যয় করেন। এর ভাষা ক্লাসিক ফারসি।</p>
+<p>অন্যদিকে,<br>
+• বিখ্যাত ফার্সি সুফি কবি মাওলানা রুমী এর বিখ্যাত গ্রন্থ হলো 'মসনবী-ই-মানবী'।<br>
+• ফার্সি কবি নিজামী 'খামসা' নামে পাঁচটি কাব্যের জন্য বিখ্যাত।<br>
+• ফার্সি সুফি কবি কবি আবদুর রহমান জামি এর বিখ্যাত গ্রন্থ তুহফাত আল-আহরার, লায়লা ওয়া মাজনুন।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q30">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ৩০</span>
+          <span class="exam-badge">১৭তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">বিশ্ব তামাকমুক্ত দিবস প্রতিপালিত হয় প্রতি বছরের-</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-30')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">৩১ জানুয়ারি</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-30')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">৩১ মার্চ</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-30')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">৩০ এপ্রিল</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ঘ', 'exp-30')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">৩১ মে</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-30')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-30">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ঘ (৩১ মে)</p>
+<p><strong>ব্যাখ্যা:</strong> ৩১ মে বিশ্ব তামাকমুক্ত দিবস জনস্বাস্থ্য রক্ষা এবং সামাজিক উন্নয়নে তামাকের বিরূপ প্রতিক্রিয়া, মারাত্মক কয়েকটি রোগের ঝুঁকি এবং আকস্মিক মৃত্যু প্রতিরোধের বিষয়টি বিশ্ববাসীকে অবহিত করার লক্ষ্যে বিশ্ব স্বাস্থ্য সংস্থা ১৯৮৭ সালে বিশ্ব তামাক মুক্ত দিবসের সূচনা করে। এরপর থেকেই সারা বিশ্বে প্রতিবছর ৩১ মে বিশ্ব তামাকমুক্ত দিবস হিসেবে পালিত হয়ে আসছে।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q31">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ৩১</span>
+          <span class="exam-badge">১১তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">— সেপ্টেম্বর বিশ্ব নিরক্ষরতা দিবস।' শূন্যস্থান পূরণ করুন।</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-31')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">৮</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-31')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">৬</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-31')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">১০</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-31')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">৫</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-31')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-31">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (৮)</p>
+<p><em>[Note: প্রশ্ন 'নিরক্ষরতা'র স্থলে 'সাক্ষরতা' হবে]</em></p>
+<p><strong>ব্যাখ্যা:</strong> বিশ্ব সাক্ষরতা দিবস প্রতি বছর ৮ সেপ্টেম্বর পালিত হয়। জাতিসংঘের অঙ্গসংস্থা ইউনেস্কো (UNESCO) ১৯৬৬ সালে এই দিবসটি ঘোষণা করে এবং ১৯৬৭ সাল থেকে এই দিনটি বিশ্বব্যাপী পালিত হচ্ছে। এই দিবসের উদ্দেশ্য হলো নিরক্ষরতা দূর করার জন্য জনসচেতনতা বৃদ্ধি করা এবং শিক্ষা গ্রহণের গুরুত্ব তুলে ধরা।</p>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="chapter-footer">
+      <div class="footer-nav">
+        <a href="যুদ্ধ ও বিপ্লবসমূহ.html">← পূর্ববর্তী অধ্যায়</a>
+        <a href="বৈশ্বিক দ্বন্দ্ব ও গুরুত্বপূর্ণ অঞ্চল.html">পরবর্তী অধ্যায় →</a>
+      </div>
+      <p>লাইভ এমসিকিউ™ বিসিএস প্রিলিমিনারি ই-বুক • আন্তর্জাতিক বিষয়াবলি</p>
+    </footer>
   </div>
 
-  <!-- BCS Frequency Analysis -->
-  <section class="bcs-card">
-    <div class="bcs-title">
-      <span>📊</span> বিসিএস প্রিলিমিনারি প্রশ্ন সংখ্যা বিশ্লেষণ (৫০তম থেকে ১০ম বিসিএস)
-    </div>
-    <div class="bcs-grid">
-      <div class="bcs-item"><span class="exam">৫০তম বিসিএস</span><span class="count">০টি</span></div>
-      <div class="bcs-item"><span class="exam">৪৯তম বিসিএস</span><span class="count">২টি</span></div>
-      <div class="bcs-item"><span class="exam">৪৮তম বিসিএস</span><span class="count">১টি</span></div>
-      <div class="bcs-item"><span class="exam">৪৭তম বিসিএস</span><span class="count">০টি</span></div>
-      <div class="bcs-item"><span class="exam">৪৬তম বিসিএস</span><span class="count">১টি</span></div>
-      <div class="bcs-item"><span class="exam">৪৫তম বিসিএস</span><span class="count">০টি</span></div>
-      <div class="bcs-item"><span class="exam">৪৪তম বিসিএস</span><span class="count">১টি</span></div>
-      <div class="bcs-item"><span class="exam">৪৩তম বিসিএস</span><span class="count">২টি</span></div>
-      <div class="bcs-item"><span class="exam">৪২তম বিসিএস</span><span class="count">১টি</span></div>
-      <div class="bcs-item"><span class="exam">৪১তম বিসিএস</span><span class="count">০টি</span></div>
-      <div class="bcs-item"><span class="exam">৪০তম বিসিএস</span><span class="count">১টি</span></div>
-      <div class="bcs-item"><span class="exam">৩৯তম বিসিএস</span><span class="count">০টি</span></div>
-      <div class="bcs-item"><span class="exam">৩৮তম বিসিএস</span><span class="count">২টি</span></div>
-      <div class="bcs-item"><span class="exam">৩৭তম বিসিএস</span><span class="count">০টি</span></div>
-      <div class="bcs-item"><span class="exam">৩৬তম বিসিএস</span><span class="count">২টি</span></div>
-      <div class="bcs-item"><span class="exam">৩৫তম বিসিএস</span><span class="count">১টি</span></div>
-      <div class="bcs-item"><span class="exam">১০ম–৩৪তম বিসিএস</span><span class="count">২০টি</span></div>
-    </div>
-    <p style="font-size:0.875rem; color:var(--text-muted); line-height:1.5;">
-      💡 <strong>গুরুত্বপূর্ণ পর্যবেক্ষণ:</strong> প্রাচীন চীনে সিভিল সার্ভিস ব্যবস্থার উদ্ভব, আব্রাহাম লিংকনের ক্রীতদাস প্রথা বিলোপ, নেলসন ম্যান্ডেলার বর্ণবাদবিরোধী সংগ্রাম ও আফ্রিকান ন্যাশনাল কংগ্রেস (ANC), হিটলারের উক্তি, লিওনার্দো দ্য ভিঞ্চির মোনালিসা এবং আন্তর্জাতিক সাক্ষরতা দিবস থেকে নিয়মিত বিসিএস প্রশ্ন এসেছে।
-    </p>
-  </section>
-
-  <!-- Visual Summary Section -->
-  <h2 class="section-heading"><span>📜</span> ঐতিহাসিক ব্যক্তিত্ব, ধর্মের বিকাশ ও শিল্প-সাহিত্য</h2>
-
-  <!-- Religions Table -->
-  <div class="visual-card">
-    <h3><span>🕊️</span> টেবিল ১: বিশ্বের প্রধান প্রধান ধর্ম, প্রবক্তা ও পবিত্র তীর্থস্থান</h3>
-    <div class="table-responsive">
-      <table>
-        <thead>
-          <tr>
-            <th>ধর্ম</th>
-            <th>প্রবক্তা / মূল ব্যক্তিত্ব</th>
-            <th>পবিত্র ধর্মগ্রন্থ</th>
-            <th>পবিত্রতম স্থান ও বিশেষত্ব</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>ইসলাম ধর্ম</strong></td>
-            <td>হযরত মুহাম্মদ (সা.)</td>
-            <td>আল কোরআন</td>
-            <td>মক্কা মুকাররমা (কাবা শরিফ), মদিনা মুনাওয়ারা, বায়তুল মুকাদ্দাস (জেরুজালেম)</td>
-          </tr>
-          <tr>
-            <td><strong>খ্রিস্টধর্ম</strong></td>
-            <td>যিশু খ্রিস্ট (ঈসা আ.)</td>
-            <td>বাইবেল (ওল্ড ও নিউ টেস্টামেন্ট)</td>
-            <td>জেরুজালেম (পবিত্র সমাধি চার্চ), বেথলেহেম, ভ্যাটিকান সিটি (সেন্ট পিটার্স ব্যাসিলিকা)</td>
-          </tr>
-          <tr>
-            <td><strong>ইহুদি ধর্ম</strong></td>
-            <td>হযরত মুসা (আ.) ও ইব্রাহিম (আ.)</td>
-            <td>তাওরাত / তোরাহ</td>
-            <td>জেরুজালেম (পশ্চিম প্রাচীর বা ওয়েস্টার্ন ওয়াল / কোতেল)</td>
-          </tr>
-          <tr>
-            <td><strong>বৌদ্ধধর্ম</strong></td>
-            <td>গৌতম বুদ্ধ (সিদ্ধার্থ)</td>
-            <td>ত্রিপিটক (পালি ভাষা)</td>
-            <td>লুম্বিনী (নেপাল - জন্মস্থান), বোধগয়া (ভারত - বোধিলাভ), সারনাথ</td>
-          </tr>
-          <tr>
-            <td><strong>হিন্দুধর্ম</strong></td>
-            <td>সনাতন ঋষি ও ঐতিহ্য</td>
-            <td>বেদ, উপনিষদ, শ্রীমদ্ভগবদ্গীতা</td>
-            <td>বারাণসী (কাশী), হরিদ্বার, অযোধ্যা, পুরী (ভারত)</td>
-          </tr>
-          <tr>
-            <td><strong>কনফুসীয়বাদ</strong></td>
-            <td>কনফুসিয়াস (চীন)</td>
-            <td>দ্য অ্যানালেকটস</td>
-            <td>কুফু (চীন); নৈতিকতা ও সদাচরণের সামাজিক দর্শন</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- Statesmen Matrix -->
-  <div class="visual-card">
-    <h3><span>👑</span> টেবিল ২: ইতিহাসের প্রভাবশালী রাষ্ট্রনায়ক, দার্শনিক ও তাদের কীর্তি</h3>
-    <div class="table-responsive">
-      <table>
-        <thead>
-          <tr>
-            <th>ব্যক্তিত্ব</th>
-            <th>দেশ / অঞ্চল</th>
-            <th>ঐতিহাসিক ভূমিকা</th>
-            <th>প্রধান কীর্তি ও অমর উক্তি</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>আব্রাহাম লিংকন</strong></td>
-            <td>মার্কিন যুক্তরাষ্ট্র</td>
-            <td>১৬তম মার্কিন প্রেসিডেন্ট; গৃহযুদ্ধের সময় যুক্তরাষ্ট্রকে রক্ষা করেন</td>
-            <td>১৮৬৩ সালে ক্রীতদাস প্রথা বিলোপের 'ইমানসিপেশন প্রক্লেমেশন'; বিখ্যাত গেটিসবার্গ ভাষণ</td>
-          </tr>
-          <tr>
-            <td><strong>নেলসন ম্যান্ডেলা</strong></td>
-            <td>দক্ষিণ আফ্রিকা</td>
-            <td>বর্ণবাদবিরোধী মহান বিপ্লবী নেতা; দক্ষিণ আফ্রিকার ১ম কৃষ্ণাঙ্গ প্রেসিডেন্ট</td>
-            <td>আফ্রিকান ন্যাশনাল কংগ্রেস (ANC); রোবেন দ্বীপে ২৭ বছর কারাভোগ; ১৯৯৩ সালে নোবেল শান্তি</td>
-          </tr>
-          <tr>
-            <td><strong>অ্যাডলফ হিটলার</strong></td>
-            <td>জার্মানি</td>
-            <td>নাৎসি জার্মানির একনায়ক (ফুয়েরার)</td>
-            <td>"যুদ্ধই জীবন, যুদ্ধই সর্বজনীন" (War is life, war is universal); আত্মজীবনী 'মেইন কাম্ফ'</td>
-          </tr>
-          <tr>
-            <td><strong>উইলিয়াম রোস্টো</strong></td>
-            <td>যুক্তরাষ্ট্র</td>
-            <td>বিখ্যাত অর্থনীতিবিদ ও উন্নয়ন তাত্ত্বিক</td>
-            <td>"The Stages of Economic Growth: A Non-Communist Manifesto" (অর্থনৈতিক প্রবৃদ্ধির ৫ স্তর)</td>
-          </tr>
-          <tr>
-            <td><strong>কার্ল মার্ক্স</strong></td>
-            <td>জার্মানি</td>
-            <td>বৈজ্ঞানিক সমাজতন্ত্রের জনক</td>
-            <td>দাস ক্যাপিটাল (Das Kapital) ও কমিউনিস্ট ম্যানিফেস্টো; দ্বান্দ্বিক বস্তুবাদ</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- Art & Literature Cards -->
-  <div class="visual-card">
-    <h3><span>🎨</span> বিশ্ববিখ্যাত শিল্পকর্ম, সাহিত্য ও আন্তর্জাতিক দিবস</h3>
-    <div class="concept-grid">
-      <div class="concept-box">
-        <h4>'মোনালিসা' ও লিওনার্দো দ্য ভিঞ্চি</h4>
-        <p>ইতালীয় রেনেসাঁ শিল্পী লিওনার্দো দ্য ভিঞ্চির জগদ্বিখ্যাত রহস্যময় প্রতিকৃতি। বর্তমানে ফ্রান্সের প্যারিসের ল্যুভর মিউজিয়ামে সংরক্ষিত। তাঁর আরেকটি বিখ্যাত চিত্রকর্ম 'দ্য লাস্ট সাপার'।</p>
-      </div>
-      <div class="concept-box blue">
-        <h4>'শাহনামা' ও মহাকবি ফেরদৌসী</h4>
-        <p>ফারসি সাহিত্যের অমর মহাকাব্য 'শাহনামা' (বুক অব কিংস) রচনা করেন আবুল কাসিম ফেরদৌসী। প্রায় ৩০ বছর ধরে রচিত এটি পারস্যের প্রাচীন ইতিহাস ও বীরগাথা তুলে ধরে।</p>
-      </div>
-      <div class="concept-box navy">
-        <h4>প্রাচীন সিভিল সার্ভিস ও চীন</h4>
-        <p>ইতিহাসে সিভিল সার্ভিস বা বেসামরিক আমলাতন্ত্রের ধারণা প্রথম উদ্ভূত হয় প্রাচীন চীনে (হান ও তাং রাজবংশ আমলে প্রতিযোগিতামূলক মেধাভিত্তিক পরীক্ষার মাধ্যমে)।</p>
-      </div>
-      <div class="concept-box">
-        <h4>৮ সেপ্টেম্বর: আন্তর্জাতিক সাক্ষরতা দিবস</h4>
-        <p>ইউনেস্কো (UNESCO) কর্তৃক ১৯৬৬ সালে ঘোষিত এবং ১৯৬৭ সাল থেকে প্রতিবছর ৮ সেপ্টেম্বর বিশ্বব্যাপী সাক্ষরতা প্রসারে আন্তর্জাতিক সাক্ষরতা দিবস পালিত হয়।</p>
-      </div>
-      <div class="concept-box blue">
-        <h4>৩১ মে: বিশ্ব তামাকমুক্ত দিবস</h4>
-        <p>বিশ্ব স্বাস্থ্য সংস্থা (WHO) কর্তৃক ১৯৮৭ সাল থেকে প্রতিবছর ৩১ মে তামাকের ক্ষতিকর প্রভাব সম্পর্কে সচেতনতা বৃদ্ধিতে বিশ্ব তামাকমুক্ত দিবস পালন করা হয়।</p>
-      </div>
-      <div class="concept-box navy">
-        <h4>সুফি সাধক মাওলানা রুমী</h4>
-        <p>বিখ্যাত ফারসি সুফি কবি মাওলানা জালালউদ্দিন রুমীর শ্রেষ্ঠ সাহিত্যকর্ম হলো আধ্যাত্মিক কাব্যগ্রন্থ 'মসনবী-ই-মানবী'।</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mnemonic Box -->
-  <div class="mnemonic-box">
-    <div class="mnemonic-icon">💡</div>
-    <div class="mnemonic-text">
-      <strong>বিসিএস মেমোরি হ্যাক (গুরুত্বপূর্ণ ব্যক্তি ও দিবস):</strong><br>
-      • <strong>সিভিল সার্ভিস উৎপত্তি:</strong> চীন (মেধাভিত্তিক পরীক্ষা 'কেজু')।<br>
-      • <strong>দাসপ্রথা বিলোপ:</strong> আব্রাহাম লিংকন (১৬তম প্রেসিডেন্ট, ১৮৬৩ সালে ইমানসিপেশন প্রক্লেমেশন)।<br>
-      • <strong>ম্যান্ডেলার দল:</strong> আফ্রিকান ন্যাশনাল কংগ্রেস (ANC)।<br>
-      • <strong>৮ সেপ্টেম্বর:</strong> আন্তর্জাতিক সাক্ষরতা দিবস (UNESCO)।<br>
-      • <strong>৩১ মে:</strong> বিশ্ব তামাকমুক্ত দিবস (WHO)।
-    </div>
-  </div>
-
-  <!-- Interactive Quiz Engine -->
-  <h2 class="section-heading"><span>📝</span> অধ্যায়ভিত্তিক পূর্ণাঙ্গ বিসিএস কুইজ ইঞ্জিন (৩১টি এমসিকিউ)</h2>
-
-  <div class="quiz-header">
-    <div class="quiz-score-badge" id="live-score">
-      স্কোর: ০ / ৩১ (সঠিকতা: ০%)
-    </div>
-    <div style="font-size:0.875rem; color:var(--text-muted);">
-      সরাসরি অপশনে ক্লিক করে উত্তর যাচাই করুন ও ব্যাখ্যা দেখুন
-    </div>
-  </div>
-
-  <!-- Category Filter Pills -->
-  <div class="filter-pills">
-    <button class="filter-pill active" onclick="filterCategory('all', this)">সকল প্রশ্ন (৩১টি)</button>
-    <button class="filter-pill" onclick="filterCategory('ঐতিহাসিক ব্যক্তি ও অবদান', this)">ঐতিহাসিক ব্যক্তিত্ব</button>
-    <button class="filter-pill" onclick="filterCategory('ধর্ম ও ধর্মীয় দর্শন', this)">ধর্ম ও তীর্থস্থান</button>
-    <button class="filter-pill" onclick="filterCategory('শিল্প, সাহিত্য ও দিবস', this)">শিল্প, সাহিত্য ও দিবস</button>
-    <button class="filter-pill" onclick="filterCategory('wrong', this)">ভুল উত্তরগুলো</button>
-  </div>
-
-  <!-- Questions Container -->
-  <div id="questions-container">
-
-    <div class="mcq-card" id="q-card-1" data-category="ধর্ম ও ধর্মীয় দর্শন" data-ans="গ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১</span>
-        <span class="mcq-bcs">৪৯তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">প্রাচীনকালে কোন দেশে সিভিল সার্ভিসের ধারণা প্রথম উদ্ভুত হয়]</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(1, 'ক', 'গ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">মিশর</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(1, 'খ', 'গ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">রীস চীন রোম </span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(1, 'গ', 'গ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">গ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(1, 'ঘ', 'গ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">ঘ</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(1)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-1">
-        <strong>সঠিক উত্তর: (গ)</strong><br>
-        প্রাচীনকালে সিভিল সার্ভিসের ধারণা প্রথম উদ্ভূত
-চীনে।
-সিভিল সার্ভিস : সিভিল সার্ভিস একটি রাষ্ট্রীয় প্রশাসনিক
-ব্যবছ্থা। এর মাধ্যমে সরকার বিভিন্ন কার্যক্রম পরিচালনা করে
-এবং নাগরিকদের সেবা প্রদান করে। এটি মূলত একটি ॥ ১.৫, ৯ টেন 7.4 ০ আগ ১] ১ ০ ঢা রা...
-পেশাদার, অরাজনৈতিক ও দক্ষ কর্মকর্তা-কর্মচারী বাহিনী,
-যারা সংবিধান ও সরকারের নীতিমালার আলোকে কাজ করে।
-এছাড়া, তারা সরকারের নীতিমালা বাস্তবায়নে গুরুত্বপূর্ণ
-ভূমিকা পালন করেন। এর অন্তর্ভুক্ত কর্মকর্তারা কেন্দ্রীয় ও
-স্থানীয় প্রশাসনের নানা স্তরে নিয়োজিত থাকেন।
-সিভিল সার্ভিসের উদ্ভব হয়েছে- প্রাচীন কালেই; যখন কিনা
-বিশ্বের বিভিন্ন প্রান্তে রাজতন্ত্র বিদ্যমান ছিল।
-এনসাইক্লোপিডিয়া ব্রিটানিকার তথ্য অনুসারে, সিভিল 11০ 14001 বিসিএস প্রিলিমিনারি
-সার্ভিসের ধারণার উদ্ভব হয়েছিল প্রাচীন মিশরীয় ও থ্ত্রীক
-সভ্যতার সময়। পরবর্তীতে , রোমান সাম্রাজ্য প্রশাসনিক দপ্তর
-নির্মাণের মাধ্যমে একটি বিস্তৃত নেটওয়ার্ক গড়ে তুলেছিল; যা
-পরবর্তীতে রোমান ক্যাথলিক চার্চগুলোও অনুসরণ করে।
-চীনে খ্রিস্টপূর্ব ২ অন্দে সিডিল সার্ভিসের উদ্ভব হয় যা চীনা
-সভ্যতা/সাম্রাজ্যকে দুই হাজার বছরের বেশি সময় ধরে স্থায়িত্ব
-দিয়েছে। যোগ্যতার ডিত্তিতে সিভিল সার্ভিসের প্রাচীনতম
-উদাহরণগুলির মধ্যে একটি হলো চীনের ইম্পেরিয়াল
-আমলাতন্ত্র। চীনে সিডিল সার্ভিসের চাকরিকে &quot;1011 ২106
-8০%1]' বলা হয়। চাকরির নিরাপত্তা ও উচ্চ বেতনের জন্য
-এই নামকরণ করা হয়েছে। চীনের সিভিল সার্ভিস পরীক্ষা
-মান্দারিন ভাষায় হয় '00810'। খ্রিষ্টপূর্ব ২০৬ অন্দে চীনের
-হান রাজবংশের রাজা গাওজু (08021) এর শাসনামলে
-মেধাভিত্তিক সিভিল সার্ভিসের উন্মেষ ঘটে। তিনি প্রথম
-পরীক্ষার মাধ্যমে রাজকর্মচারী নিয়োগের ব্যবস্থা চালু করেন।
-এই সময়ে ইস্পেরিয়াল পরীক্ষা ব্যবস্থা [10] বা শে]
-ওণছাত চাঞা8001)) চালু হয়, যা মেধা ও যোগ্যতার
-ভিত্তিতে সরকারি কর্মকর্তা নিয়োগের জন্য প্রতিযোগিতামূলক
-পরীক্ষার উপর নির্ভরশীল ছিল। এই ব্যবস্থা পরবর্তীতে সুই
-(৫৮১-৬১৮) এবং তাং রাজবংশের (৬১৮-৯০৭) সময়ে
-আরও উন্নত হয়। পরবর্তীতে অন্যান্য রাজবংশের শাসনের
-সময় তা বিভিন্ন সংশোধন ও পরিমার্জনের মাধ্যমে পরিবর্তিত
-হতে থাকে ও অধিক সুসংগঠিত হয়। সং সাম্রাজ্য (30108
-[0850 - 960-1279) প্রথম যোগ্যতা (00511 0০৪০০)
-ও পরীক্ষা পদ্ধতির প্রচলন ঘটায়। মিং সাম্রাজ্যের (418
-09া0858 - 1368-1644) সময় সিভিল সার্ভিস সিস্টেম
-চূড়ান্ত রূপে পৌঁছায় এবং পরবর্তীতে কিং সাম্রাজ্যও এই
-পদ্ধতিই অনুসরণ করে। এই সময় সিভিল সার্ভিসের
-কর্মকর্তাগণ নিজের এলাকায় নিয়োগ না পাওয়া, এক স্থানে
-তিনবছরের বেশি দায়িত্ব পালন না করা ইত্যাদি নিয়ম অন্তর্ভুক্ত
-হয়। তাছাড়া, উচ্চপদের জন্য যোগ্যতার ক্ষেত্রে বেশ কিছু
-জিনিস অন্তর্ভুক্ত এবং শৃঙ্খলাভঙ্গের জন্য শান্তির বিধান করা
-হয়। চীনে ১৯৪৯ সালে গণপ্রজাতন্ত্র প্রতিষ্ঠার পর মূলত
-বর্তমান রাষ্ট্রীয় সিভিল সার্ভিসের প্রচলন ঘটে। সাধারণত
-কমিউনিস্ট পার্টির সাথে সংশ্লিষ্টরাই এই সার্ভিসে যোগদান
-করে। তাই, সিভিল সার্ভিসের উদ্ভব হিসেবে চীন দেশকেই
-গণ্য করা হয়।
-উল্লেখ্য, ১৯৪৭ সালের ভারত বিভাগের পর এই কাঠামো দুটি
-ভাগে বিভক্ত হয়-ডারত ও পাকিস্তানের নিজ নিজ প্রশাসনিক
-কাঠামোতে ৷ পরবর্তীতে বাংলাদেশের স্বাধীনতার পর, ১৯৭২
-সালে সিভিল সার্ভিস পুনর্গঠিত হয়ে বাংলাদেশ সিডিল সার্ভিস
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-2" data-category="ঐতিহাসিক ব্যক্তি ও অবদান" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২</span>
-        <span class="mcq-bcs">৪৯তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">“কেবল আয়ের অভাব নয়, বরং সাম্যের অভাবই দারিদ্র্যের মূল কারণ”- অর্থনীতিবিদ অমর্ত সেন কোন গ্রন্থে এই যুক্তি তুলে ধরেন?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(2, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">1)6010]011011(</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(2, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">5 77176600111</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(2, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">01101</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(2, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">110 [1017</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(2)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-2">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        “কেবল আয়ের অভাব নয়, বরং সামর্থের অভাবই দারিদ্র্যের
-মূল কারণ” অর্থনীতিবিদ অমর্ত সেন ')6%০]0[1006110 85
-166011' গ্রন্থে এই যুক্তি তুলে ধরেন।
-অমর্ত্ সেন : অমর্ত্ সেন একজন ভারতীয় বাঙালী
-অর্থনীতিবিদ ও দার্শনিক। ১৯৯৮ সালে তিনি অর্থনীতিতে
-নোবেল পুরস্কার লাভ করেছিলেন। দারিদ্র এবং দুর্ভিক্ষ নিয়ে
-গবেষণার জন্য ১৯৯৮ সালে অর্থনীতিতে নোবেল পুরস্কার পান
-অমর্ত্য সেন।
-১৯৫১ সালে আইএসসি পরীক্ষায় প্রথম হয়ে তিনি ভর্তি হন
-কলকাতার প্রেসিডেন্সি কলেজে এবং তারপর অর্থনীতি নিয়ে
-উচ্চতর শিক্ষা গ্রহণ করেন ইংল্যাণ্ডে কেম্ত্রিজের ট্রিনিটি
-কলেজে । এছাড়াও তিনি ১৯৯৮ থেকে ২০০৪ সাল পর্যন্ত
-ক্যামব্রিজের ট্রিনিটি কলেজের মাস্টার হিসেবে কর্মরত
-ছিলেন। তিনি ইকোনমিস্ট ফর পিস আ্যান্ড সিকিউরিটির
-একজন ট্রাষ্টি। তিনিই প্রথম ভারতীয় শিক্ষাবিদ যিনি একটি
-অসক্সব্লিজ কলেজের প্রধান হন। এছাড়াও তিনি প্রস্তাবিত নালন্দা
-আন্তর্জাতিক বিশ্ববিদ্যালয়ের উপাচার্য হিসাবেও কাজ করেছেন।
-২০০৬ সালে টাইম ম্যাগাজিন তাকে অনূর্ধ্ব ষাট বছর বয়সী
-ভারতীয় বীর হিসেবে চিহ্নিত করেছে। ২০১০ সালে তাকে
-বিশ্বের ১০০ প্রভাবশালী ব্যক্তির তালিকায় স্থান দেওয়া হয়।
-উল্লেখ্য, “কবল আয়ের অভাব নয়, বরং সামর্থ্যের অভাবই
-দারিযিদ্ররে মূল কারণ&quot;- এই উক্তিটি অর্থনীতিবিদ অমর্ত্য সেন-
-এর । তিনি তার &quot;6০101110110 35 ঢ1660011&quot; গ্রন্থে এই
-যুক্তি তুলে ধরেন। এখানে 'সামর্যের অভাব' বলতে শুধু
-আর্থিক সংগতিই নয়, বরং মানুষের সক্ষমতার অভাবকেও
-বোঝানো হয়েছে, যার মধ্যে রয়েছে শিক্ষা, স্বাস্থ্য, সুযোগ এবং
-স্বাধীনতা লাভের অভাব।
-এছাড়াও, অমর্ত সেনের লেখা গ্রন্থাবলি ৩০টিরও বেশি ভাষায়
-অনুদিত হয়েছে। 116 1098 01 109006-গ্রন্থটের রচয়িতা
-অমর্ত সেন। বইটি মূলত জন রলসের '&amp; 06017 ০0৫
-19006 (1971)-এর মৌলিক ধারণাগুলির একটি সমালোচনা
-এবং সংশোধন ।
-চন ব্রার পে ঞ ১৬২. হেলেন
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-3" data-category="ঐতিহাসিক ব্যক্তি ও অবদান" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ৩</span>
-        <span class="mcq-bcs">৪৮তম
-বিসিএস</span>
-      </div>
-      <div class="mcq-question">কে প্রথম 'গ্লোবাল ডিলেজ' ধারাটির উপস্থাপন করেন?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(3, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">হার</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(3, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">বার</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(3, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">মার</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(3, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">শাল ম</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(3)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-3">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        'গ্লোবাল ভিলেজ' ধারাটি প্রথম উপস্থাপন করেন
-কানাডিয়ান গণযোগাযোগ বিশেষজ্ঞ মার্শাল ম্যাকলুহান।
-দগ্লোবাল ভিলেজ বা বিশ্বধাম : গ্লোবাল ভিলেজ বা বিশ্বধাম
-হচ্ছে এমন একটি পরিবেশ যেখানে পৃথিবীর সকল মানুষই
-একটি একক সমাজে বসবাস করে এবং ইলেকট্রনিক মিডিয়া
-ও তথ্য প্রযুক্তির ব্যবহারের মাধ্যমে একে অপরকে সেবা প্রদান
-করে থাকে। কানাডার টরেন্টো বিশ্ববিদ্যালয়ের ইংরেজি
-বিভাগের অধ্যাপক ও বিখ্যাত দার্শনিক 'মার্শাল ম্যাকলুহান'
-সর্বপ্রথম গ্লোবাল ভিলেজ বা বিশ্বাম শব্দটি ব্যবহার করেন।
-মার্শাল ম্যাকলুহান 'দি মিডিয়াম ইজ দি মেসেজ' (016
-0001010 1$ 1]6 111088886) এবং 'গ্লোবাল ভিলেজ'
-(010881 11886) এর প্রবক্তা বা উদ্ভাবক হিসাবে পরিচিতি
-পেয়েছেন। তিনি ১৯৬২ সালে তার প্রকাশিত গ্রন্থ 16
-0০016118918: 1116 14310118 ০1081001106 থা
-এবং ১৯৬৪ সালে তার প্রকাশিত গ্রন্থ '110919131101118
-14০018' এ গ্লোবাল ভিলেজ বা বিশ্বাম এর ধারণা দেন। তার
-সময়ে ইলেকট্রনিক কমিউনিকেশন প্রযুক্তির ব্যাপক বিস্তার লাভ
-করেছিল। তার মতে, ইলেক্ট্রনিক কমিউনিকেশন প্রযুক্তির
-ব্যাপক বিস্তারের ফলে সময় ও দূরত্ব সংকুচিত হয়ে পৃথিবী
-একটি খ্রামে পরিণত হয়েছে। তিনি এ প্রযুক্তির বিষ্ভুতিকে
-'ইলেকট্রনিক নার্ভাস সিস্টেম' (01600016 01%005
-8১101) নামে আখ্যায়িত করেছেন। পৃথিবী এ সিস্টেমের
-সাহায্যে সংযুক্ত হয়ে বিশ্বধাম (01088] *111886) এ
-রূপান্তরিত হয়েছে।
-উৎস: তথ্য ও যোগাযোগ প্রযুক্তি, একাদশ ও দ্বাদশ শ্রেণি (প্রকৌশলী
-মুজিবুর রহমান)
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-4" data-category="শিল্প, সাহিত্য ও দিবস" data-ans="গ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ৪</span>
-        <span class="mcq-bcs">৪৬তম
-বিসিএস</span>
-      </div>
-      <div class="mcq-question">কোন দিনটি বিশ্ব শরণার্থী দিবস হিসেবে পালিত হয়?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(4, 'ক', 'গ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">জ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(4, 'খ', 'গ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">ন</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(4, 'গ', 'গ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">১০ জ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(4, 'ঘ', 'গ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">ন</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(4)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-4">
-        <strong>সঠিক উত্তর: (গ)</strong><br>
-        বিশ্ব শরণার্থী দিবস পালিত হয় ২০ জুন। বিশ্বজুড়ে
-শরণার্থীদের অমানবিক অবস্থানের প্রতি আন্তর্জাতিক নেতৃবৃন্দের
-সচেতনতা সৃষ্টির জন্য দিবসটি পালন করা হয়। এযাবৎ কালে
-শরণার্থী সংখ্যা সর্বোচ্চ রেকর্ড ছুঁয়েছে। বর্তমানে বিশ্বে বাস্্যুত
-মানুষের সংখ্যা ১২ কোটি ছাড়িয়েছে। মূলত যুদ্ধ, জাতিগত
-সন্ত্রাসই সাম্প্রতিক সময়ে শরণার্থী সংখ্যা বৃদ্ধির মূল কারণ।
-অন্যদিকে, ৫ই জুন বিশ্ব পরিবেশ দিবস।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-5" data-category="ধর্ম ও ধর্মীয় দর্শন" data-ans="খ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ৫</span>
-        <span class="mcq-bcs">৪৪তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">ইসলাম ও সুফিমতের প্রভাবে ভারতবর্ষে ঘটেছিল-</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(5, 'ক', 'খ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">বর</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(5, 'খ', 'খ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">ণবাদের</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(5, 'গ', 'খ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">নর</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(5, 'ঘ', 'খ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">থান</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(5)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-5">
-        <strong>সঠিক উত্তর: (খ)</strong><br>
-        ইসলাম ও সুফি মতবাদের প্রভাব ভারতবর্ষে একটি
-চিন্তাবিপ্লব সৃষ্টি করেছিল। সুফি দর্শন ও ইসলাম ধর্মের
-সংমিশ্রণে নতুন চিন্তা ও দার্শনিক ধারার বিকাশ ঘটে । এতে
-ভারতবর্ষের সমাজ, ধর্ম ও সংস্কৃতির মধ্যে এক নতুন চিন্তার
-সূচনা হয়।
-সুফি দর্শন মূলত প্রেম ও মানবিকতা নিয়ে গঠিত, যেখানে
-আল্লাহর প্রতি প্রেমকে সর্বোচ্চ মর্যাদা দেওয়া হয়। ভারতবর্ষে
-সুফি দরবেশরা তাদের মানবিক দৃষ্টিভঙ্গি এবং প্রেমের তত্ত্বের
-মাধ্যমে সমাজে গুরুত্বপূর্ণ প্রভাব ফেলে । এই সুফি দর্শন ও
-ইসলাম ধর্মের প্রভাবেই ভারতে নতুন চিন্তার উদ্ভব হয়, যা
-পরবর্তীতে ভক্তিবাদ ও আধুনিক চিন্তাধারা সৃষ্টি করে।
-উদাহরণস্বরূপ- রাজা রামমোহন রায় ইসলামের যুক্তিবাদ ও
-সুফি ভক্তিবাদের মেলবন্ধন করেছিলেন, যা চিন্তাবিপ্ুবের
-ধারাকে আরো শক্তিশালী করেছিল।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-6" data-category="শিল্প, সাহিত্য ও দিবস" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ৬</span>
-        <span class="mcq-bcs">৪৩তম
-বিসিএস</span>
-      </div>
-      <div class="mcq-question">তান্তর্জাতিক গণতন্ত্র দিবস কোন তারিখে পালিত হয়?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(6, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">১</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(6, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">সে</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(6, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">েম</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(6, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">বর</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(6)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-6">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        প্রতি বছর '১৫ সেপ্টেম্বর' তারিখে আন্তর্জাতিক গণতন্ত্র
-দিবস পালিত হয়। জাতিসংঘের সদস্যভুক্ত দেশগুলোতে
-গণতন্ত্র সম্পর্কে আগ্রহ সৃষ্টি ও গণতন্ত্র চর্চাকে উৎসাহিত করার
-জন্য ২০০৭ সাল থেকে এই দিনটিকে উদযাপন করা হয়।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-7" data-category="শিল্প, সাহিত্য ও দিবস" data-ans="খ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ৭</span>
-        <span class="mcq-bcs">৩৪তম
-বিসিএস</span>
-      </div>
-      <div class="mcq-question">'া116180) &quot;101 016 1.1” নামে পরিচিত- (৪৩তম</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(7, 'ক', 'খ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">হেলেন</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(7, 'খ', 'খ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">েলার</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(7, 'গ', 'খ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">ফ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(7, 'ঘ', 'খ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">লোরে নাই</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(7)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-7">
-        <strong>সঠিক উত্তর: (খ)</strong><br>
-        ফ্লোরে নাইটিঙ্গেলকে 'লেডি উইথ দ্য ল্যাম্প' বলা
-হয়। আধুনিক নার্সিংয়ের প্রতিষ্ঠাতা ফ্লোরে নাইটিঙ্গেল
-(চ101006 1২1810118816) উনবিংশ শতাব্দীর একজন
-বিখ্যাত নার্স ছিলেন। তাকে “1116 180) 10) 06 1 910
-নামে ডাকা হয় কারণ তিনি ক্রিমিয়ার যুদ্ধের সময় আহত
-সৈন্যদের সেবা করতে রাতের অন্ধকারে ল্যাম্প হাতে
-রোগীদের কাছে যেতেন। এই সাহসিকতা এবং সেবার কারণে
-তিনি ইতিহাসে অমর হয়ে আছেন। তাকে আধুনিক নার্সিং
-এর অগ্রদূতও বলা হয়।
-অন্যদিকে,
-2 সরোজিনী নাইডুকে ওয়াল্ডারিং গায়িকা, গার্ডিয়ান অফ মাই
-সোল, বুলবুল-ই-হিন্দ, 14180118816 ০111018 বলে সম্বোধন
-করা হয়।
-₹ মাদার তেরেসাকে সাধারণত “সেন্ট তেরেসা অফ
-ক্যালকাটা” (381110161698 ০£091০008) নামে ডাকা হয়।
-2 হেলেন কেলার ছিলেন একজন প্রখ্যাত আমেরিকান লেখক,
-রাজনৈতিক কর্মী এবং সমাজকর্মী । তার লেখা “দ্য স্টোরি অব
-মাই লাইফ” (116 90017 ০14 116) বইটি বিশ্বজুড়ে
-ক ্্ । ্ ৮ ৬৮ লট ৷ 2 ক ৮ ১ ও কক
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-8" data-category="শিল্প, সাহিত্য ও দিবস" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ৮</span>
-        <span class="mcq-bcs">৪২তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">ভারতে বছরের কোন দিনটি সিভিল সার্ভিস দিবস (011 3০1%1063)) হিসেবে পালিত হয়?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(8, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">২১ এ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(8, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">রিল</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(8, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">২ অ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(8, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">োবর</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(8)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-8">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        ভারতে প্রতি বছর ২১ এপ্রিল কে সিভিল সার্ভিস দিবস
-(011 301%4106 8১) হিসেবে পালন করা হয়। এই দিনে
-ভারতের বিভিন্ন সিডিল সার্ভিস কর্মকর্তাদের কাজের জন্য
-স্বীকৃতি ও সম্মাননা দেওয়া হয়। ১৯৪৭ সালের এই দিনে
-ভারতের প্রথম স্বরাষটরমন্ত্রী সর্দার বল্নভভাই প্যাটেল সিভিল
-সার্ভিস কর্মকর্তাদেরকে জাতির 'স্টিল ফ্রেম' বলে অভিহিত
-করেছিলেন।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-9" data-category="ঐতিহাসিক ব্যক্তি ও অবদান" data-ans="গ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ৯</span>
-        <span class="mcq-bcs">৪০তম বিসিএস
-ও মার্থা ন্যূসবাম ও জোসেফ স্টিগলিটজ
-ও অমর্ত্য সেন ও জন রাউলস উ.গ
-ব্যাখ্যা: 'দি আইডিয়া অফ জাস্টিস' হল নোবেল বিজয়ী অমর্ত্য
-সেনের একটি বিখ্যাত গ্রন্থ । অমর্ত্য সেন হলেন নোবেল বিজয়ী
-(১৯৯৮ সাল</span>
-      </div>
-      <div class="mcq-question">'দ্যা আইডিয়া অব জাস্টিস' গ্রন্থের রচয়িতা কে?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(9, 'ক', 'গ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text"> অর</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(9, 'খ', 'গ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">থনীতিবিদ এবং দার</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(9, 'গ', 'গ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">শনি</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(9, 'ঘ', 'গ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">। বই</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(9)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-9">
-        <strong>সঠিক উত্তর: (গ)</strong><br>
-        'দি আইডিয়া অফ জাস্টিস' হল নোবেল বিজয়ী অমর্ত্য
-সেনের একটি বিখ্যাত গ্রন্থ । অমর্ত্য সেন হলেন নোবেল বিজয়ী
-(১৯৯৮ সাল) অর্থনীতিবিদ এবং দার্শনিক। বইটি ২০০৯
-সালে প্রকাশিত হয়। এটি জন রাউলসের 'এ থিওরি অফ
-জাস্টিস'-এর সমালোচনা ও সংশোধন হিসেবে পরিচিত ।
-বইটির মূলকথা হল, ন্যায্যতা বিমূর্ত ধারণা নয়; বরং এটি
-বিভিন্ন পরিস্থিতিতে ভিন্ন ভিন্ন মাপকাঠিতে বিচার করা প্রয়োজন ।
-অর্থাৎ, ন্যায় ও অন্যায়ের বিচার করতে হলে বাস্তব পরিস্থিতির
-দিকে নজর দিতে হবে।
-অন্যান্য অপশনগুলোর মধ্যে
-2 মার্থা ন্যুসবাম : মার্থা ন্যূসবাম একজন আমেরিকান
-দার্শনিক, যিনি ন্যায় এবং মানবিক উন্নয়নের উপর কাজ
-করেছেন।
-2 জোসেফ স্টিগলিটজ : জোসেফ স্টিগলিটজ একজন
-অর্থনীতিবিদ, যিনি ২০০১ সালে নোবেল পুরস্কার লাভ করেন।
-2 জন রাউলস : জন রাউলস একজন গুরুত্বপূর্ণ রাজনৈতিক
-দার্শনিক, যিনি “&amp; 1116013 ০£105000' নামক বইটি রচনা
-করেছেন।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-10" data-category="ঐতিহাসিক ব্যক্তি ও অবদান" data-ans="খ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১০</span>
-        <span class="mcq-bcs">৩৮তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">11001811111, 016 101611650 ১0866 01 08010811511 বইটি কার লেখা?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(10, 'ক', 'খ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">মাস হবসন</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(10, 'খ', 'খ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">ভি. আই লেনিন</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(10, 'গ', 'খ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">ার</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(10, 'ঘ', 'খ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">ল মার</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(10)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-10">
-        <strong>সঠিক উত্তর: (খ)</strong><br>
-        “11009181110, 006 160690 ৩0389 ০1৫
-00010811910” বইটি রাশিয়ান বিপ্লবী নেতা ভি. আই. লেনিনের
-লেখা। এই গ্রন্থে লেনিন উল্লেখ করেছেন সাম্রাজ্যবাদ
-(্যা0911811911) হলো পুঁজিবাদ (0810811911)-এর সর্বোচ্চ
-পর্যায়। তার মতে, সাম্রাজ্যবাদী সম্প্রসারণ মূলত অর্থনৈতিক
-কারণে ঘটে এবং এতে পুঁজির বিকাশ এবং সম্প্রসারণে গতি পায়।
-লেনিন বলেন যে, পুঁজিবাদ এবং সাম্রাজ্যবাদ একে অপরের
-সাথে সম্পর্কিত। অর্থাৎ, যখন পুঁজির জমায়েত ঘটে, তখন
-সেটা আন্তর্জাতিক আকার ধারণ করে এবং অন্যান্য দেশের ০০০০ - লা ০ েও ক ও
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-11" data-category="ঐতিহাসিক ব্যক্তি ও অবদান" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১১</span>
-        <span class="mcq-bcs">৩৮তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">প্রাকৃতিক আইনের উদ্ভব হয়:</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(11, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">থমাস হবসন, হ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(11, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">ো</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(11, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">োসিয়াস</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(11, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">জন ল</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(11)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-11">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        প্রাকৃতিক আইনের উদ্ভব হয়েছে থমাস হবস, হুগো
-োসিয়াস এবং জন লকের মতো দার্শনিকদের লেখনী থেকে
-প্রাকৃতিক আইন হলো একটি নৈতিক তত্ত্ব, যেখানে বলা
-হয়েছে মানব সমাজের সব কিছুতে সার্বজনীন নীতি বিদ্যমান ।
-থমাস হবস এই ধারণাটি তার সামাজিক চুক্তি তত্ত্বের মাধ্যমে
-ব্যাখ্যা করেছিলেন, যেখানে তিনি &quot;স্বাভাবিক অবস্থা' থেকে
-প্রাকৃতিক আইনের ধারণা ব্যাখ্যা করেন। হুগো গ্রোসিয়াস
-প্রাকৃতিক আইনকে মানব আচরণের সার্বজনীন নীতি হিসেবে
-দেখিয়েছেন এবং জন লক প্রাকৃতিক অধিকার এবং ব্যক্তিগত
-স্বাধীনতার ওপর জোর দিয়েছেন।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-12" data-category="ঐতিহাসিক ব্যক্তি ও অবদান" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১২</span>
-        <span class="mcq-bcs">২৬তম
-বিসিএস</span>
-      </div>
-      <div class="mcq-question">মাদার তেরেসা কোন দেশে জন্মুগহণ করেন? /৩৬তম</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(12, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">মেসিডোনিয়া</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(12, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">আলজেরিয়া</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(12, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">আলবেনিয়া</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(12, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">ফ</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(12)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-12">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        মাদার তেরেসা মেসিডোনিয়া-তে জন্মগ্রহণ করেন।
-তার আসল নাম ছিল আ্যাগনেজ গঞ্জে বয়াজিও। তিনি
-কলকাতায় 'মিশনারিজ অব চ্যারিটিজ' প্রতিষ্ঠা করে মানব
-সেবায় আত্মনিয়োগ করেন। মানবসেবায় অসামান্য অবদানের
-জন্য তিনি ১৯৭৯ সালে নোবেল শান্তি পুরস্কার লাভ করেন।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-13" data-category="শিল্প, সাহিত্য ও দিবস" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১৩</span>
-        <span class="mcq-bcs">৩৬তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">1 311৫ 080০” উপন্যাসের রচয়িতা-</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(13, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">লি</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(13, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">লস</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(13, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">য়</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(13, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">ডেভিড রি</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(13)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-13">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        ''%01 0110 2০8০০' উপন্যাসের রচয়িতা হলেন রুশ
-লেখক লিও টলস্টয়। টলস্টয়ের দুটি অন্যতম কাজ হল “দাগ
-আ11 2০806 এবং “0113 10810101131
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-14" data-category="ঐতিহাসিক ব্যক্তি ও অবদান" data-ans="গ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১৪</span>
-        <span class="mcq-bcs">৩৫তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">'া16/1001ছ 81 গ্রন্থের রচয়িতা-</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(14, 'ক', 'গ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">র</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(14, 'খ', 'গ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">জউইজ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(14, 'গ', 'গ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">আলফ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(14, 'ঘ', 'গ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">রেড মাহান</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(14)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-14">
-        <strong>সঠিক উত্তর: (গ)</strong><br>
-        16 01 ছা ঞথা' খ্রন্থের রচয়িতা হলেন সুন জু।
-এই গ্রন্থটে সামরিক কৌশল, পরিকল্পনা এবং যুদ্ধের মনন্তত্ব
-নিয়ে আলোচনা করে।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-15" data-category="ঐতিহাসিক ব্যক্তি ও অবদান" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১৫</span>
-        <span class="mcq-bcs">৩২তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">'জুলিয়াস সীজার' কেন বিখ্যাত?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(15, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">রোমান স</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(15, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">মা</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(15, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">হিসেবে</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(15, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">বর</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(15)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-15">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        'জুলিয়াস সীজার' রোমান সম্রাট হিসেবে বিখ্যাত।
-তিনি রোমের প্রখ্যাত জেনারেল, রাজনীতিবিদ এবং পণ্ডিত
-ছিলেন। তিনি গল (04801) অঞ্চল বিজয়ের জন্য বিখ্যাত, যা
-আজকের ফ্রা্গ এবং এর আশেপাশের এলাকা ৷ তিনি রোমান
-প্রজাতন্ত্রের পতনের সাথে সাথে রোমান সাম্রাজ্যের ডিকটেটর
-ও - দা ওত বস্তা
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-16" data-category="ঐতিহাসিক ব্যক্তি ও অবদান" data-ans="গ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১৬</span>
-        <span class="mcq-bcs">৩১তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">কার্ল মার্কস কোন দেশে মৃত্যুবরণ করেন?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(16, 'ক', 'গ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">জার</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(16, 'খ', 'গ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">মানি</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(16, 'গ', 'গ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">ফ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(16, 'ঘ', 'গ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">লাস য</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(16)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-16">
-        <strong>সঠিক উত্তর: (গ)</strong><br>
-        কার্ল মার্কস ১৮৮৩ সালের ১৪ মার্চ যুক্তরাজ্যের
-লব্ডনে মৃত্যুবরণ করেন। তিনি ১৮১৮ সালের ৫ মে জার্মানির
-রাইন প্রদেশের ট্রায়ারে জন্মগ্রহণ করেন। মার্কস, সমাজবাদী
-চিন্তাধারার প্রভাবশালী ব্যক্তি হিসেবে পরিচিত । তার বিখ্যাত
-খএইগুলির মধ্যে 'দ্য কমিউনিস্ট মেনিফেস্টো' এবং 'দাস
-ক্যাপিটাল' উল্লেখযোগ্য । মার্ক্স তার লেখনির মাধ্যমে যে
-মতবাদকে তুলে ধরেন তা মার্ল্তবাদ নামে পরিচিত।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-17" data-category="ঐতিহাসিক ব্যক্তি ও অবদান" data-ans="গ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১৭</span>
-        <span class="mcq-bcs">সরকার প্রধানগণ কোথায় মিলিত হন? [২৬তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">ফিলিস্তিনের প্রেসিডেন্ট ইয়াসির আরাফাত এর আনুষ্ঠানিক অস্ত্যষ্টিক্রিয়া অনুষ্ঠানে যোগদানের জন্য বিশ্বের বিভিন্ন দেশের রাষ্ট্রপরধান</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(17, 'ক', 'গ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">রামাল</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(17, 'খ', 'গ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">লা</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(17, 'গ', 'গ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">যারিস</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(17, 'ঘ', 'গ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">ায়রো</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(17)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-17">
-        <strong>সঠিক উত্তর: (গ)</strong><br>
-        ফিলিস্তনের প্রেসিডেন্ট ইয়াসির আরাফাত- ১১ নভেম্বর
-২০০৪ প্যারিসের পার্সি সামরিক হাসপাতালে ইন্তেকাল করেন।
-ইসরাইলের নিষেধাজ্ঞার কারণে তার অন্ত্যেষ্টিক্রিয়া অনুষ্ঠিত হয়
-মিশরের কায়রোতে এবং সেখানে বিশ্বের বিভিন্ন দেশের
-সরকার ও রাষ্ট্র্রধানগণ অন্ত্যে্টিক্রিয়া অনুষ্ঠানে যোগদান করেন।
-অনুষ্ঠান শেষে তাকে রামাল্লায় দাফন করা হয়। ইয়াসির
-আরাফাত ৭৫ বছর বয়সে মারা যান।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-18" data-category="ঐতিহাসিক ব্যক্তি ও অবদান" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১৮</span>
-        <span class="mcq-bcs">২৫তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">রাষ্ট্রপধান না হয়েও কোন ব্যক্তি রাষ্ট্রপ্রধানের মর্যাদা ভোগ করেন?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(18, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">ইয়াসির আরাফাত</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(18, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">ফি আনান</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(18, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">সামা বিন লাদেন</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(18, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">আ</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(18)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-18">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        ইয়াসির আরাফাত রাষ্ট্রপ্রধান না হয়েও রাষ্ট্রপ্রধানের
-মর্যাদা ভোগ করেছেন। তিনি ১৯৯৬ থেকে ২০০৪ সাল পর্যন্ত
-প্যালেস্টাইন অথরিটি নামক সংগঠনের প্রেসিডেন্ট এবং ১৯৬৯
-থেকে ২০০৪ সাল পর্যন্ত প্যালেস্টাইন মুক্তি সংস্থার (1.0)
-চেয়ারম্যান হিসেবে কাজ করেছেন।
-আরাফাত ১৯৯৩ সালে ইসরায়েল সরকারের সাথে একটি
-শান্তি চুক্তিতে নেতৃত্ব দেন। এই চুক্তির জন্য তিনি ইসরায়েলের
-ইতৎসাক রবিন এবং শিমন পেরেস-এর সাথে মিলে ১৯৯৪ সালে
-নোবেল শান্তি পুরস্কার লাভ করেন।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-19" data-category="ঐতিহাসিক ব্যক্তি ও অবদান" data-ans="ঘ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১৯</span>
-        <span class="mcq-bcs">২৫তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">কে লৌহমানবী বলে পরিচিত?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(19, 'ক', 'ঘ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">ইন</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(19, 'খ', 'ঘ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">দিরা</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(19, 'গ', 'ঘ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">ান</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(19, 'ঘ', 'ঘ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">ধী</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(19)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-19">
-        <strong>সঠিক উত্তর: (ঘ)</strong><br>
-        বিটেনের প্রথম মহিলা প্রধানমন্ত্রী মার্গারেট থ্যাচার
-'লৌহমানবী' হিসেবে পরিচিত। তার শক্তিশালী নেতৃত্ব এবং
-কঠোর রাজনৈতিক সিদ্ধান্তের জন্য তাকে 'লৌহমানবী' উপাধিতে
-ভূষিত করা হয়।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-20" data-category="ঐতিহাসিক ব্যক্তি ও অবদান" data-ans="গ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২০</span>
-        <span class="mcq-bcs">২৫তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">'ডিজ আর্মিং ইরাক' গ্রনটের রচিয়তা কে?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(20, 'ক', 'গ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">সালমান র</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(20, 'খ', 'গ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">শদী</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(20, 'গ', 'গ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">লদ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(20, 'ঘ', 'গ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">বী</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(20)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-20">
-        <strong>সঠিক উত্তর: (গ)</strong><br>
-        'ডিজ আর্মিং ইরাক' বইটির রচিয়তা হ্যান্স ব্রিক্স। তিনি
-একজন সুইডিশ কূটনীতিক যিনি আন্তর্জাতিক পারমাণবিক শক্তি
-এজেঙ্গি (18) এর মহাপরিচালক হিসেবে ১৯৮১ থেকে
-১৯৯৭ সাল পূর্যন্ত দায়িত্ব পালন করেছেন। এছাড়া, তিনি
-২০০০ থেকে ২০০৩ সাল পর্যন্ত ইরাকে জাতিসংঘের প্রধান
-অস্ত্র পরিদর্শক হিসেবে কাজ করেছেন। তার অভিজ্ঞতার ভিত্তিতে
-“'ডিজ আর্মিং ইরাক' বইটি লিখেছেন।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-21" data-category="ঐতিহাসিক ব্যক্তি ও অবদান" data-ans="খ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২১</span>
-        <span class="mcq-bcs">২৪তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">'হ্যারি পটার' কি?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(21, 'ক', 'খ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">এ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(21, 'খ', 'খ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">জাতীয় ধাতব</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(21, 'গ', 'খ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">াত</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(21, 'ঘ', 'খ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">র</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(21)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-21">
-        <strong>সঠিক উত্তর: (খ)</strong><br>
-        বিখ্যাত শিশুতোষ সিরিজ [17 20091-এর রচয়িতা
-1.1. 81118 এই সিরিজে সাতটি উপন্যাস রয়েছে।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-22" data-category="ঐতিহাসিক ব্যক্তি ও অবদান" data-ans="গ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২২</span>
-        <span class="mcq-bcs">0 ০০৫01 বইটির লেখক কে? [২৪তম
-বিসিএস</span>
-      </div>
-      <div class="mcq-question">&amp; 1.018 ঘ' 311</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(22, 'ক', 'গ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">হোসে</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(22, 'খ', 'গ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">সামা</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(22, 'গ', 'গ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">রবার</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(22, 'ঘ', 'গ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">ম</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(22)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-22">
-        <strong>সঠিক উত্তর: (গ)</strong><br>
-        ১৯৯৪ সালে নেলসন ম্যান্ডেলার আত্মজীবনী '&amp;
-1,018 31110 16600111” প্রকাশিত হয়। এই বইয়ে তিনি
-তার জীবনের প্রথমাংশ, বর্ণবাদবিরোধী আন্দোলন এবং
-কারাবাসের সময়কাল সম্পর্কে বিস্তারিত আলোচনা করেছেন।
-অন্যদিকে, &quot;11161২08080 716600111' উপন্যাসের রচয়িতা
-1০811-0801] 38106, '01000560 [২0805 0 ঢ16600110
-বইটির রচয়িতা 8101811 [২5961] এবং 11018 ঘা যা15
-1160001 বইটি লিখেছেন 1/8018113 /১৮৮1 1091811) ১280 ।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-23" data-category="শিল্প, সাহিত্য ও দিবস" data-ans="ঘ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২৩</span>
-        <span class="mcq-bcs">২৩তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">মাইকেল আযাষ্জেলো কোন দেশের শিল্পী?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(23, 'ক', 'ঘ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">অস</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(23, 'খ', 'ঘ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">রিয়া</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(23, 'গ', 'ঘ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">রিস</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(23, 'ঘ', 'ঘ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">স</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(23)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-23">
-        <strong>সঠিক উত্তর: (ঘ)</strong><br>
-        ইতালির মাইকেল আযাঞ্জেলো রেনেসী যুগের প্রখ্যাত
-মূর্তি, চিত্রকলা, স্থাপত্য শিল্পী । তার সবচেয়ে পরিচিত কাজগুলোর
-মধ্যে রয়েছে 138%10', 116 শ0০80101 ০£/১৫8101, 1106
-1.89:100811' ইত্যাদি।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-24" data-category="ঐতিহাসিক ব্যক্তি ও অবদান" data-ans="খ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২৪</span>
-        <span class="mcq-bcs">২৩তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">1116 51811 1)181118 গ্রন্থটের রচয়িতা কে?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(24, 'ক', 'খ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">অমর</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(24, 'খ', 'খ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">ত</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(24, 'গ', 'খ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">য সেন</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(24, 'ঘ', 'খ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">নার মিরডাল</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(24)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-24">
-        <strong>সঠিক উত্তর: (খ)</strong><br>
-        প্রখ্যাত সুইডিশ অর্থনীতিবিদ ও সমাজবিজ্ঞানী গুনার
-মিরডালের একটি বিখ্যাত গ্রন্থ 716 81911 71919” | এই
-খরন্থে তিনি এশিয়ার বিভিন্ন দেশের দারিদ্য্য এবং উন্নয়নের
-চ্যালেঞ্জ নিয়ে বিশদ আলোচনা করেছেন।
-অন্যদিকে,
-2 ভারতের প্রখ্যাত নোবেল বিজয়ী অর্থনীতিবিদ অধ্যাপক
-অমর্ত্য সেনের বিখ্যাত গ্রন্থের মধ্যে অন্যতম হলো ১৯৮১
-সালে প্রকাশিত গবেষণা গ্রন্থ “20% 95 2110 81111169: 1)
-1958 011 চা101019100110 81710 1707011%80011 2 প্রখ্যাত অর্থনীতিবিদ উইলয়াম রস্টো এর বিখ্যাত বই |.
-“6 91886$ ০1৫ দ০0101016 010গ 0; 4 01া-
-গো্যো191481169(0”
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-25" data-category="ঐতিহাসিক ব্যক্তি ও অবদান" data-ans="ঘ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২৫</span>
-        <span class="mcq-bcs">২১তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">নেলসন ম্যান্ডেলার রাজনৈতিক দলের নাম কি?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(25, 'ক', 'ঘ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">ইন</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(25, 'খ', 'ঘ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">থা ফ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(25, 'গ', 'ঘ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">রিডম</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(25, 'ঘ', 'ঘ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">ার</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(25)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-25">
-        <strong>সঠিক উত্তর: (ঘ)</strong><br>
-        নেলসন ম্যান্ডেলা ছিলেন আফ্রিকান ন্যাশনাল কংগ্রেস
-(4740) পার্টির নেতা। তিনি ১৯৪৪ সালে এই দলের সদস্য
-হন এবং দীর্ঘ সময় ধরে দক্ষিণ আফ্রিকার বর্ণবাদী শাসনের
-বিরুদ্ধে সংগ্রাম চালান। ১৯৯১-১৯৯৭ সাল পর্যন্ত /মা40-এর
-সভাপতি ছিলেন এবং ১৯৯৪ সালে প্রথম গণতান্ত্রিক নির্বাচনে
-দক্ষিণ আফ্রিকার প্রেসিডেন্ট হিসেবে নির্বাচিত হন।
-অপশনগুলোর মধ্যে (ঘ) আফ্রিকান ন্যাশনাল পার্টি সবচেয়ে
-কাছাকাছি উত্তর। তাই এটিকে উত্তর হিসাবে ধরা হচ্ছে।
-প্রকৃতপক্ষে এটি হবে- আফ্রিকান ন্যাশনাল কংগ্রেস (440)
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-26" data-category="ঐতিহাসিক ব্যক্তি ও অবদান" data-ans="গ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২৬</span>
-        <span class="mcq-bcs">২০তম বিসিএস
-ও সালজার ও</span>
-      </div>
-      <div class="mcq-question">“যুদ্ধই জীবন, যুদ্ধই সর্বজনীন”- এটি কার উক্তি?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(26, 'ক', 'গ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text"> ফ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(26, 'খ', 'গ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">রাঙ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(26, 'গ', 'গ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">ো 0</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(26, 'ঘ', 'গ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">হি</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(26)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-26">
-        <strong>সঠিক উত্তর: (গ)</strong><br>
-        “যুদ্ধই জীবন, যুদ্ধই সর্বজনীন”- এই উক্তিটি আডলফ
-হিটলার-এর। তিনি ১৯৩২ সালে বলেছেন, “দাগ: $
-৩(০া1181, ঘখ81 15 0111%0158], 016 15 110 ৮০ঠা01118
-110 1066 15 110 06806. ছা 15 ][ভি... ঘা 15 176
-ণযাহ!1 ০101] 1111185.” এটি তার যুদ্ধের প্রতি তার প্রবল
-আগ্রহের প্রতিফলন ।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-27" data-category="ঐতিহাসিক ব্যক্তি ও অবদান" data-ans="খ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২৭</span>
-        <span class="mcq-bcs">১৯তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">যুক্তরাষ্ট্রে ক্রীতদাস প্রথা বিলোপকারী প্রেসিডেন্টের নাম কী?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(27, 'ক', 'খ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">জর</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(27, 'খ', 'খ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">জ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(27, 'গ', 'খ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">য়াশিং</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(27, 'ঘ', 'খ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">ন</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(27)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-27">
-        <strong>সঠিক উত্তর: (খ)</strong><br>
-        ১৮৬৩ সালের ১ জানুয়ারি যুক্তরাষ্ট্রের ১৮তম প্রেসিডেন্ট
-আব্াাহাম লিংকন এমানসিপেশন প্রোক্লামেশন (ঢ্যাথ110108001
-110018111811011) জারির মাধ্যমে দাসপ্রথাকে আনুষ্ঠানিকভাবে
-নিষিদ্ধ করেন। ১৮৬৫ সালে সংবিধানে ১৩তম সংশোধনীর
-মাধ্যমে যুক্তরাষ্ট্রে দাসপ্রথা পুরোপুরি বিলোপ করা হয়।
-আব্রাহাম লিংকন গেটিসবার্গ ভাষণের জন্যে বিখ্যাত ।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-28" data-category="শিল্প, সাহিত্য ও দিবস" data-ans="খ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২৮</span>
-        <span class="mcq-bcs">১৮তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">'মোনালিসা' চিত্রটির চিত্রকর কে?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(28, 'ক', 'খ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">১</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(28, 'খ', 'খ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">তম বিসিএস]</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(28, 'গ', 'খ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">মাই</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(28, 'ঘ', 'খ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">েল এঞ</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(28)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-28">
-        <strong>সঠিক উত্তর: (খ)</strong><br>
-        বিশ্বখ্যাত 'মোনালিসা' চিত্রটির চিত্রকর ছিলেন ইতালির
-বিখ্যাত চিত্রশিল্পী লিওনার্দো দ্য ভিঞ্চি। এটি বর্তমানে ফ্রান্সের
-ল্যুভর মিউজিয়ামে সংরক্ষিত আছে। এটি পৃথিবীর অন্যতম
-মূল্যবান শিল্পকর্ম হিসেবে বিবেচিত হয়। ছবিটি তৈরি করতে
-লিওনার্দো দ্য ভিঞ্চির প্রায় চার বছর সময় লেগেছিল। তার
-সচ্টাতব্া আরও একটি বিখ্যাত দিল ক্তর্সয ঢা লাস সাপান' ।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-29" data-category="শিল্প, সাহিত্য ও দিবস" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২৯</span>
-        <span class="mcq-bcs">১৮তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">'শাহনামা'-এর লেখক কে?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(29, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">বি ফেরদৌসী</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(29, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">ম</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(29, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">লানা র</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(29, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">মী</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(29)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-29">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        প্রখ্যাত ফার্সি কবি আবুল কাসিম ফেরদৌসী (4৮৮
-8৪1-08811] 10051) রচিত মহাকাব্য 'শাহনামা”। এটি
-ইরানের প্রাচীন কিংবদন্তি এবং ইতিহাস নিয়ে রচিত।
-ফেরদৌসী এই মহাকাব্য রচনায় প্রায় ৩০ বছর সময় ব্যয়
-করেন। এর ভাষা ক্লাসিক ফারসি।
-অন্যদিকে,
-2 বিখ্যাত ফার্সি সুফি কবি মওলানা রুমী এর বিখ্যাত গ্রন্থ
-হলো “মসনবী-ই-মানবী'।
-2 ফার্সি কবি নিজামী 'খামসা' নামে পাঁচটি কাব্যের জন্য
-বিখ্যাত
-2 ফার্সি সুফি কবি কবি আবদুর রহমান জামি এর বিখ্যাত গ্রন্থ
-তুহফাত আল-আহরার, লায়লা ওয়া মাজনুন।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-30" data-category="শিল্প, সাহিত্য ও দিবস" data-ans="ঘ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ৩০</span>
-        <span class="mcq-bcs">১৭তম
-বিসিএস</span>
-      </div>
-      <div class="mcq-question">বিশ্ব তামাকযুক্ত দিবস প্রতিপালিত হয় প্রতি বছরের-</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(30, 'ক', 'ঘ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">৩১ জান</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(30, 'খ', 'ঘ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">য়ারি</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(30, 'গ', 'ঘ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">৩১মার</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(30, 'ঘ', 'ঘ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">চ</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(30)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-30">
-        <strong>সঠিক উত্তর: (ঘ)</strong><br>
-        ৩১ মে বিশ্ব তামাকমুক্ত দিবস জনস্বাস্থ্য রক্ষা এবং
-সামাজিক উন্নয়নে তামাকের বিরূপ প্রতিক্রিয়া, মারাত্মক
-কয়েকটি রোগের ঝুঁকি এবং আকস্মিক মৃত্যু প্রতিরোধের
-বিষয়টি বিশ্ববাসীকে অবহিত করার লক্ষ্যে বিশ্ব স্বাস্থ্য সংস্থা
-১৯৮৭ সালে বিশ্ব তামাক মুক্ত দিবসের সূচনা করে। এরপর
-থেকেই সারা বিশ্বে প্রতিবছর ৩১ মে বিশ্ব তামাকমুক্ত দিবস
-হিসেবে পালিত হয়ে আসছে।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-31" data-category="শিল্প, সাহিত্য ও দিবস" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ৩১</span>
-        <span class="mcq-bcs">১১তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">__ সেপ্টেম্বর বিশ্ব নিরক্ষরতা দিবস।' শূন্যস্থান পূরণ করুন।</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(31, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">৮</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(31, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">১০</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(31, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">গ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(31, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">ঘ</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(31)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-31">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        বিশ্ব সাক্ষরতা দিবস প্রতি বছর ৮ সেপ্টেম্বর পালিত
-হয়। জাতিসংঘের অঙ্গসংস্থা ইউনেস্কো (074300) ১৯৬৬
-সালে এই দিবসটি ঘোষণা করে এবং ১৯৬৭ সাল থেকে এই
-দিনটি বিশ্বব্যাপী পালিত হচ্ছে। এই দিবসের উদ্দেশ্য হলো
-নিরক্ষরতা দূর করার জন্য জনসচেতনতা বৃদ্ধি করা এবং শিক্ষা
-গ্রহণের গুরুত্ব তুলে ধরা।
-1196 11007 আ্যাপ থেকে [021 [হর]
-0০৪10:103273
-      </div>
-    </div>
-  
-  </div>
-
-  <!-- Bottom Navigation -->
-  <nav class="chapter-nav">
-    <a href="যুদ্ধ ও বিপ্লবসমূহ.html" class="nav-link-btn">
-      <span>⬅️ পূর্ববর্তী অধ্যায়:</span> যুদ্ধ ও বিপ্লবসমূহ
-    </a>
-    <a href="index.html" class="nav-link-btn">
-      <span>📑</span> মূল সূচিপত্র
-    </a>
-    <a href="বৈশ্বিক দ্বন্দ্ব ও গুরুত্বপূর্ণ অঞ্চল.html" class="nav-link-btn">
-      <span>পরবর্তী খণ্ড:</span> বৈশ্বিক দ্বন্দ্ব ও গুরুত্বপূর্ণ অঞ্চল <span>➡️</span>
-    </a>
-  </nav>
-</div>
-
-<script>
-let totalQuestions = 31;
-let attempted = 0;
-let correctCount = 0;
-let answeredQuestions = {};
-
-function checkAnswer(qNum, selectedLetter, correctLetter, btn) {
-  if (answeredQuestions[qNum]) return;
-  
-  const card = document.getElementById('q-card-' + qNum);
-  const allBtns = card.querySelectorAll('.option-btn');
-  answeredQuestions[qNum] = { selected: selectedLetter, correct: correctLetter };
-  attempted++;
-
-  allBtns.forEach(b => {
-    b.disabled = true;
-    const ltr = b.getAttribute('data-letter');
-    if (ltr === correctLetter) {
-      b.classList.add('correct');
-    }
-  });
-
-  if (selectedLetter === correctLetter) {
-    correctCount++;
-    card.classList.add('answered-correct');
-  } else {
-    btn.classList.add('wrong');
-    card.classList.add('answered-wrong');
-  }
-
-  const expl = document.getElementById('expl-' + qNum);
-  if (expl) expl.classList.add('open');
-
-  updateScore();
-}
-
-function updateScore() {
-  const badge = document.getElementById('live-score');
-  const acc = attempted > 0 ? Math.round((correctCount / attempted) * 100) : 0;
-  badge.innerHTML = 'স্কোর: ' + correctCount + ' / ' + totalQuestions + ' (সঠিকতা: ' + acc + '%) | চেষ্টা: ' + attempted;
-}
-
-function toggleExplanation(qNum) {
-  const expl = document.getElementById('expl-' + qNum);
-  if (expl) expl.classList.toggle('open');
-}
-
-function toggleAllExplanations() {
-  const boxes = document.querySelectorAll('.explanation-box');
-  const anyOpen = Array.from(boxes).some(b => b.classList.contains('open'));
-  boxes.forEach(b => {
-    if (anyOpen) b.classList.remove('open');
-    else b.classList.add('open');
-  });
-}
-
-function filterCategory(cat, pill) {
-  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-  if (pill) pill.classList.add('active');
-
-  const cards = document.querySelectorAll('.mcq-card');
-  cards.forEach(card => {
-    if (cat === 'all') {
-      card.style.display = 'block';
-    } else if (cat === 'wrong') {
-      card.style.display = card.classList.contains('answered-wrong') ? 'block' : 'none';
-    } else {
-      const cardCat = card.getAttribute('data-category');
-      card.style.display = cardCat === cat ? 'block' : 'none';
-    }
-  });
-}
-
-function resetQuiz() {
-  if (!confirm('আপনি কি সম্পূর্ণ কুইজ পুনরায় শুরু করতে চান?')) return;
-  answeredQuestions = {};
-  attempted = 0;
-  correctCount = 0;
-  updateScore();
-
-  document.querySelectorAll('.mcq-card').forEach(card => {
-    card.classList.remove('answered-correct', 'answered-wrong');
-    card.querySelectorAll('.option-btn').forEach(b => {
-      b.disabled = false;
-      b.classList.remove('correct', 'wrong');
-    });
-    const expl = card.querySelector('.explanation-box');
-    if (expl) expl.classList.remove('open');
-  });
-}
-
-function toggleTheme() {
-  const current = document.documentElement.getAttribute('data-theme');
-  const target = current === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', target);
-  localStorage.setItem('ebk_theme', target);
-}
-
-if (localStorage.getItem('ebk_theme') === 'dark') {
-  document.documentElement.setAttribute('data-theme', 'dark');
-}
-
-window.addEventListener('scroll', () => {
-  const sTop = document.documentElement.scrollTop || document.body.scrollTop;
-  const sHeight = (document.documentElement.scrollHeight || document.body.scrollHeight) - document.documentElement.clientHeight;
-  if (sHeight > 0) {
-    const pct = Math.min(100, Math.max(0, (sTop / sHeight) * 100));
-    document.getElementById('reading-progress').style.width = pct + '%';
-  }
-});
-</script>
-
-<script src="nav-component.js"></script>
-
-  <!-- Universal E-Book Theme Persistence & Controller -->
   <script>
-    (function() {
-      function applyTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        if (document.body) document.body.setAttribute('data-theme', theme);
-        try {
-          localStorage.setItem('theme', theme);
-          localStorage.setItem('ebk_portal_theme', theme);
-        } catch(e) {}
-        var btns = document.querySelectorAll('#themeBtn, #theme-btn, #themeToggleBtn, .btn-ctrl[onclick*="toggleTheme"], button[onclick*="toggleTheme"], .btn-theme-toggle');
-        btns.forEach(function(b) {
-          if (b.id === 'themeToggleBtn' || b.classList.contains('icon-only')) {
-            b.textContent = theme === 'dark' ? '☀️' : '🌙';
-          } else {
-            b.innerHTML = theme === 'dark' ? '☀️ মোড' : '🌓 মোড';
-          }
-        });
-      }
+    let userScore = 0;
+    const answeredQuestions = new Set();
+    const totalQuestions = 31;
 
-      window.toggleTheme = function() {
-        var cur = document.documentElement.getAttribute('data-theme') || (document.body && document.body.getAttribute('data-theme')) || 'light';
-        var next = cur === 'dark' ? 'light' : 'dark';
-        applyTheme(next);
-      };
+    function checkAnswer(btn, isCorrect, correctLetter, expId) {
+      const card = btn.closest('.q-card');
+      const qId = card.id;
+      const allButtons = card.querySelectorAll('.opt-btn');
 
-      var saved = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || 'light';
-      applyTheme(saved);
+      // Disable all buttons in this question
+      allButtons.forEach(b => b.disabled = true);
 
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-          applyTheme(saved);
-          var toggleBtn = document.getElementById('themeToggleBtn') || document.getElementById('themeBtn') || document.getElementById('theme-btn');
-          if (toggleBtn) {
-            toggleBtn.onclick = window.toggleTheme;
-          }
-        });
-      } else {
-        var toggleBtn = document.getElementById('themeToggleBtn') || document.getElementById('themeBtn') || document.getElementById('theme-btn');
-        if (toggleBtn) {
-          toggleBtn.onclick = window.toggleTheme;
+      // Highlight clicked
+      if (isCorrect) {
+        btn.classList.add('correct');
+        if (!answeredQuestions.has(qId)) {
+          userScore++;
+          answeredQuestions.add(qId);
         }
+      } else {
+        btn.classList.add('wrong');
+        // Find and highlight correct answer
+        allButtons.forEach(b => {
+          if (b.querySelector('.opt-letter').textContent.includes(correctLetter)) {
+            b.classList.add('correct');
+          }
+        });
+        answeredQuestions.add(qId);
       }
-    })();
-  </script>
 
+      // Automatically open explanation
+      const expDrawer = document.getElementById(expId);
+      if (expDrawer) {
+        expDrawer.classList.add('open');
+      }
+
+      updateScoreDisplay();
+    }
+
+    function toggleExp(expId) {
+      const expDrawer = document.getElementById(expId);
+      if (expDrawer) {
+        expDrawer.classList.toggle('open');
+      }
+    }
+
+    function updateScoreDisplay() {
+      const scoreDisplay = document.getElementById('scoreDisplay');
+      if (scoreDisplay) {
+        scoreDisplay.textContent = '🏆 সঠিক উত্তর: ' + userScore + ' / ' + totalQuestions;
+      }
+    }
+
+    function resetQuiz() {
+      userScore = 0;
+      answeredQuestions.clear();
+      updateScoreDisplay();
+
+      document.querySelectorAll('.opt-btn').forEach(b => {
+        b.disabled = false;
+        b.classList.remove('correct', 'wrong');
+      });
+
+      document.querySelectorAll('.explanation-drawer').forEach(d => {
+        d.classList.remove('open');
+      });
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      try {
+        localStorage.setItem('theme', newTheme);
+        localStorage.setItem('ebk_portal_theme', newTheme);
+      } catch(e) {}
+    }
+  </script>
 </body>
 </html>

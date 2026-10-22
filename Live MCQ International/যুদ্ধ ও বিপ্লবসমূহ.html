@@ -8,2760 +8,1688 @@
       document.documentElement.setAttribute('data-theme', savedTheme);
     } catch(e) {}
   })();
-</script>
-<!-- DESIGN PLAN:
-(১) কন্টেন্ট বিশ্লেষণ ও বিন্যাস:
-    - উৎস: Live MCQ আন্তর্জাতিক বিষয়াবলি - খণ্ড ১: যুদ্ধ ও বিপ্লবসমূহ [বইয়ের পৃষ্ঠা ৬০০–৬০৫ / ৩৭-৪২.pdf]।
-    - মোট বিসিএস এমসিকিউ: ২৭টি (৪৯তম থেকে ১০ম বিসিএস পর্যন্ত)।
-    - তাত্ত্বিক বিশ্লেষণ: প্রথম বিশ্বযুদ্ধ (১৯১৪–১৯১৮) ও ভার্সাই চুক্তি (১৯১৯), দ্বিতীয় বিশ্বযুদ্ধ (১৯৩৯–১৯৪৫) ও পার্ল হারবার, অক্ষশক্তি ও মিত্রশক্তি, হিরোশিমা-নাগাসাকির পারমাণবিক বোমা, ফরাসি বিপ্লব (১৭৮৯) ও বাস্তিল দুর্গের পতন, রুশ বিপ্লব (১৯১৭), আফিম যুদ্ধ (১৮৩৯–১৮৬০), বার্লিন প্রাচীর (১৯৬১–১৯৮৯) ও দুই জার্মানির একত্রীকরণ (১৯৯০), উপসাগরীয় যুদ্ধ ও ইরাক আক্রমণ।
-(২) ভিজ্যুয়াল ও পেডাগজিক্যাল কম্পোনেন্ট:
-    - বিসিএস প্রশ্নবণ্টন অ্যানালাইসিস গ্রিড।
-    - প্রথম ও দ্বিতীয় বিশ্বযুদ্ধের তুলনামূলক ম্যাট্রিক্স ছক।
-    - ইতিহাসের প্রধান প্রধান বিপ্লবের তুলনামূলক টাইমলাইন ও বৈশিষ্ট্য ছক।
-    - দ্বিতীয় বিশ্বযুদ্ধের প্রধান বাঁক ও ঐতিহাসিক তারিখ কার্ড গ্রিড।
-    - আফিম যুদ্ধ, ওয়াটারলু ও ঐতিহাসিক সংঘাত কার্ড।
-    - ইন্টারেক্টিভ কুইজ ইঞ্জিন: ২৭টি প্রশ্ন, তাৎক্ষণিক উত্তর যাচাই ও অ্যানসার ড্রয়ার, লাইভ স্কোর এবং ৩টি ক্যাটাগরি ফিল্টার।
-(৩) কালার প্যালেট (Military & Historical Theme):
-    - Primary: #881337 (Historical Crimson / Burgundy)
-    - Secondary: #0284C7 (Ocean Blue)
-    - Accent Gold: #D97706 (Historic Bronze)
-    - Background: #F8FAFC (Clean Paper Off-White)
-    - Card: #FFFFFF, Border: #E2E8F0
-(৪) ফন্ট ও টাইপোগ্রাফি:
-    - 'Kalpurush', rem ইউনিট স্কেলিং, পূর্ণ ডার্ক মোড সাপোর্ট।
--->
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>যুদ্ধ ও বিপ্লবসমূহ - বিসিএস আন্তর্জাতিক বিষয়াবলি</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root {
-  --font-base: 'Noto Serif Bengali', 'Kalpurush', Vrinda, sans-serif;
-  --primary-color: #881337;
-  --primary-light: #9F1239;
-  --secondary-color: #0284C7;
-  --accent-gold: #D97706;
-  --accent-soft: #FEF3C7;
-  --bg-main: #F8FAFC;
-  --bg-card: #FFFFFF;
-  --text-main: #0F172A;
-  --text-muted: #475569;
-  --border-color: #E2E8F0;
-  --correct-bg: #DCFCE7;
-  --correct-color: #166534;
-  --wrong-bg: #FEE2E2;
-  --wrong-color: #991B1B;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.04);
-  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.03);
-  --base-font-size: 1rem;
-  --radius: 12px;
-}
-
-[data-theme="dark"], body[data-theme="dark"] {
-  --primary-color: #FB7185;
-  --primary-light: #FDA4AF;
-  --secondary-color: #38BDF8;
-  --accent-gold: #FBBF24;
-  --accent-soft: #2D2214;
-  --bg-main: #0B0F19;
-  --bg-card: #151D2E;
-  --text-main: #F1F5F9;
-  --text-muted: #94A3B8;
-  --border-color: #243048;
-  --correct-bg: #143522;
-  --correct-color: #86EFAC;
-  --wrong-bg: #451A1A;
-  --wrong-color: #FCA5A5;
-}
-
-* {
-  box-sizing: border-box; overflow-wrap: break-word;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: var(--font-base);
-  font-size: var(--base-font-size);
-  background-color: var(--bg-main);
-  color: var(--text-main);
-  line-height: 1.7;
-  overflow-x: clip;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-#reading-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--accent-gold));
-  width: 0%;
-  z-index: 9999;
-  transition: width 0.1s;
-}
-
-.container {
-  max-width: 920px;
-  margin: 0 auto;
-  padding: 1.5rem 1rem 5rem 1rem;
-}
-
-/* Hero Section */
-.hero {
-  background: linear-gradient(135deg, #881337 0%, #4C0519 100%);
-  color: #FFFFFF;
-  padding: 2.25rem 1.75rem;
-  border-radius: var(--radius);
-  margin-bottom: 2rem;
-  box-shadow: var(--shadow-lg);
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::after {
-  content: "⚔️";
-  position: absolute;
-  right: -10px;
-  bottom: -20px;
-  font-size: 8rem;
-  opacity: 0.08;
-  pointer-events: none;
-}
-
-.hero-tag {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  padding: 0.25rem 0.85rem;
-  border-radius: 999px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #FECDD3;
-  margin-bottom: 0.75rem;
-}
-
-.hero h1 {
-  font-size: 1.85rem;
-  font-weight: 700;
-  line-height: 1.35;
-  margin-bottom: 0.5rem;
-}
-
-.hero p {
-  font-size: 0.975rem;
-  color: #FFE4E6;
-  line-height: 1.6;
-}
-
-/* Control Bar */
-.control-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--bg-card);
-  padding: 0.85rem 1.25rem;
-  border-radius: var(--radius);
-  margin-bottom: 1.75rem;
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
-}
-
-.control-group {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.btn-ctrl {
-  background: var(--bg-main);
-  border: 1px solid var(--border-color);
-  color: var(--text-main);
-  padding: 0.4rem 0.75rem;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  font-family: inherit;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  transition: all 0.2s;
-}
-
-.btn-ctrl:hover {
-  background: var(--border-color);
-}
-
-/* BCS Grid */
-.bcs-card {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  border: 1px solid var(--border-color);
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  box-shadow: var(--shadow-sm);
-}
-
-.bcs-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.bcs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 0.65rem;
-  margin-bottom: 1rem;
-}
-
-.bcs-item {
-  background: var(--bg-main);
-  border: 1px solid var(--border-color);
-  padding: 0.6rem 0.75rem;
-  border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9rem;
-}
-
-.bcs-item .exam {
-  font-weight: 600;
-  color: var(--text-main);
-}
-
-.bcs-item .count {
-  background: var(--primary-color);
-  color: #FFFFFF;
-  padding: 0.15rem 0.55rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 700;
-}
-
-/* Headings & Visual Cards */
-.section-heading {
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  margin: 2rem 0 1rem 0;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--border-color);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.visual-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: var(--shadow-sm);
-}
-
-.visual-card h3 {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  margin-bottom: 0.75rem;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.table-responsive {
-  width: 100%;
-  overflow-x: auto;
-  border-radius: 8px;
-  margin: 1rem 0;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-  font-size: 0.925rem;
-}
-
-th, td {
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--border-color);
-}
-
-th {
-  background: rgba(136, 19, 55, 0.08);
-  font-weight: 700;
-  color: var(--primary-color);
-}
-
-[data-theme="dark"] th {
-  background: rgba(251, 113, 133, 0.12);
-  color: var(--primary-color);
-}
-
-tr:nth-child(even) {
-  background-color: rgba(0, 0, 0, 0.015);
-}
-
-/* Concept Grid */
-.concept-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1rem;
-  margin: 1rem 0;
-}
-
-.concept-box {
-  background: var(--bg-main);
-  border-left: 4px solid var(--primary-color);
-  border-radius: 0 8px 8px 0;
-  padding: 1rem 1.15rem;
-}
-
-.concept-box.blue {
-  border-left-color: var(--secondary-color);
-}
-
-.concept-box.gold {
-  border-left-color: var(--accent-gold);
-}
-
-.concept-box h4 {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text-main);
-  margin-bottom: 0.4rem;
-}
-
-.concept-box p {
-  font-size: 0.885rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-
-/* Mnemonic Box */
-.mnemonic-box {
-  background: var(--accent-soft);
-  border: 1px solid #FCD34D;
-  border-radius: 8px;
-  padding: 1rem 1.25rem;
-  margin: 1.25rem 0;
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-}
-
-[data-theme="dark"] .mnemonic-box {
-  border-color: #78350F;
-}
-
-.mnemonic-icon {
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
-.mnemonic-text {
-  font-size: 0.925rem;
-  color: #92400E;
-}
-
-[data-theme="dark"] .mnemonic-text {
-  color: #FDE68A;
-}
-
-/* MCQ Cards */
-.quiz-header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
-}
-
-.quiz-score-badge {
-  background: var(--primary-color);
-  color: #FFFFFF;
-  padding: 0.45rem 1rem;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-
-.filter-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-bottom: 1.5rem;
-}
-
-.filter-pill {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  color: var(--text-muted);
-  padding: 0.35rem 0.85rem;
-  border-radius: 999px;
-  font-size: 0.825rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.filter-pill.active, .filter-pill:hover {
-  background: var(--primary-color);
-  color: #FFFFFF;
-  border-color: var(--primary-color);
-}
-
-.mcq-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  padding: 1.25rem;
-  margin-bottom: 1.25rem;
-  box-shadow: var(--shadow-sm);
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.mcq-card:hover {
-  border-color: var(--primary-color);
-}
-
-.mcq-card.answered-correct {
-  border-color: #22C55E;
-}
-
-.mcq-card.answered-wrong {
-  border-color: #EF4444;
-}
-
-.mcq-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.75rem;
-}
-
-.mcq-num {
-  font-weight: 700;
-  color: var(--primary-color);
-  font-size: 1.05rem;
-}
-
-.mcq-bcs {
-  font-size: 0.8rem;
-  background: rgba(136, 19, 55, 0.1);
-  color: var(--primary-color);
-  padding: 0.15rem 0.55rem;
-  border-radius: 4px;
-  font-weight: 600;
-}
-
-.mcq-question {
-  font-size: 1.025rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: var(--text-main);
-  line-height: 1.6;
-}
-
-.options-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.option-btn {
-  background: var(--bg-main);
-  border: 1px solid var(--border-color);
-  color: var(--text-main);
-  padding: 0.65rem 0.9rem;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-family: inherit;
-  text-align: left;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  transition: all 0.2s;
-}
-
-.option-btn:hover:not(:disabled) {
-  background: rgba(136, 19, 55, 0.08);
-  border-color: var(--primary-color);
-}
-
-.option-letter {
-  display: inline-flex;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--border-color);
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.825rem;
-  flex-shrink: 0;
-}
-
-.option-btn.correct {
-  background: var(--correct-bg) !important;
-  color: var(--correct-color) !important;
-  border-color: #86EFAC !important;
-  font-weight: 700;
-}
-
-.option-btn.correct .option-letter {
-  background: #22C55E;
-  color: #FFFFFF;
-}
-
-.option-btn.wrong {
-  background: var(--wrong-bg) !important;
-  color: var(--wrong-color) !important;
-  border-color: #FCA5A5 !important;
-}
-
-.option-btn.wrong .option-letter {
-  background: #EF4444;
-  color: #FFFFFF;
-}
-
-.explanation-btn {
-  background: none;
-  border: none;
-  color: var(--primary-color);
-  font-size: 0.875rem;
-  font-weight: 600;
-  font-family: inherit;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.35rem 0;
-}
-
-.explanation-box {
-  margin-top: 0.75rem;
-  padding: 1rem 1.15rem;
-  background: rgba(136, 19, 55, 0.04);
-  border-left: 3px solid var(--primary-color);
-  border-radius: 0 6px 6px 0;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  line-height: 1.65;
-  display: none;
-}
-
-[data-theme="dark"] .explanation-box {
-  background: rgba(251, 113, 133, 0.08);
-}
-
-.explanation-box.open {
-  display: block;
-}
-
-.chapter-nav {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border-color);
-}
-
-.nav-link-btn {
-  text-decoration: none;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  color: var(--text-main);
-  padding: 0.75rem 1.25rem;
-  border-radius: var(--radius);
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: all 0.2s;
-}
-
-.nav-link-btn:hover {
-  background: var(--primary-color);
-  color: #FFFFFF;
-  border-color: var(--primary-color);
-}
-
-@media (max-width: 640px) {
-  .hero {
-    padding: 1.5rem 1.25rem;
-  }
-  .hero h1 {
-    font-size: 1.5rem;
-  }
-  .options-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Universal Text Box Bleed & Alignment Protection */
-.card, .quote-box, .doubt-box, .info-box, .mcq-card, .study-section, .flash-item, .bcs-card, .visual-card, .concept-box, .mnemonic-box, .fact-check-box {
-  max-width: 100%;
-  overflow-wrap: break-word;
-  word-break: normal;
-}
-
-  /* ══════ Universal Mobile Screen Layout Optimization (Samsung A23 / 360px-480px) ══════ */
-  @media (max-width: 600px) {
-    /* 1. Header & Controls: prevent button overflow, slim height */
-    header.sticky-header, .top-control-bar, .control-bar, .site-header {
-      position: sticky !important;
-      top: 0 !important;
-      padding: 6px 8px !important;
-      gap: 6px !important;
-    }
-    .brand-group {
-      gap: 4px !important;
-      min-width: 0 !important;
-    }
-    .book-badge {
-      font-size: 0.7rem !important;
-      padding: 0.15rem 0.45rem !important;
-    }
-    .chapter-heading-bar, .brand-badge, .brand-title {
-      font-size: 0.8rem !important;
-      max-width: 130px !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-      white-space: nowrap !important;
-    }
-    .controls-group, .controls, .control-group {
-      gap: 4px !important;
-      display: flex !important;
-      align-items: center !important;
-    }
-    .control-btn, .ctrl-btn, .btn-ctrl {
-      padding: 4px 7px !important;
-      font-size: 0.78rem !important;
-      border-radius: 6px !important;
-    }
-    .print-btn, button[onclick*="print"], .ctrl-btn[onclick*="print"] {
-      display: none !important;
-    }
-
-    /* 2. Container & Lateral Space: eliminate ~120px wasted empty margins */
-    .main-container, .container {
-      padding-left: 8px !important;
-      padding-right: 8px !important;
-      padding-top: 6px !important;
-      padding-bottom: 24px !important;
-      margin-top: 0.75rem !important;
-      margin-bottom: 1.5rem !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      box-sizing: border-box !important;
-    }
-    .infographic-wrapper, .study-section, .section {
-      margin-bottom: 1.25rem !important;
-      gap: 0.75rem !important;
-    }
-    .section-title {
-      font-size: 1.15rem !important;
-      margin-bottom: 0.75rem !important;
-      padding-left: 0.5rem !important;
-    }
-    .card, .mcq-card, .quiz-stats-card, .study-card, .author-card, .fact-item, .info-box {
-      padding: 12px 10px !important;
-      margin-bottom: 10px !important;
-      border-radius: 10px !important;
-      max-width: 100% !important;
-      box-sizing: border-box !important;
-      overflow-wrap: break-word !important;
-      word-break: normal!important;
-    }
-
-    /* 3. Hero Banner: slim down vertical space */
-    .hero-banner, .hero {
-      padding: 14px 10px !important;
-      margin-bottom: 1.25rem !important;
-      border-radius: 12px !important;
-    }
-    .hero-title {
-      font-size: 1.3rem !important;
-      line-height: 1.3 !important;
-      margin-bottom: 0.5rem !important;
-    }
-    .hero-desc {
-      font-size: 0.85rem !important;
-      line-height: 1.45 !important;
-      margin-bottom: 0.75rem !important;
-    }
-    .hero-stats, .stats-indicators {
-      gap: 6px !important;
-    }
-    .stat-pill, .indicator-item {
-      padding: 4px 8px !important;
-      font-size: 0.76rem !important;
-    }
-
-    /* 4. Tables & Responsiveness */
-    table.data-table th, table.data-table td,
-    table th, table td {
-      padding: 7px 6px !important;
-      font-size: 0.82rem !important;
-      line-height: 1.35 !important;
-    }
-    .data-table-container, .table-responsive, .table-container {
-      -webkit-overflow-scrolling: touch !important;
-      overflow-x: auto !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      display: block !important;
-      border-radius: 8px !important;
-    }
-
-    /* 5. MCQs & Quizzes */
-    .q-header {
-      gap: 0.5rem !important;
-      margin-bottom: 0.65rem !important;
-    }
-    .q-num-title {
-      font-size: 0.95rem !important;
-      gap: 0.5rem !important;
-      line-height: 1.4 !important;
-    }
-    .q-number {
-      width: 24px !important;
-      height: 24px !important;
-      font-size: 0.78rem !important;
-    }
-    .options-grid, .quiz-options {
-      grid-template-columns: 1fr !important;
-      gap: 6px !important;
-    }
-    .opt-btn, .option-btn {
-      padding: 8px 10px !important;
-      font-size: 0.86rem !important;
-      border-radius: 8px !important;
-    }
-    .explanation-drawer, .quiz-explanation {
-      padding: 10px 12px !important;
-      font-size: 0.85rem !important;
-    }
-  }
-
-
-/* BCS Question Analysis Card & Table */
-.bcs-table-card {
-  background: var(--bg-card);
-  border: 1px solid var(--card-border, var(--border-color, rgba(148, 163, 184, 0.2)));
-  border-radius: var(--radius, 16px);
-  padding: 1.25rem;
-  margin-bottom: 1.75rem;
-  box-shadow: var(--shadow-soft, var(--shadow-sm, 0 4px 12px rgba(0,0,0,0.05)));
-  backdrop-filter: blur(8px);
-}
-
-.bcs-table-card .bcs-card-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin-bottom: 0.85rem;
-  color: var(--accent-cyan, var(--primary-color, #0284c7));
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border-left: 4px solid var(--accent-cyan, var(--primary-color, #0284c7));
-  padding-left: 0.6rem;
-}
-
-.bcs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.bcs-pill {
-  background: var(--bg-surface, var(--bg-main, rgba(255, 255, 255, 0.03)));
-  border: 1px solid var(--card-border, var(--border-color, rgba(148, 163, 184, 0.15)));
-  padding: 0.45rem 0.55rem;
-  border-radius: 8px;
-  text-align: center;
-  font-size: 0.85rem;
-}
-
-.bcs-pill .num {
-  font-weight: 700;
-  color: var(--accent-cyan, var(--primary-color, #38bdf8));
-  font-size: 0.82rem;
-}
-
-.bcs-pill .cnt {
-  font-size: 0.8rem;
-  color: var(--text-muted, #94a3b8);
-}
-
-.bcs-pill.has-q {
-  background: rgba(56, 189, 248, 0.12);
-  border-color: rgba(56, 189, 248, 0.35);
-}
-
-.bcs-pill.has-q .cnt {
-  color: var(--accent-gold, #fbbf24);
-  font-weight: 700;
-}
-
-[data-theme="dark"] .bcs-pill.has-q {
-  background: rgba(56, 189, 248, 0.15);
-  border-color: #38bdf8;
-}
-
-.bcs-table-container {
-  overflow-x: auto;
-  border-radius: 10px;
-  border: 1px solid var(--card-border, var(--border-color, rgba(148, 163, 184, 0.18)));
-  margin-top: 0.75rem;
-  -webkit-overflow-scrolling: touch;
-}
-
-.bcs-table-container table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center;
-  font-size: 0.85rem;
-}
-
-.bcs-table-container th, .bcs-table-container td {
-  padding: 0.55rem 0.75rem;
-  border: 1px solid var(--card-border, var(--border-color, rgba(148, 163, 184, 0.15)));
-}
-
-.bcs-table-container th {
-  background: rgba(56, 189, 248, 0.1);
-  color: var(--accent-cyan, var(--primary-color, #38bdf8));
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.bcs-table-container td strong {
-  color: var(--accent-cyan, var(--primary-color, #38bdf8));
-}
-
-.bcs-table-container td.has-q-td {
-  font-weight: 700;
-  color: var(--accent-gold, #fbbf24);
-}
-
-
-/* ══════ Responsive Smart Table Protection (No Word Breaking & Smooth Horizontal Touch Scroll) ══════ */
-.table-responsive, .data-table-container, .table-container, .bcs-table-container {
-  width: 100% !important;
-  max-width: 100% !important;
-  overflow-x: auto !important;
-  -webkit-overflow-scrolling: touch !important;
-  display: block !important;
-  margin: 1rem 0 !important;
-  border-radius: 8px !important;
-  box-sizing: border-box !important;
-}
-
-table, .pro-table, .data-table, .custom-table, .bcs-table {
-  width: 100% !important;
-  min-width: 540px !important;
-  border-collapse: collapse !important;
-  table-layout: auto !important;
-  box-sizing: border-box !important;
-}
-
-table th, table td,
-.pro-table th, .pro-table td,
-.data-table th, .data-table td,
-.custom-table th, .custom-table td,
-.bcs-table th, .bcs-table td {
-  word-break: normal !important;
-  overflow-wrap: normal !important;
-  white-space: normal !important;
-  hyphens: none !important;
-  text-align: left !important;
-  vertical-align: top !important;
-  line-height: 1.5 !important;
-}
-
-table th, .pro-table th, .data-table th, .custom-table th, .bcs-table th {
-  white-space: nowrap !important;
-  font-weight: 700 !important;
-}
-
-@media (max-width: 600px) {
-  table th, table td,
-  .pro-table th, .pro-table td,
-  .data-table th, .data-table td,
-  .custom-table th, .custom-table td,
-  .bcs-table th, .bcs-table td {
-    padding: 7px 8px !important;
-    font-size: 0.85rem !important;
-  }
-  table, .pro-table, .data-table, .custom-table, .bcs-table {
-    min-width: 500px !important;
-  }
-}
-
-
-    /* Live MCQ Design System - Matching Bangla Language */
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>যুদ্ধ ও বিপ্লবসমূহ - লাইভ এমসিকিউ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
     :root {
+      --bg-primary: #f8fafc;
+      --bg-surface: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: #e2e8f0;
+      --card-border: #e2e8f0;
+      --accent-cyan: #0284c7;
+      --accent-gold: #d97706;
+      --correct-bg: #dcfce7;
+      --correct-border: #86efac;
+      --correct-text: #166534;
+      --wrong-bg: #fee2e2;
+      --wrong-border: #fca5a5;
+      --wrong-text: #991b1b;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
       --font-base: 'Noto Serif Bengali', serif;
     }
-    body {
-      font-family: 'Noto Serif Bengali', serif !important;
-    }
-    .bcs-tag, .exam-badge {
-      font-size: 0.75rem !important;
-      font-weight: 600 !important;
-      background: rgba(56, 189, 248, 0.15) !important;
-      color: #0284c7 !important;
-      padding: 0.2rem 0.6rem !important;
-      border-radius: 6px !important;
-      white-space: nowrap !important;
-      height: fit-content !important;
-      flex-shrink: 0 !important;
-      border: 1px solid rgba(56, 189, 248, 0.3) !important;
-    }
-    [data-theme="dark"] .bcs-tag, [data-theme="dark"] .exam-badge {
-      background: rgba(56, 189, 248, 0.15) !important;
-      color: #38bdf8 !important;
-    }
-    .q-header {
-      display: flex !important;
-      justify-content: space-between !important;
-      align-items: flex-start !important;
-      gap: 0.75rem !important;
-      margin-bottom: 0.75rem !important;
-    }
-    .q-num-title {
-      display: flex !important;
-      align-items: flex-start !important;
-      gap: 0.6rem !important;
-      flex: 1 1 auto !important;
-      min-width: 0 !important;
-      overflow-wrap: break-word !important;
-      word-break: normal !important;
-      line-height: 1.55 !important;
-    }
-    .options-grid {
-      display: grid !important;
-      grid-template-columns: 1fr !important;
-      gap: 8px !important;
-      margin-bottom: 0.75rem !important;
-    }
-    @media (min-width: 640px) {
-      .options-grid {
-        grid-template-columns: 1fr 1fr !important;
-      }
-    }
-    .opt-btn {
-      white-space: normal !important;
-      overflow-wrap: break-word !important;
-      word-break: normal !important;
-      text-align: left !important;
-      display: flex !important;
-      align-items: center !important;
-      gap: 0.6rem !important;
-      width: 100% !important;
-      min-height: 44px !important;
-      line-height: 1.4 !important;
-    }
-    .card, .mcq-card {
-      overflow-wrap: break-word !important;
-      word-break: normal !important;
+
+    [data-theme="dark"] {
+      --bg-primary: #0b0f19;
+      --bg-surface: #151d2e;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: #243048;
+      --card-border: #243048;
+      --accent-cyan: #38bdf8;
+      --accent-gold: #fbbf24;
+      --correct-bg: #143522;
+      --correct-border: #22c55e;
+      --correct-text: #86efac;
+      --wrong-bg: #451a1a;
+      --wrong-border: #ef4444;
+      --wrong-text: #fca5a5;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
     }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-base);
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.7;
+      padding: 1rem 0.75rem 4rem;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* Top Navigation Bar */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .nav-link:hover {
+      text-decoration: underline;
+    }
+
+    .theme-toggle-btn {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Chapter Header */
+    .chapter-header {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .unit-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      background: rgba(217, 119, 6, 0.1);
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+    }
+
+    .chapter-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .chapter-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .chapter-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 0.75rem;
+    }
+
+    /* BCS Analysis Table */
+    .bcs-table-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .bcs-table-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.75rem;
+      color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .table-responsive {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    .table-responsive th, .table-responsive td {
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 0.6rem;
+      text-align: center;
+    }
+
+    .table-responsive th {
+      background: rgba(2, 132, 199, 0.08);
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    [data-theme="dark"] .table-responsive th {
+      background: rgba(56, 189, 248, 0.12);
+    }
+
+    .table-responsive td.has-q {
+      font-weight: 700;
+      color: var(--accent-cyan);
+    }
+
+    /* Score Bar */
+    .score-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      margin-bottom: 1.25rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .score-badge {
+      color: var(--accent-cyan);
+    }
+
+    .reset-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.8rem;
+    }
+
+    .reset-btn:hover {
+      background: var(--bg-primary);
+      color: var(--text-main);
+    }
+
+    /* Question Cards */
+    .q-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .q-card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .q-num {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+    }
+
+    .exam-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Option Grid */
+    .opt-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .opt-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      padding: 0.65rem 0.85rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      line-height: 1.5;
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--accent-cyan);
+      background: rgba(2, 132, 199, 0.05);
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.05);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    [data-theme="dark"] .opt-letter {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .opt-text {
+      flex: 1;
+    }
+
+    /* Answer States */
+    .opt-btn.correct {
+      background: var(--correct-bg) !important;
+      border-color: var(--correct-border) !important;
+      color: var(--correct-text) !important;
+      font-weight: 600;
+    }
+
+    .opt-btn.correct .opt-letter {
+      background: var(--correct-border);
+      color: var(--correct-text);
+    }
+
+    .opt-btn.wrong {
+      background: var(--wrong-bg) !important;
+      border-color: var(--wrong-border) !important;
+      color: var(--wrong-text) !important;
+    }
+
+    .opt-btn.wrong .opt-letter {
+      background: var(--wrong-border);
+      color: var(--wrong-text);
+    }
+
+    .opt-btn:disabled {
+      cursor: default;
+    }
+
+    /* Explanation Accordion */
+    .exp-toggle-wrap {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .exp-toggle-btn {
+      background: none;
+      border: none;
+      color: var(--accent-cyan);
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+    }
+
+    .exp-toggle-btn:hover {
+      background: rgba(2, 132, 199, 0.08);
+    }
+
+    .explanation-drawer {
+      display: none;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px dashed var(--border-color);
+      animation: fadeIn 0.2s ease;
+    }
+
+    .explanation-drawer.open {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .exp-content {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .exp-content p {
+      margin-bottom: 0.6rem;
+    }
+
+    .exp-content strong {
+      color: var(--text-main);
+    }
+
+    .sub-table-wrap {
+      margin: 0.75rem 0;
+      overflow-x: auto;
+    }
+
+    .sub-table-wrap h4 {
+      font-size: 0.88rem;
+      margin-bottom: 0.4rem;
+      color: var(--accent-cyan);
+    }
+
+    .exp-source {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 0.4rem;
+      border-top: 1px solid var(--border-color);
+      padding-top: 0.3rem;
+    }
+
+    /* Chapter Footer */
+    .chapter-footer {
+      margin-top: 3rem;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+      padding-top: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .footer-nav a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-nav a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
+  <div class="container">
+    <!-- Top Nav -->
+    <nav class="top-nav">
+      <a href="index.html" class="nav-link">← আন্তর্জাতিক বিষয়াবলি সূচিপত্র</a>
+      <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+        🌓 থিম
+      </button>
+    </nav>
 
-<div id="reading-progress"></div>
-
-<div class="container">
-  <!-- Hero Section -->
-  <header class="hero">
-    <span class="hero-tag">বিসিএস আন্তর্জাতিক বিষয়াবলি • অধ্যায় ৪</span>
-    <h1>যুদ্ধ ও বিপ্লবসমূহ</h1>
-    <p>বইয়ের পৃষ্ঠা: ৬০০–৬০৫ | প্রথম ও দ্বিতীয় বিশ্বযুদ্ধ, ঐতিহাসিক বিপ্লব, আন্তর্জাতিক চুক্তি ও সংঘাত | মোট প্রশ্ন: ২৭টি</p>
-  </header>
-
-    <!-- BCS Analysis Breakdown -->
-    <section class="bcs-table-card">
-      <div class="bcs-card-title">📊 বিগত বিসিএস পরীক্ষার প্রশ্ন বিশ্লেষণ ছক (বইয়ের মূল ছক অনুযায়ী)</div>
-      <div class="bcs-grid">
-        <div class="bcs-pill"><div class="num">৫০তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill"><div class="num">৪৯তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill"><div class="num">৪৮তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill has-q"><div class="num">৪৭তম</div><div class="cnt">১টি প্রশ্ন</div></div>
-        <div class="bcs-pill"><div class="num">৪৬তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill has-q"><div class="num">৪৫তম</div><div class="cnt">১টি প্রশ্ন</div></div>
-        <div class="bcs-pill has-q"><div class="num">৪৪তম</div><div class="cnt">২টি প্রশ্ন 🔥</div></div>
-        <div class="bcs-pill"><div class="num">৪৩তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill has-q"><div class="num">৪২তম</div><div class="cnt">১টি প্রশ্ন</div></div>
-        <div class="bcs-pill has-q"><div class="num">৪১তম</div><div class="cnt">১টি প্রশ্ন</div></div>
-        <div class="bcs-pill"><div class="num">৪০তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill"><div class="num">৩৯তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill has-q"><div class="num">৩৮তম</div><div class="cnt">১টি প্রশ্ন</div></div>
-        <div class="bcs-pill has-q"><div class="num">৩৭তম</div><div class="cnt">১টি প্রশ্ন</div></div>
-        <div class="bcs-pill"><div class="num">৩৬তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill has-q"><div class="num">৩৫তম</div><div class="cnt">১টি প্রশ্ন</div></div>
-        <div class="bcs-pill has-q"><div class="num">১০ম-৩৪তম</div><div class="cnt">১৪টি প্রশ্ন 🔥</div></div>
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+      <span class="unit-tag">অধ্যায় ৪ • আন্তর্জাতিক বিষয়াবলি</span>
+      <h1 class="chapter-title">যুদ্ধ ও বিপ্লবসমূহ</h1>
+      <p class="chapter-subtitle">১ম ও ২য় বিশ্বযুদ্ধ, রুশ ও ফরাসি বিপ্লব, আরব বসন্ত, ঐতিহাসিক যুদ্ধ ও সামরিক অভিযান</p>
+      <div class="chapter-meta">
+        <span>📖 বইয়ের পৃষ্ঠা: ৬০০–৬০৫</span>
+        <span>📝 মোট প্রশ্ন: ২৭টি</span>
+        <span>🎯 পূর্ণাঙ্গ ব্যাখ্যা ও বিশ্লেষণসহ</span>
       </div>
-      <div class="bcs-table-container">
-        <table class="data-table">
+    </header>
+
+    <!-- BCS Analysis Matrix -->
+    <section class="bcs-table-card">
+      <h3>📊 বিসিএস প্রশ্ন বিশ্লেষণ ছক</h3>
+      <div style="overflow-x: auto;">
+        <table class="table-responsive">
           <thead>
             <tr>
-              <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
-              <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
-              <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
+              <th>বিসিএস</th><th>প্রশ্ন</th>
+              <th>বিসিএস</th><th>প্রশ্ন</th>
+              <th>বিসিএস</th><th>প্রশ্ন</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><strong>৫০তম</strong></td><td>০টি</td>
-              <td><strong>৪৪তম</strong></td><td class="has-q-td">২টি</td>
-              <td><strong>৩৮তম</strong></td><td class="has-q-td">১টি</td>
+              <td>৫০তম</td><td>০</td>
+              <td>৪৪তম</td><td class="has-q">২</td>
+              <td>৩৮তম</td><td class="has-q">১</td>
             </tr>
             <tr>
-              <td><strong>৪৯তম</strong></td><td class="has-q-td">২টি</td>
-              <td><strong>৪৩তম</strong></td><td>০টি</td>
-              <td><strong>৩৭তম</strong></td><td class="has-q-td">১টি</td>
+              <td>৪৯তম</td><td class="has-q">২</td>
+              <td>৪৩তম</td><td>০</td>
+              <td>৩৭তম</td><td class="has-q">১</td>
             </tr>
             <tr>
-              <td><strong>৪৮তম</strong></td><td class="has-q-td">৩টি</td>
-              <td><strong>৪২তম</strong></td><td class="has-q-td">১টি</td>
-              <td><strong>৩৬তম</strong></td><td>০টি</td>
+              <td>৪৮তম</td><td class="has-q">৩</td>
+              <td>৪২তম</td><td class="has-q">১</td>
+              <td>৩৬তম</td><td>০</td>
             </tr>
             <tr>
-              <td><strong>৪৭তম</strong></td><td class="has-q-td">১টি</td>
-              <td><strong>৪১তম</strong></td><td class="has-q-td">১টি</td>
-              <td><strong>৩৫তম</strong></td><td class="has-q-td">১টি</td>
+              <td>৪৭তম</td><td class="has-q">১</td>
+              <td>৪১তম</td><td class="has-q">১</td>
+              <td>৩৫তম</td><td class="has-q">১</td>
             </tr>
             <tr>
-              <td><strong>৪৬তম</strong></td><td>০টি</td>
-              <td><strong>৪০তম</strong></td><td>০টি</td>
-              <td><strong>১০ম-৩৪তম</strong></td><td class="has-q-td">১৪টি</td>
+              <td>৪৬তম</td><td>০</td>
+              <td>৪০তম</td><td>০</td>
+              <td>১০ম–৩৪তম</td><td class="has-q">১৪</td>
             </tr>
             <tr>
-              <td><strong>৪৫তম</strong></td><td class="has-q-td">১টি</td>
-              <td><strong>৩৯তম</strong></td><td>০টি</td>
-              <td><strong>মোট প্রশ্ন</strong></td><td class="has-q-td"><strong>২৮টি</strong></td>
+              <td>৪৫তম</td><td class="has-q">১</td>
+              <td>৩৯তম</td><td>০</td>
+              <td><strong>মোট</strong></td><td class="has-q"><strong>২৭টি</strong></td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
 
-  <!-- Control Bar -->
-  <div class="control-bar">
-    <div class="control-group">
-      <button class="btn-ctrl" onclick="adjustFontSize(-1)">A-</button>
-      <button class="btn-ctrl" onclick="changeFontSize(0)">১০০%</button>
-      <button class="btn-ctrl" onclick="adjustFontSize(1)">A+</button>
+    <!-- Score Bar -->
+    <div class="score-bar">
+      <span class="score-badge" id="scoreDisplay">🏆 সঠিক উত্তর: ০ / ২৭</span>
+      <button class="reset-btn" onclick="resetQuiz()">🔄 পুনরায় শুরু করুন</button>
     </div>
-    <div class="control-group">
-      <button class="btn-ctrl" id="theme-btn" onclick="toggleTheme()">🌓 থিম</button>
-      <button class="btn-ctrl" onclick="toggleAllExplanations()">📖 ব্যাখ্যা টগল</button>
-      <button class="btn-ctrl" onclick="resetQuiz()">🔄 রিসেট কুইজ</button>
-    </div>
-  </div>
 
-  <!-- BCS Frequency Analysis -->
-  <section class="bcs-card">
-    <div class="bcs-title">
-      <span>📊</span> বিসিএস প্রিলিমিনারি প্রশ্ন সংখ্যা বিশ্লেষণ (৫০তম থেকে ১০ম বিসিএস)
-    </div>
-    <div class="bcs-grid">
-      <div class="bcs-item"><span class="exam">৫০তম বিসিএস</span><span class="count">০টি</span></div>
-      <div class="bcs-item"><span class="exam">৪৯তম বিসিএস</span><span class="count">২টি</span></div>
-      <div class="bcs-item"><span class="exam">৪৮তম বিসিএস</span><span class="count">৩টি</span></div>
-      <div class="bcs-item"><span class="exam">৪৭তম বিসিএস</span><span class="count">১টি</span></div>
-      <div class="bcs-item"><span class="exam">৪৬তম বিসিএস</span><span class="count">০টি</span></div>
-      <div class="bcs-item"><span class="exam">৪৫তম বিসিএস</span><span class="count">১টি</span></div>
-      <div class="bcs-item"><span class="exam">৪৪তম বিসিএস</span><span class="count">২টি</span></div>
-      <div class="bcs-item"><span class="exam">৪৩তম বিসিএস</span><span class="count">০টি</span></div>
-      <div class="bcs-item"><span class="exam">৪২তম বিসিএস</span><span class="count">১টি</span></div>
-      <div class="bcs-item"><span class="exam">৪১তম বিসিএস</span><span class="count">১টি</span></div>
-      <div class="bcs-item"><span class="exam">৪০তম বিসিএস</span><span class="count">০টি</span></div>
-      <div class="bcs-item"><span class="exam">৩৯তম বিসিএস</span><span class="count">০টি</span></div>
-      <div class="bcs-item"><span class="exam">৩৮তম বিসিএস</span><span class="count">১টি</span></div>
-      <div class="bcs-item"><span class="exam">৩৭তম বিসিএস</span><span class="count">১টি</span></div>
-      <div class="bcs-item"><span class="exam">৩৬তম বিসিএস</span><span class="count">০টি</span></div>
-      <div class="bcs-item"><span class="exam">৩৫তম বিসিএস</span><span class="count">১টি</span></div>
-      <div class="bcs-item"><span class="exam">১০ম–৩৪তম বিসিএস</span><span class="count">১৪টি</span></div>
-    </div>
-    <p style="font-size:0.875rem; color:var(--text-muted); line-height:1.5;">
-      💡 <strong>গুরুত্বপূর্ণ পর্যবেক্ষণ:</strong> প্রথম বিশ্বযুদ্ধ সমাপ্তির ভার্সাই চুক্তি, দ্বিতীয় বিশ্বযুদ্ধে অক্ষশক্তি-মিত্রশক্তি, পার্ল হারবার আক্রমণ, হিরোশিমা-নাগাসাকির পারমাণবিক বোমা বিস্ফোরণ, ফরাসি বিপ্লব এবং আফিম যুদ্ধ থেকে নিয়মিত প্রশ্ন এসেছে।
-    </p>
-  </section>
+    <!-- Questions Container -->
+    <main id="questionsContainer">
 
-  <!-- Visual Summary Section -->
-  <h2 class="section-heading"><span>⚔️</span> বিশ্বযুদ্ধের তুলনামূলক ম্যাট্রিক্স ও ঐতিহাসিক বিপ্লবসমূহ</h2>
-
-  <!-- World Wars Table -->
-  <div class="visual-card">
-    <h3><span>🌐</span> টেবিল ১: প্রথম ও দ্বিতীয় বিশ্বযুদ্ধের তুলনামূলক বিশ্লেষণ ছক</h3>
-    <div class="table-responsive">
-      <table>
-        <thead>
-          <tr>
-            <th>বৈশিষ্ট্য</th>
-            <th>প্রথম বিশ্বযুদ্ধ (World War I)</th>
-            <th>দ্বিতীয় বিশ্বযুদ্ধ (World War II)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>সময়কাল</strong></td>
-            <td>২৮ জুলাই ১৯১৪ – ১১ নভেম্বর ১৯১৮</td>
-            <td>১ সেপ্টেম্বর ১৯৩৯ – ২ সেপ্টেম্বর ১৯৪৫</td>
-          </tr>
-          <tr>
-            <td><strong>প্রত্যক্ষ কারণ</strong></td>
-            <td>অস্ট্রিয়ার যুবরাজ আর্চডিউক ফ্রাঞ্জ ফার্ডিনান্ড হত্যাকাণ্ড (সারাজেভো)</td>
-            <td>হিটলারের নাৎসি জার্মানি কর্তৃক পোল্যান্ড আক্রমণ</td>
-          </tr>
-          <tr>
-            <td><strong>অক্ষশক্তি / বিপক্ষ</strong></td>
-            <td>জার্মানি, অস্ট্রিয়া-হাঙ্গেরি, অটোমান সাম্রাজ্য, বুলগেরিয়া</td>
-            <td>জার্মানি, ইতালি, জাপান (রোম-বার্লিন-টোকিও অক্ষশক্তি)</td>
-          </tr>
-          <tr>
-            <td><strong>মিত্রশক্তি</strong></td>
-            <td>যুক্তরাজ্য, ফ্রান্স, রাশিয়া, ইতালি, যুক্তরাষ্ট্র (১৯১৭), জাপান</td>
-            <td>যুক্তরাজ্য, সোভিয়েত ইউনিয়ন, যুক্তরাষ্ট্র (১৯৪১), ফ্রান্স, চীন</td>
-          </tr>
-          <tr>
-            <td><strong>প্রধান চুক্তি / সমাপ্তি</strong></td>
-            <td>ভার্সাই চুক্তি (Treaty of Versailles, ২৮ জুন ১৯১৯)</td>
-            <td>জার্মানির আত্মসমর্পণ (মে ১৯৪৫) ও জাপানের আত্মসমর্পণ (সেপ্টেম্বর ১৯৪৫)</td>
-          </tr>
-          <tr>
-            <td><strong>ঐতিহাসিক ফলশ্রুতি</strong></td>
-            <td>লীগ অব নেশনস (জাতিপুঞ্জ) প্রতিষ্ঠা; অটোমান ও অস্ট্রো-হাঙ্গেরীয় সাম্রাজ্যের পতন</td>
-            <td>জাতিসংঘ (UN) প্রতিষ্ঠা; শীতল যুদ্ধ (Cold War)-এর সূচনা; উপনিবেশ বিলোপ</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- Major World Revolutions Matrix -->
-  <div class="visual-card">
-    <h3><span>🚩</span> টেবিল ২: বিশ্বের প্রধান প্রধান ঐতিহাসিক বিপ্লব ও পরিবর্তনের ম্যাট্রিক্স</h3>
-    <div class="table-responsive">
-      <table>
-        <thead>
-          <tr>
-            <th>বিপ্লব</th>
-            <th>সাল</th>
-            <th>প্রধান স্লোগান / নেতৃত্ব</th>
-            <th>ঐতিহাসিক ঘটনা ও ফলাফল</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>ফরাসি বিপ্লব (French Revolution)</strong></td>
-            <td>১৭৮৯</td>
-            <td>"সাম্য, মৈত্রী, স্বাধীনতা" (রুশো, ভলতেয়ার, মন্টেস্কু)</td>
-            <td>১৪ জুলাই ১৭৮৯ বাস্তিল দুর্গের পতন; রাজা ষোড়শ লুইয়ের রাজতন্ত্রের অবসান</td>
-          </tr>
-          <tr>
-            <td><strong>রুশ / বলশেভিক বিপ্লব</strong></td>
-            <td>১৯১৭</td>
-            <td>"শান্তি, রুটি ও জমি" (ভ্লাদিমির ইলিচ লেনিন)</td>
-            <td>অক্টোবর বিপ্লব; জার নিকোলাস দ্বিতীয়-এর পতন এবং প্রথম সমাজতান্ত্রিক রাষ্ট্র প্রতিষ্ঠা</td>
-          </tr>
-          <tr>
-            <td><strong>চীনা বিপ্লব (Chinese Revolution)</strong></td>
-            <td>১৯৪৯</td>
-            <td>মাও সে তুং (লং মার্চ ১৯৩৪-৩৫)</td>
-            <td>১ অক্টোবর ১৯৪৯ গণপ্রজাতন্ত্রী চীন প্রতিষ্ঠা; কুওমিনতাং দলের তাইওয়ানে পলায়ন</td>
-          </tr>
-          <tr>
-            <td><strong>মার্কিন স্বাধীনতা যুদ্ধ</strong></td>
-            <td>১৭৭৫–১৭৮৩</td>
-            <td>টমাস জেফারসন, জর্জ ওয়াশিংটন</td>
-            <td>৪ জুলাই ১৭৭৬ স্বাধীনতার ঘোষণাপত্র; ১৭৮৩ প্যারিস চুক্তিতে ব্রিটেনের স্বীকৃতি</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- Key Battles and Turning Points Cards -->
-  <div class="visual-card">
-    <h3><span>💣</span> দ্বিতীয় বিশ্বযুদ্ধের প্রধান বাঁক ও ঐতিহাসিক তারিখ</h3>
-    <div class="concept-grid">
-      <div class="concept-box">
-        <h4>পার্ল হারবার আক্রমণ (৭ ডিসেম্বর ১৯৪১)</h4>
-        <p>হাওয়াই দ্বীপপুঞ্জে মার্কিন নৌঘাঁটিতে জাপানের অতর্কিত আক্রমণ। এর ফলে পরদিন (৮ ডিসেম্বর) যুক্তরাষ্ট্র আনুষ্ঠানিকভাবে সরাসরি দ্বিতীয় বিশ্বযুদ্ধে যোগদান করে।</p>
-      </div>
-      <div class="concept-box blue">
-        <h4>ডি-ডে / নরম্যান্ডি অবতরণ (৬ জুন ১৯৪৪)</h4>
-        <p>জেনারেল আইজেনহাওয়ারের নেতৃত্বে মিত্রবাহিনীর ফ্রান্সের নরম্যান্ডি উপকূলে সর্ববৃহৎ উভচর সেনা অবতরণ অভিযান (Operation Overlord)।</p>
-      </div>
-      <div class="concept-box gold">
-        <h4>পারমাণবিক বোমা বিস্ফোরণ (আগস্ট ১৯৪৫)</h4>
-        <p>৬ আগস্ট হিরোশিমায় 'লিটল বয়' এবং ৯ আগস্ট নাগাসাকিতে 'ফ্যাটম্যান' নিক্ষেপ। প্রেসিডেন্ট হ্যারি এস ট্রুম্যানের নির্দেশে এ হামলা চালানো হয়।</p>
-      </div>
-      <div class="concept-box">
-        <h4>বার্লিন প্রাচীর ও জার্মানি একত্রীকরণ</h4>
-        <p>১৯৬১ সালে সমাজতান্ত্রিক পূর্ব জার্মানি কর্তৃক বার্লিন প্রাচীর নির্মাণ। ৯ নভেম্বর ১৯৮৯ প্রাচীরের পতন এবং ৩ অক্টোবর ১৯৯০ দুই জার্মানি পুনরায় একত্র হয়।</p>
-      </div>
-      <div class="concept-box blue">
-        <h4>আফিম যুদ্ধ (১৮৩৯–১৮৪২ ও ১৮৫৬–১৮৬০)</h4>
-        <p>চীন ও যুক্তরাজ্যের মধ্যে আফিম ব্যবসা কেন্দ্রিক যুদ্ধ। ১৮৪২ সালের নানকিং চুক্তির শর্তানুযায়ী চীন হংকং দ্বীপটি যুক্তরাজ্যের নিকট হস্তান্তর করে।</p>
-      </div>
-      <div class="concept-box gold">
-        <h4>উপসাগরীয় যুদ্ধ ও আফগানিস্তান প্রত্যাহার</h4>
-        <p>১৯৯০ সালে ইরাক কুয়েত দখল করলে ১৯৯১ সালে 'অপারেশন ডেজার্ট স্টর্ম'। ১৯৮৯ সালের ১৫ ফেব্রুয়ারি আফগানিস্তান থেকে সোভিয়েত সৈন্য প্রত্যাহার সমাপ্ত হয়।</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mnemonic Box -->
-  <div class="mnemonic-box">
-    <div class="mnemonic-icon">💡</div>
-    <div class="mnemonic-text">
-      <strong>বিসিএস মেমোরি হ্যাক (ঐতিহাসিক যুদ্ধ ও সাল মনে রাখার কৌশল):</strong><br>
-      • <strong>প্রথম বিশ্বযুদ্ধ সমাপ্তি:</strong> ১৯১৯ সালের ভার্সাই চুক্তি (Versailles Treaty) → জার্মানির ওপর কঠোর ক্ষতিপূরণ চাপিয়ে দ্বিতীয় বিশ্বযুদ্ধের বীজ বপন।<br>
-      • <strong>পার্ল হারবার:</strong> ৭ ডিসেম্বর ১৯৪১ → মার্কিন যুক্তরাষ্ট্র অক্ষশক্তির বিরুদ্ধে সরাসরি যুদ্ধে নামে।<br>
-      • <strong>পারমাণবিক বোমা:</strong> হিরোশিমা (৬ আগস্ট - Little Boy) ও নাগাসাকি (৯ আগস্ট - Fat Man) → ১৯৪৫ সালের আগস্ট।<br>
-      • <strong>জার্মানি একত্রীকরণ:</strong> ৩ অক্টোবর ১৯৯০ (দেয়াল ভাঙা: ৯ নভেম্বর ১৯৮৯)।
-    </div>
-  </div>
-
-  <!-- Interactive Quiz Engine -->
-  <h2 class="section-heading"><span>📝</span> অধ্যায়ভিত্তিক পূর্ণাঙ্গ বিসিএস কুইজ ইঞ্জিন (২৭টি এমসিকিউ)</h2>
-
-  <div class="quiz-header">
-    <div class="quiz-score-badge" id="live-score">
-      স্কোর: ০ / ২৭ (সঠিকতা: ০%)
-    </div>
-    <div style="font-size:0.875rem; color:var(--text-muted);">
-      সরাসরি অপশনে ক্লিক করে উত্তর যাচাই করুন ও ব্যাখ্যা দেখুন
-    </div>
-  </div>
-
-  <!-- Category Filter Pills -->
-  <div class="filter-pills">
-    <button class="filter-pill active" onclick="filterCategory('all', this)">সকল প্রশ্ন (২৭টি)</button>
-    <button class="filter-pill" onclick="filterCategory('প্রথম ও দ্বিতীয় বিশ্বযুদ্ধ', this)">বিশ্বযুদ্ধসমূহ</button>
-    <button class="filter-pill" onclick="filterCategory('বিশ্বের প্রধান বিপ্লব ও আন্দোলন', this)">বিপ্লব ও আন্দোলন</button>
-    <button class="filter-pill" onclick="filterCategory('আঞ্চলিক যুদ্ধ ও সংঘাত', this)">আঞ্চলিক সংঘাত</button>
-    <button class="filter-pill" onclick="filterCategory('wrong', this)">ভুল উত্তরগুলো</button>
-  </div>
-
-  <!-- Questions Container -->
-  <div id="questions-container">
-
-    <div class="mcq-card" id="q-card-1" data-category="প্রথম ও দ্বিতীয় বিশ্বযুদ্ধ" data-ans="খ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১</span>
-        <span class="mcq-bcs">৪৮তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">প্রথম বিশ্বযুদ্ধ কোন চুক্তির মাধ্যমে সমাপ্ত হয়? [৪৯তম</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(1, 'ক', 'খ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">যারিস চ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(1, 'খ', 'খ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">তি</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(1, 'গ', 'খ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">ভার</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(1, 'ঘ', 'খ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">সাই চ</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(1)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-1">
-        <strong>সঠিক উত্তর: (খ)</strong><br>
-        প্রথম বিশ্বযুদ্ধ ভার্সাই চুক্তির মাধ্যমে সমাপ্ত হয়।
-দ্বিতীয় ভার্সাই চুক্তি : বিধ্বংসী প্রথম বিশ্বযুদ্ধের অবসানের
-লক্ষ্যে ১৯১৯ সালের ২৮ জুন ভার্সাই চুক্তি স্বাক্ষরিত হয়।
-ফ্রাঙ্গের ভার্সাই প্রাসাদের হল অফ মিররসে স্বাক্ষরিত হয়েছিল৷
-পক্ষসমূহ: মিত্রশক্তি (বিটেন, যুক্তরাষ্ট্র, ফ্রাঙ্স, ইতালি, জাপান)
-এবং জার্মানি। প্রথম বিশ্বযুদ্ধের পর জার্মানির ওপর যে
-ক্ষতিপূরণ আরোপ করা হয়েছিল, তা মূলত স্বাক্ষরিত ভার্সাই
-চুক্তি (7168 ০£ খ০15811165)-এর মাধ্যমে হয়েছিল। এই
-চুক্তিটি জার্মানিকে যুদ্ধের জন্য দায়ী করে এবং মিত্র
-দেশগুলোর ক্ষতির জন্য ক্ষতিপূরণ দিতে বাধ্য করে। যুদ্ধের
-কারণে মিত্র দেশগুলোর যে ক্ষতি হয়েছিল, তার জন্য
-জার্মানিকে বিশাল অঙ্কের ক্ষতিপূরণ দিতে বাধ্য করা হয়।
-প্রথম বিশ্বযুদ্ধ : প্রথম বিশ্বযুদ্ধ (011 ঘা 1) ১৯১৪ থেকে
-১৯১৮ সাল পর্যন্ত সংঘটিত হয়েছিল এবং এটি ছিল ইতিহাসের 3 ১৯৮৬৬৯৬৪৬৯0 ১2 ১,/৮৬, ১৩১,১০১ ২৮৭
-বিভিন্ন শক্তির মধ্যে সংঘটিত হলেও এর প্রভাব ছিল
-পৃথিবীজুড়ে ৷
-যুদ্ধের পটভূমি : ২৮ জুলাই, ১৯১৪ সালে যুদ্ধ শুরু হয় এবং
-১১ নভেম্বর, ১৯১৮ সালে শেষ হয়। যুদ্ধের ফলাফল মিত্র
-শক্তির বিজয়। অক্ষশক্তি: জার্মানি, অস্ট্রিয়া, হাঙ্গেরি,
-অটোমান সাম্রাজ্য ও বুলগেরিয়া। মিত্রশক্তি: সার্বিয়া, রাশিয়া,
-ফ্রাগ, যুক্তরাজ্য, যুক্তরাষ্ট্র, ইতালি, জাপান প্রভৃতি দেশ।
-উৎস: 8।1/৫॥/10৫ এবং 1%415/017.00/%
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-2" data-category="আঞ্চলিক যুদ্ধ ও সংঘাত" data-ans="খ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২</span>
-        <span class="mcq-bcs">৪৯তম
-বিসিএস</span>
-      </div>
-      <div class="mcq-question">আফিম যুদ্ধ কোন দুইটি দেশের মধ্যে সংঘটিত হয়?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(2, 'ক', 'খ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">চীন</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(2, 'খ', 'খ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">আফ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(2, 'গ', 'খ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">ানিস</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(2, 'ঘ', 'খ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">তান</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(2)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-2">
-        <strong>সঠিক উত্তর: (খ)</strong><br>
-        আফিম যুদ্ধ চীন ও ইংল্যান্ড- এই দুইটি দেশের মধ্যে
-সংঘটিত হয়। আফিম যুদ্ধ : আফিমের চোরাচালানকে কেন্দ্র করে চীন ও
-ব্রিটেনের মধ্যে যে যুদ্ধ সংঘটিত হয়েছিল, তাই আফিম যুদ্ধ
-নামে পরিচিত । আশীতজাতক বিবির
-ইস্ট ইন্ডিয়া কোম্পানি উনিশ শতকের গোড়া থেকে চীনের
-সঙ্গে ব্যবসায়ে ঘাটতি মেটাতে বঙ্গদেশ থেকে চীনে আফিম
-রপ্তানি শুরু করে। চীনা শাসকরা ১৮৩৯ সালে আফিম
-আমদানি নিষিদ্ধ ঘোষণা করে।
-কিন্তু ইস্ট ইন্ডিয়া কোম্পানি অবৈধ উপায়ে এ ব্যবসা অব্যাহত
-রাখে। কোম্পানির অবৈধ আফিম ব্যবসার কারণে চীন ও
-ব্রিটেনের মধ্যে যুদ্ধ বাধে । ১ম যুদ্ধে চীনারা পরাজিত হয় এবং
-চীন ১৮৪২ সালে নানকিং চুক্তি স্বাক্ষর করতে বাধ্য হয়।
-নানকিং চুক্তি : প্রথম আফিম যুদ্ধে পরাজয়ের পর চীনের
-শাসকগোষ্ঠী ব্রিটিশদের সাথে একটি অপমানজনক 'অসম
-চুক্তি' স্বাক্ষর করতে বাধ্য হয়। এই চুক্তির নাম নানকিং চুক্তি ।
-চিনা কমিশনার চিইং (0131118) এবং নব নিযুক্ত ব্রিটিশ
-রাষ্ট্রদূত স্যার হেনরি পট্টিনগার (311 মা 2001897) -
-এর উদ্যোগে শান্তি প্রতিষ্ঠার লক্ষ্যে এই চুক্তি স্বাক্ষরিত হয়।
-চুক্তি স্বাক্ষরিত হয় ২৯ আগস্ট, ১৮৪২ সালে। এই চুক্তির
-মাধ্যমে ব্রিটিশদের হংকংয়ের নিয়ন্ত্রণ দেওয়া হয়েছিল৷ এছাড়া
-চীন কর্তৃক বিটেনকে বিভিন্ন বাণিজ্যিক সুযোগ-সুবিধা প্রদানে
-বাধ্য হয়। পরবর্তীতে ১৮৯৮ সালে চীন সরকার ৯৯ বছরের
-জন্যে হংকংকে ব্রিটেনের নিকট লিজ দেয় এবং ১৯৯৭ সালের
-১ জুলাই লিজের মেয়াদ শেষে ব্রিটেন পুনরায় চীনের নিকট
-হংকং-কে হস্তান্তর করে।
-উৎস: 8৪171011100
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-3" data-category="আঞ্চলিক যুদ্ধ ও সংঘাত" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ৩</span>
-        <span class="mcq-bcs">৪৮তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">কোন দেশের গৃহযুদ্ধের কারণে ইউরোপজুড়ে অভিবাসী সংকট সৃষ্টি হয়েছে?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(3, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">সিরিয়া</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(3, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">লেবানন</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(3, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">আফ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(3, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">ানিস</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(3)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-3">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        সিরিয়ার গৃহযুদ্ধের কারণে ইউরোপজুড়ে অভিবাসী
-সংকট সৃষ্টি হয়। ২০১১ সালে শুরু হওয়া এই সংঘাতের ফলে
-লক্ষাধিক মানুষ ইউরোপে শরণার্থী হয়ে আশ্রয় নেয়।
-ইউরোপের অভিবাসী সংকট : ইউরোপজুড়ে অভিবাসী
-সংকটের মূল কারণ হলো সিরিয়ার গৃহযুদ্ধ । সিরিয়ার গৃহযুদ্ধ
-২০১১ সালে শুরু হয়। এই সংঘাতের ফলে লক্ষ লক্ষ সিরীয়
-নাগরিক নিরাপত্তাহীনতার কারণে নিজেদের দেশ ছেড়ে
-আশ্রয়ের খোজে পার্শ্বৰতী দেশ এবং ইউরোপের দিকে পালাতে
-বাধ্য হন। তুরস্ক, লেবানন ও জর্ডান প্রথমে তাদের আশ্রয়
-দিলেও, অনেকেই পরে ইউরোপের বিভিন্ন দেশে যান। এই
-বিশাল সংখ্যক শরণার্থী ইউরোপের সামাজিক, রাজনৈতিক ও
-মানবিক সংকটের সৃষ্টি করে। আফগানিস্তান ও ইরাকেও যুদ্ধ ও
-সংকট থাকলেও সিরিয়ার গৃহযুদ্ধের প্রভাব সবচেয়ে বেশি এবং
-সেটি ইউরোপজুড়ে অভিবাসী সংকটের প্রধান উৎস।
-উৎস: (71408, £70760% €91115510% ও পত্রিকা রিপোর্ট
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-4" data-category="বিশ্বের প্রধান বিপ্লব ও আন্দোলন" data-ans="খ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ৪</span>
-        <span class="mcq-bcs">বিসিএস প্রশ্ন</span>
-      </div>
-      <div class="mcq-question">অক্টোবর সমাজতান্ত্রিক বিপ্লব কত খ্রিষ্টাব্দে সংঘটিত হয়? ৪৮তম বিসিএস] ৷ে ১১১০ 2 ৬৮-৯০ 2২১০৬ আজ ৷ সে থা চল ৩০১</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(4, 'ক', 'খ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">অ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(4, 'খ', 'খ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">োবর সমাজতান</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(4, 'গ', 'খ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">ত</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(4, 'ঘ', 'খ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">রি</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(4)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-4">
-        <strong>সঠিক উত্তর: (খ)</strong><br>
-        অক্টোবর সমাজতান্ত্রিক বিপ্লব (0000861 3০0০0181150
-০&quot;০10001) সংঘটিত হয় ১৯১৭ খ্রিস্টাব্দে। এই বিপুবের
-মাধ্যমে রাশিয়ায় বলশেভিকদের নেতৃত্বে সমাজতান্ত্রিক শাসন
-প্রতিষ্ঠিত হয়।
-রুশ বিপ্লব : ১৯১৭ সালে রুশ বিপ্লব সংঘটিত হয়। ১৯১৭
-সালে রাশিয়ায় মূলত দুটি বিপ্লব সংঘটিত হয়। এই দুটি বিপ্লব
-হলো ফেব্রুয়ারি বিপ্লব ও বলশেভিক বিপ্লব। এই দুটি বিপ্লবকে
-একত্রে &quot;১৯১৭ সালের রুশ বিপ্লব&quot; (8059181 ঢ6খ0100011
-০1 1917) বলা হয়। এই বিপ্লবের ফলে রাশিয়ায় রাজতন্ত্রের
-অবসান ঘটে ও সমাজতন্ত্রের সূচনা ঘটে ।
-ফেব্রুয়ারি বিপ্লব : রুশ বিপ্লবের প্রথম পর্যায়কে ফেব্রুয়ারি
-বিপ্লব বলা হয়। ফেব্রুয়ারি বিপ্লবের ফলে রাজতন্ত্রের অবসান
-ঘটে এবং জার দ্বিতীয় নিকোলাসকে ক্ষমতা থেকে উচ্ছেদ ও
-বন্দি করা হয়। ফেব্রুয়ারি বিপ্লবের নেতৃত্ব ছিলেন আলেক্সান্দ্রো
-এফ. ক্যারেনস্কি (১19181101 ঢ. 1919191) ।
-বলশেভিক বিপ্লব/অক্টোবর বিপ্লব : রুশ বিপ্লবের দ্বিতীয়
-পর্যায়কে বলশেভিক বা অক্টোবর বিপ্লৰ বলে। বলশেভিক
-বিপ্লবের ফলে রাশিয়ায় লেনিনের নেতৃত্বে বিশ্বের প্রথম
-সমাজতান্ত্রিক রাষ্ট্র প্রতিষ্ঠা লাভ করে। বলশেভিক বিপ্লবের
-নেতা ছিলেন ভ্লাদিমির লেনিন ও লিওন ট্রটস্কি।
-উৎস: ৪11/01111/0৫ এবং 1415/017.001%
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-5" data-category="প্রথম ও দ্বিতীয় বিশ্বযুদ্ধ" data-ans="গ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ৫</span>
-        <span class="mcq-bcs">৪৭তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">যুক্তরাষ্ট্রের পরিচালিত 'অপারেশন মিডনাইট হ্যামার' ইরানে কবে হামলা করে?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(5, 'ক', 'গ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">২০ জ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(5, 'খ', 'গ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">ন, ২০২</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(5, 'গ', 'গ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">২১ জ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(5, 'ঘ', 'গ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">ন, ২০২</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(5)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-5">
-        <strong>সঠিক উত্তর: (গ)</strong><br>
-        ২২ জুন ২০২৫ তারিখে যুক্তরাষ্ট্রের পরিচালিত
-'অপারেশন মিডনাইট হ্যামার' ইরানে হামলা করে। অপারেশন মিডনাইট হ্যামার (00180011 110116110
-মঃা011101) : ২২ জুন, ২০২৫ তারিখে ইরানের পারমাণবিক
-স্থাপনায় 'অপারেশন মিডনাইট হ্যামার' নামে অভিযান
-পরিচালনা করে যুক্তরাষ্ট্র । 'অপারেশন মিডনাইট হ্যামার' নামে
-পরিচালিত বিশেষ অভিযানে ইরানের পারমাণবিক স্থাপনায়
-হামলা চালায় যুক্তরাষ্ট্র ৷ মার্কিন যুক্তরাষ্ট্র জানিয়েছে, শনিবার (রবিবার তেহরানের সময়
-০২:৪০-০৩:০৫) ২২:৪০ 0141 থেকে ২৩:০৫ 0141 এর
-মধ্যে তাদের উপর হামলা চালানো হয়েছিল। অর্থাৎ ইরানের
-স্থানীয় সময় রবিবার ২২ জুন, ২০২৫ রাত ০২:৪০ থেকে
-০৩:০৫ সময়ে এই হামলা চালানো হয়েছিল । প্রায় ২৫ মিনিট দীর্ঘ এই অভিযানে যুক্তরাষ্ট্রের ১২৫টি
-যুদ্ধবিমান অংশ নিয়েছে। যুক্তরাষ্ট্রের মিসৌরি থেকে উডডয়নের
-প্রায় ৩৭ ঘণ্টা উড়ে অপারেশন মিডনাইট হ্যামারে অংশ
-সাতটি বি-২ বোমারু বিমান। এই বিমানগুলো ইরানের ৩টি
-পরমাণু স্থাপনা ফর্দো, ইস্ফাহান এবং নাতাঞ্জ লক্ষ্য করে ১৪টি
-বাংকার বাস্টার বোমা ছোড়ে প্রতিটি বি-২ বোমারু বিমান
-দুটি করে বাংকার বিধ্বংসী বোমা বহনে সক্ষম । প্রতিটি বোমার 11'614007 বিসিএস প্রিলিমিনা৷
-এ ছাড়া এই অভিযানে অংশ নেয় জ্বালানি ভরার ট্যাংকার €
-নজরদারি বিমান ।
-উনেখ্য, যুক্তরাষ্ট্রের প্রতিরক্ষামন্ত্রী পিটার হেগসেথ বলেছেন
-ইরানের পারমাণবিক স্থাপনায় হামলা চালিয়ে যুক্তরাষ্ট্রের ছমবি
-নির্মূল করাই ছিল এই মিশনের লক্ষ্য ।
-এছাড়াও, ১৩ জুন, ২০২৫ তারিখে ইসরায়েল ইরানের কয়েব
-ডজন পারমাণবিক ও সামরিক লক্ষ্যবস্তুতে আকশ্মিক আক্রুম
-চালায়। এই অভিযানের নাম ছিল অপারেশন রাইজিং লায়ন
-(0098001) 1২19118 1101) । ১৩ জুন, ২০২৫ তারিখে
-ইরানে ইসরাইলের পরিচালিত অভিযান 'অপারেশন রাইজি!
-লায়ন'-এর বিপরীতে অপারেশন ট্টু প্রমিজ থ্রি অভিযান
-পরিচালনা করছে ইরান। তারপর থেকে উভয় দেশের মধ্য
-বিমান যুদ্ধ অব্যাহত থাকে।
-উল্লেখ্য, ২৮ ফেব্রুয়ারি, ২০২৬ তারিখে ইসরায়েল ও যুক্তরাষ্
-ইরানে যৌথ অভিযান 'অপারেশন এপিক ফিউরি' শুরু করে
-অভিযানে এঁ দিনই ইরানের সর্বোচ্চ নেতা আয়াতুল্লাহ আল
-খামেনি মৃত্যুবরণ করেন।
-উৎস: প্রথম আলো, বিবিসি, 515 এবং 0] পত্রিকা ।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-6" data-category="প্রথম ও দ্বিতীয় বিশ্বযুদ্ধ" data-ans="গ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ৬</span>
-        <span class="mcq-bcs">৪৫তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">চীন-ভারত যুদ্ধ কত সালে সংঘটিত হয়?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(6, 'ক', 'গ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">১৯</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(6, 'খ', 'গ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">৯</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(6, 'গ', 'গ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">১৯</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(6, 'ঘ', 'গ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">০</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(6)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-6">
-        <strong>সঠিক উত্তর: (গ)</strong><br>
-        চীন-ভারত যুদ্ধ (3110-10191 ঘঞ7) ১৯৬২
-সালের ২০ অক্টোবর থেকে ২০ নভেম্বর সংঘটিত হয়। এব
-মূল কারণ ছিল আকসাই চিন (41881 011) এলাকা এবং
-অরুণাচল প্রদেশ (&amp;11180181 11806911) নিয়ে সীমান
-বিরোধ। এই যুদ্ধের ফলে, চীন আ্যাকসাই চিন দখল করে
-রাখে এবং ভারত অরুণাচল প্রদেশের নিয়ন্ত্রণ বজায় রাখে
-এই যুদ্ধের পর চীন এবং ভারত সীমান্তে দীর্ঘদিনের উত্তেজন
-চলে এবং ২০২০ সালে লাদাখ অঞ্চলে গালওয়ান ভ্যালিতে
-চীন-ভারত সেনাদের মধ্যে আবারও সংঘর্ষ ঘটে।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-7" data-category="বিশ্বের প্রধান বিপ্লব ও আন্দোলন" data-ans="খ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ৭</span>
-        <span class="mcq-bcs">৪৪তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">কোন দেশ থেকে 'আরব বসন্ত'-এর সূচনা হয়?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(7, 'ক', 'খ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">মিশর</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(7, 'খ', 'খ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">তিউনিশিয়া</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(7, 'গ', 'খ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">লিবিয়া</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(7, 'ঘ', 'খ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">সিরিয়া </span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(7)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-7">
-        <strong>সঠিক উত্তর: (খ)</strong><br>
-        ২০১০ সালের ডিসেম্বরে তিউনিশিয়ায় বোয়াজিজি
-নামের এক ফলবিক্রেতা কর্তৃক নিজ শরীরে আগুন ধরিয়ে
-দেওয়ার মাধ্যমে গণবিক্ষোভের সূচনা ঘটে, যা 'আরব বসন্ত
-নামে পরিচিত। এই ঘটনার পর ২০১১ সালের ১৪ জানুয়ারি,
-তিউনিশিয়ার স্বৈরশাসক জাইন এল বেন আলী ক্ষমতাচ্যুত হন
-এবং সৌদি আরবে পালিয়ে যান।
-পরবর্তীতে , এই গণবিক্ষোভ অন্যান্য দেশ যেমন মিসর, ইয়েমেন,
-লিবিয়া, সিরিয়া, বাহরাইন এবং মরক্কোতে ছড়িয়ে পড়ে৷
-লিবিয়া, সিরিয়া ও ইয়েমেনে এই গণআন্দোলন গৃহযুদ্ধে রূপ
-নেয়।
-অন্যান্য কয়েকটি বিপ্লব: _বৈপ্ণ ._ ][সাল দেশ
-| প্বেতবিপ্ৰ ১৯৬৩] হরল
-ভলভেট বিপুব
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-8" data-category="প্রথম ও দ্বিতীয় বিশ্বযুদ্ধ" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ৮</span>
-        <span class="mcq-bcs">৪৪তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">মহান মুক্তিযুদ্ধ চলাকালীন 'কনসার্ট ফর বাংলাদেশ (€071001 101991161806911)' কোথায় অনুষ্ঠিত হয়েছিল?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(8, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">
-
-1</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(8, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">নিউইয়র</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(8, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">বোস</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(8, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">ন লন</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(8)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-8">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        ১৯৭১ সালের ১ আগস্ট মার্কিন যুক্তরাষ্ট্রের নিউইয়র্ক । সিটির ম্যাডিসন স্কয়ারে কনসার্ট ফর বাংলাদেশ অনুষ্ঠিত হয়।
-এই কনসার্টের উদ্দেশ্য ছিলো কনসার্ট থেকে প্রাপ্ত অর্থ দিয়ে
-বাংলাদেশের শরণার্থীদের সহায়তা করা। এর মূল উদ্যোক্তা ছিলেন বিখ্যাত ভারতীয় সেতারবাদক পণ্ডিত রবিশংকর। তার
-আহবানে সাড়া দিয়ে মার্কিন ব্যান্ডদল বিটলসের জর্জ হ্যারিসন, বব ডিলান, রিঙ্গো স্টার প্রমুখ এই কনসার্টে অংশগ্রহণ করেন। ্‌ বাংলাদেশের আকবর আলী খা, তবলাবাদক ওস্তাদ আল্লারাখা প্রমুখ এতে যুক্ত ছিলেন।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-9" data-category="বিশ্বের প্রধান বিপ্লব ও আন্দোলন" data-ans="খ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ৯</span>
-        <span class="mcq-bcs">৪২তম বিশে
-বিসিএস স্বাস্থ্য
-
-ও উনবিংশ শতাব্দীতে ও</span>
-      </div>
-      <div class="mcq-question">ব্রিটিশ কৃষি বিপুৰ কখন সংঘটিত হয়েছিল?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(9, 'ক', 'খ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text"> অষ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(9, 'খ', 'খ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">াদশ শতাব</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(9, 'গ', 'খ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">দীতে</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(9, 'ঘ', 'খ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">যোড়শ শতার</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(9)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-9">
-        <strong>সঠিক উত্তর: (খ)</strong><br>
-        কৃষি বিপ্লব ১৮ শতকের শুরুতে যুক্তরাজ্যে শুরু হয়।
-এই বিপ্লবের লক্ষ্য ছিল কৃষি ব্যবস্থার উন্নয়ন। কৃষি বিপ্লবের আওতায় জমির মালিকানা পুনর্বিন্যাস এবং কৃষির জন্য নতুন
-প্রযুক্তি ও যন্ত্রপাতিতে বিনিয়োগ বাড়ানো হয়। এতে উন্নত ড্রেনেজ ব্যবস্থা, বৈজ্ঞানিক প্রজনন পদ্ধতি এবং নতুন ফসলের উপর পরীক্ষার মতো বিষয়গুলো অন্তর্ভুক্ত ছিল। যদিও এই
-পরিবর্তনগুলো ১৯ শতকে পুরোপুরি বাস্তবায়িত হয়, কিন্ত মূলত অষ্টাদশ শতাব্দীতেই কৃষি বিপ্লব সংঘটিত হয়েছিল।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-10" data-category="আঞ্চলিক যুদ্ধ ও সংঘাত" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১০</span>
-        <span class="mcq-bcs">৪১তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">সামরিক ভাষায় 'ছ%11)' অর্থ কী?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(10, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">॥%/০</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(10, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">00115 011355 [)7০501000011</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(10, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">&quot;</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(10, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">0110%%106 1</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(10)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-10">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        সামরিক ভাষায় “1%141)'-এর পূর্ণরূপ হচ্ছে ঘ ০8005
-০1893 76০50000011, যার বাংলা অর্থ গণবিধ্বংসী অন্তর ।
-এই ধরনের অন্ত্রগুলো সাধারণত পারমাণবিক, রাসায়নিক, বা
-জৈব অস্ত্র হিসাবে পরিচিত, যেগুলো বৃহৎ পরিমাণে মানুষ ও
-সম্পদের ক্ষতি করতে সক্ষম। ২০০৩ সালে ঘ147 আছে
-এমন আশঙ্কায় ইঙ্গ-মার্কিন জোট ইরাকে আব্রমণ করেছিল।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-11" data-category="বিশ্বের প্রধান বিপ্লব ও আন্দোলন" data-ans="গ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১১</span>
-        <span class="mcq-bcs">৩৮তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">অক্টোবর বিপ্লবের নেতৃত্ব দিয়েছেন :</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(11, 'ক', 'গ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">ার</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(11, 'খ', 'গ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">ল মার</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(11, 'গ', 'গ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">স</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(11, 'ঘ', 'গ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">ফ</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(11)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-11">
-        <strong>সঠিক উত্তর: (গ)</strong><br>
-        ১৯১৭ সালে রাশিয়ায় অক্টোবর বিপ্লৰ (যাকে
-বলশেভিক বিপ্লবও বলা হয়) সংঘটিত হয়। এই বিপ্লবের
-নেতৃত্ব দেন বলশেভিক পার্টির নেতা ভ্লাদিমির ইলিচ লেনিন।
-অক্টোবর বিপ্লবের ফলে রুশ সামাজ্যের পতন ঘটিয়ে রাশিয়ায়
-সমাজতান্ত্রিক শাসন প্রতিষ্ঠিত হয়। এর মাধ্যমে সোভিয়েত
-ইউনিয়ন প্রতিষ্ঠিত হয়, যা পরবর্তীতে বিশ্বের অন্যতম বড়
-সমাজতান্ত্রিক রাষ্ট্র হয়ে ওঠে ।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-12" data-category="প্রথম ও দ্বিতীয় বিশ্বযুদ্ধ" data-ans="গ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১২</span>
-        <span class="mcq-bcs">৩৭তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">81801171605 80061” কী?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(12, 'ক', 'গ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">এ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(12, 'খ', 'গ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">ি</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(12, 'গ', 'গ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">রন</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(12, 'ঘ', 'গ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">থের নাম</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(12)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-12">
-        <strong>সঠিক উত্তর: (গ)</strong><br>
-        81800105148 (8174) একটি বর্ণবাদ বিরোধী
-আন্দোলন, যা মার্কিন যুক্তরাষ্ট্রে ২০১৩ সালে শুরু হয়। এই
-আন্দোলনের মূল উদ্দেশ্য হল গ্লোবাল রেসিজম বা কৃষ্ণাঙ্গদের
-বিরুদ্ধে বৈষম্য বন্ধ করা। বিশেষ করে আমেরিকান কৃষ্ণাঙ্গ
-জর্জ ফ্লয়েডের হত্যার পর এই আন্দোলন আন্তর্জাতিক পর্যায়ে
-ব্যাপকভাবে আলোচিত হয়।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-13" data-category="প্রথম ও দ্বিতীয় বিশ্বযুদ্ধ" data-ans="গ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১৩</span>
-        <span class="mcq-bcs">৩৫তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">প্রথম বিশ্বযুদ্ধ চলাকালীন বেলফোর ঘোষণা ১৯১৭-এর মূল প্রতিপাদ্য ছিল-</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(13, 'ক', 'গ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">জাতি</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(13, 'খ', 'গ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">ঞ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(13, 'গ', 'গ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">জ সৃষ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(13, 'ঘ', 'গ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">ি</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(13)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-13">
-        <strong>সঠিক উত্তর: (গ)</strong><br>
-        প্রথম বিশ্বযুদ্ধ চলাকালীন বেলফোর ঘোষণা ১৯১৭ এর
-মূল প্রতিপাদ্য ছিল ইহুদিদের জন্য একটি জাতিরাষ্ট্র গঠন তথা
-ইসরায়েল রাষ্ট্র প্রতিষ্ঠা। ১৯১৭ সালের ২ নভেম্বর, ব্রিটেনের
-তৎকালীন পররাষ্ট্রমন্ত্রী লর্ড আর্থার জেমস বেলফোর , ইহুদিবাদী
-আন্দোলনের নেতা রথসচাইল্ডকে চিঠিতে ফিলিস্তিন ভূখণ্ডে
-ইহুদিদের জন্য একটি রাষ্ট্র প্রতিষ্ঠায় ব্রিটেনের সহায়তার
-প্রতিশ্রুতি দেন। এই চিঠিটি ইতিহাসে বেলফোর ডিক্লারেশন
-নামে পরিচিত।
-ব্রিটেনের প্রথম বিশ্বযুদ্ধে বিজয়ের ফলে অটোমান সাম্রাজ্যের
-অধীনে থাকা ফিলিস্তিন ভূখণ্ড ব্রিটিশ সাম্রাজ্যের অধিকারে
-আসে। বেলফোর ঘোষণার ৩১ বছর পর, ১৯৪৮ সালে যুক্তরাষ্ট্র
-ও ব্রিটেনের প্রত্যক্ষ সহায়তায় ফিলিস্তিনে ইসরায়েল রাষ্ট্রের
-প্রতিষ্ঠা ঘটে।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-14" data-category="প্রথম ও দ্বিতীয় বিশ্বযুদ্ধ" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১৪</span>
-        <span class="mcq-bcs">৩৪তম বিসিএসা
-ও আরবের বিভিন্ন দেশে গণজাগরণ
-ও</span>
-      </div>
-      <div class="mcq-question">'আরব বসস্ত' বলতে কি বুঝায়?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(14, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text"> আরব অঞ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(14, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">চলে বসন</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(14, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">ত</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(14, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">াল</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(14)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-14">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        ২০১০ ও ২০১১ সালে আরব অঞ্চলে বিশেষ করে
-মধ্যপ্রাচ্য ও উত্তর আফ্রিকায় সংঘঠিত গণজাগরণকে 'আরব
-বসপ্ত' বলে। এই গণজাগরণগুলির লক্ষ্য ছিল রাজনৈতিক ও
-সামাজিক পরিবর্তন, শাসকদের বিরুদ্ধে প্রতিবাদ এবং
-গণতান্ত্রিক সংস্কার ।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-15" data-category="বিশ্বের প্রধান বিপ্লব ও আন্দোলন" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১৫</span>
-        <span class="mcq-bcs">৩১তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">কবে ফরাসী বিপ্লব সংঘটিত হয়?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(15, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">
-3১৭৮৯</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(15, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">১৭৯১</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(15, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">১৭৯</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(15, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">১৮০০ </span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(15)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-15">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        বিশ্ব ইতিহাসের অন্যতম গুরুত্বপূর্ণ ঘটনা ফরাসি
-বিপ্লব সংঘটিত হয় ১৭৮৯ সালে। ১৪ জুলাই, ১৭৮৯ সালে
-বাস্তিল দুর্গের পতনের মাধ্যমে বিপ্লবের সূচনা ঘটে । ফরাসি
-বিপ্লবের মূল প্লোগান ছিল 'স্বাধীনতা, সমতা ও ভ্রাতৃত্ব
-(11890, 8008113, 91015), যা পরবর্তীতে বিশ্বের
-বিভিন্ন দেশের গণতান্ত্রিক আন্দোলনগুলোকে অনুপ্রাণিত করে।
-ফ্রাঙ্গের সম্রাট নেপোলিয়ন বোনাপার্ট' এই বিপ্লবের অগ্রগণ্য
-নেতাদের মধ্যে একজন।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-16" data-category="প্রথম ও দ্বিতীয় বিশ্বযুদ্ধ" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১৬</span>
-        <span class="mcq-bcs">২৮তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">ব্সনিয়ায় যুদ্ধবিরতি স্বাক্ষরের মধ্যহ্তাকারী কে?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(16, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">বিল</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(16, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">লিন</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(16, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">ন</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(16, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">জিমি</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(16)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-16">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        বসনিয়ায় যুদ্ধবিরতির জন্য স্বাক্ষরিত ডেটন শান্তি
-চুক্তির মধ্যস্থতাকারী বিল ক্লিনটন। এটি বসনিয়া সংকট
-সমাধানের লক্ষ্যে গৃহীত পদক্ষেপ, যা ১৯৯৫ সালে স্বাক্ষরিত
-হয়। এ চুক্তির খসড়া যুক্তরাষ্ট্রের ওহায়ো অঙ্গরাজ্যের ডেটন
-শহরের একটি বিমান ঘাঁটিতে প্রস্তুত করা বলে এটি ডেটন
-শান্তি চুক্তি নামে পরিচিত। যুক্তরাষ্ট্রের প্রেসিডেন্ট বিল ক্লিনটন
-এবং তার পররাষ্ট্রমন্ত্রী ওয়ারেন ক্রিস্টোফার এই চুক্তির
-মধ্যস্থতাকারী। চুক্তির প্রধান শান্তি আলোচক ছিলেন রিচার্ড
-হলবোক। ডেটন শান্তি চুক্তি বসনিয়া এবং হার্জেগোভিনা
-অঞ্চলে দীর্ঘদিনের সংঘাতের অবসান ঘটায়।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-17" data-category="প্রথম ও দ্বিতীয় বিশ্বযুদ্ধ" data-ans="ঘ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১৭</span>
-        <span class="mcq-bcs">২৬তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">ফ্রাঙ্গের মহান স্ত্রাট নেপোলিয়নের জীবনাবসান হয় কোথায়?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(17, 'ক', 'ঘ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">য়া</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(17, 'খ', 'ঘ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">ার ল</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(17, 'গ', 'ঘ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">নাম</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(17, 'ঘ', 'ঘ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">স</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(17)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-17">
-        <strong>সঠিক উত্তর: (ঘ)</strong><br>
-        ফ্রাঙ্গের মহান স্মা্ট নেপোলিয়নের জীবনাবসান হয়
-সেন্ট হেলেনা দ্বীপে। নেপোলিয়ন কর্সিকা দ্বীপে জন্মুগহণ
-করেন। ১৮১৫ সালের জুন মাসে বিখ্যাত ওয়াটার'লু যুদ্ধে
-বিটেনের কাছে পরাজিত হন নেপোলিয়ন। তাকে আটলান্টিক
-মহাসাগরের সেন্ট হেলেনা দ্বীপে নির্বাসন দেয়া হয়। নির্বাসিত
-অবস্থায় ছয় বছর পর ১৮২১ সালে ক্যান্সারে আক্রান্ত হয়ে মারা
-যান এই বীর সেনাপতি ।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-18" data-category="আঞ্চলিক যুদ্ধ ও সংঘাত" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১৮</span>
-        <span class="mcq-bcs">২৫তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">ইরাকে কখন মার্কিন-বিটিশ যৌথ সামরিক অভিযান শুরু হয়?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(18, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">২০০৩ সালের ১৮ মার</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(18, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">চ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(18, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">২০০৩ সালের ২০ মার</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(18, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">চ
-
-</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(18)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-18">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        মার্কিন নেতৃত্বাধীন যৌথ বাহিনী ২০০৩ সালের ২:
-মার্চ তারিখে ইরাক আক্রমণ শুরু করে যার সামরিক নাচ
-'অপারেশন ইরাকি ফ্রিডম'। তখন ইরাকের ক্ষমতায় ছিলে
-প্রেসিডেন্ট সাদ্দাম হোসেন। যুক্তরাষ্ট্র আর যুক্তরাজ্য অভিযোগ
-করে, প্রেসিডেন্ট সাদ্দাম ইরাকে গণবিধ্বংসী অন্ত্রের (ডরলিউএমডি
-মজুত গড়ে তুলেছেন এবং সেই সঙ্গে আল-কায়েদার মতে
-সন্ত্রাসী গোষ্ঠীগুলোকে সমর্থন দিয়ে যাচ্ছেন। তাই সাদ্দামে'
-বিরুদ্ধে শুরু হয় ইঙ্গ-মার্কিন বাহিনীর যুদ্ধ ।
-তার আগে ১৯৯০ সালের ২ আগস্ট ইরাক কর্তৃক কুয়ে
-আক্রান্ত হলে ১৯৯১ সালের ১৭ জানুয়ারি মার্কিন নেতৃত্বাধী'
-বহুজাতিক বাহিনী ইরাকের উপর বিমান হামলা শুরু করে য
-'অপারেশন ডেজার্ট স্টর্ম' নামে পরিচিত।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-19" data-category="আঞ্চলিক যুদ্ধ ও সংঘাত" data-ans="খ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ১৯</span>
-        <span class="mcq-bcs">২৪তম বিসিএস বাতিল</span>
-      </div>
-      <div class="mcq-question">কত সালে আফগানিস্তান থেকে সোভিয়েত সৈন্য প্রত্যাহার কর হয়ঃ</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(19, 'ক', 'খ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">১৯৮৮ সালে</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(19, 'খ', 'খ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">১৯৮৯ সালে</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(19, 'গ', 'খ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">১৯৯০ সালে</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(19, 'ঘ', 'খ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">১৯৯১ সালে উ.
-</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(19)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-19">
-        <strong>সঠিক উত্তর: (খ)</strong><br>
-        'বেজনেভ ডকট্রিন' অনুসরণ করে ১৯৭৯ সালের ২
-ডিসেম্বর সোভিয়েত ইউনিয়ন আফগানিস্তানে আক্রমণ শুরু কে
-দেশটির নেতা হাফিজুল্লাহ আমিনকে আটক করে। পরবর্তীবে
-তাকে হত্যা করা হয় এবং সোভিয়েত ইউনিয়নের প্রতি অত্য৷
-সহানুভূতিশীল হিসেবে পরিচিত আরেক বামপন্থী নেতা বাবরাব
-কারমালকে দেশটির রাষ্ট্রক্ষমতায় অধিষ্ঠিত করা হয়।
-সোভিয়েত ইউনিয়নের এই অভিযানের কারণে আফগানিস্তান
-গৃহযুদ্ধ ছড়িয়ে পড়ে। একইসাথে, এই সংঘাতপূর্ণ পরিস্থিতি
-ফলে সোভিয়েত ইউনিয়নের অর্থনীতিতে বিরূপ প্রভাব তৈঠি
-হয়। দীর্ঘ নয় বছরেরও বেশি সময় অবস্থানের পর ১৯৮
-সালের ১৫ ফেব্রুয়ারির মধ্যে আনুষ্ঠানিকভাবে আফগানিস্ত
-থেকে সব সোভিয়েত সেনা প্রত্যাহার করা হয়।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-20" data-category="প্রথম ও দ্বিতীয় বিশ্বযুদ্ধ" data-ans="খ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২০</span>
-        <span class="mcq-bcs">১৭তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">যেযুদ্ধের প্রেক্ষাপটে সাধারণ পরিষদে &quot;1016 01-0630 10০50100011 গৃহীত হয়েছিল</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(20, 'ক', 'খ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">স</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(20, 'খ', 'খ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">য়েজ য</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(20, 'গ', 'খ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">দ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(20, 'ঘ', 'খ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">ধ</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(20)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-20">
-        <strong>সঠিক উত্তর: (খ)</strong><br>
-        ১৯৫০ সালে কোরিয়া সংকটের প্রেক্ষাপটে জাতিসংঘে
-সাধারণ পরিষদে &quot;11018 101 26806 1২০90100101&quot; গৃহীয
-হয়। এটা সাধারণ পরিষদের 377(%) নামে পরিচিত । উদ্দেশ
-ছিল নিরাপত্তা পরিষদের সদস্যরা যদি কোনো গুরুত্বপূর্ণ বিষণ
-মতানৈক্যে পড়ে বা পদক্ষেপ নিতে ব্যর্থ হয়, তাহলে সাধার'
-পরিষদকে ২৪ ঘণ্টার মধ্যে জরুরি সভা আহবান করার ক্ষম
-প্রদান করা।
-১৯৫০ সালের ২৫শে জুন দুই কোরিয়ার যুদ্ধ শুরুর পর সে
-তিন বছর চলমান ছিল এবং ১৯৫৩ সালর ১৭শ জলা
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-21" data-category="বিশ্বের প্রধান বিপ্লব ও আন্দোলন" data-ans="গ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২১</span>
-        <span class="mcq-bcs">১৬তম বিসিএস
-1 8১৯৪৬ ৪১৯৪৮ 8১৯৬১ ও ১৯৬২ ট.গ
-। ব্যাখ্যা : বার্লিন প্রাচীর বা বার্লিনের দেওয়াল ১৯৬১ সালে
-ণ নির্মিত হয়। দ্বিতীয় বিশ্বযুদ্ধের পর ১৯৪৫ সালে জার্মানি</span>
-      </div>
-      <div class="mcq-question">বার্লিনের দেওয়াল কোন সালে নির্মিত হয়েছিল?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(21, 'ক', 'গ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text"> মিত</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(21, 'খ', 'গ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">রশ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(21, 'গ', 'গ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">তির মধ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(21, 'ঘ', 'গ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">যে ভা</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(21)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-21">
-        <strong>সঠিক উত্তর: (গ)</strong><br>
-        বার্লিন প্রাচীর বা বার্লিনের দেওয়াল ১৯৬১ সালে
-ণ নির্মিত হয়। দ্বিতীয় বিশ্বযুদ্ধের পর ১৯৪৫ সালে জার্মানি
-) মিত্রশক্তির মধ্যে ভাগ হয়। পশ্চিম জার্মানি মার্কিন নেতৃত্বাধীন
-া পুঁজিবাদের অধীনে, আর পূর্ব জার্মানি সোভিয়েত ইউনিয়নের
-অধীনে যায়। এই বিভাজনের ফলস্বরূপ পূর্ব এবং পন্চিম
-বার্লিনকে পৃথক করার জন্য বার্লিন প্রাচীর নির্মাণ করা হয়।
-যে ১৯৮৯ সালের ৯ নভেম্বর দেওয়ালটির পতন ঘটে এবং পরে
-না ১৯৯০ সালের ৩ অক্টোবর আনুষ্ঠানিকভাবে দুই জার্মানি একত্র
-া হ্য়।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-22" data-category="আঞ্চলিক যুদ্ধ ও সংঘাত" data-ans="গ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২২</span>
-        <span class="mcq-bcs">১৬তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">জর্দান ও ইসরাইলের মধ্যে ৪৬ বছরের যুদ্ধাব্থার আনুষ্ঠানিক রা অবসানের লক্ষ্যে কবে জর্দানের বাদশাহ হোসেন এবং ইসরাইলের প্রধানমন্ত্রী ইসহাক রাবিন এঁতিহাসিক ঘোষণায় স্বাক্ষর করেন?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(22, 'ক', 'গ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">২</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(22, 'খ', 'গ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">জ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(22, 'গ', 'গ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">লাই, ১৯৯</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(22, 'ঘ', 'গ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">২</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(22)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-22">
-        <strong>সঠিক উত্তর: (গ)</strong><br>
-        জর্ডান ও ইসরাইলের মধ্যে ৪৬ বছরের যুদ্ধাবস্থার
-চে আনুষ্ঠানিক অবসানের লক্ষ্যে জর্ডানের বাদশাহ হোসেন এবং
-যু ইসরাইলের প্রধানমন্ত্রী ইসহাক রবিন একটি এঁতিহাসিক
-| ঘোষণায় স্বাক্ষর করেন ২৬ জুলাই ১৯৯৪। ঘোষণাটি জর্ডান-
-ইসরায়েল শান্তি চুক্তি নামে পরিচিত।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-23" data-category="প্রথম ও দ্বিতীয় বিশ্বযুদ্ধ" data-ans="ঘ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২৩</span>
-        <span class="mcq-bcs">১৩তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">১৯৯০ সালের কোন তারিখে পূর্ব ও পশ্চিম জার্মানি পুনরায় একটি রাষ্ট্র গঠন করে?</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(23, 'ক', 'ঘ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">২ অ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(23, 'খ', 'ঘ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">োবর (স</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(23, 'গ', 'ঘ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">ালে)</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(23, 'ঘ', 'ঘ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">২ অ</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(23)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-23">
-        <strong>সঠিক উত্তর: (ঘ)</strong><br>
-        ১৮ মার্চ, ১৯৯০ তারিখে পূর্ব জার্মানিতে প্রথমবারের
-মতো মুক্ত নির্বাচন অনুষ্ঠিত হয়। পরবর্তী সময়ে পূর্ব এবং
-ট পশ্চিম জার্মানি পুনরায় একত্রিত হওয়ার বিষয়ে আলোচনা শর
-হয়। যার ফলশ্রুতিতে ১৯৯০ সালের ৩ অক্টোবর দুই জার্মানি
-পুনরায় একত্র হয়।
-| দ্বিতীয় বিশ্বযুদ্ধের পর জার্মানিকে দুভাগে ভাগ করে পশ্চিম
-রন জার্মানিতে পুঁজিবাদী ব্যবস্থা এবং পূর্ব জার্মানিতে সমাজতান্ত্রিক
-চে ব্যবস্থা প্রতিষ্ঠিত হয়। ১৯৪৯ থেকে ১৯৬১ সময়ে পূর্ব জার্মানি
-্য থেকে ২.৫ মিলিয়ন মানুষ পশ্চিম জার্মানিতে পালিয়ে যায় যার
-য় মধ্যে প্রচুর সংখ্যক পেশাজীবী ও দক্ষ জনশক্তি ছিল। এতে
-রা করে পূর্ব জার্মানি সরকার শঙ্কিত হয়ে ১৯৬১ সালে বার্লিন
-গা প্রাচীর নির্মাণ শুরু করে। ১৯৮৯ সালের ৯ নভেম্বর পূর্ব জার্মান
-সরকার তার জনগণকে পশ্চিম জার্মানিতে অবাধে যাওয়ার
-টু ঘোষণা প্রদান করলে জার্মানির জনগণ স্বতঃস্ফূর্ত হয়ে বার্ণিন
-দন দেয়াল ভাঙতে শুরু করে । বার্লিন /দচএয়াল সায়যাছর প্রতীক আন্তর্জাতিক বিষয়া
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-24" data-category="বিশ্বের প্রধান বিপ্লব ও আন্দোলন" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২৪</span>
-        <span class="mcq-bcs">১২তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">বাষ্ডিল দুর্গের পতন ঘটেছিল</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(24, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">১</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(24, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">জ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(24, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">লাই ১৭৮৯</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(24, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">৭ জ</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(24)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-24">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        ১৪ জুলাই ১৭৮৯ সালে বাষ্তিল দুর্গের পতনের মাধ্যমে
-ফরাসি বিপ্লব তথা আধুনিক ইউরোপের রাজনৈতিক, সামাজিক
-ও চিন্তার জগতে নতুন দিগন্তের সূচনা হয়। স্বেচ্ছাচারী রাজতন্ত্রের
-প্রতীক বাস্তিল কারাদুর্গ আক্রমণ ও এর পতনের মধ্য দিয়ে
-সূচিত হয় বিশ্ব ইতিহাসের এক নতুন অধ্যায়
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-25" data-category="প্রথম ও দ্বিতীয় বিশ্বযুদ্ধ" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২৫</span>
-        <span class="mcq-bcs">১২তম বিসিএস</span>
-      </div>
-      <div class="mcq-question">জাপান পার্ল হারবার আক্রমণ করে-</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(25, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">৭ ডিসেম</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(25, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">বর ১৯</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(25, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">১</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(25, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">২৩ জ</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(25)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-25">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        দ্বিতীয় বিশ্বযুদ্ধে অংশগ্রহণকারী জাপান, জার্মানি ও
-ইতালিকে একত্রে অক্ষশক্তি বলা হয়।
-১৯৪১ সালের ৭ ডিসেম্বর প্রশান্ত মহাসাগরের হাওয়াই দ্বীপপুঞ্জের
-পার্ল হারবারে অবস্থিত মার্কিন নৌধাটিতে আক্রমণ করে
-জাপানের সামরিক বাহিনী । জাপানের এই অতর্কিত ও ধ্বংসাত্মক
-হামলার পরিপ্রেক্ষিতে ১৯৪১ সালের ৮ ডিসেম্বর মার্কিন যুক্তরাষ্ট্র
-সরাসরি দ্বিতীয় বিশ্বযুদ্ধে অংশগ্রহণ করে।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-26" data-category="প্রথম ও দ্বিতীয় বিশ্বযুদ্ধ" data-ans="ক">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২৬</span>
-        <span class="mcq-bcs">১০ম বিসিএস</span>
-      </div>
-      <div class="mcq-question">হিরোশিমায় এটম বোমা ফেলা হয়েছিল-</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(26, 'ক', 'ক', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">১৯</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(26, 'খ', 'ক', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">সালের আ</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(26, 'গ', 'ক', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">স</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(26, 'ঘ', 'ক', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">মাসে</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(26)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-26">
-        <strong>সঠিক উত্তর: (ক)</strong><br>
-        ১৯৪৫ সালের আগস্ট মাসে যুক্তরাষ্ট্রের বিমান বাহিনী বলি 0] ৬০৫
-জাপানের হিরোশিমা এবং নাগাসাকি শহরের ওপর এটম বোমা
-ফেলে । ৬ই আগস্ট হিরোশিমা শহরের উপর নিক্ষিপ্ত বোমাটির
-নাম লিটলবয় এবং ৯ই আগস্ট নাগাসাকি শহরের উপর
-নিক্ষিপ্ত বোমাটির নাম ফ্যাটম্যান।
-      </div>
-    </div>
-  
-    <div class="mcq-card" id="q-card-27" data-category="প্রথম ও দ্বিতীয় বিশ্বযুদ্ধ" data-ans="গ">
-      <div class="mcq-meta">
-        <span class="mcq-num">প্রশ্ন ২৭</span>
-        <span class="mcq-bcs">১০ম বিসিএস</span>
-      </div>
-      <div class="mcq-question">দ্বিতীয় মহাযুদ্ধে জার্মানি আত্মসমর্পণ করে-</div>
-      <div class="options-grid">
-        
-      <button class="option-btn" data-letter="ক" onclick="checkAnswer(27, 'ক', 'গ', this)">
-        <span class="option-letter">ক</span>
-        <span class="option-text">১৯</span>
-      </button>
-    
-      <button class="option-btn" data-letter="খ" onclick="checkAnswer(27, 'খ', 'গ', this)">
-        <span class="option-letter">খ</span>
-        <span class="option-text">২ সালের নভেম</span>
-      </button>
-    
-      <button class="option-btn" data-letter="গ" onclick="checkAnswer(27, 'গ', 'গ', this)">
-        <span class="option-letter">গ</span>
-        <span class="option-text">বর মাসে</span>
-      </button>
-    
-      <button class="option-btn" data-letter="ঘ" onclick="checkAnswer(27, 'ঘ', 'গ', this)">
-        <span class="option-letter">ঘ</span>
-        <span class="option-text">১৯</span>
-      </button>
-    
-      </div>
-      <button class="explanation-btn" onclick="toggleExplanation(27)">
-        <span>💡</span> ব্যাখ্যা দেখুন
-      </button>
-      <div class="explanation-box" id="expl-27">
-        <strong>সঠিক উত্তর: (গ)</strong><br>
-        দ্বিতীয় বিশ্বযুদ্ধে জার্মানি আত্মসমর্পণ করে ১৯৪৫
-সালের মে মাসে। ৭ই মে, ১৯৪৫ সালে জার্মানির নাজি বাহিনী
-আনুষ্ঠানিকভাবে মিত্রবাহিনীর কাছে আত্মসমর্পণ করে। ৮মে
-তা কার্যকর হয়, তাই ইউরোপে এই দিনটি 'ঘ-চ 728
-(&quot;10013 1) 10706 8) বা ইউরোপে বিজয় দিবস
-হিসেবে পালিত হয়।
-উল্লেখ্য, ১৯৩৯ সালের ১ সেপ্টেম্বর জার্মানি কর্তৃক পোল্যান্ড
-আক্রমণের ফলে দ্বিতীয় বিশ্বযুদ্ধ শুরু হয়। ২ সেপ্টেম্বর ১৯৪৫
-সালে জাপান কর্তৃক আনুষ্ঠানিক আত্মসমর্পণের মাধ্যমে দ্বিতীয়
-বিশ্বযুদ্ধের আনুষ্ঠানিক সমাপ্তি ঘটে।
-116 1001 আ্যাপ থেকে দাঃ &quot;৯. [দ]
-      </div>
-    </div>
-  
-  </div>
-
-  <!-- Bottom Navigation -->
-  <nav class="chapter-nav">
-    <a href="গুরুত্বপূর্ণ মহাদেশ, দেশ (রাজধানী, মুদ্রা), স্থান, বন্দর ইত্যাদি সম্পর্কিত.html" class="nav-link-btn">
-      <span>⬅️ পূর্ববর্তী অধ্যায়:</span> মহাদেশ, দেশ, স্থান ও বন্দর
-    </a>
-    <a href="index.html" class="nav-link-btn">
-      <span>📑</span> মূল সূচিপত্র
-    </a>
-    <a href="ইতিহাসের গুরুত্বপূর্ণ ব্যক্তি, ধর্মের অভিযাত্রা ও অন্যান্য.html" class="nav-link-btn">
-      <span>পরবর্তী অধ্যায়:</span> গুরুত্বপূর্ণ ব্যক্তি ও ধর্মের অভিযাত্রা <span>➡️</span>
-    </a>
-  </nav>
+      <article class="q-card" id="q1">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১</span>
+          <span class="exam-badge">৪৯তম/৪৮তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">প্রথম বিশ্বযুদ্ধ কোন চুক্তির মাধ্যমে সমাপ্ত হয়?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-1')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">প্যারিস চুক্তি</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'খ', 'exp-1')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">ভার্সাই চুক্তি</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-1')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">জেনেভা চুক্তি</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-1')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">রোম চুক্তি</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-1')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-1">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> খ (ভার্সাই চুক্তি)</p>
+<p><strong>ব্যাখ্যা:</strong> প্রথম বিশ্বযুদ্ধ ভার্সাই চুক্তির মাধ্যমে সমাপ্ত হয়।</p>
+<p><strong>দ্বিতীয় ভার্সাই চুক্তি :</strong> বিধ্বংসী প্রথম বিশ্বযুদ্ধের অবসানের লক্ষ্যে ১৯১৯ সালের ২৮ জুন ভার্সাই চুক্তি স্বাক্ষরিত হয়। ফ্রান্সের ভার্সাই প্রাসাদের হল অফ মিররসে স্বাক্ষরিত হয়েছিল। পক্ষসমূহ: মিত্রশক্তি (ব্রিটেন, যুক্তরাষ্ট্র, ফ্রান্স, ইতালি, জাপান) এবং জার্মানি। প্রথম বিশ্বযুদ্ধের পর জার্মানির ওপর যে ক্ষতিপূরণ আরোপ করা হয়েছিল, তা মূলত স্বাক্ষরিত ভার্সাই চুক্তি (Treaty of Versailles)-এর মাধ্যমে হয়েছিল। এই চুক্তিটি জার্মানিকে যুদ্ধের জন্য দায়ী করে এবং মিত্র দেশগুলোর ক্ষতির জন্য ক্ষতিপূরণ দিতে বাধ্য করে। যুদ্ধের কারণে মিত্র দেশগুলোর যে ক্ষতি হয়েছিল, তার জন্য জার্মানিকে বিশাল অঙ্কের ক্ষতিপূরণ দিতে বাধ্য করা হয়।</p>
+<p><strong>প্রথম বিশ্বযুদ্ধ :</strong> প্রথম বিশ্বযুদ্ধ (World War I) ১৯১৪ থেকে ১৯১৮ সাল পর্যন্ত সংঘটিত হয়েছিল এবং এটি ছিল ইতিহাসের অন্যতম বৃহৎ ও ধ্বংসাত্মক যুদ্ধ। যুদ্ধটি মূলত ইউরোপের বিভিন্ন শক্তির মধ্যে সংঘটিত হলেও এর প্রভাব ছিল পৃথিবীজুড়ে।</p>
+<p><strong>যুদ্ধের পটভূমি :</strong> ২৮ জুলাই, ১৯১৪ সালে যুদ্ধ শুরু হয় এবং ১১ নভেম্বর, ১৯১৮ সালে শেষ হয়। যুদ্ধের ফলাফল মিত্র শক্তির বিজয়। অক্ষশক্তি: জার্মানি, অস্ট্রিয়া, হাঙ্গেরি, অটোমান সাম্রাজ্য ও বুলগেরিয়া। মিত্রশক্তি: সার্বিয়া, রাশিয়া, ফ্রান্স, যুক্তরাজ্য, যুক্তরাষ্ট্র, ইতালি, জাপান প্রভৃতি দেশ।</p>
+<div class="exp-source">উৎস: Britannica এবং History.com</div>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q2">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২</span>
+          <span class="exam-badge">৪৯তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">আফিম যুদ্ধ কোন দুইটি দেশের মধ্যে সংঘটিত হয়?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-2')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">চীন ও আফগানিস্তান</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'খ', 'exp-2')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">চীন ও ইংল্যান্ড</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-2')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">চীন ও রাশিয়া</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-2')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">ইংল্যান্ড ও আফগানিস্তান</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-2')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-2">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> খ (চীন ও ইংল্যান্ড)</p>
+<p><strong>ব্যাখ্যা:</strong> আফিম যুদ্ধ চীন ও ইংল্যান্ড- এই দুইটি দেশের মধ্যে সংঘটিত হয়।</p>
+<p><strong>আফিম যুদ্ধ :</strong> আফিমের চোরাচালানকে কেন্দ্র করে চীন ও ব্রিটেনের মধ্যে যে যুদ্ধ সংঘটিত হয়েছিল, তাই আফিম যুদ্ধ নামে পরিচিত। ইস্ট ইন্ডিয়া কোম্পানি উনিশ শতকের গোড়া থেকে চীনের সঙ্গে ব্যবসায়ে ঘাটতি মেটাতে বঙ্গদেশ থেকে চীনে আফিম রপ্তানি শুরু করে। চীনা শাসকরা ১৮৩৯ সালে আফিম আমদানি নিষিদ্ধ ঘোষণা করে। কিন্তু ইস্ট ইন্ডিয়া কোম্পানি অবৈধ উপায়ে এ ব্যবসা অব্যাহত রাখে। কোম্পানির অবৈধ আফিম ব্যবসার কারণে চীন ও ব্রিটেনের মধ্যে যুদ্ধ বাধে। ১ম যুদ্ধে চীনারা পরাজিত হয় এবং চীন ১৮৪২ সালে নানকিং চুক্তি স্বাক্ষর করতে বাধ্য হয়।</p>
+<p><strong>নানকিং চুক্তি :</strong> প্রথম আফিম যুদ্ধে পরাজয়ের পর চীনের শাসকগোষ্ঠী ব্রিটিশদের সাথে একটি অপমানজনক 'অসম চুক্তি' স্বাক্ষর করতে বাধ্য হয়। এই চুক্তির নাম নানকিং চুক্তি। চীনা কমিশনার চেইং (Chiying) এবং নব নিযুক্ত ব্রিটিশ রাষ্ট্রদূত স্যার হেনরি পটিঙ্গার (Sir Henry Pottinger) -এর উদ্যোগে শান্তি প্রতিষ্ঠার লক্ষ্যে এই চুক্তি স্বাক্ষরিত হয়। চুক্তি স্বাক্ষরিত হয় ২৯ আগস্ট, ১৮৪২ সালে। এই চুক্তির মাধ্যমে ব্রিটিশদের হংকংয়ের নিয়ন্ত্রণ দেওয়া হয়েছিল। এছাড়া চীন কর্তৃক ব্রিটেনকে বিভিন্ন বাণিজ্যিক সুযোগ-সুবিধা প্রদানে বাধ্য হয়। পরবর্তীতে ১৮৯৮ সালে চীন সরকার ৯৯ বছরের জন্যে হংকংকে ব্রিটেনের নিকট লিজ দেয় এবং ১৯৯৭ সালের ১ জুলাই লিজের মেয়াদ শেষে ব্রিটেন পুনরায় চীনের নিকট হংকং-কে হস্তান্তর করে।</p>
+<div class="exp-source">উৎস: Britannica</div>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q3">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ৩</span>
+          <span class="exam-badge">৪৮তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">কোন দেশের গৃহযুদ্ধের কারণে ইউরোপজুড়ে অভিবাসী সংকট সৃষ্টি হয়েছে?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-3')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">সিরিয়া</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-3')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">লেবানন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-3')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">আফগানিস্তান</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-3')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">ইরাক</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-3')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-3">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (সিরিয়া)</p>
+<p><strong>ব্যাখ্যা:</strong> সিরিয়ার গৃহযুদ্ধের কারণে ইউরোপজুড়ে অভিবাসী সংকট সৃষ্টি হয়। ২০১১ সালে শুরু হওয়া এই সংঘাতের ফলে লক্ষাধিক মানুষ ইউরোপে শরণার্থী হয়ে আশ্রয় নেয়।</p>
+<p><strong>ইউরোপের অভিবাসী সংকট :</strong> ইউরোপজুড়ে অভিবাসী সংকটের মূল কারণ হলো সিরিয়ার গৃহযুদ্ধ। সিরিয়ার গৃহযুদ্ধ ২০১১ সালে শুরু হয়। এই সংঘাতের ফলে লক্ষ লক্ষ সিরীয় নাগরিক নিরাপত্তার কারণে নিজেদের দেশ ছেড়ে আশ্রয়ের খোঁজে পার্শ্ববর্তী দেশ এবং ইউরোপের দিকে পালাতে বাধ্য হন। তুরস্ক, লেবানন ও জর্ডান প্রথমে তাদের আশ্রয় দিলেও, অনেকেই পরে ইউরোপের বিভিন্ন দেশে যান। এই বিশাল সংখ্যক শরণার্থী ইউরোপের সামাজিক, রাজনৈতিক ও মানবিক সংকটের সৃষ্টি করে। আফগানিস্তান ও ইরাকেও যুদ্ধ ও সংকট থাকলেও সিরিয়ার গৃহযুদ্ধের প্রভাব সবচেয়ে বেশি এবং সেটি ইউরোপজুড়ে অভিবাসী সংকটের প্রধান উৎস।</p>
+<div class="exp-source">উৎস: UNHCR, European Commission ও পত্রিকা রিপোর্ট</div>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q4">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ৪</span>
+          <span class="exam-badge">৪৮তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">অক্টোবর সমাজতান্ত্রিক বিপ্লব কত খ্রিস্টাব্দে সংঘটিত হয়?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-4')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">১৯১৭</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-4')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">১৮৫৭</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-4')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">১৮৪৯</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-4')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">১৭৫৭</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-4')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-4">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (১৯১৭)</p>
+<p><strong>ব্যাখ্যা:</strong> অক্টোবর সমাজতান্ত্রিক বিপ্লব (October Socialist Revolution) সংঘটিত হয় ১৯১৭ খ্রিস্টাব্দে। এই বিপ্লবের মাধ্যমে রাশিয়ায় বলশেভিকদের নেতৃত্বে সমাজতান্ত্রিক শাসন প্রতিষ্ঠিত হয়।</p>
+<p><strong>রুশ বিপ্লব :</strong> ১৯১৭ সালে রুশ বিপ্লব সংঘটিত হয়। ১৯১৭ সালে রাশিয়ায় মূলত দুটি বিপ্লব সংঘটিত হয়। এই দুটি বিপ্লব হলো ফেব্রুয়ারি বিপ্লব ও বলশেভিক বিপ্লব। এই দুটি বিপ্লবকে একত্রে "১৯১৭ সালের রুশ বিপ্লব" (Russian Revolution of 1917) বলা হয়। এই বিপ্লবের ফলে রাশিয়ায় রাজতন্ত্রের অবসান ঘটে ও সমাজতন্ত্রের সূচনা ঘটে।</p>
+<p><strong>ফেব্রুয়ারি বিপ্লব :</strong> রুশ বিপ্লবের প্রথম পর্যায়কে ফেব্রুয়ারি বিপ্লব বলা হয়। ফেব্রুয়ারি বিপ্লবের ফলে রাজতন্ত্রের অবসান ঘটে এবং জার দ্বিতীয় নিকোলাসকে ক্ষমতা থেকে উচ্ছেদ ও বন্দি করা হয়। ফেব্রুয়ারি বিপ্লবের নেতৃত্ব ছিলেন আলেকজান্দ্রো এফ. ক্যারেনস্কি (Aleksandr F. Kerensky)।</p>
+<p><strong>বলশেভিক বিপ্লব/অক্টোবর বিপ্লব :</strong> রুশ বিপ্লবের দ্বিতীয় পর্যায়কে বলশেভিক বা অক্টোবর বিপ্লব বলে। বলশেভিক বিপ্লবের ফলে রাশিয়ায় লেনিনের নেতৃত্বে বিশ্বের প্রথম সমাজতান্ত্রিক রাষ্ট্র প্রতিষ্ঠা লাভ করে। বলশেভিক বিপ্লবের নেতা ছিলেন ভ্লাদিমির লেনিন ও লিওন ট্রটস্কি।</p>
+<div class="exp-source">উৎস: Britannica এবং History.com</div>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q5">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ৫</span>
+          <span class="exam-badge">৪৭তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">যুক্তরাষ্ট্রের পরিচালিত 'অপারেশন মিডনাইট হ্যামার' ইরানে কবে হামলা করে?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-5')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">২০ জুন, ২০২৫</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-5')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">২১ জুন, ২০২৫</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-5')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">২২ জুন, ২০২৫</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-5')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">২৩ জুন, ২০২৫</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-5')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-5">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> গ (২২ জুন, ২০২৫)</p>
+<p><strong>ব্যাখ্যা:</strong> ২২ জুন, ২০২৫ তারিখে যুক্তরাষ্ট্রের পরিচালিত 'অপারেশন মিডনাইট হ্যামার' ইরানে হামলা করে।</p>
+<p><strong>অপারেশন মিডনাইট হ্যামার (Operation Midnight Hammer) :</strong> ২২ জুন, ২০২৫ তারিখে ইরানের পারমাণবিক স্থাপনায় 'অপারেশন মিডনাইট হ্যামার' নামে অভিযান পরিচালনা করে যুক্তরাষ্ট্র। 'অপারেশন মিডনাইট হ্যামার' নামে পরিচালিত বিশেষ অভিযানে ইরানের পারমাণবিক স্থাপনায় হামলা চালায় যুক্তরাষ্ট্র।</p>
+<p>মার্কিন যুক্তরাষ্ট্র জানিয়েছে, শনিবার (রবিবার তেহরানের সময় ০২:৪০-০৩:০৫) ২২:৪০ GMT থেকে ২৩:০৫ GMT এর মধ্যে তাদের উপর হামলা চালানো হয়েছিল। অর্থাৎ ইরানের স্থানীয় সময় রবিবার ২২ জুন, ২০২৫ রাত ০২:৪০ থেকে ০৩:০৫ সময়ে এই হামলা চালানো হয়েছিল।</p>
+<p>প্রায় ২৫ মিনিট দীর্ঘ এই অভিযানে যুক্তরাষ্ট্রের ১২৫টি যুদ্ধবিমান অংশ নিয়েছে। যুক্তরাষ্ট্রের মিসৌরি থেকে উড্ডয়নের প্রায় ৩৭ ঘণ্টা উড়ে অপারেশন মিডনাইট হ্যামারে অংশ সাতটি বি-২ বোমারু বিমান। এই বিমানগুলো ইরানের ৩টি পরমাণু স্থাপনা ফর্দো, ইস্ফাহান এবং নাতাঞ্জ লক্ষ্য করে ১৪টি বাংকার বাস্টার বোমা ছোড়ে। প্রতিটি বি-২ বোমারু বিমান দুটি করে বাংকার বিধ্বংসী বোমা বহনে সক্ষম। প্রতিটি বোমার ওজন ৩০ হাজার পাউন্ড। এ ছাড়া এই অভিযানে অংশ নেয় জ্বালানি ভরার ট্যাংকার ও নজরদারি বিমান।</p>
+<p>উল্লেখ্য, যুক্তরাষ্ট্রের প্রতিরক্ষামন্ত্রী পিটার হেগসেথ বলেছেন, ইরানের পারমাণবিক স্থাপনায় হামলা চালিয়ে যুক্তরাষ্ট্রের হুমকি নির্মূল করাই ছিল এই মিশনের লক্ষ্য।</p>
+<p>এছাড়াও, ১৩ জুন, ২০২৫ তারিখে ইসরায়েল ইরানের কয়েক ডজন পারমাণবিক ও সামরিক লক্ষ্যবস্তুতে আকস্মিক আক্রমণ চালায়। এই অভিযানের নাম ছিল অপারেশন রাইজিং লায়ন (Operation Rising Lion)। ১৩ জুন, ২০২৫ তারিখে ইরানে ইসরাইলের পরিচালিত অভিযান 'অপারেশন রাইজিং লায়ন'-এর বিপরীতে অপারেশন ট্রু প্রমিজ থ্রি অভিযান পরিচালনা করছে ইরান। তারপর থেকে উভয় দেশের মধ্যে বিমান যুদ্ধ অব্যাহত থাকে।</p>
+<p>উল্লেখ্য, ২৮ ফেব্রুয়ারি, ২০২৬ তারিখে ইসরায়েল ও যুক্তরাষ্ট্র ইরানে যৌথ অভিযান 'অপারেশন এপিক ফিউরি' শুরু করে। অভিযানে ঐ দিনই ইরানের সর্বোচ্চ নেতা আয়াতুল্লাহ আলী খামেনি মৃত্যুবরণ করেন।</p>
+<div class="exp-source">উৎস: প্রথম আলো, বিবিসি, CSIS এবং CNN পত্রিকা।</div>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q6">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ৬</span>
+          <span class="exam-badge">৪৫তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">চীন-ভারত যুদ্ধ কত সালে সংঘটিত হয়?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-6')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">১৯৫৯</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-6')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">১৯৬০</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-6')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">১৯৬২</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-6')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">১৯৬৩</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-6')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-6">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> গ (১৯৬২)</p>
+<p><strong>ব্যাখ্যা:</strong> চীন-ভারত যুদ্ধ (Sino-Indian War) ১৯৬২ সালের ২০ অক্টোবর থেকে ২০ নভেম্বর সংঘটিত হয়। এর মূল কারণ ছিল আকসাই চীন (Aksai Chin) এলাকা এবং অরুণাচল প্রদেশ (Arunachal Pradesh) নিয়ে সীমান্ত বিরোধ। এই যুদ্ধের ফলে, চীন অ্যাকসাই চীন দখল করে রাখে এবং ভারত অরুণাচল প্রদেশের নিয়ন্ত্রণ বজায় রাখে। এই যুদ্ধের পর চীন এবং ভারত সীমান্তে দীর্ঘদিনের উত্তেজনা চলে এবং ২০২০ সালে লাদাখ অঞ্চলে গালওয়ান ভ্যালিতে চীন-ভারত সেনাদের মধ্যে আবারও সংঘর্ষ ঘটে।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q7">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ৭</span>
+          <span class="exam-badge">৪৪তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">কোন দেশ থেকে 'আরব বসন্ত'-এর সূচনা হয়?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-7')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">মিশর</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'খ', 'exp-7')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">তিউনিশিয়া</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-7')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">লিবিয়া</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-7')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">সিরিয়া</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-7')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-7">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> খ (তিউনিশিয়া)</p>
+<p><strong>ব্যাখ্যা:</strong> ২০১০ সালের ডিসেম্বরে তিউনিশিয়ায় বোয়াজিজি নামের এক ফলবিক্রেতা কর্তৃক নিজ শরীরে আগুন ধরিয়ে দেওয়ার মাধ্যমে গণবিক্ষোভের সূচনা ঘটে, যা 'আরব বসন্ত' নামে পরিচিত। এই ঘটনার পর ২০১১ সালের ১৪ জানুয়ারি, তিউনিশিয়ার স্বৈরশাসক জাইন এল বেন আলী ক্ষমতাচ্যুত হন এবং সৌদি আরবে পালিয়ে যান।</p>
+<p>পরবর্তীতে, এই গণবিক্ষোভ অন্যান্য দেশ যেমন মিশর, ইয়েমেন, লিবিয়া, সিরিয়া, বাহরাইন এবং মরক্কোতে ছড়িয়ে পড়ে। লিবিয়া, সিরিয়া ও ইয়েমেনে এই গণআন্দোলন গৃহযুদ্ধে রূপ নেয়।</p>
+<div class="sub-table-wrap">
+  <h4>অন্যান্য কয়েকটি বিপ্লব:</h4>
+  <table class="table-responsive">
+    <thead><tr><th>বিপ্লব</th><th>সাল</th><th>দেশ</th></tr></thead>
+    <tbody>
+      <tr><td>ফরাসী বিপ্লব</td><td>১৭৮৯</td><td>ফ্রান্স</td></tr>
+      <tr><td>রুশ/বলশেভিক/অক্টোবর বিপ্লব</td><td>১৯১৭</td><td>রাশিয়া</td></tr>
+    </tbody>
+  </table>
 </div>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q8">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ৮</span>
+          <span class="exam-badge">৪৪তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">মহান মুক্তিযুদ্ধ চলাকালীন 'কনসার্ট ফর বাংলাদেশ' (Concert for Bangladesh) কোথায় অনুষ্ঠিত হয়েছিল?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-8')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">নিউইয়র্ক</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-8')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">বোস্টন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-8')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">লন্ডন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-8')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">ক্যানবেরা</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-8')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-8">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (নিউইয়র্ক)</p>
+<p><strong>ব্যাখ্যা:</strong> ১৯৭১ সালের ১ আগস্ট মার্কিন যুক্তরাষ্ট্রের নিউইয়র্ক সিটির ম্যাডিসন স্কয়ারে 'কনসার্ট ফর বাংলাদেশ' অনুষ্ঠিত হয়। এই কনসার্টের উদ্দেশ্য ছিল কনসার্ট থেকে প্রাপ্ত অর্থ দিয়ে বাংলাদেশের শরণার্থীদের সহায়তা করা। এর মূল উদ্যোক্তা ছিলেন বিখ্যাত ভারতীয় সেতারবাদক পণ্ডিত রবিশংকর। তার আহ্বানে সাড়া দিয়ে মার্কিন ব্যান্ডদল বিটলসের জর্জ হ্যারিসন, বব ডিলান, রিঙ্গো স্টার প্রমুখ এই কনসার্টে অংশগ্রহণ করেন। বাংলাদেশের আকবর আলী খাঁ, তবলাবাদক ওস্তাদ আল্লারাখা প্রমুখ এতে যুক্ত ছিলেন।</p>
+<div class="sub-table-wrap">
+  <h4>ঐতিহাসিক বিপ্লব ও অভ্যুত্থান:</h4>
+  <table class="table-responsive">
+    <thead><tr><th>বিপ্লব</th><th>সাল</th><th>দেশ</th></tr></thead>
+    <tbody>
+      <tr><td>আগস্ট বিপ্লব</td><td>১৯৪৫</td><td>ভিয়েতনাম</td></tr>
+      <tr><td>শ্বেত বিপ্লব</td><td>১৯৬৩</td><td>ইরান</td></tr>
+      <tr><td>ইসলামি বিপ্লব</td><td>১৯৭৯</td><td>ইরান</td></tr>
+      <tr><td>ভেলভেট বিপ্লব (Gentle Revolution)</td><td>১৯৮৯</td><td>চেকোস্লোভাকিয়া</td></tr>
+      <tr><td>রোজ বিপ্লব</td><td>২০০৩</td><td>জর্জিয়া</td></tr>
+      <tr><td>অরেঞ্জ বিপ্লব</td><td>২০০৪</td><td>ইউক্রেন</td></tr>
+      <tr><td>টিউলিপ বিপ্লব</td><td>২০০৫</td><td>কিরগিজস্তান</td></tr>
+      <tr><td>সিডার বিপ্লব</td><td>২০০৫</td><td>লেবানন</td></tr>
+      <tr><td>জেসমিন বিপ্লব</td><td>২০১১</td><td>তিউনিসিয়া</td></tr>
+    </tbody>
+  </table>
+</div>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q9">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ৯</span>
+          <span class="exam-badge">৪২তম বিশেষ বিসিএস</span>
+        </div>
+        <h3 class="q-text">ব্রিটিশ কৃষি বিপ্লব কখন সংঘটিত হয়েছিল?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-9')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">ঊনবিংশ শতাব্দীতে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'খ', 'exp-9')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">অষ্টাদশ শতাব্দীতে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-9')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">ষোড়শ শতাব্দীতে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-9')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">চতুর্দশ শতাব্দীতে</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-9')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-9">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> খ (অষ্টাদশ শতাব্দীতে)</p>
+<p><strong>ব্যাখ্যা:</strong> কৃষি বিপ্লব ১৮ শতকের শুরুতে যুক্তরাজ্যে শুরু হয়। এই বিপ্লবের লক্ষ্য ছিল কৃষি ব্যবস্থার উন্নয়ন। কৃষি বিপ্লবের আওতায় জমির মালিকানা পুনর্বিন্যাস এবং কৃষির জন্য নতুন প্রযুক্তি ও যন্ত্রপাতি ব্যবহারের বিনিয়োগ বাড়ানো হয়। এতে উন্নত ড্রেনেজ ব্যবস্থা, বৈজ্ঞানিক প্রজনন পদ্ধতি এবং নতুন ফসলের ওপর পরীক্ষার মতো বিষয়গুলো অন্তর্ভুক্ত ছিল। যদিও এই পরিবর্তনগুলো ১৯ শতকে পুরোপুরি বাস্তবায়িত হয়, কিন্তু মূলত অষ্টাদশ শতাব্দীতেই কৃষি বিপ্লব সংঘটিত হয়েছিল।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q10">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১০</span>
+          <span class="exam-badge">৪১তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">সামরিক ভাষায় 'WMD' অর্থ কী?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-10')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">Weapons of Mass Destruction</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-10')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">Worldwide Mass Destruction</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-10')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">Weapons of Missile Defence</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-10')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">Weapons for Massive Destruction</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-10')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-10">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (Weapons of Mass Destruction)</p>
+<p><strong>ব্যাখ্যা:</strong> সামরিক ভাষায় 'WMD'-এর পূর্ণরূপ হচ্ছে Weapons of Mass Destruction, যার বাংলা অর্থ গণবিধ্বংসী অস্ত্র। এই ধরনের অস্ত্রগুলো সাধারণত পারমাণবিক, রাসায়নিক, বা জৈব অস্ত্র হিসাবে পরিচিত, যেগুলো বৃহৎ পরিমাণে মানুষ ও সম্পদের ক্ষতি করতে সক্ষম। ২০০৩ সালে WMD আছে এমন আশঙ্কায় ইঙ্গ-মার্কিন জোট ইরাকে আক্রমণ করেছিল।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q11">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১১</span>
+          <span class="exam-badge">৩৮তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">অক্টোবর বিপ্লবের নেতৃত্ব দিয়েছেন :</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-11')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">কার্ল মার্কস</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-11')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">ফ্রেডরিক এঙ্গেলস</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-11')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">ভি. আই. লেনিন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-11')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">মাও সে তুং</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-11')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-11">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> গ (ভি. আই. লেনিন)</p>
+<p><strong>ব্যাখ্যা:</strong> ১৯১৭ সালে রাশিয়ায় অক্টোবর বিপ্লব (যাকে বলশেভিক বিপ্লবও বলা হয়) সংঘটিত হয়। এই বিপ্লবের নেতৃত্ব দেন বলশেভিক পার্টির নেতা ভ্লাদিমির ইলিচ লেনিন। অক্টোবর বিপ্লবের ফলে রুশ সাম্রাজ্যের পতন ঘটিয়ে রাশিয়ায় সমাজতান্ত্রিক শাসন প্রতিষ্ঠিত হয়। এর মাধ্যমে সোভিয়েত ইউনিয়ন প্রতিষ্ঠিত হয়, যা পরবর্তীতে বিশ্বের অন্যতম বড় সমাজতান্ত্রিক রাষ্ট্র হয়ে ওঠে।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q12">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১২</span>
+          <span class="exam-badge">৩৭তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">'Black Lives Matter' কী?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-12')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">একটি গ্রন্থের নাম</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-12')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">একটি পানীয়</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-12')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">বর্ণবাদ বিরোধী আন্দোলন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-12')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">একটি NGO</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-12')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-12">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> গ (বর্ণবাদ বিরোধী আন্দোলন)</p>
+<p><strong>ব্যাখ্যা:</strong> Black Lives Matter (BLM) একটি বর্ণবাদ বিরোধী আন্দোলন, যা মার্কিন যুক্তরাষ্ট্রে ২০১৩ সালে শুরু হয়। এই আন্দোলনের মূল উদ্দেশ্য হল গ্লোবাল রেসিজম বা কৃষ্ণাঙ্গদের বিরুদ্ধে বৈষম্য বন্ধ করা। বিশেষ করে আমেরিকান কৃষ্ণাঙ্গ জর্জ ফ্লয়েডের হত্যার পর এই আন্দোলন আন্তর্জাতিক পর্যায়ে ব্যাপকভাবে আলোচিত হয়।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q13">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১৩</span>
+          <span class="exam-badge">৩৫তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">প্রথম বিশ্বযুদ্ধ চলাকালীন বেলফোর ঘোষণা ১৯১৭-এর মূল প্রতিপাদ্য ছিল-</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-13')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">জাতিপুঞ্জ সৃষ্টি করা</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-13')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">অটোমানদের জায়গা দখল করা</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-13')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">ইহুদিদের জন্য একটি জাতিরাষ্ট্র গঠন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-13')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">জার্মানির বিরুদ্ধে মিত্র শক্তির নতুন কৌশল অবলম্বন</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-13')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-13">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> গ (ইহুদিদের জন্য একটি জাতিরাষ্ট্র গঠন)</p>
+<p><strong>ব্যাখ্যা:</strong> প্রথম বিশ্বযুদ্ধ চলাকালীন বেলফোর ঘোষণা ১৯১৭ এর মূল প্রতিপাদ্য ছিল ইহুদিদের জন্য একটি জাতিরাষ্ট্র গঠন তথা ইসরায়েল রাষ্ট্র প্রতিষ্ঠা। ১৯১৭ সালের ২ নভেম্বর, ব্রিটেনের তৎকালীন পররাষ্ট্রমন্ত্রী লর্ড আর্থার জেমস বেলফোর, ইহুদিবাদী আন্দোলনের নেতা রথসচাইল্ডকে চিঠিতে ফিলিস্তিন ভূখণ্ডে ইহুদিদের জন্য একটি রাষ্ট্র প্রতিষ্ঠায় ব্রিটেনের সহায়তার প্রতিশ্রুতি দেন। এই চিঠিটি ইতিহাসে বেলফোর ডিক্লারেশন নামে পরিচিত।</p>
+<p>ব্রিটেনের প্রথম বিশ্বযুদ্ধে বিজয়ের ফলে অটোমান সাম্রাজ্যের অধীনে থাকা ফিলিস্তিন ভূখণ্ড ব্রিটিশ সাম্রাজ্যের অধিকারে আসে। বেলফোর ঘোষণার ৩১ বছর পর, ১৯৪৮ সালে যুক্তরাষ্ট্র ও ব্রিটেনের প্রত্যক্ষ সহায়তায় ফিলিস্তিনে ইসরায়েল রাষ্ট্রের প্রতিষ্ঠা ঘটে।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q14">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১৪</span>
+          <span class="exam-badge">৩৪তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">'আরব বসন্ত' বলতে কি বুঝায়?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-14')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">আরবের বিভিন্ন দেশে গণজাগরণ</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-14')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">আরব অঞ্চলে বসন্তকাল</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-14')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">আরব রাজতন্ত্র</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-14')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">আরবীয় মহিলাদের ক্ষমতায়ন</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-14')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-14">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (আরবের বিভিন্ন দেশে গণজাগরণ)</p>
+<p><strong>ব্যাখ্যা:</strong> ২০১০ ও ২০১১ সালে আরব অঞ্চলে বিশেষ করে মধ্যপ্রাচ্য ও উত্তর আফ্রিকায় সংঘটিত গণজাগরণকে 'আরব বসন্ত' বলে। এই গণজাগরণগুলির লক্ষ্য ছিল রাজনৈতিক ও সামাজিক পরিবর্তন, শাসকদের বিরুদ্ধে প্রতিবাদ এবং গণতান্ত্রিক সংস্কার।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q15">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১৫</span>
+          <span class="exam-badge">৩১তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">কবে ফরাসী বিপ্লব সংঘটিত হয়?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-15')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">১৭৮৯</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-15')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">১৭৯১</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-15')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">১৭৯৫</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-15')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">১৮০০</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-15')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-15">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (১৭৮৯)</p>
+<p><strong>ব্যাখ্যা:</strong> বিশ্ব ইতিহাসের অন্যতম গুরুত্বপূর্ণ ঘটনা ফরাসি বিপ্লব সংঘটিত হয় ১৭৮৯ সালে। ১৪ জুলাই, ১৭৮৯ সালে বাস্তিল দুর্গের পতনের মাধ্যমে বিপ্লবের সূচনা ঘটে। ফরাসি বিপ্লবের মূল স্লোগান ছিল 'স্বাধীনতা, সমতা ও ভ্রাতৃত্ব' (Liberty, Equality, Fraternity), যা পরবর্তীতে বিশ্বের বিভিন্ন দেশের গণতান্ত্রিক আন্দোলনগুলোকে অনুপ্রাণিত করে। ফ্রান্সের সম্রাট নেপোলিয়ন বোনাপার্ট এই বিপ্লবের অগ্রগণ্য নেতাদের মধ্যে একজন।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q16">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১৬</span>
+          <span class="exam-badge">২৮তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">বসনিয়ায় যুদ্ধবিরতি স্বাক্ষরের মধ্যস্থতাকারী কে?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-16')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">বিল ক্লিনটন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-16')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">জিমি কার্টার</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-16')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">নিক্সন</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-16')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">রিগান</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-16')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-16">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (বিল ক্লিনটন)</p>
+<p><strong>ব্যাখ্যা:</strong> বসনিয়ায় যুদ্ধবিরতির জন্য স্বাক্ষরিত ডেটন শান্তি চুক্তির মধ্যস্থতাকারী বিল ক্লিনটন। এটি বসনিয়া সংকট সমাধানের লক্ষ্যে গৃহীত পদক্ষেপ, যা ১৯৯৫ সালে স্বাক্ষরিত হয়। এ চুক্তির খসড়া যুক্তরাষ্ট্রের ওহাইয়ো অঙ্গরাজ্যের ডেটন শহরের একটি বিমান ঘাঁটিতে প্রস্তুত করা বলে এটি ডেটন শান্তি চুক্তি নামে পরিচিত। যুক্তরাষ্ট্রের প্রেসিডেন্ট বিল ক্লিনটন এবং তার পররাষ্ট্রমন্ত্রী ওয়ারেন ক্রিস্টোফার এই চুক্তির মধ্যস্থতাকারী। চুক্তির প্রধান শান্তি আলোচক ছিলেন রিচার্ড হলব্রোক। ডেটন শান্তি চুক্তি বসনিয়া এবং হার্জেগোভিনা অঞ্চলে দীর্ঘদিনের সংঘাতের অবসান ঘটায়।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q17">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১৭</span>
+          <span class="exam-badge">২৬তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">ফ্রান্সের মহান সম্রাট নেপোলিয়নের জীবনাবসান হয় কোথায়?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-17')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">ওয়াটার লু নামক স্থানে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-17')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">দ্বীপ এলবাতে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-17')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">ভার্সাই নগরীতে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ঘ', 'exp-17')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">সেন্ট হেলেনা দ্বীপে</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-17')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-17">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ঘ (সেন্ট হেলেনা দ্বীপে)</p>
+<p><strong>ব্যাখ্যা:</strong> ফ্রান্সের মহান সম্রাট নেপোলিয়নের জীবনাবসান হয় সেন্ট হেলেনা দ্বীপে। নেপোলিয়ন কর্সিকা দ্বীপে জন্মগ্রহণ করেন। ১৮১৫ সালের জুন মাসে বিখ্যাত ওয়াটারলু যুদ্ধে ব্রিটেনের কাছে পরাজিত হন নেপোলিয়ন। তাকে আটলান্টিক মহাসাগরের সেন্ট হেলেনা দ্বীপে নির্বাসন দেয়া হয়। নির্বাসিত অবস্থায় ছয় বছর পর ১৮২১ সালে ক্যান্সারে আক্রান্ত হয়ে মারা যান এই বীর সেনাপতি।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q18">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১৮</span>
+          <span class="exam-badge">২৫তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">ইরাকে কখন মার্কিন-ব্রিটিশ যৌথ সামরিক অভিযান শুরু হয়?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-18')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">২০০৩ সালের ১৮ মার্চ</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'খ', 'exp-18')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">২০০৩ সালের ২০ মার্চ</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-18')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">২০০৩ সালের ২২ মার্চ</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-18')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">২০০৩ সালের ২৪ মার্চ</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-18')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-18">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> খ (২০০৩ সালের ২০ মার্চ)</p>
+<p><strong>ব্যাখ্যা:</strong> মার্কিন নেতৃত্বাধীন যৌথ বাহিনী ২০০৩ সালের ২০ মার্চ তারিখে ইরাক আক্রমণ শুরু করে যার সামরিক নাম 'অপারেশন ইরাকি ফ্রিডম'। তখন ইরাকের ক্ষমতায় ছিলেন প্রেসিডেন্ট সাদ্দাম হোসেন। যুক্তরাষ্ট্র আর যুক্তরাজ্য অভিযোগ করে, প্রেসিডেন্ট সাদ্দাম ইরাকে গণবিধ্বংসী অস্ত্রের (ডব্লিউএমডি) মজুদ গড়ে তুলেছেন এবং সেই সঙ্গে আল-কায়েদার মতো সন্ত্রাসী গোষ্ঠীগুলোকে সমর্থন দিয়ে যাচ্ছেন। তাই সাদ্দামের বিরুদ্ধে শুরু হয় ইঙ্গ-মার্কিন বাহিনীর যুদ্ধ।</p>
+<p>তার আগে ১৯৯০ সালের ২ আগস্ট ইরাক কর্তৃক কুয়েত আক্রান্ত হলে ১৯৯১ সালের ১৭ জানুয়ারি মার্কিন নেতৃত্বাধীন বহুজাতিক বাহিনী ইরাকের উপর বিমান হামলা শুরু করে যা 'অপারেশন ডেজার্ট স্টর্ম' নামে পরিচিত।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q19">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ১৯</span>
+          <span class="exam-badge">২৪তম বিসিএস বাতিল</span>
+        </div>
+        <h3 class="q-text">কত সালে আফগানিস্তান থেকে সোভিয়েত সৈন্য প্রত্যাহার করা হয়?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-19')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">১৯৮৮ সালে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'খ', 'exp-19')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">১৯৮৯ সালে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-19')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">১৯৯০ সালে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-19')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">১৯৯১ সালে</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-19')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-19">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> খ (১৯৮৯ সালে)</p>
+<p><strong>ব্যাখ্যা:</strong> 'ব্রেজনেভ ডকট্রিন' অনুসরণ করে ১৯৭৯ সালের ২৪ ডিসেম্বর সোভিয়েত ইউনিয়ন আফগানিস্তানে আক্রমণ শুরু করে দেশটির নেতা হাফিজুল্লাহ আমিনকে আটক করে। পরবর্তীতে তাকে হত্যা করা হয় এবং সোভিয়েত ইউনিয়নের প্রতি অত্যন্ত সহানুভূতিশীল হিসেবে পরিচিত আরেক বামপন্থী নেতা বাবরাক কারমালকে দেশটির রাষ্ট্রক্ষমতায় অধিষ্ঠিত করা হয়।</p>
+<p>সোভিয়েত ইউনিয়নের এই অভিযানের কারণে আফগানিস্তানে গৃহযুদ্ধ ছড়িয়ে পড়ে। একইসাথে, এই সংঘাতপূর্ণ পরিস্থিতির ফলে সোভিয়েত ইউনিয়নের অর্থনীতিতে বিরূপ প্রভাব তৈরি হয়। দীর্ঘ নয় বছরেরও বেশি সময় অবস্থানের পর ১৯৮৯ সালের ১৫ ফেব্রুয়ারির মধ্যে আনুষ্ঠানিকভাবে আফগানিস্তান থেকে সব সোভিয়েত সেনা প্রত্যাহার করা হয়।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q20">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২০</span>
+          <span class="exam-badge">১৭তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">যে যুদ্ধের প্রেক্ষাপটে সাধারণ পরিষদে 'Uniting for peace resolution' গৃহীত হয়েছিল-</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-20')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">সুয়েজ যুদ্ধ</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'খ', 'exp-20')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">কোরিয়া যুদ্ধ</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-20')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">পাক-ভারত যুদ্ধ ১৯৬৫</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-20')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">ফকল্যান্ড যুদ্ধ</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-20')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-20">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> খ (কোরিয়া যুদ্ধ)</p>
+<p><strong>ব্যাখ্যা:</strong> ১৯৫০ সালে কোরিয়া সংকটের প্রেক্ষাপটে জাতিসংঘের সাধারণ পরিষদে 'Uniting for Peace Resolution' গৃহীত হয়। এটা সাধারণ পরিষদের 377(V) নামে পরিচিত। উদ্দেশ্য ছিল নিরাপত্তা পরিষদের সদস্যরা যদি কোনো গুরুত্বপূর্ণ বিষয়ে মতানৈক্যে পড়ে বা পদক্ষেপ নিতে ব্যর্থ হয়, তাহলে সাধারণ পরিষদকে ২৪ ঘণ্টার মধ্যে জরুরি সভা আহ্বান করার ক্ষমতা প্রদান করা। ১৯৫০ সালের ২৫শে জুন দুই কোরিয়ার যুদ্ধ শুরুর পর সেটি তিন বছর চলমান ছিল এবং ১৯৫৩ সালের ২৭শে জুলাই যুদ্ধের অবসান ঘটে।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q21">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২১</span>
+          <span class="exam-badge">১৬তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">বার্লিনের দেওয়াল কোন সালে নির্মিত হয়েছিল?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-21')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">১৯৪৬</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-21')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">১৯৪৮</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-21')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">১৯৬১</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-21')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">১৯৬২</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-21')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-21">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> গ (১৯৬১)</p>
+<p><strong>ব্যাখ্যা:</strong> বার্লিন প্রাচীর বা বার্লিনের দেওয়াল ১৯৬১ সালে নির্মিত হয়। দ্বিতীয় বিশ্বযুদ্ধের পর ১৯৪৫ সালে জার্মানি মিত্রশক্তির মধ্যে ভাগ হয়। পশ্চিম জার্মানি মার্কিন নেতৃত্বাধীন পুঁজিবাদের অধীনে, আর পূর্ব জার্মানি সোভিয়েত ইউনিয়নের অধীনে যায়। এই বিভাজনের ফলস্বরূপ পূর্ব এবং পশ্চিম বার্লিনকে পৃথক করার জন্য বার্লিন প্রাচীর নির্মাণ করা হয়। ১৯৮৯ সালের ৯ নভেম্বর দেওয়ালটির পতন ঘটে এবং পরে ১৯৯০ সালের ৩ অক্টোবর আনুষ্ঠানিকভাবে দুই জার্মানি একত্র হয়।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q22">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২২</span>
+          <span class="exam-badge">১৬তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">জর্দান ও ইসরাইলের মধ্যে ৪৬ বছরের যুদ্ধাবস্থার আনুষ্ঠানিক অবসানের লক্ষ্যে কবে জর্দানের বাদশাহ হোসেন এবং ইসরাইলের প্রধানমন্ত্রী ইসহাক রাবিন ঐতিহাসিক ঘোষণায় স্বাক্ষর করেন?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-22')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">২৪ জুলাই, ১৯৯৪</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-22')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">২৫ জুলাই, ১৯৯৪</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-22')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">২৬ জুলাই, ১৯৯৪</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-22')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">২৭ জুলাই, ১৯৯৪</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-22')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-22">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> গ (২৬ জুলাই, ১৯৯৪)</p>
+<p><strong>ব্যাখ্যা:</strong> জর্দান ও ইসরাইলের মধ্যে ৪৬ বছরের যুদ্ধাবস্থার আনুষ্ঠানিক অবসানের লক্ষ্যে জর্দানের বাদশাহ হোসেন এবং ইসরাইলের প্রধানমন্ত্রী ইসহাক রাবিন একটি ঐতিহাসিক ঘোষণায় স্বাক্ষর করেন ২৬ জুলাই ১৯৯৪। ঘোষণাটি জর্দান-ইসরায়েল শান্তি চুক্তি নামে পরিচিত।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q23">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২৩</span>
+          <span class="exam-badge">১৩তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">১৯৯০ সালের কোন তারিখে পূর্ব ও পশ্চিম জার্মানি পুনরায় একটি রাষ্ট্র গঠন করে?</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-23')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">২ অক্টোবর (সকালে)</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-23')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">২ অক্টোবর (মাঝরাতে)</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-23')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">১ অক্টোবর (দুপুরে)</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ঘ', 'exp-23')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">৩ অক্টোবর (মাঝরাতে)</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-23')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-23">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ঘ (৩ অক্টোবর (মাঝরাতে))</p>
+<p><strong>ব্যাখ্যা:</strong> ১৮ মার্চ, ১৯৯০ তারিখে পূর্ব জার্মানিতে প্রথমবারের মতো মুক্ত নির্বাচন অনুষ্ঠিত হয়। পরবর্তী সময়ে পূর্ব এবং পশ্চিম জার্মানি পুনরায় একত্রিত হওয়ার বিষয়ে আলোচনা শুরু হয়। যার ফলশ্রুতিতে ১৯৯০ সালের ৩ অক্টোবর দুই জার্মানি পুনরায় একত্র হয়।</p>
+<p>দ্বিতীয় বিশ্বযুদ্ধের পর জার্মানিকে দুভাগে ভাগ করে পশ্চিম জার্মানিতে পুঁজিবাদী ব্যবস্থা এবং পূর্ব জার্মানিতে সমাজতান্ত্রিক ব্যবস্থা প্রতিষ্ঠিত হয়। ১৯৪৯ থেকে ১৯৬১ সময়ে পূর্ব জার্মানি থেকে ২.৫ মিলিয়ন মানুষ পশ্চিম জার্মানিতে পালিয়ে যায় যার মধ্যে প্রচুর সংখ্যক পেশাজীবী ও দক্ষ জনশক্তি ছিল। এতে করে পূর্ব জার্মানি সরকার শঙ্কিত হয়ে ১৯৬১ সালে বার্লিন প্রাচীর নির্মাণ শুরু করে। ১৯৮৯ সালের ৯ নভেম্বর পূর্ব জার্মানি সরকার তার জনগণকে পশ্চিম জার্মানিতে অবাধে যাওয়ার ঘোষণা প্রদান করলে জার্মানির জনগণ স্বতঃস্ফূর্ত হয়ে বার্লিন দেয়াল ভাঙতে শুরু করে। বার্লিন দেওয়াল স্নায়ুযুদ্ধের প্রতীক হিসেবে চিহ্নিত।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q24">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২৪</span>
+          <span class="exam-badge">১২তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">বাস্তিল দুর্গের পতন ঘটেছিল-</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-24')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">১৪ জুলাই ১৭৮৯</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-24')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">৭ জুন ১৭৮৮</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-24')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">৫ অক্টোবর ১৭৮৮</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-24')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">২৬ আগস্ট ১৭৮৮</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-24')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-24">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (১৪ জুলাই ১৭৮৯)</p>
+<p><strong>ব্যাখ্যা:</strong> ১৪ জুলাই ১৭৮৯ সালে বাস্তিল দুর্গের পতনের মাধ্যমে ফরাসি বিপ্লব তথা আধুনিক ইউরোপের রাজনৈতিক, সামাজিক ও চিন্তার জগতে নতুন দিগন্তের সূচনা হয়। স্বেচ্ছাচারী রাজতন্ত্রের প্রতীক বাস্তিল কারাদুর্গ আক্রমণ ও এর পতনের মধ্য দিয়ে সূচিত হয় বিশ্ব ইতিহাসের এক নতুন অধ্যায়।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q25">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২৫</span>
+          <span class="exam-badge">১২তম বিসিএস</span>
+        </div>
+        <h3 class="q-text">জাপান পার্ল হারবার আক্রমণ করে-</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-25')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">৭ ডিসেম্বর ১৯৪১</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-25')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">২৩ জুন ১৯৪২</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-25')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">৩ নভেম্বর ১৯৪২</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-25')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">২৬ জুলাই ১৯৪৩</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-25')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-25">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (৭ ডিসেম্বর ১৯৪১)</p>
+<p><strong>ব্যাখ্যা:</strong> দ্বিতীয় বিশ্বযুদ্ধে অংশগ্রহণকারী জাপান, জার্মানি ও ইতালিকে একত্রে অক্ষশক্তি বলা হয়। ১৯৪১ সালের ৭ ডিসেম্বর প্রশান্ত মহাসাগরের হাওয়াই দ্বীপপুঞ্জের পার্ল হারবারে অবস্থিত মার্কিন নৌঘাঁটিতে আক্রমণ করে জাপানের সামরিক বাহিনী। জাপানের এই অতর্কিত ও ধ্বংসাত্মক হামলার পরিপ্রেক্ষিতে ১৯৪১ সালের ৮ ডিসেম্বর মার্কিন যুক্তরাষ্ট্র সরাসরি দ্বিতীয় বিশ্বযুদ্ধে অংশগ্রহণ করে।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q26">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২৬</span>
+          <span class="exam-badge">১০ম বিসিএস</span>
+        </div>
+        <h3 class="q-text">হিরোশিমায় এটম বোমা ফেলা হয়েছিল-</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-26')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">১৯৪৫ সালের আগস্ট মাসে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-26')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">১৯৪৫ সালের মে মাসে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-26')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">১৯৪৪ সালের সেপ্টেম্বর মাসে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-26')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">১৯৪৪ সালের আগস্ট মাসে</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-26')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-26">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> ক (১৯৪৫ সালের আগস্ট মাসে)</p>
+<p><strong>ব্যাখ্যা:</strong> জাপানের হিরোশিমা এবং নাগাসাকি শহরের ওপর এটম বোমা ফেলে। ৬ই আগস্ট হিরোশিমা শহরের উপর নিক্ষিপ্ত বোমাটির নাম লিটলবয় এবং ৯ই আগস্ট নাগাসাকি শহরের উপর নিক্ষিপ্ত বোমাটির নাম ফ্যাটম্যান।</p>
+          </div>
+        </div>
+      </article>
+      <article class="q-card" id="q27">
+        <div class="q-header">
+          <span class="q-num">প্রশ্ন ২৭</span>
+          <span class="exam-badge">১০ম বিসিএস</span>
+        </div>
+        <h3 class="q-text">দ্বিতীয় মহাযুদ্ধে জার্মানি আত্মসমর্পণ করে-</h3>
+        <div class="opt-grid">
+          
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-27')">
+            <span class="opt-letter">ক</span>
+            <span class="opt-text">১৯৪২ সালের নভেম্বর মাসে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-27')">
+            <span class="opt-letter">খ</span>
+            <span class="opt-text">১৯৪৩ সালের ফেব্রুয়ারি মাসে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-27')">
+            <span class="opt-letter">গ</span>
+            <span class="opt-text">১৯৪৫ সালের মে মাসে</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-27')">
+            <span class="opt-letter">ঘ</span>
+            <span class="opt-text">১৯৪৫ সালের সেপ্টেম্বর মাসে</span>
+          </button>
+        </div>
+        <div class="exp-toggle-wrap">
+          <button class="exp-toggle-btn" onclick="toggleExp('exp-27')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+        <div class="explanation-drawer" id="exp-27">
+          <div class="exp-content">
+            <p><strong>উত্তর:</strong> গ (১৯৪৫ সালের মে মাসে)</p>
+<p><strong>ব্যাখ্যা:</strong> দ্বিতীয় বিশ্বযুদ্ধে জার্মানি আত্মসমর্পণ করে ১৯৪৫ সালের মে মাসে। ৭ই মে, ১৯৪৫ সালে জার্মানির নাজি বাহিনী আনুষ্ঠানিকভাবে মিত্রবাহিনীর কাছে আত্মসমর্পণ করে। ৮মে তা কার্যকর হয়, তাই ইউরোপে এই দিনটি 'V-E Day' (Victory in Europe Day) বা ইউরোপে বিজয় দিবস হিসেবে পালিত হয়। উল্লেখ্য, ১৯৩৯ সালের ১ সেপ্টেম্বর জার্মানি কর্তৃক পোল্যান্ড আক্রমণের ফলে দ্বিতীয় বিশ্বযুদ্ধ শুরু হয়। ২ সেপ্টেম্বর ১৯৪৫ সালে জাপান কর্তৃক আনুষ্ঠানিক আত্মসমর্পণের মাধ্যমে দ্বিতীয় বিশ্বযুদ্ধের আনুষ্ঠানিক সমাপ্তি ঘটে।</p>
+          </div>
+        </div>
+      </article>
+    </main>
 
-<script>
-let totalQuestions = 27;
-let attempted = 0;
-let correctCount = 0;
-let answeredQuestions = {};
+    <!-- Footer -->
+    <footer class="chapter-footer">
+      <div class="footer-nav">
+        <a href="গুরুত্বপূর্ণ মহাদেশ, দেশ (রাজধানী, মুদ্রা), স্থান, বন্দর ইত্যাদি সম্পর্কিত.html">← পূর্ববর্তী অধ্যায়</a>
+        <a href="ইতিহাসের গুরুত্বপূর্ণ ব্যক্তি, ধর্মের অভিযাত্রা ও অন্যান্য.html">পরবর্তী অধ্যায় →</a>
+      </div>
+      <p>লাইভ এমসিকিউ™ বিসিএস প্রিলিমিনারি ই-বুক • আন্তর্জাতিক বিষয়াবলি</p>
+    </footer>
+  </div>
 
-function checkAnswer(qNum, selectedLetter, correctLetter, btn) {
-  if (answeredQuestions[qNum]) return;
-  
-  const card = document.getElementById('q-card-' + qNum);
-  const allBtns = card.querySelectorAll('.option-btn');
-  answeredQuestions[qNum] = { selected: selectedLetter, correct: correctLetter };
-  attempted++;
-
-  allBtns.forEach(b => {
-    b.disabled = true;
-    const ltr = b.getAttribute('data-letter');
-    if (ltr === correctLetter) {
-      b.classList.add('correct');
-    }
-  });
-
-  if (selectedLetter === correctLetter) {
-    correctCount++;
-    card.classList.add('answered-correct');
-  } else {
-    btn.classList.add('wrong');
-    card.classList.add('answered-wrong');
-  }
-
-  const expl = document.getElementById('expl-' + qNum);
-  if (expl) expl.classList.add('open');
-
-  updateScore();
-}
-
-function updateScore() {
-  const badge = document.getElementById('live-score');
-  const acc = attempted > 0 ? Math.round((correctCount / attempted) * 100) : 0;
-  badge.innerHTML = 'স্কোর: ' + correctCount + ' / ' + totalQuestions + ' (সঠিকতা: ' + acc + '%) | চেষ্টা: ' + attempted;
-}
-
-function toggleExplanation(qNum) {
-  const expl = document.getElementById('expl-' + qNum);
-  if (expl) expl.classList.toggle('open');
-}
-
-function toggleAllExplanations() {
-  const boxes = document.querySelectorAll('.explanation-box');
-  const anyOpen = Array.from(boxes).some(b => b.classList.contains('open'));
-  boxes.forEach(b => {
-    if (anyOpen) b.classList.remove('open');
-    else b.classList.add('open');
-  });
-}
-
-function filterCategory(cat, pill) {
-  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-  if (pill) pill.classList.add('active');
-
-  const cards = document.querySelectorAll('.mcq-card');
-  cards.forEach(card => {
-    if (cat === 'all') {
-      card.style.display = 'block';
-    } else if (cat === 'wrong') {
-      card.style.display = card.classList.contains('answered-wrong') ? 'block' : 'none';
-    } else {
-      const cardCat = card.getAttribute('data-category');
-      card.style.display = cardCat === cat ? 'block' : 'none';
-    }
-  });
-}
-
-function resetQuiz() {
-  if (!confirm('আপনি কি সম্পূর্ণ কুইজ পুনরায় শুরু করতে চান?')) return;
-  answeredQuestions = {};
-  attempted = 0;
-  correctCount = 0;
-  updateScore();
-
-  document.querySelectorAll('.mcq-card').forEach(card => {
-    card.classList.remove('answered-correct', 'answered-wrong');
-    card.querySelectorAll('.option-btn').forEach(b => {
-      b.disabled = false;
-      b.classList.remove('correct', 'wrong');
-    });
-    const expl = card.querySelector('.explanation-box');
-    if (expl) expl.classList.remove('open');
-  });
-}
-
-function toggleTheme() {
-  const current = document.documentElement.getAttribute('data-theme');
-  const target = current === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', target);
-  localStorage.setItem('ebk_theme', target);
-}
-
-if (localStorage.getItem('ebk_theme') === 'dark') {
-  document.documentElement.setAttribute('data-theme', 'dark');
-}
-
-window.addEventListener('scroll', () => {
-  const sTop = document.documentElement.scrollTop || document.body.scrollTop;
-  const sHeight = (document.documentElement.scrollHeight || document.body.scrollHeight) - document.documentElement.clientHeight;
-  if (sHeight > 0) {
-    const pct = Math.min(100, Math.max(0, (sTop / sHeight) * 100));
-    document.getElementById('reading-progress').style.width = pct + '%';
-  }
-});
-</script>
-
-<script src="nav-component.js"></script>
-
-  <!-- Universal E-Book Theme Persistence & Controller -->
   <script>
-    (function() {
-      function applyTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        if (document.body) document.body.setAttribute('data-theme', theme);
-        try {
-          localStorage.setItem('theme', theme);
-          localStorage.setItem('ebk_portal_theme', theme);
-        } catch(e) {}
-        var btns = document.querySelectorAll('#themeBtn, #theme-btn, #themeToggleBtn, .btn-ctrl[onclick*="toggleTheme"], button[onclick*="toggleTheme"], .btn-theme-toggle');
-        btns.forEach(function(b) {
-          if (b.id === 'themeToggleBtn' || b.classList.contains('icon-only')) {
-            b.textContent = theme === 'dark' ? '☀️' : '🌙';
-          } else {
-            b.innerHTML = theme === 'dark' ? '☀️ মোড' : '🌓 মোড';
-          }
-        });
-      }
+    let userScore = 0;
+    const answeredQuestions = new Set();
+    const totalQuestions = 27;
 
-      window.toggleTheme = function() {
-        var cur = document.documentElement.getAttribute('data-theme') || (document.body && document.body.getAttribute('data-theme')) || 'light';
-        var next = cur === 'dark' ? 'light' : 'dark';
-        applyTheme(next);
-      };
+    function checkAnswer(btn, isCorrect, correctLetter, expId) {
+      const card = btn.closest('.q-card');
+      const qId = card.id;
+      const allButtons = card.querySelectorAll('.opt-btn');
 
-      var saved = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || 'light';
-      applyTheme(saved);
+      // Disable all buttons in this question
+      allButtons.forEach(b => b.disabled = true);
 
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-          applyTheme(saved);
-          var toggleBtn = document.getElementById('themeToggleBtn') || document.getElementById('themeBtn') || document.getElementById('theme-btn');
-          if (toggleBtn) {
-            toggleBtn.onclick = window.toggleTheme;
-          }
-        });
-      } else {
-        var toggleBtn = document.getElementById('themeToggleBtn') || document.getElementById('themeBtn') || document.getElementById('theme-btn');
-        if (toggleBtn) {
-          toggleBtn.onclick = window.toggleTheme;
+      // Highlight clicked
+      if (isCorrect) {
+        btn.classList.add('correct');
+        if (!answeredQuestions.has(qId)) {
+          userScore++;
+          answeredQuestions.add(qId);
         }
+      } else {
+        btn.classList.add('wrong');
+        // Find and highlight correct answer
+        allButtons.forEach(b => {
+          if (b.querySelector('.opt-letter').textContent.includes(correctLetter)) {
+            b.classList.add('correct');
+          }
+        });
+        answeredQuestions.add(qId);
       }
-    })();
-  </script>
 
+      // Automatically open explanation
+      const expDrawer = document.getElementById(expId);
+      if (expDrawer) {
+        expDrawer.classList.add('open');
+      }
+
+      updateScoreDisplay();
+    }
+
+    function toggleExp(expId) {
+      const expDrawer = document.getElementById(expId);
+      if (expDrawer) {
+        expDrawer.classList.toggle('open');
+      }
+    }
+
+    function updateScoreDisplay() {
+      const scoreDisplay = document.getElementById('scoreDisplay');
+      if (scoreDisplay) {
+        scoreDisplay.textContent = '🏆 সঠিক উত্তর: ' + userScore + ' / ' + totalQuestions;
+      }
+    }
+
+    function resetQuiz() {
+      userScore = 0;
+      answeredQuestions.clear();
+      updateScoreDisplay();
+
+      document.querySelectorAll('.opt-btn').forEach(b => {
+        b.disabled = false;
+        b.classList.remove('correct', 'wrong');
+      });
+
+      document.querySelectorAll('.explanation-drawer').forEach(d => {
+        d.classList.remove('open');
+      });
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      try {
+        localStorage.setItem('theme', newTheme);
+        localStorage.setItem('ebk_portal_theme', newTheme);
+      } catch(e) {}
+    }
+  </script>
 </body>
 </html>

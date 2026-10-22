@@ -1,1561 +1,1145 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="bn" data-theme="light">
 <head>
-  <script>
-  (function() {
-    try {
-      var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || 'light';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-    } catch(e) {}
-  })();
-</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ন্যাটো ও অন্যান্য নিরাপত্তা জোট বাহিনী | Live MCQ International</title>
-  
+  <title>ন্যাটো এবং অন্যান্য নিরাপত্তা জোট ও বাহিনী | Live MCQ International</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-  --font-base: 'Noto Serif Bengali', 'Kalpurush', Vrinda, sans-serif;
-      --primary: #0F3966;
-      --primary-light: #1E4E8C;
-      --primary-dark: #0A2544;
-      --accent-gold: #D4AF37;
-      --accent-gold-light: #FBF5E6;
-      --accent-gold-dark: #AA820A;
-      --bg-body: #F4F7FB;
-      --bg-card: #FFFFFF;
-      --bg-alt: #EBF1F8;
-      --text-main: #1E293B;
-      --text-muted: #64748B;
-      --border-color: #E2E8F0;
-      --success-bg: #ECFDF5;
-      --success-border: #10B981;
-      --success-text: #065F46;
-      --error-bg: #FEF2F2;
-      --error-border: #EF4444;
-      --error-text: #991B1B;
-      --font-scale: 1rem;
-      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      --primary-color: #0d6efd;
+      --primary-hover: #0b5ed7;
+      --bg-color: #f4f7f6;
+      --card-bg: #ffffff;
+      --text-color: #212529;
+      --text-muted: #6c757d;
+      --border-color: #e9ecef;
+      --correct-bg: #d1e7dd;
+      --correct-border: #a3cfbb;
+      --correct-text: #0f5132;
+      --wrong-bg: #f8d7da;
+      --wrong-border: #f1aeb5;
+      --wrong-text: #842029;
+      --tag-bg: #e7f1ff;
+      --tag-color: #0d6efd;
+      --table-header-bg: #e3f2fd;
+      --table-header-color: #0d47a1;
+      --analysis-bg: #ffffff;
+      --exp-bg: #f8f9fa;
+      --font-scale: 1;
     }
 
-    [data-theme="dark"], body[data-theme="dark"] {
-      --primary: #38BDF8;
-      --primary-light: #0284C7;
-      --primary-dark: #0369A1;
-      --accent-gold: #FCD34D;
-      --accent-gold-light: #1E293B;
-      --accent-gold-dark: #F59E0B;
-      --bg-body: #0F172A;
-      --bg-card: #1E293B;
-      --bg-alt: #0F172A;
-      --text-main: #F8FAFC;
-      --text-muted: #94A3B8;
-      --border-color: #334155;
-      --success-bg: #064E3B;
-      --success-border: #10B981;
-      --success-text: #A7F3D0;
-      --error-bg: #7F1D1D;
-      --error-border: #EF4444;
-      --error-text: #FECACA;
+    [data-theme="dark"] {
+      --primary-color: #3d8bfd;
+      --primary-hover: #0d6efd;
+      --bg-color: #121212;
+      --card-bg: #1e1e1e;
+      --text-color: #e0e0e0;
+      --text-muted: #a0a0a0;
+      --border-color: #333333;
+      --correct-bg: #133926;
+      --correct-border: #2d6a4f;
+      --correct-text: #74c69d;
+      --wrong-bg: #441c21;
+      --wrong-border: #842029;
+      --wrong-text: #ea868f;
+      --tag-bg: #1c2d42;
+      --tag-color: #79b5ff;
+      --table-header-bg: #1a2736;
+      --table-header-color: #90caf9;
+      --analysis-bg: #1e1e1e;
+      --exp-bg: #252525;
     }
 
-    * { box-sizing: border-box; overflow-wrap: break-word; margin: 0; padding: 0; }
-    html { font-size: var(--font-scale); scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      font-family: var(--font-base);
-      background-color: var(--bg-body);
-      color: var(--text-main);
-      line-height: 1.65;
-      padding-bottom: 5rem;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      font-family: 'Hind Siliguri', 'Noto Serif Bengali', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding-bottom: 60px;
+      font-size: calc(1rem * var(--font-scale));
     }
 
-    #progress-container {
-      position: fixed; top: 0; left: 0; width: 100%; height: 4px; background: transparent; z-index: 1000;
-    }
-    #progress-bar {
-      height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent-gold)); transition: width 0.1s ease;
-    }
-
-    .hero-header {
-      background: linear-gradient(135deg, #0A2544 0%, #0F3966 60%, #1E4E8C 100%);
-      color: #FFFFFF;
-      padding: 3rem 1.5rem 2.5rem;
-      position: relative;
-      border-bottom: 4px solid var(--accent-gold);
-    }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
-
-    .unit-tag {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: rgba(212, 175, 55, 0.2); border: 1px solid var(--accent-gold);
-      color: #FEEBC8; padding: 0.35rem 0.85rem; border-radius: 20px;
-      font-size: 0.875rem; font-weight: 600; margin-bottom: 0.75rem;
-    }
-    .hero-title {
-      font-size: 2.25rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.75rem;
-    }
-    .hero-desc { font-size: 1.05rem; color: #E2E8F0; max-width: 800px; margin-bottom: 1.5rem; }
-    .meta-badges { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-    .meta-badge {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      background: rgba(255, 255, 255, 0.12); padding: 0.4rem 0.85rem;
-      border-radius: 8px; font-size: 0.85rem; border: 1px solid rgba(255, 255, 255, 0.18);
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 15px;
     }
 
-    .controls-wrapper {
-      position: sticky; top: 10px; z-index: 990; margin: -1.5rem auto 2rem; padding: 0 1rem;
-    }
-    .controls-bar {
-      display: flex; justify-content: space-between; align-items: center;
-      background: var(--bg-card); border: 1px solid var(--border-color);
-      border-radius: 50px; padding: 0.6rem 1.25rem;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-    }
-    .btn-group { display: flex; align-items: center; gap: 0.4rem; }
-    .ctrl-btn {
-      background: var(--bg-alt); border: 1px solid var(--border-color);
-      color: var(--text-main); padding: 0.4rem 0.75rem; border-radius: 20px;
-      font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: var(--transition);
-      display: inline-flex; align-items: center; gap: 0.3rem;
-    }
-    .ctrl-btn:hover { background: var(--primary); color: #FFFFFF; border-color: var(--primary); }
-
-    .section-title-wrap {
-      display: flex; align-items: center; justify-content: space-between;
-      border-bottom: 2px solid var(--accent-gold); padding-bottom: 0.75rem; margin: 3rem 0 1.5rem;
-    }
-    .section-title {
-      font-size: 1.5rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 0.6rem;
-    }
-    [data-theme="dark"] .section-title { color: var(--primary); }
-    .card-subtext { font-size: 0.875rem; color: var(--text-muted); }
-
-    .infographic-card {
-      background: var(--bg-card); border: 1px solid var(--border-color);
-      border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 20px;
     }
 
-    .data-table-wrapper { width: 100%; overflow-x: auto; border-radius: 10px; border: 1px solid var(--border-color); }
-    .pro-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem; }
-    .pro-table th {
-      background: var(--bg-alt); color: var(--primary-dark); padding: 0.9rem 1rem;
-      font-weight: 700; border-bottom: 2px solid var(--border-color); white-space: nowrap;
-    }
-    [data-theme="dark"] .pro-table th { background: #1E293B; color: #38BDF8; }
-    .pro-table td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--border-color); vertical-align: top; }
-    .pro-table tr:hover td { background: rgba(15, 57, 102, 0.02); }
-
-    .pill-tag {
-      display: inline-block; padding: 0.2rem 0.55rem; border-radius: 6px;
-      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
-    }
-    .pill-gold {
-      background: rgba(212, 175, 55, 0.15); color: #B45309; border: 1px solid rgba(212, 175, 55, 0.4);
-    }
-    [data-theme="dark"] .pill-gold { color: #FCD34D; }
-    .pill-blue {
-      background: rgba(15, 57, 102, 0.1); color: #1E40AF; border: 1px solid rgba(15, 57, 102, 0.2);
-    }
-    [data-theme="dark"] .pill-blue { background: rgba(56, 189, 248, 0.15); color: #7DD3FC; }
-
-    .cards-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 1rem;
-    }
-    .grid-box {
-      background: var(--bg-card); border: 1px solid var(--border-color);
-      border-radius: 12px; padding: 1.25rem; border-top: 4px solid var(--primary);
-      transition: var(--transition);
-    }
-    .grid-box:hover { transform: translateY(-3px); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.08); }
-    .grid-box-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; display: flex; justify-content: space-between; }
-    .grid-box-content { font-size: 0.925rem; color: var(--text-muted); line-height: 1.55; }
-
-    /* Quiz Stats Bar */
-    .quiz-stats-header {
-      background: var(--bg-card); border: 1px solid var(--border-color);
-      border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem;
-      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;
-    }
-    .score-badge-wrap { display: flex; align-items: center; gap: 1rem; }
-    .score-stat { display: flex; flex-direction: column; }
-    .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
-    .stat-val { font-size: 1.4rem; font-weight: 700; color: var(--primary); font-family: 'Outfit', sans-serif; }
-    [data-theme="dark"] .stat-val { color: #38BDF8; }
-
-    .filter-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
-    .pill-btn {
-      background: var(--bg-card); border: 1px solid var(--border-color);
-      color: var(--text-muted); padding: 0.45rem 1rem; border-radius: 25px;
-      font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: var(--transition);
-    }
-    .pill-btn.active, .pill-btn:hover { background: var(--primary); color: #FFFFFF; border-color: var(--primary); }
-
-    .mcq-card {
-      background: var(--bg-card); border: 1px solid var(--border-color);
-      border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02); transition: var(--transition);
-    }
-    .mcq-card:hover { box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05); }
-    .mcq-header { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1.25rem; }
-    .q-number {
-      background: var(--bg-alt); color: var(--primary); font-weight: 700;
-      min-width: 38px; height: 38px; border-radius: 10px; display: flex;
-      align-items: center; justify-content: center; font-size: 1.05rem; flex-shrink: 0;
-    }
-    [data-theme="dark"] .q-number { background: #0F172A; color: #38BDF8; }
-    .q-text-wrap { flex: 1; }
-    .q-title { font-size: 1.05rem; font-weight: 600; line-height: 1.5; margin-bottom: 0.4rem; }
-    .q-tag {
-      display: inline-block; font-size: 0.75rem; font-weight: 700;
-      background: rgba(212, 175, 55, 0.15); color: #92400E; padding: 0.15rem 0.5rem; border-radius: 4px;
-    }
-    [data-theme="dark"] .q-tag { color: #FCD34D; }
-
-    .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.75rem; margin-bottom: 1rem; }
-    .opt-btn {
-      background: var(--bg-alt); border: 1px solid var(--border-color);
-      color: var(--text-main); padding: 0.75rem 1rem; border-radius: 10px;
-      font-size: 0.95rem; font-weight: 500; cursor: pointer; text-align: left;
-      display: flex; align-items: center; gap: 0.75rem; transition: var(--transition);
-    }
-    .opt-btn:hover:not(:disabled) { background: rgba(15, 57, 102, 0.08); border-color: var(--primary); }
-    .opt-letter {
-      width: 26px; height: 26px; border-radius: 50%; background: var(--bg-card);
-      border: 1px solid var(--border-color); display: flex; align-items: center;
-      justify-content: center; font-size: 0.8rem; font-weight: 700; flex-shrink: 0;
-    }
-    .opt-btn.correct { background: var(--success-bg) !important; border-color: var(--success-border) !important; color: var(--success-text) !important; font-weight: 600; }
-    .opt-btn.correct .opt-letter { background: var(--success-border); color: #FFFFFF; }
-    .opt-btn.wrong { background: var(--error-bg) !important; border-color: var(--error-border) !important; color: var(--error-text) !important; }
-    .opt-btn.wrong .opt-letter { background: var(--error-border); color: #FFFFFF; }
-
-    .exp-drawer { margin-top: 1rem; border-top: 1px dashed var(--border-color); padding-top: 1rem; display: none; }
-    .exp-drawer.open { display: block; animation: fadeIn 0.3s ease; }
-    .exp-box { background: rgba(15, 57, 102, 0.04); border-left: 4px solid var(--primary); border-radius: 0 8px 8px 0; padding: 1rem; font-size: 0.925rem; }
-    [data-theme="dark"] .exp-box { background: rgba(56, 189, 248, 0.05); border-left-color: #38BDF8; }
-    .exp-header { font-weight: 700; color: var(--primary); margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.4rem; }
-    [data-theme="dark"] .exp-header { color: #38BDF8; }
-    .toggle-exp-btn {
-      background: transparent; border: none; color: var(--primary); font-size: 0.85rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 0.5rem;
-    }
-    [data-theme="dark"] .toggle-exp-btn { color: #38BDF8; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-
-    @media (max-width: 768px) {
-      .hero-title { font-size: 1.75rem; }
-      .controls-bar { border-radius: 14px; flex-direction: column; gap: 0.6rem; }
-      .options-grid { grid-template-columns: 1fr; }
-    }
-  
-/* Universal Text Box Bleed & Alignment Protection */
-.card, .quote-box, .doubt-box, .info-box, .mcq-card, .study-section, .flash-item, .bcs-card, .visual-card, .concept-box, .mnemonic-box, .fact-check-box {
-  max-width: 100%;
-  overflow-wrap: break-word;
-  word-break: normal;
-}
-
-  /* ══════ Universal Mobile Screen Layout Optimization (Samsung A23 / 360px-480px) ══════ */
-  @media (max-width: 600px) {
-    /* 1. Header & Controls: prevent button overflow, slim height */
-    header.sticky-header, .top-control-bar, .control-bar, .site-header {
-      position: sticky !important;
-      top: 0 !important;
-      padding: 6px 8px !important;
-      gap: 6px !important;
-    }
-    .brand-group {
-      gap: 4px !important;
-      min-width: 0 !important;
-    }
-    .book-badge {
-      font-size: 0.7rem !important;
-      padding: 0.15rem 0.45rem !important;
-    }
-    .chapter-heading-bar, .brand-badge, .brand-title {
-      font-size: 0.8rem !important;
-      max-width: 130px !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-      white-space: nowrap !important;
-    }
-    .controls-group, .controls, .control-group {
-      gap: 4px !important;
-      display: flex !important;
-      align-items: center !important;
-    }
-    .control-btn, .ctrl-btn, .btn-ctrl {
-      padding: 4px 7px !important;
-      font-size: 0.78rem !important;
-      border-radius: 6px !important;
-    }
-    .print-btn, button[onclick*="print"], .ctrl-btn[onclick*="print"] {
-      display: none !important;
+    .nav-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
     }
 
-    /* 2. Container & Lateral Space: eliminate ~120px wasted empty margins */
-    .main-container, .container {
-      padding-left: 8px !important;
-      padding-right: 8px !important;
-      padding-top: 6px !important;
-      padding-bottom: 24px !important;
-      margin-top: 0.75rem !important;
-      margin-bottom: 1.5rem !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      box-sizing: border-box !important;
-    }
-    .infographic-wrapper, .study-section, .section {
-      margin-bottom: 1.25rem !important;
-      gap: 0.75rem !important;
-    }
-    .section-title {
-      font-size: 1.15rem !important;
-      margin-bottom: 0.75rem !important;
-      padding-left: 0.5rem !important;
-    }
-    .card, .mcq-card, .quiz-stats-card, .study-card, .author-card, .fact-item, .info-box {
-      padding: 12px 10px !important;
-      margin-bottom: 10px !important;
-      border-radius: 10px !important;
-      max-width: 100% !important;
-      box-sizing: border-box !important;
-      overflow-wrap: break-word !important;
-      word-break: normal!important;
+    .nav-btn:hover {
+      background: var(--border-color);
     }
 
-    /* 3. Hero Banner: slim down vertical space */
-    .hero-banner, .hero {
-      padding: 14px 10px !important;
-      margin-bottom: 1.25rem !important;
-      border-radius: 12px !important;
-    }
-    .hero-title {
-      font-size: 1.3rem !important;
-      line-height: 1.3 !important;
-      margin-bottom: 0.5rem !important;
-    }
-    .hero-desc {
-      font-size: 0.85rem !important;
-      line-height: 1.45 !important;
-      margin-bottom: 0.75rem !important;
-    }
-    .hero-stats, .stats-indicators {
-      gap: 6px !important;
-    }
-    .stat-pill, .indicator-item {
-      padding: 4px 8px !important;
-      font-size: 0.76rem !important;
+    .theme-toggle-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.3rem;
+      color: var(--text-color);
     }
 
-    /* 4. Tables & Responsiveness */
-    table.data-table th, table.data-table td,
-    table th, table td {
-      padding: 7px 6px !important;
-      font-size: 0.82rem !important;
-      line-height: 1.35 !important;
-    }
-    .data-table-container, .table-responsive, .table-container {
-      -webkit-overflow-scrolling: touch !important;
-      overflow-x: auto !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      display: block !important;
-      border-radius: 8px !important;
+    .chapter-header {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-color);
+      text-align: center;
     }
 
-    /* 5. MCQs & Quizzes */
+    .badge-wrap {
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .chapter-badge {
+      background: var(--tag-bg);
+      color: var(--tag-color);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .chapter-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-color);
+      margin-bottom: 8px;
+    }
+
+    .chapter-subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .bcs-analysis-box {
+      background: var(--analysis-bg);
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 24px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    .analysis-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-align: center;
+      color: var(--primary-color);
+    }
+
+    .analysis-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .analysis-table th, .analysis-table td {
+      border: 1px solid var(--border-color);
+      padding: 6px 8px;
+    }
+
+    .analysis-table th {
+      background: var(--table-header-bg);
+      color: var(--table-header-color);
+      font-weight: 600;
+    }
+
+    .score-bar {
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 8px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    .score-badge {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .reset-btn {
+      background: none;
+      border: none;
+      color: var(--primary-color);
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 4px 8px;
+    }
+
+    .reset-btn:hover {
+      text-decoration: underline;
+    }
+
+    .q-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      transition: all 0.2s ease;
+    }
+
     .q-header {
-      gap: 0.5rem !important;
-      margin-bottom: 0.65rem !important;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 16px;
     }
-    .q-num-title {
-      font-size: 0.95rem !important;
-      gap: 0.5rem !important;
-      line-height: 1.4 !important;
+
+    .q-num {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--primary-color);
+      line-height: 1.4;
     }
-    .q-number {
-      width: 24px !important;
-      height: 24px !important;
-      font-size: 0.78rem !important;
+
+    .q-text-group {
+      flex: 1;
     }
-    .options-grid, .quiz-options {
-      grid-template-columns: 1fr !important;
-      gap: 6px !important;
+
+    .q-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 6px;
     }
-    .opt-btn, .option-btn {
-      padding: 8px 10px !important;
-      font-size: 0.86rem !important;
-      border-radius: 8px !important;
+
+    .q-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
     }
-    .explanation-drawer, .quiz-explanation {
-      padding: 10px 12px !important;
-      font-size: 0.85rem !important;
+
+    .exam-tag {
+      background: var(--tag-bg);
+      color: var(--tag-color);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
     }
-  }
 
-
-/* BCS Question Analysis Card & Table */
-.bcs-table-card {
-  background: var(--bg-card);
-  border: 1px solid var(--card-border, var(--border-color, rgba(148, 163, 184, 0.2)));
-  border-radius: var(--radius, 16px);
-  padding: 1.25rem;
-  margin-bottom: 1.75rem;
-  box-shadow: var(--shadow-soft, var(--shadow-sm, 0 4px 12px rgba(0,0,0,0.05)));
-  backdrop-filter: blur(8px);
-}
-
-.bcs-table-card .bcs-card-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin-bottom: 0.85rem;
-  color: var(--accent-cyan, var(--primary-color, #0284c7));
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border-left: 4px solid var(--accent-cyan, var(--primary-color, #0284c7));
-  padding-left: 0.6rem;
-}
-
-.bcs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.bcs-pill {
-  background: var(--bg-surface, var(--bg-main, rgba(255, 255, 255, 0.03)));
-  border: 1px solid var(--card-border, var(--border-color, rgba(148, 163, 184, 0.15)));
-  padding: 0.45rem 0.55rem;
-  border-radius: 8px;
-  text-align: center;
-  font-size: 0.85rem;
-}
-
-.bcs-pill .num {
-  font-weight: 700;
-  color: var(--accent-cyan, var(--primary-color, #38bdf8));
-  font-size: 0.82rem;
-}
-
-.bcs-pill .cnt {
-  font-size: 0.8rem;
-  color: var(--text-muted, #94a3b8);
-}
-
-.bcs-pill.has-q {
-  background: rgba(56, 189, 248, 0.12);
-  border-color: rgba(56, 189, 248, 0.35);
-}
-
-.bcs-pill.has-q .cnt {
-  color: var(--accent-gold, #fbbf24);
-  font-weight: 700;
-}
-
-[data-theme="dark"] .bcs-pill.has-q {
-  background: rgba(56, 189, 248, 0.15);
-  border-color: #38bdf8;
-}
-
-.bcs-table-container {
-  overflow-x: auto;
-  border-radius: 10px;
-  border: 1px solid var(--card-border, var(--border-color, rgba(148, 163, 184, 0.18)));
-  margin-top: 0.75rem;
-  -webkit-overflow-scrolling: touch;
-}
-
-.bcs-table-container table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center;
-  font-size: 0.85rem;
-}
-
-.bcs-table-container th, .bcs-table-container td {
-  padding: 0.55rem 0.75rem;
-  border: 1px solid var(--card-border, var(--border-color, rgba(148, 163, 184, 0.15)));
-}
-
-.bcs-table-container th {
-  background: rgba(56, 189, 248, 0.1);
-  color: var(--accent-cyan, var(--primary-color, #38bdf8));
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.bcs-table-container td strong {
-  color: var(--accent-cyan, var(--primary-color, #38bdf8));
-}
-
-.bcs-table-container td.has-q-td {
-  font-weight: 700;
-  color: var(--accent-gold, #fbbf24);
-}
-
-
-/* ══════ Responsive Smart Table Protection (No Word Breaking & Smooth Horizontal Touch Scroll) ══════ */
-.table-responsive, .data-table-container, .table-container, .bcs-table-container {
-  width: 100% !important;
-  max-width: 100% !important;
-  overflow-x: auto !important;
-  -webkit-overflow-scrolling: touch !important;
-  display: block !important;
-  margin: 1rem 0 !important;
-  border-radius: 8px !important;
-  box-sizing: border-box !important;
-}
-
-table, .pro-table, .data-table, .custom-table, .bcs-table {
-  width: 100% !important;
-  min-width: 540px !important;
-  border-collapse: collapse !important;
-  table-layout: auto !important;
-  box-sizing: border-box !important;
-}
-
-table th, table td,
-.pro-table th, .pro-table td,
-.data-table th, .data-table td,
-.custom-table th, .custom-table td,
-.bcs-table th, .bcs-table td {
-  word-break: normal !important;
-  overflow-wrap: normal !important;
-  white-space: normal !important;
-  hyphens: none !important;
-  text-align: left !important;
-  vertical-align: top !important;
-  line-height: 1.5 !important;
-}
-
-table th, .pro-table th, .data-table th, .custom-table th, .bcs-table th {
-  white-space: nowrap !important;
-  font-weight: 700 !important;
-}
-
-@media (max-width: 600px) {
-  table th, table td,
-  .pro-table th, .pro-table td,
-  .data-table th, .data-table td,
-  .custom-table th, .custom-table td,
-  .bcs-table th, .bcs-table td {
-    padding: 7px 8px !important;
-    font-size: 0.85rem !important;
-  }
-  table, .pro-table, .data-table, .custom-table, .bcs-table {
-    min-width: 500px !important;
-  }
-}
-
-
-    /* Live MCQ Design System - Matching Bangla Language */
-    :root {
-      --font-base: 'Noto Serif Bengali', serif;
+    .opt-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
     }
-    body {
-      font-family: 'Noto Serif Bengali', serif !important;
-    }
-    .bcs-tag, .exam-badge {
-      font-size: 0.75rem !important;
-      font-weight: 600 !important;
-      background: rgba(56, 189, 248, 0.15) !important;
-      color: #0284c7 !important;
-      padding: 0.2rem 0.6rem !important;
-      border-radius: 6px !important;
-      white-space: nowrap !important;
-      height: fit-content !important;
-      flex-shrink: 0 !important;
-      border: 1px solid rgba(56, 189, 248, 0.3) !important;
-    }
-    [data-theme="dark"] .bcs-tag, [data-theme="dark"] .exam-badge {
-      background: rgba(56, 189, 248, 0.15) !important;
-      color: #38bdf8 !important;
-    }
-    .q-header {
-      display: flex !important;
-      justify-content: space-between !important;
-      align-items: flex-start !important;
-      gap: 0.75rem !important;
-      margin-bottom: 0.75rem !important;
-    }
-    .q-num-title {
-      display: flex !important;
-      align-items: flex-start !important;
-      gap: 0.6rem !important;
-      flex: 1 1 auto !important;
-      min-width: 0 !important;
-      overflow-wrap: break-word !important;
-      word-break: normal !important;
-      line-height: 1.55 !important;
-    }
-    .options-grid {
-      display: grid !important;
-      grid-template-columns: 1fr !important;
-      gap: 8px !important;
-      margin-bottom: 0.75rem !important;
-    }
-    @media (min-width: 640px) {
-      .options-grid {
-        grid-template-columns: 1fr 1fr !important;
+
+    @media (min-width: 600px) {
+      .opt-grid {
+        grid-template-columns: 1fr 1fr;
       }
     }
+
     .opt-btn {
-      white-space: normal !important;
-      overflow-wrap: break-word !important;
-      word-break: normal !important;
-      text-align: left !important;
-      display: flex !important;
-      align-items: center !important;
-      gap: 0.6rem !important;
-      width: 100% !important;
-      min-height: 44px !important;
-      line-height: 1.4 !important;
-    }
-    .card, .mcq-card {
-      overflow-wrap: break-word !important;
-      word-break: normal !important;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--text-color);
+      transition: all 0.15s ease;
+      width: 100%;
     }
 
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary-color);
+      background-color: var(--bg-color);
+    }
+
+    .opt-btn:disabled {
+      cursor: default;
+    }
+
+    .opt-letter {
+      background: var(--border-color);
+      color: var(--text-color);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .opt-text {
+      flex: 1;
+    }
+
+    .opt-btn.correct {
+      background-color: var(--correct-bg) !important;
+      border-color: var(--correct-border) !important;
+      color: var(--correct-text) !important;
+    }
+
+    .opt-btn.correct .opt-letter {
+      background: var(--correct-border);
+      color: var(--correct-text);
+    }
+
+    .opt-btn.wrong {
+      background-color: var(--wrong-bg) !important;
+      border-color: var(--wrong-border) !important;
+      color: var(--wrong-text) !important;
+    }
+
+    .opt-btn.wrong .opt-letter {
+      background: var(--wrong-border);
+      color: var(--wrong-text);
+    }
+
+    .card-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .action-btn {
+      background: none;
+      border: none;
+      color: var(--primary-color);
+      font-size: 0.85rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .action-btn:hover {
+      background: var(--bg-color);
+    }
+
+    .explanation-drawer {
+      display: none;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border-color);
+    }
+
+    .explanation-drawer.open {
+      display: block;
+      animation: fadeIn 0.25s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .exp-box {
+      background: var(--exp-bg);
+      border-left: 4px solid var(--primary-color);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.9rem;
+    }
+
+    .exp-box p {
+      margin-bottom: 8px;
+    }
+
+    .exp-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .exp-box ul {
+      margin-left: 20px;
+      margin-bottom: 8px;
+    }
+
+    .exp-box li {
+      margin-bottom: 4px;
+    }
+
+    .exp-source {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    .chapter-footer {
+      margin-top: 40px;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+      padding-top: 24px;
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .footer-nav a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+    }
+
+    .footer-nav a:hover {
+      background: var(--border-color);
+    }
   </style>
 </head>
 <body>
+  <div class="container">
+    <!-- Top Nav -->
+    <nav class="top-nav">
+      <a href="index.html" class="nav-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        সূচিপত্র
+      </a>
+      <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme">🌓</button>
+    </nav>
 
-  <div id="progress-container"><div id="progress-bar"></div></div>
-
-  <header class="hero-header">
-    <div class="container">
-      <span class="unit-tag">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
-        ইউনিট ২: আন্তর্জাতিক নিরাপত্তা ও আন্তঃরাষ্ট্রীয় ক্ষমতা সম্পর্ক
-      </span>
-      <h1 class="hero-title">ন্যাটো ও অন্যান্য নিরাপত্তা জোট বাহিনী</h1>
-      <p class="hero-desc">
-        নর্থ আটলান্টিক ট্রিটি অর্গানাইজেশন (NATO), আর্টিকেল-৫ সম্মিলিত প্রতিরক্ষা, নতুন সদস্য অন্তর্ভুক্তি, ইন্দো-প্যাসিফিক ত্রিদেশীয় জোট অকাস (AUKUS) ও বৈশ্বিক সামরিক জোটসমূহের প্রামাণ্য রূপরেখা (পৃষ্ঠা ৬২২–৬২৪)।
-      </p>
-      <div class="meta-badges">
-        <span class="meta-badge">মোট ৯টি বিসিএস প্রশ্ন সমাধান</span>
-        <span class="meta-badge">ন্যাটো প্রোফাইল ও ১৪টি ধারা বিশ্লেষণ</span>
-        <span class="meta-badge">অকাস (AUKUS) ও নিরাপত্তা জোট ম্যাট্রিক্স</span>
+    <!-- Header -->
+    <header class="chapter-header">
+      <div class="badge-wrap">
+        <span class="chapter-badge">অধ্যায় ৭ • পৃষ্ঠা ৬২২–৬২৪</span>
       </div>
-    </div>
-  </header>
+      <h1 class="chapter-title">ন্যাটো এবং অন্যান্য নিরাপত্তা জোট ও বাহিনী</h1>
+      <p class="chapter-subtitle">বিসিএস প্রিলিমিনারি বিগত বছরের প্রশ্ন ও ব্যাখ্যা বিশ্লেষণ • মোট ৯টি প্রশ্ন</p>
+    </header>
 
-  <div class="controls-wrapper">
-    <div class="container">
-      <div class="controls-bar">
-        <div class="btn-group">
-          <button class="ctrl-btn" id="btn-font-dec">A-</button>
-          <button class="ctrl-btn" id="btn-font-reset">স্বাভাবিক</button>
-          <button class="ctrl-btn" id="btn-font-inc">A+</button>
-          <button class="ctrl-btn" id="btn-font-toggle">ফন্ট শৈলী</button>
-        </div>
-        <div class="btn-group">
-          <button class="ctrl-btn" id="btn-theme-toggle">
-            <span id="theme-text">ডার্ক মোড</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <main class="container">
-
-    <!-- BCS Analysis Breakdown -->
-    <section class="bcs-table-card">
-      <div class="bcs-card-title">📊 বিগত বিসিএস পরীক্ষার প্রশ্ন বিশ্লেষণ ছক (বইয়ের মূল ছক অনুযায়ী)</div>
-      <div class="bcs-grid">
-        <div class="bcs-pill"><div class="num">৫০তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill"><div class="num">৪৯তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill"><div class="num">৪৮তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill has-q"><div class="num">৪৭তম</div><div class="cnt">১টি প্রশ্ন</div></div>
-        <div class="bcs-pill has-q"><div class="num">৪৬তম</div><div class="cnt">১টি প্রশ্ন</div></div>
-        <div class="bcs-pill has-q"><div class="num">৪৫তম</div><div class="cnt">১টি প্রশ্ন</div></div>
-        <div class="bcs-pill"><div class="num">৪৪তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill"><div class="num">৪৩তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill"><div class="num">৪২তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill has-q"><div class="num">৪১তম</div><div class="cnt">২টি প্রশ্ন 🔥</div></div>
-        <div class="bcs-pill"><div class="num">৪০তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill has-q"><div class="num">৩৯তম</div><div class="cnt">১টি প্রশ্ন</div></div>
-        <div class="bcs-pill"><div class="num">৩৮তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill"><div class="num">৩৭তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill"><div class="num">৩৬তম</div><div class="cnt">০টি</div></div>
-        <div class="bcs-pill has-q"><div class="num">৩৫তম</div><div class="cnt">১টি প্রশ্ন</div></div>
-        <div class="bcs-pill has-q"><div class="num">১০ম-৩৪তম</div><div class="cnt">৩টি প্রশ্ন 🔥</div></div>
-      </div>
-      <div class="bcs-table-container">
-        <table class="data-table">
+    <!-- BCS Analysis Table -->
+    <section class="bcs-analysis-box">
+      <h2 class="analysis-title">📊 বিসিএস প্রশ্ন বিশ্লেষণ ছক</h2>
+      <div style="overflow-x: auto;">
+        <table class="analysis-table">
           <thead>
             <tr>
-              <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
-              <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
-              <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
+              <th>বিসিএস</th>
+              <th>প্রশ্ন সংখ্যা</th>
+              <th>বিসিএস</th>
+              <th>প্রশ্ন সংখ্যা</th>
+              <th>বিসিএস</th>
+              <th>প্রশ্ন সংখ্যা</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><strong>৫০তম</strong></td><td class="has-q-td">২টি</td>
-              <td><strong>৪৪তম</strong></td><td>০টি</td>
-              <td><strong>৩৮তম</strong></td><td>০টি</td>
+              <td>৫০তম</td>
+              <td>২</td>
+              <td>৪৪তম</td>
+              <td>০</td>
+              <td>৩৮তম</td>
+              <td>০</td>
             </tr>
             <tr>
-              <td><strong>৪৯তম</strong></td><td class="has-q-td">১টি</td>
-              <td><strong>৪৩তম</strong></td><td>০টি</td>
-              <td><strong>৩৭তম</strong></td><td>০টি</td>
+              <td>৪৯তম</td>
+              <td>১</td>
+              <td>৪৩তম</td>
+              <td>০</td>
+              <td>৩৭তম</td>
+              <td>০</td>
             </tr>
             <tr>
-              <td><strong>৪৮তম</strong></td><td>০টি</td>
-              <td><strong>৪২তম</strong></td><td>০টি</td>
-              <td><strong>৩৬তম</strong></td><td>০টি</td>
+              <td>৪৮তম</td>
+              <td>০</td>
+              <td>৪২তম</td>
+              <td>০</td>
+              <td>৩৬তম</td>
+              <td>০</td>
             </tr>
             <tr>
-              <td><strong>৪৭তম</strong></td><td class="has-q-td">১টি</td>
-              <td><strong>৪১তম</strong></td><td class="has-q-td">২টি</td>
-              <td><strong>৩৫তম</strong></td><td class="has-q-td">১টি</td>
+              <td>৪৭তম</td>
+              <td>১</td>
+              <td>৪১তম</td>
+              <td>২</td>
+              <td>৩৫তম</td>
+              <td>১</td>
             </tr>
             <tr>
-              <td><strong>৪৬তম</strong></td><td class="has-q-td">১টি</td>
-              <td><strong>৪০তম</strong></td><td>০টি</td>
-              <td><strong>১০ম-৩৪তম</strong></td><td class="has-q-td">৩টি</td>
+              <td>৪৬তম</td>
+              <td>১</td>
+              <td>৪০তম</td>
+              <td>০</td>
+              <td>১০ম-৩৪তম</td>
+              <td>৩</td>
             </tr>
             <tr>
-              <td><strong>৪৫তম</strong></td><td class="has-q-td">১টি</td>
-              <td><strong>৩৯তম</strong></td><td class="has-q-td">১টি</td>
-              <td><strong>মোট প্রশ্ন</strong></td><td class="has-q-td"><strong>১৩টি</strong></td>
+              <td>৪৫তম</td>
+              <td>১</td>
+              <td>৩৯তম</td>
+              <td>১</td>
+              <td colspan="2" style="background:var(--table-header-bg); font-weight:bold;">মোট = ৯টি</td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <!-- PRESENTATION 1: NATO MASTER PROFILE -->
-    <section>
-      <div class="section-title-wrap">
-        <h2 class="section-title">১. ন্যাটো (NATO) পূর্ণাঙ্গ কৌশলগত পরিচিতি ও তথ্যকণিকা</h2>
-        <span class="card-subtext">বিসিএস প্রিলিমিনারি স্পেশাল সামারি</span>
-      </div>
+    <!-- Score Bar -->
+    <div class="score-bar">
+      <span class="score-badge" id="scoreDisplay">🏆 সঠিক উত্তর: ০ / ৯</span>
+      <button class="reset-btn" onclick="resetQuiz()">🔄 পুনরায় শুরু করুন</button>
+    </div>
 
-      <div class="infographic-card">
-        <div class="data-table-wrapper">
-          <table class="pro-table">
-            <thead>
-              <tr>
-                <th>বিষয় / সূচক</th>
-                <th>প্রামাণ্য তথ্য ও বিবরণ</th>
-                <th>কৌশলগত গুরুত্ব ও প্রেক্ষাপট</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>পূর্ণরূপ ও প্রকৃতি</strong></td>
-                <td>North Atlantic Treaty Organization (নর্থ আটলান্টিক ট্রিটি অর্গানাইজেশন)</td>
-                <td><span class="pill-tag pill-gold">সামরিক প্রতিরক্ষা জোট</span> দ্বিতীয় বিশ্বযুদ্ধোত্তর সোভিয়েত সম্প্রসারণ রুখতে গঠিত।</td>
-              </tr>
-              <tr>
-                <td><strong>প্রতিষ্ঠার তারিখ ও চুক্তি</strong></td>
-                <td>৪ এপ্রিল, ১৯৪৯ (ওয়াশিংটন চুক্তি / উত্তর আটলান্টিক চুক্তি)</td>
-                <td>ওয়াশিংটন ডি.সি.-তে ১২টি প্রতিষ্ঠাতা সদস্য রাষ্ট্র কর্তৃক স্বাক্ষরিত হয়।</td>
-              </tr>
-              <tr>
-                <td><strong>সদর দপ্তর</strong></td>
-                <td>ব্রাসেলস, বেলজিয়াম</td>
-                <td>পূর্ববর্তী সদর দপ্তর ছিল যথাক্রমে লন্ডন (১৯৪৯–১৯৫২) এবং প্যারিস (১৯৫২–১৯৬৭)।</td>
-              </tr>
-              <tr>
-                <td><strong>মোট সদস্য সংখ্যা</strong></td>
-                <td>৩২টি রাষ্ট্র (সর্বশেষ ৩২তম: সুইডেন, ৭ মার্চ ২০২৪)</td>
-                <td>৩১তম সদস্য ফিনল্যান্ড (৪ এপ্রিল ২০২৩) এবং ৩০তম উত্তর মেসিডোনিয়া (২০২০)।</td>
-              </tr>
-              <tr>
-                <td><strong>মুসলিম সদস্য রাষ্ট্র</strong></td>
-                <td>২টি (তুরস্ক ও আলবেনিয়া)</td>
-                <td>তুরস্ক ১৯৫২ সালে এবং আলবেনিয়া ২০০৯ সালে ন্যাটোতে আনুষ্ঠানিকভাবে যোগ দেয়।</td>
-              </tr>
-              <tr>
-                <td><strong>বর্তমান মহাসচিব</strong></td>
-                <td>মার্ক রুট্টে (Mark Rutte - নেদারল্যান্ডস)</td>
-                <td>২০২৪ সালের ১ অক্টোবর থেকে দায়িত্বপ্রাপ্ত (পূর্বসূরি: জেনস স্টলটেনবার্গ)।</td>
-              </tr>
-              <tr>
-                <td><strong>মূল দর্শন / নীতি</strong></td>
-                <td>আর্টিকেল-৫ (সম্মিলিত প্রতিরক্ষা - "An attack on one is an attack on all")</td>
-                <td>ইতিহাসে মাত্র একবার নাইন-ইলেভেন হামলার পর ২০০১ সালে কার্যকর করা হয়।</td>
-              </tr>
-              <tr>
-                <td><strong>সাম্প্রতিক ও ভবিষ্যৎ সম্মেলন</strong></td>
-                <td>২০২৫: হেগ (নেদারল্যান্ডস) | ২০২৬: আঙ্কারা (তুরস্ক)</td>
-                <td>প্রতি বছর রাষ্ট্রপ্রধানদের শীর্ষ বৈঠকে যৌথ কৌশলগত প্রতিরক্ষা নীতি নির্ধারিত হয়।</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRESENTATION 2: NATO 14 ARTICLES SUMMARY -->
-    <section>
-      <div class="section-title-wrap">
-        <h2 class="section-title">২. ন্যাটো সনদের মূল ধারাসমূহ (Articles Matrix)</h2>
-        <span class="card-subtext">ওয়াশিংটন চুক্তি ১৯৪৯-এর গঠনতন্ত্র</span>
-      </div>
-
-      <div class="cards-grid">
-        <div class="grid-box">
-          <div class="grid-box-title">
-            <span>আর্টিকেল ১–৩</span>
-            <span class="pill-tag pill-blue">শান্তি ও প্রস্তুতি</span>
+    <!-- Questions Container -->
+    <main id="questionsContainer">
+      <!-- Question 1 -->
+      <article class="q-card" id="q1">
+        <div class="q-header">
+          <span class="q-num">১.</span>
+          <div class="q-text-group">
+            <h2 class="q-title">কোন দুটি দেশ সম্প্রতি ন্যাটোতে (NATO) যোগদান করেছে, যা ইউরোপের নিরাপত্তা পরিস্থিতিকে নতুন রূপ প্রদান করেছে?</h2>
+            <div class="q-meta">
+              <span class="exam-tag">৫০তম বিসিএস</span>
+            </div>
           </div>
-          <p class="grid-box-content">
-            আন্তর্জাতিক বিরোধের শান্তিপূর্ণ মীমাংসা, বন্ধুভাবাপন্ন সম্পর্ক বজায় রাখা এবং সামরিক সক্ষমতা নিরবচ্ছিন্ন বৃদ্ধির অঙ্গীকার।
-          </p>
         </div>
 
-        <div class="grid-box">
-          <div class="grid-box-title">
-            <span>আর্টিকেল ৪</span>
-            <span class="pill-tag pill-gold">পরামর্শ সভা</span>
-          </div>
-          <p class="grid-box-content">
-            যেকোনো সদস্যের আঞ্চলিক অখণ্ডতা, রাজনৈতিক স্বাধীনতা বা নিরাপত্তা বিঘ্নিত হলে সব সদস্য যৌথ জরুরি পরামর্শে বসবে।
-          </p>
+        <div class="opt-grid">
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-q1')">
+          <span class="opt-letter">ক</span>
+          <span class="opt-text">অস্ট্রেলিয়া এবং সুইজারল্যান্ড</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-q1')">
+          <span class="opt-letter">খ</span>
+          <span class="opt-text">ইউক্রেন এবং জর্জিয়া</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-q1')">
+          <span class="opt-letter">গ</span>
+          <span class="opt-text">সুইডেন এবং ফিনল্যান্ড</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-q1')">
+          <span class="opt-letter">ঘ</span>
+          <span class="opt-text">মলদোভা এবং বেলারুশ</span>
+        </button>
         </div>
 
-        <div class="grid-box">
-          <div class="grid-box-title">
-            <span>আর্টিকেল ৫</span>
-            <span class="pill-tag pill-gold">সম্মিলিত প্রতিরক্ষা</span>
-          </div>
-          <p class="grid-box-content">
-            ন্যাটোর প্রধান ভিত্তি। এক সদস্যের ওপর আক্রমণ মানে সবার ওপর আক্রমণ। নাইন-ইলেভেন হামলার পর আফগানিস্তান অভিযানে এটি কার্যকর হয়।
-          </p>
+        <div class="card-actions">
+          <button type="button" class="action-btn toggle-exp-btn" onclick="toggleExp('exp-q1')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
         </div>
 
-        <div class="grid-box">
-          <div class="grid-box-title">
-            <span>আর্টিকেল ১০</span>
-            <span class="pill-tag pill-blue">উন্মুক্ত দুয়ার (Open Door)</span>
-          </div>
-          <p class="grid-box-content">
-            উত্তর আটলান্টিক অঞ্চলের নিরাপত্তা বৃদ্ধিতে সক্ষম যেকোনো ইউরোপীয় গণতান্ত্রিক রাষ্ট্রের জন্য ন্যাটোর সদস্যপদ উন্মুক্ত রাখা।
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRESENTATION 3: AUKUS & OTHER ALLIANCES -->
-    <section>
-      <div class="section-title-wrap">
-        <h2 class="section-title">৩. অকাস (AUKUS) ও বৈশ্বিক সামরিক জোটসমূহের তুলনামূলক রূপরেখা</h2>
-        <span class="card-subtext">সমকালীন ও ঐতিহাসিক নিরাপত্তা মৈত্রী</span>
-      </div>
-
-      <div class="infographic-card">
-        <div class="data-table-wrapper">
-          <table class="pro-table">
-            <thead>
-              <tr>
-                <th>জোটের নাম</th>
-                <th>সদস্য রাষ্ট্রসমূহ</th>
-                <th>প্রতিষ্ঠার সাল</th>
-                <th>মূল লক্ষ্য ও বর্তমান অবস্থা</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>অকাস (AUKUS)</strong></td>
-                <td>অস্ট্রেলিয়া, যুক্তরাজ্য, যুক্তরাষ্ট্র</td>
-                <td>১৫ সেপ্টেম্বর, ২০২১</td>
-                <td><span class="pill-tag pill-gold">ইন্দো-প্যাসিফিক প্রতিরক্ষা</span> অস্ট্রেলিয়াকে পারমাণবিক সাবমেরিন প্রযুক্তি প্রদান ও চীনের প্রভাব মোকাবিলা।</td>
-              </tr>
-              <tr>
-                <td><strong>কোয়াড (QUAD)</strong></td>
-                <td>যুক্তরাষ্ট্র, জাপান, ভারত, অস্ট্রেলিয়া</td>
-                <td>২০০৭ (পুনরুজ্জীবন ২০১৭)</td>
-                <td><span class="pill-tag pill-blue">মুক্ত ইন্দো-প্যাসিফিক</span> সামুদ্রিক নিরাপত্তা ও আন্তর্জাতিক আইনের শাসন নিশ্চিত করা।</td>
-              </tr>
-              <tr>
-                <td><strong>সিএসটিও (CSTO)</strong></td>
-                <td>রাশিয়া, বেলারুশ, কাজাখস্তান, কিরগিজস্তান, তাজিকিস্তান, আর্মেনিয়া</td>
-                <td>১৯৯২ (কার্যকর ২০০২)</td>
-                <td><span class="pill-tag pill-gold">পোস্ট-সোভিয়েত জোট</span> রাশিয়ার নেতৃত্বাধীন যৌথ সামরিক প্রতিরক্ষা ব্যবস্থা।</td>
-              </tr>
-              <tr>
-                <td><strong>ওয়ারশ প্যাক্ট (Warsaw Pact)</strong></td>
-                <td>সোভিয়েত ইউনিয়ন ও পূর্ব ইউরোপের সমাজতান্ত্রিক দেশসমূহ</td>
-                <td>১৯৫৫ (বিলুপ্ত ১৯৯১)</td>
-                <td><span class="pill-tag pill-blue">বিলুপ্ত ঐতিহাসিক জোট</span> ন্যাটোর বিপরীতে গঠিত প্রধান সামরিক মৈত্রী।</td>
-              </tr>
-              <tr>
-                <td><strong>সিয়াটো (SEATO)</strong></td>
-                <td>যুক্তরাষ্ট্র, যুক্তরাজ্য, ফ্রান্স, অস্ট্রেলিয়া, নিউজিল্যান্ড, পাকিস্তান, ফিলিপাইন, থাইল্যান্ড</td>
-                <td>১৯৫৪ (বিলুপ্ত ১৯৭৭)</td>
-                <td><span class="pill-tag pill-gold">দক্ষিণ-পূর্ব এশিয়া</span> সমাজতন্ত্র রোধে গঠিত ম্যানিলা চুক্তিভিত্তিক সামরিক জোট।</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- QUIZ ENGINE -->
-    <section id="mcq-practice-section">
-      <div class="section-title-wrap">
-        <h2 class="section-title">অনুশীলনী ও বিসিএস প্রশ্ন সমাধান (১–৯)</h2>
-        <span class="card-subtext">তাৎক্ষণিক উত্তর ফিডব্যাক ও ব্যাখ্যা</span>
-      </div>
-
-      <div class="quiz-stats-header">
-        <div class="score-badge-wrap">
-          <div class="score-stat">
-            <span class="stat-label">স্কোর</span>
-            <span class="stat-val" id="score-counter">০ / ৯</span>
-          </div>
-          <div class="score-stat">
-            <span class="stat-label">সঠিকতার হার</span>
-            <span class="stat-val" id="accuracy-counter">০%</span>
-          </div>
-          <div class="score-stat">
-            <span class="stat-label">উত্তরিত প্রশ্ন</span>
-            <span class="stat-val" id="answered-counter">০ সম্পন্ন</span>
+        <div class="explanation-drawer" id="exp-q1">
+          <div class="exp-box">
+<p><strong>উত্তর:</strong> গ (সুইডেন এবং ফিনল্যান্ড)</p>
+<p><strong>ব্যাখ্যা:</strong> সম্প্রতি ফিনল্যান্ড (৪ এপ্রিল, ২০২৩) এবং (সর্বশেষ) সুইডেন (৭ মার্চ, ২০২৪) আনুষ্ঠানিকভাবে ন্যাটোতে যোগদান করেছে, যা ইউরোপের নিরাপত্তা পরিস্থিতিকে নতুন রূপ প্রদান করেছে।</p>
+<p><strong>ন্যাটোর সদস্য দেশ:</strong></p>
+<ul>
+  <li><strong>ন্যাটোর প্রতিষ্ঠাতা সদস্য:</strong> ১২টি।</li>
+  <li><strong>বর্তমান সদস্য:</strong> ৩২টি (বেলজিয়াম, কানাডা, ডেনমার্ক, ফ্রান্স, আইসল্যান্ড, ইতালি, লুক্সেমবার্গ, নেদারল্যান্ডস, নরওয়ে, পর্তুগাল, যুক্তরাজ্য, যুক্তরাষ্ট্র, গ্রীস, তুরস্ক, জার্মানি, স্পেন, চেক প্রজাতন্ত্র, হাঙ্গেরি, পোল্যান্ড, বুলগেরিয়া, এস্তোনিয়া, লাটভিয়া, লিথুয়ানিয়া, রোমানিয়া, স্লোভাকিয়া, স্লোভেনিয়া, আলবেনিয়া, ক্রোয়েশিয়া, মন্টিনিগ্রো, উত্তর মেসিডোনিয়া, ফিনল্যান্ড, সুইডেন)।</li>
+</ul>
+<p><strong>NATO :</strong> NATO-এর পূর্ণরূপ: North Atlantic Treaty Organisation (উত্তর আটলান্টিক নিরাপত্তা জোট)</p>
+<p>দ্বিতীয় বিশ্বযুদ্ধের পর ৪ এপ্রিল, ১৯৪৯ উত্তর আটলান্টিক চুক্তির মাধ্যমে NATO গঠিত হয়।</p>
+<ul>
+  <li><strong>সদর দপ্তর:</strong> ব্রাসেলস, বেলজিয়াম।</li>
+  <li><strong>বর্তমান মহাসচিব:</strong> মার্ক রুত্তে।</li>
+</ul>
+<p>দাপ্তরিকভাবে ন্যাটো গঠনের উদ্দেশ্য হচ্ছে 'উত্তর আটলান্টিক অঞ্চলে স্থিতিশীলতা ও কল্যাণ' নিশ্চিত করে সদস্য রাষ্ট্রগুলোর 'স্বাধীনতা, অভিন্ন ঐতিহ্য এবং সভ্যতার' রক্ষাকবচ হিসেবে কাজ করা।</p>
+<p>ন্যাটো প্রতিষ্ঠার চুক্তিটি ১৪টি ধারার। ন্যাটোর গঠনতন্ত্র ও চুক্তিগুলো শুধু সদস্য দেশগুলোর ক্ষেত্রেই প্রযোজ্য।</p>
+<p>ন্যাটোর মূল ভিত্তি ধরা হয় 'অনুচ্ছেদ ৫'-কে। অনুচ্ছেদ-৫ এ বলা হয়েছে- জোটভুক্ত কোনো দেশ যদি বিদেশি শক্তির দ্বারা আক্রমণের শিকার হয়, তাহলে জোটের সব সদস্য দেশ একযোগে তা প্রতিহত করবে। অর্থাৎ সদস্য দেশগুলো সম্মিলিতভাবে একে অপরকে সুরক্ষা দেবে।</p>
+<p>ইউরোপের বাইরে NATO'র প্রথম সামরিক অভিযান আফগানিস্তানে ছিল।</p>
+<p>২০২৫ সালের ২৪-২৫ জুন নেদারল্যান্ডসের হেগ শহরে ন্যাটো শীর্ষ সম্মেলন অনুষ্ঠিত হয়েছে।</p>
+<p>২০২৬ সালের জুলাইতে তুরস্কের রাজধানী আঙ্কারায় ন্যাটোর শীর্ষ সম্মেলন অনুষ্ঠিত হবে।</p>
+<div class="exp-source">উৎস: NATO ওয়েবসাইট।</div>
           </div>
         </div>
-        <div>
-          <button class="ctrl-btn" id="btn-reset-quiz">পুনরায় শুরু করুন</button>
+      </article>
+
+      <!-- Question 2 -->
+      <article class="q-card" id="q2">
+        <div class="q-header">
+          <span class="q-num">২.</span>
+          <div class="q-text-group">
+            <h2 class="q-title">মার্কিন যুক্তরাষ্ট্রের নেতৃত্বাধীন 'অ্যাকাস' (AUKUS) চুক্তির প্রাথমিক লক্ষ্য কী?</h2>
+            <div class="q-meta">
+              <span class="exam-tag">৫০তম বিসিএস</span>
+            </div>
+          </div>
         </div>
+
+        <div class="opt-grid">
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-q2')">
+          <span class="opt-letter">ক</span>
+          <span class="opt-text">অর্থনৈতিক সহযোগিতা</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, true, 'খ', 'exp-q2')">
+          <span class="opt-letter">খ</span>
+          <span class="opt-text">সামরিক সহযোগিতা</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-q2')">
+          <span class="opt-letter">গ</span>
+          <span class="opt-text">পরিবেশ সুরক্ষা</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-q2')">
+          <span class="opt-letter">ঘ</span>
+          <span class="opt-text">মহাকাশ গবেষণা সহযোগিতা</span>
+        </button>
+        </div>
+
+        <div class="card-actions">
+          <button type="button" class="action-btn toggle-exp-btn" onclick="toggleExp('exp-q2')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+
+        <div class="explanation-drawer" id="exp-q2">
+          <div class="exp-box">
+<p><strong>উত্তর:</strong> খ (সামরিক সহযোগিতা)</p>
+<p><strong>ব্যাখ্যা:</strong> মার্কিন যুক্তরাষ্ট্রের নেতৃত্বাধীন 'অ্যাকাস' (AUKUS) চুক্তির প্রাথমিক লক্ষ্য সামরিক সহযোগিতা।</p>
+<p><strong>AUKUS চুক্তি :</strong> AUKUS চুক্তি মার্কিন যুক্তরাষ্ট্র, যুক্তরাজ্য এবং অস্ট্রেলিয়ার মধ্যে একটি ত্রিদেশীয় নিরাপত্তা ও প্রতিরক্ষা জোট। এই চুক্তির প্রাথমিক লক্ষ্য হলো ইন্দো-প্যাসিফিক অঞ্চলে, বিশেষ করে দক্ষিণ চীন সাগরে চীনের ক্রমবর্ধমান সামরিক প্রভাব ও উচ্চাকাঙ্ক্ষা প্রতিহত করা।</p>
+<p>যুক্তরাষ্ট্রের প্রেসিডেন্ট জো বাইডেন, ব্রিটিশ প্রধানমন্ত্রী বরিস জনসন এবং অস্ট্রেলিয়ার প্রধানমন্ত্রী স্কট মরিসন অকাস গঠনের কথা ঘোষণা করেন। চুক্তিটি কার্যকর হয়: ১৫ সেপ্টেম্বর, ২০২১।</p>
+<p><strong>উদ্দেশ্য:</strong> আনুষ্ঠানিকভাবে Aukus গঠনের উদ্দেশ্য হলো ইন্দো-প্যাসিফিক অঞ্চলে সমন্বিত নিরাপত্তা ও উন্নতি নিশ্চিতের পাশাপাশি মূল্যবোধের সুরক্ষা। অকাস চুক্তির আওতায় যুক্তরাজ্য ও যুক্তরাষ্ট্র অস্ট্রেলিয়াকে পরমাণু চালিত সাবমেরিন নির্মাণের প্রযুক্তি দিয়ে সহযোগিতা করবে।</p>
+<p><strong>লক্ষ্য:</strong> মূলত বিরোধপূর্ণ দক্ষিণ চীন সাগরে চীনের প্রভাব মোকাবেলার জন্যই এই জোট গঠন করা হয়েছে। এই অঞ্চলে বহু বছর ধরেই সংকট বিরাজ করছে এবং এর জের ধরেই বিরোধপূর্ণ দক্ষিণ চীন সাগরে চীনের ক্রমবর্ধমান প্রভাব ঠেকানোই প্রধান লক্ষ্য। এছাড়াও জোটটি পারমাণবিক প্রযুক্তি, কৃত্রিম বুদ্ধিমত্তা, কোয়ান্টাম কম্পিউটিং, সাইবার অপারেশন এবং ক্ষেপণাস্ত্র প্রযুক্তি সম্পর্কিত প্রযুক্তির গবেষণা এবং প্রয়োগের সমন্বয় সাধন করে।</p>
+<p>AUKUS চুক্তি দুটি প্রধান স্তম্ভ বা 'পিলার'-এর ওপর ভিত্তি করে গঠিত। প্রথম পিলারের অধীনে পারমাণবিক শক্তিচালিত আক্রমণাত্মক সাবমেরিন সরবরাহ ও সংশ্লিষ্ট প্রযুক্তিগত সহযোগিতা অন্তর্ভুক্ত রয়েছে।</p>
+<p>দ্বিতীয় পিলারে মিত্র দেশগুলোর মধ্যে উন্নত প্রতিরক্ষা সক্ষমতা-যেমন দূরপাল্লার হাইপারসনিক ক্ষেপণাস্ত্র, পানির নিচের রোবোটিক প্রযুক্তি এবং কৃত্রিম বুদ্ধিমত্তা (AI)-ক্ষেত্রে সমন্বিত গবেষণা ও দক্ষতা বিনিময়ের ওপর গুরুত্ব দেওয়া হয়েছে।</p>
+<p>উল্লেখ্য, তিন পক্ষের নির্ধারিত সময়সীমা অনুসারে, ২০২৭ সাল থেকে যুক্তরাজ্য ও মার্কিন যুক্তরাষ্ট্রের সাবমেরিনগুলো অস্থায়ীভাবে অস্ট্রেলিয়ায় স্থাপিত হবে।</p>
+<div class="exp-source">উৎস: U.S. Department of Defense (.gov), Britannica.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 3 -->
+      <article class="q-card" id="q3">
+        <div class="q-header">
+          <span class="q-num">৩.</span>
+          <div class="q-text-group">
+            <h2 class="q-title">নর্থ আটলান্টিক ট্রিটি অর্গানাইজেশন বা সামরিক জোট কত সালে স্বাক্ষরিত হয়?</h2>
+            <div class="q-meta">
+              <span class="exam-tag">৪৯তম বিসিএস</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="opt-grid">
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-q3')">
+          <span class="opt-letter">ক</span>
+          <span class="opt-text">১৯৩৯</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-q3')">
+          <span class="opt-letter">খ</span>
+          <span class="opt-text">১৯৪৩</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-q3')">
+          <span class="opt-letter">গ</span>
+          <span class="opt-text">১৯৪৯</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-q3')">
+          <span class="opt-letter">ঘ</span>
+          <span class="opt-text">১৯৬০</span>
+        </button>
+        </div>
+
+        <div class="card-actions">
+          <button type="button" class="action-btn toggle-exp-btn" onclick="toggleExp('exp-q3')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+
+        <div class="explanation-drawer" id="exp-q3">
+          <div class="exp-box">
+<p><strong>উত্তর:</strong> গ (১৯৪৯)</p>
+<p><strong>ব্যাখ্যা:</strong> ১৯৪৯ সালে নর্থ আটলান্টিক ট্রিটি অর্গানাইজেশন (NATO) বা উত্তর আটলান্টিক নিরাপত্তা জোট স্বাক্ষরিত হয়। এটি দ্বিতীয় বিশ্বযুদ্ধের পরবর্তী শীতল যুদ্ধের প্রেক্ষাপটে সোভিয়েত ইউনিয়নের সম্ভাব্য আগ্রাসন থেকে পশ্চিম ইউরোপ এবং উত্তর আমেরিকার নিরাপত্তা নিশ্চিত করার উদ্দেশ্যে গঠিত একটি যৌথ সামরিক জোট। ১৯৪৯ সালের ৪ এপ্রিল ওয়াশিংটন ডি.সি.-তে প্রতিষ্ঠাতা ১২টি সদস্য দেশ (যুক্তরাষ্ট্র, যুক্তরাজ্য, ফ্রান্স, কানাডা, বেলজিয়াম, ডেনমার্ক, আইসল্যান্ড, ইতালি, লুক্সেমবার্গ, নেদারল্যান্ডস, নরওয়ে, পর্তুগাল) ১৪টি ধারা সম্বলিত চুক্তিটি স্বাক্ষর করে। চুক্তির মূল নীতি "একের উপর আক্রমণ সকলের উপর আক্রমণ" (Article 5)। বর্তমানে এর সদস্য সংখ্যা ৩২টি, সদর দপ্তর ব্রাসেলস (বেলজিয়াম) এবং মহাসচিব মার্ক রুত্তে (২০২৪ থেকে)। মুসলিম সংখ্যাগরিষ্ঠ আলবেনিয়া ও তুরস্ক এর সদস্যদেশ।</p>
+<p>NATO-এর গঠন মার্শাল প্ল্যানের সাথে যুক্ত ইউরোপীয় পুনর্গঠন এবং সোভিয়েত প্রভাব রোধে যুক্তরাষ্ট্রের নেতৃত্বে ঘটে। এটি শীতল যুদ্ধের সময় ওয়ারশ প্যাক্টের বিপরীতে এবং ১৯৯১ সালে সোভিয়েত পতনের পরও সন্ত্রাসবাদ, সাইবার হুমকি এবং রাশিয়ান আগ্রাসন (যেমন- ইউক্রেন যুদ্ধ) মোকাবিলায় সক্রিয়। চুক্তির মাধ্যমে সদস্যরা জিডিপির ২% সামরিক খরচে ব্যয় করতে অঙ্গীকারবদ্ধ।</p>
+<div class="exp-source">উৎস: NATO ওয়েবসাইট।</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 4 -->
+      <article class="q-card" id="q4">
+        <div class="q-header">
+          <span class="q-num">৪.</span>
+          <div class="q-text-group">
+            <h2 class="q-title">ন্যাটো (NATO) চার্টারের কোন ধারায় সম্মিলিত প্রতিরক্ষার কথা উল্লেখ আছে?</h2>
+            <div class="q-meta">
+              <span class="exam-tag">৪৭তম বিসিএস/৪৬তম বিসিএস</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="opt-grid">
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-q4')">
+          <span class="opt-letter">ক</span>
+          <span class="opt-text">আর্টিকেল-২</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-q4')">
+          <span class="opt-letter">খ</span>
+          <span class="opt-text">আর্টিকেল-৩</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-q4')">
+          <span class="opt-letter">গ</span>
+          <span class="opt-text">আর্টিকেল-৫</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-q4')">
+          <span class="opt-letter">ঘ</span>
+          <span class="opt-text">আর্টিকেল-৬</span>
+        </button>
+        </div>
+
+        <div class="card-actions">
+          <button type="button" class="action-btn toggle-exp-btn" onclick="toggleExp('exp-q4')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+
+        <div class="explanation-drawer" id="exp-q4">
+          <div class="exp-box">
+<p><strong>উত্তর:</strong> গ (আর্টিকেল-৫)</p>
+<p><strong>ব্যাখ্যা:</strong> ন্যাটো (NATO) চার্টারের আর্টিকেল-৫-এ সম্মিলিত প্রতিরক্ষার কথা উল্লেখ আছে।</p>
+<p>• <strong>অনুচ্ছেদ ৫: সম্মিলিত প্রতিরক্ষা NATO-র অনুচ্ছেদ ৫-</strong> “যদি একটি ন্যাটো মিত্র সশস্ত্র আক্রমণের শিকার হয়, তবে জোটের প্রতিটি সদস্য এই সহিংসতার কাজটিকে সমস্ত সদস্যদের বিরুদ্ধে সশস্ত্র আক্রমণ হিসাবে বিবেচনা করবে এবং মিত্রদের আক্রমণে সহায়তা করার জন্য প্রয়োজনীয় ব্যবস্থা গ্রহণ করবে।” অর্থাৎ সদস্যদেশগুলো সম্মিলিতভাবে একে অপরকে সুরক্ষা দেবে। ন্যাটোর মূল ভিত্তি ধরা হয় এ ধারাকে।</p>
+<p>উল্লেখ্য, ন্যাটোর ইতিহাসে একবার মাত্র ন্যাটোর আর্টিকেল-৫ কার্যকর করা হয়েছে। নাইন ইলেভেনে টুইন টাওয়ার হামলার পর ২০০১ সালে এই আর্টিকেল অনুযায়ী পদক্ষেপ নেওয়া হয়। এটির ভিত্তিতেই সদস্য রাষ্ট্রগুলোকে সঙ্গে নিয়ে আফগানিস্তানে হামলা চালায় যুক্তরাষ্ট্র।</p>
+<p><strong>ন্যাটোর অনুচ্ছেদ:</strong> ন্যাটো প্রতিষ্ঠার চুক্তিটি ছোট। মাত্র ১৪টি ধারার। এগুলো হলো:</p>
+<ul>
+  <li>অনুচ্ছেদ ১: শান্তিপূর্ণ সমাধান,</li>
+  <li>অনুচ্ছেদ ২: বন্ধুত্বপূর্ণ সম্পর্ক,</li>
+  <li>অনুচ্ছেদ ৩: প্রতিরক্ষা সক্ষমতা,</li>
+  <li>অনুচ্ছেদ ৪: পরামর্শ,</li>
+  <li>অনুচ্ছেদ ৫: সম্মিলিত প্রতিরক্ষা,</li>
+  <li>অনুচ্ছেদ ৬: আক্রমণের সংজ্ঞা,</li>
+  <li>অনুচ্ছেদ ৭: জাতিসংঘ সনদের বাধ্যবাধকতা,</li>
+  <li>অনুচ্ছেদ ৮: অ-দ্বন্দ্বমূলক সম্পৃক্ততা,</li>
+  <li>অনুচ্ছেদ ৯: বাস্তবায়ন পরিষদ,</li>
+  <li>অনুচ্ছেদ ১০: অতিরিক্ত পক্ষসমূহ,</li>
+  <li>অনুচ্ছেদ ১১: চুক্তি অনুমোদন এবং প্রয়োগ,</li>
+  <li>অনুচ্ছেদ ১২: চুক্তি পর্যালোচনা,</li>
+  <li>অনুচ্ছেদ ১৩: জোটের সদস্যতা ত্যাগ,</li>
+  <li>অনুচ্ছেদ ১৪: চুক্তির অন্যান্য সংস্করণের গ্রহণযোগ্যতা।</li>
+</ul>
+<div class="exp-source">উৎস: NATO ওয়েবসাইট।</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 5 -->
+      <article class="q-card" id="q5">
+        <div class="q-header">
+          <span class="q-num">৫.</span>
+          <div class="q-text-group">
+            <h2 class="q-title">বাংলাদেশ সদস্য নয় :</h2>
+            <div class="q-meta">
+              <span class="exam-tag">৪৫তম বিসিএস</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="opt-grid">
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-q5')">
+          <span class="opt-letter">ক</span>
+          <span class="opt-text">ILO</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-q5')">
+          <span class="opt-letter">খ</span>
+          <span class="opt-text">SAARC</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, true, 'গ', 'exp-q5')">
+          <span class="opt-letter">গ</span>
+          <span class="opt-text">NATO</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'গ', 'exp-q5')">
+          <span class="opt-letter">ঘ</span>
+          <span class="opt-text">BIMSTEC</span>
+        </button>
+        </div>
+
+        <div class="card-actions">
+          <button type="button" class="action-btn toggle-exp-btn" onclick="toggleExp('exp-q5')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+
+        <div class="explanation-drawer" id="exp-q5">
+          <div class="exp-box">
+<p><strong>উত্তর:</strong> গ (NATO)</p>
+<p><strong>ব্যাখ্যা:</strong> প্রশ্নে প্রদত্ত অপশনগুলোর মধ্যে - বাংলাদেশ ন্যাটোর সদস্য নয়।</p>
+<p><strong>অন্যদিকে, বাংলাদেশ:</strong></p>
+<ul>
+  <li>২২ জুন, ১৯৭২ সালে ILO (International Labour Organization) এর সদস্য হয়।</li>
+  <li>৮ ডিসেম্বর, ১৯৮৫ সালে SAARC (South Asian Association for Regional Cooperation) প্রতিষ্ঠা পায়। বাংলাদেশ এর প্রতিষ্ঠাকালীন সদস্য।</li>
+  <li>৬ জুন, ১৯৯৭ সালে BIMSTEC (Bay of Bengal Initiative for Multi-Sectoral Technical and Economic Cooperation) প্রতিষ্ঠা পায়। বাংলাদেশ এর প্রতিষ্ঠাকালীন সদস্য।</li>
+</ul>
+<p><strong>ন্যাটো সম্পর্কিত গুরুত্বপূর্ণ তথ্য-</strong></p>
+<div class="bcs-analysis-box" style="margin: 1rem 0;">
+  <table class="analysis-table" style="font-size:0.9rem;">
+    <thead>
+      <tr>
+        <th colspan="2" style="text-align:center; font-size:1rem;">ন্যাটো (NATO : North Atlantic Treaty Organization)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="2" style="text-align:center; background:var(--bg-alt);">দ্বিতীয় বিশ্বযুদ্ধ-পরবর্তী সময়ে সোভিয়েত ইউনিয়নের প্রভাব প্রতিহত করার জন্য গঠিত সামরিক জোট।</td>
+      </tr>
+      <tr>
+        <td><strong>চুক্তির নাম</strong></td>
+        <td>উত্তর আটলান্টিক চুক্তি, যা Washington Treaty নামেও পরিচিত।</td>
+      </tr>
+      <tr>
+        <td><strong> প্রতিষ্ঠাকাল</strong></td>
+        <td>৪ এপ্রিল, ১৯৪৯ (ওয়াশিংটন ডিসি, যুক্তরাষ্ট্র)।</td>
+      </tr>
+      <tr>
+        <td><strong>উদ্যোক্তা</strong></td>
+        <td>যুক্তরাষ্ট্র।</td>
+      </tr>
+      <tr>
+        <td><strong>সদর দপ্তর</strong></td>
+        <td>ব্রাসেলস, বেলজিয়াম। [পূর্বের সদর দপ্তর - লন্ডন ও প্যারিস]</td>
+      </tr>
+      <tr>
+        <td><strong>প্রতিষ্ঠাকালীন সদস্য</strong></td>
+        <td>১২টি</td>
+      </tr>
+      <tr>
+        <td><strong>বর্তমান সদস্য</strong></td>
+        <td>৩২টি (সর্বশেষ- সুইডেন)</td>
+      </tr>
+      <tr>
+        <td><strong>ন্যাটোভুক্ত মুসলিম দেশ</strong></td>
+        <td>২টি (তুরস্ক ও আলবেনিয়া)</td>
+      </tr>
+      <tr>
+        <td><strong>বর্তমান মহাসচিব</strong></td>
+        <td>মার্ক রুত্তে (নেদারল্যান্ডস)।</td>
+      </tr>
+      <tr>
+        <td><strong>সর্বশেষ সম্মেলন</strong></td>
+        <td>হেগ, নেদারল্যান্ড (৩৫তম) (২০২৫)</td>
+      </tr>
+      <tr>
+        <td><strong>পরবর্তী সম্মেলন</strong></td>
+        <td>আঙ্কারা, তুরস্ক (৩৬তম)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 6 -->
+      <article class="q-card" id="q6">
+        <div class="q-header">
+          <span class="q-num">৬.</span>
+          <div class="q-text-group">
+            <h2 class="q-title">কোন মুসলিম দেশ সামরিক জোট ন্যাটোর সদস্য?</h2>
+            <div class="q-meta">
+              <span class="exam-tag">৪১তম বিসিএস</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="opt-grid">
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-q6')">
+          <span class="opt-letter">ক</span>
+          <span class="opt-text">সৌদি আরব</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-q6')">
+          <span class="opt-letter">খ</span>
+          <span class="opt-text">মালয়েশিয়া</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'ঘ', 'exp-q6')">
+          <span class="opt-letter">গ</span>
+          <span class="opt-text">পাকিস্তান</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, true, 'ঘ', 'exp-q6')">
+          <span class="opt-letter">ঘ</span>
+          <span class="opt-text">তুরস্ক</span>
+        </button>
+        </div>
+
+        <div class="card-actions">
+          <button type="button" class="action-btn toggle-exp-btn" onclick="toggleExp('exp-q6')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+
+        <div class="explanation-drawer" id="exp-q6">
+          <div class="exp-box">
+<p><strong>উত্তর:</strong> ঘ (তুরস্ক)</p>
+<p><strong>ব্যাখ্যা:</strong> তুরস্ক ও আলবেনিয়া ন্যাটোভুক্ত মুসলিম দেশ।</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 7 -->
+      <article class="q-card" id="q7">
+        <div class="q-header">
+          <span class="q-num">৭.</span>
+          <div class="q-text-group">
+            <h2 class="q-title">নর্থ আটলান্টিক ট্রিটি অর্গানাইজেশন কোন বছর প্রতিষ্ঠিত হয়?</h2>
+            <div class="q-meta">
+              <span class="exam-tag">৪১তম/২১তম বিসিএস</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="opt-grid">
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-q7')">
+          <span class="opt-letter">ক</span>
+          <span class="opt-text">১৯৪৫ সালে</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, true, 'খ', 'exp-q7')">
+          <span class="opt-letter">খ</span>
+          <span class="opt-text">১৯৪৯ সালে</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-q7')">
+          <span class="opt-letter">গ</span>
+          <span class="opt-text">১৯৪৮ সালে</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'খ', 'exp-q7')">
+          <span class="opt-letter">ঘ</span>
+          <span class="opt-text">১৯৫১ সালে</span>
+        </button>
+        </div>
+
+        <div class="card-actions">
+          <button type="button" class="action-btn toggle-exp-btn" onclick="toggleExp('exp-q7')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+
+        <div class="explanation-drawer" id="exp-q7">
+          <div class="exp-box">
+<p><strong>উত্তর:</strong> খ (১৯৪৯ সালে)</p>
+<p><strong>ব্যাখ্যা:</strong> ১৯৪৯ সালের ৪ এপ্রিল, ১২টি দেশের সমন্বয়ে North Atlantic Treaty Organization (NATO) সামরিক জোট গঠিত হয়।</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 8 -->
+      <article class="q-card" id="q8">
+        <div class="q-header">
+          <span class="q-num">৮.</span>
+          <div class="q-text-group">
+            <h2 class="q-title">ন্যাটোর সর্বশেষ সদস্য রাষ্ট্র কোনটি?</h2>
+            <div class="q-meta">
+              <span class="exam-tag">৩৯তম বিসিএস</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="opt-grid">
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'উত্তর: অপশনে সঠিক উত্তর নেই। সাম্প্রতিক তথ্য অনুযায়ী, সুইডেন।', 'exp-q8')">
+          <span class="opt-letter">ক</span>
+          <span class="opt-text">মন্টিনিগ্রো</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'উত্তর: অপশনে সঠিক উত্তর নেই। সাম্প্রতিক তথ্য অনুযায়ী, সুইডেন।', 'exp-q8')">
+          <span class="opt-letter">খ</span>
+          <span class="opt-text">লিথুনিয়া</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'উত্তর: অপশনে সঠিক উত্তর নেই। সাম্প্রতিক তথ্য অনুযায়ী, সুইডেন।', 'exp-q8')">
+          <span class="opt-letter">গ</span>
+          <span class="opt-text">আলবেনিয়া</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'উত্তর: অপশনে সঠিক উত্তর নেই। সাম্প্রতিক তথ্য অনুযায়ী, সুইডেন।', 'exp-q8')">
+          <span class="opt-letter">ঘ</span>
+          <span class="opt-text">ক্রোয়েশিয়া</span>
+        </button>
+        </div>
+
+        <div class="card-actions">
+          <button type="button" class="action-btn toggle-exp-btn" onclick="toggleExp('exp-q8')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+
+        <div class="explanation-drawer" id="exp-q8">
+          <div class="exp-box">
+<p><strong>উত্তর:</strong> অপশনে সঠিক উত্তর নেই। সাম্প্রতিক তথ্য অনুযায়ী, সুইডেন।</p>
+<p><strong>ব্যাখ্যা:</strong> তৎকালীন সঠিক উত্তর ছিল মন্টিনিগ্রো। বর্তমানে (নভেম্বর, ২০২৫) ন্যাটোর সর্বশেষ রাষ্ট্র সুইডেন।</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 9 -->
+      <article class="q-card" id="q9">
+        <div class="q-header">
+          <span class="q-num">৯.</span>
+          <div class="q-text-group">
+            <h2 class="q-title">উত্তর আটলান্টিক চুক্তি সংস্থা গঠিত হয়েছিল-</h2>
+            <div class="q-meta">
+              <span class="exam-tag">১৭তম/১৬তম বিসিএস</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="opt-grid">
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, true, 'ক', 'exp-q9')">
+          <span class="opt-letter">ক</span>
+          <span class="opt-text">৪ এপ্রিল, ১৯৪৯</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-q9')">
+          <span class="opt-letter">খ</span>
+          <span class="opt-text">৩ জানুয়ারি, ১৯৫৪</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-q9')">
+          <span class="opt-letter">গ</span>
+          <span class="opt-text">২৬ মে, ১৯৫৫</span>
+        </button>
+        <button type="button" class="opt-btn" onclick="checkAnswer(this, false, 'ক', 'exp-q9')">
+          <span class="opt-letter">ঘ</span>
+          <span class="opt-text">১ ফেব্রুয়ারি, ১৯৫৬</span>
+        </button>
+        </div>
+
+        <div class="card-actions">
+          <button type="button" class="action-btn toggle-exp-btn" onclick="toggleExp('exp-q9')">
+            💡 ব্যাখ্যা দেখুন
+          </button>
+        </div>
+
+        <div class="explanation-drawer" id="exp-q9">
+          <div class="exp-box">
+<p><strong>উত্তর:</strong> ক (৪ এপ্রিল, ১৯৪৯)</p>
+<p><strong>ব্যাখ্যা:</strong> নর্থ আটলান্টিক ট্রিটি অর্গানাইজেশন (NATO) নামের সামরিক জোট ১৯৪৯ সালের ৪ এপ্রিল গঠিত হয়।</p>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="chapter-footer">
+      <div class="footer-nav">
+        <a href="বৈশ্বিক দ্বন্দ্ব ও গুরুত্বপূর্ণ অঞ্চল.html">← পূর্ববর্তী অধ্যায়</a>
+        <a href="বিভিন্ন গেরিলা ও জঙ্গি সংস্থা, বিদ্রোহী জোট এবং গোয়েন্দা.html">পরবর্তী অধ্যায় →</a>
       </div>
-
-      <div class="filter-pills">
-        <button class="pill-btn active" data-filter="all">সকল প্রশ্ন (৯)</button>
-        <button class="pill-btn" data-filter="ন্যাটো প্রতিষ্ঠা ও ইতিহাস">ন্যাটো প্রতিষ্ঠা ও ইতিহাস</button>
-        <button class="pill-btn" data-filter="ন্যাটো সনদ ও আর্টিকেল ৫">সনদ ও আর্টিকেল ৫</button>
-        <button class="pill-btn" data-filter="ন্যাটো সম্প্রসারণ ও নতুন সদস্য">সম্প্রসারণ ও নতুন সদস্য</button>
-        <button class="pill-btn" data-filter="অন্যান্য নিরাপত্তা জোট ও অকাস">অকাস ও নিরাপত্তা জোট</button>
-      </div>
-
-      <div class="questions-container">
-        
-          <div class="mcq-card" id="card-q1" data-category="ন্যাটো সম্প্রসারণ ও নতুন সদস্য">
-            <div class="mcq-header">
-              <div class="q-number">১</div>
-              <div class="q-text-wrap">
-                <h3 class="q-title">কোন দুটি দেশ সম্প্রতি ন্যাটোতে (NATO) যোগদান করেছে, যা ইউরোপের নিরাপত্তা পরিস্থিতিকে নতুন রূপ প্রদান করেছে?</h3>
-                <span class="q-tag">৫০তম বিসিএস</span>
-              </div>
-            </div>
-
-            <div class="options-grid" data-qid="1" data-ans="গ">
-              
-                  <button class="opt-btn" data-opt="ক" onclick="handleOptionClick(1, 'ক')">
-                    <span class="opt-letter">ক</span>
-                    <span class="opt-text">অস্ট্রেলিয়া এবং সুইজারল্যান্ড</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="খ" onclick="handleOptionClick(1, 'খ')">
-                    <span class="opt-letter">খ</span>
-                    <span class="opt-text">ইউক্রেন এবং জর্জিয়া</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="গ" onclick="handleOptionClick(1, 'গ')">
-                    <span class="opt-letter">গ</span>
-                    <span class="opt-text">সুইডেন এবং ফিনল্যান্ড</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="ঘ" onclick="handleOptionClick(1, 'ঘ')">
-                    <span class="opt-letter">ঘ</span>
-                    <span class="opt-text">মলদোভা এবং বেলারুশ</span>
-                  </button>
-                
-            </div>
-
-            <button class="toggle-exp-btn" onclick="toggleExplanation(1)">
-              <span>বিস্তারিত ব্যাখ্যা দেখুন</span>
-            </button>
-
-            <div class="exp-drawer" id="exp-1">
-              <div class="exp-box">
-                <div class="exp-header">
-                  <span>সঠিক উত্তর: গ</span>
-                </div>
-                <div class="exp-content">
-                  রাশিয়ার ইউক্রেন আক্রমণের প্রেক্ষিতে দীর্ঘদিনের সামরিক নিরপেক্ষতা ভেঙে ফিনল্যান্ড (৪ এপ্রিল, ২০২৩ - ৩১তম সদস্য) এবং সুইডেন (৭ মার্চ, ২০২৪ - ৩২তম সদস্য) আনুষ্ঠানিকভাবে উত্তর আটলান্টিক সামরিক জোট ন্যাটোতে (NATO) যোগদান করে। এর ফলে বাল্টিক সাগরে ন্যাটোর নিয়ন্ত্রণ সুসংহত হয়েছে এবং ইউরোপের নিরাপত্তা ব্যবস্থায় ঐতিহাসিক পরিবর্তন এসেছে।
-                </div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="mcq-card" id="card-q2" data-category="অন্যান্য নিরাপত্তা জোট ও অকাস">
-            <div class="mcq-header">
-              <div class="q-number">২</div>
-              <div class="q-text-wrap">
-                <h3 class="q-title">মার্কিন যুক্তরাষ্ট্রের নেতৃত্বাধীন 'অকাস' (AUKUS) চুক্তির প্রাথমিক লক্ষ্য কী?</h3>
-                <span class="q-tag">৫০তম বিসিএস</span>
-              </div>
-            </div>
-
-            <div class="options-grid" data-qid="2" data-ans="খ">
-              
-                  <button class="opt-btn" data-opt="ক" onclick="handleOptionClick(2, 'ক')">
-                    <span class="opt-letter">ক</span>
-                    <span class="opt-text">অর্থনৈতিক সহযোগিতা</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="খ" onclick="handleOptionClick(2, 'খ')">
-                    <span class="opt-letter">খ</span>
-                    <span class="opt-text">সামরিক ও প্রতিরক্ষা সহযোগিতা</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="গ" onclick="handleOptionClick(2, 'গ')">
-                    <span class="opt-letter">গ</span>
-                    <span class="opt-text">পরিবেশ সুরক্ষা ও জলবায়ু তহবিল</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="ঘ" onclick="handleOptionClick(2, 'ঘ')">
-                    <span class="opt-letter">ঘ</span>
-                    <span class="opt-text">মহাকাশ গবেষণা ও উপগ্রহ উৎক্ষেপণ</span>
-                  </button>
-                
-            </div>
-
-            <button class="toggle-exp-btn" onclick="toggleExplanation(2)">
-              <span>বিস্তারিত ব্যাখ্যা দেখুন</span>
-            </button>
-
-            <div class="exp-drawer" id="exp-2">
-              <div class="exp-box">
-                <div class="exp-header">
-                  <span>সঠিক উত্তর: খ</span>
-                </div>
-                <div class="exp-content">
-                  মার্কিন যুক্তরাষ্ট্র, যুক্তরাজ্য এবং অস্ট্রেলিয়ার মধ্যে ১৫ সেপ্টেম্বর ২০২১ তারিখে স্বাক্ষরিত 'অকাস' (AUKUS) একটি ত্রিদেশীয় ঐতিহাসিক সামরিক ও প্রতিরক্ষা জোট। এর প্রাথমিক লক্ষ্য ইন্দো-প্যাসিফিক অঞ্চলে, বিশেষত দক্ষিণ চীন সাগরে চীনের সামরিক প্রভাব ও আধিপত্য প্রতিহত করা। চুক্তির মূল ভিত্তি দুটি পিলার: ১ম পিলারে অস্ট্রেলিয়াকে পারমাণবিক শক্তিচালিত সাবমেরিন প্রযুক্তি প্রদান এবং ২য় পিলারে হাইপারসনিক ক্ষেপণাস্ত্র, সাইবার ও কৃত্রিম বুদ্ধিমত্তা (AI) প্রযুক্তির যৌথ সমন্বয়।
-                </div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="mcq-card" id="card-q3" data-category="ন্যাটো প্রতিষ্ঠা ও ইতিহাস">
-            <div class="mcq-header">
-              <div class="q-number">৩</div>
-              <div class="q-text-wrap">
-                <h3 class="q-title">নর্থ আটলান্টিক ট্রিটি অর্গানাইজেশন বা সামরিক জোট কত সালে স্বাক্ষরিত হয়?</h3>
-                <span class="q-tag">৪৯তম বিসিএস</span>
-              </div>
-            </div>
-
-            <div class="options-grid" data-qid="3" data-ans="গ">
-              
-                  <button class="opt-btn" data-opt="ক" onclick="handleOptionClick(3, 'ক')">
-                    <span class="opt-letter">ক</span>
-                    <span class="opt-text">১৯৩৯ সালে</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="খ" onclick="handleOptionClick(3, 'খ')">
-                    <span class="opt-letter">খ</span>
-                    <span class="opt-text">১৯৪৩ সালে</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="গ" onclick="handleOptionClick(3, 'গ')">
-                    <span class="opt-letter">গ</span>
-                    <span class="opt-text">১৯৪৯ সালে</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="ঘ" onclick="handleOptionClick(3, 'ঘ')">
-                    <span class="opt-letter">ঘ</span>
-                    <span class="opt-text">১৯৬০ সালে</span>
-                  </button>
-                
-            </div>
-
-            <button class="toggle-exp-btn" onclick="toggleExplanation(3)">
-              <span>বিস্তারিত ব্যাখ্যা দেখুন</span>
-            </button>
-
-            <div class="exp-drawer" id="exp-3">
-              <div class="exp-box">
-                <div class="exp-header">
-                  <span>সঠিক উত্তর: গ</span>
-                </div>
-                <div class="exp-content">
-                  ১৯৪৯ সালের ৪ এপ্রিল মার্কিন যুক্তরাষ্ট্রের রাজধানী ওয়াশিংটন ডি.সি.-তে ১২টি প্রতিষ্ঠাতা দেশের পররাষ্ট্রমন্ত্রীদের দ্বারা 'উত্তর আটলান্টিক চুক্তি' (যা ওয়াশিংটন চুক্তি নামেও পরিচিত) স্বাক্ষরিত হয়। দ্বিতীয় বিশ্বযুদ্ধোত্তর ইউরোপে সোভিয়েত ইউনিয়নের সামরিক ও মতাদর্শিক সম্প্রসারণ রোধে এটি গঠিত হয়েছিল।
-                </div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="mcq-card" id="card-q4" data-category="ন্যাটো সনদ ও আর্টিকেল ৫">
-            <div class="mcq-header">
-              <div class="q-number">৪</div>
-              <div class="q-text-wrap">
-                <h3 class="q-title">ন্যাটো (NATO) চার্টারের কোন ধারায় 'সম্মিলিত প্রতিরক্ষা' (Collective Defense)-র কথা উল্লেখ আছে?</h3>
-                <span class="q-tag">৪৭তম/৪৬তম বিসিএস</span>
-              </div>
-            </div>
-
-            <div class="options-grid" data-qid="4" data-ans="গ">
-              
-                  <button class="opt-btn" data-opt="ক" onclick="handleOptionClick(4, 'ক')">
-                    <span class="opt-letter">ক</span>
-                    <span class="opt-text">আর্টিকেল-২</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="খ" onclick="handleOptionClick(4, 'খ')">
-                    <span class="opt-letter">খ</span>
-                    <span class="opt-text">আর্টিকেল-৩</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="গ" onclick="handleOptionClick(4, 'গ')">
-                    <span class="opt-letter">গ</span>
-                    <span class="opt-text">আর্টিকেল-৫</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="ঘ" onclick="handleOptionClick(4, 'ঘ')">
-                    <span class="opt-letter">ঘ</span>
-                    <span class="opt-text">আর্টিকেল-৬</span>
-                  </button>
-                
-            </div>
-
-            <button class="toggle-exp-btn" onclick="toggleExplanation(4)">
-              <span>বিস্তারিত ব্যাখ্যা দেখুন</span>
-            </button>
-
-            <div class="exp-drawer" id="exp-4">
-              <div class="exp-box">
-                <div class="exp-header">
-                  <span>সঠিক উত্তর: গ</span>
-                </div>
-                <div class="exp-content">
-                  ন্যাটো চার্টারের 'আর্টিকেল-৫' (অনুচ্ছেদ ৫)-এ সম্মিলিত প্রতিরক্ষার নীতি ঘোষিত হয়েছে: 'জোটভুক্ত যেকোনো এক বা একাধিক সদস্য রাষ্ট্রের ওপর সশস্ত্র আক্রমণ হলে তা সমগ্র জোটের ওপর আক্রমণ হিসেবে বিবেচিত হবে এবং মিত্রদেশগুলো আক্রান্ত দেশকে রক্ষা করতে তাৎক্ষণিক সামরিক ব্যবস্থা গ্রহণ করবে।' ন্যাটোর ইতিহাসে মাত্র একবার—২০০১ সালের ১১ সেপ্টেম্বর নাইন-ইলেভেন হামলার পর যুক্তরাষ্ট্রের সমর্থনে এই আর্টিকেল ৫ কার্যকর করা হয়েছিল।
-                </div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="mcq-card" id="card-q5" data-category="ন্যাটো ও অন্যান্য আন্তর্জাতিক সংস্থা">
-            <div class="mcq-header">
-              <div class="q-number">৫</div>
-              <div class="q-text-wrap">
-                <h3 class="q-title">বাংলাদেশ নিচের কোন সংস্থা বা জোটটির সদস্য নয়?</h3>
-                <span class="q-tag">৪৫তম বিসিএস</span>
-              </div>
-            </div>
-
-            <div class="options-grid" data-qid="5" data-ans="গ">
-              
-                  <button class="opt-btn" data-opt="ক" onclick="handleOptionClick(5, 'ক')">
-                    <span class="opt-letter">ক</span>
-                    <span class="opt-text">ILO (আন্তর্জাতিক শ্রম সংস্থা)</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="খ" onclick="handleOptionClick(5, 'খ')">
-                    <span class="opt-letter">খ</span>
-                    <span class="opt-text">SAARC (সার্ক)</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="গ" onclick="handleOptionClick(5, 'গ')">
-                    <span class="opt-letter">গ</span>
-                    <span class="opt-text">NATO (ন্যাটো)</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="ঘ" onclick="handleOptionClick(5, 'ঘ')">
-                    <span class="opt-letter">ঘ</span>
-                    <span class="opt-text">BIMSTEC (বিমসটেক)</span>
-                  </button>
-                
-            </div>
-
-            <button class="toggle-exp-btn" onclick="toggleExplanation(5)">
-              <span>বিস্তারিত ব্যাখ্যা দেখুন</span>
-            </button>
-
-            <div class="exp-drawer" id="exp-5">
-              <div class="exp-box">
-                <div class="exp-header">
-                  <span>সঠিক উত্তর: গ</span>
-                </div>
-                <div class="exp-content">
-                  বাংলাদেশ ন্যাটোর (NATO) সদস্য নয়; কারণ ন্যাটো উত্তর আমেরিকা ও ইউরোপীয় দেশগুলোর সমন্বয়ে গঠিত একটি আঞ্চলিক সামরিক জোট। অন্যদিকে বাংলাদেশ ১৯৭২ সালের ২২ জুন জাতিসংঘের বিশেষায়িত সংস্থা ILO-র সদস্য হয় এবং ১৯৮৫ সালের ৮ ডিসেম্বর প্রতিষ্ঠিত SAARC ও ১৯৯৭ সালের ৬ জুন প্রতিষ্ঠিত BIMSTEC-এর অন্যতম প্রতিষ্ঠাতা সদস্য।
-                </div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="mcq-card" id="card-q6" data-category="ন্যাটো সম্প্রসারণ ও নতুন সদস্য">
-            <div class="mcq-header">
-              <div class="q-number">৬</div>
-              <div class="q-text-wrap">
-                <h3 class="q-title">কোন মুসলিম প্রধান দেশ সামরিক জোট ন্যাটোর (NATO) সদস্য?</h3>
-                <span class="q-tag">৪১তম বিসিএস</span>
-              </div>
-            </div>
-
-            <div class="options-grid" data-qid="6" data-ans="ঘ">
-              
-                  <button class="opt-btn" data-opt="ক" onclick="handleOptionClick(6, 'ক')">
-                    <span class="opt-letter">ক</span>
-                    <span class="opt-text">সৌদি আরব</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="খ" onclick="handleOptionClick(6, 'খ')">
-                    <span class="opt-letter">খ</span>
-                    <span class="opt-text">মালয়েশিয়া</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="গ" onclick="handleOptionClick(6, 'গ')">
-                    <span class="opt-letter">গ</span>
-                    <span class="opt-text">পাকিস্তান</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="ঘ" onclick="handleOptionClick(6, 'ঘ')">
-                    <span class="opt-letter">ঘ</span>
-                    <span class="opt-text">তুরস্ক</span>
-                  </button>
-                
-            </div>
-
-            <button class="toggle-exp-btn" onclick="toggleExplanation(6)">
-              <span>বিস্তারিত ব্যাখ্যা দেখুন</span>
-            </button>
-
-            <div class="exp-drawer" id="exp-6">
-              <div class="exp-box">
-                <div class="exp-header">
-                  <span>সঠিক উত্তর: ঘ</span>
-                </div>
-                <div class="exp-content">
-                  তুরস্ক (Türkiye) ১৯৫২ সালে ন্যাটোর সদস্যপদ লাভ করে এবং ন্যাটোর ২য় বৃহত্তম সামরিক বাহিনীর অধিকারী। বর্তমানে ন্যাটোভুক্ত মুসলিম সংখ্যাগরিষ্ঠ দেশ ২টি: তুরস্ক (১৯৫২) এবং আলবেনিয়া (২০০৯)।
-                </div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="mcq-card" id="card-q7" data-category="ন্যাটো প্রতিষ্ঠা ও ইতিহাস">
-            <div class="mcq-header">
-              <div class="q-number">৭</div>
-              <div class="q-text-wrap">
-                <h3 class="q-title">নর্থ আটলান্টিক ট্রিটি অর্গানাইজেশন (NATO) কোন বছর আনুষ্ঠানিকভাবে প্রতিষ্ঠিত হয়?</h3>
-                <span class="q-tag">৪১তম/২১তম বিসিএস</span>
-              </div>
-            </div>
-
-            <div class="options-grid" data-qid="7" data-ans="খ">
-              
-                  <button class="opt-btn" data-opt="ক" onclick="handleOptionClick(7, 'ক')">
-                    <span class="opt-letter">ক</span>
-                    <span class="opt-text">১৯৪৫ সালে</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="খ" onclick="handleOptionClick(7, 'খ')">
-                    <span class="opt-letter">খ</span>
-                    <span class="opt-text">১৯৪৯ সালে</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="গ" onclick="handleOptionClick(7, 'গ')">
-                    <span class="opt-letter">গ</span>
-                    <span class="opt-text">১৯৪৮ সালে</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="ঘ" onclick="handleOptionClick(7, 'ঘ')">
-                    <span class="opt-letter">ঘ</span>
-                    <span class="opt-text">১৯৫১ সালে</span>
-                  </button>
-                
-            </div>
-
-            <button class="toggle-exp-btn" onclick="toggleExplanation(7)">
-              <span>বিস্তারিত ব্যাখ্যা দেখুন</span>
-            </button>
-
-            <div class="exp-drawer" id="exp-7">
-              <div class="exp-box">
-                <div class="exp-header">
-                  <span>সঠিক উত্তর: খ</span>
-                </div>
-                <div class="exp-content">
-                  ১৯৪৯ সালের ৪ এপ্রিল ১২টি প্রতিষ্ঠাতা সদস্য দেশের (যুক্তরাষ্ট্র, যুক্তরাজ্য, ফ্রান্স, কানাডা, ইতালি, বেলজিয়াম, নেদারল্যান্ডস, লুক্সেমবার্গ, ডেনমার্ক, নরওয়ে, আইসল্যান্ড ও পর্তুগাল) স্বাক্ষরের মাধ্যমে ন্যাটো প্রতিষ্ঠিত হয়। এর সদর দপ্তর বেলজিয়ামের রাজধানী ব্রাসেলসে অবস্থিত।
-                </div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="mcq-card" id="card-q8" data-category="ন্যাটো সম্প্রসারণ ও নতুন সদস্য">
-            <div class="mcq-header">
-              <div class="q-number">৮</div>
-              <div class="q-text-wrap">
-                <h3 class="q-title">ন্যাটোর সর্বশেষ সদস্য রাষ্ট্র কোনটি?</h3>
-                <span class="q-tag">৩৯তম বিসিএস</span>
-              </div>
-            </div>
-
-            <div class="options-grid" data-qid="8" data-ans="অপশনে সঠিক উত্তর নেই (সুইডেন)">
-              
-                  <button class="opt-btn" data-opt="ক" onclick="handleOptionClick(8, 'ক')">
-                    <span class="opt-letter">ক</span>
-                    <span class="opt-text">মন্টিনিগ্রো</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="খ" onclick="handleOptionClick(8, 'খ')">
-                    <span class="opt-letter">খ</span>
-                    <span class="opt-text">লিথুয়ানিয়া</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="গ" onclick="handleOptionClick(8, 'গ')">
-                    <span class="opt-letter">গ</span>
-                    <span class="opt-text">আলবেনিয়া</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="ঘ" onclick="handleOptionClick(8, 'ঘ')">
-                    <span class="opt-letter">ঘ</span>
-                    <span class="opt-text">ক্রোয়েশিয়া</span>
-                  </button>
-                
-            </div>
-
-            <button class="toggle-exp-btn" onclick="toggleExplanation(8)">
-              <span>বিস্তারিত ব্যাখ্যা দেখুন</span>
-            </button>
-
-            <div class="exp-drawer" id="exp-8">
-              <div class="exp-box">
-                <div class="exp-header">
-                  <span>সঠিক উত্তর: অপশনে সঠিক উত্তর নেই (সুইডেন)</span>
-                </div>
-                <div class="exp-content">
-                  ৩৯তম বিসিএস পরীক্ষার তৎকালীন সময়ে সঠিক উত্তর ছিল মন্টিনিগ্রো (২৯তম সদস্য, ২০১৭)। তবে বর্তমান তথ্য অনুযায়ী: ন্যাটোর ৩১তম সদস্য ফিনল্যান্ড (২০২৩) এবং সর্বশেষ ৩২তম সদস্য সুইডেন (৭ মার্চ, ২০২৪)। তাই প্রশ্নে প্রদত্ত অপশনসমূহের বাইরে বর্তমান উত্তর হবে 'সুইডেন'।
-                </div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="mcq-card" id="card-q9" data-category="ন্যাটো প্রতিষ্ঠা ও ইতিহাস">
-            <div class="mcq-header">
-              <div class="q-number">৯</div>
-              <div class="q-text-wrap">
-                <h3 class="q-title">উত্তর আটলান্টিক চুক্তি সংস্থা (NATO) গঠিত হয়েছিল কোন নির্দিষ্ট তারিখে?</h3>
-                <span class="q-tag">১৭তম/১৬তম বিসিএস</span>
-              </div>
-            </div>
-
-            <div class="options-grid" data-qid="9" data-ans="ক">
-              
-                  <button class="opt-btn" data-opt="ক" onclick="handleOptionClick(9, 'ক')">
-                    <span class="opt-letter">ক</span>
-                    <span class="opt-text">৪ এপ্রিল, ১৯৪৯</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="খ" onclick="handleOptionClick(9, 'খ')">
-                    <span class="opt-letter">খ</span>
-                    <span class="opt-text">৩ জানুয়ারী, ১৯৫৪</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="গ" onclick="handleOptionClick(9, 'গ')">
-                    <span class="opt-letter">গ</span>
-                    <span class="opt-text">২৬ মে, ১৯৫৫</span>
-                  </button>
-                
-                  <button class="opt-btn" data-opt="ঘ" onclick="handleOptionClick(9, 'ঘ')">
-                    <span class="opt-letter">ঘ</span>
-                    <span class="opt-text">১ ফেব্রুয়ারী, ১৯৫৬</span>
-                  </button>
-                
-            </div>
-
-            <button class="toggle-exp-btn" onclick="toggleExplanation(9)">
-              <span>বিস্তারিত ব্যাখ্যা দেখুন</span>
-            </button>
-
-            <div class="exp-drawer" id="exp-9">
-              <div class="exp-box">
-                <div class="exp-header">
-                  <span>সঠিক উত্তর: ক</span>
-                </div>
-                <div class="exp-content">
-                  ১৯৪৯ সালের ৪ এপ্রিল উত্তর আটলান্টিক চুক্তি স্বাক্ষরের মাধ্যমে ন্যাটো গঠিত হয়। চুক্তির ১৪টি ধারার মধ্যে ৫ নম্বর ধারাটি সম্মিলিত প্রতিরক্ষার প্রধান স্তম্ভ হিসেবে বিশ্ব রাজনীতি ও প্রতিরক্ষায় কার্যকর ভূমিকা পালন করে আসছে।
-                </div>
-              </div>
-            </div>
-          </div>
-        
-      </div>
-    </section>
-
-  </main>
+      <p>লাইভ এমসিকিউ™ বিসিএস প্রিলিমিনারি ই-বুক • আন্তর্জাতিক বিষয়াবলি</p>
+    </footer>
+  </div>
 
   <script>
-    window.addEventListener('scroll', () => {
-      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      document.getElementById('progress-bar').style.width = ((winScroll / height) * 100) + '%';
-    });
-
-    let currentFontSize = 1;
-    const root = document.documentElement;
-    document.getElementById('btn-font-inc').addEventListener('click', () => {
-      if (currentFontSize < 1.35) { currentFontSize += 0.05; root.style.setProperty('--font-scale', currentFontSize + 'rem'); }
-    });
-    document.getElementById('btn-font-dec').addEventListener('click', () => {
-      if (currentFontSize > 0.85) { currentFontSize -= 0.05; root.style.setProperty('--font-scale', currentFontSize + 'rem'); }
-    });
-    document.getElementById('btn-font-reset').addEventListener('click', () => {
-      currentFontSize = 1; root.style.setProperty('--font-scale', '1rem');
-    });
-
-    let currentFontFamily = ;
-    document.getElementById('btn-font-toggle').addEventListener('click', () => {
-      if (currentFontFamily === ) {
-        document.body.style.fontFamily = "serif";
-        currentFontFamily = ;
-      } else {
-        document.body.style.fontFamily = "sans-serif";
-        currentFontFamily = ;
-      }
-    });
-
-    const themeBtn = document.getElementById('btn-theme-toggle');
-    const themeText = document.getElementById('theme-text');
-    themeBtn.addEventListener('click', () => {
-      const isDark = root.getAttribute('data-theme') === 'dark';
-      if (isDark) {
-        root.removeAttribute('data-theme');
-        themeText.innerText = 'ডার্ক মোড';
-      } else {
-        root.setAttribute('data-theme', 'dark');
-        themeText.innerText = 'লাইট মোড';
-      }
-    });
-
+    let userScore = 0;
+    const answeredQuestions = new Set();
     const totalQuestions = 9;
-    let score = 0;
-    let answeredCount = 0;
-    const answeredMap = {};
 
-    function bnDigits(num) {
-      const digits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
-      return String(num).replace(/[0-9]/g, d => digits[d]);
-    }
+    function checkAnswer(btn, isCorrect, correctLetter, expId) {
+      const card = btn.closest('.q-card');
+      const qId = card.id;
+      const allButtons = card.querySelectorAll('.opt-btn');
 
-    function updateStats() {
-      document.getElementById('score-counter').innerText = bnDigits(score) + ' / ' + bnDigits(totalQuestions);
-      document.getElementById('answered-counter').innerText = bnDigits(answeredCount) + ' সম্পন্ন';
-      const pct = answeredCount > 0 ? Math.round((score / answeredCount) * 100) : 0;
-      document.getElementById('accuracy-counter').innerText = bnDigits(pct) + '%';
-    }
+      // Disable all buttons in this question
+      allButtons.forEach(b => b.disabled = true);
 
-    window.handleOptionClick = function(qNum, selectedLetter) {
-      if (answeredMap[qNum]) return;
-      answeredMap[qNum] = true;
-      answeredCount++;
-
-      const grid = document.querySelector('.options-grid[data-qid="' + qNum + '"]');
-      const correctAns = grid.getAttribute('data-ans').trim();
-      const buttons = grid.querySelectorAll('.opt-btn');
-
-      let isCorrect = (selectedLetter === correctAns);
-      if (isCorrect) score++;
-
-      buttons.forEach(btn => {
-        btn.disabled = true;
-        const optLetter = btn.getAttribute('data-opt');
-        if (optLetter === correctAns) {
-          btn.classList.add('correct');
-        } else if (optLetter === selectedLetter && !isCorrect) {
-          btn.classList.add('wrong');
+      // Highlight clicked
+      if (isCorrect) {
+        btn.classList.add('correct');
+        if (!answeredQuestions.has(qId)) {
+          userScore++;
+          answeredQuestions.add(qId);
         }
-      });
-
-      if (correctAns.includes('অপশনে সঠিক উত্তর নেই')) {
-        buttons.forEach(btn => btn.classList.add('wrong'));
-      }
-
-      updateStats();
-      const expDrawer = document.getElementById('exp-' + qNum);
-      if (expDrawer) expDrawer.classList.add('open');
-    };
-
-    window.toggleExplanation = function(qNum) {
-      const expDrawer = document.getElementById('exp-' + qNum);
-      if (expDrawer) expDrawer.classList.toggle('open');
-    };
-
-    document.getElementById('btn-reset-quiz').addEventListener('click', () => {
-      score = 0; answeredCount = 0;
-      for (const k in answeredMap) delete answeredMap[k];
-      document.querySelectorAll('.opt-btn').forEach(btn => {
-        btn.disabled = false; btn.classList.remove('correct', 'wrong');
-      });
-      document.querySelectorAll('.exp-drawer').forEach(drawer => drawer.classList.remove('open'));
-      updateStats();
-    });
-
-    const filterPills = document.querySelectorAll('.pill-btn');
-    const cards = document.querySelectorAll('.mcq-card');
-    filterPills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        filterPills.forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        const filter = pill.getAttribute('data-filter');
-        cards.forEach(card => {
-          const cat = card.getAttribute('data-category');
-          card.style.display = (filter === 'all' || cat === filter) ? 'block' : 'none';
-        });
-      });
-    });
-  </script>
-
-  <script src="nav-component.js"></script>
-
-
-  <!-- Universal E-Book Theme Persistence & Controller -->
-  <script>
-    (function() {
-      function applyTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        if (document.body) document.body.setAttribute('data-theme', theme);
-        try {
-          localStorage.setItem('theme', theme);
-          localStorage.setItem('ebk_portal_theme', theme);
-        } catch(e) {}
-        var btns = document.querySelectorAll('#themeBtn, #theme-btn, #themeToggleBtn, .btn-ctrl[onclick*="toggleTheme"], button[onclick*="toggleTheme"], .btn-theme-toggle');
-        btns.forEach(function(b) {
-          if (b.id === 'themeToggleBtn' || b.classList.contains('icon-only')) {
-            b.textContent = theme === 'dark' ? '☀️' : '🌙';
-          } else {
-            b.innerHTML = theme === 'dark' ? '☀️ মোড' : '🌓 মোড';
-          }
-        });
-      }
-
-      window.toggleTheme = function() {
-        var cur = document.documentElement.getAttribute('data-theme') || (document.body && document.body.getAttribute('data-theme')) || 'light';
-        var next = cur === 'dark' ? 'light' : 'dark';
-        applyTheme(next);
-      };
-
-      var saved = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || 'light';
-      applyTheme(saved);
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-          applyTheme(saved);
-          var toggleBtn = document.getElementById('themeToggleBtn') || document.getElementById('themeBtn') || document.getElementById('theme-btn');
-          if (toggleBtn) {
-            toggleBtn.onclick = window.toggleTheme;
-          }
-        });
       } else {
-        var toggleBtn = document.getElementById('themeToggleBtn') || document.getElementById('themeBtn') || document.getElementById('theme-btn');
-        if (toggleBtn) {
-          toggleBtn.onclick = window.toggleTheme;
-        }
+        btn.classList.add('wrong');
+        // Find and highlight correct answer
+        allButtons.forEach(b => {
+          if (b.querySelector('.opt-letter').textContent.includes(correctLetter)) {
+            b.classList.add('correct');
+          }
+        });
+        answeredQuestions.add(qId);
       }
-    })();
-  </script>
 
+      // Automatically open explanation
+      const expDrawer = document.getElementById(expId);
+      if (expDrawer) {
+        expDrawer.classList.add('open');
+      }
+
+      updateScoreDisplay();
+    }
+
+    function toggleExp(expId) {
+      const expDrawer = document.getElementById(expId);
+      if (expDrawer) {
+        expDrawer.classList.toggle('open');
+      }
+    }
+
+    function updateScoreDisplay() {
+      const scoreDisplay = document.getElementById('scoreDisplay');
+      if (scoreDisplay) {
+        scoreDisplay.textContent = '🏆 সঠিক উত্তর: ' + userScore + ' / ' + totalQuestions;
+      }
+    }
+
+    function resetQuiz() {
+      userScore = 0;
+      answeredQuestions.clear();
+      updateScoreDisplay();
+
+      document.querySelectorAll('.opt-btn').forEach(b => {
+        b.disabled = false;
+        b.classList.remove('correct', 'wrong');
+      });
+
+      document.querySelectorAll('.explanation-drawer').forEach(d => {
+        d.classList.remove('open');
+      });
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      try {
+        localStorage.setItem('theme', newTheme);
+        localStorage.setItem('ebk_portal_theme', newTheme);
+      } catch(e) {}
+    }
+  </script>
 </body>
 </html>
