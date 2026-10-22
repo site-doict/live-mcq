@@ -167,8 +167,9 @@
           <select id="ebk-subject-switch" style="padding:4px 8px;border-radius:6px;border:1px solid #cbd5e1;background:#fff;font-family:inherit;font-size:0.85rem;cursor:pointer;">
             <option value="current" selected>🌐 আন্তর্জাতিক বিষয়াবলি</option>
             <option value="../Live MCQ Bangladesh/index.html">🇧🇩 বাংলাদেশ বিষয়াবলি</option>
-            <option value="../index.html">📚 বাংলা সাহিত্য</option>
-            <option value="../Master Portal Index.html">🏛️ মাস্টার পোর্টাল</option>
+            <option value="../Live MCQ Bangla Literature/index.html">📚 বাংলা সাহিত্য</option>
+            <option value="../Live MCQ Bangla Language/index.html">✍️ বাংলা ভাষা ও ব্যাকরণ</option>
+            <option value="../index.html">🏛️ মাস্টার পোর্টাল</option>
           </select>
         </div>
 
