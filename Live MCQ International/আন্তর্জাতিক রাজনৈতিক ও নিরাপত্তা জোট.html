@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>আন্তর্জাতিক রাজনৈতিক ও নিরাপত্তা জোট - লাইভ এমসিকিউ আন্তর্জাতিক</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-scale: 1rem;
+      --bg-primary: #0a0f1d;
+      --bg-secondary: #10192e;
+      --bg-card: rgba(19, 31, 56, 0.85);
+      --card-border: rgba(148, 163, 184, 0.14);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-gold: #fbbf24;
+      --gold-glow: rgba(251, 191, 36, 0.25);
+      --accent-cyan: #38bdf8;
+      --accent-emerald: #10b981;
+      --accent-rose: #f43f5e;
+      --nav-bg: rgba(10, 15, 29, 0.92);
+      --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #f1f5f9;
+      --bg-card: rgba(255, 255, 255, 0.92);
+      --card-border: rgba(203, 213, 225, 0.8);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --accent-gold: #d97706;
+      --gold-glow: rgba(217, 119, 6, 0.15);
+      --accent-cyan: #0284c7;
+      --accent-emerald: #059669;
+      --accent-rose: #e11d48;
+      --nav-bg: rgba(248, 250, 252, 0.95);
+      --shadow-soft: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Hind Siliguri', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-size: var(--font-scale);
+      line-height: 1.65;
+      padding-bottom: 5rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .progress-bar-container { position: fixed; top: 0; left: 0; width: 100%; height: 4px; z-index: 1000; }
+    .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #38bdf8, #fbbf24, #10b981); }
+
+    header.sticky-header {
+      position: sticky; top: 4px; z-index: 900;
+      backdrop-filter: blur(14px);
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--card-border);
+      padding: 0.75rem 1rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+    }
+    .brand-group { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
+    .book-badge {
+      display: inline-flex; align-items: center;
+      background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 9999px;
+      padding: 0.2rem 0.65rem; font-size: 0.75rem; font-weight: 700; white-space: nowrap;
+    }
+    .chapter-heading-bar {
+      font-size: 0.95rem; font-weight: 700; color: var(--text-main);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .controls-group { display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
+    .control-btn {
+      background: var(--bg-card); border: 1px solid var(--card-border); color: var(--text-main);
+      padding: 0.35rem 0.65rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+    }
+    .control-btn:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+
+    .main-container { max-width: 960px; margin: 1.5rem auto; padding: 0 1rem; }
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(16, 25, 46, 0.95), rgba(30, 58, 138, 0.4));
+      border: 1px solid var(--card-border); border-radius: 20px;
+      padding: 2rem 1.5rem; text-align: center; margin-bottom: 2rem;
+      box-shadow: var(--shadow-soft);
+    }
+    [data-theme="light"] .hero-banner { background: linear-gradient(135deg, #ffffff, #f0f9ff); }
+    .unit-tag { color: var(--accent-cyan); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; display: block; }
+    .hero-title { font-size: clamp(1.4rem, 4vw, 2.1rem); font-weight: 700; color: var(--text-main); line-height: 1.3; margin-bottom: 0.75rem; }
+    .hero-desc { color: var(--text-muted); font-size: 0.95rem; max-width: 720px; margin: 0 auto 1.25rem; }
+    .hero-stats { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+    .stat-pill { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); padding: 0.4rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; }
+    .stat-pill span { color: var(--accent-cyan); font-weight: 700; }
+
+    .infographic-wrapper { margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    .section-title { font-size: 1.25rem; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 0.65rem; }
+    .card { background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 16px; padding: 1.25rem; box-shadow: var(--shadow-soft); backdrop-filter: blur(8px); }
+
+    .data-table-container { overflow-x: auto; border-radius: 12px; border: 1px solid var(--card-border); margin-top: 0.75rem; }
+    table.data-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem; }
+    table.data-table th, table.data-table td { padding: 0.8rem 1rem; border-bottom: 1px solid var(--card-border); }
+    table.data-table th { background: rgba(56, 189, 248, 0.08); color: var(--accent-cyan); font-weight: 700; white-space: nowrap; }
+    .badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+    .badge-cyan { background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan); border: 1px solid rgba(56, 189, 248, 0.3); }
+    .badge-gold { background: rgba(251, 191, 36, 0.15); color: var(--accent-gold); border: 1px solid rgba(251, 191, 36, 0.3); }
+
+    .quiz-stats-card {
+      background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 14px;
+      padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .stats-indicators { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+    .indicator-item { display: flex; flex-direction: column; }
+    .indicator-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
+    .indicator-val { font-size: 1.2rem; font-weight: 700; color: var(--text-main); }
+    .indicator-val.cyan { color: var(--accent-cyan); }
+    .indicator-val.gold { color: var(--accent-gold); }
+
+    .filter-pills { display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+    .filter-btn { background: var(--bg-card); border: 1px solid var(--card-border); color: var(--text-muted); padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .filter-btn.active, .filter-btn:hover { background: var(--accent-cyan); color: #000; border-color: var(--accent-cyan); font-weight: 700; }
+
+    .mcq-card { background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 16px; padding: 1.25rem; margin-bottom: 1.25rem; box-shadow: var(--shadow-soft); }
+    .mcq-card:hover { border-color: rgba(56, 189, 248, 0.3); }
+    .q-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.85rem; }
+    .q-num-title { display: flex; gap: 0.65rem; font-size: 1.05rem; font-weight: 600; color: var(--text-main); line-height: 1.45; }
+    .q-number { background: linear-gradient(135deg, var(--accent-cyan), #0284c7); color: #fff; width: 28px; height: 28px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .bcs-tag { background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan); border: 1px solid rgba(56, 189, 248, 0.3); font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
+
+    .options-grid { display: grid; grid-template-columns: 1fr; gap: 0.6rem; margin-top: 0.85rem; }
+    @media (min-width: 640px) { .options-grid { grid-template-columns: 1fr 1fr; } }
+    .opt-btn { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--card-border); color: var(--text-main); border-radius: 10px; padding: 0.75rem 1rem; text-align: left; font-size: 0.92rem; cursor: pointer; display: flex; align-items: center; gap: 0.75rem; }
+    .opt-btn:hover:not(.locked) { background: rgba(56, 189, 248, 0.08); border-color: var(--accent-cyan); }
+    .opt-letter { width: 24px; height: 24px; border-radius: 50%; background: rgba(148, 163, 184, 0.15); display: inline-flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; flex-shrink: 0; }
+    .opt-btn.correct { background: rgba(16, 185, 129, 0.18) !important; border-color: var(--accent-emerald) !important; color: #34d399 !important; font-weight: 600; }
+    .opt-btn.correct .opt-letter { background: var(--accent-emerald); color: #fff; }
+    .opt-btn.wrong { background: rgba(244, 63, 94, 0.18) !important; border-color: var(--accent-rose) !important; color: #fb7185 !important; }
+    .opt-btn.wrong .opt-letter { background: var(--accent-rose); color: #fff; }
+
+    .exp-drawer { margin-top: 0.85rem; padding: 1rem; background: rgba(15, 23, 42, 0.6); border: 1px solid var(--card-border); border-left: 3px solid var(--accent-cyan); border-radius: 10px; font-size: 0.88rem; color: var(--text-muted); display: none; }
+    [data-theme="light"] .exp-drawer { background: #f8fafc; }
+    .exp-drawer.open { display: block; }
+    .exp-title { font-weight: 700; color: var(--accent-cyan); margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.4rem; }
+    .exp-toggle-btn { margin-top: 0.75rem; background: transparent; border: none; color: var(--accent-cyan); font-size: 0.82rem; font-weight: 600; cursor: pointer; }
+  </style>
+</head>
+<body data-theme="dark">
+
+  <div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+
+  <header class="sticky-header">
+    <div class="brand-group">
+      <span class="book-badge">আন্তর্জাতিক বিষয়াবলি</span>
+      <div class="chapter-heading-bar">অধ্যায় ১৩: আন্তর্জাতিক রাজনৈতিক ও নিরাপত্তা জোট</div>
+    </div>
+    <div class="controls-group">
+      <button class="control-btn" id="fontDecBtn">A-</button>
+      <button class="control-btn" id="fontResetBtn">A</button>
+      <button class="control-btn" id="fontIncBtn">A+</button>
+      <button class="control-btn" id="themeToggleBtn">🌙</button>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <section class="hero-banner">
+      <span class="unit-tag">ইউনিট ৪: আন্তর্জাতিক সংগঠন ও বৈশ্বিক প্রতিষ্ঠান (পৃষ্ঠা ৬৪৫–৬৪৮)</span>
+      <h1 class="hero-title">আন্তর্জাতিক রাজনৈতিক ও নিরাপত্তা জোট</h1>
+      <p class="hero-desc">কমনওয়েলথ, জোট নিরপেক্ষ আন্দোলন (ন্যাম), ওআইসি, আরব লীগ, আইএইএ, ইন্টারপোল ও পিএলও সম্পর্কিত বিসিএস পরীক্ষার ২৬টি অত্যন্ত গুরুত্বপূর্ণ প্রশ্ন ও বিস্তারিত ব্যাখ্যা।</p>
+      <div class="hero-stats">
+        <div class="stat-pill">মোট প্রশ্ন: <span>26 টি</span></div>
+        <div class="stat-pill">পাঠ্যবই পৃষ্ঠা: <span>৬৪৫–৬৪৮</span></div>
+        <div class="stat-pill">বিষয়বস্তু: <span>রাজনৈতিক ও নিরাপত্তা জোট</span></div>
+      </div>
+    </section>
+
+    <!-- Master Infographic Section -->
+    <div class="infographic-wrapper">
+      <div class="card">
+        <div class="section-title"><span>🏛️</span> আন্তর্জাতিক প্রধান রাজনৈতিক ও নিরাপত্তা জোট ম্যাট্রিক্স</div>
+        <div class="data-table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>সংস্থার নাম</th>
+                <th>প্রতিষ্ঠা সাল</th>
+                <th>সদর দপ্তর</th>
+                <th>বর্তমান সদস্য</th>
+                <th>বিশেষ বৈশিষ্ট্য ও বাংলাদেশের অবস্থান</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>কমনওয়েলথ</strong></td>
+                <td>১৯৩১ / ১৯৪৯</td>
+                <td>মার্লবোরো হাউজ, লন্ডন</td>
+                <td><span class="badge badge-cyan">৫৬টি</span></td>
+                <td>প্রধান রাজা ৩য় চার্লস (১৪ দেশের রাষ্ট্রপ্রধান)। উপনিবেশ না হয়েও সদস্য: গ্যাবন, টোগো, রুয়ান্ডা, মোজাম্বিক।</td>
+              </tr>
+              <tr>
+                <td><strong>জোট নিরপেক্ষ আন্দোলন (NAM)</strong></td>
+                <td>১৯৬১ (বেলগ্রেড)</td>
+                <td><strong>স্থায়ী সদর দপ্তর নেই</strong></td>
+                <td><span class="badge badge-cyan">১২০টি</span></td>
+                <td>উদ্যোক্তা: টিটো, নেহরু, নাসের, সুকর্ণ। ১৯৭৩ আলজিয়ার্স সম্মেলনে বঙ্গবন্ধুর ঐতিহাসিক ভাষণ।</td>
+              </tr>
+              <tr>
+                <td><strong>ইসলামী সহযোগিতা সংস্থা (OIC)</strong></td>
+                <td>১৯৬৯ (রাবাত)</td>
+                <td>জেদ্দা, সৌদি আরব</td>
+                <td><span class="badge badge-cyan">৫৭টি</span></td>
+                <td>দাপ্তরিক ভাষা ৩টি (আরবি, ইংরেজি, ফরাসি)। ১৯৭৪ লাহোর সম্মেলনে বাংলাদেশের যোগদান। মহাসচিব: হুসেইন ইব্রাহিম তাহা।</td>
+              </tr>
+              <tr>
+                <td><strong>আরব লীগ (Arab League)</strong></td>
+                <td>২২ মার্চ ১৯৪৫</td>
+                <td>কায়রো, মিশর</td>
+                <td><span class="badge badge-cyan">২২টি</span></td>
+                <td>প্রতিষ্ঠাতা ৭টি দেশ। ইরান অনারব দেশ হওয়ায় সদস্য নয়। ফিলিস্তিন এর পূর্ণাঙ্গ সদস্য।</td>
+              </tr>
+              <tr>
+                <td><strong>IAEA</strong></td>
+                <td>১৯৫৭</td>
+                <td>ভিয়েনা, অস্ট্রিয়া</td>
+                <td><span class="badge badge-cyan">১৮১টি</span></td>
+                <td>'Atoms for Peace' নীতি। ২০০৫ সালে শান্তিতে নোবেল। বর্তমান প্রধান: রাফায়েল মারিয়ানো গ্রোসি।</td>
+              </tr>
+              <tr>
+                <td><strong>ইন্টারপোল (INTERPOL)</strong></td>
+                <td>১৯২৩</td>
+                <td>লিওঁ, ফ্রান্স</td>
+                <td><span class="badge badge-cyan">১৯৬টি</span></td>
+                <td>আন্তর্জাতিক পুলিশ সংস্থা। ৪টি অফিসিয়াল ভাষা। বাংলাদেশ ১৯৭৬ সালে সদস্যপদ পায়।</td>
+              </tr>
+              <tr>
+                <td><strong>পিএলও (PLO)</strong></td>
+                <td>২৮ মে ১৯৬৪</td>
+                <td>রামাল্লা, ফিলিস্তিন</td>
+                <td>-</td>
+                <td>ফিলিস্তিনি মুক্তিসংগ্রামের একমাত্র বৈধ আন্তর্জাতিক মুখপাত্র। প্রতিষ্ঠাতা চেয়ারম্যান আহমদ শুকেরী।</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz Stats -->
+    <div class="quiz-stats-card">
+      <div class="stats-indicators">
+        <div class="indicator-item">
+          <span class="indicator-label">মোট প্রশ্ন</span>
+          <span class="indicator-val">26</span>
+        </div>
+        <div class="indicator-item">
+          <span class="indicator-label">উত্তর প্রদান</span>
+          <span class="indicator-val gold" id="answeredCount">০</span>
+        </div>
+        <div class="indicator-item">
+          <span class="indicator-label">সঠিক উত্তর</span>
+          <span class="indicator-val emerald" id="correctCount">০</span>
+        </div>
+        <div class="indicator-item">
+          <span class="indicator-label">নির্ভুলতার হার</span>
+          <span class="indicator-val cyan" id="accuracyRate">০%</span>
+        </div>
+      </div>
+      <div>
+        <button class="control-btn" id="resetQuizBtn">🔄 কুইজ রিসেট</button>
+      </div>
+    </div>
+
+    <div class="filter-pills">
+      <button class="filter-btn active" data-category="all">সকল বিষয় (26)</button>
+      <button class="filter-btn" data-category="কমনওয়েলথ">কমনওয়েলথ</button>
+      <button class="filter-btn" data-category="জোট নিরপেক্ষ আন্দোলন (NAM)">জোট নিরপেক্ষ আন্দোলন (NAM)</button>
+      <button class="filter-btn" data-category="ইসলামী সহযোগিতা সংস্থা (OIC)">ইসলামী সহযোগিতা সংস্থা (OIC)</button>
+      <button class="filter-btn" data-category="আন্তর্জাতিক পারমাণবিক সংস্থা (IAEA)">আন্তর্জাতিক পারমাণবিক সংস্থা (IAEA)</button>
+      <button class="filter-btn" data-category="আরব লীগ">আরব লীগ</button>
+      <button class="filter-btn" data-category="ইন্টারপোল ও বৈশ্বিক নিরাপত্তা">ইন্টারপোল ও বৈশ্বিক নিরাপত্তা</button>
+      <button class="filter-btn" data-category="ফিলিস্তিন ও মধ্যপ্রাচ্য রাজনীতি">ফিলিস্তিন ও মধ্যপ্রাচ্য রাজনীতি</button>
+    </div>
+
+    <div id="questionsContainer">
+      
+      <div class="mcq-card" data-category="কমনওয়েলথ" id="q1">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">1</span>
+            <span>কমনওয়েলথ কোন ধরনের দেশ নিয়ে গঠিত?</span>
+          </div>
+          <span class="bcs-tag">৪৮তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(1, 0)">
+            <span class="opt-letter">ক</span>
+            <span>ইংরেজ শাসন থেকে স্বাধীনতাপ্রাপ্ত দেশসমূহ</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(1, 1)">
+            <span class="opt-letter">খ</span>
+            <span>তেল উৎপাদনকারী দেশসমূহ</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(1, 2)">
+            <span class="opt-letter">গ</span>
+            <span>এশিয়া ও ইউরোপের দেশসমূহ</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(1, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>স্বল্পোন্নত দেশসমূহ</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp1">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>কমনওয়েলথ অব নেশনস (Commonwealth of Nations) মূলত ব্রিটিশ সাম্রাজ্যের অধীনে থাকা বা ইংরেজ শাসন থেকে স্বাধীনতা লাভ করা স্বাধীন দেশগুলোর একটি আন্তর্জাতিক স্বেচ্ছাসেবী রাজনৈতিক জোট। ১৯৩১ সালে ওয়েস্টমিনস্টার সংবিধির মাধ্যমে এর ভিত্তি রচিত হয় এবং ১৯৪৯ সালের লন্ডন ঘোষণার মাধ্যমে আধুনিক কমনওয়েলথের রূপ পায়। বর্তমান সদস্য সংখ্যা ৫৬টি। তবে ব্রিটিশ উপনিবেশ না হয়েও রুয়ান্ডা, মোজাম্বিক, গ্যাবন ও টোগো এর সদস্যপদ গ্রহণ করেছে।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(1)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="জোট নিরপেক্ষ আন্দোলন (NAM)" id="q2">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">2</span>
+            <span>নিচের কোন সংস্থাটির স্থায়ী সদর দপ্তর নেই?</span>
+          </div>
+          <span class="bcs-tag">৪০তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(2, 0)">
+            <span class="opt-letter">ক</span>
+            <span>NATO</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(2, 1)">
+            <span class="opt-letter">খ</span>
+            <span>EU</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(2, 2)">
+            <span class="opt-letter">গ</span>
+            <span>NAM</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(2, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>ASEAN</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp2">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>জোট নিরপেক্ষ আন্দোলন বা NAM (Non-Aligned Movement)-এর কোনো স্থায়ী সচিবালয় বা সদর দপ্তর নেই। যে দেশটিতে শীর্ষ সম্মেলন অনুষ্ঠিত হয়, সেই দেশ পরবর্তী ৩ বছরের জন্য জোটের সমন্বয় ও সভাপতির দায়িত্ব পালন করে। অন্যদিকে ন্যাটো ও ইউরোপীয় ইউনিয়নের সদর দপ্তর ব্রাসেলসে এবং আসিয়ানের সদর দপ্তর জাকার্তায় অবস্থিত।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(2)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="ইসলামী সহযোগিতা সংস্থা (OIC)" id="q3">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">3</span>
+            <span>OIC-এর কততম শীর্ষ সম্মেলনে বঙ্গবন্ধু শেখ মুজিবুর রহমান অংশগ্রহণ করেছিলেন?</span>
+          </div>
+          <span class="bcs-tag">৪০তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(3, 0)">
+            <span class="opt-letter">ক</span>
+            <span>২য় শীর্ষ সম্মেলন</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(3, 1)">
+            <span class="opt-letter">খ</span>
+            <span>৫ম শীর্ষ সম্মেলন</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(3, 2)">
+            <span class="opt-letter">গ</span>
+            <span>৪র্থ শীর্ষ সম্মেলন</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(3, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>৭ম শীর্ষ সম্মেলন</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp3">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>১৯৭৪ সালের ২২–২৪ ফেব্রুয়ারি পাকিস্তানের লাহোরে অনুষ্ঠিত ওআইসি (OIC)-এর ঐতিহাসিক দ্বিতীয় শীর্ষ সম্মেলনে জাতির পিতা বঙ্গবন্ধু শেখ মুজিবুর রহমান অংশগ্রহণ করেন। এই সম্মেলনেই বাংলাদেশ আনুষ্ঠানিকভাবে ওআইসির সদস্যপদ লাভ করে এবং পাকিস্তান বাংলাদেশকে স্বাধীন সার্বভৌম রাষ্ট্র হিসেবে কূটনৈতিক স্বীকৃতি প্রদান করে।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(3)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="ইসলামী সহযোগিতা সংস্থা (OIC)" id="q4">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">4</span>
+            <span>ইসলামী সহযোগিতা সংস্থা (OIC)-এর দাপ্তরিক ভাষার সংখ্যা কয়টি?</span>
+          </div>
+          <span class="bcs-tag">৩৮তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(4, 0)">
+            <span class="opt-letter">ক</span>
+            <span>৫টি</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(4, 1)">
+            <span class="opt-letter">খ</span>
+            <span>৩টি</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(4, 2)">
+            <span class="opt-letter">গ</span>
+            <span>৪টি</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(4, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>২টি</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp4">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>ওআইসি (Organization of Islamic Cooperation)-এর দাপ্তরিক বা অফিশিয়াল ভাষা ৩টি। এগুলো হলো: আরবি, ইংরেজি এবং ফরাসি।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(4)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="আন্তর্জাতিক পারমাণবিক সংস্থা (IAEA)" id="q5">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">5</span>
+            <span>IAEA-এর সদর দপ্তর কোথায় অবস্থিত?</span>
+          </div>
+          <span class="bcs-tag">৩৬তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(5, 0)">
+            <span class="opt-letter">ক</span>
+            <span>জেনেভা</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(5, 1)">
+            <span class="opt-letter">খ</span>
+            <span>ভিয়েনা</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(5, 2)">
+            <span class="opt-letter">গ</span>
+            <span>ওয়াশিংটন</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(5, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>প্যারিস</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp5">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>আন্তর্জাতিক আণবিক শক্তি সংস্থা বা IAEA (International Atomic Energy Agency)-এর সদর দপ্তর অস্ট্রিয়ার রাজধানী ভিয়েনায় অবস্থিত। ১৯৫৭ সালের ২৯ জুলাই জাতিসংঘের পৃষ্ঠপোষকতায় 'শান্তির জন্য পরমাণু' (Atoms for Peace) নীতির ভিত্তিতে এটি প্রতিষ্ঠিত হয়। সংস্থাটি ২০০৫ সালে শান্তিতে নোবেল পুরস্কার লাভ করে।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(5)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="আরব লীগ" id="q6">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">6</span>
+            <span>আরব লীগ কত সালে প্রতিষ্ঠা পায়?</span>
+          </div>
+          <span class="bcs-tag">৩৬তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(6, 0)">
+            <span class="opt-letter">ক</span>
+            <span>১৯৪৯</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(6, 1)">
+            <span class="opt-letter">খ</span>
+            <span>১৯৫০</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(6, 2)">
+            <span class="opt-letter">গ</span>
+            <span>১৯৪৫</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(6, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>১৯৪০</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp6">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>১৯৪৫ সালের ২২ মার্চ মিশরের রাজধানী কায়রোতে 'কায়রো চুক্তি' স্বাক্ষরের মাধ্যমে আরব লীগ (League of Arab States) প্রতিষ্ঠিত হয়। এর সদর দপ্তর মিশরের কায়রোতে অবস্থিত। প্রতিষ্ঠাতা সদস্য ছিল ৬টি দেশ (মিশর, ইরাক, জর্ডান, লেবানন, সৌদি আরব ও সিরিয়া, পরবর্তীতে ইয়েমেন যোগ দেয়)। বর্তমানে সদস্য সংখ্যা ২২টি।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(6)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="জোট নিরপেক্ষ আন্দোলন (NAM)" id="q7">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">7</span>
+            <span>বর্তমানে জোট নিরপেক্ষ আন্দোলন (NAM)-এর সদস্য সংখ্যা কত?</span>
+          </div>
+          <span class="bcs-tag">৩৬তম/২২তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(7, 0)">
+            <span class="opt-letter">ক</span>
+            <span>১২০টি</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(7, 1)">
+            <span class="opt-letter">খ</span>
+            <span>১১৫টি</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(7, 2)">
+            <span class="opt-letter">গ</span>
+            <span>৭৭টি</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(7, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>১২১টি</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp7">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>বর্তমানে জোট নিরপেক্ষ আন্দোলন (NAM)-এর মোট সদস্য রাষ্ট্র ১২০টি এবং ১৮টি দেশ ও ১০টি আন্তর্জাতিক সংস্থা পর্যবেক্ষক হিসেবে রয়েছে। সর্বশেষ ১৯তম শীর্ষ সম্মেলন ২০২৪ সালের জানুয়ারিতে উগান্ডার রাজধানী কাম্পালায় অনুষ্ঠিত হয়।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(7)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="ইসলামী সহযোগিতা সংস্থা (OIC)" id="q8">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">8</span>
+            <span>মুসলিম প্রধান না হয়েও নিচের কোন দেশটি ইসলামী সম্মেলন সংস্থা (OIC)-র সদস্য?</span>
+          </div>
+          <span class="bcs-tag">২৭তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(8, 0)">
+            <span class="opt-letter">ক</span>
+            <span>নাইজেরিয়া</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(8, 1)">
+            <span class="opt-letter">খ</span>
+            <span>লেবানন</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(8, 2)">
+            <span class="opt-letter">গ</span>
+            <span>নাইজার</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(8, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>উগান্ডা</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp8">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>আফ্রিকার দেশ উগান্ডায় ৮৫%-এর বেশি জনগণ খ্রিস্টান ধর্মাবলম্বী হওয়া সত্ত্বেও দেশটি ওআইসির পূর্ণাঙ্গ সদস্য। একইভাবে গায়ানা, সুরিনাম ও মোজাম্বিক মুসলিম সংখ্যাগরিষ্ঠ না হয়েও ওআইসির সদস্য।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(8)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="আন্তর্জাতিক পারমাণবিক সংস্থা (IAEA)" id="q9">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">9</span>
+            <span>IAEA-এর বর্তমান নির্বাহী প্রধান বা মহাপরিচালক কে?</span>
+          </div>
+          <span class="bcs-tag">২৬তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(9, 0)">
+            <span class="opt-letter">ক</span>
+            <span>মোহাম্মদ আল বারাদি</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(9, 1)">
+            <span class="opt-letter">খ</span>
+            <span>আমর মুসা</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(9, 2)">
+            <span class="opt-letter">গ</span>
+            <span>রাফায়েল মারিয়ানো গ্রোসি (বর্তমান)</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(9, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>ইউকিয়া আমানো</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp9">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>২৬তম বিসিএসের সময় মহাপরিচালক ছিলেন মিশরের মোহাম্মদ আল বারাদি এবং পরবর্তীতে জাপানের ইউকিয়া আমানো। ২০১৯ সালের ৩ ডিসেম্বর থেকে বর্তমান পর্যন্ত আন্তর্জাতিক আণবিক শক্তি সংস্থার (IAEA) মহাপরিচালক হিসেবে দায়িত্ব পালন করছেন আর্জেন্টিনার পরমাণু কূটনীতিক রাফায়েল মারিয়ানো গ্রোসি (Rafael Mariano Grossi)।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(9)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="ইন্টারপোল ও বৈশ্বিক নিরাপত্তা" id="q10">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">10</span>
+            <span>ইন্টারপোলের (INTERPOL) সদর দপ্তর কোথায় অবস্থিত?</span>
+          </div>
+          <span class="bcs-tag">২৬তম/২৫তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(10, 0)">
+            <span class="opt-letter">ক</span>
+            <span>লন্ডন</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(10, 1)">
+            <span class="opt-letter">খ</span>
+            <span>লিওঁ (Lyon)</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(10, 2)">
+            <span class="opt-letter">গ</span>
+            <span>রোম</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(10, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>প্যারিস</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp10">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>আন্তর্জাতিক অপরাধ পুলিশ সংস্থা বা ইন্টারপোল (INTERPOL - International Criminal Police Organization)-এর প্রধান সদর দপ্তর ফ্রান্সের লিওঁ (Lyon) শহরে অবস্থিত। ১৯২৩ সালে অস্ট্রিয়ার ভিয়েনায় এটি গঠিত হয়েছিল, পরবর্তীতে ১৯৫৬ সালে ইন্টারপোল নামকরণ করা হয় এবং ১৯৮৯ সালে সচিবালয় ফ্রান্সে স্থানান্তরিত হয়। বাংলাদেশ ১৯৭৬ সালের ১৪ অক্টোবর ইন্টারপোলের সদস্যপদ পায়।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(10)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="আরব লীগ" id="q11">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">11</span>
+            <span>নিচের কোনটি আরব লীগের প্রতিষ্ঠাতা সদস্য দেশ নয়?</span>
+          </div>
+          <span class="bcs-tag">২৫তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(11, 0)">
+            <span class="opt-letter">ক</span>
+            <span>সংযুক্ত আরব আমিরাত</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(11, 1)">
+            <span class="opt-letter">খ</span>
+            <span>মিশর</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(11, 2)">
+            <span class="opt-letter">গ</span>
+            <span>লেবানন</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(11, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>ইয়েমেন</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp11">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>১৯৪৫ সালে আরব লীগের প্রতিষ্ঠাতা সদস্য ছিল মিশর, ইরাক, লেবানন, সৌদি আরব, সিরিয়া, জর্ডান এবং ইয়েমেন। সংযুক্ত আরব আমিরাত ১৯৭১ সালে ব্রিটিশ শাসন থেকে স্বাধীন হওয়ার পর আরব লীগের সদস্যপদ গ্রহণ করে; সুতরাং সংযুক্ত আরব আমিরাত প্রতিষ্ঠাতা সদস্য নয়।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(11)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="ইসলামী সহযোগিতা সংস্থা (OIC)" id="q12">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">12</span>
+            <span>ওআইসি (OIC)-এর বর্তমান মহাসচিব কোন দেশের নাগরিক?</span>
+          </div>
+          <span class="bcs-tag">২৪তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(12, 0)">
+            <span class="opt-letter">ক</span>
+            <span>বাংলাদেশ</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(12, 1)">
+            <span class="opt-letter">খ</span>
+            <span>তুরস্ক</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(12, 2)">
+            <span class="opt-letter">গ</span>
+            <span>চাদ (হুসেইন ইব্রাহিম তাহা)</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(12, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>সৌদি আরব</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp12">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>ইসলামী সহযোগিতা সংস্থা (OIC)-এর ১২তম এবং বর্তমান মহাসচিব হলেন আফ্রিকার দেশ চাদের কূটনীতিক হুসেইন ইব্রাহিম তাহা (Hissein Brahim Taha)। তিনি ২০২১ সালের ১৭ নভেম্বর দায়িত্ব গ্রহণ করেন। ওআইসির সদর দপ্তর সৌদি আরবের জেদ্দায় অবস্থিত।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(12)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="ফিলিস্তিন ও মধ্যপ্রাচ্য রাজনীতি" id="q13">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">13</span>
+            <span>প্যালেস্টাইন লিবারেশন অর্গানাইজেশন (PLO) কখন গঠিত হয়?</span>
+          </div>
+          <span class="bcs-tag">২৩তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(13, 0)">
+            <span class="opt-letter">ক</span>
+            <span>১৯৬৪ সালে</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(13, 1)">
+            <span class="opt-letter">খ</span>
+            <span>১৯৬৫ সালে</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(13, 2)">
+            <span class="opt-letter">গ</span>
+            <span>১৯৬৬ সালে</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(13, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>১৯৬৭ সালে</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp13">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>স্বাধীন ফিলিস্তিন রাষ্ট্র প্রতিষ্ঠার জাতীয় রাজনৈতিক সংগ্রামের লক্ষ্যে ১৯৬৪ সালের ২৮ মে জেরুজালেমে আরব লীগের সমর্থনে পিএলও (Palestine Liberation Organization) প্রতিষ্ঠিত হয়। এর প্রথম চেয়ারম্যান ছিলেন আহমদ শুকেরী। ১৯৬৯ সালে ইয়াসির আরাফাত পিএলওর নির্বাহী চেয়ারম্যান হন। ১৯৭৪ সালে জাতিসংঘ পিএলওকে ফিলিস্তিনি জনগণের একমাত্র বৈধ প্রতিনিধি হিসেবে স্বীকৃতি দেয়।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(13)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="জোট নিরপেক্ষ আন্দোলন (NAM)" id="q14">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">14</span>
+            <span>জোট নিরপেক্ষ আন্দোলন (NAM)-এর প্রথম শীর্ষ সম্মেলন কোথায় অনুষ্ঠিত হয়েছিল?</span>
+          </div>
+          <span class="bcs-tag">২২তম/১৭তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(14, 0)">
+            <span class="opt-letter">ক</span>
+            <span>দিল্লি, ১৯৫৭</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(14, 1)">
+            <span class="opt-letter">খ</span>
+            <span>বেলগ্রেড, ১৯৬১</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(14, 2)">
+            <span class="opt-letter">গ</span>
+            <span>ঢাকা, ১৯৭৩</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(14, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>কায়রো, ১৯৬৪</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp14">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>১৯৬১ সালের ১–৬ সেপ্টেম্বর সাবেক যুগোস্লাভিয়ার রাজধানী বেলগ্রেডে ২৫টি দেশের অংশগ্রহণে জোট নিরপেক্ষ আন্দোলন (NAM)-এর প্রথম আনুষ্ঠানিক শীর্ষ সম্মেলন অনুষ্ঠিত হয়। এই সম্মেলনে মার্শাল টিটো, জওহরলাল নেহরু, জামাল আবদেল নাসের ও সুকর্ণ মূল নেতৃত্ব দেন।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(14)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="কমনওয়েলথ" id="q15">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">15</span>
+            <span>কমনওয়েলথ সেক্রেটারিয়েট লন্ডনের যে ঐতিহাসিক অট্টালিকায় অবস্থিত তার নাম কী?</span>
+          </div>
+          <span class="bcs-tag">২২তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(15, 0)">
+            <span class="opt-letter">ক</span>
+            <span>মার্লবোরো হাউজ</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(15, 1)">
+            <span class="opt-letter">খ</span>
+            <span>হোয়াইট হাউজ</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(15, 2)">
+            <span class="opt-letter">গ</span>
+            <span>বাকিংহাম প্রাসাদ</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(15, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>দি চেকার্স</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp15">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>কমনওয়েলথ সচিবালয় বা সদর দপ্তর যুক্তরাজ্যের রাজধানী লন্ডনের সেন্ট জেমস-এ অবস্থিত বিখ্যাত রাজকীয় প্রাসাদ 'মার্লবোরো হাউজ' (Marlborough House)-এ অবস্থিত। ১৯৬৩ সালে রানি দ্বিতীয় এলিজাবেথ ভবনটি কমনওয়েলথ সচিবালয়ের স্থায়ী কার্যালয় হিসেবে ব্যবহারের অনুমতি দেন।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(15)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="ইসলামী সহযোগিতা সংস্থা (OIC)" id="q16">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">16</span>
+            <span>ইসলামী সম্মেলন সংস্থা (OIC)-র প্রধান কার্যালয় বা সদর দপ্তর কোথায়?</span>
+          </div>
+          <span class="bcs-tag">২২তম/১০ম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(16, 0)">
+            <span class="opt-letter">ক</span>
+            <span>তেহরান</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(16, 1)">
+            <span class="opt-letter">খ</span>
+            <span>জেদ্দা</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(16, 2)">
+            <span class="opt-letter">গ</span>
+            <span>কায়রো</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(16, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>রিয়াদ</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp16">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>ওআইসি (OIC)-এর স্থায়ী সদর দপ্তর সৌদি আরবের লোহিত সাগর তীরবর্তী শহর জেদ্দায় অবস্থিত (ফিলিস্তিনের আল-কুদস বা জেরুজালেম মুক্ত না হওয়া পর্যন্ত জেদ্দাকে ওআইসির অস্থায়ী সদর দপ্তর হিসেবে নির্ধারণ করা হয়েছে)।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(16)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="আন্তর্জাতিক পারমাণবিক সংস্থা (IAEA)" id="q17">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">17</span>
+            <span>আন্তর্জাতিক আণবিক শক্তি কমিশনের (IAEA) সদর দপ্তর কোথায় অবস্থিত?</span>
+          </div>
+          <span class="bcs-tag">২১তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(17, 0)">
+            <span class="opt-letter">ক</span>
+            <span>জেনেভায়</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(17, 1)">
+            <span class="opt-letter">খ</span>
+            <span>ওয়াশিংটনে</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(17, 2)">
+            <span class="opt-letter">গ</span>
+            <span>ভিয়েনায়</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(17, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>ব্রাসেলসে</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp17">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>IAEA-এর সদর দপ্তর অস্ট্রিয়ার ভিয়েনায় অবস্থিত। এটি বিশ্বের পারমাণবিক প্রযুক্তির সামরিক অপব্যবহার রোধ এবং শান্তিকামী বিদ্যুৎ ও গবেষণা ব্যবহারে তদারকি করে।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(17)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="কমনওয়েলথ" id="q18">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">18</span>
+            <span>কমনওয়েলথ থেকে কোন দেশকে সামরিক অভ্যুত্থানের কারণে একাধিকবার বরখাস্ত/বহিষ্কার করা হয়েছিল?</span>
+          </div>
+          <span class="bcs-tag">২১তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(18, 0)">
+            <span class="opt-letter">ক</span>
+            <span>গাম্বিয়া</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(18, 1)">
+            <span class="opt-letter">খ</span>
+            <span>শ্রীলঙ্কা</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(18, 2)">
+            <span class="opt-letter">গ</span>
+            <span>পাকিস্তান</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(18, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>ভারত</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp18">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>১৯৯৯ সালে জেনারেল পারভেজ মোশাররফের সামরিক অভ্যুত্থানের পর পাকিস্তানকে কমনওয়েলথ থেকে সাময়িক বহিষ্কার করা হয়েছিল (পরবর্তীতে ২০০৪ সালে পুনর্বহাল ও ২০০৭ সালে পুনরায় সাময়িক বরখাস্ত করা হয়)। ফিজির ক্ষেত্রেও অনুরূপ পদক্ষেপ নেওয়া হয়েছিল।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(18)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="কমনওয়েলথ" id="q19">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">19</span>
+            <span>কমনওয়েলথের বর্তমান সদস্য সংখ্যা কত?</span>
+          </div>
+          <span class="bcs-tag">১৭তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(19, 0)">
+            <span class="opt-letter">ক</span>
+            <span>৪৮টি</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(19, 1)">
+            <span class="opt-letter">খ</span>
+            <span>৫০টি</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(19, 2)">
+            <span class="opt-letter">গ</span>
+            <span>৫৪টি</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(19, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>৫৬টি</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp19">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>বর্তমানে কমনওয়েলথের মোট সদস্য দেশ ৫৬টি। ২০২২ সালের জুন মাসে রুয়ান্ডার কিগালিতে অনুষ্ঠিত সিএইচওজিএম (CHOGM) শীর্ষ সম্মেলনে পশ্চিম আফ্রিকার দুই দেশ গ্যাবন ও টোগো ৫৫তম ও ৫৬তম সদস্য হিসেবে অন্তর্ভুক্ত হয়।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(19)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="জোট নিরপেক্ষ আন্দোলন (NAM)" id="q20">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">20</span>
+            <span>জোট নিরপেক্ষ আন্দোলনের প্রথম শীর্ষ সম্মেলন কবে অনুষ্ঠিত হয়?</span>
+          </div>
+          <span class="bcs-tag">১৭তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(20, 0)">
+            <span class="opt-letter">ক</span>
+            <span>হারারে, ১৯৮৯ সালে</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(20, 1)">
+            <span class="opt-letter">খ</span>
+            <span>বেলগ্রেডে, ১৯৬১ সালে</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(20, 2)">
+            <span class="opt-letter">গ</span>
+            <span>হাভানা, ১৯৭৩ সালে</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(20, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>কায়রো, ১৯৭০ সালে</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp20">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>১৯৬১ সালের সেপ্টেম্বর মাসে যুগোস্লাভিয়ার রাজধানী বেলগ্রেডে প্রথম ন্যাম শীর্ষ সম্মেলন অনুষ্ঠিত হয়। এর উদ্দেশ্য ছিল শীতল যুদ্ধের সময় মার্কিন নেতৃত্বাধীন পুঁজিবাদী ও সোভিয়েত নেতৃত্বাধীন সমাজতান্ত্রিক পরাশক্তির কোনো জোটে না গিয়ে স্বাধীন জোট নিরপেক্ষ পররাষ্ট্রনীতি অনুসরণ করা।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(20)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="আরব লীগ" id="q21">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">21</span>
+            <span>'League of Arab States'-এর বর্তমান সদর দপ্তর কোথায় অবস্থিত?</span>
+          </div>
+          <span class="bcs-tag">১৫তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(21, 0)">
+            <span class="opt-letter">ক</span>
+            <span>তিউনিস</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(21, 1)">
+            <span class="opt-letter">খ</span>
+            <span>কায়রো</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(21, 2)">
+            <span class="opt-letter">গ</span>
+            <span>রাবাত</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(21, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>জেদ্দা</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp21">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>আরব লীগের স্থায়ী সদর দপ্তর মিশরের কায়রোতে অবস্থিত। ১৯৭৯ সালে মিশর কর্তৃক ইসরাইলের সাথে ক্যাম্প ডেভিড শান্তি চুক্তি স্বাক্ষরের পর আরব লীগ সদর দপ্তর সাময়িকভাবে তিউনিসিয়ার রাজধানী তিউনিসে সরিয়ে নেওয়া হয়েছিল। পরবর্তীতে ১৯৯০ সালে পুনরায় কায়রোতে ফিরিয়ে আনা হয়।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(21)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="কমনওয়েলথ" id="q22">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">22</span>
+            <span>কমনওয়েলথের কোন দেশটি যুক্তরাজ্যের রাজা/রানিকে এখনও তাদের সাংবিধানিক রাষ্ট্রপ্রধান হিসেবে স্বীকার করে?</span>
+          </div>
+          <span class="bcs-tag">১৪তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(22, 0)">
+            <span class="opt-letter">ক</span>
+            <span>অস্ট্রেলিয়া</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(22, 1)">
+            <span class="opt-letter">খ</span>
+            <span>কানাডা</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(22, 2)">
+            <span class="opt-letter">গ</span>
+            <span>সাইপ্রাস</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(22, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>অস্ট্রেলিয়া ও কানাডা উভয়ই</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp22">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>কমনওয়েলথভুক্ত ৫৬টি দেশের মধ্যে যুক্তরাজ্যসহ ১৪টি দেশে ব্রিটিশ রাজা তৃতীয় চার্লস সাংবিধানিক রাষ্ট্রপ্রধান (Commonwealth Realm)। এদের মধ্যে রয়েছে অস্ট্রেলিয়া, কানাডা, নিউজিল্যান্ড, জ্যামাইকা, পাপুয়া নিউগিনি, বাহামা ইত্যাদি।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(22)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="আরব লীগ" id="q23">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">23</span>
+            <span>নিচের কোন দেশটি আরব লীগের অন্তর্ভুক্ত নয়?</span>
+          </div>
+          <span class="bcs-tag">১৪তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(23, 0)">
+            <span class="opt-letter">ক</span>
+            <span>জর্ডান</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(23, 1)">
+            <span class="opt-letter">খ</span>
+            <span>লেবানন</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(23, 2)">
+            <span class="opt-letter">গ</span>
+            <span>ইরান</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(23, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>বাহরাইন</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp23">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>ইরান একটি অনারব পারস্য (ফারসিভাষী) রাষ্ট্র। তাই ইরান আরব লীগের সদস্য নয়। অন্যদিকে জর্ডান, লেবানন ও বাহরাইন আরব লীগের পূর্ণাঙ্গ সদস্য।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(23)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="ইসলামী সহযোগিতা সংস্থা (OIC)" id="q24">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">24</span>
+            <span>কোনটি ওআইসি (OIC)-এর প্রধান অঙ্গসংস্থা নয়?</span>
+          </div>
+          <span class="bcs-tag">১৪তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(24, 0)">
+            <span class="opt-letter">ক</span>
+            <span>আন্তর্জাতিক ইসলামী আদালত</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(24, 1)">
+            <span class="opt-letter">খ</span>
+            <span>সাধারণ সচিবালয়</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(24, 2)">
+            <span class="opt-letter">গ</span>
+            <span>ইসলামী বাণিজ্য উন্নয়ন কেন্দ্র (সহযোগী প্রতিষ্ঠান)</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(24, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>ইসলামী উন্নয়ন ব্যাংক</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp24">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>ওআইসির মূল অঙ্গসংস্থাগুলোর মধ্যে রয়েছে: ইসলামী শীর্ষ সম্মেলন, পররাষ্ট্রমন্ত্রীদের সম্মেলন (CFM), সাধারণ সচিবালয়, আন্তর্জাতিক ইসলামী বিচার আদালত ইত্যাদি। ইসলামী বাণিজ্য উন্নয়ন কেন্দ্র (ICDT) হলো মরক্কোর ক্যাসাব্লাঙ্কায় অবস্থিত ওআইসির একটি সহযোগী প্রতিষ্ঠান (Subsidiary Organ), মূল সাংবিধানিক অঙ্গসংস্থা নয়।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(24)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="আন্তর্জাতিক পারমাণবিক সংস্থা (IAEA)" id="q25">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">25</span>
+            <span>আন্তর্জাতিক আণবিক শক্তি সংস্থা (IAEA)-এর সদর দপ্তর কোথায়?</span>
+          </div>
+          <span class="bcs-tag">১১তম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(25, 0)">
+            <span class="opt-letter">ক</span>
+            <span>ভিয়েনা</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(25, 1)">
+            <span class="opt-letter">খ</span>
+            <span>বন</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(25, 2)">
+            <span class="opt-letter">গ</span>
+            <span>জেনেভা</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(25, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>রোম</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp25">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>IAEA-এর আন্তর্জাতিক সদর দপ্তর অস্ট্রিয়ার রাজধানী ভিয়েনার ভিয়েনা আন্তর্জাতিক কেন্দ্রে (VIC) অবস্থিত।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(25)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+
+      <div class="mcq-card" data-category="ফিলিস্তিন ও মধ্যপ্রাচ্য রাজনীতি" id="q26">
+        <div class="q-header">
+          <div class="q-num-title">
+            <span class="q-number">26</span>
+            <span>পিএলও (PLO)-এর সদর দপ্তর বর্তমানে কোথায় অবস্থিত?</span>
+          </div>
+          <span class="bcs-tag">১০ম বিসিএস</span>
+        </div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" onclick="handleSelect(26, 0)">
+            <span class="opt-letter">ক</span>
+            <span>তিউনিস</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(26, 1)">
+            <span class="opt-letter">খ</span>
+            <span>রামাল্লা (ফিলিস্তিন)</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(26, 2)">
+            <span class="opt-letter">গ</span>
+            <span>বেনগাজি</span>
+          </button>
+          <button class="opt-btn" onclick="handleSelect(26, 3)">
+            <span class="opt-letter">ঘ</span>
+            <span>মরক্কো</span>
+          </button>
+        </div>
+        <div class="exp-drawer" id="exp26">
+          <div class="exp-title"><span>💡</span> ব্যাখ্যা ও বিশ্লেষণ (উৎস: পাঠ্যবই)</div>
+          <div>১৯৮২ সালের বৈরুত যুদ্ধের পর ইয়াসির আরাফাতের নেতৃত্বে পিএলও সদর দপ্তর তিউনিসিয়ার রাজধানী তিউনিসে স্থানান্তর করা হয়েছিল। ১৯৯৩ সালের অসলো চুক্তির পর পিএলও ও ফিলিস্তিনি কর্তৃপক্ষ (PA) তাদের সদর দপ্তর আনুষ্ঠানিকভাবে ফিলিস্তিনের পশ্চিম তীরের রামাল্লা (Ramallah) শহরে স্থানান্তর করে।</div>
+        </div>
+        <button class="exp-toggle-btn" onclick="toggleExp(26)">
+          <span>📖 ব্যাখ্যা দেখুন</span>
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const mcqData = [{"id":1,"ans":0},{"id":2,"ans":2},{"id":3,"ans":0},{"id":4,"ans":1},{"id":5,"ans":1},{"id":6,"ans":2},{"id":7,"ans":0},{"id":8,"ans":3},{"id":9,"ans":2},{"id":10,"ans":1},{"id":11,"ans":0},{"id":12,"ans":2},{"id":13,"ans":0},{"id":14,"ans":1},{"id":15,"ans":0},{"id":16,"ans":1},{"id":17,"ans":2},{"id":18,"ans":2},{"id":19,"ans":3},{"id":20,"ans":1},{"id":21,"ans":1},{"id":22,"ans":3},{"id":23,"ans":2},{"id":24,"ans":2},{"id":25,"ans":0},{"id":26,"ans":1}];
+    let answeredState = {};
+
+    function updateStats() {
+      const answeredKeys = Object.keys(answeredState);
+      const totalAnswered = answeredKeys.length;
+      let totalCorrect = 0;
+      for (const id of answeredKeys) {
+        if (answeredState[id].isCorrect) totalCorrect++;
+      }
+      const accuracy = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
+      const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+      const toBn = n => String(n).replace(/[0-9]/g, d => bnDigits[d]);
+
+      document.getElementById('answeredCount').textContent = toBn(totalAnswered);
+      document.getElementById('correctCount').textContent = toBn(totalCorrect);
+      document.getElementById('accuracyRate').textContent = toBn(accuracy) + '%';
+    }
+
+    function handleSelect(qId, selectedIdx) {
+      if (answeredState[qId]) return;
+      const qObj = mcqData.find(item => item.id === qId);
+      if (!qObj) return;
+
+      const isCorrect = (selectedIdx === qObj.ans);
+      answeredState[qId] = { selected: selectedIdx, isCorrect: isCorrect };
+
+      const card = document.getElementById('q' + qId);
+      const buttons = card.querySelectorAll('.opt-btn');
+
+      buttons.forEach((btn, idx) => {
+        btn.classList.add('locked');
+        if (idx === qObj.ans) btn.classList.add('correct');
+        else if (idx === selectedIdx && !isCorrect) btn.classList.add('wrong');
+      });
+
+      const expDrawer = document.getElementById('exp' + qId);
+      if (expDrawer) expDrawer.classList.add('open');
+      updateStats();
+    }
+
+    function toggleExp(qId) {
+      const expDrawer = document.getElementById('exp' + qId);
+      if (expDrawer) expDrawer.classList.toggle('open');
+    }
+
+    document.getElementById('resetQuizBtn').addEventListener('click', () => {
+      answeredState = {};
+      document.querySelectorAll('.opt-btn').forEach(btn => btn.classList.remove('locked', 'correct', 'wrong'));
+      document.querySelectorAll('.exp-drawer').forEach(drawer => drawer.classList.remove('open'));
+      updateStats();
+    });
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.getAttribute('data-category');
+        document.querySelectorAll('.mcq-card').forEach(card => {
+          if (cat === 'all' || card.getAttribute('data-category') === cat) card.style.display = 'block';
+          else card.style.display = 'none';
+        });
+      });
+    });
+
+    const themeBtn = document.getElementById('themeToggleBtn');
+    themeBtn.addEventListener('click', () => {
+      const current = document.body.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', next);
+      themeBtn.textContent = next === 'dark' ? '🌙' : '☀️';
+    });
+
+    let currentScale = 1.0;
+    const updateFontScale = (scale) => {
+      currentScale = scale;
+      document.documentElement.style.setProperty('--font-scale', scale + 'rem');
+    };
+    document.getElementById('fontDecBtn').addEventListener('click', () => {
+      if (currentScale > 0.8) updateFontScale(+(currentScale - 0.05).toFixed(2));
+    });
+    document.getElementById('fontIncBtn').addEventListener('click', () => {
+      if (currentScale < 1.35) updateFontScale(+(currentScale + 0.05).toFixed(2));
+    });
+    document.getElementById('fontResetBtn').addEventListener('click', () => updateFontScale(1.0));
+
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const st = h.scrollTop || document.body.scrollTop;
+      const sh = h.scrollHeight || document.body.scrollHeight;
+      const percent = (st / (sh - h.clientHeight)) * 100;
+      document.getElementById('progressBar').style.width = Math.min(100, Math.max(0, percent)) + '%';
+    });
+  </script>
+
+  <script src="nav-component.js"></script>
+</body>
+</html>
