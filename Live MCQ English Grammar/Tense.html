@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch(e) {}
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+  <title>Tense | English Grammar বিসিএস প্রিলিমিনারি স্মার্ট ই-বুক</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../bangla-fonts.css">
+  <link rel="stylesheet" href="../paper-textures.css">
+  <style>
+    :root, [data-theme="light"] {
+      --font-scale: 1;
+      --bg-primary: #F8FAFC;
+      --bg-surface: #FFFFFF;
+      --text-primary: #0F172A;
+      --text-secondary: #334155;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --primary: #4338CA;
+      --primary-light: #EEF2FF;
+      --primary-hover: #3730A3;
+      --accent: #D97706;
+      --accent-light: #FEF3C7;
+      --success: #15803D;
+      --success-light: #DCFCE7;
+      --danger: #B91C1C;
+      --danger-light: #FEE2E2;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+      --radius-sm: 0.375rem;
+      --radius-md: 0.625rem;
+      --radius-lg: 0.875rem;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #090D16;
+      --bg-surface: #111827;
+      --text-primary: #F8FAFC;
+      --text-secondary: #CBD5E1;
+      --text-muted: #94A3B8;
+      --border-color: #1E293B;
+      --primary: #818CF8;
+      --primary-light: rgba(99, 102, 241, 0.15);
+      --primary-hover: #A5B4FC;
+      --accent: #F59E0B;
+      --accent-light: rgba(245, 158, 11, 0.15);
+      --success: #22C55E;
+      --success-light: rgba(34, 197, 94, 0.15);
+      --danger: #EF4444;
+      --danger-light: rgba(239, 68, 68, 0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { max-width: 100vw; overflow-x: clip; box-sizing: border-box; }
+    body {
+      font-family: 'Noto Serif Bengali', serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: calc(1rem * var(--font-scale));
+      line-height: 1.65;
+      padding-bottom: 5rem;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .container { max-width: 52rem; margin: 0 auto; padding: 1rem 0.85rem; }
+
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 0.4rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .nav-btn:hover { background: var(--primary-light); color: var(--primary); }
+
+    .theme-controls { display: flex; align-items: center; gap: 0.35rem; }
+    .scale-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      width: 2rem;
+      height: 2rem;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .scale-btn:hover { background: var(--primary-light); color: var(--primary); }
+
+    .chapter-header {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    .chapter-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      margin-bottom: 0.5rem;
+    }
+    .chapter-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 0.35rem;
+      line-height: 1.3;
+    }
+    .chapter-subtitle {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .matrix-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .matrix-title {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .matrix-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+      text-align: center;
+    }
+    .matrix-table th, .matrix-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.4rem 0.5rem;
+      white-space: nowrap;
+    }
+    .matrix-table th { background: var(--primary-light); color: var(--primary); font-weight: 700; }
+    .matrix-table td { background: var(--bg-surface); color: var(--text-secondary); }
+
+    .score-bar {
+      position: sticky;
+      top: 0.5rem;
+      z-index: 30;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.6rem 1rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(8px);
+    }
+    .score-item { font-size: 0.8125rem; font-weight: 600; color: var(--text-secondary); }
+    .score-num { font-weight: 800; padding: 0.1rem 0.4rem; border-radius: var(--radius-sm); }
+    .score-total { background: var(--primary-light); color: var(--primary); }
+    .score-correct { background: var(--success-light); color: var(--success); }
+    .score-wrong { background: var(--danger-light); color: var(--danger); }
+    .score-unanswered { background: var(--bg-primary); color: var(--text-muted); }
+
+    .q-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.15rem 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .q-card:hover { border-color: var(--primary); }
+
+    .q-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.85rem;
+    }
+    .q-num {
+      flex-shrink: 0;
+      width: 1.75rem;
+      height: 1.75rem;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.875rem;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .q-text {
+      flex-grow: 1;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+    .bcs-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 0.15rem 0.45rem;
+      border-radius: var(--radius-sm);
+      margin-left: 0.35rem;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    @media (max-width: 600px) {
+      .options-grid { grid-template-columns: 1fr; }
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 0.55rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s ease;
+      font-family: inherit;
+      width: 100%;
+    }
+    .opt-btn:hover:not(.locked) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .opt-label {
+      flex-shrink: 0;
+      width: 1.35rem;
+      height: 1.35rem;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .opt-btn.correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+      color: var(--success) !important;
+      font-weight: 700;
+    }
+    .opt-btn.correct .opt-label {
+      background: var(--success);
+      color: #FFFFFF;
+      border-color: var(--success);
+    }
+    .opt-btn.wrong {
+      background: var(--danger-light) !important;
+      border-color: var(--danger) !important;
+      color: var(--danger) !important;
+    }
+    .opt-btn.wrong .opt-label {
+      background: var(--danger);
+      color: #FFFFFF;
+      border-color: var(--danger);
+    }
+    .opt-btn.locked { cursor: default; }
+
+    .drawer-toggle {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0.35rem 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: inherit;
+    }
+    .drawer-toggle:hover { text-decoration: underline; }
+
+    .explanation-drawer {
+      display: none;
+      margin-top: 0.75rem;
+      padding: 0.85rem 1rem;
+      background: var(--bg-primary);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .explanation-drawer.open { display: block; }
+    .exp-ans { font-weight: 700; color: var(--success); margin-bottom: 0.35rem; }
+    .exp-title { font-weight: 700; color: var(--text-primary); margin: 0.4rem 0 0.2rem; }
+    .exp-src { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; font-style: italic; }
+
+    .rule-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .rule-box-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .content-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0;
+      font-size: 0.85rem;
+    }
+    .content-table th, .content-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 0.65rem;
+    }
+    .content-table th { background: var(--primary-light); color: var(--primary); font-weight: 700; text-align: left; }
+    .content-table td { background: var(--bg-surface); }
+  </style>
+</head>
+<body class="paper-lined-notebook font-nirlipta">
+  <div class="container">
+    <div class="top-nav">
+      <a href="index.html" class="nav-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        English Grammar সূচিপত্র
+      </a>
+      <div class="theme-controls">
+        <button class="scale-btn" onclick="changeFontSize(-0.05)" title="ফন্ট ছোট করুন">A-</button>
+        <button class="scale-btn" onclick="resetFontSize()" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="scale-btn" onclick="changeFontSize(0.05)" title="ফন্ট বড় করুন">A+</button>
+      </div>
+    </div>
+
+    <div class="chapter-header">
+      <span class="chapter-badge">অধ্যায় ৫</span>
+      <h1 class="chapter-title">Tense</h1>
+      <p class="chapter-subtitle">Live MCQ™ বিসিএস প্রিলিমিনারি বিষয়ভিত্তিক জব সলিউশন (পৃষ্ঠা ২২২–২২৩)</p>
+    </div>
+
+    <!-- BCS Analysis Matrix -->
+    <div class="matrix-card">
+      <div class="matrix-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+        বিসিএস প্রিলিমিনারি প্রশ্ন বিশ্লেষণ ছক
+      </div>
+      <div class="matrix-table-wrap">
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
+              <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
+              <th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>৫০তম</td><td>০</td><td>৪৪তম</td><td>১</td><td>৩৮তম</td><td>০</td></tr>
+            <tr><td>৪৯তম</td><td>০</td><td>৪৩তম</td><td>০</td><td>৩৭তম</td><td>০</td></tr>
+            <tr><td>৪৮তম</td><td>০</td><td>৪২তম</td><td>০</td><td>৩৬তম</td><td>২</td></tr>
+            <tr><td>৪৭তম</td><td>০</td><td>৪১তম</td><td>০</td><td>৩৫তম</td><td>০</td></tr>
+            <tr><td>৪৬তম</td><td>১</td><td>৪০তম</td><td>০</td><td>১০ম-৩৪তম</td><td>৭</td></tr>
+            <tr><td>৪৫তম</td><td>১</td><td>৩৯তম</td><td>০</td><td><strong>সর্বমোট</strong></td><td><strong>১২</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tense Reference Box -->
+    <div class="rule-box">
+      <div class="rule-box-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        Time Expressions & Tense Identification (মূল বইয়ের সারাংশ ছক)
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">সাধারণত Simple sentence এ কিছু কিছু নির্দিষ্ট Word বা phrase বাক্যে থাকলে নির্দিষ্ট tense হয়। যেমন—</p>
+      <div class="matrix-table-wrap">
+        <table class="content-table">
+          <thead>
+            <tr>
+              <th style="width: 60%;">Words / Phrase</th>
+              <th style="width: 40%;">Tense</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Generally, normally, regularly, usually, occasionally, daily, every day, always, often, sometimes</td>
+              <td><strong>Present Indefinite Tense</strong></td>
+            </tr>
+            <tr>
+              <td>Ago, yesterday, long since, long ago, last, once</td>
+              <td><strong>Past Indefinite Tense</strong></td>
+            </tr>
+            <tr>
+              <td>Tomorrow, next time, next year, coming year</td>
+              <td><strong>Future Indefinite Tense</strong></td>
+            </tr>
+            <tr>
+              <td>Now, at this moment, at present</td>
+              <td><strong>Present Continuous Tense</strong></td>
+            </tr>
+            <tr>
+              <td>At that moment, at that time, then</td>
+              <td><strong>Past Continuous Tense</strong></td>
+            </tr>
+            <tr>
+              <td>Just, just now, yet, already, never, ever, recently, lately</td>
+              <td><strong>Present Perfect Tense</strong></td>
+            </tr>
+            <tr>
+              <td>By this time, by next time, by this evening</td>
+              <td><strong>Future Perfect Tense</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Live Score Tracker -->
+    <div class="score-bar">
+      <div class="score-item">মোট: <span class="score-num score-total" id="totalCount">১২</span></div>
+      <div class="score-item">সঠিক: <span class="score-num score-correct" id="correctCount">০</span></div>
+      <div class="score-item">ভুল: <span class="score-num score-wrong" id="wrongCount">০</span></div>
+      <div class="score-item">অনুত্তরিত: <span class="score-num score-unanswered" id="unansweredCount">১২</span></div>
+    </div>
+
+    <!-- Questions Container -->
+    <div id="questionsContainer">
+
+      <!-- Question 1 -->
+      <div class="q-card" id="q1" data-correct="3">
+        <div class="q-header">
+          <span class="q-num">১</span>
+          <div class="q-text">
+            Samin is my colleague. I ___ him for ten years.
+            <span class="bcs-tag">৪৬তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(1, 1)"><span class="opt-label">ক</span> know</button>
+          <button class="opt-btn" onclick="checkAnswer(1, 2)"><span class="opt-label">খ</span> knew</button>
+          <button class="opt-btn" onclick="checkAnswer(1, 3)"><span class="opt-label">গ</span> have known</button>
+          <button class="opt-btn" onclick="checkAnswer(1, 4)"><span class="opt-label">ঘ</span> have been known</button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(1)">
+          <span>বিস্তারিত ব্যাখ্যা</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="explanation-drawer" id="drawer1">
+          <div class="exp-ans">সঠিক উত্তর: গ (have known)</div>
+          <p><strong>ব্যাখ্যা :</strong> For + Period of Time বা Since + Point of Time বাক্যে থাকলে Present Perfect Tense (Subject + have/has + Verb এর Past Participle form/V3) বা Perfect Continuous Tense (Subject + have been/has been + Verb এর Base form/V1 + ing) দুটোই হয়। এখানে For/since conjunction. যেমন-</p>
+          <p>• I have not seen him since yesterday.<br>
+          • We have been waiting for you since 10'O clock.<br>
+          • She has been on the phone for hours.<br>
+          • It has been raining for two days.</p>
+          <p>তবে সাধারণত Stative verbs, যেমন- know, see, understand, seem, suppose, have ইত্যাদি Non-progressive verb গুলোর Continuous form (ing) ব্যবহৃত হয় না। তাই প্রশ্নে Present Perfect Continuous Tense (have been knowing ✗) হবে না, অপশনে উল্লিখিত Present Perfect tense (have known ✓) হবে সঠিক উত্তর।</p>
+          <div class="matrix-table-wrap" style="margin: 0.5rem 0;">
+            <table class="content-table" style="font-size: 0.8rem;">
+              <tbody>
+                <tr><td>I am not knowing the answer</td><td style="color: var(--danger); font-weight: 700;">Incorrect</td></tr>
+                <tr><td>She is really liking you</td><td style="color: var(--danger); font-weight: 700;">Incorrect</td></tr>
+                <tr><td>He is seeming happy at that moment</td><td style="color: var(--danger); font-weight: 700;">Incorrect</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="exp-src">Source: Britannica, Cambridge dictionary, Learnenglish.britishcouncil.com</div>
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="q-card" id="q2" data-correct="3">
+        <div class="q-header">
+          <span class="q-num">২</span>
+          <div class="q-text">
+            Choose the right form of verb: The boy (to lie) on the floor yesterday.
+            <span class="bcs-tag">৪৫তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(2, 1)"><span class="opt-label">ক</span> lies</button>
+          <button class="opt-btn" onclick="checkAnswer(2, 2)"><span class="opt-label">খ</span> lied</button>
+          <button class="opt-btn" onclick="checkAnswer(2, 3)"><span class="opt-label">গ</span> lay</button>
+          <button class="opt-btn" onclick="checkAnswer(2, 4)"><span class="opt-label">ঘ</span> layed</button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(2)">
+          <span>বিস্তারিত ব্যাখ্যা</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="explanation-drawer" id="drawer2">
+          <div class="exp-ans">সঠিক উত্তর: গ (lay)</div>
+          <p><strong>ব্যাখ্যা :</strong> প্রদত্ত বাক্যের শেষে যেহেতু ‘yesterday’ রয়েছে সেহেতু পুরো বাক্যটি Past Indefinite Tense (Subject +Verb এর Past form/V2) এ হবে এবং lie-এর past form lay হবে।</p>
+        </div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="q-card" id="q3" data-correct="3">
+        <div class="q-header">
+          <span class="q-num">৩</span>
+          <div class="q-text">
+            Identify the right tense: 'My father ___ before I came'.
+            <span class="bcs-tag">৪৪তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(3, 1)"><span class="opt-label">ক</span> would be leaving</button>
+          <button class="opt-btn" onclick="checkAnswer(3, 2)"><span class="opt-label">খ</span> had been leaving</button>
+          <button class="opt-btn" onclick="checkAnswer(3, 3)"><span class="opt-label">গ</span> had left</button>
+          <button class="opt-btn" onclick="checkAnswer(3, 4)"><span class="opt-label">ঘ</span> will leave</button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(3)">
+          <span>বিস্তারিত ব্যাখ্যা</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="explanation-drawer" id="drawer3">
+          <div class="exp-ans">সঠিক উত্তর: গ (had left)</div>
+          <p><strong>ব্যাখ্যা :</strong> before- conjunction যুক্ত sentence এ before-এর আগে (before শব্দের অর্থ পূর্বে) Past Perfect Tense (Subject + had + Verb এর Past Participle form/V3) হয় এবং before-এর পরে Past Indefinite Tense (Subject + Verb এর Past form/V2) হবে। যেমন- The patient had died before the doctor came. এখানে before এর আগে তাই Past Perfect Tense হবে। অর্থাৎ উত্তর হবে had left.</p>
+          <p>উল্লেখ্য, after- conjunction যুক্ত sentence এ after-এর পরে (after মানে পরে) Past Perfect Tense এবং after এর পূর্বে Past Indefinite Tense হয়। যেমন- The patient died after the doctor had come.</p>
+        </div>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="q-card" id="q4" data-correct="1">
+        <div class="q-header">
+          <span class="q-num">৪</span>
+          <div class="q-text">
+            Teacher said, 'The earth ___ round the sun'.
+            <span class="bcs-tag">৩৬তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(4, 1)"><span class="opt-label">ক</span> moves</button>
+          <button class="opt-btn" onclick="checkAnswer(4, 2)"><span class="opt-label">খ</span> moved</button>
+          <button class="opt-btn" onclick="checkAnswer(4, 3)"><span class="opt-label">গ</span> has moved</button>
+          <button class="opt-btn" onclick="checkAnswer(4, 4)"><span class="opt-label">ঘ</span> will be moving</button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(4)">
+          <span>বিস্তারিত ব্যাখ্যা</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="explanation-drawer" id="drawer4">
+          <div class="exp-ans">সঠিক উত্তর: ক (moves)</div>
+          <p><strong>ব্যাখ্যা :</strong> 'General truth', 'Universal truth' সবসময় Present Indefinite Tense দ্বারা প্রকাশ করা হয়। Present Indefinite Tense-এর structure হলো: Subject + verb এর base form (Subject-টি third person singular number হলে মূল verb এর সাথে 's' বা 'es' যুক্ত হয়) + object. এখানে বাক্যটি 'Universal truth' হওয়ায় Present Indefinite Tense এ হবে। সুতরাং verb-টি হবে 'moves'.</p>
+        </div>
+      </div>
+
+      <!-- Question 5 -->
+      <div class="q-card" id="q5" data-correct="4">
+        <div class="q-header">
+          <span class="q-num">৫</span>
+          <div class="q-text">
+            Identify the correct sentence?
+            <span class="bcs-tag">৩৬তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(5, 1)"><span class="opt-label">ক</span> Yesterday, he has gone home</button>
+          <button class="opt-btn" onclick="checkAnswer(5, 2)"><span class="opt-label">খ</span> Yesterday, he did gone home</button>
+          <button class="opt-btn" onclick="checkAnswer(5, 3)"><span class="opt-label">গ</span> Yesterday, he had gone home</button>
+          <button class="opt-btn" onclick="checkAnswer(5, 4)"><span class="opt-label">ঘ</span> Yesterday, he went home</button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(5)">
+          <span>বিস্তারিত ব্যাখ্যা</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="explanation-drawer" id="drawer5">
+          <div class="exp-ans">সঠিক উত্তর: ঘ (Yesterday, he went home)</div>
+          <p><strong>ব্যাখ্যা :</strong> 'Yesterday' শব্দটি থাকায় বাক্যটি Past Indefinite Tense হবে। অর্থাৎ 'Yesterday, he went home' সঠিক।</p>
+        </div>
+      </div>
+
+      <!-- Question 6 -->
+      <div class="q-card" id="q6" data-correct="3">
+        <div class="q-header">
+          <span class="q-num">৬</span>
+          <div class="q-text">
+            The prices of rice are —
+            <span class="bcs-tag">২৮তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(6, 1)"><span class="opt-label">ক</span> raising</button>
+          <button class="opt-btn" onclick="checkAnswer(6, 2)"><span class="opt-label">খ</span> risen</button>
+          <button class="opt-btn" onclick="checkAnswer(6, 3)"><span class="opt-label">গ</span> rising</button>
+          <button class="opt-btn" onclick="checkAnswer(6, 4)"><span class="opt-label">ঘ</span> Raised</button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(6)">
+          <span>বিস্তারিত ব্যাখ্যা</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="explanation-drawer" id="drawer6">
+          <div class="exp-ans">সঠিক উত্তর: গ (rising)</div>
+          <p><strong>ব্যাখ্যা :</strong> Present Continuous Tense (Subject + am/is/are + verb এর Present form/V1 + ing).<br>
+          Example : He is swimming. Prices are rising.</p>
+        </div>
+      </div>
+
+      <!-- Question 7 -->
+      <div class="q-card" id="q7" data-correct="1">
+        <div class="q-header">
+          <span class="q-num">৭</span>
+          <div class="q-text">
+            He had written the book before he —
+            <span class="bcs-tag">২৮তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(7, 1)"><span class="opt-label">ক</span> retired</button>
+          <button class="opt-btn" onclick="checkAnswer(7, 2)"><span class="opt-label">খ</span> had retired</button>
+          <button class="opt-btn" onclick="checkAnswer(7, 3)"><span class="opt-label">গ</span> has retired</button>
+          <button class="opt-btn" onclick="checkAnswer(7, 4)"><span class="opt-label">ঘ</span> will be retired</button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(7)">
+          <span>বিস্তারিত ব্যাখ্যা</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="explanation-drawer" id="drawer7">
+          <div class="exp-ans">সঠিক উত্তর: ক (retired)</div>
+          <p><strong>ব্যাখ্যা :</strong> before- conjunction যুক্ত sentence এ before-এর আগে Past Perfect Tense হয় এবং before-এর পরে Past Indefinite Tense হবে। এখানে before এর আগে Past Perfect Tense আছে তাই before-এর পরে Past Indefinite Tense হবে। অর্থাৎ উত্তর হবে retired.</p>
+        </div>
+      </div>
+
+      <!-- Question 8 -->
+      <div class="q-card" id="q8" data-correct="2">
+        <div class="q-header">
+          <span class="q-num">৮</span>
+          <div class="q-text">
+            Choose the correct sentence.
+            <span class="bcs-tag">২৬তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(8, 1)"><span class="opt-label">ক</span> I have looked for a good doctor before I met you.</button>
+          <button class="opt-btn" onclick="checkAnswer(8, 2)"><span class="opt-label">খ</span> I had looked for a good doctor before I met you.</button>
+          <button class="opt-btn" onclick="checkAnswer(8, 3)"><span class="opt-label">গ</span> I looked for a good doctor before I had met you.</button>
+          <button class="opt-btn" onclick="checkAnswer(8, 4)"><span class="opt-label">ঘ</span> I am looking for a good doctor before meeting you.</button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(8)">
+          <span>বিস্তারিত ব্যাখ্যা</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="explanation-drawer" id="drawer8">
+          <div class="exp-ans">সঠিক উত্তর: খ (I had looked for a good doctor before I met you.)</div>
+          <p><strong>ব্যাখ্যা :</strong> before- conjunction যুক্ত sentence এ before-এর আগে Past Perfect Tense হয় এবং before-এর পরে Past Indefinite Tense হবে। এখানে তাই উত্তর হবে I had looked for a good doctor before I met you.</p>
+        </div>
+      </div>
+
+      <!-- Question 9 -->
+      <div class="q-card" id="q9" data-correct="2">
+        <div class="q-header">
+          <span class="q-num">৯</span>
+          <div class="q-text">
+            She told me his name after he ___.
+            <span class="bcs-tag">২৫তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(9, 1)"><span class="opt-label">ক</span> left</button>
+          <button class="opt-btn" onclick="checkAnswer(9, 2)"><span class="opt-label">খ</span> had left</button>
+          <button class="opt-btn" onclick="checkAnswer(9, 3)"><span class="opt-label">গ</span> has left</button>
+          <button class="opt-btn" onclick="checkAnswer(9, 4)"><span class="opt-label">ঘ</span> has been leaving</button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(9)">
+          <span>বিস্তারিত ব্যাখ্যা</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="explanation-drawer" id="drawer9">
+          <div class="exp-ans">সঠিক উত্তর: খ (had left)</div>
+          <p><strong>ব্যাখ্যা :</strong> after- conjunction যুক্ত sentence এ after-এর পরে Past Perfect Tense এবং after এর পূর্বে Past Indefinite Tense হয়। এখানে after- এর আগে Past Indefinite Tense আছে তাই after- এর পরে Past Perfect Tense হবে। অর্থাৎ উত্তর হবে had left.</p>
+        </div>
+      </div>
+
+      <!-- Question 10 -->
+      <div class="q-card" id="q10" data-correct="2">
+        <div class="q-header">
+          <span class="q-num">১০</span>
+          <div class="q-text">
+            Just now he ___ his dinner but he says he will see you when he's finished.
+            <span class="bcs-tag">২৪তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(10, 1)"><span class="opt-label">ক</span> is having</button>
+          <button class="opt-btn" onclick="checkAnswer(10, 2)"><span class="opt-label">খ</span> has had</button>
+          <button class="opt-btn" onclick="checkAnswer(10, 3)"><span class="opt-label">গ</span> was having</button>
+          <button class="opt-btn" onclick="checkAnswer(10, 4)"><span class="opt-label">ঘ</span> Had</button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(10)">
+          <span>বিস্তারিত ব্যাখ্যা</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="explanation-drawer" id="drawer10">
+          <div class="exp-ans">সঠিক উত্তর: খ (has had)</div>
+          <p><strong>ব্যাখ্যা :</strong> Just, just now বাক্যে থাকলে সাধারণত Present Perfect Tense হয়। তাই শূন্যস্থানে has had হবে।</p>
+        </div>
+      </div>
+
+      <!-- Question 11 -->
+      <div class="q-card" id="q11" data-correct="2">
+        <div class="q-header">
+          <span class="q-num">১১</span>
+          <div class="q-text">
+            How many eggs have your hens ___ this month? -Which is the following words best completes the above sentence?
+            <span class="bcs-tag">১৪তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(11, 1)"><span class="opt-label">ক</span> lain</button>
+          <button class="opt-btn" onclick="checkAnswer(11, 2)"><span class="opt-label">খ</span> laid</button>
+          <button class="opt-btn" onclick="checkAnswer(11, 3)"><span class="opt-label">গ</span> lay</button>
+          <button class="opt-btn" onclick="checkAnswer(11, 4)"><span class="opt-label">ঘ</span> lied</button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(11)">
+          <span>বিস্তারিত ব্যাখ্যা</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="explanation-drawer" id="drawer11">
+          <div class="exp-ans">সঠিক উত্তর: খ (laid)</div>
+          <p><strong>ব্যাখ্যা :</strong> Present Perfect Tense অনুযায়ী Have এর পর verb এর Past Participle (V3) হয়। এখানে verb হলো lay (ডিমপাড়া) যার Past form-laid ও Past Participle form-laid. প্রশ্নে যেহেতু ডিম পাড়া বুঝাচ্ছে তাই (lay)-এর Past Participle laid হবে সঠিক উত্তর।</p>
+        </div>
+      </div>
+
+      <!-- Question 12 -->
+      <div class="q-card" id="q12" data-correct="2">
+        <div class="q-header">
+          <span class="q-num">১২</span>
+          <div class="q-text">
+            We (not have) a holiday since the beginning of the year.-Which of the following verb forms best completes the above sentence?
+            <span class="bcs-tag">১৩তম বিসিএস</span>
+          </div>
+        </div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(12, 1)"><span class="opt-label">ক</span> did not have</button>
+          <button class="opt-btn" onclick="checkAnswer(12, 2)"><span class="opt-label">খ</span> have not had</button>
+          <button class="opt-btn" onclick="checkAnswer(12, 3)"><span class="opt-label">গ</span> are not having</button>
+          <button class="opt-btn" onclick="checkAnswer(12, 4)"><span class="opt-label">ঘ</span> had not had</button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(12)">
+          <span>বিস্তারিত ব্যাখ্যা</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="explanation-drawer" id="drawer12">
+          <div class="exp-ans">সঠিক উত্তর: খ (have not had)</div>
+          <p><strong>ব্যাখ্যা :</strong> Since + Point of Time বাক্যে থাকলে Present Perfect Tense (Subject + have/has + verb এর Past Participle/V3) হয়। তাই এখানে সঠিক উত্তর হবে We have not had a holiday since the beginning of the year. এখানে had হলো have এর Past Participle form.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="nav-component.js"></script>
+  <script>
+    // Universal Font Scaler
+    var currentScale = parseFloat(localStorage.getItem('ebk_font_scale') || '1');
+    function applyFontScale() {
+      document.documentElement.style.setProperty('--font-scale', currentScale);
+      localStorage.setItem('ebk_font_scale', currentScale);
+    }
+    function changeFontSize(delta) {
+      currentScale = Math.min(1.4, Math.max(0.85, currentScale + delta));
+      applyFontScale();
+    }
+    function resetFontSize() {
+      currentScale = 1;
+      applyFontScale();
+    }
+    applyFontScale();
+
+    // Drawer Toggle
+    function toggleDrawer(id) {
+      var d = document.getElementById('drawer' + id);
+      if (d) {
+        d.classList.toggle('open');
+      }
+    }
+
+    // Quiz Engine
+    var totalQuestions = 12;
+    var userAnswers = {};
+
+    function checkAnswer(qNum, selectedOpt) {
+      var card = document.getElementById('q' + qNum);
+      if (!card || card.classList.contains('answered')) return;
+
+      var correctOpt = parseInt(card.getAttribute('data-correct'), 10);
+      var buttons = card.querySelectorAll('.opt-btn');
+
+      card.classList.add('answered');
+      userAnswers[qNum] = selectedOpt;
+
+      buttons.forEach(function(btn, idx) {
+        btn.classList.add('locked');
+        var optIndex = idx + 1;
+        if (optIndex === correctOpt) {
+          btn.classList.add('correct');
+        } else if (optIndex === selectedOpt) {
+          btn.classList.add('wrong');
+        }
+      });
+
+      // Automatically open explanation drawer
+      var drawer = document.getElementById('drawer' + qNum);
+      if (drawer) drawer.classList.add('open');
+
+      updateScore();
+    }
+
+    function updateScore() {
+      var answered = Object.keys(userAnswers).length;
+      var correct = 0;
+      var wrong = 0;
+
+      for (var q in userAnswers) {
+        var card = document.getElementById('q' + q);
+        var correctOpt = parseInt(card.getAttribute('data-correct'), 10);
+        if (userAnswers[q] === correctOpt) {
+          correct++;
+        } else {
+          wrong++;
+        }
+      }
+
+      document.getElementById('correctCount').innerText = correct;
+      document.getElementById('wrongCount').innerText = wrong;
+      document.getElementById('unansweredCount').innerText = totalQuestions - answered;
+    }
+  </script>
+</body>
+</html>
