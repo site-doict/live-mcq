@@ -11,15 +11,22 @@ Use this skill whenever the user provides a folder or set of PDF files / book pa
 
 When given a PDF folder or PDF file:
 
-### Step 0: Pre-Flight Rules Verification (বাধ্যতামূলক প্রাক-চেক)
+### Step 0: Pre-Flight Rules Verification & Core Mission (বাধ্যতামূলক প্রাক-চেক)
 Before executing any generation or editing, you MUST verify against `GEMINI.md`:
-1. **Zero Fabrication:** Never add synthetic theoretical summaries, artificial timelines, or fictitious exam tags.
-2. **Authentic Source Only:** If the chapter is a question bank (e.g., Live MCQ), include only the authentic "বিসিএস প্রশ্ন বিশ্লেষণ ছক", questions, and explanations. Do NOT invent standalone theory cards before questions.
-3. **No Literal Translations:** Never translate acronyms or organizations word-for-word (e.g. MIGA, IFC, IDA). Use standard exam transliterations.
+1. **World-Class Vision:** Transform authentic book PDFs into a world-class, premium, and high-quality interactive smart e-book with elegant presentation, responsive tables, and interactive quiz mechanics.
+2. **Zero Fabrication:** Never add synthetic theoretical summaries, artificial timelines, or fictitious exam tags.
+3. **Missing Data Restoration:** Compare files with the authentic PDF. If any question, option, table, footnote, or explanation is present in the PDF but missing in the HTML, faithfully extract and add it.
+4. **Authentic Source Only:** If the chapter is a question bank (e.g., Live MCQ), include only the authentic "বিসিএস প্রশ্ন বিশ্লেষণ ছক", questions, and explanations. Do NOT invent standalone theory cards before questions.
+5. **No Literal Translations:** Never translate acronyms or organizations word-for-word (e.g. MIGA, IFC, IDA). Use standard exam transliterations.
+6. **Authentic Source Repositories:**
+   - **বাংলা সাহিত্য:** `C:\Users\PC User\Downloads\Live MCQ\3. বাংলা_সাহিত্য_.pdf`
+   - **বাংলাদেশ বিষয়াবলি:** `C:\Users\PC User\Downloads\Live MCQ\6. বাংলাদেশ_বিষয়াবলি_.pdf`
+   - **আন্তর্জাতিক বিষয়াবলি:** `C:\Users\PC User\Downloads\Live MCQ\7. আন্তর্জাতিক_বিষয়াবলি_.pdf`
+   - **বাংলা ভাষা ও ব্যাকরণ:** `C:\Users\PC User\Documents\Live MCQ Banlga Language\`
 
 ### Step 1: Source Discovery, Page Counting & Planning
-1. Inspect the folder and map each PDF/image to its chapter.
-2. For each chapter/PDF:
+1. Inspect the source PDF for the target subject and identify the page range of the chapter.
+2. For each chapter:
    - Extract the chapter title, starting and ending page numbers.
    - Physically count the EXACT number of distinct MCQs on the pages (from Question 1 to end).
    - **Warning on Analysis Matrix:** Do NOT sum numbers from the "বিসিএস প্রশ্ন বিশ্লেষণ ছক" to determine question counts; multiple BCS tags on a single question cause inflated counts. Physically count the distinct questions.
