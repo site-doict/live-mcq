@@ -324,7 +324,7 @@
   function setFont(fontOrId) {
     let font = null;
     if (typeof fontOrId === 'string') {
-      font = BANGLA_FONTS.find(f => f.id === fontOrId || f.name.toLowerCase() === fontOrId.toLowerCase()) || BANGLA_FONTS[0];
+      font = BANGLA_FONTS.find(f => f.id === fontOrId || f.name.toLowerCase() === fontOrId.toLowerCase() || f.className === fontOrId) || BANGLA_FONTS[0];
     } else if (fontOrId && fontOrId.family) {
       font = fontOrId;
     } else {
@@ -333,17 +333,28 @@
 
     state.activeFont = font;
 
-    // Fallback font stack
-    const fontStack = `'${font.family}', 'Nirlipta', 'FNRayhanHosthoshoily', 'Atma', 'Baloo Da 2', 'Hind Siliguri', cursive, sans-serif`;
+    // Handwriting font stack strictly for titles/headings
+    const titleFontStack = `'${font.family}', 'Nirlipta', 'FNRayhanHosthoshoily', cursive, sans-serif`;
+    const bodyFontStack = `'Noto Serif Bengali', 'Kalpurush', Georgia, serif`;
 
     // Inject/Update CSS variables on :root
-    document.documentElement.style.setProperty('--paper-font-active', fontStack);
-    document.documentElement.style.setProperty('--sk-font-bn', fontStack);
-    document.documentElement.style.setProperty('--paper-font', fontStack);
+    document.documentElement.style.setProperty('--paper-title-font', titleFontStack);
+    document.documentElement.style.setProperty('--paper-font-active', titleFontStack);
+    document.documentElement.style.setProperty('--paper-body-font', bodyFontStack);
+    document.documentElement.style.setProperty('--paper-font', titleFontStack);
 
-    // Update body classes for utility font targeting
+    // Update body classes for utility font targeting (controlled by bangla-fonts.css dual-tier rules)
     BANGLA_FONTS.forEach(f => document.body.classList.remove(f.className));
     document.body.classList.add(font.className);
+
+    // Also update target selector containers if present
+    try {
+      const targets = document.querySelectorAll(state.options.targetSelector);
+      targets.forEach(el => {
+        BANGLA_FONTS.forEach(f => el.classList.remove(f.className));
+        el.classList.add(font.className);
+      });
+    } catch (e) {}
 
     // Save if persistence enabled
     if (state.options.persistSelection) {
