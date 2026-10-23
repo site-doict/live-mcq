@@ -62,6 +62,15 @@
       description: 'মার্কার পেনের মতো দৃষ্টিনন্দন বাঁকানো অক্ষরবিন্যাস।'
     },
     {
+      id: 'begum-zia-curve',
+      name: 'Begum Zia Curve',
+      bnName: 'বেগম জিয়া কার্ভ',
+      family: 'BegumZiaCurve',
+      className: 'font-begum-zia-curve',
+      category: 'cursive',
+      description: 'অতিরিক্ত বাঁকানো ও দৃষ্টিনন্দন হস্তলিপিশৈলী।'
+    },
+    {
       id: 'anirban',
       name: 'Anirban',
       bnName: 'অনির্বাণ',
