@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>গাণিতিক যুক্তি (Mathematical Reasoning) - পূর্ণাঙ্গ ডিজিটাল ই-বুক পোর্টাল</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-body: #f8fafc;
+            --bg-card: rgba(255, 255, 255, 0.88);
+            --bg-surface: rgba(255, 255, 255, 0.85);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: rgba(148, 163, 184, 0.25);
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            --font-family: 'Noto Serif Bengali', Georgia, serif;
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #0b1120;
+            --bg-card: rgba(17, 24, 39, 0.88);
+            --bg-surface: rgba(30, 41, 59, 0.85);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 30px 16px 60px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .portal-container {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .portal-header {
+            text-align: center;
+            margin-bottom: 35px;
+            padding: 40px 24px;
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .top-bar-links {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: transform 0.2s;
+        }
+        .back-home:hover {
+            transform: translateX(-4px);
+        }
+
+        .theme-toggle-btn {
+            background: rgba(148, 163, 184, 0.15);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 6px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .badge-main {
+            display: inline-block;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+        }
+
+        .portal-title {
+            font-size: 2.3rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .portal-subtitle {
+            font-family: 'Inter', sans-serif !important;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+
+        .stats-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .stat-pill {
+            background: rgba(148, 163, 184, 0.12);
+            padding: 6px 16px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        .stat-pill strong {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        /* Search & Filter */
+        .controls-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px 12px 40px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg-surface);
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .filter-tabs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover, .tab-btn.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        /* Grid */
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .chapter-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 22px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .chapter-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px -5px rgba(37, 99, 235, 0.15);
+            border-color: var(--primary);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .ch-badge {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 3px 10px;
+            border-radius: 8px;
+        }
+
+        .cat-badge {
+            background: rgba(148, 163, 184, 0.15);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 8px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .card-subtitle {
+            font-family: 'Inter', sans-serif !important;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 14px;
+            border-top: 1px dashed var(--border);
+            font-size: 0.85rem;
+        }
+
+        .meta-item.highlight {
+            color: #16a34a;
+            font-weight: 700;
+        }
+
+        .card-design-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .design-tag {
+            background: rgba(148, 163, 184, 0.1);
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        /* Footer */
+        .portal-footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 25px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <div class="portal-container">
+        <!-- Header -->
+        <header class="portal-header">
+            <div class="top-bar-links">
+                <a href="../index.html" class="back-home">⬅ মূল লাইব্রেরি ড্যাশবোর্ড</a>
+                <button class="theme-toggle-btn" id="theme-btn" onclick="toggleTheme()">🌙</button>
+            </div>
+            <span class="badge-main">বিসিএস প্রিলিমিনারি বিষয়ভিত্তিক জব সল্যুশন</span>
+            <h1 class="portal-title">গাণিতিক যুক্তি</h1>
+            <div class="portal-subtitle">Live MCQ™ Mathematical Reasoning Complete E-Book Portal</div>
+            
+            <div class="stats-row">
+                <span class="stat-pill">মোট অধ্যায়: <strong>১৩টি</strong></span>
+                <span class="stat-pill">মোট প্রামাণ্য প্রশ্ন: <strong>538টি</strong></span>
+                <span class="stat-pill">বইয়ের পৃষ্ঠা: <strong>৮৮৫ - ৯৮৬ (১০৪ পৃষ্ঠা)</strong></span>
+            </div>
+        </header>
+
+        <!-- Search & Category Filters -->
+        <div class="controls-card">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="chapter-search" class="search-input" placeholder="অধ্যায় বা বিষয় খুঁজুন..." oninput="handleSearch()">
+            </div>
+            <div class="filter-tabs">
+                <button class="tab-btn active" data-cat="all" onclick="filterCategory('all', this)">সকল (13)</button>
+                <button class="tab-btn" data-cat="পাটিগণিত" onclick="filterCategory('পাটিগণিত', this)">পাটিগণিত (৪)</button>
+                <button class="tab-btn" data-cat="বীজগণিত" onclick="filterCategory('বীজগণিত', this)">বীজগণিত (৬)</button>
+                <button class="tab-btn" data-cat="জ্যামিতি" onclick="filterCategory('জ্যামিতি', this)">জ্যামিতি (৩)</button>
+            </div>
+        </div>
+
+        <!-- Chapters Grid -->
+        <div class="chapters-grid" id="chapters-grid">
+            
+    <a href="বাস্তব সংখ্যা, গড়, ভগ্নাংশ ও ল.সা.গু.-গ.সা.গু..html" class="chapter-card" data-category="পাটিগণিত" data-title="বাস্তব সংখ্যা, গড়, ভগ্নাংশ ও ল.সা.গু.-গ.সা.গু. Real Numbers, Average, Fractions, LCM & GCD">
+        <div class="card-header">
+            <span class="ch-badge">অধ্যায় ০১</span>
+            <span class="cat-badge">পাটিগণিত</span>
+        </div>
+        <h2 class="card-title">বাস্তব সংখ্যা, গড়, ভগ্নাংশ ও ল.সা.গু.-গ.সা.গু.</h2>
+        <div class="card-subtitle">Real Numbers, Average, Fractions, LCM & GCD</div>
+        <div class="card-meta">
+            <span class="meta-item">📖 পৃষ্ঠা: ৮৮৫-৮৯৪</span>
+            <span class="meta-item highlight">🎯 143 টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+        <div class="card-design-info">
+            <span class="design-tag">📄 পুরাতন</span>
+            <span class="design-tag">✍️ বেগম</span>
+        </div>
+    </a>
+    
+    <a href="শতকরা, মুনাফা ও লাভ-ক্ষতি.html" class="chapter-card" data-category="পাটিগণিত" data-title="শতকরা, মুনাফা ও লাভ-ক্ষতি Percentage, Profit, Loss & Compound Interest">
+        <div class="card-header">
+            <span class="ch-badge">অধ্যায় ০২</span>
+            <span class="cat-badge">পাটিগণিত</span>
+        </div>
+        <h2 class="card-title">শতকরা, মুনাফা ও লাভ-ক্ষতি</h2>
+        <div class="card-subtitle">Percentage, Profit, Loss & Compound Interest</div>
+        <div class="card-meta">
+            <span class="meta-item">📖 পৃষ্ঠা: ৮৯৫-৯০৬</span>
+            <span class="meta-item highlight">🎯 63 টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+        <div class="card-design-info">
+            <span class="design-tag">📄 কুঁচকানো</span>
+            <span class="design-tag">✍️ অনির্বাণ</span>
+        </div>
+    </a>
+    
+    <a href="অনুপাত, সমানুপাত ও অংশীদারি কারবার.html" class="chapter-card" data-category="পাটিগণিত" data-title="অনুপাত, সমানুপাত ও অংশীদারি কারবার Ratio, Proportion & Partnership Business">
+        <div class="card-header">
+            <span class="ch-badge">অধ্যায় ০৩</span>
+            <span class="cat-badge">পাটিগণিত</span>
+        </div>
+        <h2 class="card-title">অনুপাত, সমানুপাত ও অংশীদারি কারবার</h2>
+        <div class="card-subtitle">Ratio, Proportion & Partnership Business</div>
+        <div class="card-meta">
+            <span class="meta-item">📖 পৃষ্ঠা: ৯০৭-৯১২</span>
+            <span class="meta-item highlight">🎯 23 টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+        <div class="card-design-info">
+            <span class="design-tag">📄 কফির</span>
+            <span class="design-tag">✍️ বাঁধন</span>
+        </div>
+    </a>
+    
+    <a href="গতিবেগ, নৌকা, ট্রেন, সময় ও দূরত্ব.html" class="chapter-card" data-category="পাটিগণিত" data-title="গতিবেগ, নৌকা, ট্রেন, সময় ও দূরত্ব Speed, Boats, Trains, Time, Work & Distance">
+        <div class="card-header">
+            <span class="ch-badge">অধ্যায় ০৪</span>
+            <span class="cat-badge">পাটিগণিত</span>
+        </div>
+        <h2 class="card-title">গতিবেগ, নৌকা, ট্রেন, সময় ও দূরত্ব</h2>
+        <div class="card-subtitle">Speed, Boats, Trains, Time, Work & Distance</div>
+        <div class="card-meta">
+            <span class="meta-item">📖 পৃষ্ঠা: ৯১৩-৯১৮</span>
+            <span class="meta-item highlight">🎯 19 টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+        <div class="card-design-info">
+            <span class="design-tag">📄 হলুদ</span>
+            <span class="design-tag">✍️ শরীফ</span>
+        </div>
+    </a>
+    
+    <a href="বীজগাণিতিক সূত্রাবলি ও উৎপাদক বিশ্লেষণ.html" class="chapter-card" data-category="বীজগণিত" data-title="বীজগাণিতিক সূত্রাবলি ও উৎপাদক বিশ্লেষণ Algebraic Formulas & Polynomial Factorization">
+        <div class="card-header">
+            <span class="ch-badge">অধ্যায় ০৫</span>
+            <span class="cat-badge">বীজগণিত</span>
+        </div>
+        <h2 class="card-title">বীজগাণিতিক সূত্রাবলি ও উৎপাদক বিশ্লেষণ</h2>
+        <div class="card-subtitle">Algebraic Formulas & Polynomial Factorization</div>
+        <div class="card-meta">
+            <span class="meta-item">📖 পৃষ্ঠা: ৯১৯-৯২৭</span>
+            <span class="meta-item highlight">🎯 25 টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+        <div class="card-design-info">
+            <span class="design-tag">📄 পোড়া</span>
+            <span class="design-tag">✍️ হাসান</span>
+        </div>
+    </a>
+    
+    <a href="সরল ও দ্বিঘাত সমীকরণ এবং অসমতা.html" class="chapter-card" data-category="বীজগণিত" data-title="সরল ও দ্বিঘাত সমীকরণ এবং অসমতা Linear & Quadratic Equations and Inequalities">
+        <div class="card-header">
+            <span class="ch-badge">অধ্যায় ০৬</span>
+            <span class="cat-badge">বীজগণিত</span>
+        </div>
+        <h2 class="card-title">সরল ও দ্বিঘাত সমীকরণ এবং অসমতা</h2>
+        <div class="card-subtitle">Linear & Quadratic Equations and Inequalities</div>
+        <div class="card-meta">
+            <span class="meta-item">📖 পৃষ্ঠা: ৯২৮-৯৩৯</span>
+            <span class="meta-item highlight">🎯 87 টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+        <div class="card-design-info">
+            <span class="design-tag">📄 ক্রাফট</span>
+            <span class="design-tag">✍️ আহসান</span>
+        </div>
+    </a>
+    
+    <a href="সূচক ও লগারিদম.html" class="chapter-card" data-category="বীজগণিত" data-title="সূচক ও লগারিদম Indices, Exponents & Logarithms">
+        <div class="card-header">
+            <span class="ch-badge">অধ্যায় ০৭</span>
+            <span class="cat-badge">বীজগণিত</span>
+        </div>
+        <h2 class="card-title">সূচক ও লগারিদম</h2>
+        <div class="card-subtitle">Indices, Exponents & Logarithms</div>
+        <div class="card-meta">
+            <span class="meta-item">📖 পৃষ্ঠা: ৯৪০-৯৪৫</span>
+            <span class="meta-item highlight">🎯 23 টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+        <div class="card-design-info">
+            <span class="design-tag">📄 দাগটানা</span>
+            <span class="design-tag">✍️ মামুন</span>
+        </div>
+    </a>
+    
+    <a href="সমান্তর ও গুণোত্তর ধারা.html" class="chapter-card" data-category="বীজগণিত" data-title="সমান্তর ও গুণোত্তর ধারা Arithmetic & Geometric Progressions">
+        <div class="card-header">
+            <span class="ch-badge">অধ্যায় ০৮</span>
+            <span class="cat-badge">বীজগণিত</span>
+        </div>
+        <h2 class="card-title">সমান্তর ও গুণোত্তর ধারা</h2>
+        <div class="card-subtitle">Arithmetic & Geometric Progressions</div>
+        <div class="card-meta">
+            <span class="meta-item">📖 পৃষ্ঠা: ৯৪৬-৯৫১</span>
+            <span class="meta-item highlight">🎯 30 টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+        <div class="card-design-info">
+            <span class="design-tag">📄 পুরাতন</span>
+            <span class="design-tag">✍️ বাঁধন</span>
+        </div>
+    </a>
+    
+    <a href="সেট, ফাংশন ও ভেনচিত্র.html" class="chapter-card" data-category="বীজগণিত" data-title="সেট, ফাংশন ও ভেনচিত্র Set Theory, Relations, Functions & Venn Diagrams">
+        <div class="card-header">
+            <span class="ch-badge">অধ্যায় ০৯</span>
+            <span class="cat-badge">বীজগণিত</span>
+        </div>
+        <h2 class="card-title">সেট, ফাংশন ও ভেনচিত্র</h2>
+        <div class="card-subtitle">Set Theory, Relations, Functions & Venn Diagrams</div>
+        <div class="card-meta">
+            <span class="meta-item">📖 পৃষ্ঠা: ৯৫২-৯৫৬</span>
+            <span class="meta-item highlight">🎯 20 টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+        <div class="card-design-info">
+            <span class="design-tag">📄 ডট</span>
+            <span class="design-tag">✍️ কর্ণফুলী</span>
+        </div>
+    </a>
+    
+    <a href="বিন্যাস, সমাবেশ, পরিসংখ্যান ও সম্ভাব্যতা.html" class="chapter-card" data-category="বীজগণিত" data-title="বিন্যাস, সমাবেশ, পরিসংখ্যান ও সম্ভাব্যতা Permutations, Combinations, Statistics & Probability">
+        <div class="card-header">
+            <span class="ch-badge">অধ্যায় ১০</span>
+            <span class="cat-badge">বীজগণিত</span>
+        </div>
+        <h2 class="card-title">বিন্যাস, সমাবেশ, পরিসংখ্যান ও সম্ভাব্যতা</h2>
+        <div class="card-subtitle">Permutations, Combinations, Statistics & Probability</div>
+        <div class="card-meta">
+            <span class="meta-item">📖 পৃষ্ঠা: ৯৫৭-৯৬১</span>
+            <span class="meta-item highlight">🎯 19 টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+        <div class="card-design-info">
+            <span class="design-tag">📄 ব্লুপ্রিন্ট</span>
+            <span class="design-tag">✍️ স্বাধীনতা</span>
+        </div>
+    </a>
+    
+    <a href="রেখা, কোণ, বৃত্ত ও জ্যামিতিক উপপাদ্য.html" class="chapter-card" data-category="জ্যামিতি" data-title="রেখা, কোণ, বৃত্ত ও জ্যামিতিক উপপাদ্য Lines, Angles, Circles & Geometric Theorems">
+        <div class="card-header">
+            <span class="ch-badge">অধ্যায় ১১</span>
+            <span class="cat-badge">জ্যামিতি</span>
+        </div>
+        <h2 class="card-title">রেখা, কোণ, বৃত্ত ও জ্যামিতিক উপপাদ্য</h2>
+        <div class="card-subtitle">Lines, Angles, Circles & Geometric Theorems</div>
+        <div class="card-meta">
+            <span class="meta-item">📖 পৃষ্ঠা: ৯৬২-৯৬৯</span>
+            <span class="meta-item highlight">🎯 27 টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+        <div class="card-design-info">
+            <span class="design-tag">📄 ছেঁড়া</span>
+            <span class="design-tag">✍️ ত্রিমোহনা</span>
+        </div>
+    </a>
+    
+    <a href="ত্রিভুজ ও চতুর্ভুজ সংক্রান্ত সমস্যা ও সমাধান.html" class="chapter-card" data-category="জ্যামিতি" data-title="ত্রিভুজ ও চতুর্ভুজ সংক্রান্ত সমস্যা ও সমাধান Triangles, Quadrilaterals & Polygons">
+        <div class="card-header">
+            <span class="ch-badge">অধ্যায় ১২</span>
+            <span class="cat-badge">জ্যামিতি</span>
+        </div>
+        <h2 class="card-title">ত্রিভুজ ও চতুর্ভুজ সংক্রান্ত সমস্যা ও সমাধান</h2>
+        <div class="card-subtitle">Triangles, Quadrilaterals & Polygons</div>
+        <div class="card-meta">
+            <span class="meta-item">📖 পৃষ্ঠা: ৯৭০-৯৭৯</span>
+            <span class="meta-item highlight">🎯 45 টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+        <div class="card-design-info">
+            <span class="design-tag">📄 কুঁচকানো</span>
+            <span class="design-tag">✍️ প্রাপ্তি</span>
+        </div>
+    </a>
+    
+    <a href="পিথাগোরাসের উপপাদ্য, ত্রিকোণমিতি ও পরিমিতি.html" class="chapter-card" data-category="জ্যামিতি" data-title="পিথাগোরাসের উপপাদ্য, ত্রিকোণমিতি ও পরিমিতি Pythagorean Theorem, Trigonometry & Mensuration">
+        <div class="card-header">
+            <span class="ch-badge">অধ্যায় ১৩</span>
+            <span class="cat-badge">জ্যামিতি</span>
+        </div>
+        <h2 class="card-title">পিথাগোরাসের উপপাদ্য, ত্রিকোণমিতি ও পরিমিতি</h2>
+        <div class="card-subtitle">Pythagorean Theorem, Trigonometry & Mensuration</div>
+        <div class="card-meta">
+            <span class="meta-item">📖 পৃষ্ঠা: ৯৮০-৯৮৬</span>
+            <span class="meta-item highlight">🎯 14 টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+        <div class="card-design-info">
+            <span class="design-tag">📄 কফির</span>
+            <span class="design-tag">✍️ আবু</span>
+        </div>
+    </a>
+    
+        </div>
+
+        <!-- Footer -->
+        <footer class="portal-footer">
+            <p>Live MCQ™ বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ ডিজিটাল প্রশ্নব্যাংক ও প্রামাণ্য রিভিশন নোট</p>
+            <p style="margin-top: 6px; font-size: 0.8rem;">১০ম থেকে ৫০তম বিসিএস প্রিলিমিনারি পরীক্ষার শতভাগ প্রামাণ্য প্রশ্নাবলি ও সমাধান</p>
+        </footer>
+    </div>
+
+    <script>
+        let currentCat = 'all';
+
+        function filterCategory(cat, btn) {
+            currentCat = cat;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            applyFilters();
+        }
+
+        function handleSearch() {
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const query = document.getElementById('chapter-search').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.chapter-card');
+
+            cards.forEach(card => {
+                const cat = card.getAttribute('data-category');
+                const title = card.getAttribute('data-title').toLowerCase();
+                
+                const matchesCat = (currentCat === 'all' || cat === currentCat);
+                const matchesQuery = (!query || title.includes(query));
+
+                if (matchesCat && matchesQuery) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function toggleTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                document.getElementById('theme-btn').textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('theme-btn').textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.getElementById('theme-btn').textContent = '☀️';
+        }
+    </script>
+</body>
+</html>

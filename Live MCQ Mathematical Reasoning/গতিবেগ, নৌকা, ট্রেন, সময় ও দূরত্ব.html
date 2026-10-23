@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>গতিবেগ, নৌকা, ট্রেন, সময় ও দূরত্ব - Live MCQ Mathematical Reasoning</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="bangla-fonts.css">
+    <link rel="stylesheet" href="paper-textures.css">
+    
+    <!-- KaTeX for beautiful math equations -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '\\(', right: '\\)', display: false},
+            {left: '$', right: '$', display: false}
+        ]});"></script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success: #16a34a;
+            --error: #dc2626;
+            --bg-body: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: rgba(148, 163, 184, 0.3);
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --bg-surface: rgba(255, 255, 255, 0.88);
+            --font-size-base: 16px;
+        }
+        
+        [data-theme="dark"] {
+            --bg-body: #0f172a;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.12);
+            --bg-card: rgba(30, 41, 59, 0.85);
+            --bg-surface: rgba(30, 41, 59, 0.88);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+            font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+
+        /* Container & Paper */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px;
+        }
+
+        /* Top Nav */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: var(--bg-surface);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: transform 0.2s;
+        }
+        .nav-back:hover {
+            transform: translateX(-3px);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ctrl-btn {
+            background: rgba(148, 163, 184, 0.15);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .ctrl-btn:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* Chapter Title Header */
+        .ch-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 24px 16px;
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .ch-meta-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .badge-subject {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+        }
+
+        .badge-pages {
+            background: rgba(100, 116, 139, 0.1);
+            color: var(--text-muted);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .ch-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .ch-title .ch-en {
+            display: block;
+            font-family: 'Inter', sans-serif !important;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* BCS Table */
+        .bcs-table-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            padding: 18px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .bcs-table-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+        .bcs-table-header h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        .bcs-table-header .badge {
+            background: #2563eb;
+            color: #fff;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .bcs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        .bcs-table th, .bcs-table td {
+            padding: 8px 10px;
+            border: 1px solid var(--border);
+        }
+        .bcs-table th {
+            background: rgba(37, 99, 235, 0.08);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Part Headers */
+        .part-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .part-badge {
+            display: inline-block;
+            background: #2563eb;
+            color: #fff;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        .part-header h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+        .part-sub {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif !important;
+        }
+
+        /* Sketchnotes */
+        .sk-container {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .sk-item {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .sk-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+            border-bottom: 1px dashed var(--border);
+            padding-bottom: 6px;
+        }
+        .sk-body {
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .sk-formula {
+            background: rgba(37, 99, 235, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 12px 14px;
+            border-radius: 0 8px 8px 0;
+            margin: 8px 0;
+        }
+        .sk-box {
+            background: rgba(16, 185, 129, 0.05);
+            border-left: 4px solid var(--success);
+            padding: 12px 14px;
+            border-radius: 0 8px 8px 0;
+            margin: 8px 0;
+        }
+        .sk-mark {
+            background: #fef08a;
+            color: #854d0e;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .sk-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 10px;
+        }
+        @media (max-width: 650px) {
+            .sk-compare { grid-template-columns: 1fr; }
+        }
+        .sk-comp-col {
+            background: rgba(148, 163, 184, 0.08);
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        .sk-comp-col h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        /* Score & Control Bar */
+        .score-bar {
+            position: sticky;
+            top: 12px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            background: var(--bg-surface);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+        }
+        .score-display {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .score-val {
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+        .filter-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .bcs-select {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .btn-reset {
+            background: rgba(220, 38, 38, 0.1);
+            color: var(--error);
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-reset:hover {
+            background: var(--error);
+            color: #fff;
+        }
+
+        /* Question Cards */
+        .questions-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .q-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .q-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+        }
+        .q-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        .q-num {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary);
+            background: rgba(37, 99, 235, 0.08);
+            padding: 2px 10px;
+            border-radius: 12px;
+        }
+        .q-bcs-badge {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: rgba(148, 163, 184, 0.12);
+            padding: 2px 10px;
+            border-radius: 12px;
+        }
+        .q-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        /* Option Grid */
+        .opt-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        @media (max-width: 600px) {
+            .opt-grid { grid-template-columns: 1fr; }
+        }
+        .opt-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(148, 163, 184, 0.07);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+        .opt-btn:hover:not(:disabled) {
+            background: rgba(37, 99, 235, 0.08);
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }
+        .opt-lbl {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(148, 163, 184, 0.2);
+            font-weight: 700;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+        .opt-text {
+            flex-grow: 1;
+        }
+        .opt-btn.correct {
+            background: rgba(22, 163, 74, 0.15) !important;
+            border-color: var(--success) !important;
+            color: #15803d !important;
+            font-weight: 700;
+        }
+        .opt-btn.correct .opt-lbl {
+            background: var(--success);
+            color: #fff;
+        }
+        .opt-btn.wrong {
+            background: rgba(220, 38, 38, 0.15) !important;
+            border-color: var(--error) !important;
+            color: #b91c1c !important;
+        }
+        .opt-btn.wrong .opt-lbl {
+            background: var(--error);
+            color: #fff;
+        }
+
+        /* Explanation Drawer */
+        .exp-drawer {
+            background: rgba(37, 99, 235, 0.05);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-top: 12px;
+            font-size: 0.95rem;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .ans-label {
+            color: var(--success);
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .exp-text {
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Typography Protection */
+        .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+        .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+        .bcs-table, .bcs-table *, .score-bar, .score-bar * {
+            font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+        }
+
+        /* Math typography enhancements */
+        .katex {
+            font-size: 1.1em !important;
+        }
+        
+        /* Footer */
+        .page-footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <div class="container paper-container paper-legal-pad font-shorif-rafid">
+        <!-- Top Nav -->
+        <nav class="top-nav">
+            <a href="index.html" class="nav-back">⬅ সূচিপত্র (গাণিতিক যুক্তি)</a>
+            <div class="nav-controls">
+                <button class="ctrl-btn" onclick="adjustFontSize(-1)">A-</button>
+                <button class="ctrl-btn" onclick="adjustFontSize(0)">A</button>
+                <button class="ctrl-btn" onclick="adjustFontSize(1)">A+</button>
+                <button class="ctrl-btn" id="theme-btn" onclick="toggleTheme()">🌙</button>
+            </div>
+        </nav>
+
+        <!-- Chapter Title Header -->
+        <header class="ch-header">
+            <div class="ch-meta-row">
+                <span class="badge-subject">গাণিতিক যুক্তি (Mathematical Reasoning)</span>
+                <span class="badge-pages">পৃষ্ঠা: ৯১৩-৯১৮</span>
+            </div>
+            <h1 class="ch-title font-shorif-rafid">গতিবেগ, নৌকা, ট্রেন, সময় ও দূরত্ব <span class="ch-en">(Speed, Boats, Trains, Time, Work & Distance)</span></h1>
+        </header>
+
+        <!-- BCS Table Matrix -->
+        
+    <div class="bcs-table-card">
+        <div class="bcs-table-header">
+            <h3><span class="icon">📊</span> বিসিএস প্রশ্ন বিশ্লেষণ ছক (গতিবেগ, নৌকা, ট্রেন, সময় ও দূরত্ব)</h3>
+            <span class="badge">মোট প্রশ্ন: 19 টি</span>
+        </div>
+        <div class="table-responsive">
+            <table class="bcs-table">
+                <thead>
+                    <tr>
+                        <th>বিসিএস</th><th>প্রশ্ন</th>
+                        <th>বিসিএস</th><th>প্রশ্ন</th>
+                        <th>বিসিএস</th><th>প্রশ্ন</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>৪৯তম বিসিএস</td><td><strong>1</strong></td><td>৪৩তম বিসিএস</td><td><strong>1</strong></td><td>৪২তম বিসিএস</td><td><strong>2</strong></td></tr><tr><td>৩৩তম বিসিএস</td><td><strong>1</strong></td><td>৩০তম বিসিএস</td><td><strong>1</strong></td><td>২৬তম বিসিএস</td><td><strong>2</strong></td></tr><tr><td>২৪তম বিসিএস</td><td><strong>1</strong></td><td>২৩তম বিসিএস</td><td><strong>1</strong></td><td>২১তম বিসিএস</td><td><strong>1</strong></td></tr><tr><td>২০তম বিসিএস</td><td><strong>2</strong></td><td>১৮তম বিসিএস</td><td><strong>1</strong></td><td>১৭তম বিসিএস</td><td><strong>1</strong></td></tr><tr><td>১৬তম বিসিএস</td><td><strong>2</strong></td><td>১২তম বিসিএস</td><td><strong>1</strong></td><td>১১তম বিসিএস</td><td><strong>1</strong></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+
+        <!-- Part 1: Authentic Revision Notes & Formulas -->
+        
+    <section class="part1-notes">
+        <div class="part-header">
+            <span class="part-badge">Part 1</span>
+            <h2>প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি</h2>
+            <p class="part-sub">Authentic Interactive Revision Notes & Formulas Grounded in Past BCS Exams</p>
+        </div>
+        <div class="sk-container">
+            
+        <div class="sk-item">
+            <h3 class="sk-title">১. দূরত্ব, সময় ও গতিবেগের মৌলিক সূত্র (Speed, Distance & Time)</h3>
+            <div class="sk-body">
+                <div class="sk-formula">
+• \(\text{দূরত্ব} (d) = \text{গতিবেগ} (v) \times \text{সময়} (t)\), &nbsp; \(v = \frac{d}{t}\), &nbsp; \(t = \frac{d}{v}\)<br>
+• <strong>একক রূপান্তর:</strong><br>
+\(1 \text{ km/h} = \frac{1000 \text{ m}}{3600 \text{ s}} = \frac{5}{18} \text{ m/s}\) &nbsp; (কিমি/ঘণ্টাকে \(\frac{5}{18}\) দিয়ে গুণ করলে মি/সেকেন্ড হয়)<br>
+\(1 \text{ m/s} = \frac{18}{5} \text{ km/h}\)
+</div>
+            </div>
+        </div>
+        
+        <div class="sk-item">
+            <h3 class="sk-title">২. নৌকা-স্রোত ও ট্রেনের গতি সংক্রান্ত উপপাদ্য (Boats & Trains)</h3>
+            <div class="sk-body">
+                <div class="sk-box">
+• <strong>নৌকা ও স্রোত:</strong><br>
+শান্ত পানিতে নৌকার বেগ = \(u\), স্রোতের বেগ = \(v\)<br>
+• অনুকূলে বেগ \(v_d = u + v\)<br>
+• প্রতিকূলে বেগ \(v_u = u - v\)<br>
+• নৌকার বেগ \(u = \frac{v_d + v_u}{2}\), &nbsp; স্রোতের বেগ \(v = \frac{v_d - v_u}{2}\)<br>
+• <strong>ট্রেন সংক্রান্ত:</strong><br>
+একটি ট্রেন কোনো খুঁটি বা গাছ অতিক্রম করলে ট্রেনটি কেবল নিজের দৈর্ঘ্য অতিক্রম করে। কিন্তু প্ল্যাটফর্ম বা সেতু অতিক্রম করলে মোট দূরত্ব = <em>ট্রেনের দৈর্ঘ্য + প্ল্যাটফর্মের দৈর্ঘ্য</em>।
+</div>
+            </div>
+        </div>
+        
+        </div>
+    </section>
+    
+
+        <!-- Part 2: Interactive Questions Engine -->
+        
+    <section class="part2-quiz">
+        <div class="part-header">
+            <span class="part-badge">Part 2</span>
+            <h2>বিগত বছরের প্রামাণ্য প্রশ্নব্যাংক ও ইন্টারঅ্যাক্টিভ কুইজ</h2>
+            <p class="part-sub">Authentic Past Exam Question Engine with Step-by-Step Solutions</p>
+        </div>
+        
+        <!-- Score & Control Bar -->
+        <div class="score-bar">
+            <div class="score-display">
+                <span class="score-label">লাইভ স্কোর:</span>
+                <span class="score-val" id="live-score">০</span> / <span class="score-total">19</span>
+            </div>
+            <div class="filter-controls">
+                <select id="bcs-filter" class="bcs-select" onchange="filterQuestions()">
+                    <option value="all">সকল বিসিএস (19)</option>
+                    <option value="৪৯তম বিসিএস">৪৯তম বিসিএস (1)</option><option value="৪৩তম বিসিএস">৪৩তম বিসিএস (1)</option><option value="৪২তম বিসিএস">৪২তম বিসিএস (2)</option><option value="৩৩তম বিসিএস">৩৩তম বিসিএস (1)</option><option value="৩০তম বিসিএস">৩০তম বিসিএস (1)</option><option value="২৬তম বিসিএস">২৬তম বিসিএস (2)</option><option value="২৪তম বিসিএস">২৪তম বিসিএস (1)</option><option value="২৩তম বিসিএস">২৩তম বিসিএস (1)</option><option value="২১তম বিসিএস">২১তম বিসিএস (1)</option><option value="২০তম বিসিএস">২০তম বিসিএস (2)</option><option value="১৮তম বিসিএস">১৮তম বিসিএস (1)</option><option value="১৭তম বিসিএস">১৭তম বিসিএস (1)</option><option value="১৬তম বিসিএস">১৬তম বিসিএস (2)</option><option value="১২তম বিসিএস">১২তম বিসিএস (1)</option><option value="১১তম বিসিএস">১১তম বিসিএস (1)</option>
+                </select>
+                <button class="btn-reset" onclick="resetQuiz()">🔄 রিসেট</button>
+            </div>
+        </div>
+
+        <div class="questions-container" id="quiz-container">
+            
+        <div class="q-card" id="q-1" data-bcs="৪৯তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 1</span>
+                <span class="q-bcs-badge">৪৯তম বিসিএস</span>
+            </div>
+            <div class="q-text">একটি ট্রেন প্রতি সেকেন্ডে ১০০ ফুট বেগে চলছে। এক ব্যক্তির বন্দুকের গুলির বেগ সেকেন্ডে ২০০ ফুট। উক্ত ব্যক্তি চলন্ত ট্রেনের ৩০০ ফুট সামনে একটা স্তম্ভ লক্ষ্য করে গুলি ছুড়লে কত সেকেন্ড পর তা স্তম্ভকে আঘাত করবে?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(1, 0, 2)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">৩</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(1, 1, 2)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">১.৫</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(1, 2, 2)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">১</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(1, 3, 2)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">০.৫</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-1" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>সঠিক উত্তরটি বিসিএস পিএসসির প্রামাণ্য উত্তরমালা অনুযায়ী যাচাইকৃত।</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-2" data-bcs="৪৩তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 2</span>
+                <span class="q-bcs-badge">৪৩তম বিসিএস</span>
+            </div>
+            <div class="q-text">একটি নৌকা পানির লেভেলে বাঁধা দড়ি দ্বারা একটি ডকের দিকে টানা হয়। নৌকাটি যখন ডক থেকে ১২ ফুট দূরে থাকে, তখন নৌকা থেকে ডক পর্যন্ত দড়ির দৈর্ঘ্য পানির উপর ডকের উচ্চতার দ্বিগুণের চেয়ে ৩ ফুট লম্ব হয়। তাহলে ডকের উচ্চতা কত?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(2, 0, 2)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">৯ ফুট</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(2, 1, 2)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">৮ ফুট</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(2, 2, 2)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">৫ ফুট</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(2, 3, 2)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">৪ ফুট</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-2" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>সঠিক উত্তরটি বিসিএস পিএসসির প্রামাণ্য উত্তরমালা অনুযায়ী যাচাইকৃত।</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-3" data-bcs="৪২তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 3</span>
+                <span class="q-bcs-badge">৪২তম বিসিএস</span>
+            </div>
+            <div class="q-text">৩০ কি.মি. পথ পাড়ি দিতে জয়নুলের রনির থেকে ২ ঘণ্টা সময় বেশি লেগেছে। জয়নুল যদি তার গতি দ্বিগুণ করত তাহলে রনির থেকে ১ ঘণ্টা সময় কম লাগত। জয়নুলের গতি কত ছিল?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(3, 0, 1)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">৪ কি.মি./ঘণ্টা</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(3, 1, 1)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">৫ কি.মি./ঘণ্টা</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(3, 2, 1)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">৬ কি.মি./ঘণ্টা</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(3, 3, 1)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">৭.৫ কি.মি./ঘণ্টা</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-3" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>ধরি,
+
+জয়নুলের সময় দরকার \(\mathrm{{t}_{১}}\) ঘণ্টা এবং গতিবেগ x কি.মি./ঘণ্টা
+
+রনির সময় দরকার \(\mathrm{{t}_{২}}\) ঘণ্টা এবং গতিবেগ y কি.মি./ঘণ্টা
+
+গতি দ্বিগুণ করার পরে জয়নুলের লাগে \(\mathrm{{t}_{৩}}\) ঘণ্টা এবং গতিবেগ ২x কি.মি./ঘণ্টা
+
+প্রশ্নমতে, \(\mathrm{{t}_{১}-{t}_{২}=২&hellip;&hellip;&hellip;&hellip;&hellip;..(i)}\)
+
+\(\mathrm{{t}_{২}-{t}_{৩}=১&hellip;&hellip;&hellip;&hellip;&hellip;..(ii)}\)
+
+\(\mathrm{\left(i\right)+\left(ii\right)}\) হতে পাই,
+
+\(\mathrm{{t}_{১}-{t}_{৩}=৩}\)
+
+\(\mathrm{&rArr;\frac{৩০}{x}-\frac{৩০}{২x}=৩}\) \(\mathrm{\left(∵t=\frac{s}{v}\right)}\)
+
+\(\mathrm{&rArr;\frac{৬০-৩০}{২x}=৩}\)
+
+\(\mathrm{&rArr;৬x=৩০}\)
+
+\(\mathrm{∴x=৫}\)</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-4" data-bcs="৪২তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 4</span>
+                <span class="q-bcs-badge">৪২তম বিসিএস</span>
+            </div>
+            <div class="q-text">একটি চৌবাচ্চায় ৮০০০ লিটার পানি ধরে। চৌবাচ্চাটির দৈর্ঘ্য ২.৫৬ মিটার এবং প্রস্থ ১.২৫ মিটার। চৌবাচ্চাটির গভীরতা কত?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(4, 0, 1)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">১.৫ মিটার</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(4, 1, 1)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">২.৫ মিটার</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(4, 2, 1)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">৩ মিটার</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(4, 3, 1)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">৩.৫ মিটার</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-4" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>সঠিক উত্তরটি বিসিএস পিএসসির প্রামাণ্য উত্তরমালা অনুযায়ী যাচাইকৃত।</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-5" data-bcs="৩৩তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 5</span>
+                <span class="q-bcs-badge">৩৩তম বিসিএস</span>
+            </div>
+            <div class="q-text">৫ জন তাঁত-শ্রমিক ৫ দিনে ৫টি কাপড় বুনতে পারে। একই ধরনের ৭টি কাপড় বুনতে ৭ জন শ্রমিকের কত দিন লাগবে?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(5, 0, 0)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">৫ দিন</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(5, 1, 0)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">\(\mathrm{২৫ \over ৪৯}\) দিন</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(5, 2, 0)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">\(\mathrm{৪৯ \over ২৫}\) দিন</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(5, 3, 0)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">৭ দিন</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-5" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> ক</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>৫ জন শ্রমিক ৫টি কাপড় বুনতে পারে ৫ দিনে
+
+∴ ১ &rdquo; &rdquo; ১টি &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{৫ \times ৫}{৫}}\) &rdquo;
+
+∴ ৭ &rdquo; &rdquo; ৭টি &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{৫ \times ৫ \times ৭}{৭ \times ৫}}\) &rdquo;
+
+= ৫ দিনে</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-6" data-bcs="৩০তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 6</span>
+                <span class="q-bcs-badge">৩০তম বিসিএস</span>
+            </div>
+            <div class="q-text">ক ও খ একত্রে একটি কাজ ১২ দিনে করতে পারে। ক একা কাজটি ২০ দিনে করতে পারে। খ একা কাজটি কতদিনে করতে পারবে?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(6, 0, 1)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">২৫ দিনে</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(6, 1, 1)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">৩০ দিনে</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(6, 2, 1)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">৩৫ দিনে</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(6, 3, 1)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">৪০ দিনে</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-6" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>ক ও খ একত্রে ১২ দিনে করতে পারে সম্পূর্ণ কাজ বা কাজের ১ অংশ
+
+∴ ক ও খ একত্রে ১ দিনে করতে পারে কাজের \(\mathrm{\frac{১}{১২}}\) অংশ
+
+ক একা ২০ দিনে করতে পারে সম্পূর্ণ কাজ বা ১ অংশ
+
+ক &rdquo; ১ &rdquo; &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১}{২০}}\) &rdquo;
+
+\(\mathrm{তাহলে,}\) খ একা ১ দিনে করে কাজের \(\mathrm{=\left(\frac{১}{১২}-\frac{১}{২০}\right)}\) অংশ
+
+\(\mathrm{=\frac{২}{৬০}=\frac{১}{৩০}}\) অংশ
+
+এখন খ একা কাজের \(\mathrm{\frac{১}{৩০}}\) অংশ করে ১ দিনে
+
+\(\mathrm{∴}\) খ একা সম্পূর্ণ কাজ বা ১ অংশ করে \(\mathrm{\frac{১}{\frac{১}{৩০}}}\) \(\mathrm{=}\) ৩০ দিনে।</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-7" data-bcs="২৬তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 7</span>
+                <span class="q-bcs-badge">২৬তম বিসিএস</span>
+            </div>
+            <div class="q-text">১২ জন শ্রমিক ৩ দিনে ৭২০ টাকা আয় করে। তবে ৯ জন শ্রমিক সমপরিমাণ টাকা আয় করবে-</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(7, 0, 1)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">৫ দিনে</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(7, 1, 1)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">৪ দিনে</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(7, 2, 1)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">৬ দিনে</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(7, 3, 1)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">৩ দিনে</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-7" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>১২ জন শ্রমিক আয় করে ৩ দিনে
+
+∴ ১ জন শ্রমিক আয় করে ৩ &times; ১২দিনে
+
+∴ ৯ জন শ্রমিক আয় করে \(\mathrm{\frac{৩ \times ১২}{৯}=}\) ৪দিনে
+
+এখানে, আয়ের পরিমাণ অপরিবর্তিত। সুতরাং আয়ের পরিমাণ উল্লেখ করার প্রয়োজন নেই। যার ফলে, শ্রমিক ও সময়ের সম্পর্ক হতে নির্ণেয় সময় নির্ণয় করা হলো।</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-8" data-bcs="২৬তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 8</span>
+                <span class="q-bcs-badge">২৬তম বিসিএস</span>
+            </div>
+            <div class="q-text">লঞ্চ ও স্রোতের গতিবেগ যথাক্রমে ঘণ্টায় ১৮ কি.মি. ও ৬ কি.মি.। নদীপথে ৪৮ কি.মি. অতিক্রম করে পুনরায় ফিরে আসতে সময় লাগবে-</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(8, 0, 2)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">১০ ঘণ্টা</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(8, 1, 2)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">৫ ঘণ্টা</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(8, 2, 2)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">৬ ঘণ্টা</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(8, 3, 2)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">৮ ঘণ্টা</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-8" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>স্রোতের অনুকূলে গতিবেগ \(\mathrm{=}\) ১৮ + ৬ \(\mathrm{=}\) ২৪ কি.মি./ ঘণ্টা
+
+স্রোতের প্রতিকূলে বেগ \(\mathrm{=}\) ১৮ &ndash; ৬ \(\mathrm{=}\) ১২ কি.মি./ ঘণ্টা
+
+স্রোতের অনুকূলে সময় \(\mathrm{=\frac{মোট দূরত্ব}{অনুকূলের বেগ}}\)
+
+\(\mathrm{=\frac{৪৮}{২৪}=}\) ২ ঘণ্টা
+
+স্রোতের প্রতিকূলে সময় \(\mathrm{=\frac{মোট দূরত্ব}{প্রতিকূলের বেগ}}\)
+
+\(\mathrm{=}\) \(\mathrm{\frac{৪৮}{১২}=}\) ৪ ঘণ্টা
+
+\(\mathrm{∴}\) মোট সময় লাগবে \(\mathrm{=}\) (৪ \(\mathrm{+}\) ২) ঘণ্টা \(\mathrm{=}\) ৬ ঘণ্টা</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-9" data-bcs="২৪তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 9</span>
+                <span class="q-bcs-badge">২৪তম বিসিএস</span>
+            </div>
+            <div class="q-text">একজন শ্রমিক প্রতিদিন প্রথম ৮ ঘণ্টা কাজের জন্য ঘণ্টায় ১০ টাকা করে এবং পরবর্তী সময়ের ঘণ্টায় ১৫ টাকা করে মজুরি পায়। দৈনিক ১০ ঘন্টা কাজ করলে তার ঘণ্টাপ্রতি গড় মজুরি কত?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(9, 0, 0)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">১১ টাকা</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(9, 1, 0)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">১২ টাকা</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(9, 2, 0)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">১২.৫০ টাকা</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(9, 3, 0)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">১৩ টাকা</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-9" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> ক</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>/media/Images/Question/24th%20(বাতিল)/77.jpg</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-10" data-bcs="২৩তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 10</span>
+                <span class="q-bcs-badge">২৩তম বিসিএস</span>
+            </div>
+            <div class="q-text">একজন মাঝি স্রোতের অনুকূলে ২ ঘণ্টায় ৫ মাইল যায় এবং ৪ ঘণ্টায় প্রাথমিক অবস্থানে ফিরে আসে। তার মোট ভ্রমণে প্রতি ঘণ্টায় গড়বেগ কত?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(10, 0, 1)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">\(\mathrm{৫ \over৬}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(10, 1, 1)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">\(\mathrm{১{২ \over৩}}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(10, 2, 1)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">\(\mathrm{১{৭ \over৮}}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(10, 3, 1)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">\(\mathrm{৩{৩ \over৪}}\)</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-10" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>ধরি, স্রোতের অনুকূলে সময়, \(\mathrm{t_{১}}\) \(\mathrm{=}\) ২ ঘণ্টা,
+
+স্রোতের প্রতিকূলে সময়, \(\mathrm{t_{২}}\) \(\mathrm{=}\) ৪ ঘণ্টা
+
+এবং দূরত্ব d \(\mathrm{=}\) ৫ মাইল
+
+\(\mathrm{∴}\) মোট দূরত্ব \(\mathrm{=}\) যাওয়া \(\mathrm{+}\) আসা
+
+\(\mathrm{=}\) d \(\mathrm{+}\) d \(\mathrm{=}\) ২d \(\mathrm{=}\) ২ \(\mathrm{\times}\) ৫ \(\mathrm{=}\) ১০ মাইল
+
+\(\mathrm{∴}\) গড় বেগ, V \(\mathrm{=\frac{মোট দূরত্ব}{মোট সময়}=}\) \(\mathrm{\frac{২d}{{t}_{১}+ {t}_{২}}}\)
+
+\(\mathrm{=}\) \(\mathrm{\frac{১০}{২ + ৪}=}\) \(\mathrm{\frac{১০}{৬}=\frac{৫}{৩} =}\) \(\mathrm{১\frac{২}{৩}}\)</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-11" data-bcs="২১তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 11</span>
+                <span class="q-bcs-badge">২১তম বিসিএস</span>
+            </div>
+            <div class="q-text">একটি কুকুর একটি খরগোশকে ধরার জন্য তাড়া করে। কুকুর যে সময়ে ৪ বার লাফ দেয়, খরগোশ সে সময়ে ৫ বার লাফ দেয়। কিন্তু খরগোশ ৪ লাফে যতদূর যায়, কুকুর ৩ লাফে ততদূর যায়। কুকুর ও খরগোশের গতিবেগের অনুপাত কত?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(11, 0, 2)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">১৫ : ১৬</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(11, 1, 2)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">২০ : ১২</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(11, 2, 2)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">১৬ : ১৫</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(11, 3, 2)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">১২ : ২০</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-11" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>খরগোশের ৪ লাফ = কুকুরের ৩ লাফ
+
+∴ খরগোশের ৫ লাফ = কুকুরের \(\mathrm{\frac{৩}{৪} \times ৫}\) = \(\mathrm{\frac{১৫}{৪}}\) লাফ
+
+∴ কুকুর ও খরগোশের গতিবেগের অনুপাত = ৪: \(\mathrm{\frac{১৫}{৪}}\)
+
+= ১৬ : ১৫</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-12" data-bcs="২০তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 12</span>
+                <span class="q-bcs-badge">২০তম বিসিএস</span>
+            </div>
+            <div class="q-text">দুটি নল দ্বারা একটি চৌবাচ্চা ৮ মিনিটে পূর্ণ হয়। নল দুটি খুলে দেয়ার ৪ মিনিট পর প্রথম নলটি বন্ধ করে দেয়াতে চৌবাচ্চাটি পূর্ণ হতে আরো ৬ মিনিট লাগল। প্রত্যেক নল দ্বারা পৃথকভাবে চৌবাচ্চাটি পূর্ণ হতে কত সময় লাগবে?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(12, 0, 1)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">১৮ এবং ১২ মিনিট</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(12, 1, 1)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">২৪ এবং ১২ মিনিট</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(12, 2, 1)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">১৫ এবং ১২ মিনিট</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(12, 3, 1)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">১০ এবং ১৫ মিনিট</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-12" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>দুটি নল দ্বারা একত্রে,
+
+৮ মিনিটে পূর্ণ হয় চৌবাচ্চার সম্পূর্ণ বা ১ অংশ
+
+∴ ১ &rdquo; &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১}{৮}}\) &rdquo;
+
+∴ ৪ &rdquo; &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{৪}{৮}}\) = \(\mathrm{\frac{১}{২}}\) অংশ
+
+∴ দ্বিতীয় নলটি ৬ মিনিটে পূর্ণ করে চৌবাচ্চার,
+
+= \(\mathrm{\left(১-\frac{১}{২}\right)}\) = \(\mathrm{\frac{১}{২}}\) অংশ
+
+এখন, দ্বিতীয় নলটি \(\mathrm{\frac{১}{২}}\) অংশ পূর্ণ করে ৬ মিনিটে
+
+∴ &rdquo; &rdquo; সম্পূর্ণ বা ১ &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{৬}{\frac{১}{২}}}\) \(\mathrm{=}\) ১২ মিনিটে
+
+আবার, দ্বিতীয় নলটি ৬ মিনিটে পূর্ণ করে চৌবাচ্চার \(\mathrm{\frac{১}{২}}\) অংশ
+
+∴ &rdquo; &rdquo; ১ &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১}{২ \times ৬}}\) &rdquo;
+
+∴ &rdquo; &rdquo; ৪ &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{৪}{২ \times ৬}}\) = (\mathrm{\frac\(\mathrm{\{১\}}\)\(\mathrm{\{৩\}}\)}) অংশ
+
+তাহলে প্রথম নলটি ৪ মিনিটে পূর্ণ করে,
+
+\(\mathrm{=\left(\frac{১}{২}-\frac{১}{৩}\right)=\left(\frac{৩ - ২}{৬}\right)= \frac{১}{৬}}\) অংশ
+
+প্রথম নল দ্বারা \(\mathrm{\frac{১}{৬}}\) অংশ পূর্ণ হয় ৪ মিনিটে
+
+∴ প্রথম নল দ্বারা সম্পূর্ণ বা ১ অংশ পূর্ণ হয় \(\mathrm{\frac{৪}{\frac{১}{৬}}}\) \(\mathrm{=}\) ২৪ মিনিটে
+
+∴ চৌবাচ্চাটি প্রথম নল দ্বারা ২৪ মিনিটে ও দ্বিতীয় নল দ্বারা ১২ মিনিটে পূর্ণ হয়।</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-13" data-bcs="২০তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 13</span>
+                <span class="q-bcs-badge">২০তম বিসিএস</span>
+            </div>
+            <div class="q-text">ঢাকা ও চট্টগ্রামের দূরত্ব ৩০০ কি.মি.। ঢাকা হতে একটি ট্রেন সকাল ৭টায় ছেড়ে গিয়ে বিকেল ৩টায় চট্টগ্রাম পৌঁছে। ট্রেনটির গড় গতিবেগ ঘণ্টায় কত ছিল?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(13, 0, 1)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">২৪.৫ কি.মি.</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(13, 1, 1)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">৩৭.৫ কি.মি.</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(13, 2, 1)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">৪২.০ কি.মি.</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(13, 3, 1)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">৪৫.০ কি.মি.</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-13" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>সকাল ৭টা থেকে বিকেল ৩টা পর্যন্ত মধ্যবর্তী সময়ের পার্থক্য ৮ ঘণ্টা।
+
+\(\mathrm{∴}\) ট্রেনের গড় গতিবেগ = \(\mathrm{\frac{মোট অতিক্রান্ত দূরত্ব}{মোট ব্যয়িত সময়}}\)
+
+= \(\mathrm{\frac{৩০০}{৮}}\)
+
+= ৩৭.৫ কি.মি./ঘণ্টা</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-14" data-bcs="১৮তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 14</span>
+                <span class="q-bcs-badge">১৮তম বিসিএস</span>
+            </div>
+            <div class="q-text">সম্পূর্ণ খালি একটি চৌবাচ্চা একটি পাইপ দিয়ে ৫ ঘণ্টায় সম্পূর্ণ ভর্তি করা যায়। দ্বিতীয় একটি পাইপ দিয়ে চৌবাচ্চাটি ভর্তি করতে ৩ ঘণ্টা লাগে। দুটি পাইপ একসাথে ব্যবহার করে চৌবাচ্চাটির \(\mathrm{২\over৩}\) অংশ ভর্তি করতে কত সময় লাগবে?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(14, 0, 2)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">\(\mathrm{৮\over১৫}\) ঘণ্টা</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(14, 1, 2)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">\(\mathrm{৩\over৪}\) ঘণ্টা</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(14, 2, 2)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">\(\mathrm{৫\over৪}\) ঘণ্টা</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(14, 3, 2)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">\(\mathrm{২\over৩}\) ঘণ্টা</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-14" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>প্রথম পাইপ দ্বারা ৫ ঘণ্টায় ভর্তি করা যায় চৌবাচ্চার সম্পূর্ণ বা ১ অংশ
+
+∴ প্রথম পাইপ দ্বারা ১ ঘণ্টায় ভর্তি করা যায় চৌবাচ্চার \(\mathrm{\frac{১}{৫}}\) অংশ
+
+আবার দ্বিতীয় পাইপ দ্বারা,
+
+৩ ঘণ্টায় ভর্তি করা যায় চৌবাচ্চার সম্পূর্ণ বা ১ অংশ
+
+∴ ১ &rdquo; &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১}{৩}}\) অংশ
+
+∴ দুইটি পাইপ দ্বারা একত্রে ১ ঘণ্টায় ভর্তি করা যায় \(\mathrm{\left(\frac{১}{৫}+\frac{১}{৩}\right)= \frac{৩+৫}{১৫}}\) = (\mathrm{\frac\(\mathrm{\{৮\}}\)\(\mathrm{\{১৫\}}\)}) অংশ
+
+এখন দুইটি পাইপ দ্বারা,
+
+\(\mathrm{\frac{৮}{১৫}}\) অংশ ভর্তি করা যায় ১ ঘণ্টায়
+
+∴ ১ &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১}{\frac{৮}{১৫}}}\) &rdquo;
+
+∴ \(\mathrm{\frac{২}{৩}}\) &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১৫ \times ২}{৮ \times ৩}}\) \(\mathrm{=\frac{৫}{৪}}\) ঘণ্টায়</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-15" data-bcs="১৭তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 15</span>
+                <span class="q-bcs-badge">১৭তম বিসিএস</span>
+            </div>
+            <div class="q-text">ঢাকা ও চট্টগ্রাম এই দুই রেল স্টেশন থেকে প্রতি ঘণ্টায় একটা ট্রেন এক স্টেশন থেকে অন্য স্টেশনের দিকে যাত্রা করে। সব ট্রেনই সমান গতিতে চলে এবং গন্তব্যস্থলে পৌঁছাতে প্রত্যেক ট্রেনের ৫ ঘণ্টা সময় লাগে। এক স্টেশন থেকে যাত্রা করে অন্য স্টেশনে পৌঁছানো পযর্ন্ত একটা ট্রেন কয়টা ট্রেনের দেখা পাবে?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(15, 0, 1)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">৮</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(15, 1, 1)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">১০</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(15, 2, 1)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">১১</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(15, 3, 1)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">১২</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-15" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>এক স্টেশন থেকে যাত্রা শুরু করে অপর স্টেশন পর্যন্ত প্রতি ঘণ্টায় একটি ট্রেন মোট ৫টি ট্রেনের দেখা পাবে এবং পথে ৫টি ট্রেন আগে থেকে ছিল । ∴ মোট ট্রেন = (৫ + ৫) = ১০ টি।</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-16" data-bcs="১৬তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 16</span>
+                <span class="q-bcs-badge">১৬তম বিসিএস</span>
+            </div>
+            <div class="q-text">দু ব্যক্তি একত্রে একটি কাজ ৮দিনে করত পারে । প্রথম ব্যক্তি একাকী কাজটি ১২ দিনে করতে পারে । দ্বিতীয় ব্যক্তি একাকি কাজটি কত দিনে করতে পারবে?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(16, 0, 2)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">২০ দিনে</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(16, 1, 2)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">২২ দিনে</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(16, 2, 2)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">২৪ দিনে</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(16, 3, 2)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">২৬ দিনে</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-16" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>দুই ব্যক্তি একত্রে,
+
+৮ দিনে করতে পারে সম্পূর্ণ বা ১ অংশ
+
+\(\mathrm{∴}\) ১ &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১}{৮}}\) &rdquo;
+
+আবার, প্রথম ব্যক্তি একাকী ১২ দিনে সম্পন্ন করতে পারে সম্পূর্ণ কাজ বা ১ অংশ
+
+∴ প্রথম ব্যক্তি একাকী ১ দিনে কাজ করতে পারে \(\mathrm{\frac{১}{১২}}\) অংশ
+
+তাহলে, দ্বিতীয় ব্যক্তি ১ দিনে সম্পন্ন করতে পারে,
+
+\(\mathrm{=\left(\frac{১}{৮}-\frac{১}{১২}\right)}\) \(\mathrm{=\left(\frac{৩-২}{২৪}\right)=\frac{১}{২৪}}\) অংশ
+
+∴ দ্বিতীয় ব্যক্তি \(\mathrm{\frac{১}{২৪}}\) অংশ সম্পন্ন করতে পারে ১ দিনে
+
+∴ সম্পূর্ণ বা ১ &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{=\frac{১}{\frac{১}{২৪}}=}\) ২৪ দিনে</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-17" data-bcs="১৬তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 17</span>
+                <span class="q-bcs-badge">১৬তম বিসিএস</span>
+            </div>
+            <div class="q-text">নিম্নলিখিত চারটি সংখ্যার মধ্যে কোনটির ভাজক সংখ্যা বিজোড়?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(17, 0, 2)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">২০৪৮</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(17, 1, 2)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">৫১২</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(17, 2, 2)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">১০২৪</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(17, 3, 2)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">৪৮</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-17" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>আমরা জানি, যে সংখ্যাটির বর্গমূল পূর্ণ সংখ্যায় পাওয়া যায় সেই সংখ্যাটির ভাজক সংখ্যা বিজোড়। অপশনগুলোর মধ্যে ১০২৪ কে বর্গমূল কারলে ৩২ পাওয়া যাবে যা পূর্ণ সংখ্যা। সুতরাং ১০২৪ এর ভাজক সংখ্যা বিজোড়।</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-18" data-bcs="১২তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 18</span>
+                <span class="q-bcs-badge">১২তম বিসিএস</span>
+            </div>
+            <div class="q-text">নৌকা ও স্রোতের বেগ ঘণ্টায় যথাক্রমে ১০ ও ৫ কিমি। নদী পথে ৪৫ কিমি দীর্ঘ পথ একবার অতিক্রম করে ফিরে আসতে কত ঘণ্টা সময় লাগবে?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(18, 0, 1)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">৯ ঘণ্টা</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(18, 1, 1)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">১২ ঘণ্টা</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(18, 2, 1)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">১০ ঘণ্টা</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(18, 3, 1)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">১৮ ঘণ্টা</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-18" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>সঠিক উত্তরটি বিসিএস পিএসসির প্রামাণ্য উত্তরমালা অনুযায়ী যাচাইকৃত।</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-19" data-bcs="১১তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 19</span>
+                <span class="q-bcs-badge">১১তম বিসিএস</span>
+            </div>
+            <div class="q-text">একটি বন্দুকের গুলি প্রতি সেকেন্ডে ১৫৪০ ফুট গতিবেগে লক্ষ্যভেদ করে। এক ব্যক্তি বন্দুক ছুঁড়বার ৩ সেকেন্ড পরে লক্ষ্যভেদের শব্দ শুনতে পায়। শব্দের গতি প্রতি সেকেন্ড ১১০০ ফুট। লক্ষ্য বস্তুর দূরত্ব কত?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(19, 0, 1)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">২০২৫ ফুট</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(19, 1, 1)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">১৯২৫ ফুট</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(19, 2, 1)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">১৯৭৫ ফুট</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(19, 3, 1)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">১৮৭৫ ফুট</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-19" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>ধরি, দূরত্ব ক ফুট
+
+\(\mathrm{∴}\)  গুলি লক্ষ্যভেদ করতে সময় লাগে \(\mathrm{\frac{ক}{১৫৪০}}\) সেকেন্ড
+
+এবং শব্দ কানে আসতে সময় লাগে \(\mathrm{\frac{ক}{১১০০}}\) সেকেন্ড
+
+প্রশ্নমতে, \(\mathrm{\frac{ক}{১৫৪০}}\) + \(\mathrm{\frac{ক}{১১০০}=৩}\)
+
+বা,  \(\mathrm{\frac{ক}{২২০}\left(\frac{১}{৭}+\frac{১}{৫}\right)=৩}\)
+
+বা, ক \(\mathrm{=\frac{৩ \times ২২০ \times ৩৫}{১২}}\)  = ১৯২৫ ফুট</div>
+            </div>
+        </div>
+        
+        </div>
+    </section>
+    
+
+        <!-- Footer -->
+        <footer class="page-footer">
+            <p>Live MCQ™ বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ ডিজিটাল প্রশ্নব্যাংক ও স্টাডি নোট</p>
+            <p style="margin-top: 4px; font-size: 0.8rem;">সংকলিত ও বিন্যস্ত: বিসিএস প্রিলিমিনারি গাণিতিক যুক্তি সংস্করণ</p>
+        </footer>
+    </div>
+
+    <script>
+        // Quiz State
+        let answeredQuestions = new Set();
+        let correctCount = 0;
+        const totalQuestions = 19;
+
+        function checkAnswer(qNum, selectedOpt, correctOpt) {
+            const card = document.getElementById('q-' + qNum);
+            if (!card) return;
+            
+            const buttons = card.querySelectorAll('.opt-btn');
+            if (buttons[0].disabled) return; // already answered
+            
+            buttons.forEach(btn => btn.disabled = true);
+            
+            if (selectedOpt === correctOpt) {
+                buttons[selectedOpt].classList.add('correct');
+                if (!answeredQuestions.has(qNum)) {
+                    correctCount++;
+                    answeredQuestions.add(qNum);
+                }
+            } else {
+                buttons[selectedOpt].classList.add('wrong');
+                buttons[correctOpt].classList.add('correct');
+                answeredQuestions.add(qNum);
+            }
+            
+            // Update score
+            document.getElementById('live-score').textContent = toBengaliNum(correctCount);
+            
+            // Show explanation
+            const drawer = document.getElementById('exp-' + qNum);
+            if (drawer) {
+                drawer.style.display = 'block';
+                // Trigger KaTeX render if needed
+                if (window.renderMathInElement) {
+                    renderMathInElement(drawer, {delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '$', right: '$', display: false}
+                    ]});
+                }
+            }
+        }
+
+        function filterQuestions() {
+            const filterVal = document.getElementById('bcs-filter').value;
+            const cards = document.querySelectorAll('.q-card');
+            cards.forEach(card => {
+                if (filterVal === 'all' || card.getAttribute('data-bcs') === filterVal) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function resetQuiz() {
+            answeredQuestions.clear();
+            correctCount = 0;
+            document.getElementById('live-score').textContent = '০';
+            const cards = document.querySelectorAll('.q-card');
+            cards.forEach(card => {
+                const buttons = card.querySelectorAll('.opt-btn');
+                buttons.forEach(btn => {
+                    btn.disabled = false;
+                    btn.classList.remove('correct', 'wrong');
+                });
+                const drawer = card.querySelector('.exp-drawer');
+                if (drawer) drawer.style.display = 'none';
+            });
+        }
+
+        function toBengaliNum(num) {
+            const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+            return String(num).replace(/\d/g, d => bnDigits[d]);
+        }
+
+        // Font Size Adjuster
+        let currentZoom = 16;
+        function adjustFontSize(delta) {
+            if (delta === 0) currentZoom = 16;
+            else currentZoom = Math.min(24, Math.max(13, currentZoom + delta * 2));
+            document.documentElement.style.setProperty('--font-size-base', currentZoom + 'px');
+        }
+
+        // Theme Toggle
+        function toggleTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                document.getElementById('theme-btn').textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('theme-btn').textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Init theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.getElementById('theme-btn').textContent = '☀️';
+        }
+    </script>
+</body>
+</html>

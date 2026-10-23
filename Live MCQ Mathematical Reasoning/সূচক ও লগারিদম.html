@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>সূচক ও লগারিদম - Live MCQ Mathematical Reasoning</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="bangla-fonts.css">
+    <link rel="stylesheet" href="paper-textures.css">
+    
+    <!-- KaTeX for beautiful math equations -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '\\(', right: '\\)', display: false},
+            {left: '$', right: '$', display: false}
+        ]});"></script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success: #16a34a;
+            --error: #dc2626;
+            --bg-body: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: rgba(148, 163, 184, 0.3);
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --bg-surface: rgba(255, 255, 255, 0.88);
+            --font-size-base: 16px;
+        }
+        
+        [data-theme="dark"] {
+            --bg-body: #0f172a;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.12);
+            --bg-card: rgba(30, 41, 59, 0.85);
+            --bg-surface: rgba(30, 41, 59, 0.88);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+            font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+
+        /* Container & Paper */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px;
+        }
+
+        /* Top Nav */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: var(--bg-surface);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: transform 0.2s;
+        }
+        .nav-back:hover {
+            transform: translateX(-3px);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ctrl-btn {
+            background: rgba(148, 163, 184, 0.15);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .ctrl-btn:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* Chapter Title Header */
+        .ch-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 24px 16px;
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .ch-meta-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .badge-subject {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+        }
+
+        .badge-pages {
+            background: rgba(100, 116, 139, 0.1);
+            color: var(--text-muted);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .ch-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .ch-title .ch-en {
+            display: block;
+            font-family: 'Inter', sans-serif !important;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* BCS Table */
+        .bcs-table-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            padding: 18px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .bcs-table-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+        .bcs-table-header h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        .bcs-table-header .badge {
+            background: #2563eb;
+            color: #fff;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .bcs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        .bcs-table th, .bcs-table td {
+            padding: 8px 10px;
+            border: 1px solid var(--border);
+        }
+        .bcs-table th {
+            background: rgba(37, 99, 235, 0.08);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Part Headers */
+        .part-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .part-badge {
+            display: inline-block;
+            background: #2563eb;
+            color: #fff;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        .part-header h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+        .part-sub {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif !important;
+        }
+
+        /* Sketchnotes */
+        .sk-container {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .sk-item {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .sk-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+            border-bottom: 1px dashed var(--border);
+            padding-bottom: 6px;
+        }
+        .sk-body {
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .sk-formula {
+            background: rgba(37, 99, 235, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 12px 14px;
+            border-radius: 0 8px 8px 0;
+            margin: 8px 0;
+        }
+        .sk-box {
+            background: rgba(16, 185, 129, 0.05);
+            border-left: 4px solid var(--success);
+            padding: 12px 14px;
+            border-radius: 0 8px 8px 0;
+            margin: 8px 0;
+        }
+        .sk-mark {
+            background: #fef08a;
+            color: #854d0e;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .sk-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 10px;
+        }
+        @media (max-width: 650px) {
+            .sk-compare { grid-template-columns: 1fr; }
+        }
+        .sk-comp-col {
+            background: rgba(148, 163, 184, 0.08);
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        .sk-comp-col h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        /* Score & Control Bar */
+        .score-bar {
+            position: sticky;
+            top: 12px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            background: var(--bg-surface);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+        }
+        .score-display {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .score-val {
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+        .filter-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .bcs-select {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .btn-reset {
+            background: rgba(220, 38, 38, 0.1);
+            color: var(--error);
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-reset:hover {
+            background: var(--error);
+            color: #fff;
+        }
+
+        /* Question Cards */
+        .questions-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .q-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .q-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+        }
+        .q-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        .q-num {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary);
+            background: rgba(37, 99, 235, 0.08);
+            padding: 2px 10px;
+            border-radius: 12px;
+        }
+        .q-bcs-badge {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: rgba(148, 163, 184, 0.12);
+            padding: 2px 10px;
+            border-radius: 12px;
+        }
+        .q-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        /* Option Grid */
+        .opt-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        @media (max-width: 600px) {
+            .opt-grid { grid-template-columns: 1fr; }
+        }
+        .opt-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(148, 163, 184, 0.07);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+        .opt-btn:hover:not(:disabled) {
+            background: rgba(37, 99, 235, 0.08);
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }
+        .opt-lbl {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(148, 163, 184, 0.2);
+            font-weight: 700;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+        .opt-text {
+            flex-grow: 1;
+        }
+        .opt-btn.correct {
+            background: rgba(22, 163, 74, 0.15) !important;
+            border-color: var(--success) !important;
+            color: #15803d !important;
+            font-weight: 700;
+        }
+        .opt-btn.correct .opt-lbl {
+            background: var(--success);
+            color: #fff;
+        }
+        .opt-btn.wrong {
+            background: rgba(220, 38, 38, 0.15) !important;
+            border-color: var(--error) !important;
+            color: #b91c1c !important;
+        }
+        .opt-btn.wrong .opt-lbl {
+            background: var(--error);
+            color: #fff;
+        }
+
+        /* Explanation Drawer */
+        .exp-drawer {
+            background: rgba(37, 99, 235, 0.05);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-top: 12px;
+            font-size: 0.95rem;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .ans-label {
+            color: var(--success);
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .exp-text {
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Typography Protection */
+        .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+        .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+        .bcs-table, .bcs-table *, .score-bar, .score-bar * {
+            font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+        }
+
+        /* Math typography enhancements */
+        .katex {
+            font-size: 1.1em !important;
+        }
+        
+        /* Footer */
+        .page-footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <div class="container paper-container paper-lined-notebook font-mamun">
+        <!-- Top Nav -->
+        <nav class="top-nav">
+            <a href="index.html" class="nav-back">⬅ সূচিপত্র (গাণিতিক যুক্তি)</a>
+            <div class="nav-controls">
+                <button class="ctrl-btn" onclick="adjustFontSize(-1)">A-</button>
+                <button class="ctrl-btn" onclick="adjustFontSize(0)">A</button>
+                <button class="ctrl-btn" onclick="adjustFontSize(1)">A+</button>
+                <button class="ctrl-btn" id="theme-btn" onclick="toggleTheme()">🌙</button>
+            </div>
+        </nav>
+
+        <!-- Chapter Title Header -->
+        <header class="ch-header">
+            <div class="ch-meta-row">
+                <span class="badge-subject">গাণিতিক যুক্তি (Mathematical Reasoning)</span>
+                <span class="badge-pages">পৃষ্ঠা: ৯৪০-৯৪৫</span>
+            </div>
+            <h1 class="ch-title font-mamun">সূচক ও লগারিদম <span class="ch-en">(Indices, Exponents & Logarithms)</span></h1>
+        </header>
+
+        <!-- BCS Table Matrix -->
+        
+    <div class="bcs-table-card">
+        <div class="bcs-table-header">
+            <h3><span class="icon">📊</span> বিসিএস প্রশ্ন বিশ্লেষণ ছক (সূচক ও লগারিদম)</h3>
+            <span class="badge">মোট প্রশ্ন: 23 টি</span>
+        </div>
+        <div class="table-responsive">
+            <table class="bcs-table">
+                <thead>
+                    <tr>
+                        <th>বিসিএস</th><th>প্রশ্ন</th>
+                        <th>বিসিএস</th><th>প্রশ্ন</th>
+                        <th>বিসিএস</th><th>প্রশ্ন</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>৪৯তম বিসিএস</td><td><strong>1</strong></td><td>৪৫তম বিসিএস</td><td><strong>2</strong></td><td>৪৩তম বিসিএস</td><td><strong>1</strong></td></tr><tr><td>৪১তম বিসিএস</td><td><strong>2</strong></td><td>৪০তম বিসিএস</td><td><strong>1</strong></td><td>৩৯তম বিসিএস</td><td><strong>2</strong></td></tr><tr><td>৩৮তম বিসিএস</td><td><strong>2</strong></td><td>৩৭তম বিসিএস</td><td><strong>2</strong></td><td>৩৬তম বিসিএস</td><td><strong>2</strong></td></tr><tr><td>৩৫তম বিসিএস</td><td><strong>2</strong></td><td>৩৩তম বিসিএস</td><td><strong>1</strong></td><td>৩২তম বিসিএস</td><td><strong>1</strong></td></tr><tr><td>৩১তম বিসিএস</td><td><strong>1</strong></td><td>৩০তম বিসিএস</td><td><strong>1</strong></td><td>১৪তম বিসিএস</td><td><strong>1</strong></td></tr><tr><td>১৩তম বিসিএস</td><td><strong>1</strong></td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+
+        <!-- Part 1: Authentic Revision Notes & Formulas -->
+        
+    <section class="part1-notes">
+        <div class="part-header">
+            <span class="part-badge">Part 1</span>
+            <h2>প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি</h2>
+            <p class="part-sub">Authentic Interactive Revision Notes & Formulas Grounded in Past BCS Exams</p>
+        </div>
+        <div class="sk-container">
+            
+        <div class="sk-item">
+            <h3 class="sk-title">১. সূচকের মৌলিক সূত্রাবলি (Laws of Indices)</h3>
+            <div class="sk-body">
+                <div class="sk-formula">
+• \(a^m \times a^n = a^{m+n}\), &nbsp; \(\frac{a^m}{a^n} = a^{m-n}\)<br>
+• \((a^m)^n = a^{mn}\), &nbsp; \((ab)^n = a^n b^n\), &nbsp; \(\Big(\frac{a}{b}\Big)^n = \frac{a^n}{b^n}\)<br>
+• \(a^0 = 1\) (যেখানে \(a \ne 0\)), &nbsp; \(a^{-n} = \frac{1}{a^n}\)<br>
+• \(\sqrt[n]{a} = a^{1/n}\), &nbsp; \(\sqrt[n]{a^m} = a^{m/n}\)<br>
+• যদি \(a^x = a^y\) হয় (যেখানে \(a > 0, a \ne 1\)), তবে \(x = y\)।
+</div>
+            </div>
+        </div>
+        
+        <div class="sk-item">
+            <h3 class="sk-title">২. লগারিদমের সংজ্ঞা ও সূত্রাবলি (Laws of Logarithms)</h3>
+            <div class="sk-body">
+                <div class="sk-box">
+• <strong>সংজ্ঞা:</strong> যদি \(a^x = N\) হয়, তবে \(x = \log_a N\) (যেখানে \(a > 0, a \ne 1, N > 0\))<br>
+• \(\log_a(MN) = \log_a M + \log_a N\)<br>
+• \(\log_a\Big(\frac{M}{N}\Big) = \log_a M - \log_a N\)<br>
+• \(\log_a(M^k) = k \log_a M\)<br>
+• \(\log_a a = 1\), &nbsp; \(\log_a 1 = 0\)<br>
+• <strong>ভিত্তি পরিবর্তন:</strong> \(\log_a b = \frac{\log_c b}{\log_c a}\), &nbsp; \(\log_a b \times \log_b a = 1\)
+</div>
+            </div>
+        </div>
+        
+        </div>
+    </section>
+    
+
+        <!-- Part 2: Interactive Questions Engine -->
+        
+    <section class="part2-quiz">
+        <div class="part-header">
+            <span class="part-badge">Part 2</span>
+            <h2>বিগত বছরের প্রামাণ্য প্রশ্নব্যাংক ও ইন্টারঅ্যাক্টিভ কুইজ</h2>
+            <p class="part-sub">Authentic Past Exam Question Engine with Step-by-Step Solutions</p>
+        </div>
+        
+        <!-- Score & Control Bar -->
+        <div class="score-bar">
+            <div class="score-display">
+                <span class="score-label">লাইভ স্কোর:</span>
+                <span class="score-val" id="live-score">০</span> / <span class="score-total">23</span>
+            </div>
+            <div class="filter-controls">
+                <select id="bcs-filter" class="bcs-select" onchange="filterQuestions()">
+                    <option value="all">সকল বিসিএস (23)</option>
+                    <option value="৪৯তম বিসিএস">৪৯তম বিসিএস (1)</option><option value="৪৫তম বিসিএস">৪৫তম বিসিএস (2)</option><option value="৪৩তম বিসিএস">৪৩তম বিসিএস (1)</option><option value="৪১তম বিসিএস">৪১তম বিসিএস (2)</option><option value="৪০তম বিসিএস">৪০তম বিসিএস (1)</option><option value="৩৯তম বিসিএস">৩৯তম বিসিএস (2)</option><option value="৩৮তম বিসিএস">৩৮তম বিসিএস (2)</option><option value="৩৭তম বিসিএস">৩৭তম বিসিএস (2)</option><option value="৩৬তম বিসিএস">৩৬তম বিসিএস (2)</option><option value="৩৫তম বিসিএস">৩৫তম বিসিএস (2)</option><option value="৩৩তম বিসিএস">৩৩তম বিসিএস (1)</option><option value="৩২তম বিসিএস">৩২তম বিসিএস (1)</option><option value="৩১তম বিসিএস">৩১তম বিসিএস (1)</option><option value="৩০তম বিসিএস">৩০তম বিসিএস (1)</option><option value="১৪তম বিসিএস">১৪তম বিসিএস (1)</option><option value="১৩তম বিসিএস">১৩তম বিসিএস (1)</option>
+                </select>
+                <button class="btn-reset" onclick="resetQuiz()">🔄 রিসেট</button>
+            </div>
+        </div>
+
+        <div class="questions-container" id="quiz-container">
+            
+        <div class="q-card" id="q-1" data-bcs="৪৯তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 1</span>
+                <span class="q-bcs-badge">৪৯তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\mathrm{log_x⁡4 = - 2}\) হলে \(\mathrm{x=}\) কত?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(1, 0, 0)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">\(\mathrm{\frac12}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(1, 1, 0)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">\(\mathrm{-{\frac12}}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(1, 2, 0)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">\(\mathrm{2}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(1, 3, 0)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">\(\mathrm{-2}\)</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-1" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> ক</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{x}4=-2}\)
+\(\mathrm{&rArr;{x}^{-2}=4}\) \(\mathrm{[{log}_{a}b=c হলে, {a}^{c}=b]}\)
+\(\mathrm{&rArr;{x}^{2}={4}^{-1}=(\mathrm{\frac{1}{4}})}\) [উভয় পক্ষের ঘাতকে \(\mathrm{-1}\) দ্বারা গুণ করে]
+\(\mathrm{∴x=(\mathrm{\frac{1}{2}})}\)</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-2" data-bcs="৪৫তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 2</span>
+                <span class="q-bcs-badge">৪৫তম বিসিএস</span>
+            </div>
+            <div class="q-text">যদি \(\mathrm {log}⁡(\mathrm {a\over b})+ \ {\mathrm {log⁡( {b\over a}})}= \mathrm {log⁡(a+b)}\) হয়, তবে-</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(2, 0, 0)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">\(\mathrm {a+b=1}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(2, 1, 0)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">\(\mathrm {a-b=1}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(2, 2, 0)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">\(\mathrm {a=b}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(2, 3, 0)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">\(\mathrm {a^2-b^2=1}\)</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-2" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> ক</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>সঠিক উত্তরটি বিসিএস পিএসসির প্রামাণ্য উত্তরমালা অনুযায়ী যাচাইকৃত।</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-3" data-bcs="৪৫তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 3</span>
+                <span class="q-bcs-badge">৪৫তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\mathrm {2^{x+7}=4^{x+2}}\) হলে \(x\) এর মান কত?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(3, 0, 1)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">2</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(3, 1, 1)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">3</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(3, 2, 1)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">4</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(3, 3, 1)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">6</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-3" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>সঠিক উত্তরটি বিসিএস পিএসসির প্রামাণ্য উত্তরমালা অনুযায়ী যাচাইকৃত।</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-4" data-bcs="৪৩তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 4</span>
+                <span class="q-bcs-badge">৪৩তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\mathrm{4^x+4^{1-x}=4 }\) হলে \(\mathrm{x}\) = কত?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(4, 0, 2)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">\(\mathrm{1\over4 }\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(4, 1, 2)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">\(\mathrm{1\over3 }\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(4, 2, 2)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">\(\mathrm{1\over2 }\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(4, 3, 2)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">1</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-4" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>সঠিক উত্তরটি বিসিএস পিএসসির প্রামাণ্য উত্তরমালা অনুযায়ী যাচাইকৃত।</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-5" data-bcs="৪১তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 5</span>
+                <span class="q-bcs-badge">৪১তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\mathrm {5^x+8.5^x+16.5^x=1}\) হলে, \(\mathrm {x}\) এর মান কত?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(5, 0, 1)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">\(-3\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(5, 1, 1)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">\(-2\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(5, 2, 1)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">\(-1\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(5, 3, 1)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">\(-\frac {1}{2}\)</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-5" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>সঠিক উত্তরটি বিসিএস পিএসসির প্রামাণ্য উত্তরমালা অনুযায়ী যাচাইকৃত।</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-6" data-bcs="৪১তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 6</span>
+                <span class="q-bcs-badge">৪১তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\mathrm {log_2⁡log_\sqrt {e}⁡e^2 =?}\)</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(6, 0, 3)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">\(-2\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(6, 1, 3)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">\(-1\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(6, 2, 3)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">\(1\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(6, 3, 3)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">\(2\)</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-6" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> ঘ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\begin{aligned} & \log _2 \log _{\sqrt{\mathrm{e}}} \mathrm{e}^2 \\ & =\log _2 2 \log _{\sqrt{\mathrm{e}}} \mathrm{e} \\ & =\log _2 2 \log _{\sqrt{\mathrm{e}}}(\sqrt{\mathrm{e}})^2 \\ & =\log _2 4 \log _{\sqrt{\mathrm{e}}} \sqrt{\mathrm{e}} \\ & =\log _2(4 \times 1) \\ & =\log _2 4 \\ & =\log _2 2^2 \\ & =2 \log _2 2 \\ & =2 \times 1 \\ & =2\end{aligned}</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-7" data-bcs="৪০তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 7</span>
+                <span class="q-bcs-badge">৪০তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\mathrm{{x^{x^{\sqrt x}}}={(x\sqrt x)^x}}\) হলে, \(\mathrm{x}\) এর মান কত?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(7, 0, 2)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">\(\frac 32\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(7, 1, 2)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">\(\frac 45\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(7, 2, 2)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">\(\frac 94\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(7, 3, 2)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">\(\frac 23\)</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-7" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>সঠিক উত্তরটি বিসিএস পিএসসির প্রামাণ্য উত্তরমালা অনুযায়ী যাচাইকৃত।</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-8" data-bcs="৩৯তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 8</span>
+                <span class="q-bcs-badge">৩৯তম বিসিএস</span>
+            </div>
+            <div class="q-text">\( \mathrm {2x^{2}+5x + 3<0}\) এর সমাধান কোনটি?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(8, 0, 0)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">\[ -{ {3} \over 2}<{\mathrm x}<-1\]</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(8, 1, 0)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">\[ -{ {3} \over 2}<{\mathrm x}<1\]</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(8, 2, 0)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">\[ -{ {3} \over 2} \mathrm {\leq x}\leq1\]</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(8, 3, 0)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">\[ -{ {3} \over 2} \mathrm {< x}\leq1\]</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-8" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> ক</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{2{x}^{2}+5x+3<0}\)
+
+&rArr; \(\mathrm{2{x}^{2}+3x+2x+3<0}\)
+
+&rArr; \(\mathrm{x(2x+3)+1(2x+3)<0}\)
+
+&rArr; \(\mathrm{(2x+3)(x+1)<0}\)
+
+এখন, \(\mathrm{\left(2x+3\right)}\) ও \(\mathrm{\left(x+1\right)}\) রাশিদ্বয়ের একটি ধনাত্মক এবং অপরটি ঋণাত্মক হলে, অসমতাটি সত্য হবে।
+
+শর্ত-(i): \(\mathrm{(2x+3)>0}\) এবং \(\mathrm{(x+1)<0}\)
+
+\(\mathrm{x>-\frac{3}{2}}\) এবং \(\mathrm{x<-1}\)
+
+অর্থাৎ \(\mathrm{-\frac{3}{2}0}\)
+
+\(\mathrm{x<-\frac{3}{2}}\) এবং \(\mathrm{x>-1}\)
+
+অর্থাৎ ফাঁকা সেট
+
+∴ নির্ণেয় সমাধান: \(\mathrm{-\frac{3}{2}<x<-1}\)</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-9" data-bcs="৩৯তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 9</span>
+                <span class="q-bcs-badge">৩৯তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\mathrm {c={\{x:x}}\) ঋণাত্মক পূর্ণসংখ্যা এবং \(\mathrm {x^{2}<18\}}\); c সেটের উপাদানগুলো হবে-</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(9, 0, 0)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">\(\{1, 2, 3, 5\}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(9, 1, 0)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">\(\{1, 3, 5, 7\}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(9, 2, 0)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">\(\{2, 4, 6, 8\}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(9, 3, 0)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">\(\{1, 2, 3, 4\}\)</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-9" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> ক</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>ঋণাত্মক পূর্ণসংখ্যাসমূহ = \(\mathrm{-}\) 1, \(\mathrm{-}\) 2, \(\mathrm{-}\) 3, \(\mathrm{-}\) 4, \(\mathrm{-}\) 5, ....
+
+এখানে, \(\mathrm{{\left(-1\right)}^{2}=1<18}\) , \(\mathrm{{\left(-2\right)}^{2}=4<18,}\)
+
+\(\mathrm{{\left(-3\right)}^{2}=9<18}\) , \(\mathrm{{\left(-4\right)}^{2}=16<18}\)
+
+কিন্তু \(\mathrm{{\left(-5\right)}^{2}=25>18}\)
+
+\(\mathrm{∴C=\{-1,-2,-3,-4\}}\)</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-10" data-bcs="৩৮তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 10</span>
+                <span class="q-bcs-badge">৩৮তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\mathrm{log_x⁡(\frac{1}{8})= -2}\) হলে, \(\mathrm{x =}\) কত?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(10, 0, 2)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">2</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(10, 1, 2)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">\(\sqrt2\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(10, 2, 2)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">\(2\sqrt2\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(10, 3, 2)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">4</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-10" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{x}\left(\frac{1}{8}\right)=-2}\)
+
+\(\mathrm{&rArr;{x}^{-2}=\frac{1}{8}\left[∵ x= {log}_{a}N হলে {a}^{x}=N\right]}\)
+
+\(\mathrm{&rArr;\frac{1}{{x}^{2}}=\frac{1}{8}}\)
+
+\(\mathrm{&rArr;{x}^{2}=8}\)
+
+\(\mathrm{&rArr;{x}^{2}={\left(2\sqrt{2}\right)}^{2}}\)
+
+\(\mathrm{∴ x=2\sqrt{2} [∵}\) পাওয়ার বা ঘাত সমান]</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-11" data-bcs="৩৮তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 11</span>
+                <span class="q-bcs-badge">৩৮তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\mathrm{2^x+2^{1-x}=3 }\) হলে, \(\mathrm{x =}\) কত?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(11, 0, 3)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">(1, 2)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(11, 1, 3)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">(0, 2)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(11, 2, 3)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">(1, 3)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(11, 3, 3)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">(0, 1)</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-11" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> ঘ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{2}^{x} +{2}^{1-x}=3}\)
+
+\(\mathrm{&rArr;{2}^{x}+\frac{{2}^{1}}{{2}^{x}}=3}\)
+
+\(\mathrm{&rArr;a+\frac{2}{a}=3 \left[{2}^{x}=a ধরে\right]}\)
+
+\(\mathrm{&rArr;{a}^{2}+2=3a}\)
+
+\(\mathrm{&rArr;{a}^{2} -3a +2=0}\)
+
+\(\mathrm{&rArr;{a}^{2} -2a -a+2=0}\)
+
+\(\mathrm{&rArr;a\left(a-2\right)-1\left(a-2\right)=0}\)
+
+\(\mathrm{&rArr;\left(a-2\right)\left(a-1\right)=0}\)
+
+\(\mathrm{এখন, a-2=0 অথবা, a-1=0}\)
+
+\(\mathrm{∴ a=2 বা, a=}\) 1
+
+\(\mathrm{&rArr;{2}^{x}=2}\) \(\mathrm{বা, {2}^{x}=1}\)
+
+\(\mathrm{&rArr;{2}^{x}={2}^{1} বা,{2}^{x}={2}^{0}}\)
+
+\(\mathrm{∴x=1 ∴ x =0}\)
+
+\(\mathrm{∴x=(0, 1)}\)</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-12" data-bcs="৩৭তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 12</span>
+                <span class="q-bcs-badge">৩৭তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\mathrm x^ {2}-3\mathrm{x}+1=0\) হলে, \((\mathrm x^{2}- {1 \over \mathrm x^{2}}) \) এর মান-</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(12, 0, 1)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">\(5 \sqrt {3}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(12, 1, 1)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">\(3 \sqrt {5}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(12, 2, 1)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">\(4 \sqrt {5}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(12, 3, 1)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">\(6 \sqrt {5}\)</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-12" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>দেওয়া আছে, \(\mathrm{{x}^{2}-3x+1=0}\)
+
+\(\mathrm{&rArr;{x}^{2}+1=3x}\)
+
+\(\mathrm{&rArr;\frac{{x}^{2}+1}{x}=3}\)
+
+\(\mathrm{∴x+\frac{1}{x}=3}\)
+
+আবার, \(\mathrm{x-\frac{1}{x}=\sqrt{{\left(x+\frac{1}{x}\right)}^{2}-4.x.\frac{1}{x}}}\)
+
+\(\mathrm{=}\) \(\mathrm{\sqrt{{\left(3\right)}^{2}-4}}\)
+
+\(\mathrm{=\sqrt{9-4}}\)
+
+\(\mathrm{∴x-\frac{1}{x}=\sqrt{5}}\)
+
+এখন, \(\mathrm{{x}^{2}-\frac{1}{{x}^{2}}=\left(x+\frac{1}{x}\right)\left(x-\frac{1}{x}\right)=3\sqrt{5}}\)</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-13" data-bcs="৩৭তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 13</span>
+                <span class="q-bcs-badge">৩৭তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\log_\mathrm {x}\)\(({3 \over 2})=- {1 \over 2} \) হলে, \(\mathrm{x}\)-এর মান-</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(13, 0, 0)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">\(4 \over {9}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(13, 1, 0)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">\(9 \over {4}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(13, 2, 0)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">\[{\sqrt{3 \over2}}\]</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(13, 3, 0)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">\[{\sqrt{2 \over3}}\]</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-13" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> ক</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{x}\left(\frac{3}{2}\right)=-\frac{1}{2}}\)
+
+\(\mathrm{&rArr;{\left(x\right)}^{-\frac{1}{2}}=\frac{3}{2}}\)
+
+\(\mathrm{&rArr;\frac{1}{{x}^{\frac{1}{2}}}=\frac{3}{2}}\)
+
+\(\mathrm{&rArr;\frac{1}{\sqrt{x}}=\frac{3}{2}}\)
+
+\(\mathrm{&rArr;3\sqrt{x}=2}\)
+
+\(\mathrm{&rArr;9x=4}\)
+
+\(\mathrm{∴x=\frac{4}{9}}\)</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-14" data-bcs="৩৬তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 14</span>
+                <span class="q-bcs-badge">৩৬তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\mathrm{{log}_{\sqrt{3}}81}\)  কত?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(14, 0, 2)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">4</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(14, 1, 2)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">\(27\mathrm {\sqrt3}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(14, 2, 2)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">8</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(14, 3, 2)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">\(1\over {8}\)</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-14" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{\sqrt{3}}81}\)
+
+\(\mathrm{={log}_{\sqrt{3}}{\left(\sqrt{3}\right)}^{8}}\)
+
+\(\mathrm{=8 \times {log}_{\sqrt{3}}\sqrt{3}}\)
+
+\(\mathrm{=8 [∴{log}_{a}a=1}\) ]</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-15" data-bcs="৩৬তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 15</span>
+                <span class="q-bcs-badge">৩৬তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\mathrm{x^{2}+ \mathrm {y^{2}}}=185\), \(\mathrm {x-y=3}\) এর একটি সমাধান হল:</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(15, 0, 3)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">(7, 4)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(15, 1, 3)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">(9, 6)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(15, 2, 3)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">(10, 7)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(15, 3, 3)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">(11, 8)</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-15" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> ঘ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{x}^{2}+{y}^{2}=185&hellip;&hellip;&hellip;}\) \(\mathrm{(i)}\)
+
+\(\mathrm{x-y=3&hellip;&hellip;&hellip;&hellip;&hellip;}\) \(\mathrm{\left(ii\right)}\)
+
+\(\mathrm{(i)}\) নং হতে পাই, \(\mathrm{{x}^{2}+{y}^{2}=185}\)
+
+\(\mathrm{&rArr;{\left(x-y\right)}^{2}+2xy=185}\)
+
+\(\mathrm{&rArr;{\left(3\right)}^{2}+2xy=185}\)
+
+\(\mathrm{&rArr;2xy=185-9}\)
+
+\(\mathrm{&rArr;2xy=176}\)
+
+\(\mathrm{∴xy=88}\)
+
+আবার, \(\mathrm{{\left(x+y\right)}^{2}={\left(x-y\right)}^{2}+4xy ={3}^{2}+4.88}\)
+
+\(\mathrm{=9+352}\) \(\mathrm{&rArr;}\) \(\mathrm{{\left(x+y\right)}^{2}=361}\)
+
+\(\mathrm{∴x+y=19&hellip;&hellip;&hellip;(iii)}\)
+
+\(\mathrm{(i)}\) + \(\mathrm{(ii)}\) করে পাই, \(\mathrm{2x=22}\) \(\mathrm{∴x=11}\)
+
+\(\mathrm{(iii)}\) এ \(\mathrm{x=11}\) বসাই, \(\mathrm{11+y=19}\) \(\mathrm{∴y=8}\)
+
+\(\mathrm{∴\left(x,y\right)=(11, 8)}\)</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-16" data-bcs="৩৫তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 16</span>
+                <span class="q-bcs-badge">৩৫তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\mathrm{{log}_{3}\left(\frac{1}{9}\right)}\)  এর মান-</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(16, 0, 1)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">2</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(16, 1, 1)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">-2</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(16, 2, 1)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">3</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(16, 3, 1)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">-3</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-16" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{3}\left(\frac{1}{9}\right)}\)  
+
+\(\mathrm{=Lo{g}_{3}\left(\frac{1}{{3}^{2}}\right)}\)
+
+\(\mathrm{=lo{g}_{3}\left({3}^{-2}\right)}\)
+
+\(\mathrm{=-2.lo{g}_{3}3}\)
+
+\(\mathrm{=-2}\) \(\mathrm{[∵lo{g}_{a}a=1]}\)</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-17" data-bcs="৩৫তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 17</span>
+                <span class="q-bcs-badge">৩৫তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\mathrm{{log}_{a}x=1,{log}_{a}y=2}\)  এবং  \(\mathrm{{log}_{a}z=3}\)  হলে,  \(\mathrm{{log}_{a}\left(\frac{{x}^{3}{y}^{2}}{z}\right)}\)  এর মান কত?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(17, 0, 2)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">1</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(17, 1, 2)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">2</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(17, 2, 2)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">4</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(17, 3, 2)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">5</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-17" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{a}\left(\frac{{x}^{3}{y}^{2}}{z}\right)}\)
+
+\(\mathrm{=}\) \(\mathrm{lo{g}_{a}\left({x}^{3}{y}^{2}\right)-lo{g}_{a}z}\)
+
+\(\mathrm{=}\) \(\mathrm{lo{g}_{a}{x}^{3}+lo{g}_{a}{y}^{2}-lo{g}_{a}z}\)
+
+\(\mathrm{=}\) \(\mathrm{3lo{g}_{a}x+2lo{g}_{a}y-lo{g}_{a}z}\)
+
+\(\mathrm{=}\) \(\mathrm{3 \times 1+2 \times 2-3}\) [মান বসিয়ে]
+
+\(\mathrm{=}\) \(\mathrm{3+4-3}\)
+
+\(\mathrm{=}\) \(\mathrm{4}\)</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-18" data-bcs="৩৩তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 18</span>
+                <span class="q-bcs-badge">৩৩তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\mathrm {4^x+4^x+4^x+4^x}\) এর মান নিচের কোনটি?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(18, 0, 2)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">\(16^\mathrm x\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(18, 1, 2)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">\(4^\mathrm {4x}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(18, 2, 2)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">\(2^\mathrm {2x+2}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(18, 3, 2)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">\(2^\mathrm {8x}\)</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-18" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{4}^{x}+{4}^{x}+{4}^{x}+{4}^{x}}\)
+
+\(\mathrm{={4}^{x}\left(1+1+1+1\right)}\)
+
+\(\mathrm{={4}^{x}.{4}^{1}}\)
+
+\(\mathrm{={4}^{x+1}}\)
+
+\(\mathrm{={2}^{2x+2}}\)</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-19" data-bcs="৩২তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 19</span>
+                <span class="q-bcs-badge">৩২তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\mathrm{{log}_{2}8=}\)  কত?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(19, 0, 1)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">4</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(19, 1, 1)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">3</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(19, 2, 1)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">2</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(19, 3, 1)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">1</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-19" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{2}8=lo{g}_{2}{2}^{3}}\)
+
+\(\mathrm{=3lo{g}_{2}2}\)
+
+\(\mathrm{=3.1=3}\)</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-20" data-bcs="৩১তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 20</span>
+                <span class="q-bcs-badge">৩১তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\mathrm{lo{g}_{2}\left(\frac{1}{32}\right)}\)  এর মান-</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(20, 0, 1)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">\(1\over 25\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(20, 1, 1)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">\(-5\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(20, 2, 1)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">\(1\over 5\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(20, 3, 1)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">\(-1\over 5\)</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-20" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{2}\frac{1}{32}}\)
+
+\(\mathrm{={log}_{2}\frac{1}{{2}^{5}}}\)
+
+\(\mathrm{={log}_{2}{2}^{-5}}\)
+
+\(\mathrm{=-5lo{g}_{2}2}\)
+
+\(\mathrm{=-5 \times 1}\)
+
+\(\mathrm{=-5}\)</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-21" data-bcs="৩০তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 21</span>
+                <span class="q-bcs-badge">৩০তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\mathrm{{log}_{a}\left(\frac{m}{n}\right)=}\)  কত?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(21, 0, 0)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">\(\mathrm {log_a⁡ m-log_a⁡n} \)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(21, 1, 0)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">\(\mathrm {log_a⁡ m+log_a⁡n }\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(21, 2, 0)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">\(\mathrm {log_a ⁡m×log_a ⁡n}\)</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(21, 3, 0)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">কোনোটিই নয়</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-21" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> ক</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>লগারিদমের সূত্রানুযায়ী,
+
+\(\mathrm{{log}_{a}\left(\frac{m}{n}\right)={log}_{a} m-{log}_{a}n}\)</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-22" data-bcs="১৪তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 22</span>
+                <span class="q-bcs-badge">১৪তম বিসিএস</span>
+            </div>
+            <div class="q-text">\(\mathrm {a^m.a^n=a^{m+n}}\) কখন হবে?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(22, 0, 2)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">m ধনাত্মক হলে</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(22, 1, 2)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">n ধনাত্মক হলে</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(22, 2, 2)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">m ও n ধনাত্মক হলে</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(22, 3, 2)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">m ধনাত্মক ও n ঋণাত্মক হলে</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-22" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>যদি \(\mathrm{aϵR}\) (বাস্তব সংখ্যার সেট) এবং \(\mathrm{m, nϵN}\) (স্বাভাবিক সংখ্যার সেট) হয়, তবে সূচকের নিয়মানুযায়ী \(\mathrm{{a}^{m} . {a}^{n}={a}^{m+n}}\)</div>
+            </div>
+        </div>
+        
+        <div class="q-card" id="q-23" data-bcs="১৩তম বিসিএস">
+            <div class="q-top">
+                <span class="q-num">প্রশ্ন 23</span>
+                <span class="q-bcs-badge">১৩তম বিসিএস</span>
+            </div>
+            <div class="q-text">৩২ এর ২ ভিত্তিক লগারিদম কত?</div>
+            <div class="opt-grid">
+                
+            <button class="opt-btn" data-opt-idx="0" onclick="checkAnswer(23, 0, 2)">
+                <span class="opt-lbl">ক</span>
+                <span class="opt-text">৩</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="1" onclick="checkAnswer(23, 1, 2)">
+                <span class="opt-lbl">খ</span>
+                <span class="opt-text">৪</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="2" onclick="checkAnswer(23, 2, 2)">
+                <span class="opt-lbl">গ</span>
+                <span class="opt-text">৫</span>
+            </button>
+            
+            <button class="opt-btn" data-opt-idx="3" onclick="checkAnswer(23, 3, 2)">
+                <span class="opt-lbl">ঘ</span>
+                <span class="opt-text">৬</span>
+            </button>
+            
+            </div>
+            <div class="exp-drawer" id="exp-23" style="display:none;">
+                <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{2}32}\)
+
+\(\mathrm{={log}_{2}{2}^{5}}\)
+
+\(\mathrm{=5{log}_{2}2}\)
+
+\(\mathrm{=5.1=5}\)</div>
+            </div>
+        </div>
+        
+        </div>
+    </section>
+    
+
+        <!-- Footer -->
+        <footer class="page-footer">
+            <p>Live MCQ™ বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ ডিজিটাল প্রশ্নব্যাংক ও স্টাডি নোট</p>
+            <p style="margin-top: 4px; font-size: 0.8rem;">সংকলিত ও বিন্যস্ত: বিসিএস প্রিলিমিনারি গাণিতিক যুক্তি সংস্করণ</p>
+        </footer>
+    </div>
+
+    <script>
+        // Quiz State
+        let answeredQuestions = new Set();
+        let correctCount = 0;
+        const totalQuestions = 23;
+
+        function checkAnswer(qNum, selectedOpt, correctOpt) {
+            const card = document.getElementById('q-' + qNum);
+            if (!card) return;
+            
+            const buttons = card.querySelectorAll('.opt-btn');
+            if (buttons[0].disabled) return; // already answered
+            
+            buttons.forEach(btn => btn.disabled = true);
+            
+            if (selectedOpt === correctOpt) {
+                buttons[selectedOpt].classList.add('correct');
+                if (!answeredQuestions.has(qNum)) {
+                    correctCount++;
+                    answeredQuestions.add(qNum);
+                }
+            } else {
+                buttons[selectedOpt].classList.add('wrong');
+                buttons[correctOpt].classList.add('correct');
+                answeredQuestions.add(qNum);
+            }
+            
+            // Update score
+            document.getElementById('live-score').textContent = toBengaliNum(correctCount);
+            
+            // Show explanation
+            const drawer = document.getElementById('exp-' + qNum);
+            if (drawer) {
+                drawer.style.display = 'block';
+                // Trigger KaTeX render if needed
+                if (window.renderMathInElement) {
+                    renderMathInElement(drawer, {delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '$', right: '$', display: false}
+                    ]});
+                }
+            }
+        }
+
+        function filterQuestions() {
+            const filterVal = document.getElementById('bcs-filter').value;
+            const cards = document.querySelectorAll('.q-card');
+            cards.forEach(card => {
+                if (filterVal === 'all' || card.getAttribute('data-bcs') === filterVal) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function resetQuiz() {
+            answeredQuestions.clear();
+            correctCount = 0;
+            document.getElementById('live-score').textContent = '০';
+            const cards = document.querySelectorAll('.q-card');
+            cards.forEach(card => {
+                const buttons = card.querySelectorAll('.opt-btn');
+                buttons.forEach(btn => {
+                    btn.disabled = false;
+                    btn.classList.remove('correct', 'wrong');
+                });
+                const drawer = card.querySelector('.exp-drawer');
+                if (drawer) drawer.style.display = 'none';
+            });
+        }
+
+        function toBengaliNum(num) {
+            const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+            return String(num).replace(/\d/g, d => bnDigits[d]);
+        }
+
+        // Font Size Adjuster
+        let currentZoom = 16;
+        function adjustFontSize(delta) {
+            if (delta === 0) currentZoom = 16;
+            else currentZoom = Math.min(24, Math.max(13, currentZoom + delta * 2));
+            document.documentElement.style.setProperty('--font-size-base', currentZoom + 'px');
+        }
+
+        // Theme Toggle
+        function toggleTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                document.getElementById('theme-btn').textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('theme-btn').textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Init theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.getElementById('theme-btn').textContent = '☀️';
+        }
+    </script>
+</body>
+</html>
