@@ -996,6 +996,7 @@ function toggleRevAns(btn) {
 }
 
 // পৃষ্ঠা ৮৫ - ৮৮ এর সম্পূর্ণ ১৩টি আসল বিসিএস প্রশ্নমালা
+window.quizData = quizData;
 const quizData = [
   {
     id: 1,
@@ -1148,12 +1149,13 @@ function renderQuiz() {
     const letters = ['ক', 'খ', 'গ', 'ঘ'];
     qItem.opts.forEach((opt, oIdx) => {
       optsHtml += `
-        <button class="opt-btn" onclick="checkAnswer(${qItem.id}, ${oIdx})" id="opt-${qItem.id}-${oIdx}">
+        <button class="opt-btn" ${oIdx === qItem.ans ? \'data-is-correct="true"\' : \'\'} onclick="checkAnswer(${qItem.id}, ${oIdx})" id="opt-${qItem.id}-${oIdx}">
           <strong>${letters[oIdx]}.</strong> ${opt}
         </button>
       `;
     });
     
+    card.setAttribute("data-ans", qItem.ans);
     card.innerHTML = `
       <div class="question-header">
         <div class="q-text">${idx + 1}. ${qItem.q}</div>
@@ -1219,6 +1221,7 @@ function resetQuiz() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  window.quizData = quizData;
   renderQuiz();
   try {
     const savedTheme = localStorage.getItem('theme');

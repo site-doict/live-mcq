@@ -1031,7 +1031,8 @@
     let score = 0;
     const userAnswers = {};
 
-    function renderQuestions(filterTag = "all") {
+    window.questions = questions;
+function renderQuestions(filterTag = "all") {
       const container = document.getElementById("quiz-list");
       container.innerHTML = "";
 
@@ -1041,6 +1042,7 @@
         const card = document.createElement("div");
         card.className = "q-card";
         card.id = `q-card-${qItem.id}`;
+        card.setAttribute("data-ans", qItem.ans);
 
         const isAnswered = userAnswers[qItem.id] !== undefined;
         const selectedOpt = userAnswers[qItem.id];
@@ -1057,7 +1059,7 @@
             }
           }
           optsHtml += `
-            <button class="${btnClass}" onclick="handleSelect(${qItem.id}, ${optIdx})" ${isAnswered ? "disabled" : ""}>
+            <button class="${btnClass}" ${optIdx === qItem.ans ? 'data-is-correct="true"' : ''} onclick="handleSelect(${qItem.id}, ${optIdx})" ${isAnswered ? "disabled" : ""}>
               <span class="opt-prefix">${prefixes[optIdx]}.</span>
               <span>${optText}</span>
             </button>

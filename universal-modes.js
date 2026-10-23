@@ -120,6 +120,7 @@
       [data-qa-mode="direct-answer"] .options-grid,
       [data-qa-mode="direct-answer"] .quiz-options,
       [data-qa-mode="direct-answer"] .opt-grid,
+      [data-qa-mode="direct-answer"] .opts-grid,
       [data-qa-mode="direct-answer"] .q-options,
       [data-qa-mode="direct-answer"] .options-list,
       [data-qa-mode="direct-answer"] .mcq-options {
@@ -137,11 +138,14 @@
       [data-qa-mode="direct-answer"] .options-grid > *:not([data-is-correct="true"]),
       [data-qa-mode="direct-answer"] .quiz-options > *:not([data-is-correct="true"]),
       [data-qa-mode="direct-answer"] .opt-grid > *:not([data-is-correct="true"]),
+      [data-qa-mode="direct-answer"] .opts-grid > *:not([data-is-correct="true"]),
       [data-qa-mode="direct-answer"] .q-options > *:not([data-is-correct="true"]),
       [data-qa-mode="direct-answer"] .options-list > *:not([data-is-correct="true"]),
       [data-qa-mode="direct-answer"] .mcq-options > *:not([data-is-correct="true"]),
       [data-qa-mode="direct-answer"] .opt-btn:not([data-is-correct="true"]),
       [data-qa-mode="direct-answer"] .option-btn:not([data-is-correct="true"]),
+      [data-qa-mode="direct-answer"] .quiz-opt-btn:not([data-is-correct="true"]),
+      [data-qa-mode="direct-answer"] .quiz-option:not([data-is-correct="true"]),
       [data-qa-mode="direct-answer"] .q-opt:not([data-is-correct="true"]),
       [data-qa-mode="direct-answer"] .option:not([data-is-correct="true"]) {
         display: none !important;
@@ -151,6 +155,8 @@
       [data-qa-mode="direct-answer"] [data-is-correct="true"],
       [data-qa-mode="direct-answer"] .opt-btn[data-is-correct="true"],
       [data-qa-mode="direct-answer"] .option-btn[data-is-correct="true"],
+      [data-qa-mode="direct-answer"] .quiz-opt-btn[data-is-correct="true"],
+      [data-qa-mode="direct-answer"] .quiz-option[data-is-correct="true"],
       [data-qa-mode="direct-answer"] .q-opt[data-is-correct="true"],
       [data-qa-mode="direct-answer"] .option[data-is-correct="true"] {
         display: inline-flex !important;
@@ -174,6 +180,8 @@
       [data-theme="dark"][data-qa-mode="direct-answer"] [data-is-correct="true"],
       [data-theme="dark"][data-qa-mode="direct-answer"] .opt-btn[data-is-correct="true"],
       [data-theme="dark"][data-qa-mode="direct-answer"] .option-btn[data-is-correct="true"],
+      [data-theme="dark"][data-qa-mode="direct-answer"] .quiz-opt-btn[data-is-correct="true"],
+      [data-theme="dark"][data-qa-mode="direct-answer"] .quiz-option[data-is-correct="true"],
       [data-theme="dark"][data-qa-mode="direct-answer"] .q-opt[data-is-correct="true"],
       [data-theme="dark"][data-qa-mode="direct-answer"] .option[data-is-correct="true"] {
         background: rgba(16, 185, 129, 0.2) !important;
@@ -185,6 +193,8 @@
       [data-qa-mode="direct-answer"] [data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
       [data-qa-mode="direct-answer"] .opt-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
       [data-qa-mode="direct-answer"] .option-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+      [data-qa-mode="direct-answer"] .quiz-opt-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+      [data-qa-mode="direct-answer"] .quiz-option[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
       [data-qa-mode="direct-answer"] .q-opt[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
       [data-qa-mode="direct-answer"] .option[data-is-correct="true"]:not(.ebk-no-ans-notice)::before {
         content: "উত্তর: ";
@@ -196,6 +206,8 @@
       [data-theme="dark"][data-qa-mode="direct-answer"] [data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
       [data-theme="dark"][data-qa-mode="direct-answer"] .opt-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
       [data-theme="dark"][data-qa-mode="direct-answer"] .option-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+      [data-theme="dark"][data-qa-mode="direct-answer"] .quiz-opt-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+      [data-theme="dark"][data-qa-mode="direct-answer"] .quiz-option[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
       [data-theme="dark"][data-qa-mode="direct-answer"] .q-opt[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
       [data-theme="dark"][data-qa-mode="direct-answer"] .option[data-is-correct="true"]:not(.ebk-no-ans-notice)::before {
         color: #34d399;
@@ -439,36 +451,112 @@
   function tagAllCorrectAnswers() {
     const optMap = { 'ক': 0, 'খ': 1, 'গ': 2, 'ঘ': 3, 'a': 0, 'b': 1, 'c': 2, 'd': 3, 'A': 0, 'B': 1, 'C': 2, 'D': 3 };
 
+    // Auto-discover in-page script data arrays if not already globally exposed on window
+    if (!window.quizData || !window.QUIZ_DATA || !window.mcqData || !window.questions) {
+      try {
+        const scripts = document.querySelectorAll('script:not([src])');
+        scripts.forEach((s) => {
+          const code = s.textContent || '';
+          if (!window.quizData) {
+            const m = code.match(/(?:const|let|var)\s+quizData\s*=\s*(\[[\s\S]*?\]);/);
+            if (m) {
+              try { window.quizData = new Function('return ' + m[1])(); } catch (e) {}
+            }
+          }
+          if (!window.QUIZ_DATA) {
+            const m = code.match(/(?:const|let|var)\s+QUIZ_DATA\s*=\s*(\[[\s\S]*?\]);/);
+            if (m) {
+              try { window.QUIZ_DATA = new Function('return ' + m[1])(); } catch (e) {}
+            }
+          }
+          if (!window.mcqData) {
+            const m = code.match(/(?:const|let|var)\s+mcqData\s*=\s*(\[[\s\S]*?\]);/);
+            if (m) {
+              try { window.mcqData = new Function('return ' + m[1])(); } catch (e) {}
+            }
+          }
+          if (!window.questions) {
+            const m = code.match(/(?:const|let|var)\s+questions\s*=\s*(\[[\s\S]*?\]);/);
+            if (m) {
+              try { window.questions = new Function('return ' + m[1])(); } catch (e) {}
+            }
+          }
+        });
+      } catch (e) {}
+    }
+
+    // Helper: tag button
+    function tagBtn(btn) {
+      if (btn) btn.setAttribute('data-is-correct', 'true');
+    }
+
+    // Helper: show canceled / no answer notice
+    function showNoAnsNotice(card) {
+      if (!card) return;
+      let noAnsNote = card.querySelector('.ebk-no-ans-notice');
+      if (!noAnsNote) {
+        const optContainer = card.querySelector('.options-grid, .quiz-options, .opt-grid, .opts-grid, .q-options, .options-list, .mcq-options');
+        if (optContainer) {
+          noAnsNote = document.createElement('div');
+          noAnsNote.className = 'ebk-no-ans-notice';
+          noAnsNote.setAttribute('data-is-correct', 'true');
+          noAnsNote.innerHTML = '<span>⚠️</span> <span>উত্তর: অপশনে সঠিক উত্তর নেই (প্রশ্নটি বাতিল/বিতর্কিত)</span>';
+          optContainer.appendChild(noAnsNote);
+        }
+      }
+    }
+
     // A. Inspect JS Data Arrays (quizData, QUIZ_DATA, mcqData, questions, QUESTIONS)
     const jsArrays = [window.quizData, window.QUIZ_DATA, window.mcqData, window.questions, window.QUESTIONS];
     jsArrays.forEach((arr) => {
       if (Array.isArray(arr)) {
         arr.forEach((item, idx) => {
           if (!item) return;
-          const ansIdx = item.ans !== undefined ? item.ans : (item.answer !== undefined ? item.answer : -1);
-          if (ansIdx === -1) return;
+          const ansRaw = item.ans !== undefined ? item.ans : (item.answer !== undefined ? item.answer : -1);
           const qId = item.id !== undefined ? item.id : idx;
 
-          // Target specific option button IDs
-          let targetBtn = document.getElementById(`opt-${qId}-${ansIdx}`) || 
-                          document.getElementById(`opt-${idx}-${ansIdx}`);
-          if (targetBtn) {
-            targetBtn.setAttribute('data-is-correct', 'true');
+          // Find card container
+          const card = document.getElementById(`qcard-${qId}`) ||
+                       document.getElementById(`q-card-${qId}`) ||
+                       document.getElementById(`q-${qId}`) ||
+                       document.getElementById(`q${qId}`) ||
+                       document.getElementById(`card-q${qId}`) ||
+                       document.getElementById(`q-card-${idx}`) ||
+                       document.getElementById(`qcard-${idx}`) ||
+                       document.getElementById(`q${idx + 1}`);
+
+          if (ansRaw === -1) {
+            showNoAnsNotice(card);
+            return;
+          }
+
+          // Handle single or multiple answers (e.g. 0, [0, 1], "0,1")
+          let ansList = [];
+          if (Array.isArray(ansRaw)) {
+            ansList = ansRaw;
+          } else if (typeof ansRaw === 'string' && ansRaw.includes(',')) {
+            ansList = ansRaw.split(',').map(v => parseInt(v.trim(), 10)).filter(n => !isNaN(n));
           } else {
-            // Find card container
-            const card = document.getElementById(`qcard-${qId}`) ||
-                         document.getElementById(`q-card-${qId}`) ||
-                         document.getElementById(`q-${qId}`) ||
-                         document.getElementById(`q${qId}`) ||
-                         document.getElementById(`card-q${qId}`) ||
-                         document.getElementById(`q-card-${idx}`) ||
-                         document.getElementById(`qcard-${idx}`);
-            if (card) {
+            const num = parseInt(ansRaw, 10);
+            if (!isNaN(num)) ansList = [num];
+          }
+
+          ansList.forEach((ansIdx) => {
+            // Target specific option button IDs
+            let targetBtn = document.getElementById(`opt-${qId}-${ansIdx}`) || 
+                            document.getElementById(`opt-${idx}-${ansIdx}`);
+            if (targetBtn) {
+              tagBtn(targetBtn);
+            } else if (card) {
               const btns = card.querySelectorAll('.opt-btn, .option-btn, .q-opt, .option, .quiz-option');
               if (btns && btns[ansIdx]) {
-                btns[ansIdx].setAttribute('data-is-correct', 'true');
+                tagBtn(btns[ansIdx]);
               }
             }
+          });
+
+          if (card && !card.getAttribute('data-ans')) {
+            card.setAttribute('data-ans', Array.isArray(ansRaw) ? ansRaw.join(',') : ansRaw);
           }
         });
       }
@@ -485,13 +573,14 @@
       btns.forEach((b) => {
         if (b.getAttribute('data-is-correct') === 'true') alreadyTagged = true;
       });
+      if (card.querySelector('.ebk-no-ans-notice')) alreadyTagged = true;
       if (alreadyTagged) return;
 
       let correctIdx = -1;
 
-      // 1. Button attributes: data-answer="true" or data-correct="true"
+      // 1. Button attributes: data-answer="true" or data-correct="true" or data-is-correct="true"
       for (let i = 0; i < btns.length; i++) {
-        if (btns[i].getAttribute('data-answer') === 'true' || btns[i].getAttribute('data-correct') === 'true') {
+        if (btns[i].getAttribute('data-answer') === 'true' || btns[i].getAttribute('data-correct') === 'true' || btns[i].getAttribute('data-is-correct') === 'true') {
           correctIdx = i;
           break;
         }
@@ -500,9 +589,23 @@
       // 2. Card attributes: data-correct, data-ans, data-answer
       if (correctIdx === -1) {
         const cardAns = card.getAttribute('data-correct') || card.getAttribute('data-ans') || card.getAttribute('data-answer');
-        if (cardAns) {
+        if (cardAns !== null && cardAns !== undefined) {
           const val = cardAns.trim();
-          if (optMap[val] !== undefined) {
+          if (val === '-1' || val === '') {
+            correctIdx = -99;
+          } else if (val.includes(',')) {
+            // Multi-answer
+            const parts = val.split(',').map(p => p.trim());
+            parts.forEach((p) => {
+              if (optMap[p] !== undefined) {
+                tagBtn(btns[optMap[p]]);
+              } else if (/^\d+$/.test(p)) {
+                const n = parseInt(p, 10);
+                if (n >= 0 && n < btns.length) tagBtn(btns[n]);
+              }
+            });
+            return;
+          } else if (optMap[val] !== undefined) {
             // Match with data-opt on buttons
             btns.forEach((b, idx) => {
               if (b.getAttribute('data-opt') === val) correctIdx = idx;
@@ -511,9 +614,12 @@
           } else if (/^\d+$/.test(val)) {
             const num = parseInt(val, 10);
             const firstClick = btns[0].getAttribute('onclick') || '';
-            if (firstClick.includes('checkAnswer') && firstClick.match(/checkAnswer\([^,]+,\s*1\)/)) {
+            // If onclick uses 0-based index: checkAnswer(1, 0)
+            if (/(?:checkAnswer|handleSelect|checkAns)\([^,]+,\s*0\)/.test(firstClick)) {
+              correctIdx = num;
+            } else if (firstClick.includes('checkAnswer') && firstClick.match(/checkAnswer\([^,]+,\s*1\)/)) {
               correctIdx = num - 1;
-            } else if (num >= 1 && num <= 4 && btns.length === 4) {
+            } else if (num >= 1 && num <= btns.length && btns.length === 4) {
               correctIdx = num - 1;
             } else if (num >= 0 && num < btns.length) {
               correctIdx = num;
@@ -609,18 +715,8 @@
       // Apply tag or fallback notice
       if (correctIdx >= 0 && correctIdx < btns.length) {
         btns[correctIdx].setAttribute('data-is-correct', 'true');
-      } else if (correctIdx === -99 || card.getAttribute('data-ans') === '') {
-        let noAnsNote = card.querySelector('.ebk-no-ans-notice');
-        if (!noAnsNote) {
-          const optContainer = card.querySelector('.options-grid, .quiz-options, .opt-grid, .q-options, .options-list, .mcq-options');
-          if (optContainer) {
-            noAnsNote = document.createElement('div');
-            noAnsNote.className = 'ebk-no-ans-notice';
-            noAnsNote.setAttribute('data-is-correct', 'true');
-            noAnsNote.innerHTML = '<span>⚠️</span> <span>উত্তর: অপশনে সঠিক উত্তর নেই (প্রশ্নটি বাতিল/বিতর্কিত)</span>';
-            optContainer.appendChild(noAnsNote);
-          }
-        }
+      } else if (correctIdx === -99 || card.getAttribute('data-ans') === '' || card.getAttribute('data-ans') === '-1') {
+        showNoAnsNotice(card);
       }
     });
   }
@@ -804,6 +900,24 @@
     tagAllCorrectAnswers();
     setTimeout(tagAllCorrectAnswers, 300);
     setTimeout(tagAllCorrectAnswers, 1200);
+
+    // Hook dynamic render functions if defined globally
+    function hookDynamicRenderers() {
+      ['renderQuiz', 'renderQuestions', 'generateQuiz', 'resetQuiz'].forEach(fn => {
+        if (typeof window[fn] === 'function' && !window[fn]._ebkHooked) {
+          const orig = window[fn];
+          window[fn] = function(...args) {
+            const res = orig.apply(this, args);
+            tagAllCorrectAnswers();
+            return res;
+          };
+          window[fn]._ebkHooked = true;
+        }
+      });
+    }
+    hookDynamicRenderers();
+    setTimeout(hookDynamicRenderers, 400);
+    setTimeout(hookDynamicRenderers, 1000);
 
     // Watch for dynamic quiz renderers
     try {

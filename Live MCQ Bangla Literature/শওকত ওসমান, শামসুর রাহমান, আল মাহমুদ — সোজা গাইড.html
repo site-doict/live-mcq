@@ -1149,14 +1149,14 @@
     function renderQuiz() {
       const container = document.getElementById("quiz-box");
       container.innerHTML = questions.map((item, qIdx) => `
-        <div class="quiz-card" id="qcard-${qIdx}">
+        <div class="quiz-card" id="qcard-${qIdx}" data-ans="${item.ans}">
           <div class="quiz-header">
             <span class="quiz-question">${qIdx + 1}. ${item.q}</span>
             <span class="quiz-badge">${item.bcs}</span>
           </div>
           <div class="quiz-options">
             ${item.opts.map((opt, oIdx) => `
-              <button class="quiz-opt-btn" id="btn-${qIdx}-${oIdx}" onclick="selectAnswer(${qIdx}, ${oIdx})">
+              <button class="quiz-opt-btn" id="btn-${qIdx}-${oIdx}" ${oIdx === item.ans ? 'data-is-correct="true"' : ''} onclick="selectAnswer(${qIdx}, ${oIdx})">
                 <span>${['ক', 'খ', 'গ', 'ঘ'][oIdx]}.</span> ${opt}
               </button>
             `).join('')}

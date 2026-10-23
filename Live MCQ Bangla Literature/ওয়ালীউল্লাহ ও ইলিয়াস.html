@@ -1396,7 +1396,7 @@
 
       container.innerHTML = QUIZ_DATA.map((item, idx) => {
         return `
-          <div class="quiz-card" id="q-card-${idx}">
+          <div class="quiz-card" id="q-card-${idx}" data-ans="${item.ans}">
             <div class="quiz-q-title">
               <span><strong>${toBn(idx + 1)}.</strong> ${item.q}</span>
               <span class="quiz-bcs-tag">${item.bcs}</span>
@@ -1406,6 +1406,7 @@
                 <button 
                   class="opt-btn" 
                   id="opt-${idx}-${oIdx}" 
+                  ${oIdx === item.ans ? 'data-is-correct="true"' : ''}
                   onclick="selectOption(${idx}, ${oIdx})"
                 >
                   <span class="opt-letter">${LETTERS[oIdx]}</span>
