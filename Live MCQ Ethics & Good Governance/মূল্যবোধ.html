@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>অধ্যায় ০২: মূল্যবোধ - বিসিএস প্রিলিমিনারি ই-বুক</title>
+  <link rel="stylesheet" href="paper-textures.css">
+  <link rel="stylesheet" href="bangla-fonts.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1d4ed8;
+      --primary-light: #dbeafe;
+      --primary-dark: #1e40af;
+      --accent: #d97706;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(29, 78, 216, 0.2);
+      --font-scale: 1;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 24px rgba(29, 78, 216, 0.12);
+      
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.82);
+    }
+
+    [data-theme="dark"] {
+      --primary: #60a5fa;
+      --primary-light: rgba(96, 165, 250, 0.15);
+      --primary-dark: #2563eb;
+      --accent: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(96, 165, 250, 0.22);
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+      
+      --bg-surface: rgba(28, 25, 23, 0.85);
+      --bg-card: rgba(28, 25, 23, 0.82);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.7;
+      color: var(--text-main);
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 5rem 1rem;
+    }
+
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      background: var(--bg-surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-main);
+      text-decoration: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-sm);
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      transition: all 0.2s;
+    }
+
+    [data-theme="dark"] .nav-btn {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .control-btn {
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.7rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+
+    [data-theme="dark"] .control-btn {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .control-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .chapter-header {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .chapter-header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .ch-pre {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .ch-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.35;
+      margin-bottom: 0.75rem;
+    }
+
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .ch-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .ch-badge {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .ch-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .bcs-table-wrapper {
+      overflow-x: auto;
+      margin-bottom: 2rem;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .bcs-table th, .bcs-table td {
+      padding: 0.65rem 0.75rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .bcs-table th {
+      color: var(--primary);
+    }
+
+    .notes-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .sec-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
+      color: var(--primary);
+    }
+
+    .sk-box {
+      background: var(--bg-card);
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .sk-box-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sk-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .sk-table th, .sk-table td {
+      padding: 0.65rem 0.85rem;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .sk-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    [data-theme="dark"] .sk-table th {
+      color: var(--primary);
+    }
+
+    .sk-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .sk-list li {
+      position: relative;
+      padding-left: 1.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .sk-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0.3rem;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .sk-sticky {
+      background: rgba(254, 240, 138, 0.4);
+      border-left: 4px solid #eab308;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1rem;
+      font-size: 0.98rem;
+    }
+
+    [data-theme="dark"] .sk-sticky {
+      background: rgba(234, 179, 8, 0.15);
+      border-left-color: #facc15;
+    }
+
+    .sk-mark {
+      background: linear-gradient(120deg, rgba(254, 240, 138, 0.6) 0%, rgba(254, 240, 138, 0.6) 100%);
+      background-repeat: no-repeat;
+      background-size: 100% 40%;
+      background-position: 0 88%;
+      padding: 0 2px;
+      font-weight: 600;
+    }
+
+    .quiz-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .quiz-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      background: var(--bg-surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .score-badge {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .reset-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .reset-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+    .bcs-table, .bcs-table *, .score-bar, .score-bar *, .doubt-box, .doubt-box * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .q-num {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+
+    .q-tag {
+      background: rgba(0, 0, 0, 0.05);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      color: var(--text-muted);
+    }
+
+    [data-theme="dark"] .q-tag {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .options-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      width: 100%;
+      text-align: left;
+      padding: 0.75rem 1rem;
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      transition: all 0.2s;
+    }
+
+    [data-theme="dark"] .opt-btn {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    [data-theme="dark"] .opt-letter {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .opt-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .opt-btn.correct {
+      background: rgba(34, 197, 94, 0.2) !important;
+      color: #4ade80 !important;
+    }
+
+    .opt-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+
+    [data-theme="dark"] .opt-btn.wrong {
+      background: rgba(239, 68, 68, 0.2) !important;
+      color: #f87171 !important;
+    }
+
+    .ans-drawer {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border-color);
+      display: none;
+    }
+
+    .ans-badge {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-content {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    .ch-nav-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3rem;
+      background: var(--bg-surface);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .nav-arrow {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.2s;
+    }
+
+    .nav-arrow:hover {
+      transform: translateX(4px);
+    }
+
+    .nav-arrow.prev:hover {
+      transform: translateX(-4px);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container paper-container paper-lined-notebook font-rayhan">
+
+    <!-- Top Sticky Navigation -->
+    <header class="top-nav">
+      <div class="nav-left">
+        <a href="index.html" class="nav-btn">
+          <i class="fa-solid fa-arrow-left"></i> সূচিপত্র
+        </a>
+      </div>
+      <div class="controls">
+        <button class="control-btn" onclick="adjustFontSize(-0.05)" title="ফন্ট ছোট করুন">A-</button>
+        <button class="control-btn" onclick="resetFontSize()" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="control-btn" onclick="adjustFontSize(0.05)" title="ফন্ট বড় করুন">A+</button>
+        <button class="control-btn" onclick="toggleTheme()" id="themeBtn" title="থিম পরিবর্তন">🌙</button>
+      </div>
+    </header>
+
+    <!-- Chapter Header -->
+    <section class="chapter-header">
+      <span class="ch-pre">অধ্যায় ০২</span>
+      <h1 class="ch-title font-rayhan">মূল্যবোধ <span class="ch-en">(Values & Human Morals)</span></h1>
+      <div class="ch-meta">
+        <span>📖 পৃষ্ঠা ১০৩১ হতে ১০৩৭</span>
+        <span class="ch-badge">৩০টি প্রামাণ্য প্রশ্ন</span>
+      </div>
+    </section>
+
+    <!-- BCS Analysis Matrix Table -->
+    <div class="bcs-table-wrapper">
+      <table class="bcs-table">
+        <thead>
+          <tr>
+            <th>বিসিএস</th>
+            <th>প্রশ্ন সংখ্যা</th>
+            <th>বিসিএস</th>
+            <th>প্রশ্ন সংখ্যা</th>
+            <th>বিসিএস</th>
+            <th>প্রশ্ন সংখ্যা</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>৫০তম</td>
+            <td>৬</td>
+            <td>৪৪তম</td>
+            <td>৫</td>
+            <td>৩৮তম</td>
+            <td>২</td>
+          </tr>
+          <tr>
+            <td>৪৯তম</td>
+            <td>০</td>
+            <td>৪৩তম</td>
+            <td>০</td>
+            <td>৩৭তম</td>
+            <td>২</td>
+          </tr>
+          <tr>
+            <td>৪৮তম</td>
+            <td>০</td>
+            <td>৪২তম</td>
+            <td>০</td>
+            <td>৩৬তম</td>
+            <td>৩</td>
+          </tr>
+          <tr>
+            <td>৪৭তম</td>
+            <td>৩</td>
+            <td>৪১তম</td>
+            <td>৩</td>
+            <td>৩৫তম</td>
+            <td>২</td>
+          </tr>
+          <tr>
+            <td>৪৬তম</td>
+            <td>০</td>
+            <td>৪০তম</td>
+            <td>৩</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>৪৫তম</td>
+            <td>২</td>
+            <td>৩৯তম</td>
+            <td>০</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Part 1: Authentic Interactive Notes & Sketchnotes -->
+    <section class="notes-section">
+      <h2 class="sec-heading">
+        <i class="fa-solid fa-pen-nib"></i> প্রথম অংশ: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি
+      </h2>
+
+      <!-- Box 1: মূল্যবোধের স্বরূপ ও সংজ্ঞা -->
+      <div class="sk-box">
+        <div class="sk-box-title">
+          <i class="fa-solid fa-compass"></i> মূল্যবোধের ধারণা, উৎপত্তি ও পণ্ডিতদের মতবাদ
+        </div>
+        <p style="margin-bottom:0.8rem;">
+          <span class="sk-mark">মূল্যবোধ (Values):</span> মানুষের আচরণের সামাজিক মাপকাঠি এবং আচরণ পরিচালনাকারী দীর্ঘমেয়াদি বিশ্বাস ও আদর্শ। এটি একজন ব্যক্তির চিন্তা, সিদ্ধান্ত ও জীবনদৃষ্টিকে পরিচালিত করে।
+        </p>
+        <div class="sk-sticky">
+          <strong>🏡 মূল্যবোধের প্রাথমিক ও প্রাতিষ্ঠানিক কেন্দ্র:</strong>
+          <br>• <strong>প্রাথমিক উৎস:</strong> পরিবার (পরিবারেই শিশুর মূল্যবোধ ও আচরণের প্রথম পাঠ রচিত হয়)।
+          <br>• <strong>প্রাতিষ্ঠানিক উৎস:</strong> শিক্ষালয় বা বিদ্যালয় (শিক্ষার মাধ্যমে মূল্যবোধ সুদৃঢ় ও পরিশীলিত হয়)।
+          <br>• <strong>চালিকা শক্তি:</strong> সংস্কৃতি (সংস্কৃতির মাধ্যমেই মূল্যবোধ সমাজে টিকে থাকে ও বিকশিত হয়)।
+        </div>
+        <table class="sk-table">
+          <thead>
+            <tr>
+              <th>সমাজবিজ্ঞানী / পণ্ডিত</th>
+              <th>মূল্যবোধের কালজয়ী সংজ্ঞা</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>স্টুয়ার্ট সি. ডড (Stuart C. Dodd)</strong></td>
+              <td>সামাজিক মূল্যবোধ হলো সেসব রীতিনীতির সমষ্টি, যা ব্যক্তি সমাজের নিকট হতে আশা করে এবং যা সমাজ ব্যক্তির নিকট হতে লাভ করে।</td>
+            </tr>
+            <tr>
+              <td><strong>এম. আর. উইলিয়াম</strong></td>
+              <td>মূল্যবোধ মানুষের ইচ্ছার একটি প্রধান মানদণ্ড।</td>
+            </tr>
+            <tr>
+              <td><strong>এইচ. এম. জনসন</strong></td>
+              <td>সামাজিক মূল্যবোধ হলো একটি মানদণ্ড, যার দ্বারা একটি সমাজের ভালো-মন্দ ও ন্যায়-অন্যায় পরিমাপ করা হয়।</td>
+            </tr>
+            <tr>
+              <td><strong>ক্লাইড ক্লুখোন (Clyde Kluckhohn)</strong></td>
+              <td>সামাজিক মূল্যবোধ হচ্ছে সেসব প্রকাশ্য ও অনুমেয় আচার-আচরণের ধারা, যা ব্যক্তি ও সমাজের মৌলিক বৈশিষ্ট্য বলে স্বীকৃত।</td>
+            </tr>
+            <tr>
+              <td><strong>এফ. ই. মেরিল (F. E. Meril)</strong></td>
+              <td>সামাজিক মূল্যবোধ হচ্ছে বিশ্বাসের এক প্রকৃতি বা ধরন, যা গোষ্ঠীগত কল্যাণে সংরক্ষণ করাকে মানুষ গুরুত্বপূর্ণ বলে মনে করে।</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Box 2: মূল্যবোধের প্রকারভেদ ও বৈশিষ্ট্য -->
+      <div class="sk-box">
+        <div class="sk-box-title">
+          <i class="fa-solid fa-layer-group"></i> মূল্যবোধের প্রধান বৈশিষ্ট্য ও শ্রেণিবিভাগ
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+          <div style="background:var(--bg-surface); padding:1rem; border-radius:var(--radius-sm); border:1px solid var(--border-color);">
+            <h4 style="color:var(--primary); margin-bottom:0.5rem;">🌟 জীবনের ৩টি শ্রেষ্ঠ মূল্যবোধ:</h4>
+            <ul class="sk-list">
+              <li><strong>১. সত্য (Truth):</strong> সততা, ন্যায় ও নৈতিকতার ভিত্তি।</li>
+              <li><strong>২. সুন্দর (Beauty):</strong> নান্দনিকতা ও মনের ইতিবাচক পরিচ্ছন্নতা।</li>
+              <li><strong>৩. সদ্‌গুণ (Virtue):</strong> মানুষের কল্যাণমুখী আচরণ ও মহৎ গুণাবলি।</li>
+            </ul>
+          </div>
+          <div style="background:var(--bg-surface); padding:1rem; border-radius:var(--radius-sm); border:1px solid var(--border-color);">
+            <h4 style="color:var(--primary); margin-bottom:0.5rem;">⚖️ মূল্যবোধের গুরুত্বপূর্ণ বৈশিষ্ট্যসমূহ:</h4>
+            <ul class="sk-list">
+              <li><strong>বিভিন্নতা:</strong> সমাজ ও সংস্কৃতিভেদে ভিন্ন হয়।</li>
+              <li><strong>পরিবর্তনশীলতা:</strong> সময়ের সাথে সাথে মূল্যবোধ পরিমার্জিত হয়।</li>
+              <li><strong>আপেক্ষিকতা:</strong> পরিস্থিতি ও সমাজভেদে গ্রহণযোগ্যতার তারতম্য থাকে।</li>
+              <li><strong>সামাজিক মাপকাঠি:</strong> মানুষের আচরণের মূল্যায়ন করে।</li>
+            </ul>
+          </div>
+        </div>
+        <div class="sk-sticky">
+          <strong>🕊️ চিরন্তন মূল্যবোধ:</strong> 'সত্য ও ন্যায়'—যা সকল যুগে ও সকল মানবসমাজে অপরিবর্তনীয় ও চিরন্তন।
+        </div>
+      </div>
+
+      <!-- Box 3: দুর্নীতি প্রতিরোধ ও আন্তর্জাতিক কনভেনশন -->
+      <div class="sk-box">
+        <div class="sk-box-title">
+          <i class="fa-solid fa-shield-halved"></i> দুর্নীতি প্রতিরোধ, আইনি বিধান ও আন্তর্জাতিক কনভেনশন (UNCAC)
+        </div>
+        <table class="sk-table">
+          <thead>
+            <tr>
+              <th>আইন / কনভেনশন</th>
+              <th>গুরুত্বপূর্ণ তথ্য ও ধারা</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>দণ্ডবিধি, ১৮৬০</strong></td>
+              <td>বাংলাদেশে ফৌজদারি অপরাধ ও সরকারি দুর্নীতির দণ্ড সম্পর্কিত মৌলিক আইন।</td>
+            </tr>
+            <tr>
+              <td><strong>দুর্নীতি দমন কমিশন আইন, ২০০৪</strong></td>
+              <td>স্বাধীন দুর্নীতি দমন কমিশন (দুদক) গঠন ও কার্যকর দুর্নীতি দমনের বিশেষ আইন।</td>
+            </tr>
+            <tr>
+              <td><strong>সরকারি কর্মচারী (শৃঙ্খলা ও আপীল) বিধিমালা, ২০১৮</strong></td>
+              <td>সরকারি কর্মকর্তাদের অসদাচরণ ও দুর্নীতির জন্য গুরুদণ্ড ও লঘুদণ্ডের বিধান।</td>
+            </tr>
+            <tr>
+              <td><strong>UNCAC (মেরিডা কনভেনশন)</strong></td>
+              <td>জাতিসংঘের দুর্নীতিবিরোধী কনভেনশন (United Nations Convention Against Corruption)। গৃহীত: ৩১ অক্টোবর ২০০৩; স্থান: মেরিডা, মেক্সিকো। কার্যকর: ১৪ ডিসেম্বর ২০০৫। বাংলাদেশ স্বাক্ষর করে ২০০৭ সালে। মোট সদস্য: ১৯২টি।</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Part 2: Interactive Quiz Engine -->
+    <section class="quiz-section">
+      <h2 class="sec-heading">
+        <i class="fa-solid fa-circle-question"></i> দ্বিতীয় অংশ: বিগত বছরের প্রামাণ্য প্রশ্নব্যাংক ও কুইজ
+      </h2>
+
+      <div class="quiz-toolbar">
+        <div class="score-badge">
+          লাইভ স্কোর: <span id="scoreText">০ / ৩০</span>
+        </div>
+        <button class="reset-btn" onclick="resetQuiz()">
+          <i class="fa-solid fa-rotate-right"></i> রিসেট কুইজ
+        </button>
+      </div>
+
+      <div id="quizContainer">
+        <!-- Q1 -->
+        <div class="q-card" data-q="1" data-ans="খ">
+          <div class="q-header"><span class="q-num">১</span><span class="q-tag">৫০তম বিসিএস</span></div>
+          <div class="q-text">সাধারণের দৃষ্টিতে কোনটি মূল্যবোধ সম্পন্ন শাসন ব্যবস্থার বৈশিষ্ট্য?</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> আইনের নির্বাচনী প্রয়োগ</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> নাগরিকের অংশগ্রহণ</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> কর্তৃত্ববাদ</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> গোপনীয়তা</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: খ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> মূল্যবোধ সম্পন্ন শাসন ব্যবস্থার অন্যতম প্রধান বৈশিষ্ট্য হলো নাগরিকের সক্রিয় অংশগ্রহণ। এর মাধ্যমে শাসন ব্যবস্থার স্বচ্ছতা ও জবাবদিহিতা নিশ্চিত হয়।</div>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="q-card" data-q="2" data-ans="গ">
+          <div class="q-header"><span class="q-num">২</span><span class="q-tag">৫০তম বিসিএস</span></div>
+          <div class="q-text">মূল্যবোধ ও সুশাসনের উপস্থিতি জাতীয় উন্নয়নের কোন দিকটিকে বেশি টেকসই করে তোলে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> স্বল্পমেয়াদি প্রবৃদ্ধি</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> অবকাঠামো নির্মাণ</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> মানব সম্পদ উন্নয়ন</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> আমলাতান্ত্রিক নিয়ন্ত্রণ</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: গ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> মূল্যবোধ ও সুশাসনের উপস্থিতি জাতীয় উন্নয়নের ক্ষেত্রে 'মানব সম্পদ উন্নয়ন'-কে সবচেয়ে বেশি টেকসই করে তোলে। মানুষের চরিত্র, সততা, শিক্ষা ও স্বাস্থ্য দীর্ঘমেয়াদি উন্নয়নের প্রাণ।</div>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="q-card" data-q="3" data-ans="গ">
+          <div class="q-header"><span class="q-num">৩</span><span class="q-tag">৫০তম বিসিএস</span></div>
+          <div class="q-text">কোনটি মূল্যবোধের সারসত্তাকে প্রতিফলিত করে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> কর্তৃপক্ষ কর্তৃক আরোপিত নিয়ম</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> নৈতিক নির্দেশ ছাড়া প্রথা ও ঐতিহ্য</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> নৈতিক আচরণ নির্দেশক বিশ্বাস ও নীতি</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> সামাজিক শৃঙ্খলার আইনি বাধ্যবাধকতা</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: গ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> মূল্যবোধের সারসত্তা হলো মানুষের অভ্যন্তরীণ অকৃত্রিম ও চিরন্তন নৈতিক আচরণ নির্দেশক বিশ্বাস ও নীতি, যা স্বতঃস্ফূর্তভাবে সঠিক আচরণকে উৎসাহিত করে।</div>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="q-card" data-q="4" data-ans="খ">
+          <div class="q-header"><span class="q-num">৪</span><span class="q-tag">৫০তম বিসিএস</span></div>
+          <div class="q-text">মূল্যবোধ ও শাসনের মধ্যে সম্পর্ক হলো—</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> নৈতিক নীতি, নিয়ম ও রাজনৈতিক নির্দেশ মানা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> নৈতিক নীতি, স্বচ্ছতা ও সামাজিক দায়বদ্ধতা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> স্তরবিন্যাস, স্বচ্ছতা ও ঐতিহ্য</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> নৈতিকতা ছাড়া প্রশাসনিক দক্ষতা</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: খ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> মূল্যবোধ ও শাসনের মধ্যে সম্পর্ক হলো নৈতিক নীতি, স্বচ্ছতা ও সামাজিক দায়বদ্ধতা। শাসন তখনই সুশাসনে রূপ নেয় যখন তা নৈতিকতা ও দায়বদ্ধতার দ্বারা পরিচালিত হয়।</div>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="q-card" data-q="5" data-ans="গ">
+          <div class="q-header"><span class="q-num">৫</span><span class="q-tag">৫০তম বিসিএস</span></div>
+          <div class="q-text">জীবনের তিনটি শ্রেষ্ঠ মূল্যবোধ কী কী?</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> সম্পদ, ক্ষমতা ও সদ্‌গুণ</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> সত্য, আনন্দ ও সদ্‌গুণ</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> সত্য, সুন্দর ও সদ্‌গুণ</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> আনন্দ, বিবেক ও সাহস</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: গ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> মানবজীবনের তিনটি শ্রেষ্ঠ সনাতন মূল্যবোধ হলো সত্য (Truth), সুন্দর (Beauty) এবং সদ্‌গুণ (Virtue)। সত্য মানবজীবনের নিষ্ঠা আনে, সুন্দর রুচি আনে এবং সদ্‌গুণ মহত্ত্ব এনে দেয়।</div>
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="q-card" data-q="6" data-ans="গ">
+          <div class="q-header"><span class="q-num">৬</span><span class="q-tag">৫০তম বিসিএস</span></div>
+          <div class="q-text">সাংস্কৃতিক মূল্যবোধগুলো বেশি উদ্ভূত হয় 'সামাজিক ____' থেকে।</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> আচরণ</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> বৈষম্য</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> প্রথা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> নীতি</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: গ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> সাংস্কৃতিক মূল্যবোধ প্রধানত দীর্ঘদিন ধরে প্রচলিত সামাজিক 'প্রথা' (Customs) ও ঐতিহ্য থেকে জন্ম নেয় এবং বংশপরম্পরায় প্রবাহিত হয়।</div>
+          </div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="q-card" data-q="7" data-ans="খ">
+          <div class="q-header"><span class="q-num">৭</span><span class="q-tag">৪৭তম বিসিএস</span></div>
+          <div class="q-text">মানুষের মধ্যে সামাজিক মূল্যবোধ গড়ে উঠে—</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> আইনের বাধ্যবাধকতার মাধ্যমে</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> সামাজিকীকরণের মাধ্যমে</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> অর্থনৈতিক প্রণোদনার মাধ্যমে</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> উচ্চমানের প্রযুক্তি অনুসরণের মাধ্যমে</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: খ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> মানুষের মধ্যে সামাজিক মূল্যবোধ গড়ে ওঠে মূলত সামাজিকীকরণের (Socialization) প্রক্রিয়ায়। পরিবার, সমাজ, বিদ্যালয় ও প্রতিবেশীর সাথে মিথস্ক্রিয়ার মাধ্যমে মানুষ সামাজিক নিয়ম শেখে।</div>
+          </div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="q-card" data-q="8" data-ans="গ">
+          <div class="q-header"><span class="q-num">৮</span><span class="q-tag">৪৭তম বিসিএস</span></div>
+          <div class="q-text">জাতিসংঘের সাধারণ পরিষদে দুর্নীতির বিরুদ্ধে আন্তর্জাতিক কনভেনশনটি গৃহীত হয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> ৩১ জানুয়ারি, ২০০৩</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> ৩১ অক্টোবর, ২০০৬</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> ৩১ অক্টোবর, ২০০৩</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> ২১ ফেব্রুয়ারি, ২০০৮</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: গ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> ২০০৩ সালের ৩১ অক্টোবর জাতিসংঘের সাধারণ পরিষদে দুর্নীতির বিরুদ্ধে আন্তর্জাতিক কনভেনশন (UNCAC) গৃহীত হয়। পরবর্তীতে মেক্সিকোর মেরিডায় এটি স্বাক্ষরের জন্য উন্মুক্ত করা হয়।</div>
+          </div>
+        </div>
+
+        <!-- Q9 -->
+        <div class="q-card" data-q="9" data-ans="ঘ">
+          <div class="q-header"><span class="q-num">৯</span><span class="q-tag">৪৭তম বিসিএস</span></div>
+          <div class="q-text">৭ আগস্ট ২০২৪ পর্যন্ত দুর্নীতির বিরুদ্ধে জাতিসংঘের আন্তর্জাতিক কনভেনশনে স্বাক্ষরকারী দেশের সংখ্যা—</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> ১৯২টি</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> ১০৯টি</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> ১৯০টি</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> ১৯১টি</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: ঘ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> ৭ আগস্ট ২০২৪ পর্যন্ত United Nations Convention Against Corruption (UNCAC)-এ স্বাক্ষরকারী দেশের সংখ্যা ছিল ১৯১টি।</div>
+          </div>
+        </div>
+
+        <!-- Q10 -->
+        <div class="q-card" data-q="10" data-ans="ক">
+          <div class="q-header"><span class="q-num">১০</span><span class="q-tag">৪৫তম বিসিএস</span></div>
+          <div class="q-text">ভালো-মন্দ কোন ধরনের মূল্যবোধ?</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> নৈতিক</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> অর্থনৈতিক</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> রাজনৈতিক</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> সামাজিক</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: ক</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> ভালো ও মন্দের পার্থক্য বিচার করা মানুষের একটি মৌলিক 'নৈতিক মূল্যবোধ'। এর মাধ্যমে মানুষ অনুচিত কাজ থেকে বিরত থাকে এবং শুভ কাজের প্রতি ধাবিত হয়।</div>
+          </div>
+        </div>
+
+        <!-- Q11 -->
+        <div class="q-card" data-q="11" data-ans="গ">
+          <div class="q-header"><span class="q-num">১১</span><span class="q-tag">৪৫তম বিসিএস</span></div>
+          <div class="q-text">মূল্যবোধের উৎস কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> ধর্ম</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> সমাজ</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> নৈতিক চেতনা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> রাষ্ট্র</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: গ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> মূল্যবোধের সবচেয়ে গভীর ও মৌলিক উৎস হলো 'নৈতিক চেতনা'। নৈতিক চেতনার আলোকে মানুষ সমাজে সত্য ও ন্যায়ের প্রতিষ্ঠা করে।</div>
+          </div>
+        </div>
+
+        <!-- Q12 -->
+        <div class="q-card" data-q="12" data-ans="ঘ">
+          <div class="q-header"><span class="q-num">১২</span><span class="q-tag">৪৪তম বিসিএস</span></div>
+          <div class="q-text">বাংলাদেশে দুর্নীতিকে দণ্ডনীয় ঘোষণা করা হয়েছে যে বিধানে—</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> ১৮৬০ সালে প্রণীত দণ্ডবিধিতে</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> ২০০৪ সালে প্রণীত দুর্নীতি দমন কমিশন আইনে</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> ২০১৮ সালে প্রণীত সরকারি কর্মকর্তার (শৃঙ্খলা ও আপীল) বিধিমালাতে</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> উপরের সবগুলোতেই</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: ঘ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> বাংলাদেশে দণ্ডবিধি ১৮৬০, দুদক আইন ২০০৪ এবং সরকারি কর্মচারী (শৃঙ্খলা ও আপীল) বিধিমালা ২০১৮—এই তিনটি আইনেই দুর্নীতিকে দণ্ডনীয় অপরাধ হিসেবে অন্তর্ভুক্ত করা হয়েছে।</div>
+          </div>
+        </div>
+
+        <!-- Q13 -->
+        <div class="q-card" data-q="13" data-ans="গ">
+          <div class="q-header"><span class="q-num">১৩</span><span class="q-tag">৪৪তম বিসিএস</span></div>
+          <div class="q-text">জাতিসংঘের দুর্নীতিবিরোধী কনভেনশনের নাম—</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> UNCLOS</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> UNCTAD</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> UNCAC</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> CEDAW</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: গ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> জাতিসংঘের দুর্নীতিবিরোধী কনভেনশনের নাম UNCAC (United Nations Convention Against Corruption)। এটি ২০০৩ সালে গৃহীত ও ২০০৫ সালে কার্যকর হয়।</div>
+          </div>
+        </div>
+
+        <!-- Q14 -->
+        <div class="q-card" data-q="14" data-ans="ঘ">
+          <div class="q-header"><span class="q-num">১৪</span><span class="q-tag">৪৪তম বিসিএস</span></div>
+          <div class="q-text">গণতান্ত্রিক মূল্যবোধের সবচেয়ে গুরুত্বপূর্ণ উপাদান—</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> নেতৃত্বের প্রতি আনুগত্য</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> স্বচ্ছ নির্বাচন কমিশন</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> শক্তিশালী রাজনৈতিক দল</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> পরমতসহিষ্ণুতা</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: ঘ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> গণতন্ত্রের প্রাণ হলো পরমতসহিষ্ণুতা (Tolerance)। অন্যের মতামতকে শ্রদ্ধা ও সহনশীলতার সাথে গ্রহণ করাই গণতান্ত্রিক মূল্যবোধের শ্রেষ্ঠ উপাদান।</div>
+          </div>
+        </div>
+
+        <!-- Q15 -->
+        <div class="q-card" data-q="15" data-ans="গ">
+          <div class="q-header"><span class="q-num">১৫</span><span class="q-tag">৪৪তম বিসিএস</span></div>
+          <div class="q-text">প্রাথমিকভাবে একজন মানুষের মানবীয় গুণাবলি ও সামাজিক মূল্যবোধের বিকাশ ঘটে—</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> সমাজে বসবাসের মাধ্যমে</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> বিদ্যালয়ে</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> পরিবারে</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> রাষ্ট্রের মাধ্যমে</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: গ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> পরিবার হলো মানবজীবনের আদি ও শাশ্বত শিক্ষালয়। পরিবারেই শিশুর মধ্যে স্নেহ, মায়া, মমতা, সততা ও মূল্যবোধের প্রাথমিক বিকাশ ঘটে।</div>
+          </div>
+        </div>
+
+        <!-- Q16 -->
+        <div class="q-card" data-q="16" data-ans="ঘ">
+          <div class="q-header"><span class="q-num">১৬</span><span class="q-tag">৪৪তম বিসিএস</span></div>
+          <div class="q-text">যে গুণের মাধ্যমে মানুষ 'ভুল' ও 'শুদ্ধ'-এর পার্থক্য নির্ধারণ করতে পারে, তা হচ্ছে—</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> সততা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> সদাচার</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> কর্তব্যবোধ</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> মূল্যবোধ</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: ঘ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> মূল্যবোধ মানুষকে সঠিক ও বেঠিক, ভুল ও শুদ্ধের মধ্যকার স্পষ্ট পার্থক্য বোঝার এবং শুদ্ধ পথ অনুসরণের প্রেরণা যোগায়।</div>
+          </div>
+        </div>
+
+        <!-- Q17 -->
+        <div class="q-card" data-q="17" data-ans="ঘ">
+          <div class="q-header"><span class="q-num">১৭</span><span class="q-tag">৪১তম বিসিএস</span></div>
+          <div class="q-text">মূল্যবোধের গুরুত্বপূর্ণ বৈশিষ্ট্য হলো—</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> বিভিন্নতা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> পরিবর্তনশীলতা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> আপেক্ষিকতা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> উপরের সবগুলোই</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: ঘ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> মূল্যবোধ সমাজ ও স্থানভেদে বিভিন্ন হতে পারে, সময়ের পরিক্রমায় পরিবর্তিত হয় এবং পরিস্থিতির প্রেক্ষিতে আপেক্ষিক। সুতরাং উপরের সবগুলোই এর গুরুত্বপূর্ণ বৈশিষ্ট্য।</div>
+          </div>
+        </div>
+
+        <!-- Q18 -->
+        <div class="q-card" data-q="18" data-ans="ক">
+          <div class="q-header"><span class="q-num">১৮</span><span class="q-tag">৪১তম বিসিএস</span></div>
+          <div class="q-text">মূল্যবোধ দৃঢ় হয়—</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> শিক্ষার মাধ্যমে</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> সুশাসনের মাধ্যমে</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> ধর্মের মাধ্যমে</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> গণতন্ত্র চর্চার মাধ্যমে</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: ক</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> শিক্ষার মূল উদ্দেশ্য হলো মূল্যবোধ অর্জন ও চরিত্র গঠন। প্রকৃত শিক্ষার মাধ্যমেই মানুষের মধ্যে অর্জিত মূল্যবোধ সুদৃঢ় ও স্থায়ী হয়।</div>
+          </div>
+        </div>
+
+        <!-- Q19 -->
+        <div class="q-card" data-q="19" data-ans="গ">
+          <div class="q-header"><span class="q-num">১৯</span><span class="q-tag">৪১তম বিসিএস</span></div>
+          <div class="q-text">কোন মূল্যবোধ রাষ্ট্র, সরকার ও গোষ্ঠী কর্তৃক স্বীকৃত?</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> সামাজিক মূল্যবোধ</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> ইতিবাচক মূল্যবোধ</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> গণতান্ত্রিক মূল্যবোধ</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> নৈতিক মূল্যবোধ</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: গ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> গণতান্ত্রিক মূল্যবোধ রাষ্ট্রের সংবিধান, সরকার এবং বৃহত্তর রাজনৈতিক গোষ্ঠী কর্তৃক প্রাতিষ্ঠানিকভাবে স্বীকৃত ও সংরক্ষিত থাকে।</div>
+          </div>
+        </div>
+
+        <!-- Q20 -->
+        <div class="q-card" data-q="20" data-ans="খ">
+          <div class="q-header"><span class="q-num">২০</span><span class="q-tag">৪০তম বিসিএস</span></div>
+          <div class="q-text">আমরা যে সমাজেই বসবাস করি না কেন, আমরা সকলেই ভালো নাগরিক হওয়ার প্রত্যাশা করি। এটি—</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> নৈতিক অনুশাসন</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> রাজনৈতিক ও সামাজিক অনুশাসন</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> আইনের শাসন</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> আইনের অধ্যাদেশ</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: খ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> ভালো নাগরিক হওয়ার প্রত্যাশা এবং রাষ্ট্রের আইন ও দায়িত্ব পালন মূলত একটি রাজনৈতিক ও সামাজিক অনুশাসন (Political and social sanction)।</div>
+          </div>
+        </div>
+
+        <!-- Q21 -->
+        <div class="q-card" data-q="21" data-ans="গ">
+          <div class="q-header"><span class="q-num">২১</span><span class="q-tag">৪০তম বিসিএস</span></div>
+          <div class="q-text">মূল্যবোধের চালিকা শক্তি হলো—</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> উন্নয়ন</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> গণতন্ত্র</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> সংস্কৃতি</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> সুশাসন</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: গ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> সংস্কৃতি হলো মানুষের জীবনপ্রণালী। এই সংস্কৃতির চর্চায় লালিত হয়ে মূল্যবোধ প্রজন্ম থেকে প্রজন্মে ছড়িয়ে পড়ে, তাই সংস্কৃতিই মূল্যবোধের প্রধান চালিকা শক্তি।</div>
+          </div>
+        </div>
+
+        <!-- Q22 -->
+        <div class="q-card" data-q="22" data-ans="খ">
+          <div class="q-header"><span class="q-num">২২</span><span class="q-tag">৪০তম ও ৩৫তম বিসিএস</span></div>
+          <div class="q-text">মূল্যবোধ হলো—</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> মানুষের সঙ্গে মানুষের পারস্পরিক সম্পর্ক নির্ধারণ</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> মানুষের আচরণ পরিচালনাকারী নীতি ও মানদণ্ড</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> সমাজজীবনে মানুষের সুখী হওয়ার প্রয়োজনীয় উপাদান</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> মানুষের প্রাতিষ্ঠানিক কার্যাবলীর দিক নির্দেশনা</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: খ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> মূল্যবোধ হলো মানুষের আচরণ পরিচালনাকারী নীতি ও মানদণ্ড। এটি মানুষের আচার-আচরণকে নিয়ন্ত্রণ ও নির্দেশনা দেয়।</div>
+          </div>
+        </div>
+
+        <!-- Q23 -->
+        <div class="q-card" data-q="23" data-ans="গ">
+          <div class="q-header"><span class="q-num">২৩</span><span class="q-tag">৩৮তম বিসিএস</span></div>
+          <div class="q-text">ব্যক্তি সহনশীলতার শিক্ষা লাভ করে—</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> সুশাসনের শিক্ষা থেকে</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> আইনের শিক্ষা থেকে</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> মূল্যবোধের শিক্ষা থেকে</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> কর্তব্যবোধ থেকে</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: গ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> ব্যক্তিগত ও পারিবারিক মূল্যবোধের শিক্ষা থেকেই মানুষ অন্যের প্রতি শ্রদ্ধাশীল হতে ও সহনশীলতার মনোভাব অর্জন করতে শেখে।</div>
+          </div>
+        </div>
+
+        <!-- Q24 -->
+        <div class="q-card" data-q="24" data-ans="ঘ">
+          <div class="q-header"><span class="q-num">২৪</span><span class="q-tag">৩৮তম বিসিএস</span></div>
+          <div class="q-text">মূল্যবোধ পরীক্ষা করে—</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> ভালো ও মন্দ</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> ন্যায় ও অন্যায়</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> নৈতিকতা ও অনৈতিকতা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> উপরের সবগুলো</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: ঘ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> মূল্যবোধ ব্যক্তি ও সমাজের সেতু হিসেবে ভালো-মন্দ, ন্যায়-অন্যায় এবং নৈতিকতা-অনৈতিকতার সার্বিক মূল্যায়ন ও পরীক্ষা করে থাকে।</div>
+          </div>
+        </div>
+
+        <!-- Q25 -->
+        <div class="q-card" data-q="25" data-ans="ক">
+          <div class="q-header"><span class="q-num">২৫</span><span class="q-tag">৩৭তম বিসিএস</span></div>
+          <div class="q-text">আমাদের চিরন্তন মূল্যবোধ কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> সত্য ও ন্যায়</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> সার্থকতা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> শঠতা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> অসহিষ্ণুতা</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: ক</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> সত্য ও ন্যায়পরায়ণতা হলো মানুষের শাশ্বত ও চিরন্তন মূল্যবোধ, যা স্থান-কাল-পাত্র নির্বিশেষে সর্বদা শ্রদ্ধার পাত্র।</div>
+          </div>
+        </div>
+
+        <!-- Q26 -->
+        <div class="q-card" data-q="26" data-ans="খ">
+          <div class="q-header"><span class="q-num">২৬</span><span class="q-tag">৩৭তম বিসিএস</span></div>
+          <div class="q-text">সরকারি সিদ্ধান্ত প্রণয়নে কোন মূল্যবোধটি গুরুত্বপূর্ণ নয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> বিশ্বস্ততা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> সৃজনশীলতা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> নিরপেক্ষতা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> জবাবদিহিতা</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: খ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> সরকারি নীতি প্রণয়নে নিরপেক্ষতা, জবাবদিহিতা ও বিশ্বস্ততা বাধ্যতামূলক হলেও সৃজনশীলতা ঐচ্ছিক বিষয়, এটি শাসনতান্ত্রিক মূল মানদণ্ড নয়।</div>
+          </div>
+        </div>
+
+        <!-- Q27 -->
+        <div class="q-card" data-q="27" data-ans="ঘ">
+          <div class="q-header"><span class="q-num">২৭</span><span class="q-tag">৩৬তম বিসিএস</span></div>
+          <div class="q-text">ব্যক্তিগত মূল্যবোধ লালন করে—</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> সামাজিক মূল্যবোধকে</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> গণতান্ত্রিক মূল্যবোধকে</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> ব্যক্তিগত মূল্যবোধকে</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> স্বাধীনতার মূল্যবোধকে</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: ঘ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> ব্যক্তিগত মূল্যবোধ মূলত ব্যক্তির নিজস্ব চিন্তা, স্বাধীনতা ও স্বকীয়তাকে লালন করে। এটি ব্যক্তির স্বাধীনতার মূল্যবোধের পরিপূরক।</div>
+          </div>
+        </div>
+
+        <!-- Q28 -->
+        <div class="q-card" data-q="28" data-ans="খ">
+          <div class="q-header"><span class="q-num">২৮</span><span class="q-tag">৩৬তম বিসিএস</span></div>
+          <div class="q-text">মূল্যবোধ শিক্ষার অন্যতম লক্ষ্য হচ্ছে—</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> দুর্নীতি রোধ করা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> সামাজিক অবক্ষয় রোধ করা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> রাজনৈতিক অবক্ষয় রোধ করা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> সাংস্কৃতিক অবরোধ রক্ষণ করা</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: খ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> মূল্যবোধ শিক্ষার প্রধান ও মৌলিক লক্ষ্য হলো সমাজে শৃঙ্খলা ফিরিয়ে আনা এবং সামাজিক অবক্ষয় (Social decay) কার্যকরভাবে রোধ করা।</div>
+          </div>
+        </div>
+
+        <!-- Q29 -->
+        <div class="q-card" data-q="29" data-ans="ঘ">
+          <div class="q-header"><span class="q-num">২৯</span><span class="q-tag">৩৬তম বিসিএস</span></div>
+          <div class="q-text">একজন জনপ্রশাসকের মৌলিক মূল্যবোধ হলো—</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> স্বাধীনতা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> ক্ষমতা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> কর্মদক্ষতা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> জনকল্যাণ</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: ঘ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> একজন সরকারি কর্মকর্তা বা জনপ্রশাসকের সবচেয়ে বড় ও মৌলিক মূল্যবোধ হলো 'জনকল্যাণ' (Public Welfare)। জনগণের সেবাই প্রশাসনের পরম ধর্ম।</div>
+          </div>
+        </div>
+
+        <!-- Q30 -->
+        <div class="q-card" data-q="30" data-ans="ঘ">
+          <div class="q-header"><span class="q-num">৩০</span><span class="q-tag">৩৫তম বিসিএস</span></div>
+          <div class="q-text">সামাজিক মূল্যবোধের ভিত্তি কী?</div>
+          <div class="options-grid">
+            <button class="opt-btn" onclick="checkAnswer(this, 'ক')"><span class="opt-letter">ক</span> আইনের শাসন</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'খ')"><span class="opt-letter">খ</span> নৈতিকতা</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'গ')"><span class="opt-letter">গ</span> সাম্য</button>
+            <button class="opt-btn" onclick="checkAnswer(this, 'ঘ')"><span class="opt-letter">ঘ</span> উপরের সবগুলো</button>
+          </div>
+          <div class="ans-drawer">
+            <span class="ans-badge">সঠিক উত্তর: ঘ</span>
+            <div class="exp-content"><strong>ব্যাখ্যা:</strong> আইনের শাসন, নৈতিক চেতনা, সাম্য ও সামাজিক সুবিচার—এই সবগুলো মিলেই একটি সমাজের স্বাস্থ্যবান মূল্যবোধের ভিত্তি গঠিত হয়।</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <div class="ch-nav-bottom">
+      <a href="নৈতিকতা.html" class="nav-arrow prev">
+        <i class="fa-solid fa-arrow-left"></i> পূর্ববর্তী অধ্যায়: নৈতিকতা
+      </a>
+      <a href="সুশাসন.html" class="nav-arrow">
+        পরবর্তী অধ্যায়: সুশাসন <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    function initTheme() {
+      const savedTheme = localStorage.getItem('bcs_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateThemeIcon(savedTheme);
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('bcs_theme', newTheme);
+      updateThemeIcon(newTheme);
+    }
+
+    function updateThemeIcon(theme) {
+      const btn = document.getElementById('themeBtn');
+      if (btn) btn.innerText = theme === 'dark' ? '☀️' : '🌙';
+    }
+
+    let currentScale = 1;
+    function adjustFontSize(delta) {
+      currentScale = Math.min(Math.max(currentScale + delta, 0.85), 1.3);
+      document.documentElement.style.setProperty('--font-scale', currentScale);
+    }
+
+    function resetFontSize() {
+      currentScale = 1;
+      document.documentElement.style.setProperty('--font-scale', currentScale);
+    }
+
+    let score = 0;
+    const answered = new Set();
+    const totalQuestions = 30;
+
+    function checkAnswer(btn, chosenOpt) {
+      const card = btn.closest('.q-card');
+      const qId = card.getAttribute('data-q');
+      const correctOpt = card.getAttribute('data-ans');
+      
+      if (answered.has(qId)) return;
+      answered.add(qId);
+
+      const buttons = card.querySelectorAll('.opt-btn');
+      buttons.forEach(b => {
+        b.disabled = true;
+        const letterSpan = b.querySelector('.opt-letter');
+        const letter = letterSpan ? letterSpan.innerText.trim() : '';
+        if (letter === correctOpt) {
+          b.classList.add('correct');
+        }
+      });
+
+      if (chosenOpt === correctOpt) {
+        score++;
+      } else {
+        btn.classList.add('wrong');
+      }
+
+      document.getElementById('scoreText').innerText = `${convertToBangla(score)} / ${convertToBangla(totalQuestions)}`;
+
+      const drawer = card.querySelector('.ans-drawer');
+      if (drawer) {
+        drawer.style.display = 'block';
+      }
+    }
+
+    function resetQuiz() {
+      score = 0;
+      answered.clear();
+      document.getElementById('scoreText').innerText = `০ / ${convertToBangla(totalQuestions)}`;
+      
+      const cards = document.querySelectorAll('.q-card');
+      cards.forEach(card => {
+        const buttons = card.querySelectorAll('.opt-btn');
+        buttons.forEach(b => {
+          b.disabled = false;
+          b.classList.remove('correct', 'wrong');
+        });
+        const drawer = card.querySelector('.ans-drawer');
+        if (drawer) {
+          drawer.style.display = 'none';
+        }
+      });
+    }
+
+    function convertToBangla(n) {
+      const bn = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+      return String(n).split('').map(d => bn[d] || d).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+    });
+  </script>
+</body>
+</html>
