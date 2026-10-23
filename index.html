@@ -476,6 +476,106 @@
       color: var(--text-muted);
     }
 
+    /* Book Switcher Tabs */
+    .book-tabs-container {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-color);
+      padding: 8px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      flex-wrap: wrap;
+    }
+
+    .book-tab-btn {
+      flex: 1;
+      min-width: 270px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border-radius: var(--radius-md);
+      border: 2px solid transparent;
+      background: transparent;
+      color: var(--text-main);
+      cursor: pointer;
+      font-family: inherit;
+      text-align: left;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .book-tab-btn:hover {
+      background: var(--bg-base);
+    }
+
+    .book-tab-btn.active {
+      background: var(--bg-card);
+      border-color: #0f766e;
+      box-shadow: var(--shadow-md);
+    }
+    [data-theme="dark"] .book-tab-btn.active {
+      border-color: #14b8a6;
+      background: #151f32;
+    }
+
+    .book-tab-icon {
+      font-size: 1.8rem;
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: var(--bg-base);
+      border: 1px solid var(--border-color);
+      flex-shrink: 0;
+    }
+
+    .book-tab-content {
+      flex: 1;
+    }
+
+    .book-tab-content strong {
+      display: block;
+      font-size: 1.08rem;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+
+    .book-tab-content small {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .book-tab-badge {
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 20px;
+      background: var(--bg-base);
+      border: 1px solid var(--border-color);
+      color: #0f766e;
+      align-self: flex-start;
+    }
+    [data-theme="dark"] .book-tab-badge {
+      color: #14b8a6;
+    }
+
+    .book-tab-badge.badge-new {
+      background: #fef3c7;
+      color: #b45309;
+      border-color: #fde68a;
+    }
+    [data-theme="dark"] .book-tab-badge.badge-new {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+
     /* Subjects Grid */
     .subject-grid {
       display: grid;
@@ -889,8 +989,29 @@
     <!-- Universal Deep Search Engine Mount Point -->
     <div id="ebkSearchMount"></div>
 
-    <!-- Subjects Cards Grid -->
-    <section class="subject-grid">
+    <!-- Book Switcher Tabs -->
+    <div class="book-tabs-container">
+      <button type="button" class="book-tab-btn active" id="tabCadre" onclick="switchBook('cadre')">
+        <span class="book-tab-icon">🏛️</span>
+        <span class="book-tab-content">
+          <strong>ক্যাডার প্রশ্নব্যাংক</strong>
+          <small>১০ম - ৫০তম বিসিএস প্রিলিমিনারি (১২টি পূর্ণাঙ্গ বিষয়)</small>
+        </span>
+        <span class="book-tab-badge">২১১টি অধ্যায়</span>
+      </button>
+
+      <button type="button" class="book-tab-btn" id="tabNonCadre" onclick="switchBook('non-cadre')">
+        <span class="book-tab-icon">🎯</span>
+        <span class="book-tab-content">
+          <strong>নন-ক্যাডার প্রশ্নব্যাংক</strong>
+          <small>পিএসসি নন-ক্যাডার জব সলিউশন সিরিজ (১ম খন্ড)</small>
+        </span>
+        <span class="book-tab-badge badge-new">নতুন বই • ১ম খন্ড</span>
+      </button>
+    </div>
+
+    <!-- Subjects Cards Grid (Cadre Book) -->
+    <section class="subject-grid" id="cadreBookSection">
       <!-- Subject ০১: বাংলা ভাষা ও ব্যাকরণ -->
       <article class="subject-card bangla-lang">
         <div class="card-top">
@@ -1467,7 +1588,203 @@
             📑 সূচিপত্র
           </a>
         </div>
+    </section>
+
+    <!-- Non-Cadre Book Section (Job Hunter / Matrix Series) -->
+    <section class="subject-grid" id="nonCadreBookSection" style="display:none;">
+      
+      <!-- Non-Cadre 01: বাংলা সাহিত্য -->
+      <article class="subject-card bangla">
+        <div class="card-top">
+          <div class="card-icon"><svg viewBox="0 0 44 44" width="34" height="34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="44" height="44" rx="10" fill="#0f766e"/>
+            <text x="22" y="32" text-anchor="middle" font-family="'Noto Serif Bengali', serif" font-weight="800" font-size="24" fill="#ffffff">সা</text>
+          </svg></div>
+          <div class="card-title-group">
+            <div class="card-serial">নন-ক্যাডার বিষয় ০১</div>
+            <h2>বাংলা সাহিত্য</h2>
+          </div>
+        </div>
+
+        <div class="card-stats-row">
+          <span class="stat-pill">📖 ৪টি পরিচ্ছেদ</span>
+          <span class="stat-pill">🎯 প্রামাণ্য প্রশ্নব্যাংক</span>
+          <span class="stat-pill">📄 পৃষ্ঠা ১–১৪১</span>
+        </div>
+
+        <div class="sub-progress-wrap">
+          <div class="sub-prog-header">
+            <span>পড়ার অগ্রগতি (১ম খন্ড):</span>
+            <span class="prog-pct" style="color:#0f766e; font-weight:700;">সক্রিয়</span>
+          </div>
+          <div class="sub-prog-bar-bg">
+            <div style="height:100%; width:15%; background:#0f766e; border-radius:999px;"></div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <a href="Non Cadre Bangla Literature/ch-01-bangla-bhasha.html" class="btn-action btn-bangla-main">
+            📖 পড়া শুরু করুন
+          </a>
+          <a href="Non Cadre Bangla Literature/index.html" class="btn-action btn-secondary">
+            📑 সূচিপত্র
+          </a>
+        </div>
       </article>
+
+      <!-- Non-Cadre 02: বাংলা ভাষা ও ব্যাকরণ -->
+      <article class="subject-card bangla-lang">
+        <div class="card-top">
+          <div class="card-icon"><svg viewBox="0 0 44 44" width="34" height="34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="44" height="44" rx="10" fill="#0d9488"/>
+            <text x="22" y="32" text-anchor="middle" font-family="'Noto Serif Bengali', serif" font-weight="800" font-size="24" fill="#ffffff">ব্য</text>
+          </svg></div>
+          <div class="card-title-group">
+            <div class="card-serial">নন-ক্যাডার বিষয় ০২</div>
+            <h2>বাংলা ব্যাকরণ</h2>
+          </div>
+        </div>
+
+        <div class="card-stats-row">
+          <span class="stat-pill">📖 ব্যাকরণ ও নির্মিতি</span>
+          <span class="stat-pill">🎯 বিগত ১৬৪টি পরীক্ষা</span>
+          <span class="stat-pill">📄 পৃষ্ঠা ১৪২–২৪২</span>
+        </div>
+
+        <div class="sub-progress-wrap">
+          <div class="sub-prog-header">
+            <span>স্ট্যাটাস:</span>
+            <span class="prog-pct" style="color:var(--text-muted);">প্রক্রিয়াধীন</span>
+          </div>
+          <div class="sub-prog-bar-bg">
+            <div style="height:100%; width:0%; background:#0d9488; border-radius:999px;"></div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <span class="btn-action" style="background:var(--bg-base); color:var(--text-muted); border:1px solid var(--border-color); cursor:not-allowed;">
+            ⏳ পরবর্তী ধাপে আসছে
+          </span>
+        </div>
+      </article>
+
+      <!-- Non-Cadre 03: English Grammar -->
+      <article class="subject-card" style="border-top: 4px solid #1e3a8a;">
+        <div class="card-top">
+          <div class="card-icon"><svg viewBox="0 0 44 44" width="34" height="34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="44" height="44" rx="10" fill="#1e3a8a"/>
+            <text x="22" y="30" text-anchor="middle" font-family="'Inter', sans-serif" font-weight="800" font-size="20" fill="#ffffff">EG</text>
+          </svg></div>
+          <div class="card-title-group">
+            <div class="card-serial">নন-ক্যাডার বিষয় ০৩</div>
+            <h2>English Grammar</h2>
+          </div>
+        </div>
+
+        <div class="card-stats-row">
+          <span class="stat-pill">📖 Parts of Speech to Translation</span>
+          <span class="stat-pill">🎯 PSC Non-Cadre</span>
+          <span class="stat-pill">📄 পৃষ্ঠা ২৪৩–৫৩১</span>
+        </div>
+
+        <div class="sub-progress-wrap">
+          <div class="sub-prog-header">
+            <span>স্ট্যাটাস:</span>
+            <span class="prog-pct" style="color:var(--text-muted);">১ম খন্ড</span>
+          </div>
+          <div class="sub-prog-bar-bg">
+            <div style="height:100%; width:0%; background:#1e3a8a; border-radius:999px;"></div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <span class="btn-action" style="background:var(--bg-base); color:var(--text-muted); border:1px solid var(--border-color); cursor:not-allowed;">
+            ⏳ পরবর্তী ধাপে আসছে
+          </span>
+        </div>
+      </article>
+
+      <!-- Non-Cadre 04: English Literature -->
+      <article class="subject-card" style="border-top: 4px solid #854d0e;">
+        <div class="card-top">
+          <div class="card-icon"><svg viewBox="0 0 44 44" width="34" height="34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="44" height="44" rx="10" fill="#854d0e"/>
+            <text x="22" y="30" text-anchor="middle" font-family="'Inter', sans-serif" font-weight="800" font-size="20" fill="#ffffff">EL</text>
+          </svg></div>
+          <div class="card-title-group">
+            <div class="card-serial">নন-ক্যাডার বিষয় ০৪</div>
+            <h2>English Literature</h2>
+          </div>
+        </div>
+
+        <div class="card-stats-row">
+          <span class="stat-pill">📖 Periods & Major Authors</span>
+          <span class="stat-pill">🎯 PSC Non-Cadre</span>
+          <span class="stat-pill">📄 পৃষ্ঠা ৫৩২–৫৫২</span>
+        </div>
+
+        <div class="sub-progress-wrap">
+          <div class="sub-prog-header">
+            <span>স্ট্যাটাস:</span>
+            <span class="prog-pct" style="color:var(--text-muted);">১ম খন্ড</span>
+          </div>
+          <div class="sub-prog-bar-bg">
+            <div style="height:100%; width:0%; background:#854d0e; border-radius:999px;"></div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <span class="btn-action" style="background:var(--bg-base); color:var(--text-muted); border:1px solid var(--border-color); cursor:not-allowed;">
+            ⏳ পরবর্তী ধাপে আসছে
+          </span>
+        </div>
+      </article>
+
+      <!-- Non-Cadre 05: সাধারণ বিজ্ঞান -->
+      <article class="subject-card" style="border-top: 4px solid #059669;">
+        <div class="card-top">
+          <div class="card-icon"><svg viewBox="0 0 44 44" width="34" height="34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="44" height="44" rx="10" fill="#059669"/>
+            <text x="22" y="32" text-anchor="middle" font-family="'Noto Serif Bengali', serif" font-weight="800" font-size="24" fill="#ffffff">বি</text>
+          </svg></div>
+          <div class="card-title-group">
+            <div class="card-serial">নন-ক্যাডার বিষয় ০৫</div>
+            <h2>সাধারণ বিজ্ঞান</h2>
+          </div>
+        </div>
+
+        <div class="card-stats-row">
+          <span class="stat-pill">📖 পদার্থ, রসায়ন ও জীববিজ্ঞান</span>
+          <span class="stat-pill">🎯 বিগত ১৬৪টি পরীক্ষা</span>
+          <span class="stat-pill">📄 পৃষ্ঠা ৫৬১–৬৬৪</span>
+        </div>
+
+        <div class="sub-progress-wrap">
+          <div class="sub-prog-header">
+            <span>স্ট্যাটাস:</span>
+            <span class="prog-pct" style="color:var(--text-muted);">১ম খন্ড</span>
+          </div>
+          <div class="sub-prog-bar-bg">
+            <div style="height:100%; width:0%; background:#059669; border-radius:999px;"></div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <span class="btn-action" style="background:var(--bg-base); color:var(--text-muted); border:1px solid var(--border-color); cursor:not-allowed;">
+            ⏳ পরবর্তী ধাপে আসছে
+          </span>
+        </div>
+      </article>
+
+      <!-- Non-Cadre Notice Card for Upcoming Volumes -->
+      <article class="subject-card" style="border: 2px dashed var(--accent); background: var(--bg-base); display:flex; align-items:center; justify-content:center; text-align:center;">
+        <div style="padding: 10px;">
+          <div style="font-size:2.2rem; margin-bottom:8px;">📦</div>
+          <h3 style="font-size:1.15rem; font-weight:800; color:var(--text-main); margin-bottom:6px;">পরবর্তী খণ্ডসমূহ আসছে</h3>
+          <p style="font-size:0.86rem; color:var(--text-muted); line-height:1.5;">গণিত, মানসিক দক্ষতা, বাংলাদেশ, আন্তর্জাতিক ও ভূগোলসহ অন্যান্য বিষয়সমূহ পরবর্তী খণ্ড যুক্ত হওয়ার সাথে সাথে স্বয়ংক্রিয়ভাবে সক্রিয় হবে।</p>
+        </div>
+      </article>
+
     </section>
 
   </main>
@@ -1478,6 +1795,11 @@
 
   <script>
     const ALL_TOPICS = [
+
+      // নন-ক্যাডার প্রশ্নব্যাংক (PSC Non-Cadre Series)
+      { title: "বাংলা ভাষার উদ্ভব ও বিকাশ (নন-ক্যাডার)", sub: "নন-ক্যাডার বাংলা সাহিত্য", href: "Non Cadre Bangla Literature/ch-01-bangla-bhasha.html" },
+      { title: "বাংলা লিপি ও ছাপাখানা (নন-ক্যাডার)", sub: "নন-ক্যাডার বাংলা সাহিত্য", href: "Non Cadre Bangla Literature/ch-02-bangla-lipi.html" },
+      { title: "বাংলা সাহিত্যের যুগ ও প্রাচীন যুগ - চর্যাপদ ও খনার বচন (নন-ক্যাডার)", sub: "নন-ক্যাডার বাংলা সাহিত্য", href: "Non Cadre Bangla Literature/ch-03-yug-bibhag-charyapada.html" },
 
       // Mental Ability (৬টি)
       { title: "ভাষাগত যৌক্তিক বিচার (Verbal Reasoning & Logical Analysis)", sub: "Mental Ability", href: "Live MCQ Mental Ability/ভাষাগত যৌক্তিক বিচার.html" },
@@ -1976,6 +2298,32 @@
         if (btn.getAttribute('data-qa') === savedQa) btn.classList.add('active');
         else btn.classList.remove('active');
       });
+    } catch(e) {}
+
+    // Book Switcher (Cadre vs Non-Cadre)
+    function switchBook(bookType) {
+      const cadreSection = document.getElementById('cadreBookSection');
+      const nonCadreSection = document.getElementById('nonCadreBookSection');
+      const tabCadre = document.getElementById('tabCadre');
+      const tabNonCadre = document.getElementById('tabNonCadre');
+      if (bookType === 'cadre') {
+        if (cadreSection) cadreSection.style.display = 'grid';
+        if (nonCadreSection) nonCadreSection.style.display = 'none';
+        if (tabCadre) tabCadre.classList.add('active');
+        if (tabNonCadre) tabNonCadre.classList.remove('active');
+        try { localStorage.setItem('selected_book', 'cadre'); } catch(e) {}
+      } else {
+        if (cadreSection) cadreSection.style.display = 'none';
+        if (nonCadreSection) nonCadreSection.style.display = 'grid';
+        if (tabCadre) tabCadre.classList.remove('active');
+        if (tabNonCadre) tabNonCadre.classList.add('active');
+        try { localStorage.setItem('selected_book', 'non-cadre'); } catch(e) {}
+      }
+    }
+
+    try {
+      const savedBook = localStorage.getItem('selected_book') || 'cadre';
+      switchBook(savedBook);
     } catch(e) {}
 
     // Init UI
