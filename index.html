@@ -778,6 +778,7 @@
     }
   </style>
   <script src="universal-modes.js"></script>
+  <script src="search-engine.js"></script>
 </head>
 <body>
 
@@ -864,20 +865,8 @@
       </div>
     </section>
 
-    <!-- Global Live Search -->
-    <div class="search-wrapper">
-      <span class="search-icon">🔍</span>
-      <input type="text" id="masterSearchInput" class="search-input" placeholder="যেকোনো বিষয় বা অধ্যায় খুঁজুন (যেমন: রবীন্দ্রনাথ, সংবিধান, বঙ্কিমচন্দ্র, মুক্তিযুদ্ধ, বাজেট, চর্যাপদ)...">
-    </div>
-
-    <!-- Live Search Results -->
-    <section class="search-results-section" id="searchResultsSection">
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h3 style="font-size:1.1rem; font-weight:700;">🔎 অনুসন্ধান ফলাফল</h3>
-        <span id="searchResultCount" style="font-size:0.85rem; color:var(--text-muted);"></span>
-      </div>
-      <div class="results-grid" id="resultsGrid"></div>
-    </section>
+    <!-- Universal Deep Search Engine Mount Point -->
+    <div id="ebkSearchMount"></div>
 
     <!-- Subjects Cards Grid -->
     <section class="subject-grid">
@@ -1843,43 +1832,6 @@
       }
     }
 
-    // Search Filtering
-    const searchInput = document.getElementById('masterSearchInput');
-    const resultsSection = document.getElementById('searchResultsSection');
-    const resultsGrid = document.getElementById('resultsGrid');
-    const resultCount = document.getElementById('searchResultCount');
-
-    searchInput.addEventListener('input', (e) => {
-      const query = e.target.value.toLowerCase().trim();
-      if (!query) {
-        resultsSection.style.display = 'none';
-        return;
-      }
-
-      const matches = ALL_TOPICS.filter(t => t.title.toLowerCase().includes(query) || t.sub.toLowerCase().includes(query));
-      resultsGrid.innerHTML = '';
-
-      if (matches.length === 0) {
-        resultsGrid.innerHTML = '<div style="color:var(--text-muted); font-size:0.9rem;">কোনো অধ্যায় খুঁজে পাওয়া যায়নি।</div>';
-        resultCount.innerText = '০টি ফলাফল';
-      } else {
-        resultCount.innerText = `${toBn(matches.length)}টি ফলাফল`;
-        matches.forEach(m => {
-          const item = document.createElement('a');
-          item.href = m.href;
-          item.className = 'result-item';
-          const tagBg = m.sub === 'Mental Ability' ? 'rgba(139,92,246,0.12)' : (m.sub === 'Mathematical Reasoning' ? 'rgba(79,70,229,0.12)' : (m.sub === 'Ethics & Good Governance' ? 'rgba(13,148,136,0.12)' : (m.sub === 'English Literature' ? 'rgba(133,77,14,0.12)' : (m.sub === 'English Grammar' ? 'rgba(30,58,138,0.1)' : (m.sub.includes('ভাষা') ? 'rgba(15,118,110,0.1)' : (m.sub==='বাংলা সাহিত্য'?'rgba(15,118,110,0.1)':(m.sub==='বাংলাদেশ বিষয়াবলি'?'rgba(136,19,55,0.1)':'rgba(2,132,199,0.1)')))))));
-          const tagColor = m.sub === 'Mental Ability' ? '#8b5cf6' : (m.sub === 'Mathematical Reasoning' ? '#4f46e5' : (m.sub === 'Ethics & Good Governance' ? '#0d9488' : (m.sub === 'English Literature' ? '#854d0e' : (m.sub === 'English Grammar' ? '#1e3a8a' : (m.sub.includes('ভাষা') ? '#0f766e' : (m.sub==='বাংলা সাহিত্য'?'#0f766e':(m.sub==='বাংলাদেশ বিষয়াবলি'?'#881337':'#0284c7')))))));
-          item.innerHTML = `
-            <span>📖 ${m.title}</span>
-            <span style="font-size:0.75rem; padding:2px 6px; border-radius:4px; background:${tagBg}; color:${tagColor};">${m.sub}</span>
-          `;
-          resultsGrid.appendChild(item);
-        });
-      }
-
-      resultsSection.style.display = 'block';
-    });
 
     // Universal Theme Sync & Toggle
     function updateThemeBtn(theme) {
