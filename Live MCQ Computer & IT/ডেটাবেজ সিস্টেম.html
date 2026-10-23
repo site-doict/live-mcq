@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>অধ্যায় ০৬: ডেটাবেজ সিস্টেম - বিসিএস প্রিলিমিনারি ই-বুক</title>
+  <link rel="stylesheet" href="paper-textures.css">
+  <link rel="stylesheet" href="bangla-fonts.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4338ca;
+      --primary-light: #e0e7ff;
+      --primary-dark: #3730a3;
+      --accent: #0284c7;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(67, 56, 202, 0.2);
+      --font-scale: 1;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 24px rgba(67, 56, 202, 0.12);
+      
+      --bg-surface: rgba(255, 255, 255, 0.86);
+      --bg-card: rgba(255, 255, 255, 0.84);
+    }
+
+    [data-theme="dark"] {
+      --primary: #818cf8;
+      --primary-light: rgba(129, 140, 248, 0.15);
+      --primary-dark: #4338ca;
+      --accent: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(129, 140, 248, 0.22);
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+      
+      --bg-surface: rgba(15, 23, 42, 0.86);
+      --bg-card: rgba(23, 23, 38, 0.84);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.7;
+      color: var(--text-main);
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 5rem 1rem;
+    }
+
+    /* Top Bar Navigation */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      background: var(--bg-surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-main);
+      text-decoration: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-sm);
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      transition: all 0.2s;
+    }
+
+    [data-theme="dark"] .nav-btn {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .control-btn {
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.7rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+
+    [data-theme="dark"] .control-btn {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .control-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* Chapter Header */
+    .chapter-header {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .chapter-header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .ch-pre {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .ch-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.35;
+      margin-bottom: 0.75rem;
+    }
+
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .ch-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .ch-badge {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .ch-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* BCS Analysis Table */
+    .bcs-table-wrapper {
+      overflow-x: auto;
+      margin-bottom: 2rem;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .bcs-table th, .bcs-table td {
+      padding: 0.65rem 0.75rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .bcs-table th {
+      color: var(--primary);
+    }
+
+    /* Sketchnote Section (Part 1) */
+    .notes-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .sec-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
+      color: var(--primary);
+    }
+
+    .sk-box {
+      background: var(--bg-card);
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .sk-box-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sk-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+      font-size: 0.92rem;
+    }
+
+    .sk-table th, .sk-table td {
+      padding: 0.6rem 0.8rem;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .sk-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    [data-theme="dark"] .sk-table th {
+      color: var(--primary);
+    }
+
+    .sk-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .sk-list li {
+      position: relative;
+      padding-left: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .sk-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0.3rem;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .sk-sticky {
+      background: rgba(254, 240, 138, 0.4);
+      border-left: 4px solid #eab308;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    [data-theme="dark"] .sk-sticky {
+      background: rgba(234, 179, 8, 0.15);
+      border-left-color: #facc15;
+    }
+
+    /* Quiz Engine & Typography Protection (Part 2) */
+    .quiz-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .quiz-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      background: var(--bg-surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .score-badge {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .reset-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .reset-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+    .bcs-table, .bcs-table *, .score-bar, .score-bar *, .doubt-box, .doubt-box * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .q-num {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+
+    .q-tag {
+      background: rgba(0, 0, 0, 0.05);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      color: var(--text-muted);
+    }
+
+    [data-theme="dark"] .q-tag {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .options-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      width: 100%;
+      text-align: left;
+      padding: 0.75rem 1rem;
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      transition: all 0.2s;
+    }
+
+    [data-theme="dark"] .opt-btn {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    [data-theme="dark"] .opt-letter {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .opt-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .opt-btn.correct {
+      background: rgba(34, 197, 94, 0.2) !important;
+      color: #4ade80 !important;
+    }
+
+    .opt-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+
+    [data-theme="dark"] .opt-btn.wrong {
+      background: rgba(239, 68, 68, 0.2) !important;
+      color: #f87171 !important;
+    }
+
+    /* Answer Drawer */
+    .ans-drawer {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border-color);
+      display: none;
+    }
+
+    .ans-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-content {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    /* Bottom Navigation */
+    .ch-nav-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3rem;
+      background: var(--bg-surface);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-arrow {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.2s;
+    }
+
+    .nav-arrow:hover {
+      transform: translateX(3px);
+    }
+
+    .nav-arrow:first-child:hover {
+      transform: translateX(-3px);
+    }
+
+    /* Bibliography & Footer */
+    .biblio-box {
+      margin-top: 3rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .biblio-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 0.5rem;
+    }
+
+    .biblio-list {
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="container paper-container paper-crumpled font-anirban">
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+      <div class="nav-left">
+        <a href="index.html" class="nav-btn"><i class="fa-solid fa-list-ul"></i> বিষয় সূচিপত্র</a>
+      </div>
+      <div class="controls">
+        <button class="control-btn" id="btn-dec" title="ফন্ট ছোট করুন">A-</button>
+        <button class="control-btn" id="btn-reset" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="control-btn" id="btn-inc" title="ফন্ট বড় করুন">A+</button>
+        <button class="control-btn" id="btn-theme" title="থিম পরিবর্তন">🌙</button>
+      </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+      <span class="ch-pre">কম্পিউটার ও তথ্যপ্রযুক্তি • অধ্যায় ০৬</span>
+      <h1 class="ch-title font-anirban">
+        ডেটাবেজ সিস্টেম
+        <span class="ch-en">(Database Management System (DBMS))</span>
+      </h1>
+      <div class="ch-meta">
+        <span><i class="fa-solid fa-file-lines"></i> পৃষ্ঠা: ৮৫৬-৮৫৯</span>
+        <span class="ch-badge"><i class="fa-solid fa-circle-question"></i> মোট প্রশ্ন: ০৯ টি</span>
+      </div>
+    </header>
+
+    <!-- BCS Analysis Matrix -->
+    
+<div class="bcs-table-wrapper">
+  <table class="bcs-table">
+    <thead>
+      <tr><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>৫০তম</td><td>১</td><td>৪৪তম</td><td>১</td><td>৩৮তম</td><td>০</td></tr>
+      <tr><td>৪৯তম</td><td>০</td><td>৪৩তম</td><td>১</td><td>৩৭তম</td><td>১</td></tr>
+      <tr><td>৪৮তম</td><td>০</td><td>৪২তম</td><td>০</td><td>৩৬তম</td><td>১</td></tr>
+      <tr><td>৪৭তম</td><td>০</td><td>৪১তম</td><td>১</td><td>৩৫তম</td><td>১</td></tr>
+      <tr><td>৪৬তম</td><td>০</td><td>৪০তম</td><td>১</td><td>১০ম-৩৪তম</td><td>০</td></tr>
+      <tr><td>৪৫তম</td><td>১</td><td>৩৯তম</td><td>০</td><td><strong>সর্বমোট</strong></td><td><strong>০৯</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+    <!-- Part 1: Authentic Sketchnotes & Revision Notes -->
+    <section class="notes-section">
+      <h2 class="sec-heading font-anirban"><i class="fa-solid fa-lightbulb"></i> প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি</h2>
+      
+<div class="sk-box">
+  <div class="sk-box-title">🗄️ ডেটাবেজের স্তরবিন্যাস ও মৌলিক উপাদান</div>
+  <table class="sk-table">
+    <thead><tr><th>উপাদান</th><th>সংজ্ঞা ও ভূমিকা</th><th>উদাহরণ</th></tr></thead>
+    <tbody>
+      <tr><td><strong>বিট (Bit)</strong></td><td>বাইনারি অঙ্ক (০ বা ১); ডেটার ক্ষুদ্রতম একক</td><td>0 অথবা 1</td></tr>
+      <tr><td><strong>বাইট / ক্যারেক্টার</strong></td><td>৮ বিটের সমন্বয়ে গঠিত বর্ণ বা প্রতীক</td><td>'A' (ASCII 65)</td></tr>
+      <tr><td><strong>ফিল্ড (Field)</strong></td><td>একই জাতীয় ডেটার সমন্বয়ে গঠিত কলাম (Attribute)</td><td>Roll, Name, GPA</td></tr>
+      <tr><td><strong>রেকর্ড (Record)</strong></td><td>একজন ব্যক্তি বা বস্তুর সম্পর্কিত ফিল্ডসমূহের সমষ্টি (Row / Tuple)</td><td>(101, 'Rahim', 3.85)</td></tr>
+      <tr><td><strong>টেবিল / ফাইল</strong></td><td>পারস্পরিক সম্পর্কিত অনেকগুলো রেকর্ডের সমাহার (Relation)</td><td>Student Table</td></tr>
+      <tr><td><strong>ডেটাবেজ (Database)</strong></td><td>পরস্পর সম্পর্কিত একাধিক টেবিল ও তথ্যের সুসংগঠিত ভাণ্ডার</td><td>University Database</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="sk-box">
+  <div class="sk-box-title">🔑 ডেটাবেজ কী (Key)-এর প্রকারভেদ</div>
+  <ul class="sk-list">
+    <li><strong>Primary Key:</strong> যে ফিল্ডের মান অদ্বিতীয় (Unique) এবং কখনোই ফাঁকা (NOT NULL) হতে পারে না। একটি টেবিলে একটিই প্রাইমারি কী থাকে (উদা: Student ID, NID)।</li>
+    <li><strong>Foreign Key:</strong> একটি টেবিলের প্রাইমারি কী যখন অন্য কোনো টেবিলে রেফারেন্স বা সম্পর্ক স্থাপনের জন্য ব্যবহৃত হয়।</li>
+    <li><strong>Composite Key:</strong> একাধিক ফিল্ডের সমন্বয়ে গঠিত প্রাইমারি কী।</li>
+  </ul>
+</div>
+
+<div class="sk-sticky">
+  ⌨️ <strong>SQL (Structured Query Language) কমান্ডের ভাগ:</strong><br>
+  • <strong>DDL (Data Definition Language):</strong> ডেটাবেজ কাঠামো তৈরি ও পরিবর্তন (CREATE, ALTER, DROP, TRUNCATE)।<br>
+  • <strong>DML (Data Manipulation Language):</strong> টেবিলের ডেটা নিয়ন্ত্রণ ও পরিচালনা (SELECT, INSERT, UPDATE, DELETE)।<br>
+  • <strong>DCL (Data Control Language):</strong> নিরাপত্তা ও অনুমতি প্রদান (GRANT, REVOKE)।
+</div>
+
+    </section>
+
+    <!-- Part 2: Interactive Past Exam Question Engine -->
+    <section class="quiz-section">
+      <div class="quiz-toolbar">
+        <h2 class="sec-heading" style="margin-bottom:0; font-size:1.15rem;"><i class="fa-solid fa-circle-check"></i> প্রামাণ্য প্রশ্নব্যাংক ও কুইজ</h2>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <span class="score-badge">স্কোর: <span id="score-counter">০</span> / ০৯</span>
+          <button class="reset-btn" id="btn-quiz-reset"><i class="fa-solid fa-rotate-left"></i> রিসেট</button>
+        </div>
+      </div>
+      <div class="quiz-cards-container">
+        
+        <div class="q-card" id="q6_1" data-session="৫০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১</span>
+            <span class="q-tag">৫০তম বিসিএস</span>
+          </div>
+          <div class="q-text">১. ডেটাবেস হলো-</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">তথ্যসমূহের সুসংগঠিত রূপ</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">তথ্য আদানপ্রদানের হার্ডওয়্যার</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">তথ্য আদানপ্রদানের প্রোগ্রাম</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">তথ্য ইন্টারনেটে দেওয়ার পরিবেশ</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (তথ্যসমূহের সুসংগঠিত রূপ)</strong><br>ডেটাবেস হলো কোনো ব্যক্তি বা প্রতিষ্ঠানের পারস্পরিক সম্পর্কিত বিপুল পরিমাণ তথ্য বা ডেটার সুশৃঙ্খল ও পরিকল্পিত ডিজিটাল ভাণ্ডার।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q6_2" data-session="৪৫তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২</span>
+            <span class="q-tag">৪৫তম বিসিএস</span>
+          </div>
+          <div class="q-text">২. SQL-এর পূর্ণরূপ কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Structured Query Language</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Sequential Query Language</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Standard Question Language</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">System Query Logic</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Structured Query Language)</strong><br>SQL হলো রিলেশনাল ডেটাবেজ ম্যানেজমেন্ট সিস্টেমে ডেটা সংরক্ষণ, অনুসন্ধান, পরিবর্তন ও বিশ্লেষণের জন্য আন্তর্জাতিক মানসম্মত ডেটাবেজ ল্যাঙ্গুয়েজ।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q6_3" data-session="৪৪তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৩</span>
+            <span class="q-tag">৪৪তম বিসিএস</span>
+          </div>
+          <div class="q-text">৩. ডেটাবেজ টেবিলের প্রতিটি সারিকে (Row) কী বলা হয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Record বা Tuple</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Field</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Attribute</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Domain</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Record বা Tuple)</strong><br>রিলেশনাল ডেটাবেজে প্রতিটি কলামকে বলা হয় Field বা Attribute, এবং প্রতিটি আনুভূমিক সারিকে বলা হয় Record বা Tuple।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q6_4" data-session="৪৩তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৪</span>
+            <span class="q-tag">৪৩তম বিসিএস</span>
+          </div>
+          <div class="q-text">৪. একটি টেবিলে কোনো রেকর্ডকে এককভাবে (Uniquely) শনাক্ত করার জন্য ব্যবহৃত ফিল্ডকে কী বলে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Primary Key</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Foreign Key</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Alternate Key</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Secondary Key</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Primary Key)</strong><br>প্রাইমারি কী (Primary Key) হলো এমন এক বা একাধিক ফিল্ডের সমষ্টি যা টেবিলের প্রতিটি রেকর্ডকে অদ্বিতীয়ভাবে শনাক্ত করে এবং এর মান নাল (NULL) হতে পারে না।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q6_5" data-session="৪১তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৫</span>
+            <span class="q-tag">৪১তম বিসিএস</span>
+          </div>
+          <div class="q-text">৫. নিচের কোনটি একটি জনপ্রিয় RDBMS সফটওয়্যার?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Oracle / MySQL</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">MS Word</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Adobe Photoshop</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Google Chrome</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Oracle / MySQL)</strong><br>Oracle, MySQL, Microsoft SQL Server, PostgreSQL, SQLite হলো বহুল ব্যবহৃত রিলেশনাল ডেটাবেজ ম্যানেজমেন্ট সফটওয়্যার।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q6_6" data-session="৪০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৬</span>
+            <span class="q-tag">৪০তম বিসিএস</span>
+          </div>
+          <div class="q-text">৬. দুটি টেবিলের মধ্যে সম্পর্ক (Relationship) স্থাপনের জন্য অপর টেবিলে রেফারেন্স হিসেবে ব্যবহৃত কী-কে কী বলে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Foreign Key</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Primary Key</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Candidate Key</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Composite Key</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Foreign Key)</strong><br>যখন একটি টেবিলের প্রাইমারি কী অন্য একটি টেবিলে সম্পর্ক রক্ষার জন্য ব্যবহৃত হয়, তখন তাকে ফরেন কী (Foreign Key) বলা হয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q6_7" data-session="৩৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৭</span>
+            <span class="q-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">৭. নিচের কোনটি ডেটাবেজ কুয়েরি বা ডেটা খোঁজার ভাষা?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">SQL</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">HTML</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">C++</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">BASIC</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (SQL)</strong><br>এসকিউএল (Structured Query Language) ব্যবহার করে ডেটাবেজ থেকে নির্দিষ্ট শর্ত অনুযায়ী ডেটা অনুসন্ধান (Query) করা হয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q6_8" data-session="৩৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৮</span>
+            <span class="q-tag">৩৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">৮. নিচের কোনটি ডেটাবেজ ল্যাঙ্গুয়েজ (Database Language) নয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">MS-Word</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Oracle</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">SQL</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">কোনোটিই নয়</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (MS-Word)</strong><br>MS-Word হলো একটি ওয়ার্ড প্রসেসর অ্যাপ্লিকেশন সফটওয়্যার, কোনো ডেটাবেজ প্রোগ্রাম নয়। ওরাকল ও এসকিউএল ডেটাবেজের সাথে সংশ্লিষ্ট।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q6_9" data-session="৩৫তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৯</span>
+            <span class="q-tag">৩৫তম বিসিএস</span>
+          </div>
+          <div class="q-text">৯. নিচের কোনটি ডেটাবেজ ল্যাঙ্গুয়েজের প্রধান শ্রেণিবিভাগ?</div>
+          <div class="options-grid">
+            <button class="opt-btn"><span class="opt-letter">ক</span> <span class="opt-txt">Data Definition Language (DDL)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Data Manipulation Language (DML)</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Query Language</span></button>
+<button class="opt-btn" data-answer="true"><span class="opt-letter">ঘ</span> <span class="opt-txt">উপরের সবকয়টিই</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ঘ (উপরের সবকয়টিই)</strong><br>ডেটাবেজ ল্যাঙ্গুয়েজের মধ্যে DDL (টেবিলের কাঠামো তৈরি ও পরিবর্তন), DML (ডেটা যোগ, পরিবর্তন ও মুছে ফেলা) এবং Query Language (অনুসন্ধান করা) সবগুলোই অন্তর্ভুক্ত।
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <nav class="ch-nav-bottom">
+      <div><a href="কম্পিউটার নম্বর সিস্টেম ও লজিক গেইটসমূহ.html" class="nav-arrow">← পূর্ববর্তী অধ্যায়</a></div>
+      <div><a href="index.html" class="nav-arrow"><i class="fa-solid fa-house"></i> সূচিপত্র</a></div>
+      <div><a href="ইন্টারনেট সংক্রান্ত বিষয়.html" class="nav-arrow">পরবর্তী অধ্যায় →</a></div>
+    </nav>
+
+    
+
+    <!-- Universal Footer -->
+    <footer>
+      <p>বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ ডিজিটাল প্রশ্নব্যাংক • সাধারণ বিজ্ঞান ও তথ্যপ্রযুক্তি শাখা</p>
+      <p style="margin-top: 0.5rem; font-size: 0.85rem;">হস্তলিপি ও বাস্তবসম্মত পেপার টেক্সচার সহযোগে নির্মিত ইন্টারঅ্যাক্টিভ সংস্করণ</p>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle
+    const themeBtn = document.getElementById('btn-theme');
+    const htmlElem = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    htmlElem.setAttribute('data-theme', savedTheme);
+    themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+    themeBtn.addEventListener('click', () => {
+      const cur = htmlElem.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      htmlElem.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+
+    // Font size scaling
+    let scale = parseFloat(localStorage.getItem('font-scale') || '1');
+    applyScale(scale);
+
+    document.getElementById('btn-inc').addEventListener('click', () => {
+      if (scale < 1.3) { scale += 0.08; applyScale(scale); }
+    });
+    document.getElementById('btn-dec').addEventListener('click', () => {
+      if (scale > 0.85) { scale -= 0.08; applyScale(scale); }
+    });
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      scale = 1.0; applyScale(scale);
+    });
+
+    function applyScale(s) {
+      document.documentElement.style.setProperty('--font-scale', s);
+      localStorage.setItem('font-scale', s);
+    }
+
+    // Quiz Engine
+    let currentScore = 0;
+    const answeredCards = new Set();
+    const scoreElem = document.getElementById('score-counter');
+
+    function toBnNum(num) {
+      const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+      return num.toString().split('').map(d => bnDigits[parseInt(d)] || d).join('');
+    }
+
+    document.querySelectorAll('.q-card').forEach(card => {
+      const cardId = card.id;
+      const optBtns = card.querySelectorAll('.opt-btn');
+      const ansDrawer = card.querySelector('.ans-drawer');
+
+      optBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (answeredCards.has(cardId)) return;
+          answeredCards.add(cardId);
+
+          const isCorrect = btn.getAttribute('data-answer') === 'true';
+          if (isCorrect) {
+            btn.classList.add('correct');
+            currentScore++;
+            scoreElem.textContent = toBnNum(currentScore);
+          } else {
+            btn.classList.add('wrong');
+            // highlight correct option
+            optBtns.forEach(b => {
+              if (b.getAttribute('data-answer') === 'true') {
+                b.classList.add('correct');
+              }
+            });
+          }
+
+          // disable all option buttons in this card
+          optBtns.forEach(b => b.disabled = true);
+
+          // reveal explanation drawer
+          if (ansDrawer) ansDrawer.style.display = 'block';
+        });
+      });
+    });
+
+    document.getElementById('btn-quiz-reset').addEventListener('click', () => {
+      answeredCards.clear();
+      currentScore = 0;
+      scoreElem.textContent = '০';
+      document.querySelectorAll('.q-card').forEach(card => {
+        card.querySelectorAll('.opt-btn').forEach(btn => {
+          btn.disabled = false;
+          btn.classList.remove('correct', 'wrong');
+        });
+        const drawer = card.querySelector('.ans-drawer');
+        if (drawer) drawer.style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>

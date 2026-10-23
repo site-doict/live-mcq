@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>অধ্যায় ১০: ক্লায়েন্ট সার্ভার ম্যানেজমেন্ট ও ক্লাউড কম্পিউটিং - বিসিএস প্রিলিমিনারি ই-বুক</title>
+  <link rel="stylesheet" href="paper-textures.css">
+  <link rel="stylesheet" href="bangla-fonts.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4338ca;
+      --primary-light: #e0e7ff;
+      --primary-dark: #3730a3;
+      --accent: #0284c7;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(67, 56, 202, 0.2);
+      --font-scale: 1;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 24px rgba(67, 56, 202, 0.12);
+      
+      --bg-surface: rgba(255, 255, 255, 0.86);
+      --bg-card: rgba(255, 255, 255, 0.84);
+    }
+
+    [data-theme="dark"] {
+      --primary: #818cf8;
+      --primary-light: rgba(129, 140, 248, 0.15);
+      --primary-dark: #4338ca;
+      --accent: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(129, 140, 248, 0.22);
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+      
+      --bg-surface: rgba(15, 23, 42, 0.86);
+      --bg-card: rgba(23, 23, 38, 0.84);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.7;
+      color: var(--text-main);
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 5rem 1rem;
+    }
+
+    /* Top Bar Navigation */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      background: var(--bg-surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-main);
+      text-decoration: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-sm);
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      transition: all 0.2s;
+    }
+
+    [data-theme="dark"] .nav-btn {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .control-btn {
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.7rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+
+    [data-theme="dark"] .control-btn {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .control-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* Chapter Header */
+    .chapter-header {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .chapter-header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .ch-pre {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .ch-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.35;
+      margin-bottom: 0.75rem;
+    }
+
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .ch-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .ch-badge {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .ch-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* BCS Analysis Table */
+    .bcs-table-wrapper {
+      overflow-x: auto;
+      margin-bottom: 2rem;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .bcs-table th, .bcs-table td {
+      padding: 0.65rem 0.75rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .bcs-table th {
+      color: var(--primary);
+    }
+
+    /* Sketchnote Section (Part 1) */
+    .notes-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .sec-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
+      color: var(--primary);
+    }
+
+    .sk-box {
+      background: var(--bg-card);
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .sk-box-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sk-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+      font-size: 0.92rem;
+    }
+
+    .sk-table th, .sk-table td {
+      padding: 0.6rem 0.8rem;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .sk-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    [data-theme="dark"] .sk-table th {
+      color: var(--primary);
+    }
+
+    .sk-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .sk-list li {
+      position: relative;
+      padding-left: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .sk-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0.3rem;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .sk-sticky {
+      background: rgba(254, 240, 138, 0.4);
+      border-left: 4px solid #eab308;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    [data-theme="dark"] .sk-sticky {
+      background: rgba(234, 179, 8, 0.15);
+      border-left-color: #facc15;
+    }
+
+    /* Quiz Engine & Typography Protection (Part 2) */
+    .quiz-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .quiz-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      background: var(--bg-surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .score-badge {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .reset-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .reset-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+    .bcs-table, .bcs-table *, .score-bar, .score-bar *, .doubt-box, .doubt-box * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .q-num {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+
+    .q-tag {
+      background: rgba(0, 0, 0, 0.05);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      color: var(--text-muted);
+    }
+
+    [data-theme="dark"] .q-tag {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .options-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      width: 100%;
+      text-align: left;
+      padding: 0.75rem 1rem;
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      transition: all 0.2s;
+    }
+
+    [data-theme="dark"] .opt-btn {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    [data-theme="dark"] .opt-letter {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .opt-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .opt-btn.correct {
+      background: rgba(34, 197, 94, 0.2) !important;
+      color: #4ade80 !important;
+    }
+
+    .opt-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+
+    [data-theme="dark"] .opt-btn.wrong {
+      background: rgba(239, 68, 68, 0.2) !important;
+      color: #f87171 !important;
+    }
+
+    /* Answer Drawer */
+    .ans-drawer {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border-color);
+      display: none;
+    }
+
+    .ans-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-content {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    /* Bottom Navigation */
+    .ch-nav-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3rem;
+      background: var(--bg-surface);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-arrow {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.2s;
+    }
+
+    .nav-arrow:hover {
+      transform: translateX(3px);
+    }
+
+    .nav-arrow:first-child:hover {
+      transform: translateX(-3px);
+    }
+
+    /* Bibliography & Footer */
+    .biblio-box {
+      margin-top: 3rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .biblio-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 0.5rem;
+    }
+
+    .biblio-list {
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="container paper-container paper-kraft font-ahasan">
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+      <div class="nav-left">
+        <a href="index.html" class="nav-btn"><i class="fa-solid fa-list-ul"></i> বিষয় সূচিপত্র</a>
+      </div>
+      <div class="controls">
+        <button class="control-btn" id="btn-dec" title="ফন্ট ছোট করুন">A-</button>
+        <button class="control-btn" id="btn-reset" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="control-btn" id="btn-inc" title="ফন্ট বড় করুন">A+</button>
+        <button class="control-btn" id="btn-theme" title="থিম পরিবর্তন">🌙</button>
+      </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+      <span class="ch-pre">কম্পিউটার ও তথ্যপ্রযুক্তি • অধ্যায় ১০</span>
+      <h1 class="ch-title font-ahasan">
+        ক্লায়েন্ট সার্ভার ম্যানেজমেন্ট ও ক্লাউড কম্পিউটিং
+        <span class="ch-en">(Client-Server Management & Cloud Computing)</span>
+      </h1>
+      <div class="ch-meta">
+        <span><i class="fa-solid fa-file-lines"></i> পৃষ্ঠা: ৮৭৫-৮৭৮</span>
+        <span class="ch-badge"><i class="fa-solid fa-circle-question"></i> মোট প্রশ্ন: ১১ টি</span>
+      </div>
+    </header>
+
+    <!-- BCS Analysis Matrix -->
+    
+<div class="bcs-table-wrapper">
+  <table class="bcs-table">
+    <thead>
+      <tr><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>৫০তম</td><td>১</td><td>৪৪তম</td><td>২</td><td>৩৮তম</td><td>০</td></tr>
+      <tr><td>৪৯তম</td><td>০</td><td>৪৩তম</td><td>১</td><td>৩৭তম</td><td>১</td></tr>
+      <tr><td>৪৮তম</td><td>০</td><td>৪২তম</td><td>০</td><td>৩৬তম</td><td>০</td></tr>
+      <tr><td>৪৭তম</td><td>২</td><td>৪১তম</td><td>১</td><td>৩৫তম</td><td>১</td></tr>
+      <tr><td>৪৬তম</td><td>১</td><td>৪০তম</td><td>০</td><td>১০ম-৩৪তম</td><td>০</td></tr>
+      <tr><td>৪৫তম</td><td>১</td><td>৩৯তম</td><td>০</td><td><strong>সর্বমোট</strong></td><td><strong>১১</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+    <!-- Part 1: Authentic Sketchnotes & Revision Notes -->
+    <section class="notes-section">
+      <h2 class="sec-heading font-ahasan"><i class="fa-solid fa-lightbulb"></i> প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি</h2>
+      
+<div class="sk-box">
+  <div class="sk-box-title">☁️ ক্লাউড কম্পিউটিংয়ের সার্ভিস মডেলসমূহ (NIST স্ট্যান্ডার্ড)</div>
+  <table class="sk-table">
+    <thead><tr><th>মডেল</th><th>পূর্ণরূপ</th><th>প্রদত্ত সুবিধা ও উদাহরণ</th></tr></thead>
+    <tbody>
+      <tr><td><strong>IaaS</strong></td><td>Infrastructure as a Service</td><td>ভার্চুয়াল মেশিন, সার্ভার, স্টোরেজ ও নেটওয়ার্ক অবকাঠামো ভাড়া দেওয়া হয় (যেমন: AWS EC2, Google Compute Engine, Microsoft Azure VM)</td></tr>
+      <tr><td><strong>PaaS</strong></td><td>Platform as a Service</td><td>ডেভেলপারদের সফটওয়্যার তৈরির পরিবেশ ও রানটাইম প্ল্যাটফর্ম দেওয়া হয় (যেমন: Google App Engine, Heroku, AWS Elastic Beanstalk)</td></tr>
+      <tr><td><strong>SaaS</strong></td><td>Software as a Service</td><td>সরাসরি ইন্টারনেট ব্রাউজারের মাধ্যমে সম্পূর্ণ রেডিমেড সফটওয়্যার ব্যবহার (যেমন: Google Drive/Docs, Gmail, Microsoft 365, Dropbox, Salesforce)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="sk-box">
+  <div class="sk-box-title">📊 ক্লাউড ডিপ্লয়মেন্ট মডেল ও বিগ ডেটা (Big Data)</div>
+  <ul class="sk-list">
+    <li><strong>পাবলিক ক্লাউড:</strong> সর্বসাধারণের জন্য ইন্টারনেটে উন্মুক্ত সেবা (AWS, Google Cloud)।</li>
+    <li><strong>প্রাইভেট ক্লাউড:</strong> কোনো নির্দিষ্ট একক সংস্থার জন্য সংরক্ষিত অত্যন্ত নিরাপদ নিজস্ব ক্লাউড।</li>
+    <li><strong>হাইব্রিড ক্লাউড:</strong> পাবলিক ও প্রাইভেট ক্লাউডের সমন্বয়ে গঠিত পরিবেশ।</li>
+    <li><strong>বিগ ডেটা ৫টি 'V':</strong> Volume (বিশাল আকার), Velocity (অতি দ্রুত সৃষ্টি ও প্রবাহ), Variety (নানা বৈচিত্র্যের ডেটা), Veracity (ডেটার সত্যতা), Value (ব্যবসায়িক মূল্য)।</li>
+  </ul>
+</div>
+
+<div class="sk-sticky">
+  💡 <strong>ক্লাউড কম্পিউটিংয়ের মূল বৈশিষ্ট্য:</strong><br>
+  • <strong>On-demand Self-service:</strong> প্রয়োজন হলেই মুহূর্তের মধ্যে রিসোর্স চালু করা যায়।<br>
+  • <strong>Resource Pooling & Scalability:</strong> চাহিদা বাড়লে স্বয়ংক্রিয়ভাবে কম্পিউটিং পাওয়ার বৃদ্ধি (Elasticity)।<br>
+  • <strong>Pay-as-you-go:</strong> যতটুকু রিসোর্স ব্যবহার করা হবে ঠিক ততটুকুর জন্য বিল দিতে হয়।
+</div>
+
+    </section>
+
+    <!-- Part 2: Interactive Past Exam Question Engine -->
+    <section class="quiz-section">
+      <div class="quiz-toolbar">
+        <h2 class="sec-heading" style="margin-bottom:0; font-size:1.15rem;"><i class="fa-solid fa-circle-check"></i> প্রামাণ্য প্রশ্নব্যাংক ও কুইজ</h2>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <span class="score-badge">স্কোর: <span id="score-counter">০</span> / ১১</span>
+          <button class="reset-btn" id="btn-quiz-reset"><i class="fa-solid fa-rotate-left"></i> রিসেট</button>
+        </div>
+      </div>
+      <div class="quiz-cards-container">
+        
+        <div class="q-card" id="q10_1" data-session="৫০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১</span>
+            <span class="q-tag">৫০তম বিসিএস</span>
+          </div>
+          <div class="q-text">১. ক্লাউড কম্পিউটিং কোন সুবিধাটি প্রদান করে?</div>
+          <div class="options-grid">
+            <button class="opt-btn"><span class="opt-letter">ক</span> <span class="opt-txt">স্বল্পমূল্যের লোকাল স্টোরেজ</span></button>
+<button class="opt-btn" data-answer="true"><span class="opt-letter">খ</span> <span class="opt-txt">ভার্চুয়াল কম্পিউটিং রিসোর্সেস</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">স্বতন্ত্র অফলাইন ডেটাবেস</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">উপরের সবকয়টি</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: খ (ভার্চুয়াল কম্পিউটিং রিসোর্সেস)</strong><br>ক্লাউড কম্পিউটিং ইন্টারনেটের মাধ্যমে ব্যবহারকারীদের ভার্চুয়ালাইজড সিপিইউ, র‍্যাম, স্টোরেজ ও সার্ভার রিসোর্স দূরবর্তী স্থান থেকে চাহিদা অনুযায়ী অন-ডিমান্ড সরবরাহ করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q10_2" data-session="৪৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২</span>
+            <span class="q-tag">৪৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">২. SaaS-এর পূর্ণরূপ কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Software as a Service</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">System as a Service</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Storage as a Service</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Server as a Solution</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Software as a Service)</strong><br>SaaS হলো ক্লাউড কম্পিউটিং মডেল যেখানে ব্যবহারকারীকে কোনো সফটওয়্যার ডাউনলোড বা ইন্সটল না করেই ব্রাউজারের মাধ্যমে সরাসরি অ্যাপ্লিকেশন সেবা প্রদান করা হয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q10_3" data-session="৪৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৩</span>
+            <span class="q-tag">৪৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">৩. গুগল ড্রাইভ (Google Drive) বা ড্রপবক্স (Dropbox) কোন ধরনের ক্লাউড সেবার অন্তর্ভুক্ত?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">SaaS / ক্লাউড স্টোরেজ</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">PaaS</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">IaaS</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">CaaS</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (SaaS / ক্লাউড স্টোরেজ)</strong><br>গুগল ড্রাইভ হলো শেষ ব্যবহারকারীদের জন্য ক্লাউডভিত্তিক ফাইল স্টোরেজ সফটওয়্যার সেবা (SaaS)।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q10_4" data-session="৪৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৪</span>
+            <span class="q-tag">৪৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">৪. ক্লাউড কম্পিউটিংয়ের অবকাঠামোগত সেবা (IaaS)-এর উদাহরণ কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Amazon EC2 / Microsoft Azure VM</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Google Docs</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Gmail</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">MS Office 365</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Amazon EC2)</strong><br>AWS EC2 এবং মাইক্রোসফট অ্যাজিউর ভার্চুয়াল মেশিন হলো IaaS (Infrastructure as a Service), যাতে ব্যবহারকারী ভার্চুয়াল সিপিইউ ও স্টোরেজ অবকাঠামো ভাড়া নেয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q10_5" data-session="৪৫তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৫</span>
+            <span class="q-tag">৪৫তম বিসিএস</span>
+          </div>
+          <div class="q-text">৫. বিগ ডেটা (Big Data)-এর ৩টি প্রধান মাত্রা বা বৈশিষ্ট্য কী কী?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Volume, Velocity, Variety</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Vector, Value, Virtual</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">View, Volume, Version</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Voice, Vision, Video</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Volume, Velocity, Variety)</strong><br>বিগ ডেটার মূল তিনটি 'V' হলো: Volume (বিপুল পরিমাণ ডেটা), Velocity (দ্রুত সৃষ্টির গতি) এবং Variety (কাঠামোবদ্ধ ও অকাঠামোবদ্ধ নানা ধরন)।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q10_6" data-session="৪৪তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৬</span>
+            <span class="q-tag">৪৪তম বিসিএস</span>
+          </div>
+          <div class="q-text">৬. PaaS (Platform as a Service)-এর প্রধান সুবিধাভোগী কারা?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">সফটওয়্যার ও অ্যাপ ডেভেলপারগণ</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">সাধারণ এন্ড-ইউজার</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">হার্ডওয়্যার মেকানিক</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">গ্রাহক সেবা প্রতিনিধি</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (সফটওয়্যার ও অ্যাপ ডেভেলপারগণ)</strong><br>PaaS ডেভেলপারদেরকে সফটওয়্যার কোডিং, টেস্টিং ও রান করার জন্য প্রয়োজনীয় অপারেটিং সিস্টেম, ডেটাবেজ ও রানটাইম পরিবেশ প্ল্যাটফর্ম হিসেবে সরবরাহ করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q10_7" data-session="৪৪তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৭</span>
+            <span class="q-tag">৪৪তম বিসিএস</span>
+          </div>
+          <div class="q-text">৭. শুধুমাত্র একটি একক কর্পোরেট সংস্থার অভ্যন্তরীণ ব্যবহারের জন্য নির্মিত ক্লাউডকে কী বলে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Private Cloud</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Public Cloud</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Community Cloud</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Open Cloud</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Private Cloud)</strong><br>প্রাইভেট ক্লাউড হলো কোনো নির্দিষ্ট প্রতিষ্ঠান বা ব্যাংকের নিজস্ব ফায়ারওয়ালের ভেতরে সম্পূর্ণ নিয়ন্ত্রিত ও নিরাপদ ক্লাউড পরিবেশ।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q10_8" data-session="৪৩তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৮</span>
+            <span class="q-tag">৪৩তম বিসিএস</span>
+          </div>
+          <div class="q-text">৮. নিচের কোন প্রযুক্তি 'Pay as You Go' সার্ভিস মডেল অনুসরণ করে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Cloud Computing</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Internet of Things (IoT)</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Client-Server Systems</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Big Data Analytics</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Cloud Computing)</strong><br>ক্লাউড কম্পিউটিংয়ের অন্যতম শ্রেষ্ঠ নীতি হলো ইউটিলিটি বিলের মত 'Pay as You Go', অর্থাৎ প্রতিষ্ঠান যতটুকু সময় ও রিসোর্স ব্যবহার করবে ঠিক ততটুকুর জন্য অর্থ পরিশোধ করবে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q10_9" data-session="৪১তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৯</span>
+            <span class="q-tag">৪১তম বিসিএস</span>
+          </div>
+          <div class="q-text">৯. ক্লাউড কম্পিউটিং-এর সার্ভিস মডেল কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn"><span class="opt-letter">ক</span> <span class="opt-txt">অবকাঠামোগত (IaaS)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">প্ল্যাটফর্মভিত্তিক (PaaS)</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">সফটওয়্যারভিত্তিক (SaaS)</span></button>
+<button class="opt-btn" data-answer="true"><span class="opt-letter">ঘ</span> <span class="opt-txt">উপরের সবকয়টি</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ঘ (উপরের সবকয়টি)</strong><br>মার্কিন ন্যাশনাল ইনস্টিটিউট অব স্ট্যান্ডার্ডস অ্যান্ড টেকনোলজি (NIST) অনুযায়ী ক্লাউড সেবার প্রধান তিনটি স্বীকৃত মডেল হলো IaaS, PaaS এবং SaaS।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q10_10" data-session="৩৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১০</span>
+            <span class="q-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">১০. ক্লাউড সার্ভিস নিচের কোনটিতে সবচেয়ে ভালো বর্ণনা করা সম্ভব?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">ব্যবহারকারীর চাহিদা অনুযায়ী কম্পিউটিং সেবা দেয়া</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">নেটওয়ার্কের মাধ্যমে যুক্ত একাধিক কম্পিউটার সার্ভার</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">একটি নির্দিষ্ট ক্ষমতা সম্পন্ন কম্পিউটার সার্ভার</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">উপরের কোনোটিই নয়</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (ব্যবহারকারীর চাহিদা অনুযায়ী কম্পিউটিং সেবা দেয়া)</strong><br>ক্লাউড সার্ভিসের সবচেয়ে নিখুঁত সংজ্ঞা হলো ব্যবহারকারীর তাৎক্ষণিক চাহিদা ও প্রয়োজন অনুযায়ী দূরবর্তী ইন্টারনেট নেটওয়ার্কের মাধ্যমে কম্পিউটিং রিসোর্স সেবা হিসেবে প্রদান করা।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q10_11" data-session="৩৫তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১১</span>
+            <span class="q-tag">৩৫তম বিসিএস</span>
+          </div>
+          <div class="q-text">১১. একটি প্রতিষ্ঠানে ডিভাইস ভাগাভাগি করে নেয়ার সুবিধা হলো-</div>
+          <div class="options-grid">
+            <button class="opt-btn"><span class="opt-letter">ক</span> <span class="opt-txt">অর্থ সাশ্রয়</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">সময় সাশ্রয়</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">স্থানের সাশ্রয়</span></button>
+<button class="opt-btn" data-answer="true"><span class="opt-letter">ঘ</span> <span class="opt-txt">উপরের সবকটি</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ঘ (উপরের সবকটি)</strong><br>একটি নেটওয়ার্কে প্রিন্টার, স্ক্যানার ও হার্ডডিস্ক রিসোর্স ভাগাভাগি (Resource Sharing) করলে প্রতিটি কম্পিউটারের জন্য আলাদা যন্ত্র কিনতে হয় না, ফলে অর্থ, সময় ও জায়গার সাশ্রয় ঘটে।
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <nav class="ch-nav-bottom">
+      <div><a href="দৈনন্দিন জীবনে তথ্য-প্রযুক্তি (ইমেইল, স্মার্টফোন ইত্যাদি).html" class="nav-arrow">← পূর্ববর্তী অধ্যায়</a></div>
+      <div><a href="index.html" class="nav-arrow"><i class="fa-solid fa-house"></i> সূচিপত্র</a></div>
+      <div><a href="মোবাইল প্রযুক্তি ও এর বৈশিষ্ট্য, রোবটিক্স ও সাইবার অপরাধ.html" class="nav-arrow">পরবর্তী অধ্যায় →</a></div>
+    </nav>
+
+    
+
+    <!-- Universal Footer -->
+    <footer>
+      <p>বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ ডিজিটাল প্রশ্নব্যাংক • সাধারণ বিজ্ঞান ও তথ্যপ্রযুক্তি শাখা</p>
+      <p style="margin-top: 0.5rem; font-size: 0.85rem;">হস্তলিপি ও বাস্তবসম্মত পেপার টেক্সচার সহযোগে নির্মিত ইন্টারঅ্যাক্টিভ সংস্করণ</p>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle
+    const themeBtn = document.getElementById('btn-theme');
+    const htmlElem = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    htmlElem.setAttribute('data-theme', savedTheme);
+    themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+    themeBtn.addEventListener('click', () => {
+      const cur = htmlElem.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      htmlElem.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+
+    // Font size scaling
+    let scale = parseFloat(localStorage.getItem('font-scale') || '1');
+    applyScale(scale);
+
+    document.getElementById('btn-inc').addEventListener('click', () => {
+      if (scale < 1.3) { scale += 0.08; applyScale(scale); }
+    });
+    document.getElementById('btn-dec').addEventListener('click', () => {
+      if (scale > 0.85) { scale -= 0.08; applyScale(scale); }
+    });
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      scale = 1.0; applyScale(scale);
+    });
+
+    function applyScale(s) {
+      document.documentElement.style.setProperty('--font-scale', s);
+      localStorage.setItem('font-scale', s);
+    }
+
+    // Quiz Engine
+    let currentScore = 0;
+    const answeredCards = new Set();
+    const scoreElem = document.getElementById('score-counter');
+
+    function toBnNum(num) {
+      const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+      return num.toString().split('').map(d => bnDigits[parseInt(d)] || d).join('');
+    }
+
+    document.querySelectorAll('.q-card').forEach(card => {
+      const cardId = card.id;
+      const optBtns = card.querySelectorAll('.opt-btn');
+      const ansDrawer = card.querySelector('.ans-drawer');
+
+      optBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (answeredCards.has(cardId)) return;
+          answeredCards.add(cardId);
+
+          const isCorrect = btn.getAttribute('data-answer') === 'true';
+          if (isCorrect) {
+            btn.classList.add('correct');
+            currentScore++;
+            scoreElem.textContent = toBnNum(currentScore);
+          } else {
+            btn.classList.add('wrong');
+            // highlight correct option
+            optBtns.forEach(b => {
+              if (b.getAttribute('data-answer') === 'true') {
+                b.classList.add('correct');
+              }
+            });
+          }
+
+          // disable all option buttons in this card
+          optBtns.forEach(b => b.disabled = true);
+
+          // reveal explanation drawer
+          if (ansDrawer) ansDrawer.style.display = 'block';
+        });
+      });
+    });
+
+    document.getElementById('btn-quiz-reset').addEventListener('click', () => {
+      answeredCards.clear();
+      currentScore = 0;
+      scoreElem.textContent = '০';
+      document.querySelectorAll('.q-card').forEach(card => {
+        card.querySelectorAll('.opt-btn').forEach(btn => {
+          btn.disabled = false;
+          btn.classList.remove('correct', 'wrong');
+        });
+        const drawer = card.querySelector('.ans-drawer');
+        if (drawer) drawer.style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>

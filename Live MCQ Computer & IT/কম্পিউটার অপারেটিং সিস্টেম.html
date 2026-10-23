@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>অধ্যায় ০৩: কম্পিউটার অপারেটিং সিস্টেম - বিসিএস প্রিলিমিনারি ই-বুক</title>
+  <link rel="stylesheet" href="paper-textures.css">
+  <link rel="stylesheet" href="bangla-fonts.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4338ca;
+      --primary-light: #e0e7ff;
+      --primary-dark: #3730a3;
+      --accent: #0284c7;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(67, 56, 202, 0.2);
+      --font-scale: 1;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 24px rgba(67, 56, 202, 0.12);
+      
+      --bg-surface: rgba(255, 255, 255, 0.86);
+      --bg-card: rgba(255, 255, 255, 0.84);
+    }
+
+    [data-theme="dark"] {
+      --primary: #818cf8;
+      --primary-light: rgba(129, 140, 248, 0.15);
+      --primary-dark: #4338ca;
+      --accent: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(129, 140, 248, 0.22);
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+      
+      --bg-surface: rgba(15, 23, 42, 0.86);
+      --bg-card: rgba(23, 23, 38, 0.84);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.7;
+      color: var(--text-main);
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 5rem 1rem;
+    }
+
+    /* Top Bar Navigation */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      background: var(--bg-surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-main);
+      text-decoration: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-sm);
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      transition: all 0.2s;
+    }
+
+    [data-theme="dark"] .nav-btn {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .control-btn {
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.7rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+
+    [data-theme="dark"] .control-btn {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .control-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* Chapter Header */
+    .chapter-header {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .chapter-header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .ch-pre {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .ch-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.35;
+      margin-bottom: 0.75rem;
+    }
+
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .ch-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .ch-badge {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .ch-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* BCS Analysis Table */
+    .bcs-table-wrapper {
+      overflow-x: auto;
+      margin-bottom: 2rem;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .bcs-table th, .bcs-table td {
+      padding: 0.65rem 0.75rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .bcs-table th {
+      color: var(--primary);
+    }
+
+    /* Sketchnote Section (Part 1) */
+    .notes-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .sec-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
+      color: var(--primary);
+    }
+
+    .sk-box {
+      background: var(--bg-card);
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .sk-box-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sk-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+      font-size: 0.92rem;
+    }
+
+    .sk-table th, .sk-table td {
+      padding: 0.6rem 0.8rem;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .sk-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    [data-theme="dark"] .sk-table th {
+      color: var(--primary);
+    }
+
+    .sk-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .sk-list li {
+      position: relative;
+      padding-left: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .sk-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0.3rem;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .sk-sticky {
+      background: rgba(254, 240, 138, 0.4);
+      border-left: 4px solid #eab308;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    [data-theme="dark"] .sk-sticky {
+      background: rgba(234, 179, 8, 0.15);
+      border-left-color: #facc15;
+    }
+
+    /* Quiz Engine & Typography Protection (Part 2) */
+    .quiz-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .quiz-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      background: var(--bg-surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .score-badge {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .reset-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .reset-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+    .bcs-table, .bcs-table *, .score-bar, .score-bar *, .doubt-box, .doubt-box * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .q-num {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+
+    .q-tag {
+      background: rgba(0, 0, 0, 0.05);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      color: var(--text-muted);
+    }
+
+    [data-theme="dark"] .q-tag {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .options-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      width: 100%;
+      text-align: left;
+      padding: 0.75rem 1rem;
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      transition: all 0.2s;
+    }
+
+    [data-theme="dark"] .opt-btn {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    [data-theme="dark"] .opt-letter {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .opt-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .opt-btn.correct {
+      background: rgba(34, 197, 94, 0.2) !important;
+      color: #4ade80 !important;
+    }
+
+    .opt-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+
+    [data-theme="dark"] .opt-btn.wrong {
+      background: rgba(239, 68, 68, 0.2) !important;
+      color: #f87171 !important;
+    }
+
+    /* Answer Drawer */
+    .ans-drawer {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border-color);
+      display: none;
+    }
+
+    .ans-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-content {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    /* Bottom Navigation */
+    .ch-nav-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3rem;
+      background: var(--bg-surface);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-arrow {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.2s;
+    }
+
+    .nav-arrow:hover {
+      transform: translateX(3px);
+    }
+
+    .nav-arrow:first-child:hover {
+      transform: translateX(-3px);
+    }
+
+    /* Bibliography & Footer */
+    .biblio-box {
+      margin-top: 3rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .biblio-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 0.5rem;
+    }
+
+    .biblio-list {
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="container paper-container paper-torn font-durbar">
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+      <div class="nav-left">
+        <a href="index.html" class="nav-btn"><i class="fa-solid fa-list-ul"></i> বিষয় সূচিপত্র</a>
+      </div>
+      <div class="controls">
+        <button class="control-btn" id="btn-dec" title="ফন্ট ছোট করুন">A-</button>
+        <button class="control-btn" id="btn-reset" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="control-btn" id="btn-inc" title="ফন্ট বড় করুন">A+</button>
+        <button class="control-btn" id="btn-theme" title="থিম পরিবর্তন">🌙</button>
+      </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+      <span class="ch-pre">কম্পিউটার ও তথ্যপ্রযুক্তি • অধ্যায় ০৩</span>
+      <h1 class="ch-title font-durbar">
+        কম্পিউটার অপারেটিং সিস্টেম
+        <span class="ch-en">(Computer Operating System)</span>
+      </h1>
+      <div class="ch-meta">
+        <span><i class="fa-solid fa-file-lines"></i> পৃষ্ঠা: ৮৪৫-৮৪৮</span>
+        <span class="ch-badge"><i class="fa-solid fa-circle-question"></i> মোট প্রশ্ন: ১৩ টি</span>
+      </div>
+    </header>
+
+    <!-- BCS Analysis Matrix -->
+    
+<div class="bcs-table-wrapper">
+  <table class="bcs-table">
+    <thead>
+      <tr><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>৫০তম</td><td>০</td><td>৪৪তম</td><td>০</td><td>৩৮তম</td><td>২</td></tr>
+      <tr><td>৪৯তম</td><td>০</td><td>৪৩তম</td><td>২</td><td>৩৭তম</td><td>৩</td></tr>
+      <tr><td>৪৮তম</td><td>০</td><td>৪২তম</td><td>০</td><td>৩৬তম</td><td>০</td></tr>
+      <tr><td>৪৭তম</td><td>২</td><td>৪১তম</td><td>১</td><td>৩৫তম</td><td>১</td></tr>
+      <tr><td>৪৬তম</td><td>২</td><td>৪০তম</td><td>১</td><td>১০ম-৩৪তম</td><td>০</td></tr>
+      <tr><td>৪৫তম</td><td>০</td><td>৩৯তম</td><td>০</td><td><strong>সর্বমোট</strong></td><td><strong>১৩</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+    <!-- Part 1: Authentic Sketchnotes & Revision Notes -->
+    <section class="notes-section">
+      <h2 class="sec-heading font-durbar"><i class="fa-solid fa-lightbulb"></i> প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি</h2>
+      
+<div class="sk-box">
+  <div class="sk-box-title">🎛️ অপারেটিং সিস্টেমের মূল কার্যাবলি ও গঠন</div>
+  <table class="sk-table">
+    <thead><tr><th>স্তর / উপাদান</th><th>দায়িত্ব ও বিবরণ</th></tr></thead>
+    <tbody>
+      <tr><td><strong>কার্নেল (Kernel)</strong></td><td>অপারেটিং সিস্টেমের কেন্দ্রীয় মূল অংশ; হার্ডওয়্যার ও সফটওয়্যারের সরাসরি যোগাযোগ স্থাপন করে</td></tr>
+      <tr><td><strong>শেল (Shell)</strong></td><td>ব্যবহারকারী ইন্টারফেস যা কার্নেলকে কমান্ড প্রদান করে (CLI বা GUI)</td></tr>
+      <tr><td><strong>প্রসেস ম্যানেজমেন্ট</strong></td><td>CPU শিডিউলিং, মাল্টিটাস্কিং, থ্রেড নিয়ন্ত্রণ ও ডেডলক প্রতিরোধ</td></tr>
+      <tr><td><strong>মেমোরি ম্যানেজমেন্ট</strong></td><td>ভার্চুয়াল মেমোরি, পেজিং (Paging), র‍্যামের মেমোরি বরাদ্দ ও মুক্তকরণ</td></tr>
+      <tr><td><strong>ফাইল সিস্টেম</strong></td><td>ডিস্কে ডেটা সংগঠন ও সুরক্ষা (যেমন- NTFS, FAT32, exFAT, EXT4, APFS)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="sk-box">
+  <div class="sk-box-title">📂 প্রধান অপারেটিং সিস্টেমের শ্রেণিবিভাগ</div>
+  <ul class="sk-list">
+    <li><strong>ওপেন সোর্স (Open Source):</strong> লিনাক্স (Linux - উবুন্টু, ফেডোরা, রেডহ্যাট), অ্যান্ড্রয়েড (Android)। এদের সোর্স কোড উন্মুক্ত ও পরিবর্তনযোগ্য।</li>
+    <li><strong>ক্লোজড সোর্স / প্রোপ্রাইটরি:</strong> উইন্ডোজ (Windows), ম্যাকওএস (macOS), আইওএস (iOS)।</li>
+    <li><strong>মোবাইল ওএস:</strong> Android (Google), iOS (Apple), HarmonyOS (Huawei), Symbian (Nokia), Tizen (Samsung)।</li>
+  </ul>
+</div>
+
+<div class="sk-sticky">
+  🔄 <strong>বুটিং প্রক্রিয়া (Booting):</strong><br>
+  কম্পিউটার চালু করার সময় ROM-এর BIOS সক্রিয় হয়ে হার্ডওয়্যার যাচাই করে (POST - Power-On Self-Test) এবং সেকেন্ডারি স্টোরেজ থেকে অপারেটিং সিস্টেমের কার্নেলকে র‍্যামে লোড করে।<br>
+  • <strong>Cold Boot:</strong> বন্ধ কম্পিউটার প্রথম পাওয়ার বাটন চেপে চালু করা।<br>
+  • <strong>Warm Boot:</strong> চলমান কম্পিউটার রিস্টার্ট করা (Ctrl+Alt+Del)।
+</div>
+
+    </section>
+
+    <!-- Part 2: Interactive Past Exam Question Engine -->
+    <section class="quiz-section">
+      <div class="quiz-toolbar">
+        <h2 class="sec-heading" style="margin-bottom:0; font-size:1.15rem;"><i class="fa-solid fa-circle-check"></i> প্রামাণ্য প্রশ্নব্যাংক ও কুইজ</h2>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <span class="score-badge">স্কোর: <span id="score-counter">০</span> / ১৩</span>
+          <button class="reset-btn" id="btn-quiz-reset"><i class="fa-solid fa-rotate-left"></i> রিসেট</button>
+        </div>
+      </div>
+      <div class="quiz-cards-container">
+        
+        <div class="q-card" id="q3_1" data-session="৪৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১</span>
+            <span class="q-tag">৪৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">১. অপারেটিং সিস্টেমে ভার্চুয়াল মেমোরি ব্যবহার করা হয়-</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">র‍্যামের ধারণক্ষমতা প্রয়োজনের চেয়ে কম হলে হার্ডডিস্ককে মেমোরি হিসেবে ব্যবহারে</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">স্থায়ীভাবে ডেটা সংরক্ষণের জন্য</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">ইন্টারনেট স্পিড বৃদ্ধি করার জন্য</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">সিপিইউ-এর ভোল্টেজ কমাতে</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (র‍্যামের ধারণক্ষমতা প্রয়োজনের চেয়ে কম হলে হার্ডডিস্ককে মেমোরি হিসেবে ব্যবহারে)</strong><br>ভার্চুয়াল মেমোরি হলো অপারেটিং সিস্টেমের একটি মেমোরি ম্যানেজমেন্ট কৌশল, যাতে মূল মেমোরি (RAM) পূর্ণ হয়ে গেলে হার্ডডিস্কের নির্দিষ্ট অংশকে সাময়িকভাবে অতিরিক্ত র‍্যাম হিসেবে ব্যবহার করা হয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q3_2" data-session="৪৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২</span>
+            <span class="q-tag">৪৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">২. লিনাক্স (Linux) কোন ধরনের অপারেটিং সিস্টেম?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">ওপেন সোর্স এবং মাল্টিটাস্কিং</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">ক্লোজড সোর্স ও সিঙ্গেল ইউজার</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">শুধুমাত্র স্মার্টফোনের জন্য</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">শুধুমাত্র হার্ডওয়্যার টেস্টিং প্রোগ্রাম</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (ওপেন সোর্স এবং মাল্টিটাস্কিং)</strong><br>১৯৯১ সালে লিনাস টরভাল্ডস লিনাক্স উদ্ভাবন করেন। এটি একটি মুক্ত ও উন্মুক্ত সোর্স (Open Source), মাল্টি-ইউজার এবং মাল্টি-টাস্কিং অপারেটিং সিস্টেম কার্নেল।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q3_3" data-session="৪৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৩</span>
+            <span class="q-tag">৪৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">৩. অপারেটিং সিস্টেমের কেন্দ্রীয় হৃৎপিণ্ড বা মূল কোর অংশ কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Kernel</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Shell</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Command prompt</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">GUI</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Kernel)</strong><br>কার্নেল (Kernel) হলো একটি অপারেটিং সিস্টেমের কেন্দ্রীয় ও সবচেয়ে মৌলিক স্তর, যা সিপিইউ, মেমোরি ও হার্ডওয়্যার রিসোর্সের সাথে অ্যাপ্লিকেশন প্রোগ্রামের যোগাযোগ পরিচালনা করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q3_4" data-session="৪৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৪</span>
+            <span class="q-tag">৪৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">৪. নিচের কোনটি একটি রিয়েল-টাইম অপারেটিং সিস্টেম (RTOS)?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">VxWorks / RTLinux</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">MS-DOS</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Windows 10</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">macOS</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (VxWorks / RTLinux)</strong><br>RTOS (Real-Time Operating System) সুনির্দিষ্ট সময়সীমার (Time-critical) মধ্যে ইনপুট প্রক্রিয়া করে অবিলম্বে আউটপুট দেয়। রোবোটিক্স, মিসাইল ও মহাকাশযানে এটি ব্যবহৃত হয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q3_5" data-session="৪৩তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৫</span>
+            <span class="q-tag">৪৩তম বিসিএস</span>
+          </div>
+          <div class="q-text">৫. কম্পিউটার চালু করার সময় হার্ডওয়্যার স্বয়ংক্রিয় পরীক্ষার প্রক্রিয়াকে কী বলে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">POST (Power-On Self-Test)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Boot Loader</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Paging</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Interrupt</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (POST)</strong><br>কম্পিউটার পাওয়ার বোতামে চাপ দিলে BIOS প্রথমে সমস্ত অভ্যন্তরীণ যন্ত্রাংশ (CPU, RAM, কীবোর্ড) সচল আছে কিনা তা পরীক্ষা করে। একে POST (Power-On Self-Test) বলা হয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q3_6" data-session="৪৩তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৬</span>
+            <span class="q-tag">৪৩তম বিসিএস</span>
+          </div>
+          <div class="q-text">৬. উইন্ডোজ অপারেটিং সিস্টেমে ফাইল সংরক্ষণের আধুনিক ফাইল সিস্টেম ফরম্যাট কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">NTFS</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">FAT16</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">EXT2</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">SWAP</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (NTFS)</strong><br>NTFS (New Technology File System) মাইক্রোসফট উইন্ডোজের আধুনিক ও নিরাপদ ফাইল সিস্টেম, যা ফাইলের নিরাপত্তা এনক্রিপশন ও বড় সাইজের ফাইল সমর্থন করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q3_7" data-session="৪১তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৭</span>
+            <span class="q-tag">৪১তম বিসিএস</span>
+          </div>
+          <div class="q-text">৭. অ্যান্ড্রয়েড (Android) অপারেটিং সিস্টেমের মালিক প্রতিষ্ঠান কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">গুগল (Google)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">অ্যাপল (Apple)</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">মাইক্রোসফট (Microsoft)</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">আইবিএম (IBM)</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (গুগল)</strong><br>২০০৩ সালে অ্যান্ড্রয়েড ইনকর্পোরেটেড প্রতিষ্ঠিত হয় এবং ২০০৫ সালে গুগল এটি অধিগ্রহণ করে। এটি লিনাক্স কার্নেলের ওপর ভিত্তি করে নির্মিত মোবাইল অপারেটিং সিস্টেম।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q3_8" data-session="৪০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৮</span>
+            <span class="q-tag">৪০তম বিসিএস</span>
+          </div>
+          <div class="q-text">৮. কম্পিউটার রিস্টার্ট করাকে কোন ধরনের বুটিং বলা হয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Warm Booting</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Cold Booting</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Hard Booting</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Direct Booting</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Warm Booting)</strong><br>কম্পিউটার চালু থাকা অবস্থায় পাওয়ার সুইচ অফ না করে সফটওয়্যার বা কীবোর্ড কমান্ড (Ctrl+Alt+Delete) দিয়ে পুনরায় চালু করাকে ওয়ার্ম বুটিং বলে। সম্পূর্ণ বন্ধ পিসি চালু করা কোল্ড বুটিং।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q3_9" data-session="৩৮তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৯</span>
+            <span class="q-tag">৩৮তম বিসিএস</span>
+          </div>
+          <div class="q-text">৯. ম্যাকিন্টোশ বা ম্যাকওএস (macOS) অপারেটিং সিস্টেমের উদ্ভাবক প্রতিষ্ঠান কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Apple</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Microsoft</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">IBM</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Dell</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Apple)</strong><br>১৯৮৪ সালে স্টিভ জবসের হাত ধরে অ্যাপল ইনকর্পোরেটেড ম্যাকিন্টোশ কম্পিউটারের জন্য গ্রাফিক্যাল ইউজার ইন্টারফেস সমৃদ্ধ ম্যাকওএস তৈরি করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q3_10" data-session="৩৮তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১০</span>
+            <span class="q-tag">৩৮তম বিসিএস</span>
+          </div>
+          <div class="q-text">১০. কম্পিউটারে একই সাথে একাধিক প্রোগ্রাম কার্যকর করার ক্ষমতাকে কী বলা হয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Multitasking</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Multiprocessing</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Multithreading</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Multiprogramming</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Multitasking)</strong><br>মাল্টিটাস্কিং (Multitasking) হলো অপারেটিং সিস্টেমের এমন একটি বৈশিষ্ট্য যার মাধ্যমে সিপিইউ অতি দ্রুত একাধিক সক্রিয় কাজের মাঝে সুইচ করে একসাথে চলমান রাখে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q3_11" data-session="৩৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১১</span>
+            <span class="q-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">১১. আইফোন ও আইপ্যাডে ব্যবহৃত অপারেটিং সিস্টেমের নাম কী?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">iOS</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Android</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Windows Mobile</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Symbian</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (iOS)</strong><br>অ্যাপলের স্মার্ট ডিভাইসগুলোর জন্য নিজস্ব অপারেটিং সিস্টেম হলো আইওএস (iOS - iPhone OS), যা ২০০৭ সালে প্রথম উন্মোচিত হয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q3_12" data-session="৩৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১২</span>
+            <span class="q-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">১২. উইন্ডোজ ফোনের প্রস্তুতকারক কোম্পানি কোনটি ছিল?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Microsoft</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Nokia</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Google</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Blackberry</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Microsoft)</strong><br>উইন্ডোজ ফোন ছিল মাইক্রোসফট কর্তৃক স্মার্টফোনের জন্য উদ্ভাবিত মোবাইল অপারেটিং সিস্টেম।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q3_13" data-session="৩৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৩</span>
+            <span class="q-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৩. কোনটি অপারেটিং সিস্টেম নয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">C</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">DOS</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">CP/M</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">XENIX</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (C)</strong><br>C হলো একটি উচ্চস্তরের প্রোগ্রামিং ভাষা, কোনো অপারেটিং সিস্টেম নয়। অন্যদিকে DOS, CP/M, XENIX সবই অপারেটিং সিস্টেম।
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <nav class="ch-nav-bottom">
+      <div><a href="কম্পিউটার প্রোগ্রাম, প্রোগ্রামিং ল্যাঙ্গুয়েজ ও পারঙ্গমতা.html" class="nav-arrow">← পূর্ববর্তী অধ্যায়</a></div>
+      <div><a href="index.html" class="nav-arrow"><i class="fa-solid fa-house"></i> সূচিপত্র</a></div>
+      <div><a href="কম্পিউটারের ইতিহাস, কম্পিউটারের প্রকারভেদ ও দৈনন্দিন জীবনে কম্পিউটার.html" class="nav-arrow">পরবর্তী অধ্যায় →</a></div>
+    </nav>
+
+    
+
+    <!-- Universal Footer -->
+    <footer>
+      <p>বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ ডিজিটাল প্রশ্নব্যাংক • সাধারণ বিজ্ঞান ও তথ্যপ্রযুক্তি শাখা</p>
+      <p style="margin-top: 0.5rem; font-size: 0.85rem;">হস্তলিপি ও বাস্তবসম্মত পেপার টেক্সচার সহযোগে নির্মিত ইন্টারঅ্যাক্টিভ সংস্করণ</p>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle
+    const themeBtn = document.getElementById('btn-theme');
+    const htmlElem = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    htmlElem.setAttribute('data-theme', savedTheme);
+    themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+    themeBtn.addEventListener('click', () => {
+      const cur = htmlElem.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      htmlElem.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+
+    // Font size scaling
+    let scale = parseFloat(localStorage.getItem('font-scale') || '1');
+    applyScale(scale);
+
+    document.getElementById('btn-inc').addEventListener('click', () => {
+      if (scale < 1.3) { scale += 0.08; applyScale(scale); }
+    });
+    document.getElementById('btn-dec').addEventListener('click', () => {
+      if (scale > 0.85) { scale -= 0.08; applyScale(scale); }
+    });
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      scale = 1.0; applyScale(scale);
+    });
+
+    function applyScale(s) {
+      document.documentElement.style.setProperty('--font-scale', s);
+      localStorage.setItem('font-scale', s);
+    }
+
+    // Quiz Engine
+    let currentScore = 0;
+    const answeredCards = new Set();
+    const scoreElem = document.getElementById('score-counter');
+
+    function toBnNum(num) {
+      const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+      return num.toString().split('').map(d => bnDigits[parseInt(d)] || d).join('');
+    }
+
+    document.querySelectorAll('.q-card').forEach(card => {
+      const cardId = card.id;
+      const optBtns = card.querySelectorAll('.opt-btn');
+      const ansDrawer = card.querySelector('.ans-drawer');
+
+      optBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (answeredCards.has(cardId)) return;
+          answeredCards.add(cardId);
+
+          const isCorrect = btn.getAttribute('data-answer') === 'true';
+          if (isCorrect) {
+            btn.classList.add('correct');
+            currentScore++;
+            scoreElem.textContent = toBnNum(currentScore);
+          } else {
+            btn.classList.add('wrong');
+            // highlight correct option
+            optBtns.forEach(b => {
+              if (b.getAttribute('data-answer') === 'true') {
+                b.classList.add('correct');
+              }
+            });
+          }
+
+          // disable all option buttons in this card
+          optBtns.forEach(b => b.disabled = true);
+
+          // reveal explanation drawer
+          if (ansDrawer) ansDrawer.style.display = 'block';
+        });
+      });
+    });
+
+    document.getElementById('btn-quiz-reset').addEventListener('click', () => {
+      answeredCards.clear();
+      currentScore = 0;
+      scoreElem.textContent = '০';
+      document.querySelectorAll('.q-card').forEach(card => {
+        card.querySelectorAll('.opt-btn').forEach(btn => {
+          btn.disabled = false;
+          btn.classList.remove('correct', 'wrong');
+        });
+        const drawer = card.querySelector('.ans-drawer');
+        if (drawer) drawer.style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>

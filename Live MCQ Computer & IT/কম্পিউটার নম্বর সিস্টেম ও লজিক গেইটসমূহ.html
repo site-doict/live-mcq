@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>অধ্যায় ০৫: কম্পিউটার নম্বর সিস্টেম ও লজিক গেইটসমূহ - বিসিএস প্রিলিমিনারি ই-বুক</title>
+  <link rel="stylesheet" href="paper-textures.css">
+  <link rel="stylesheet" href="bangla-fonts.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4338ca;
+      --primary-light: #e0e7ff;
+      --primary-dark: #3730a3;
+      --accent: #0284c7;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(67, 56, 202, 0.2);
+      --font-scale: 1;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 24px rgba(67, 56, 202, 0.12);
+      
+      --bg-surface: rgba(255, 255, 255, 0.86);
+      --bg-card: rgba(255, 255, 255, 0.84);
+    }
+
+    [data-theme="dark"] {
+      --primary: #818cf8;
+      --primary-light: rgba(129, 140, 248, 0.15);
+      --primary-dark: #4338ca;
+      --accent: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(129, 140, 248, 0.22);
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+      
+      --bg-surface: rgba(15, 23, 42, 0.86);
+      --bg-card: rgba(23, 23, 38, 0.84);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.7;
+      color: var(--text-main);
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 5rem 1rem;
+    }
+
+    /* Top Bar Navigation */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      background: var(--bg-surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-main);
+      text-decoration: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-sm);
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      transition: all 0.2s;
+    }
+
+    [data-theme="dark"] .nav-btn {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .control-btn {
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.7rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+
+    [data-theme="dark"] .control-btn {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .control-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* Chapter Header */
+    .chapter-header {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .chapter-header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .ch-pre {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .ch-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.35;
+      margin-bottom: 0.75rem;
+    }
+
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .ch-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .ch-badge {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .ch-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* BCS Analysis Table */
+    .bcs-table-wrapper {
+      overflow-x: auto;
+      margin-bottom: 2rem;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .bcs-table th, .bcs-table td {
+      padding: 0.65rem 0.75rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .bcs-table th {
+      color: var(--primary);
+    }
+
+    /* Sketchnote Section (Part 1) */
+    .notes-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .sec-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
+      color: var(--primary);
+    }
+
+    .sk-box {
+      background: var(--bg-card);
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .sk-box-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sk-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+      font-size: 0.92rem;
+    }
+
+    .sk-table th, .sk-table td {
+      padding: 0.6rem 0.8rem;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .sk-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    [data-theme="dark"] .sk-table th {
+      color: var(--primary);
+    }
+
+    .sk-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .sk-list li {
+      position: relative;
+      padding-left: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .sk-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0.3rem;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .sk-sticky {
+      background: rgba(254, 240, 138, 0.4);
+      border-left: 4px solid #eab308;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    [data-theme="dark"] .sk-sticky {
+      background: rgba(234, 179, 8, 0.15);
+      border-left-color: #facc15;
+    }
+
+    /* Quiz Engine & Typography Protection (Part 2) */
+    .quiz-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .quiz-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      background: var(--bg-surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .score-badge {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .reset-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .reset-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+    .bcs-table, .bcs-table *, .score-bar, .score-bar *, .doubt-box, .doubt-box * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .q-num {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+
+    .q-tag {
+      background: rgba(0, 0, 0, 0.05);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      color: var(--text-muted);
+    }
+
+    [data-theme="dark"] .q-tag {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .options-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      width: 100%;
+      text-align: left;
+      padding: 0.75rem 1rem;
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      transition: all 0.2s;
+    }
+
+    [data-theme="dark"] .opt-btn {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    [data-theme="dark"] .opt-letter {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .opt-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .opt-btn.correct {
+      background: rgba(34, 197, 94, 0.2) !important;
+      color: #4ade80 !important;
+    }
+
+    .opt-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+
+    [data-theme="dark"] .opt-btn.wrong {
+      background: rgba(239, 68, 68, 0.2) !important;
+      color: #f87171 !important;
+    }
+
+    /* Answer Drawer */
+    .ans-drawer {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border-color);
+      display: none;
+    }
+
+    .ans-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-content {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    /* Bottom Navigation */
+    .ch-nav-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3rem;
+      background: var(--bg-surface);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-arrow {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.2s;
+    }
+
+    .nav-arrow:hover {
+      transform: translateX(3px);
+    }
+
+    .nav-arrow:first-child:hover {
+      transform: translateX(-3px);
+    }
+
+    /* Bibliography & Footer */
+    .biblio-box {
+      margin-top: 3rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .biblio-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 0.5rem;
+    }
+
+    .biblio-list {
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="container paper-container paper-graph font-begum-zia-curve">
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+      <div class="nav-left">
+        <a href="index.html" class="nav-btn"><i class="fa-solid fa-list-ul"></i> বিষয় সূচিপত্র</a>
+      </div>
+      <div class="controls">
+        <button class="control-btn" id="btn-dec" title="ফন্ট ছোট করুন">A-</button>
+        <button class="control-btn" id="btn-reset" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="control-btn" id="btn-inc" title="ফন্ট বড় করুন">A+</button>
+        <button class="control-btn" id="btn-theme" title="থিম পরিবর্তন">🌙</button>
+      </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+      <span class="ch-pre">কম্পিউটার ও তথ্যপ্রযুক্তি • অধ্যায় ০৫</span>
+      <h1 class="ch-title font-begum-zia-curve">
+        কম্পিউটার নম্বর সিস্টেম ও লজিক গেইটসমূহ
+        <span class="ch-en">(Computer Number Systems & Logic Gates)</span>
+      </h1>
+      <div class="ch-meta">
+        <span><i class="fa-solid fa-file-lines"></i> পৃষ্ঠা: ৮৫১-৮৫৬</span>
+        <span class="ch-badge"><i class="fa-solid fa-circle-question"></i> মোট প্রশ্ন: ২১ টি</span>
+      </div>
+    </header>
+
+    <!-- BCS Analysis Matrix -->
+    
+<div class="bcs-table-wrapper">
+  <table class="bcs-table">
+    <thead>
+      <tr><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>৫০তম</td><td>৩</td><td>৪৪তম</td><td>১</td><td>৩৮তম</td><td>৩</td></tr>
+      <tr><td>৪৯তম</td><td>০</td><td>৪৩তম</td><td>১</td><td>৩৭তম</td><td>২</td></tr>
+      <tr><td>৪৮তম</td><td>০</td><td>৪২তম</td><td>০</td><td>৩৬তম</td><td>২</td></tr>
+      <tr><td>৪৭তম</td><td>১</td><td>৪১তম</td><td>৩</td><td>৩৫তম</td><td>০</td></tr>
+      <tr><td>৪৬তম</td><td>১</td><td>৪০তম</td><td>২</td><td>১০ম-৩৪তম</td><td>০</td></tr>
+      <tr><td>৪৫তম</td><td>২</td><td>৩৯তম</td><td>০</td><td><strong>সর্বমোট</strong></td><td><strong>২১</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+    <!-- Part 1: Authentic Sketchnotes & Revision Notes -->
+    <section class="notes-section">
+      <h2 class="sec-heading font-begum-zia-curve"><i class="fa-solid fa-lightbulb"></i> প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি</h2>
+      
+<div class="sk-box">
+  <div class="sk-box-title">🔢 সংখ্যা পদ্ধতির রূপান্তর ও বেস (Base)</div>
+  <table class="sk-table">
+    <thead><tr><th>পদ্ধতি</th><th>বেস</th><th>ব্যবহৃত অঙ্কসমূহ</th><th>উদাহরণ</th></tr></thead>
+    <tbody>
+      <tr><td><strong>বাইনারি (Binary)</strong></td><td>২</td><td>০, ১</td><td>(১০১১০)<sub>২</sub></td></tr>
+      <tr><td><strong>অক্টাল (Octal)</strong></td><td>৮</td><td>০, ১, ২, ৩, ৪, ৫, ৬, ৭</td><td>(৭৫)<sub>৮</sub> (প্রতি অঙ্ক = ৩ বিট বাইনারি)</td></tr>
+      <tr><td><strong>ডেসিমেল (Decimal)</strong></td><td>১০</td><td>০, ১, ২, ৩, ৪, ৫, ৬, ৭, ৮, ৯</td><td>(১২৫)<sub>১০</sub></td></tr>
+      <tr><td><strong>হেক্সাডেসিমেল (Hex)</strong></td><td>১৬</td><td>০-৯ এবং A(10), B(11), C(12), D(13), E(14), F(15)</td><td>(2F)<sub>১৬</sub> (প্রতি অঙ্ক = ৪ বিট বাইনারি)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="sk-box">
+  <div class="sk-box-title">⚡ ডিজিটাল লজিক গেইটসমূহ</div>
+  <ul class="sk-list">
+    <li><strong>মৌলিক গেইট (Basic Gates):</strong><br>
+      • <strong>AND Gate:</strong> গুণন প্রক্রিয়া ($Y = A \cdot B$); সব ইনপুট ১ হলেই আউটপুট ১ হবে।<br>
+      • <strong>OR Gate:</strong> যোগ প্রক্রিয়া ($Y = A + B$); যেকোনো একটি ইনপুট ১ হলেই আউটপুট ১ হবে।<br>
+      • <strong>NOT Gate (Inverter):</strong> বিপরীত প্রক্রিয়া ($Y = \overline{A}$); ইনপুট উল্টে যায়।
+    </li>
+    <li><strong>সার্বজনীন গেইট (Universal Gates):</strong><br>
+      • <strong>NAND Gate:</strong> AND + NOT ($Y = \overline{A \cdot B}$); সকল মৌলিক গেইট তৈরি করা যায়।<br>
+      • <strong>NOR Gate:</strong> OR + NOT ($Y = \overline{A + B}$); সকল মৌলিক গেইট বাস্তবায়ন সম্ভব।
+    </li>
+    <li><strong>বিশেষ গেইট:</strong><br>
+      • <strong>XOR Gate:</strong> বিজোড় সংখ্যক ১ থাকলে আউটপুট ১ ($Y = A \oplus B = A\overline{B} + \overline{A}B$)।<br>
+      • <strong>XNOR Gate:</strong> জোড় সংখ্যক ১ থাকলে আউটপুট ১ ($Y = \overline{A \oplus B} = AB + \overline{A}\overline{B}$)।
+    </li>
+  </ul>
+</div>
+
+<div class="sk-sticky">
+  📜 <strong>বুলিয়ান স্বতঃসিদ্ধ ও ডি-মরগ্যানের সূত্র:</strong><br>
+  • $A + 0 = A$, $A + 1 = 1$, $A + A = A$, $A + \overline{A} = 1$<br>
+  • $A \cdot 0 = 0$, $A \cdot 1 = A$, $A \cdot A = A$, $A \cdot \overline{A} = 0$<br>
+  • ডি-মরগ্যান ১ম সূত্র: $\overline{A + B} = \overline{A} \cdot \overline{B}$<br>
+  • ডি-মরগ্যান ২য় সূত্র: $\overline{A \cdot B} = \overline{A} + \overline{B}$
+</div>
+
+    </section>
+
+    <!-- Part 2: Interactive Past Exam Question Engine -->
+    <section class="quiz-section">
+      <div class="quiz-toolbar">
+        <h2 class="sec-heading" style="margin-bottom:0; font-size:1.15rem;"><i class="fa-solid fa-circle-check"></i> প্রামাণ্য প্রশ্নব্যাংক ও কুইজ</h2>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <span class="score-badge">স্কোর: <span id="score-counter">০</span> / ২১</span>
+          <button class="reset-btn" id="btn-quiz-reset"><i class="fa-solid fa-rotate-left"></i> রিসেট</button>
+        </div>
+      </div>
+      <div class="quiz-cards-container">
+        
+        <div class="q-card" id="q5_1" data-session="৫০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১</span>
+            <span class="q-tag">৫০তম বিসিএস</span>
+          </div>
+          <div class="q-text">১. কোনটি কম্বিনেশনাল লজিক সার্কিট নয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">রেজিস্টার (Register)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">ডিকোডার (Decoder)</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">মাল্টিপ্লেক্সার (Multiplexer)</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">NAND গেট</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (রেজিস্টার)</strong><br>কম্বিনেশনাল সার্কিটের আউটপুট শুধুমাত্র বর্তমান ইনপুটের ওপর নির্ভর করে এবং এতে কোনো মেমোরি থাকে না (যেমন- অ্যাডার, মাল্টিপ্লেক্সার, এনকোডার)। অন্যদিকে রেজিস্টার হলো সিকোয়েন্সিয়াল সার্কিট, যা ফ্লিপ-ফ্লপ দিয়ে তৈরি এবং এতে মেমোরি থাকে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_2" data-session="৫০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২</span>
+            <span class="q-tag">৫০তম বিসিএস</span>
+          </div>
+          <div class="q-text">২. হেক্সাডেসিমেল সংখ্যা পদ্ধতির বেস (Base) কত?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">১৬</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">১০</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">৮</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">২</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (১৬)</strong><br>হেক্সাডেসিমেল সংখ্যা পদ্ধতিতে মোট ১৬টি মৌলিক চিহ্ন বা প্রতীক (০-৯ এবং A, B, C, D, E, F) ব্যবহৃত হয়, তাই এর ভিত্তি বা বেস ১৬।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_3" data-session="৫০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৩</span>
+            <span class="q-tag">৫০তম বিসিএস</span>
+          </div>
+          <div class="q-text">৩. বুলিয়ান অ্যালজেবরায় A + 1 এর মান কত?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">1</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">A</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">0</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">A+1</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (1)</strong><br>বুলিয়ান স্বতঃসিদ্ধ অনুযায়ী, OR অপারেশনে যেকোনো একটি ইনপুট ১ হলে অপর ইনপুট যাই হোক না কেন আউটপুট সবসময় ১ হয় ($A + 1 = 1$)।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_4" data-session="৪৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৪</span>
+            <span class="q-tag">৪৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">৪. বাইনারি সংখ্যা (11011)₂ এর সমকক্ষ ডেসিমেল মান কত?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">২৭</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">২৫</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">২৯</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">৩১</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (২৭)</strong><br>১×২⁴ + ১×২³ + ০×২² + ১×২¹ + ১×২⁰ = ১৬ + ৮ + ০ + ২ + ১ = ২৭।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_5" data-session="৪৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৫</span>
+            <span class="q-tag">৪৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">৫. সার্বজনীন গেইট (Universal Gate) কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">NAND ও NOR</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">AND ও OR</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">XOR ও XNOR</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">NOT ও AND</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (NAND ও NOR)</strong><br>NAND এবং NOR গেইট দিয়ে মৌলিক তিনটি গেইটসহ যেকোনো ডিজিটাল লজিক সার্কিট তৈরি করা সম্ভব বলে এদের সার্বজনীন গেইট বলা হয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_6" data-session="৪৫তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৬</span>
+            <span class="q-tag">৪৫তম বিসিএস</span>
+          </div>
+          <div class="q-text">৬. হেক্সাডেসিমেল পদ্ধতিতে F-এর সমতুল্য দশমিক মান কত?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">১৫</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">১৬</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">১৪</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">১০</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (১৫)</strong><br>হেক্সাডেসিমেলে A=10, B=11, C=12, D=13, E=14 এবং F=15।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_7" data-session="৪৫তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৭</span>
+            <span class="q-tag">৪৫তম বিসিএস</span>
+          </div>
+          <div class="q-text">৭. বাইনারি পদ্ধতিতে ১ + ১ এর যোগফল কত?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">১০ (যোগফল ০, ক্যারি ১)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">২</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">১</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">০</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (১০)</strong><br>বাইনারি যোগে ১ + ১ = (১০)₂, যেখানে যোগফল (Sum) হলো ০ এবং হাতে থাকে ১ (Carry = 1)।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_8" data-session="৪৪তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৮</span>
+            <span class="q-tag">৪৪তম বিসিএস</span>
+          </div>
+          <div class="q-text">৮. ডিমরগ্যানের ১ম সূত্র কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">(A + B)' = A' . B'</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">(A . B)' = A' + B'</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">A + A = A</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">A . A = 1</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক ((A + B)' = A' . B')</strong><br>ডি মরগ্যানের প্রথম উপপাদ্য অনুসারে, যেকোনো সংখ্যক চলকের যোগফলের কমপ্লিমেন্ট তাদের পৃথক কমপ্লিমেন্টের গুণফলের সমান।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_9" data-session="৪৩তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৯</span>
+            <span class="q-tag">৪৩তম বিসিএস</span>
+          </div>
+          <div class="q-text">৯. বাইনারি (1010)₂ এবং (0101)₂ এর যোগফল কত?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">(1111)₂</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">(10000)₂</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">(1110)₂</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">(10101)₂</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক ((1111)₂)</strong><br>১০১০ (১০) + ০১০১ (৫) = ১৫, যার বাইনারি হলো ১১১১ (1111)₂।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_10" data-session="৪১তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১০</span>
+            <span class="q-tag">৪১তম বিসিএস</span>
+          </div>
+          <div class="q-text">১০. একটি ৮-বিট বাইনারি সংখ্যার সর্বোচ্চ ডেসিমেল মান কত হতে পারে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">২৫৫</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">২৫৬</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">১২৮</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">৫১২</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (২৫৫)</strong><br>৮-বিটের বৃহত্তম সংখ্যা হলো (11111111)₂, যার দশমিক মান ২⁸ - ১ = ২৫৬ - ১ = ২৫৫।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_11" data-session="৪১তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১১</span>
+            <span class="q-tag">৪১তম বিসিএস</span>
+          </div>
+          <div class="q-text">১১. কোন লজিক গেটের আউটপুট ১ হবে যদি এবং কেবল যদি বিজোড় সংখ্যক ইনপুট ১ হয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">XOR Gate</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">XNOR Gate</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">AND Gate</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">NOR Gate</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (XOR Gate)</strong><br>XOR (Exclusive OR) গেটের প্রধান ধর্ম হলো বিজোড় সংখ্যক ১ ইনপুট থাকলে আউটপুট ১ হয়, অন্যথায় আউটপুট ০ হয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_12" data-session="৪১তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১২</span>
+            <span class="q-tag">৪১তম বিসিএস</span>
+          </div>
+          <div class="q-text">১২. হেক্সাডেসিমেল সংখ্যা (2D)₁₆ কে বাইনারিতে প্রকাশ করলে কত হবে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">00101101</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">00101110</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">00111101</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">00011101</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (00101101)</strong><br>হেক্সাডেসিমেলের প্রতি অঙ্ক ৪ বিট বাইনারি: ২ = 0010 এবং D (13) = 1101; ফলে (2D)₁₆ = 00101101₂।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_13" data-session="৪০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৩</span>
+            <span class="q-tag">৪০তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৩. দশমিক সংখ্যা ১৫ এর সমতুল্য অক্টাল সংখ্যা কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">(17)₈</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">(15)₈</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">(20)₈</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">(16)₈</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক ((17)₈)</strong><br>১৫ কে ৮ দিয়ে ভাগ করলে ভাগফল ১ এবং ভাগশেষ ৭ থাকে। নিচ থেকে লিখলে মান দাঁড়ায় (১৭)₈।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_14" data-session="৪০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৪</span>
+            <span class="q-tag">৪০তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৪. বুলিয়ান সমীকরণ A . A' এর মান কত?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">0</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">1</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">A</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">A'</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (0)</strong><br>যেকোনো চলক এবং তার বিপরীত চলকের গুণফল সর্বদা ০ হয় (যেমন: ১ . ০ = ০ অথবা ০ . ১ = ০)।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_15" data-session="৩৮তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৫</span>
+            <span class="q-tag">৩৮তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৫. বাইনারি সংখ্যায় ঋণাত্মক সংখ্যা উপস্থাপনের জন্য আধুনিক কম্পিউটারে কোন পদ্ধতি ব্যবহৃত হয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">২ এর পরিপূরক (2's Complement)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">১ এর পরিপূরক</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">সাইন-ম্যাগনিচিউড</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">দশমিক রূপান্তর</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (২ এর পরিপূরক)</strong><br>২ এর পরিপূরক পদ্ধতিতে শূন্যের কোনো দ্বৈত মান (+০ ও -০) থাকে না এবং যোগের সার্কিট দিয়েই সরাসরি বিয়োগের কাজ সম্পন্ন করা যায়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_16" data-session="৩৮তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৬</span>
+            <span class="q-tag">৩৮তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৬. (1011)₂ এর ২ এর পরিপূরক (2's Complement) কত?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">0101</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">0100</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">1100</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">0110</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (0101)</strong><br>(1011)₂ এর ১ এর পরিপূরক হলো 0100। এর সাথে ১ যোগ করলে ২ এর পরিপূরক হয়: 0100 + 1 = 0101।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_17" data-session="৩৮তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৭</span>
+            <span class="q-tag">৩৮তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৭. অক্টাল সংখ্যা পদ্ধতির একটি অঙ্ক বাইনারির কয়টি বিট প্রকাশ করে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">৩টি বিট</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">৪টি বিট</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">২টি বিট</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">৮টি বিট</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (৩টি বিট)</strong><br>যেহেতু ৮ = ২³, তাই অক্টাল সংখ্যা পদ্ধতির প্রতিটি অঙ্ক সরাসরি ৩-বিট বাইনারি সংখ্যা নির্দেশ করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_18" data-session="৩৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৮</span>
+            <span class="q-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৮. বুলিয়ান উপপাদ্য A + A এর মান কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">A</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">2A</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">1</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">0</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (A)</strong><br>বুলিয়ান অ্যালজেবরার আইডেমপোটেন্ট সূত্রানুসারে $A + A = A$ এবং $A \cdot A = A$।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_19" data-session="৩৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৯</span>
+            <span class="q-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৯. কোন লজিক গেটের সমস্ত ইনপুট ১ হলে আউটপুট ০ হয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">NAND Gate</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">AND Gate</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">OR Gate</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">XOR Gate</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (NAND Gate)</strong><br>AND গেটে সমস্ত ইনপুট ১ হলে আউটপুট ১ হয়। NAND গেট হলো এর উল্টো, তাই সব ইনপুট ১ হলে আউটপুট ০ হয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_20" data-session="৩৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২০</span>
+            <span class="q-tag">৩৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">২০. (1011)₂ + (0101)₂ = কত?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">(10000)₂</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">(1100)₂</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">(01100)₂</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">কোনোটিই নয়</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক ((10000)₂)</strong><br>1011 (দশমিকে 11) + 0101 (দশমিকে 5) = 16, যার বাইনারি রূপ হলো (10000)₂।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q5_21" data-session="৩৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২১</span>
+            <span class="q-tag">৩৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">২১. Boolean Algebra-এর নিচের কোনটি সঠিক?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">A + A' = 1</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">A . A = 1</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">A + A = 2A</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">উপরের কোনোটিই নয়</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (A + A' = 1)</strong><br>বুলিয়ান অ্যালজেবরায় একটি চলক এবং তার বিপরীত মান যোগ করলে উত্তর সর্বদা ১ হয় ($1 + 0 = 1$ বা $0 + 1 = 1$)।
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <nav class="ch-nav-bottom">
+      <div><a href="কম্পিউটারের ইতিহাস, কম্পিউটারের প্রকারভেদ ও দৈনন্দিন জীবনে কম্পিউটার.html" class="nav-arrow">← পূর্ববর্তী অধ্যায়</a></div>
+      <div><a href="index.html" class="nav-arrow"><i class="fa-solid fa-house"></i> সূচিপত্র</a></div>
+      <div><a href="ডেটাবেজ সিস্টেম.html" class="nav-arrow">পরবর্তী অধ্যায় →</a></div>
+    </nav>
+
+    
+
+    <!-- Universal Footer -->
+    <footer>
+      <p>বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ ডিজিটাল প্রশ্নব্যাংক • সাধারণ বিজ্ঞান ও তথ্যপ্রযুক্তি শাখা</p>
+      <p style="margin-top: 0.5rem; font-size: 0.85rem;">হস্তলিপি ও বাস্তবসম্মত পেপার টেক্সচার সহযোগে নির্মিত ইন্টারঅ্যাক্টিভ সংস্করণ</p>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle
+    const themeBtn = document.getElementById('btn-theme');
+    const htmlElem = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    htmlElem.setAttribute('data-theme', savedTheme);
+    themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+    themeBtn.addEventListener('click', () => {
+      const cur = htmlElem.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      htmlElem.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+
+    // Font size scaling
+    let scale = parseFloat(localStorage.getItem('font-scale') || '1');
+    applyScale(scale);
+
+    document.getElementById('btn-inc').addEventListener('click', () => {
+      if (scale < 1.3) { scale += 0.08; applyScale(scale); }
+    });
+    document.getElementById('btn-dec').addEventListener('click', () => {
+      if (scale > 0.85) { scale -= 0.08; applyScale(scale); }
+    });
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      scale = 1.0; applyScale(scale);
+    });
+
+    function applyScale(s) {
+      document.documentElement.style.setProperty('--font-scale', s);
+      localStorage.setItem('font-scale', s);
+    }
+
+    // Quiz Engine
+    let currentScore = 0;
+    const answeredCards = new Set();
+    const scoreElem = document.getElementById('score-counter');
+
+    function toBnNum(num) {
+      const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+      return num.toString().split('').map(d => bnDigits[parseInt(d)] || d).join('');
+    }
+
+    document.querySelectorAll('.q-card').forEach(card => {
+      const cardId = card.id;
+      const optBtns = card.querySelectorAll('.opt-btn');
+      const ansDrawer = card.querySelector('.ans-drawer');
+
+      optBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (answeredCards.has(cardId)) return;
+          answeredCards.add(cardId);
+
+          const isCorrect = btn.getAttribute('data-answer') === 'true';
+          if (isCorrect) {
+            btn.classList.add('correct');
+            currentScore++;
+            scoreElem.textContent = toBnNum(currentScore);
+          } else {
+            btn.classList.add('wrong');
+            // highlight correct option
+            optBtns.forEach(b => {
+              if (b.getAttribute('data-answer') === 'true') {
+                b.classList.add('correct');
+              }
+            });
+          }
+
+          // disable all option buttons in this card
+          optBtns.forEach(b => b.disabled = true);
+
+          // reveal explanation drawer
+          if (ansDrawer) ansDrawer.style.display = 'block';
+        });
+      });
+    });
+
+    document.getElementById('btn-quiz-reset').addEventListener('click', () => {
+      answeredCards.clear();
+      currentScore = 0;
+      scoreElem.textContent = '০';
+      document.querySelectorAll('.q-card').forEach(card => {
+        card.querySelectorAll('.opt-btn').forEach(btn => {
+          btn.disabled = false;
+          btn.classList.remove('correct', 'wrong');
+        });
+        const drawer = card.querySelector('.ans-drawer');
+        if (drawer) drawer.style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>

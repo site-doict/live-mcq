@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>অধ্যায় ০৮: কম্পিউটার ও সেলুলার নেটওয়ার্কিং সিস্টেম ও ডেটা কমিউনিকেশন - বিসিএস প্রিলিমিনারি ই-বুক</title>
+  <link rel="stylesheet" href="paper-textures.css">
+  <link rel="stylesheet" href="bangla-fonts.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4338ca;
+      --primary-light: #e0e7ff;
+      --primary-dark: #3730a3;
+      --accent: #0284c7;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(67, 56, 202, 0.2);
+      --font-scale: 1;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 24px rgba(67, 56, 202, 0.12);
+      
+      --bg-surface: rgba(255, 255, 255, 0.86);
+      --bg-card: rgba(255, 255, 255, 0.84);
+    }
+
+    [data-theme="dark"] {
+      --primary: #818cf8;
+      --primary-light: rgba(129, 140, 248, 0.15);
+      --primary-dark: #4338ca;
+      --accent: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(129, 140, 248, 0.22);
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+      
+      --bg-surface: rgba(15, 23, 42, 0.86);
+      --bg-card: rgba(23, 23, 38, 0.84);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.7;
+      color: var(--text-main);
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 5rem 1rem;
+    }
+
+    /* Top Bar Navigation */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      background: var(--bg-surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-main);
+      text-decoration: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-sm);
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      transition: all 0.2s;
+    }
+
+    [data-theme="dark"] .nav-btn {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .control-btn {
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.7rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+
+    [data-theme="dark"] .control-btn {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .control-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* Chapter Header */
+    .chapter-header {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .chapter-header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .ch-pre {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .ch-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.35;
+      margin-bottom: 0.75rem;
+    }
+
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .ch-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .ch-badge {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .ch-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* BCS Analysis Table */
+    .bcs-table-wrapper {
+      overflow-x: auto;
+      margin-bottom: 2rem;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .bcs-table th, .bcs-table td {
+      padding: 0.65rem 0.75rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .bcs-table th {
+      color: var(--primary);
+    }
+
+    /* Sketchnote Section (Part 1) */
+    .notes-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .sec-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
+      color: var(--primary);
+    }
+
+    .sk-box {
+      background: var(--bg-card);
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .sk-box-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sk-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+      font-size: 0.92rem;
+    }
+
+    .sk-table th, .sk-table td {
+      padding: 0.6rem 0.8rem;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .sk-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    [data-theme="dark"] .sk-table th {
+      color: var(--primary);
+    }
+
+    .sk-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .sk-list li {
+      position: relative;
+      padding-left: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .sk-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0.3rem;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .sk-sticky {
+      background: rgba(254, 240, 138, 0.4);
+      border-left: 4px solid #eab308;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    [data-theme="dark"] .sk-sticky {
+      background: rgba(234, 179, 8, 0.15);
+      border-left-color: #facc15;
+    }
+
+    /* Quiz Engine & Typography Protection (Part 2) */
+    .quiz-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .quiz-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      background: var(--bg-surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .score-badge {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .reset-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .reset-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+    .bcs-table, .bcs-table *, .score-bar, .score-bar *, .doubt-box, .doubt-box * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .q-num {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+
+    .q-tag {
+      background: rgba(0, 0, 0, 0.05);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      color: var(--text-muted);
+    }
+
+    [data-theme="dark"] .q-tag {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .options-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      width: 100%;
+      text-align: left;
+      padding: 0.75rem 1rem;
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      transition: all 0.2s;
+    }
+
+    [data-theme="dark"] .opt-btn {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    [data-theme="dark"] .opt-letter {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .opt-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .opt-btn.correct {
+      background: rgba(34, 197, 94, 0.2) !important;
+      color: #4ade80 !important;
+    }
+
+    .opt-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+
+    [data-theme="dark"] .opt-btn.wrong {
+      background: rgba(239, 68, 68, 0.2) !important;
+      color: #f87171 !important;
+    }
+
+    /* Answer Drawer */
+    .ans-drawer {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border-color);
+      display: none;
+    }
+
+    .ans-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-content {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    /* Bottom Navigation */
+    .ch-nav-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3rem;
+      background: var(--bg-surface);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-arrow {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.2s;
+    }
+
+    .nav-arrow:hover {
+      transform: translateX(3px);
+    }
+
+    .nav-arrow:first-child:hover {
+      transform: translateX(-3px);
+    }
+
+    /* Bibliography & Footer */
+    .biblio-box {
+      margin-top: 3rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .biblio-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 0.5rem;
+    }
+
+    .biblio-list {
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="container paper-container paper-legal-pad font-shorif-rafid">
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+      <div class="nav-left">
+        <a href="index.html" class="nav-btn"><i class="fa-solid fa-list-ul"></i> বিষয় সূচিপত্র</a>
+      </div>
+      <div class="controls">
+        <button class="control-btn" id="btn-dec" title="ফন্ট ছোট করুন">A-</button>
+        <button class="control-btn" id="btn-reset" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="control-btn" id="btn-inc" title="ফন্ট বড় করুন">A+</button>
+        <button class="control-btn" id="btn-theme" title="থিম পরিবর্তন">🌙</button>
+      </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+      <span class="ch-pre">কম্পিউটার ও তথ্যপ্রযুক্তি • অধ্যায় ০৮</span>
+      <h1 class="ch-title font-shorif-rafid">
+        কম্পিউটার ও সেলুলার নেটওয়ার্কিং সিস্টেম ও ডেটা কমিউনিকেশন
+        <span class="ch-en">(Computer & Cellular Networking & Data Communication)</span>
+      </h1>
+      <div class="ch-meta">
+        <span><i class="fa-solid fa-file-lines"></i> পৃষ্ঠা: ৮৬৪-৮৭১</span>
+        <span class="ch-badge"><i class="fa-solid fa-circle-question"></i> মোট প্রশ্ন: ২৮ টি</span>
+      </div>
+    </header>
+
+    <!-- BCS Analysis Matrix -->
+    
+<div class="bcs-table-wrapper">
+  <table class="bcs-table">
+    <thead>
+      <tr><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>৫০তম</td><td>১</td><td>৪৪তম</td><td>৩</td><td>৩৮তম</td><td>২</td></tr>
+      <tr><td>৪৯তম</td><td>০</td><td>৪৩তম</td><td>৩</td><td>৩৭তম</td><td>২</td></tr>
+      <tr><td>৪৮তম</td><td>০</td><td>৪২তম</td><td>০</td><td>৩৬তম</td><td>৪</td></tr>
+      <tr><td>৪৭তম</td><td>২</td><td>৪১তম</td><td>৩</td><td>৩৫তম</td><td>১</td></tr>
+      <tr><td>৪৬তম</td><td>২</td><td>৪০তম</td><td>৩</td><td>১০ম-৩৪তম</td><td>৩</td></tr>
+      <tr><td>৪৫তম</td><td>১</td><td>৩৯তম</td><td>০</td><td><strong>সর্বমোট</strong></td><td><strong>২৮</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+    <!-- Part 1: Authentic Sketchnotes & Revision Notes -->
+    <section class="notes-section">
+      <h2 class="sec-heading font-shorif-rafid"><i class="fa-solid fa-lightbulb"></i> প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি</h2>
+      
+<div class="sk-box">
+  <div class="sk-box-title">🌐 OSI ৭-স্তর বিশিষ্ট রেফারেন্স মডেল (নিচ থেকে উপরে)</div>
+  <table class="sk-table">
+    <thead><tr><th>স্তর (Layer)</th><th>প্রোটোকল ডেটা ইউনিট (PDU)</th><th>প্রধান দায়িত্ব ও প্রোটোকল/ডিভাইস</th></tr></thead>
+    <tbody>
+      <tr><td><strong>১. Physical Layer</strong></td><td>Bits</td><td>তার, সিগন্যাল, হাব ও রিপিটার; বৈদ্যুতিক ভোল্টেজ রূপান্তর</td></tr>
+      <tr><td><strong>২. Data Link Layer</strong></td><td>Frames</td><td>ম্যাক অ্যাড্রেস (MAC), সুইচ ও ব্রিজ; ত্রুটি সংশোধন ও প্রবাহ নিয়ন্ত্রণ</td></tr>
+      <tr><td><strong>৩. Network Layer</strong></td><td>Packets</td><td>আইপি অ্যাড্রেস (IP), রাউটার; লজিক্যাল অ্যাড্রেসিং ও রাউটিং</td></tr>
+      <tr><td><strong>৪. Transport Layer</strong></td><td>Segments</td><td>TCP, UDP; এন্ড-টু-এন্ড নির্ভরযোগ্য সংযোগ ও পোর্ট অ্যাড্রেস</td></tr>
+      <tr><td><strong>৫. Session Layer</strong></td><td>Data</td><td>সেশন তৈরি, নিয়ন্ত্রণ ও সমাপ্তি; সিঙ্ক্রোনাইজেশন</td></tr>
+      <tr><td><strong>৬. Presentation Layer</strong></td><td>Data</td><td>ডেটা ফরম্যাটিং, এনক্রিপশন/ডিক্রিপশন ও কম্প্রেশন</td></tr>
+      <tr><td><strong>৭. Application Layer</strong></td><td>Data</td><td>ইউজার ইন্টারফেস ও নেটওয়ার্ক সার্ভিস (HTTP, FTP, SMTP, DNS)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="sk-box">
+  <div class="sk-box-title">🔌 নেটওয়ার্ক টপোলজি ও সংযোগ মাধ্যম</div>
+  <ul class="sk-list">
+    <li><strong>স্টার টপোলজি (Star):</strong> কেন্দ্রীয় হাব বা সুইচের সাথে সব নোড যুক্ত থাকে। একটি ক্যাবল ছিঁড়লে অন্যগুলোর ক্ষতি হয় না (বহুল ব্যবহৃত)।</li>
+    <li><strong>মেশ টপোলজি (Mesh):</strong> প্রতিটি নোড পরস্পরের সাথে সরাসরি পয়েন্ট-টু-পয়েন্ট যুক্ত। সর্বোচ্চ নির্ভরযোগ্য কিন্তু অত্যন্ত ব্যয়বহুল ($n(n-1)/2$ ক্যাবল লাগে)।</li>
+    <li><strong>বাস টপোলজি (Bus):</strong> একটিমাত্র কেন্দ্রীয় ব্যাকবোন লাইনের সাথে সবাই যুক্ত। ব্যাকবোন নষ্ট হলে পুরো নেটওয়ার্ক অচল।</li>
+    <li><strong>অপটিক্যাল ফাইবার:</strong> কাঁচ বা প্লাস্টিকের সরু তন্তু যার মধ্য দিয়ে <em>পূর্ণ অভ্যন্তরীণ প্রতিফলনের (Total Internal Reflection)</em> মাধ্যমে আলোর গতিতে ডেটা পরিবাহিত হয়। আলোর প্রতিসরণাঙ্ক: কোর (Core) &gt; ক্ল্যাডিং (Cladding)।</li>
+  </ul>
+</div>
+
+<div class="sk-sticky">
+  📶 <strong>ওয়্যারলেস প্রযুক্তি ও স্ট্যান্ডার্ড:</strong><br>
+  • <strong>Bluetooth:</strong> IEEE 802.15.1 (WPAN, ২.৪ GHz ISM ব্যান্ড, স্বল্প দূরত্ব ১০ মিটার)।<br>
+  • <strong>Wi-Fi:</strong> IEEE 802.11 (WLAN, ২.৪ GHz / ৫ GHz)।<br>
+  • <strong>WiMAX:</strong> IEEE 802.16 (WMAN, ব্রডব্যান্ড দূরপাল্লার ওয়্যারলেস)।
+</div>
+
+    </section>
+
+    <!-- Part 2: Interactive Past Exam Question Engine -->
+    <section class="quiz-section">
+      <div class="quiz-toolbar">
+        <h2 class="sec-heading" style="margin-bottom:0; font-size:1.15rem;"><i class="fa-solid fa-circle-check"></i> প্রামাণ্য প্রশ্নব্যাংক ও কুইজ</h2>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <span class="score-badge">স্কোর: <span id="score-counter">০</span> / ২৮</span>
+          <button class="reset-btn" id="btn-quiz-reset"><i class="fa-solid fa-rotate-left"></i> রিসেট</button>
+        </div>
+      </div>
+      <div class="quiz-cards-container">
+        
+        <div class="q-card" id="q8_1" data-session="৫০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১</span>
+            <span class="q-tag">৫০তম বিসিএস</span>
+          </div>
+          <div class="q-text">১. Transmission Control Protocol (TCP) OSI মডেলের কোন লেয়ারের প্রোটোকল?</div>
+          <div class="options-grid">
+            <button class="opt-btn"><span class="opt-letter">ক</span> <span class="opt-txt">Application Layer</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Network Layer</span></button>
+<button class="opt-btn" data-answer="true"><span class="opt-letter">গ</span> <span class="opt-txt">Transport Layer</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Data Link Layer</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: গ (Transport Layer)</strong><br>OSI মডেলের ৪র্থ স্তর হলো ট্রান্সপোর্ট লেয়ার (Transport Layer), যেখানে সংযোগভিত্তিক নির্ভরযোগ্য ডেটা স্থানান্তরের জন্য TCP (Transmission Control Protocol) এবং সংযোগহীন দ্রুত ডেটা স্থানান্তরে UDP প্রোটোকল কাজ করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_2" data-session="৪৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২</span>
+            <span class="q-tag">৪৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">২. অপটিক্যাল ফাইবারে আলোর কোন ঘটনাটি ঘটে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">পূর্ণ অভ্যন্তরীণ প্রতিফলন</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">প্রতিসরণ</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">বিচ্ছুরণ</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">ব্যতিচার</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (পূর্ণ অভ্যন্তরীণ প্রতিফলন)</strong><br>অপটিক্যাল ফাইবারের কোরের মধ্য দিয়ে আলো যখন সংকট কোণের চেয়ে বেশি কোণে ক্ল্যাডিংয়ের গায়ে আপতিত হয়, তখন পূর্ণ অভ্যন্তরীণ প্রতিফলনের মাধ্যমে আলোক সংকেত কোনো ক্ষতি ছাড়াই দীর্ঘ দূরত্ব অতিক্রম করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_3" data-session="৪৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৩</span>
+            <span class="q-tag">৪৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">৩. ব্লুটুথ (Bluetooth) প্রযুক্তির আন্তর্জাতিক স্ট্যান্ডার্ড কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">IEEE 802.15.1</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">IEEE 802.11</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">IEEE 802.3</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">IEEE 802.16</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (IEEE 802.15.1)</strong><br>ব্লুটুথের ওয়্যারলেস পার্সোনাল এরিয়া নেটওয়ার্ক (WPAN) স্ট্যান্ডার্ড হলো IEEE 802.15.1। ওয়াই-ফাই হলো IEEE 802.11 এবং ওয়াইম্যাক্স হলো IEEE 802.16।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_4" data-session="৪৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৪</span>
+            <span class="q-tag">৪৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">৪. OSI মডেলের কোন লেয়ারে রাউটার (Router) কাজ করে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Network Layer (স্তর ৩)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Data Link Layer</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Transport Layer</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Physical Layer</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Network Layer)</strong><br>রাউটার একটি নেটওয়ার্কিং ডিভাইস যা আইপি অ্যাড্রেসের ওপর ভিত্তি করে নেটওয়ার্ক লেয়ার (Layer 3)-এ ডেটা প্যাকেট রাউটিং বা পথ নির্ধারণ করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_5" data-session="৪৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৫</span>
+            <span class="q-tag">৪৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">৫. MAC অ্যাড্রেস কত বিট দীর্ঘ হয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">৪৮ বিট</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">৩২ বিট</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">৬৪ বিট</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">১২৮ বিট</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (৪৮ বিট)</strong><br>MAC (Media Access Control) অ্যাড্রেস হলো নেটওয়ার্ক ইন্টারফেস কার্ডের (NIC) স্থায়ী হার্ডওয়্যার অ্যাড্রেস, যা ৪৮ বিট বা ৬ বাইট দীর্ঘ এবং ১২টি হেক্সাডেসিমেল অঙ্কে লেখা হয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_6" data-session="৪৫তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৬</span>
+            <span class="q-tag">৪৫তম বিসিএস</span>
+          </div>
+          <div class="q-text">৬. কোন টপোলজিতে কেন্দ্রীয় হাব বা সুইচ ব্যবহৃত হয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">স্টার টপোলজি (Star)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">রিং টপোলজি</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">বাস টপোলজি</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">মেশ টপোলজি</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (স্টার টপোলজি)</strong><br>স্টার টপোলজিতে প্রতিটি কম্পিউটার বা নোড আলাদা ক্যাবলের মাধ্যমে কেন্দ্রীয় ডিভাইস সুইচ বা হাবের সাথে সংযুক্ত থাকে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_7" data-session="৪৪তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৭</span>
+            <span class="q-tag">৪৪তম বিসিএস</span>
+          </div>
+          <div class="q-text">৭. মডেম (Modem) এর প্রধান কাজ কী?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">মডুলেশন ও ডিমডুলেশন</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">শুধুমাত্র সিগন্যাল বিবর্ধন</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">আইপি নির্ধারণ</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">ফাইল সংরক্ষণ</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (মডুলেশন ও ডিমডুলেশন)</strong><br>মডেম (Modulator-Demodulator) ডিজিটাল সিগন্যালকে অ্যানালগ সিগন্যালে রূপান্তর (মডুলেশন) করে এবং টেলিফোন লাইন থেকে আসা অ্যানালগ সিগন্যালকে কম্পিউটারের ডিজিটাল সিগন্যালে রূপান্তর (ডিমডুলেশন) করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_8" data-session="৪৪তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৮</span>
+            <span class="q-tag">৪৪তম বিসিএস</span>
+          </div>
+          <div class="q-text">৮. ওয়াই-ফাই (Wi-Fi)-এর স্ট্যান্ডার্ড কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">IEEE 802.11</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">IEEE 802.15</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">IEEE 802.16</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">IEEE 802.3</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (IEEE 802.11)</strong><br>ওয়াই-ফাই (Wireless Fidelity) হলো ওয়্যারলেস লোকাল এরিয়া নেটওয়ার্ক (WLAN) প্রযুক্তি, যার বৈশ্বিক প্রযুক্তিগত মান হলো IEEE 802.11।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_9" data-session="৪৪তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৯</span>
+            <span class="q-tag">৪৪তম বিসিএস</span>
+          </div>
+          <div class="q-text">৯. ডেটা একমুখী স্থানান্তরের পদ্ধতিকে কী বলে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Simplex</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Half-Duplex</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Full-Duplex</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Multiplex</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Simplex)</strong><br>সিমপ্লেক্স (Simplex) মোডে ডেটা শুধুমাত্র একদিকে প্রবাহিত হয়, যেমন- কীবোর্ড থেকে সিপিইউ, রেডিও বা টেলিভিশন সম্প্রচার।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_10" data-session="৪৩তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১০</span>
+            <span class="q-tag">৪৩তম বিসিএস</span>
+          </div>
+          <div class="q-text">১০. ওয়াকিটকিতে কোন মোডে ডেটা স্থানান্তর হয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Half-Duplex</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Full-Duplex</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Simplex</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Multiplex</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Half-Duplex)</strong><br>হাফ-ডুপ্লেক্স মোডে উভয় দিক থেকে ডেটা পাঠানো যায় কিন্তু একই সাথে নয়; এক পক্ষ কথা বলা শেষ করে "Over" বললে অপর পক্ষ কথা বলতে পারে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_11" data-session="৪৩তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১১</span>
+            <span class="q-tag">৪৩তম বিসিএস</span>
+          </div>
+          <div class="q-text">১১. মোবাইল ফোনের কথোপকথন কোন ডেটা ট্রান্সমিশন মোডের উদাহরণ?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Full-Duplex</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Half-Duplex</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Simplex</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Broadband</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Full-Duplex)</strong><br>ফুল-ডুপ্লেক্স মোডে একই সাথে উভয় পক্ষ ডেটা পাঠাতে ও গ্রহণ করতে পারে, যেমন- টেলিফোন ও মোবাইল ফোনের কথোপকথন।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_12" data-session="৪৩তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১২</span>
+            <span class="q-tag">৪৩তম বিসিএস</span>
+          </div>
+          <div class="q-text">১২. ক্লাউড কম্পিউটিংয়ে নেটওয়ার্ক সুইচের পরিবর্তে কোন লেয়ার ২ ডিভাইস নেটওয়ার্ককে খণ্ড খণ্ড করতে পারে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Bridge</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Repeater</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Hub</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Amplifier</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Bridge)</strong><br>ব্রিজ (Bridge) ডেটা লিংক লেয়ারে (লেয়ার ২) ম্যাক ঠিকানার ওপর ভিত্তি করে দুটি পৃথক ল্যান সেগমেন্টকে সংযুক্ত ও ফিল্টার করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_13" data-session="৪১তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৩</span>
+            <span class="q-tag">৪১তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৩. অপটিক্যাল ফাইবার তারের সবচেয়ে ভেতরের স্তরটির নাম কী?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">কোর (Core)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">ক্ল্যাডিং (Cladding)</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">বাফার (Buffer)</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">জ্যাকেট (Jacket)</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (কোর)</strong><br>অপটিক্যাল ফাইবারের একেবারে কেন্দ্রীয় কাঁচের তৈরি অংশকে কোর (Core) বলে, যার মধ্য দিয়ে সরাসরি আলো প্রবাহিত হয়। কোরের ওপরের আবরণ হলো ক্ল্যাডিং।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_14" data-session="৪১তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৪</span>
+            <span class="q-tag">৪১তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৪. LAN-এর পূর্ণরূপ কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Local Area Network</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Large Area Network</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Logical Access Node</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Link Access Network</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Local Area Network)</strong><br>একটি নির্দিষ্ট ভবন, কক্ষ বা ক্যাম্পাসের কম্পিউটারগুলোর মধ্যে গঠিত নেটওয়ার্ক হলো লোকাল এরিয়া নেটওয়ার্ক (LAN)।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_15" data-session="৪১তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৫</span>
+            <span class="q-tag">৪১তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৫. WiMAX কোন ধরনের নেটওয়ার্কের অন্তর্ভুক্ত?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">WMAN (Wireless Metropolitan Area Network)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">WPAN</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">WLAN</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">WWAN</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (WMAN)</strong><br>WiMAX (Worldwide Interoperability for Microwave Access) পুরো শহর বা মেট্রোপলিটন অঞ্চলে ব্রডব্যান্ড ওয়্যারলেস সেবা দেয়, ফলে এটি WMAN।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_16" data-session="৪০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৬</span>
+            <span class="q-tag">৪০তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৬. OSI রেফারেন্স মডেলে মোট কয়টি স্তর (Layers) রয়েছে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">৭টি</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">৪টি</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">৫টি</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">৬টি</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (৭টি)</strong><br>আন্তর্জাতিক মান সংস্থা (ISO) প্রণীত ওপেন সিস্টেম ইন্টারকানেকশন (OSI) মডেলে মোট ৭টি স্তর রয়েছে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_17" data-session="৪০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৭</span>
+            <span class="q-tag">৪০তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৭. ভিন্ন ভিন্ন প্রোটোকল বিশিষ্ট দুটি স্বতন্ত্র নেটওয়ার্ককে সংযুক্ত করতে কোন ডিভাইসটি প্রয়োজন?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Gateway</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Bridge</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Switch</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Hub</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Gateway)</strong><br>গেটওয়ে (Gateway) সম্পূর্ণ ভিন্ন নেটওয়ার্ক আর্কিটেকচার ও ভিন্ন প্রোটোকলযুক্ত নেটওয়ার্কগুলোর মধ্যে প্রোটোকল কনভার্সন করে সংযোগ স্থাপন করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_18" data-session="৪০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৮</span>
+            <span class="q-tag">৪০তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৮. দুর্বল হয়ে যাওয়া নেটওয়ার্ক সংকেতকে বিবর্ধিত (Amplify) করে পুনরায় প্রেরণ করে কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">রিপিটার (Repeater)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">মডেম</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">রাউটার</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">হাব</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (রিপিটার)</strong><br>ফিজিক্যাল লেয়ারে দীর্ঘ দূরত্বে পরিবাহিত সংকেতের অ্যাটেন্যুয়েশন বা ক্ষয় রোধে রিপিটার সংকেত গ্রহণ করে তাকে বর্ধিত ও শক্তিশালী করে পাঠায়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_19" data-session="৩৮তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৯</span>
+            <span class="q-tag">৩৮তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৯. কোন নেটওয়ার্ক টপোলজিতে প্রতিটি নোড সরাসরি অন্য সকল নোডের সাথে সংযুক্ত থাকে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">মেশ টপোলজি (Mesh)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">রিং টপোলজি</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">স্টার টপোলজি</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">ট্রি টপোলজি</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (মেশ টপোলজি)</strong><br>সম্পূর্ণ মেশ টপোলজিতে প্রতিটি কম্পিউটার অপর সকল কম্পিউটারের সাথে পৃথক পৃথক ক্যাবল দিয়ে যুক্ত থাকে। নোড সংখ্যা n হলে লিংকের সংখ্যা n(n-1)/2।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_20" data-session="৩৮তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২০</span>
+            <span class="q-tag">৩৮তম বিসিএস</span>
+          </div>
+          <div class="q-text">২০. মোবাইল নেটওয়ার্কে 4G-এর প্রধান বৈশিষ্ট্য কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">আইপি ভিত্তিক সম্পূর্ণ ডিজিটাল নেটওয়ার্ক (LTE)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">অ্যানালগ যোগাযোগ</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">শুধুমাত্র ভয়েস কল</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">সার্কিট সুইচিং</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (আইপি ভিত্তিক সম্পূর্ণ ডিজিটাল নেটওয়ার্ক)</strong><br>চতুর্থ প্রজন্মের (4G LTE) মোবাইল নেটওয়ার্ক হলো সম্পূর্ণ আইপি-ভিত্তিক (All-IP Packet Switching) নেটওয়ার্ক, যা অত্যন্ত উচ্চগতির মোবাইল ইন্টারনেট প্রদান করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_21" data-session="৩৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২১</span>
+            <span class="q-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">২১. টুইস্টেড পেয়ার ক্যাবলে তারগুলো পেঁচানো থাকে কেন?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">ইলেক্ট্রোম্যাগনেটিক ইন্টারফেয়ারেন্স (EMI) ও ক্রসটক কমাতে</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">তারের শক্তি বাড়াতে</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">বিদ্যুৎ সঞ্চালন বাড়াতে</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">সহজে বাঁকানোর জন্য</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (ইলেক্ট্রোম্যাগনেটিক ইন্টারফেয়ারেন্স ও ক্রসটক কমাতে)</strong><br>টুইস্টেড পেয়ার ক্যাবলে দুটি তামার তার পরস্পর পেঁচানো থাকলে বাহ্যিক তড়িৎচৌম্বকীয় ব্যতিচার এবং পাশাপাশি তারের ক্রসটক বাতিল হয়ে যায়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_22" data-session="৩৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২২</span>
+            <span class="q-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">২২. নেটওয়ার্কে ডাটা প্যাকেটের গন্তব্য ঠিকানায় পৌঁছানোর সবচেয়ে অনুকূল পথ কোনটি তা নির্ধারণ করে কে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Router</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Hub</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Switch</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">NIC</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Router)</strong><br>রাউটার তার রাউটিং টেবিল ও অ্যালগরিদমের মাধ্যমে নেটওয়ার্ক ট্রাফিকের শর্টেস্ট ও সবচেয়ে দ্রুততম পথ নির্ধারণ করে প্যাকেট ফরোয়ার্ড করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_23" data-session="৩৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২৩</span>
+            <span class="q-tag">৩৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">২৩. ব্লুটুথের ফ্রিকোয়েন্সি ব্যান্ড কত?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">২.৪ GHz ISM ব্যান্ড</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">৫ GHz</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">৯০০ MHz</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">৬০ GHz</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (২.৪ GHz ISM ব্যান্ড)</strong><br>ব্লুটুথ ২.৪ গিগাহার্টজ (2.402 GHz থেকে 2.480 GHz) লাইসেন্সমুক্ত ISM (Industrial, Scientific, and Medical) ফ্রিকোয়েন্সি ব্যান্ড ব্যবহার করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_24" data-session="৩৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২৪</span>
+            <span class="q-tag">৩৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">২৪. হাবের (Hub) তুলনায় সুইচের (Switch) প্রধান সুবিধা কী?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">সুইচ শুধুমাত্র নির্দিষ্ট প্রাপক নোডেই ফ্রেম পাঠায় (ইউনিকাস্ট)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">সুইচ সব পোর্টে ব্রডকাস্ট করে</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">সুইচের দাম কম</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">সুইচে তার লাগে না</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (সুইচ শুধুমাত্র নির্দিষ্ট প্রাপক নোডেই ফ্রেম পাঠায়)</strong><br>হাব হলো একটি বোকা ডিভাইস যা সব পোর্টে ব্রডকাস্ট করে কলিশন বাড়ায়। অপরদিকে সুইচ ম্যাক ঠিকানা মনে রেখে সরাসরি নির্দিষ্ট পোর্টে ডেটা পাঠায়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_25" data-session="৩৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২৫</span>
+            <span class="q-tag">৩৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">২৫. ক্লায়েন্ট-সার্ভার নেটওয়ার্কে সার্ভার কম্পিউটারের প্রধান কাজ কী?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">ক্লায়েন্টের অনুরোধ অনুযায়ী কেন্দ্রীয় রিসোর্স ও সেবা প্রদান করা</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">ক্লায়েন্ট থেকে সেবা গ্রহণ করা</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">ইন্টারনেট বন্ধ রাখা</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">শুধুমাত্র টাইপ করা</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (ক্লায়েন্টের অনুরোধ অনুযায়ী কেন্দ্রীয় রিসোর্স ও সেবা প্রদান করা)</strong><br>সার্ভার হলো একটি উচ্চ ক্ষমতাসম্পন্ন কম্পিউটার যা নেটওয়ার্কের ক্লায়েন্ট কম্পিউটারগুলোকে ওয়েব, ইমেইল, ফাইল ও ডেটাবেজ রিসোর্স সরবরাহ করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_26" data-session="৩৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২৬</span>
+            <span class="q-tag">৩৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">২৬. অপটিক্যাল ফাইবারের সবচেয়ে বাইরের প্রতিরক্ষামূলক প্লাস্টিক আবরণকে কী বলে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">জ্যাকেট (Outer Jacket)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">কোর</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">ক্ল্যাডিং</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">সিলিকন</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (জ্যাকেট)</strong><br>ফাইবারের অভ্যন্তরীণ সূক্ষ্ম কাঁচের কোর ও ক্ল্যাডিংকে আর্দ্রতা, চাপ ও আঘাত থেকে রক্ষা করতে বাইরের শক্ত প্লাস্টিক আবরণকে জ্যাকেট বলা হয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_27" data-session="৩৫তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২৭</span>
+            <span class="q-tag">৩৫তম বিসিএস</span>
+          </div>
+          <div class="q-text">২৭. একটি শহর বা মেট্রোপলিটন এলাকা জুড়ে বিস্তৃত নেটওয়ার্ককে কী বলা হয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">MAN (Metropolitan Area Network)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">LAN</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">PAN</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">WAN</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (MAN)</strong><br>একটি সম্পূর্ণ শহরের বিভিন্ন শাখা অফিস বা কেবল টিভি নেটওয়ার্ককে সংযুক্তকারী মাঝারি নেটওয়ার্ক হলো মেট্রোপলিটন এরিয়া নেটওয়ার্ক (MAN)।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q8_28" data-session="৩২তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২৮</span>
+            <span class="q-tag">৩২তম বিসিএস</span>
+          </div>
+          <div class="q-text">২৮. মডেম-এর মধ্যে যা থাকে তা হলো-</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">একটি মডুলেটর ও একটি ডিমডুলেটর</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">একটি মডুলেটর</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">একটি কোডেক</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">একটি এনকোডার</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (একটি মডুলেটর ও একটি ডিমডুলেটর)</strong><br>Modem শব্দটি এসেছে MOdulator এবং DEModulator-এর সংক্ষিপ্ত রূপ থেকে। এর ভেতর অ্যানালগ সংকেত তৈরি এবং পুনরুদ্ধারের দুটি সার্কিট একসাথে থাকে।
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <nav class="ch-nav-bottom">
+      <div><a href="ইন্টারনেট সংক্রান্ত বিষয়.html" class="nav-arrow">← পূর্ববর্তী অধ্যায়</a></div>
+      <div><a href="index.html" class="nav-arrow"><i class="fa-solid fa-house"></i> সূচিপত্র</a></div>
+      <div><a href="দৈনন্দিন জীবনে তথ্য-প্রযুক্তি (ইমেইল, স্মার্টফোন ইত্যাদি).html" class="nav-arrow">পরবর্তী অধ্যায় →</a></div>
+    </nav>
+
+    
+
+    <!-- Universal Footer -->
+    <footer>
+      <p>বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ ডিজিটাল প্রশ্নব্যাংক • সাধারণ বিজ্ঞান ও তথ্যপ্রযুক্তি শাখা</p>
+      <p style="margin-top: 0.5rem; font-size: 0.85rem;">হস্তলিপি ও বাস্তবসম্মত পেপার টেক্সচার সহযোগে নির্মিত ইন্টারঅ্যাক্টিভ সংস্করণ</p>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle
+    const themeBtn = document.getElementById('btn-theme');
+    const htmlElem = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    htmlElem.setAttribute('data-theme', savedTheme);
+    themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+    themeBtn.addEventListener('click', () => {
+      const cur = htmlElem.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      htmlElem.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+
+    // Font size scaling
+    let scale = parseFloat(localStorage.getItem('font-scale') || '1');
+    applyScale(scale);
+
+    document.getElementById('btn-inc').addEventListener('click', () => {
+      if (scale < 1.3) { scale += 0.08; applyScale(scale); }
+    });
+    document.getElementById('btn-dec').addEventListener('click', () => {
+      if (scale > 0.85) { scale -= 0.08; applyScale(scale); }
+    });
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      scale = 1.0; applyScale(scale);
+    });
+
+    function applyScale(s) {
+      document.documentElement.style.setProperty('--font-scale', s);
+      localStorage.setItem('font-scale', s);
+    }
+
+    // Quiz Engine
+    let currentScore = 0;
+    const answeredCards = new Set();
+    const scoreElem = document.getElementById('score-counter');
+
+    function toBnNum(num) {
+      const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+      return num.toString().split('').map(d => bnDigits[parseInt(d)] || d).join('');
+    }
+
+    document.querySelectorAll('.q-card').forEach(card => {
+      const cardId = card.id;
+      const optBtns = card.querySelectorAll('.opt-btn');
+      const ansDrawer = card.querySelector('.ans-drawer');
+
+      optBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (answeredCards.has(cardId)) return;
+          answeredCards.add(cardId);
+
+          const isCorrect = btn.getAttribute('data-answer') === 'true';
+          if (isCorrect) {
+            btn.classList.add('correct');
+            currentScore++;
+            scoreElem.textContent = toBnNum(currentScore);
+          } else {
+            btn.classList.add('wrong');
+            // highlight correct option
+            optBtns.forEach(b => {
+              if (b.getAttribute('data-answer') === 'true') {
+                b.classList.add('correct');
+              }
+            });
+          }
+
+          // disable all option buttons in this card
+          optBtns.forEach(b => b.disabled = true);
+
+          // reveal explanation drawer
+          if (ansDrawer) ansDrawer.style.display = 'block';
+        });
+      });
+    });
+
+    document.getElementById('btn-quiz-reset').addEventListener('click', () => {
+      answeredCards.clear();
+      currentScore = 0;
+      scoreElem.textContent = '০';
+      document.querySelectorAll('.q-card').forEach(card => {
+        card.querySelectorAll('.opt-btn').forEach(btn => {
+          btn.disabled = false;
+          btn.classList.remove('correct', 'wrong');
+        });
+        const drawer = card.querySelector('.ans-drawer');
+        if (drawer) drawer.style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>

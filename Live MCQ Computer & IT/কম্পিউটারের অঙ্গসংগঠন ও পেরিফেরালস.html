@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>অধ্যায় ০১: কম্পিউটারের অঙ্গসংগঠন ও পেরিফেরালস - বিসিএস প্রিলিমিনারি ই-বুক</title>
+  <link rel="stylesheet" href="paper-textures.css">
+  <link rel="stylesheet" href="bangla-fonts.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4338ca;
+      --primary-light: #e0e7ff;
+      --primary-dark: #3730a3;
+      --accent: #0284c7;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(67, 56, 202, 0.2);
+      --font-scale: 1;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 24px rgba(67, 56, 202, 0.12);
+      
+      --bg-surface: rgba(255, 255, 255, 0.86);
+      --bg-card: rgba(255, 255, 255, 0.84);
+    }
+
+    [data-theme="dark"] {
+      --primary: #818cf8;
+      --primary-light: rgba(129, 140, 248, 0.15);
+      --primary-dark: #4338ca;
+      --accent: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(129, 140, 248, 0.22);
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+      
+      --bg-surface: rgba(15, 23, 42, 0.86);
+      --bg-card: rgba(23, 23, 38, 0.84);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.7;
+      color: var(--text-main);
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 5rem 1rem;
+    }
+
+    /* Top Bar Navigation */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      background: var(--bg-surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-main);
+      text-decoration: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-sm);
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      transition: all 0.2s;
+    }
+
+    [data-theme="dark"] .nav-btn {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .control-btn {
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.7rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+
+    [data-theme="dark"] .control-btn {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .control-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* Chapter Header */
+    .chapter-header {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .chapter-header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .ch-pre {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .ch-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.35;
+      margin-bottom: 0.75rem;
+    }
+
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .ch-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .ch-badge {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .ch-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* BCS Analysis Table */
+    .bcs-table-wrapper {
+      overflow-x: auto;
+      margin-bottom: 2rem;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .bcs-table th, .bcs-table td {
+      padding: 0.65rem 0.75rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .bcs-table th {
+      color: var(--primary);
+    }
+
+    /* Sketchnote Section (Part 1) */
+    .notes-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .sec-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
+      color: var(--primary);
+    }
+
+    .sk-box {
+      background: var(--bg-card);
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .sk-box-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sk-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+      font-size: 0.92rem;
+    }
+
+    .sk-table th, .sk-table td {
+      padding: 0.6rem 0.8rem;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .sk-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    [data-theme="dark"] .sk-table th {
+      color: var(--primary);
+    }
+
+    .sk-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .sk-list li {
+      position: relative;
+      padding-left: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .sk-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0.3rem;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .sk-sticky {
+      background: rgba(254, 240, 138, 0.4);
+      border-left: 4px solid #eab308;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    [data-theme="dark"] .sk-sticky {
+      background: rgba(234, 179, 8, 0.15);
+      border-left-color: #facc15;
+    }
+
+    /* Quiz Engine & Typography Protection (Part 2) */
+    .quiz-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .quiz-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      background: var(--bg-surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .score-badge {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .reset-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .reset-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+    .bcs-table, .bcs-table *, .score-bar, .score-bar *, .doubt-box, .doubt-box * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .q-num {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+
+    .q-tag {
+      background: rgba(0, 0, 0, 0.05);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      color: var(--text-muted);
+    }
+
+    [data-theme="dark"] .q-tag {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .options-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      width: 100%;
+      text-align: left;
+      padding: 0.75rem 1rem;
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      transition: all 0.2s;
+    }
+
+    [data-theme="dark"] .opt-btn {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    [data-theme="dark"] .opt-letter {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .opt-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .opt-btn.correct {
+      background: rgba(34, 197, 94, 0.2) !important;
+      color: #4ade80 !important;
+    }
+
+    .opt-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+
+    [data-theme="dark"] .opt-btn.wrong {
+      background: rgba(239, 68, 68, 0.2) !important;
+      color: #f87171 !important;
+    }
+
+    /* Answer Drawer */
+    .ans-drawer {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border-color);
+      display: none;
+    }
+
+    .ans-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-content {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    /* Bottom Navigation */
+    .ch-nav-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3rem;
+      background: var(--bg-surface);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-arrow {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.2s;
+    }
+
+    .nav-arrow:hover {
+      transform: translateX(3px);
+    }
+
+    .nav-arrow:first-child:hover {
+      transform: translateX(-3px);
+    }
+
+    /* Bibliography & Footer */
+    .biblio-box {
+      margin-top: 3rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .biblio-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 0.5rem;
+    }
+
+    .biblio-list {
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="container paper-container paper-old-aged font-nirlipta">
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+      <div class="nav-left">
+        <a href="index.html" class="nav-btn"><i class="fa-solid fa-list-ul"></i> বিষয় সূচিপত্র</a>
+      </div>
+      <div class="controls">
+        <button class="control-btn" id="btn-dec" title="ফন্ট ছোট করুন">A-</button>
+        <button class="control-btn" id="btn-reset" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="control-btn" id="btn-inc" title="ফন্ট বড় করুন">A+</button>
+        <button class="control-btn" id="btn-theme" title="থিম পরিবর্তন">🌙</button>
+      </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+      <span class="ch-pre">কম্পিউটার ও তথ্যপ্রযুক্তি • অধ্যায় ০১</span>
+      <h1 class="ch-title font-nirlipta">
+        কম্পিউটারের অঙ্গসংগঠন ও পেরিফেরালস
+        <span class="ch-en">(Computer Organization & Peripherals)</span>
+      </h1>
+      <div class="ch-meta">
+        <span><i class="fa-solid fa-file-lines"></i> পৃষ্ঠা: ৮৩১-৮৩৮</span>
+        <span class="ch-badge"><i class="fa-solid fa-circle-question"></i> মোট প্রশ্ন: ৩৩ টি</span>
+      </div>
+    </header>
+
+    <!-- BCS Analysis Matrix -->
+    
+<div class="bcs-table-wrapper">
+  <table class="bcs-table">
+    <thead>
+      <tr><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>৫০তম</td><td>২</td><td>৪৪তম</td><td>২</td><td>৩৮তম</td><td>২</td></tr>
+      <tr><td>৪৯তম</td><td>০</td><td>৪৩তম</td><td>৩</td><td>৩৭তম</td><td>২</td></tr>
+      <tr><td>৪৮তম</td><td>০</td><td>৪২তম</td><td>০</td><td>৩৬তম</td><td>৬</td></tr>
+      <tr><td>৪৭তম</td><td>৪</td><td>৪১তম</td><td>০</td><td>৩৫তম</td><td>৫</td></tr>
+      <tr><td>৪৬তম</td><td>২</td><td>৪০তম</td><td>৩</td><td>১০ম-৩৪তম</td><td>১</td></tr>
+      <tr><td>৪৫তম</td><td>৩</td><td>৩৯তম</td><td>০</td><td><strong>সর্বমোট</strong></td><td><strong>৩৩</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+    <!-- Part 1: Authentic Sketchnotes & Revision Notes -->
+    <section class="notes-section">
+      <h2 class="sec-heading font-nirlipta"><i class="fa-solid fa-lightbulb"></i> প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি</h2>
+      
+<div class="sk-box">
+  <div class="sk-box-title">🖥️ কম্পিউটারের মৌলিক ব্লক ডায়াগ্রাম ও সংগঠন</div>
+  <table class="sk-table">
+    <thead><tr><th>অংশ</th><th>প্রধান কাজ</th><th>উপাদানসমূহ</th></tr></thead>
+    <tbody>
+      <tr><td><strong>সেন্ট্রাল প্রসেসিং ইউনিট (CPU)</strong></td><td>কম্পিউটারের মস্তিষ্ক; সমস্ত নির্দেশ বিশ্লেষণ ও সম্পাদন</td><td>ALU, Control Unit (CU), Registers</td></tr>
+      <tr><td><strong>ALU (Arithmetic Logic Unit)</strong></td><td>গাণিতিক (+, -, *, /) এবং যৌক্তিক (&lt;, &gt;, =) কাজ সম্পন্ন করে</td><td>অ্যাডার, শিফটার, লজিক সার্কিট</td></tr>
+      <tr><td><strong>কন্ট্রোল ইউনিট (CU)</strong></td><td>নির্দেশনা ফেচ (Fetch), ডিকোড (Decode) ও নিয়ন্ত্রণ সংকেত প্রদান</td><td>টাইমিং ও কন্ট্রোল লজিক</td></tr>
+      <tr><td><strong>রেজিস্টার (Register)</strong></td><td>সিপিইউ-এর অভ্যন্তরে অবস্থিত দ্রুততম মেমোরি</td><td>PC (Program Counter), IR, Accumulator, MAR, MBR</td></tr>
+      <tr><td><strong>সিস্টেম বাস (System Bus)</strong></td><td>ডিভাইসসমূহের মধ্যে সংকেত ও ডেটা চলাচলের পথ</td><td>Data Bus (দ্বিমুখী), Address Bus (একমুখী), Control Bus</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="sk-box">
+  <div class="sk-box-title">⌨️ ইনপুট ও আউটপুট পেরিফেরালস</div>
+  <ul class="sk-list">
+    <li><strong>ইনপুট ডিভাইস:</strong> কিবোর্ড, মাউস, স্ক্যানার, OCR (Optical Character Reader), OMR (Optical Mark Reader), MICR (Magnetic Ink Character Recognition - চেক বইয়ে ব্যবহৃত), বারকোড রিডার, জয়স্টিক, লাইটপেন, মাইক্রোফোন।</li>
+    <li><strong>আউটপুট ডিভাইস:</strong> মনিটর (CRT, LCD, LED, OLED), প্রিন্টার (ইমপ্যাক্ট - ডট ম্যাট্রিক্স; নন-ইমপ্যাক্ট - লেজার, ইঙ্কজেট), প্লটার (মানচিত্র ও বড় ড্রয়িং ছাপতে), স্পিকার, প্রজেক্টর।</li>
+    <li><strong>উভয়মুখী (I/O) ডিভাইস:</strong> টাচস্ক্রিন মনিটর, মডেম, নেটওয়ার্ক ইন্টারফেস কার্ড (NIC), সাউন্ড কার্ড, হেডসেট।</li>
+  </ul>
+</div>
+
+<div class="sk-sticky">
+  📌 <strong>মেমোরি স্পিড হায়ারার্কি:</strong> Registers (দ্রুততম) ➔ Cache Memory (L1, L2, L3) ➔ RAM (Primary Memory) ➔ SSD/Flash ➔ Magnetic Hard Disk ➔ Magnetic Tape (সবচেয়ে ধীর)।
+</div>
+
+    </section>
+
+    <!-- Part 2: Interactive Past Exam Question Engine -->
+    <section class="quiz-section">
+      <div class="quiz-toolbar">
+        <h2 class="sec-heading" style="margin-bottom:0; font-size:1.15rem;"><i class="fa-solid fa-circle-check"></i> প্রামাণ্য প্রশ্নব্যাংক ও কুইজ</h2>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <span class="score-badge">স্কোর: <span id="score-counter">০</span> / ৩৩</span>
+          <button class="reset-btn" id="btn-quiz-reset"><i class="fa-solid fa-rotate-left"></i> রিসেট</button>
+        </div>
+      </div>
+      <div class="quiz-cards-container">
+        
+        <div class="q-card" id="q1_1" data-session="৫০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১</span>
+            <span class="q-tag">৫০তম বিসিএস</span>
+          </div>
+          <div class="q-text">১. OCR — থেকে — এ রূপান্তরের জন্য ব্যবহার করা হয়।</div>
+          <div class="options-grid">
+            <button class="opt-btn"><span class="opt-letter">ক</span> <span class="opt-txt">অডিও হতে টেক্সট</span></button>
+<button class="opt-btn" data-answer="true"><span class="opt-letter">খ</span> <span class="opt-txt">ইমেজ হতে টেক্সট</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">ভিডিও হতে টেক্সট</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">বাইনারি হতে ডেসিমেল</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: খ (ইমেজ হতে টেক্সট)</strong><br>OCR (Optical Character Recognition) একটি প্রযুক্তি যা স্ক্যান করা কাগজের ডকুমেন্ট, ছবি বা পিডিএফ-এর ইমেজ টেক্সটকে কম্পিউটারে সম্পাদনাযোগ্য (editable) ডিজিটাল টেক্সটে রূপান্তর করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_2" data-session="৫০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২</span>
+            <span class="q-tag">৫০তম বিসিএস</span>
+          </div>
+          <div class="q-text">২. 'Pixel' দ্বারা কী বুঝায়?</div>
+          <div class="options-grid">
+            <button class="opt-btn"><span class="opt-letter">ক</span> <span class="opt-txt">Pixie land</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Person length</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Pixure length</span></button>
+<button class="opt-btn" data-answer="true"><span class="opt-letter">ঘ</span> <span class="opt-txt">Picture element</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ঘ (Picture element)</strong><br>'Pixel' শব্দটি 'Picture Element' থেকে এসেছে। এটি ডিজিটাল স্ক্রিন বা ছবির প্রদর্শনের ক্ষুদ্রতম অবিভাজ্য একক।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_3" data-session="৪৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৩</span>
+            <span class="q-tag">৪৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">৩. কোনটি ইনপুট ও আউটপুট উভয় ডিভাইস হিসেবে কাজ করে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">টাচ স্ক্রিন</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">মাউস</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">প্রিন্টার</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">কিবোর্ড</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (টাচ স্ক্রিন)</strong><br>টাচ স্ক্রিনের মাধ্যমে ব্যবহারকারী পর্দায় স্পর্শ করে ইনপুট দেয় এবং একই স্ক্রিনে ভিজ্যুয়াল তথ্য আউটপুট আকারে দেখতে পায়। ফলে এটি ইনপুট ও আউটপুট উভয় ডিভাইস।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_4" data-session="৪৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৪</span>
+            <span class="q-tag">৪৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">৪. নিচের কোনটি কম্পিউটারের প্রাইমারি মেমোরি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">RAM</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Hard Disk</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Pen drive</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">CD-ROM</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (RAM)</strong><br>RAM (Random Access Memory) এবং ROM হলো কম্পিউটারের প্রধান বা প্রাইমারি মেমোরি। হার্ডডিস্ক, পেনড্রাইভ ও সিডি-রম হলো সেকেন্ডারি বা সহায়ক স্টোরেজ।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_5" data-session="৪৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৫</span>
+            <span class="q-tag">৪৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">৫. কম্পিউটারের প্রসেসরের অভ্যন্তরীণ মেমোরি কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Register</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">RAM</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Hard Disk</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">ROM</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Register)</strong><br>রেজিস্টার হলো সরাসরি প্রসেসর বা সিপিইউ-এর ভেতরে থাকা ক্ষুদ্রতম ও দ্রুততম মেমোরি, যা অস্থায়ীভাবে ডেটা ও নির্দেশনা ধারণ করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_6" data-session="৪৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৬</span>
+            <span class="q-tag">৪৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">৬. ক্যাশ মেমোরি (Cache Memory) কোথায় অবস্থান করে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">CPU ও RAM-এর মাঝে</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">RAM ও ROM-এর মাঝে</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">CPU ও Hard Disk-এর মাঝে</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">মাদারবোর্ডের বাইরে</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (CPU ও RAM-এর মাঝে)</strong><br>সিপিইউ এবং মূল মেমোরি (RAM)-এর কাজের গতির ভারসাম্য রক্ষার জন্য এ দুটির মধ্যবর্তী স্থানে অত্যন্ত দ্রুতগতির ক্যাশ মেমোরি স্থাপন করা হয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_7" data-session="৪৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৭</span>
+            <span class="q-tag">৪৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">৭. কোনটি মুদ্রণ বা প্রিন্টারের রেজুলেশন পরিমাপের একক?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">DPI</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">PPM</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">BPS</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Hertz</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (DPI)</strong><br>প্রিন্টারের রেজুলেশন বা প্রিন্টের সূক্ষ্মতা পরিমাপ করা হয় DPI (Dots Per Inch) এককে। অন্যদিকে প্রিন্টারের গতি পরিমাপ করা হয় PPM (Pages Per Minute) এককে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_8" data-session="৪৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৮</span>
+            <span class="q-tag">৪৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">৮. কম্পিউটারের মস্তিষ্ক হিসেবে কাজ করে কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">CPU</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Hard Disk</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">RAM</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Motherboard</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (CPU)</strong><br>CPU (Central Processing Unit) কম্পিউটারের সমস্ত গণনা, যৌক্তিক সিদ্ধান্ত গ্রহণ এবং নিয়ন্ত্রণ সম্পন্ন করে বলে একে কম্পিউটারের মস্তিষ্ক (Brain of Computer) বলা হয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_9" data-session="৪৫তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৯</span>
+            <span class="q-tag">৪৫তম বিসিএস</span>
+          </div>
+          <div class="q-text">৯. ব্যাংকের চেকে ব্যবহৃত বিশেষ চৌম্বকীয় কালি শনাক্ত করতে কোনটি ব্যবহৃত হয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">MICR</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">OMR</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">OCR</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Barcode Reader</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (MICR)</strong><br>MICR (Magnetic Ink Character Recognition) প্রযুক্তি ব্যাংকের চেক নম্বরে ব্যবহৃত আয়রন অক্সাইডযুক্ত বিশেষ চৌম্বকীয় কালি স্ক্যান ও যাচাই করতে ব্যবহৃত হয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_10" data-session="৪৫তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১০</span>
+            <span class="q-tag">৪৫তম বিসিএস</span>
+          </div>
+          <div class="q-text">১০. কম্পিউটারের বাস (Bus) বলতে কী বোঝায়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">ডেটা স্থানান্তরের তার বা পথ</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">একটি বড় সফটওয়্যার</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">একটি এক্সটার্নাল ড্রাইভ</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">বিদ্যুৎ সরবরাহের তার</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (ডেটা স্থানান্তরের তার বা পথ)</strong><br>কম্পিউটারের অভ্যন্তরীণ বিভিন্ন অংশের (যেমন- সিপিইউ, মেমোরি, আই/ও ডিভাইস) মধ্যে ডেটা, ঠিকানা ও নিয়ন্ত্রণ সংকেত পরিবহনের সমান্তরাল পরিবাহী লাইন বা পরিবাহী পথকে বাস (Bus) বলে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_11" data-session="৪৫তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১১</span>
+            <span class="q-tag">৪৫তম বিসিএস</span>
+          </div>
+          <div class="q-text">১১. RAM কোন ধরনের মেমোরি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">অস্থায়ী ও উদ্বায়ী (Volatile)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">স্থায়ী ও অনুদ্বায়ী (Non-volatile)</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">শুধুমাত্র পাঠযোগ্য</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">সেকেন্ডারি মেমোরি</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (অস্থায়ী ও উদ্বায়ী (Volatile))</strong><br>RAM একটি ভোলাটাইল (উদ্বায়ী) মেমোরি। বিদ্যুৎ সরবরাহ বন্ধ হয়ে গেলে এতে থাকা সমস্ত সংরক্ষিত তথ্য তাৎক্ষণিকভাবে মুছে যায়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_12" data-session="৪৪তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১২</span>
+            <span class="q-tag">৪৪তম বিসিএস</span>
+          </div>
+          <div class="q-text">১২. আধুনিক কম্পিউটারের দ্রুতগতির ফ্ল্যাশ মেমোরি স্টোরেজ কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">SSD</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">HDD</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Floppy Disk</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Magnetic Tape</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (SSD)</strong><br>SSD (Solid State Drive) কোনো ঘূর্ণায়মান যান্ত্রিক ডিস্ক ছাড়াই সেমিকন্ডাক্টর ফ্ল্যাশ মেমোরি চিপের মাধ্যমে কাজ করে, যা প্রচলিত মেকানিক্যাল HDD-এর চেয়ে বহুগুণ দ্রুত।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_13" data-session="৪৪তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৩</span>
+            <span class="q-tag">৪৪তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৩. প্রসেসরের কাজের গতি পরিমাপের একক কী?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Gigahertz (GHz)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Gigabyte (GB)</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">DPI</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">BPS</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Gigahertz (GHz))</strong><br>প্রসেসরের ঘড়ির গতি (Clock Speed) হার্টজ (Hz), মেগাহার্টজ (MHz) বা গিগাহার্টজ (GHz) এককে পরিমাপ করা হয়। প্রতি সেকেন্ডে কত কোটি ক্লক সাইকেল সম্পন্ন হয় তা এর দ্বারা নির্ধারিত হয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_14" data-session="৪৩তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৪</span>
+            <span class="q-tag">৪৩তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৪. ALU-এর পূর্ণরূপ কী?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Arithmetic Logic Unit</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Array Logic Unit</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Application Level Unit</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Analog Logic Unit</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Arithmetic Logic Unit)</strong><br>ALU-এর পূর্ণরূপ Arithmetic Logic Unit (গাণিতিক যুক্তি অংশ)। এটি সিপিইউ-এর অভ্যন্তরে সমস্ত গাণিতিক যোগ-বিয়োগ ও যৌক্তিক তুলনা সম্পন্ন করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_15" data-session="৪৩তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৫</span>
+            <span class="q-tag">৪৩তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৫. নিচের কোনটি আউটপুট ডিভাইস নয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">মাইক্রোফোন</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">প্লটার</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">মনিটর</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">স্পিকার</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (মাইক্রোফোন)</strong><br>মাইক্রোফোন মানুষের শব্দ বা অডিও সংকেতকে বৈদ্যুতিক ডিজিটাল তরঙ্গে রূপান্তর করে কম্পিউটারে ইনপুট দেয়। প্লটার, মনিটর ও স্পিকার আউটপুট ডিভাইস।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_16" data-session="৪৩তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৬</span>
+            <span class="q-tag">৪৩তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৬. ব্লু-রে ডিস্ক (Blu-ray Disc)-এর ধারণক্ষমতা সাধারণত কত?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">২৫ জিবি থেকে ৫০ জিবি</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">৭০০ এমবি</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">৪.৭ জিবি</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">১ টিবি</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (২৫ জিবি থেকে ৫০ জিবি)</strong><br>একটি স্ট্যান্ডার্ড সিডি ধারণক্ষমতা প্রায় ৭০০ এমবি, ডিভিডি ৪.৭ জিবি এবং একক স্তরের ব্লু-রে ডিস্ক ২৫ জিবি (ডুয়েল লেয়ার ৫০ জিবি) ডেটা ধারণ করতে পারে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_17" data-session="৪০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৭</span>
+            <span class="q-tag">৪০তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৭. OMR-এর পূর্ণরূপ কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Optical Mark Reader / Recognition</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Optical Magnetic Reader</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Online Mark Reader</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Output Memory Recorder</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Optical Mark Reader / Recognition)</strong><br>OMR হলো অপটিক্যাল মার্ক রিডার, যা পরীক্ষার উত্তরপত্রে পেনসিল বা বলপেনের দাগের উপস্থিতি ও প্রতিফলন শনাক্ত করে উত্তর স্বয়ংক্রিয়ভাবে মূল্যায়ন করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_18" data-session="৪০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৮</span>
+            <span class="q-tag">৪০তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৮. কম্পিউটার হার্ডওয়্যারের মধ্যে কোন অংশটি ডেটা বাসের সাথে সরাসরি যুক্ত থাকে না?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">কন্ট্রোল ইউনিট</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">মেমোরি</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">ALU</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">ইনপুট/আউটপুট ইন্টারফেস</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (কন্ট্রোল ইউনিট)</strong><br>কন্ট্রোল ইউনিট সরাসরি ডেটা বাসের পরিবর্তে কন্ট্রোল বাসের মাধ্যমে বিভিন্ন অংশে নিয়ন্ত্রণ সংকেত পাঠায় এবং অভ্যন্তরীণ ডেটা নিয়ন্ত্রণ করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_19" data-session="৪০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৯</span>
+            <span class="q-tag">৪০তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৯. প্রিন্টারের সংযোগের জন্য আধুনিক কম্পিউটারে কোন পোর্টটি সবচেয়ে বেশি ব্যবহৃত হয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">USB Port</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Parallel Port</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Serial Port</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">PS/2 Port</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (USB Port)</strong><br>পূর্বে প্রিন্টারে সমান্তরাল প্যারালাল পোর্ট (LPT) ব্যবহৃত হতো, কিন্তু বর্তমানে সর্বজনীন ইউএসবি (Universal Serial Bus) পোর্ট সবচেয়ে ব্যাপকভাবে ব্যবহৃত হয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_20" data-session="৩৮তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২০</span>
+            <span class="q-tag">৩৮তম বিসিএস</span>
+          </div>
+          <div class="q-text">২০. ROM কোন প্রকৃতির মেমোরি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">স্থায়ী ও নন-ভোলাটাইল</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">অস্থায়ী ও ভোলাটাইল</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">শুধুমাত্র লিখনযোগ্য</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">ভার্চুয়াল মেমোরি</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (স্থায়ী ও নন-ভোলাটাইল)</strong><br>ROM (Read-Only Memory) একটি স্থায়ী ও নন-ভোলাটাইল মেমোরি, যা বিদ্যুৎ চলে গেলেও তার ডেটা ও বায়োস (BIOS) প্রোগ্রাম অক্ষত রাখে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_21" data-session="৩৮তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২১</span>
+            <span class="q-tag">৩৮তম বিসিএস</span>
+          </div>
+          <div class="q-text">২১. প্রোগ্রাম কাউন্টার (Program Counter - PC) রেজিস্টারের কাজ কী?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">পরবর্তী কার্যকর হতে যাওয়া নির্দেশের ঠিকানা সংরক্ষণ করা</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">বর্তমান নির্দেশ সংরক্ষণ করা</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">যোগের ফলাফল রাখা</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">মেমোরির ডেটা গণনা করা</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (পরবর্তী কার্যকর হতে যাওয়া নির্দেশের ঠিকানা সংরক্ষণ করা)</strong><br>প্রোগ্রাম কাউন্টার হলো সিপিইউ-এর বিশেষ রেজিস্টার যা পরবর্তীতে কোন মেমোরি ঠিকানার নির্দেশ কার্যকর করা হবে তা ধরে রাখে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_22" data-session="৩৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২২</span>
+            <span class="q-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">২২. ১ গিগাবাইট (1 GB) সমান কত বাইট?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">২<sup>৩০</sup> বাইট</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">২<sup>১০</sup> বাইট</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">২<sup>২০</sup> বাইট</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">২<sup>৪০</sup> বাইট</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (২<sup>৩০</sup> বাইট)</strong><br>১ কিলোবাইট (KB) = ২<sup>১০</sup> বাইট (১০২৪ বাইট); ১ মেগাবাইট (MB) = ২<sup>২০</sup> বাইট; ১ গিগাবাইট (GB) = ২<sup>৩০</sup> বাইট; ১ টেরাবাইট (TB) = ২<sup>৪০</sup> বাইট।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_23" data-session="৩৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২৩</span>
+            <span class="q-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">২৩. কম্পিউটারের স্থায়ী ডিস্কের গতি পরিমাপের একক RPM বলতে কী বোঝায়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Revolutions Per Minute</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Rotations Per Meter</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Reads Per Millisecond</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Rate Per Minute</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Revolutions Per Minute)</strong><br>হার্ডডিস্কের ম্যাগনেটিক স্পিন্ডল প্রতি মিনিটে কতবার পূর্ণ আবর্তন করে তা পরিমাপের একক হলো RPM (Revolutions Per Minute - যেমন ৫৪০০ RPM, ৭২০০ RPM)।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_24" data-session="৩৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২৪</span>
+            <span class="q-tag">৩৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">২৪. কম্পিউটারের প্রধান সার্কিট বোর্ডকে কী বলা হয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Motherboard</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Breadboard</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Hard Drive</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Expansion Slot</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Motherboard)</strong><br>মাদারবোর্ড (System Board) হলো কম্পিউটারের কেন্দ্রীয় মুদ্রিত সার্কিট বোর্ড (PCB), যার সাথে প্রসেসর, র‍্যাম, স্টোরেজ ও এক্সপানশন কার্ডসমূহ সংযুক্ত থাকে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_25" data-session="৩৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২৫</span>
+            <span class="q-tag">৩৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">২৫. কিবোর্ডের F1 থেকে F12 পর্যন্ত কি-গুলোকে কী বলা হয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Function Keys</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Control Keys</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Navigation Keys</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Numeric Keys</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Function Keys)</strong><br>কিবোর্ডের শীর্ষে অবস্থিত F1 থেকে F12 পর্যন্ত বারোটি কি-কে ফাংশন কি বলা হয়, যা বিভিন্ন প্রোগ্রামে বিশেষ শর্টকাট কাজের জন্য ব্যবহৃত হয় (যেমন: F1 সাহায্য বা Help-এর জন্য)।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_26" data-session="৩৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২৬</span>
+            <span class="q-tag">৩৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">২৬. বড় আকারের প্রকৌশল নকশা বা আর্কিটেকচারাল ম্যাপ নিখুঁতভাবে প্রিন্ট করতে কোন আউটপুট যন্ত্রটি প্রয়োজন?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Plotter</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Laser Printer</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Dot Matrix Printer</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Scanner</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Plotter)</strong><br>প্লটার ভেক্টর গ্রাফিক্স ড্রয়িং প্রযুক্তি ব্যবহার করে বিশালাকার প্রকৌশল ব্লুপ্রিন্ট, আর্কিটেকচারাল নকশা ও ব্যানারের নির্ভুল রেখাচিত্র অঙ্কন করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_27" data-session="৩৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২৭</span>
+            <span class="q-tag">৩৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">২৭. BIOS কম্পিউটারের কোথায় সংরক্ষিত থাকে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">ROM চিপে</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">RAM-এ</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Hard Disk-এ</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">ক্যাশ মেমোরিতে</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (ROM চিপে)</strong><br>BIOS (Basic Input/Output System) ফার্মওয়্যারটি মাদারবোর্ডে থাকা নন-ভোলাটাইল ROM বা Flash EEPROM চিপে স্থায়ীভাবে সংরক্ষিত থাকে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_28" data-session="৩৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২৮</span>
+            <span class="q-tag">৩৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">২৮. কম্পিউটারের ক্লক স্পিড (Clock Speed) দ্বারা কী নির্ধারিত হয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">সিপিইউ-এর প্রসেসিং গতি</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">মনিটরের ডিসপ্লে সময়</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">ইন্টারনেটের গতি</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">হার্ডডিস্কের ধারণক্ষমতা</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (সিপিইউ-এর প্রসেসিং গতি)</strong><br>অভ্যন্তরীণ কোয়ার্টজ ক্রিস্টাল অসিলেটর দ্বারা প্রসেসরের ক্লক স্পিড নিয়ন্ত্রিত হয়, যা নির্ধারণ করে প্রসেসর প্রতি সেকেন্ডে কতগুলো সাইকেল বা নির্দেশনা প্রক্রিয়া করতে পারবে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_29" data-session="৩৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২৯</span>
+            <span class="q-tag">৩৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">২৯. মেকানিক্যাল মাউসের নিচে বা অপটিক্যাল মাউসে আলোর সাহায্যে কী নির্ণয় করা হয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">কার্সারের গতি ও অবস্থান</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">কম্পিউটারের তাপমাত্রা</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">বিদ্যুৎ খরচ</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">কিবোর্ড সংকেত</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (কার্সারের গতি ও অবস্থান)</strong><br>মাউসের নিচে থাকা অপটিক্যাল সেন্সর বা মেকানিক্যাল বল পৃষ্ঠের সাপেক্ষে মাউসের স্থান পরিবর্তনকে দ্বিমাত্রিক স্থানাঙ্কে রূপান্তর করে স্ক্রিনে কার্সার পরিচালনা করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_30" data-session="৩৫তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৩০</span>
+            <span class="q-tag">৩৫তম বিসিএস</span>
+          </div>
+          <div class="q-text">৩০. কম্পিউটারে পেনড্রাইভ সংযোগের আধুনিকতম দ্রুতগতির ইউএসবি স্ট্যান্ডার্ড কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">USB 3.0 / USB-C</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">USB 1.1</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">RS-232</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">PS/2</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (USB 3.0 / USB-C)</strong><br>USB 3.0 (সুপারস্পিড - ৫ Gbps) এবং USB-C ইন্টারফেস প্রচলিত USB 2.0 (৪৮০ Mbps)-এর তুলনায় বহুগুণ দ্রুত ডেটা আদান-প্রদান এবং উচ্চ পাওয়ার ডেলিভারি নিশ্চিত করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_31" data-session="৩৫তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৩১</span>
+            <span class="q-tag">৩৫তম বিসিএস</span>
+          </div>
+          <div class="q-text">৩১. কোনটি ভোলাটাইল বা বিদ্যুৎ চলে গেলে মুছে যাওয়া মেমোরি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">RAM</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">ROM</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">PROM</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">EEPROM</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (RAM)</strong><br>র‍্যান্ডম অ্যাক্সেস মেমোরি (RAM) সেমিকন্ডাক্টর ক্যাপাসিটর বা ট্রানজিস্টরে চার্জ আকারে ডেটা ধরে রাখে। বিদ্যুৎ সংযোগ বিচ্ছিন্ন হলেই এর ডেটা পুরোপুরি মুছে যায়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_32" data-session="৩৫তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৩২</span>
+            <span class="q-tag">৩৫তম বিসিএস</span>
+          </div>
+          <div class="q-text">৩২. টেক্সট কপি করার পর ডেটাটি সাময়িকভাবে কোথায় জমা থাকে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Clipboard</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">RAM</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Terminal</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Hard Disk</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Clipboard)</strong><br>কম্পিউটারে কপি (Ctrl+C) বা কাট (Ctrl+X) করা যেকোনো টেক্সট বা ছবি পেস্ট করার পূর্ব পর্যন্ত অপারেটিং সিস্টেমের ক্লিপবোর্ড (Clipboard) নামক সাময়িক বাফারে সংরক্ষিত থাকে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q1_33" data-session="২৯তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৩৩</span>
+            <span class="q-tag">২৯তম বিসিএস</span>
+          </div>
+          <div class="q-text">৩৩. কম্পিউটারের স্থায়ী স্মৃতিশক্তিকে কি বলে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">ROM</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">RAM</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">হার্ডওয়্যার</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">সফটওয়্যার</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (ROM)</strong><br>ROM (Read-Only Memory) হলো কম্পিউটারের স্থায়ী মেমোরি। এটি প্রস্তুতকারক কোম্পানি কর্তৃক সরাসরি স্থায়ীভাবে লিখে দেওয়া হয় এবং বিদ্যুৎ সংযোগের উপর নির্ভরশীল নয়।
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <nav class="ch-nav-bottom">
+      <div><span class="nav-disabled">← প্রথম অধ্যায়</span></div>
+      <div><a href="index.html" class="nav-arrow"><i class="fa-solid fa-house"></i> সূচিপত্র</a></div>
+      <div><a href="কম্পিউটার প্রোগ্রাম, প্রোগ্রামিং ল্যাঙ্গুয়েজ ও পারঙ্গমতা.html" class="nav-arrow">পরবর্তী অধ্যায় →</a></div>
+    </nav>
+
+    
+
+    <!-- Universal Footer -->
+    <footer>
+      <p>বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ ডিজিটাল প্রশ্নব্যাংক • সাধারণ বিজ্ঞান ও তথ্যপ্রযুক্তি শাখা</p>
+      <p style="margin-top: 0.5rem; font-size: 0.85rem;">হস্তলিপি ও বাস্তবসম্মত পেপার টেক্সচার সহযোগে নির্মিত ইন্টারঅ্যাক্টিভ সংস্করণ</p>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle
+    const themeBtn = document.getElementById('btn-theme');
+    const htmlElem = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    htmlElem.setAttribute('data-theme', savedTheme);
+    themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+    themeBtn.addEventListener('click', () => {
+      const cur = htmlElem.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      htmlElem.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+
+    // Font size scaling
+    let scale = parseFloat(localStorage.getItem('font-scale') || '1');
+    applyScale(scale);
+
+    document.getElementById('btn-inc').addEventListener('click', () => {
+      if (scale < 1.3) { scale += 0.08; applyScale(scale); }
+    });
+    document.getElementById('btn-dec').addEventListener('click', () => {
+      if (scale > 0.85) { scale -= 0.08; applyScale(scale); }
+    });
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      scale = 1.0; applyScale(scale);
+    });
+
+    function applyScale(s) {
+      document.documentElement.style.setProperty('--font-scale', s);
+      localStorage.setItem('font-scale', s);
+    }
+
+    // Quiz Engine
+    let currentScore = 0;
+    const answeredCards = new Set();
+    const scoreElem = document.getElementById('score-counter');
+
+    function toBnNum(num) {
+      const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+      return num.toString().split('').map(d => bnDigits[parseInt(d)] || d).join('');
+    }
+
+    document.querySelectorAll('.q-card').forEach(card => {
+      const cardId = card.id;
+      const optBtns = card.querySelectorAll('.opt-btn');
+      const ansDrawer = card.querySelector('.ans-drawer');
+
+      optBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (answeredCards.has(cardId)) return;
+          answeredCards.add(cardId);
+
+          const isCorrect = btn.getAttribute('data-answer') === 'true';
+          if (isCorrect) {
+            btn.classList.add('correct');
+            currentScore++;
+            scoreElem.textContent = toBnNum(currentScore);
+          } else {
+            btn.classList.add('wrong');
+            // highlight correct option
+            optBtns.forEach(b => {
+              if (b.getAttribute('data-answer') === 'true') {
+                b.classList.add('correct');
+              }
+            });
+          }
+
+          // disable all option buttons in this card
+          optBtns.forEach(b => b.disabled = true);
+
+          // reveal explanation drawer
+          if (ansDrawer) ansDrawer.style.display = 'block';
+        });
+      });
+    });
+
+    document.getElementById('btn-quiz-reset').addEventListener('click', () => {
+      answeredCards.clear();
+      currentScore = 0;
+      scoreElem.textContent = '০';
+      document.querySelectorAll('.q-card').forEach(card => {
+        card.querySelectorAll('.opt-btn').forEach(btn => {
+          btn.disabled = false;
+          btn.classList.remove('correct', 'wrong');
+        });
+        const drawer = card.querySelector('.ans-drawer');
+        if (drawer) drawer.style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>

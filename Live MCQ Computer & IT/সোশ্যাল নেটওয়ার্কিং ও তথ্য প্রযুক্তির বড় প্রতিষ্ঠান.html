@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>অধ্যায় ১২: সোশ্যাল নেটওয়ার্কিং ও তথ্য প্রযুক্তির বড় প্রতিষ্ঠান - বিসিএস প্রিলিমিনারি ই-বুক</title>
+  <link rel="stylesheet" href="paper-textures.css">
+  <link rel="stylesheet" href="bangla-fonts.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4338ca;
+      --primary-light: #e0e7ff;
+      --primary-dark: #3730a3;
+      --accent: #0284c7;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(67, 56, 202, 0.2);
+      --font-scale: 1;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 24px rgba(67, 56, 202, 0.12);
+      
+      --bg-surface: rgba(255, 255, 255, 0.86);
+      --bg-card: rgba(255, 255, 255, 0.84);
+    }
+
+    [data-theme="dark"] {
+      --primary: #818cf8;
+      --primary-light: rgba(129, 140, 248, 0.15);
+      --primary-dark: #4338ca;
+      --accent: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(129, 140, 248, 0.22);
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+      
+      --bg-surface: rgba(15, 23, 42, 0.86);
+      --bg-card: rgba(23, 23, 38, 0.84);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.7;
+      color: var(--text-main);
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 5rem 1rem;
+    }
+
+    /* Top Bar Navigation */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      background: var(--bg-surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-main);
+      text-decoration: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-sm);
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      transition: all 0.2s;
+    }
+
+    [data-theme="dark"] .nav-btn {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .control-btn {
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.7rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+
+    [data-theme="dark"] .control-btn {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .control-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* Chapter Header */
+    .chapter-header {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .chapter-header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .ch-pre {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .ch-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.35;
+      margin-bottom: 0.75rem;
+    }
+
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .ch-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .ch-badge {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .ch-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* BCS Analysis Table */
+    .bcs-table-wrapper {
+      overflow-x: auto;
+      margin-bottom: 2rem;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .bcs-table th, .bcs-table td {
+      padding: 0.65rem 0.75rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .bcs-table th {
+      color: var(--primary);
+    }
+
+    /* Sketchnote Section (Part 1) */
+    .notes-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .sec-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
+      color: var(--primary);
+    }
+
+    .sk-box {
+      background: var(--bg-card);
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .sk-box-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sk-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+      font-size: 0.92rem;
+    }
+
+    .sk-table th, .sk-table td {
+      padding: 0.6rem 0.8rem;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .sk-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    [data-theme="dark"] .sk-table th {
+      color: var(--primary);
+    }
+
+    .sk-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .sk-list li {
+      position: relative;
+      padding-left: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .sk-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0.3rem;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .sk-sticky {
+      background: rgba(254, 240, 138, 0.4);
+      border-left: 4px solid #eab308;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    [data-theme="dark"] .sk-sticky {
+      background: rgba(234, 179, 8, 0.15);
+      border-left-color: #facc15;
+    }
+
+    /* Quiz Engine & Typography Protection (Part 2) */
+    .quiz-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .quiz-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      background: var(--bg-surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .score-badge {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .reset-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .reset-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+    .bcs-table, .bcs-table *, .score-bar, .score-bar *, .doubt-box, .doubt-box * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .q-num {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+
+    .q-tag {
+      background: rgba(0, 0, 0, 0.05);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      color: var(--text-muted);
+    }
+
+    [data-theme="dark"] .q-tag {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .options-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      width: 100%;
+      text-align: left;
+      padding: 0.75rem 1rem;
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      transition: all 0.2s;
+    }
+
+    [data-theme="dark"] .opt-btn {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    [data-theme="dark"] .opt-letter {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .opt-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .opt-btn.correct {
+      background: rgba(34, 197, 94, 0.2) !important;
+      color: #4ade80 !important;
+    }
+
+    .opt-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+
+    [data-theme="dark"] .opt-btn.wrong {
+      background: rgba(239, 68, 68, 0.2) !important;
+      color: #f87171 !important;
+    }
+
+    /* Answer Drawer */
+    .ans-drawer {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border-color);
+      display: none;
+    }
+
+    .ans-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-content {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    /* Bottom Navigation */
+    .ch-nav-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3rem;
+      background: var(--bg-surface);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-arrow {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.2s;
+    }
+
+    .nav-arrow:hover {
+      transform: translateX(3px);
+    }
+
+    .nav-arrow:first-child:hover {
+      transform: translateX(-3px);
+    }
+
+    /* Bibliography & Footer */
+    .biblio-box {
+      margin-top: 3rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .biblio-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 0.5rem;
+    }
+
+    .biblio-list {
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="container paper-container paper-old-aged font-gedamala">
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+      <div class="nav-left">
+        <a href="index.html" class="nav-btn"><i class="fa-solid fa-list-ul"></i> বিষয় সূচিপত্র</a>
+      </div>
+      <div class="controls">
+        <button class="control-btn" id="btn-dec" title="ফন্ট ছোট করুন">A-</button>
+        <button class="control-btn" id="btn-reset" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="control-btn" id="btn-inc" title="ফন্ট বড় করুন">A+</button>
+        <button class="control-btn" id="btn-theme" title="থিম পরিবর্তন">🌙</button>
+      </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+      <span class="ch-pre">কম্পিউটার ও তথ্যপ্রযুক্তি • অধ্যায় ১২</span>
+      <h1 class="ch-title font-gedamala">
+        সোশ্যাল নেটওয়ার্কিং ও তথ্য প্রযুক্তির বড় প্রতিষ্ঠান
+        <span class="ch-en">(Social Networking & Big Tech Companies)</span>
+      </h1>
+      <div class="ch-meta">
+        <span><i class="fa-solid fa-file-lines"></i> পৃষ্ঠা: ৮৮২-৮৮৪</span>
+        <span class="ch-badge"><i class="fa-solid fa-circle-question"></i> মোট প্রশ্ন: ০৮ টি</span>
+      </div>
+    </header>
+
+    <!-- BCS Analysis Matrix -->
+    
+<div class="bcs-table-wrapper">
+  <table class="bcs-table">
+    <thead>
+      <tr><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>৫০তম</td><td>০</td><td>৪৪তম</td><td>০</td><td>৩৮তম</td><td>১</td></tr>
+      <tr><td>৪৯তম</td><td>০</td><td>৪৩তম</td><td>০</td><td>৩৭তম</td><td>০</td></tr>
+      <tr><td>৪৮তম</td><td>০</td><td>৪২তম</td><td>০</td><td>৩৬তম</td><td>১</td></tr>
+      <tr><td>৪৭তম</td><td>০</td><td>৪১তম</td><td>০</td><td>৩৫তম</td><td>২</td></tr>
+      <tr><td>৪৬তম</td><td>২</td><td>৪০তম</td><td>১</td><td>১০ম-৩৪তম</td><td>১</td></tr>
+      <tr><td>৪৫তম</td><td>০</td><td>৩৯তম</td><td>০</td><td><strong>সর্বমোট</strong></td><td><strong>০৮</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+    <!-- Part 1: Authentic Sketchnotes & Revision Notes -->
+    <section class="notes-section">
+      <h2 class="sec-heading font-gedamala"><i class="fa-solid fa-lightbulb"></i> প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি</h2>
+      
+<div class="sk-box">
+  <div class="sk-box-title">🏢 বিশ্বের শীর্ষ প্রযুক্তি প্রতিষ্ঠান (Big Tech Giants)</div>
+  <table class="sk-table">
+    <thead><tr><th>প্রতিষ্ঠান</th><th>প্রতিষ্ঠাতা ও সাল</th><th>সদর দপ্তর</th><th>প্রধান পণ্য / প্ল্যাটফর্ম</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Microsoft</strong></td><td>বিল গেটস ও পল অ্যালেন (১৯৭৫)</td><td>রেডমন্ড, ওয়াশিংটন, ইউএসএ</td><td>Windows, MS Office, Azure, LinkedIn</td></tr>
+      <tr><td><strong>Apple Inc.</strong></td><td>স্টিভ জবস, স্টিভ ওজনিয়াক, রোনাল্ড ওয়েন (১৯৭৬)</td><td>কুপারটিনো, ক্যালিফোর্নিয়া</td><td>Mac, iPhone, iPad, iOS, macOS</td></tr>
+      <tr><td><strong>Google (Alphabet)</strong></td><td>ল্যারি পেজ ও সের্গেই ব্রিন (১৯৯৮)</td><td>মাউন্টেন ভিউ, ক্যালিফোর্নিয়া</td><td>Search Engine, Android, Chrome, YouTube</td></tr>
+      <tr><td><strong>Amazon</strong></td><td>জেফ বেজোস (১৯৯৪)</td><td>সিয়াটল, ওয়াশিংটন, ইউএসএ</td><td>Amazon e-Commerce, AWS Cloud, Kindle</td></tr>
+      <tr><td><strong>Meta (Facebook)</strong></td><td>মার্ক জুকারবার্গ (২০০৪)</td><td>মেনলো পার্ক, ক্যালিফোর্নিয়া</td><td>Facebook, Instagram, WhatsApp, Messenger</td></tr>
+      <tr><td><strong>Oracle</strong></td><td>ল্যারি এলিসন, বব মাইনার, এড ওটস (১৯৭৭)</td><td>অস্টিন, টেক্সাস (পূর্বে রেডউড শোরস)</td><td>Oracle Database, Java, Enterprise Cloud</td></tr>
+      <tr><td><strong>Intel</strong></td><td>রবার্ট নয়েস ও গর্ডন মুর (১৯৬৮)</td><td>সান্টা ক্লারা, ক্যালিফোর্নিয়া</td><td>Microprocessors (x86), Semiconductor Chips</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="sk-box">
+  <div class="sk-box-title">📱 সামাজিক যোগাযোগ মাধ্যম (Social Media Platforms)</div>
+  <ul class="sk-list">
+    <li><strong>Facebook (Meta):</strong> ২০০৪ সালে মার্ক জুকারবার্গ কর্তৃক প্রতিষ্ঠিত বিশ্বের বৃহত্তম সোশ্যাল নেটওয়ার্ক।</li>
+    <li><strong>YouTube:</strong> ২০০৫ সালে স্টিভ চ্যান, চ্যাড হার্লি ও জাওয়েদ করিম কর্তৃক প্রতিষ্ঠিত ভিডিও প্ল্যাটফর্ম (২০০৬ সালে গুগল অধিগ্রহণ করে)।</li>
+    <li><strong>Twitter (বর্তমানে X):</strong> ২০০৬ সালে জ্যাক ডরসি, বিজ স্টোন ও ইভান উইলিয়ামস কর্তৃক প্রতিষ্ঠিত মাইক্রোব্লগিং সাইট (বর্তমানে ইলন মাস্কের মালিকানাধীন)।</li>
+    <li><strong>Instagram:</strong> ২০১০ সালে কেভিন সিস্ট্রম ও মাইক ক্রিগার প্রতিষ্ঠিত ফটো শেয়ারিং প্ল্যাটফর্ম (২০১২ সালে ফেসবুক অধিগ্রহণ করে)।</li>
+    <li><strong>LinkedIn:</strong> ২০০২ সালে রিড হফম্যান কর্তৃক পেশাজীবীদের জন্য প্রতিষ্ঠিত প্ল্যাটফর্ম (২০১৬ সালে মাইক্রোসফট অধিগ্রহণ করে)।</li>
+  </ul>
+</div>
+
+<div class="sk-sticky">
+  💡 <strong>গুরুত্বপূর্ণ তথ্য:</strong><br>
+  ল্যারি এলিসন ১৯৭৭ সালে ওরাকল (Oracle) প্রতিষ্ঠা করেন। মাইক্রোসফটের বর্তমান প্রধান নির্বাহী সত্য নাদেলা এবং অ্যালফাবেট/গুগলের সুন্দর পিচাই।
+</div>
+
+    </section>
+
+    <!-- Part 2: Interactive Past Exam Question Engine -->
+    <section class="quiz-section">
+      <div class="quiz-toolbar">
+        <h2 class="sec-heading" style="margin-bottom:0; font-size:1.15rem;"><i class="fa-solid fa-circle-check"></i> প্রামাণ্য প্রশ্নব্যাংক ও কুইজ</h2>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <span class="score-badge">স্কোর: <span id="score-counter">০</span> / ০৮</span>
+          <button class="reset-btn" id="btn-quiz-reset"><i class="fa-solid fa-rotate-left"></i> রিসেট</button>
+        </div>
+      </div>
+      <div class="quiz-cards-container">
+        
+        <div class="q-card" id="q12_1" data-session="৪৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১</span>
+            <span class="q-tag">৪৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">১. নিচের কোনটি সোশ্যাল মিডিয়া প্ল্যাটফর্ম নয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Google</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Facebook</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Instagram</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Twitter</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Google)</strong><br>গুগল একটি সার্চ ইঞ্জিন ও প্রযুক্তি কোম্পানি। ফেসবুক, ইনস্টাগ্রাম ও টুইটার (এক্স) হলো সামাজিক যোগাযোগ মাধ্যম।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q12_2" data-session="৪৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২</span>
+            <span class="q-tag">৪৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">২. টুইটার (বর্তমানে X) কোন ধরনের সোশ্যাল মিডিয়া?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Microblogging</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Photo sharing</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Video streaming</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Professional networking</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Microblogging)</strong><br>টুইটার (এক্স) হলো একটি মাইক্রোব্লগিং সাইট, যেখানে ব্যবহারকারীরা সংক্ষিপ্ত বার্তা বা টুইট (পূর্বে সর্বোচ্চ ১৪০ বা বর্তমানে ২৮০ অক্ষর) প্রকাশ ও আদান-প্রদান করতে পারেন।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q12_3" data-session="৪০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৩</span>
+            <span class="q-tag">৪০তম বিসিএস</span>
+          </div>
+          <div class="q-text">৩. ফেসবুকের প্রতিষ্ঠাতা কে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">মার্ক জুকারবার্গ (Mark Zuckerberg)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">বিল গেটস</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">স্টিভ জবস</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">ল্যারি পেজ</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (মার্ক জুকারবার্গ)</strong><br>২০০৪ সালের ৪ ফেব্রুয়ারি হার্ভার্ড বিশ্ববিদ্যালয়ে অধ্যয়নকালে মার্ক জুকারবার্গ তাঁর বন্ধুদের সাথে নিয়ে ফেসবুক প্রতিষ্ঠা করেন।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q12_4" data-session="৩৮তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৪</span>
+            <span class="q-tag">৩৮তম বিসিএস</span>
+          </div>
+          <div class="q-text">৪. পেশাজীবীদের জন্য বিশ্বের সবচেয়ে জনপ্রিয় সোশ্যাল নেটওয়ার্কিং প্ল্যাটফর্ম কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">LinkedIn</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Facebook</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Snapchat</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">TikTok</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (LinkedIn)</strong><br>লিঙ্কডইন (LinkedIn) হলো ব্যবসায়িক যোগাযোগ ও পেশাগত নেটওয়ার্কিংয়ের প্ল্যাটফর্ম, যা ২০১৬ সালে মাইক্রোসফট কিনে নেয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q12_5" data-session="৩৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৫</span>
+            <span class="q-tag">৩৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">৫. মাইক্রোসফটের প্রতিষ্ঠাতা কে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">বিল গেটস ও পল অ্যালেন</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">স্টিভ জবস</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">জেফ বেজোস</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">মার্ক জুকারবার্গ</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (বিল গেটস ও পল অ্যালেন)</strong><br>১৯৭৫ সালের ৪ এপ্রিল যুক্তরাষ্ট্রের নিউ মেক্সিকোর আলবুকার্কিতে দুই শৈশবের বন্ধু বিল গেটস ও পল অ্যালেন মাইক্রোসফট প্রতিষ্ঠা করেন।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q12_6" data-session="৩৫তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৬</span>
+            <span class="q-tag">৩৫তম বিসিএস</span>
+          </div>
+          <div class="q-text">৬. ইউটিউব (YouTube)-এর যাত্রা শুরু হয় কোন সালে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">২০০৫ সালে</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">২০০৪ সালে</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">২০০৬ সালে</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">২০০৮ সালে</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (২০০৫ সালে)</strong><br>২০০৫ সালের ১৪ ফেব্রুয়ারি পেপ্যালের সাবেক তিন কর্মী চ্যাড হার্লি, স্টিভ চ্যান এবং জাওয়েদ করিম ইউটিউব প্রতিষ্ঠা করেন। ২০০৬ সালে গুগল এটি কিনে নেয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q12_7" data-session="৩৫তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৭</span>
+            <span class="q-tag">৩৫তম বিসিএস</span>
+          </div>
+          <div class="q-text">৭. Oracle Corporation-এর প্রতিষ্ঠাতা কে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Lawrence J. Ellison (Larry Ellison)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Bill Gates</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Tim Cook</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Andrew S. Grove</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Larry Ellison)</strong><br>১৯৭৭ সালে ল্যারি এলিসন (Lawrence J. Ellison) বব মাইনার ও এড ওটসের সাথে মিলে বিশ্বখ্যাত রিলেশনাল ডেটাবেজ প্রতিষ্ঠান ওরাকল (Oracle) প্রতিষ্ঠা করেন।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q12_8" data-session="১৯তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৮</span>
+            <span class="q-tag">১৯তম বিসিএস</span>
+          </div>
+          <div class="q-text">৮. কম্পিউটার সফটওয়্যার জগতে নামকরা প্রতিষ্ঠান কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">মাইক্রোসফট (Microsoft)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">গিগাবাইট</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">ইনটেল</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">অ্যাপল ম্যাকিন্টশ</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (মাইক্রোসফট)</strong><br>মাইক্রোসফট (Microsoft) বিশ্বজুড়ে উইন্ডোজ অপারেটিং সিস্টেম ও এমএস অফিস অ্যাপ্লিকেশনের জন্য সফটওয়্যার শিল্পের শীর্ষস্থানীয় প্রতিষ্ঠান।
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <nav class="ch-nav-bottom">
+      <div><a href="মোবাইল প্রযুক্তি ও এর বৈশিষ্ট্য, রোবটিক্স ও সাইবার অপরাধ.html" class="nav-arrow">← পূর্ববর্তী অধ্যায়</a></div>
+      <div><a href="index.html" class="nav-arrow"><i class="fa-solid fa-house"></i> সূচিপত্র</a></div>
+      <div><span class="nav-disabled">শেষ অধ্যায় →</span></div>
+    </nav>
+
+    
+<div class="biblio-box">
+  <h3 class="biblio-title"><i class="fa-solid fa-book-bookmark"></i> 'Computer & ICT' বিষয়ের প্রশ্নসমূহের উত্তর ও ব্যাখ্যার উৎস / গ্রন্থপঞ্জি</h3>
+  <ol class="biblio-list">
+    <li>তথ্য ও যোগাযোগ প্রযুক্তি, বোর্ড বই- নবম দশম শ্রেণী;</li>
+    <li>উচ্চ মাধ্যমিক কম্পিউটার এবং তথ্য ও যোগাযোগ প্রযুক্তি, প্রকৌশলী মুজিবুর রহমান;</li>
+    <li>উচ্চ মাধ্যমিক কম্পিউটার এবং তথ্য ও যোগাযোগ প্রযুক্তি, মাহবুবুর রহমান;</li>
+    <li>তথ্য ও যোগাযোগ প্রযুক্তি, এসএসসি প্রোগ্রাম, উন্মুক্ত বিশ্ববিদ্যালয়;</li>
+    <li>মৌলিক কম্পিউটার শিক্ষা, বিবিএ প্রোগ্রাম, উন্মুক্ত বিশ্ববিদ্যালয়।</li>
+  </ol>
+</div>
+
+
+    <!-- Universal Footer -->
+    <footer>
+      <p>বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ ডিজিটাল প্রশ্নব্যাংক • সাধারণ বিজ্ঞান ও তথ্যপ্রযুক্তি শাখা</p>
+      <p style="margin-top: 0.5rem; font-size: 0.85rem;">হস্তলিপি ও বাস্তবসম্মত পেপার টেক্সচার সহযোগে নির্মিত ইন্টারঅ্যাক্টিভ সংস্করণ</p>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle
+    const themeBtn = document.getElementById('btn-theme');
+    const htmlElem = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    htmlElem.setAttribute('data-theme', savedTheme);
+    themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+    themeBtn.addEventListener('click', () => {
+      const cur = htmlElem.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      htmlElem.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+
+    // Font size scaling
+    let scale = parseFloat(localStorage.getItem('font-scale') || '1');
+    applyScale(scale);
+
+    document.getElementById('btn-inc').addEventListener('click', () => {
+      if (scale < 1.3) { scale += 0.08; applyScale(scale); }
+    });
+    document.getElementById('btn-dec').addEventListener('click', () => {
+      if (scale > 0.85) { scale -= 0.08; applyScale(scale); }
+    });
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      scale = 1.0; applyScale(scale);
+    });
+
+    function applyScale(s) {
+      document.documentElement.style.setProperty('--font-scale', s);
+      localStorage.setItem('font-scale', s);
+    }
+
+    // Quiz Engine
+    let currentScore = 0;
+    const answeredCards = new Set();
+    const scoreElem = document.getElementById('score-counter');
+
+    function toBnNum(num) {
+      const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+      return num.toString().split('').map(d => bnDigits[parseInt(d)] || d).join('');
+    }
+
+    document.querySelectorAll('.q-card').forEach(card => {
+      const cardId = card.id;
+      const optBtns = card.querySelectorAll('.opt-btn');
+      const ansDrawer = card.querySelector('.ans-drawer');
+
+      optBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (answeredCards.has(cardId)) return;
+          answeredCards.add(cardId);
+
+          const isCorrect = btn.getAttribute('data-answer') === 'true';
+          if (isCorrect) {
+            btn.classList.add('correct');
+            currentScore++;
+            scoreElem.textContent = toBnNum(currentScore);
+          } else {
+            btn.classList.add('wrong');
+            // highlight correct option
+            optBtns.forEach(b => {
+              if (b.getAttribute('data-answer') === 'true') {
+                b.classList.add('correct');
+              }
+            });
+          }
+
+          // disable all option buttons in this card
+          optBtns.forEach(b => b.disabled = true);
+
+          // reveal explanation drawer
+          if (ansDrawer) ansDrawer.style.display = 'block';
+        });
+      });
+    });
+
+    document.getElementById('btn-quiz-reset').addEventListener('click', () => {
+      answeredCards.clear();
+      currentScore = 0;
+      scoreElem.textContent = '০';
+      document.querySelectorAll('.q-card').forEach(card => {
+        card.querySelectorAll('.opt-btn').forEach(btn => {
+          btn.disabled = false;
+          btn.classList.remove('correct', 'wrong');
+        });
+        const drawer = card.querySelector('.ans-drawer');
+        if (drawer) drawer.style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>অধ্যায় ০৭: ইন্টারনেট সংক্রান্ত বিষয় - বিসিএস প্রিলিমিনারি ই-বুক</title>
+  <link rel="stylesheet" href="paper-textures.css">
+  <link rel="stylesheet" href="bangla-fonts.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4338ca;
+      --primary-light: #e0e7ff;
+      --primary-dark: #3730a3;
+      --accent: #0284c7;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(67, 56, 202, 0.2);
+      --font-scale: 1;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 24px rgba(67, 56, 202, 0.12);
+      
+      --bg-surface: rgba(255, 255, 255, 0.86);
+      --bg-card: rgba(255, 255, 255, 0.84);
+    }
+
+    [data-theme="dark"] {
+      --primary: #818cf8;
+      --primary-light: rgba(129, 140, 248, 0.15);
+      --primary-dark: #4338ca;
+      --accent: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(129, 140, 248, 0.22);
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+      
+      --bg-surface: rgba(15, 23, 42, 0.86);
+      --bg-card: rgba(23, 23, 38, 0.84);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.7;
+      color: var(--text-main);
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 5rem 1rem;
+    }
+
+    /* Top Bar Navigation */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      background: var(--bg-surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-main);
+      text-decoration: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-sm);
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      transition: all 0.2s;
+    }
+
+    [data-theme="dark"] .nav-btn {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .control-btn {
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.7rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+
+    [data-theme="dark"] .control-btn {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .control-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* Chapter Header */
+    .chapter-header {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .chapter-header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .ch-pre {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .ch-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.35;
+      margin-bottom: 0.75rem;
+    }
+
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .ch-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .ch-badge {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .ch-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* BCS Analysis Table */
+    .bcs-table-wrapper {
+      overflow-x: auto;
+      margin-bottom: 2rem;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .bcs-table th, .bcs-table td {
+      padding: 0.65rem 0.75rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .bcs-table th {
+      color: var(--primary);
+    }
+
+    /* Sketchnote Section (Part 1) */
+    .notes-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .sec-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
+      color: var(--primary);
+    }
+
+    .sk-box {
+      background: var(--bg-card);
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .sk-box-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sk-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+      font-size: 0.92rem;
+    }
+
+    .sk-table th, .sk-table td {
+      padding: 0.6rem 0.8rem;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .sk-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    [data-theme="dark"] .sk-table th {
+      color: var(--primary);
+    }
+
+    .sk-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .sk-list li {
+      position: relative;
+      padding-left: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .sk-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0.3rem;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .sk-sticky {
+      background: rgba(254, 240, 138, 0.4);
+      border-left: 4px solid #eab308;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    [data-theme="dark"] .sk-sticky {
+      background: rgba(234, 179, 8, 0.15);
+      border-left-color: #facc15;
+    }
+
+    /* Quiz Engine & Typography Protection (Part 2) */
+    .quiz-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .quiz-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      background: var(--bg-surface);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .score-badge {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .reset-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .reset-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+    .bcs-table, .bcs-table *, .score-bar, .score-bar *, .doubt-box, .doubt-box * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .q-num {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+
+    .q-tag {
+      background: rgba(0, 0, 0, 0.05);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      color: var(--text-muted);
+    }
+
+    [data-theme="dark"] .q-tag {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .options-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      width: 100%;
+      text-align: left;
+      padding: 0.75rem 1rem;
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      transition: all 0.2s;
+    }
+
+    [data-theme="dark"] .opt-btn {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    [data-theme="dark"] .opt-letter {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .opt-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .opt-btn.correct {
+      background: rgba(34, 197, 94, 0.2) !important;
+      color: #4ade80 !important;
+    }
+
+    .opt-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+
+    [data-theme="dark"] .opt-btn.wrong {
+      background: rgba(239, 68, 68, 0.2) !important;
+      color: #f87171 !important;
+    }
+
+    /* Answer Drawer */
+    .ans-drawer {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border-color);
+      display: none;
+    }
+
+    .ans-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-content {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    /* Bottom Navigation */
+    .ch-nav-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3rem;
+      background: var(--bg-surface);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-arrow {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.2s;
+    }
+
+    .nav-arrow:hover {
+      transform: translateX(3px);
+    }
+
+    .nav-arrow:first-child:hover {
+      transform: translateX(-3px);
+    }
+
+    /* Bibliography & Footer */
+    .biblio-box {
+      margin-top: 3rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .biblio-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 0.5rem;
+    }
+
+    .biblio-list {
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="container paper-container paper-coffee-stained font-badhon-ador">
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+      <div class="nav-left">
+        <a href="index.html" class="nav-btn"><i class="fa-solid fa-list-ul"></i> বিষয় সূচিপত্র</a>
+      </div>
+      <div class="controls">
+        <button class="control-btn" id="btn-dec" title="ফন্ট ছোট করুন">A-</button>
+        <button class="control-btn" id="btn-reset" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="control-btn" id="btn-inc" title="ফন্ট বড় করুন">A+</button>
+        <button class="control-btn" id="btn-theme" title="থিম পরিবর্তন">🌙</button>
+      </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+      <span class="ch-pre">কম্পিউটার ও তথ্যপ্রযুক্তি • অধ্যায় ০৭</span>
+      <h1 class="ch-title font-badhon-ador">
+        ইন্টারনেট সংক্রান্ত বিষয়
+        <span class="ch-en">(Internet Related Topics & Protocols)</span>
+      </h1>
+      <div class="ch-meta">
+        <span><i class="fa-solid fa-file-lines"></i> পৃষ্ঠা: ৮৬০-৮৬৩</span>
+        <span class="ch-badge"><i class="fa-solid fa-circle-question"></i> মোট প্রশ্ন: ১৫ টি</span>
+      </div>
+    </header>
+
+    <!-- BCS Analysis Matrix -->
+    
+<div class="bcs-table-wrapper">
+  <table class="bcs-table">
+    <thead>
+      <tr><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th><th>বিসিএস</th><th>প্রশ্ন সংখ্যা</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>৫০তম</td><td>১</td><td>৪৪তম</td><td>১</td><td>৩৮তম</td><td>১</td></tr>
+      <tr><td>৪৯তম</td><td>০</td><td>৪৩তম</td><td>২</td><td>৩৭তম</td><td>১</td></tr>
+      <tr><td>৪৮তম</td><td>০</td><td>৪২তম</td><td>০</td><td>৩৬তম</td><td>০</td></tr>
+      <tr><td>৪৭তম</td><td>০</td><td>৪১তম</td><td>২</td><td>৩৫তম</td><td>১</td></tr>
+      <tr><td>৪৬তম</td><td>১</td><td>৪০তম</td><td>২</td><td>১০ম-৩৪তম</td><td>৪</td></tr>
+      <tr><td>৪৫তম</td><td>২</td><td>৩৯তম</td><td>০</td><td><strong>সর্বমোট</strong></td><td><strong>১৫</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+    <!-- Part 1: Authentic Sketchnotes & Revision Notes -->
+    <section class="notes-section">
+      <h2 class="sec-heading font-badhon-ador"><i class="fa-solid fa-lightbulb"></i> প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি</h2>
+      
+<div class="sk-box">
+  <div class="sk-box-title">🌐 ইন্টারনেট, ওয়ার্ল্ড ওয়াইড ওয়েব ও আইপি অ্যাড্রেসিং</div>
+  <table class="sk-table">
+    <thead><tr><th>বিষয় / পরিভাষা</th><th>পূর্ণরূপ ও বিবরণ</th><th>মূল বৈশিষ্ট্য</th></tr></thead>
+    <tbody>
+      <tr><td><strong>WWW</strong></td><td>World Wide Web (টিম বার্নার্স লি ১৯৮৯ সালে উদ্ভাবন করেন)</td><td>ওয়েবপেজসমূহের আন্তঃসংযুক্ত হাইপারটেক্সট ব্যবস্থা</td></tr>
+      <tr><td><strong>IPv4</strong></td><td>Internet Protocol version 4</td><td>৩২ বিটের ঠিকানা; ৪টি অকটেট ডট দিয়ে পৃথক (যেমন: 192.168.1.1); মোট ঠিকানা ২³² বা প্রায় ৪.৩ বিলিয়ন</td></tr>
+      <tr><td><strong>IPv6</strong></td><td>Internet Protocol version 6</td><td>১২৮ বিটের ঠিকানা; ৮টি গ্রুপ কোলন দিয়ে পৃথক হেক্সাডেসিমেল (মোট ঠিকানা ২¹²⁸)</td></tr>
+      <tr><td><strong>DNS</strong></td><td>Domain Name System</td><td>মানুষের বোধগম্য ডোমেন নামকে কম্পিউটারের আইপি অ্যাড্রেসে রূপান্তর করে (ইন্টারনেটের ফোনবুক)</td></tr>
+      <tr><td><strong>URL</strong></td><td>Uniform Resource Locator</td><td>ওয়েবে কোনো নির্দিষ্ট রিসোর্সের একক বৈশ্বিক ঠিকানা (Protocol + Domain + Path)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="sk-box">
+  <div class="sk-box-title">📡 প্রধান ইন্টারনেট প্রোটোকলসমূহ (Protocols)</div>
+  <ul class="sk-list">
+    <li><strong>HTTP / HTTPS:</strong> Hypertext Transfer Protocol (Port 80) এবং Secure (SSL/TLS এনক্রিপ্টেড - Port 443)। ওয়েবপেজ স্থানান্তরে ব্যবহৃত হয়।</li>
+    <li><strong>FTP:</strong> File Transfer Protocol (Port 20, 21)। ফাইল আপলোড ও ডাউনলোডে ব্যবহৃত হয়।</li>
+    <li><strong>SMTP:</strong> Simple Mail Transfer Protocol (Port 25)। ইমেইল প্রেরণে ব্যবহৃত হয়।</li>
+    <li><strong>POP3 / IMAP:</strong> Post Office Protocol (Port 110) ও Internet Message Access Protocol (Port 143)। মেইল সার্ভার থেকে ইমেইল গ্রহণে ব্যবহৃত হয়।</li>
+  </ul>
+</div>
+
+<div class="sk-sticky">
+  🔍 <strong>ওয়েব ব্রাউজার বনাম সার্চ ইঞ্জিন:</strong><br>
+  • <strong>ওয়েব ব্রাউজার:</strong> অ্যাপ্লিকেশন সফটওয়্যার যা ওয়েবপেজ প্রদর্শন করে (উদা: Google Chrome, Mozilla Firefox, Apple Safari, Microsoft Edge, Opera)।<br>
+  • <strong>সার্চ ইঞ্জিন:</strong> ওয়েবভিত্তিক সেবা যা কি-ওয়ার্ড দিয়ে ইন্টারনেটে তথ্য অনুসন্ধান করে (উদা: Google, Bing, Yahoo!, DuckDuckGo, পিপীলিকা)।
+</div>
+
+    </section>
+
+    <!-- Part 2: Interactive Past Exam Question Engine -->
+    <section class="quiz-section">
+      <div class="quiz-toolbar">
+        <h2 class="sec-heading" style="margin-bottom:0; font-size:1.15rem;"><i class="fa-solid fa-circle-check"></i> প্রামাণ্য প্রশ্নব্যাংক ও কুইজ</h2>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <span class="score-badge">স্কোর: <span id="score-counter">০</span> / ১৫</span>
+          <button class="reset-btn" id="btn-quiz-reset"><i class="fa-solid fa-rotate-left"></i> রিসেট</button>
+        </div>
+      </div>
+      <div class="quiz-cards-container">
+        
+        <div class="q-card" id="q7_1" data-session="৫০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১</span>
+            <span class="q-tag">৫০তম বিসিএস</span>
+          </div>
+          <div class="q-text">১. HTTPS কোন বৈশিষ্ট্য HTTP-এর সাথে যোগ করে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">নিরাপত্তা (Security / Encryption)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">উচ্চগতি</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">স্বয়ংক্রিয় ডাউনলোড</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">ভিডিও স্ট্রিমিং</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (নিরাপত্তা)</strong><br>HTTPS (Hypertext Transfer Protocol Secure)-এ SSL/TLS এনক্রিপশন প্রোটোকল যুক্ত থাকে, যা ব্রাউজার ও ওয়েব সার্ভারের মধ্যকার সমস্ত ডেটা লেনদেনকে এনক্রিপ্ট করে নিরাপদ রাখে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q7_2" data-session="৪৬তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">২</span>
+            <span class="q-tag">৪৬তম বিসিএস</span>
+          </div>
+          <div class="q-text">২. IPv4 অ্যাড্রেস কত বিটের হয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">৩২ বিট</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">৬৪ বিট</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">১২৮ বিট</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">১৬ বিট</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (৩২ বিট)</strong><br>IPv4 অ্যাড্রেস মোট ৩২ বিট (৪ বাইট) দীর্ঘ হয়, যা ৪টি অকটেটে ডট (.) দ্বারা বিভক্ত থাকে (যেমন: 172.16.254.1)।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q7_3" data-session="৪৫তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৩</span>
+            <span class="q-tag">৪৫তম বিসিএস</span>
+          </div>
+          <div class="q-text">৩. IPv6 অ্যাড্রেস কত বিট বিশিষ্ট?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">১২৮ বিট</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">৩২ বিট</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">৬৪ বিট</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">২৫৬ বিট</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (১২৮ বিট)</strong><br>IPv6 অ্যাড্রেস ১২৮ বিট বিশিষ্ট, যা হেক্সাডেসিমেল পদ্ধতিতে কোলন (:) দিয়ে পৃথক করা ৮টি ব্লকে লেখা হয় (যেমন- 2001:0db8:85a3::8a2e:0370:7334)।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q7_4" data-session="৪৫তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৪</span>
+            <span class="q-tag">৪৫তম বিসিএস</span>
+          </div>
+          <div class="q-text">৪. ডোমেইন নেমকে আইপি অ্যাড্রেসে অনুবাদ করে কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">DNS (Domain Name System)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">DHCP</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">FTP</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">HTTP</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (DNS)</strong><br>DNS মানুষের বোধগম্য ডোমেন নামকে (যেমন: www.google.com) কম্পিউটারের সাথে যোগাযোগের উপযুক্ত নিউমেরিক আইপি ঠিকানায় (যেমন: 142.250.190.46) অনুবাদ করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q7_5" data-session="৪৪তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৫</span>
+            <span class="q-tag">৪৪তম বিসিএস</span>
+          </div>
+          <div class="q-text">৫. URL-এর পূর্ণরূপ কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Uniform Resource Locator</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Universal Resource Link</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Unified Resource Language</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Uniform Record Locator</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Uniform Resource Locator)</strong><br>URL হলো ইন্টারনেটে কোনো ওয়েবপেজ বা রিসোর্সের নির্দিষ্ট গ্লোবাল ঠিকানা, যা প্রোটোকল, ডোমেন নাম ও ফাইল পাথের সমন্বয়ে গঠিত।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q7_6" data-session="৪৩তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৬</span>
+            <span class="q-tag">৪৩তম বিসিএস</span>
+          </div>
+          <div class="q-text">৬. ফাইল আপলোড বা স্থানান্তরের জন্য ইন্টারনেট প্রোটোকল কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">FTP</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">HTTP</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">SMTP</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">DNS</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (FTP)</strong><br>FTP (File Transfer Protocol) ইন্টারনেটে নেটওয়ার্কের এক কম্পিউটার থেকে অন্য কম্পিউটারে ফাইল পাঠানো ও গ্রহণের জন্য নির্ধারিত স্ট্যান্ডার্ড প্রোটোকল।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q7_7" data-session="৪৩তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৭</span>
+            <span class="q-tag">৪৩তম বিসিএস</span>
+          </div>
+          <div class="q-text">৭. ওয়ার্ল্ড ওয়াইড ওয়েব (WWW)-এর জনক কে?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">টিম বার্নার্স-লি (Tim Berners-Lee)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">ভিন্ট সার্ফ</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">মার্ক জুকারবার্গ</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">বিল গেটস</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (টিম বার্নার্স-লি)</strong><br>১৯৮৯ সালে সুইজারল্যান্ডের সার্ন (CERN)-এ গবেষণারত ব্রিটিশ বিজ্ঞানী স্যার টিম বার্নার্স-লি এইচটিএমএল এবং ওয়ার্ল্ড ওয়াইড ওয়েব (WWW) উদ্ভাবন করেন।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q7_8" data-session="৪১তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৮</span>
+            <span class="q-tag">৪১তম বিসিএস</span>
+          </div>
+          <div class="q-text">৮. ইন্টারনেটের মাধ্যমে তথ্যের আদান-প্রদান নিয়ন্ত্রণের মূল প্রোটোকল সুইট কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">TCP/IP</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">IPX/SPX</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">NetBIOS</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">AppleTalk</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (TCP/IP)</strong><br>TCP/IP (Transmission Control Protocol / Internet Protocol) হলো ইন্টারনেটের সার্বজনীন প্রোটোকল স্যুট যা ডেটাকে ছোট ছোট প্যাকেটে বিভক্ত করে গন্তব্যে নির্ভুল পৌঁছানো নিশ্চিত করে।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q7_9" data-session="৪১তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">৯</span>
+            <span class="q-tag">৪১তম বিসিএস</span>
+          </div>
+          <div class="q-text">৯. নিচের কোনটি একটি ওয়েব ব্রাউজার নয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Google Search</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Google Chrome</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Safari</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Opera</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Google Search)</strong><br>Google Search একটি সার্চ ইঞ্জিন। গুগল ক্রোম, সাফারি ও অপেরা হলো ইন্টারনেট ব্রাউজার সফটওয়্যার।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q7_10" data-session="৪০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১০</span>
+            <span class="q-tag">৪০তম বিসিএস</span>
+          </div>
+          <div class="q-text">১০. ইন্টারনেটের জনক (Father of the Internet) হিসেবে কাকে গণ্য করা হয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">ভিন্টন জি সার্ফ (Vinton G. Cerf)</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">টিম বার্নার্স লি</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">স্টিভ জবস</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">চার্লস ব্যাবেজ</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (ভিন্টন জি সার্ফ)</strong><br>যুক্তরাষ্ট্রের কম্পিউটার বিজ্ঞানী ভিন্টন সার্ফ (Vinton Cerf) এবং রবার্ট কান টিসিপি/আইপি প্রোটোকল তৈরি করায় তাদের ইন্টারনেটের জনক বলা হয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q7_11" data-session="৪০তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১১</span>
+            <span class="q-tag">৪০তম বিসিএস</span>
+          </div>
+          <div class="q-text">১১. ওয়েবপেজ তৈরির প্রধান হাইপারটেক্সট মার্কআপ ভাষা কোনটি?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">HTML</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">HTTP</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">FTP</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">URL</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (HTML)</strong><br>HTML (HyperText Markup Language) হলো ওয়েবপেজ ডিজাইন ও কনটেন্টের গঠন তৈরির জন্য সর্বজনীন মার্কআপ ভাষা।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q7_12" data-session="৩৭তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১২</span>
+            <span class="q-tag">৩৭তম বিসিএস</span>
+          </div>
+          <div class="q-text">১২. IP-V6 অ্যাড্রেস কত বিটের?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">১২৮</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">৩২</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">১২</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">৬</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (১২৮)</strong><br>IPv6 (Internet Protocol version 6) অ্যাড্রেসের আকার ১২৮ বিট, যা প্রায় ৩.৪ × ১০³⁸ সংখ্যক একক ইউনিক আইপি অ্যাড্রেস তৈরি করতে সক্ষম।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q7_13" data-session="৩৫তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৩</span>
+            <span class="q-tag">৩৫তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৩. নিচের কোনটি ছাড়া Internet-এ প্রবেশ করা সহজ নয়?</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">Web browser</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">Task bar</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">Notification area</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">Menu bar</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (Web browser)</strong><br>ওয়েব ব্রাউজার হলো এমন একটি ক্লায়েন্ট সফটওয়্যার অ্যাপ্লিকেশন যা ওয়ার্ল্ড ওয়াইড ওয়েবের কনটেন্ট প্রদর্শন ও নেভিগেট করতে অপরিহার্য।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q7_14" data-session="৩৩তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৪</span>
+            <span class="q-tag">৩৩তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৪. ইন্টারনেট চালুর বছর-</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">১৯৬৯</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">১৯৬৫</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">১৯৭৯</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">১৯৮১</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (১৯৬৯)</strong><br>মার্কিন প্রতিরক্ষা বিভাগের অ্যাডভান্সড রিসার্চ প্রজেক্টস এজেন্সির অর্থায়নে ১৯৬৯ সালে চার বিশ্ববিদ্যালয়ের মধ্যে আরপানেট (ARPANET) চালুর মাধ্যমে ইন্টারনেটের ঐতিহাসিক যাত্রা শুরু হয়।
+            </div>
+          </div>
+        </div>
+        
+        <div class="q-card" id="q7_15" data-session="৩১তম/৩০তম/২৪তম বিসিএস">
+          <div class="q-header">
+            <span class="q-num">১৫</span>
+            <span class="q-tag">৩১তম/৩০তম/২৪তম বিসিএস</span>
+          </div>
+          <div class="q-text">১৫. কম্পিউটার-টু-কম্পিউটারের তথ্য আদান-প্রদানের প্রযুক্তিকে বলা হয়-</div>
+          <div class="options-grid">
+            <button class="opt-btn" data-answer="true"><span class="opt-letter">ক</span> <span class="opt-txt">ইন্টারনেট</span></button>
+<button class="opt-btn"><span class="opt-letter">খ</span> <span class="opt-txt">ই-মেইল</span></button>
+<button class="opt-btn"><span class="opt-letter">গ</span> <span class="opt-txt">ইন্টারকম</span></button>
+<button class="opt-btn"><span class="opt-letter">ঘ</span> <span class="opt-txt">টেলিযোগাযোগ</span></button>
+
+          </div>
+          <div class="ans-drawer">
+            <div class="ans-badge">ব্যাখ্যা ও প্রামাণ্য তথ্য</div>
+            <div class="exp-content">
+              <strong>উত্তর: ক (ইন্টারনেট)</strong><br>বিশ্বজুড়ে লক্ষ লক্ষ কম্পিউটারের মধ্যকার পারস্পরিক তথ্য ও ডেটা আদান-প্রদানের বিশ্বজনীন নেটওয়ার্ক ব্যবস্থাকে ইন্টারনেট বলা হয়।
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <nav class="ch-nav-bottom">
+      <div><a href="ডেটাবেজ সিস্টেম.html" class="nav-arrow">← পূর্ববর্তী অধ্যায়</a></div>
+      <div><a href="index.html" class="nav-arrow"><i class="fa-solid fa-house"></i> সূচিপত্র</a></div>
+      <div><a href="কম্পিউটার ও সেলুলার নেটওয়ার্কিং সিস্টেম ও ডেটা কমিউনিকেশন.html" class="nav-arrow">পরবর্তী অধ্যায় →</a></div>
+    </nav>
+
+    
+
+    <!-- Universal Footer -->
+    <footer>
+      <p>বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ ডিজিটাল প্রশ্নব্যাংক • সাধারণ বিজ্ঞান ও তথ্যপ্রযুক্তি শাখা</p>
+      <p style="margin-top: 0.5rem; font-size: 0.85rem;">হস্তলিপি ও বাস্তবসম্মত পেপার টেক্সচার সহযোগে নির্মিত ইন্টারঅ্যাক্টিভ সংস্করণ</p>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle
+    const themeBtn = document.getElementById('btn-theme');
+    const htmlElem = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    htmlElem.setAttribute('data-theme', savedTheme);
+    themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+    themeBtn.addEventListener('click', () => {
+      const cur = htmlElem.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      htmlElem.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+
+    // Font size scaling
+    let scale = parseFloat(localStorage.getItem('font-scale') || '1');
+    applyScale(scale);
+
+    document.getElementById('btn-inc').addEventListener('click', () => {
+      if (scale < 1.3) { scale += 0.08; applyScale(scale); }
+    });
+    document.getElementById('btn-dec').addEventListener('click', () => {
+      if (scale > 0.85) { scale -= 0.08; applyScale(scale); }
+    });
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      scale = 1.0; applyScale(scale);
+    });
+
+    function applyScale(s) {
+      document.documentElement.style.setProperty('--font-scale', s);
+      localStorage.setItem('font-scale', s);
+    }
+
+    // Quiz Engine
+    let currentScore = 0;
+    const answeredCards = new Set();
+    const scoreElem = document.getElementById('score-counter');
+
+    function toBnNum(num) {
+      const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+      return num.toString().split('').map(d => bnDigits[parseInt(d)] || d).join('');
+    }
+
+    document.querySelectorAll('.q-card').forEach(card => {
+      const cardId = card.id;
+      const optBtns = card.querySelectorAll('.opt-btn');
+      const ansDrawer = card.querySelector('.ans-drawer');
+
+      optBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (answeredCards.has(cardId)) return;
+          answeredCards.add(cardId);
+
+          const isCorrect = btn.getAttribute('data-answer') === 'true';
+          if (isCorrect) {
+            btn.classList.add('correct');
+            currentScore++;
+            scoreElem.textContent = toBnNum(currentScore);
+          } else {
+            btn.classList.add('wrong');
+            // highlight correct option
+            optBtns.forEach(b => {
+              if (b.getAttribute('data-answer') === 'true') {
+                b.classList.add('correct');
+              }
+            });
+          }
+
+          // disable all option buttons in this card
+          optBtns.forEach(b => b.disabled = true);
+
+          // reveal explanation drawer
+          if (ansDrawer) ansDrawer.style.display = 'block';
+        });
+      });
+    });
+
+    document.getElementById('btn-quiz-reset').addEventListener('click', () => {
+      answeredCards.clear();
+      currentScore = 0;
+      scoreElem.textContent = '০';
+      document.querySelectorAll('.q-card').forEach(card => {
+        card.querySelectorAll('.opt-btn').forEach(btn => {
+          btn.disabled = false;
+          btn.classList.remove('correct', 'wrong');
+        });
+        const drawer = card.querySelector('.ans-drawer');
+        if (drawer) drawer.style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>
