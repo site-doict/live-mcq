@@ -445,7 +445,11 @@
     (function() {
       try {
         var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        var viewMode = localStorage.getItem('ebk_view_mode') || 'full';
+        var qaMode = localStorage.getItem('ebk_qa_mode') || 'quiz';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-view-mode', viewMode);
+        document.documentElement.setAttribute('data-qa-mode', qaMode);
         if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
@@ -453,23 +457,8 @@
         }
       } catch(e) {}
     })();
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        var cur = document.documentElement.getAttribute('data-theme') || 'light';
-        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
-        btns.forEach(function(b) {
-          var icon = b.querySelector('#themeIcon') || b;
-          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
-            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
-          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
-            b.textContent = cur === 'dark' ? '☀️' : '🌙';
-          }
-          var text = b.querySelector('#themeText');
-          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
-        });
-      } catch(e) {}
-    });
   </script>
+  <script src="../universal-modes.js"></script>
 </head>
 <body>
   <div class="container">
@@ -568,7 +557,43 @@
     <!-- Questions Container -->
     <main id="questionsContainer">
       <!-- Question 1 -->
-      <article class="q-card" id="q1">
+      
+    <!-- Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি -->
+    <section class="part-1-notes info-summary-card" id="part1Notes" style="background:var(--bg-surface, #fff); border:1.5px solid var(--border-color, #e2e8f0); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary, #0f766e); padding-bottom:8px; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+        <h2 style="font-size:1.15rem; font-weight:800; color:var(--primary, #0f766e); display:flex; align-items:center; gap:8px; margin:0;">
+          <span>📝</span> <span>বিভিন্ন গেরিলা ও জঙ্গি সংস্থা, বিদ্রোহী জোট এবং গোয়েন্দা — প্রামাণ্য রিভিশন নোট ও বিশ্ব তথ্যাবলি (Part 1)</span>
+        </h2>
+        <span style="font-size:0.75rem; font-weight:700; background:rgba(15,118,110,0.12); color:var(--primary, #0f766e); padding:3px 8px; border-radius:6px;">
+          বিসিএস পরীক্ষার বিশদ ব্যাখ্যা হতে সংকলিত (11টি মূল পয়েন্ট)
+        </span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:10px;">
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            📌 ঐতিহাসিক পটভূমি, চুক্তি ও গুরুত্বপূর্ণ ঘটনাপঞ্জি
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>— লোহিত সাগরে:</strong> উত্তর: ঘ (প্রসপারিটি গার্ডিয়ান) অপারেশন প্রসপারিটি গার্ডিয়ান লোহিত সাগরে ইয়েমেনের হুথি বিদ্রোহীদের ধারাবাহিক হামলা ও বাণিজ্যিক জাহাজ চলাচলের হুমকির জবাবে মার্কিন নেতৃত্বাধীন একটি বহুজাতিক সামুদ্রিক নিরাপত্তা উদ্যোগ।</li><li><strong>সালের এপ্রিল থেকে:</strong> উত্তর: ঘ (র‍্যাপিড সাপোর্ট ফোর্স (RSF)) ২০২৩ সালের এপ্রিল থেকে সুদানের সশস্ত্র বাহিনীর (SAF) বিরুদ্ধে গৃহযুদ্ধে লিপ্ত বিদ্রোহী আধাসামরিক গোষ্ঠীটি হলো র‍্যাপিড সাপোর্ট ফোর্সেস (RSF)।</li><li><strong>নিরাপত্তা আলোচনায় নিচের:</strong> উত্তর: গ (র‍্যানসমওয়্যার অ্যাটাক (Ransomware Attack)) আন্তর্জাতিক নিরাপত্তা আলোচনায় র‍্যানসমওয়্যার (Ransomware) ক্রমবর্ধমানভাবে তাৎপর্যপূর্ণ হয়ে উঠেছে।</li><li><strong>বিচ্ছিন্নতাবাদী দল Kurdistan:</strong> উত্তর: ঘ (আবদুল্লাহ ওচালান) তুরস্কের বিচ্ছিন্নতাবাদী দল Kurdistan Workers' Party বা PKK এর প্রতিষ্ঠাতা আবদুল্লাহ ওচালান।</li><li><strong>Five Eyes:</strong> উত্তর: খ (ফ্রান্স) 'Five Eyes' গোয়েন্দা জোটের অন্তর্ভুক্ত দেশ নয় ফ্রান্স। অন্যদিকে অস্ট্রেলিয়া, নিউজিল্যান্ড ও কানাডা Five Eyes-এর সদস্য। Five Eyes : Five Eyes ইন্টেলিজেন্স অ্যালায়েন্স, যা FVEY নামেও পরিচিত।</li><li><strong>স্টিলথ ড্রোন:</strong> উত্তর: ক (বোমারু বিমান চালিত) 'ড্রোন' হলো এক প্রকার চালকবিহীন বিমান। আমেরিকার স্টিলথ ড্রোন হলো একটি বোমারু বিমান চালিত ড্রোন।</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            ⚡ আন্তর্জাতিক সংস্থা, সদস্য, সনদ ও সদরদপ্তর
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>ফেয়ার ফ্যাক্স কি?:</strong> উত্তর: গ (গোয়েন্দা সংস্থা) ফেয়ার ফ্যাক্স মার্কিন যুক্তরাষ্ট্রের বেসরকারি অর্থনৈতিক গোয়েন্দা সংস্থা। ফেয়ার ফ্যাক্সের পাশাপাশি যুক্তরাষ্ট্রে আরও কয়েকটি গুরুত্বপূর্ণ গোয়েন্দা সংস্থা রয়েছে।</li><li><strong>সায়েফ গেরিলা গোষ্ঠী:</strong> উত্তর: খ (ফিলিপাইন) ফিলিপাইন ভিত্তিক স্বাধীনতাকামী গেরিলা গোষ্ঠী আবু সায়েফ। এই গোষ্ঠীটি ১৯৯১ সালে প্রতিষ্ঠিত হয়। তারা দীর্ঘদিন ধরে মুসলিম অধ্যুষিত মিনদনাও প্রদেশে একটি স্বাধীন রাষ্ট্র গড়ার সংগ্রাম চালিয়ে যাচ্ছে।</li><li><strong>কন্ট্রা:</strong> উত্তর: খ (যুক্তরাষ্ট্র) ১৯৭৯ সালে নিকারাগুয়ায় স্বৈরাচারী সামোজা সরকারের পতন ঘটে। এতে আশা ভঙ্গ হয় যুক্তরাষ্ট্রের রিগ্যান সরকারের।</li><li><strong>ব্ল্যাক ক্যাট:</strong> উত্তর: খ (ভারত) 'ব্ল্যাক ক্যাট' হলো ভারতের ন্যাশনাল সিকিউরিটি গার্ড (NSG) এর বিশেষ কমান্ডো বাহিনী। এই বাহিনী সন্ত্রাসী হামলা, জরুরি উদ্ধার অভিযান এবং অন্যান্য বিশেষ নিরাপত্তা কার্যক্রম পরিচালনার জন্য প্রশিক্ষিত।</li><li><strong>যে বিদ্রোহীদের যুক্তরাষ্ট্র:</strong> উত্তর: গ (কন্ট্রা) নিকারাগুয়ায় যে বিদ্রোহী গোষ্ঠীকে যুক্তরাষ্ট্র সমর্থন করেছিল, তাদের নাম ছিল কন্ট্রা (Contra)। ১৯৮০-এর দশকে নিকারাগুয়ায় স্যান্ডিনিস্তা সরকার সোভিয়েত ইউনিয়নের ঘনিষ্ঠ ছিল।</li>
+          </ul>
+        </div>
+      </div>
+      <div style="font-size:0.75rem; color:var(--text-muted, #64748b); text-align:right; font-style:italic; margin-top:4px;">
+        * প্রশ্নের কুইজে যাওয়ার আগেই উপরের প্রামাণ্য তথ্যাবলি একনজরে রিভিশন দিয়ে নিন।
+      </div>
+    </section>
+
+    <article class="q-card" id="q1">
         <div class="q-header">
           <span class="q-num">১.</span>
           <div class="q-text-group">

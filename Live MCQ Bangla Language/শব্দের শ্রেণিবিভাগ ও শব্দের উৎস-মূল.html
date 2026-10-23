@@ -491,7 +491,11 @@
     (function() {
       try {
         var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        var viewMode = localStorage.getItem('ebk_view_mode') || 'full';
+        var qaMode = localStorage.getItem('ebk_qa_mode') || 'quiz';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-view-mode', viewMode);
+        document.documentElement.setAttribute('data-qa-mode', qaMode);
         if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
@@ -499,23 +503,8 @@
         }
       } catch(e) {}
     })();
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        var cur = document.documentElement.getAttribute('data-theme') || 'light';
-        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
-        btns.forEach(function(b) {
-          var icon = b.querySelector('#themeIcon') || b;
-          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
-            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
-          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
-            b.textContent = cur === 'dark' ? '☀️' : '🌙';
-          }
-          var text = b.querySelector('#themeText');
-          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
-        });
-      } catch(e) {}
-    });
   </script>
+  <script src="../universal-modes.js"></script>
 </head>
 <body>
   <div class="reading-progress-bar" id="progressBar"></div>
@@ -548,6 +537,42 @@
     </section>
 
     <!-- Score Live Tracker -->
+    
+    <!-- Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি -->
+    <section class="part-1-notes info-summary-card" id="part1Notes" style="background:var(--bg-surface, #fff); border:1.5px solid var(--border-color, #e2e8f0); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary, #0f766e); padding-bottom:8px; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+        <h2 style="font-size:1.15rem; font-weight:800; color:var(--primary, #0f766e); display:flex; align-items:center; gap:8px; margin:0;">
+          <span>📝</span> <span>শব্দের শ্রেণিবিভাগ ও শব্দের উৎস-মূল — প্রামাণ্য রিভিশন নোট ও সূত্রাবলি (Part 1)</span>
+        </h2>
+        <span style="font-size:0.75rem; font-weight:700; background:rgba(15,118,110,0.12); color:var(--primary, #0f766e); padding:3px 8px; border-radius:6px;">
+          বিসিএস পরীক্ষার বিশদ ব্যাখ্যা হতে সংকলিত (31টি মূল পয়েন্ট)
+        </span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:10px;">
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            📌 মূল সূত্র, সংজ্ঞা ও ব্যাকরণিক নিয়ম
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>ময়দান, মুনাফা, বই:</strong> উত্তর: (গ) আরবি ময়দান (আরবি ভাষার শব্দ) শব্দটি বিশেষ্য পদ। অর্থ: মাঠ, প্রান্তর। মুনাফা (আরবি ভাষার শব্দ) শব্দটি বিশেষ্য পদ।</li><li><strong>শব্দ কোনটি?:</strong> উত্তর: (ঘ) শাখামৃগ সমাস নিষ্পন্ন যে সকল শব্দ সম্পূর্ণভাবে সমস্যমান পদসমূহের অনুগামী না হয়ে কোনো বিশিষ্ট অর্থ গ্রহণ করে, তাদের যোগরূঢ় শব্দ বলে।</li><li><strong>কোনটি যৌগিক:</strong> উত্তর: (ঘ) মিতালি যে সকল শব্দের ব্যুৎপত্তিগত অর্থ ও ব্যবহারিক অর্থ একই রকম, সেগুলোকে যৌগিক শব্দ বলে। যেমন- মিতালি = মিতা + আলি — অর্থ: সখ্য, বন্ধুত্ব, বন্ধুতা ।</li><li><strong>কলম:</strong> উত্তর: (গ) গ্রিক আরবি কলম (qalam) শব্দটির আদি উৎস কলমোস (Kalamos/Kálamos); যা মূলত গ্রিক ভাষার শব্দ । Kalamos/Kálamos শব্দের অর্থ- a reed, a pen.</li><li><strong>হরতাল:</strong> উত্তর: (গ) গুজরাটি 'হরতাল' এবং 'খদ্দর' শব্দ দুটি গুজরাটি ভাষা থেকে বাংলা ভাষায় এসেছে। অন্যান্য বিদেশি শব্দ: পর্তুগিজ: আলমারি, আনারস, আলপিন, গির্জা, চাবি, পাউরুটি, পেঁপে, পেরেক, পেয়ারা, সাবান, বালতি, বোতাম।</li><li><strong>কোনটি তৎসম:</strong> উত্তর: (গ) ধূলি ধূলি (বিশেষ্য) : অর্থ- শুকনো মাটির সূক্ষ্ম কণা, রেণু। শব্দটি সংস্কৃত বা তৎসম ভাষা থেকে অবিকৃতভাবে আগত। পছন্দ: ফারসি শব্দ।</li><li><strong>কোন ভাষা:</strong> উত্তর: (ঘ) ফারসি আসমান (বিশেষ্য; অর্থ- আকাশ) শব্দটি ফারসি ভাষা থেকে আগত। বাংলায় ব্যবহৃত ফারসি শব্দাবলি: বেহেশত, দোজখ, ফেরেশতা, নামাজ, খোদা, গুনাহ, পয়গম্বর, কারখানা, চশমা, দোকান, দস্তখত, দরবার ইত্যাদি।</li><li><strong>বাবা:</strong> উত্তর: (ঘ) তুর্কি 'বাবা' (পিতা, জনক) শব্দটি তুর্কি ভাষা থেকে আগত।</li><li><strong>সোমত্ত:</strong> উত্তর: (খ) সমর্থ সোমত্ত [শোমোতোতো] (বিশেষণ); {(তৎসম বা সংস্কৃত থেকে উৎপন্ন) সমর্থ } &gt; অর্থ: ১. বিয়ের উপযুক্ত (ঘরে আমার সোমত্ত মেয়ে)। ২. যৌবনপ্রাপ্ত; বয়ঃপ্রাপ্ত; সমর্থ।</li><li><strong>গির্জা:</strong> উত্তর: (খ) পর্তুগিজ গির্জা (ইগরেজা &gt; গির্জা) শব্দটি পর্তুগিজ ভাষা থেকে বাংলা ভাষায় এসেছে।</li><li><strong>জোছনা:</strong> উত্তর: (ঘ) অর্ধ-তৎসম অর্ধ-তৎসম শব্দ: বাংলা ভাষায় কিছু সংস্কৃত শব্দ কিঞ্চিৎ পরিবর্তিত আকারে ব্যবহৃত হয়। এগুলোকে বলে অর্ধ-তৎসম (আধা সংস্কৃত) শব্দ।</li><li><strong>গিন্নি:</strong> উত্তর: (ঘ) অর্ধ-তৎসম সংস্কৃত 'গৃহিণী' শব্দটি কিছুটা বিকৃত হয়ে বাংলায় 'গিন্নী' রূপ ধারণ করেছে। তাই এটি একটি অর্ধ-তৎসম শব্দ ।</li><li><strong>মৌলিক শব্দ?:</strong> উত্তর: (খ) গোলাপ মৌলিক শব্দ: যেসব শব্দ বিশ্লেষণ করা যায় না বা ভেঙ্গে আলাদা করা যায় না, সেগুলোকে মৌলিক শব্দ বলে। যেমন- গোলাপ, নাক, তিল, হাত, ফুল ইত্যাদি।</li><li><strong>হেড মৌলভী:</strong> উত্তর: (খ) ইংরেজি + আরবি বাংলা একাডেমি আধুনিক বাংলা অভিধান অনুসারে, হেড-মৌলভী : (ইংরেজি + আরবি) শব্দ। এখানে, 'হেড' ইংরেজি শব্দ (অর্থ- প্রধান) এবং 'মৌলবি' আরবি শব্দ (অর্থ- ইসলাম ধর্মশাস্ত্রে পারদর্শী ব্যক্তি)।</li><li><strong>সাধিত শব্দ:</strong> উত্তর: (গ) গোলাপ অপশন পর্যালোচনা: পানি + সা = পানসা (প্রত্যয় সাধিত) হাত + ল = হাতল (প্রত্যয় সাধিত) ফুল + এল = ফুলেল (প্রত্যয় সাধিত) গোলাপ একটি অবিভাজ্য মৌলিক শব্দ, যা কোনো প্রত্যয় বা সমাস দ্বারা গঠিত নয়।</li><li><strong>ইংরেজি শব্দ?:</strong> উত্তর: (ঘ) কমা পিস্তল ও আলমারি পর্তুগিজ শব্দ; ম্যাজেন্টা ইতালীয় শব্দ; এবং কমা (Comma) ইংরেজি শব্দ ।</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            ⚡ গুরুত্বপূর্ণ প্রামাণ্য তালিকা ও পরীক্ষার প্রয়োগ
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>উজবুক:</strong> উত্তর: (খ) তুর্কি 'উজবুক' শব্দটি তুর্কি ভাষা থেকে বাংলা ভাষায় এসেছে। এর অর্থ বোকা, নির্বোধ বা আনাড়ি ব্যক্তি।</li><li><strong>শব্দ কোনটি?:</strong> উত্তর: (ঘ) দাম দাম (মূল্য) গ্রিক শব্দ 'দ্রাখমে' (Drakhme) থেকে উৎপন্ন। বাংলায় অন্যান্য গ্রিক শব্দ: সুরঙ্গ (সুরিংক্স), ইউনানি (আইওনিয়ন), সেমাই (সেমাদালিম)।</li><li><strong>কোন শব্দটি:</strong> উত্তর: (গ) এজেন্ট 'এজেন্ট' (Agent) শব্দটি ইংরেজি ভাষা থেকে আগত; এর অর্থ প্রতিনিধি, ব্যবসায়ী সংস্থার প্রতিনিধি। অন্যদিকে, 'আইন' ফারসি শব্দ, 'দাখিল' আরবি শব্দ, এবং 'মুচলেকা' তুর্কি শব্দ।</li><li><strong>চৌ-হদ্দি:</strong> উত্তর: (ক) বাংলা + ফারসি চৌহদ্দি (বিশেষ্য): শব্দটি গঠিত হয়েছে (বাংলা 'চৌ' + ফারসি 'হদ্দি') যোগে। যার অর্থ: চারদিকের সীমানা; চতুঃসীমা।</li><li><strong>শব্দটি ফারসি?:</strong> উত্তর: (গ) পেরেশান 'পেরেশান' শব্দটি ফারসি শব্দ। এর অর্থ— উদ্বিগ্ন বা চিন্তিত। অন্যদিকে, তকদির (ভাগ্য), মুসাফির (ভ্রমণকারী), মজলুম (অত্যাচারিত) তিনটিই আরবি শব্দ।</li><li><strong>কাঁচি:</strong> উত্তর: (ঘ) তুর্কি 'কাঁচি' তুর্কি ভাষার শব্দ । অর্থ— কাগজ, কাপড় প্রভৃতি কাটার জন্য ব্যবহৃত দুটি হাতল যুক্ত ইস্পাতের ফলা একত্রে জুড়ে তৈরি ধারালো অস্ত্রবিশেষ।</li><li><strong>বেটাইম:</strong> উত্তর: (ক) ফারসি ও ইংরেজি শব্দে 'বেটাইম' একটি মিশ্র শব্দ। এখানে 'বে' হলো ফারসি উপসর্গ এবং 'টাইম' (Time) হলো ইংরেজি শব্দ । সুতরাং ফারসি উপসর্গ ও ইংরেজি শব্দের সমন্বয়ে বেটাইম শব্দটি গঠিত হয়েছে।</li><li><strong>পেয়ারা:</strong> উত্তর: (গ) পর্তুগিজ 'পেয়ারা' পর্তুগিজ ভাষার শব্দ । একইভাবে আনারস, আতা, পেঁপে, পেরেক, চাবি, আলমারি, পাউরুটি ইত্যাদিও পর্তুগিজ শব্দ।</li><li><strong>বামেতর:</strong> উত্তর: (খ) ডান বামেতর (বাম + इतर = যা বাম নয়); অর্থ— ডান, দাহিন, দক্ষিণ । কবিতায় ব্যবহার: "প্রমীলার বামেতর নয়ন নাচিল" — মাইকেল মধুসূদন দত্ত (মেঘনাদবধ কাব্য)।</li><li><strong>অনুসারে বাংলা:</strong> উত্তর: (খ) তিন ভাগে শব্দার্থ (বা অর্থমূলক) অনুসারে বাংলা ভাষার শব্দসমূহকে তিন ভাগে ভাগ করা যায়। যথা— (১) যৌগিক শব্দ, (২) রূঢ় বা রূঢ়ি শব্দ, এবং (৩) যোগরূঢ় শব্দ।</li><li><strong>ভাষা থেকে:</strong> উত্তর: (গ) বালতি 'বালতি' পর্তুগিজ ভাষা থেকে আগত শব্দ। অর্থ- হাতলযুক্ত জলের পাত্র। অন্যদিকে, 'টেবিল' ও 'চেয়ার' ইংরেজি শব্দ এবং 'শরবত' আরবি শব্দ।</li><li><strong>শব্দ কোনটি?:</strong> উত্তর: (ক) গোলাপ যেসব শব্দকে বিশ্লেষণ করা যায় না বা ভেঙে আলাদা অর্থবোধক অংশ পাওয়া যায় না, সেগুলোকে মৌলিক শব্দ বলে। যেমন- গোলাপ, নাক, লাল, হাত ইত্যাদি। শীতল, নেয়ে, গৌরব প্রত্যয়সাধিত শব্দ।</li><li><strong>ভাষা কোন:</strong> উত্তর: (গ) চা, চিনি বাংলা ভাষার ব্যাকরণ অনুযায়ী চা এবং চিনি চীনা ভাষার শব্দ। চাকু, চাকর: তুর্কি শব্দ। খদ্দর, হরতাল: গুজরাটি শব্দ।</li><li><strong>আনারস:</strong> উত্তর: (ক) পর্তুগিজ ভাষা থেকে 'আনারস' এবং 'চাবি' শব্দ দুটি পর্তুগিজ ভাষা থেকে বাংলা ভাষা গ্রহণ করেছে। অন্যদিকে, চুলা, কুলা, ডাব, ঢেঁকি, টোপর ইত্যাদি দেশি শব্দ।</li><li><strong>তদ্ভব শব্দ?:</strong> উত্তর: (ক) চাঁদ যেসব শব্দের মূল সংস্কৃত ভাষায় পাওয়া যায়, কিন্তু ভাষার স্বাভাবিক বিবর্তন ধারায় প্রাকৃতের মাধ্যমে পরিবর্তিত হয়ে আধুনিক বাংলায় স্থান করে নিয়েছে, সেগুলোকে তদ্ভব (খাঁটি বাংলা) শব্দ বলে।</li>
+          </ul>
+        </div>
+      </div>
+      <div style="font-size:0.75rem; color:var(--text-muted, #64748b); text-align:right; font-style:italic; margin-top:4px;">
+        * প্রশ্নের কুইজে যাওয়ার আগেই উপরের প্রামাণ্য সূত্রাবলি ও তালিকাটি একনজরে রিভিশন দিয়ে নিন।
+      </div>
+    </section>
+
     <div class="score-banner">
       <div class="score-stat">
         <div class="score-val" id="answered-count">০</div>

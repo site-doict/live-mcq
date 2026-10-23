@@ -410,7 +410,11 @@
     (function() {
       try {
         var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        var viewMode = localStorage.getItem('ebk_view_mode') || 'full';
+        var qaMode = localStorage.getItem('ebk_qa_mode') || 'quiz';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-view-mode', viewMode);
+        document.documentElement.setAttribute('data-qa-mode', qaMode);
         if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
@@ -418,23 +422,8 @@
         }
       } catch(e) {}
     })();
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        var cur = document.documentElement.getAttribute('data-theme') || 'light';
-        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
-        btns.forEach(function(b) {
-          var icon = b.querySelector('#themeIcon') || b;
-          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
-            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
-          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
-            b.textContent = cur === 'dark' ? '☀️' : '🌙';
-          }
-          var text = b.querySelector('#themeText');
-          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
-        });
-      } catch(e) {}
-    });
   </script>
+  <script src="../universal-modes.js"></script>
 </head>
 <body>
   <div class="container">
@@ -490,6 +479,42 @@
     </section>
 
     <!-- Sticky Score Tracker -->
+    
+    <!-- Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি -->
+    <section class="part-1-notes info-summary-card" id="part1Notes" style="background:var(--bg-surface, #fff); border:1.5px solid var(--border-color, #e2e8f0); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary, #0f766e); padding-bottom:8px; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+        <h2 style="font-size:1.15rem; font-weight:800; color:var(--primary, #0f766e); display:flex; align-items:center; gap:8px; margin:0;">
+          <span>📝</span> <span>পদ ও পদের শ্রেণিবিভাগ — প্রামাণ্য রিভিশন নোট ও সূত্রাবলি (Part 1)</span>
+        </h2>
+        <span style="font-size:0.75rem; font-weight:700; background:rgba(15,118,110,0.12); color:var(--primary, #0f766e); padding:3px 8px; border-radius:6px;">
+          বিসিএস পরীক্ষার বিশদ ব্যাখ্যা হতে সংকলিত (26টি মূল পয়েন্ট)
+        </span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:10px;">
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            📌 মূল সূত্র, সংজ্ঞা ও ব্যাকরণিক নিয়ম
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>বিষণ্ণ:</strong> বিষণ্ণ-এর শুদ্ধ বিশেষ্য রূপ— বিষণ্ণতা ; তবে এটি অপশনে না থাকায় অর্থঘনিষ্ঠ বিশেষ্য হিসেবে বিষাদ গ্রহণযোগ্য। • বিষণ্ণ (বিণ.) অর্থ: বিষাদ-যুক্ত; দুঃখিত; ক্ষুণ্ন; ম্লান, মলিন।</li><li><strong>পরিবার থেকেই শিক্ষার শুরু:</strong> বাংলা ব্যাকরণে শব্দ গঠনের বিভিন্ন উপাদান রয়েছে। যেমন-উপসর্গ, প্রত্যয়, ধাতু, বলক ইত্যাদি। প্রদত্ত বাক্য 'পরিবার থেকেই শিক্ষার শুরু'-এর মধ্যে 'থেকে' শব্দের সঙ্গে যুক্ত 'ই' শব্দটির ব্যাকরণিক পরিচয় হলো 'বলক' ।</li><li><strong>কোনটি বিশেষণ?:</strong> বিশেষণ : বাংলা ব্যাকরণে বিশেষণ হলো এমন শব্দ, যা বিশেষ্য বা সর্বনামের গুণ, পরিমাণ, পরিমাপ, অবস্থা বা পরিচয় বোঝায় এবং তাকে বিশেষিত করে।</li><li><strong>বাক্যের মধ্যে:</strong> বাক্য গঠনের নিয়ম : বাংলা বাক্যে শব্দের অবস্থান সাধারণত কর্তা-কর্ম-ক্রিয়া (SOV: Subject-Object-Verb) পদবিন্যাস অনুসারে হয়। এটি বাংলা ভাষার বাক্য গঠনের মূল বৈশিষ্ট্য।</li><li><strong>তুমি তো ভারি সুন্দর ছবি আঁক!:</strong> অনন্বয়ী অব্যয়: যে সকল অব্যয় বাক্যের অন্য পদের সঙ্গে কোনো সম্বন্ধ না রেখে স্বাধীনভাবে নানাবিধ ভাব প্রকাশে ব্যবহৃত হয়, তাদের অনন্বয়ী অব্যয় বলে।</li><li><strong>তোমার নাম কী?:</strong> সর্বনাম পদ : বিশেষ্যের পরিবর্তে যে শব্দ ব্যবহৃত হয়, তাকে সর্বনাম পদ বলে। প্রশ্ন তৈরির জন্য প্রশ্নবাচক সর্বনাম প্রয়োগ করা হয়। যেমন— কে, কি, কী, কোন, কাহার, কার, কিসে?</li><li><strong>নিচের কোনটি:</strong> যৌগিক কাল : ক্রিয়ার যে কালরূপ একাধিক ধাতুর দ্বারা গঠিত, তাকে যৌগিক কাল বলে। যৌগিক কালের ক্রিয়া গঠনের জন্য মূল ধাতুর সাথে 'ইয়া' বা 'ইতে' প্রত্যয় যোগ করার পর '√আছ্', '√থাক্' প্রভৃতি ধাতুকে সহায়ক হিসেবে ব্যবহার করতে হয়।</li><li><strong>এ যে আমাদের চেনা লোক:</strong> বিশেষণ পদ : যে শব্দ দিয়ে সাধারণত বিশেষ্য, সর্বনাম বা ক্রিয়াপদের গুণ, দোষ, সংখ্যা, পরিমাণ, অবস্থা ইত্যাদি বোঝায় তাকে বিশেষণ বলে।</li><li><strong>নিচের কোনটি:</strong> বাংলা একাডেমি আধুনিক বাংলা অভিধান অনুসারে, গাম্ভীর্য বিশেষ্য পদ (গুণবাচক বিশেষ্য)। এই শব্দের বিশেষণ রূপ হলো— গম্ভীর । • জাত ও উদ্ধত— বিশেষণ পদ।</li><li><strong>লবণ:</strong> লবণ (বিশেষ্য পদ); এটি সংস্কৃত শব্দ। অর্থ— নুন (বিশেষ্য পদ) , সোডিয়াম ও ক্লোরিন পরমাণুর রাসায়নিক বিক্রিয়াজাত কেলাসিত খনিজ পদার্থ। অন্যদিকে, • লবণাক্ত (বিশেষণ পদ); অর্থ— লবণ মিশ্রিত, ক্ষারযুক্ত বা লোনা স্বাদযুক্ত।</li><li><strong>এ মাটি সোনার বাড়া:</strong> বিশেষণের অতিশায়ন : বিশেষণ পদ যখন দুই বা ততোধিক বিশেষ্য পদের মধ্যে গুণ, অবস্থা, পরিমাণ প্রভৃতি বিষয়ে তুলনায় একটির উৎকর্ষ বা অপকর্ষ বুঝিয়ে থাকে, তাকে বিশেষণের অতিশায়ন বলে।</li><li><strong>তুমি এতক্ষণ কী করেছ?:</strong> 'তুমি এতক্ষণ কী করেছ?'-এই বাক্যে 'কী' হলো প্রশ্নবাচক সর্বনাম পদ ।</li><li><strong>সুন্দর মাত্রেরই একটা আকর্ষণ শক্তি আছে।:</strong> 'সুন্দর মাত্রেরই একটি আকর্ষণ শক্তি আছে'— এই বাক্যে 'সুন্দর' শব্দটি হলো গুণবাচক বিশেষ্য পদ । সুন্দর বিশেষ্য পদ যোগে গঠিত আরও কিছু বাক্য হলো— • সুন্দর (বিশেষ্য) মানুষকে নিজের দিকে টানে।</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            ⚡ গুরুত্বপূর্ণ প্রামাণ্য তালিকা ও পরীক্ষার প্রয়োগ
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>লাজ:</strong> 'লাজ' শব্দটি বিশেষ্য পদ ; অর্থ— লজ্জা, শরম। 'লাজ' এর বিশেষণ পদ : লাজুক, লজ্জাবতী, লজ্জাবান।</li><li><strong>যে পদে:</strong> ক্রিয়াবিশেষণ : যে পদে বাক্যের ক্রিয়াপদটির গুণ, প্রকৃতি, তীব্রতা ইত্যাদি প্রকৃতিগত অবস্থা বোঝায়, তাকে ক্রিয়াবিশেষণ বলা হয়। যেমন— ছেলেটি দ্রুত দৌড়ায়। লোকটি ধীরে হাঁটে।</li><li><strong>ক্রিয়াপদ-:</strong> ক্রিয়াপদ বাক্য গঠনের অপরিহার্য অঙ্গ। ক্রিয়াপদ ভিন্ন কোনো মনোভাবই সম্পূর্ণরূপে প্রকাশ করা যায় না। তবে কখনো কখনো বাক্যে ক্রিয়াপদ উহ্য বা অনুক্ত থাকতে পারে ।</li><li><strong>পদ:</strong> পদ : বাক্যে ব্যবহৃত বিভক্তিযুক্ত শব্দ ও ধাতুকে পদ বলে। ঐতিহ্যগত ব্যাকরণে পদ ৫ প্রকার: বিশেষ্য, বিশেষণ, সর্বনাম, ক্রিয়া এবং অব্যয়।</li><li><strong>“মরি মরি!:</strong> প্রশ্নে উল্লিখিত বাক্য— “মরি মরি! কি সুন্দর প্রভাতের রূপ” এখানে, 'মরি মরি' পদের সাথে বাক্যের অন্য কোনো পদের অন্বয় বা ব্যাকরণিক সম্পর্ক নেই। এটি মনের তীব্র ভাব/উচ্ছ্বাস প্রকাশ করছে।</li><li><strong>ইচ্ছা:</strong> ইচ্ছা (বিশেষ্য পদ); অর্থ— অভিলাষ, স্পৃহা, বাসনা। • ইচ্ছুক (বিশেষণ পদ); অর্থ— অভিলাষী, রাজি, সম্মত (সাধারণত ব্যক্তিকে নির্দেশ করে)।</li><li><strong>কোন বাক্যটিতে:</strong> সমধাতুজ কর্ম : বাক্যের ক্রিয়া ও কর্ম পদ একই ধাতু থেকে গঠিত হলে ঐ কর্মপদকে সমধাতুজ কর্ম বা ধাত্বর্থক কর্মপদ বলে।</li><li><strong>জাতিবাচক বিশেষ্যের:</strong> জাতিবাচক বিশেষ্য : যে পদ দ্বারা কোনো এক জাতীয় প্রাণী বা পদার্থের সাধারণ নাম বোঝায় তাকে জাতিবাচক বিশেষ্য বলে। যেমন— মানুষ, পাখি, নদী , পর্বত ইত্যাদি। • সমাজ, মিছিল — সমষ্টিবাচক বিশেষ্য।</li><li><strong>কোনটি বিশেষণ:</strong> জীবনী একটি সংস্কৃত শব্দ; এটি অর্থভেদে বিশেষ্য ও বিশেষণ উভয় পদ হিসেবে ব্যবহৃত হয়। প্রাণশক্তি দান করে এমন অর্থে 'জীবনী' (যেমন: জীবনী শক্তি) বিশেষণ বাচক । অন্যদিকে, • জীবন (বিশেষ্য পদ); অর্থ— প্রাণ, আয়ু।</li><li><strong>কোন বাক্যে:</strong> কিংবা, বা, অথবা, নতুবা , না হয়, নয়তো ইত্যাদি সমুচ্চয়ী (বিয়োজক) অব্যয়। তাই “লেখাপড়া কর, নতুবা ফেল করবে” বাক্যে সমুচ্চয়ী অব্যয় ব্যবহৃত হয়েছে। • অপেক্ষা, দিয়ে — অনুসর্গ অব্যয়।</li><li><strong>কোন বাক্যে:</strong> পুরুষ তিন প্রকার: • উত্তম পুরুষ : ক্রিয়ার কর্তা নিজেকে বুঝাতে যে সর্বনাম ব্যবহার করে। যেমন— আমি, আমরা। • মধ্যম পুরুষ : বক্তা যার সাথে কথা বলে তাকে বুঝাতে যে সর্বনাম ব্যবহার করে।</li><li><strong>কোন বাক্যে:</strong> সমাপিকা ক্রিয়া : যে ক্রিয়া দিয়ে বাক্যের ভাব সম্পূর্ণ হয়, তাকে সমাপিকা ক্রিয়া বলে। যেমন— ভালো করে পড়াশোনা করবে। অনুরূপভাবে— আমি ভাত খাচ্ছি , আমি দুপুরে ভাত খাই ।</li><li><strong>বিভক্তিযুক্ত শব্দ:</strong> বাক্যে ব্যবহৃত বিভক্তিযুক্ত শব্দ ও ধাতুকে পদ বলে।</li>
+          </ul>
+        </div>
+      </div>
+      <div style="font-size:0.75rem; color:var(--text-muted, #64748b); text-align:right; font-style:italic; margin-top:4px;">
+        * প্রশ্নের কুইজে যাওয়ার আগেই উপরের প্রামাণ্য সূত্রাবলি ও তালিকাটি একনজরে রিভিশন দিয়ে নিন।
+      </div>
+    </section>
+
     <div class="score-card">
       <div class="score-item score-total">
         <span>মোট প্রশ্ন:</span>

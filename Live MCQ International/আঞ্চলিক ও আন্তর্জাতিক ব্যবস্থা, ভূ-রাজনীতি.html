@@ -5,7 +5,11 @@
     (function() {
       try {
         var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        var viewMode = localStorage.getItem('ebk_view_mode') || 'full';
+        var qaMode = localStorage.getItem('ebk_qa_mode') || 'quiz';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-view-mode', viewMode);
+        document.documentElement.setAttribute('data-qa-mode', qaMode);
         if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
@@ -13,22 +17,6 @@
         }
       } catch(e) {}
     })();
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        var cur = document.documentElement.getAttribute('data-theme') || 'light';
-        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
-        btns.forEach(function(b) {
-          var icon = b.querySelector('#themeIcon') || b;
-          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
-            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
-          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
-            b.textContent = cur === 'dark' ? '☀️' : '🌙';
-          }
-          var text = b.querySelector('#themeText');
-          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
-        });
-      } catch(e) {}
-    });
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -477,6 +465,7 @@
       text-decoration: underline;
     }
   </style>
+  <script src="../universal-modes.js"></script>
 </head>
 <body>
   <div class="container">
@@ -551,7 +540,43 @@
     <main id="questionsContainer">
 
       <!-- Q1 -->
-      <article class="q-card" id="q1">
+      
+    <!-- Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি -->
+    <section class="part-1-notes info-summary-card" id="part1Notes" style="background:var(--bg-surface, #fff); border:1.5px solid var(--border-color, #e2e8f0); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary, #0f766e); padding-bottom:8px; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+        <h2 style="font-size:1.15rem; font-weight:800; color:var(--primary, #0f766e); display:flex; align-items:center; gap:8px; margin:0;">
+          <span>📝</span> <span>আঞ্চলিক ও আন্তর্জাতিক ব্যবস্থা, ভূ-রাজনীতি — প্রামাণ্য রিভিশন নোট ও বিশ্ব তথ্যাবলি (Part 1)</span>
+        </h2>
+        <span style="font-size:0.75rem; font-weight:700; background:rgba(15,118,110,0.12); color:var(--primary, #0f766e); padding:3px 8px; border-radius:6px;">
+          বিসিএস পরীক্ষার বিশদ ব্যাখ্যা হতে সংকলিত (17টি মূল পয়েন্ট)
+        </span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:10px;">
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            📌 ঐতিহাসিক পটভূমি, চুক্তি ও গুরুত্বপূর্ণ ঘটনাপঞ্জি
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>নন্দী, শশী থারুর:</strong> উত্তর: ক (মুসলিম লীগ) দ্বি-জাতি তত্ত্ব: দ্বি-জাতি তত্ত্ব হলো একটি রাজনৈতিক ও সামাজিক দর্শন, যার মতে হিন্দু ও মুসলমানরা ভিন্ন ধর্ম, ভিন্ন সংস্কৃতি, ভিন্ন জীবনাচার ও ভিন্ন ঐতিহ্যের ক...</li><li><strong>ভারত স্থল সীমান্ত:</strong> উত্তর: খ (২০১১) ২০১১ সালের ৬ সেপ্টেম্বর বাংলাদেশ ও ভারতের মধ্যে স্থল সীমান্ত সম্পর্কিত প্রটোকলটি স্বাক্ষরিত হয়। ভারতের তৎকালীন প্রধানমন্ত্রী ড. মনমোহন সিংয়ের বাংলাদেশ সফরের সময় প্রটোকলটি স্বাক্ষরিত হয়েছিল।</li><li><strong>সম্পর্কের কোন তত্ত্বটি:</strong> উত্তর: ক (উদারবাদ) আন্তর্জাতিক সম্পর্কের তত্ত্বগুলোর মধ্যে উদারবাদ (Liberalism) তত্ত্বটি আন্তর্জাতিক প্রতিষ্ঠানের কার্যকরী ভূমিকার বিষয়ে ইতিবাচক ধারণা প্রদান করে।</li><li><strong>নেকড়েযোদ্ধা কূটনীতি:</strong> উত্তর: গ (চীন) 'নেকড়েযোদ্ধা কূটনীতি' মূলত চীনের র‍্যাম্বো স্টাইলের চলচ্চিত্র 'উলফ ওয়ারিয়র-২' থেকে এসেছে। এই চলচ্চিত্রে চীনা সেনা সদস্যরা তাদের দেশের স্বার্থ রক্ষায় সক্রিয় থাকে।</li><li><strong>থেকে ক্রয়কৃত বাংলাদেশ:</strong> উত্তর: খ (মিং-ক্লাস) বাংলাদেশ ২০১৬ সালে চীনের কাছ থেকে দুটি সাবমেরিন ক্রয় করে। চীনের দালিয়ান প্রদেশের লিয়াওওয়ান শিপইয়ার্ডে সাবমেরিন দুটি বাংলাদেশের কাছে হস্তান্তর করা হয়।</li><li><strong>কত সালে এবং:</strong> উত্তর: ঘ (১৯৭৩, আলজিয়ার্স) বঙ্গবন্ধু শেখ মুজিবুর রহমানের নেতৃত্বে বাংলাদেশ ১৯৭৩ সালের ৫-৯ সেপ্টেম্বর আলজেরিয়ার রাজধানী আলজিয়ার্সে অনুষ্ঠিত জোট নিরপেক্ষ আন্দোলনের (ন্যাম) চতুর্থ ...</li><li><strong>ভারতের রাজধানী কলকাতা:</strong> উত্তর: ক (১৯১২ সালে) ১৯১২ সালে ব্রিটিশ ভারতের রাজধানী কলকাতা থেকে দিল্লিতে স্থানান্তরিত হয়। ১৯০৫ সালে বেঙ্গল প্রেসিডেন্সিকে ভেঙে দুই ভাগ করার ফলে বঙ্গভঙ্গ আন্দোলন শুরু হয়।</li><li><strong>গেম (Zero-Sum Game):</strong> উত্তর: ক (বাস্তববাদ) জিরোসাম গেম (Zero-Sum Game) আন্তর্জাতিক সম্পর্কের বাস্তববাদ (Realism) তত্ত্বের সঙ্গে সম্পর্কিত। বাস্তববাদ তত্ত্ব অনুযায়ী, আন্তর্জাতিক রাজনীতিতে এক রাষ্ট্রের লাভ মানেই অন্য রাষ্ট্রের ক্ষতি।</li><li><strong>যে তত্ত্বের মূল:</strong> উত্তর: গ (বাস্তববাদ) নৈরাজ্য (Anarchy) আন্তর্জাতিক সম্পর্কের বাস্তববাদ (Realism) তত্ত্বের একটি মূল উপাদান।</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            ⚡ আন্তর্জাতিক সংস্থা, সদস্য, সনদ ও সদরদপ্তর
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>বিশ্বযুদ্ধের পর পূর্ব-পশ্চিম:</strong> উত্তর: গ (কমেকন) দ্বিতীয় বিশ্বযুদ্ধের পর পূর্ব-পশ্চিম দ্বন্দ্বের ফলে সৃষ্ট পূর্বের অর্থনৈতিক জোট কমেকন (COMECON: Council for Mutual Economic Assistance)।</li><li><strong>নিউ সিল্ক রোড:</strong> উত্তর: ঘ (চীন) বর্তমান নিউ সিল্ক রোড ধারণার প্রবক্তা হলো চীন। প্রাচীন সিল্ক রোড ছিল একটি ঐতিহাসিক বাণিজ্য পথ, যা চীন থেকে মধ্য এশিয়া হয়ে দক্ষিণ এশিয়া, পশ্চিম এশিয়া, ইউরোপ এবং উত্তর আফ্রিকায় বিস্তৃত ছিল।</li><li><strong>শব্দসমষ্টি যে বিশেষ:</strong> উত্তর: ঘ (কূটনীতিক) Persona-non-grata একটি ল্যাটিন শব্দ, যার অর্থ 'অগ্রহণযোগ্য ব্যক্তি' বা 'অবাঞ্ছিত ব্যক্তি'। সাধারণত এই শব্দটি কূটনীতিকদের ক্ষেত্রে ব্যবহৃত হয়।</li><li><strong>vote বলতে কী:</strong> উত্তর: ক (Unofficial poll of public opinion) Straw vote বা Straw poll বলতে অনানুষ্ঠানিক ভোটকে বোঝায়, যা সাধারণ জনগণের মতামত যাচাই করার জন্য পরিচালিত হয়।</li><li><strong>যুক্তরাষ্ট্রের পররাষ্ট্রনীতির মূল:</strong> উত্তর: গ ('আসিয়ান' জোটকে সমর্থন করা) এশিয়ায় যুক্তরাষ্ট্রের পররাষ্ট্রনীতির মূল ভিত্তি হলো 'আসিয়ান' জোটকে সমর্থন করা।</li><li><strong>দক্ষিণ এশিয়ার রাজনৈতিক:</strong> উত্তর: গ (সংস্কৃতি) দক্ষিণ এশিয়ার রাজনৈতিক ক্ষেত্রে সবচেয়ে কম সংশ্লিষ্ট বিষয় হলো সংস্কৃতি। দক্ষিণ এশিয়ায় রাজনৈতিক ক্ষেত্রে প্রধানত ধর্ম, জাতি এবং ভাষা গুরুত্বপূর্ণ প্রভাব ফেলে।</li><li><strong>একদেশ, দুই নীতি:</strong> উত্তর: ঘ (গণচীন) যুক্তরাজ্যের সঙ্গে চুক্তি অনুযায়ী, হংকং শাসনের ক্ষেত্রে চীন 'এক দেশ, দুই নীতি' ব্যবস্থা অনুসরণ করা হয়ে থাকে। ১৯৯৭ সালের ১ জুলাই যুক্তরাজ্যের কাছ থেকে ১৫৬ বছর পর হংকংয়ের নিয়ন্ত্রণ পায় চীন।</li><li><strong>৫০০ দিনের প্ল্যান:</strong> উত্তর: গ (সোভিয়েত ইউনিয়নে প্রস্তাবিত বাজার অর্থনীতি প্রচলন সম্পন্ন করা) '৫০০ দিনের প্ল্যান' ছিল সোভিয়েত ইউনিয়নের একটি অর্থনৈতিক সংস্কার পরিকল্পনা, যার লক্ষ্য ছিল বাজার অর্থনীতি চালু করা।</li>
+          </ul>
+        </div>
+      </div>
+      <div style="font-size:0.75rem; color:var(--text-muted, #64748b); text-align:right; font-style:italic; margin-top:4px;">
+        * প্রশ্নের কুইজে যাওয়ার আগেই উপরের প্রামাণ্য তথ্যাবলি একনজরে রিভিশন দিয়ে নিন।
+      </div>
+    </section>
+
+    <article class="q-card" id="q1">
         <div class="q-header">
           <div class="q-num-title">
             <span class="q-number">১</span>

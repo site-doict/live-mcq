@@ -256,6 +256,192 @@
       font-weight: 600;
     }
 
+    /* Smart Study & Revision Controller Card */
+    .quick-modes-card {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      max-width: 620px;
+      margin: 14px auto 0 auto;
+      box-shadow: var(--shadow-md);
+      text-align: left;
+    }
+
+    .quick-modes-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .modes-badge {
+      font-size: 0.72rem;
+      background: rgba(15, 118, 110, 0.12);
+      color: #0f766e;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+    [data-theme="dark"] .modes-badge {
+      background: rgba(45, 212, 191, 0.18);
+      color: #2dd4bf;
+    }
+
+    .mode-group {
+      margin-bottom: 10px;
+    }
+    .mode-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .mode-label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .mode-pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .mode-pill {
+      flex: 1 1 auto;
+      padding: 7px 11px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-base);
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      text-align: center;
+    }
+
+    .mode-pill:hover {
+      border-color: #0f766e;
+      background: rgba(15, 118, 110, 0.06);
+    }
+
+    .mode-pill.active {
+      border-color: #0f766e;
+      background: #0f766e;
+      color: #ffffff;
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(15, 118, 110, 0.25);
+    }
+
+    [data-theme="dark"] .mode-pill.active {
+      background: #0d9488;
+      border-color: #14b8a6;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(20, 184, 166, 0.3);
+    }
+
+    /* Toast Notification */
+    .ebk-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      z-index: 999999;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+    [data-theme="dark"] .ebk-toast {
+      background: #1e293b;
+      border: 1px solid #334155;
+    }
+    .ebk-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      z-index: 99998;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-overlay.open {
+      display: flex;
+    }
+    .modal-box {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      width: 100%;
+      max-width: 520px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .modal-header h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-main);
+    }
+    .modal-close-btn {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      line-height: 1;
+    }
+    .modal-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.55;
+    }
+
     /* Global Live Search Bar */
     .search-wrapper {
       position: relative;
@@ -581,6 +767,7 @@
       }
     }
   </style>
+  <script src="universal-modes.js"></script>
 </head>
 <body>
 
@@ -591,6 +778,10 @@
       <span>বিসিএস লাইব্রেরি</span>
     </a>
     <div class="topbar-actions">
+      <button class="topbar-engine-btn" id="modeSettingsBtn" onclick="openRevisionModal()" title="স্টাডি ও রিভিশন সেটিংস">
+        <span>⚡</span>
+        <span class="topbar-btn-text">রিভিশন মোড</span>
+      </button>
       <a href="paper-showcase.html" class="topbar-engine-btn" title="ফন্ট ও পেপার ইঞ্জিন">
         <span>📜</span>
         <span class="topbar-btn-text">ফন্ট ও পেপার</span>
@@ -621,6 +812,44 @@
         <div class="progress-caption">
           <span id="completedCountText">সম্পন্ন: ০ / ২১১টি অধ্যায়</span>
           <span>লক্ষ্য: ১০০% রিভিশন</span>
+        </div>
+      </div>
+
+      <!-- Quick Revision & Study Controller -->
+      <div class="quick-modes-card">
+        <div class="quick-modes-title">
+          <span>⚡ স্মার্ট স্টাডি ও কুইক রিভিশন সেটিংস</span>
+          <span class="modes-badge">সকল অধ্যায়ে অটো-সিঙ্ক</span>
+        </div>
+
+        <div class="mode-group">
+          <span class="mode-label">📖 অধ্যায় কন্টেন্ট ভিউ:</span>
+          <div class="mode-pill-group" id="viewModeGroup">
+            <button type="button" class="mode-pill active" data-view="full" onclick="setGlobalViewMode('full')">
+              📚 পূর্ণাঙ্গ পাঠ (নোট + প্রশ্ন)
+            </button>
+            <button type="button" class="mode-pill" data-view="notes-only" onclick="setGlobalViewMode('notes-only')">
+              📝 শুধু প্রামাণ্য নোট ও সূত্র
+            </button>
+            <button type="button" class="mode-pill" data-view="questions-only" onclick="setGlobalViewMode('questions-only')">
+              🎯 শুধু পরীক্ষার প্রশ্নব্যাংক
+            </button>
+          </div>
+        </div>
+
+        <div class="mode-group">
+          <span class="mode-label">🧩 প্রশ্ন ও উত্তর প্রদর্শন:</span>
+          <div class="mode-pill-group" id="qaModeGroup">
+            <button type="button" class="mode-pill active" data-qa="quiz" onclick="setGlobalQaMode('quiz')">
+              🧩 কুইজ প্র্যাকটিস (অপশন সহ)
+            </button>
+            <button type="button" class="mode-pill" data-qa="show-answers" onclick="setGlobalQaMode('show-answers')">
+              💡 তাত্ক্ষণিক উত্তর ও ব্যাখ্যা
+            </button>
+            <button type="button" class="mode-pill" data-qa="direct-answer" onclick="setGlobalQaMode('direct-answer')">
+              ⚡ শুধু প্রশ্ন ও সঠিক উত্তর
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -1533,8 +1762,146 @@
       updateThemeBtn(savedTheme);
     } catch(e) {}
 
+    // ══════ Universal Revision & Study Modes ══════
+    function showToast(msg) {
+      let toast = document.getElementById('ebkToast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'ebkToast';
+        toast.className = 'ebk-toast';
+        document.body.appendChild(toast);
+      }
+      toast.innerHTML = `<span>⚡</span> <span>${msg}</span>`;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2600);
+    }
+
+    function setGlobalViewMode(mode) {
+      document.documentElement.setAttribute('data-view-mode', mode);
+      try {
+        localStorage.setItem('ebk_view_mode', mode);
+      } catch(e) {}
+      
+      document.querySelectorAll('#viewModeGroup .mode-pill, .modal-view-pill').forEach(btn => {
+        if (btn.getAttribute('data-view') === mode) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+      
+      const labels = {
+        'full': 'পূর্ণাঙ্গ অধ্যায় (নোট + প্রশ্নব্যাংক)',
+        'notes-only': 'শুধু প্রামাণ্য রিভিশন নোট ও সূত্রাবলি',
+        'questions-only': 'শুধু পরীক্ষার প্রশ্নব্যাংক'
+      };
+      showToast(`অধ্যায় ভিউ: ${labels[mode] || mode}`);
+    }
+
+    function setGlobalQaMode(mode) {
+      document.documentElement.setAttribute('data-qa-mode', mode);
+      try {
+        localStorage.setItem('ebk_qa_mode', mode);
+      } catch(e) {}
+      
+      document.querySelectorAll('#qaModeGroup .mode-pill, .modal-qa-pill').forEach(btn => {
+        if (btn.getAttribute('data-qa') === mode) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+      
+      const labels = {
+        'quiz': 'কুইজ প্র্যাকটিস মোড',
+        'show-answers': 'তাত্ক্ষণিক উত্তর ও ব্যাখ্যা ওপেন মোড',
+        'direct-answer': 'শুধু প্রশ্ন ও সঠিক উত্তর মোড (ভুল অপশন বন্ধ)'
+      };
+      showToast(`প্রশ্ন-উত্তর মোড: ${labels[mode] || mode}`);
+    }
+
+    function openRevisionModal() {
+      const modal = document.getElementById('revisionModal');
+      if (modal) modal.classList.add('open');
+    }
+
+    function closeRevisionModal() {
+      const modal = document.getElementById('revisionModal');
+      if (modal) modal.classList.remove('open');
+    }
+
+    // Init saved modes on load
+    try {
+      const savedView = localStorage.getItem('ebk_view_mode') || 'full';
+      const savedQa = localStorage.getItem('ebk_qa_mode') || 'quiz';
+      document.documentElement.setAttribute('data-view-mode', savedView);
+      document.documentElement.setAttribute('data-qa-mode', savedQa);
+      
+      document.querySelectorAll('#viewModeGroup .mode-pill, .modal-view-pill').forEach(btn => {
+        if (btn.getAttribute('data-view') === savedView) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+      document.querySelectorAll('#qaModeGroup .mode-pill, .modal-qa-pill').forEach(btn => {
+        if (btn.getAttribute('data-qa') === savedQa) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+    } catch(e) {}
+
     // Init UI
     updateProgressUI();
   </script>
+
+  <!-- Revision Modes Modal -->
+  <div class="modal-overlay" id="revisionModal" onclick="if(event.target===this)closeRevisionModal()">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>⚡ কুইক রিভিশন ও স্টাডি সেটিংস</h3>
+        <button class="modal-close-btn" onclick="closeRevisionModal()">&times;</button>
+      </div>
+      <p class="modal-desc">
+        আপনার পড়ার সুবিধার্থে যেকোনো মোড নির্বাচন করুন। এটি পোর্টাল ও সকল বিষয়ের প্রতিটি অধ্যায়ে স্বয়ংক্রিয়ভাবে কার্যকর থাকবে।
+      </p>
+
+      <div class="mode-group" style="margin-bottom:18px;">
+        <span class="mode-label">📖 অধ্যায় কন্টেন্ট ভিউ:</span>
+        <div class="mode-pill-group">
+          <button type="button" class="mode-pill modal-view-pill" data-view="full" onclick="setGlobalViewMode('full')">
+            📚 পূর্ণাঙ্গ পাঠ (নোট + প্রশ্ন)
+          </button>
+          <button type="button" class="mode-pill modal-view-pill" data-view="notes-only" onclick="setGlobalViewMode('notes-only')">
+            📝 শুধু প্রামাণ্য নোট ও সূত্র
+          </button>
+          <button type="button" class="mode-pill modal-view-pill" data-view="questions-only" onclick="setGlobalViewMode('questions-only')">
+            🎯 শুধু পরীক্ষার প্রশ্নব্যাংক
+          </button>
+        </div>
+      </div>
+
+      <div class="mode-group">
+        <span class="mode-label">🧩 প্রশ্ন ও উত্তর প্রদর্শন:</span>
+        <div class="mode-pill-group">
+          <button type="button" class="mode-pill modal-qa-pill" data-qa="quiz" onclick="setGlobalQaMode('quiz')">
+            🧩 কুইজ প্র্যাকটিস (অপশন সহ)
+          </button>
+          <button type="button" class="mode-pill modal-qa-pill" data-qa="show-answers" onclick="setGlobalQaMode('show-answers')">
+            💡 তাত্ক্ষণিক উত্তর ও ব্যাখ্যা
+          </button>
+          <button type="button" class="mode-pill modal-qa-pill" data-qa="direct-answer" onclick="setGlobalQaMode('direct-answer')">
+            ⚡ শুধু প্রশ্ন ও সঠিক উত্তর
+          </button>
+        </div>
+      </div>
+
+      <div style="margin-top:20px; text-align:right;">
+        <button type="button" class="btn-action" style="display:inline-flex; padding:8px 18px; background:#0f766e; color:#fff; border:none; border-radius:8px; cursor:pointer;" onclick="closeRevisionModal()">
+          ✓ সম্পন্ন করুন
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="ebkToast" class="ebk-toast"></div>
 </body>
 </html>

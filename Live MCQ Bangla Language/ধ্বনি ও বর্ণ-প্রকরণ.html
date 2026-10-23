@@ -5,7 +5,11 @@
     (function() {
       try {
         var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        var viewMode = localStorage.getItem('ebk_view_mode') || 'full';
+        var qaMode = localStorage.getItem('ebk_qa_mode') || 'quiz';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-view-mode', viewMode);
+        document.documentElement.setAttribute('data-qa-mode', qaMode);
         if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
@@ -13,22 +17,6 @@
         }
       } catch(e) {}
     })();
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        var cur = document.documentElement.getAttribute('data-theme') || 'light';
-        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
-        btns.forEach(function(b) {
-          var icon = b.querySelector('#themeIcon') || b;
-          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
-            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
-          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
-            b.textContent = cur === 'dark' ? '☀️' : '🌙';
-          }
-          var text = b.querySelector('#themeText');
-          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
-        });
-      } catch(e) {}
-    });
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
@@ -420,6 +408,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
+  <script src="../universal-modes.js"></script>
 </head>
 <body>
   <div class="container">
@@ -486,6 +475,42 @@
     </section>
 
     <!-- Sticky Score Tracker -->
+    
+    <!-- Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি -->
+    <section class="part-1-notes info-summary-card" id="part1Notes" style="background:var(--bg-surface, #fff); border:1.5px solid var(--border-color, #e2e8f0); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary, #0f766e); padding-bottom:8px; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+        <h2 style="font-size:1.15rem; font-weight:800; color:var(--primary, #0f766e); display:flex; align-items:center; gap:8px; margin:0;">
+          <span>📝</span> <span>ধ্বনি ও বর্ণ-প্রকরণ — প্রামাণ্য রিভিশন নোট ও সূত্রাবলি (Part 1)</span>
+        </h2>
+        <span style="font-size:0.75rem; font-weight:700; background:rgba(15,118,110,0.12); color:var(--primary, #0f766e); padding:3px 8px; border-radius:6px;">
+          বিসিএস পরীক্ষার বিশদ ব্যাখ্যা হতে সংকলিত (26টি মূল পয়েন্ট)
+        </span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:10px;">
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            📌 মূল সূত্র, সংজ্ঞা ও ব্যাকরণিক নিয়ম
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>ই:</strong> চোটন, আঁকড়ি, পাগড়ি, জোড় আঁকড়ি ইত্যাদি বাংলা বর্ণের বিশেষ চিহ্ন। চোটন হলো বাংলা বর্ণের মাথার ওপর থাকা বাঁকানো চিহ্ন, যা দেখতে অনেকটা উড়ে বামুনদের মাথার টিকি বা চুলের গোছার মতো।</li><li><strong>ভাষার অর্থযুক্ত:</strong> শব্দ ও রূপমূল: শব্দকে আরও ক্ষুদ্রতর অংশে বিভক্ত করলে এমন উপাদান পাওয়া যায় যা অর্থ প্রকাশে অংশগ্রহণ করে। ভাষার এই ক্ষুদ্রতম অর্থযুক্ত একককে বলা হয় রূপমূল (Morpheme)।</li><li><strong>ধ্বনি ও:</strong> বাংলা ব্যাকরণে ধ্বনি ও বর্ণ দুটি ভিন্ন ধারণা এবং এদের পার্থক্য মূলত তাদের প্রকৃতি ও ইন্দ্রিয়গ্রাহ্যতার মধ্যে নিহিত।</li><li><strong>কোন শব্দে:</strong> দ্বিধ্বনি বা যৌগিক স্বরধ্বনি: পূর্ণ স্বরধ্বনি ও অর্ধস্বরধ্বনি একত্রে উচ্চারিত হলে দ্বিধ্বনি হয়। যেমন- 'লাউ' শব্দের [আ] পূর্ণ স্বরধ্বনি এবং [উ্] অর্ধস্বরধ্বনি মিলে দ্বিধ্বনি [আউ্] তৈরি হয়েছে।</li><li><strong>অন্তর্ভুক্তিমূলক:</strong> অক্ষর (Syllable) হলো অল্প প্রয়াসে এক ঝোঁকে উচ্চারিত ধ্বনি বা ধ্বনিগুচ্ছ। 'অন্তর্ভুক্তিমূলক' শব্দের উচ্চারণ বিশ্লেষণ: অন্-তোর-ভুক্-তি-মু-লক্। এখানে মোট ৬টি অক্ষর রয়েছে।</li><li><strong>বিবৃত স্বরধ্বনি:</strong> যে স্বরধ্বনি উচ্চারণে ঠোঁট বেশি খোলে তাকে বিবৃত স্বরধ্বনি বলে (যেমন- 'আ')। আর যে স্বরধ্বনি উচ্চারণে ঠোঁট কম খোলে তাকে সংবৃত স্বরধ্বনি বলে (যেমন- 'ই', 'উ')।</li><li><strong>অভিধানে ৎ,:</strong> বাংলা একাডেমি আধুনিক বাংলা অভিধানে অনুসৃত বর্ণানুক্রমে ৎ, ঃ, ঁ বর্ণগুলো স্বরবর্ণের পরে এবং ব্যঞ্জনবর্ণের শুরুতে স্থান পেয়েছে। এছাড়া খণ্ড-ত (ৎ)-কে স্বতন্ত্র বর্ণ হিসেবে 'ত'-এর পরে স্থান দেওয়া হয়েছে।</li><li><strong>বাংলা বর্ণমালায়:</strong> বাংলা ভাষায় যৌগিক স্বরধ্বনির সংখ্যা ২৫টি। তবে বাংলা বর্ণমালায় যৌগিক স্বরজ্ঞাপক বর্ণ রয়েছে মাত্র ২টি— 'ঐ' (অ+ই) এবং 'ঔ' (অ+উ)।</li><li><strong>ধ্বনিবিজ্ঞান ও বাংলা ধ্বনিতত্ত্ব:</strong> মুহম্মদ আবদুল হাই রচিত বাংলা ধ্বনিবিজ্ঞানের দিশারি গ্রন্থ হলো 'ধ্বনিবিজ্ঞান ও বাংলা ধ্বনিতত্ত্ব' (১৯৬৪)। এ গ্রন্থে বাংলা ভাষার ধ্বনির গঠন, উচ্চারণরীতি ও আন্তর্জাতিক ধ্বনিলিপির প্রয়োগ বিজ্ঞানসম্মতভাবে ব্যাখ্যা করা হয়েছে।</li><li><strong>ধ্বনি:</strong> ধ্বনি কখনোই দৃশ্যমান নয়। ধ্বনি হলো মানুষের বাগযন্ত্রের সাহায্যে উচ্চারিত এবং কান দিয়ে শ্রবণযোগ্য আওয়াজ। ধ্বনিকে দৃশ্যমান বা দৃষ্টিগ্রাহ্য করার জন্য যে প্রতীক বা চিহ্ন ব্যবহার করা হয় তাকে 'বর্ণ' বলে।</li><li><strong>স্বরান্ত অক্ষরকে:</strong> যেসব অক্ষরের শেষে স্বরধ্বনি থাকে অর্থাৎ স্বরান্ত অক্ষরকে 'মুক্তাক্ষর' বলে। মুক্তাক্ষর উচ্চারণের পর মুখ খোলা থাকে এবং স্বর প্রলম্বিত করা যায় (চিহ্ন: U)। আর ব্যঞ্জনান্ত অক্ষরকে 'বদ্ধাক্ষর' বলে (চিহ্ন: -)।</li><li><strong>নিম্নবিবৃত স্বরধ্বনি:</strong> জিভের অবস্থান ও উচ্চতা অনুযায়ী 'আ' হলো নিম্ন-মধ্যস্থ কেন্দ্রীয় বিবৃত স্বরধ্বনি। 'আ' উচ্চারণে জিভ নিচে থাকে এবং মুখবিবর ও ঠোঁট সবচেয়ে বেশি উন্মুক্ত হয়।</li><li><strong>ধ্বনিতত্ত্ব ও:</strong> ব্যাকরণের যে অংশে পদ, পদের অন্বয়, পদক্রম এবং বাক্যের গঠনপ্রণালী বিশদভাবে আলোচিত হয় তাকে বাক্যতত্ত্ব (Syntax) বা পদক্রম বলে। ধ্বনিতত্ত্ব ও শব্দতত্ত্বের উপাদানকে বাক্যে অর্থপূর্ণভাবে সাজানোর নিয়মই বাক্যতত্ত্ব।</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            ⚡ গুরুত্বপূর্ণ প্রামাণ্য তালিকা ও পরীক্ষার প্রয়োগ
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>ব্যঞ্জন ধ্বনির:</strong> ব্যঞ্জনবর্ণের সংক্ষিপ্ত রূপকে 'ফলা' বলে। বাংলা ভাষায় ফলা ৬টি: ন-ফলা, ব-ফলা, ম-ফলা, য-ফলা, র-ফলা এবং ল-ফলা। অন্যদিকে স্বরবর্ণের সংক্ষিপ্ত রূপকে 'কার' বলে (কার ১০টি, 'অ' বর্ণের কোনো কার চিহ্ন নেই)।</li><li><strong>নিঃশ্বাসের স্বল্পতম:</strong> বাগযন্ত্রের স্বল্পতম প্রয়াসে বা এক ঝোঁকে যতটুকু ধ্বনি বা ধ্বনিসমষ্টি একবারে উচ্চারিত হয় তাকে অক্ষর (Syllable) বলে।</li><li><strong>বাংলা ভাষায়:</strong> বাংলা ভাষায় মৌলিক স্বরধ্বনি ৭টি— অ, আ, ই, উ, এ, ও এবং অ্যা। তবে বাংলা বর্ণমালায় স্বরবর্ণের সংখ্যা ১১টি।</li><li><strong>ঔ:</strong> 'ঔ' একটি যৌগিক স্বরধ্বনি বা সান্ধ্য স্বর। এটি দুটি স্বরধ্বনির (অ/ও + উ) মিলনে সৃষ্টি হয়েছে।</li><li><strong>বর্গের কোন:</strong> যেসব ধ্বনি উচ্চারণে বাতাসের চাপের আধিক্য থাকে এবং হ-কার জাতীয় ধ্বনি শোনা যায় সেগুলোকে মহাপ্রাণ ধ্বনি বলে। স্পর্শ বর্ণের প্রতি বর্গের ২য় ও ৪র্থ বর্ণ (যেমন- খ, ঘ, ছ, ঝ, ঠ, ঢ, থ, ধ, ফ, ভ) মহাপ্রাণ ধ্বনি।</li><li><strong>বাংলা বর্ণমালায়:</strong> বাংলা বর্ণমালার ৫০টি বর্ণের মধ্যে মাত্রাভেদ: পূর্ণমাত্রা ৩২টি (স্বরবর্ণ ৬টি, ব্যঞ্জনবর্ণ ২৬টি); অর্ধমাত্রা ৮টি (স্বরবর্ণ ১টি 'ঋ', ব্যঞ্জনবর্ণ ৭টি খ, গ, ণ, থ, ধ, প, শ); মাত্রাহীন ১০...</li><li><strong>বিজ্ঞান:</strong> ‘বিজ্ঞান’ শব্দের 'জ্ঞ' যুক্তবর্ণটির বিশ্লিষ্ট রূপ হলো: জ্ + ঞ। উচ্চারণ: বিগ্‌গ্যাঁন্।</li><li><strong>বাংলা ভাষায়:</strong> বাংলা ভাষায় মৌলিক ধ্বনি মোট ৩৭টি। এর মধ্যে মৌলিক স্বরধ্বনি ৭টি এবং মৌলিক ব্যঞ্জনধ্বনি ৩০টি।</li><li><strong>ভাষার ক্ষুদ্রতম:</strong> ভাষার মূল উপাদান বা ক্ষুদ্রতম একক হলো 'ধ্বনি'। বাক্যের ক্ষুদ্রতম একক শব্দ, এবং শব্দের ক্ষুদ্রতম অর্থপূর্ণ একক রূপমূল। আর ধ্বনি নির্দেশক প্রতীক হলো বর্ণ।</li><li><strong>বাংলা বর্ণমালায়:</strong> বাংলা বর্ণমালায় মোট ৫০টি বর্ণের মধ্যে স্বরবর্ণ ১১টি এবং ব্যঞ্জনবর্ণ ৩৯টি।</li><li><strong>হ্ম:</strong> ‘হ্ম’ যুক্তবর্ণটির সঠিক বিশ্লিষ্ট রূপ হলো: হ্ + ম (যেমন- ব্রাহ্মণ, ব্রহ্মা)। অপরদিকে ক্ + ষ = ক্ষ (যেমন- শিক্ষক, ক্ষমা)।</li><li><strong>বাংলা বর্ণমালায়:</strong> বাংলা বর্ণমালায় মাত্রাহীন বর্ণ মোট ১০টি। স্বরবর্ণ ৪টি (এ, ঐ, ও, ঔ) এবং ব্যঞ্জনবর্ণ ৬টি (ঙ, ঞ, ৎ, ং, ঃ, ঁ)।</li><li><strong>বর্ণ হচ্ছে?:</strong> মানুষের মুখনিঃসৃত ধ্বনিকে লিখে প্রকাশ করার জন্য যে সাংকেতিক চিহ্ন বা প্রতীক ব্যবহার করা হয় তাকে 'বর্ণ' বলে।</li>
+          </ul>
+        </div>
+      </div>
+      <div style="font-size:0.75rem; color:var(--text-muted, #64748b); text-align:right; font-style:italic; margin-top:4px;">
+        * প্রশ্নের কুইজে যাওয়ার আগেই উপরের প্রামাণ্য সূত্রাবলি ও তালিকাটি একনজরে রিভিশন দিয়ে নিন।
+      </div>
+    </section>
+
     <div class="score-card">
       <div class="score-item score-total">
         <span>মোট প্রশ্ন:</span>

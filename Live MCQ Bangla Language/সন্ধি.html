@@ -491,7 +491,11 @@
     (function() {
       try {
         var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        var viewMode = localStorage.getItem('ebk_view_mode') || 'full';
+        var qaMode = localStorage.getItem('ebk_qa_mode') || 'quiz';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-view-mode', viewMode);
+        document.documentElement.setAttribute('data-qa-mode', qaMode);
         if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
@@ -499,23 +503,8 @@
         }
       } catch(e) {}
     })();
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        var cur = document.documentElement.getAttribute('data-theme') || 'light';
-        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
-        btns.forEach(function(b) {
-          var icon = b.querySelector('#themeIcon') || b;
-          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
-            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
-          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
-            b.textContent = cur === 'dark' ? '☀️' : '🌙';
-          }
-          var text = b.querySelector('#themeText');
-          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
-        });
-      } catch(e) {}
-    });
   </script>
+  <script src="../universal-modes.js"></script>
 </head>
 <body>
   <div class="reading-progress-bar" id="progressBar"></div>
@@ -548,6 +537,40 @@
     </section>
 
     <!-- Score Live Tracker -->
+    
+    <!-- ══════ Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি ══════ -->
+    <section class="part-1-notes info-summary-card" id="part1Notes" style="background:var(--bg-surface, #fff); border:1.5px solid var(--border-color, #e2e8f0); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary, #0f766e); padding-bottom:8px; margin-bottom:14px;">
+        <h2 style="font-size:1.18rem; font-weight:800; color:var(--primary, #0f766e); display:flex; align-items:center; gap:8px;">
+          <span>📝</span> <span>প্রামাণ্য সন্ধি রিভিশন নোট ও সূত্রাবলি (Part 1)</span>
+        </h2>
+        <span style="font-size:0.75rem; font-weight:700; background:rgba(15,118,110,0.12); color:var(--primary, #0f766e); padding:3px 8px; border-radius:6px;">
+          বিসিএস ব্যাখ্যা হতে সংকলিত
+        </span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:14px;">
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.95rem; font-weight:700; color:var(--primary, #0f766e); margin-bottom:6px;">📌 স্বরসন্ধি ও বিসর্গ সন্ধির প্রধান সূত্র</h3>
+          <ul style="font-size:0.88rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155);">
+            <li><strong>অ/আ + ই/ঈ = এ:</strong> পরম + ঈশ = পরমেশ; শুভ + ইচ্ছা = শুভেচ্ছা; যথা + ইষ্ট = যথেষ্ট; মহা + ঈশ = মহেশ।</li>
+            <li><strong>অ/আ + উ/ঊ = ও:</strong> সূর্য + উদয় = সূর্যোদয়; যথা + উচিত = যথোচিত।</li>
+            <li><strong>বিসর্গ সন্ধি (র-জাত ও স-জাত):</strong> নিঃ + রব = নীরব; নিঃ + রস = নীরস; দুঃ + অবস্থা = দুরবস্থা; শিরঃ + ছেদ = শিরশ্ছেদ; মনঃ + কষ্ট = মনঃকষ্ট।</li>
+            <li><strong>বিসর্গের পর চ/ছ থাকলে 'শ্' হয়:</strong> শিরঃ + ছেদ = শিরশ্ছেদ; নিঃ + চয় = নিশ্চয়।</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.95rem; font-weight:700; color:var(--primary, #0f766e); margin-bottom:6px;">⚡ নিপাতনে সিদ্ধ সন্ধি (বিশেষ তালিকা)</h3>
+          <ul style="font-size:0.88rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155);">
+            <li><strong>নিপাতনে সিদ্ধ স্বরসন্ধি:</strong> গো + অক্ষ = গবাক্ষ; প্র + ঊঢ় = প্রৌঢ়; কুল + অটা = কুলটা; মার্ত + অণ্ড = মার্তণ্ড; শুদ্ধ + ওদন = শুদ্ধোদন।</li>
+            <li><strong>নিপাতনে সিদ্ধ ব্যঞ্জনসন্ধি:</strong> এক + দশ = একাদশ; বৃহৎ + পতি = বৃহস্পতি; বন + পতি = বনস্পতি; গো + পদ = গোষ্পদ; আ + চর্য = আশ্চর্য।</li>
+            <li><strong>নিপাতনে সিদ্ধ বিসর্গসন্ধি:</strong> অহঃ + অহ = অহরহ; অহঃ + নিশ = অহর্নিশ; বাচঃ + পতি = বাচস্পতি।</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <div class="score-banner">
       <div class="score-stat">
         <div class="score-val" id="answered-count">০</div>

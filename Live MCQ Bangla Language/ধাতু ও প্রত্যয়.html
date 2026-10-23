@@ -491,7 +491,11 @@
     (function() {
       try {
         var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        var viewMode = localStorage.getItem('ebk_view_mode') || 'full';
+        var qaMode = localStorage.getItem('ebk_qa_mode') || 'quiz';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-view-mode', viewMode);
+        document.documentElement.setAttribute('data-qa-mode', qaMode);
         if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
@@ -499,23 +503,8 @@
         }
       } catch(e) {}
     })();
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        var cur = document.documentElement.getAttribute('data-theme') || 'light';
-        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
-        btns.forEach(function(b) {
-          var icon = b.querySelector('#themeIcon') || b;
-          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
-            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
-          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
-            b.textContent = cur === 'dark' ? '☀️' : '🌙';
-          }
-          var text = b.querySelector('#themeText');
-          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
-        });
-      } catch(e) {}
-    });
   </script>
+  <script src="../universal-modes.js"></script>
 </head>
 <body>
   <div class="reading-progress-bar" id="progressBar"></div>
@@ -548,6 +537,42 @@
     </section>
 
     <!-- Score Live Tracker -->
+    
+    <!-- Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি -->
+    <section class="part-1-notes info-summary-card" id="part1Notes" style="background:var(--bg-surface, #fff); border:1.5px solid var(--border-color, #e2e8f0); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary, #0f766e); padding-bottom:8px; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+        <h2 style="font-size:1.15rem; font-weight:800; color:var(--primary, #0f766e); display:flex; align-items:center; gap:8px; margin:0;">
+          <span>📝</span> <span>ধাতু ও প্রত্যয় — প্রামাণ্য রিভিশন নোট ও সূত্রাবলি (Part 1)</span>
+        </h2>
+        <span style="font-size:0.75rem; font-weight:700; background:rgba(15,118,110,0.12); color:var(--primary, #0f766e); padding:3px 8px; border-radius:6px;">
+          বিসিএস পরীক্ষার বিশদ ব্যাখ্যা হতে সংকলিত (25টি মূল পয়েন্ট)
+        </span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:10px;">
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            📌 মূল সূত্র, সংজ্ঞা ও ব্যাকরণিক নিয়ম
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>বাক্যে সমধাতুজ:</strong> উত্তর: (গ) আজ এমন ঘুম ঘুমিয়েছি! বাক্যের ক্রিয়া ও কর্ম পদ একই ধাতু থেকে গঠিত হলে ঐ কর্মপদকে সমধাতুজ কর্ম বা ধাত্বর্থক কর্মপদ বলে।</li><li><strong>শব্দটি প্রত্যয়যোগে:</strong> উত্তর: (ক) ডাক্তারখানা ডাক্তারখানা: এটি প্রত্যয়যোগে গঠিত। 'ডাক্তার' শব্দটির সঙ্গে '-খানা' (বিদেশি তদ্ধিত প্রত্যয়) যুক্ত হয়ে 'ডাক্তারখানা' গঠিত হয়েছে।</li><li><strong>গঠিত শব্দ:</strong> উত্তর: (ক) ডাক্তারখানা বিদেশি তদ্ধিত প্রত্যয়যোগে গঠিত শব্দ — ডাক্তার + খানা = ডাক্তারখানা । অনুগমন: অনু (উপসর্গ) + √গম্ (ধাতু) + অন (প্রত্যয়)। এটি মূলত উপসর্গ ও প্রত্যয় উভয়যোগে গঠিত।</li><li><strong>মূল অংশকে:</strong> উত্তর: (খ) ধাতু ধাতু বা ক্রিয়ামূল: যে পদ দ্বারা কোনো কার্য সম্পাদন করা বোঝায়, তাকে ক্রিয়াপদ বলে। ক্রিয়াপদ থেকে ক্রিয়া বিভক্তি বাদ দিলে যা অবশিষ্ট থাকে তাই ধাতু ।</li><li><strong>প্রত্যয়-সাধিত শব্দ?:</strong> উত্তর: (ঘ) ঐকিক 'ঐকিক' একটি সংস্কৃত তদ্ধিত প্রত্যয়যোগে গঠিত শব্দ। এর সঠিক প্রকৃতি-প্রত্যয় → এক + ইক = ঐকিক ।</li><li><strong>পদের পূর্ববর্তী:</strong> উত্তর: (ক) উপপদ কৃৎ-প্রত্যয় সাধিত পদকে বলা হয় কৃদন্ত পদ। আর কৃদন্ত পদের পূর্বের পদকে বলা হয় উপপদ । অন্যভাবে বলা যায়, কৃৎ-প্রত্যয়ান্ত শব্দের আগে উপসর্গ ছাড়া অন্য কোনো নামপদ থাকলে তাকে উপপদ বলে।</li><li><strong>কোনটি বাংলা:</strong> উত্তর: (ক) কহ্ যেসব ধাতু বা ক্রিয়ামূল প্রাকৃতের মধ্য দিয়ে পরিবর্তিত হয়ে বাংলা ভাষায় ব্যবহৃত হচ্ছে, সেগুলোকে বাংলা ধাতু বা খাঁটি বাংলা ধাতু বলে। যেমন— কাদ্, কাট্, নাচ্, আঁক্, কহ্ , কর্ ইত্যাদি।</li><li><strong>নামধাতুর উদাহরণ?:</strong> উত্তর: (গ) বেতা নামধাতু: বিশেষ্য, বিশেষণ ও ধ্বন্যাত্মক অব্যয়ের পর 'আ' প্রত্যয়যোগে যে সব ধাতু গঠিত হয়, সেগুলোকে নামধাতু বলা হয়। যেমন— 'বেত' (বিশেষ্য) + 'আ' প্রত্যয় = বেতা (নামধাতু)।</li><li><strong>শব্দের সঠিক:</strong> উত্তর: (ক) কৃষ + তি কৃষ্টি (সংস্কৃত শব্দ; অর্থ— হালচাষ, কর্ষণ, সংস্কৃতি)। এর সঠিক প্রকৃতি-প্রত্যয়: √কৃষ্ + তি = কৃষ্টি (ষ-এর পর ত থাকলে তা 'ট' হয়ে যায়)।</li><li><strong>+ য:</strong> উত্তর: (খ) তদ্ধিত প্রত্যয় 'প্রচুর' একটি বিশেষণ পদ (শব্দ বা প্রাতিপদিক)। শব্দের শেষে প্রত্যয় যুক্ত হলে তাকে তদ্ধিত প্রত্যয় বলে। সুতরাং 'প্রচুর + য = প্রাচুর্য' হলো সংস্কৃত তদ্ধিত প্রত্যয় ।</li><li><strong>কৃৎ-প্রত্যয় সাধিত:</strong> উত্তর: (ঘ) খেলনা বাংলা কৃৎ-প্রত্যয় সাধিত শব্দ হলো খেলনা (√খেল্ + অনা) । অন্যান্য অপশনগুলো সংস্কৃত কৃৎ-প্রত্যয় সাধিত: কারক = √কৃ + অক (ণ্বুল্) লিখিত = √লিখ্ + ইত (ক্ত) বেদনা = √বিদ্ + অন + আ</li><li><strong>সর্বাঙ্গীণ:</strong> উত্তর: (ঘ) সর্বাঙ্গ + ঈন 'সর্বাঙ্গীণ' শব্দের সঠিক প্রকৃতি-প্রত্যয়: সর্বাঙ্গ + ঈন (নীন) । এর অর্থ সর্বাঙ্গব্যাপী। অনুরূপ: সর্বজন + ঈন = সর্বজনীন, কুল + ঈন = কুলীন, নব + ঈন = নবীন।</li><li><strong>শ্রদ্ধা:</strong> উত্তর: (ক) শ্রৎ + ধা + অ + আ সংস্কৃত কৃৎ প্রত্যয়: অ (অঙ্) + স্ত্রী প্রত্যয় (আ/টাপ্) যোগে গঠিত শব্দ: শ্রৎ + √ধা + অ (অঙ্) + আ (টাপ্) = শ্রদ্ধা । অনুরূপ: √ব্যথ্ + অ + আ = ব্যথা, √কৃপ্ + অ + আ = কৃপা।</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            ⚡ গুরুত্বপূর্ণ প্রামাণ্য তালিকা ও পরীক্ষার প্রয়োগ
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>কৃৎ-প্রত্যয় সাধিত:</strong> উত্তর: (গ) মোড়ক বাংলা কৃৎ-প্রত্যয় ('অক') যোগে গঠিত শব্দ হলো: √মুড়্ + অক = মোড়ক । অন্যান্য অপশনে: চামার = চাম + আর (তদ্ধিত), ধারালো = ধার + আলু (তদ্ধিত), পোঁষ্টাই = পোঁষ্টা + আই (তদ্ধিত)।</li><li><strong>কোন শব্দটি:</strong> উত্তর: (খ) শুভেচ্ছা 'শুভেচ্ছা' শব্দটি প্রত্যয়যোগে নয়, বরং স্বরসন্ধি সাধিত শব্দ (শুভ + ইচ্ছা = শুভেচ্ছা)। অন্যদিকে, সভাসদ (সভা + সদ), ফলবান (ফল + বান) এবং তন্বী (তনু + ঈ) প্রত্যয়যোগে গঠিত শব্দ।</li><li><strong>কোন শব্দটি:</strong> উত্তর: (খ) খণ্ডিত "খণ্ডিত" শব্দটি কৃৎপ্রত্যয় সাধিত। এর প্রকৃতি-প্রত্যয়: √খণ্ড্ + ত (ক্ত) = খণ্ডিত । অর্থ— খণ্ডন করা হয়েছে এমন।</li><li><strong>সাহচর্য:</strong> উত্তর: (গ) সহচর + য সাহচর্য (বিশেষ্য পদ); এর প্রকৃতি-প্রত্যয় : সহচর + য (ষ্ণ্য) । অর্থ— সংস্রব, সঙ্গ, সহায়তা।</li><li><strong>মেছো:</strong> উত্তর: (ঘ) মাছ + উয়া > ও 'মেছো' শব্দের প্রকৃতি-প্রত্যয় : মাছ + উয়া &gt; ও = মাছুয়া &gt; মেছো (উপজীবিকা অর্থে তদ্ধিত প্রত্যয়)। অনুরূপ: গাঁ + উয়া &gt; গেঁয়ো, মাঠ + উয়া &gt; মেঠো, জ্বর + উয়া &gt; জুরো।</li><li><strong>যা কিছু হারায় গিন্নী বলেন, কেষ্টা বেটাই চোর:</strong> উত্তর: (ক) প্রযোজ্য ধাতু প্রযোজক ধাতু (বা ণিজন্ত ধাতু): মৌলিক ধাতুর পর প্রেরণার্থে বা কর্মবাচ্যে 'আ' প্রত্যয় যোগ করে প্রযোজক ধাতু গঠিত হয়। যেমন— হার্ + আ = হারা &gt; হারায়।</li><li><strong>নবান্ন:</strong> উত্তর: (ক) সমাস নবান্ন = নব যে অন্ন; এটি কর্মধারয় সমাস যোগে গঠিত। সন্ধি মূলত একটি ধ্বনিতাত্ত্বিক প্রক্রিয়া, শব্দ গঠনকারী প্রত্যয় বা সমাস প্রক্রিয়ার মধ্যে সমাসসাধিত হিসেবে এটি গৃহীত হয়।</li><li><strong>পর কোন:</strong> উত্তর: (ঘ) আও ভাববাচক বিশেষ্য গঠনে 'আই' এবং 'আও' এই দুটি প্রত্যয় ব্যবহৃত হয়। যেমন— √চড়্ + আও = চড়াও, √ঘের্ + আও = ঘেরাও।</li><li><strong>দোলনা:</strong> উত্তর: (ক) √দুল্ + অনা 'দোলনা' একটি কৃদন্ত শব্দ। এর সঠিক প্রকৃতি-প্রত্যয়: √দুল্ + অনা = দোলনা (গুণ বৃদ্ধির নিয়মে উ-কার ও-কার হয়েছে)।</li><li><strong>শুদ্ধ কোনটি?:</strong> উত্তর: (খ) উৎকর্ষ 'উৎকর্ষ' (উৎ + √কৃষ্ + অ) একটি প্রত্যয় সাধিত বিশেষ্য পদ। 'উৎকর্ষ' শব্দের সাথে পুনরায় 'তা' প্রত্যয় যুক্ত করলে 'উৎকর্ষতা' হয়, যা প্রত্যয়জনিত বাহুল্য দোষে দুষ্ট। তাই 'উৎকর্ষ' প্রত্যয়গতভাবে শুদ্ধ।</li><li><strong>পদের মূল:</strong> উত্তর: (খ) ধাতু ক্রিয়াপদের অবিভাজ্য মূল অংশকে ধাতু বা ক্রিয়ামূল বলা হয়। যেমন— 'পড়িতেছে' ক্রিয়াপদের মূল অংশ হলো √পড়্ (ধাতু)।</li><li><strong>শব্দে ধাতুর:</strong> উত্তর: (গ) পাঠক √পাঠ্ (ধাতু) + অক (কৃৎ প্রত্যয়) = পাঠক । এখানে ধাতুর সঙ্গে প্রত্যয় যুক্ত হয়েছে। অন্যদিকে ঠগী (ঠগ + ই), পানসা (পানি + সা), সেলামী (সালাম + ই) শব্দগুলো প্রাতিপদিক বা নামের শেষে তদ্ধিত প্রত্যয়যোগে গঠিত।</li>
+          </ul>
+        </div>
+      </div>
+      <div style="font-size:0.75rem; color:var(--text-muted, #64748b); text-align:right; font-style:italic; margin-top:4px;">
+        * প্রশ্নের কুইজে যাওয়ার আগেই উপরের প্রামাণ্য সূত্রাবলি ও তালিকাটি একনজরে রিভিশন দিয়ে নিন।
+      </div>
+    </section>
+
     <div class="score-banner">
       <div class="score-stat">
         <div class="score-val" id="answered-count">০</div>

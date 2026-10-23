@@ -5,7 +5,11 @@
     (function() {
       try {
         var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        var viewMode = localStorage.getItem('ebk_view_mode') || 'full';
+        var qaMode = localStorage.getItem('ebk_qa_mode') || 'quiz';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-view-mode', viewMode);
+        document.documentElement.setAttribute('data-qa-mode', qaMode);
         if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
@@ -13,22 +17,6 @@
         }
       } catch(e) {}
     })();
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        var cur = document.documentElement.getAttribute('data-theme') || 'light';
-        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
-        btns.forEach(function(b) {
-          var icon = b.querySelector('#themeIcon') || b;
-          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
-            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
-          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
-            b.textContent = cur === 'dark' ? '☀️' : '🌙';
-          }
-          var text = b.querySelector('#themeText');
-          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
-        });
-      } catch(e) {}
-    });
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
@@ -420,6 +408,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
+  <script src="../universal-modes.js"></script>
 </head>
 <body>
   <div class="container">
@@ -486,6 +475,42 @@
     </section>
 
     <!-- Sticky Score Tracker -->
+    
+    <!-- Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি -->
+    <section class="part-1-notes info-summary-card" id="part1Notes" style="background:var(--bg-surface, #fff); border:1.5px solid var(--border-color, #e2e8f0); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary, #0f766e); padding-bottom:8px; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+        <h2 style="font-size:1.15rem; font-weight:800; color:var(--primary, #0f766e); display:flex; align-items:center; gap:8px; margin:0;">
+          <span>📝</span> <span>ধ্বনির উচ্চারণ ও ধ্বনি পরিবর্তন — প্রামাণ্য রিভিশন নোট ও সূত্রাবলি (Part 1)</span>
+        </h2>
+        <span style="font-size:0.75rem; font-weight:700; background:rgba(15,118,110,0.12); color:var(--primary, #0f766e); padding:3px 8px; border-radius:6px;">
+          বিসিএস পরীক্ষার বিশদ ব্যাখ্যা হতে সংকলিত (15টি মূল পয়েন্ট)
+        </span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:10px;">
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            📌 মূল সূত্র, সংজ্ঞা ও ব্যাকরণিক নিয়ম
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>একটি স্বরধ্বনির:</strong> একটি স্বরধ্বনির প্রভাবে শব্দে অন্য স্বরধ্বনির সংগতি বা পরিবর্তন ঘটলে তাকে স্বরসঙ্গতি (Vowel Harmony) বলে। যেমন- দেশি > দিশি, বিলাতি > বিলিতি, মূলা > মুলো ইত্যাদি।</li><li><strong>কোন ধ্বনি:</strong> তৎসম শব্দ থেকে তদ্ভব শব্দ গঠনের প্রক্রিয়ায় ধ্বনি পরিবর্তন ঘটে। যেমন: ক্রন্দন > কাঁদা, অঞ্চল > আঁচল, দন্ত > দাঁত (নাসিক্যীভবন ও স্বরভক্তি)।</li><li><strong>রবীন্দ্রনাথ ঠাকুর:</strong> বাংলায় 'এ'-কারের উচ্চারণ দুই রকম: সংবৃত বা স্বাভাবিক [এ] এবং বিবৃত [অ্যা]।</li><li><strong>স্মরণ:</strong> পূর্ববঙ্গীয় (ঢাকাইয়া, কুমিল্লা, নোয়াখালী ইত্যাদি) আঞ্চলিক উচ্চারণে 'স্ম' ধ্বনির শুরুতে থাকা দন্ত্য 'স' প্রমিত 'শ'-এর মতো উচ্চারিত হয়ে 'শঁরোন্' রূপ ধারণ করে।</li><li><strong>বাংলা ভাষায়:</strong> উচ্চ স্বরধ্বনি উচ্চারণের সময় জিহ্বা মুখের তালুর দিকে সবচেয়ে উঁচুতে অবস্থান করে। বাংলা ভাষায় উচ্চ স্বরধ্বনি দুটি: সম্মুখ উচ্চ স্বরধ্বনি [ই] এবং পশ্চাৎ উচ্চ স্বরধ্বনি [উ]।</li><li><strong>উচ্চারণের রীতি:</strong> উচ্চ-মধ্য সম্মুখ স্বরধ্বনি হলো [এ]। জিহ্বার সম্মুখ ভাগে এবং উচ্চ ও মধ্যম স্তরের মধ্যবর্তী স্থানে এর উচ্চারণ সাধিত হয়।</li><li><strong>ধ্বনি-পরিবর্তনের নিয়মে:</strong> শব্দের মধ্যে দুটি ব্যঞ্জনের পরস্পর স্থান পরিবর্তন ঘটলে তাকে বর্ণ-বিপর্যয় বা ধ্বনি-বিপর্যয় বলে। যেমন: পিশাচ > পিচাশ, লাফ > ফাল, বাক্স > বাস্‌ক, রিকশা > রিস্কা ইত্যাদি।</li><li><strong>বড় >:</strong> কখনও কখনও কথার ওপর জোর দেওয়ার জন্য শব্দের মধ্যস্থিত ব্যঞ্জনের দ্বিত্ব উচ্চারণ ঘটে, একে ব্যঞ্জনদ্বিত্ব বা দ্বিত্ব ব্যঞ্জন বলে। যেমন: বড় > বড্ড, পাকা > পাক্কা, সকাল > সক্কাল ইত্যাদি।</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            ⚡ গুরুত্বপূর্ণ প্রামাণ্য তালিকা ও পরীক্ষার প্রয়োগ
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>বাগযন্ত্রের অংশ:</strong> ধ্বনি উচ্চারণে মানবদেহের যেসব প্রত্যঙ্গ সরাসরি কাজ করে সেগুলোকে একত্রে বাগযন্ত্র বলে। ফুসফুস, শ্বাসনালি, স্বরযন্ত্র, গলনালি, জিভ, তালু, মূর্ধা, দাঁত, ওষ্ঠ, নাসিকা সবই বাগযন্ত্রের অবিচ্ছেদ্য অংশ।</li><li><strong>অপিনিহিতির উদাহরণ:</strong> পরের ই-কার বা উ-কার আগে উচ্চারিত হলে কিংবা যুক্ত ব্যঞ্জনধ্বনির আগে ই-কার বা উ-কার উচ্চারিত হলে তাকে অপিনিহিতি বলে। যেমন: আজি > আইজ, সাধু > সাউধ, মারি > মাইর, চারি > চার্য়ি ইত্যাদি।</li><li><strong>হ্ম:</strong> ‘হ্ম’ যুক্তবর্ণটি হ্ + ম এর সমন্বয়ে গঠিত (যেমন: ব্রহ্ম, ব্রাহ্মণ, ব্রাহ্মপুত্র)। এর উচ্চারণ 'মভো' (ব্রাম্‌ভন)।</li><li><strong>বন্ধন:</strong> অক্ষর হলো এক ঝোঁকে উচ্চারিত ধ্বনিগুচ্ছ। 'বন্ধন' শব্দের উচ্চারণ: বন্-ধন্। এখানে দুটি বদ্ধাক্ষর রয়েছে: 'বন্' এবং 'ধন্'।</li><li><strong>নিচের কোনটি:</strong> বিভক্তিহীন নাম শব্দকে প্রাতিপদিক বলে (যেমন: হাত, বই, কলম)। এটি রূপতত্ত্ব বা শব্দতত্ত্বের আলোচ্য বিষয়, ধ্বনি পরিবর্তনের কোনো নিয়ম নয়।</li><li><strong>নিচের কোনটি:</strong> বর্গের ১ম বর্ণগুলো অঘোষ অল্পপ্রাণ ধ্বনি। ক-বর্গের 'ক', চ-বর্গের 'চ', ট-বর্গের 'ট', ত-বর্গের 'ত', প-বর্গের 'প' হলো অঘোষ অল্পপ্রাণ ধ্বনি।</li><li><strong>কোন দুটি:</strong> বর্গের প্রথম দুটি বর্ণ অঘোষ ধ্বনি। চ-বর্গের 'চ' এবং 'ছ' দুটিই অঘোষ ধ্বনি (চ হলো অঘোষ অল্পপ্রাণ, ছ হলো অঘোষ মহাপ্রাণ)।</li>
+          </ul>
+        </div>
+      </div>
+      <div style="font-size:0.75rem; color:var(--text-muted, #64748b); text-align:right; font-style:italic; margin-top:4px;">
+        * প্রশ্নের কুইজে যাওয়ার আগেই উপরের প্রামাণ্য সূত্রাবলি ও তালিকাটি একনজরে রিভিশন দিয়ে নিন।
+      </div>
+    </section>
+
     <div class="score-card">
       <div class="score-item score-total">
         <span>মোট প্রশ্ন:</span>

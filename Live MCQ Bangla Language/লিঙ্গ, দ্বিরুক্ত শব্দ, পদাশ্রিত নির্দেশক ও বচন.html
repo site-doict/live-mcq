@@ -491,7 +491,11 @@
     (function() {
       try {
         var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        var viewMode = localStorage.getItem('ebk_view_mode') || 'full';
+        var qaMode = localStorage.getItem('ebk_qa_mode') || 'quiz';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-view-mode', viewMode);
+        document.documentElement.setAttribute('data-qa-mode', qaMode);
         if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
@@ -499,23 +503,8 @@
         }
       } catch(e) {}
     })();
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        var cur = document.documentElement.getAttribute('data-theme') || 'light';
-        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
-        btns.forEach(function(b) {
-          var icon = b.querySelector('#themeIcon') || b;
-          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
-            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
-          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
-            b.textContent = cur === 'dark' ? '☀️' : '🌙';
-          }
-          var text = b.querySelector('#themeText');
-          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
-        });
-      } catch(e) {}
-    });
   </script>
+  <script src="../universal-modes.js"></script>
 </head>
 <body>
   <div class="reading-progress-bar" id="progressBar"></div>
@@ -548,6 +537,42 @@
     </section>
 
     <!-- Score Live Tracker -->
+    
+    <!-- Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি -->
+    <section class="part-1-notes info-summary-card" id="part1Notes" style="background:var(--bg-surface, #fff); border:1.5px solid var(--border-color, #e2e8f0); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary, #0f766e); padding-bottom:8px; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+        <h2 style="font-size:1.15rem; font-weight:800; color:var(--primary, #0f766e); display:flex; align-items:center; gap:8px; margin:0;">
+          <span>📝</span> <span>লিঙ্গ, দ্বিরুক্ত শব্দ, পদাশ্রিত নির্দেশক ও বচন — প্রামাণ্য রিভিশন নোট ও সূত্রাবলি (Part 1)</span>
+        </h2>
+        <span style="font-size:0.75rem; font-weight:700; background:rgba(15,118,110,0.12); color:var(--primary, #0f766e); padding:3px 8px; border-radius:6px;">
+          বিসিএস পরীক্ষার বিশদ ব্যাখ্যা হতে সংকলিত (12টি মূল পয়েন্ট)
+        </span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:10px;">
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            📌 মূল সূত্র, সংজ্ঞা ও ব্যাকরণিক নিয়ম
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>শিক্ষককে বুঝতে হবে শিক্ষার্থী কী চায়:</strong> উত্তর: (গ) একবচন ও বহুবচন উভয়ই বোঝাতে বাংলা ব্যাকরণে 'শিক্ষক' ও 'শিক্ষার্থী' শব্দ দুটি লিঙ্গ-নিরপেক্ষ এবং বচন-নিরপেক্ষ (singular and plural neutral) শব্দ, যা প্রেক্ষাপটের ওপর নির্...</li><li><strong>দ্বিরুক্ত শব্দ:</strong> উত্তর: (ক) ছমছম অনুভূতিজাত দ্বিরুক্ত শব্দ হলো— ছমছম । এটি ভয়ের মানসিক অনুভূতি প্রকাশ করতে ব্যবহৃত হয়। যেমন— ভয়ে গা ছমছম করছে।</li><li><strong>ডেকে ডেকে হয়রান হচ্ছি।:</strong> উত্তর: (ঘ) পৌনঃপুনিকতা ক্রিয়াবাচক শব্দের দ্বিরুক্তিতে বারবার কোনো কাজের পুনরাবৃত্তি বোঝাতে পৌনঃপুনিকতা অর্থ প্রকাশ পায়। যেমন— 'ডেকে ডেকে হয়রান হচ্ছি' (বারবার ডাকার কারণে)।</li><li><strong>জ্বর জ্বর:</strong> উত্তর: (ক) দ্বিরুক্ত শব্দ বাংলা ভাষার ব্যাকরণ অনুযায়ী একই শব্দ পরপর দুইবার অবিকৃতভাবে ব্যবহৃত হওয়াকে দ্বিরুক্ত শব্দ (বা আধুনিক ব্যাকরণে শব্দদ্বিত্ব) বলে। এখানে 'জ্বর জ্বর' সামান্য অর্থ প্রকাশক দ্বিরুক্ত শব্দ।</li><li><strong>টি খানা:</strong> উত্তর: (ক) পদাশ্রিত নির্দেশক যেসব অব্যয় বা প্রত্যয় পদের শেষে আশ্রিত হয়ে নির্দিষ্টতা বা অনির্দিষ্টতা প্রকাশ করে, সেগুলোকে পদাশ্রিত নির্দেশক বলে। যেমন- -টা, -টি, -খানা, -খানি, -গাছা, -গাছি ইত্যাদি।</li><li><strong>সম্বোধনের ক্ষেত্রে:</strong> উত্তর: (গ) শ্রদ্ধাস্পদাসু পত্র ও সম্বোধনে লিঙ্গভেদ: নারী সম্বোধন পুরুষ সম্বোধন শ্রদ্ধাভাজনাসু শ্রদ্ধাভাজনেষু শ্রদ্ধাস্পদাসু শ্রদ্ধাস্পদেষু কল্যাণীয়াসু কল্যাণীয়েষু সুচরিতাসু সুচরিতেষু প্রিয়বরাসু প্রিয়বরেষু</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            ⚡ গুরুত্বপূর্ণ প্রামাণ্য তালিকা ও পরীক্ষার প্রয়োগ
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>বৃষ্টি পড়ে টাপুর টুপুর নদে এল বান:</strong> উত্তর: (গ) ধ্বন্যাত্মক শব্দ বৃষ্টির পতনের কাল্পনিক অনুকরণে যে শব্দের সৃষ্টি হয়, তাকে ধ্বনি বা ধ্বন্যাত্মক শব্দ বলা হয়। আধুনিক ব্যাকরণিক দৃষ্টিভঙ্গি অনুযায়ী এটি ধ্বন্যাত্মক শব্দ হিসেবে সর্বাধিক গ্রহণযোগ্য উত্তর।</li><li><strong>অর্থ কি?:</strong> উত্তর: (ক) সংখ্যার ধারণা 'বচন' ব্যাকরণের একটি পারিভাষিক শব্দ (√বচ্ + অন)। ব্যাকরণে বিশেষ্য বা সর্বনাম পদের সংখ্যার ধারণা প্রকাশের উপায়কে বচন বলে।</li><li><strong>অপ্রাণিবাচক শব্দের:</strong> উত্তর: (ঘ) দাম অপ্রাণিবাচক শব্দে ব্যবহৃত বহুবচনবোধক শব্দ হলো— আবলি, গুচ্ছ, দাম (কুসুমদাম) , নিকর, পুঞ্জ, মালা, রাজি, রাশি।</li><li><strong>হয় না:</strong> উত্তর: (ঘ) কবিরাজ নিত্য পুরুষবাচক শব্দ: যেসব পুরুষবাচক শব্দের কোনো স্ত্রীবাচক রূপ হয় না, তাদের নিত্য পুরুষবাচক শব্দ বলে। যেমন- কবিরাজ , ঢাকী, কৃতদার, অকৃতদার, কাপুরুষ, স্ত্রৈণ, রাষ্ট্রপতি ইত্যাদি।</li><li><strong>পুরুষবাচক শব্দ:</strong> উত্তর: (ক) ননদ 'ননদ' স্ত্রীবাচক শব্দের দুটি পুরুষবাচক শব্দ রয়েছে— দেবর এবং ননদাই ।</li><li><strong>দ্বিরুক্ত শব্দদুটি:</strong> উত্তর: (ক) পাকা পাকা আম বিশেষ্য বা বিশেষণের দ্বিরুক্তি যখন আধিক্য বা সমষ্টি বোঝায়, তখন তা বহুবচন নির্দেশ করে। যেমন— 'পাকা পাকা আম' (অনেক পাকা আম), 'রাশি রাশি ধান', 'লাল লাল গোলাপ'।</li>
+          </ul>
+        </div>
+      </div>
+      <div style="font-size:0.75rem; color:var(--text-muted, #64748b); text-align:right; font-style:italic; margin-top:4px;">
+        * প্রশ্নের কুইজে যাওয়ার আগেই উপরের প্রামাণ্য সূত্রাবলি ও তালিকাটি একনজরে রিভিশন দিয়ে নিন।
+      </div>
+    </section>
+
     <div class="score-banner">
       <div class="score-stat">
         <div class="score-val" id="answered-count">০</div>

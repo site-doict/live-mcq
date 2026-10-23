@@ -386,7 +386,11 @@
     (function() {
       try {
         var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        var viewMode = localStorage.getItem('ebk_view_mode') || 'full';
+        var qaMode = localStorage.getItem('ebk_qa_mode') || 'quiz';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-view-mode', viewMode);
+        document.documentElement.setAttribute('data-qa-mode', qaMode);
         if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
@@ -394,23 +398,8 @@
         }
       } catch(e) {}
     })();
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        var cur = document.documentElement.getAttribute('data-theme') || 'light';
-        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
-        btns.forEach(function(b) {
-          var icon = b.querySelector('#themeIcon') || b;
-          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
-            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
-          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
-            b.textContent = cur === 'dark' ? '☀️' : '🌙';
-          }
-          var text = b.querySelector('#themeText');
-          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
-        });
-      } catch(e) {}
-    });
   </script>
+  <script src="../universal-modes.js"></script>
 </head>
 <body>
   <div class="container">
@@ -446,7 +435,43 @@
 
 
     
-<div class="score-card">
+
+    <!-- Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি -->
+    <section class="part-1-notes info-summary-card" id="part1Notes" style="background:var(--bg-surface, #fff); border:1.5px solid var(--border-color, #e2e8f0); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary, #0f766e); padding-bottom:8px; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+        <h2 style="font-size:1.15rem; font-weight:800; color:var(--primary, #0f766e); display:flex; align-items:center; gap:8px; margin:0;">
+          <span>📝</span> <span>ছন্দ ও অলংকার — প্রামাণ্য রিভিশন নোট ও সূত্রাবলি (Part 1)</span>
+        </h2>
+        <span style="font-size:0.75rem; font-weight:700; background:rgba(15,118,110,0.12); color:var(--primary, #0f766e); padding:3px 8px; border-radius:6px;">
+          বিসিএস পরীক্ষার বিশদ ব্যাখ্যা হতে সংকলিত (6টি মূল পয়েন্ট)
+        </span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:10px;">
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            📌 মূল সূত্র, সংজ্ঞা ও ব্যাকরণিক নিয়ম
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>ছন্দকে কী:</strong> স্বরবৃত্ত ছন্দ -এর অপর নাম 'ছড়ার ছন্দ' , লোকছন্দ, লৌকিক ছন্দ বা দলবৃত্ত। রবীন্দ্রনাথ ঠাকুর একে 'ছড়া ছন্দ' বলেছেন। • প্রাচীন বাংলা ছড়া ও রূপকথা এ ছন্দে রচিত।</li><li><strong>দেশের যত নদীর ধারা জল না, ওরা অশ্রুধারা:</strong> কাজী নজরুল ইসলামের এই বিখ্যাত চরণে উপমেয় 'নদীর জলের ধারা'কে অস্বীকার করে ('জল না') উপমান 'অশ্রুধারা'কে প্রতিষ্ঠা করা হয়েছে। উপমেয়কে গোপন বা নিষেধ করে উপমানকে স্থাপন করলে তাকে 'অপহ্নুতি' অলংকার বলে।</li><li><strong>এক মাত্রা:</strong> স্বরবৃত্ত ছন্দে মুক্তাক্ষর (খোলা দল) এবং বদ্ধাক্ষর (রুদ্ধ দল) উভয়কেই এক মাত্রা হিসেবে গণনা করা হয়। • মাত্রাবৃত্তে মুক্তাক্ষর ১ মাত্রা এবং বদ্ধাক্ষর সর্বদা ২ মাত্রা গণনা করা হয়।</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            ⚡ গুরুত্বপূর্ণ প্রামাণ্য তালিকা ও পরীক্ষার প্রয়োগ
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>অলঙ্কার প্রধানত:</strong> সাহিত্যে অলংকার প্রধানত ২ প্রকার — ১. শব্দালংকার (শব্দের ধ্বনিমাধুর্য সৃষ্টিকারী অলংকার, যেমন: অনুপ্রাস, যমক, শ্লেষ) ২. অর্থালংকার (অর্থের গভীরতা ও ভাবসৌন্দর্য সৃষ্টিকারী অলংকার, যেমন: উপমা, রূপক, উৎপ্রেক্ষা, অপহ্নুতি)।</li><li><strong>ভাষায় ছন্দ:</strong> বাংলা কাব্যে প্রচলিত ছন্দ প্রধানত ৩ প্রকার — ১. স্বরবৃত্ত ছন্দ (ছড়ার ছন্দ/দলবৃত্ত) ২. মাত্রাবৃত্ত ছন্দ (কলাবৃত্ত/ধ্বনিপ্রধান) ৩. অক্ষরবৃত্ত ছন্দ (পয়ার/তানপ্রধান)।</li><li><strong>ছন্দের মূল:</strong> যে ছন্দের মূল পর্ব বা পূর্ণ পর্ব চার মাত্রাবিশিষ্ট তাকে স্বরবৃত্ত ছন্দ বলে। • স্বরবৃত্তের পর্ব মাপ ৪ মাত্রার এবং অতিপর্ব ১ বা ২ মাত্রার হতে পারে। • অক্ষরবৃত্তের সাধারণ চাল ৮/৬ মাত্রার পয়ার।</li>
+          </ul>
+        </div>
+      </div>
+      <div style="font-size:0.75rem; color:var(--text-muted, #64748b); text-align:right; font-style:italic; margin-top:4px;">
+        * প্রশ্নের কুইজে যাওয়ার আগেই উপরের প্রামাণ্য সূত্রাবলি ও তালিকাটি একনজরে রিভিশন দিয়ে নিন।
+      </div>
+    </section>
+
+    <div class="score-card">
       <div class="score-item score-total">
         <span>মোট প্রশ্ন:</span>
         <span class="score-val" id="totalCount">6</span>

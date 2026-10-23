@@ -389,7 +389,11 @@
     (function() {
       try {
         var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        var viewMode = localStorage.getItem('ebk_view_mode') || 'full';
+        var qaMode = localStorage.getItem('ebk_qa_mode') || 'quiz';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-view-mode', viewMode);
+        document.documentElement.setAttribute('data-qa-mode', qaMode);
         if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
@@ -397,23 +401,8 @@
         }
       } catch(e) {}
     })();
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        var cur = document.documentElement.getAttribute('data-theme') || 'light';
-        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
-        btns.forEach(function(b) {
-          var icon = b.querySelector('#themeIcon') || b;
-          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
-            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
-          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
-            b.textContent = cur === 'dark' ? '☀️' : '🌙';
-          }
-          var text = b.querySelector('#themeText');
-          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
-        });
-      } catch(e) {}
-    });
   </script>
+  <script src="../universal-modes.js"></script>
 </head>
 <body>
   <div class="container">
@@ -469,6 +458,42 @@
     </section>
 
     <!-- Sticky Score Tracker -->
+    
+    <!-- Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি -->
+    <section class="part-1-notes info-summary-card" id="part1Notes" style="background:var(--bg-surface, #fff); border:1.5px solid var(--border-color, #e2e8f0); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary, #0f766e); padding-bottom:8px; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+        <h2 style="font-size:1.15rem; font-weight:800; color:var(--primary, #0f766e); display:flex; align-items:center; gap:8px; margin:0;">
+          <span>📝</span> <span>বাক্য ও উক্তির পরিবর্তন, বাচ্য ও বাচ্যের পরিবর্তন — প্রামাণ্য রিভিশন নোট ও সূত্রাবলি (Part 1)</span>
+        </h2>
+        <span style="font-size:0.75rem; font-weight:700; background:rgba(15,118,110,0.12); color:var(--primary, #0f766e); padding:3px 8px; border-radius:6px;">
+          বিসিএস পরীক্ষার বিশদ ব্যাখ্যা হতে সংকলিত (6টি মূল পয়েন্ট)
+        </span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:10px;">
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            📌 মূল সূত্র, সংজ্ঞা ও ব্যাকরণিক নিয়ম
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>তিনি কথা শুনে ঘুমাতে পারলেন না:</strong> বাক্যটি – “তিনি কথা শুনে ঘুমাতে পারলেন না” – এটি একটি নেতিবাচক (Negative) বাক্য। এর অস্তিবাচক (Affirmative) রূপ করতে হলে “না” বাদ দিয়ে অর্থ বজায় রেখে ইতিবাচকভাবে প্রকাশ করতে হয়।</li><li><strong>তিনি কথা বললেন না।:</strong> মূল বাক্য : “তিনি কথা বললেন না।” এটি একটি নেতিবাচক বাক্য। অস্তিবাচক রূপে রূপান্তর করতে হলে মূল অর্থ অপরিবর্তিত রেখে নেতিবাচক পদ বর্জন করতে হবে। (ক) “তিনি কথা বলতে চাইলেন না” → নঞর্থক পদ রয়ে গেছে।</li><li><strong>তাতে সমাজজীবন চলে না।:</strong> বাক্য রূপান্তর : মূলভাব বা অর্থ অপরিবর্তিত রেখে এক শ্রেণীর বাক্যকে অন্য শ্রেণীর বাক্যে পরিবর্তন করার নামই হলো বাক্য রূপান্তর। নেতিবাচক: তাতে সমাজজীবন চলে না। অস্তিবাচক: তাতে সমাজজীবন অচল হয়ে পড়ে।</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            ⚡ গুরুত্বপূর্ণ প্রামাণ্য তালিকা ও পরীক্ষার প্রয়োগ
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>বাবা ছেলের দীর্ঘায়ু কামনা করলেন:</strong> উক্তির পরিবর্তন : পরোক্ষ উক্তিতে 'প্রার্থনা করল', 'কামনা করল' প্রভৃতি থাকলে প্রত্যক্ষ উক্তিতে তা প্রার্থনাসূচক বাক্যে পরিবর্তন করতে হয় এবং বক্তার বক্তব্যটুকু উদ্ধরণ চিহ্নের (' ') মধ্যে অন্তর্ভুক্ত করতে হয়।</li><li><strong>“ডিঙি টেনে:</strong> ভাববাচ্য : যে বাচ্যে কর্ম থাকে না এবং বাক্যের ক্রিয়ার অর্থই বিশেষভাবে ব্যক্ত হয়, তাকে ভাববাচ্য বলে। কখনো কখনো ভাববাচ্যে কর্তা উহ্য থাকে এবং কর্ম বা ভাব দ্বারাই ভাববাচ্য গঠিত হয়।</li><li><strong>মিথ্যাবাদীকে সবাই অপছন্দ করে:</strong> অস্তিবাচক বাক্যকে নেতিবাচক বাক্যে রূপান্তর করার নিয়ম— বাক্যের মূল অর্থ অপরিবর্তিত রেখে মূল শব্দের বিপরীতার্থক শব্দ ও নঞর্থক অব্যয় প্রয়োগ করতে হয়।</li>
+          </ul>
+        </div>
+      </div>
+      <div style="font-size:0.75rem; color:var(--text-muted, #64748b); text-align:right; font-style:italic; margin-top:4px;">
+        * প্রশ্নের কুইজে যাওয়ার আগেই উপরের প্রামাণ্য সূত্রাবলি ও তালিকাটি একনজরে রিভিশন দিয়ে নিন।
+      </div>
+    </section>
+
     <div class="score-card">
       <div class="score-item score-total">
         <span>মোট প্রশ্ন:</span>

@@ -445,7 +445,11 @@
     (function() {
       try {
         var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        var viewMode = localStorage.getItem('ebk_view_mode') || 'full';
+        var qaMode = localStorage.getItem('ebk_qa_mode') || 'quiz';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-view-mode', viewMode);
+        document.documentElement.setAttribute('data-qa-mode', qaMode);
         if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
@@ -453,23 +457,8 @@
         }
       } catch(e) {}
     })();
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        var cur = document.documentElement.getAttribute('data-theme') || 'light';
-        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
-        btns.forEach(function(b) {
-          var icon = b.querySelector('#themeIcon') || b;
-          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
-            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
-          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
-            b.textContent = cur === 'dark' ? '☀️' : '🌙';
-          }
-          var text = b.querySelector('#themeText');
-          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
-        });
-      } catch(e) {}
-    });
   </script>
+  <script src="../universal-modes.js"></script>
 </head>
 <body>
   <div class="container">
@@ -568,7 +557,43 @@
     <!-- Questions Container -->
     <main id="questionsContainer">
       <!-- Question 1 -->
-      <article class="q-card" id="q1">
+      
+    <!-- Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি -->
+    <section class="part-1-notes info-summary-card" id="part1Notes" style="background:var(--bg-surface, #fff); border:1.5px solid var(--border-color, #e2e8f0); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary, #0f766e); padding-bottom:8px; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+        <h2 style="font-size:1.15rem; font-weight:800; color:var(--primary, #0f766e); display:flex; align-items:center; gap:8px; margin:0;">
+          <span>📝</span> <span>ন্যাটো ও অন্যান্য নিরাপত্তা জোট বাহিনী — প্রামাণ্য রিভিশন নোট ও বিশ্ব তথ্যাবলি (Part 1)</span>
+        </h2>
+        <span style="font-size:0.75rem; font-weight:700; background:rgba(15,118,110,0.12); color:var(--primary, #0f766e); padding:3px 8px; border-radius:6px;">
+          বিসিএস পরীক্ষার বিশদ ব্যাখ্যা হতে সংকলিত (9টি মূল পয়েন্ট)
+        </span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:10px;">
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            📌 ঐতিহাসিক পটভূমি, চুক্তি ও গুরুত্বপূর্ণ ঘটনাপঞ্জি
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>দুটি দেশ সম্প্রতি:</strong> উত্তর: গ (সুইডেন এবং ফিনল্যান্ড) সম্প্রতি ফিনল্যান্ড (৪ এপ্রিল, ২০২৩) এবং (সর্বশেষ) সুইডেন (৭ মার্চ, ২০২৪) আনুষ্ঠানিকভাবে ন্যাটোতে যোগদান করেছে, যা ইউরোপের নিরাপত্তা পরিস্থিতিকে নতুন রূপ প্রদান করেছে।</li><li><strong>অ্যাকাস:</strong> উত্তর: খ (সামরিক সহযোগিতা) মার্কিন যুক্তরাষ্ট্রের নেতৃত্বাধীন 'অ্যাকাস' (AUKUS) চুক্তির প্রাথমিক লক্ষ্য সামরিক সহযোগিতা।</li><li><strong>আটলান্টিক ট্রিটি অর্গানাইজেশন:</strong> উত্তর: গ (১৯৪৯) ১৯৪৯ সালে নর্থ আটলান্টিক ট্রিটি অর্গানাইজেশন (NATO) বা উত্তর আটলান্টিক নিরাপত্তা জোট স্বাক্ষরিত হয়।</li><li><strong>(NATO) চার্টারের কোন:</strong> উত্তর: গ (আর্টিকেল-৫) ন্যাটো (NATO) চার্টারের আর্টিকেল-৫-এ সম্মিলিত প্রতিরক্ষার কথা উল্লেখ আছে।</li><li><strong>সদস্য নয় ::</strong> উত্তর: গ (NATO) প্রশ্নে প্রদত্ত অপশনগুলোর মধ্যে - বাংলাদেশ ন্যাটোর সদস্য নয়। অন্যদিকে, বাংলাদেশ: ২২ জুন, ১৯৭২ সালে ILO (International Labour Organization) এর সদস্য হয়।</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            ⚡ আন্তর্জাতিক সংস্থা, সদস্য, সনদ ও সদরদপ্তর
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>মুসলিম দেশ সামরিক:</strong> উত্তর: ঘ (তুরস্ক) তুরস্ক ও আলবেনিয়া ন্যাটোভুক্ত মুসলিম দেশ।</li><li><strong>আটলান্টিক ট্রিটি অর্গানাইজেশন:</strong> উত্তর: খ (১৯৪৯ সালে) ১৯৪৯ সালের ৪ এপ্রিল, ১২টি দেশের সমন্বয়ে North Atlantic Treaty Organization (NATO) সামরিক জোট গঠিত হয়।</li><li><strong>সর্বশেষ সদস্য রাষ্ট্র:</strong> উত্তর: অপশনে সঠিক উত্তর নেই। সাম্প্রতিক তথ্য অনুযায়ী, সুইডেন। তৎকালীন সঠিক উত্তর ছিল মন্টিনিগ্রো।</li><li><strong>আটলান্টিক চুক্তি সংস্থা:</strong> উত্তর: ক (৪ এপ্রিল, ১৯৪৯) নর্থ আটলান্টিক ট্রিটি অর্গানাইজেশন (NATO) নামের সামরিক জোট ১৯৪৯ সালের ৪ এপ্রিল গঠিত হয়।</li>
+          </ul>
+        </div>
+      </div>
+      <div style="font-size:0.75rem; color:var(--text-muted, #64748b); text-align:right; font-style:italic; margin-top:4px;">
+        * প্রশ্নের কুইজে যাওয়ার আগেই উপরের প্রামাণ্য তথ্যাবলি একনজরে রিভিশন দিয়ে নিন।
+      </div>
+    </section>
+
+    <article class="q-card" id="q1">
         <div class="q-header">
           <span class="q-num">১.</span>
           <div class="q-text-group">

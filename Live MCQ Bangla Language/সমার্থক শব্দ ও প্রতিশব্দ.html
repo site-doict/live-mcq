@@ -389,7 +389,11 @@
     (function() {
       try {
         var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        var viewMode = localStorage.getItem('ebk_view_mode') || 'full';
+        var qaMode = localStorage.getItem('ebk_qa_mode') || 'quiz';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-view-mode', viewMode);
+        document.documentElement.setAttribute('data-qa-mode', qaMode);
         if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
@@ -397,23 +401,8 @@
         }
       } catch(e) {}
     })();
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        var cur = document.documentElement.getAttribute('data-theme') || 'light';
-        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
-        btns.forEach(function(b) {
-          var icon = b.querySelector('#themeIcon') || b;
-          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
-            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
-          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
-            b.textContent = cur === 'dark' ? '☀️' : '🌙';
-          }
-          var text = b.querySelector('#themeText');
-          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
-        });
-      } catch(e) {}
-    });
   </script>
+  <script src="../universal-modes.js"></script>
 </head>
 <body>
   <div class="container">
@@ -469,6 +458,42 @@
     </section>
 
     <!-- Sticky Score Tracker -->
+    
+    <!-- Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি -->
+    <section class="part-1-notes info-summary-card" id="part1Notes" style="background:var(--bg-surface, #fff); border:1.5px solid var(--border-color, #e2e8f0); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary, #0f766e); padding-bottom:8px; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+        <h2 style="font-size:1.15rem; font-weight:800; color:var(--primary, #0f766e); display:flex; align-items:center; gap:8px; margin:0;">
+          <span>📝</span> <span>সমার্থক শব্দ ও প্রতিশব্দ — প্রামাণ্য রিভিশন নোট ও সূত্রাবলি (Part 1)</span>
+        </h2>
+        <span style="font-size:0.75rem; font-weight:700; background:rgba(15,118,110,0.12); color:var(--primary, #0f766e); padding:3px 8px; border-radius:6px;">
+          বিসিএস পরীক্ষার বিশদ ব্যাখ্যা হতে সংকলিত (32টি মূল পয়েন্ট)
+        </span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:10px;">
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            📌 মূল সূত্র, সংজ্ঞা ও ব্যাকরণিক নিয়ম
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>ফ্যাকা কমলা রং:</strong> ফ্যাকা (বিশেষণ পদ) একটি দেশি শব্দ। এর আভিধানিক অর্থ: অনুজ্জ্বল, ফ্যাকাশে; অসার, বাজে ।</li><li><strong>ভাত:</strong> 'ভাত' এর প্রতিশব্দ— তণ্ডুল (প্রশ্নপত্রে 'তণডুল' মুদ্রিত ছিল)। • প্রভঞ্জন = ঝড়ঝাপটা, বায়ু, পবনদেব। • মহি = পৃথিবী, ধরণি।</li><li><strong>স্বর্গ:</strong> 'স্বর্গ' শব্দের সঠিক সমার্থক শব্দজোড়া— ত্রিদিব, সুরপুর । অন্যান্য সমার্থক: দেবলোক, দ্যুলোক, অমরাবতী, বেহেশত। • দিনমণি, দিননাথ, হরিদশ্ব = সূর্য।</li><li><strong>এ কাজ করতে আমি বদ্ধ পরিকর:</strong> বাংলা একাডেমি আধুনিক বাংলা অভিধান অনুসারে, 'পরিকর' শব্দের আক্ষরিক অর্থ হলো কোমর বা কটিবন্ধ । 'বদ্ধ পরিকর' মানে কোমর বেঁধে প্রস্তুত হওয়া (দৃঢ়সংকল্প করা)।</li><li><strong>মৃগয়া:</strong> 'মৃগ' শব্দের প্রাচীন অর্থ পশু বা হরিণ। 'মৃগয়া' শব্দের অর্থ বন্য পশুপাখি বা হরিণ শিকার।</li><li><strong>আফতাব:</strong> 'আফতাব' শব্দের সমার্থক শব্দ হলো সূর্য বা অর্ক । • অর্ণব, জলধি = সমুদ্র। • রাতুল = লাল বা রক্তবর্ণ।</li><li><strong>গড্ডলিকা প্রবাহ:</strong> 'গড্ডল' একটি সংস্কৃত শব্দ, যার আভিধানিক অর্থ ভেড়া বা মেষ । 'গড্ডলিকা প্রবাহ' মানে অন্ধভাবে ভেড়ার পালের মতো অনুকরণ।</li><li><strong>নিত্য তোমার যে ফুল ফোটে ফুলবনে:</strong> পঙ্‌ক্তিটিতে 'নিত্য' শব্দটি ক্রিয়া-বিশেষণ হিসেবে ব্যবহৃত হয়েছে, যার অর্থ 'প্রতিনিয়ত' বা 'অহরহ' ।</li><li><strong>নদী:</strong> 'নদী' শব্দের সমার্থক শব্দ হলো তটিনী , তরঙ্গিনী, শৈবলিনী, স্রোতস্বিনী ইত্যাদি। • সিন্ধু = সমুদ্র। হিল্লোল = ঢেউ/তরঙ্গ।</li><li><strong>তাম্বুলিক:</strong> 'তাম্বুলিক' শব্দের সমার্থক হলো পান-ব্যবসায়ী, পর্ণকার ও বারুই। কিন্তু 'তামসিক' শব্দের অর্থ ঘন অন্ধকারাচ্ছন্ন বা অজ্ঞতাপ্রসূত; এটি সমার্থক নয়।</li><li><strong>অগ্নি:</strong> বহ্নি, বায়ুসখা, বৈশ্বানর—সবগুলোই অগ্নির সমার্থক শব্দ। কিন্তু আবীর অর্থ সুগন্ধি লাল রঙের গুঁড়া বা ফাগ; এটি অগ্নির সমার্থক নয়।</li><li><strong>উদ্বাসন শব্দের:</strong> উদ্বাসন (বিশেষ্য) শব্দের অর্থ বাস্তুভূমি বা স্বদেশ থেকে বিতাড়িত হওয়া বা নির্বাসন ।</li><li><strong>কুসীদজীবী:</strong> 'কুসীদ' অর্থ সুদ। অতএব 'কুসীদজীবী' বলতে সুদখোর বা সুদের কারবার করে জীবিকা নির্বাহকারী কে বোঝায়।</li><li><strong>অভিরাম:</strong> 'অভিরাম' শব্দের আভিধানিক অর্থ সুন্দর, মনোহর বা প্রীতিপ্রদ (যেমন: নয়নাভিরাম দৃশ্য)।</li><li><strong>ঊর্ণনাভ:</strong> 'ঊর্ণনাভ' (ঊর্ণা বা জাল নাভিতে যার) শব্দটি দিয়ে মাকড়সা বোঝায়।</li><li><strong>আগুন:</strong> 'আগুন'-এর সমার্থক শব্দ হলো অনল , পাবক, বহ্নি, হুতাশন। • ভাতি, অংশু, জ্যোতি = আলো বা রশ্মি।</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            ⚡ গুরুত্বপূর্ণ প্রামাণ্য তালিকা ও পরীক্ষার প্রয়োগ
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>সূর্য:</strong> 'সূর্য' শব্দের সমার্থক শব্দ অর্ক । • অর্ণব = সমুদ্র। প্রসূন = ফুল।</li><li><strong>সমভিব্যাহারে:</strong> 'সমভিব্যাহারে' (ক্রিয়া-বিশেষণ)-এর অর্থ একযোগে, সঙ্ঘবদ্ধভাবে বা সঙ্গে (যেমন: মন্ত্রী অমাত্য সমভিব্যাহারে গমন করলেন)।</li><li><strong>প্রকর্ষ:</strong> 'প্রকর্ষ' শব্দের সমার্থক শব্দ হলো উৎকর্ষ বা শ্রেষ্ঠত্ব । [মনে রাখা আবশ্যক: 'উৎকর্ষতা' শব্দটি ব্যাকরণগতভাবে অশুদ্ধ প্রয়োগ; শুদ্ধ রূপ হলো 'উৎকর্ষ' বা 'উৎকৃষ্টতা'] ।</li><li><strong>জল:</strong> সলিল, উদক, নীর— সবই জলের সমার্থক। কিন্তু জলধি অর্থ সমুদ্র বা সাগর।</li><li><strong>পরশু:</strong> 'পরশু' শব্দের অর্থ গতকালের আগের দিন বা আগামীকালের পরের দিন (পরশু) ।</li><li><strong>অগ্নি:</strong> পাবক, বহ্নি, হুতাশন বিশেষ্য পদ এবং অগ্নির সমার্থক। কিন্তু প্রজ্বলিত একটি বিশেষণ পদ, যার অর্থ জ্বলছে এমন।</li><li><strong>বৃক্ষ:</strong> 'বৃক্ষ' শব্দের সমার্থক শব্দ হলো বিটপী , পাদপ, তরু, দ্রুম, মহীরূহ, গাছ। • কলাপী = ময়ূর। নীরধি = সমুদ্র।</li><li><strong>বাতাস:</strong> মারুত, পবন, অনিল বাতাসের সমার্থক। কিন্তু পাবক অর্থ আগুন।</li><li><strong>অদিতি:</strong> পৃথ্বী, ক্ষিতি, অবনী— সবই পৃথিবী বা অদিতির সমার্থক। কিন্তু নীর অর্থ জল বা পানি।</li><li><strong>শিখণ্ডী শব্দের:</strong> 'শিখণ্ডী' শব্দের অর্থ ময়ূর (অন্যান্য সমার্থক: কেকী, কলাপী, বর্হী)।</li><li><strong>অনীক:</strong> 'অনীক' একটি সংস্কৃত শব্দ। এর অর্থ সৈনিক বা সৈন্যদল (অনীকিনী = সেনাবাহিনী)।</li><li><strong>উপরোধ:</strong> 'উপরোধ' শব্দের অর্থ বিশেষ অনুরোধ, সুপারিশ বা সমাদর ।</li><li><strong>সমার্থক শব্দগুচ্ছ:</strong> 'শৈবলিনী, তরঙ্গিনী, সরিৎ' — এই শব্দগুচ্ছের প্রতিটি শব্দই নদী -র খাঁটি সমার্থক। • অর্ণব ও সিন্ধু = সমুদ্র।</li><li><strong>অপলাপ:</strong> অপলাপ (বিশেষ্য) তৎসম বা সংস্কৃত; অপ + √লপ্ + অ; অর্থ— ১. অসঙ্গত বাক্য। ২. গোপন। ৩. মিথ্যা উক্তি (সত্যের অপলাপ)।</li><li><strong>বিরাগী:</strong> বিরাগী (বিশেষণ পদ; সংস্কৃত শব্দ) : অর্থ— উদাসীন; আসক্তিহীন; নিস্পৃহ; অনুরাগহীন; বিরাগযুক্ত। অনুরাগী এর বিপরীত শব্দ বিরাগী।</li><li><strong>শিষ্টাচার:</strong> শিষ্টাচার (বিশেষ্য পদ): অর্থ— ভদ্র ব্যবহার; নম্র আচরণ। সদাচার (বিশেষ্য পদ) : অর্থ— সদাচরণ। সদাচরণ (বিশেষ্য পদ) : অর্থ— সৎ ও মার্জিত আচরণ, শাস্ত্রবিহিত আচরণ।</li>
+          </ul>
+        </div>
+      </div>
+      <div style="font-size:0.75rem; color:var(--text-muted, #64748b); text-align:right; font-style:italic; margin-top:4px;">
+        * প্রশ্নের কুইজে যাওয়ার আগেই উপরের প্রামাণ্য সূত্রাবলি ও তালিকাটি একনজরে রিভিশন দিয়ে নিন।
+      </div>
+    </section>
+
     <div class="score-card">
       <div class="score-item score-total">
         <span>মোট প্রশ্ন:</span>

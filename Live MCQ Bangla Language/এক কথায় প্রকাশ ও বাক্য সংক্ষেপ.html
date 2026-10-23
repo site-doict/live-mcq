@@ -386,7 +386,11 @@
     (function() {
       try {
         var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        var viewMode = localStorage.getItem('ebk_view_mode') || 'full';
+        var qaMode = localStorage.getItem('ebk_qa_mode') || 'quiz';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-view-mode', viewMode);
+        document.documentElement.setAttribute('data-qa-mode', qaMode);
         if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
@@ -394,23 +398,8 @@
         }
       } catch(e) {}
     })();
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        var cur = document.documentElement.getAttribute('data-theme') || 'light';
-        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
-        btns.forEach(function(b) {
-          var icon = b.querySelector('#themeIcon') || b;
-          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
-            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
-          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
-            b.textContent = cur === 'dark' ? '☀️' : '🌙';
-          }
-          var text = b.querySelector('#themeText');
-          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
-        });
-      } catch(e) {}
-    });
   </script>
+  <script src="../universal-modes.js"></script>
 </head>
 <body>
   <div class="container">
@@ -446,7 +435,43 @@
 
 
     
-<div class="score-card">
+
+    <!-- Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি -->
+    <section class="part-1-notes info-summary-card" id="part1Notes" style="background:var(--bg-surface, #fff); border:1.5px solid var(--border-color, #e2e8f0); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary, #0f766e); padding-bottom:8px; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+        <h2 style="font-size:1.15rem; font-weight:800; color:var(--primary, #0f766e); display:flex; align-items:center; gap:8px; margin:0;">
+          <span>📝</span> <span>এক কথায় প্রকাশ ও বাক্য সংক্ষেপ — প্রামাণ্য রিভিশন নোট ও সূত্রাবলি (Part 1)</span>
+        </h2>
+        <span style="font-size:0.75rem; font-weight:700; background:rgba(15,118,110,0.12); color:var(--primary, #0f766e); padding:3px 8px; border-radius:6px;">
+          বিসিএস পরীক্ষার বিশদ ব্যাখ্যা হতে সংকলিত (18টি মূল পয়েন্ট)
+        </span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:10px;">
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            📌 মূল সূত্র, সংজ্ঞা ও ব্যাকরণিক নিয়ম
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>আকাশ ও পৃথিবীর অন্তরাল:</strong> 'আকাশ ও পৃথিবীর অন্তরাল' -এর এক কথায় প্রকাশ হলো 'রোদসী' । • স্ফুলিঙ্গ = আগুনের কণা/চিনগারি। • পীতাভ = ঈষৎ পীত বা হলদে ভাবযুক্ত।</li><li><strong>যে আলোতে কুমুদ ফোটে:</strong> 'যে আলোতে কুমুদ ফোটে' — এর এককথায় প্রকাশ হলো 'কৌমুদী' (চাঁদের আলো/জ্যোৎস্না)। • প্রভাবতী = দীপ্তিময়ী নারী। বিভা = আলোক, কিরণ, দীপ্তি বা প্রভা।</li><li><strong>মৃত্তিকা দিয়ে তৈরি:</strong> 'মৃত্তিকা দিয়ে তৈরি' কথাটির সংকুচিত রূপ হলো 'মৃণ্ময়' (মৃৎ + ময়ট)। মাটির তৈরি যে কোনো জিনিসকে মৃণ্ময় বলা হয়।</li><li><strong>জিগীষা:</strong> 'জিগীষা' অর্থ জয় করার ইচ্ছা (জয় করিবার ইচ্ছা)। • জানিবার ইচ্ছা = জিজ্ঞাসা। • হনন/বধ করিবার ইচ্ছা = জিঘাংসা।</li><li><strong>জিজীবিষা:</strong> 'জিজীবিষা' শব্দের অর্থ 'বেঁচে থাকার ইচ্ছা' বা জীবনের প্রবল আকাঙ্ক্ষা। যে বেঁচে থাকতে ইচ্ছা করে তাকে বলে 'জিজীবিষু'।</li><li><strong>যিনি ন্যায়শাস্ত্র জানেন:</strong> যিনি ন্যায়শাস্ত্রে পণ্ডিত বা ন্যায়শাস্ত্র জানেন, তাকে এক কথায় 'নৈয়ায়িক' বলে।</li><li><strong>জিজীবিষা:</strong> 'জিজীবিষা' বলতে 'বেঁচে থাকার ইচ্ছা' বোঝায়। (জয়ের ইচ্ছা = জিগীষা; হত্যার ইচ্ছা = জিঘাংসা; শোনার ইচ্ছা = শুশ্রূষা)।</li><li><strong>রচনা থেকে:</strong> অন্যের লেখা চুরি করে নিজের নামে চালিয়ে দেওয়াকে 'কুম্ভিলকবৃত্তি' (Plagiarism) বলা হয়। • পতঙ্গবৃত্তি = আগুনে পতঙ্গের ঝাঁপ দেওয়ার মতো হিতাহিতজ্ঞানহীন আচরণ।</li><li><strong>প্রোষিতভর্তৃকা:</strong> 'প্রোষিতভর্তৃকা' শব্দের অর্থ 'যে নারীর স্বামী বিদেশে অবস্থান করে' । • যে পুরুষের স্ত্রী বিদেশে থাকে = প্রোষিতভার্য/প্রোষিতপত্নীক। • চিরকাল পিতৃগৃহে বাস করে যে নারী = চিরন্টী।</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            ⚡ গুরুত্বপূর্ণ প্রামাণ্য তালিকা ও পরীক্ষার প্রয়োগ
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>নষ্ট হওয়ার স্বভাব যার:</strong> 'নষ্ট হওয়ার স্বভাব যার' — এক কথায় হবে 'নশ্বর' । • নষ্ট হওয়াই স্বভাব নয় যার = অবিনশ্বর।</li><li><strong>অক্ষির সমীপে:</strong> 'অক্ষির সমীপে' = সমক্ষ । • অক্ষির অভিমুখে = প্রত্যক্ষ। • অক্ষির অগোচরে = পরোক্ষ।</li><li><strong>কর্মে যাহার ক্লান্তি নাই:</strong> 'কর্মে যাহার ক্লান্তি নাই' — এর এক কথায় প্রকাশ হলো 'অক্লান্ত কর্মী' । • যাহার কোন কিছুতেই ক্লান্তি নাই = অক্লান্ত / ক্লান্তিহীন।</li><li><strong>যা সহজে অতিক্রম করা যায় না:</strong> 'যা সহজে অতিক্রম করা যায় না' = দুরতিক্রম্য । • যা একেবারেই অতিক্রম করা যায় না = অনতিক্রম্য। • যা সহজে লঙ্ঘন করা যায় না = অলঙ্ঘ্য।</li><li><strong>চিরস্থায়ী নয়-:</strong> 'যা চিরস্থায়ী নয়' বা নষ্ট হওয়ার স্বভাব যার = নশ্বর । • যা স্থায়ী নয় = অস্থায়ী। ক্ষণকাল স্থায়ী হয় যা = ক্ষণস্থায়ী।</li><li><strong>ভূমিতে ফসল:</strong> যে ভূমিতে ফসল জন্মায় না তাকে বলে 'ঊষর' । • যে জমি চাষ না করে ফেলে রাখা হয়েছে = পতিত/অনাবাদি। • যার উর্বরা শক্তি কম = অনুর্বর।</li><li><strong>যা পূর্বে ছিল এখন নেই:</strong> 'যা পূর্বে ছিল এখন নেই' = ভূতপূর্ব । • যা পূর্বে দেখা যায়নি = অদৃষ্টপূর্ব। • যা পূর্বে কখনো ঘটেনি = অভূতপূর্ব।</li><li><strong>যা বলা হয়নি:</strong> 'যা বলা হয়নি' = অনুক্ত । • যা বলা হয়েছে = উক্ত। • যা প্রকাশ করা হয়নি = অব্যক্ত।</li><li><strong>ক্ষমার যোগ্য:</strong> 'ক্ষমার যোগ্য' = ক্ষমার্হ । অনুরূপভাবে: • প্রশংসার যোগ্য = প্রশংসার্হ। • ধন্যবাদ পাওয়ার যোগ্য = ধন্যবাদার্হ।</li>
+          </ul>
+        </div>
+      </div>
+      <div style="font-size:0.75rem; color:var(--text-muted, #64748b); text-align:right; font-style:italic; margin-top:4px;">
+        * প্রশ্নের কুইজে যাওয়ার আগেই উপরের প্রামাণ্য সূত্রাবলি ও তালিকাটি একনজরে রিভিশন দিয়ে নিন।
+      </div>
+    </section>
+
+    <div class="score-card">
       <div class="score-item score-total">
         <span>মোট প্রশ্ন:</span>
         <span class="score-val" id="totalCount">18</span>

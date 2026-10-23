@@ -5,7 +5,11 @@
     (function() {
       try {
         var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        var viewMode = localStorage.getItem('ebk_view_mode') || 'full';
+        var qaMode = localStorage.getItem('ebk_qa_mode') || 'quiz';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-view-mode', viewMode);
+        document.documentElement.setAttribute('data-qa-mode', qaMode);
         if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
@@ -13,22 +17,6 @@
         }
       } catch(e) {}
     })();
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        var cur = document.documentElement.getAttribute('data-theme') || 'light';
-        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
-        btns.forEach(function(b) {
-          var icon = b.querySelector('#themeIcon') || b;
-          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
-            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
-          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
-            b.textContent = cur === 'dark' ? '☀️' : '🌙';
-          }
-          var text = b.querySelector('#themeText');
-          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
-        });
-      } catch(e) {}
-    });
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
@@ -420,6 +408,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
+  <script src="../universal-modes.js"></script>
 </head>
 <body>
   <div class="container">
@@ -486,6 +475,38 @@
     </section>
 
     <!-- Sticky Score Tracker -->
+    
+    <!-- ══════ Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি ══════ -->
+    <section class="part-1-notes info-summary-card" id="part1Notes" style="background:var(--bg-surface, #fff); border:1.5px solid var(--border-color, #e2e8f0); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary, #0f766e); padding-bottom:8px; margin-bottom:14px;">
+        <h2 style="font-size:1.18rem; font-weight:800; color:var(--primary, #0f766e); display:flex; align-items:center; gap:8px;">
+          <span>📝</span> <span>প্রামাণ্য রিভিশন নোট ও সূত্রাবলি (Part 1)</span>
+        </h2>
+        <span style="font-size:0.75rem; font-weight:700; background:rgba(15,118,110,0.12); color:var(--primary, #0f766e); padding:3px 8px; border-radius:6px;">
+          বিসিএস ব্যাখ্যা হতে সংকলিত
+        </span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:14px;">
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.95rem; font-weight:700; color:var(--primary, #0f766e); margin-bottom:6px;">📌 ণ-ত্ব ও ষ-ত্ব বিধানের প্রযোজ্যতার ক্ষেত্র</h3>
+          <ul style="font-size:0.88rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155);">
+            <li><strong>কেবল তৎসম (সংস্কৃত) শব্দে প্রযোজ্য:</strong> ণ-ত্ব ও ষ-ত্ব বিধি কেবল তৎসম শব্দের বানানে মূর্ধন্য 'ণ' ও 'ষ' ব্যবহারের সুনির্দিষ্ট নিয়ম।</li>
+            <li><strong>যেখানে প্রযোজ্য নয়:</strong> খাঁটি বাংলা (তদ্ভব), দেশি এবং বিদেশি শব্দে (ইংরেজি, ফারসি, আরবি) কখনো মূর্ধন্য 'ণ' বা 'ষ' হয় না (যেমন: কোরআন, গভর্নর, পোশাক, জিনিস, মাস্টার, পোস্ট)।</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.95rem; font-weight:700; color:var(--primary, #0f766e); margin-bottom:6px;">⚡ নিয়মানুযায়ী বনাম স্বভাবতই 'ণ' ও 'ষ'</h3>
+          <ul style="font-size:0.88rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155);">
+            <li><strong>নিয়মানুযায়ী 'ণ':</strong> ঋ, র, ষ-এর পর স্বরধ্বনি, ক-বর্গ, প-বর্গ এবং য, য়, ব, হ থাকলে পরবর্তী ন ➔ ণ হয় (যেমন: <em>প্রবণ</em> ➔ প্র + ব + ণ)।</li>
+            <li><strong>স্বভাবতই 'ণ' (নিত্য মূর্ধন্য-ণ):</strong> চাণক্য, মাণিক্য, বাণিজ্য, লবণ, বীণা, <em>কল্যাণ</em>, <em>নিক্বণ</em>, <em>বিপণি</em>, শোণিত, কঙ্কণ ইত্যাদি।</li>
+            <li><strong>নিত্য মূর্ধন্য-ষ:</strong> কোনো নিয়ম ছাড়া স্বভাবতই মূর্ধন্য-ষ হয় ➔ <em>আষাঢ়</em>, পৌষ, মানুষ, ভূষণ, ঔষধ, পাষাণ, ঊষা, ষড়যন্ত্র, রোষ, কোষ।</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <div class="score-card">
       <div class="score-item score-total">
         <span>মোট প্রশ্ন:</span>

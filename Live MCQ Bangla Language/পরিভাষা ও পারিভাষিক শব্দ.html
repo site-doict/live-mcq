@@ -386,7 +386,11 @@
     (function() {
       try {
         var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        var viewMode = localStorage.getItem('ebk_view_mode') || 'full';
+        var qaMode = localStorage.getItem('ebk_qa_mode') || 'quiz';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-view-mode', viewMode);
+        document.documentElement.setAttribute('data-qa-mode', qaMode);
         if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
@@ -394,23 +398,8 @@
         }
       } catch(e) {}
     })();
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        var cur = document.documentElement.getAttribute('data-theme') || 'light';
-        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
-        btns.forEach(function(b) {
-          var icon = b.querySelector('#themeIcon') || b;
-          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
-            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
-          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
-            b.textContent = cur === 'dark' ? '☀️' : '🌙';
-          }
-          var text = b.querySelector('#themeText');
-          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
-        });
-      } catch(e) {}
-    });
   </script>
+  <script src="../universal-modes.js"></script>
 </head>
 <body>
   <div class="container">
@@ -446,7 +435,43 @@
 
 
     
-<div class="score-card">
+
+    <!-- Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি -->
+    <section class="part-1-notes info-summary-card" id="part1Notes" style="background:var(--bg-surface, #fff); border:1.5px solid var(--border-color, #e2e8f0); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary, #0f766e); padding-bottom:8px; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+        <h2 style="font-size:1.15rem; font-weight:800; color:var(--primary, #0f766e); display:flex; align-items:center; gap:8px; margin:0;">
+          <span>📝</span> <span>পরিভাষা ও পারিভাষিক শব্দ — প্রামাণ্য রিভিশন নোট ও সূত্রাবলি (Part 1)</span>
+        </h2>
+        <span style="font-size:0.75rem; font-weight:700; background:rgba(15,118,110,0.12); color:var(--primary, #0f766e); padding:3px 8px; border-radius:6px;">
+          বিসিএস পরীক্ষার বিশদ ব্যাখ্যা হতে সংকলিত (16টি মূল পয়েন্ট)
+        </span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:10px;">
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            📌 মূল সূত্র, সংজ্ঞা ও ব্যাকরণিক নিয়ম
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>শব্দ বলতে:</strong> পারিভাষিক শব্দ বলতে এমন শব্দ বোঝায় যা কোনো নির্দিষ্ট বিষয়, পেশা, শাস্ত্র বা ক্ষেত্রের (বিজ্ঞান, চিকিৎসা, আইন, সাহিত্য) সঙ্গে সম্পর্কিত এবং সেই বিশেষ ক্ষেত্রে সুনির্দিষ্ট অর্থ প্রকাশ করে ।</li><li><strong>শব্দের বাংলা:</strong> 'Transparency' -এর বাংলা পরিভাষা হলো 'স্বচ্ছতা' । • Accuracy = যথাযথতা/নির্ভুলতা। • Reliability = নির্ভরযোগ্যতা।</li><li><strong>Glossary:</strong> 'Glossary' শব্দের বাংলা অর্থ 'শব্দার্থপঞ্জি' বা টীকাপুঞ্জ (কঠিন বা বিশেষ পারিভাষিক শব্দের বর্ণানুক্রমিক ব্যাখ্যামূলক তালিকা)। • Hand-out = জ্ঞাপনপত্র। • In total/Collectively = সর্বসাকুল্যে।</li><li><strong>pedagogy:</strong> বাংলা একাডেমি অভিধান অনুসারে 'pedagogy' শব্দের পরিভাষা হলো 'শিক্ষাতত্ত্ব' বা 'শিক্ষণবিজ্ঞান' (the study of methods and activities of teaching)। • Coeducation = সহশিক্ষা। • Education policy = শিক্ষানীতি।</li><li><strong>Rank:</strong> 'Rank' শব্দের বাংলা পরিভাষা হলো 'পদমর্যাদা' । • Post = পদ। • Degree = মাত্রা।</li><li><strong>Attested:</strong> 'Attested' শব্দের শুদ্ধ বাংলা পরিভাষা 'সত্যায়িত' (বানান: দন্ত্য-স + ত্য + ায়িত)। • Certified = প্রত্যয়িত। • Verified = প্রতিপাদনকৃত বা যাচাইকৃত।</li><li><strong>Notification:</strong> বাংলা একাডেমি প্রশাসনিক পরিভাষা ও ভাষা-শিক্ষা (ড. হায়াৎ মামুদ) অনুযায়ী 'Notification' -এর পরিভাষা হলো 'প্রজ্ঞাপন' । তবে বিস্তৃত অর্থে 'বিজ্ঞপ্তি' হিসেবেও গণ্য হয়। দাপ্তরিক নির্দেশনামূলক বিধিবদ্ধ ঘোষণাকে প্রজ্ঞাপন বলা হয়।</li><li><strong>Hand out:</strong> 'Hand out' -এর শুদ্ধ বাংলা পরিভাষা হলো 'জ্ঞাপনপত্র' । • Hand-bill = প্রচারপত্র বা ইশতেহার। • Hand-book = তথ্যপুস্তিকা।</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            ⚡ গুরুত্বপূর্ণ প্রামাণ্য তালিকা ও পরীক্ষার প্রয়োগ
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>and Void”-এর:</strong> আইন ও দাপ্তরিক পরিভাষায় 'Null and Void' শব্দের অর্থ 'বাতিল' বা অকার্যকর।</li><li><strong>Custom:</strong> 'Custom' শব্দের অর্থ 'প্রথা' বা সামাজিক রীতি। • অন্যদিকে বহুবচনে 'Customs' অর্থ শুল্ক বা শুল্ক বিভাগ। • Law = আইন; Duty = শুল্ক/কর্তব্য।</li><li><strong>Consumer goods:</strong> অর্থনীতি ও বাণিজ্যে 'Consumer goods' -এর স্বীকৃত পরিভাষা হলো 'ভোগ্যপণ্য' । • Consumption = ভোগ। • Consumer = ভোক্তা বা ব্যবহারকারী।</li><li><strong>duty-র পরিভাষা:</strong> 'Excise duty' -এর পরিভাষা হলো 'আবগারি শুল্ক' (অন্তঃশুল্ক)। দেশের অভ্যন্তরে উৎপাদিত ও বিক্রিত পণ্যের ওপর আরোপিত করকে আবগারি শুল্ক বলে। • Estate duty = সম্পত্তি কর।</li><li><strong>Subconscious:</strong> মনোবিজ্ঞানে 'Subconscious' -এর বাংলা পারিভাষিক শব্দ হলো 'অবচেতন' । • Conscious = সচেতন। • Unconscious = অচেতন।</li><li><strong>শব্দের অর্থ:</strong> 'Quarterly' শব্দের অর্থ হলো প্রতি তিন মাস অন্তর বা 'ত্রৈমাসিক' । • Weekly = সাপ্তাহিক। • Fortnightly = পাক্ষিক।</li><li><strong>শব্দের অর্থ-:</strong> চিকিৎসাবিজ্ঞানে 'Anatomy' শব্দের পারিভাষিক অর্থ 'শারীরবিদ্যা' , শারীরস্থান বা অঙ্গব্যবচ্ছেদ-বিদ্যা। (Physiology = শারীরবৃত্তীয় বিজ্ঞান)।</li><li><strong>Intellectual:</strong> ‘Intellectual’ শব্দের বাংলা পরিভাষা বা অর্থ হলো 'বুদ্ধিজীবী' বা বুদ্ধিবাদী। • Intelligent = বুদ্ধিমান। • Thoughtful = মননশীল।</li>
+          </ul>
+        </div>
+      </div>
+      <div style="font-size:0.75rem; color:var(--text-muted, #64748b); text-align:right; font-style:italic; margin-top:4px;">
+        * প্রশ্নের কুইজে যাওয়ার আগেই উপরের প্রামাণ্য সূত্রাবলি ও তালিকাটি একনজরে রিভিশন দিয়ে নিন।
+      </div>
+    </section>
+
+    <div class="score-card">
       <div class="score-item score-total">
         <span>মোট প্রশ্ন:</span>
         <span class="score-val" id="totalCount">16</span>

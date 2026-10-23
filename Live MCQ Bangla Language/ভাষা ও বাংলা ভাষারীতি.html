@@ -5,7 +5,11 @@
     (function() {
       try {
         var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        var viewMode = localStorage.getItem('ebk_view_mode') || 'full';
+        var qaMode = localStorage.getItem('ebk_qa_mode') || 'quiz';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-view-mode', viewMode);
+        document.documentElement.setAttribute('data-qa-mode', qaMode);
         if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
@@ -13,22 +17,6 @@
         }
       } catch(e) {}
     })();
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        var cur = document.documentElement.getAttribute('data-theme') || 'light';
-        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
-        btns.forEach(function(b) {
-          var icon = b.querySelector('#themeIcon') || b;
-          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
-            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
-          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
-            b.textContent = cur === 'dark' ? '☀️' : '🌙';
-          }
-          var text = b.querySelector('#themeText');
-          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
-        });
-      } catch(e) {}
-    });
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
@@ -420,6 +408,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
+  <script src="../universal-modes.js"></script>
 </head>
 <body>
   <div class="container">
@@ -486,6 +475,42 @@
     </section>
 
     <!-- Sticky Score Tracker -->
+    
+    <!-- Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি -->
+    <section class="part-1-notes info-summary-card" id="part1Notes" style="background:var(--bg-surface, #fff); border:1.5px solid var(--border-color, #e2e8f0); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary, #0f766e); padding-bottom:8px; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+        <h2 style="font-size:1.15rem; font-weight:800; color:var(--primary, #0f766e); display:flex; align-items:center; gap:8px; margin:0;">
+          <span>📝</span> <span>ভাষা ও বাংলা ভাষারীতি — প্রামাণ্য রিভিশন নোট ও সূত্রাবলি (Part 1)</span>
+        </h2>
+        <span style="font-size:0.75rem; font-weight:700; background:rgba(15,118,110,0.12); color:var(--primary, #0f766e); padding:3px 8px; border-radius:6px;">
+          বিসিএস পরীক্ষার বিশদ ব্যাখ্যা হতে সংকলিত (18টি মূল পয়েন্ট)
+        </span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:10px;">
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            📌 মূল সূত্র, সংজ্ঞা ও ব্যাকরণিক নিয়ম
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>মনোএল দ্যা:</strong> ‘Vocabulario em idioma Bengalla, e Portuguez dividido em duas partes’ – গ্রন্থ রচনার জন্য ৯-১০ বছর ধরে শব্দ সংগ্রহ করেছেন।</li><li><strong>গৌড়ী প্রাকৃত:</strong> গৌড়ী প্রাকৃত বলতে বোঝায় গৌড় অঞ্চলের সাধারণ মানুষের মুখের ভাষা। ড. মুহম্মদ শহীদুল্লাহর মতে, গৌড় অঞ্চলের সাধারণ মানুষের মুখের ভাষা অর্থ প্রাকৃতজনের মুখের ভাষা থেকে বাংলা ভাষার উৎপত্তি হয়েছে।</li><li><strong>বাংলা শব্দ:</strong> প্রাচীনকালে এদেশের অধিবাসী ছিল অনার্য, দ্রাবিড়, কোল প্রভৃতি জাতি। তাদের ভাষা ও সংস্কৃতির কিছু শব্দ আর্যদের প্রভাবে পরিবর্তিত না হয়ে অবিকৃতভাবে বাংলা ভাষায় রক্ষিত হয়েছে। এগুলোকে দেশি শব্দ বলা হয়।</li><li><strong>সর্বপ্রথম বাংলা:</strong> প্রথম বাংলা ভাষার ব্যাকরণ রচনা করেন মানোএল দা আসসুম্পসাঁউ। পর্তুগালের রাজধানী লিসবন থেকে ১৭৪৩ সালে পর্তুগিজ ভাষায় প্রকাশিত গ্রন্থের নাম ছিল “Vocabulario em Idioma Bengalla E Portugues”।</li><li><strong>ভাষা চিন্তার শুধু বাহনই নয়, চিন্তার প্রসূতিও।:</strong> প্রশ্নে উল্লিখিত মন্তব্যটি করেন প্রখ্যাত ভাষা-চিন্তক সুকুমার সেন। তিনি তাঁর ‘ভাষার ইতিবৃত্ত’ গ্রন্থের ‘ভাষা ও উপভাষা’ নামক অধ্যায়ে মন্তব্যটি করেন। গ্রন্থটি সর্বপ্রথম ১৯৩৯ সালে প্রকাশিত হয়।</li><li><strong>কেন্তুমের কোন:</strong> ইন্দো-ইউরোপীয় ভাষা গোষ্ঠীর প্রাচীন শাখা ৯টি। আধুনিককালে অনেকে ১০টি বলেও উল্লেখ করেছেন।</li><li><strong>মানুষের দেহের:</strong> মানবদেহের যেসব অঙ্গ-প্রত্যঙ্গ ধ্বনি তৈরিতে সহায়তা করে তাদের বাক প্রত্যঙ্গ বলা হয়। বাক প্রত্যঙ্গগুলোকে একসঙ্গে বলা হয় বাগযন্ত্র।</li><li><strong>বাঙালি উপভাষা:</strong> ঝাড়খণ্ড থেকে শুরু করে কামরূপ পর্যন্ত বিস্তৃত অঞ্চলের কথ্য ভাষা হলো বাংলা। কথ্য রীতির পার্থক্য অঞ্চল ভেদে সহজেই বোঝা যায়। অঞ্চল ভেদে ভাষার এই ভিন্নতা উপভাষা নামে পরিচিত।</li><li><strong>বাংলা ভাষায়:</strong> রামচন্দ্র বিদ্যাবাগীশ (১৭৮৬-১৮৪৫) একজন আভিধানিক ও পণ্ডিত। তিনি বাংলা ভাষার প্রথম অভিধান সংকলন করেন। তাঁর আদি নিবাস নদীয়া।</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            ⚡ গুরুত্বপূর্ণ প্রামাণ্য তালিকা ও পরীক্ষার প্রয়োগ
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>সাধু ও:</strong> সাধু রীতির সাধারণ বৈশিষ্ট্য: ১. সাধু রীতিতে ক্রিয়ারূপ দীর্ঘতর (যেমন- করা ক্রিয়ার রূপ: করিতেছে, করিয়াছে, করিল, করিলে, করিলাম, করিত, করিতেছিল, করিয়াছিল, করিব, করিবে, করিতে, করিয়া, করিলে, করিবার)।</li><li><strong>বাংলা ভাষায়:</strong> বাংলা শব্দ গঠনের কয়েকটি উপায়: সমাসের মাধ্যমে, বহুবচনের মাধ্যমে, উপসর্গ যোগে, প্রত্যয় সহযোগে ইত্যাদি। লিঙ্গ পরিবর্তনের মাধ্যমে নতুন অর্থবাচক শব্দ তৈরি হয় না, কেবল পুরুষবাচক বা স্ত্রীবাচক ব্যাকরণিক রূপ নির্দেশিত হয়।</li><li><strong>তৎসম:</strong> সাধু রীতি: বাংলা লেখ্য সাধু রীতি সুনির্ধারিত ব্যাকরণের নিয়ম অনুসরণ করে চলে এবং এর পদবিন্যাস সুনিয়ন্ত্রিত ও সুনির্দিষ্ট। এ রীতি গুরুগম্ভীর ও তৎসম শব্দবহুল। এ রীতি নাটকের সংলাপ ও বক্তৃতায় অনুপযোগী।</li><li><strong>সাধু ভাষা:</strong> সাধু রীতির অন্যতম প্রধান বৈশিষ্ট্য হলো এটি কৃত্রিম ও গুরুগম্ভীর। তাই নাটকের সংলাপ ও বক্তৃতায় সাধু ভাষা সম্পূর্ণ অনুপযোগী।</li><li><strong>বাংলা ভাষার:</strong> বাঙালি জনগোষ্ঠী যে ভাষা দিয়ে তাদের মনের ভাব প্রকাশ করে তার নাম বাংলা ভাষা। ইন্দো-ইউরোপীয় আদি ভাষা বহু বিবর্তনের মধ্য দিয়ে বাংলা ভাষায় পরিণত হয়েছে।</li><li><strong>সাধু ভাষা:</strong> সাধু ভাষা ও চলিত ভাষার প্রধান পার্থক্য ক্রিয়াপদ ও সর্বনাম পদের রূপগত ভিন্নতায় পরিলক্ষিত হয়। যেমন: সাধু 'তাহারা করিতেছে' বনাম চলিত 'তারা করছে'।</li><li><strong>বাংলা ভাষার:</strong> বর্তমানে অনেক ভাষাবিদের মতে, বাংলা ভাষা দশম শতকে উৎপত্তি লাভ করেছে। দশম থেকে চতুর্দশ শতাব্দী পর্যন্ত বাংলা ভাষার আদিস্তরের স্থিতিকাল বিবেচনা করা হয়।</li><li><strong>বাংলা লিপির:</strong> বাংলা লিপির উৎপত্তি: বাংলা ভাষার নিজস্ব লিপি রয়েছে। এই লিপির নাম বাংলা লিপি। বাংলা লিপির আদি উৎস ব্রাহ্মীলিপি।</li><li><strong>গুরুচণ্ডালী দোষমুক্ত:</strong> গুরুচণ্ডালী দোষ: বাংলা ভাষায় তৎসম শব্দের সঙ্গে দেশীয় শব্দের মিশ্রণ ঘটলে যে সমস্যার সৃষ্টি হয় তাকে গুরুচণ্ডালী দোষ বলে। এ দোষে দুষ্ট শব্দ তার যোগ্যতা হারায়।</li>
+          </ul>
+        </div>
+      </div>
+      <div style="font-size:0.75rem; color:var(--text-muted, #64748b); text-align:right; font-style:italic; margin-top:4px;">
+        * প্রশ্নের কুইজে যাওয়ার আগেই উপরের প্রামাণ্য সূত্রাবলি ও তালিকাটি একনজরে রিভিশন দিয়ে নিন।
+      </div>
+    </section>
+
     <div class="score-card">
       <div class="score-item score-total">
         <span>মোট প্রশ্ন:</span>

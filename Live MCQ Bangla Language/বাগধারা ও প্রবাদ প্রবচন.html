@@ -389,7 +389,11 @@
     (function() {
       try {
         var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        var viewMode = localStorage.getItem('ebk_view_mode') || 'full';
+        var qaMode = localStorage.getItem('ebk_qa_mode') || 'quiz';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-view-mode', viewMode);
+        document.documentElement.setAttribute('data-qa-mode', qaMode);
         if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
@@ -397,23 +401,8 @@
         }
       } catch(e) {}
     })();
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        var cur = document.documentElement.getAttribute('data-theme') || 'light';
-        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
-        btns.forEach(function(b) {
-          var icon = b.querySelector('#themeIcon') || b;
-          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
-            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
-          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
-            b.textContent = cur === 'dark' ? '☀️' : '🌙';
-          }
-          var text = b.querySelector('#themeText');
-          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
-        });
-      } catch(e) {}
-    });
   </script>
+  <script src="../universal-modes.js"></script>
 </head>
 <body>
   <div class="container">
@@ -469,6 +458,42 @@
     </section>
 
     <!-- Sticky Score Tracker -->
+    
+    <!-- Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি -->
+    <section class="part-1-notes info-summary-card" id="part1Notes" style="background:var(--bg-surface, #fff); border:1.5px solid var(--border-color, #e2e8f0); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--primary, #0f766e); padding-bottom:8px; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+        <h2 style="font-size:1.15rem; font-weight:800; color:var(--primary, #0f766e); display:flex; align-items:center; gap:8px; margin:0;">
+          <span>📝</span> <span>বাগধারা ও প্রবাদ প্রবচন — প্রামাণ্য রিভিশন নোট ও সূত্রাবলি (Part 1)</span>
+        </h2>
+        <span style="font-size:0.75rem; font-weight:700; background:rgba(15,118,110,0.12); color:var(--primary, #0f766e); padding:3px 8px; border-radius:6px;">
+          বিসিএস পরীক্ষার বিশদ ব্যাখ্যা হতে সংকলিত (27টি মূল পয়েন্ট)
+        </span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:10px;">
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            📌 মূল সূত্র, সংজ্ঞা ও ব্যাকরণিক নিয়ম
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>অর্ধচন্দ্র:</strong> বাংলা একাডেমি আধুনিক বাংলা অভিধান অনুসারে, 'অর্ধচন্দ্র' (বিশেষ্য)-এর রূপক অর্থ হলো গলাধাক্কা দেওয়া ।</li><li><strong>ইতরবিশেষ:</strong> 'ইতরবিশেষ' একটি সংস্কৃত শব্দ। এর অর্থ সামান্য পার্থক্য বা ভেদাভেদ ।</li><li><strong>সপ্তকাণ্ড রামায়ণ:</strong> 'সপ্তকাণ্ড রামায়ণ' বাগধারার অর্থ হলো বৃহৎ বিষয় বা সুবিশাল ব্যাপার । অনুরূপ গুরুত্বপূর্ণ বাগধারা— হাড়হদ্দ = সবকিছু; ঢাকঢাক গুড়গুড় = লুকোচুরি; দিবাস্বপ্ন = অলীক কল্পনা।</li><li><strong>উলুবনে মুক্ত ছড়ানো:</strong> দীর্ঘদিনের অভিজ্ঞতা-লব্ধ কোনো গভীর জীবনসত্য যখন সংক্ষিপ্ত জনপ্রিয় উক্তির মাধ্যমে প্রকাশিত হয়, তাকে প্রবাদ-প্রবচন বলে। যেমন— 'উলুবনে মুক্তা ছড়ানো' (অস্থানে মূল্যবান বস্তু দান)।</li><li><strong>শরতের শিশির:</strong> 'শরতের শিশির' বাগ্​ধারার অর্থ ক্ষণস্থায়ী বা সুসময়ের বন্ধু । অনুরূপ— 'বসন্তের কোকিল' = সুসময়ের বন্ধু।</li><li><strong>শিব রাত্রির সলতে:</strong> 'শিবরাত্রির সলতে' বাগধারাটির অর্থ একমাত্র জীবিত বংশধর বা একমাত্র সন্তান ।</li><li><strong>কোনটি বাগধারা:</strong> 'শিরে সংক্রান্তি' একটি বাগধারা; যার অর্থ আসন্ন বিপদ বা সামনেই বিপদ । অন্যান্যগুলো বাংলা ও ধর্মীয় বর্ষপঞ্জির নির্দিষ্ট দিন বা উৎসব।</li><li><strong>ঢাকের কাঠি:</strong> 'ঢাকের কাঠি' বাগ্​ধারার অর্থ তোষামুদে বা মোসাহেব । • বর্ণচোরা = কপট ব্যক্তি। • অষ্টকপাল = হতভাগ্য।</li><li><strong>গাছপাথর:</strong> 'গাছপাথর' বাগধারাটির অর্থ হিসাব-নিকাশ (যেমন: তার বয়সের গাছপাথর নেই)। • ভূমিকা করা = গৌরচন্দ্রিকা। • অসম্ভব বস্তু = কাঁঠালের আমসত্ত্ব / আকাশ কুসুম।</li><li><strong>হাত-ভারি:</strong> 'হাত-ভারি' বাগধারার অর্থ কৃপণ ।</li><li><strong>কার মাথায় হাত বুলিয়েছ।:</strong> 'মাথায় হাত বুলানো' বাগধারায় 'মাথা' শব্দটি ফাঁকি দেওয়া বা প্রতারণা অর্থে ব্যবহৃত হয়েছে।</li><li><strong>রামগরুড়ের ছানা:</strong> 'রামগরুড়ের ছানা' কথাটির অর্থ গোমড়ামুখো লোক বা সদাহাস্যহীন ব্যক্তি ।</li><li><strong>নিরানব্বইয়ের ধাক্কা:</strong> 'নিরানব্বইয়ের ধাক্কা' বাগধারাটির অর্থ সঞ্চয়ের প্রবৃত্তি ।</li><li><strong>চাঁদের হাট:</strong> 'চাঁদের হাট' অর্থ আনন্দের প্রাচুর্য বা প্রিয়জন সমাগম (সুন্দরী বা বিশিষ্ট গুণীজনের একত্র মিলন)।</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--bg-base, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:12px;">
+          <h3 style="font-size:0.92rem; font-weight:700; color:var(--primary, #0f766e); margin-top:0; margin-bottom:8px; border-bottom:1px dashed var(--border-color, #e2e8f0); padding-bottom:4px;">
+            ⚡ গুরুত্বপূর্ণ প্রামাণ্য তালিকা ও পরীক্ষার প্রয়োগ
+          </h3>
+          <ul style="font-size:0.86rem; padding-left:18px; line-height:1.6; color:var(--text-secondary, #334155); margin:0;">
+            <li><strong>ঠোঁট-কাটা বলতে:</strong> 'ঠোঁট-কাটা' বাগধারাটির অর্থ স্পষ্টভাষী বা দ্বিধাহীন বক্তা (কখনো বেহায়া অর্থেও প্রযুক্ত হয়)।</li><li><strong>ভূষণ্ডির কাক:</strong> 'ভূষণ্ডির কাক' অর্থ দীর্ঘায়ু ব্যক্তি বা দীর্ঘকালের অভিজ্ঞ ব্যক্তি ।</li><li><strong>ব্যাঙের সর্দি:</strong> 'ব্যাঙের সর্দি' বাগধারাটির অর্থ অসম্ভব ঘটনা বা অসম্ভব বস্তু ।</li><li><strong>একাদশে বৃহস্পতি:</strong> 'একাদশে বৃহস্পতি' বাগধারাটির অর্থ সৌভাগ্যের বিষয় বা সুসময় ।</li><li><strong>কৌশলে কার্যোদ্ধার:</strong> 'ধরি মাছ না ছুঁই পানি' বাগধারাটির অর্থ কৌশলে কার্যোদ্ধার বা গা বাঁচিয়ে নিজের সুবিধা আদায় করা।</li><li><strong>রাবণের চিতা:</strong> 'রাবণের চিতা' বাগধারাটির অর্থ চির অশান্তি বা অবিরাম যন্ত্রণা ।</li><li><strong>হতভাগ্য:</strong> 'আট কপালে' প্রবচনটির অর্থ হতভাগ্য বা মন্দভাগ্য । • উড়নচণ্ডী = অমিতব্যয়ী। • ছা-পোষা = পোষ্য-ভারাক্রান্ত সাধারণ গৃহী।</li><li><strong>যার কোন:</strong> যার কোনো মূল্য বা গুরুত্ব নেই— তাকে বাগধারায় বলা হয় 'ঢাকের বাঁয়া' । • তুলসী বনের বাঘ = ভণ্ড সাধু। • তামার বিষ = অর্থের কু-প্রভাব।</li><li><strong>গোঁফ-খেজুরে:</strong> 'গোঁফ-খেজুরে' বাগধারাটির অর্থ নিতান্ত অলস ।</li><li><strong>ঢাক্ ঢাক্ গুড় গুড়:</strong> 'ঢাক্ ঢাক্ গুড় গুড়' প্রবাদটির অর্থ হলো গোপন রাখার চেষ্টা বা লুকোচুরি । তাই “ঢাক্ ঢাক্ গুড় গুড় করে কি লাভ, আসল কথাটি বল” বাক্যে এর যথার্থ ভাব প্রকাশ পেয়েছে।</li><li><strong>বাগধারা যুগলদের:</strong> 'বক ধার্মিক' এবং 'বিড়াল তপস্বী' উভয় বাগধারারই নিখুঁত অর্থ হলো ভণ্ড সাধু । তাই এ জোড়াটি সর্বাধিক সমার্থক।</li><li><strong>উভয়কূল রক্ষা:</strong> উভয়কূল রক্ষা অর্থে ব্যবহৃত প্রবচন হলো— 'সাপও মরে, লাঠিও না ভাঙ্গে' ।</li><li><strong>কোন প্রবচন:</strong> ব্যবহারিক দিক থেকে প্রমিত প্রবচনটি হলো “অধিক সন্ন্যাসীতে গাজন নষ্ট” (অতিরিক্ত লোকের খবরদারিতে কাজ পণ্ড)।</li>
+          </ul>
+        </div>
+      </div>
+      <div style="font-size:0.75rem; color:var(--text-muted, #64748b); text-align:right; font-style:italic; margin-top:4px;">
+        * প্রশ্নের কুইজে যাওয়ার আগেই উপরের প্রামাণ্য সূত্রাবলি ও তালিকাটি একনজরে রিভিশন দিয়ে নিন।
+      </div>
+    </section>
+
     <div class="score-card">
       <div class="score-item score-total">
         <span>মোট প্রশ্ন:</span>
