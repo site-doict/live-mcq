@@ -327,7 +327,36 @@
         gap: 6px;
       }
     `;
-    document.head.appendChild(style);
+    
+      /* Universal Button Safeguards */
+
+    /* Universal In-Page Chapter Footer Button Safeguards (Image 3 fix) */
+    .footer-nav, .chapter-footer-nav {
+      display: flex !important;
+      justify-content: space-between !important;
+      gap: 8px !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    .footer-btn, .nav-btn-link, a.footer-btn, a.nav-btn {
+      flex: 1 1 0 !important;
+      min-width: 0 !important;
+      max-width: 50% !important;
+      padding: 0.65rem 0.5rem !important;
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+      text-align: center !important;
+      line-height: 1.35 !important;
+      font-size: 0.82rem !important;
+      box-sizing: border-box !important;
+      white-space: normal !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+document.head.appendChild(style);
   }
 
   window.toggleGeoDrawer = function() {
@@ -350,3 +379,58 @@
     buildDrawer();
   }
 })();
+
+
+  // Universal Theme Setter & Synchronizer
+  function syncTheme() {
+    try {
+      const savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      if (savedTheme === 'dark') {
+        document.body && document.body.classList.add('dark');
+      } else {
+        document.body && document.body.classList.remove('dark');
+      }
+      const themeBtns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
+      themeBtns.forEach(btn => {
+        const icon = btn.querySelector('#themeIcon') || btn;
+        if (icon) icon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        const text = btn.querySelector('#themeText');
+        if (text) text.textContent = savedTheme === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
+      });
+    } catch(e) {}
+  }
+
+  window.setGlobalTheme = function(nextTheme) {
+    try {
+      document.documentElement.setAttribute('data-theme', nextTheme);
+      if (nextTheme === 'dark') {
+        document.body && document.body.classList.add('dark');
+      } else {
+        document.body && document.body.classList.remove('dark');
+      }
+      localStorage.setItem('theme', nextTheme);
+      localStorage.setItem('ebk_portal_theme', nextTheme);
+      localStorage.setItem('bcs_theme', nextTheme);
+      syncTheme();
+    } catch (e) {}
+  };
+
+  window.toggleTheme = function() {
+    const cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    const next = cur === 'dark' ? 'light' : 'dark';
+    window.setGlobalTheme(next);
+  };
+  window.togglePortalTheme = window.toggleTheme;
+
+  // Theme Toggle Button Setup
+  function setupThemeToggle() {
+    const btn = document.getElementById('ebk-theme-btn');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        window.toggleTheme();
+      });
+    }
+    syncTheme();
+  }
+

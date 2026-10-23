@@ -541,6 +541,36 @@
             border-top: 1px solid var(--border);
         }
     </style>
+
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch(e) {}
+    })();
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        var cur = document.documentElement.getAttribute('data-theme') || 'light';
+        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
+        btns.forEach(function(b) {
+          var icon = b.querySelector('#themeIcon') || b;
+          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
+            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
+          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
+            b.textContent = cur === 'dark' ? '☀️' : '🌙';
+          }
+          var text = b.querySelector('#themeText');
+          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
+        });
+      } catch(e) {}
+    });
+  </script>
 </head>
 <body>
     <div class="container paper-container paper-dot-grid font-kornofuli">
@@ -684,8 +714,10 @@
             </div>
             <div class="exp-drawer" id="exp-1" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>ধরি, \(\mathrm{A={2,3,4}}\)
-উপাদান সংখ্যা \(\mathrm{n=3}\)
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>ধরি, \(\mathrm{A={2,3,4}}\)
+
+উপাদান সংখ্যা \(\mathrm{n=3}\)
+
 ∴ প্রকৃত উপসেট সংখ্যা \(\mathrm{=2^n-1 =2^3-1=8-1=7}\)</div>
             </div>
         </div>
@@ -721,10 +753,14 @@
             </div>
             <div class="exp-drawer" id="exp-2" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> ক</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{x^2-(p+q)x+pq=0\\
-    &rArr;x^2-px-qx+pq=0\\
-    &rArr;x(x-p)-q(x-p)=0\\
-    &rArr;(x-p)(x-q)=0\\
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{x^2-(p+q)x+pq=0\\
+
+    &rArr;x^2-px-qx+pq=0\\
+
+    &rArr;x(x-p)-q(x-p)=0\\
+
+    &rArr;(x-p)(x-q)=0\\
+
 ∴x=p,q }\)</div>
             </div>
         </div>
@@ -760,9 +796,12 @@
             </div>
             <div class="exp-drawer" id="exp-3" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> ঘ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>ধরি, \(\mathrm{f(x)=x^4-2x+1 }\)
-\(\mathrm{f(x)}\) কে \(\mathrm{(x-3) }\) দ্বারা ভাগ করলে ভাগশেষ হবে,
-\(\mathrm{f(3)=3^4-2&times;3+1\\
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>ধরি, \(\mathrm{f(x)=x^4-2x+1 }\)
+
+\(\mathrm{f(x)}\) কে \(\mathrm{(x-3) }\) দ্বারা ভাগ করলে ভাগশেষ হবে,
+
+\(\mathrm{f(3)=3^4-2&times;3+1\\
+
  =81-6+1=76}\)</div>
             </div>
         </div>
@@ -798,28 +837,50 @@
             </div>
             <div class="exp-drawer" id="exp-4" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{x&sup2;+6x-27<0}\)
-
-\(\mathrm{&rArr;{x}^{2}+9x-3x-27<0}\)
-
-\(\mathrm{&rArr;x\left(x+9\right)-3\left(x+9\right)<0}\)
-
-\(\mathrm{&rArr;\left(x-3\right)\left(x+9\right)<0}\)
-
-এখন, \(\mathrm{(x-3)}\) ও \(\mathrm{(x+9)}\) রাশিদ্বয়ের একটি ধনাত্মক এবং অপরটি ঋণাত্মক হলে, অসমতাটি সত্য হবে।
-
-শর্ত-(i): \(\mathrm{x-3<0}\) এবং \(\mathrm{x+9>0}\)
-
-&rArr; \(\mathrm{x<3}\) এবং \(\mathrm{x>-9}\)
-
-অর্থাৎ \(\mathrm{-}\) 9 < \(\mathrm{x}\) < 3 বা \(\mathrm{(-9, 3)}\)
-
-শর্ত-(ii): \(\mathrm{x-3>0}\) এবং \(\mathrm{x+9<0}\)
-
-&rArr; \(\mathrm{x>3}\) এবং \(\mathrm{x<-9}\)
-
-অর্থাৎ ফাঁকা সেট
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{x&sup2;+6x-27<0}\)
+
+
+
+\(\mathrm{&rArr;{x}^{2}+9x-3x-27<0}\)
+
+
+
+\(\mathrm{&rArr;x\left(x+9\right)-3\left(x+9\right)<0}\)
+
+
+
+\(\mathrm{&rArr;\left(x-3\right)\left(x+9\right)<0}\)
+
+
+
+এখন, \(\mathrm{(x-3)}\) ও \(\mathrm{(x+9)}\) রাশিদ্বয়ের একটি ধনাত্মক এবং অপরটি ঋণাত্মক হলে, অসমতাটি সত্য হবে।
+
+
+
+শর্ত-(i): \(\mathrm{x-3<0}\) এবং \(\mathrm{x+9>0}\)
+
+
+
+&rArr; \(\mathrm{x<3}\) এবং \(\mathrm{x>-9}\)
+
+
+
+অর্থাৎ \(\mathrm{-}\) 9 < \(\mathrm{x}\) < 3 বা \(\mathrm{(-9, 3)}\)
+
+
+
+শর্ত-(ii): \(\mathrm{x-3>0}\) এবং \(\mathrm{x+9<0}\)
+
+
+
+&rArr; \(\mathrm{x>3}\) এবং \(\mathrm{x<-9}\)
+
+
+
+অর্থাৎ ফাঁকা সেট
+
+
+
 সুতরাং, উল্লিখিত অসমতার সমাধান \(\mathrm{(-9,3)}\)</div>
             </div>
         </div>
@@ -855,9 +916,12 @@
             </div>
             <div class="exp-drawer" id="exp-5" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>দেওয়া আছে, \(\mathrm{|x-5|<2}\)
-\(\mathrm{⇒-2<x-5<2 \\ ⇒-2+5<x-5+5<2+5 \\ ⇒3<x<7 }\)
-অর্থাৎ x এর মান 3 থেকে বড় এবং 7 থেকে ছোট স্বাভাবিক সংখ্যা। (যেহেতু x&isin;N)
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>দেওয়া আছে, \(\mathrm{|x-5|<2}\)
+
+\(\mathrm{⇒-2<x-5<2 \\ ⇒-2+5<x-5+5<2+5 \\ ⇒3<x<7 }\)
+
+অর্থাৎ x এর মান 3 থেকে বড় এবং 7 থেকে ছোট স্বাভাবিক সংখ্যা। (যেহেতু x&isin;N)
+
 ∴ নির্ণেয় সমাধান সেট \(\mathrm{= {4, 5, 6} }\)</div>
             </div>
         </div>
@@ -1173,17 +1237,28 @@
             </div>
             <div class="exp-drawer" id="exp-14" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>Fibonacci সংখ্যাগুলো হলো:
-0, 1, 1, 2, 3, 5, 8, 13........
-\(\mathrm{x=0}\) হলে, \(\mathrm{{0}^{2}<64}\)
-\(\mathrm{x=1}\) হলে,\(\mathrm{ {1}^{2}<64}\)
-\(\mathrm{x=2}\) হলে, \(\mathrm{{2}^{2}<64}\)
-\(\mathrm{x=3}\) হলে, \(\mathrm{{3}^{2}<64}\)
-\(\mathrm{x=5}\) হলে, \(\mathrm{{5}^{2}<64}\)
-\(\mathrm{x=8}\) হলে, \(\mathrm{{8}^{2}=64}\)
-\(\mathrm{x=13}\) হলে, \(\mathrm{{13}^{2}>64}\)
-\(\mathrm{∴A=\left\{0, 1, 2, 3, 5\right\}}\)
-\(\mathrm{∴n=5}\)
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>Fibonacci সংখ্যাগুলো হলো:
+
+0, 1, 1, 2, 3, 5, 8, 13........
+
+\(\mathrm{x=0}\) হলে, \(\mathrm{{0}^{2}<64}\)
+
+\(\mathrm{x=1}\) হলে,\(\mathrm{ {1}^{2}<64}\)
+
+\(\mathrm{x=2}\) হলে, \(\mathrm{{2}^{2}<64}\)
+
+\(\mathrm{x=3}\) হলে, \(\mathrm{{3}^{2}<64}\)
+
+\(\mathrm{x=5}\) হলে, \(\mathrm{{5}^{2}<64}\)
+
+\(\mathrm{x=8}\) হলে, \(\mathrm{{8}^{2}=64}\)
+
+\(\mathrm{x=13}\) হলে, \(\mathrm{{13}^{2}>64}\)
+
+\(\mathrm{∴A=\left\{0, 1, 2, 3, 5\right\}}\)
+
+\(\mathrm{∴n=5}\)
+
 ∴ P(A) এর উপাদান \(\mathrm{={2}^{n}={2}^{5}=32}\)</div>
             </div>
         </div>
@@ -1219,8 +1294,10 @@
             </div>
             <div class="exp-drawer" id="exp-15" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> ক</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{A=\{2,3,5\}}\), এখানে, &Alpha; এর উপাদান সংখ্যা n \(\mathrm{=}\) 3
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{A=\{2,3,5\}}\), এখানে, &Alpha; এর উপাদান সংখ্যা n \(\mathrm{=}\) 3
+
+
+
 \(\mathrm{∴P(A)}\) এর উপাদান সংখ্যা \(\mathrm{{=2}^{n}={2}^{3} =8}\)</div>
             </div>
         </div>
@@ -1256,14 +1333,22 @@
             </div>
             <div class="exp-drawer" id="exp-16" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> ঘ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{\left(\sqrt[3]{3} \times \sqrt[3]{4}\right)}^{6}}\)
-
-\(\mathrm{={\left({3}^{\frac{1}{3}} \times {4}^{\frac{1}{3}}\right)}^{6}}\) [রুটের মধ্যে যে সংখ্যাটি থাকে রুট তুলে দিলে সেটির রিভার্স পাওয়ার হয়]
-
-\(\mathrm{={\left({12}^{\frac{1}{3}}\right)}^{6}}\) [পাওয়ার একই থাকলে বেস (Base) গুণ হয়ে যায়]
-
-\(\mathrm{={12}^{2}}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{\left(\sqrt[3]{3} \times \sqrt[3]{4}\right)}^{6}}\)
+
+
+
+\(\mathrm{={\left({3}^{\frac{1}{3}} \times {4}^{\frac{1}{3}}\right)}^{6}}\) [রুটের মধ্যে যে সংখ্যাটি থাকে রুট তুলে দিলে সেটির রিভার্স পাওয়ার হয়]
+
+
+
+\(\mathrm{={\left({12}^{\frac{1}{3}}\right)}^{6}}\) [পাওয়ার একই থাকলে বেস (Base) গুণ হয়ে যায়]
+
+
+
+\(\mathrm{={12}^{2}}\)
+
+
+
 \(\mathrm{=144}\) [পাওয়ারে পাওয়ারে গুণ হয়]</div>
             </div>
         </div>
@@ -1299,8 +1384,10 @@
             </div>
             <div class="exp-drawer" id="exp-17" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{A&cap;B=\left\{5, 15, 20, 30\right\}&cap;\left\{3, 5, 15, 18, 20\right\}}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{A&cap;B=\left\{5, 15, 20, 30\right\}&cap;\left\{3, 5, 15, 18, 20\right\}}\)
+
+
+
 \(\mathrm{=\{5, 15, 20\}}\)</div>
             </div>
         </div>
@@ -1336,10 +1423,14 @@
             </div>
             <div class="exp-drawer" id="exp-18" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> ঘ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>এখানে, \(\mathrm{f\left(x\right)={x}^{3}-2x+10}\)
-
-\(\mathrm{∴f\left(0\right)}\)   \(\mathrm{={0}^{3}-2.0+10}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>এখানে, \(\mathrm{f\left(x\right)={x}^{3}-2x+10}\)
+
+
+
+\(\mathrm{∴f\left(0\right)}\)   \(\mathrm{={0}^{3}-2.0+10}\)
+
+
+
 \(\mathrm{=10}\)</div>
             </div>
         </div>
@@ -1375,14 +1466,22 @@
             </div>
             <div class="exp-drawer" id="exp-19" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> ঘ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{f\left(x\right)={x}^{3}+k{x}^{2}-6x-9}\)
-
-\(\mathrm{&rArr;f\left(3\right)={3}^{3}+k \times {3}^{2}-6 \times 3-9}\)
-
-\(\mathrm{=27+9k-18-9}\)
-
-\(\mathrm{=9k}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{f\left(x\right)={x}^{3}+k{x}^{2}-6x-9}\)
+
+
+
+\(\mathrm{&rArr;f\left(3\right)={3}^{3}+k \times {3}^{2}-6 \times 3-9}\)
+
+
+
+\(\mathrm{=27+9k-18-9}\)
+
+
+
+\(\mathrm{=9k}\)
+
+
+
 এখন, \(\mathrm{9k=0}\) \(\mathrm{&rArr;}\) \(\mathrm{k=0}\) হলে \(\mathrm{f\left(3\right)=0}\) হবে।</div>
             </div>
         </div>

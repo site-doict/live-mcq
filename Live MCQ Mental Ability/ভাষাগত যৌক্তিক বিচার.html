@@ -530,6 +530,36 @@
             border-top: 1px solid var(--border);
         }
     </style>
+
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch(e) {}
+    })();
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        var cur = document.documentElement.getAttribute('data-theme') || 'light';
+        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
+        btns.forEach(function(b) {
+          var icon = b.querySelector('#themeIcon') || b;
+          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
+            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
+          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
+            b.textContent = cur === 'dark' ? '☀️' : '🌙';
+          }
+          var text = b.querySelector('#themeText');
+          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
+        });
+      } catch(e) {}
+    });
+  </script>
 </head>
 <body>
     <div class="container paper-container paper-legal-pad font-ekush">
@@ -748,8 +778,10 @@
             </div>
             <div class="exp-drawer" id="exp-3" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> ঘ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>এখানে, ০.৫&times;০.০৫&times;০.০০৫
-    =০.০২৫ &times;০.০০৫
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>এখানে, ০.৫&times;০.০৫&times;০.০০৫
+
+    =০.০২৫ &times;০.০০৫
+
     =০.০০০১২৫</div>
             </div>
         </div>
@@ -890,8 +922,10 @@
             </div>
             <div class="exp-drawer" id="exp-7" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{১৮ + ১২ + ২০ = ৫০ &divide; ১০ = ৫\\
-১৬ + ১৪ + ৩০ = ৬০ &divide; ১০ = ৬\\
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{১৮ + ১২ + ২০ = ৫০ &divide; ১০ = ৫\\
+
+১৬ + ১৪ + ৩০ = ৬০ &divide; ১০ = ৬\\
+
 ৪৫ + ১৮ + ২৭ = ৯০ &divide; ১০ = ৯    }\)</div>
             </div>
         </div>
@@ -2677,8 +2711,10 @@
             </div>
             <div class="exp-drawer" id="exp-58" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> ক</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>০.৪ \(\mathrm{\times}\) ০.০২ \(\mathrm{\times}\) ০.০৮
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>০.৪ \(\mathrm{\times}\) ০.০২ \(\mathrm{\times}\) ০.০৮
+
+
+
 \(\mathrm{=০.০০০৬৪}\)</div>
             </div>
         </div>
@@ -2714,12 +2750,18 @@
             </div>
             <div class="exp-drawer" id="exp-59" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> ঘ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{\frac{৫}{৮}>\frac{৩}{৫}}\) কারণ (৫&times;৫) = ২৫ \(\mathrm{>}\) (৮&times;৩) = ২৪
-
-\(\mathrm{\frac{৫}{৮}>\frac{৬}{১১}}\) কারণ (৫&times;১১) = ৫৫ \(\mathrm{>}\) (৮&times;৬) = ৪৮
-
-\(\mathrm{\frac{৫}{৮}>\frac{৮}{১৪}}\) কারণ (৫&times;১৪) = ৭০ \(\mathrm{>}\) (৮&times;৮) = ৬৪
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{\frac{৫}{৮}>\frac{৩}{৫}}\) কারণ (৫&times;৫) = ২৫ \(\mathrm{>}\) (৮&times;৩) = ২৪
+
+
+
+\(\mathrm{\frac{৫}{৮}>\frac{৬}{১১}}\) কারণ (৫&times;১১) = ৫৫ \(\mathrm{>}\) (৮&times;৬) = ৪৮
+
+
+
+\(\mathrm{\frac{৫}{৮}>\frac{৮}{১৪}}\) কারণ (৫&times;১৪) = ৭০ \(\mathrm{>}\) (৮&times;৮) = ৬৪
+
+
+
 সুতরাং  \(\mathrm{\frac{৫}{৮}}\)  ভগ্নাংশটি বৃহ্ত্তম।</div>
             </div>
         </div>
@@ -3210,30 +3252,54 @@
             </div>
             <div class="exp-drawer" id="exp-73" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>n তম পদ \(\mathrm{=&zwj;a+(n-১)d}\)
-
-\(\mathrm{&rArr;৮১=১+(n-১)৪}\)
-
-১ম পদ, a=১
-
-সাধারণ অন্তর,d=৫-১ =৪
-
-\(\mathrm{&rArr;৮১=১+৪n-৪}\)
-
-\(\mathrm{&rArr;৪n=৮১+৩}\)
-
-\(\mathrm{&rArr;৪n=৮৪}\)
-
-\(\mathrm{∴n=২১}\)
-
-\(\mathrm{{S}_{n}=\frac{n}{২}\{২a+(n-১)d\}}\)
-
-= (\mathrm{\frac\(\mathrm{\{২১\}}\)\(\mathrm{\{২\}}\) \times \\(\mathrm{\{২\times১+২০\times৪\\}}\)})
-
-= (\mathrm{\frac\(\mathrm{\{২১\}}\)\(\mathrm{\{২\}}\) \times ৮২})
-
-= (\mathrm\(\mathrm{\{২১\times৪১\}}\))
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>n তম পদ \(\mathrm{=&zwj;a+(n-১)d}\)
+
+
+
+\(\mathrm{&rArr;৮১=১+(n-১)৪}\)
+
+
+
+১ম পদ, a=১
+
+
+
+সাধারণ অন্তর,d=৫-১ =৪
+
+
+
+\(\mathrm{&rArr;৮১=১+৪n-৪}\)
+
+
+
+\(\mathrm{&rArr;৪n=৮১+৩}\)
+
+
+
+\(\mathrm{&rArr;৪n=৮৪}\)
+
+
+
+\(\mathrm{∴n=২১}\)
+
+
+
+\(\mathrm{{S}_{n}=\frac{n}{২}\{২a+(n-১)d\}}\)
+
+
+
+= (\mathrm{\frac\(\mathrm{\{২১\}}\)\(\mathrm{\{২\}}\) \times \\(\mathrm{\{২\times১+২০\times৪\\}}\)})
+
+
+
+= (\mathrm{\frac\(\mathrm{\{২১\}}\)\(\mathrm{\{২\}}\) \times ৮২})
+
+
+
+= (\mathrm\(\mathrm{\{২১\times৪১\}}\))
+
+
+
 = (\mathrm\(\mathrm{\{৮৬১\}}\))</div>
             </div>
         </div>
@@ -3409,10 +3475,14 @@
             </div>
             <div class="exp-drawer" id="exp-78" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>১ম চিত্রে, \(\mathrm{\frac{৬৪}{৮}=৮;\frac{৪৯}{৭}=৭;৮-৭=১}\)
-
-৩য় চিত্রে, \(\mathrm{\frac{৩৬}{৬}=৬;\frac{২৫}{৫}=৫;৬-৫=১}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>১ম চিত্রে, \(\mathrm{\frac{৬৪}{৮}=৮;\frac{৪৯}{৭}=৭;৮-৭=১}\)
+
+
+
+৩য় চিত্রে, \(\mathrm{\frac{৩৬}{৬}=৬;\frac{২৫}{৫}=৫;৬-৫=১}\)
+
+
+
 ২য় চিত্রে, \(\mathrm{\frac{৫৬}{৭}=৮;\frac{৩৬}{৬}=৬;৮-৬=২}\)</div>
             </div>
         </div>
@@ -3483,8 +3553,10 @@
             </div>
             <div class="exp-drawer" id="exp-80" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{০.০৩ ০.০০৬ ০.০০৭}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{০.০৩ ০.০০৬ ০.০০৭}\)
+
+
+
 \(\mathrm{=০.০০০০০১২৬}\)</div>
             </div>
         </div>
@@ -3625,18 +3697,30 @@
             </div>
             <div class="exp-drawer" id="exp-84" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>মনে করি, বড় অংশের দৈর্ঘ্য ক ফুট
-
-এবং ছোট &rdquo; &rdquo; = \(\mathrm{\frac{২ক}{৩}}\) ফুট
-
-প্রশ্নমতে, \(\mathrm{ক+\frac{২ক}{৩}}\) = ২০
-
-বা, \(\mathrm{\frac{৩ক + ২ক}{৩}}\) = ২০
-
-বা, ৫ক = ৬০
-
-\(\mathrm{∴}\) ক = ১২
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>মনে করি, বড় অংশের দৈর্ঘ্য ক ফুট
+
+
+
+এবং ছোট &rdquo; &rdquo; = \(\mathrm{\frac{২ক}{৩}}\) ফুট
+
+
+
+প্রশ্নমতে, \(\mathrm{ক+\frac{২ক}{৩}}\) = ২০
+
+
+
+বা, \(\mathrm{\frac{৩ক + ২ক}{৩}}\) = ২০
+
+
+
+বা, ৫ক = ৬০
+
+
+
+\(\mathrm{∴}\) ক = ১২
+
+
+
 \(\mathrm{∴}\) ছোট অংশের দৈর্ঘ্য \(\mathrm{\frac{২ \times ১২}{৩}}\) = ৮ ফুট</div>
             </div>
         </div>

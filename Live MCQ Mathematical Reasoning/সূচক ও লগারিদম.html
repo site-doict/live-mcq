@@ -541,6 +541,36 @@
             border-top: 1px solid var(--border);
         }
     </style>
+
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch(e) {}
+    })();
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        var cur = document.documentElement.getAttribute('data-theme') || 'light';
+        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
+        btns.forEach(function(b) {
+          var icon = b.querySelector('#themeIcon') || b;
+          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
+            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
+          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
+            b.textContent = cur === 'dark' ? '☀️' : '🌙';
+          }
+          var text = b.querySelector('#themeText');
+          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
+        });
+      } catch(e) {}
+    });
+  </script>
 </head>
 <body>
     <div class="container paper-container paper-lined-notebook font-mamun">
@@ -686,9 +716,12 @@
             </div>
             <div class="exp-drawer" id="exp-1" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> ক</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{x}4=-2}\)
-\(\mathrm{&rArr;{x}^{-2}=4}\) \(\mathrm{[{log}_{a}b=c হলে, {a}^{c}=b]}\)
-\(\mathrm{&rArr;{x}^{2}={4}^{-1}=(\mathrm{\frac{1}{4}})}\) [উভয় পক্ষের ঘাতকে \(\mathrm{-1}\) দ্বারা গুণ করে]
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{x}4=-2}\)
+
+\(\mathrm{&rArr;{x}^{-2}=4}\) \(\mathrm{[{log}_{a}b=c হলে, {a}^{c}=b]}\)
+
+\(\mathrm{&rArr;{x}^{2}={4}^{-1}=(\mathrm{\frac{1}{4}})}\) [উভয় পক্ষের ঘাতকে \(\mathrm{-1}\) দ্বারা গুণ করে]
+
 \(\mathrm{∴x=(\mathrm{\frac{1}{2}})}\)</div>
             </div>
         </div>
@@ -934,26 +967,46 @@
             </div>
             <div class="exp-drawer" id="exp-8" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> ক</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{2{x}^{2}+5x+3<0}\)
-
-&rArr; \(\mathrm{2{x}^{2}+3x+2x+3<0}\)
-
-&rArr; \(\mathrm{x(2x+3)+1(2x+3)<0}\)
-
-&rArr; \(\mathrm{(2x+3)(x+1)<0}\)
-
-এখন, \(\mathrm{\left(2x+3\right)}\) ও \(\mathrm{\left(x+1\right)}\) রাশিদ্বয়ের একটি ধনাত্মক এবং অপরটি ঋণাত্মক হলে, অসমতাটি সত্য হবে।
-
-শর্ত-(i): \(\mathrm{(2x+3)>0}\) এবং \(\mathrm{(x+1)<0}\)
-
-\(\mathrm{x>-\frac{3}{2}}\) এবং \(\mathrm{x<-1}\)
-
-অর্থাৎ \(\mathrm{-\frac{3}{2}0}\)
-
-\(\mathrm{x<-\frac{3}{2}}\) এবং \(\mathrm{x>-1}\)
-
-অর্থাৎ ফাঁকা সেট
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{2{x}^{2}+5x+3<0}\)
+
+
+
+&rArr; \(\mathrm{2{x}^{2}+3x+2x+3<0}\)
+
+
+
+&rArr; \(\mathrm{x(2x+3)+1(2x+3)<0}\)
+
+
+
+&rArr; \(\mathrm{(2x+3)(x+1)<0}\)
+
+
+
+এখন, \(\mathrm{\left(2x+3\right)}\) ও \(\mathrm{\left(x+1\right)}\) রাশিদ্বয়ের একটি ধনাত্মক এবং অপরটি ঋণাত্মক হলে, অসমতাটি সত্য হবে।
+
+
+
+শর্ত-(i): \(\mathrm{(2x+3)>0}\) এবং \(\mathrm{(x+1)<0}\)
+
+
+
+\(\mathrm{x>-\frac{3}{2}}\) এবং \(\mathrm{x<-1}\)
+
+
+
+অর্থাৎ \(\mathrm{-\frac{3}{2}0}\)
+
+
+
+\(\mathrm{x<-\frac{3}{2}}\) এবং \(\mathrm{x>-1}\)
+
+
+
+অর্থাৎ ফাঁকা সেট
+
+
+
 ∴ নির্ণেয় সমাধান: \(\mathrm{-\frac{3}{2}<x<-1}\)</div>
             </div>
         </div>
@@ -989,14 +1042,22 @@
             </div>
             <div class="exp-drawer" id="exp-9" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> ক</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>ঋণাত্মক পূর্ণসংখ্যাসমূহ = \(\mathrm{-}\) 1, \(\mathrm{-}\) 2, \(\mathrm{-}\) 3, \(\mathrm{-}\) 4, \(\mathrm{-}\) 5, ....
-
-এখানে, \(\mathrm{{\left(-1\right)}^{2}=1<18}\) , \(\mathrm{{\left(-2\right)}^{2}=4<18,}\)
-
-\(\mathrm{{\left(-3\right)}^{2}=9<18}\) , \(\mathrm{{\left(-4\right)}^{2}=16<18}\)
-
-কিন্তু \(\mathrm{{\left(-5\right)}^{2}=25>18}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>ঋণাত্মক পূর্ণসংখ্যাসমূহ = \(\mathrm{-}\) 1, \(\mathrm{-}\) 2, \(\mathrm{-}\) 3, \(\mathrm{-}\) 4, \(\mathrm{-}\) 5, ....
+
+
+
+এখানে, \(\mathrm{{\left(-1\right)}^{2}=1<18}\) , \(\mathrm{{\left(-2\right)}^{2}=4<18,}\)
+
+
+
+\(\mathrm{{\left(-3\right)}^{2}=9<18}\) , \(\mathrm{{\left(-4\right)}^{2}=16<18}\)
+
+
+
+কিন্তু \(\mathrm{{\left(-5\right)}^{2}=25>18}\)
+
+
+
 \(\mathrm{∴C=\{-1,-2,-3,-4\}}\)</div>
             </div>
         </div>
@@ -1032,16 +1093,26 @@
             </div>
             <div class="exp-drawer" id="exp-10" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{x}\left(\frac{1}{8}\right)=-2}\)
-
-\(\mathrm{&rArr;{x}^{-2}=\frac{1}{8}\left[∵ x= {log}_{a}N হলে {a}^{x}=N\right]}\)
-
-\(\mathrm{&rArr;\frac{1}{{x}^{2}}=\frac{1}{8}}\)
-
-\(\mathrm{&rArr;{x}^{2}=8}\)
-
-\(\mathrm{&rArr;{x}^{2}={\left(2\sqrt{2}\right)}^{2}}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{x}\left(\frac{1}{8}\right)=-2}\)
+
+
+
+\(\mathrm{&rArr;{x}^{-2}=\frac{1}{8}\left[∵ x= {log}_{a}N হলে {a}^{x}=N\right]}\)
+
+
+
+\(\mathrm{&rArr;\frac{1}{{x}^{2}}=\frac{1}{8}}\)
+
+
+
+\(\mathrm{&rArr;{x}^{2}=8}\)
+
+
+
+\(\mathrm{&rArr;{x}^{2}={\left(2\sqrt{2}\right)}^{2}}\)
+
+
+
 \(\mathrm{∴ x=2\sqrt{2} [∵}\) পাওয়ার বা ঘাত সমান]</div>
             </div>
         </div>
@@ -1077,32 +1148,58 @@
             </div>
             <div class="exp-drawer" id="exp-11" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> ঘ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{2}^{x} +{2}^{1-x}=3}\)
-
-\(\mathrm{&rArr;{2}^{x}+\frac{{2}^{1}}{{2}^{x}}=3}\)
-
-\(\mathrm{&rArr;a+\frac{2}{a}=3 \left[{2}^{x}=a ধরে\right]}\)
-
-\(\mathrm{&rArr;{a}^{2}+2=3a}\)
-
-\(\mathrm{&rArr;{a}^{2} -3a +2=0}\)
-
-\(\mathrm{&rArr;{a}^{2} -2a -a+2=0}\)
-
-\(\mathrm{&rArr;a\left(a-2\right)-1\left(a-2\right)=0}\)
-
-\(\mathrm{&rArr;\left(a-2\right)\left(a-1\right)=0}\)
-
-\(\mathrm{এখন, a-2=0 অথবা, a-1=0}\)
-
-\(\mathrm{∴ a=2 বা, a=}\) 1
-
-\(\mathrm{&rArr;{2}^{x}=2}\) \(\mathrm{বা, {2}^{x}=1}\)
-
-\(\mathrm{&rArr;{2}^{x}={2}^{1} বা,{2}^{x}={2}^{0}}\)
-
-\(\mathrm{∴x=1 ∴ x =0}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{2}^{x} +{2}^{1-x}=3}\)
+
+
+
+\(\mathrm{&rArr;{2}^{x}+\frac{{2}^{1}}{{2}^{x}}=3}\)
+
+
+
+\(\mathrm{&rArr;a+\frac{2}{a}=3 \left[{2}^{x}=a ধরে\right]}\)
+
+
+
+\(\mathrm{&rArr;{a}^{2}+2=3a}\)
+
+
+
+\(\mathrm{&rArr;{a}^{2} -3a +2=0}\)
+
+
+
+\(\mathrm{&rArr;{a}^{2} -2a -a+2=0}\)
+
+
+
+\(\mathrm{&rArr;a\left(a-2\right)-1\left(a-2\right)=0}\)
+
+
+
+\(\mathrm{&rArr;\left(a-2\right)\left(a-1\right)=0}\)
+
+
+
+\(\mathrm{এখন, a-2=0 অথবা, a-1=0}\)
+
+
+
+\(\mathrm{∴ a=2 বা, a=}\) 1
+
+
+
+\(\mathrm{&rArr;{2}^{x}=2}\) \(\mathrm{বা, {2}^{x}=1}\)
+
+
+
+\(\mathrm{&rArr;{2}^{x}={2}^{1} বা,{2}^{x}={2}^{0}}\)
+
+
+
+\(\mathrm{∴x=1 ∴ x =0}\)
+
+
+
 \(\mathrm{∴x=(0, 1)}\)</div>
             </div>
         </div>
@@ -1138,22 +1235,38 @@
             </div>
             <div class="exp-drawer" id="exp-12" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>দেওয়া আছে, \(\mathrm{{x}^{2}-3x+1=0}\)
-
-\(\mathrm{&rArr;{x}^{2}+1=3x}\)
-
-\(\mathrm{&rArr;\frac{{x}^{2}+1}{x}=3}\)
-
-\(\mathrm{∴x+\frac{1}{x}=3}\)
-
-আবার, \(\mathrm{x-\frac{1}{x}=\sqrt{{\left(x+\frac{1}{x}\right)}^{2}-4.x.\frac{1}{x}}}\)
-
-\(\mathrm{=}\) \(\mathrm{\sqrt{{\left(3\right)}^{2}-4}}\)
-
-\(\mathrm{=\sqrt{9-4}}\)
-
-\(\mathrm{∴x-\frac{1}{x}=\sqrt{5}}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>দেওয়া আছে, \(\mathrm{{x}^{2}-3x+1=0}\)
+
+
+
+\(\mathrm{&rArr;{x}^{2}+1=3x}\)
+
+
+
+\(\mathrm{&rArr;\frac{{x}^{2}+1}{x}=3}\)
+
+
+
+\(\mathrm{∴x+\frac{1}{x}=3}\)
+
+
+
+আবার, \(\mathrm{x-\frac{1}{x}=\sqrt{{\left(x+\frac{1}{x}\right)}^{2}-4.x.\frac{1}{x}}}\)
+
+
+
+\(\mathrm{=}\) \(\mathrm{\sqrt{{\left(3\right)}^{2}-4}}\)
+
+
+
+\(\mathrm{=\sqrt{9-4}}\)
+
+
+
+\(\mathrm{∴x-\frac{1}{x}=\sqrt{5}}\)
+
+
+
 এখন, \(\mathrm{{x}^{2}-\frac{1}{{x}^{2}}=\left(x+\frac{1}{x}\right)\left(x-\frac{1}{x}\right)=3\sqrt{5}}\)</div>
             </div>
         </div>
@@ -1189,18 +1302,30 @@
             </div>
             <div class="exp-drawer" id="exp-13" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> ক</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{x}\left(\frac{3}{2}\right)=-\frac{1}{2}}\)
-
-\(\mathrm{&rArr;{\left(x\right)}^{-\frac{1}{2}}=\frac{3}{2}}\)
-
-\(\mathrm{&rArr;\frac{1}{{x}^{\frac{1}{2}}}=\frac{3}{2}}\)
-
-\(\mathrm{&rArr;\frac{1}{\sqrt{x}}=\frac{3}{2}}\)
-
-\(\mathrm{&rArr;3\sqrt{x}=2}\)
-
-\(\mathrm{&rArr;9x=4}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{x}\left(\frac{3}{2}\right)=-\frac{1}{2}}\)
+
+
+
+\(\mathrm{&rArr;{\left(x\right)}^{-\frac{1}{2}}=\frac{3}{2}}\)
+
+
+
+\(\mathrm{&rArr;\frac{1}{{x}^{\frac{1}{2}}}=\frac{3}{2}}\)
+
+
+
+\(\mathrm{&rArr;\frac{1}{\sqrt{x}}=\frac{3}{2}}\)
+
+
+
+\(\mathrm{&rArr;3\sqrt{x}=2}\)
+
+
+
+\(\mathrm{&rArr;9x=4}\)
+
+
+
 \(\mathrm{∴x=\frac{4}{9}}\)</div>
             </div>
         </div>
@@ -1236,12 +1361,18 @@
             </div>
             <div class="exp-drawer" id="exp-14" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{\sqrt{3}}81}\)
-
-\(\mathrm{={log}_{\sqrt{3}}{\left(\sqrt{3}\right)}^{8}}\)
-
-\(\mathrm{=8 \times {log}_{\sqrt{3}}\sqrt{3}}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{\sqrt{3}}81}\)
+
+
+
+\(\mathrm{={log}_{\sqrt{3}}{\left(\sqrt{3}\right)}^{8}}\)
+
+
+
+\(\mathrm{=8 \times {log}_{\sqrt{3}}\sqrt{3}}\)
+
+
+
 \(\mathrm{=8 [∴{log}_{a}a=1}\) ]</div>
             </div>
         </div>
@@ -1277,32 +1408,58 @@
             </div>
             <div class="exp-drawer" id="exp-15" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> ঘ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{x}^{2}+{y}^{2}=185&hellip;&hellip;&hellip;}\) \(\mathrm{(i)}\)
-
-\(\mathrm{x-y=3&hellip;&hellip;&hellip;&hellip;&hellip;}\) \(\mathrm{\left(ii\right)}\)
-
-\(\mathrm{(i)}\) নং হতে পাই, \(\mathrm{{x}^{2}+{y}^{2}=185}\)
-
-\(\mathrm{&rArr;{\left(x-y\right)}^{2}+2xy=185}\)
-
-\(\mathrm{&rArr;{\left(3\right)}^{2}+2xy=185}\)
-
-\(\mathrm{&rArr;2xy=185-9}\)
-
-\(\mathrm{&rArr;2xy=176}\)
-
-\(\mathrm{∴xy=88}\)
-
-আবার, \(\mathrm{{\left(x+y\right)}^{2}={\left(x-y\right)}^{2}+4xy ={3}^{2}+4.88}\)
-
-\(\mathrm{=9+352}\) \(\mathrm{&rArr;}\) \(\mathrm{{\left(x+y\right)}^{2}=361}\)
-
-\(\mathrm{∴x+y=19&hellip;&hellip;&hellip;(iii)}\)
-
-\(\mathrm{(i)}\) + \(\mathrm{(ii)}\) করে পাই, \(\mathrm{2x=22}\) \(\mathrm{∴x=11}\)
-
-\(\mathrm{(iii)}\) এ \(\mathrm{x=11}\) বসাই, \(\mathrm{11+y=19}\) \(\mathrm{∴y=8}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{x}^{2}+{y}^{2}=185&hellip;&hellip;&hellip;}\) \(\mathrm{(i)}\)
+
+
+
+\(\mathrm{x-y=3&hellip;&hellip;&hellip;&hellip;&hellip;}\) \(\mathrm{\left(ii\right)}\)
+
+
+
+\(\mathrm{(i)}\) নং হতে পাই, \(\mathrm{{x}^{2}+{y}^{2}=185}\)
+
+
+
+\(\mathrm{&rArr;{\left(x-y\right)}^{2}+2xy=185}\)
+
+
+
+\(\mathrm{&rArr;{\left(3\right)}^{2}+2xy=185}\)
+
+
+
+\(\mathrm{&rArr;2xy=185-9}\)
+
+
+
+\(\mathrm{&rArr;2xy=176}\)
+
+
+
+\(\mathrm{∴xy=88}\)
+
+
+
+আবার, \(\mathrm{{\left(x+y\right)}^{2}={\left(x-y\right)}^{2}+4xy ={3}^{2}+4.88}\)
+
+
+
+\(\mathrm{=9+352}\) \(\mathrm{&rArr;}\) \(\mathrm{{\left(x+y\right)}^{2}=361}\)
+
+
+
+\(\mathrm{∴x+y=19&hellip;&hellip;&hellip;(iii)}\)
+
+
+
+\(\mathrm{(i)}\) + \(\mathrm{(ii)}\) করে পাই, \(\mathrm{2x=22}\) \(\mathrm{∴x=11}\)
+
+
+
+\(\mathrm{(iii)}\) এ \(\mathrm{x=11}\) বসাই, \(\mathrm{11+y=19}\) \(\mathrm{∴y=8}\)
+
+
+
 \(\mathrm{∴\left(x,y\right)=(11, 8)}\)</div>
             </div>
         </div>
@@ -1338,14 +1495,22 @@
             </div>
             <div class="exp-drawer" id="exp-16" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{3}\left(\frac{1}{9}\right)}\)  
-
-\(\mathrm{=Lo{g}_{3}\left(\frac{1}{{3}^{2}}\right)}\)
-
-\(\mathrm{=lo{g}_{3}\left({3}^{-2}\right)}\)
-
-\(\mathrm{=-2.lo{g}_{3}3}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{3}\left(\frac{1}{9}\right)}\)  
+
+
+
+\(\mathrm{=Lo{g}_{3}\left(\frac{1}{{3}^{2}}\right)}\)
+
+
+
+\(\mathrm{=lo{g}_{3}\left({3}^{-2}\right)}\)
+
+
+
+\(\mathrm{=-2.lo{g}_{3}3}\)
+
+
+
 \(\mathrm{=-2}\) \(\mathrm{[∵lo{g}_{a}a=1]}\)</div>
             </div>
         </div>
@@ -1381,18 +1546,30 @@
             </div>
             <div class="exp-drawer" id="exp-17" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{a}\left(\frac{{x}^{3}{y}^{2}}{z}\right)}\)
-
-\(\mathrm{=}\) \(\mathrm{lo{g}_{a}\left({x}^{3}{y}^{2}\right)-lo{g}_{a}z}\)
-
-\(\mathrm{=}\) \(\mathrm{lo{g}_{a}{x}^{3}+lo{g}_{a}{y}^{2}-lo{g}_{a}z}\)
-
-\(\mathrm{=}\) \(\mathrm{3lo{g}_{a}x+2lo{g}_{a}y-lo{g}_{a}z}\)
-
-\(\mathrm{=}\) \(\mathrm{3 \times 1+2 \times 2-3}\) [মান বসিয়ে]
-
-\(\mathrm{=}\) \(\mathrm{3+4-3}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{a}\left(\frac{{x}^{3}{y}^{2}}{z}\right)}\)
+
+
+
+\(\mathrm{=}\) \(\mathrm{lo{g}_{a}\left({x}^{3}{y}^{2}\right)-lo{g}_{a}z}\)
+
+
+
+\(\mathrm{=}\) \(\mathrm{lo{g}_{a}{x}^{3}+lo{g}_{a}{y}^{2}-lo{g}_{a}z}\)
+
+
+
+\(\mathrm{=}\) \(\mathrm{3lo{g}_{a}x+2lo{g}_{a}y-lo{g}_{a}z}\)
+
+
+
+\(\mathrm{=}\) \(\mathrm{3 \times 1+2 \times 2-3}\) [মান বসিয়ে]
+
+
+
+\(\mathrm{=}\) \(\mathrm{3+4-3}\)
+
+
+
 \(\mathrm{=}\) \(\mathrm{4}\)</div>
             </div>
         </div>
@@ -1428,14 +1605,22 @@
             </div>
             <div class="exp-drawer" id="exp-18" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{4}^{x}+{4}^{x}+{4}^{x}+{4}^{x}}\)
-
-\(\mathrm{={4}^{x}\left(1+1+1+1\right)}\)
-
-\(\mathrm{={4}^{x}.{4}^{1}}\)
-
-\(\mathrm{={4}^{x+1}}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{4}^{x}+{4}^{x}+{4}^{x}+{4}^{x}}\)
+
+
+
+\(\mathrm{={4}^{x}\left(1+1+1+1\right)}\)
+
+
+
+\(\mathrm{={4}^{x}.{4}^{1}}\)
+
+
+
+\(\mathrm{={4}^{x+1}}\)
+
+
+
 \(\mathrm{={2}^{2x+2}}\)</div>
             </div>
         </div>
@@ -1471,10 +1656,14 @@
             </div>
             <div class="exp-drawer" id="exp-19" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{2}8=lo{g}_{2}{2}^{3}}\)
-
-\(\mathrm{=3lo{g}_{2}2}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{2}8=lo{g}_{2}{2}^{3}}\)
+
+
+
+\(\mathrm{=3lo{g}_{2}2}\)
+
+
+
 \(\mathrm{=3.1=3}\)</div>
             </div>
         </div>
@@ -1510,16 +1699,26 @@
             </div>
             <div class="exp-drawer" id="exp-20" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{2}\frac{1}{32}}\)
-
-\(\mathrm{={log}_{2}\frac{1}{{2}^{5}}}\)
-
-\(\mathrm{={log}_{2}{2}^{-5}}\)
-
-\(\mathrm{=-5lo{g}_{2}2}\)
-
-\(\mathrm{=-5 \times 1}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{2}\frac{1}{32}}\)
+
+
+
+\(\mathrm{={log}_{2}\frac{1}{{2}^{5}}}\)
+
+
+
+\(\mathrm{={log}_{2}{2}^{-5}}\)
+
+
+
+\(\mathrm{=-5lo{g}_{2}2}\)
+
+
+
+\(\mathrm{=-5 \times 1}\)
+
+
+
 \(\mathrm{=-5}\)</div>
             </div>
         </div>
@@ -1555,8 +1754,10 @@
             </div>
             <div class="exp-drawer" id="exp-21" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> ক</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>লগারিদমের সূত্রানুযায়ী,
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>লগারিদমের সূত্রানুযায়ী,
+
+
+
 \(\mathrm{{log}_{a}\left(\frac{m}{n}\right)={log}_{a} m-{log}_{a}n}\)</div>
             </div>
         </div>
@@ -1627,12 +1828,18 @@
             </div>
             <div class="exp-drawer" id="exp-23" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{2}32}\)
-
-\(\mathrm{={log}_{2}{2}^{5}}\)
-
-\(\mathrm{=5{log}_{2}2}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>\(\mathrm{{log}_{2}32}\)
+
+
+
+\(\mathrm{={log}_{2}{2}^{5}}\)
+
+
+
+\(\mathrm{=5{log}_{2}2}\)
+
+
+
 \(\mathrm{=5.1=5}\)</div>
             </div>
         </div>

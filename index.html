@@ -4,7 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>বিসিএস পূর্ণাঙ্গ স্মার্ট ইবুক লাইব্রেরি পোর্টাল | Live MCQ</title>
-  <meta name="description" content="বিসিএস ও সরকারি চাকরি পরীক্ষার পূর্ণাঙ্গ স্মার্ট ইবুক লাইব্রেরি ড্যাশবোর্ড - বাংলা সাহিত্য, বাংলাদেশ বিষয়াবলি ও আন্তর্জাতিক বিষয়াবলি।">
+  <meta name="description" content="বিসিএস ও সরকারি চাকরি পরীক্ষার পূর্ণাঙ্গ স্মার্ট ইবুক লাইব্রেরি ড্যাশবোর্ড।">
+
+  <!-- Bulletproof Pre-render Theme Restore -->
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch(e) {}
+    })();
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        var cur = document.documentElement.getAttribute('data-theme') || 'light';
+        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
+        btns.forEach(function(b) {
+          var icon = b.querySelector('#themeIcon') || b;
+          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
+            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
+          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
+            b.textContent = cur === 'dark' ? '☀️' : '🌙';
+          }
+          var text = b.querySelector('#themeText');
+          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
+        });
+      } catch(e) {}
+    });
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,44 +107,62 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .brand-logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       font-weight: 800;
       font-size: 1.15rem;
       color: var(--text-main);
       text-decoration: none;
     }
 
-    .brand-badge {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #0f766e, #881337);
-      color: #fff;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .topbar-engine-btn {
+      background: linear-gradient(135deg, #0f766e, #0d9488);
+      color: #ffffff;
+      padding: 6px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 2px 6px rgba(15,118,110,0.25);
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+
+    .topbar-engine-btn:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
     }
 
     .theme-toggle-btn {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       color: var(--text-main);
-      padding: 6px 14px;
-      border-radius: var(--radius-sm);
+      padding: 6px 12px;
+      border-radius: 8px;
       cursor: pointer;
       font-family: inherit;
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       transition: var(--transition);
+      white-space: nowrap;
     }
 
     .theme-toggle-btn:hover {
@@ -134,8 +183,8 @@
       background: linear-gradient(135deg, rgba(15,118,110,0.08) 0%, rgba(136,19,55,0.08) 100%);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
-      padding: 32px 24px;
-      margin-bottom: 28px;
+      padding: 28px 20px;
+      margin-bottom: 24px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -143,7 +192,7 @@
     }
 
     .hero-portal h1 {
-      font-size: 1.95rem;
+      font-size: 1.85rem;
       font-weight: 800;
       margin-bottom: 8px;
       background: linear-gradient(135deg, #0f766e, #881337);
@@ -158,10 +207,10 @@
     }
 
     .hero-portal p {
-      font-size: 1.05rem;
+      font-size: 0.98rem;
       color: var(--text-muted);
       max-width: 680px;
-      margin: 0 auto 20px auto;
+      margin: 0 auto 18px auto;
     }
 
     /* Global Progress Card */
@@ -169,8 +218,8 @@
       background: var(--bg-surface);
       border: 1.5px solid var(--border-color);
       border-radius: var(--radius-md);
-      padding: 18px 20px;
-      max-width: 640px;
+      padding: 16px 18px;
+      max-width: 620px;
       margin: 0 auto;
       box-shadow: var(--shadow-md);
     }
@@ -178,54 +227,53 @@
     .progress-meta {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 700;
+      margin-bottom: 8px;
     }
 
     .progress-bar-bg {
-      height: 10px;
+      height: 9px;
       background: var(--border-color);
       border-radius: 999px;
       overflow: hidden;
-      position: relative;
+      margin-bottom: 8px;
     }
 
     .progress-bar-fill {
       height: 100%;
-      background: linear-gradient(90deg, #0f766e, #881337);
+      background: linear-gradient(90deg, #0f766e, #0284c7);
       width: 0%;
       border-radius: 999px;
-      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .progress-caption {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 6px;
       display: flex;
       justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
     }
 
-    /* Search Bar */
+    /* Global Live Search Bar */
     .search-wrapper {
-      margin-bottom: 28px;
       position: relative;
+      margin-bottom: 24px;
     }
 
     .search-input {
       width: 100%;
-      padding: 14px 18px 14px 44px;
-      font-size: 1.02rem;
-      font-family: inherit;
-      border: 1.5px solid var(--border-color);
+      padding: 13px 18px 13px 44px;
       border-radius: var(--radius-md);
+      border: 1.5px solid var(--border-color);
       background: var(--bg-surface);
       color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.95rem;
       box-shadow: var(--shadow-sm);
-      outline: none;
       transition: var(--transition);
+      outline: none;
     }
 
     .search-input:focus {
@@ -235,391 +283,123 @@
 
     .search-icon {
       position: absolute;
-      left: 16px;
+      left: 14px;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 1.15rem;
-      opacity: 0.6;
+      font-size: 1.1rem;
+      color: var(--text-muted);
     }
 
-    /* Subject Cards Grid */
+    /* Subjects Grid */
     .subject-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 22px;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 18px;
       margin-bottom: 32px;
     }
 
     .subject-card {
       background: var(--bg-surface);
-      border: 2px solid var(--border-color);
+      border: 1.5px solid var(--border-color);
       border-radius: var(--radius-lg);
-      padding: 24px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
-      box-shadow: var(--shadow-md);
+      box-shadow: var(--shadow-sm);
       transition: var(--transition);
       position: relative;
       overflow: hidden;
     }
 
     .subject-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
     }
 
-    .subject-card.bangla {
-      border-top: 6px solid #0f766e;
-    }
-
-    .subject-card.bangladesh {
-      border-top: 6px solid #881337;
-    }
-
-    .subject-card.international {
-      border-top: 6px solid #0284c7;
-    }
-
-    .subject-card.international .card-icon {
-      background: #e0f2fe;
-    }
-
-    [data-theme="dark"] .subject-card.international .card-icon {
-      background: rgba(2, 132, 199, 0.2);
-    }
-
-    .sub-prog-fill-intl {
-      height: 100%;
-      background: #0284c7;
-      width: 0%;
-      border-radius: 999px;
-      transition: width 0.6s;
-    }
-
-    .btn-intl-main {
-      background: #0284c7;
-      color: #fff;
-    }
-
-    .btn-intl-main:hover {
-      background: #0369a1;
-    }
-
-        .subject-card.english-grammar {
-      border-top: 6px solid #1e3a8a;
-    }
-
-    .subject-card.english-grammar .card-icon {
-      background: rgba(30, 58, 138, 0.15);
-    }
-
-    [data-theme="dark"] .subject-card.english-grammar .card-icon {
-      background: rgba(96, 165, 250, 0.2);
-    }
-
-    .sub-prog-fill-english-grammar {
-      height: 100%;
-      background: #1e3a8a;
-      width: 0%;
-      border-radius: 999px;
-      transition: width 0.6s;
-    }
-
-    .btn-english-grammar-main {
-      background: #1e3a8a;
-      color: #fff;
-    }
-
-    .btn-english-grammar-main:hover {
-      background: #172554;
-    }
-
-        .subject-card.english-literature {
-      border-top: 6px solid #854d0e;
-    }
-
-    .subject-card.english-literature .card-icon {
-      background: rgba(133, 77, 14, 0.15);
-    }
-
-    [data-theme="dark"] .subject-card.english-literature .card-icon {
-      background: rgba(251, 191, 36, 0.2);
-    }
-
-    .sub-prog-fill-english-lit {
-      height: 100%;
-      background: #854d0e;
-      width: 0%;
-      border-radius: 999px;
-      transition: width 0.6s;
-    }
-
-    .btn-english-lit-main {
-      background: #854d0e;
-      color: #fff;
-    }
-
-    .btn-english-lit-main:hover {
-      background: #713f12;
-    }
-
-    .subject-card.bangla-lang {
-      border-top: 6px solid #0f766e;
-    }
-
-    .subject-card.bangla-lang .card-icon {
-      background: rgba(15, 118, 110, 0.15);
-    }
-
-    [data-theme="dark"] .subject-card.bangla-lang .card-icon {
-      background: rgba(20, 184, 166, 0.2);
-    }
-
-    .sub-prog-fill-bangla-lang {
-      height: 100%;
-      background: #0f766e;
-      width: 0%;
-      border-radius: 999px;
-      transition: width 0.6s;
-    }
-
-    .btn-bangla-lang-main {
-      background: #0f766e;
-      color: #fff;
-    }
-
-    .btn-bangla-lang-main:hover {
-      background: #115e59;
-    }
+    /* Border top accents */
+    .subject-card.bangla-lang { border-top: 5px solid #0f766e; }
+    .subject-card.bangla { border-top: 5px solid #0f766e; }
+    .subject-card.english-grammar { border-top: 5px solid #1e3a8a; }
+    .subject-card.english-literature { border-top: 5px solid #854d0e; }
+    .subject-card.bangladesh { border-top: 5px solid #881337; }
+    .subject-card.international { border-top: 5px solid #0284c7; }
+    .subject-card.geography { border-top: 5px solid #0284c7; }
+    .subject-card.science { border-top: 5px solid #059669; }
+    .subject-card.computer { border-top: 5px solid #2563eb; }
+    .subject-card.math { border-top: 5px solid #4f46e5; }
+    .subject-card.mental { border-top: 5px solid #8b5cf6; }
+    .subject-card.ethics { border-top: 5px solid #0d9488; }
 
     .card-top {
       display: flex;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 14px;
+      gap: 12px;
+      margin-bottom: 12px;
     }
 
     .card-icon {
-      width: 52px;
-      height: 52px;
+      width: 44px;
+      height: 44px;
       border-radius: var(--radius-md);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 26px;
+      font-size: 22px;
       flex-shrink: 0;
+      background: var(--bg-base);
+      border: 1px solid var(--border-color);
     }
 
-    .subject-card.bangla .card-icon {
-      background: var(--primary-bangla-light);
-    }
-
-    .subject-card.bangladesh .card-icon {
-      background: var(--primary-bd-light);
+    .card-serial {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
     }
 
     .card-title-group h2 {
-      font-size: 1.38rem;
+      font-size: 1.18rem;
       font-weight: 800;
       color: var(--text-main);
-      line-height: 1.25;
+      line-height: 1.3;
     }
 
-    .card-page-range {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .card-desc {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-      line-height: 1.5;
-      flex: 1;
-    }
-
-    .feature-tags {
+    .card-stats-row {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
 
-    .tag-chip {
-      font-size: 0.76rem;
+    .stat-pill {
+      font-size: 0.78rem;
+      font-weight: 600;
       padding: 3px 8px;
       border-radius: 6px;
       background: var(--bg-base);
       border: 1px solid var(--border-color);
       color: var(--text-main);
-      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
-    
-    .subject-card.geography {
-      border-top: 6px solid #0284c7;
-    }
-    .subject-card.geography .card-icon {
-      background: #e0f2fe;
-    }
-    [data-theme="dark"] .subject-card.geography .card-icon {
-      background: rgba(2, 132, 199, 0.2);
-    }
-    .sub-prog-fill-geo {
-      height: 100%;
-      background: #0284c7;
-      width: 0%;
-      border-radius: 999px;
-      transition: width 0.6s;
-    }
-    .btn-geo-main {
-      background: #0284c7;
-      color: #fff;
-    }
-    .btn-geo-main:hover {
-      background: #0369a1;
-    }
-
-    
-    .subject-card.science {
-      border-top: 6px solid #059669;
-    }
-    .subject-card.science .card-icon {
-      background: #ecfdf5;
-    }
-    [data-theme="dark"] .subject-card.science .card-icon {
-      background: rgba(5, 150, 105, 0.2);
-    }
-    .sub-prog-fill-science {
-      height: 100%;
-      background: #059669;
-      width: 0%;
-      border-radius: 999px;
-      transition: width 0.6s;
-    }
-    .btn-science-main {
-      background: #059669;
-      color: #fff;
-    }
-    .btn-science-main:hover {
-      background: #047857;
-    }
-
-    .subject-card.computer {
-      border-top: 6px solid #2563eb;
-    }
-    .subject-card.computer .card-icon {
-      background: #eff6ff;
-    }
-    [data-theme="dark"] .subject-card.computer .card-icon {
-      background: rgba(37, 99, 235, 0.2);
-    }
-    .sub-prog-fill-computer {
-      height: 100%;
-      background: #2563eb;
-      width: 0%;
-      border-radius: 999px;
-      transition: width 0.6s;
-    }
-    .btn-comp-main {
-      background: #2563eb;
-      color: #fff;
-    }
-    .btn-comp-main:hover {
-      background: #1d4ed8;
-    }
-
-    
-    .subject-card.math {
-      border-top: 6px solid #4f46e5;
-    }
-    .subject-card.math .card-icon {
-      background: #eef2ff;
-    }
-    [data-theme="dark"] .subject-card.math .card-icon {
-      background: rgba(79, 70, 229, 0.2);
-    }
-    .sub-prog-fill-math {
-      height: 100%;
-      background: #4f46e5;
-      width: 0%;
-      border-radius: 999px;
-      transition: width 0.6s;
-    }
-    .btn-math-main {
-      background: #4f46e5;
-      color: #fff;
-    }
-    .btn-math-main:hover {
-      background: #4338ca;
-    }
-
-    .subject-card.ethics {
-      border-top: 6px solid #0d9488;
-    }
-    .subject-card.ethics .card-icon {
-      background: #ccfbf1;
-    }
-    [data-theme="dark"] .subject-card.ethics .card-icon {
-      background: rgba(13, 148, 136, 0.2);
-    }
-    .sub-prog-fill-ethics {
-      height: 100%;
-      background: #0d9488;
-      width: 0%;
-      border-radius: 999px;
-      transition: width 0.6s;
-    }
-    .btn-ethics-main {
-      background: #0d9488;
-      color: #fff;
-    }
-    .btn-ethics-main:hover {
-      background: #0f766e;
-    }
-
-    .subject-card.mental {
-      border-top: 6px solid #8b5cf6;
-    }
-    .subject-card.mental .card-icon {
-      background: #f5f3ff;
-    }
-    [data-theme="dark"] .subject-card.mental .card-icon {
-      background: rgba(139, 92, 246, 0.2);
-    }
-    .sub-prog-fill-mental {
-      height: 100%;
-      background: #8b5cf6;
-      width: 0%;
-      border-radius: 999px;
-      transition: width 0.6s;
-    }
-    .btn-mental-main {
-      background: #8b5cf6;
-      color: #fff;
-    }
-    .btn-mental-main:hover {
-      background: #7c3aed;
-    }
-
-
-
-    /* Mini Subject Progress */
     .sub-progress-wrap {
       background: var(--bg-base);
       border-radius: var(--radius-sm);
-      padding: 10px 12px;
-      margin-bottom: 18px;
+      padding: 9px 12px;
+      margin-bottom: 14px;
       border: 1px solid var(--border-color);
     }
 
     .sub-prog-header {
       display: flex;
       justify-content: space-between;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 700;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
 
     .sub-prog-bar-bg {
@@ -629,61 +409,78 @@
       overflow: hidden;
     }
 
-    .sub-prog-fill-bangla {
-      height: 100%;
-      background: #0f766e;
-      width: 0%;
-      border-radius: 999px;
-      transition: width 0.6s;
-    }
-
-    .sub-prog-fill-bd {
-      height: 100%;
-      background: #881337;
-      width: 0%;
-      border-radius: 999px;
-      transition: width 0.6s;
-    }
+    /* Progress Fills */
+    .sub-prog-fill-bangla-lang { height: 100%; background: #0f766e; width: 0%; border-radius: 999px; transition: width 0.6s; }
+    .sub-prog-fill-bangla { height: 100%; background: #0f766e; width: 0%; border-radius: 999px; transition: width 0.6s; }
+    .sub-prog-fill-english-grammar { height: 100%; background: #1e3a8a; width: 0%; border-radius: 999px; transition: width 0.6s; }
+    .sub-prog-fill-english-lit { height: 100%; background: #854d0e; width: 0%; border-radius: 999px; transition: width 0.6s; }
+    .sub-prog-fill-bd { height: 100%; background: #881337; width: 0%; border-radius: 999px; transition: width 0.6s; }
+    .sub-prog-fill-intl { height: 100%; background: #0284c7; width: 0%; border-radius: 999px; transition: width 0.6s; }
+    .sub-prog-fill-geo { height: 100%; background: #0284c7; width: 0%; border-radius: 999px; transition: width 0.6s; }
+    .sub-prog-fill-science { height: 100%; background: #059669; width: 0%; border-radius: 999px; transition: width 0.6s; }
+    .sub-prog-fill-computer { height: 100%; background: #2563eb; width: 0%; border-radius: 999px; transition: width 0.6s; }
+    .sub-prog-fill-math { height: 100%; background: #4f46e5; width: 0%; border-radius: 999px; transition: width 0.6s; }
+    .sub-prog-fill-mental { height: 100%; background: #8b5cf6; width: 0%; border-radius: 999px; transition: width 0.6s; }
+    .sub-prog-fill-ethics { height: 100%; background: #0d9488; width: 0%; border-radius: 999px; transition: width 0.6s; }
 
     /* Card Actions */
     .card-actions {
       display: flex;
-      gap: 10px;
+      gap: 8px;
+      margin-top: auto;
     }
 
     .btn-action {
       flex: 1;
       text-align: center;
-      padding: 10px 14px;
+      padding: 9px 12px;
       border-radius: var(--radius-sm);
       font-family: inherit;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       font-weight: 700;
       text-decoration: none;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 5px;
       transition: var(--transition);
     }
 
-    .btn-bangla-main {
-      background: #0f766e;
-      color: #fff;
-    }
+    .btn-bangla-lang-main { background: #0f766e; color: #fff; }
+    .btn-bangla-lang-main:hover { background: #115e59; }
 
-    .btn-bangla-main:hover {
-      background: #115e59;
-    }
+    .btn-bangla-main { background: #0f766e; color: #fff; }
+    .btn-bangla-main:hover { background: #115e59; }
 
-    .btn-bd-main {
-      background: #881337;
-      color: #fff;
-    }
+    .btn-english-grammar-main { background: #1e3a8a; color: #fff; }
+    .btn-english-grammar-main:hover { background: #172554; }
 
-    .btn-bd-main:hover {
-      background: #701a75;
-    }
+    .btn-english-lit-main { background: #854d0e; color: #fff; }
+    .btn-english-lit-main:hover { background: #713f12; }
+
+    .btn-bd-main { background: #881337; color: #fff; }
+    .btn-bd-main:hover { background: #701a75; }
+
+    .btn-intl-main { background: #0284c7; color: #fff; }
+    .btn-intl-main:hover { background: #0369a1; }
+
+    .btn-geo-main { background: #0284c7; color: #fff; }
+    .btn-geo-main:hover { background: #0369a1; }
+
+    .btn-science-main { background: #059669; color: #fff; }
+    .btn-science-main:hover { background: #047857; }
+
+    .btn-comp-main { background: #2563eb; color: #fff; }
+    .btn-comp-main:hover { background: #1d4ed8; }
+
+    .btn-math-main { background: #4f46e5; color: #fff; }
+    .btn-math-main:hover { background: #4338ca; }
+
+    .btn-mental-main { background: #8b5cf6; color: #fff; }
+    .btn-mental-main:hover { background: #7c3aed; }
+
+    .btn-ethics-main { background: #0d9488; color: #fff; }
+    .btn-ethics-main:hover { background: #0f766e; }
 
     .btn-secondary {
       background: var(--bg-base);
@@ -695,32 +492,32 @@
       background: var(--border-color);
     }
 
-    /* Quick Filter Section */
+    /* Search Results */
     .search-results-section {
       display: none;
       background: var(--bg-surface);
       border: 1.5px solid var(--border-color);
       border-radius: var(--radius-lg);
-      padding: 20px;
-      margin-bottom: 30px;
+      padding: 18px;
+      margin-bottom: 24px;
       box-shadow: var(--shadow-md);
     }
 
     .results-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 10px;
-      margin-top: 14px;
+      margin-top: 12px;
     }
 
     .result-item {
-      padding: 10px 14px;
+      padding: 9px 12px;
       border-radius: var(--radius-sm);
       border: 1px solid var(--border-color);
       background: var(--bg-base);
       text-decoration: none;
       color: var(--text-main);
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -738,20 +535,35 @@
     footer {
       border-top: 1px solid var(--border-color);
       background: var(--bg-surface);
-      padding: 20px 16px;
+      padding: 18px 16px;
       text-align: center;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       color: var(--text-muted);
     }
 
-    /* Mobile Responsive (Samsung A23 Standards) */
+    /* Mobile Responsive Optimizations */
     @media (max-width: 600px) {
+      .topbar {
+        padding: 8px 10px;
+      }
+      .brand-logo {
+        font-size: 0.98rem;
+        gap: 6px;
+      }
+      .topbar-engine-btn {
+        padding: 5px 8px;
+        font-size: 0.78rem;
+      }
+      .theme-toggle-btn {
+        padding: 5px 8px;
+        font-size: 0.78rem;
+      }
       .container {
-        padding: 10px 8px 30px 8px;
+        padding: 12px 10px 32px 10px;
       }
       .hero-portal {
-        padding: 20px 14px;
-        margin-bottom: 18px;
+        padding: 18px 12px;
+        margin-bottom: 16px;
       }
       .hero-portal h1 {
         font-size: 1.45rem;
@@ -767,9 +579,6 @@
       .subject-card {
         padding: 16px 14px;
       }
-      .card-actions {
-        flex-direction: column;
-      }
     }
   </style>
 </head>
@@ -777,16 +586,18 @@
 
   <!-- Top Sticky Navigation -->
   <header class="topbar">
-    <a href="#" class="brand-logo">
+    <a href="index.html" class="brand-logo">
       <span>🏛️</span>
-      <span>বিসিএস লাইব্রেরি পোর্টাল</span>
-      <span class="brand-badge">PRO E-BOOK</span>
+      <span>বিসিএস লাইব্রেরি</span>
     </a>
-    <div style="display:flex; align-items:center; gap:10px;">
-      <a href="paper-showcase.html" style="background: linear-gradient(135deg, #0f766e, #0d9488); color: white; padding: 7px 14px; border-radius: 8px; text-decoration: none; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 2px 6px rgba(15,118,110,0.25);">📜 ফন্ট ও পেপার ইঞ্জিন</a>
-      <button class="theme-toggle-btn" id="themeBtn" onclick="togglePortalTheme()">
+    <div class="topbar-actions">
+      <a href="paper-showcase.html" class="topbar-engine-btn" title="ফন্ট ও পেপার ইঞ্জিন">
+        <span>📜</span>
+        <span class="topbar-btn-text">ফন্ট ও পেপার</span>
+      </a>
+      <button class="theme-toggle-btn" id="themeBtn" onclick="togglePortalTheme()" title="থিম পরিবর্তন">
         <span id="themeIcon">🌓</span>
-        <span id="themeText">থিম পরিবর্তন</span>
+        <span id="themeText" class="topbar-btn-text">ডার্ক মোড</span>
       </button>
     </div>
   </header>
@@ -802,7 +613,7 @@
       <div class="overall-progress-card">
         <div class="progress-meta">
           <span>📚 সার্বিক সিলেবাস সমাপ্তির অগ্রগতি</span>
-          <span id="overallPercentage" style="color:#0f766e; font-family:'Inter',sans-serif;">০%</span>
+          <span id="overallPercentage" style="color:#0f766e; font-family:'Inter',sans-serif; font-weight:700;">০%</span>
         </div>
         <div class="progress-bar-bg">
           <div class="progress-bar-fill" id="overallFill"></div>
@@ -812,49 +623,6 @@
           <span>লক্ষ্য: ১০০% রিভিশন</span>
         </div>
       </div>
-      <!-- Subject: মানসিক দক্ষতা -->
-      <article class="subject-card mental">
-        <div class="card-top">
-          <div class="card-icon">🧠</div>
-          <div class="card-title-group">
-            <h2>মানসিক দক্ষতা</h2>
-            <div class="card-page-range">পৃষ্ঠা ৯৮৭ হতে ১০২৪ • ৬টি পরিচ্ছেদ (১৭৫টি প্রশ্ন)</div>
-          </div>
-        </div>
-
-        <p class="card-desc">
-          বিসিএস প্রিলিমিনারি পরীক্ষার সিলেবাসভিত্তিক ভাষাগত যৌক্তিক বিচার, সমস্যা সমাধান ও বাস্তবভিত্তিক যুক্তি, বানান ও ভাষা, যান্ত্রিক দক্ষতা, স্থানাঙ্ক সম্পর্ক ও চিত্রভিত্তিক যুক্তি এবং সংখ্যাগত ক্ষমতা ও প্যাটার্নের ৬টি অধ্যায়ের মোট ১৭৫টি প্রামাণ্য প্রশ্ন, বিশদ ব্যাখ্যা এবং অধ্যায়ভিত্তিক হ্যান্ড-ড্রন ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি।
-        </p>
-
-        <div class="feature-tags">
-          <span class="tag-chip">💡 ভাষাগত যুক্তি (৯২)</span>
-          <span class="tag-chip">🧩 সমস্যা সমাধান (২০)</span>
-          <span class="tag-chip">⚙️ যান্ত্রিক দক্ষতা (৭)</span>
-          <span class="tag-chip">📐 স্থানাঙ্ক ও চিত্র (৩৮)</span>
-          <span class="tag-chip">🔢 সংখ্যা ও প্যাটার্ন (১২)</span>
-          <span class="tag-chip">🎯 ১৭৫টি প্রশ্ন</span>
-        </div>
-
-        <!-- Subject Progress -->
-        <div class="sub-progress-wrap">
-          <div class="sub-prog-header">
-            <span>পড়ার অগ্রগতি:</span>
-            <span id="mentalProgressText" style="color:#8b5cf6; font-family:'Inter',sans-serif;">০%</span>
-          </div>
-          <div class="sub-prog-bar-bg">
-            <div class="sub-prog-fill-mental" id="mentalProgressFill"></div>
-          </div>
-        </div>
-
-        <div class="card-actions">
-          <a href="Live MCQ Mental Ability/ভাষাগত যৌক্তিক বিচার.html" class="btn-action btn-mental-main">
-            📖 পড়া শুরু করুন
-          </a>
-          <a href="Live MCQ Mental Ability/index.html" class="btn-action btn-secondary">
-            📑 সূচিপত্র
-          </a>
-        </div>
-      </article>
     </section>
 
     <!-- Global Live Search -->
@@ -863,7 +631,7 @@
       <input type="text" id="masterSearchInput" class="search-input" placeholder="যেকোনো বিষয় বা অধ্যায় খুঁজুন (যেমন: রবীন্দ্রনাথ, সংবিধান, বঙ্কিমচন্দ্র, মুক্তিযুদ্ধ, বাজেট, চর্যাপদ)...">
     </div>
 
-    <!-- Live Search Results (Shows dynamically when typing) -->
+    <!-- Live Search Results -->
     <section class="search-results-section" id="searchResultsSection">
       <div style="display:flex; justify-content:space-between; align-items:center;">
         <h3 style="font-size:1.1rem; font-weight:700;">🔎 অনুসন্ধান ফলাফল</h3>
@@ -874,34 +642,26 @@
 
     <!-- Subjects Cards Grid -->
     <section class="subject-grid">
-
-      <!-- Subject 0: বাংলা ভাষা ও ব্যাকরণ -->
+      <!-- Subject ০১: বাংলা ভাষা ও ব্যাকরণ -->
       <article class="subject-card bangla-lang">
         <div class="card-top">
           <div class="card-icon">🔤</div>
           <div class="card-title-group">
+            <div class="card-serial">বিষয় ০১</div>
             <h2>বাংলা ভাষা ও ব্যাকরণ</h2>
-            <div class="card-page-range">পৃষ্ঠা ১ হতে ৭৩ • ২২টি পরিচ্ছেদ</div>
           </div>
         </div>
 
-        <p class="card-desc">
-          ধ্বনি ও বর্ণ-প্রকরণ, সন্ধি, ণ-ত্ব ও ষ-ত্ব বিধান, সমাস, প্রত্যয়, উপসর্গ, পদপ্রকরণ, বাক্যশুদ্ধি ও প্রমিত বানানরীতির পূর্ণাঙ্গ তাত্ত্বিক নিয়মাবলি এবং বিগত বিসিএস পরীক্ষার ৪২১টি আসল প্রশ্নের ব্যাখ্যাসহ সমাধান।
-        </p>
-
-        <div class="feature-tags">
-          <span class="tag-chip">🔤 ধ্বনি ও বর্ণ</span>
-          <span class="tag-chip">🧩 সন্ধি ও সমাস</span>
-          <span class="tag-chip">🌿 ধাতু ও প্রত্যয়</span>
-          <span class="tag-chip">✍️ বানান ও বাক্যশুদ্ধি</span>
-          <span class="tag-chip">🎯 স্মার্ট কুইজ</span>
+        <div class="card-stats-row">
+          <span class="stat-pill">📖 ২২টি পরিচ্ছেদ</span>
+          <span class="stat-pill">🎯 ৪২১টি প্রশ্ন</span>
+          <span class="stat-pill">📄 পৃষ্ঠা ১–৭৩</span>
         </div>
 
-        <!-- Subject Progress -->
         <div class="sub-progress-wrap">
           <div class="sub-prog-header">
             <span>পড়ার অগ্রগতি:</span>
-            <span id="banglaLangProgressText" style="color:#0f766e; font-family:'Inter',sans-serif;">০%</span>
+            <span id="banglaLangProgressText" class="prog-pct">০%</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill-bangla-lang" id="banglaLangProgressFill"></div>
@@ -918,33 +678,26 @@
         </div>
       </article>
 
-      <!-- Subject 1: বাংলা সাহিত্য -->
+      <!-- Subject ০২: বাংলা সাহিত্য -->
       <article class="subject-card bangla">
         <div class="card-top">
           <div class="card-icon">📚</div>
           <div class="card-title-group">
+            <div class="card-serial">বিষয় ০২</div>
             <h2>বাংলা সাহিত্য</h2>
-            <div class="card-page-range">পৃষ্ঠা ৭৩ হতে ২০২ • ৩০টি পরিচ্ছেদ</div>
           </div>
         </div>
 
-        <p class="card-desc">
-          প্রাচীন যুগ (চর্যাপদ), মধ্যযুগ (শ্রীকৃষ্ণকীর্তন, মঙ্গলকাব্য, বৈষ্ণব পদাবলী), আধুনিক যুগের পঞ্চপাণ্ডব, রবীন্দ্রনাথ, নজরুল এবং অমর উক্তি ও চরিত্র-ম্যাট্রিক্সের পূর্ণাঙ্গ বিসিএস প্রস্তুতি।
-        </p>
-
-        <div class="feature-tags">
-          <span class="tag-chip">📜 চর্যাপদ</span>
-          <span class="tag-chip">👑 মধ্যযুগ</span>
-          <span class="tag-chip">✍️ রবীন্দ্রনাথ ও নজরুল</span>
-          <span class="tag-chip">🎭 কালজয়ী চরিত্র</span>
-          <span class="tag-chip">📝 স্মার্ট কুইজ</span>
+        <div class="card-stats-row">
+          <span class="stat-pill">📖 ৩০টি পরিচ্ছেদ</span>
+          <span class="stat-pill">🎯 ৪৬০টি প্রশ্ন</span>
+          <span class="stat-pill">📄 পৃষ্ঠা ৭৩–২০২</span>
         </div>
 
-        <!-- Subject Progress -->
         <div class="sub-progress-wrap">
           <div class="sub-prog-header">
             <span>পড়ার অগ্রগতি:</span>
-            <span id="banglaProgressText" style="color:#0f766e; font-family:'Inter',sans-serif;">০%</span>
+            <span id="banglaProgressText" class="prog-pct">০%</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill-bangla" id="banglaProgressFill"></div>
@@ -961,77 +714,26 @@
         </div>
       </article>
 
-      <!-- Subject 2: বাংলাদেশ বিষয়াবলি -->
-      <article class="subject-card bangladesh">
-        <div class="card-top">
-          <div class="card-icon">🇧🇩</div>
-          <div class="card-title-group">
-            <h2>বাংলাদেশ বিষয়াবলি</h2>
-            <div class="card-page-range">পৃষ্ঠা ৪০১ হতে ৫৬৪ • ৩১টি পরিচ্ছেদ</div>
-          </div>
-        </div>
-
-        <p class="card-desc">
-          প্রাচীন বাংলার ইতিহাস, সুলতানি ও মুঘল আমল, ব্রিটিশ বিরোধী আন্দোলন, ভাষা আন্দোলন, ৭ মার্চের ভাষণ, মুক্তিযুদ্ধ, সংবিধানের ১৫৩ অনুচ্ছেদ, অর্থনীতি, বাজেট ও জাতীয় অর্জনের পূর্ণাঙ্গ প্রস্তুতি।
-        </p>
-
-        <div class="feature-tags">
-          <span class="tag-chip">⚔️ মুক্তিযুদ্ধ ও সংগ্রাম</span>
-          <span class="tag-chip">⚖️ পূর্ণাঙ্গ সংবিধান</span>
-          <span class="tag-chip">💰 অর্থনীতি ও বাজেট</span>
-          <span class="tag-chip">🌾 কৃষিজ সম্পদ</span>
-          <span class="tag-chip">🏆 জাতীয় অর্জন</span>
-        </div>
-
-        <!-- Subject Progress -->
-        <div class="sub-progress-wrap">
-          <div class="sub-prog-header">
-            <span>পড়ার অগ্রগতি:</span>
-            <span id="bdProgressText" style="color:#881337; font-family:'Inter',sans-serif;">০%</span>
-          </div>
-          <div class="sub-prog-bar-bg">
-            <div class="sub-prog-fill-bd" id="bdProgressFill"></div>
-          </div>
-        </div>
-
-        <div class="card-actions">
-          <a href="Live MCQ Bangladesh/প্রাচীন কাল (ইতিহাস, জনপদ ও বিভিন্ন রাজবংশ).html" class="btn-action btn-bd-main">
-            📖 পড়া শুরু করুন
-          </a>
-          <a href="Live MCQ Bangladesh/index.html" class="btn-action btn-secondary">
-            📑 সূচিপত্র
-          </a>
-        </div>
-      </article>
-
-      
-      <!-- Subject: English Grammar -->
+      <!-- Subject ০৩: English Grammar -->
       <article class="subject-card english-grammar">
         <div class="card-top">
           <div class="card-icon">🇬🇧</div>
           <div class="card-title-group">
+            <div class="card-serial">বিষয় ০৩</div>
             <h2>English Grammar</h2>
-            <div class="card-page-range">পৃষ্ঠা ২০৩ হতে ৩৪৪ • ২৯টি পরিচ্ছেদ (৭৫৭টি প্রশ্ন)</div>
           </div>
         </div>
 
-        <p class="card-desc">
-          Noun, Pronoun, Verbs, Prepositions, Tense, Voice, Narration, Correction, Idioms & Phrases, Word Meaning, Synonym-Antonym ও এক কথায় প্রকাশ সহ বিগত ১০ম–৫০তম বিসিএস পরীক্ষার পূর্ণাঙ্গ প্রশ্নব্যাংক ও বিশদ ব্যাকরণিক ব্যাখ্যা।
-        </p>
-
-        <div class="feature-tags">
-          <span class="tag-chip">📝 Parts of Speech</span>
-          <span class="tag-chip">⚖️ Sentence & Voice</span>
-          <span class="tag-chip">📌 Appropriate Preposition</span>
-          <span class="tag-chip">📚 Idioms & Phrases</span>
-          <span class="tag-chip">🎯 ৭৫৭টি স্মার্ট প্রশ্ন</span>
+        <div class="card-stats-row">
+          <span class="stat-pill">📖 ২৯টি পরিচ্ছেদ</span>
+          <span class="stat-pill">🎯 ৭৫৭টি প্রশ্ন</span>
+          <span class="stat-pill">📄 পৃষ্ঠা ২০৩–৩৪৪</span>
         </div>
 
-        <!-- Subject Progress -->
         <div class="sub-progress-wrap">
           <div class="sub-prog-header">
             <span>পড়ার অগ্রগতি:</span>
-            <span id="englishGrammarProgressText" style="color:#1e3a8a; font-family:'Inter',sans-serif;">০%</span>
+            <span id="englishGrammarProgressText" class="prog-pct">০%</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill-english-grammar" id="englishGrammarProgressFill"></div>
@@ -1048,33 +750,26 @@
         </div>
       </article>
 
-            <!-- Subject: English Literature -->
+      <!-- Subject ০৪: English Literature -->
       <article class="subject-card english-literature">
         <div class="card-top">
           <div class="card-icon">🎭</div>
           <div class="card-title-group">
+            <div class="card-serial">বিষয় ০৪</div>
             <h2>English Literature</h2>
-            <div class="card-page-range">পৃষ্ঠা ৩৪৫ হতে ৪০০ • ৮টি পরিচ্ছেদ (২০৫টি প্রশ্ন)</div>
           </div>
         </div>
 
-        <p class="card-desc">
-          Periods of English Literature, Old & Middle English, Renaissance (Shakespeare, Marlowe, Bacon), Neoclassical, Romantic, Victorian, Modern & Postmodern, Other Writers from Around the World ও Literary Terms সহ ২০৫টি প্রামাণ্য প্রশ্ন ও বিশদ বিশ্লেষণ।
-        </p>
-
-        <div class="feature-tags">
-          <span class="tag-chip">👑 Periods Timeline</span>
-          <span class="tag-chip">🎭 Shakespeare & Renaissance</span>
-          <span class="tag-chip">🌿 Romantic & Victorian</span>
-          <span class="tag-chip">🌍 World Writers</span>
-          <span class="tag-chip">📌 ২০৫টি স্মার্ট প্রশ্ন</span>
+        <div class="card-stats-row">
+          <span class="stat-pill">📖 ৮টি পরিচ্ছেদ</span>
+          <span class="stat-pill">🎯 ২০৫টি প্রশ্ন</span>
+          <span class="stat-pill">📄 পৃষ্ঠা ৩৪৫–৪০০</span>
         </div>
 
-        <!-- Subject Progress -->
         <div class="sub-progress-wrap">
           <div class="sub-prog-header">
             <span>পড়ার অগ্রগতি:</span>
-            <span id="englishLitProgressText" style="color:#854d0e; font-family:'Inter',sans-serif;">০%</span>
+            <span id="englishLitProgressText" class="prog-pct">০%</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill-english-lit" id="englishLitProgressFill"></div>
@@ -1091,33 +786,62 @@
         </div>
       </article>
 
-      <!-- Subject 3: আন্তর্জাতিক বিষয়াবলি -->
+      <!-- Subject ০৫: বাংলাদেশ বিষয়াবলি -->
+      <article class="subject-card bangladesh">
+        <div class="card-top">
+          <div class="card-icon">🇧🇩</div>
+          <div class="card-title-group">
+            <div class="card-serial">বিষয় ০৫</div>
+            <h2>বাংলাদেশ বিষয়াবলি</h2>
+          </div>
+        </div>
+
+        <div class="card-stats-row">
+          <span class="stat-pill">📖 ৩১টি পরিচ্ছেদ</span>
+          <span class="stat-pill">🎯 ৫৫০টি প্রশ্ন</span>
+          <span class="stat-pill">📄 পৃষ্ঠা ৪০১–৫৬৪</span>
+        </div>
+
+        <div class="sub-progress-wrap">
+          <div class="sub-prog-header">
+            <span>পড়ার অগ্রগতি:</span>
+            <span id="bdProgressText" class="prog-pct">০%</span>
+          </div>
+          <div class="sub-prog-bar-bg">
+            <div class="sub-prog-fill-bd" id="bdProgressFill"></div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <a href="Live MCQ Bangladesh/প্রাচীন কাল (ইতিহাস, জনপদ ও বিভিন্ন রাজবংশ).html" class="btn-action btn-bd-main">
+            📖 পড়া শুরু করুন
+          </a>
+          <a href="Live MCQ Bangladesh/index.html" class="btn-action btn-secondary">
+            📑 সূচিপত্র
+          </a>
+        </div>
+      </article>
+
+      <!-- Subject ০৬: আন্তর্জাতিক বিষয়াবলি -->
       <article class="subject-card international">
         <div class="card-top">
           <div class="card-icon">🌍</div>
           <div class="card-title-group">
+            <div class="card-serial">বিষয় ০৬</div>
             <h2>আন্তর্জাতিক বিষয়াবলি</h2>
-            <div class="card-page-range">পৃষ্ঠা ৫৮৫ হতে ৬৯৮ • ২১টি পরিচ্ছেদ</div>
           </div>
         </div>
 
-        <p class="card-desc">
-          বৈশ্বিক ইতিহাস ও প্রাচীন সভ্যতা, ভূ-রাজনীতি, গুরুত্বপূর্ণ দেশ-স্থান-বন্দর, বৈশ্বিক দ্বন্দ্ব, নিরাপত্তা জোট ও চুক্তি, জাতিসংঘ ও বৈশ্বিক সংস্থা, বিশ্বব্যাংক-IMF, পরিবেশ ইস্যু ও সম্মেলন।
-        </p>
-
-        <div class="feature-tags">
-          <span class="tag-chip">🌍 বৈশ্বিক ইতিহাস ও ভূগোল</span>
-          <span class="tag-chip">🌐 জাতিসংঘ ও অঙ্গসংস্থা</span>
-          <span class="tag-chip">🤝 নিরাপত্তা জোট ও চুক্তি</span>
-          <span class="tag-chip">🌿 পরিবেশ ও জলবায়ু</span>
-          <span class="tag-chip">📊 সূচক ও সম্মেলন</span>
+        <div class="card-stats-row">
+          <span class="stat-pill">📖 ২১টি পরিচ্ছেদ</span>
+          <span class="stat-pill">🎯 ৫১৫টি প্রশ্ন</span>
+          <span class="stat-pill">📄 পৃষ্ঠা ৫৮৫–৬৯৮</span>
         </div>
 
-        <!-- Subject Progress -->
         <div class="sub-progress-wrap">
           <div class="sub-prog-header">
             <span>পড়ার অগ্রগতি:</span>
-            <span id="intlProgressText" style="color:#0284c7; font-family:'Inter',sans-serif;">০%</span>
+            <span id="intlProgressText" class="prog-pct">০%</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill-intl" id="intlProgressFill"></div>
@@ -1134,34 +858,26 @@
         </div>
       </article>
 
-    
-      <!-- Subject: ভূগোল (বাংলাদেশ ও বিশ্ব), পরিবেশ ও দুর্যোগ ব্যবস্থাপনা -->
+      <!-- Subject ০৭: ভূগোল, পরিবেশ ও দুর্যোগ ব্যবস্থাপনা -->
       <article class="subject-card geography">
         <div class="card-top">
           <div class="card-icon">🗺️</div>
           <div class="card-title-group">
+            <div class="card-serial">বিষয় ০৭</div>
             <h2>ভূগোল, পরিবেশ ও দুর্যোগ ব্যবস্থাপনা</h2>
-            <div class="card-page-range">পৃষ্ঠা ৬৯৯ হতে ৭৩৪ • ৪টি পরিচ্ছেদ (১২২টি প্রশ্ন)</div>
           </div>
         </div>
 
-        <p class="card-desc">
-          বাংলাদেশ ও বৈশ্বিক ভৌগোলিক অঞ্চল, সীমানা ও ভূ-রাজনীতি, টেকটোনিক প্লেট ও খনিজ সম্পদ, বায়ুমণ্ডলের ৫টি স্তর ও বৈশ্বিক নিঃসরণ, ঘূর্ণিঝড় ও বন্যা ব্যবস্থাপনা, সেন্দাই ও প্যারিস ফ্রেমওয়ার্ক সহ ১২২টি প্রামাণ্য প্রশ্ন ও বিস্তারিত ব্যাখ্যা।
-        </p>
-
-        <div class="feature-tags">
-          <span class="tag-chip">🏔️ সীমানা ও ভূ-রাজনীতি</span>
-          <span class="tag-chip">🌋 টেকটোনিক ও খনিজ</span>
-          <span class="tag-chip">🌊 ব্লু-ইকোনমি ও বায়ুমণ্ডল</span>
-          <span class="tag-chip">🌪️ দুর্যোগ ব্যবস্থাপনা</span>
-          <span class="tag-chip">🎯 ১২২টি স্মার্ট প্রশ্ন</span>
+        <div class="card-stats-row">
+          <span class="stat-pill">📖 ৪টি পরিচ্ছেদ</span>
+          <span class="stat-pill">🎯 ১২২টি প্রশ্ন</span>
+          <span class="stat-pill">📄 পৃষ্ঠা ৬৯৯–৭৩৪</span>
         </div>
 
-        <!-- Subject Progress -->
         <div class="sub-progress-wrap">
           <div class="sub-prog-header">
             <span>পড়ার অগ্রগতি:</span>
-            <span id="geoProgressText" style="color:#0284c7; font-family:'Inter',sans-serif;">০%</span>
+            <span id="geoProgressText" class="prog-pct">০%</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill-geo" id="geoProgressFill"></div>
@@ -1178,34 +894,26 @@
         </div>
       </article>
 
-    
-      <!-- Subject: সাধারণ বিজ্ঞান -->
+      <!-- Subject ০৮: সাধারণ বিজ্ঞান -->
       <article class="subject-card science">
         <div class="card-top">
           <div class="card-icon">🔬</div>
           <div class="card-title-group">
+            <div class="card-serial">বিষয় ০৮</div>
             <h2>সাধারণ বিজ্ঞান</h2>
-            <div class="card-page-range">পৃষ্ঠা ৭৪৮ হতে ৮১৬ • ৩১টি পরিচ্ছেদ (৪৬৩টি প্রশ্ন)</div>
           </div>
         </div>
 
-        <p class="card-desc">
-          ১০ম থেকে ৪৭তম বিসিএস পরীক্ষার সিলেবাসভিত্তিক পদার্থবিজ্ঞান, রসায়ন, জীববিজ্ঞান ও আধুনিক বিজ্ঞানের ৩১টি অধ্যায়ের মোট ৪৬৩টি প্রামাণ্য প্রশ্ন, পুঙ্খানুপুঙ্খ ব্যাখ্যা এবং অধ্যায়ভিত্তিক হ্যান্ড-ড্রন ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি।
-        </p>
-
-        <div class="feature-tags">
-          <span class="tag-chip">⚛️ পদার্থবিজ্ঞান (১০)</span>
-          <span class="tag-chip">🧪 রসায়ন (৬)</span>
-          <span class="tag-chip">🧬 জীববিজ্ঞান (৮)</span>
-          <span class="tag-chip">🚀 আধুনিক বিজ্ঞান (৭)</span>
-          <span class="tag-chip">🎯 ৪৬৩টি প্রশ্ন</span>
+        <div class="card-stats-row">
+          <span class="stat-pill">📖 ৩১টি পরিচ্ছেদ</span>
+          <span class="stat-pill">🎯 ৪৬৩টি প্রশ্ন</span>
+          <span class="stat-pill">📄 পৃষ্ঠা ৭৪৮–৮১৬</span>
         </div>
 
-        <!-- Subject Progress -->
         <div class="sub-progress-wrap">
           <div class="sub-prog-header">
             <span>পড়ার অগ্রগতি:</span>
-            <span id="scienceProgressText" style="color:#059669; font-family:'Inter',sans-serif;">০%</span>
+            <span id="scienceProgressText" class="prog-pct">০%</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill-science" id="scienceProgressFill"></div>
@@ -1222,33 +930,26 @@
         </div>
       </article>
 
-      <!-- Subject: কম্পিউটার ও তথ্য প্রযুক্তি -->
+      <!-- Subject ০৯: কম্পিউটার ও তথ্য প্রযুক্তি -->
       <article class="subject-card computer">
         <div class="card-top">
           <div class="card-icon">💻</div>
           <div class="card-title-group">
+            <div class="card-serial">বিষয় ০৯</div>
             <h2>কম্পিউটার ও তথ্য প্রযুক্তি</h2>
-            <div class="card-page-range">পৃষ্ঠা ৮৩১ হতে ৮৮৪ • ১২টি পরিচ্ছেদ (১৮৮টি প্রশ্ন)</div>
           </div>
         </div>
 
-        <p class="card-desc">
-          ১০ম থেকে ৪৭তম বিসিএস পরীক্ষার সিলেবাসভিত্তিক কম্পিউটার হার্ডওয়্যার, নম্বর সিস্টেম, লজিক গেইট, নেটওয়ার্কিং, ইন্টারনেট, সাইবার নিরাপত্তা, সোশ্যাল নেটওয়ার্কিং ও ক্লাউড কম্পিউটিং সংক্রান্ত ১২টি অধ্যায়ের মোট ১৮৮টি প্রামাণ্য প্রশ্ন, বিশদ ব্যাখ্যা এবং অধ্যায়ভিত্তিক হ্যান্ড-ড্রন ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি।
-        </p>
-
-        <div class="feature-tags">
-          <span class="tag-chip">💻 কম্পিউটার সিস্টেম (৬)</span>
-          <span class="tag-chip">🌐 তথ্যপ্রযুক্তি ও নেটওয়ার্ক (৬)</span>
-          <span class="tag-chip">⚡ নম্বর সিস্টেম ও গেইট</span>
-          <span class="tag-chip">☁️ ক্লাউড ও সাইবার অপরাধ</span>
-          <span class="tag-chip">🎯 ১৮৮টি প্রশ্ন</span>
+        <div class="card-stats-row">
+          <span class="stat-pill">📖 ১২টি পরিচ্ছেদ</span>
+          <span class="stat-pill">🎯 ১৮৮টি প্রশ্ন</span>
+          <span class="stat-pill">📄 পৃষ্ঠা ৮৩১–৮৮৪</span>
         </div>
 
-        <!-- Subject Progress -->
         <div class="sub-progress-wrap">
           <div class="sub-prog-header">
             <span>পড়ার অগ্রগতি:</span>
-            <span id="computerProgressText" style="color:#2563eb; font-family:'Inter',sans-serif;">০%</span>
+            <span id="computerProgressText" class="prog-pct">০%</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill-computer" id="computerProgressFill"></div>
@@ -1265,76 +966,26 @@
         </div>
       </article>
 
-      <!-- Subject: নৈতিকতা, মূল্যবোধ ও সুশাসন -->
-      <article class="subject-card ethics">
-        <div class="card-top">
-          <div class="card-icon">⚖️</div>
-          <div class="card-title-group">
-            <h2>নৈতিকতা, মূল্যবোধ ও সুশাসন</h2>
-            <div class="card-page-range">পৃষ্ঠা ১০২৫ হতে ১০৫৪ • ৪টি পরিচ্ছেদ (১১৪টি প্রশ্ন)</div>
-          </div>
-        </div>
-
-        <p class="card-desc">
-          বিগত ৩৫তম থেকে ৫০তম বিসিএস পরীক্ষার সিলেবাসভিত্তিক নৈতিকতা, মূল্যবোধ, সুশাসন এবং উক্তি, বই ও লেখকের ৪টি অধ্যায়ের মোট ১১৪টি প্রামাণ্য প্রশ্ন, বিশদ ব্যাখ্যা, প্রামাণ্য গ্রন্থপঞ্জি এবং অধ্যায়ভিত্তিক হ্যান্ড-ড্রন ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি।
-        </p>
-
-        <div class="feature-tags">
-          <span class="tag-chip">⚖️ নৈতিকতা ও নীতিবিদ্যা (২৪)</span>
-          <span class="tag-chip">💎 মূল্যবোধ ও মানদণ্ড (৩০)</span>
-          <span class="tag-chip">🏛️ সুশাসন ও বিশ্বব্যাংক (৪৮)</span>
-          <span class="tag-chip">📚 উক্তি, বই ও লেখক (১২)</span>
-          <span class="tag-chip">🎯 ১১৪টি প্রামাণ্য প্রশ্ন</span>
-        </div>
-
-        <!-- Subject Progress -->
-        <div class="sub-progress-wrap">
-          <div class="sub-prog-header">
-            <span>পড়ার অগ্রগতি:</span>
-            <span id="ethicsProgressText" style="color:#0d9488; font-family:'Inter',sans-serif;">০%</span>
-          </div>
-          <div class="sub-prog-bar-bg">
-            <div class="sub-prog-fill-ethics" id="ethicsProgressFill"></div>
-          </div>
-        </div>
-
-        <div class="card-actions">
-          <a href="Live MCQ Ethics & Good Governance/নৈতিকতা.html" class="btn-action btn-ethics-main">
-            📖 পড়া শুরু করুন
-          </a>
-          <a href="Live MCQ Ethics & Good Governance/index.html" class="btn-action btn-secondary">
-            📑 সূচিপত্র
-          </a>
-        </div>
-      </article>
-
-      <!-- Subject: গাণিতিক যুক্তি -->
+      <!-- Subject ১০: গাণিতিক যুক্তি -->
       <article class="subject-card math">
         <div class="card-top">
           <div class="card-icon">📐</div>
           <div class="card-title-group">
+            <div class="card-serial">বিষয় ১০</div>
             <h2>গাণিতিক যুক্তি</h2>
-            <div class="card-page-range">পৃষ্ঠা ৮৮৫ হতে ৯৮৬ • ১৩টি পরিচ্ছেদ (৫৩৮টি প্রশ্ন)</div>
           </div>
         </div>
 
-        <p class="card-desc">
-          পাটিগণিত (বাস্তব সংখ্যা, শতকরা, মুনাফা, লাভ-ক্ষতি, অনুপাত, গতিবেগ ও নৌকা-ট্রেন), বীজগণিত (বীজগাণিতিক সূত্রাবলি, উৎপাদক, সমীকরণ, অসমতা, সূচক, লগারিদম, সমান্তর ও গুণোত্তর ধারা, সেট, বিন্যাস-সমাবেশ, পরিসংখ্যান ও সম্ভাব্যতা) এবং জ্যামিতি ও পরিমিতির ১৩টি অধ্যায়ের ৫৩৮টি প্রামাণ্য প্রশ্ন, KaTeX সমীকরণ ও বিশদ সমাধান।
-        </p>
-
-        <div class="feature-tags">
-          <span class="tag-chip">🔢 পাটিগণিত (৪টি)</span>
-          <span class="tag-chip">📐 বীজগণিত (৬টি)</span>
-          <span class="tag-chip">📏 জ্যামিতি ও ত্রিকোণমিতি (৩টি)</span>
-          <span class="tag-chip">∑ সমীকরণ ও ধারা</span>
-          <span class="tag-chip">🎯 ৫৩৮টি প্রামাণ্য প্রশ্ন</span>
+        <div class="card-stats-row">
+          <span class="stat-pill">📖 ১৩টি পরিচ্ছেদ</span>
+          <span class="stat-pill">🎯 ৫৩৮টি প্রশ্ন</span>
+          <span class="stat-pill">📄 পৃষ্ঠা ৮৮৫–৯৮৬</span>
         </div>
 
-        <!-- Subject Progress -->
         <div class="sub-progress-wrap">
           <div class="sub-prog-header">
             <span>পড়ার অগ্রগতি:</span>
-            <span id="mathProgressText" style="color:#4f46e5; font-family:'Inter',sans-serif;">০%</span>
+            <span id="mathProgressText" class="prog-pct">০%</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill-math" id="mathProgressFill"></div>
@@ -1351,6 +1002,77 @@
         </div>
       </article>
 
+      <!-- Subject ১১: মানসিক দক্ষতা -->
+      <article class="subject-card mental">
+        <div class="card-top">
+          <div class="card-icon">🧠</div>
+          <div class="card-title-group">
+            <div class="card-serial">বিষয় ১১</div>
+            <h2>মানসিক দক্ষতা</h2>
+          </div>
+        </div>
+
+        <div class="card-stats-row">
+          <span class="stat-pill">📖 ৬টি পরিচ্ছেদ</span>
+          <span class="stat-pill">🎯 ১৭৫টি প্রশ্ন</span>
+          <span class="stat-pill">📄 পৃষ্ঠা ৯৮৭–১০২৪</span>
+        </div>
+
+        <div class="sub-progress-wrap">
+          <div class="sub-prog-header">
+            <span>পড়ার অগ্রগতি:</span>
+            <span id="mentalProgressText" class="prog-pct">০%</span>
+          </div>
+          <div class="sub-prog-bar-bg">
+            <div class="sub-prog-fill-mental" id="mentalProgressFill"></div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <a href="Live MCQ Mental Ability/ভাষাগত যৌক্তিক বিচার.html" class="btn-action btn-mental-main">
+            📖 পড়া শুরু করুন
+          </a>
+          <a href="Live MCQ Mental Ability/index.html" class="btn-action btn-secondary">
+            📑 সূচিপত্র
+          </a>
+        </div>
+      </article>
+
+      <!-- Subject ১২: নৈতিকতা, মূল্যবোধ ও সুশাসন -->
+      <article class="subject-card ethics">
+        <div class="card-top">
+          <div class="card-icon">⚖️</div>
+          <div class="card-title-group">
+            <div class="card-serial">বিষয় ১২</div>
+            <h2>নৈতিকতা, মূল্যবোধ ও সুশাসন</h2>
+          </div>
+        </div>
+
+        <div class="card-stats-row">
+          <span class="stat-pill">📖 ৪টি পরিচ্ছেদ</span>
+          <span class="stat-pill">🎯 ১১৪টি প্রশ্ন</span>
+          <span class="stat-pill">📄 পৃষ্ঠা ১০২৫–১০৫৪</span>
+        </div>
+
+        <div class="sub-progress-wrap">
+          <div class="sub-prog-header">
+            <span>পড়ার অগ্রগতি:</span>
+            <span id="ethicsProgressText" class="prog-pct">০%</span>
+          </div>
+          <div class="sub-prog-bar-bg">
+            <div class="sub-prog-fill-ethics" id="ethicsProgressFill"></div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <a href="Live MCQ Ethics & Good Governance/নৈতিকতা.html" class="btn-action btn-ethics-main">
+            📖 পড়া শুরু করুন
+          </a>
+          <a href="Live MCQ Ethics & Good Governance/index.html" class="btn-action btn-secondary">
+            📑 সূচিপত্র
+          </a>
+        </div>
+      </article>
     </section>
 
   </main>
@@ -1360,7 +1082,6 @@
   </footer>
 
   <script>
-    // Chapter Manifest for Search
     const ALL_TOPICS = [
 
       // Mental Ability (৬টি)
@@ -1589,33 +1310,30 @@
       { title: "সোশ্যাল নেটওয়ার্কিং ও তথ্য প্রযুক্তির বড় প্রতিষ্ঠান", sub: "কম্পিউটার ও তথ্য প্রযুক্তি", href: "Live MCQ Computer & IT/সোশ্যাল নেটওয়ার্কিং ও তথ্য প্রযুক্তির বড় প্রতিষ্ঠান.html" }
     ];
 
-    // Numbers in Bengali
-    function toBn(num) {
-      const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
-      return String(num).replace(/\d/g, d => bnDigits[d]);
-    }
+    // Bengali Number Converter
+    const toBn = n => String(n).replace(/[0-9]/g, d => "০১২৩৪৫৬৭৮৯"[d]);
 
-    // Read Progress from LocalStorage
+    // Live Progress Synchronization
     function updateProgressUI() {
       let banglaLangDone = 0;
       try {
-        const langStored = JSON.parse(localStorage.getItem('ebk_bangla_lang_progress') || localStorage.getItem('bangla_lang_progress_data_v1') || '{}');
-        banglaLangDone = Object.keys(langStored).filter(k => langStored[k]).length;
+        const blStored = JSON.parse(localStorage.getItem('ebk_bangla_lang_progress') || localStorage.getItem('bangla_lang_progress_data_v1') || '{}');
+        banglaLangDone = Object.keys(blStored).filter(k => blStored[k]).length;
       } catch(e) {}
 
       let banglaDone = 0;
       try {
-        const banglaStored = JSON.parse(localStorage.getItem('ebk_bangla_lit_progress') || localStorage.getItem('bangla_lit_progress_data_v1') || '{}');
-        banglaDone = Object.keys(banglaStored).filter(k => banglaStored[k]).length;
+        const bStored = JSON.parse(localStorage.getItem('ebk_bangla_progress') || localStorage.getItem('bangla_progress_data_v1') || '{}');
+        banglaDone = Object.keys(bStored).filter(k => bStored[k]).length;
       } catch(e) {}
 
       let bdDone = 0;
       try {
-        const bdStored = JSON.parse(localStorage.getItem('ebk_bd_progress') || localStorage.getItem('bangladesh_affairs_progress_data_v1') || '{}');
+        const bdStored = JSON.parse(localStorage.getItem('ebk_bd_progress') || localStorage.getItem('bangladesh_progress_data_v1') || '{}');
         bdDone = Object.keys(bdStored).filter(k => bdStored[k]).length;
       } catch(e) {}
 
-            let englishLitDone = 0;
+      let englishLitDone = 0;
       try {
         const elStored = JSON.parse(localStorage.getItem('ebk_english_lit_progress') || localStorage.getItem('english_lit_progress_data_v1') || '{}');
         englishLitDone = Object.keys(elStored).filter(k => elStored[k]).length;
@@ -1629,7 +1347,7 @@
 
       let englishGrammarDone = 0;
       try {
-        const egStored = JSON.parse(localStorage.getItem("ebk_english_grammar_progress") || "{}");
+        const egStored = JSON.parse(localStorage.getItem("ebk_english_grammar_progress") || localStorage.getItem("english_grammar_progress_data_v1") || '{}');
         englishGrammarDone = Object.keys(egStored).filter(k => egStored[k]).length;
       } catch(e) {}
 
@@ -1651,7 +1369,6 @@
         computerDone = Object.keys(compStored).filter(k => compStored[k]).length;
       } catch(e) {}
 
-      
       let ethicsDone = 0;
       try {
         const ethStored = JSON.parse(localStorage.getItem('ebk_ethics_progress') || '{}');
@@ -1678,25 +1395,14 @@
       const pctBangla = Math.round((banglaDone / 30) * 100);
       const pctBd = Math.round((bdDone / 31) * 100);
       const pctIntl = Math.round((intlDone / 21) * 100);
-
-      
-      const pctEthics = Math.round((ethicsDone / 4) * 100);
-      if (document.getElementById('ethicsProgressText')) {
-        document.getElementById('ethicsProgressText').innerText = toBn(pctEthics) + '% (' + toBn(ethicsDone) + '/৪)';
-        document.getElementById('ethicsProgressFill').style.width = pctEthics + '%';
-      }
-
+      const pctGrammar = Math.round((englishGrammarDone / 29) * 100);
+      const pctLit = Math.round((englishLitDone / 8) * 100);
+      const pctGeo = Math.round((geoDone / 4) * 100);
+      const pctSci = Math.round((scienceDone / 31) * 100);
+      const pctComp = Math.round((computerDone / 12) * 100);
       const pctMath = Math.round((mathDone / 13) * 100);
-      if (document.getElementById('mathProgressText')) {
-        document.getElementById('mathProgressText').innerText = toBn(pctMath) + '% (' + toBn(mathDone) + '/১৩)';
-        document.getElementById('mathProgressFill').style.width = pctMath + '%';
-      }
-
       const pctMental = Math.round((mentalDone / 6) * 100);
-      if (document.getElementById('mentalProgressText')) {
-        document.getElementById('mentalProgressText').innerText = toBn(pctMental) + '% (' + toBn(mentalDone) + '/৬)';
-        document.getElementById('mentalProgressFill').style.width = pctMental + '%';
-      }
+      const pctEthics = Math.round((ethicsDone / 4) * 100);
 
       document.getElementById('overallPercentage').innerText = toBn(pctTotal) + '%';
       document.getElementById('overallFill').style.width = pctTotal + '%';
@@ -1706,40 +1412,49 @@
         document.getElementById('banglaLangProgressText').innerText = toBn(pctLang) + '% (' + toBn(banglaLangDone) + '/২২)';
         document.getElementById('banglaLangProgressFill').style.width = pctLang + '%';
       }
-
-      document.getElementById('banglaProgressText').innerText = toBn(pctBangla) + '% (' + toBn(banglaDone) + '/৩০)';
-      document.getElementById('banglaProgressFill').style.width = pctBangla + '%';
-
-      document.getElementById('bdProgressText').innerText = toBn(pctBd) + '% (' + toBn(bdDone) + '/৩১)';
-      document.getElementById('bdProgressFill').style.width = pctBd + '%';
-
-            const pctLit = Math.round((englishLitDone / 8) * 100);
+      if (document.getElementById('banglaProgressText')) {
+        document.getElementById('banglaProgressText').innerText = toBn(pctBangla) + '% (' + toBn(banglaDone) + '/৩০)';
+        document.getElementById('banglaProgressFill').style.width = pctBangla + '%';
+      }
+      if (document.getElementById('englishGrammarProgressText')) {
+        document.getElementById('englishGrammarProgressText').innerText = toBn(pctGrammar) + '% (' + toBn(englishGrammarDone) + '/২৯)';
+        document.getElementById('englishGrammarProgressFill').style.width = pctGrammar + '%';
+      }
       if (document.getElementById('englishLitProgressText')) {
         document.getElementById('englishLitProgressText').innerText = toBn(pctLit) + '% (' + toBn(englishLitDone) + '/৮)';
         document.getElementById('englishLitProgressFill').style.width = pctLit + '%';
       }
-
+      if (document.getElementById('bdProgressText')) {
+        document.getElementById('bdProgressText').innerText = toBn(pctBd) + '% (' + toBn(bdDone) + '/৩১)';
+        document.getElementById('bdProgressFill').style.width = pctBd + '%';
+      }
       if (document.getElementById('intlProgressText')) {
         document.getElementById('intlProgressText').innerText = toBn(pctIntl) + '% (' + toBn(intlDone) + '/২১)';
         document.getElementById('intlProgressFill').style.width = pctIntl + '%';
       }
-
       if (document.getElementById('geoProgressText')) {
-        const pctGeo = Math.round((geoDone / 4) * 100);
         document.getElementById('geoProgressText').innerText = toBn(pctGeo) + '% (' + toBn(geoDone) + '/৪)';
         document.getElementById('geoProgressFill').style.width = pctGeo + '%';
       }
-
       if (document.getElementById('scienceProgressText')) {
-        const pctSci = Math.round((scienceDone / 31) * 100);
         document.getElementById('scienceProgressText').innerText = toBn(pctSci) + '% (' + toBn(scienceDone) + '/৩১)';
         document.getElementById('scienceProgressFill').style.width = pctSci + '%';
       }
-
       if (document.getElementById('computerProgressText')) {
-        const pctComp = Math.round((computerDone / 12) * 100);
         document.getElementById('computerProgressText').innerText = toBn(pctComp) + '% (' + toBn(computerDone) + '/১২)';
         document.getElementById('computerProgressFill').style.width = pctComp + '%';
+      }
+      if (document.getElementById('mathProgressText')) {
+        document.getElementById('mathProgressText').innerText = toBn(pctMath) + '% (' + toBn(mathDone) + '/১৩)';
+        document.getElementById('mathProgressFill').style.width = pctMath + '%';
+      }
+      if (document.getElementById('mentalProgressText')) {
+        document.getElementById('mentalProgressText').innerText = toBn(pctMental) + '% (' + toBn(mentalDone) + '/৬)';
+        document.getElementById('mentalProgressFill').style.width = pctMental + '%';
+      }
+      if (document.getElementById('ethicsProgressText')) {
+        document.getElementById('ethicsProgressText').innerText = toBn(pctEthics) + '% (' + toBn(ethicsDone) + '/৪)';
+        document.getElementById('ethicsProgressFill').style.width = pctEthics + '%';
       }
     }
 
@@ -1781,26 +1496,41 @@
       resultsSection.style.display = 'block';
     });
 
-    // Theme Toggle
+    // Universal Theme Sync & Toggle
+    function updateThemeBtn(theme) {
+      const icon = document.getElementById('themeIcon');
+      const text = document.getElementById('themeText');
+      if (icon) icon.innerText = theme === 'dark' ? '☀️' : '🌓';
+      if (text) text.innerText = theme === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
+    }
+
     function togglePortalTheme() {
       const cur = document.documentElement.getAttribute('data-theme') || 'light';
       const target = cur === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', target);
-      document.getElementById('themeIcon').innerText = target === 'dark' ? '☀️' : '🌓';
-      document.getElementById('themeText').innerText = target === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
+      if (target === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
       try {
+        localStorage.setItem('theme', target);
         localStorage.setItem('ebk_portal_theme', target);
+        localStorage.setItem('bcs_theme', target);
       } catch(e) {}
+      updateThemeBtn(target);
     }
 
-    // Load saved theme
+    // Apply and sync on start
     try {
-      const savedTheme = localStorage.getItem('ebk_portal_theme');
-      if (savedTheme) {
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        document.getElementById('themeIcon').innerText = savedTheme === 'dark' ? '☀️' : '🌓';
-        document.getElementById('themeText').innerText = savedTheme === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
+      const savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
       }
+      updateThemeBtn(savedTheme);
     } catch(e) {}
 
     // Init UI

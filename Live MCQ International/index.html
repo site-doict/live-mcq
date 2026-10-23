@@ -4,10 +4,31 @@
   <script>
     (function() {
       try {
-        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || 'light';
+        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
       } catch(e) {}
     })();
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        var cur = document.documentElement.getAttribute('data-theme') || 'light';
+        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
+        btns.forEach(function(b) {
+          var icon = b.querySelector('#themeIcon') || b;
+          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
+            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
+          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
+            b.textContent = cur === 'dark' ? '☀️' : '🌙';
+          }
+          var text = b.querySelector('#themeText');
+          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
+        });
+      } catch(e) {}
+    });
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

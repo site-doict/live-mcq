@@ -541,6 +541,36 @@
             border-top: 1px solid var(--border);
         }
     </style>
+
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch(e) {}
+    })();
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        var cur = document.documentElement.getAttribute('data-theme') || 'light';
+        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
+        btns.forEach(function(b) {
+          var icon = b.querySelector('#themeIcon') || b;
+          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
+            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
+          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
+            b.textContent = cur === 'dark' ? '☀️' : '🌙';
+          }
+          var text = b.querySelector('#themeText');
+          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
+        });
+      } catch(e) {}
+    });
+  </script>
 </head>
 <body>
     <div class="container paper-container paper-legal-pad font-shorif-rafid">
@@ -756,28 +786,50 @@
             </div>
             <div class="exp-drawer" id="exp-3" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>ধরি,
-
-জয়নুলের সময় দরকার \(\mathrm{{t}_{১}}\) ঘণ্টা এবং গতিবেগ x কি.মি./ঘণ্টা
-
-রনির সময় দরকার \(\mathrm{{t}_{২}}\) ঘণ্টা এবং গতিবেগ y কি.মি./ঘণ্টা
-
-গতি দ্বিগুণ করার পরে জয়নুলের লাগে \(\mathrm{{t}_{৩}}\) ঘণ্টা এবং গতিবেগ ২x কি.মি./ঘণ্টা
-
-প্রশ্নমতে, \(\mathrm{{t}_{১}-{t}_{২}=২&hellip;&hellip;&hellip;&hellip;&hellip;..(i)}\)
-
-\(\mathrm{{t}_{২}-{t}_{৩}=১&hellip;&hellip;&hellip;&hellip;&hellip;..(ii)}\)
-
-\(\mathrm{\left(i\right)+\left(ii\right)}\) হতে পাই,
-
-\(\mathrm{{t}_{১}-{t}_{৩}=৩}\)
-
-\(\mathrm{&rArr;\frac{৩০}{x}-\frac{৩০}{২x}=৩}\) \(\mathrm{\left(∵t=\frac{s}{v}\right)}\)
-
-\(\mathrm{&rArr;\frac{৬০-৩০}{২x}=৩}\)
-
-\(\mathrm{&rArr;৬x=৩০}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>ধরি,
+
+
+
+জয়নুলের সময় দরকার \(\mathrm{{t}_{১}}\) ঘণ্টা এবং গতিবেগ x কি.মি./ঘণ্টা
+
+
+
+রনির সময় দরকার \(\mathrm{{t}_{২}}\) ঘণ্টা এবং গতিবেগ y কি.মি./ঘণ্টা
+
+
+
+গতি দ্বিগুণ করার পরে জয়নুলের লাগে \(\mathrm{{t}_{৩}}\) ঘণ্টা এবং গতিবেগ ২x কি.মি./ঘণ্টা
+
+
+
+প্রশ্নমতে, \(\mathrm{{t}_{১}-{t}_{২}=২&hellip;&hellip;&hellip;&hellip;&hellip;..(i)}\)
+
+
+
+\(\mathrm{{t}_{২}-{t}_{৩}=১&hellip;&hellip;&hellip;&hellip;&hellip;..(ii)}\)
+
+
+
+\(\mathrm{\left(i\right)+\left(ii\right)}\) হতে পাই,
+
+
+
+\(\mathrm{{t}_{১}-{t}_{৩}=৩}\)
+
+
+
+\(\mathrm{&rArr;\frac{৩০}{x}-\frac{৩০}{২x}=৩}\) \(\mathrm{\left(∵t=\frac{s}{v}\right)}\)
+
+
+
+\(\mathrm{&rArr;\frac{৬০-৩০}{২x}=৩}\)
+
+
+
+\(\mathrm{&rArr;৬x=৩০}\)
+
+
+
 \(\mathrm{∴x=৫}\)</div>
             </div>
         </div>
@@ -848,12 +900,18 @@
             </div>
             <div class="exp-drawer" id="exp-5" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> ক</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>৫ জন শ্রমিক ৫টি কাপড় বুনতে পারে ৫ দিনে
-
-∴ ১ &rdquo; &rdquo; ১টি &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{৫ \times ৫}{৫}}\) &rdquo;
-
-∴ ৭ &rdquo; &rdquo; ৭টি &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{৫ \times ৫ \times ৭}{৭ \times ৫}}\) &rdquo;
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>৫ জন শ্রমিক ৫টি কাপড় বুনতে পারে ৫ দিনে
+
+
+
+∴ ১ &rdquo; &rdquo; ১টি &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{৫ \times ৫}{৫}}\) &rdquo;
+
+
+
+∴ ৭ &rdquo; &rdquo; ৭টি &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{৫ \times ৫ \times ৭}{৭ \times ৫}}\) &rdquo;
+
+
+
 = ৫ দিনে</div>
             </div>
         </div>
@@ -889,20 +947,34 @@
             </div>
             <div class="exp-drawer" id="exp-6" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>ক ও খ একত্রে ১২ দিনে করতে পারে সম্পূর্ণ কাজ বা কাজের ১ অংশ
-
-∴ ক ও খ একত্রে ১ দিনে করতে পারে কাজের \(\mathrm{\frac{১}{১২}}\) অংশ
-
-ক একা ২০ দিনে করতে পারে সম্পূর্ণ কাজ বা ১ অংশ
-
-ক &rdquo; ১ &rdquo; &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১}{২০}}\) &rdquo;
-
-\(\mathrm{তাহলে,}\) খ একা ১ দিনে করে কাজের \(\mathrm{=\left(\frac{১}{১২}-\frac{১}{২০}\right)}\) অংশ
-
-\(\mathrm{=\frac{২}{৬০}=\frac{১}{৩০}}\) অংশ
-
-এখন খ একা কাজের \(\mathrm{\frac{১}{৩০}}\) অংশ করে ১ দিনে
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>ক ও খ একত্রে ১২ দিনে করতে পারে সম্পূর্ণ কাজ বা কাজের ১ অংশ
+
+
+
+∴ ক ও খ একত্রে ১ দিনে করতে পারে কাজের \(\mathrm{\frac{১}{১২}}\) অংশ
+
+
+
+ক একা ২০ দিনে করতে পারে সম্পূর্ণ কাজ বা ১ অংশ
+
+
+
+ক &rdquo; ১ &rdquo; &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১}{২০}}\) &rdquo;
+
+
+
+\(\mathrm{তাহলে,}\) খ একা ১ দিনে করে কাজের \(\mathrm{=\left(\frac{১}{১২}-\frac{১}{২০}\right)}\) অংশ
+
+
+
+\(\mathrm{=\frac{২}{৬০}=\frac{১}{৩০}}\) অংশ
+
+
+
+এখন খ একা কাজের \(\mathrm{\frac{১}{৩০}}\) অংশ করে ১ দিনে
+
+
+
 \(\mathrm{∴}\) খ একা সম্পূর্ণ কাজ বা ১ অংশ করে \(\mathrm{\frac{১}{\frac{১}{৩০}}}\) \(\mathrm{=}\) ৩০ দিনে।</div>
             </div>
         </div>
@@ -938,12 +1010,18 @@
             </div>
             <div class="exp-drawer" id="exp-7" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>১২ জন শ্রমিক আয় করে ৩ দিনে
-
-∴ ১ জন শ্রমিক আয় করে ৩ &times; ১২দিনে
-
-∴ ৯ জন শ্রমিক আয় করে \(\mathrm{\frac{৩ \times ১২}{৯}=}\) ৪দিনে
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>১২ জন শ্রমিক আয় করে ৩ দিনে
+
+
+
+∴ ১ জন শ্রমিক আয় করে ৩ &times; ১২দিনে
+
+
+
+∴ ৯ জন শ্রমিক আয় করে \(\mathrm{\frac{৩ \times ১২}{৯}=}\) ৪দিনে
+
+
+
 এখানে, আয়ের পরিমাণ অপরিবর্তিত। সুতরাং আয়ের পরিমাণ উল্লেখ করার প্রয়োজন নেই। যার ফলে, শ্রমিক ও সময়ের সম্পর্ক হতে নির্ণেয় সময় নির্ণয় করা হলো।</div>
             </div>
         </div>
@@ -979,18 +1057,30 @@
             </div>
             <div class="exp-drawer" id="exp-8" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>স্রোতের অনুকূলে গতিবেগ \(\mathrm{=}\) ১৮ + ৬ \(\mathrm{=}\) ২৪ কি.মি./ ঘণ্টা
-
-স্রোতের প্রতিকূলে বেগ \(\mathrm{=}\) ১৮ &ndash; ৬ \(\mathrm{=}\) ১২ কি.মি./ ঘণ্টা
-
-স্রোতের অনুকূলে সময় \(\mathrm{=\frac{মোট দূরত্ব}{অনুকূলের বেগ}}\)
-
-\(\mathrm{=\frac{৪৮}{২৪}=}\) ২ ঘণ্টা
-
-স্রোতের প্রতিকূলে সময় \(\mathrm{=\frac{মোট দূরত্ব}{প্রতিকূলের বেগ}}\)
-
-\(\mathrm{=}\) \(\mathrm{\frac{৪৮}{১২}=}\) ৪ ঘণ্টা
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>স্রোতের অনুকূলে গতিবেগ \(\mathrm{=}\) ১৮ + ৬ \(\mathrm{=}\) ২৪ কি.মি./ ঘণ্টা
+
+
+
+স্রোতের প্রতিকূলে বেগ \(\mathrm{=}\) ১৮ &ndash; ৬ \(\mathrm{=}\) ১২ কি.মি./ ঘণ্টা
+
+
+
+স্রোতের অনুকূলে সময় \(\mathrm{=\frac{মোট দূরত্ব}{অনুকূলের বেগ}}\)
+
+
+
+\(\mathrm{=\frac{৪৮}{২৪}=}\) ২ ঘণ্টা
+
+
+
+স্রোতের প্রতিকূলে সময় \(\mathrm{=\frac{মোট দূরত্ব}{প্রতিকূলের বেগ}}\)
+
+
+
+\(\mathrm{=}\) \(\mathrm{\frac{৪৮}{১২}=}\) ৪ ঘণ্টা
+
+
+
 \(\mathrm{∴}\) মোট সময় লাগবে \(\mathrm{=}\) (৪ \(\mathrm{+}\) ২) ঘণ্টা \(\mathrm{=}\) ৬ ঘণ্টা</div>
             </div>
         </div>
@@ -1061,18 +1151,30 @@
             </div>
             <div class="exp-drawer" id="exp-10" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>ধরি, স্রোতের অনুকূলে সময়, \(\mathrm{t_{১}}\) \(\mathrm{=}\) ২ ঘণ্টা,
-
-স্রোতের প্রতিকূলে সময়, \(\mathrm{t_{২}}\) \(\mathrm{=}\) ৪ ঘণ্টা
-
-এবং দূরত্ব d \(\mathrm{=}\) ৫ মাইল
-
-\(\mathrm{∴}\) মোট দূরত্ব \(\mathrm{=}\) যাওয়া \(\mathrm{+}\) আসা
-
-\(\mathrm{=}\) d \(\mathrm{+}\) d \(\mathrm{=}\) ২d \(\mathrm{=}\) ২ \(\mathrm{\times}\) ৫ \(\mathrm{=}\) ১০ মাইল
-
-\(\mathrm{∴}\) গড় বেগ, V \(\mathrm{=\frac{মোট দূরত্ব}{মোট সময়}=}\) \(\mathrm{\frac{২d}{{t}_{১}+ {t}_{২}}}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>ধরি, স্রোতের অনুকূলে সময়, \(\mathrm{t_{১}}\) \(\mathrm{=}\) ২ ঘণ্টা,
+
+
+
+স্রোতের প্রতিকূলে সময়, \(\mathrm{t_{২}}\) \(\mathrm{=}\) ৪ ঘণ্টা
+
+
+
+এবং দূরত্ব d \(\mathrm{=}\) ৫ মাইল
+
+
+
+\(\mathrm{∴}\) মোট দূরত্ব \(\mathrm{=}\) যাওয়া \(\mathrm{+}\) আসা
+
+
+
+\(\mathrm{=}\) d \(\mathrm{+}\) d \(\mathrm{=}\) ২d \(\mathrm{=}\) ২ \(\mathrm{\times}\) ৫ \(\mathrm{=}\) ১০ মাইল
+
+
+
+\(\mathrm{∴}\) গড় বেগ, V \(\mathrm{=\frac{মোট দূরত্ব}{মোট সময়}=}\) \(\mathrm{\frac{২d}{{t}_{১}+ {t}_{২}}}\)
+
+
+
 \(\mathrm{=}\) \(\mathrm{\frac{১০}{২ + ৪}=}\) \(\mathrm{\frac{১০}{৬}=\frac{৫}{৩} =}\) \(\mathrm{১\frac{২}{৩}}\)</div>
             </div>
         </div>
@@ -1108,12 +1210,18 @@
             </div>
             <div class="exp-drawer" id="exp-11" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>খরগোশের ৪ লাফ = কুকুরের ৩ লাফ
-
-∴ খরগোশের ৫ লাফ = কুকুরের \(\mathrm{\frac{৩}{৪} \times ৫}\) = \(\mathrm{\frac{১৫}{৪}}\) লাফ
-
-∴ কুকুর ও খরগোশের গতিবেগের অনুপাত = ৪: \(\mathrm{\frac{১৫}{৪}}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>খরগোশের ৪ লাফ = কুকুরের ৩ লাফ
+
+
+
+∴ খরগোশের ৫ লাফ = কুকুরের \(\mathrm{\frac{৩}{৪} \times ৫}\) = \(\mathrm{\frac{১৫}{৪}}\) লাফ
+
+
+
+∴ কুকুর ও খরগোশের গতিবেগের অনুপাত = ৪: \(\mathrm{\frac{১৫}{৪}}\)
+
+
+
 = ১৬ : ১৫</div>
             </div>
         </div>
@@ -1149,36 +1257,66 @@
             </div>
             <div class="exp-drawer" id="exp-12" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>দুটি নল দ্বারা একত্রে,
-
-৮ মিনিটে পূর্ণ হয় চৌবাচ্চার সম্পূর্ণ বা ১ অংশ
-
-∴ ১ &rdquo; &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১}{৮}}\) &rdquo;
-
-∴ ৪ &rdquo; &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{৪}{৮}}\) = \(\mathrm{\frac{১}{২}}\) অংশ
-
-∴ দ্বিতীয় নলটি ৬ মিনিটে পূর্ণ করে চৌবাচ্চার,
-
-= \(\mathrm{\left(১-\frac{১}{২}\right)}\) = \(\mathrm{\frac{১}{২}}\) অংশ
-
-এখন, দ্বিতীয় নলটি \(\mathrm{\frac{১}{২}}\) অংশ পূর্ণ করে ৬ মিনিটে
-
-∴ &rdquo; &rdquo; সম্পূর্ণ বা ১ &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{৬}{\frac{১}{২}}}\) \(\mathrm{=}\) ১২ মিনিটে
-
-আবার, দ্বিতীয় নলটি ৬ মিনিটে পূর্ণ করে চৌবাচ্চার \(\mathrm{\frac{১}{২}}\) অংশ
-
-∴ &rdquo; &rdquo; ১ &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১}{২ \times ৬}}\) &rdquo;
-
-∴ &rdquo; &rdquo; ৪ &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{৪}{২ \times ৬}}\) = (\mathrm{\frac\(\mathrm{\{১\}}\)\(\mathrm{\{৩\}}\)}) অংশ
-
-তাহলে প্রথম নলটি ৪ মিনিটে পূর্ণ করে,
-
-\(\mathrm{=\left(\frac{১}{২}-\frac{১}{৩}\right)=\left(\frac{৩ - ২}{৬}\right)= \frac{১}{৬}}\) অংশ
-
-প্রথম নল দ্বারা \(\mathrm{\frac{১}{৬}}\) অংশ পূর্ণ হয় ৪ মিনিটে
-
-∴ প্রথম নল দ্বারা সম্পূর্ণ বা ১ অংশ পূর্ণ হয় \(\mathrm{\frac{৪}{\frac{১}{৬}}}\) \(\mathrm{=}\) ২৪ মিনিটে
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>দুটি নল দ্বারা একত্রে,
+
+
+
+৮ মিনিটে পূর্ণ হয় চৌবাচ্চার সম্পূর্ণ বা ১ অংশ
+
+
+
+∴ ১ &rdquo; &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১}{৮}}\) &rdquo;
+
+
+
+∴ ৪ &rdquo; &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{৪}{৮}}\) = \(\mathrm{\frac{১}{২}}\) অংশ
+
+
+
+∴ দ্বিতীয় নলটি ৬ মিনিটে পূর্ণ করে চৌবাচ্চার,
+
+
+
+= \(\mathrm{\left(১-\frac{১}{২}\right)}\) = \(\mathrm{\frac{১}{২}}\) অংশ
+
+
+
+এখন, দ্বিতীয় নলটি \(\mathrm{\frac{১}{২}}\) অংশ পূর্ণ করে ৬ মিনিটে
+
+
+
+∴ &rdquo; &rdquo; সম্পূর্ণ বা ১ &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{৬}{\frac{১}{২}}}\) \(\mathrm{=}\) ১২ মিনিটে
+
+
+
+আবার, দ্বিতীয় নলটি ৬ মিনিটে পূর্ণ করে চৌবাচ্চার \(\mathrm{\frac{১}{২}}\) অংশ
+
+
+
+∴ &rdquo; &rdquo; ১ &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১}{২ \times ৬}}\) &rdquo;
+
+
+
+∴ &rdquo; &rdquo; ৪ &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{৪}{২ \times ৬}}\) = (\mathrm{\frac\(\mathrm{\{১\}}\)\(\mathrm{\{৩\}}\)}) অংশ
+
+
+
+তাহলে প্রথম নলটি ৪ মিনিটে পূর্ণ করে,
+
+
+
+\(\mathrm{=\left(\frac{১}{২}-\frac{১}{৩}\right)=\left(\frac{৩ - ২}{৬}\right)= \frac{১}{৬}}\) অংশ
+
+
+
+প্রথম নল দ্বারা \(\mathrm{\frac{১}{৬}}\) অংশ পূর্ণ হয় ৪ মিনিটে
+
+
+
+∴ প্রথম নল দ্বারা সম্পূর্ণ বা ১ অংশ পূর্ণ হয় \(\mathrm{\frac{৪}{\frac{১}{৬}}}\) \(\mathrm{=}\) ২৪ মিনিটে
+
+
+
 ∴ চৌবাচ্চাটি প্রথম নল দ্বারা ২৪ মিনিটে ও দ্বিতীয় নল দ্বারা ১২ মিনিটে পূর্ণ হয়।</div>
             </div>
         </div>
@@ -1214,12 +1352,18 @@
             </div>
             <div class="exp-drawer" id="exp-13" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>সকাল ৭টা থেকে বিকেল ৩টা পর্যন্ত মধ্যবর্তী সময়ের পার্থক্য ৮ ঘণ্টা।
-
-\(\mathrm{∴}\) ট্রেনের গড় গতিবেগ = \(\mathrm{\frac{মোট অতিক্রান্ত দূরত্ব}{মোট ব্যয়িত সময়}}\)
-
-= \(\mathrm{\frac{৩০০}{৮}}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>সকাল ৭টা থেকে বিকেল ৩টা পর্যন্ত মধ্যবর্তী সময়ের পার্থক্য ৮ ঘণ্টা।
+
+
+
+\(\mathrm{∴}\) ট্রেনের গড় গতিবেগ = \(\mathrm{\frac{মোট অতিক্রান্ত দূরত্ব}{মোট ব্যয়িত সময়}}\)
+
+
+
+= \(\mathrm{\frac{৩০০}{৮}}\)
+
+
+
 = ৩৭.৫ কি.মি./ঘণ্টা</div>
             </div>
         </div>
@@ -1255,24 +1399,42 @@
             </div>
             <div class="exp-drawer" id="exp-14" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>প্রথম পাইপ দ্বারা ৫ ঘণ্টায় ভর্তি করা যায় চৌবাচ্চার সম্পূর্ণ বা ১ অংশ
-
-∴ প্রথম পাইপ দ্বারা ১ ঘণ্টায় ভর্তি করা যায় চৌবাচ্চার \(\mathrm{\frac{১}{৫}}\) অংশ
-
-আবার দ্বিতীয় পাইপ দ্বারা,
-
-৩ ঘণ্টায় ভর্তি করা যায় চৌবাচ্চার সম্পূর্ণ বা ১ অংশ
-
-∴ ১ &rdquo; &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১}{৩}}\) অংশ
-
-∴ দুইটি পাইপ দ্বারা একত্রে ১ ঘণ্টায় ভর্তি করা যায় \(\mathrm{\left(\frac{১}{৫}+\frac{১}{৩}\right)= \frac{৩+৫}{১৫}}\) = (\mathrm{\frac\(\mathrm{\{৮\}}\)\(\mathrm{\{১৫\}}\)}) অংশ
-
-এখন দুইটি পাইপ দ্বারা,
-
-\(\mathrm{\frac{৮}{১৫}}\) অংশ ভর্তি করা যায় ১ ঘণ্টায়
-
-∴ ১ &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১}{\frac{৮}{১৫}}}\) &rdquo;
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>প্রথম পাইপ দ্বারা ৫ ঘণ্টায় ভর্তি করা যায় চৌবাচ্চার সম্পূর্ণ বা ১ অংশ
+
+
+
+∴ প্রথম পাইপ দ্বারা ১ ঘণ্টায় ভর্তি করা যায় চৌবাচ্চার \(\mathrm{\frac{১}{৫}}\) অংশ
+
+
+
+আবার দ্বিতীয় পাইপ দ্বারা,
+
+
+
+৩ ঘণ্টায় ভর্তি করা যায় চৌবাচ্চার সম্পূর্ণ বা ১ অংশ
+
+
+
+∴ ১ &rdquo; &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১}{৩}}\) অংশ
+
+
+
+∴ দুইটি পাইপ দ্বারা একত্রে ১ ঘণ্টায় ভর্তি করা যায় \(\mathrm{\left(\frac{১}{৫}+\frac{১}{৩}\right)= \frac{৩+৫}{১৫}}\) = (\mathrm{\frac\(\mathrm{\{৮\}}\)\(\mathrm{\{১৫\}}\)}) অংশ
+
+
+
+এখন দুইটি পাইপ দ্বারা,
+
+
+
+\(\mathrm{\frac{৮}{১৫}}\) অংশ ভর্তি করা যায় ১ ঘণ্টায়
+
+
+
+∴ ১ &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১}{\frac{৮}{১৫}}}\) &rdquo;
+
+
+
 ∴ \(\mathrm{\frac{২}{৩}}\) &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১৫ \times ২}{৮ \times ৩}}\) \(\mathrm{=\frac{৫}{৪}}\) ঘণ্টায়</div>
             </div>
         </div>
@@ -1343,22 +1505,38 @@
             </div>
             <div class="exp-drawer" id="exp-16" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> গ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>দুই ব্যক্তি একত্রে,
-
-৮ দিনে করতে পারে সম্পূর্ণ বা ১ অংশ
-
-\(\mathrm{∴}\) ১ &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১}{৮}}\) &rdquo;
-
-আবার, প্রথম ব্যক্তি একাকী ১২ দিনে সম্পন্ন করতে পারে সম্পূর্ণ কাজ বা ১ অংশ
-
-∴ প্রথম ব্যক্তি একাকী ১ দিনে কাজ করতে পারে \(\mathrm{\frac{১}{১২}}\) অংশ
-
-তাহলে, দ্বিতীয় ব্যক্তি ১ দিনে সম্পন্ন করতে পারে,
-
-\(\mathrm{=\left(\frac{১}{৮}-\frac{১}{১২}\right)}\) \(\mathrm{=\left(\frac{৩-২}{২৪}\right)=\frac{১}{২৪}}\) অংশ
-
-∴ দ্বিতীয় ব্যক্তি \(\mathrm{\frac{১}{২৪}}\) অংশ সম্পন্ন করতে পারে ১ দিনে
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>দুই ব্যক্তি একত্রে,
+
+
+
+৮ দিনে করতে পারে সম্পূর্ণ বা ১ অংশ
+
+
+
+\(\mathrm{∴}\) ১ &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{\frac{১}{৮}}\) &rdquo;
+
+
+
+আবার, প্রথম ব্যক্তি একাকী ১২ দিনে সম্পন্ন করতে পারে সম্পূর্ণ কাজ বা ১ অংশ
+
+
+
+∴ প্রথম ব্যক্তি একাকী ১ দিনে কাজ করতে পারে \(\mathrm{\frac{১}{১২}}\) অংশ
+
+
+
+তাহলে, দ্বিতীয় ব্যক্তি ১ দিনে সম্পন্ন করতে পারে,
+
+
+
+\(\mathrm{=\left(\frac{১}{৮}-\frac{১}{১২}\right)}\) \(\mathrm{=\left(\frac{৩-২}{২৪}\right)=\frac{১}{২৪}}\) অংশ
+
+
+
+∴ দ্বিতীয় ব্যক্তি \(\mathrm{\frac{১}{২৪}}\) অংশ সম্পন্ন করতে পারে ১ দিনে
+
+
+
 ∴ সম্পূর্ণ বা ১ &rdquo; &rdquo; &rdquo; &rdquo; \(\mathrm{=\frac{১}{\frac{১}{২৪}}=}\) ২৪ দিনে</div>
             </div>
         </div>
@@ -1464,16 +1642,26 @@
             </div>
             <div class="exp-drawer" id="exp-19" style="display:none;">
                 <div class="ans-label"><strong>সঠিক উত্তর:</strong> খ</div>
-                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>ধরি, দূরত্ব ক ফুট
-
-\(\mathrm{∴}\)  গুলি লক্ষ্যভেদ করতে সময় লাগে \(\mathrm{\frac{ক}{১৫৪০}}\) সেকেন্ড
-
-এবং শব্দ কানে আসতে সময় লাগে \(\mathrm{\frac{ক}{১১০০}}\) সেকেন্ড
-
-প্রশ্নমতে, \(\mathrm{\frac{ক}{১৫৪০}}\) + \(\mathrm{\frac{ক}{১১০০}=৩}\)
-
-বা,  \(\mathrm{\frac{ক}{২২০}\left(\frac{১}{৭}+\frac{১}{৫}\right)=৩}\)
-
+                <div class="exp-text"><strong>ব্যাখ্যা:</strong><br>ধরি, দূরত্ব ক ফুট
+
+
+
+\(\mathrm{∴}\)  গুলি লক্ষ্যভেদ করতে সময় লাগে \(\mathrm{\frac{ক}{১৫৪০}}\) সেকেন্ড
+
+
+
+এবং শব্দ কানে আসতে সময় লাগে \(\mathrm{\frac{ক}{১১০০}}\) সেকেন্ড
+
+
+
+প্রশ্নমতে, \(\mathrm{\frac{ক}{১৫৪০}}\) + \(\mathrm{\frac{ক}{১১০০}=৩}\)
+
+
+
+বা,  \(\mathrm{\frac{ক}{২২০}\left(\frac{১}{৭}+\frac{১}{৫}\right)=৩}\)
+
+
+
 বা, ক \(\mathrm{=\frac{৩ \times ২২০ \times ৩৫}{১২}}\)  = ১৯২৫ ফুট</div>
             </div>
         </div>

@@ -4,10 +4,31 @@
   <script>
     (function() {
       try {
-        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || 'light';
+        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
       } catch(e) {}
     })();
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        var cur = document.documentElement.getAttribute('data-theme') || 'light';
+        var btns = document.querySelectorAll('#themeBtn, #ebk-theme-btn, .theme-toggle-btn');
+        btns.forEach(function(b) {
+          var icon = b.querySelector('#themeIcon') || b;
+          if (icon && icon.tagName !== 'BUTTON' && icon.id !== 'themeBtn') {
+            icon.textContent = cur === 'dark' ? '☀️' : '🌙';
+          } else if (b.id === 'themeBtn' && !b.querySelector('#themeIcon')) {
+            b.textContent = cur === 'dark' ? '☀️' : '🌙';
+          }
+          var text = b.querySelector('#themeText');
+          if (text) text.textContent = cur === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
+        });
+      } catch(e) {}
+    });
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
@@ -599,7 +620,7 @@
       <button class="exp-toggle-btn" onclick="toggleExplanation(2)">💡 ব্যাখ্যা দেখুন</button>
       <div class="answer-drawer" id="exp2">
         <div class="explanation-title">✓ সঠিক উত্তর: (খ) an adjective phrase</div>
-        <div class="explanation-content">He is a man to depend on-এই বাক্যের underlined part একটি adjective phrase কারণ এটা noun 'man' কে modify করছে।<br>এখানে- To হচ্ছে infinitive marker, Preposition নয়। তাই, Underlined Phrase কে prepositional phrase বলা যাবে না।<br>In English grammar, the "infinitive marker" is the word "to" that is used before a verb to form the infinitive form of that verb.</div>
+        <div class="explanation-content">He is a man <u>to depend on</u>-এই বাক্যের underlined part একটি adjective phrase কারণ এটা noun 'man' কে modify করছে।<br>এখানে- To হচ্ছে infinitive marker, Preposition নয়। তাই, Underlined Phrase কে prepositional phrase বলা যাবে না।<br>In English grammar, the "infinitive marker" is the word "to" that is used before a verb to form the infinitive form of that verb.</div>
       </div>
     </article>
     
