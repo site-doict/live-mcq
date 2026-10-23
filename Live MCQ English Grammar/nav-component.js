@@ -913,7 +913,7 @@
           <option value="../Live MCQ English Literature/index.html">🎭 English Literature</option>
           <option value="../Live MCQ Bangla Language/index.html">✍️ বাংলা ভাষা ও ব্যাকরণ</option>
           <option value="../Live MCQ Bangla Literature/index.html">📚 বাংলা সাহিত্য</option>
-          <option value="../Live MCQ Bangladesh/index.html">🇧🇩 বাংলাদেশ বিষয়াবলি</option>
+          <option value="../Live MCQ Bangladesh/index.html">🏛️ বাংলাদেশ বিষয়াবলি</option>
           <option value="../Live MCQ International/index.html">🌐 আন্তর্জাতিক বিষয়াবলি</option>
           <option value="../index.html">🏛️ মাস্টার লাইব্রেরি পোর্টাল</option>
         </select>
