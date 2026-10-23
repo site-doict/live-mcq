@@ -909,12 +909,18 @@
       <div style="padding: 8px 14px; background: rgba(67, 56, 202, 0.08); border-bottom: 1px solid var(--ebk-border); font-size: 12px; display: flex; align-items: center; justify-content: space-between;">
         <span style="font-weight: 700; color: var(--ebk-primary);">বিষয় পরিবর্তন:</span>
         <select onchange="if(this.value!=='current') window.location.href=this.value;" style="padding: 3px 6px; border-radius: 6px; border: 1px solid var(--ebk-border); background: var(--ebk-card-bg); color: var(--ebk-text-main); font-family: inherit; font-size: 12px; cursor: pointer; max-width: 65%;">
-          <option value="current" selected>📗 English Grammar</option>
-          <option value="../Live MCQ English Literature/index.html">🎭 English Literature</option>
           <option value="../Live MCQ Bangla Language/index.html">✍️ বাংলা ভাষা ও ব্যাকরণ</option>
           <option value="../Live MCQ Bangla Literature/index.html">📚 বাংলা সাহিত্য</option>
-          <option value="../Live MCQ Bangladesh/index.html">🏛️ বাংলাদেশ বিষয়াবলি</option>
+          <option value="current" selected>🔤 English Grammar</option>
+          <option value="../Live MCQ English Literature/index.html">🎭 English Literature</option>
+          <option value="../Live MCQ Bangladesh/index.html">🇧🇩 বাংলাদেশ বিষয়াবলি</option>
           <option value="../Live MCQ International/index.html">🌐 আন্তর্জাতিক বিষয়াবলি</option>
+          <option value="../Live MCQ Geography/index.html">🗺️ ভূগোল, পরিবেশ ও দুর্যোগ ব্যবস্থাপনা</option>
+          <option value="../Live MCQ General Science/index.html">🔬 সাধারণ বিজ্ঞান</option>
+          <option value="../Live MCQ Computer & IT/index.html">💻 কম্পিউটার ও তথ্য প্রযুক্তি</option>
+          <option value="../Live MCQ Mathematical Reasoning/index.html">📐 গাণিতিক যুক্তি</option>
+          <option value="../Live MCQ Mental Ability/index.html">🧩 মানসিক দক্ষতা</option>
+          <option value="../Live MCQ Ethics & Good Governance/index.html">⚖️ নৈতিকতা, মূল্যবোধ ও সুশাসন</option>
           <option value="../index.html">🏛️ মাস্টার লাইব্রেরি পোর্টাল</option>
         </select>
       </div>
