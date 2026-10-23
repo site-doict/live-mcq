@@ -530,6 +530,31 @@
       background: #1d4ed8;
     }
 
+    .subject-card.ethics {
+      border-top: 6px solid #0d9488;
+    }
+    .subject-card.ethics .card-icon {
+      background: #ccfbf1;
+    }
+    [data-theme="dark"] .subject-card.ethics .card-icon {
+      background: rgba(13, 148, 136, 0.2);
+    }
+    .sub-prog-fill-ethics {
+      height: 100%;
+      background: #0d9488;
+      width: 0%;
+      border-radius: 999px;
+      transition: width 0.6s;
+    }
+    .btn-ethics-main {
+      background: #0d9488;
+      color: #fff;
+    }
+    .btn-ethics-main:hover {
+      background: #0f766e;
+    }
+
+
 
     /* Mini Subject Progress */
     .sub-progress-wrap {
@@ -734,7 +759,7 @@
           <div class="progress-bar-fill" id="overallFill"></div>
         </div>
         <div class="progress-caption">
-          <span id="completedCountText">সম্পন্ন: ০ / ১৮৮টি অধ্যায়</span>
+          <span id="completedCountText">সম্পন্ন: ০ / ১৯২টি অধ্যায়</span>
           <span>লক্ষ্য: ১০০% রিভিশন</span>
         </div>
       </div>
@@ -1148,6 +1173,48 @@
         </div>
       </article>
 
+      <!-- Subject: নৈতিকতা, মূল্যবোধ ও সুশাসন -->
+      <article class="subject-card ethics">
+        <div class="card-top">
+          <div class="card-icon">⚖️</div>
+          <div class="card-title-group">
+            <h2>নৈতিকতা, মূল্যবোধ ও সুশাসন</h2>
+            <div class="card-page-range">পৃষ্ঠা ১০২৫ হতে ১০৫৪ • ৪টি পরিচ্ছেদ (১১৪টি প্রশ্ন)</div>
+          </div>
+        </div>
+
+        <p class="card-desc">
+          বিগত ৩৫তম থেকে ৫০তম বিসিএস পরীক্ষার সিলেবাসভিত্তিক নৈতিকতা, মূল্যবোধ, সুশাসন এবং উক্তি, বই ও লেখকের ৪টি অধ্যায়ের মোট ১১৪টি প্রামাণ্য প্রশ্ন, বিশদ ব্যাখ্যা, প্রামাণ্য গ্রন্থপঞ্জি এবং অধ্যায়ভিত্তিক হ্যান্ড-ড্রন ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি।
+        </p>
+
+        <div class="feature-tags">
+          <span class="tag-chip">⚖️ নৈতিকতা ও নীতিবিদ্যা (২৪)</span>
+          <span class="tag-chip">💎 মূল্যবোধ ও মানদণ্ড (৩০)</span>
+          <span class="tag-chip">🏛️ সুশাসন ও বিশ্বব্যাংক (৪৮)</span>
+          <span class="tag-chip">📚 উক্তি, বই ও লেখক (১২)</span>
+          <span class="tag-chip">🎯 ১১৪টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+
+        <!-- Subject Progress -->
+        <div class="sub-progress-wrap">
+          <div class="sub-prog-header">
+            <span>পড়ার অগ্রগতি:</span>
+            <span id="ethicsProgressText" style="color:#0d9488; font-family:'Inter',sans-serif;">০%</span>
+          </div>
+          <div class="sub-prog-bar-bg">
+            <div class="sub-prog-fill-ethics" id="ethicsProgressFill"></div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <a href="Live MCQ Ethics & Good Governance/নৈতিকতা.html" class="btn-action btn-ethics-main">
+            📖 পড়া শুরু করুন
+          </a>
+          <a href="Live MCQ Ethics & Good Governance/index.html" class="btn-action btn-secondary">
+            📑 সূচিপত্র
+          </a>
+        </div>
+      </article>
 
     </section>
 
@@ -1425,14 +1492,28 @@
         computerDone = Object.keys(compStored).filter(k => compStored[k]).length;
       } catch(e) {}
 
-      const totalDone = banglaLangDone + banglaDone + bdDone + englishGrammarDone + englishLitDone + intlDone + geoDone + scienceDone + computerDone;
-      const totalCount = 188;
+      
+      let ethicsDone = 0;
+      try {
+        const ethStored = JSON.parse(localStorage.getItem('ebk_ethics_progress') || '{}');
+        ethicsDone = Object.keys(ethStored).filter(k => ethStored[k]).length;
+      } catch(e) {}
+
+      const totalDone = banglaLangDone + banglaDone + bdDone + englishGrammarDone + englishLitDone + intlDone + geoDone + scienceDone + computerDone + ethicsDone;
+      const totalCount = 192;
 
       const pctTotal = Math.round((totalDone / totalCount) * 100);
       const pctLang = Math.round((banglaLangDone / 22) * 100);
       const pctBangla = Math.round((banglaDone / 30) * 100);
       const pctBd = Math.round((bdDone / 31) * 100);
       const pctIntl = Math.round((intlDone / 21) * 100);
+
+      
+      const pctEthics = Math.round((ethicsDone / 4) * 100);
+      if (document.getElementById('ethicsProgressText')) {
+        document.getElementById('ethicsProgressText').innerText = toBn(pctEthics) + '% (' + toBn(ethicsDone) + '/৪)';
+        document.getElementById('ethicsProgressFill').style.width = pctEthics + '%';
+      }
 
       document.getElementById('overallPercentage').innerText = toBn(pctTotal) + '%';
       document.getElementById('overallFill').style.width = pctTotal + '%';

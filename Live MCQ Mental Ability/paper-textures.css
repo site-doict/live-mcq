@@ -1,0 +1,718 @@
+/**
+ * High-Fidelity Paper Textures CSS Library (10 Distinct Styles)
+ * Version: 1.0.0
+ * Hand-crafted CSS Gradients, Masking, Clip-Paths & Tactile 3D Depth
+ * Full Dark Mode & Mobile Responsive Support (Zero Dependencies)
+ */
+
+/* ==========================================================================
+   1. Universal Base Container (.paper-container)
+   ========================================================================== */
+.paper-container {
+  position: relative;
+  box-sizing: border-box;
+  margin: 2rem auto;
+  width: 100%;
+  max-width: 960px;
+  min-height: 280px;
+  padding: 2.5rem 2.2rem;
+  border-radius: 8px;
+  font-family: var(--paper-font-active, var(--sk-font-bn, system-ui, sans-serif));
+  font-size: 1.15rem;
+  line-height: 1.85;
+  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  overflow-x: clip;
+}
+
+/* Seamless support when applied directly onto .sk-page from sketchnote.css */
+.sk-page.paper-container,
+.sk-page[class*="paper-"] {
+  border-radius: 8px;
+  overflow: visible;
+  padding-left: 2.2rem;
+}
+.sk-page.paper-torn,
+.sk-page.paper-old-aged.paper-torn,
+.sk-page[class*="paper-torn"] {
+  padding-top: 3.2rem;
+  padding-bottom: 3.2rem;
+  padding-left: 2.2rem;
+  padding-right: 2.2rem;
+  overflow-x: clip;
+}
+
+/* ==========================================================================
+   Style 1: Lined Notebook Style (দাগটানা খাতা)
+   Clean CSS linear-gradients mimicking school notebook rules with red/blue margins
+   ========================================================================== */
+.paper-lined-notebook {
+  background-color: #fbfaf5;
+  background-image: 
+    /* Red Vertical Margin Double-Rule at left */
+    linear-gradient(to right, 
+      transparent 4.2rem, 
+      rgba(239, 68, 68, 0.75) 4.2rem, 
+      rgba(239, 68, 68, 0.75) calc(4.2rem + 1.5px), 
+      transparent calc(4.2rem + 1.5px), 
+      transparent calc(4.2rem + 5px), 
+      rgba(239, 68, 68, 0.35) calc(4.2rem + 5px), 
+      rgba(239, 68, 68, 0.35) calc(4.2rem + 6px), 
+      transparent calc(4.2rem + 6px)
+    ),
+    /* Blue Horizontal Ruled Lines (32px baseline) */
+    repeating-linear-gradient(to bottom,
+      transparent,
+      transparent 31px,
+      #cfe2f3 31px,
+      #cfe2f3 32px
+    );
+  color: #1a2a44;
+  padding-left: 5.5rem;
+  padding-right: 2.5rem;
+  padding-top: 2.8rem;
+  border: 1px solid #dbe7f2;
+  box-shadow: 0 4px 20px rgba(30, 50, 80, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Left Spiral / Binder Hole Simulation */
+.paper-lined-notebook::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  bottom: 18px;
+  left: 14px;
+  width: 16px;
+  background-image: radial-gradient(circle, #334155 5px, #1e293b 6px, transparent 7px);
+  background-size: 16px 36px;
+  background-repeat: repeat-y;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* Dark Mode - Lined Notebook */
+[data-theme="dark"] .paper-lined-notebook,
+body.dark-mode .paper-lined-notebook,
+.theme-dark .paper-lined-notebook {
+  background-color: #141b24;
+  background-image: 
+    linear-gradient(to right, 
+      transparent 4.2rem, 
+      rgba(244, 63, 94, 0.45) 4.2rem, 
+      rgba(244, 63, 94, 0.45) calc(4.2rem + 1.5px), 
+      transparent calc(4.2rem + 1.5px), 
+      transparent calc(4.2rem + 5px), 
+      rgba(244, 63, 94, 0.25) calc(4.2rem + 5px), 
+      rgba(244, 63, 94, 0.25) calc(4.2rem + 6px), 
+      transparent calc(4.2rem + 6px)
+    ),
+    repeating-linear-gradient(to bottom,
+      transparent,
+      transparent 31px,
+      #223044 31px,
+      #223044 32px
+    );
+  color: #e2eaf5;
+  border-color: #27364b;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+}
+[data-theme="dark"] .paper-lined-notebook::before,
+body.dark-mode .paper-lined-notebook::before {
+  background-image: radial-gradient(circle, #0f141c 5px, #475569 6px, transparent 7px);
+}
+
+/* ==========================================================================
+   Style 2: Old Aged Paper Style (পুরাতন কাগজ)
+   Rustic, warm sepia/cream surface with subtle grunge grain overlays & parchment tones
+   ========================================================================== */
+.paper-old-aged {
+  background-color: #f7eedb;
+  background-image: 
+    /* Aged edge oxidation vignette */
+    radial-gradient(circle at 50% 50%, 
+      rgba(255, 255, 255, 0.35) 20%, 
+      rgba(235, 214, 178, 0.45) 60%, 
+      rgba(176, 134, 82, 0.4) 95%, 
+      rgba(122, 85, 42, 0.55) 100%
+    ),
+    /* Microscopic paper pulp texture mesh */
+    repeating-linear-gradient(45deg, rgba(160, 115, 65, 0.03) 0, rgba(160, 115, 65, 0.03) 2px, transparent 2px, transparent 4px),
+    repeating-linear-gradient(-45deg, rgba(160, 115, 65, 0.03) 0, rgba(160, 115, 65, 0.03) 2px, transparent 2px, transparent 4px);
+  color: #2e1d0f;
+  border: 1px solid #d2b78d;
+  box-shadow: 
+    inset 0 0 50px rgba(115, 75, 30, 0.22),
+    inset 0 0 100px rgba(85, 52, 20, 0.12),
+    0 8px 24px rgba(45, 30, 10, 0.14);
+}
+
+/* Subtle deckled edge overlay */
+.paper-old-aged::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 18px rgba(92, 58, 22, 0.28);
+  pointer-events: none;
+}
+
+/* Dark Mode - Old Aged Paper */
+[data-theme="dark"] .paper-old-aged,
+body.dark-mode .paper-old-aged,
+.theme-dark .paper-old-aged {
+  background-color: #1f1811;
+  background-image: 
+    radial-gradient(circle at 50% 50%, 
+      rgba(45, 35, 25, 0.5) 20%, 
+      rgba(26, 20, 14, 0.75) 75%, 
+      rgba(14, 10, 6, 0.95) 100%
+    ),
+    repeating-linear-gradient(45deg, rgba(230, 180, 120, 0.03) 0, rgba(230, 180, 120, 0.03) 2px, transparent 2px, transparent 4px);
+  color: #faebd7;
+  border-color: #4a3824;
+  box-shadow: 
+    inset 0 0 55px rgba(0, 0, 0, 0.65),
+    0 8px 28px rgba(0, 0, 0, 0.55);
+}
+
+/* ==========================================================================
+   Style 3: Torn Paper Style (ছেঁড়া পাতা)
+   CSS polygon clip-paths simulating jagged, realistically ripped notebook edges
+   ========================================================================== */
+.paper-torn {
+  background-color: #ffffff;
+  background-image: 
+    linear-gradient(to bottom, #fdfbf7 0%, #ffffff 15%, #ffffff 85%, #f9f6ef 100%);
+  color: #1e293b;
+  border: none;
+  /* Multi-vertex jagged rip across top and bottom */
+  clip-path: polygon(
+    0% 14px, 2% 4px, 5% 15px, 8% 3px, 12% 16px, 16% 5px, 20% 15px, 
+    24% 2px, 28% 14px, 32% 6px, 37% 17px, 41% 4px, 46% 15px, 50% 3px, 
+    55% 16px, 60% 5px, 64% 15px, 69% 2px, 73% 14px, 77% 6px, 82% 16px, 
+    86% 4px, 90% 15px, 94% 2px, 97% 13px, 100% 6px,
+    100% calc(100% - 14px), 98% calc(100% - 4px), 95% calc(100% - 15px), 91% calc(100% - 3px),
+    87% calc(100% - 16px), 83% calc(100% - 6px), 79% calc(100% - 15px), 74% calc(100% - 3px),
+    70% calc(100% - 16px), 66% calc(100% - 5px), 61% calc(100% - 15px), 57% calc(100% - 3px),
+    52% calc(100% - 17px), 48% calc(100% - 5px), 43% calc(100% - 15px), 39% calc(100% - 3px),
+    34% calc(100% - 16px), 30% calc(100% - 5px), 25% calc(100% - 15px), 21% calc(100% - 3px),
+    16% calc(100% - 16px), 12% calc(100% - 5px), 8% calc(100% - 15px), 4% calc(100% - 3px),
+    0% calc(100% - 14px)
+  );
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.12));
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+/* Torn white cellulose fiber simulation underlay */
+.paper-torn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(90deg, #fff 0, #fff 3px, #e2e8f0 3px, #e2e8f0 6px);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Dark Mode - Torn Paper */
+[data-theme="dark"] .paper-torn,
+body.dark-mode .paper-torn,
+.theme-dark .paper-torn {
+  background-color: #171f2b;
+  background-image: 
+    linear-gradient(to bottom, #131a24 0%, #171f2b 15%, #171f2b 85%, #111720 100%);
+  color: #e2eaf5;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.55));
+}
+[data-theme="dark"] .paper-torn::before,
+body.dark-mode .paper-torn::before {
+  background: repeating-linear-gradient(90deg, #334155 0, #334155 3px, #1e293b 3px, #1e293b 6px);
+}
+
+/* ==========================================================================
+   Style 3B: Old Aged Torn Paper Style (পুরাতন ছেঁড়া কাগজ)
+   Combines realistic ripped clip-path edges with antique warm sepia parchment & oxidation vignette
+   ========================================================================== */
+.paper-old-aged.paper-torn,
+.paper-torn.paper-old-aged,
+.paper-torn-aged {
+  background-color: #f7eedb;
+  background-image: 
+    radial-gradient(circle at 50% 50%, 
+      rgba(255, 255, 255, 0.35) 20%, 
+      rgba(235, 214, 178, 0.45) 60%, 
+      rgba(176, 134, 82, 0.4) 95%, 
+      rgba(122, 85, 42, 0.55) 100%
+    ),
+    repeating-linear-gradient(45deg, rgba(160, 115, 65, 0.04) 0, rgba(160, 115, 65, 0.04) 2px, transparent 2px, transparent 4px),
+    repeating-linear-gradient(-45deg, rgba(160, 115, 65, 0.04) 0, rgba(160, 115, 65, 0.04) 2px, transparent 2px, transparent 4px);
+  color: #2e1d0f;
+  border: none;
+  filter: drop-shadow(0 8px 24px rgba(45, 30, 10, 0.18));
+}
+
+.paper-old-aged.paper-torn::before,
+.paper-torn.paper-old-aged::before,
+.paper-torn-aged::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(90deg, #d2b78d 0, #d2b78d 3px, #b08652 3px, #b08652 6px);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+[data-theme="dark"] .paper-old-aged.paper-torn,
+[data-theme="dark"] .paper-torn.paper-old-aged,
+[data-theme="dark"] .paper-torn-aged,
+body.dark-mode .paper-old-aged.paper-torn,
+body.dark-mode .paper-torn.paper-old-aged,
+body.dark-mode .paper-torn-aged,
+.theme-dark .paper-old-aged.paper-torn,
+.theme-dark .paper-torn.paper-old-aged,
+.theme-dark .paper-torn-aged {
+  background-color: #1f1811;
+  background-image: 
+    radial-gradient(circle at 50% 50%, 
+      rgba(45, 35, 25, 0.5) 20%, 
+      rgba(26, 20, 14, 0.75) 75%, 
+      rgba(14, 10, 6, 0.95) 100%
+    ),
+    repeating-linear-gradient(45deg, rgba(230, 180, 120, 0.03) 0, rgba(230, 180, 120, 0.03) 2px, transparent 2px, transparent 4px);
+  color: #faebd7;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.65));
+}
+
+[data-theme="dark"] .paper-old-aged.paper-torn::before,
+[data-theme="dark"] .paper-torn.paper-old-aged::before,
+[data-theme="dark"] .paper-torn-aged::before,
+body.dark-mode .paper-old-aged.paper-torn::before,
+body.dark-mode .paper-torn.paper-old-aged::before,
+body.dark-mode .paper-torn-aged::before {
+  background: repeating-linear-gradient(90deg, #4a3824 0, #4a3824 3px, #2a1f14 3px, #2a1f14 6px);
+}
+
+/* ==========================================================================
+   Style 4: Dot Grid Style (ডট গ্রিড খাতা)
+   Minimal Bullet Journal layout using CSS radial-gradients for clean dots
+   ========================================================================== */
+.paper-dot-grid {
+  background-color: #faf9f6;
+  background-image: radial-gradient(circle, #94a3b8 1.25px, transparent 1.25px);
+  background-size: 24px 24px;
+  background-position: 12px 12px;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+/* Dark Mode - Dot Grid */
+[data-theme="dark"] .paper-dot-grid,
+body.dark-mode .paper-dot-grid,
+.theme-dark .paper-dot-grid {
+  background-color: #121822;
+  background-image: radial-gradient(circle, #334155 1.25px, transparent 1.25px);
+  color: #e2e8f0;
+  border-color: #1e293b;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}
+
+/* ==========================================================================
+   Style 5: Graph Paper Style (গ্রাফ পেপার)
+   Blueprint/technical layout featuring fine crisscrossing blue or green grid lines
+   ========================================================================== */
+.paper-graph {
+  background-color: #f1f7fc;
+  background-image:
+    /* Major grid lines (every 100px) */
+    linear-gradient(to right, rgba(126, 168, 201, 0.45) 1.2px, transparent 1.2px),
+    linear-gradient(to bottom, rgba(126, 168, 201, 0.45) 1.2px, transparent 1.2px),
+    /* Minor grid lines (every 20px) */
+    linear-gradient(to right, rgba(195, 222, 240, 0.65) 0.8px, transparent 0.8px),
+    linear-gradient(to bottom, rgba(195, 222, 240, 0.65) 0.8px, transparent 0.8px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-position: -1px -1px;
+  color: #102a43;
+  border: 1px solid #b3d1ea;
+  box-shadow: 0 4px 20px rgba(16, 42, 67, 0.08);
+}
+
+/* Dark Mode - Graph Paper (Technical Blueprint) */
+[data-theme="dark"] .paper-graph,
+body.dark-mode .paper-graph,
+.theme-dark .paper-graph {
+  background-color: #0c1826;
+  background-image:
+    linear-gradient(to right, rgba(56, 189, 248, 0.28) 1.2px, transparent 1.2px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.28) 1.2px, transparent 1.2px),
+    linear-gradient(to right, rgba(30, 58, 95, 0.6) 0.8px, transparent 0.8px),
+    linear-gradient(to bottom, rgba(30, 58, 95, 0.6) 0.8px, transparent 0.8px);
+  color: #e0f2fe;
+  border-color: #1e3a5f;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   Style 6: Crumpled Paper Style (কুঁচকানো কাগজ)
+   3D realistic look using layered linear-gradients & facet highlights
+   ========================================================================== */
+.paper-crumpled {
+  background-color: #f7f6f2;
+  background-image: 
+    /* Primary diagonal crease highlight & shade */
+    linear-gradient(132deg, rgba(255, 255, 255, 0.55) 0%, transparent 45%, rgba(0, 0, 0, 0.06) 55%, transparent 70%),
+    /* Counter crease angle */
+    linear-gradient(42deg, rgba(0, 0, 0, 0.04) 0%, transparent 35%, rgba(255, 255, 255, 0.45) 50%, transparent 75%),
+    /* Lateral crinkle ridges */
+    linear-gradient(218deg, rgba(0, 0, 0, 0.05) 15%, transparent 40%, rgba(255, 255, 255, 0.35) 60%),
+    /* Soft ambient vignette */
+    radial-gradient(circle at 45% 45%, transparent 60%, rgba(0, 0, 0, 0.05) 100%);
+  color: #1f2937;
+  border: 1px solid #e0ddd5;
+  border-radius: 4px 2px 5px 3px;
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    0 8px 25px rgba(0, 0, 0, 0.07),
+    inset 0 0 35px rgba(0, 0, 0, 0.03);
+}
+
+/* Dark Mode - Crumpled Paper */
+[data-theme="dark"] .paper-crumpled,
+body.dark-mode .paper-crumpled,
+.theme-dark .paper-crumpled {
+  background-color: #171d26;
+  background-image: 
+    linear-gradient(132deg, rgba(255, 255, 255, 0.08) 0%, transparent 45%, rgba(0, 0, 0, 0.25) 55%, transparent 70%),
+    linear-gradient(42deg, rgba(0, 0, 0, 0.2) 0%, transparent 35%, rgba(255, 255, 255, 0.07) 50%, transparent 75%),
+    linear-gradient(218deg, rgba(0, 0, 0, 0.2) 15%, transparent 40%, rgba(255, 255, 255, 0.05) 60%);
+  color: #e5e7eb;
+  border-color: #2b3544;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    inset 0 0 40px rgba(0, 0, 0, 0.35);
+}
+
+/* ==========================================================================
+   Style 7: Coffee Stained Parchment (কফি বা চায়ের দাগযুক্ত কাগজ)
+   Artistic backdrop with warm brown circular gradients simulating dried mug rings
+   ========================================================================== */
+.paper-coffee-stained {
+  background-color: #fbf7ee;
+  background-image: 
+    /* Main Coffee Mug Ring (Top-Right) */
+    radial-gradient(ellipse 95px 90px at 85% 22%, 
+      transparent 67%, 
+      rgba(146, 92, 42, 0.28) 70%, 
+      rgba(175, 115, 58, 0.16) 74%, 
+      transparent 78%
+    ),
+    /* Second Faint Mug Ring (Bottom-Left) */
+    radial-gradient(ellipse 80px 75px at 14% 78%, 
+      transparent 66%, 
+      rgba(146, 92, 42, 0.22) 69%, 
+      rgba(175, 115, 58, 0.12) 73%, 
+      transparent 77%
+    ),
+    /* Coffee Splatter Droplet 1 */
+    radial-gradient(circle 9px at 78% 36%, 
+      rgba(138, 86, 38, 0.35) 0%, 
+      rgba(138, 86, 38, 0.22) 65%, 
+      transparent 100%
+    ),
+    /* Coffee Splatter Droplet 2 */
+    radial-gradient(circle 5px at 82% 41%, 
+      rgba(138, 86, 38, 0.28) 0%, 
+      transparent 100%
+    ),
+    /* Coffee Splatter Droplet 3 */
+    radial-gradient(circle 6px at 20% 88%, 
+      rgba(138, 86, 38, 0.25) 0%, 
+      transparent 100%
+    ),
+    /* Warm parchment gradient base */
+    radial-gradient(circle at 50% 50%, #fefcf6 30%, #f5ecd8 100%);
+  color: #2b1d12;
+  border: 1px solid #decbb0;
+  box-shadow: 
+    0 8px 24px rgba(85, 55, 25, 0.1),
+    inset 0 0 35px rgba(140, 95, 45, 0.08);
+}
+
+/* Dark Mode - Coffee Stained Parchment */
+[data-theme="dark"] .paper-coffee-stained,
+body.dark-mode .paper-coffee-stained,
+.theme-dark .paper-coffee-stained {
+  background-color: #1a1510;
+  background-image: 
+    radial-gradient(ellipse 95px 90px at 85% 22%, 
+      transparent 67%, 
+      rgba(195, 130, 65, 0.25) 70%, 
+      rgba(215, 150, 80, 0.12) 74%, 
+      transparent 78%
+    ),
+    radial-gradient(ellipse 80px 75px at 14% 78%, 
+      transparent 66%, 
+      rgba(195, 130, 65, 0.2) 69%, 
+      rgba(215, 150, 80, 0.09) 73%, 
+      transparent 77%
+    ),
+    radial-gradient(circle at 50% 50%, #241c15 30%, #15100c 100%);
+  color: #f6ecdb;
+  border-color: #3d2f21;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+}
+
+/* ==========================================================================
+   Style 8: Legal Pad Style (হলুদ আইনি প্যাড)
+   Canary yellow background with distinct double red vertical divider at left
+   ========================================================================== */
+.paper-legal-pad {
+  background-color: #fffab0;
+  background-image: 
+    /* Double Red Vertical Margin Lines */
+    linear-gradient(to right, 
+      transparent 4.5rem, 
+      #ef4444 4.5rem, 
+      #ef4444 calc(4.5rem + 1.5px), 
+      transparent calc(4.5rem + 1.5px), 
+      transparent calc(4.5rem + 6px), 
+      #ef4444 calc(4.5rem + 6px), 
+      #ef4444 calc(4.5rem + 7.5px), 
+      transparent calc(4.5rem + 7.5px)
+    ),
+    /* Faint blue/violet horizontal ruled lines (32px baseline) */
+    repeating-linear-gradient(to bottom,
+      transparent,
+      transparent 31px,
+      rgba(147, 197, 253, 0.55) 31px,
+      rgba(147, 197, 253, 0.55) 32px
+    );
+  color: #1e293b;
+  padding-left: 5.8rem;
+  padding-top: 3.2rem;
+  border: 1px solid #ebd982;
+  box-shadow: 0 6px 20px rgba(120, 100, 20, 0.12);
+}
+
+/* Legal Pad Header Binding Tape Strip with Metal Staples */
+.paper-legal-pad::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 24px;
+  background: linear-gradient(to bottom, #451a03 0%, #78350f 80%, #582408 100%);
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+/* Metallic Faux Brass Staples */
+.paper-legal-pad::after {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: 5rem;
+  width: 28px;
+  height: 4px;
+  background: #facc15;
+  border-radius: 2px;
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    12rem 0 0 #facc15,
+    12rem 1px 2px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+/* Dark Mode - Legal Pad */
+[data-theme="dark"] .paper-legal-pad,
+body.dark-mode .paper-legal-pad,
+.theme-dark .paper-legal-pad {
+  background-color: #241e0e;
+  background-image: 
+    linear-gradient(to right, 
+      transparent 4.5rem, 
+      rgba(244, 63, 94, 0.55) 4.5rem, 
+      rgba(244, 63, 94, 0.55) calc(4.5rem + 1.5px), 
+      transparent calc(4.5rem + 1.5px), 
+      transparent calc(4.5rem + 6px), 
+      rgba(244, 63, 94, 0.35) calc(4.5rem + 6px), 
+      rgba(244, 63, 94, 0.35) calc(4.5rem + 7.5px), 
+      transparent calc(4.5rem + 7.5px)
+    ),
+    repeating-linear-gradient(to bottom,
+      transparent,
+      transparent 31px,
+      rgba(59, 130, 246, 0.2) 31px,
+      rgba(59, 130, 246, 0.2) 32px
+    );
+  color: #fef08a;
+  border-color: #443714;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+}
+[data-theme="dark"] .paper-legal-pad::before,
+body.dark-mode .paper-legal-pad::before {
+  background: linear-gradient(to bottom, #1c1917 0%, #292524 80%, #1c1917 100%);
+}
+
+/* ==========================================================================
+   Style 9: Burnt Edge Scroll (পোড়া কাগজের স্ক্রোল)
+   Vintage document look where perimeter fades into a dark, smoky charred-brown vignette
+   ========================================================================== */
+.paper-burnt-edge {
+  background-color: #eddcb9;
+  background-image: 
+    radial-gradient(circle at 50% 50%, 
+      #f8f0dd 20%, 
+      #ebd6aa 60%, 
+      #bc9259 85%, 
+      #5c3716 98%
+    );
+  color: #29180c;
+  border: 2px solid rgba(75, 35, 12, 0.65);
+  border-radius: 10px 14px 8px 16px;
+  box-shadow: 
+    inset 0 0 45px rgba(45, 20, 8, 0.75),
+    inset 0 0 95px rgba(25, 10, 4, 0.88),
+    0 12px 30px rgba(0, 0, 0, 0.32);
+  padding: 3rem 2.8rem;
+}
+
+/* Smoky Charred Border Vignette Overlay */
+.paper-burnt-edge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 25px rgba(10, 4, 1, 0.85);
+  pointer-events: none;
+}
+
+/* Dark Mode - Burnt Edge Scroll */
+[data-theme="dark"] .paper-burnt-edge,
+body.dark-mode .paper-burnt-edge,
+.theme-dark .paper-burnt-edge {
+  background-color: #17120c;
+  background-image: 
+    radial-gradient(circle at 50% 50%, 
+      #292015 20%, 
+      #1c150e 65%, 
+      #0d0906 95%
+    );
+  color: #faebd7;
+  border-color: rgba(90, 45, 15, 0.75);
+  box-shadow: 
+    inset 0 0 55px rgba(0, 0, 0, 0.85),
+    inset 0 0 110px rgba(0, 0, 0, 0.95),
+    0 14px 35px rgba(0, 0, 0, 0.65);
+}
+
+/* ==========================================================================
+   Style 10: Kraft Paper Style (কার্ডবোর্ড বা খসখসে প্যাকিং কাগজ)
+   Textured, fibrous brown recycled paper layout providing a raw, organic craft vibe
+   ========================================================================== */
+.paper-kraft {
+  background-color: #cbaf86;
+  background-image: 
+    /* Cross-hatch fiber texture simulating coarse recycled pulp */
+    linear-gradient(45deg, rgba(255, 255, 255, 0.06) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(0, 0, 0, 0.05) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.06) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(0, 0, 0, 0.05) 75%),
+    /* Ambient organic paper tone gradient */
+    radial-gradient(circle at 50% 50%, #d5bc94 0%, #be9f72 100%);
+  background-size: 6px 6px, 6px 6px, 6px 6px, 6px 6px, 100% 100%;
+  color: #271a0e;
+  border: 1px solid #aa8a5e;
+  box-shadow: 
+    0 6px 20px rgba(60, 40, 20, 0.15),
+    inset 0 0 25px rgba(80, 50, 20, 0.12);
+}
+
+/* Dark Mode - Kraft Paper */
+[data-theme="dark"] .paper-kraft,
+body.dark-mode .paper-kraft,
+.theme-dark .paper-kraft {
+  background-color: #261d14;
+  background-image: 
+    linear-gradient(45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(0, 0, 0, 0.2) 25%, transparent 25%),
+    radial-gradient(circle at 50% 50%, #302419 0%, #1e160e 100%);
+  background-size: 6px 6px, 6px 6px, 100% 100%;
+  color: #eeddc5;
+  border-color: #4a3824;
+  box-shadow: 
+    0 8px 28px rgba(0, 0, 0, 0.6),
+    inset 0 0 35px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================================================
+   Responsive Adaptations (Mobile First for Samsung A23 / Small Screens)
+   ========================================================================== */
+@media (max-width: 640px) {
+  .paper-container {
+    padding: 1.8rem 1.2rem;
+    margin: 1.2rem auto;
+    font-size: 1.05rem;
+  }
+  
+  /* Compact Left Margins on Mobile */
+  .paper-lined-notebook {
+    background-image: 
+      linear-gradient(to right, 
+        transparent 2.8rem, 
+        rgba(239, 68, 68, 0.75) 2.8rem, 
+        rgba(239, 68, 68, 0.75) calc(2.8rem + 1.5px), 
+        transparent calc(2.8rem + 1.5px)
+      ),
+      repeating-linear-gradient(to bottom,
+        transparent,
+        transparent 31px,
+        #cfe2f3 31px,
+        #cfe2f3 32px
+      );
+    padding-left: 3.5rem;
+    padding-right: 1.2rem;
+  }
+  .paper-lined-notebook::before {
+    left: 8px;
+    width: 12px;
+  }
+
+  .paper-legal-pad {
+    background-image: 
+      linear-gradient(to right, 
+        transparent 3rem, 
+        #ef4444 3rem, 
+        #ef4444 calc(3rem + 1.5px), 
+        transparent calc(3rem + 1.5px)
+      ),
+      repeating-linear-gradient(to bottom,
+        transparent,
+        transparent 31px,
+        rgba(147, 197, 253, 0.55) 31px,
+        rgba(147, 197, 253, 0.55) 32px
+      );
+    padding-left: 3.8rem;
+    padding-right: 1.2rem;
+  }
+  .paper-legal-pad::after {
+    left: 2rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  }
+
+  .paper-torn {
+    padding-top: 2.2rem;
+    padding-bottom: 2.2rem;
+  }
+  
+  .paper-burnt-edge {
+    padding: 2rem 1.4rem;
+  }
+}

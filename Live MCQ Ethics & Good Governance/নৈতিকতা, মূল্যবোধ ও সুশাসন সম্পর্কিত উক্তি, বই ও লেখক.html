@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>অধ্যায় ০৪: উক্তি, বই ও লেখক - বিসিএস প্রিলিমিনারি ই-বুক</title>
+  <link rel="stylesheet" href="paper-textures.css">
+  <link rel="stylesheet" href="bangla-fonts.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --primary-light: #ede9fe;
+      --primary-dark: #6d28d9;
+      --accent: #d97706;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(124, 58, 237, 0.2);
+      --font-scale: 1;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 24px rgba(124, 58, 237, 0.12);
+      
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.82);
+    }
+
+    [data-theme="dark"] {
+      --primary: #a78bfa;
+      --primary-light: rgba(167, 139, 250, 0.15);
+      --primary-dark: #8b5cf6;
+      --accent: #fbbf24;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(167, 139, 250, 0.22);
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+      
+      --bg-surface: rgba(28, 25, 23, 0.85);
+      --bg-card: rgba(28, 25, 23, 0.82);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.7;
+      color: var(--text-main);
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+    }
+
+    /* Top Navigation */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding: 12px 20px;
+      background: var(--bg-surface);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+    }
+
+    .nav-btn:hover {
+      background: var(--primary-light);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-tool {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .btn-tool:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* Chapter Header */
+    .ch-header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding: 32px 24px;
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-md);
+    }
+
+    .ch-badge-group {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid var(--border-color);
+    }
+
+    .badge-accent {
+      background: rgba(217, 119, 6, 0.15);
+      color: var(--accent);
+      border-color: rgba(217, 119, 6, 0.3);
+    }
+
+    .ch-title {
+      font-size: 2.1rem;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    /* BCS Matrix */
+    .matrix-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .section-title {
+      font-size: 1.35rem;
+      color: var(--primary-dark);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 8px;
+    }
+
+    .bcs-table-wrap {
+      overflow-x: auto;
+    }
+
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    .bcs-table th, .bcs-table td {
+      padding: 10px 12px;
+      border: 1px solid var(--border-color);
+      font-size: 0.95rem;
+    }
+
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    .bcs-table tr:nth-child(even) td {
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    /* Part 1: Notes */
+    .notes-section {
+      margin-bottom: 40px;
+    }
+
+    .sk-box {
+      background: var(--bg-card);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: var(--radius-md);
+      border-left: 5px solid var(--primary);
+      border-top: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+      line-height: 1.8;
+    }
+
+    .sk-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sk-sticky {
+      background: rgba(254, 240, 138, 0.55);
+      backdrop-filter: blur(4px);
+      border-left: 5px solid #eab308;
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      color: #713f12;
+      box-shadow: var(--shadow-sm);
+    }
+
+    [data-theme="dark"] .sk-sticky {
+      background: rgba(113, 63, 18, 0.35);
+      border-left-color: #facc15;
+      color: #fef08a;
+    }
+
+    .sk-compare {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.95rem;
+    }
+
+    .sk-compare th, .sk-compare td {
+      padding: 10px 14px;
+      border: 1px solid var(--border-color);
+    }
+
+    .sk-compare th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      text-align: left;
+    }
+
+    .sk-mark {
+      background: rgba(124, 58, 237, 0.15);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    /* Part 2: Quiz Engine */
+    .quiz-section {
+      margin-top: 40px;
+    }
+
+    .quiz-control-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: var(--bg-surface);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .score-bar {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    .filter-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-select {
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-main);
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    /* Typography Protection */
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+    .bcs-table, .bcs-table *, .score-bar, .score-bar *, .doubt-box, .doubt-box * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .q-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .q-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .q-num-badge {
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+
+    .q-bcs-tag {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 600;
+      background: rgba(217, 119, 6, 0.1);
+      padding: 2px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(217, 119, 6, 0.2);
+    }
+
+    .q-text {
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.6;
+      color: var(--text-main);
+      margin-bottom: 18px;
+    }
+
+    .opts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .opt-btn {
+      text-align: left;
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--text-main);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      transition: all 0.2s;
+      width: 100%;
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .opt-prefix {
+      font-weight: 700;
+      color: var(--primary);
+      min-width: 24px;
+    }
+
+    .opt-btn.correct {
+      background: rgba(16, 185, 129, 0.15) !important;
+      border-color: #10b981 !important;
+      color: #065f46 !important;
+      font-weight: 600;
+    }
+
+    [data-theme="dark"] .opt-btn.correct {
+      background: rgba(16, 185, 129, 0.25) !important;
+      color: #6ee7b7 !important;
+    }
+
+    .opt-btn.wrong {
+      background: rgba(239, 68, 68, 0.15) !important;
+      border-color: #ef4444 !important;
+      color: #991b1b !important;
+    }
+
+    [data-theme="dark"] .opt-btn.wrong {
+      background: rgba(239, 68, 68, 0.25) !important;
+      color: #fca5a5 !important;
+    }
+
+    .q-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+    }
+
+    .btn-exp-toggle {
+      background: none;
+      border: 1px dashed var(--primary);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-exp-toggle:hover {
+      background: var(--primary-light);
+    }
+
+    .exp-drawer {
+      display: none;
+      margin-top: 16px;
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      background: rgba(124, 58, 237, 0.05);
+      border: 1px solid var(--border-color);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    [data-theme="dark"] .exp-drawer {
+      background: rgba(167, 139, 250, 0.08);
+    }
+
+    .exp-drawer.open {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .exp-title {
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Bibliography Section */
+    .bib-section {
+      background: var(--bg-card);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      padding: 28px;
+      margin-top: 48px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .bib-list {
+      list-style-type: decimal;
+      padding-left: 24px;
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    .bib-list li {
+      margin-bottom: 8px;
+    }
+
+    /* Bottom Navigation */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 48px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-page-nav {
+      flex: 1;
+      min-width: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      background: var(--bg-surface);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.2s;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-page-nav:hover {
+      background: var(--primary);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body class="paper-dot-grid">
+  <div class="container font-begum-zia">
+    
+    <!-- Top Nav -->
+    <nav class="top-nav">
+      <a href="index.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> বিষয় সূচিপত্র</a>
+      <div class="controls">
+        <button class="btn-tool" id="btn-dec" title="ছোট ফন্ট">A-</button>
+        <button class="btn-tool" id="btn-reset-font" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="btn-tool" id="btn-inc" title="বড় ফন্ট">A+</button>
+        <button class="btn-tool" id="btn-theme" title="থিম পরিবর্তন"><i class="fa-solid fa-moon"></i></button>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="ch-header">
+      <div class="ch-badge-group">
+        <span class="badge"><i class="fa-solid fa-book-open"></i> অধ্যায় ০৪</span>
+        <span class="badge"><i class="fa-regular fa-file-lines"></i> পৃষ্ঠা: ১০৫১ - ১০৫৪</span>
+        <span class="badge badge-accent"><i class="fa-solid fa-clipboard-question"></i> মোট প্রশ্ন: ১২ টি</span>
+      </div>
+      <h1 class="ch-title font-begum-zia">নৈতিকতা, মূল্যবোধ ও সুশাসন সম্পর্কিত উক্তি, বই ও লেখক <span class="ch-en">(Quotes, Books & Authors on Ethics, Values & Governance)</span></h1>
+      <p style="color: var(--text-muted); font-size: 1.05rem;">বিসিএস প্রিলিমিনারি প্রামাণ্য প্রশ্নব্যাংক, বিশ্লেষণ ও ইন্টারেক্টিভ রিভিশন নোট</p>
+    </header>
+
+    <!-- BCS Analysis Matrix -->
+    <section class="matrix-card">
+      <h2 class="section-title"><i class="fa-solid fa-chart-pie"></i> বিসিএস প্রশ্ন বিশ্লেষণ ছক</h2>
+      <div class="bcs-table-wrap">
+        <table class="bcs-table">
+          <thead>
+            <tr>
+              <th>বিসিএস পরীক্ষা</th>
+              <th>৪৬তম</th>
+              <th>৪৫তম</th>
+              <th>৪৩তম</th>
+              <th>৪১তম</th>
+              <th>৩৮তম</th>
+              <th>৩৬তম</th>
+              <th>মোট প্রশ্ন</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>প্রশ্ন সংখ্যা</strong></td>
+              <td>৪টি</td>
+              <td>২টি</td>
+              <td>২টি</td>
+              <td>১টি</td>
+              <td>২টি</td>
+              <td>১টি</td>
+              <td><strong>১২টি</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Part 1: Authentic Notes -->
+    <section class="notes-section">
+      <h2 class="section-title"><i class="fa-solid fa-feather-pointed"></i> প্রথম অংশ: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি</h2>
+
+      <div class="sk-box">
+        <div class="sk-title"><i class="fa-solid fa-book-bookmark"></i> ১. প্রাচ্য ও পাশ্চাত্যের কালজয়ী দার্শনিকদের বিখ্যাত গ্রন্থ ও তত্ত্ব</div>
+        <table class="sk-compare">
+          <thead>
+            <tr>
+              <th>দার্শনিক ও চিন্তাবিদ</th>
+              <th>দেশ ও পরিচয়</th>
+              <th>কালজয়ী গ্রন্থসমূহ</th>
+              <th>মূল দর্শন ও স্মরণীয় উক্তি</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>সক্রেটিস (Socrates)</strong></td>
+              <td>প্রাচীন গ্রিস</td>
+              <td>কোনো লিখিত গ্রন্থ রেখে যাননি (শিষ্য প্লেটোর সংলাপে বিধৃত)</td>
+              <td>
+                • <span class="sk-mark">"জ্ঞানই পুণ্য" (Virtue is Knowledge)</span><br>
+                • "নিজেকে জানো" (Know thyself)<br>
+                • "একটি অপরীক্ষিত জীবন বেঁচে থাকার যোগ্য নয়।"
+              </td>
+            </tr>
+            <tr>
+              <td><strong>প্লেটো (Plato)</strong></td>
+              <td>প্রাচীন গ্রিস</td>
+              <td>
+                • <em>The Republic</em> (রিপাবলিক)<br>
+                • <em>The Laws</em><br>
+                • <em>The Statesman</em>, <em>Apology</em>
+              </td>
+              <td>
+                • "শাসক যদি ন্যায়বান হন তবে আইন নিষ্প্রয়োজন, আর শাসক যদি দুর্নীতিপরায়ণ হন তবে আইন নিরর্থক।"<br>
+                • প্লেটোর ৪টি প্রধান সদ্‌গুণ: <strong>জ্ঞান, সাহসিকতা, আত্মসংযম ও ন্যায়পরায়ণতা</strong>।
+              </td>
+            </tr>
+            <tr>
+              <td><strong>এরিস্টটল (Aristotle)</strong></td>
+              <td>প্রাচীন গ্রিস (বিজ্ঞানের জনক)</td>
+              <td>
+                • <em>Politics</em> (পলিটিক্স)<br>
+                • <em>Nicomachean Ethics</em>
+              </td>
+              <td>
+                • "মানুষ প্রকৃতিগতভাবেই একটি সামাজিক ও রাজনৈতিক জীব।"<br>
+                • মধ্যপন্থা তত্ত্ব (Golden Mean)।
+              </td>
+            </tr>
+            <tr>
+              <td><strong>জন স্টুয়ার্ট মিল (J. S. Mill)</strong></td>
+              <td>যুক্তরাজ্য (ধ্রুপদী ব্যক্তিস্বাতন্ত্র্যবাদ)</td>
+              <td>
+                • <em>Utilitarianism</em> (উপযোগবাদ, ১৮৬১)<br>
+                • <em>On Liberty</em> (১৮৫৯)<br>
+                • <em>Considerations on Representative Government</em>
+              </td>
+              <td>
+                • উপযোগবাদের মূলসূত্র: <strong>সর্বোচ্চ সংখ্যক মানুষের সর্বাধিক সুখ (The greatest happiness of the greatest number)</strong>।<br>
+                • চিন্তা ও মত প্রকাশের অবাধ স্বাধীনতার অন্যতম শ্রেষ্ঠ সমর্থক।
+              </td>
+            </tr>
+            <tr>
+              <td><strong>বার্ট্রান্ড রাসেল (Bertrand Russell)</strong></td>
+              <td>যুক্তরাজ্য (নোবেলজয়ী দার্শনিক)</td>
+              <td>
+                • <em>Power: A New Social Analysis</em> (১৯৩৮)<br>
+                • <em>The History of Western Philosophy</em> (১৯৪৫)<br>
+                • <em>Human Society in Ethics and Politics</em> (১৯৫৪)<br>
+                • <em>Political Ideals</em> (১৯১৭)
+              </td>
+              <td>
+                • <span class="sk-mark">"দর্শন হচ্ছে ধর্মতত্ত্ব ও বিজ্ঞানের মধ্যবর্তী এক অনধিকৃত অঞ্চল (No Man's Land)।"</span><br>
+                • ক্ষমতার সংজ্ঞা: পূর্বনির্ধারিত প্রভাব বা ফলাফল সৃষ্টির সামর্থ্যই হলো ক্ষমতা।
+              </td>
+            </tr>
+            <tr>
+              <td><strong>জেরেমি বেন্থাম (Jeremy Bentham)</strong></td>
+              <td>যুক্তরাজ্য</td>
+              <td>
+                • <em>An Introduction to the Principles of Morals and Legislation</em> (১৭৮৯)
+              </td>
+              <td>
+                • আধুনিক উপযোগবাদের (Utilitarianism) জনক। সুখ ও দুঃখ হলো মানুষের কর্মপ্রেরণার মূল চালিকাশক্তি।
+              </td>
+            </tr>
+            <tr>
+              <td><strong>জর্জ ডব্লিউ এফ হেগেল (Hegel)</strong></td>
+              <td>জার্মানি (ভাববাদী দার্শনিক)</td>
+              <td>
+                • <em>The Philosophy of Right</em><br>
+                • <em>Phenomenology of Spirit</em>
+              </td>
+              <td>
+                • <span class="sk-mark">"মানুষ হও এবং মরে বাঁচ" (Be a person and respect others as persons / Die to live)।</span><br>
+                • দ্বান্দ্বিক ভাববাদ (Thesis - Antithesis - Synthesis)।
+              </td>
+            </tr>
+            <tr>
+              <td><strong>পিটার সিঙ্গার (Peter Singer)</strong></td>
+              <td>অস্ট্রেলিয়া / যুক্তরাষ্ট্র</td>
+              <td>
+                • <em>Practical Ethics</em> (ব্যবহারিক নীতিবিদ্যা, ১৯৭৯)<br>
+                • <em>Animal Liberation</em>
+              </td>
+              <td>
+                • আধুনিক ফলিত নীতিবিদ্যা ও প্রাণী অধিকার আন্দোলনের পুরোধা।
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="sk-sticky">
+        <i class="fa-solid fa-lightbulb"></i> <strong>শূন্যবাদ (Nihilism) তত্ত্বের উৎপত্তি:</strong><br>
+        • 'নিহিলিজম' শব্দটি ল্যাটিন <strong>'Nihil'</strong> শব্দ থেকে উদ্ভূত, যার আক্ষরিক অর্থ <strong>'কিছুই না' (Nothing)</strong>।<br>
+        • শূন্যবাদের মূল দর্শন হলো— জগতে কোনো বস্তুগত বা সর্বজনীন সত্য নেই, সবকিছুই অর্থহীন ও শূন্য।<br>
+        • রাশিয়ান সাহিত্যে ১৮২৯ সালে এন. আই. নাদেজদিন শব্দটি প্রথম ব্যবহার করেন এবং ১৮৬২ সালে ইভান তুর্গেনেভ তাঁর বিখ্যাত উপন্যাস <em>'Fathers and Sons'</em>-এ শব্দটি অত্যন্ত জনপ্রিয় করে তোলেন। পরবর্তীতে জার্মান দার্শনিক ফ্রেডরিক নিটশে এই তত্ত্বটিকে গভীর দার্শনিক ভিত্তি প্রদান করেন।
+      </div>
+    </section>
+
+    <!-- Part 2: Quiz Engine -->
+    <section class="quiz-section">
+      <h2 class="section-title"><i class="fa-solid fa-laptop-code"></i> দ্বিতীয় অংশ: বিগত বছরের প্রামাণ্য প্রশ্নব্যাংক ও কুইজ ইঞ্জিন</h2>
+
+      <div class="quiz-control-bar">
+        <div class="score-bar">
+          <i class="fa-solid fa-award"></i> লাইভ স্কোর: <span id="score-display">০</span> / <span id="total-display">১২</span>
+        </div>
+        <div class="filter-wrap">
+          <label for="bcs-filter"><i class="fa-solid fa-filter"></i> ফিল্টার:</label>
+          <select id="bcs-filter" class="filter-select">
+            <option value="all">সকল বিসিএস (১২টি)</option>
+            <option value="46th">৪৬তম বিসিএস (৪টি)</option>
+            <option value="45th">৪৫তম বিসিএস (২টি)</option>
+            <option value="43rd">৪৩তম বিসিএস (২টি)</option>
+            <option value="41st">৪১তম বিসিএস (১টি)</option>
+            <option value="38th">৩৮তম বিসিএস (২টি)</option>
+            <option value="36th">৩৬তম বিসিএস (১টি)</option>
+          </select>
+          <button class="btn-tool" id="btn-reset-quiz" title="কুইজ রিসেট"><i class="fa-solid fa-rotate-right"></i> রিসেট</button>
+        </div>
+      </div>
+
+      <div class="quiz-container" id="quiz-list">
+        <!-- Questions injected here -->
+      </div>
+    </section>
+
+    <!-- Reference Bibliography -->
+    <section class="bib-section">
+      <h2 class="section-title"><i class="fa-solid fa-book"></i> প্রামাণ্য গ্রন্থপঞ্জি (Authoritative References)</h2>
+      <p style="margin-bottom: 14px; color: var(--text-muted);">মূল বইয়ের শেষে উল্লেখিত নির্ভরযোগ্য রেফারেন্স গ্রন্থপঞ্জি:</p>
+      <ol class="bib-list">
+        <li>পৌরনীতি ও নাগরিকতা: নবম-দশম শ্রেণি (জাতীয় শিক্ষাক্রম ও পাঠ্যপুস্তক বোর্ড)</li>
+        <li>পৌরনীতি ও নাগরিকতা: এসএসসি প্রোগ্রাম, বাংলাদেশ উন্মুক্ত বিশ্ববিদ্যালয়</li>
+        <li>পৌরনীতি ও সুশাসন - ১ম পত্র: এইচএসসি প্রোগ্রাম, বাংলাদেশ উন্মুক্ত বিশ্ববিদ্যালয়</li>
+        <li>পৌরনীতি ও সুশাসন - ১ম পত্র: একাদশ-দ্বাদশ শ্রেণি — প্রফেসর মো: মোজাম্মেল হক</li>
+        <li>পৌরনীতি ও সুশাসন - ২য় পত্র: একাদশ-দ্বাদশ শ্রেণি — প্রফেসর মো: মোজাম্মেল হক</li>
+        <li>গণপ্রজাতন্ত্রী বাংলাদেশের সংবিধান</li>
+        <li>অর্থ মন্ত্রণালয়, বাংলাদেশ সরকার (https://mof.gov.bd)</li>
+        <li>বিশ্ব স্বাস্থ্য সংস্থা (https://www.who.int/initiatives)</li>
+        <li>বিশ্বব্যাংক ওপেন ডেটা (https://data.worldbank.org)</li>
+        <li>জাতিসংঘ প্রাতিষ্ঠানিক পোর্টাল (https://www.un.org/en)</li>
+        <li>ইউএনডিপি গভর্ন্যান্স পোর্টাল (https://www.undp.org)</li>
+        <li>অ্যামনেস্টি ইন্টারন্যাশনাল (https://www.amnesty.org)</li>
+        <li>বাংলাপিডিয়া (বাংলাদেশ এশিয়াটিক সোসাইটি)</li>
+      </ol>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+      <a href="সুশাসন.html" class="btn-page-nav"><i class="fa-solid fa-arrow-left"></i> পূর্ববর্তী অধ্যায়: সুশাসন</a>
+      <a href="index.html" class="btn-page-nav">বিষয় সূচিপত্র <i class="fa-solid fa-house"></i></a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>নৈতিকতা, মূল্যবোধ ও সুশাসন — বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ ৪টি অধ্যায়ের প্রামাণ্য ই-বুক সংকলন।</p>
+      <p style="margin-top: 8px;">&copy; ২০২৬ লাইভ এমসিকিউ প্রামাণ্য ই-বুক সংস্করণ</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // 12 Authentic BCS Questions Data
+    const questions = [
+      {
+        id: 1,
+        bcs: "৪৬তম বিসিএস",
+        tag: "46th",
+        q: "'Practical Ethics' গ্রন্থের রচয়িতা কে?",
+        opts: [
+          "ইমানুয়েল কান্ট",
+          "জন স্টুয়ার্ট মিল",
+          "জেরেমি বেন্থাম",
+          "পিটার সিঙ্গার"
+        ],
+        ans: 3,
+        exp: "'Practical Ethics' (ব্যবহারিক নীতিবিদ্যা) গ্রন্থটির রচয়িতা বিখ্যাত অস্ট্রেলীয় দার্শনিক পিটার সিঙ্গার (Peter Singer)। ১৯৭৯ সালে প্রথম প্রকাশিত এই গ্রন্থে তিনি ব্যবহারিক নৈতিক সমস্যা যেমন গর্ভপাত, প্রাণীর অধিকার, বৈশ্বিক দারিদ্র্য ইত্যাদি বিষয় নিয়ে আলোচনা করেছেন।"
+      },
+      {
+        id: 2,
+        bcs: "৪৬তম বিসিএস",
+        tag: "46th",
+        q: ""মানুষ হও এবং মরে বাঁচ।"— এটি কার উক্তি?",
+        opts: [
+          "জন স্টুয়ার্ট মিল",
+          "হেগেল",
+          "জি. ই. ম্যুর",
+          "বার্ট্রান্ড রাসেল"
+        ],
+        ans: 1,
+        exp: "জার্মান ভাববাদী দার্শনিক জর্জ ডব্লিউ এফ হেগেল (Hegel) বলেছেন, 'মানুষ হও এবং মরে বাঁচ' (Be a person and respect others as persons / Die to live)। আত্মত্যাগের মাধ্যমে উচ্চতর নৈতিক ও সামাজিক জীবনে বেঁচে থাকার কথা তিনি ব্যক্ত করেছেন।"
+      },
+      {
+        id: 3,
+        bcs: "৪৬তম বিসিএস",
+        tag: "46th",
+        q: ""দর্শন হচ্ছে ধর্ম ও বিজ্ঞানের মধ্যবর্তী এক অনধিকৃত অঞ্চল" (No Man's Land)— উক্তিটি কার?",
+        opts: [
+          "প্লেটো",
+          "থমাস হবস",
+          "সি. ডি. ব্রড",
+          "বার্ট্রান্ড রাসেল"
+        ],
+        ans: 3,
+        exp: "বিখ্যাত ব্রিটিশ দার্শনিক বার্ট্রান্ড রাসেল তার 'History of Western Philosophy' গ্রন্থের ভূমিকায় দর্শনকে বিজ্ঞান ও ধর্মতত্ত্বের মধ্যবর্তী অনধিকৃত রাজ্য (No Man's Land) হিসেবে অভিহিত করেছেন।"
+      },
+      {
+        id: 4,
+        bcs: "৪৬তম বিসিএস",
+        tag: "46th",
+        q: ""Republic" গ্রন্থটির রচয়িতা কে?",
+        opts: [
+          "জর্জ বার্কলে",
+          "জন লক",
+          "রেনে দেকার্ত",
+          "প্লেটো"
+        ],
+        ans: 3,
+        exp: "প্রাচীন গ্রিক দার্শনিক প্লেটোর বিশ্বখ্যাত রাজনৈতিক দর্শনের গ্রন্থ 'The Republic'। এই গ্রন্থে তিনি আদর্শ রাষ্ট্রের ধারণা, ন্যায়বিচারের প্রকৃতি এবং দার্শনিক রাজার শাসন নিয়ে আলোচনা করেছেন।"
+      },
+      {
+        id: 5,
+        bcs: "৪৫তম বিসিএস",
+        tag: "45th",
+        q: ""Utilitarianism" গ্রন্থের লেখক কে?",
+        opts: [
+          "জন স্টুয়ার্ট মিল",
+          "ইমানুয়েল কান্ট",
+          "বার্ট্রান্ড রাসেল",
+          "জেরেমি বেন্থাম"
+        ],
+        ans: 0,
+        exp: "১৮৬১ সালে ব্রিটিশ দার্শনিক জন স্টুয়ার্ট মিল (J. S. Mill) 'Utilitarianism' গ্রন্থটি রচনা করেন। এই তত্ত্বে তিনি সর্বাধিক মানুষের সর্বাধিক সুখ ও কল্যাণের নীতি ব্যাখ্যা করেছেন।"
+      },
+      {
+        id: 6,
+        bcs: "৪৫তম বিসিএস",
+        tag: "45th",
+        q: ""জ্ঞান হয় পুণ্য" (Virtue is Knowledge)— এই উক্তিটি কার?",
+        opts: [
+          "থেলিস",
+          "সক্রেটিস",
+          "এরিস্টটল",
+          "প্লেটো"
+        ],
+        ans: 1,
+        exp: "প্রাচীন গ্রিক দার্শনিক সক্রেটিসের মতে নৈতিকতা ও ন্যায়ের ভিত্তি হলো জ্ঞান। তিনি বিশ্বাস করতেন সদ্‌গুণ ও জ্ঞান একই বিষয়, তাই 'জ্ঞানই পুণ্য' বা Virtue is Knowledge।"
+      },
+      {
+        id: 7,
+        bcs: "৪৩তম বিসিএস",
+        tag: "43rd",
+        q: ""On Liberty" গ্রন্থের লেখক কে?",
+        opts: [
+          "ইমানুয়েল কান্ট",
+          "জন লক",
+          "জন স্টুয়ার্ট মিল",
+          "জেরেমি বেন্থাম"
+        ],
+        ans: 2,
+        exp: "ব্যক্তিস্বাধীনতা ও বাক-স্বাধীনতার পক্ষে এক অবিস্মরণীয় গ্রন্থ 'On Liberty' (১৮৫৯), যার রচয়িতা ব্রিটিশ দার্শনিক জন স্টুয়ার্ট মিল (J. S. Mill)।"
+      },
+      {
+        id: 8,
+        bcs: "৪৩তম বিসিএস",
+        tag: "43rd",
+        q: ""Human Society in Ethics and Politics" গ্রন্থের লেখক কে?",
+        opts: [
+          "প্লেটো",
+          "জাঁ-জ্যাক রুশো",
+          "বার্ট্রান্ড রাসেল",
+          "জন স্টুয়ার্ট মিল"
+        ],
+        ans: 2,
+        exp: "ব্রিটিশ দার্শনিক বার্ট্রান্ড রাসেল রচিত একটি বিখ্যাত গ্রন্থ হলো 'Human Society in Ethics and Politics' (১৯৫৪), যেখানে মানবসমাজ, নৈতিকতা ও রাজনীতির পারস্পরিক সম্পর্ক বিশ্লেষণ করা হয়েছে।"
+      },
+      {
+        id: 9,
+        bcs: "৪১তম বিসিএস",
+        tag: "41st",
+        q: ""Political Ideals" গ্রন্থের লেখক কে?",
+        opts: [
+          "নিকোলো ম্যাকিয়াভেলি",
+          "বার্ট্রান্ড রাসেল",
+          "প্লেটো",
+          "এরিস্টটল"
+        ],
+        ans: 1,
+        exp: "'Political Ideals' (১৯১৭) গ্রন্থটির লেখক বার্ট্রান্ড রাসেল। প্রথম বিশ্বযুদ্ধের প্রেক্ষাপটে তিনি এ বইটিতে সমাজ, রাজনীতি ও ব্যক্তি স্বাধীনতার আদর্শ রূপরেখা তুলে ধরেন।"
+      },
+      {
+        id: 10,
+        bcs: "৩৮তম বিসিএস",
+        tag: "38th",
+        q: "জেরেমি বেন্থাম কোন দেশের অধিবাসী ছিলেন?",
+        opts: [
+          "জার্মানি",
+          "ফ্রান্স",
+          "মার্কিন যুক্তরাষ্ট্র",
+          "যুক্তরাজ্য"
+        ],
+        ans: 3,
+        exp: "জেরেমি বেন্থাম (১৭৪৮-১৮৩২) ছিলেন একজন প্রখ্যাত ইংরেজ (যুক্তরাজ্য) দার্শনিক, আইনজ্ঞ এবং আধুনিক উপযোগবাদতত্ত্বের (Utilitarianism) প্রতিষ্ঠাতা।"
+      },
+      {
+        id: 11,
+        bcs: "৩৮তম বিসিএস",
+        tag: "38th",
+        q: "শূন্যবাদ (Nihilism) যে ল্যাটিন শব্দ থেকে উদ্ভূত তার অর্থ কি?",
+        opts: [
+          "সব",
+          "কিছুই না",
+          "সর্বজনীন",
+          "কিছু"
+        ],
+        ans: 1,
+        exp: "শূন্যবাদ বা Nihilism শব্দটি এসেছে ল্যাটিন 'Nihil' শব্দ থেকে, যার অর্থ 'কিছুই না' (Nothing)। এই মতবাদ অনুযায়ী মানব অস্তিত্বে কোনো পরম উদ্দেশ্য বা সর্বজনীন সত্য নেই।"
+      },
+      {
+        id: 12,
+        bcs: "৩৬তম বিসিএস",
+        tag: "36th",
+        q: ""Power: A New Social Analysis" গ্রন্থটি কার লেখা?",
+        opts: [
+          "নিকোলো ম্যাকিয়াভেলি",
+          "থমাস হবস",
+          "জন লক",
+          "বার্ট্রান্ড রাসেল"
+        ],
+        ans: 3,
+        exp: "'Power: A New Social Analysis' (১৯৩৮) গ্রন্থটির রচয়িতা ব্রিটিশ দার্শনিক বার্ট্রান্ড রাসেল। তিনি এতে সামাজিক গতিশীলতা ও মানব আচরণের প্রধান নিয়ামক হিসেবে 'ক্ষমতা'র ভূমিকা বিশ্লেষণ করেন।"
+      }
+    ];
+
+    // State
+    let score = 0;
+    const userAnswers = {};
+
+    function renderQuestions(filterTag = "all") {
+      const container = document.getElementById("quiz-list");
+      container.innerHTML = "";
+
+      const filtered = filterTag === "all" ? questions : questions.filter(q => q.tag === filterTag);
+
+      filtered.forEach((qItem, idx) => {
+        const card = document.createElement("div");
+        card.className = "q-card";
+        card.id = `q-card-${qItem.id}`;
+
+        const isAnswered = userAnswers[qItem.id] !== undefined;
+        const selectedOpt = userAnswers[qItem.id];
+
+        let optsHtml = "";
+        const prefixes = ["ক", "খ", "গ", "ঘ"];
+        qItem.opts.forEach((optText, optIdx) => {
+          let btnClass = "opt-btn";
+          if (isAnswered) {
+            if (optIdx === qItem.ans) {
+              btnClass += " correct";
+            } else if (optIdx === selectedOpt) {
+              btnClass += " wrong";
+            }
+          }
+          optsHtml += `
+            <button class="${btnClass}" onclick="handleSelect(${qItem.id}, ${optIdx})" ${isAnswered ? "disabled" : ""}>
+              <span class="opt-prefix">${prefixes[optIdx]}.</span>
+              <span>${optText}</span>
+            </button>
+          `;
+        });
+
+        card.innerHTML = `
+          <div class="q-head">
+            <span class="q-num-badge">প্রশ্ন ${idx + 1}</span>
+            <span class="q-bcs-tag"><i class="fa-solid fa-tag"></i> ${qItem.bcs}</span>
+          </div>
+          <div class="q-text">${qItem.q}</div>
+          <div class="opts-grid">${optsHtml}</div>
+          <div class="q-actions">
+            <button class="btn-exp-toggle" onclick="toggleExp(${qItem.id})">
+              <i class="fa-solid fa-circle-info"></i> ব্যাখ্যা দেখুন
+            </button>
+          </div>
+          <div class="exp-drawer" id="exp-${qItem.id}">
+            <div class="exp-title"><i class="fa-solid fa-lightbulb"></i> প্রামাণ্য বিশদ ব্যাখ্যা:</div>
+            <p>${qItem.exp}</p>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      document.getElementById("total-display").innerText = filtered.length;
+    }
+
+    window.handleSelect = function(qId, optIdx) {
+      if (userAnswers[qId] !== undefined) return;
+      userAnswers[qId] = optIdx;
+
+      const qItem = questions.find(q => q.id === qId);
+      if (optIdx === qItem.ans) {
+        score++;
+      }
+      document.getElementById("score-display").innerText = score;
+
+      const currentFilter = document.getElementById("bcs-filter").value;
+      renderQuestions(currentFilter);
+
+      // Auto open explanation on answer
+      const exp = document.getElementById(`exp-${qId}`);
+      if (exp) exp.classList.add("open");
+    };
+
+    window.toggleExp = function(qId) {
+      const exp = document.getElementById(`exp-${qId}`);
+      if (exp) {
+        exp.classList.toggle("open");
+      }
+    };
+
+    // Filter
+    document.getElementById("bcs-filter").addEventListener("change", function(e) {
+      renderQuestions(e.target.value);
+    });
+
+    // Reset Quiz
+    document.getElementById("btn-reset-quiz").addEventListener("click", function() {
+      if (confirm("আপনি কি সমস্ত উত্তর রিসেট করতে চান?")) {
+        score = 0;
+        for (let key in userAnswers) delete userAnswers[key];
+        document.getElementById("score-display").innerText = "০";
+        renderQuestions(document.getElementById("bcs-filter").value);
+      }
+    });
+
+    // Font Controls
+    let curScale = 1.0;
+    document.getElementById("btn-inc").addEventListener("click", () => {
+      if (curScale < 1.3) {
+        curScale += 0.05;
+        document.documentElement.style.setProperty("--font-scale", curScale);
+      }
+    });
+    document.getElementById("btn-dec").addEventListener("click", () => {
+      if (curScale > 0.85) {
+        curScale -= 0.05;
+        document.documentElement.style.setProperty("--font-scale", curScale);
+      }
+    });
+    document.getElementById("btn-reset-font").addEventListener("click", () => {
+      curScale = 1.0;
+      document.documentElement.style.setProperty("--font-scale", 1);
+    });
+
+    // Theme Toggle
+    const themeBtn = document.getElementById("btn-theme");
+    themeBtn.addEventListener("click", () => {
+      const curTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = curTheme === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", newTheme);
+      themeBtn.innerHTML = newTheme === "dark" ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+    });
+
+    // Init
+    renderQuestions();
+  </script>
+</body>
+</html>
