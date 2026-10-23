@@ -64,6 +64,7 @@
 [data-qa-mode="show-answers"] .explanation-drawer,
 [data-qa-mode="show-answers"] .explanation-box,
 [data-qa-mode="show-answers"] .quiz-explanation,
+[data-qa-mode="show-answers"] .quiz-expl,
 [data-qa-mode="show-answers"] .ans-drawer {
   display: block !important;
   max-height: none !important;
@@ -72,56 +73,171 @@
   animation: none !important;
 }
 
+[data-qa-mode="show-answers"] [data-is-correct="true"],
+[data-qa-mode="show-answers"] .opt-btn[data-is-correct="true"],
+[data-qa-mode="show-answers"] .option-btn[data-is-correct="true"],
+[data-qa-mode="show-answers"] .q-opt[data-is-correct="true"],
+[data-qa-mode="show-answers"] .option[data-is-correct="true"] {
+  background: rgba(16, 185, 129, 0.12) !important;
+  border-color: #10b981 !important;
+  color: #065f46 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="dark"][data-qa-mode="show-answers"] [data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="show-answers"] .opt-btn[data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="show-answers"] .option-btn[data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="show-answers"] .q-opt[data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="show-answers"] .option[data-is-correct="true"] {
+  background: rgba(16, 185, 129, 0.2) !important;
+  border-color: #34d399 !important;
+  color: #a7f3d0 !important;
+}
+
 [data-qa-mode="show-answers"] .exp-toggle-btn,
 [data-qa-mode="show-answers"] .btn-explain,
 [data-qa-mode="show-answers"] .drawer-toggle,
-[data-qa-mode="show-answers"] .toggle-exp-btn {
+[data-qa-mode="show-answers"] .toggle-exp-btn,
+[data-qa-mode="show-answers"] .exp-toggle {
   opacity: 0.6;
 }
 
-/* [direct-answer]: শুধু প্রশ্ন ও সঠিক উত্তর মোড — ভুল অপশনগুলো বন্ধ */
+/* [direct-answer]: শুধু প্রশ্ন ও সঠিক উত্তর মোড — ভুল অপশন ও ব্যাখ্যা সম্পূর্ণ বন্ধ */
+[data-qa-mode="direct-answer"] .q-card,
+[data-qa-mode="direct-answer"] .quiz-card,
+[data-qa-mode="direct-answer"] .mcq-card,
+[data-qa-mode="direct-answer"] .quiz-item,
+[data-qa-mode="direct-answer"] article.q-card {
+  display: block !important;
+}
+
 [data-qa-mode="direct-answer"] .options-grid,
 [data-qa-mode="direct-answer"] .quiz-options,
 [data-qa-mode="direct-answer"] .opt-grid,
 [data-qa-mode="direct-answer"] .q-options,
 [data-qa-mode="direct-answer"] .options-list,
 [data-qa-mode="direct-answer"] .mcq-options {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  margin-top: 8px !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Hide all options that are NOT the correct answer */
+[data-qa-mode="direct-answer"] .options-grid > *:not([data-is-correct="true"]),
+[data-qa-mode="direct-answer"] .quiz-options > *:not([data-is-correct="true"]),
+[data-qa-mode="direct-answer"] .opt-grid > *:not([data-is-correct="true"]),
+[data-qa-mode="direct-answer"] .q-options > *:not([data-is-correct="true"]),
+[data-qa-mode="direct-answer"] .options-list > *:not([data-is-correct="true"]),
+[data-qa-mode="direct-answer"] .mcq-options > *:not([data-is-correct="true"]),
+[data-qa-mode="direct-answer"] .opt-btn:not([data-is-correct="true"]),
+[data-qa-mode="direct-answer"] .option-btn:not([data-is-correct="true"]),
+[data-qa-mode="direct-answer"] .q-opt:not([data-is-correct="true"]),
+[data-qa-mode="direct-answer"] .option:not([data-is-correct="true"]) {
   display: none !important;
 }
 
+/* Style ONLY the single correct option */
+[data-qa-mode="direct-answer"] [data-is-correct="true"],
+[data-qa-mode="direct-answer"] .opt-btn[data-is-correct="true"],
+[data-qa-mode="direct-answer"] .option-btn[data-is-correct="true"],
+[data-qa-mode="direct-answer"] .q-opt[data-is-correct="true"],
+[data-qa-mode="direct-answer"] .option[data-is-correct="true"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: rgba(16, 185, 129, 0.12) !important;
+  border: 1.5px solid #10b981 !important;
+  color: #065f46 !important;
+  padding: 8px 14px !important;
+  border-radius: 8px !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  cursor: default !important;
+  pointer-events: none !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  margin: 4px 0 !important;
+  box-shadow: 0 1px 4px rgba(16, 185, 129, 0.12) !important;
+}
+
+[data-theme="dark"][data-qa-mode="direct-answer"] [data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="direct-answer"] .opt-btn[data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="direct-answer"] .option-btn[data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="direct-answer"] .q-opt[data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="direct-answer"] .option[data-is-correct="true"] {
+  background: rgba(16, 185, 129, 0.2) !important;
+  border-color: #34d399 !important;
+  color: #a7f3d0 !important;
+}
+
+/* Add the 'উত্তর: ' prefix */
+[data-qa-mode="direct-answer"] [data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+[data-qa-mode="direct-answer"] .opt-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+[data-qa-mode="direct-answer"] .option-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+[data-qa-mode="direct-answer"] .q-opt[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+[data-qa-mode="direct-answer"] .option[data-is-correct="true"]:not(.ebk-no-ans-notice)::before {
+  content: "উত্তর: ";
+  font-weight: 800;
+  color: #059669;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"][data-qa-mode="direct-answer"] [data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+[data-theme="dark"][data-qa-mode="direct-answer"] .opt-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+[data-theme="dark"][data-qa-mode="direct-answer"] .option-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+[data-theme="dark"][data-qa-mode="direct-answer"] .q-opt[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+[data-theme="dark"][data-qa-mode="direct-answer"] .option[data-is-correct="true"]:not(.ebk-no-ans-notice)::before {
+  color: #34d399;
+}
+
+/* Notice for questions with no correct option */
+.ebk-no-ans-notice {
+  display: none;
+}
+[data-qa-mode="direct-answer"] .ebk-no-ans-notice {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  background: rgba(245, 158, 11, 0.12) !important;
+  border: 1.5px solid #f59e0b !important;
+  color: #b45309 !important;
+  padding: 8px 14px !important;
+  border-radius: 8px !important;
+  font-weight: 700 !important;
+  font-size: 0.92rem !important;
+  margin: 4px 0 !important;
+}
+[data-theme="dark"][data-qa-mode="direct-answer"] .ebk-no-ans-notice {
+  background: rgba(245, 158, 11, 0.2) !important;
+  border-color: #fbbf24 !important;
+  color: #fde68a !important;
+}
+
+/* Hide explanation drawers & toggle buttons completely in direct-answer mode */
 [data-qa-mode="direct-answer"] .answer-drawer,
 [data-qa-mode="direct-answer"] .exp-drawer,
 [data-qa-mode="direct-answer"] .explanation-drawer,
 [data-qa-mode="direct-answer"] .explanation-box,
 [data-qa-mode="direct-answer"] .quiz-explanation,
-[data-qa-mode="direct-answer"] .ans-drawer {
-  display: block !important;
-  max-height: none !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  border-top: none !important;
-  background: rgba(34, 197, 94, 0.08) !important;
-  border-left: 4px solid #16a34a !important;
-  border-radius: 8px !important;
-  padding: 10px 14px !important;
-  margin-top: 8px !important;
-}
-
-[data-theme="dark"][data-qa-mode="direct-answer"] .answer-drawer,
-[data-theme="dark"][data-qa-mode="direct-answer"] .exp-drawer,
-[data-theme="dark"][data-qa-mode="direct-answer"] .explanation-drawer,
-[data-theme="dark"][data-qa-mode="direct-answer"] .explanation-box,
-[data-theme="dark"][data-qa-mode="direct-answer"] .quiz-explanation,
-[data-theme="dark"][data-qa-mode="direct-answer"] .ans-drawer {
-  background: rgba(34, 197, 94, 0.12) !important;
-  border-left-color: #22c55e !important;
-}
-
+[data-qa-mode="direct-answer"] .quiz-expl,
+[data-qa-mode="direct-answer"] .ans-drawer,
 [data-qa-mode="direct-answer"] .exp-toggle-btn,
 [data-qa-mode="direct-answer"] .btn-explain,
 [data-qa-mode="direct-answer"] .drawer-toggle,
 [data-qa-mode="direct-answer"] .toggle-exp-btn,
-[data-qa-mode="direct-answer"] .mcq-actions {
+[data-qa-mode="direct-answer"] .exp-toggle-wrap,
+[data-qa-mode="direct-answer"] .exp-toggle,
+[data-qa-mode="direct-answer"] .mcq-actions,
+[data-qa-mode="direct-answer"] .status-indicator,
+[data-qa-mode="direct-answer"] .explanation-title,
+[data-qa-mode="direct-answer"] .exp-header,
+[data-qa-mode="direct-answer"] .exp-title,
+[data-qa-mode="direct-answer"] .exp-source {
   display: none !important;
 }
 

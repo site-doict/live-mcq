@@ -1,11 +1,11 @@
 ---
 name: pdf-to-html-ebook
-description: Transforms PDF chapter pages or scanned book images of competitive exam books into interactive, mobile-optimized, single-file HTML e-book chapters following verified project standards.
+description: Transforms PDF chapter pages or scanned book images of competitive exam books (10th-50th BCS, PSC Non-Cadre Job Solutions, Bank, Primary, NTRCA, etc.) into interactive, mobile-optimized, single-file HTML e-book chapters with dual revision modes, sketch notes, and central exam/search integration.
 ---
 
 # PDF to Interactive Smart E-Book Generator Skill
 
-Use this skill whenever the user provides a folder or set of PDF files / book page images and asks to generate interactive HTML chapters for the BCS Live MCQ e-book library.
+Use this skill whenever the user provides a folder or set of PDF files / book page images and asks to generate interactive HTML chapters for the BCS Live MCQ e-book library or any future competitive exam books (PSC Non-Cadre Job Solution, Bank Recruitment, Primary Teacher, NTRCA, Subject-wise Digests, etc.).
 
 ---
 
@@ -48,7 +48,12 @@ Use this skill whenever the user provides a folder or set of PDF files / book pa
 
 ### স্তর ৪: দ্বিতীয় অংশ (Part 2) — বিগত বছরের প্রামাণ্য প্রশ্নব্যাংক ও ইন্টারঅ্যাক্টিভ কুইজ (Exam Engine)
 - **টাইপোগ্রাফি প্রোটেকশন:** সকল প্রশ্ন, অপশন, ড্রয়ার, ব্যাজ এবং ব্যাখ্যায় বাধ্যতামূলকভাবে **`Noto Serif Bengali`** ফন্ট (`font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;`) প্রযোজ্য হবে।
-- **ফিচারসমূহ:** লাইভ স্কোর কাউন্টার (`০ / [মোট প্রশ্ন]`), বিসিএস সেশন অনুযায়ী ফিল্টার ড্রপডাউন, অপশন সিলেকশন ফিডব্যাক (সঠিক হলে সবুজ, ভুল হলে লাল এবং সঠিকটি হাইলাইট), কুইজ রিসেট বাটন, এবং ব্যাখ্যার কলাপসিবল ড্রয়ার।
+- **ফিচারসমূহ:** লাইভ স্কোর কাউন্টার (`০ / [মোট প্রশ্ন]`), বিসিএস/পরীক্ষা সেশন অনুযায়ী ফিল্টার ড্রপডাউন, অপশন সিলেকশন ফিডব্যাক (সঠিক হলে সবুজ, ভুল হলে লাল এবং সঠিকটি হাইলাইট), কুইজ রিসেট বাটন, এবং ব্যাখ্যার কলাপসিবল ড্রয়ার।
+- **ইউনিভার্সাল মোড কমপ্লায়েন্স:**
+  - প্রতিটি অপশন বাটনে স্ট্যান্ডার্ড ক্লাস (`.opt-btn`, `.option-btn`, `.q-opt`, বা `.option`) থাকবে।
+  - সঠিক উত্তরে `data-is-correct="true"` বা `checkAnswer(this, 1)` থাকবে।
+  - সঠিক উত্তর না থাকলে অপশনে কোনো সঠিক ফ্ল্যাগ থাকবে না এবং `data-ans=""` বা `checkAnswer(this, -1)` থাকবে।
+  - ব্যাখ্যার ড্রয়ারে `.ans-drawer` বা `.exp-drawer` ক্লাস থাকবে।
 
 ### স্তর ৫: প্রামাণ্য গ্রন্থপঞ্জি ও ফুটার (Bibliography & Footer)
 - বইয়ের অধ্যায় বা বিষয়ের শেষে থাকা আসল রেফারেন্স গ্রন্থপঞ্জি এবং সর্বজনীন কপিরাইট/তথ্যসমাপ্তি ফুটার।
@@ -148,19 +153,24 @@ Use this skill whenever the user provides a folder or set of PDF files / book pa
 
 ## 6. সম্পূর্ণ স্বয়ংক্রিয় এক ক্লিকে এক্সিকিউশন প্রটোকল (Autonomous Execution Protocol)
 
-ব্যবহারকারী শুধু বিষয়ের নাম, ফোল্ডারের লোকেশন এবং মূল পিডিএফ ফাইলের লোকেশন উল্লেখ করবেন। এজেন্ট কোনো বাড়তি প্রম্পট ছাড়াই সম্পূর্ণ স্বয়ংক্রিয়ভাবে নিচের ৫টি ধাপে কাজ সম্পন্ন করবে:
+ব্যবহারকারী শুধু বিষয়ের নাম, ফোল্ডারের লোকেশন এবং মূল পিডিএফ ফাইলের লোকেশন উল্লেখ করবেন। এজেন্ট কোনো বাড়তি প্রম্পট ছাড়াই সম্পূর্ণ স্বয়ংক্রিয়ভাবে নিচের ৬টি ধাপে কাজ সম্পন্ন করবে:
 
 ### ধাপ ১: সোর্স অডিট ও প্ল্যানিং (Source Audit & Counting)
 - মূল পিডিএফ থেকে অধ্যায়গুলোর পৃষ্ঠা সীমা ও ফিজিক্যাল প্রশ্ন সংখ্যা নিখুঁতভাবে গণনা করা।
-- বিসিএস ছকের ডুপ্লিকেট সংখ্যা যোগ না করে আসল প্রশ্নের সংখ্যা নির্ধারণ করা।
+- বিসিএস/পরীক্ষা ছকের ডুপ্লিকেট সংখ্যা যোগ না করে আসল প্রশ্নের সংখ্যা নির্ধারণ করা।
 
 ### ধাপ ২: চ্যাপ্টার কোডিং (Two-Part Architecture)
 - রোটেশন শিডিউল অনুযায়ী নির্দিষ্ট পেপার ও ফন্ট ক্লাসে `<div class="container paper-container paper-[style] font-[style]">` তৈরি।
 - `<head>` ট্যাগে `bangla-fonts.css` ও `paper-textures.css` যুক্ত করা।
-- দ্বিভাষিক শিরোনাম `<h1 class="ch-title [font]">{বাংলা} <span class="ch-en">({English})</span></h1>` ও বিসিএস ছক তৈরি।
+- দ্বিভাষিক শিরোনাম `<h1 class="ch-title [font]">{বাংলা} <span class="ch-en">({English})</span></h1>` ও বিসিএস/পরীক্ষা ছক তৈরি।
 - **Part 1:** ব্যাখ্যা ও তত্ত্ব হতে প্রামাণ্য ইন্টারঅ্যাক্টিভ রিভিশন নোট ও স্কেচনোট সংকলন।
 - **Part 2:** `Noto Serif Bengali` ফন্ট সুরক্ষিত প্রামাণ্য কুইজ ইঞ্জিন ও প্রশ্নাবলি সংযোজন।
-- `</body>` এর ঠিক আগে `<script src="nav-component.js"></script>` যুক্ত করা।
+  - প্রতিটি অপশন বাটনে `.opt-btn` ও সঠিক উত্তরে `data-is-correct="true"` বা `checkAnswer(this, 1)` নিশ্চিত করা।
+- `</body>` এর ঠিক আগে বাধ্যতামূলকভাবে স্ক্রিপ্ট দুটি যুক্ত করা:
+  ```html
+  <script src="nav-component.js"></script>
+  <script src="../universal-modes.js"></script>
+  ```
 
 ### ধাপ ৩: বিষয়ভিত্তিক পোর্টাল সূচিপত্র (`[Subject]/index.html`)
 - উক্ত বিষয়ের সকল অধ্যায়ের কার্ড, সঠিক প্রশ্ন সংখ্যা ও পৃষ্ঠা রেঞ্জ সম্বলিত আকর্ষণীয় বিষয়ভিত্তিক সূচিপত্র পোর্টাল তৈরি বা আপডেট করা।
@@ -170,3 +180,47 @@ Use this skill whenever the user provides a folder or set of PDF files / book pa
 
 ### ধাপ ৫: স্বয়ংক্রিয় অডিট ও নিশ্চয়তা
 - স্ক্রিপ্ট রান করে প্রতিটি ফাইলের প্রশ্ন সংখ্যা, পেপার ক্লাস, ফন্ট ক্লাস ও নেভিগেশন লিংক শতভাগ ভেরিফাই করা।
+
+### ধাপ ৬: সেন্ট্রাল প্ল্যাটফর্ম ডাটা সিঙ্ক (`search-data.json` ও `exam-data.json`)
+- স্ক্রিপ্ট চালিয়ে নতুন বইয়ের সমস্ত প্রশ্ন ও অধ্যায়ের তথ্য সেন্ট্রাল সার্চ ইনডেক্স (`search-data.json`) এবং লাইভ এক্সাম ইঞ্জিনের ডাটাবেজ (`exam-data.json`)-এ স্বয়ংক্রিয়ভাবে মার্জ/আপডেট করা।
+
+---
+
+## 7. ইউনিভার্সাল স্মার্ট স্টাডি ও কুইক রিভিশন মোডস গাইড (Universal Revision Modes Integration)
+
+প্রতিটি বই ও অধ্যায়ে শিক্ষার্থীরা যাতে ৩টি ভিউ মোড এবং ৩টি কিউএ মোডে পড়তে পারে, সেজন্য `universal-modes.js` কাজ করে:
+
+### ক. ভিউ মোডসমূহ (`data-view-mode`):
+1. **`full` (পূর্ণাঙ্গ মোড):** নোট, স্কেচনোট ও প্রশ্নাবলি সবই দেখতে পাওয়া যায়।
+2. **`notes-only` (শুধু নোট ও আলোচনা মোড):** অধ্যায়ের শুরুর সমস্ত ইন্টারেক্টিভ রিভিশন নোট ও টেবিল দৃশ্যমান থাকবে; পেছনের সব কুইজ ও প্রশ্ন হাইড (`display: none !important;`) হয়ে যাবে।
+3. **`questions-only` (শুধু প্রশ্নব্যাংক মোড):** অধ্যায়ের শুরুর সমস্ত নোট হাইড হয়ে শিক্ষার্থী সরাসরি ১ম প্রশ্নে চলে যাবে।
+
+### খ. কিউএ মোডসমূহ (`data-qa-mode`):
+1. **`quiz` (ইন্টারেক্টিভ টেস্ট মোড):** অপশনে ক্লিক করে সেলফ টেস্ট দেওয়া যায়, সঠিক-ভুল ফিডব্যাক ও স্কোরবোর্ড পাওয়া যায়।
+2. **`show-answers` (তাত্ক্ষণিক উত্তর ও ব্যাখ্যা মোড):** সমস্ত সঠিক উত্তর স্বয়ংক্রিয়ভাবে সবুজ বর্ডারে হাইলাইট করা থাকে এবং সব ব্যাখ্যার ড্রয়ার খোলা থাকে।
+3. **`direct-answer` (সরাসরি প্রশ্ন ও সঠিক উত্তর মোড - কুইক রিভিশন স্পেশাল):**
+   - **প্রশ্ন ও শুধু একক সঠিক উত্তর:** শিক্ষার্থীর সামনে প্রশ্ন এবং ৪টি অপশনের মধ্যে **শুধুমাত্র সঠিক অপশনটি** দৃশ্যমান থাকবে।
+   - **`উত্তর: ` প্রিফিক্স:** সঠিক উত্তরের শুরুতে **`উত্তর: `** প্রিফিক্স স্বয়ংক্রিয়ভাবে দৃশ্যমান হবে (যেমন: `উত্তর: ক) ঢাকা`)।
+   - **ভুল ৩টি অপশন ও ব্যাখ্যার ড্রয়ার সম্পূর্ণ অদৃশ্য (`display: none !important;`):** রিভিশন স্পিড বাড়ানোর জন্য ভুল অপশন ও বড় ব্যাখ্যার কোনো টেক্সট দৃশ্যমান থাকবে না।
+   - **সঠিক উত্তরবিহীন প্রশ্ন:** প্রশ্নে সঠিক উত্তর না থাকলে স্বয়ংক্রিয় নোটিশ ব্যাজ `⚠️ সঠিক উত্তর নেই` ফুটে উঠবে।
+
+---
+
+## 8. মাল্টি-বুক আর্কিটেকচার ও ভবিষ্যৎ বই সংযোগ ফ্রেমওয়ার্ক (Multi-Book Pipeline & Scalability)
+
+বর্তমান সংকলনটি ১০ম-৫০তম বিসিএস প্রিলিমিনারি প্রশ্নব্যাংকের উপর ভিত্তি করে গড়ে উঠেছে। তবে যেকোনো নতুন বই যুক্ত করার ক্ষেত্রে নিচের নিয়মাবলি বাধ্যতামূলক:
+
+### ক. নতুন বইয়ের ক্যাটাগরি ও ফোল্ডার বিন্যাস:
+- প্রতিটি স্বতন্ত্র বইয়ের জন্য নিজস্ব স্পষ্ট ফোল্ডার হবে (যেমন: `Job Solution Non-Cadre`, `Bank Question Bank`, `Primary Teacher Guide`, `NTRCA Guide` ইত্যাদি)।
+- প্রতিটি বইয়ের ফোল্ডারে নিজস্ব `index.html` পোর্টাল থাকবে।
+
+### খ. স্টাইলিং ও টাইপোগ্রাফি রোটেশন:
+- নতুন বইয়ের অধ্যায় ১ থেকে আবার পেপার ও ফন্ট রোটেশন সাইকেল (Ch 01 = `.paper-old-aged` + `.font-nirlipta`...) ক্রমানুসারে শুরু হবে।
+- হস্তলিপি ফন্ট শুধু শিরোনাম ও টপিকের নামে এবং বিস্তারিত নোট, ছক ও কুইজ `Noto Serif Bengali` ফন্টে থাকবে।
+
+### গ. প্ল্যাটফর্ম-ওয়াইড সিঙ্ক:
+- নতুন বইয়ের অধ্যায়গুলো সমাপ্ত হওয়ার সাথে সাথে:
+  1. মূল `index.html` ড্যাশবোর্ডে নতুন বুক কার্ড ও পরিসংখ্যান যোগ হবে।
+  2. `exam-data.json`-এ প্রশ্নগুলো অন্তর্ভুক্ত হবে যাতে এক্সাম পোর্টালে ওই বইটির উপর সরাসরি মক টেস্ট দেওয়া যায়।
+  3. `search-data.json`-এ প্রশ্নগুলো ইনডেক্স হবে যাতে সেন্ট্রাল সার্চে নতুন বইয়ের যেকোনো তথ্য এক ক্লিকে পাওয়া যায়।
+

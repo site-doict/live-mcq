@@ -70,6 +70,7 @@
       [data-qa-mode="show-answers"] .explanation-drawer,
       [data-qa-mode="show-answers"] .explanation-box,
       [data-qa-mode="show-answers"] .quiz-explanation,
+      [data-qa-mode="show-answers"] .quiz-expl,
       [data-qa-mode="show-answers"] .ans-drawer {
         display: block !important;
         max-height: none !important;
@@ -78,51 +79,174 @@
         animation: none !important;
       }
 
-      /* [direct-answer]: শুধু প্রশ্ন ও সঠিক উত্তর মোড — ভুল অপশন বন্ধ */
+      [data-qa-mode="show-answers"] [data-is-correct="true"],
+      [data-qa-mode="show-answers"] .opt-btn[data-is-correct="true"],
+      [data-qa-mode="show-answers"] .option-btn[data-is-correct="true"],
+      [data-qa-mode="show-answers"] .q-opt[data-is-correct="true"],
+      [data-qa-mode="show-answers"] .option[data-is-correct="true"] {
+        background: rgba(16, 185, 129, 0.12) !important;
+        border-color: #10b981 !important;
+        color: #065f46 !important;
+        font-weight: 700 !important;
+      }
+
+      [data-theme="dark"][data-qa-mode="show-answers"] [data-is-correct="true"],
+      [data-theme="dark"][data-qa-mode="show-answers"] .opt-btn[data-is-correct="true"],
+      [data-theme="dark"][data-qa-mode="show-answers"] .option-btn[data-is-correct="true"],
+      [data-theme="dark"][data-qa-mode="show-answers"] .q-opt[data-is-correct="true"],
+      [data-theme="dark"][data-qa-mode="show-answers"] .option[data-is-correct="true"] {
+        background: rgba(16, 185, 129, 0.2) !important;
+        border-color: #34d399 !important;
+        color: #a7f3d0 !important;
+      }
+
+      [data-qa-mode="show-answers"] .exp-toggle-btn,
+      [data-qa-mode="show-answers"] .btn-explain,
+      [data-qa-mode="show-answers"] .drawer-toggle,
+      [data-qa-mode="show-answers"] .toggle-exp-btn,
+      [data-qa-mode="show-answers"] .exp-toggle {
+        opacity: 0.6;
+      }
+
+      /* [direct-answer]: শুধু প্রশ্ন ও সঠিক উত্তর মোড — ভুল অপশন ও ব্যাখ্যা সম্পূর্ণ বন্ধ */
+      [data-qa-mode="direct-answer"] .q-card,
+      [data-qa-mode="direct-answer"] .quiz-card,
+      [data-qa-mode="direct-answer"] .mcq-card,
+      [data-qa-mode="direct-answer"] .quiz-item,
+      [data-qa-mode="direct-answer"] article.q-card {
+        display: block !important;
+      }
+
       [data-qa-mode="direct-answer"] .options-grid,
       [data-qa-mode="direct-answer"] .quiz-options,
       [data-qa-mode="direct-answer"] .opt-grid,
       [data-qa-mode="direct-answer"] .q-options,
       [data-qa-mode="direct-answer"] .options-list,
       [data-qa-mode="direct-answer"] .mcq-options {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+        margin-top: 8px !important;
+        border: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+      }
+
+      /* Hide all options that are NOT the correct answer */
+      [data-qa-mode="direct-answer"] .options-grid > *:not([data-is-correct="true"]),
+      [data-qa-mode="direct-answer"] .quiz-options > *:not([data-is-correct="true"]),
+      [data-qa-mode="direct-answer"] .opt-grid > *:not([data-is-correct="true"]),
+      [data-qa-mode="direct-answer"] .q-options > *:not([data-is-correct="true"]),
+      [data-qa-mode="direct-answer"] .options-list > *:not([data-is-correct="true"]),
+      [data-qa-mode="direct-answer"] .mcq-options > *:not([data-is-correct="true"]),
+      [data-qa-mode="direct-answer"] .opt-btn:not([data-is-correct="true"]),
+      [data-qa-mode="direct-answer"] .option-btn:not([data-is-correct="true"]),
+      [data-qa-mode="direct-answer"] .q-opt:not([data-is-correct="true"]),
+      [data-qa-mode="direct-answer"] .option:not([data-is-correct="true"]) {
         display: none !important;
       }
 
+      /* Style ONLY the single correct option */
+      [data-qa-mode="direct-answer"] [data-is-correct="true"],
+      [data-qa-mode="direct-answer"] .opt-btn[data-is-correct="true"],
+      [data-qa-mode="direct-answer"] .option-btn[data-is-correct="true"],
+      [data-qa-mode="direct-answer"] .q-opt[data-is-correct="true"],
+      [data-qa-mode="direct-answer"] .option[data-is-correct="true"] {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        background: rgba(16, 185, 129, 0.12) !important;
+        border: 1.5px solid #10b981 !important;
+        color: #065f46 !important;
+        padding: 8px 14px !important;
+        border-radius: 8px !important;
+        font-weight: 700 !important;
+        font-size: 0.95rem !important;
+        cursor: default !important;
+        pointer-events: none !important;
+        width: fit-content !important;
+        max-width: 100% !important;
+        margin: 4px 0 !important;
+        box-shadow: 0 1px 4px rgba(16, 185, 129, 0.12) !important;
+      }
+
+      [data-theme="dark"][data-qa-mode="direct-answer"] [data-is-correct="true"],
+      [data-theme="dark"][data-qa-mode="direct-answer"] .opt-btn[data-is-correct="true"],
+      [data-theme="dark"][data-qa-mode="direct-answer"] .option-btn[data-is-correct="true"],
+      [data-theme="dark"][data-qa-mode="direct-answer"] .q-opt[data-is-correct="true"],
+      [data-theme="dark"][data-qa-mode="direct-answer"] .option[data-is-correct="true"] {
+        background: rgba(16, 185, 129, 0.2) !important;
+        border-color: #34d399 !important;
+        color: #a7f3d0 !important;
+      }
+
+      /* Add the 'উত্তর: ' prefix */
+      [data-qa-mode="direct-answer"] [data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+      [data-qa-mode="direct-answer"] .opt-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+      [data-qa-mode="direct-answer"] .option-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+      [data-qa-mode="direct-answer"] .q-opt[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+      [data-qa-mode="direct-answer"] .option[data-is-correct="true"]:not(.ebk-no-ans-notice)::before {
+        content: "উত্তর: ";
+        font-weight: 800;
+        color: #059669;
+        flex-shrink: 0;
+      }
+
+      [data-theme="dark"][data-qa-mode="direct-answer"] [data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+      [data-theme="dark"][data-qa-mode="direct-answer"] .opt-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+      [data-theme="dark"][data-qa-mode="direct-answer"] .option-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+      [data-theme="dark"][data-qa-mode="direct-answer"] .q-opt[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
+      [data-theme="dark"][data-qa-mode="direct-answer"] .option[data-is-correct="true"]:not(.ebk-no-ans-notice)::before {
+        color: #34d399;
+      }
+
+      /* Notice for questions with no correct option */
+      .ebk-no-ans-notice {
+        display: none;
+      }
+      [data-qa-mode="direct-answer"] .ebk-no-ans-notice {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        background: rgba(245, 158, 11, 0.12) !important;
+        border: 1.5px solid #f59e0b !important;
+        color: #b45309 !important;
+        padding: 8px 14px !important;
+        border-radius: 8px !important;
+        font-weight: 700 !important;
+        font-size: 0.92rem !important;
+        margin: 4px 0 !important;
+      }
+      [data-theme="dark"][data-qa-mode="direct-answer"] .ebk-no-ans-notice {
+        background: rgba(245, 158, 11, 0.2) !important;
+        border-color: #fbbf24 !important;
+        color: #fde68a !important;
+      }
+
+      /* Hide explanation drawers & toggle buttons completely in direct-answer mode */
       [data-qa-mode="direct-answer"] .answer-drawer,
       [data-qa-mode="direct-answer"] .exp-drawer,
       [data-qa-mode="direct-answer"] .explanation-drawer,
       [data-qa-mode="direct-answer"] .explanation-box,
       [data-qa-mode="direct-answer"] .quiz-explanation,
-      [data-qa-mode="direct-answer"] .ans-drawer {
-        display: block !important;
-        max-height: none !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        border-top: none !important;
-        background: rgba(34, 197, 94, 0.08) !important;
-        border-left: 4px solid #16a34a !important;
-        border-radius: 8px !important;
-        padding: 10px 14px !important;
-        margin-top: 8px !important;
-      }
-
-      [data-theme="dark"][data-qa-mode="direct-answer"] .answer-drawer,
-      [data-theme="dark"][data-qa-mode="direct-answer"] .exp-drawer,
-      [data-theme="dark"][data-qa-mode="direct-answer"] .explanation-drawer,
-      [data-theme="dark"][data-qa-mode="direct-answer"] .explanation-box,
-      [data-theme="dark"][data-qa-mode="direct-answer"] .quiz-explanation,
-      [data-theme="dark"][data-qa-mode="direct-answer"] .ans-drawer {
-        background: rgba(34, 197, 94, 0.12) !important;
-        border-left-color: #22c55e !important;
-      }
-
+      [data-qa-mode="direct-answer"] .quiz-expl,
+      [data-qa-mode="direct-answer"] .ans-drawer,
       [data-qa-mode="direct-answer"] .exp-toggle-btn,
       [data-qa-mode="direct-answer"] .btn-explain,
       [data-qa-mode="direct-answer"] .drawer-toggle,
       [data-qa-mode="direct-answer"] .toggle-exp-btn,
-      [data-qa-mode="direct-answer"] .mcq-actions {
+      [data-qa-mode="direct-answer"] .exp-toggle-wrap,
+      [data-qa-mode="direct-answer"] .exp-toggle,
+      [data-qa-mode="direct-answer"] .mcq-actions,
+      [data-qa-mode="direct-answer"] .status-indicator,
+      [data-qa-mode="direct-answer"] .explanation-title,
+      [data-qa-mode="direct-answer"] .exp-header,
+      [data-qa-mode="direct-answer"] .exp-title,
+      [data-qa-mode="direct-answer"] .exp-source {
         display: none !important;
       }
+
 
       /* In-Page Floating FAB */
       .ebk-mode-fab {
@@ -311,7 +435,199 @@
     document.head.appendChild(style);
   }
 
-  // 3. Global Controllers
+  // 3. Tagging Engine for Correct Answers across all chapters
+  function tagAllCorrectAnswers() {
+    const optMap = { 'ক': 0, 'খ': 1, 'গ': 2, 'ঘ': 3, 'a': 0, 'b': 1, 'c': 2, 'd': 3, 'A': 0, 'B': 1, 'C': 2, 'D': 3 };
+
+    // A. Inspect JS Data Arrays (quizData, QUIZ_DATA, mcqData, questions, QUESTIONS)
+    const jsArrays = [window.quizData, window.QUIZ_DATA, window.mcqData, window.questions, window.QUESTIONS];
+    jsArrays.forEach((arr) => {
+      if (Array.isArray(arr)) {
+        arr.forEach((item, idx) => {
+          if (!item) return;
+          const ansIdx = item.ans !== undefined ? item.ans : (item.answer !== undefined ? item.answer : -1);
+          if (ansIdx === -1) return;
+          const qId = item.id !== undefined ? item.id : idx;
+
+          // Target specific option button IDs
+          let targetBtn = document.getElementById(`opt-${qId}-${ansIdx}`) || 
+                          document.getElementById(`opt-${idx}-${ansIdx}`);
+          if (targetBtn) {
+            targetBtn.setAttribute('data-is-correct', 'true');
+          } else {
+            // Find card container
+            const card = document.getElementById(`qcard-${qId}`) ||
+                         document.getElementById(`q-card-${qId}`) ||
+                         document.getElementById(`q-${qId}`) ||
+                         document.getElementById(`q${qId}`) ||
+                         document.getElementById(`card-q${qId}`) ||
+                         document.getElementById(`q-card-${idx}`) ||
+                         document.getElementById(`qcard-${idx}`);
+            if (card) {
+              const btns = card.querySelectorAll('.opt-btn, .option-btn, .q-opt, .option, .quiz-option');
+              if (btns && btns[ansIdx]) {
+                btns[ansIdx].setAttribute('data-is-correct', 'true');
+              }
+            }
+          }
+        });
+      }
+    });
+
+    // B. Inspect all Question Cards on page
+    const cards = document.querySelectorAll('.q-card, .quiz-card, .mcq-card, .quiz-item, article.q-card');
+    cards.forEach((card) => {
+      const btns = card.querySelectorAll('.opt-btn, .option-btn, .q-opt, .option, .quiz-option');
+      if (!btns || btns.length === 0) return;
+
+      // Check if already tagged
+      let alreadyTagged = false;
+      btns.forEach((b) => {
+        if (b.getAttribute('data-is-correct') === 'true') alreadyTagged = true;
+      });
+      if (alreadyTagged) return;
+
+      let correctIdx = -1;
+
+      // 1. Button attributes: data-answer="true" or data-correct="true"
+      for (let i = 0; i < btns.length; i++) {
+        if (btns[i].getAttribute('data-answer') === 'true' || btns[i].getAttribute('data-correct') === 'true') {
+          correctIdx = i;
+          break;
+        }
+      }
+
+      // 2. Card attributes: data-correct, data-ans, data-answer
+      if (correctIdx === -1) {
+        const cardAns = card.getAttribute('data-correct') || card.getAttribute('data-ans') || card.getAttribute('data-answer');
+        if (cardAns) {
+          const val = cardAns.trim();
+          if (optMap[val] !== undefined) {
+            // Match with data-opt on buttons
+            btns.forEach((b, idx) => {
+              if (b.getAttribute('data-opt') === val) correctIdx = idx;
+            });
+            if (correctIdx === -1) correctIdx = optMap[val];
+          } else if (/^\d+$/.test(val)) {
+            const num = parseInt(val, 10);
+            const firstClick = btns[0].getAttribute('onclick') || '';
+            if (firstClick.includes('checkAnswer') && firstClick.match(/checkAnswer\([^,]+,\s*1\)/)) {
+              correctIdx = num - 1;
+            } else if (num >= 1 && num <= 4 && btns.length === 4) {
+              correctIdx = num - 1;
+            } else if (num >= 0 && num < btns.length) {
+              correctIdx = num;
+            }
+          }
+        }
+      }
+
+      // 3. Onclick boolean: checkAnswer(this, true, ...) or selectOption(this, true, ...)
+      if (correctIdx === -1) {
+        for (let i = 0; i < btns.length; i++) {
+          const oc = btns[i].getAttribute('onclick') || '';
+          if (/(?:checkAnswer|selectOption)\([^)]*\btrue\b/.test(oc)) {
+            correctIdx = i;
+            break;
+          }
+        }
+      }
+
+      // 4. Onclick letters: checkAnswer(..., 'ক') or checkAns(..., 'গ')
+      if (correctIdx === -1) {
+        for (let i = 0; i < btns.length; i++) {
+          const oc = btns[i].getAttribute('onclick') || '';
+          const mLet = oc.match(/(?:checkAnswer|checkAns)\([^)]*[\'\"]([কখগঘa-dA-D])[\'\"][^)]*\)/);
+          if (mLet) {
+            const allLets = mLet[0].match(/[\'\"]([কখগঘa-dA-D])[\'\"]/g);
+            if (allLets && allLets.length > 0) {
+              const cleanLetter = allLets[allLets.length - 1].replace(/[\'\"]/g, '');
+              if (optMap[cleanLetter] !== undefined) {
+                btns.forEach((b, bIdx) => {
+                  if (b.getAttribute('data-opt') === cleanLetter) correctIdx = bIdx;
+                });
+                if (correctIdx === -1) correctIdx = optMap[cleanLetter];
+                break;
+              }
+            }
+          }
+        }
+      }
+
+      // 5. Onclick 4-args: checkAnswer(this, 1, 0, 2) -> 4th arg is correctIdx
+      if (correctIdx === -1) {
+        for (let i = 0; i < btns.length; i++) {
+          const oc = btns[i].getAttribute('onclick') || '';
+          const m4 = oc.match(/checkAnswer\([^,]+,\s*[^,]+,\s*[^,]+,\s*(-?\d+)\)/);
+          if (m4) {
+            const c = parseInt(m4[1], 10);
+            if (c >= 0 && c < btns.length) {
+              correctIdx = c;
+              break;
+            } else if (c === -1) {
+              correctIdx = -99;
+              break;
+            }
+          }
+        }
+      }
+
+      // 6. Onclick 3-args: checkAnswer(qId, optIdx, correctIdx) or handleAnswer(...)
+      if (correctIdx === -1) {
+        for (let i = 0; i < btns.length; i++) {
+          const oc = btns[i].getAttribute('onclick') || '';
+          const m3 = oc.match(/(?:checkAnswer|handleAnswer|checkAns)\([^,]+,\s*[^,]+,\s*(-?\d+)\)/);
+          if (m3) {
+            const c = parseInt(m3[1], 10);
+            if (c >= 0 && c < btns.length) {
+              correctIdx = c;
+              break;
+            } else if (c === -1) {
+              correctIdx = -99;
+              break;
+            }
+          }
+        }
+      }
+
+      // 7. Explanation text fallback
+      if (correctIdx === -1) {
+        const expEl = card.querySelector('.exp-content, .exp-drawer, .explanation-box, .ans-drawer, .explanation-drawer, .quiz-explanation, .quiz-expl');
+        if (expEl) {
+          const text = expEl.textContent || '';
+          const mExp = text.match(/(?:সঠিক\s*)?উত্তর\s*[:\s]*([কখগঘa-dA-D])/);
+          if (mExp && optMap[mExp[1]] !== undefined) {
+            const letter = mExp[1];
+            btns.forEach((b, bIdx) => {
+              if (b.getAttribute('data-opt') === letter) correctIdx = bIdx;
+            });
+            if (correctIdx === -1) correctIdx = optMap[letter];
+          }
+        }
+      }
+
+      // Apply tag or fallback notice
+      if (correctIdx >= 0 && correctIdx < btns.length) {
+        btns[correctIdx].setAttribute('data-is-correct', 'true');
+      } else if (correctIdx === -99 || card.getAttribute('data-ans') === '') {
+        let noAnsNote = card.querySelector('.ebk-no-ans-notice');
+        if (!noAnsNote) {
+          const optContainer = card.querySelector('.options-grid, .quiz-options, .opt-grid, .q-options, .options-list, .mcq-options');
+          if (optContainer) {
+            noAnsNote = document.createElement('div');
+            noAnsNote.className = 'ebk-no-ans-notice';
+            noAnsNote.setAttribute('data-is-correct', 'true');
+            noAnsNote.innerHTML = '<span>⚠️</span> <span>উত্তর: অপশনে সঠিক উত্তর নেই (প্রশ্নটি বাতিল/বিতর্কিত)</span>';
+            optContainer.appendChild(noAnsNote);
+          }
+        }
+      }
+    });
+  }
+
+  window.tagAllCorrectAnswers = tagAllCorrectAnswers;
+
+  // 4. Global Controllers
   window.showEbkToast = function (msg) {
     let toast = document.getElementById('ebkQuickToast');
     if (!toast) {
@@ -357,6 +673,11 @@
       localStorage.setItem('ebk_qa_mode', mode);
     } catch (e) {}
 
+    // Run tagging engine if answers need to be exposed or filtered
+    if (mode === 'show-answers' || mode === 'direct-answer') {
+      tagAllCorrectAnswers();
+    }
+
     document.querySelectorAll('.ebk-qa-opt').forEach((btn) => {
       if (btn.getAttribute('data-qa') === mode) {
         btn.classList.add('active');
@@ -374,6 +695,7 @@
     };
     window.showEbkToast(`প্রশ্ন-উত্তর মোড: ${labels[mode] || mode}`);
   };
+
 
   window.openEbkModeSheet = function () {
     const overlay = document.getElementById('ebkModeSheetOverlay');
@@ -476,13 +798,26 @@
   }
 
   // 5. Initialize on DOM ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      injectStyles();
-      buildInPageControls();
-    });
-  } else {
+  function initEbkModes() {
     injectStyles();
     buildInPageControls();
+    tagAllCorrectAnswers();
+    setTimeout(tagAllCorrectAnswers, 300);
+    setTimeout(tagAllCorrectAnswers, 1200);
+
+    // Watch for dynamic quiz renderers
+    try {
+      const observer = new MutationObserver(() => {
+        tagAllCorrectAnswers();
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+    } catch (e) {}
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEbkModes);
+  } else {
+    initEbkModes();
   }
 })();
+

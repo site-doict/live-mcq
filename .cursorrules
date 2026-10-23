@@ -95,3 +95,29 @@ Container elements must use `.paper-container` or `.sk-page` with one of the fol
 - **Responsive Mobile First:** Always maintain `overflow-x: clip` and fluid padding to ensure seamless viewing on mobile devices (e.g. Samsung A23).
 - **Full Dark Mode:** All 10 textures automatically invert/adapt under `[data-theme="dark"]` or `body.dark-mode`.
 - **Zero Fabrication Policy:** Paper styling and handwritten fonts are purely an aesthetic presentation layer. Never alter or invent authentic question text, exam years, or verified textbook explanations.
+
+## 8. Universal Smart Study & Quick Revision Modes (`universal-modes.js`)
+All HTML chapters (current BCS and any future competitive exam books) must link `universal-modes.js`:
+```html
+<script src="../universal-modes.js"></script>
+```
+- **View Modes:**
+  - `full` (default): Authentic notes, analysis matrix, and question quiz engine.
+  - `notes-only`: Only study notes/sketchnotes visible; questions/quiz engine completely hidden (`display: none !important;`).
+  - `questions-only`: Only question bank/quiz engine visible; notes/theory hidden.
+- **QA Modes:**
+  - `quiz` (default): Interactive self-test with option click feedback and scoring.
+  - `show-answers`: All correct answers highlighted in green border; explanation drawers open.
+  - `direct-answer` (Quick Revision Special):
+    - Strictly displays ONLY the question and the single correct option.
+    - Correct option prefixed with `উত্তর: ` (e.g. `উত্তর: ক) ঢাকা`).
+    - The other 3 wrong options and explanation drawers are completely hidden (`display: none !important;`).
+    - Questions with no correct answer automatically display `⚠️ সঠিক উত্তর নেই`.
+
+## 9. Multi-Book Scalability Pipeline (BCS, Job Solution, Bank, Primary, NTRCA)
+The current book is based on the 10th-50th BCS Preliminary Question Bank. When adding future exam books:
+1. Maintain the cyclic rotation of 10 paper textures and 21 Bangla handwritten fonts from Chapter 01 onwards.
+2. Maintain the Two-Part Architecture (Part 1: Authentic Notes + Part 2: Questions & Quiz Engine).
+3. Option buttons must use `.opt-btn` with `data-is-correct="true"` or `checkAnswer(this, 1)`.
+4. Run platform sync to merge all new questions and explanations into `search-data.json` (universal deep search) and `exam-data.json` (live mock test portal).
+
