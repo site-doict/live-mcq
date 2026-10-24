@@ -26,7 +26,8 @@
     'Geography': { bg: 'rgba(2,132,199,0.12)', text: '#0284c7', name: 'ভূগোল ও দুর্যোগ ব্যবস্থাপনা' },
     'Ethics & Good Governance': { bg: 'rgba(13,148,136,0.12)', text: '#0d9488', name: 'নৈতিকতা, মূল্যবোধ ও সুশাসন' },
     'Mathematical Reasoning': { bg: 'rgba(79,70,229,0.12)', text: '#4f46e5', name: 'গাণিতিক যুক্তি' },
-    'Mental Ability': { bg: 'rgba(139,92,246,0.12)', text: '#8b5cf6', name: 'মানসিক দক্ষতা' }
+    'Mental Ability': { bg: 'rgba(139,92,246,0.12)', text: '#8b5cf6', name: 'মানসিক দক্ষতা' },
+    'Non Cadre English': { bg: 'rgba(30,58,138,0.12)', text: '#1e3a8a', name: 'নন-ক্যাডার ইংরেজি' }
   };
 
   var TYPE_BADGES = {

@@ -99,6 +99,13 @@
       icon: '⚖️',
       logo: 'Live MCQ Ethics & Good Governance/logo.png',
       bcsMarks: 10
+    },
+    'Non Cadre English': {
+      name: 'নন-ক্যাডার ইংরেজি ভাষা ও সাহিত্য',
+      short: 'নন-ক্যাডার ইংরেজি',
+      icon: '🔤',
+      logo: 'Non Cadre English/logo.png',
+      bcsMarks: 20
     }
   };
 
