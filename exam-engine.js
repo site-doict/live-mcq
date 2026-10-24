@@ -106,6 +106,13 @@
       icon: '🔤',
       logo: 'Non Cadre English/logo.png',
       bcsMarks: 20
+    },
+    'Non Cadre General Science': {
+      name: 'নন-ক্যাডার সাধারণ বিজ্ঞান',
+      short: 'নন-ক্যাডার বিজ্ঞান',
+      icon: '🔬',
+      logo: 'Non Cadre General Science/logo.png',
+      bcsMarks: 20
     }
   };
 

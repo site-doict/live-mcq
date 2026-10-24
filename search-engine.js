@@ -29,7 +29,8 @@
     'Mental Ability': { bg: 'rgba(139,92,246,0.12)', text: '#8b5cf6', name: 'মানসিক দক্ষতা' },
     'Non Cadre Bangla Grammar': { bg: 'rgba(15,118,110,0.12)', text: '#0f766e', name: 'নন-ক্যাডার বাংলা ব্যাকরণ' },
     'Non Cadre Bangla Literature': { bg: 'rgba(15,118,110,0.12)', text: '#0f766e', name: 'নন-ক্যাডার বাংলা সাহিত্য' },
-    'Non Cadre English': { bg: 'rgba(30,58,138,0.12)', text: '#1e3a8a', name: 'নন-ক্যাডার ইংরেজি' }
+    'Non Cadre English': { bg: 'rgba(30,58,138,0.12)', text: '#1e3a8a', name: 'নন-ক্যাডার ইংরেজি' },
+    'Non Cadre General Science': { bg: 'rgba(2,132,199,0.12)', text: '#0284c7', name: 'নন-ক্যাডার সাধারণ বিজ্ঞান' }
   };
 
   var TYPE_BADGES = {
