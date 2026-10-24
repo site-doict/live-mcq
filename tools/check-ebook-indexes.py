@@ -182,7 +182,7 @@ def check_file(rel_path):
     text_only = re.sub(r'\b(?:BCS|PSC|PDF|HTML|CSS|JS|URL|API)\b', ' ', text_only, flags=re.I)
 
     # Find English digits attached to Bengali letters, e.g. "538টি", "205টি", "1ম খন্ড"
-    eng_digit_bn_word = re.findall(r'(\d+[\u0980-\u09FF]+|[\u0980-\u09FF]+\d+)', text_only)
+    eng_digit_bn_word = re.findall(r'([0-9]+[\u0980-\u09FF]+|[\u0980-\u09FF]+[0-9]+)', text_only)
     if eng_digit_bn_word:
         errors.append(f"Found English digits mixed with Bengali words: {', '.join(set(eng_digit_bn_word[:5]))}. Must use Bengali numerals (০-৯).")
 
