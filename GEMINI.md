@@ -347,5 +347,23 @@ You must seek confirmation before editing or refactoring:
 ### গ. সার্বজনীন কভারেজ ও ক্রস-সাবজেক্ট প্রয়োগ:
 - এই অগ্রাধিকার নীতি ক্যাডার (১২টি বিষয়), নন-ক্যাডার (সকল বিষয়) এবং মাস্টার ড্যাশবোর্ড (`index.html`) সহ পুরো প্ল্যাটফর্মের সকল জায়গায় সমভাবে কার্যকর থাকবে।
 
+---
+
+## 16. একীভূত ডিজাইন সিস্টেম, ইনডেক্স স্ট্যান্ডার্ড ও বাধ্যতামূলক অটোমেটেড কোয়ালিটি গেট (Unified Design System & Automated Quality Gate)
+
+মাস্টার ইনডেক্স (`/index.html`) এবং সমস্ত বিষয়ভিত্তিক সাব-ইনডেক্স (`Live MCQ <বিষয়>/index.html` ও `Non Cadre <বিষয়>/index.html`) একটি একীভূত, আধুনিক ও মোবাইল-ফার্স্ট ডিজাইন সিস্টেমে পরিচালিত হবে:
+- **ডিজাইন সিস্টেম বিস্তারিত ম্যানুয়াল:** [docs/EBOOK_STANDARDS.md](file:///c:/Users/PC%20User/Documents/Live%20MCQ%20Bangla%20Literature/docs/EBOOK_STANDARDS.md)
+- **নতুন ই-বুক সংযোজনের ধাপে ধাপে চেকলিস্ট:** [docs/ADD_NEW_EBOOK_CHECKLIST.md](file:///c:/Users/PC%20User/Documents/Live%20MCQ%20Bangla%20Literature/docs/ADD_NEW_EBOOK_CHECKLIST.md)
+- **ডিজাইন চেঞ্জলগ ও নিষিদ্ধ ভুলের তালিকা:** [docs/CHANGELOG-design.md](file:///c:/Users/PC%20User/Documents/Live%20MCQ%20Bangla%20Literature/docs/CHANGELOG-design.md)
+- **সাব-ইনডেক্স মাস্টার টেমপ্লেট:** [_templates/subject-index.template.html](file:///c:/Users/PC%20User/Documents/Live%20MCQ%20Bangla%20Literature/_templates/subject-index.template.html)
+- **মাস্টার সাবজেক্ট কার্ড স্নিপেট:** [_templates/master-subject-card.snippet.html](file:///c:/Users/PC%20User/Documents/Live%20MCQ%20Bangla%20Literature/_templates/master-subject-card.snippet.html)
+
+### বাধ্যতামূলক কোয়ালিটি গেট নীতি (Mandatory Quality Gate):
+**কোনো ইনডেক্স তৈরি/সম্পাদনার পর ডেলিভারির আগে `tools/check-ebook-indexes.py` চালাতে হবে এবং শূন্য ত্রুটি (0 errors) দেখাতে হবে।**
+- ইনডেক্স পেজে স্ট্যাটিক `style="..."` সম্পূর্ণরূপে নিষিদ্ধ (শুধুমাত্র প্রগ্রেস বারের গতিশীল CSS custom property যেমন `style="--p:45%"` ব্যতিক্রম)।
+- কোনো রঙিন গ্র্যাডিয়েন্ট, নিয়ন গ্লো, বাউন্সি অ্যানিমেশন বা ইমোজি ব্যবহার করা যাবে না। একমাত্র অনুমোদিত অ্যাকসেন্ট কালার ডিপ টিল (`#0f766e` / `#2dd4bf`)।
+- দৃশ্যমান বাংলা টেক্সটে কোনো ইংরেজি অঙ্ক ব্যবহার করা যাবে না (সর্বদা বাংলা অঙ্ক ০–৯)।
+- ভিউপোর্টে জুম আটকানো (`maximum-scale=1` বা `user-scalable=no`) সম্পূর্ণ নিষিদ্ধ।
+
 
 
