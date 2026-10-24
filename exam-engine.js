@@ -142,6 +142,7 @@
     totalTimeSeconds: 0,
     timerInterval: null,
     activeSubjectFilter: 'all', // 'all' or subject key
+    showSourceTags: typeof localStorage !== 'undefined' ? (localStorage.getItem('exam_show_source_tags') !== 'false') : true,
 
     // Results State
     results: null,
@@ -990,7 +991,7 @@
       const uniqueSubjects = Object.keys(subjectCounts);
 
       container.innerHTML = `
-        <div class="exam-hall-wrapper">
+        <div class="exam-hall-wrapper ${this.showSourceTags ? '' : 'hide-exam-sources'}">
           <!-- Sticky Exam Topbar -->
           <div class="exam-topbar">
             <div class="exam-topbar-left">
@@ -998,6 +999,13 @@
               <div class="exam-topbar-title">
                 <span class="exam-title-badge">${this.getModeBadgeTitle()}</span>
               </div>
+            </div>
+
+            <div class="exam-topbar-controls">
+              <button type="button" class="exam-btn-source-toggle ${this.showSourceTags ? 'active' : ''}" id="examSourceToggleBtn" onclick="ExamEngine.toggleSourceTags()" title="পরীক্ষার উৎস (বিসিএস/চাকরির নাম) প্রদর্শন চালু বা বন্ধ করুন">
+                <span class="source-icon">${this.showSourceTags ? '👁️' : '🙈'}</span>
+                <span class="source-label">উৎস: ${this.showSourceTags ? 'চালু' : 'বন্ধ'}</span>
+              </button>
             </div>
 
             <div class="exam-topbar-center">
@@ -1072,6 +1080,50 @@
       this.updateProgressCounters();
     },
 
+    cleanExamQuestionText: function(qText, hideSource) {
+      if (!qText) return '';
+      // Strip leading original book question numbers like "৫৯. ", "৫. ", "২. ", "৫৮- ", "১০) "
+      let cleaned = qText.replace(/^\s*(?:[\d]+|[০-৯]+)[\.\-\)]\s*/, '');
+      if (hideSource) {
+        // Strip trailing exam names/sessions like "২০তম বিসিএস", "২৬তম/১৭তম বিসিএস", "- ৪৪তম বিসিএস", "[সহকারী পরিচালক...]"
+        cleaned = cleaned.replace(/(?:[\s\-\–—\(\[]*(?:[০-৯\d]+(?:তম)?(?:\/[০-৯\d]+)?(?:তম|th|st|nd|rd)?)?(?:\s*(?:বিশেষ|বাতিল|প্রিলি))?\s*(?:বিসিএস|BCS|নন[\-\s]?ক্যাডার|পিএসসি|নিয়োগ|মন্ত্রণালয়)[^)\]]*[\)\]]?)+\s*$/i, '');
+      }
+      return cleaned;
+    },
+
+    cleanOptText: function(text) {
+      if (!text) return '';
+      // Strip duplicate leading prefixes like "(ক) ", "(খ) ", "ক. ", "(a) ", "A. "
+      return text.replace(/^\s*[\(\[]?(?:[কখগঘ]|[abcdABCD])[\)\]\.\-:\s]\s*/, '');
+    },
+
+    toggleSourceTags: function() {
+      this.showSourceTags = !this.showSourceTags;
+      localStorage.setItem('exam_show_source_tags', this.showSourceTags);
+
+      const wrapper = document.querySelector('.exam-hall-wrapper');
+      if (wrapper) {
+        wrapper.classList.toggle('hide-exam-sources', !this.showSourceTags);
+      }
+
+      const btn = document.getElementById('examSourceToggleBtn');
+      if (btn) {
+        btn.classList.toggle('active', this.showSourceTags);
+        btn.innerHTML = `
+          <span class="source-icon">${this.showSourceTags ? '👁️' : '🙈'}</span>
+          <span class="source-label">উৎস: ${this.showSourceTags ? 'চালু' : 'বন্ধ'}</span>
+        `;
+      }
+
+      // Dynamically update question texts
+      this.examQuestions.forEach((q, idx) => {
+        const qEl = document.querySelector(`#examQCard_${idx} .exam-q-text`);
+        if (qEl) {
+          qEl.innerHTML = this.cleanExamQuestionText(q.q, !this.showSourceTags);
+        }
+      });
+    },
+
     getModeBadgeTitle: function() {
       if (this.activeMode === 'session') return this.selectedSession;
       if (this.activeMode === 'subject') return 'বিষয়ভিত্তিক কাস্টম পরীক্ষা';
@@ -1085,6 +1137,7 @@
         const conf = SUBJECT_CONFIG[q.s] || { short: q.s, icon: '📄' };
         const isHidden = this.activeSubjectFilter !== 'all' && this.activeSubjectFilter !== q.s;
         const selectedOpt = this.userAnswers[idx];
+        const displayQuestionText = this.cleanExamQuestionText(q.q, !this.showSourceTags);
 
         return `
           <div class="exam-q-card ${selectedOpt !== null ? 'answered' : ''} ${isHidden ? 'subject-filtered-out' : ''}" id="examQCard_${idx}" data-subject="${q.s}">
@@ -1096,13 +1149,13 @@
               </div>
             </div>
 
-            <div class="exam-q-text">${q.q}</div>
+            <div class="exam-q-text">${displayQuestionText}</div>
 
             <div class="exam-options-grid">
               ${q.opts.map((optText, optIdx) => `
                 <button type="button" class="exam-opt-btn ${selectedOpt === optIdx ? 'selected' : ''}" onclick="ExamEngine.selectAnswer(${idx}, ${optIdx})">
                   <span class="opt-key">${OPT_LABELS[optIdx]}</span>
-                  <span class="opt-label-text">${optText}</span>
+                  <span class="opt-label-text">${this.cleanOptText(optText)}</span>
                 </button>
               `).join('')}
             </div>
@@ -1488,12 +1541,12 @@
               <div class="q-meta-left">
                 <span class="q-idx-badge">প্রশ্ন ${toBn(item.index + 1)}</span>
                 <span class="q-sub-badge">${conf.icon} ${conf.short}</span>
-                ${q.bcs ? `<span class="q-bcs-badge">${q.bcs}</span>` : ''}
+                ${q.bcs ? `<span class="q-bcs-badge review-card-bcs">${q.bcs}</span>` : ''}
               </div>
               <div class="q-status-badge ${cardStatusClass}">${badgeText}</div>
             </div>
 
-            <div class="review-q-text">${q.q}</div>
+            <div class="review-q-text">${this.cleanExamQuestionText(q.q, !this.showSourceTags)}</div>
 
             <div class="review-options-grid">
               ${q.opts.map((optText, optIdx) => {
@@ -1519,7 +1572,7 @@
                 return `
                   <div class="review-opt-box ${optClass}">
                     <span class="opt-key">${OPT_LABELS[optIdx]}</span>
-                    <span class="opt-text">${optText}</span>
+                    <span class="opt-text">${this.cleanOptText(optText)}</span>
                     ${marker}
                   </div>
                 `;

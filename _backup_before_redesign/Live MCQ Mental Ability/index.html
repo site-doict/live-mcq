@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>মানসিক দক্ষতা (Mental Ability) - পূর্ণাঙ্গ ডিজিটাল ই-বুক পোর্টাল</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --primary-hover: #7c3aed;
+            --bg-body: #f8fafc;
+            --bg-card: rgba(255, 255, 255, 0.88);
+            --bg-surface: rgba(255, 255, 255, 0.85);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: rgba(148, 163, 184, 0.25);
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            --font-family: 'Noto Serif Bengali', Georgia, serif;
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #0b1120;
+            --bg-card: rgba(17, 24, 39, 0.88);
+            --bg-surface: rgba(30, 41, 59, 0.85);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 30px 16px 60px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .portal-container {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        .portal-header {
+            text-align: center;
+            margin-bottom: 35px;
+            padding: 40px 24px;
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .top-bar-links {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: transform 0.2s;
+        }
+        .back-home:hover {
+            transform: translateX(-4px);
+        }
+
+        .theme-toggle-btn {
+            background: rgba(148, 163, 184, 0.15);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 6px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .badge-main {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--primary);
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .portal-title {
+            font-size: 2.3rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .portal-subtitle {
+            font-family: 'Inter', sans-serif !important;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+
+        .stats-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .stat-pill {
+            background: rgba(148, 163, 184, 0.12);
+            padding: 6px 16px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        .stat-pill strong {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .controls-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px 12px 40px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg-surface);
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .filter-tabs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover, .tab-btn.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .chapter-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 22px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .chapter-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px -5px rgba(139, 92, 246, 0.15);
+            border-color: var(--primary);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .ch-badge {
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 3px 10px;
+            border-radius: 8px;
+        }
+
+        .cat-badge {
+            background: rgba(148, 163, 184, 0.15);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 8px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .card-subtitle {
+            font-family: 'Inter', sans-serif !important;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 14px;
+            border-top: 1px dashed var(--border);
+            font-size: 0.85rem;
+        }
+
+        .meta-item.highlight {
+            color: #16a34a;
+            font-weight: 700;
+        }
+
+        .card-design-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .design-tag {
+            background: rgba(148, 163, 184, 0.1);
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        .portal-footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 25px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+        }
+    </style>
+
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+        var viewMode = localStorage.getItem('ebk_view_mode') || 'full';
+        var qaMode = localStorage.getItem('ebk_qa_mode') || 'quiz';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-view-mode', viewMode);
+        document.documentElement.setAttribute('data-qa-mode', qaMode);
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch(e) {}
+    })();
+  </script>
+  <script src="../universal-modes.js"></script>
+  <script src="../search-engine.js"></script>
+</head>
+<body>
+    <div class="portal-container">
+        <!-- Header -->
+        <header class="portal-header">
+            <div class="top-bar-links">
+                <a href="../index.html" class="back-home">⬅ মূল লাইব্রেরি ড্যাশবোর্ড</a>
+        <div class="subject-dropdown-wrap" style="position:relative; display:inline-flex; align-items:center;">
+          <select class="subject-nav-select" onchange="if(this.value && this.value!=='current') window.location.href=this.value;" style="appearance:none; -webkit-appearance:none; padding:6px 28px 6px 10px; border-radius:8px; border:1px solid var(--border-color, var(--border, rgba(15,118,110,0.25))); background:var(--bg-card, var(--surface-2, #ffffff)); color:var(--text-main, var(--text, #0f172a)); font-family:inherit; font-size:0.84rem; font-weight:700; cursor:pointer; box-shadow:0 1px 3px rgba(0,0,0,0.06); outline:none; transition:all 0.2s ease;">
+            <option value="../Live MCQ Bangla Language/index.html">✍️ বাংলা ভাষা ও ব্যাকরণ</option>
+            <option value="../Live MCQ Bangla Literature/index.html">📚 বাংলা সাহিত্য</option>
+            <option value="../Live MCQ English Grammar/index.html">🔤 English Grammar</option>
+            <option value="../Live MCQ English Literature/index.html">🎭 English Literature</option>
+            <option value="../Live MCQ Bangladesh/index.html">🇧🇩 বাংলাদেশ বিষয়াবলি</option>
+            <option value="../Live MCQ International/index.html">🌐 আন্তর্জাতিক বিষয়াবলি</option>
+            <option value="../Live MCQ Geography/index.html">🗺️ ভূগোল, পরিবেশ ও দুর্যোগ ব্যবস্থাপনা</option>
+            <option value="../Live MCQ General Science/index.html">🔬 সাধারণ বিজ্ঞান</option>
+            <option value="../Live MCQ Computer & IT/index.html">💻 কম্পিউটার ও তথ্য প্রযুক্তি</option>
+            <option value="../Live MCQ Mathematical Reasoning/index.html">📐 গাণিতিক যুক্তি</option>
+            <option value="current" selected>🧩 মানসিক দক্ষতা</option>
+            <option value="../Live MCQ Ethics & Good Governance/index.html">⚖️ নৈতিকতা, মূল্যবোধ ও সুশাসন</option>
+            <option value="../index.html">🏛️ মাস্টার লাইব্রেরি পোর্টাল</option>
+          </select>
+          <span style="position:absolute; right:10px; pointer-events:none; font-size:10px; opacity:0.65; color:inherit;">▼</span>
+        </div>
+        <a href="../exam.html?subject=Mental%20Ability" class="topbar-exam-btn" style="display:inline-flex; align-items:center; gap:5px; background:linear-gradient(135deg, #f59e0b, #d97706); color:#fff; font-weight:700; font-size:0.84rem; padding:6px 12px; border-radius:8px; text-decoration:none; box-shadow:0 2px 6px rgba(245,158,11,0.25); margin-left:6px;" title="এই বিষয়ের উপর লাইভ পরীক্ষা দিন">
+          <span>📝</span>
+          <span>পরীক্ষা দিন</span>
+        </a>
+                <button class="theme-toggle-btn" id="theme-btn" onclick="toggleTheme()">🌙</button>
+            </div>
+            <span class="badge-main">বিসিএস প্রিলিমিনারি বিষয়ভিত্তিক জব সল্যুশন</span>
+            <h1 class="portal-title">মানসিক দক্ষতা</h1>
+            <div class="portal-subtitle">Live MCQ™ Mental Ability Complete E-Book Portal</div>
+            
+            <div class="stats-row">
+                <span class="stat-pill">মোট অধ্যায়: <strong>৬টি</strong></span>
+                <span class="stat-pill">মোট প্রামাণ্য প্রশ্ন: <strong>175টি</strong></span>
+                <span class="stat-pill">বইয়ের পৃষ্ঠা: <strong>৯৮৭ - ১০২৪ (৩৮ পৃষ্ঠা)</strong></span>
+            </div>
+        </header>
+
+        <!-- Search & Category Filters -->
+        <div class="controls-card">
+            <div id="ebkSearchMount"></div>
+
+        <!-- Chapters Grid -->
+        <div class="chapters-grid" id="chapters-grid">
+            
+    <a href="ভাষাগত যৌক্তিক বিচার.html" class="chapter-card" data-category="ভাষাগত যুক্তি" data-title="ভাষাগত যৌক্তিক বিচার Verbal Reasoning & Analogies">
+        <div class="card-header">
+            <span class="ch-badge">অধ্যায় ০১</span>
+            <span class="cat-badge">ভাষাগত যুক্তি</span>
+        </div>
+        <h2 class="card-title">ভাষাগত যৌক্তিক বিচার</h2>
+        <div class="card-subtitle">Verbal Reasoning & Analogies</div>
+        <div class="card-meta">
+            <span class="meta-item">📖 পৃষ্ঠা: ৯৮৭-৯৯৩</span>
+            <span class="meta-item highlight">🎯 92 টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+        <div class="card-design-info">
+            <span class="design-tag">📄 হলুদ</span>
+            <span class="design-tag">✍️ একুশ</span>
+        </div>
+    </a>
+    
+    <a href="সমস্যা সমাধান ও বাস্তবভিত্তিক যুক্তি.html" class="chapter-card" data-category="সমস্যা সমাধান" data-title="সমস্যা সমাধান ও বাস্তবভিত্তিক যুক্তি Problem Solving, Calendar & Blood Relations">
+        <div class="card-header">
+            <span class="ch-badge">অধ্যায় ০২</span>
+            <span class="cat-badge">সমস্যা সমাধান</span>
+        </div>
+        <h2 class="card-title">সমস্যা সমাধান ও বাস্তবভিত্তিক যুক্তি</h2>
+        <div class="card-subtitle">Problem Solving, Calendar & Blood Relations</div>
+        <div class="card-meta">
+            <span class="meta-item">📖 পৃষ্ঠা: ৯৯৪-১০০১</span>
+            <span class="meta-item highlight">🎯 20 টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+        <div class="card-design-info">
+            <span class="design-tag">📄 পোড়া</span>
+            <span class="design-tag">✍️ প্রিয়তমা</span>
+        </div>
+    </a>
+    
+    <a href="বানান ও ভাষা.html" class="chapter-card" data-category="ভাষা ও ব্যাকরণ" data-title="বানান ও ভাষা Spelling, Vocabulary & Dictionary Sequence">
+        <div class="card-header">
+            <span class="ch-badge">অধ্যায় ০৩</span>
+            <span class="cat-badge">ভাষা ও ব্যাকরণ</span>
+        </div>
+        <h2 class="card-title">বানান ও ভাষা</h2>
+        <div class="card-subtitle">Spelling, Vocabulary & Dictionary Sequence</div>
+        <div class="card-meta">
+            <span class="meta-item">📖 পৃষ্ঠা: ১০০২-১০০৫</span>
+            <span class="meta-item highlight">🎯 6 টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+        <div class="card-design-info">
+            <span class="design-tag">📄 ক্রাফট</span>
+            <span class="design-tag">✍️ প্রিয়তমা</span>
+        </div>
+    </a>
+    
+    <a href="যান্ত্রিক দক্ষতা.html" class="chapter-card" data-category="ফলিত বিজ্ঞান" data-title="যান্ত্রিক দক্ষতা Mechanical Reasoning, Levers & Gears">
+        <div class="card-header">
+            <span class="ch-badge">অধ্যায় ০৪</span>
+            <span class="cat-badge">ফলিত বিজ্ঞান</span>
+        </div>
+        <h2 class="card-title">যান্ত্রিক দক্ষতা</h2>
+        <div class="card-subtitle">Mechanical Reasoning, Levers & Gears</div>
+        <div class="card-meta">
+            <span class="meta-item">📖 পৃষ্ঠা: ১০০৬-১০১০</span>
+            <span class="meta-item highlight">🎯 7 টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+        <div class="card-design-info">
+            <span class="design-tag">📄 দাগটানা</span>
+            <span class="design-tag">✍️ দীনার</span>
+        </div>
+    </a>
+    
+    <a href="স্থানাঙ্ক সম্পর্ক ও চিত্রভিত্তিক যুক্তি.html" class="chapter-card" data-category="জ্যামিতিক যুক্তি" data-title="স্থানাঙ্ক সম্পর্ক ও চিত্রভিত্তিক যুক্তি Spatial Relations, Mirror Images & Clocks">
+        <div class="card-header">
+            <span class="ch-badge">অধ্যায় ০৫</span>
+            <span class="cat-badge">জ্যামিতিক যুক্তি</span>
+        </div>
+        <h2 class="card-title">স্থানাঙ্ক সম্পর্ক ও চিত্রভিত্তিক যুক্তি</h2>
+        <div class="card-subtitle">Spatial Relations, Mirror Images & Clocks</div>
+        <div class="card-meta">
+            <span class="meta-item">📖 পৃষ্ঠা: ১০১১-১০১৬</span>
+            <span class="meta-item highlight">🎯 38 টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+        <div class="card-design-info">
+            <span class="design-tag">📄 পুরাতন</span>
+            <span class="design-tag">✍️ নির্লিপ্ত</span>
+        </div>
+    </a>
+    
+    <a href="সংখ্যাগত ক্ষমতা ও প্যাটার্ন.html" class="chapter-card" data-category="গাণিতিক যুক্তি" data-title="সংখ্যাগত ক্ষমতা ও প্যাটার্ন Numerical Ability, Series & Patterns">
+        <div class="card-header">
+            <span class="ch-badge">অধ্যায় ০৬</span>
+            <span class="cat-badge">গাণিতিক যুক্তি</span>
+        </div>
+        <h2 class="card-title">সংখ্যাগত ক্ষমতা ও প্যাটার্ন</h2>
+        <div class="card-subtitle">Numerical Ability, Series & Patterns</div>
+        <div class="card-meta">
+            <span class="meta-item">📖 পৃষ্ঠা: ১০১৭-১০২৪</span>
+            <span class="meta-item highlight">🎯 12 টি প্রামাণ্য প্রশ্ন</span>
+        </div>
+        <div class="card-design-info">
+            <span class="design-tag">📄 ডট</span>
+            <span class="design-tag">✍️ রায়হান</span>
+        </div>
+    </a>
+    
+        </div>
+
+        <!-- Footer -->
+        <footer class="portal-footer">
+            <p>Live MCQ™ বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ ডিজিটাল প্রশ্নব্যাংক ও প্রামাণ্য রিভিশন নোট</p>
+            <p style="margin-top: 6px; font-size: 0.8rem;">৩৫তম থেকে ৫০তম বিসিএস প্রিলিমিনারি পরীক্ষার শতভাগ প্রামাণ্য প্রশ্নাবলি ও ব্যাখ্যা</p>
+        </footer>
+    </div>
+
+    <script>
+        let currentCat = 'all';
+
+        function filterCategory(cat, btn) {
+            currentCat = cat;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            applyFilters();
+        }
+
+        function handleSearch() {
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const query = document.getElementById('chapter-search').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.chapter-card');
+
+            cards.forEach(card => {
+                const cat = card.getAttribute('data-category');
+                const title = card.getAttribute('data-title').toLowerCase();
+                
+                const matchesCat = (currentCat === 'all' || cat === currentCat);
+                const matchesQuery = (!query || title.includes(query));
+
+                if (matchesCat && matchesQuery) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function toggleTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                document.getElementById('theme-btn').textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('theme-btn').textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.getElementById('theme-btn').textContent = '☀️';
+        }
+    </script>
+</body>
+</html>

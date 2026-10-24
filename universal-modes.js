@@ -259,6 +259,21 @@
         display: none !important;
       }
 
+      /* Search Deep Target Glowing Pulse */
+      .search-deep-target-glow {
+        animation: searchDeepGlow 1.2s ease-in-out 3 alternate !important;
+        border-color: #0f766e !important;
+        box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.35), 0 8px 24px rgba(15, 118, 110, 0.2) !important;
+        border-radius: 14px !important;
+      }
+      [data-theme="dark"] .search-deep-target-glow {
+        border-color: #2dd4bf !important;
+        box-shadow: 0 0 0 4px rgba(45, 212, 191, 0.35), 0 8px 24px rgba(45, 212, 191, 0.25) !important;
+      }
+      @keyframes searchDeepGlow {
+        0% { transform: scale(1); }
+        100% { transform: scale(1.015); box-shadow: 0 0 0 6px rgba(15, 118, 110, 0.5), 0 10px 28px rgba(0,0,0,0.18); }
+      }
 
       /* In-Page Floating FAB */
       .ebk-mode-fab {
@@ -893,13 +908,245 @@
     document.body.appendChild(sheet);
   }
 
-  // 5. Initialize on DOM ready
+  // 5. Global Delegated Click Listener: Auto-Open Explanation on Option Click
+  function setupAutoOpenExplanation() {
+    if (window._ebkAutoOpenAttached) return;
+    window._ebkAutoOpenAttached = true;
+
+    document.addEventListener('click', function (e) {
+      // If user chose direct-answer mode (only question and correct answer), explanations are intentionally hidden
+      if (document.documentElement.getAttribute('data-qa-mode') === 'direct-answer') return;
+
+      const optBtn = e.target.closest('.opt-btn, .option-btn, .quiz-opt-btn, .q-opt, .option, button[data-is-correct], .mcq-option, .choice-btn');
+      if (!optBtn) return;
+
+      const card = optBtn.closest('.q-card, .quiz-card, .mcq-card, .quiz-item, article');
+      if (!card) return;
+
+      // Small delay to allow the question's native logic to mark right/wrong classes
+      setTimeout(function () {
+        // Expand explanation drawer inside the card
+        const drawerSelectors = [
+          '.exp-drawer', '.exp-content', '.ans-drawer', '.explanation-drawer',
+          '.explanation-content', '.ans-box', '.explanation-box', '.exp-box',
+          '.answer-drawer', '.drawer-content', '.quiz-explanation', '.quiz-expl',
+          '.exp-desc', '.exp-text'
+        ];
+        const drawers = card.querySelectorAll(drawerSelectors.join(', '));
+        drawers.forEach(function (d) {
+          d.classList.add('open');
+          d.classList.add('show');
+          d.style.display = 'block';
+        });
+
+        // Check if explanation drawer is outside the card or identified by id
+        const qId = card.id || card.getAttribute('data-id') || card.getAttribute('data-qid');
+        if (qId) {
+          const cleanId = qId.replace(/^(?:q-|qcard-|qCard_|card-q)/, '');
+          const candidateIds = [
+            `exp-${cleanId}`,
+            `exp_${cleanId}`,
+            `expDrawer_${cleanId}`,
+            `explanation-${cleanId}`,
+            `exp-${qId}`
+          ];
+          candidateIds.forEach(function (id) {
+            const d = document.getElementById(id);
+            if (d) {
+              d.classList.add('open');
+              d.classList.add('show');
+              d.style.display = 'block';
+            }
+          });
+        }
+
+        // Update toggle button text if present
+        const toggleSelectors = [
+          '.exp-toggle-btn', '.btn-exp', '.exp-toggle', '.toggle-exp-btn',
+          '.btn-exp-toggle', '.explanation-btn', '.drawer-toggle-btn',
+          '.drawer-toggle', '.btn-explain'
+        ];
+        const toggleBtns = card.querySelectorAll(toggleSelectors.join(', '));
+        toggleBtns.forEach(function (btn) {
+          if (btn.tagName === 'BUTTON' || btn.tagName === 'A' || btn.classList.contains('btn-exp-toggle') || btn.classList.contains('drawer-toggle-btn')) {
+            btn.innerHTML = '🔼 ব্যাখ্যা লুকান';
+          }
+        });
+      }, 50);
+    }, true);
+  }
+
+  // 6. Universal Search Hash Deep-Linking & Question Card Identification
+  function registerQuestionCardAnchors() {
+    const cards = document.querySelectorAll('.q-card, .quiz-card, .mcq-card, .quiz-item, article.q-card, article');
+    cards.forEach((card, idx) => {
+      const num = idx + 1;
+      const dataId = card.getAttribute('data-id') || card.getAttribute('data-qid') || card.getAttribute('data-qindex');
+      const targetNum = dataId ? dataId : String(num);
+
+      // Register all possible anchor ID variations matching search-data.json
+      const variations = [
+        `q-${targetNum}`,
+        `q${targetNum}`,
+        `qcard-${targetNum}`,
+        `qCard_${targetNum}`,
+        `card-q${targetNum}`
+      ];
+
+      if (!card.id) {
+        card.id = `q-${targetNum}`;
+      }
+
+      // Add alias anchor spans inside card if not present in DOM
+      variations.forEach(vId => {
+        if (!document.getElementById(vId)) {
+          const anchor = document.createElement('span');
+          anchor.id = vId;
+          anchor.className = 'ebk-anchor-target';
+          anchor.style.cssText = 'position:relative; top:-80px; display:block; visibility:hidden; height:0; width:0; pointer-events:none;';
+          card.insertBefore(anchor, card.firstChild);
+        }
+      });
+
+      card.setAttribute('data-search-id', targetNum);
+    });
+  }
+
+  function handleHashDeepLink() {
+    const hash = window.location.hash;
+    if (!hash || hash.length <= 1) return;
+    const cleanHash = decodeURIComponent(hash.replace(/^#/, '')).trim();
+    if (!cleanHash) return;
+
+    // 1. Check for Study Notes Section (e.g. #part1Notes, #part1, #notes)
+    if (cleanHash.toLowerCase().includes('part1') || cleanHash.toLowerCase().includes('note')) {
+      const noteTarget = document.getElementById(cleanHash) ||
+                         document.getElementById('part1Notes') ||
+                         document.getElementById('part1') ||
+                         document.querySelector('.notes-section, .sk-container, .sketchnote-container, .part1-notes, .study-notes, .sk-notes, #sec-life, #sec-stat, .study-section, .hero-banner + section');
+      if (noteTarget) {
+        setTimeout(() => {
+          noteTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          noteTarget.classList.remove('search-deep-target-glow');
+          void noteTarget.offsetWidth;
+          noteTarget.classList.add('search-deep-target-glow');
+        }, 120);
+        return;
+      }
+    }
+
+    // 2. Direct match by element ID or name
+    let target = document.getElementById(cleanHash) || document.querySelector(`[name="${cleanHash}"]`);
+
+    // If target is an anchor span or internal element inside a question card, resolve to parent card
+    if (target && !target.matches('.q-card, .quiz-card, .mcq-card, .quiz-item, article, section, .notes-section')) {
+      const parentCard = target.closest('.q-card, .quiz-card, .mcq-card, .quiz-item, article, section');
+      if (parentCard) target = parentCard;
+    }
+
+    // 3. Extract question number (support Bengali digits ০-৯ and English digits 0-9)
+    const bnDigits = { '০': '0', '১': '1', '২': '2', '৩': '3', '৪': '4', '৫': '5', '৬': '6', '৭': '7', '৮': '8', '৯': '9' };
+    const normalizedHash = cleanHash.replace(/[০-৯]/g, d => bnDigits[d]);
+    const qMatch = normalizedHash.match(/(?:q|qcard|card|status|question)[-_]?(\d+)/i) || (normalizedHash.match(/^\d+$/) ? normalizedHash.match(/^\d+$/) : null);
+    const numId = qMatch ? (qMatch[1] || qMatch[0]) : null;
+
+    if (!target && numId) {
+      const selectors = [
+        `#q-${numId}`,
+        `#q${numId}`,
+        `#qcard-${numId}`,
+        `#qCard_${numId}`,
+        `#qCard-${numId}`,
+        `#card-q${numId}`,
+        `[data-id="${numId}"]`,
+        `[data-qid="${numId}"]`,
+        `[data-qindex="${numId}"]`,
+        `[data-search-id="${numId}"]`,
+        `#exp-${numId}`,
+        `#exp_${numId}`,
+        `#expDrawer_${numId}`
+      ];
+
+      for (const sel of selectors) {
+        const el = document.querySelector(sel);
+        if (el) {
+          target = el.closest('.q-card, .quiz-card, .mcq-card, .quiz-item, article') || el;
+          break;
+        }
+      }
+
+      // Fallback: match by question index (1-based)
+      if (!target) {
+        const idx = parseInt(numId, 10);
+        const allCards = document.querySelectorAll('.q-card, .quiz-card, .mcq-card, .quiz-item, article.q-card');
+        if (allCards.length >= idx && idx > 0) {
+          target = allCards[idx - 1];
+        }
+      }
+    }
+
+    if (target) {
+      if (!target.id) target.id = cleanHash;
+
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Glowing pulse highlight
+        target.classList.remove('search-deep-target-glow');
+        void target.offsetWidth;
+        target.classList.add('search-deep-target-glow');
+
+        // Auto expand explanation
+        const drawerSelectors = [
+          '.exp-drawer', '.exp-content', '.ans-drawer', '.explanation-drawer',
+          '.explanation-content', '.ans-box', '.explanation-box', '.exp-box',
+          '.answer-drawer', '.drawer-content', '.quiz-explanation', '.quiz-expl',
+          '.exp-desc', '.exp-text'
+        ];
+        const expDrawers = target.querySelectorAll(drawerSelectors.join(', '));
+        expDrawers.forEach(d => {
+          d.classList.add('open');
+          d.classList.add('show');
+          d.style.display = 'block';
+        });
+        if (numId) {
+          const expById = document.getElementById(`exp-${numId}`) || document.getElementById(`exp_${numId}`);
+          if (expById) {
+            expById.classList.add('open');
+            expById.classList.add('show');
+            expById.style.display = 'block';
+          }
+        }
+        const toggleSelectors = [
+          '.exp-toggle-btn', '.btn-exp', '.exp-toggle', '.toggle-exp-btn',
+          '.btn-exp-toggle', '.explanation-btn', '.drawer-toggle-btn',
+          '.drawer-toggle', '.btn-explain'
+        ];
+        const toggleBtns = target.querySelectorAll(toggleSelectors.join(', '));
+        toggleBtns.forEach(btn => {
+          if (btn.tagName === 'BUTTON' || btn.tagName === 'A' || btn.classList.contains('btn-exp-toggle') || btn.classList.contains('drawer-toggle-btn')) {
+            btn.innerHTML = '🔼 ব্যাখ্যা লুকান';
+          }
+        });
+      }, 160);
+    }
+  }
+
+  // 7. Initialize on DOM ready
   function initEbkModes() {
     injectStyles();
     buildInPageControls();
     tagAllCorrectAnswers();
+    setupAutoOpenExplanation();
+    registerQuestionCardAnchors();
+    handleHashDeepLink();
+    window.addEventListener('hashchange', handleHashDeepLink);
+
     setTimeout(tagAllCorrectAnswers, 300);
+    setTimeout(registerQuestionCardAnchors, 350);
+    setTimeout(handleHashDeepLink, 380);
     setTimeout(tagAllCorrectAnswers, 1200);
+    setTimeout(handleHashDeepLink, 1000);
 
     // Hook dynamic render functions if defined globally
     function hookDynamicRenderers() {
@@ -909,6 +1156,8 @@
           window[fn] = function(...args) {
             const res = orig.apply(this, args);
             tagAllCorrectAnswers();
+            registerQuestionCardAnchors();
+            handleHashDeepLink();
             return res;
           };
           window[fn]._ebkHooked = true;
@@ -923,6 +1172,7 @@
     try {
       const observer = new MutationObserver(() => {
         tagAllCorrectAnswers();
+        registerQuestionCardAnchors();
       });
       observer.observe(document.body, { childList: true, subtree: true });
     } catch (e) {}
