@@ -27,31 +27,39 @@
     'Ethics & Good Governance': { bg: 'rgba(13,148,136,0.12)', text: '#0d9488', name: 'নৈতিকতা, মূল্যবোধ ও সুশাসন' },
     'Mathematical Reasoning': { bg: 'rgba(79,70,229,0.12)', text: '#4f46e5', name: 'গাণিতিক যুক্তি' },
     'Mental Ability': { bg: 'rgba(139,92,246,0.12)', text: '#8b5cf6', name: 'মানসিক দক্ষতা' },
+    'Non Cadre Bangla Grammar': { bg: 'rgba(15,118,110,0.12)', text: '#0f766e', name: 'নন-ক্যাডার বাংলা ব্যাকরণ' },
+    'Non Cadre Bangla Literature': { bg: 'rgba(15,118,110,0.12)', text: '#0f766e', name: 'নন-ক্যাডার বাংলা সাহিত্য' },
     'Non Cadre English': { bg: 'rgba(30,58,138,0.12)', text: '#1e3a8a', name: 'নন-ক্যাডার ইংরেজি' }
   };
 
   var TYPE_BADGES = {
+    'title': { text: '📖 অধ্যায়ের নাম', bg: 'rgba(136,19,55,0.1)', color: '#881337' },
+    'topic': { text: '📑 টপিকের নাম', bg: 'rgba(124,58,237,0.1)', color: '#7c3aed' },
     'q': { text: '🎯 বিগত বছরের প্রশ্ন', bg: 'rgba(15,118,110,0.1)', color: '#0f766e' },
-    'opt': { text: '📋 অপশনসমূহ', bg: 'rgba(100,116,139,0.1)', color: '#475569' },
     'exp': { text: '💡 বিশদ ব্যাখ্যা', bg: 'rgba(217,119,6,0.12)', color: '#b45309' },
-    'note': { text: '📝 রিভিশন নোট ও সূত্র', bg: 'rgba(37,99,235,0.1)', color: '#1d4ed8' },
-    'title': { text: '📖 অধ্যায়ের শিরোনাম', bg: 'rgba(136,19,55,0.1)', color: '#881337' }
+    'opt': { text: '📋 অপশনসমূহ', bg: 'rgba(100,116,139,0.1)', color: '#475569' },
+    'note': { text: '📝 প্রামাণ্য রিভিশন নোট', bg: 'rgba(37,99,235,0.1)', color: '#1d4ed8' }
   };
 
-  // --- Global State ---
+  // --- Global State & Subject Detection ---
   var searchData = [];
   var isDataLoaded = false;
-  var isMasterPage = !decodeURIComponent(window.location.pathname).includes('/Live MCQ ');
-  var currentSubject = '';
 
-  // Determine current subject if on subject index
-  if (!isMasterPage) {
-    var pathParts = decodeURIComponent(window.location.pathname).replace(/\\/g, '/').split('/');
-    for (var i = 0; i < pathParts.length; i++) {
-      if (pathParts[i].startsWith('Live MCQ ')) {
-        currentSubject = pathParts[i].replace('Live MCQ ', '').trim();
-        break;
-      }
+  var normPath = decodeURIComponent(window.location.pathname).replace(/\\/g, '/');
+  var pathSegments = normPath.split('/').filter(Boolean);
+  var currentSubject = '';
+  var isMasterPage = true;
+
+  for (var pi = 0; pi < pathSegments.length; pi++) {
+    var seg = pathSegments[pi];
+    if (seg.startsWith('Live MCQ ')) {
+      currentSubject = seg.replace('Live MCQ ', '').trim();
+      isMasterPage = false;
+      break;
+    } else if (seg.startsWith('Non Cadre ')) {
+      currentSubject = seg.trim();
+      isMasterPage = false;
+      break;
     }
   }
 
@@ -72,24 +80,31 @@
     localStorage.setItem(key, val);
   }
 
-  // --- Resolve Airtight Clickable Hrefs ---
+  // --- Resolve Airtight Clickable Hrefs Across All Subjects ---
   function resolveItemHref(item) {
     var rawFile = item.f || '';
     var basename = rawFile.indexOf('/') !== -1 ? rawFile.split('/').pop() : rawFile;
     var anchor = item.a || '';
 
+    // Determine target folder name
+    var folderName = '';
+    if (rawFile.indexOf('/') !== -1) {
+      folderName = rawFile.split('/')[0];
+    } else if (item.s.startsWith('Non Cadre ') || item.s.startsWith('Live MCQ ')) {
+      folderName = item.s;
+    } else {
+      folderName = 'Live MCQ ' + item.s;
+    }
+
     if (isMasterPage) {
-      if (rawFile.startsWith('Live MCQ ')) {
-        return rawFile + anchor;
-      } else {
-        return 'Live MCQ ' + item.s + '/' + basename + anchor;
-      }
+      return folderName + '/' + basename + anchor;
     } else {
       // Inside a subject directory
-      if (item.s.toLowerCase() === currentSubject.toLowerCase()) {
+      var thisFolder = currentSubject.startsWith('Non Cadre ') ? currentSubject : ('Live MCQ ' + currentSubject);
+      if (thisFolder.toLowerCase() === folderName.toLowerCase()) {
         return basename + anchor;
       } else {
-        return '../Live MCQ ' + item.s + '/' + basename + anchor;
+        return '../' + folderName + '/' + basename + anchor;
       }
     }
   }
@@ -204,6 +219,58 @@
         results.push(item);
       }
     }
+
+    // --- Search Priority & Relevance Ranking ---
+    // User-Specified Strict Sequence:
+    // 1. অধ্যায়ের নাম (Chapter Title / Name)
+    // 2. টপিকের নাম (Topic / Section heading)
+    // 3. প্রশ্নের লাইন (Question line)
+    // 4. ব্যাখ্যা ও অপশনসমূহ (Explanations & Options)
+    // 5. নিজের তৈরি ব্যাখ্যা হতে তৈরি নোট (Synthesized Study Notes / Sketchnotes)
+    function getItemPriority(it) {
+      var itType = it.t;
+      if (itType === 'title') return 1;
+      if (itType === 'topic') return 2;
+      if (itType === 'q') return 3;
+      if (itType === 'exp') return 4;
+      if (itType === 'opt') return 5;
+      if (itType === 'note') return 6;
+      return 7;
+    }
+
+    function getItemScore(it) {
+      var txtLower = (it.txt || '').toLowerCase();
+      var score = 0;
+      if (txtLower === qLower) {
+        score += 1000;
+      } else if (txtLower.startsWith(qLower)) {
+        score += 500;
+      }
+      var phraseIdx = txtLower.indexOf(qLower);
+      if (phraseIdx !== -1) {
+        score += Math.max(0, 300 - phraseIdx);
+      }
+      for (var k = 0; k < tokens.length; k++) {
+        var tokenIdx = txtLower.indexOf(tokens[k]);
+        if (tokenIdx !== -1) {
+          score += 50;
+          if (tokenIdx === 0) score += 30;
+        }
+      }
+      return score;
+    }
+
+    // Sort matching results: strict priority tier first, then secondary score
+    results.sort(function(a, b) {
+      var pA = getItemPriority(a);
+      var pB = getItemPriority(b);
+      if (pA !== pB) {
+        return pA - pB;
+      }
+      var sA = getItemScore(a);
+      var sB = getItemScore(b);
+      return sB - sA;
+    });
 
     return { total: results.length, items: results, tooShort: false };
   }
