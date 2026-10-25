@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ঐকিক নিয়ম - পিএসসি নন-ক্যাডার পাটিগণিত</title>
+  <meta name="description" content="পিএসসি নন-ক্যাডার পরীক্ষার বিগত সালের ১৫টি প্রামাণ্য ঐকিক নিয়মের প্রশ্ন, অনুপাত-শর্টকাট এবং বিশদ ব্যাখ্যা।">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../bangla-fonts.css">
+  <link rel="stylesheet" href="../paper-textures.css">
+  <link rel="stylesheet" href="../universal-modes.css">
+  <style>
+    :root {
+      --primary: #d97706;
+      --primary-dark: #b45309;
+      --primary-light: #fef3c7;
+      --accent: #059669;
+      --accent-light: #ecfdf5;
+      --bg-base: #f8fafc;
+      --bg-surface: rgba(255, 255, 255, 0.88);
+      --bg-card: rgba(255, 255, 255, 0.84);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(226, 232, 240, 0.85);
+      --correct-bg: #ecfdf5;
+      --correct-border: #10b981;
+      --correct-text: #065f46;
+      --wrong-bg: #fef2f2;
+      --wrong-border: #ef4444;
+      --wrong-text: #991b1b;
+      --font-base: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+    }
+
+    [data-theme="dark"] {
+      --primary: #fbbf24;
+      --primary-dark: #d97706;
+      --primary-light: rgba(251, 191, 36, 0.15);
+      --accent: #34d399;
+      --accent-light: rgba(52, 211, 153, 0.15);
+      --bg-base: #0f172a;
+      --bg-surface: rgba(30, 41, 59, 0.88);
+      --bg-card: rgba(30, 41, 59, 0.84);
+      --text-main: #f8fafc;
+      --text-muted: #cbd5e1;
+      --border-color: rgba(51, 65, 85, 0.85);
+      --correct-bg: rgba(6, 95, 70, 0.3);
+      --correct-border: #10b981;
+      --correct-text: #a7f3d0;
+      --wrong-bg: rgba(153, 27, 27, 0.3);
+      --wrong-border: #ef4444;
+      --wrong-text: #fecaca;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-base);
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.7;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .paper-container {
+      max-width: 940px;
+      margin: 20px auto;
+      padding: 32px 28px;
+      border-radius: 18px;
+      box-shadow: 0 10px 28px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transition: all 0.3s ease;
+    }
+
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 7px 14px;
+      border-radius: 8px;
+      background: var(--primary-light);
+      transition: all 0.2s ease;
+    }
+    .nav-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ctrl-btn {
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .ctrl-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .ch-header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 24px 20px;
+      background: var(--bg-surface);
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+    }
+
+    .ch-title {
+      font-size: 2.1rem;
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 4px;
+    }
+
+    .ch-meta-badges {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .meta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      border: 1px solid rgba(217, 119, 6, 0.25);
+    }
+
+    /* BCS Matrix */
+    .matrix-card {
+      background: var(--bg-surface);
+      border-radius: 14px;
+      border: 1px solid var(--border-color);
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    .matrix-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    .bcs-table th, .bcs-table td {
+      padding: 9px 12px;
+      border: 1px solid var(--border-color);
+    }
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    /* Part 1: Revision Notes */
+    .notes-section {
+      margin-bottom: 40px;
+    }
+    .sec-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px dashed var(--border-color);
+    }
+    .sec-header h2 {
+      font-size: 1.6rem;
+      color: var(--primary);
+    }
+
+    .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    .sk-box {
+      background: var(--bg-surface);
+      border-radius: 14px;
+      padding: 20px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+      position: relative;
+    }
+    .sk-box-title {
+      font-size: 1.25rem;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sk-box p, .sk-box li {
+      font-size: 0.94rem;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      line-height: 1.65;
+    }
+    .sk-box ul {
+      padding-left: 20px;
+    }
+
+    .sk-formula {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      padding: 12px 16px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 0.93rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+    [data-theme="dark"] .sk-formula {
+      background: rgba(251, 191, 36, 0.12);
+      color: #fde68a;
+    }
+
+    .sk-mark {
+      background: #fef08a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      color: #854d0e;
+    }
+    [data-theme="dark"] .sk-mark {
+      background: rgba(250, 204, 21, 0.25);
+      color: #fef08a;
+    }
+
+    /* Part 2: Question Engine */
+    .quiz-section {
+      margin-top: 35px;
+    }
+
+    .quiz-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      background: var(--bg-surface);
+      padding: 16px 20px;
+      border-radius: 14px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 25px;
+    }
+
+    .score-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--primary);
+    }
+    .score-badge {
+      background: var(--primary);
+      color: #fff;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+    }
+
+    .filter-select {
+      padding: 7px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-family: var(--font-base);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .reset-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 8px;
+      background: var(--wrong-bg);
+      color: var(--wrong-text);
+      border: 1px solid var(--wrong-border);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .reset-btn:hover {
+      background: #fee2e2;
+    }
+
+    /* Q Card */
+    .q-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 22px 24px;
+      margin-bottom: 22px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .q-card:hover {
+      box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.06);
+    }
+
+    .q-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .q-num-badge {
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+
+    .q-cat-tag {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+
+    .q-tag {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-left: auto;
+    }
+
+    .q-text {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 16px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-family: var(--font-base);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .opt-btn:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .opt-letter {
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .opt-btn.selected-correct {
+      background: var(--correct-bg) !important;
+      border-color: var(--correct-border) !important;
+      color: var(--correct-text) !important;
+    }
+    .opt-btn.selected-wrong {
+      background: var(--wrong-bg) !important;
+      border-color: var(--wrong-border) !important;
+      color: var(--wrong-text) !important;
+    }
+    .opt-btn.highlight-correct {
+      border-color: var(--correct-border) !important;
+      background: var(--correct-bg) !important;
+      color: var(--correct-text) !important;
+    }
+
+    .card-footer {
+      border-top: 1px solid var(--border-color);
+      padding-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ans-drawer {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid transparent;
+      transition: all 0.25s ease;
+    }
+    .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      background: var(--bg-surface);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--primary);
+      border: 1px solid var(--border-color);
+      transition: all 0.2s;
+    }
+    .drawer-header:hover {
+      background: var(--primary-light);
+    }
+    .drawer-header svg {
+      transition: transform 0.25s ease;
+    }
+    .drawer-header.open svg {
+      transform: rotate(90deg);
+    }
+    .drawer-badge {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      background: var(--primary-light);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .drawer-content {
+      display: none;
+      padding: 14px 16px;
+      background: var(--bg-surface);
+      border-radius: 0 0 8px 8px;
+      border: 1px solid var(--border-color);
+      border-top: none;
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+    .ans-drawer.open .drawer-content {
+      display: block;
+    }
+
+    .exp-box {
+      color: var(--text-main);
+    }
+    .exp-correct {
+      font-weight: 700;
+      color: var(--correct-text);
+      margin-bottom: 6px;
+    }
+    .exp-desc {
+      color: var(--text-muted);
+    }
+
+    .card-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .doubt-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .doubt-btn:hover, .doubt-btn.active {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      border-color: var(--primary);
+    }
+
+    /* Typography Protection */
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+    .bcs-table, .bcs-table *, .score-bar, .score-bar * {
+      font-family: var(--font-base) !important;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 30px 20px 20px;
+      margin-top: 40px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+  </style>
+</head>
+<body class="paper-graph">
+  <div class="paper-container">
+    
+    <!-- Top Nav -->
+    <header class="top-nav">
+      <div class="nav-left">
+        <a href="index.html" class="nav-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          সূচিপত্র
+        </a>
+      </div>
+      <div class="nav-right">
+        <button class="ctrl-btn" onclick="changeFontSize(-1)" title="ফন্ট ছোট করুন">A-</button>
+        <button class="ctrl-btn" onclick="changeFontSize(0)" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="ctrl-btn" onclick="changeFontSize(1)" title="ফন্ট বড় করুন">A+</button>
+        <button class="ctrl-btn" onclick="toggleTheme()" title="থিম পরিবর্তন" id="themeToggle">
+          <span id="themeIcon">🌙</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Chapter Header -->
+    <div class="ch-header">
+      <h1 class="ch-title font-begum-zia-curve">
+        ঐকিক নিয়ম
+        <span class="ch-en">(Unitary Method)</span>
+      </h1>
+      <div class="ch-meta-badges">
+        <span class="meta-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          পৃষ্ঠা ২৬২–২৬৪
+        </span>
+        <span class="meta-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          মোট ১৫টি MCQ (১০০% প্রামাণ্য)
+        </span>
+      </div>
+    </div>
+
+    <!-- BCS & PSC Analysis Matrix -->
+    <div class="matrix-card">
+      <div class="matrix-title font-begum-zia-curve">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line></svg>
+        বিসিএস ও নন-ক্যাডার প্রশ্ন বিশ্লেষণ ছক
+      </div>
+      <table class="bcs-table">
+        <thead>
+          <tr>
+            <th>টপিক / বিষয়</th>
+            <th>বিসিএস ও পিএসসি নন-ক্যাডার প্রশ্ন সংখ্যা</th>
+            <th>গুরুত্ব</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>চাঁদা ও সদস্য সম্পর্কিত হিসাব</td>
+            <td>২টি MCQ</td>
+            <td>★★★★☆</td>
+          </tr>
+          <tr>
+            <td>মূল্য বিনিময় ও সমমূল্যের হিসাব (গরু-ছাগল/ঘোড়া)</td>
+            <td>২টি MCQ</td>
+            <td>★★★★★</td>
+          </tr>
+          <tr>
+            <td>পরিমাপ, গজ-ফুট ও আয়তন-ওজন রূপান্তর</td>
+            <td>৩টি MCQ</td>
+            <td>★★★★☆</td>
+          </tr>
+          <tr>
+            <td>সাধারণ ঐকিক নিয়ম ও মূল্য নির্ণয়</td>
+            <td>৪টি MCQ</td>
+            <td>★★★★★</td>
+          </tr>
+          <tr>
+            <td>ছায়া-উচ্চতা অনুপাত ও যৌক্তিক ধাঁধা</td>
+            <td>৪টি MCQ</td>
+            <td>★★★★★</td>
+          </tr>
+          <tr>
+            <td><strong>সর্বমোট</strong></td>
+            <td><strong>১৫টি প্রশ্ন</strong></td>
+            <td><strong>সর্বোচ্চ গুরুত্ব</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Part 1: Authentic Interactive Revision Notes -->
+    <section class="notes-section">
+      <div class="sec-header">
+        <h2 class="font-begum-zia-curve">১ম অংশ: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি</h2>
+      </div>
+
+      <div class="sk-grid">
+        <!-- Box 1 -->
+        <div class="sk-box">
+          <h3 class="sk-box-title font-begum-zia-curve">১. ঐকিক নিয়মের মূল ভিত্তি (সরল ও ব্যস্ত)</h3>
+          <p><strong>সরল সম্পর্ক:</strong> একটির পরিমাণ বাড়লে অপরটি বাড়ে (যেমন: জিনিসের সংখ্যা বাড়লে মোট মূল্য বাড়ে)। ১টির জন্য ভাগ এবং অনেকের জন্য গুণ।</p>
+          <p><strong>ব্যস্ত সম্পর্ক:</strong> একটি বাড়লে অপরটি কমে (যেমন: লোকসংখ্যা বাড়লে নির্দিষ্ট কাজ শেষ করার দিন কমে)। ১ জনের জন্য গুণ এবং অনেকের জন্য ভাগ।</p>
+          <div class="sk-formula">
+            একটির মান বের করে প্রয়োজনীয় সংখ্যক এককের মান নির্ণয় করাই হলো ঐকিক নিয়ম।
+          </div>
+        </div>
+
+        <!-- Box 2 -->
+        <div class="sk-box">
+          <h3 class="sk-box-title font-begum-zia-curve">২. সমিতি ও চাঁদা সংক্রান্ত ট্রিকস</h3>
+          <p>সমিতির n জন সদস্য প্রত্যেকে সদস্য সংখ্যার k গুণ চাঁদা দিলে:</p>
+          <div class="sk-formula">
+            মোট চাঁদা = n × (n × k) = k·n² টাকা<br>
+            সদস্য সংখ্যার সমান চাঁদা দিলে = n × n = n²<br>
+            সদস্য সংখ্যার n গুণ চাঁদা দিলে = n × n² = n³
+          </div>
+          <p><strong>উদাহরণ:</strong> ৪ জন সদস্য প্রত্যেকে ৪ গুণ দিলে = ৪ × ৪ × ৪ = ৬৪ টাকা। ৬ জন সদস্য ৬ গুণ দিলে = ৬³ = ২১৬ টাকা।</p>
+        </div>
+
+        <!-- Box 3 -->
+        <div class="sk-box">
+          <h3 class="sk-box-title font-begum-zia-curve">৩. বিড়াল-ইঁদুর ধাঁধা ও ম্যান-ডে সূত্র</h3>
+          <p>m₁ জন কর্মী d₁ সময়ে w₁ পরিমাণ কাজ সম্পন্ন করলে:</p>
+          <div class="sk-formula">
+            (m₁ × d₁) / w₁ = (m₂ × d₂) / w₂
+          </div>
+          <p><strong>ক্লাসিক ধাঁধা:</strong> ৫টি বিড়াল ৫টি ইঁদুর ধরতে ৫ মিনিট নিলে, ১০০টি বিড়ালের ১০০টি ইঁদুর ধরতে কত সময় লাগবে?<br>
+          (৫ × ৫) / ৫ = (১০০ × t) / ১০০ ⟹ <span class="sk-mark">t = ৫ মিনিট</span>!</p>
+        </div>
+
+        <!-- Box 4 -->
+        <div class="sk-box">
+          <h3 class="sk-box-title font-begum-zia-curve">৪. ছায়া ও উচ্চতার ঐকিক সম্পর্ক</h3>
+          <p>একই সময়ে সূর্যের আলোতে যেকোনো খাড়া বস্তু এবং তার ছায়ার দৈর্ঘ্যের অনুপাত সর্বদা ধ্রুবক থাকে:</p>
+          <div class="sk-formula">
+            বস্তুর উচ্চতা ÷ ছায়ার দৈর্ঘ্য = ধ্রুবক<br>
+            গাছের উচ্চতা = গাছের ছায়া × (বাঁশের উচ্চতা ÷ বাঁশের ছায়া)
+          </div>
+          <p><strong>উদাহরণ:</strong> বাঁশের উচ্চতা ৬ ফুট ও ছায়া ৪ ফুট হলে অনুপাত ৩:২। গাছের ছায়া ৬৪ ফুট হলে উচ্চতা = ৬৪ × (৩/২) = ৯৬ ফুট।</p>
+        </div>
+
+        <!-- Box 5 -->
+        <div class="sk-box">
+          <h3 class="sk-box-title font-begum-zia-curve">৫. পরিমাপ ও আন্তর্জাতিক একক রূপান্তর</h3>
+          <p>ঐকিক নিয়মের বিভিন্ন পরীক্ষায় ঘন ঘন আসা রূপান্তর সূত্রাবলি:</p>
+          <div class="sk-formula">
+            ১ গজ = ৩ ফুট = ৩৬ ইঞ্চি<br>
+            ৪° সে. এ ১ লিটার বিশুদ্ধ পানির ওজন = ১ কেজি (১০০০ গ্রাম)<br>
+            ২৫০ মিলি. পানির ওজন = ২৫০/১০০০ = ০.২৫ কেজি<br>
+            ১ পাউন্ড ≈ ৪৫৩.৫৯ গ্রাম (বা ২.২ পাউন্ড ≈ ১ কেজি)
+          </div>
+        </div>
+
+        <!-- Box 6 -->
+        <div class="sk-box">
+          <h3 class="sk-box-title font-begum-zia-curve">৬. আলোর গতি ও দূরত্ব নির্ণয়</h3>
+          <p>আলো প্রতি সেকেন্ডে অতিক্রম করে ৩ লক্ষ কিলোমিটার (৩ × ১০⁵ কিমি)।</p>
+          <div class="sk-formula">
+            দূরত্ব = গতিবেগ × মোট সময় (সেকেন্ডে)<br>
+            ৮ মিনিট ২০ সেকেন্ড = ৫০০ সেকেন্ড<br>
+            অতিক্রান্ত দূরত্ব = ৫০০ × ৩,০০,০০০ = ১৫ কোটি কিমি
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Part 2: Question Engine -->
+    <section class="quiz-section">
+      <div class="sec-header">
+        <h2 class="font-begum-zia-curve">২য় অংশ: বিগত বছরের প্রামাণ্য প্রশ্নব্যাংক ও ইন্টারঅ্যাক্টিভ কুইজ</h2>
+      </div>
+
+      <!-- Controls -->
+      <div class="quiz-controls">
+        <div class="score-bar">
+          স্কোর: <span class="score-badge" id="scoreDisplay">০ / ১৫</span>
+        </div>
+        <select class="filter-select" id="catFilter" onchange="filterQuestions(this.value)">
+          <option value="all">সমস্ত প্রশ্ন (১৫টি)</option>
+          <option value="চাঁদা ও সদস্য সম্পর্কিত">চাঁদা ও সদস্য সম্পর্কিত (২টি)</option>
+          <option value="মূল্য বিনিময় ও সমমূল্য">মূল্য বিনিময় ও সমমূল্য (২টি)</option>
+          <option value="পরিমাপ ও টুকরা সংক্রান্ত">পরিমাপ ও টুকরা সংক্রান্ত (২টি)</option>
+          <option value="সাধারণ ঐকিক নিয়ম">সাধারণ ঐকিক নিয়ম (৩টি)</option>
+          <option value="ছায়া ও উচ্চতার অনুপাত">ছায়া ও উচ্চতার অনুপাত (১টি)</option>
+          <option value="ঐকিক নিয়মের ধাঁধা ও বিশ্লেষণ">ঐকিক নিয়মের ধাঁধা (১টি)</option>
+        </select>
+        <button class="reset-btn" onclick="resetQuiz()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+          কুইজ রিসেট
+        </button>
+      </div>
+
+      <!-- Question Cards List -->
+      <div class="cards-list">
+<!-- Question Card 1 -->
+    <div class="q-card" id="q1" data-category="চাঁদা ও সদস্য সম্পর্কিত" data-ans="খ">
+      <div class="q-header">
+        <span class="q-num-badge">প্রশ্ন ০১</span>
+        <span class="q-cat-tag">চাঁদা ও সদস্য সম্পর্কিত</span>
+        <span class="q-tag">বিভিন্ন মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-২২</span>
+      </div>
+      <div class="q-text">০১. 4 জন সদস্যের একটি কমিটির প্রত্যেকেই সদস্য সংখ্যার 4 গুণ করে চাঁদা দিলে মোট চাঁদার পরিমাণ কত?</div>
+      <div class="options-grid">
+        <button class="opt-btn" data-letter="ক" data-correct="false" onclick="handleOptionClick(this, 'ক', 'খ', 'q1')">
+            <span class="opt-letter">(ক)</span>
+            <span class="opt-text">16</span>
+          </button><button class="opt-btn" data-letter="খ" data-correct="true" onclick="handleOptionClick(this, 'খ', 'খ', 'q1')">
+            <span class="opt-letter">(খ)</span>
+            <span class="opt-text">64</span>
+          </button><button class="opt-btn" data-letter="গ" data-correct="false" onclick="handleOptionClick(this, 'গ', 'খ', 'q1')">
+            <span class="opt-letter">(গ)</span>
+            <span class="opt-text">256</span>
+          </button><button class="opt-btn" data-letter="ঘ" data-correct="false" onclick="handleOptionClick(this, 'ঘ', 'খ', 'q1')">
+            <span class="opt-letter">(ঘ)</span>
+            <span class="opt-text">512</span>
+          </button>
+      </div>
+      <div class="card-footer">
+        <div class="ans-drawer" id="drawer-q1">
+          <div class="drawer-header" onclick="toggleDrawer('q1')">
+            <span class="drawer-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              ব্যাখ্যা ও সমাধান
+            </span>
+            <span class="drawer-badge">সঠিক উত্তর: (খ)</span>
+          </div>
+          <div class="drawer-content">
+            <div class="exp-box">
+              <div class="exp-correct"><strong>সঠিক উত্তর:</strong> (খ)</div>
+              <div class="exp-desc">কমিটির সদস্য সংখ্যা = 4 জন।<br>প্রত্যেকে চাঁদা দেয় সদস্য সংখ্যার 4 গুণ = (4 × 4) = 16 টাকা।<br>∴ 4 জন সদস্যের মোট চাঁদা = 4 × 16 = 64 টাকা। (বা 4 × 4 × 4 = 64)।</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="doubt-btn" onclick="toggleDoubt('q1')" title="প্রশ্নটি চিহ্নিত করুন">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            চিহ্নিত করুন
+          </button>
+        </div>
+      </div>
+    </div>
+
+<!-- Question Card 2 -->
+    <div class="q-card" id="q2" data-category="চাঁদা ও সদস্য সম্পর্কিত" data-ans="ক">
+      <div class="q-header">
+        <span class="q-num-badge">প্রশ্ন ০২</span>
+        <span class="q-cat-tag">চাঁদা ও সদস্য সম্পর্কিত</span>
+        <span class="q-tag">পররাষ্ট্র মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-১৯</span>
+      </div>
+      <div class="q-text">০২. ৬ জন সদস্যের সমিতির প্রত্যেকেই সদস্য সংখ্যার ৬ গুণ চাঁদা দিলে মোট কত টাকা হবে?</div>
+      <div class="options-grid">
+        <button class="opt-btn" data-letter="ক" data-correct="true" onclick="handleOptionClick(this, 'ক', 'ক', 'q2')">
+            <span class="opt-letter">(ক)</span>
+            <span class="opt-text">২১৬</span>
+          </button><button class="opt-btn" data-letter="খ" data-correct="false" onclick="handleOptionClick(this, 'খ', 'ক', 'q2')">
+            <span class="opt-letter">(খ)</span>
+            <span class="opt-text">১২৫</span>
+          </button><button class="opt-btn" data-letter="গ" data-correct="false" onclick="handleOptionClick(this, 'গ', 'ক', 'q2')">
+            <span class="opt-letter">(গ)</span>
+            <span class="opt-text">১০০</span>
+          </button><button class="opt-btn" data-letter="ঘ" data-correct="false" onclick="handleOptionClick(this, 'ঘ', 'ক', 'q2')">
+            <span class="opt-letter">(ঘ)</span>
+            <span class="opt-text">৬৪</span>
+          </button>
+      </div>
+      <div class="card-footer">
+        <div class="ans-drawer" id="drawer-q2">
+          <div class="drawer-header" onclick="toggleDrawer('q2')">
+            <span class="drawer-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              ব্যাখ্যা ও সমাধান
+            </span>
+            <span class="drawer-badge">সঠিক উত্তর: (ক)</span>
+          </div>
+          <div class="drawer-content">
+            <div class="exp-box">
+              <div class="exp-correct"><strong>সঠিক উত্তর:</strong> (ক)</div>
+              <div class="exp-desc">প্রত্যেকের চাঁদা = সদস্য সংখ্যার ৬ গুণ = ৬ × ৬ = ৩৬ টাকা।<br>∴ মোট চাঁদার পরিমাণ = ৩৬ × ৬ = ২১৬ টাকা।</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="doubt-btn" onclick="toggleDoubt('q2')" title="প্রশ্নটি চিহ্নিত করুন">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            চিহ্নিত করুন
+          </button>
+        </div>
+      </div>
+    </div>
+
+<!-- Question Card 3 -->
+    <div class="q-card" id="q3" data-category="মূল্য বিনিময় ও সমমূল্য" data-ans="ঘ">
+      <div class="q-header">
+        <span class="q-num-badge">প্রশ্ন ০৩</span>
+        <span class="q-cat-tag">মূল্য বিনিময় ও সমমূল্য</span>
+        <span class="q-tag">পররাষ্ট্র মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-১৯</span>
+      </div>
+      <div class="q-text">০৩. ৫টি গরুর মূল্য ১৫টি ছাগলের মূল্যের সমান। একটি গরুর মূল্য ৬,০০০ টাকা হলে একটি ছাগলের মূল্য কত?</div>
+      <div class="options-grid">
+        <button class="opt-btn" data-letter="ক" data-correct="false" onclick="handleOptionClick(this, 'ক', 'ঘ', 'q3')">
+            <span class="opt-letter">(ক)</span>
+            <span class="opt-text">১,৮০০ টাকা</span>
+          </button><button class="opt-btn" data-letter="খ" data-correct="false" onclick="handleOptionClick(this, 'খ', 'ঘ', 'q3')">
+            <span class="opt-letter">(খ)</span>
+            <span class="opt-text">২,২০০ টাকা</span>
+          </button><button class="opt-btn" data-letter="গ" data-correct="false" onclick="handleOptionClick(this, 'গ', 'ঘ', 'q3')">
+            <span class="opt-letter">(গ)</span>
+            <span class="opt-text">১,৫০০ টাকা</span>
+          </button><button class="opt-btn" data-letter="ঘ" data-correct="true" onclick="handleOptionClick(this, 'ঘ', 'ঘ', 'q3')">
+            <span class="opt-letter">(ঘ)</span>
+            <span class="opt-text">২,০০০ টাকা</span>
+          </button>
+      </div>
+      <div class="card-footer">
+        <div class="ans-drawer" id="drawer-q3">
+          <div class="drawer-header" onclick="toggleDrawer('q3')">
+            <span class="drawer-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              ব্যাখ্যা ও সমাধান
+            </span>
+            <span class="drawer-badge">সঠিক উত্তর: (ঘ)</span>
+          </div>
+          <div class="drawer-content">
+            <div class="exp-box">
+              <div class="exp-correct"><strong>সঠিক উত্তর:</strong> (ঘ)</div>
+              <div class="exp-desc">৫টি গরুর মূল্য = ১৫টি ছাগলের মূল্য<br>∴ ১টি গরুর মূল্য = <sup>১৫</sup>&frasl;<sub>৫</sub> = ৩টি ছাগলের মূল্য<br>প্রশ্নমতে, ১টি গরুর মূল্য = ৬,০০০ টাকা<br>∴ ৩টি ছাগলের মূল্য = ৬,০০০ টাকা ⟹ ১টি ছাগলের মূল্য = <sup>৬০০০</sup>&frasl;<sub>৩</sub> = ২,০০০ টাকা।</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="doubt-btn" onclick="toggleDoubt('q3')" title="প্রশ্নটি চিহ্নিত করুন">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            চিহ্নিত করুন
+          </button>
+        </div>
+      </div>
+    </div>
+
+<!-- Question Card 4 -->
+    <div class="q-card" id="q4" data-category="সময় ও কাজের সাধারণ হার" data-ans="খ">
+      <div class="q-header">
+        <span class="q-num-badge">প্রশ্ন ০৪</span>
+        <span class="q-cat-tag">সময় ও কাজের সাধারণ হার</span>
+        <span class="q-tag">তথ্য মন্ত্রণালয়ের অধীন চলচ্চিত্র ও প্রকাশনা অধিদপ্তরের ক্যামেরাম্যান-১৯</span>
+      </div>
+      <div class="q-text">০৪. একটি কার ওয়াশার ৮টি কার ওয়াশ করে ৩৬ মিনিটে। এ হারে তিন ঘণ্টায় কয়টি কার ওয়াশ করবে?</div>
+      <div class="options-grid">
+        <button class="opt-btn" data-letter="ক" data-correct="false" onclick="handleOptionClick(this, 'ক', 'খ', 'q4')">
+            <span class="opt-letter">(ক)</span>
+            <span class="opt-text">৮০টি</span>
+          </button><button class="opt-btn" data-letter="খ" data-correct="true" onclick="handleOptionClick(this, 'খ', 'খ', 'q4')">
+            <span class="opt-letter">(খ)</span>
+            <span class="opt-text">৪০টি</span>
+          </button><button class="opt-btn" data-letter="গ" data-correct="false" onclick="handleOptionClick(this, 'গ', 'খ', 'q4')">
+            <span class="opt-letter">(গ)</span>
+            <span class="opt-text">৫০টি</span>
+          </button><button class="opt-btn" data-letter="ঘ" data-correct="false" onclick="handleOptionClick(this, 'ঘ', 'খ', 'q4')">
+            <span class="opt-letter">(ঘ)</span>
+            <span class="opt-text">৬০টি</span>
+          </button>
+      </div>
+      <div class="card-footer">
+        <div class="ans-drawer" id="drawer-q4">
+          <div class="drawer-header" onclick="toggleDrawer('q4')">
+            <span class="drawer-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              ব্যাখ্যা ও সমাধান
+            </span>
+            <span class="drawer-badge">সঠিক উত্তর: (খ)</span>
+          </div>
+          <div class="drawer-content">
+            <div class="exp-box">
+              <div class="exp-correct"><strong>সঠিক উত্তর:</strong> (খ)</div>
+              <div class="exp-desc">৩ ঘণ্টা = ৩ × ৬০ = ১৮০ মিনিট।<br>৩৬ মিনিটে ওয়াশ করে ৮টি কার<br>∴ ১৮০ মিনিটে ওয়াশ করে = <sup>(৮ × ১৮০)</sup>&frasl;<sub>৩৬</sub> = ৮ × ৫ = ৪০টি কার।</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="doubt-btn" onclick="toggleDoubt('q4')" title="প্রশ্নটি চিহ্নিত করুন">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            চিহ্নিত করুন
+          </button>
+        </div>
+      </div>
+    </div>
+
+<!-- Question Card 5 -->
+    <div class="q-card" id="q5" data-category="পরিমাপ ও টুকরা সংক্রান্ত" data-ans="ক">
+      <div class="q-header">
+        <span class="q-num-badge">প্রশ্ন ০৫</span>
+        <span class="q-cat-tag">পরিমাপ ও টুকরা সংক্রান্ত</span>
+        <span class="q-tag">পিএসসি (বিভিন্ন পদ)-১৯</span>
+      </div>
+      <div class="q-text">০৫. তিন গজ কাপড় থেকে ১.৫ ফুট করে তিনটি টুকরা কাটা হলে কতটুকু কাপড় অবশিষ্ট রইল?</div>
+      <div class="options-grid">
+        <button class="opt-btn" data-letter="ক" data-correct="true" onclick="handleOptionClick(this, 'ক', 'ক', 'q5')">
+            <span class="opt-letter">(ক)</span>
+            <span class="opt-text">৪.৫ ফুট</span>
+          </button><button class="opt-btn" data-letter="খ" data-correct="false" onclick="handleOptionClick(this, 'খ', 'ক', 'q5')">
+            <span class="opt-letter">(খ)</span>
+            <span class="opt-text">৩ ফুট</span>
+          </button><button class="opt-btn" data-letter="গ" data-correct="false" onclick="handleOptionClick(this, 'গ', 'ক', 'q5')">
+            <span class="opt-letter">(গ)</span>
+            <span class="opt-text">৫ ফুট</span>
+          </button><button class="opt-btn" data-letter="ঘ" data-correct="false" onclick="handleOptionClick(this, 'ঘ', 'ক', 'q5')">
+            <span class="opt-letter">(ঘ)</span>
+            <span class="opt-text">৬.৫ ফুট</span>
+          </button>
+      </div>
+      <div class="card-footer">
+        <div class="ans-drawer" id="drawer-q5">
+          <div class="drawer-header" onclick="toggleDrawer('q5')">
+            <span class="drawer-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              ব্যাখ্যা ও সমাধান
+            </span>
+            <span class="drawer-badge">সঠিক উত্তর: (ক)</span>
+          </div>
+          <div class="drawer-content">
+            <div class="exp-box">
+              <div class="exp-correct"><strong>সঠিক উত্তর:</strong> (ক)</div>
+              <div class="exp-desc">আমরা জানি, ১ গজ = ৩ ফুট।<br>∴ ৩ গজ = ৩ × ৩ = ৯ ফুট।<br>১.৫ ফুট করে ৩টি টুকরায় মোট কাটা হলো = ১.৫ × ৩ = ৪.৫ ফুট।<br>∴ অবশিষ্ট কাপড় = ৯ - ৪.৫ = ৪.৫ ফুট।</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="doubt-btn" onclick="toggleDoubt('q5')" title="প্রশ্নটি চিহ্নিত করুন">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            চিহ্নিত করুন
+          </button>
+        </div>
+      </div>
+    </div>
+
+<!-- Question Card 6 -->
+    <div class="q-card" id="q6" data-category="পরিমাপ ও রূপান্তর" data-ans="খ">
+      <div class="q-header">
+        <span class="q-num-badge">প্রশ্ন ০৬</span>
+        <span class="q-cat-tag">পরিমাপ ও রূপান্তর</span>
+        <span class="q-tag">টেক্সটাইল অধিদপ্তর (ইন্সট্রাক্টর)-১৮</span>
+      </div>
+      <div class="q-text">০৬. ২৫০ মিলি. আয়তনের পানির ওজন কত কেজি?</div>
+      <div class="options-grid">
+        <button class="opt-btn" data-letter="ক" data-correct="false" onclick="handleOptionClick(this, 'ক', 'খ', 'q6')">
+            <span class="opt-letter">(ক)</span>
+            <span class="opt-text">০.০২৫ কেজি</span>
+          </button><button class="opt-btn" data-letter="খ" data-correct="true" onclick="handleOptionClick(this, 'খ', 'খ', 'q6')">
+            <span class="opt-letter">(খ)</span>
+            <span class="opt-text">০.২৫ কেজি</span>
+          </button><button class="opt-btn" data-letter="গ" data-correct="false" onclick="handleOptionClick(this, 'গ', 'খ', 'q6')">
+            <span class="opt-letter">(গ)</span>
+            <span class="opt-text">২.৫ কেজি</span>
+          </button><button class="opt-btn" data-letter="ঘ" data-correct="false" onclick="handleOptionClick(this, 'ঘ', 'খ', 'q6')">
+            <span class="opt-letter">(ঘ)</span>
+            <span class="opt-text">২৫ কেজি</span>
+          </button>
+      </div>
+      <div class="card-footer">
+        <div class="ans-drawer" id="drawer-q6">
+          <div class="drawer-header" onclick="toggleDrawer('q6')">
+            <span class="drawer-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              ব্যাখ্যা ও সমাধান
+            </span>
+            <span class="drawer-badge">সঠিক উত্তর: (খ)</span>
+          </div>
+          <div class="drawer-content">
+            <div class="exp-box">
+              <div class="exp-correct"><strong>সঠিক উত্তর:</strong> (খ)</div>
+              <div class="exp-desc">আমরা জানি, ৪° সে. তাপমাত্রায় ১ লিটার (১০০০ মিলি.) বিশুদ্ধ পানির ওজন ১ কিলোগ্রাম (কেজি)।<br>∴ ২৫০ মিলি. পানির ওজন = <sup>২৫০</sup>&frasl;<sub>১০০০</sub> কেজি = ০.২৫ কেজি।</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="doubt-btn" onclick="toggleDoubt('q6')" title="প্রশ্নটি চিহ্নিত করুন">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            চিহ্নিত করুন
+          </button>
+        </div>
+      </div>
+    </div>
+
+<!-- Question Card 7 -->
+    <div class="q-card" id="q7" data-category="গতিবেগ ও দূরত্ব" data-ans="ক">
+      <div class="q-header">
+        <span class="q-num-badge">প্রশ্ন ০৭</span>
+        <span class="q-cat-tag">গতিবেগ ও দূরত্ব</span>
+        <span class="q-tag">পিএসসি (উপসহকারী প্রকৌশলী)-১৮</span>
+      </div>
+      <div class="q-text">০৭. আলো প্রতি সেকেন্ডে ৩ লক্ষ কিলোমিটার যায়। ৮ মিনিট ২০ সেকেন্ডে আলো কত দূরত্ব অতিক্রম করবে?</div>
+      <div class="options-grid">
+        <button class="opt-btn" data-letter="ক" data-correct="true" onclick="handleOptionClick(this, 'ক', 'ক', 'q7')">
+            <span class="opt-letter">(ক)</span>
+            <span class="opt-text">১৫ কোটি কিমি</span>
+          </button><button class="opt-btn" data-letter="খ" data-correct="false" onclick="handleOptionClick(this, 'খ', 'ক', 'q7')">
+            <span class="opt-letter">(খ)</span>
+            <span class="opt-text">১২ কোটি কিমি</span>
+          </button><button class="opt-btn" data-letter="গ" data-correct="false" onclick="handleOptionClick(this, 'গ', 'ক', 'q7')">
+            <span class="opt-letter">(গ)</span>
+            <span class="opt-text">১৮ কোটি কিমি</span>
+          </button><button class="opt-btn" data-letter="ঘ" data-correct="false" onclick="handleOptionClick(this, 'ঘ', 'ক', 'q7')">
+            <span class="opt-letter">(ঘ)</span>
+            <span class="opt-text">১০ কোটি কিমি</span>
+          </button>
+      </div>
+      <div class="card-footer">
+        <div class="ans-drawer" id="drawer-q7">
+          <div class="drawer-header" onclick="toggleDrawer('q7')">
+            <span class="drawer-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              ব্যাখ্যা ও সমাধান
+            </span>
+            <span class="drawer-badge">সঠিক উত্তর: (ক)</span>
+          </div>
+          <div class="drawer-content">
+            <div class="exp-box">
+              <div class="exp-correct"><strong>সঠিক উত্তর:</strong> (ক)</div>
+              <div class="exp-desc">৮ মিনিট ২০ সেকেন্ড = (৮ × ৬০) + ২০ = ৪৮০ + ২০ = ৫০০ সেকেন্ড।<br>১ সেকেন্ডে আলো যায় = ৩,০০,০০০ কিমি<br>∴ ৫০০ সেকেন্ডে যায় = ৫০০ × ৩,০০,০০০ = ১৫,০০,০০,০০০ কিমি = ১৫ কোটি কিমি।</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="doubt-btn" onclick="toggleDoubt('q7')" title="প্রশ্নটি চিহ্নিত করুন">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            চিহ্নিত করুন
+          </button>
+        </div>
+      </div>
+    </div>
+
+<!-- Question Card 8 -->
+    <div class="q-card" id="q8" data-category="মূল্য বিনিময় ও সমমূল্য" data-ans="খ">
+      <div class="q-header">
+        <span class="q-num-badge">প্রশ্ন ০৮</span>
+        <span class="q-cat-tag">মূল্য বিনিময় ও সমমূল্য</span>
+        <span class="q-tag">ডাক অধিদপ্তর (বিল্ডিং ওভারশিয়ার)-১৮</span>
+      </div>
+      <div class="q-text">০৮. ১৫টি গরুর মূল্য ৫টি ঘোড়ার মূল্যের সমান। ২টি ঘোড়ার মূল্য ৩,০০০ টাকা হলে ১টি গরুর মূল্য কত?</div>
+      <div class="options-grid">
+        <button class="opt-btn" data-letter="ক" data-correct="false" onclick="handleOptionClick(this, 'ক', 'খ', 'q8')">
+            <span class="opt-letter">(ক)</span>
+            <span class="opt-text">৬০০ টাকা</span>
+          </button><button class="opt-btn" data-letter="খ" data-correct="true" onclick="handleOptionClick(this, 'খ', 'খ', 'q8')">
+            <span class="opt-letter">(খ)</span>
+            <span class="opt-text">৫০০ টাকা</span>
+          </button><button class="opt-btn" data-letter="গ" data-correct="false" onclick="handleOptionClick(this, 'গ', 'খ', 'q8')">
+            <span class="opt-letter">(গ)</span>
+            <span class="opt-text">৬৫০ টাকা</span>
+          </button><button class="opt-btn" data-letter="ঘ" data-correct="false" onclick="handleOptionClick(this, 'ঘ', 'খ', 'q8')">
+            <span class="opt-letter">(ঘ)</span>
+            <span class="opt-text">৭০০ টাকা</span>
+          </button>
+      </div>
+      <div class="card-footer">
+        <div class="ans-drawer" id="drawer-q8">
+          <div class="drawer-header" onclick="toggleDrawer('q8')">
+            <span class="drawer-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              ব্যাখ্যা ও সমাধান
+            </span>
+            <span class="drawer-badge">সঠিক উত্তর: (খ)</span>
+          </div>
+          <div class="drawer-content">
+            <div class="exp-box">
+              <div class="exp-correct"><strong>সঠিক উত্তর:</strong> (খ)</div>
+              <div class="exp-desc">২টি ঘোড়ার মূল্য = ৩০০০ টাকা ⟹ ১টি ঘোড়ার মূল্য = ১৫০০ টাকা।<br>∴ ৫টি ঘোড়ার মূল্য = ৫ × ১৫০০ = ৭৫০০ টাকা।<br>১৫টি গরুর মূল্য = ৫টি ঘোড়ার মূল্য = ৭৫০০ টাকা।<br>∴ ১টি গরুর মূল্য = <sup>৭৫০০</sup>&frasl;<sub>১৫</sub> = ৫০০ টাকা।</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="doubt-btn" onclick="toggleDoubt('q8')" title="প্রশ্নটি চিহ্নিত করুন">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            চিহ্নিত করুন
+          </button>
+        </div>
+      </div>
+    </div>
+
+<!-- Question Card 9 -->
+    <div class="q-card" id="q9" data-category="সীমা ও যৌক্তিক অনুমান" data-ans="গ">
+      <div class="q-header">
+        <span class="q-num-badge">প্রশ্ন ০৯</span>
+        <span class="q-cat-tag">সীমা ও যৌক্তিক অনুমান</span>
+        <span class="q-tag">ডাক অধিদপ্তর (বিল্ডিং ওভারশিয়ার)-১৮</span>
+      </div>
+      <div class="q-text">০৯. মিনার ৬টি কলম আছে যার প্রতিটির মূল্য ২৫ টাকার বেশি কিন্তু ৩০ টাকার কম। ৬টি কলমের মোট মূল্য কত হতে পারে?</div>
+      <div class="options-grid">
+        <button class="opt-btn" data-letter="ক" data-correct="false" onclick="handleOptionClick(this, 'ক', 'গ', 'q9')">
+            <span class="opt-letter">(ক)</span>
+            <span class="opt-text">১৫০ টাকা</span>
+          </button><button class="opt-btn" data-letter="খ" data-correct="false" onclick="handleOptionClick(this, 'খ', 'গ', 'q9')">
+            <span class="opt-letter">(খ)</span>
+            <span class="opt-text">১৮০ টাকা</span>
+          </button><button class="opt-btn" data-letter="গ" data-correct="true" onclick="handleOptionClick(this, 'গ', 'গ', 'q9')">
+            <span class="opt-letter">(গ)</span>
+            <span class="opt-text">১৬৭ টাকা</span>
+          </button><button class="opt-btn" data-letter="ঘ" data-correct="false" onclick="handleOptionClick(this, 'ঘ', 'গ', 'q9')">
+            <span class="opt-letter">(ঘ)</span>
+            <span class="opt-text">১০০ টাকা</span>
+          </button>
+      </div>
+      <div class="card-footer">
+        <div class="ans-drawer" id="drawer-q9">
+          <div class="drawer-header" onclick="toggleDrawer('q9')">
+            <span class="drawer-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              ব্যাখ্যা ও সমাধান
+            </span>
+            <span class="drawer-badge">সঠিক উত্তর: (গ)</span>
+          </div>
+          <div class="drawer-content">
+            <div class="exp-box">
+              <div class="exp-correct"><strong>সঠিক উত্তর:</strong> (গ)</div>
+              <div class="exp-desc">প্রতিটি কলমের মূল্য > ২৫ টাকা ⟹ ৬টি কলমের মোট মূল্য > (৬ × ২৫) = ১৫০ টাকা।<br>আবার প্রতিটি কলমের মূল্য < ৩০ টাকা ⟹ ৬টি কলমের মোট মূল্য < (৬ × ৩০) = ১৮০ টাকা।<br>সুতরাং মোট মূল্য ১৫০ টাকা এবং ১৮০ টাকার মাঝামাঝি হতে হবে। প্রদত্ত অপশনগুলোর মধ্যে কেবল ১৬৭ টাকা এই সীমার মধ্যে পড়ে। উত্তর (গ)।</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="doubt-btn" onclick="toggleDoubt('q9')" title="প্রশ্নটি চিহ্নিত করুন">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            চিহ্নিত করুন
+          </button>
+        </div>
+      </div>
+    </div>
+
+<!-- Question Card 10 -->
+    <div class="q-card" id="q10" data-category="আয় ও সময় সংক্রান্ত" data-ans="গ">
+      <div class="q-header">
+        <span class="q-num-badge">প্রশ্ন ১০</span>
+        <span class="q-cat-tag">আয় ও সময় সংক্রান্ত</span>
+        <span class="q-tag">পিএসসি (বিভিন্ন পদ)-১৭</span>
+      </div>
+      <div class="q-text">১০. করিমের সাপ্তাহিক আয় ৩৫০০ টাকা হলে এই হিসাবে জুন মাসে তার কত টাকা আয় হয়েছিল?</div>
+      <div class="options-grid">
+        <button class="opt-btn" data-letter="ক" data-correct="false" onclick="handleOptionClick(this, 'ক', 'গ', 'q10')">
+            <span class="opt-letter">(ক)</span>
+            <span class="opt-text">১২০০০ টাকা</span>
+          </button><button class="opt-btn" data-letter="খ" data-correct="false" onclick="handleOptionClick(this, 'খ', 'গ', 'q10')">
+            <span class="opt-letter">(খ)</span>
+            <span class="opt-text">১৪০০০ টাকা</span>
+          </button><button class="opt-btn" data-letter="গ" data-correct="true" onclick="handleOptionClick(this, 'গ', 'গ', 'q10')">
+            <span class="opt-letter">(গ)</span>
+            <span class="opt-text">১৫০০০ টাকা</span>
+          </button><button class="opt-btn" data-letter="ঘ" data-correct="false" onclick="handleOptionClick(this, 'ঘ', 'গ', 'q10')">
+            <span class="opt-letter">(ঘ)</span>
+            <span class="opt-text">১০৪০০ টাকা</span>
+          </button>
+      </div>
+      <div class="card-footer">
+        <div class="ans-drawer" id="drawer-q10">
+          <div class="drawer-header" onclick="toggleDrawer('q10')">
+            <span class="drawer-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              ব্যাখ্যা ও সমাধান
+            </span>
+            <span class="drawer-badge">সঠিক উত্তর: (গ)</span>
+          </div>
+          <div class="drawer-content">
+            <div class="exp-box">
+              <div class="exp-correct"><strong>সঠিক উত্তর:</strong> (গ)</div>
+              <div class="exp-desc">১ সপ্তাহ = ৭ দিন।<br>করিমের ৭ দিনের আয় = ৩৫০০ টাকা ⟹ ১ দিনের আয় = <sup>৩৫০০</sup>&frasl;<sub>৭</sub> = ৫০০ টাকা।<br>জুন মাস = ৩০ দিন।<br>∴ জুন মাসে মোট আয় = ৩০ × ৫০০ = ১৫,০০০ টাকা।</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="doubt-btn" onclick="toggleDoubt('q10')" title="প্রশ্নটি চিহ্নিত করুন">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            চিহ্নিত করুন
+          </button>
+        </div>
+      </div>
+    </div>
+
+<!-- Question Card 11 -->
+    <div class="q-card" id="q11" data-category="ছায়া ও উচ্চতার অনুপাত" data-ans="ক">
+      <div class="q-header">
+        <span class="q-num-badge">প্রশ্ন ১১</span>
+        <span class="q-cat-tag">ছায়া ও উচ্চতার অনুপাত</span>
+        <span class="q-tag">ডাক, টেলিযোগাযোগ ও তথ্যপ্রযুক্তি মন্ত্রণালয় (সহকারী প্রোগ্রামার)-১৭</span>
+      </div>
+      <div class="q-text">১১. ৬ ফুট দীর্ঘ একটি বাঁশের ৪ ফুট দীর্ঘ ছায়া হয়। একই সময়ে একটি গাছের ছায়া ৬৪ ফুট লম্বা হলে গাছটির উচ্চতা কত ফুট?</div>
+      <div class="options-grid">
+        <button class="opt-btn" data-letter="ক" data-correct="true" onclick="handleOptionClick(this, 'ক', 'ক', 'q11')">
+            <span class="opt-letter">(ক)</span>
+            <span class="opt-text">৯৬ ফুট</span>
+          </button><button class="opt-btn" data-letter="খ" data-correct="false" onclick="handleOptionClick(this, 'খ', 'ক', 'q11')">
+            <span class="opt-letter">(খ)</span>
+            <span class="opt-text">৭২ ফুট</span>
+          </button><button class="opt-btn" data-letter="গ" data-correct="false" onclick="handleOptionClick(this, 'গ', 'ক', 'q11')">
+            <span class="opt-letter">(গ)</span>
+            <span class="opt-text">১৯২ ফুট</span>
+          </button><button class="opt-btn" data-letter="ঘ" data-correct="false" onclick="handleOptionClick(this, 'ঘ', 'ক', 'q11')">
+            <span class="opt-letter">(ঘ)</span>
+            <span class="opt-text">৪৪ ফুট</span>
+          </button>
+      </div>
+      <div class="card-footer">
+        <div class="ans-drawer" id="drawer-q11">
+          <div class="drawer-header" onclick="toggleDrawer('q11')">
+            <span class="drawer-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              ব্যাখ্যা ও সমাধান
+            </span>
+            <span class="drawer-badge">সঠিক উত্তর: (ক)</span>
+          </div>
+          <div class="drawer-content">
+            <div class="exp-box">
+              <div class="exp-correct"><strong>সঠিক উত্তর:</strong> (ক)</div>
+              <div class="exp-desc">একই সময়ে বস্তু ও ছায়ার অনুপাত ধ্রুবক থাকে:<br><sup>উচ্চতা</sup>&frasl;<sub>ছায়া</sub> = <sup>৬</sup>&frasl;<sub>৪</sub> = <sup>৩</sup>&frasl;<sub>২</sub><br>ছায়া ৬৪ ফুট হলে উচ্চতা = ৬৪ × <sup>৩</sup>&frasl;<sub>২</sub> = ৩২ × ৩ = ৯৬ ফুট।</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="doubt-btn" onclick="toggleDoubt('q11')" title="প্রশ্নটি চিহ্নিত করুন">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            চিহ্নিত করুন
+          </button>
+        </div>
+      </div>
+    </div>
+
+<!-- Question Card 12 -->
+    <div class="q-card" id="q12" data-category="ঐকিক নিয়মের ধাঁধা ও বিশ্লেষণ" data-ans="ক">
+      <div class="q-header">
+        <span class="q-num-badge">প্রশ্ন ১২</span>
+        <span class="q-cat-tag">ঐকিক নিয়মের ধাঁধা ও বিশ্লেষণ</span>
+        <span class="q-tag">মাধ্যমিক ও উচ্চ শিক্ষা অধিদপ্তর (প্রদর্শক)-১৩</span>
+      </div>
+      <div class="q-text">১২. ৫টি বিড়াল ৫টি ইঁদুর ধরতে ৫ মিনিট সময় নেয়। ১০০টি বিড়াল ১০০টি ইঁদুর ধরতে কত সময় লাগবে?</div>
+      <div class="options-grid">
+        <button class="opt-btn" data-letter="ক" data-correct="true" onclick="handleOptionClick(this, 'ক', 'ক', 'q12')">
+            <span class="opt-letter">(ক)</span>
+            <span class="opt-text">৫ মিনিট</span>
+          </button><button class="opt-btn" data-letter="খ" data-correct="false" onclick="handleOptionClick(this, 'খ', 'ক', 'q12')">
+            <span class="opt-letter">(খ)</span>
+            <span class="opt-text">১০ মিনিট</span>
+          </button><button class="opt-btn" data-letter="গ" data-correct="false" onclick="handleOptionClick(this, 'গ', 'ক', 'q12')">
+            <span class="opt-letter">(গ)</span>
+            <span class="opt-text">১৫ মিনিট</span>
+          </button><button class="opt-btn" data-letter="ঘ" data-correct="false" onclick="handleOptionClick(this, 'ঘ', 'ক', 'q12')">
+            <span class="opt-letter">(ঘ)</span>
+            <span class="opt-text">২০ মিনিট</span>
+          </button>
+      </div>
+      <div class="card-footer">
+        <div class="ans-drawer" id="drawer-q12">
+          <div class="drawer-header" onclick="toggleDrawer('q12')">
+            <span class="drawer-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              ব্যাখ্যা ও সমাধান
+            </span>
+            <span class="drawer-badge">সঠিক উত্তর: (ক)</span>
+          </div>
+          <div class="drawer-content">
+            <div class="exp-box">
+              <div class="exp-correct"><strong>সঠিক উত্তর:</strong> (ক)</div>
+              <div class="exp-desc">ঐকিক নিয়ম অনুসারে:<br>৫টি বিড়ালের ৫টি ইঁদুর ধরতে লাগে ৫ মিনিট<br>∴ ১টি বিড়ালের ৫টি ইঁদুর ধরতে লাগে (৫ × ৫) মিনিট<br>∴ ১টি বিড়ালের ১টি ইঁদুর ধরতে লাগে <sup>(৫ × ৫)</sup>&frasl;<sub>৫</sub> = ৫ মিনিট<br>∴ ১০০টি বিড়ালের ১টি ইঁদুর ধরতে লাগে <sup>৫</sup>&frasl;<sub>১০০</sub> মিনিট<br>∴ ১০০টি বিড়ালের ১০০টি ইঁদুর ধরতে লাগে <sup>(৫ × ১০০)</sup>&frasl;<sub>১০০</sub> = ৫ মিনিট।</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="doubt-btn" onclick="toggleDoubt('q12')" title="প্রশ্নটি চিহ্নিত করুন">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            চিহ্নিত করুন
+          </button>
+        </div>
+      </div>
+    </div>
+
+<!-- Question Card 13 -->
+    <div class="q-card" id="q13" data-category="সাধারণ ঐকিক নিয়ম" data-ans="গ">
+      <div class="q-header">
+        <span class="q-num-badge">প্রশ্ন ১৩</span>
+        <span class="q-cat-tag">সাধারণ ঐকিক নিয়ম</span>
+        <span class="q-tag">মহা হিসাব নিরীক্ষক ও নিয়ন্ত্রকের কার্যালয় (অডিটর)-১১</span>
+      </div>
+      <div class="q-text">১৩. যদি ১৫টি কলমের দাম ৪৬.৫ টাকা হয় তাহলে ২টি কলমের দাম কত?</div>
+      <div class="options-grid">
+        <button class="opt-btn" data-letter="ক" data-correct="false" onclick="handleOptionClick(this, 'ক', 'গ', 'q13')">
+            <span class="opt-letter">(ক)</span>
+            <span class="opt-text">১০ টাকা</span>
+          </button><button class="opt-btn" data-letter="খ" data-correct="false" onclick="handleOptionClick(this, 'খ', 'গ', 'q13')">
+            <span class="opt-letter">(খ)</span>
+            <span class="opt-text">৪.৫ টাকা</span>
+          </button><button class="opt-btn" data-letter="গ" data-correct="true" onclick="handleOptionClick(this, 'গ', 'গ', 'q13')">
+            <span class="opt-letter">(গ)</span>
+            <span class="opt-text">৬.২ টাকা</span>
+          </button><button class="opt-btn" data-letter="ঘ" data-correct="false" onclick="handleOptionClick(this, 'ঘ', 'গ', 'q13')">
+            <span class="opt-letter">(ঘ)</span>
+            <span class="opt-text">১২ টাকা</span>
+          </button>
+      </div>
+      <div class="card-footer">
+        <div class="ans-drawer" id="drawer-q13">
+          <div class="drawer-header" onclick="toggleDrawer('q13')">
+            <span class="drawer-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              ব্যাখ্যা ও সমাধান
+            </span>
+            <span class="drawer-badge">সঠিক উত্তর: (গ)</span>
+          </div>
+          <div class="drawer-content">
+            <div class="exp-box">
+              <div class="exp-correct"><strong>সঠিক উত্তর:</strong> (গ)</div>
+              <div class="exp-desc">১৫টি কলমের দাম = ৪৬.৫ টাকা<br>∴ ১টি কলমের দাম = <sup>৪৬.৫</sup>&frasl;<sub>১৫</sub> = ৩.১ টাকা<br>∴ ২টি কলমের দাম = ৩.১ × ২ = ৬.২ টাকা।</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="doubt-btn" onclick="toggleDoubt('q13')" title="প্রশ্নটি চিহ্নিত করুন">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            চিহ্নিত করুন
+          </button>
+        </div>
+      </div>
+    </div>
+
+<!-- Question Card 14 -->
+    <div class="q-card" id="q14" data-category="একক রূপান্তর ও মূল্য" data-ans="ক">
+      <div class="q-header">
+        <span class="q-num-badge">প্রশ্ন ১৪</span>
+        <span class="q-cat-tag">একক রূপান্তর ও মূল্য</span>
+        <span class="q-tag">পিএসসি (বিভিন্ন পদ)-১৯</span>
+      </div>
+      <div class="q-text">১৪. এক পাউন্ড দুধের দাম ৩.৫ টাকা হলে ১৫ গ্রাম দুধের দাম কত?</div>
+      <div class="options-grid">
+        <button class="opt-btn" data-letter="ক" data-correct="true" onclick="handleOptionClick(this, 'ক', 'ক', 'q14')">
+            <span class="opt-letter">(ক)</span>
+            <span class="opt-text">০.১১৫৫ টাকা</span>
+          </button><button class="opt-btn" data-letter="খ" data-correct="false" onclick="handleOptionClick(this, 'খ', 'ক', 'q14')">
+            <span class="opt-letter">(খ)</span>
+            <span class="opt-text">১.১৬ টাকা</span>
+          </button><button class="opt-btn" data-letter="গ" data-correct="false" onclick="handleOptionClick(this, 'গ', 'ক', 'q14')">
+            <span class="opt-letter">(গ)</span>
+            <span class="opt-text">০.২৩ টাকা</span>
+          </button><button class="opt-btn" data-letter="ঘ" data-correct="false" onclick="handleOptionClick(this, 'ঘ', 'ক', 'q14')">
+            <span class="opt-letter">(ঘ)</span>
+            <span class="opt-text">১.৪৭ টাকা</span>
+          </button>
+      </div>
+      <div class="card-footer">
+        <div class="ans-drawer" id="drawer-q14">
+          <div class="drawer-header" onclick="toggleDrawer('q14')">
+            <span class="drawer-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              ব্যাখ্যা ও সমাধান
+            </span>
+            <span class="drawer-badge">সঠিক উত্তর: (ক)</span>
+          </div>
+          <div class="drawer-content">
+            <div class="exp-box">
+              <div class="exp-correct"><strong>সঠিক উত্তর:</strong> (ক)</div>
+              <div class="exp-desc">আমরা জানি, ১ পাউন্ড ≈ ৪৫৩.৫৯ গ্রাম (বা ১ কেজি ≈ ২.২ পাউন্ড ⟹ ১ পাউন্ড ≈ ৪৫৪.৫৪ গ্রাম)।<br>৪৫৪.৫৪ গ্রাম দুধের দাম ৩.৫ টাকা<br>∴ ১ গ্রাম দুধের দাম = <sup>৩.৫</sup>&frasl;<sub>৪৫৪.৫৪</sub> টাকা<br>∴ ১৫ গ্রাম দুধের দাম = <sup>(৩.৫ × ১৫)</sup>&frasl;<sub>৪৫৪.৫৪</sub> = ০.১১৫৫ টাকা।<br>[বইয়ের প্রশ্নে অপশনগুলো ভুল ছিল, সমাধানে সঠিক মান ০.১১৫৫ টাকা নির্দেশিত]।</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="doubt-btn" onclick="toggleDoubt('q14')" title="প্রশ্নটি চিহ্নিত করুন">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            চিহ্নিত করুন
+          </button>
+        </div>
+      </div>
+    </div>
+
+<!-- Question Card 15 -->
+    <div class="q-card" id="q15" data-category="সাধারণ ঐকিক নিয়ম" data-ans="গ">
+      <div class="q-header">
+        <span class="q-num-badge">প্রশ্ন ১৫</span>
+        <span class="q-cat-tag">সাধারণ ঐকিক নিয়ম</span>
+        <span class="q-tag">গণযোগাযোগ অধিদপ্তরের সহকারী তথ্য অফিসার-১৩</span>
+      </div>
+      <div class="q-text">১৫. ৩৬টি ব্যাগের দাম ১৮০০ টাকা হলে, ৫০০ টাকায় কয়টি ব্যাগ পাওয়া যাবে?</div>
+      <div class="options-grid">
+        <button class="opt-btn" data-letter="ক" data-correct="false" onclick="handleOptionClick(this, 'ক', 'গ', 'q15')">
+            <span class="opt-letter">(ক)</span>
+            <span class="opt-text">১২টি</span>
+          </button><button class="opt-btn" data-letter="খ" data-correct="false" onclick="handleOptionClick(this, 'খ', 'গ', 'q15')">
+            <span class="opt-letter">(খ)</span>
+            <span class="opt-text">১১টি</span>
+          </button><button class="opt-btn" data-letter="গ" data-correct="true" onclick="handleOptionClick(this, 'গ', 'গ', 'q15')">
+            <span class="opt-letter">(গ)</span>
+            <span class="opt-text">১০টি</span>
+          </button><button class="opt-btn" data-letter="ঘ" data-correct="false" onclick="handleOptionClick(this, 'ঘ', 'গ', 'q15')">
+            <span class="opt-letter">(ঘ)</span>
+            <span class="opt-text">১৫টি</span>
+          </button>
+      </div>
+      <div class="card-footer">
+        <div class="ans-drawer" id="drawer-q15">
+          <div class="drawer-header" onclick="toggleDrawer('q15')">
+            <span class="drawer-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              ব্যাখ্যা ও সমাধান
+            </span>
+            <span class="drawer-badge">সঠিক উত্তর: (গ)</span>
+          </div>
+          <div class="drawer-content">
+            <div class="exp-box">
+              <div class="exp-correct"><strong>সঠিক উত্তর:</strong> (গ)</div>
+              <div class="exp-desc">১৮০০ টাকায় পাওয়া যায় ৩৬টি ব্যাগ<br>∴ ১ টাকায় পাওয়া যায় <sup>৩৬</sup>&frasl;<sub>১৮০০</sub> ব্যাগ<br>∴ ৫০০ টাকায় পাওয়া যায় <sup>(৩৬ × ৫০০)</sup>&frasl;<sub>১৮০০</sub> = <sup>১৮০০০</sup>&frasl;<sub>১৮০০</sub> = ১০টি ব্যাগ।</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="doubt-btn" onclick="toggleDoubt('q15')" title="প্রশ্নটি চিহ্নিত করুন">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            চিহ্নিত করুন
+          </button>
+        </div>
+      </div>
+    </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>প্রামাণ্য তথ্যসূত্র: পিএসসি নন-ক্যাডার প্রশ্নব্যাংক (জব হান্টার - বিগত ১৮ বছরের প্রশ্ন সমাধান)।</p>
+      <p style="margin-top: 6px; font-size: 0.8rem; color: var(--text-muted);">© ২০২৬ লাইভ এমসিকিউ স্টাডি প্ল্যাটফর্ম | সর্বস্বত্ব সংরক্ষিত</p>
+    </footer>
+
+  </div>
+
+  <script src="nav-component.js"></script>
+  <script>
+    let score = 0;
+    const answeredCards = new Set();
+    const doubtCards = new Set();
+
+    function handleOptionClick(btn, selectedLet, correctLet, qId) {
+      const card = document.getElementById(qId);
+      if (answeredCards.has(qId)) return;
+      
+      answeredCards.add(qId);
+      card.classList.add('answered');
+
+      const isCorrect = (selectedLet === correctLet);
+      if (isCorrect) {
+        btn.classList.add('selected-correct');
+        score++;
+      } else {
+        btn.classList.add('selected-wrong');
+        const correctBtn = card.querySelector(`[data-letter="${correctLet}"]`);
+        if (correctBtn) correctBtn.classList.add('highlight-correct');
+      }
+
+      updateScoreDisplay();
+      
+      // Auto open drawer
+      const drawer = document.getElementById(`drawer-${qId}`);
+      const header = drawer.querySelector('.drawer-header');
+      if (drawer) {
+        drawer.classList.add('open');
+        if (header) header.classList.add('open');
+      }
+    }
+
+    function toggleDrawer(qId) {
+      const drawer = document.getElementById(`drawer-${qId}`);
+      const header = drawer.querySelector('.drawer-header');
+      if (drawer) {
+        drawer.classList.toggle('open');
+        if (header) header.classList.toggle('open');
+      }
+    }
+
+    function toggleDoubt(qId) {
+      const card = document.getElementById(qId);
+      const btn = card.querySelector('.doubt-btn');
+      if (doubtCards.has(qId)) {
+        doubtCards.delete(qId);
+        btn.classList.remove('active');
+        btn.innerHTML = `
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          চিহ্নিত করুন
+        `;
+      } else {
+        doubtCards.add(qId);
+        btn.classList.add('active');
+        btn.innerHTML = `
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="12" r="10"></circle></svg>
+          চিহ্নিত
+        `;
+      }
+    }
+
+    function updateScoreDisplay() {
+      const display = document.getElementById('scoreDisplay');
+      if (display) {
+        const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+        const scoreBn = String(score).split('').map(d => bnDigits[d] || d).join('');
+        display.textContent = `${scoreBn} / ১৫`;
+      }
+    }
+
+    function resetQuiz() {
+      answeredCards.clear();
+      score = 0;
+      updateScoreDisplay();
+      
+      document.querySelectorAll('.q-card').forEach(card => {
+        card.classList.remove('answered');
+        card.querySelectorAll('.opt-btn').forEach(btn => {
+          btn.classList.remove('selected-correct', 'selected-wrong', 'highlight-correct');
+        });
+        const drawer = card.querySelector('.ans-drawer');
+        const header = card.querySelector('.drawer-header');
+        if (drawer) drawer.classList.remove('open');
+        if (header) header.classList.remove('open');
+      });
+    }
+
+    function filterQuestions(cat) {
+      document.querySelectorAll('.q-card').forEach(card => {
+        const cardCat = card.getAttribute('data-category');
+        if (cat === 'all' || cardCat === cat) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Font size controls
+    let currentFontSize = 100;
+    function changeFontSize(delta) {
+      if (delta === 0) currentFontSize = 100;
+      else currentFontSize = Math.min(130, Math.max(85, currentFontSize + delta * 5));
+      document.body.style.fontSize = currentFontSize + '%';
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      const icon = document.getElementById('themeIcon');
+      if (icon) icon.textContent = newTheme === 'light' ? '🌙' : '☀️';
+    }
+
+    // Initialize theme from storage
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        const icon = document.getElementById('themeIcon');
+        if (icon) icon.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+      }
+    })();
+  </script>
+</body>
+</html>
