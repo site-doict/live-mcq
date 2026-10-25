@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>অধ্যায় ০৭: পরিমিতি (রম্বস, সামান্তরিক ও ট্রাপিজিয়াম) - নন-ক্যাডার প্রশ্নব্যাংক</title>
+  <meta name="description" content="পিএসসি নন-ক্যাডার পরিমিতি (রম্বস, সামান্তরিক ও ট্রাপিজিয়াম) এর ১৫টি প্রামাণ্য প্রশ্ন ও বিস্তারিত গাণিতিক সমাধান।">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../ebook-ui.css">
+  <link rel="stylesheet" href="../bangla-fonts.css">
+  <link rel="stylesheet" href="../paper-textures.css">
+  <link rel="stylesheet" href="../universal-modes.css">
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --accent: #d97706;
+      --accent-light: #fef3c7;
+      --bg-base: #f8fafc;
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(226, 232, 240, 0.85);
+      --font-base: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+    }
+    [data-theme="dark"] {
+      --primary: #38bdf8;
+      --primary-dark: #0284c7;
+      --primary-light: rgba(56, 189, 248, 0.15);
+      --accent: #fbbf24;
+      --accent-light: rgba(251, 191, 36, 0.15);
+      --bg-base: #0b1329;
+      --bg-surface: rgba(15, 23, 42, 0.85);
+      --bg-card: rgba(15, 23, 42, 0.82);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(51, 65, 85, 0.85);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: var(--font-base);
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding-bottom: 70px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 0;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      background: var(--primary-light);
+      border: none;
+      cursor: pointer;
+    }
+    .nav-controls {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .ch-header {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .ch-badges {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+    }
+    .badge-primary { background: var(--primary-light); color: var(--primary); }
+    .badge-accent { background: var(--accent-light); color: var(--accent); }
+
+    .ch-title {
+      font-size: 2.1rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 0.35rem;
+    }
+
+    .sec-heading {
+      font-size: 1.6rem;
+      margin: 2.5rem 0 1.2rem 0;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 0.5rem;
+    }
+
+    .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .sk-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.25rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .sk-box-title {
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .sk-box ul {
+      list-style-type: disc;
+      padding-left: 1.3rem;
+      font-size: 0.95rem;
+    }
+    .sk-box li {
+      margin-bottom: 0.45rem;
+    }
+
+    .formula-card {
+      background: var(--bg-card);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .formula-title {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .quiz-toolbar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.8rem 1.2rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .score-badge {
+      font-family: 'Inter', sans-serif !important;
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+    .filter-select {
+      font-family: var(--font-base);
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 0.9rem;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.4rem;
+      margin-bottom: 1.4rem;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.02);
+      transition: all 0.2s;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .q-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.8rem;
+      margin-bottom: 0.75rem;
+    }
+    .q-num {
+      font-family: 'Inter', sans-serif !important;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+    .q-exam {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: right;
+      line-height: 1.4;
+    }
+    .q-text {
+      font-size: 1.12rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .opt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-family: var(--font-base);
+      font-size: 0.98rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+    .opt-lbl {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.06);
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    [data-theme="dark"] .opt-lbl {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .opt-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: 700;
+    }
+    .opt-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+    [data-theme="dark"] .opt-btn.correct {
+      background: rgba(34, 197, 94, 0.2) !important;
+      color: #86efac !important;
+    }
+    [data-theme="dark"] .opt-btn.wrong {
+      background: rgba(239, 68, 68, 0.2) !important;
+      color: #fca5a5 !important;
+    }
+
+    .exp-box {
+      background: var(--primary-light);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 0.8rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      border-left: 4px solid var(--primary);
+      display: none;
+    }
+    .exp-title {
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    [data-theme="dark"] .exp-title {
+      color: var(--primary);
+    }
+
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .exp-box, .exp-box *, .score-badge, .filter-select {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+  </style>
+</head>
+<body class="paper-coffee-stained">
+  <div class="container">
+    <nav class="top-nav">
+      <a href="index.html" class="nav-btn">
+        <span>←</span>
+        <span>জ্যামিতি সূচিপত্র</span>
+      </a>
+      <div class="nav-controls">
+        <button type="button" class="nav-btn" onclick="toggleTheme()" id="themeBtn">🌙 থিম</button>
+      </div>
+    </nav>
+
+    <header class="ch-header">
+      <div class="ch-badges">
+        <span class="badge badge-primary">অধ্যায় ০৭</span>
+        <span class="badge badge-accent">১৫টি প্রামাণ্য প্রশ্ন</span>
+        <span class="badge badge-primary">বইয়ের পৃষ্ঠা: ৪৭৫ - ৪৭৬</span>
+      </div>
+      <h1 class="ch-title font-badhon-ador">
+        পরিমিতি: রম্বস, সামান্তরিক ও ট্রাপিজিয়াম
+        <span class="ch-en">Mensuration: Rhombus, Parallelogram & Trapezium</span>
+      </h1>
+      <p style="color: var(--text-muted); font-size: 0.98rem; max-width: 600px; margin: 0 auto;">
+        রম্বসের কর্ণ ও ক্ষেত্রফল, সামান্তরিকের ভূমি-উচ্চতা এবং ট্রাপিজিয়ামের সমান্তরাল বাহুর সমস্যাবলির শতভাগ প্রামাণ্য সমাধান।
+      </p>
+    </header>
+
+    <!-- Part 1: Authentic Interactive Notes & Sketchnotes -->
+    <section>
+      <h2 class="sec-heading font-badhon-ador">
+        <span>📌</span>
+        <span>প্রথম অংশ: প্রামাণ্য রিভিশন স্কেচনোট ও সূত্রাবলি</span>
+      </h2>
+
+      <div class="sk-grid">
+        <div class="sk-box">
+          <h3 class="sk-box-title font-badhon-ador">💎 রম্বসের পরিমিতি</h3>
+          <ul>
+            <li><strong>ক্ষেত্রফল:</strong> ক্ষেত্রফল = ½ × কর্ণদ্বয়ের গুণফল = ½ $d_1 d_2$।</li>
+            <li><strong>বাহু ও কর্ণের সম্পর্ক:</strong> $a^2 = (d_1/2)^2 + (d_2/2)^2$ বা $4a^2 = d_1^2 + d_2^2$।</li>
+            <li><strong>পরিসীমা:</strong> পরিসীমা = $4a$। কর্ণদ্বয় পরস্পরকে সমকোণে সমদ্বিখণ্ডিত করে।</li>
+          </ul>
+        </div>
+
+        <div class="sk-box">
+          <h3 class="sk-box-title font-badhon-ador">🔷 সামান্তরিকের পরিমিতি</h3>
+          <ul>
+            <li><strong>ক্ষেত্রফল:</strong> ক্ষেত্রফল = ভূমি × উচ্চতা ($b \times h$)।</li>
+            <li><strong>কোণ সংলগ্ন ক্ষেত্রফল:</strong> সন্নিহিত বাহুদ্বয় $a$ ও $b$ এবং তাদের অন্তর্ভুক্ত কোণ $\theta$ হলে: ক্ষেত্রফল = $ab \sin \theta$।</li>
+            <li><strong>পরিসীমা:</strong> পরিসীমা = ২(সন্নিহিত বাহুদ্বয়ের সমষ্টি) = $2(a + b)$।</li>
+          </ul>
+        </div>
+
+        <div class="sk-box">
+          <h3 class="sk-box-title font-badhon-ador">📐 ট্রাপিজিয়ামের পরিমিতি</h3>
+          <ul>
+            <li><strong>ক্ষেত্রফল:</strong> ক্ষেত্রফল = ½ × (সমান্তরাল বাহুদ্বয়ের যোগফল) × উচ্চতা = $\frac{1}{2}(a + b)h$।</li>
+            <li><strong>দূরত্ব ($h$):</strong> সমান্তরাল বাহুদ্বয়ের মধ্যবর্তী দূরত্ব $h = \frac{2 \times \text{ক্ষেত্রফল}}{a + b}$।</li>
+            <li><strong>সমান্তরাল বাহু:</strong> ট্রাপিজিয়ামের কেবল একজোড়া বিপরীত বাহু পরস্পর সমান্তরাল থাকে।</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h3 class="formula-title font-badhon-ador">⚡ চটজলদি রিভিশন কার্ড</h3>
+        <p style="font-size: 0.95rem; line-height: 1.8; margin-bottom: 0.5rem;">
+          ১. <strong>রম্বস:</strong> কর্ণদ্বয় জানা থাকলে ক্ষেত্রফল সরাসরি ½ × $d_1 d_2$। একটি কর্ণ ও একটি বাহু জানা থাকলে অপর কর্ণ $d_2 = 2\sqrt{a^2 - (d_1/2)^2}$।<br>
+          ২. <strong>সামান্তরিক:</strong> কোণ ৩০° হলে $\sin 30° = ½$, ফলে ক্ষেত্রফল সরাসরি ½ $ab$ হয়ে যায়!<br>
+          ৩. <strong>ট্রাপিজিয়াম:</strong> ক্ষেত্রফল দেওয়া থাকলে সমান্তরাল বাহুর যোগফল = $2 \times \text{ক্ষেত্রফল} / h$।
+        </p>
+      </div>
+    </section>
+
+    <!-- Part 2: Question Bank -->
+    <section>
+      <h2 class="sec-heading font-badhon-ador">
+        <span>📝</span>
+        <span>দ্বিতীয় অংশ: বিগত পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক ও কুইজ</span>
+      </h2>
+
+      <div class="quiz-toolbar">
+        <div>
+          <span>লাইভ স্কোর: </span>
+          <span class="score-badge" id="liveScore">০ / 15</span>
+        </div>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <select class="filter-select" id="tagFilter" onchange="filterQuestions()">
+            <option value="all">সকল বিষয় (১৫)</option>
+            <option value="রম্বস">রম্বস (৬)</option>
+            <option value="সামান্তরিক">সামান্তরিক (৪)</option>
+            <option value="ট্রাপিজিয়াম">ট্রাপিজিয়াম (৫)</option>
+          </select>
+          <button type="button" class="nav-btn" onclick="resetQuiz()">রিসেট</button>
+        </div>
+      </div>
+
+      <div id="quizContainer">
+
+        <div class="q-card" data-tag="রম্বস" id="geo-ch07-q01">
+          <div class="q-top">
+            <span class="q-num">০১</span>
+            <div class="q-exam">পিএসসি (ইকোনমিস্ট)-২৪</div>
+          </div>
+          <div class="q-text">একটি রম্বসের কর্ণদ্বয় যথাক্রমে ৫ সে.মি. ও ৪.৫ সেমি। রম্বসটির ক্ষেত্রফল কত বর্গ সেমি?</div>
+          <div class="opt-grid">
+    
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q01', 'ক', 'ঘ')">
+              <span class="opt-lbl">ক</span>
+              <span>২.২৫</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q01', 'খ', 'ঘ')">
+              <span class="opt-lbl">খ</span>
+              <span>২২.৫০</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q01', 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span>১২.৫০</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q01', 'ঘ', 'ঘ')">
+              <span class="opt-lbl">ঘ</span>
+              <span>১১.২৫</span>
+            </button>
+        
+          </div>
+          <div class="exp-box" id="exp-geo-ch07-q01">
+            <div class="exp-title">💡 সঠিক উত্তর: ঘ | ব্যাখ্যা:</div>
+            <div>আমরা জানি, রম্বসের ক্ষেত্রফল = ½ × কর্ণদ্বয়ের গুণফল = ½ × ৫ × ৪.৫ = <b>১১.২৫ বর্গ সেমি</b>।</div>
+          </div>
+        </div>
+    
+        <div class="q-card" data-tag="রম্বস" id="geo-ch07-q02">
+          <div class="q-top">
+            <span class="q-num">০২</span>
+            <div class="q-exam">রেলপথ মন্ত্রণালয় (উপসহকারী প্রকৌশলী)-১৮</div>
+          </div>
+          <div class="q-text">একটি রম্বসের দুইটি কর্ণের দৈর্ঘ্য ৮ সেমি ও ৬ সেমি হলে, এর ক্ষেত্রফল কত বর্গ সেমি?</div>
+          <div class="opt-grid">
+    
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q02', 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span>২৪</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q02', 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span>৪৮</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q02', 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span>৬০</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q02', 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span>১৪</span>
+            </button>
+        
+          </div>
+          <div class="exp-box" id="exp-geo-ch07-q02">
+            <div class="exp-title">💡 সঠিক উত্তর: ক | ব্যাখ্যা:</div>
+            <div>ক্ষেত্রফল = ½ × ৮ × ৬ = <b>২৪ বর্গ সেমি</b>।</div>
+          </div>
+        </div>
+    
+        <div class="q-card" data-tag="রম্বস" id="geo-ch07-q03">
+          <div class="q-top">
+            <span class="q-num">০৩</span>
+            <div class="q-exam">কারিগরি শিক্ষা অধিদপ্তর ইনস্ট্রাক্টর</div>
+          </div>
+          <div class="q-text">রম্বসের কর্ণদ্বয় পরস্পর d₁ ও d₂ একক হলে, রম্বসটির ক্ষেত্রফল কত?</div>
+          <div class="opt-grid">
+    
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q03', 'ক', 'খ')">
+              <span class="opt-lbl">ক</span>
+              <span>d₁ d₂</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q03', 'খ', 'খ')">
+              <span class="opt-lbl">খ</span>
+              <span>½ d₁ d₂</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q03', 'গ', 'খ')">
+              <span class="opt-lbl">গ</span>
+              <span>2 d₁ d₂</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q03', 'ঘ', 'খ')">
+              <span class="opt-lbl">ঘ</span>
+              <span>4 d₁ d₂</span>
+            </button>
+        
+          </div>
+          <div class="exp-box" id="exp-geo-ch07-q03">
+            <div class="exp-title">💡 সঠিক উত্তর: খ | ব্যাখ্যা:</div>
+            <div>রম্বসের ক্ষেত্রফল = <b>½ d₁ d₂</b>।</div>
+          </div>
+        </div>
+    
+        <div class="q-card" data-tag="রম্বস" id="geo-ch07-q04">
+          <div class="q-top">
+            <span class="q-num">০৪</span>
+            <div class="q-exam">সমাজসেবা অধিদপ্তর অফিসার</div>
+          </div>
+          <div class="q-text">একটি রম্বসের কর্ণদ্বয়ের দৈর্ঘ্য ৫ মিটার এবং ৪.২ মিটার হলে ক্ষেত্রফল কত?</div>
+          <div class="opt-grid">
+    
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q04', 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span>১০.৫ বর্গমিটার</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q04', 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span>২১.০০ বর্গমিটার</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q04', 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span>৫.২৫ বর্গমিটার</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q04', 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span>৫.৫ বর্গমিটার</span>
+            </button>
+        
+          </div>
+          <div class="exp-box" id="exp-geo-ch07-q04">
+            <div class="exp-title">💡 সঠিক উত্তর: ক | ব্যাখ্যা:</div>
+            <div>ক্ষেত্রফল = ½ × ৫ × ৪.২ = <b>১০.৫ বর্গমিটার</b>।</div>
+          </div>
+        </div>
+    
+        <div class="q-card" data-tag="রম্বস" id="geo-ch07-q05">
+          <div class="q-top">
+            <span class="q-num">০৫</span>
+            <div class="q-exam">গণপূর্ত অধিদপ্তর উপ-সহকারী প্রকৌশলী</div>
+          </div>
+          <div class="q-text">কোনো রম্বসের একটি বাহু ও একটি কর্ণের দৈর্ঘ্য যথাক্রমে ১৩ সেমি ও ২৪ সেমি হলে রম্বসটির ক্ষেত্রফল কত?</div>
+          <div class="opt-grid">
+    
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q05', 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span>১২০ বর্গ সেমি</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q05', 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span>২৪০ বর্গ সেমি</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q05', 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span>১৫৬ বর্গ সেমি</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q05', 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span>৩১২ বর্গ সেমি</span>
+            </button>
+        
+          </div>
+          <div class="exp-box" id="exp-geo-ch07-q05">
+            <div class="exp-title">💡 সঠিক উত্তর: ক | ব্যাখ্যা:</div>
+            <div>রম্বসের কর্ণদ্বয় পরস্পরকে সমকোণে সমদ্বিখণ্ডিত করে।<br>একটি কর্ণের অর্ধেক = ২৪ / ২ = ১২ সেমি। বাহু (অতিভুজ) = ১৩ সেমি।<br>অপর কর্ণের অর্ধেক = √(১৩² - ১২²) = √(১৬৯ - ১৪৪) = √২৫ = ৫ সেমি।<br>∴ অপর কর্ণ = ২ × ৫ = ১০ সেমি।<br>ক্ষেত্রফল = ½ × ২৪ × ১০ = <b>১২০ বর্গ সেমি</b>।</div>
+          </div>
+        </div>
+    
+        <div class="q-card" data-tag="রম্বস" id="geo-ch07-q06">
+          <div class="q-top">
+            <span class="q-num">০৬</span>
+            <div class="q-exam">মাদকদ্রব্য নিয়ন্ত্রণ অধিদপ্তর</div>
+          </div>
+          <div class="q-text">একটি রম্বসের বাহুর দৈর্ঘ্য ১০ সেমি এবং একটি কর্ণের দৈর্ঘ্য ১২ সেমি হলে অপর কর্ণের দৈর্ঘ্য কত?</div>
+          <div class="opt-grid">
+    
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q06', 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span>১৬ সেমি</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q06', 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span>৮ সেমি</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q06', 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span>১৪ সেমি</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q06', 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span>১৮ সেমি</span>
+            </button>
+        
+          </div>
+          <div class="exp-box" id="exp-geo-ch07-q06">
+            <div class="exp-title">💡 সঠিক উত্তর: ক | ব্যাখ্যা:</div>
+            <div>অপর কর্ণের অর্ধেক = √(১০² - ৬²) = √(১০০ - ৩৬) = √৬৪ = ৮ সেমি।<br>∴ অপর কর্ণ = ২ × ৮ = <b>১৬ সেমি</b>।</div>
+          </div>
+        </div>
+    
+        <div class="q-card" data-tag="সামান্তরিক" id="geo-ch07-q07">
+          <div class="q-top">
+            <span class="q-num">০৭</span>
+            <div class="q-exam">বিআরটিএ মোটরযান পরিদর্শক</div>
+          </div>
+          <div class="q-text">একটি সামান্তরিকের ক্ষেত্রফল নির্ণয়ের সূত্র কোনটি?</div>
+          <div class="opt-grid">
+    
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q07', 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span>ভূমি × উচ্চতা</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q07', 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span>½ × ভূমি × উচ্চতা</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q07', 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span>২ × (ভূমি + উচ্চতা)</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q07', 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span>দৈর্ঘ্য × বিস্তার</span>
+            </button>
+        
+          </div>
+          <div class="exp-box" id="exp-geo-ch07-q07">
+            <div class="exp-title">💡 সঠিক উত্তর: ক | ব্যাখ্যা:</div>
+            <div>সামান্তরিকের ক্ষেত্রফল = <b>ভূমি × উচ্চতা</b>।</div>
+          </div>
+        </div>
+    
+        <div class="q-card" data-tag="সামান্তরিক" id="geo-ch07-q08">
+          <div class="q-top">
+            <span class="q-num">০৮</span>
+            <div class="q-exam">তথ্য মন্ত্রণালয় সহকারী পরিচালক</div>
+          </div>
+          <div class="q-text">একটি সামান্তরিকের ভূমি ১২ মিটার এবং উচ্চতা ৮ মিটার হলে এর ক্ষেত্রফল কত?</div>
+          <div class="opt-grid">
+    
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q08', 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span>৯৬ বর্গমিটার</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q08', 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span>৪৮ বর্গমিটার</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q08', 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span>২৪ বর্গমিটার</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q08', 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span>২০ বর্গমিটার</span>
+            </button>
+        
+          </div>
+          <div class="exp-box" id="exp-geo-ch07-q08">
+            <div class="exp-title">💡 সঠিক উত্তর: ক | ব্যাখ্যা:</div>
+            <div>ক্ষেত্রফল = ১২ × ৮ = <b>৯৬ বর্গমিটার</b>।</div>
+          </div>
+        </div>
+    
+        <div class="q-card" data-tag="সামান্তরিক" id="geo-ch07-q09">
+          <div class="q-top">
+            <span class="q-num">০৯</span>
+            <div class="q-exam">পিএসসি সহকারী রাজস্ব কর্মকর্তা</div>
+          </div>
+          <div class="q-text">একটি সামান্তরিকের দুটি সন্নিহিত বাহুর দৈর্ঘ্য ১২ মিটার ও ৮ মিটার এবং তাদের অন্তর্ভুক্ত কোণ ৩০° হলে ক্ষেত্রফল কত?</div>
+          <div class="opt-grid">
+    
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q09', 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span>৪৮ বর্গমিটার</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q09', 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span>৯৬ বর্গমিটার</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q09', 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span>২৪ বর্গমিটার</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q09', 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span>৩৬ বর্গমিটার</span>
+            </button>
+        
+          </div>
+          <div class="exp-box" id="exp-geo-ch07-q09">
+            <div class="exp-title">💡 সঠিক উত্তর: ক | ব্যাখ্যা:</div>
+            <div>ক্ষেত্রফল = ab sin θ = ১২ × ৮ × sin 30° = ৯৬ × ½ = <b>৪৮ বর্গমিটার</b>।</div>
+          </div>
+        </div>
+    
+        <div class="q-card" data-tag="সামান্তরিক" id="geo-ch07-q10">
+          <div class="q-top">
+            <span class="q-num">১০</span>
+            <div class="q-exam">বন অধিদপ্তর কর্মকর্তা</div>
+          </div>
+          <div class="q-text">একটি সামান্তরিকের ক্ষেত্রফল ৭২ বর্গমিটার এবং উচ্চতা ৬ মিটার হলে এর ভূমির দৈর্ঘ্য কত?</div>
+          <div class="opt-grid">
+    
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q10', 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span>১২ মিটার</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q10', 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span>১৮ মিটার</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q10', 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span>১৪ মিটার</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q10', 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span>২৪ মিটার</span>
+            </button>
+        
+          </div>
+          <div class="exp-box" id="exp-geo-ch07-q10">
+            <div class="exp-title">💡 সঠিক উত্তর: ক | ব্যাখ্যা:</div>
+            <div>ভূমি = ক্ষেত্রফল / উচ্চতা = ৭২ / ৬ = <b>১২ মিটার</b>।</div>
+          </div>
+        </div>
+    
+        <div class="q-card" data-tag="ট্রাপিজিয়াম" id="geo-ch07-q11">
+          <div class="q-top">
+            <span class="q-num">১১</span>
+            <div class="q-exam">কারিগরি শিক্ষা বোর্ড সহকারী পরীক্ষা নিয়ন্ত্রক</div>
+          </div>
+          <div class="q-text">ট্রাপিজিয়াম ক্ষেত্রের ক্ষেত্রফল নির্ণয়ের সঠিক সূত্র কোনটি?</div>
+          <div class="opt-grid">
+    
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q11', 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span>½ × সমান্তরাল বাহুদ্বয়ের সমষ্টি × উচ্চতা</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q11', 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span>সমান্তরাল বাহুদ্বয়ের গুণফল × উচ্চতা</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q11', 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span>½ × সমান্তরাল বাহুদ্বয়ের গুণফল</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q11', 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span>২ × সমান্তরাল বাহুদ্বয়ের সমষ্টি × উচ্চতা</span>
+            </button>
+        
+          </div>
+          <div class="exp-box" id="exp-geo-ch07-q11">
+            <div class="exp-title">💡 সঠিক উত্তর: ক | ব্যাখ্যা:</div>
+            <div>ট্রাপিজিয়ামের ক্ষেত্রফল = <b>½ × (a + b) × h</b>।</div>
+          </div>
+        </div>
+    
+        <div class="q-card" data-tag="ট্রাপিজিয়াম" id="geo-ch07-q12">
+          <div class="q-top">
+            <span class="q-num">১২</span>
+            <div class="q-exam">সমাজসেবা কর্মকর্তা</div>
+          </div>
+          <div class="q-text">একটি ট্রাপিজিয়ামের সমান্তরাল বাহু দুটি যথাক্রমে ৯ সেমি ও ৭ সেমি এবং উচ্চতা ৮ সেমি হলে ক্ষেত্রফল কত?</div>
+          <div class="opt-grid">
+    
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q12', 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span>৬৪ বর্গ সেমি</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q12', 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span>১২৮ বর্গ সেমি</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q12', 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span>৫৬ বর্গ সেমি</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q12', 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span>৭২ বর্গ সেমি</span>
+            </button>
+        
+          </div>
+          <div class="exp-box" id="exp-geo-ch07-q12">
+            <div class="exp-title">💡 সঠিক উত্তর: ক | ব্যাখ্যা:</div>
+            <div>ক্ষেত্রফল = ½ × (৯ + ৭) × ৮ = ½ × ১৬ × ৮ = <b>৬৪ বর্গ সেমি</b>।</div>
+          </div>
+        </div>
+    
+        <div class="q-card" data-tag="ট্রাপিজিয়াম" id="geo-ch07-q13">
+          <div class="q-top">
+            <span class="q-num">১৩</span>
+            <div class="q-exam">রেলওয়ে উপ-সহকারী প্রকৌশলী</div>
+          </div>
+          <div class="q-text">একটি ট্রাপিজিয়ামের সমান্তরাল বাহুদ্বয়ের দৈর্ঘ্য 32 মিটার ও 64 মিটার এবং তাদের মধ্যবর্তী লম্ব দূরত্ব 12 মিটার হলে ক্ষেত্রফল কত?</div>
+          <div class="opt-grid">
+    
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q13', 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span>576 বর্গমিটার</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q13', 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span>1152 বর্গমিটার</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q13', 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span>480 বর্গমিটার</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q13', 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span>640 বর্গমিটার</span>
+            </button>
+        
+          </div>
+          <div class="exp-box" id="exp-geo-ch07-q13">
+            <div class="exp-title">💡 সঠিক উত্তর: ক | ব্যাখ্যা:</div>
+            <div>ক্ষেত্রফল = ½ × (32 + 64) × 12 = ½ × 96 × 12 = <b>576 বর্গমিটার</b>।</div>
+          </div>
+        </div>
+    
+        <div class="q-card" data-tag="ট্রাপিজিয়াম" id="geo-ch07-q14">
+          <div class="q-top">
+            <span class="q-num">১৪</span>
+            <div class="q-exam">উপজেলা পরিবার পরিকল্পনা কর্মকর্তা</div>
+          </div>
+          <div class="q-text">একটি ট্রাপিজিয়ামের সমান্তরাল বাহুদ্বয়ের দৈর্ঘ্য 6 ফুট ও 10 ফুট এবং মধ্যবর্তী দূরত্ব 5 ফুট হলে ক্ষেত্রফল কত?</div>
+          <div class="opt-grid">
+    
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q14', 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span>৪০ বর্গফুট</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q14', 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span>৮০ বর্গফুট</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q14', 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span>৩০ বর্গফুট</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q14', 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span>৩৬ বর্গফুট</span>
+            </button>
+        
+          </div>
+          <div class="exp-box" id="exp-geo-ch07-q14">
+            <div class="exp-title">💡 সঠিক উত্তর: ক | ব্যাখ্যা:</div>
+            <div>ক্ষেত্রফল = ½ × (6 + 10) × 5 = ½ × 16 × 5 = <b>৪০ বর্গফুট</b>।</div>
+          </div>
+        </div>
+    
+        <div class="q-card" data-tag="ট্রাপিজিয়াম" id="geo-ch07-q15">
+          <div class="q-top">
+            <span class="q-num">১৫</span>
+            <div class="q-exam">মৎস্য অধিদপ্তর সহকারী কর্মকর্তা</div>
+          </div>
+          <div class="q-text">একটি ট্রাপিজিয়ামের ক্ষেত্রফল ৯৬ বর্গমিটার এবং সমান্তরাল বাহুদ্বয়ের যোগফল ২৪ মিটার হলে তাদের মধ্যবর্তী দূরত্ব কত?</div>
+          <div class="opt-grid">
+    
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q15', 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span>৮ মিটার</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q15', 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span>৪ মিটার</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q15', 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span>১২ মিটার</span>
+            </button>
+        
+            <button type="button" class="opt-btn" onclick="checkAns('geo-ch07-q15', 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span>১৬ মিটার</span>
+            </button>
+        
+          </div>
+          <div class="exp-box" id="exp-geo-ch07-q15">
+            <div class="exp-title">💡 সঠিক উত্তর: ক | ব্যাখ্যা:</div>
+            <div>½ × ২৪ × h = ৯৬ ⇒ ১২h = ৯৬ ⇒ h = <b>৮ মিটার</b>।</div>
+          </div>
+        </div>
+    
+      </div>
+    </section>
+  </div>
+
+  <script src="../ebook-ui.js"></script>
+  <script src="../universal-modes.js"></script>
+  <script>
+    let answered = new Set();
+    let score = 0;
+    const totalQ = 15;
+
+    const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+    function toBn(n) {
+      return n.toString().split('').map(d => bnDigits[parseInt(d)] || d).join('');
+    }
+
+    function updateScore() {
+      document.getElementById('liveScore').textContent = `${toBn(score)} / ${toBn(totalQ)}`;
+    }
+
+    function checkAns(qid, chosen, correct) {
+      const card = document.getElementById(qid);
+      if (!card) return;
+      const btns = card.querySelectorAll('.opt-btn');
+      
+      btns.forEach(btn => {
+        const lbl = btn.querySelector('.opt-lbl').textContent.trim();
+        if (lbl === correct) {
+          btn.classList.add('correct');
+        } else if (lbl === chosen && chosen !== correct) {
+          btn.classList.add('wrong');
+        }
+        btn.disabled = true;
+      });
+
+      if (!answered.has(qid)) {
+        answered.add(qid);
+        if (chosen === correct) {
+          score++;
+        }
+        updateScore();
+      }
+
+      const exp = document.getElementById('exp-' + qid);
+      if (exp) exp.style.display = 'block';
+    }
+
+    function filterQuestions() {
+      const sel = document.getElementById('tagFilter').value;
+      const cards = document.querySelectorAll('.q-card');
+      cards.forEach(card => {
+        const tag = card.getAttribute('data-tag');
+        if (sel === 'all' || tag.includes(sel)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function resetQuiz() {
+      answered.clear();
+      score = 0;
+      updateScore();
+      const cards = document.querySelectorAll('.q-card');
+      cards.forEach(card => {
+        const btns = card.querySelectorAll('.opt-btn');
+        btns.forEach(b => {
+          b.classList.remove('correct', 'wrong');
+          b.disabled = false;
+        });
+        const exp = card.querySelector('.exp-box');
+        if (exp) exp.style.display = 'none';
+      });
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme') || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      document.getElementById('themeBtn').textContent = next === 'dark' ? '☀️ থিম' : '🌙 থিম';
+    }
+
+    (function() {
+      const saved = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', saved);
+      const btn = document.getElementById('themeBtn');
+      if (btn) btn.textContent = saved === 'dark' ? '☀️ থিম' : '🌙 থিম';
+    })();
+  </script>
+</body>
+</html>

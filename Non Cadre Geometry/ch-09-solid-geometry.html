@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>অধ্যায় ০৯: ঘন জ্যামিতি ও ত্রিমাত্রিক ঘনবস্তু - নন-ক্যাডার প্রশ্নব্যাংক</title>
+  <meta name="description" content="পিএসসি নন-ক্যাডার ঘন জ্যামিতি (ঘনক, আয়তাকার ঘনবস্তু, সিলিন্ডার, গোলক, কোণক ও কোণ) এর 22টি প্রামাণ্য প্রশ্ন ও বিস্তারিত গাণিতিক সমাধান।">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../ebook-ui.css">
+  <link rel="stylesheet" href="../bangla-fonts.css">
+  <link rel="stylesheet" href="../paper-textures.css">
+  <link rel="stylesheet" href="../universal-modes.css">
+  <style>
+    :root {
+      --primary: #854d0e;
+      --primary-dark: #713f12;
+      --primary-light: #fef9c3;
+      --accent: #b45309;
+      --accent-light: #fef3c7;
+      --bg-base: #fafaf9;
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --text-main: #1c1917;
+      --text-muted: #57534e;
+      --border-color: rgba(231, 229, 228, 0.85);
+      --font-base: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+    }
+    [data-theme="dark"] {
+      --primary: #fde047;
+      --primary-dark: #eab308;
+      --primary-light: rgba(253, 224, 71, 0.15);
+      --accent: #fbbf24;
+      --accent-light: rgba(251, 191, 36, 0.15);
+      --bg-base: #1c1917;
+      --bg-surface: rgba(28, 25, 23, 0.85);
+      --bg-card: rgba(41, 37, 36, 0.82);
+      --text-main: #f5f5f4;
+      --text-muted: #a8a29e;
+      --border-color: rgba(68, 64, 60, 0.85);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: var(--font-base);
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding-bottom: 70px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 0;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      background: var(--primary-light);
+      border: none;
+      cursor: pointer;
+    }
+    .nav-controls {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .ch-header {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    }
+    .ch-badge {
+      display: inline-block;
+      font-family: 'Inter', sans-serif !important;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: var(--primary);
+      color: #fff;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.5px;
+    }
+    .ch-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 0.2rem;
+    }
+    .ch-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 0.75rem;
+    }
+    .ch-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Sketchnotes Section */
+    .sk-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    }
+    .sk-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 0.75rem;
+    }
+    .sk-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .sk-box {
+      background: var(--bg-surface);
+      border: 1px dashed var(--primary);
+      border-radius: 12px;
+      padding: 1.1rem;
+      position: relative;
+    }
+    .sk-box-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .sk-box-desc {
+      font-size: 0.92rem;
+      color: var(--text-main);
+      line-height: 1.55;
+    }
+    .sk-formula {
+      background: var(--primary-light);
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin: 0.5rem 0;
+      display: block;
+      font-size: 0.95rem;
+    }
+    .sk-formula-math {
+      font-family: 'Inter', sans-serif !important;
+      font-weight: 700;
+    }
+
+    /* Quiz Engine */
+    .quiz-control-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.75rem 1.25rem;
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .score-badge {
+      font-family: 'Inter', sans-serif !important;
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+    .reset-btn {
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      border-radius: 8px;
+      padding: 0.4rem 0.85rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .reset-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .q-card:hover {
+      border-color: var(--primary);
+    }
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.85rem;
+    }
+    .q-num-badge {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif !important;
+      white-space: nowrap;
+    }
+    .q-exam {
+      font-size: 0.82rem;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      font-weight: 600;
+      text-align: right;
+    }
+    .q-text {
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.55rem;
+      margin-bottom: 0.75rem;
+    }
+    @media (min-width: 640px) {
+      .options-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.98rem;
+      color: var(--text-main);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s ease;
+      width: 100%;
+    }
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+    .opt-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: 700;
+    }
+    .opt-btn.incorrect {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+    .opt-prefix {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.06);
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    [data-theme="dark"] .opt-prefix {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .exp-box {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 10px;
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      font-size: 0.93rem;
+      line-height: 1.6;
+      color: var(--text-main);
+    }
+    .exp-title {
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .toggle-exp-btn {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: 0.5rem;
+      padding: 0.2rem 0.4rem;
+    }
+    .toggle-exp-btn:hover {
+      text-decoration: underline;
+    }
+
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .exp-box, .exp-box *, .bcs-table, .bcs-table * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    /* Footer & Bottom Navigation */
+    .ch-footer {
+      margin-top: 3rem;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+      padding-top: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .ch-nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .nav-ch-btn {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 700;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .nav-ch-btn:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+  </style>
+</head>
+<body class="paper-burnt-edge font-hasan">
+  <div class="container">
+    <!-- Top Nav -->
+    <nav class="top-nav">
+      <a href="index.html" class="nav-btn">
+        <span>← সূচিপত্র</span>
+      </a>
+      <div class="nav-controls">
+        <button id="fontSizeDown" class="nav-btn" title="Decrease font size">A-</button>
+        <button id="fontSizeReset" class="nav-btn" title="Reset font size">A</button>
+        <button id="fontSizeUp" class="nav-btn" title="Increase font size">A+</button>
+        <button id="themeToggle" class="nav-btn" title="Toggle dark/light theme">🌙</button>
+      </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <header class="ch-header">
+      <span class="ch-badge">CHAPTER 09</span>
+      <h1 class="ch-title">ঘন জ্যামিতি ও ত্রিমাত্রিক ঘনবস্তু <span class="ch-en">(Solid Geometry & 3D Mensuration)</span></h1>
+      <div class="ch-meta">
+        <span class="ch-meta-item">📖 পৃষ্ঠা: ৪৮৩ - ৪৮৭</span>
+        <span class="ch-meta-item">🎯 মোট প্রশ্ন: 22 টি</span>
+        <span class="ch-meta-item">📝 বিষয়: পিএসসি নন-ক্যাডার প্রশ্নব্যাংক</span>
+      </div>
+    </header>
+
+    <!-- Sketchnotes Section -->
+    <section class="sk-section">
+      <div class="sk-header">
+        <h2 class="sk-title">প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি</h2>
+      </div>
+
+      <div class="sk-grid">
+        <div class="sk-box">
+          <h3 class="sk-box-title">📦 ঘনক (Cube)</h3>
+          <div class="sk-box-desc">
+            ঘনকের দৈর্ঘ্য = প্রস্থ = উচ্চতা = a হলে:
+            <span class="sk-formula">আয়তন = a³</span>
+            <span class="sk-formula">সমগ্রতলের ক্ষেত্রফল = 6a²</span>
+            <span class="sk-formula">কর্ণের দৈর্ঘ্য = a√৩</span>
+            <span class="sk-formula">একটি তলের ক্ষেত্রফল = a²</span>
+            শীর্ষবিন্দু সংখ্যা ৮টি, তল সংখ্যা ৬টি, সমকোণীয় শীর্ষ ৮টি।
+          </div>
+        </div>
+
+        <div class="sk-box">
+          <h3 class="sk-box-title">🧱 আয়তাকার ঘনবস্তু (Cuboid)</h3>
+          <div class="sk-box-desc">
+            দৈর্ঘ্য = a, প্রস্থ = b, উচ্চতা = c হলে:
+            <span class="sk-formula">আয়তন = abc</span>
+            <span class="sk-formula">সমগ্রতলের ক্ষেত্রফল = 2(ab + bc + ca)</span>
+            <span class="sk-formula">কর্ণের দৈর্ঘ্য = √(a² + b² + c²)</span>
+            তিন জোড়া সমান্তরাল আয়তাকার সমতল দ্বারা আবদ্ধ ক্ষেত্র।
+          </div>
+        </div>
+
+        <div class="sk-box">
+          <h3 class="sk-box-title">🛢️ সিলিন্ডার বা বেলন (Cylinder)</h3>
+          <div class="sk-box-desc">
+            ভূমির ব্যাসার্ধ = r, উচ্চতা = h হলে:
+            <span class="sk-formula">আয়তন = πr²h</span>
+            <span class="sk-formula">বক্রতলের ক্ষেত্রফল = 2πrh</span>
+            <span class="sk-formula">সমগ্রতলের ক্ষেত্রফল = 2πr(r + h)</span>
+            সমবৃত্তভূমিক বেলনের দুই প্রান্ত বৃত্তাকার ও পার্শ্বতল বক্রাকার।
+          </div>
+        </div>
+
+        <div class="sk-box">
+          <h3 class="sk-box-title">⚽ গোলক ও কোণক (Sphere & Cone)</h3>
+          <div class="sk-box-desc">
+            <b>গোলক (Sphere):</b> ব্যাসার্ধ = r হলে:
+            <span class="sk-formula">আয়তন = (৪/৩)πr³</span>
+            <span class="sk-formula">পৃষ্ঠতলের ক্ষেত্রফল = 4πr²</span>
+            <b>কোণক (Cone):</b> ব্যাসার্ধ = r, উচ্চতা = h হলে:
+            <span class="sk-formula">আয়তন = (১/৩)πr²h</span>
+            <span class="sk-formula">হেলানো উচ্চতা l = √(r² + h²)</span>
+          </div>
+        </div>
+
+        <div class="sk-box">
+          <h3 class="sk-box-title">⏰ ঘড়ির কাঁটার কোণ নির্ণয়</h3>
+          <div class="sk-box-desc">
+            ঘণ্টার কাঁটা (H) ও মিনিটের কাঁটার (M) মধ্যবর্তী কোণ:
+            <span class="sk-formula">θ = |(11M - 60H) / 2|</span>
+            যদি θ > ১৮০° হয়, তবে ক্ষুদ্রতর কোণ = ৩৬০° - θ।<br>
+            <i>উদাহরণ:</i> ৪টা ৩০ মিনিটে কোণ = |(330 - 240)/2| = ৪৫°।
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quiz Engine -->
+    <div class="quiz-control-bar">
+      <span class="score-badge">লাইভ স্কোর: <span id="score">০</span> / 22</span>
+      <button class="reset-btn" id="resetQuiz">পুনরায় চেষ্টা করুন</button>
+    </div>
+
+    <div class="quiz-container" id="quizContainer">
+
+      <div class="q-card" id="geo-ch09-q01">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ১</span>
+          <span class="q-exam">কারিগরি শিক্ষা অধিদপ্তর (ক্রাফট ইনস্ট্রাক্টর)-২১</span>
+        </div>
+        <div class="q-text">ঘড়িতে এখন ৮টা বাজে। ঘণ্টার কাঁটা ও মিনিটের কাঁটার মধ্যকার কোণটি হলো-</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q01" data-opt="ক" data-ans="ঘ">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">১৫০°</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q01" data-opt="খ" data-ans="ঘ">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">৬০°</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q01" data-opt="গ" data-ans="ঘ">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">১০০°</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q01" data-opt="ঘ" data-ans="ঘ">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">১২০°</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q01">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q01">
+          <div class="exp-title">📝 সঠিক উত্তর: ঘ</div>
+          <div class="exp-content">ঘড়ির কাঁটা দুটির মধ্যবর্তী কোণ নির্ণয়ের সূত্র: <br>$$\theta = \left|\frac{11M - 60H}{2}\right|$$<br>এখানে, $H = 8$, $M = 0$।<br>$$\theta = \left|\frac{11\times 0 - 60\times 8}{2}\right| = \left|\frac{-480}{2}\right| = 240°$$<br>যেহেতু কোণটি ১৮০° এর চেয়ে বড়, তাই ক্ষুদ্রতর কোণ = ৩৬০° - ২৪০° = <b>১২০°</b>।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q02">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ২</span>
+          <span class="q-exam">পিএসসি (বিভিন্ন মন্ত্রণালয়ের প্রশাসনিক কর্মকর্তা)-১৯</span>
+        </div>
+        <div class="q-text">ঘড়িতে যখন ৪টা ৩০ বাজে তখন ঘণ্টার কাঁটা ও মিনিটের কাঁটার মধ্যে কত ডিগ্রি কোণ উৎপন্ন হয়?</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q02" data-opt="ক" data-ans="ক">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">৪৫°</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q02" data-opt="খ" data-ans="ক">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">৫৪°</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q02" data-opt="গ" data-ans="ক">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">৪০°</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q02" data-opt="ঘ" data-ans="ক">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">৩৬°</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q02">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q02">
+          <div class="exp-title">📝 সঠিক উত্তর: ক</div>
+          <div class="exp-content">কোণ নির্ণয়ের সূত্র: <br>$$\theta = \left|\frac{11M - 60H}{2}\right|$$<br>এখানে, $H = 4$, $M = 30$।<br>$$\theta = \left|\frac{11\times 30 - 60\times 4}{2}\right| = \left|\frac{330 - 240}{2}\right| = \frac{90}{2} = \mathbf{45°}$$।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q03">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ৩</span>
+          <span class="q-exam">উপজেলা মহিলা বিষয়ক কর্মকর্তা-১৬</span>
+        </div>
+        <div class="q-text">একটি ঘনকের সমকোণের সংখ্যা কত?</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q03" data-opt="ক" data-ans="খ">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">৪</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q03" data-opt="খ" data-ans="খ">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">৮</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q03" data-opt="গ" data-ans="খ">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">১৬</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q03" data-opt="ঘ" data-ans="খ">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">২৪</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q03">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q03">
+          <div class="exp-title">📝 সঠিক উত্তর: খ</div>
+          <div class="exp-content">ঘনক একটি ত্রিমাত্রিক সুষম ঘনবস্তু যার ৬টি সমান বর্গাকার তল থাকে। এর ৮টি শীর্ষবিন্দু রয়েছে এবং প্রতিটি শীর্ষবিন্দুতে পরস্পর লম্বভাবে ৩টি ধার মিলিত হয়। মূল বইয়ের উত্তর অনুসারে এর সমকোণীয় শীর্ষ সংখ্যা <b>৮টি</b> (যদিও তলভিত্তিক মোট সমকোণ ৬ × ৪ = ২৪টি)।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q04">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ৪</span>
+          <span class="q-exam">বিসিক (উর্ধ্বতন সমন্বয় কর্মকর্তা)-২৩</span>
+        </div>
+        <div class="q-text">একটি ঘনক আকৃতির বস্তুর পৃষ্ঠতলের ক্ষেত্রফল 2400 বর্গ সে.মি. হলে ঘনকটির কর্ণের দৈর্ঘ্য কত সে.মি.?</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q04" data-opt="ক" data-ans="গ">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">২০</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q04" data-opt="খ" data-ans="গ">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">২০√২</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q04" data-opt="গ" data-ans="গ">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">২০√৩</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q04" data-opt="ঘ" data-ans="গ">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">৪০√৩</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q04">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q04">
+          <div class="exp-title">📝 সঠিক উত্তর: গ</div>
+          <div class="exp-content">ঘনকের ধার $a$ হলে, সমগ্র পৃষ্ঠতলের ক্ষেত্রফল = $6a^2$।<br>প্রশ্নমতে, $$6a^2 = 2400 \implies a^2 = 400 \implies a = 20\text{ সেমি}$$<br>ঘনকের কর্ণের দৈর্ঘ্য = $$a\sqrt{3} = \mathbf{20\sqrt{3}}\text{ সেমি} \approx 34.641\text{ সেমি}$$।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q05">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ৫</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার (সংসদ সচিবালয়ের প্রশাসনিক কর্মকর্তা)-২৩</span>
+        </div>
+        <div class="q-text">একটি ঘনকের পৃষ্ঠের ক্ষেত্রফল ৭২৬ বর্গমিটার হলে এর আয়তন কত ঘনমিটার?</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q05" data-opt="ক" data-ans="খ">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">১৩০০</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q05" data-opt="খ" data-ans="খ">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">১৩৩১</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q05" data-opt="গ" data-ans="খ">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">১৪৫২</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q05" data-opt="ঘ" data-ans="খ">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">১৫৪২</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q05">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q05">
+          <div class="exp-title">📝 সঠিক উত্তর: খ</div>
+          <div class="exp-content">ঘনকের পৃষ্ঠের ক্ষেত্রফল = $6a^2 = 726$<br>$$\implies a^2 = \frac{726}{6} = 121 \implies a = 11\text{ মিটার}$$<br>ঘনকটির আয়তন = $$a^3 = 11^3 = 11 \times 11 \times 11 = \mathbf{১৩৩১}\text{ ঘনমিটার}$$।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q06">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ৬</span>
+          <span class="q-exam">বিভিন্ন মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-২২</span>
+        </div>
+        <div class="q-text">একটি ঘনকের কর্ণের দৈর্ঘ্য 6√3 m হলে ঘনকটির ধার কত মিটার?</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q06" data-opt="ক" data-ans="ক">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">6 m</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q06" data-opt="খ" data-ans="ক">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">4 m</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q06" data-opt="গ" data-ans="ক">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">3 m</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q06" data-opt="ঘ" data-ans="ক">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">2√3 m</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q06">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q06">
+          <div class="exp-title">📝 সঠিক উত্তর: ক</div>
+          <div class="exp-content">ঘনকের ধার $a$ হলে, কর্ণের দৈর্ঘ্য = $a\sqrt{3}$।<br>প্রশ্নমতে, $$a\sqrt{3} = 6\sqrt{3} \implies a = \mathbf{6}\text{ m}$$।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q07">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ৭</span>
+          <span class="q-exam">বিভিন্ন মন্ত্রণালয় (হিসাবরক্ষণ কর্মকর্তা)-২২</span>
+        </div>
+        <div class="q-text">একটি ঘনকের একটি ঘরের দৈর্ঘ্য ৪ মিটার হলে, উহার তলগুলোর ক্ষেত্রফল-</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q07" data-opt="ক" data-ans="ঘ">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">১৬ বর্গমিটার</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q07" data-opt="খ" data-ans="ঘ">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">২৪ বর্গমিটার</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q07" data-opt="গ" data-ans="ঘ">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">৭২ বর্গমিটার</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q07" data-opt="ঘ" data-ans="ঘ">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">৯৬ বর্গমিটার</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q07">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q07">
+          <div class="exp-title">📝 সঠিক উত্তর: ঘ</div>
+          <div class="exp-content">ঘনকের ধার $a = 4$ মিটার হলে,<br>তলগুলোর মোট ক্ষেত্রফল = $$6a^2 = 6 \times (4)^2 = 6 \times 16 = \mathbf{৯৬}\text{ বর্গমিটার}$$।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q08">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ৮</span>
+          <span class="q-exam">আইন মন্ত্রণালয় (সহকারী প্রোগ্রামার)-১৭</span>
+        </div>
+        <div class="q-text">a বাহু বিশিষ্ট ঘনকের কর্ণের দৈর্ঘ্য কত?</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q08" data-opt="ক" data-ans="খ">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">2a একক</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q08" data-opt="খ" data-ans="খ">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">√3 a একক</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q08" data-opt="গ" data-ans="খ">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">√2 a একক</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q08" data-opt="ঘ" data-ans="খ">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">3a² একক</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q08">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q08">
+          <div class="exp-title">📝 সঠিক উত্তর: খ</div>
+          <div class="exp-content">ঘনকের কর্ণ = $$\sqrt{a^2 + a^2 + a^2} = \sqrt{3a^2} = \mathbf{\sqrt{3}a}\text{ একক}$$।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q09">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ৯</span>
+          <span class="q-exam">ফায়ার সার্ভিস ও সিভিল ডিফেন্স অধিদপ্তর (স্টেশন অফিসার)-২২</span>
+        </div>
+        <div class="q-text">একটি ঘনক আকৃতির বাক্সের এক বাহুর দৈর্ঘ্য ৩ মিটার। বাক্সের আয়তন কত?</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q09" data-opt="ক" data-ans="গ">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">৯ ঘনমিটার</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q09" data-opt="খ" data-ans="গ">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">১৮ ঘনমিটার</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q09" data-opt="গ" data-ans="গ">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">২৭ ঘনমিটার</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q09" data-opt="ঘ" data-ans="গ">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">৫৪ ঘনমিটার</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q09">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q09">
+          <div class="exp-title">📝 সঠিক উত্তর: গ</div>
+          <div class="exp-content">ঘনক আকৃতির বাক্সের এক ধারের দৈর্ঘ্য $a = 3$ মিটার।<br>বাক্সটির আয়তন = $$a^3 = 3^3 = \mathbf{২৭}\text{ ঘনমিটার}$$।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q10">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ১০</span>
+          <span class="q-exam">সেবা পরিদপ্তর সিনিয়র স্টাফ নার্স-১৬</span>
+        </div>
+        <div class="q-text">একটি ঘনকের এক ধারের দৈর্ঘ্য ২ মিটার। ঘনকটির তলগুলোর ক্ষেত্রফল কত?</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q10" data-opt="ক" data-ans="গ">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">৩৬ বর্গমিটার</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q10" data-opt="খ" data-ans="গ">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">৪৮ বর্গমিটার</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q10" data-opt="গ" data-ans="গ">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">২৪ বর্গমিটার</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q10" data-opt="ঘ" data-ans="গ">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">৯৬ বর্গমিটার</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q10">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q10">
+          <div class="exp-title">📝 সঠিক উত্তর: গ</div>
+          <div class="exp-content">ঘনকের এক ধারের দৈর্ঘ্য $a = 2$ মিটার।<br>ঘনকটির তলগুলোর ক্ষেত্রফল = $$6a^2 = 6 \times (2)^2 = 6 \times 4 = \mathbf{২৪}\text{ বর্গমিটার}$$।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q11">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ১১</span>
+          <span class="q-exam">তথ্য মন্ত্রণালয়ের চলচ্চিত্র ও প্রকাশনা অধিদপ্তর ক্যামেরাম্যান-১৯</span>
+        </div>
+        <div class="q-text">একটি ঘনক আকৃতির বাক্সের বাহুর দৈর্ঘ্য ৩ মিটার হলে বাক্সের তলের মোট ক্ষেত্রফল কত বর্গমিটার?</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q11" data-opt="ক" data-ans="ঘ">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">৯</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q11" data-opt="খ" data-ans="ঘ">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">১৮</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q11" data-opt="গ" data-ans="ঘ">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">২৭</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q11" data-opt="ঘ" data-ans="ঘ">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">৫৪</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q11">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q11">
+          <div class="exp-title">📝 সঠিক উত্তর: ঘ</div>
+          <div class="exp-content">বাক্সের তলের মোট ক্ষেত্রফল = $$6a^2 = 6 \times (3)^2 = 6 \times 9 = \mathbf{৫৪}\text{ বর্গমিটার}$$।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q12">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ১২</span>
+          <span class="q-exam">পরিবার পরিকল্পনা অধিদপ্তরের সহকারী পরিকল্পনা কর্মকর্তা-১২</span>
+        </div>
+        <div class="q-text">একটি ঘনকের দৈর্ঘ্য, প্রস্থ ও উচ্চতা সমান। ঘনকটির আয়তন ৩৪৩ ঘন সেমি. হলে তার একটি তলের ক্ষেত্রফল কত?</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q12" data-opt="ক" data-ans="খ">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">৭ বর্গ সেমি.</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q12" data-opt="খ" data-ans="খ">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">৪৯ বর্গ সেমি.</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q12" data-opt="গ" data-ans="খ">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">৯ বর্গ সেমি.</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q12" data-opt="ঘ" data-ans="খ">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">৩৬ বর্গ সেমি.</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q12">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q12">
+          <div class="exp-title">📝 সঠিক উত্তর: খ</div>
+          <div class="exp-content">আমরা জানি, ঘনকের আয়তন = $a^3$ এবং একটি তলের ক্ষেত্রফল = $a^2$।<br>প্রশ্নমতে, $$a^3 = 343 = 7^3 \implies a = 7\text{ সেমি}$$<br>অতএব, একটি তলের ক্ষেত্রফল = $$a^2 = 7^2 = \mathbf{৪৯}\text{ বর্গ সেমি}$$।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q13">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ১৩</span>
+          <span class="q-exam">প্রবাসী কল্যাণ ও বৈদেশিক কর্মসংস্থান মন্ত্রণালয়ের সহকারী পরিচালক-১২</span>
+        </div>
+        <div class="q-text">গোলকের আয়তনের সূত্র কোনটি?</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q13" data-opt="ক" data-ans="গ">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">π(ব্যাসার্ধ)² × দৈর্ঘ্য</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q13" data-opt="খ" data-ans="গ">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">π × (ব্যাসার্ধ)³</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q13" data-opt="গ" data-ans="গ">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">৪/৩ π(ব্যাসার্ধ)³</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q13" data-opt="ঘ" data-ans="গ">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">২/৩ π(ব্যাসার্ধ)²</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q13">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q13">
+          <div class="exp-title">📝 সঠিক উত্তর: গ</div>
+          <div class="exp-content">ব্যাসার্ধ $r$ বিশিষ্ট গোলকের আয়তন নির্ণয়ের সূত্র হলো: <br>$$V = \mathbf{\frac{4}{3}\pi r^3} = \frac{4}{3}\pi\times (\text{ব্যাসার্ধ})^3$$।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q14">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ১৪</span>
+          <span class="q-exam">৪৬তম বিসিএস / পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">একটি সিলিন্ডারের বৃত্তীয় তলের ব্যাসার্ধ ২ সে.মি. এবং উচ্চতা ৬ সে.মি. হলে, উহার তলগুলির মোট ক্ষেত্রফল কত?</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q14" data-opt="ক" data-ans="খ">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">১০π বর্গ সেমি.</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q14" data-opt="খ" data-ans="খ">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">৩২π বর্গ সেমি.</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q14" data-opt="গ" data-ans="খ">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">৩৬π বর্গ সেমি.</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q14" data-opt="ঘ" data-ans="খ">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">২৪π বর্গ সেমি.</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q14">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q14">
+          <div class="exp-title">📝 সঠিক উত্তর: খ</div>
+          <div class="exp-content">দেওয়া আছে, সিলিন্ডারের ভূমির ব্যাসার্ধ $r = 2$ সেমি এবং উচ্চতা $h = 6$ সেমি।<br>সিলিন্ডারের সমগ্রতলের ক্ষেত্রফল = $$2\pi r(r + h) = 2\pi \times 2 \times (2 + 6) = 4\pi \times 8 = \mathbf{32\pi}\text{ বর্গ সেমি}$$।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q15">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ১৫</span>
+          <span class="q-exam">পিএসসি - সুপারিনটেনডেন্ট-২৪</span>
+        </div>
+        <div class="q-text">সমবৃত্তভূমিক সিলিন্ডারের ভূমির ব্যাসার্ধ ৫ সে.মি. এবং উচ্চতা ১২ সে.মি. হলে সিলিন্ডারের বক্রতলের ক্ষেত্রফল কত বর্গ সেমি.?</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q15" data-opt="ক" data-ans="ঘ">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">১০π</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q15" data-opt="খ" data-ans="ঘ">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">২৪π</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q15" data-opt="গ" data-ans="ঘ">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">৬০π</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q15" data-opt="ঘ" data-ans="ঘ">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">১২০π</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q15">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q15">
+          <div class="exp-title">📝 সঠিক উত্তর: ঘ</div>
+          <div class="exp-content">সিলিন্ডারের বক্রতলের ক্ষেত্রফল = $$2\pi rh = 2\times \pi \times 5 \times 12 = \mathbf{120\pi}\text{ বর্গ সেমি}$$।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q16">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ১৬</span>
+          <span class="q-exam">পিএসসি সংসদ সচিবালয়ের প্রশাসনিক কর্মকর্তা-২৩</span>
+        </div>
+        <div class="q-text">দুইটি গোলকের ব্যাসার্ধের অনুপাত ৩:২ হলে তাদের আয়তনের অনুপাত কত?</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q16" data-opt="ক" data-ans="ঘ">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">১৯:৪</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q16" data-opt="খ" data-ans="ঘ">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">১২:৪</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q16" data-opt="গ" data-ans="ঘ">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">২৭:৪</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q16" data-opt="ঘ" data-ans="ঘ">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">২৭:৮</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q16">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q16">
+          <div class="exp-title">📝 সঠিক উত্তর: ঘ</div>
+          <div class="exp-content">ধরি ব্যাসার্ধদ্বয় $r_1$ ও $r_2$। দেওয়া আছে $\frac{r_1}{r_2} = \frac{3}{2}$।<br>আয়তনের অনুপাত = $$\frac{\frac{4}{3}\pi r_1^3}{\frac{4}{3}\pi r_2^3} = \left(\frac{r_1}{r_2}\right)^3 = \left(\frac{3}{2}\right)^3 = \frac{27}{8} = \mathbf{২৭:৮}$$।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q17">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ১৭</span>
+          <span class="q-exam">পিএসসি (জেলা ক্রীড়া কর্মকর্তা)-২৩ / সহকারী স্টেশন মাস্টার-১৬</span>
+        </div>
+        <div class="q-text">দুইটি গোলকের আয়তনের অনুপাত ৮ : ২৭। তাদের পৃষ্ঠের ক্ষেত্রফলের অনুপাত কত?</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q17" data-opt="ক" data-ans="ঘ">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">৩:৪</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q17" data-opt="খ" data-ans="ঘ">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">৩:২</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q17" data-opt="গ" data-ans="ঘ">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">২:৩</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q17" data-opt="ঘ" data-ans="ঘ">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">৪:৯</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q17">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q17">
+          <div class="exp-title">📝 সঠিক উত্তর: ঘ</div>
+          <div class="exp-content">শর্তমতে, $$\frac{V_1}{V_2} = \frac{\frac{4}{3}\pi r_1^3}{\frac{4}{3}\pi r_2^3} = \frac{8}{27} \implies \left(\frac{r_1}{r_2}\right)^3 = \left(\frac{2}{3}\right)^3 \implies \frac{r_1}{r_2} = \frac{2}{3}$$<br>পৃষ্ঠের ক্ষেত্রফলের অনুপাত = $$\frac{4\pi r_1^2}{4\pi r_2^2} = \left(\frac{r_1}{r_2}\right)^2 = \left(\frac{2}{3}\right)^2 = \frac{4}{9} = \mathbf{৪:৯}$$।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q18">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ১৮</span>
+          <span class="q-exam">নার্সিং ও মিডওয়াইফারি অধিদপ্তর (সিনিয়র স্টাফ নার্স)-১৮</span>
+        </div>
+        <div class="q-text">1 cm ব্যাসার্ধ বিশিষ্ট গোলকের আয়তন কত?</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q18" data-opt="ক" data-ans="ক">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">৪/৩ π cm³</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q18" data-opt="খ" data-ans="ক">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">৩/৪ π cm³</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q18" data-opt="গ" data-ans="ক">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">2π cm³</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q18" data-opt="ঘ" data-ans="ক">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">4π cm³</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q18">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q18">
+          <div class="exp-title">📝 সঠিক উত্তর: ক</div>
+          <div class="exp-content">$r$ ব্যাসার্ধ বিশিষ্ট গোলকের আয়তন = $\frac{4}{3}\pi r^3$ ঘন একক।<br>এখানে $r = 1$ cm হলে,<br>আয়তন = $$\frac{4}{3}\pi(1)^3 = \mathbf{\frac{4}{3}\pi}\text{ cm}^3$$।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q19">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ১৯</span>
+          <span class="q-exam">জনশক্তি, কর্মসংস্থান ও প্রশিক্ষণ ব্যুরো (ইন্সট্রাক্টর)-১৮</span>
+        </div>
+        <div class="q-text">গোলকের ব্যাসার্ধ r হলে উহার আয়তন সমান কত?</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q19" data-opt="ক" data-ans="ক">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">৪/৩ πr³</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q19" data-opt="খ" data-ans="ক">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">৩/৪ πr³</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q19" data-opt="গ" data-ans="ক">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">২/৩ πr³</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q19" data-opt="ঘ" data-ans="ক">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">4πr²</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q19">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q19">
+          <div class="exp-title">📝 সঠিক উত্তর: ক</div>
+          <div class="exp-content">ব্যাসার্ধ $r$ বিশিষ্ট গোলকের আয়তন = $$\mathbf{\frac{4}{3}\pi r^3}$$ ঘন একক।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q20">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ২০</span>
+          <span class="q-exam">আইন, বিচার ও সংসদ বিষয়ক মন্ত্রণালয় সাব-রেজিস্ট্রার-১২</span>
+        </div>
+        <div class="q-text">একটি গোলকের ব্যাসার্ধ দ্বিগুণ করা হলে গোলকের আয়তন বৃদ্ধি পাবে-</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q20" data-opt="ক" data-ans="গ">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">২ গুণ</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q20" data-opt="খ" data-ans="গ">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">৪ গুণ</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q20" data-opt="গ" data-ans="গ">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">৮ গুণ</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q20" data-opt="ঘ" data-ans="গ">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">৬ গুণ</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q20">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q20">
+          <div class="exp-title">📝 সঠিক উত্তর: গ</div>
+          <div class="exp-content">গোলকের মূল আয়তন $V = \frac{4}{3}\pi r^3$।<br>ব্যাসার্ধ দ্বিগুণ ($2r$) করা হলে নতুন আয়তন $V' = \frac{4}{3}\pi (2r)^3 = \frac{4}{3}\pi (8r^3) = 8 \times \left(\frac{4}{3}\pi r^3\right) = 8V$।<br>অর্থাৎ আয়তন <b>৮ গুণ</b> বৃদ্ধি পায় (বা ৮ গুণ হয়)।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q21">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ২১</span>
+          <span class="q-exam">পিএসসি (ইকোনমিস্ট)-২৪</span>
+        </div>
+        <div class="q-text">কোনো সমবৃত্তভূমিক কোণকের ভূমির ব্যাসার্ধ r মিটার এবং উচ্চতা h মিটার হলে, কোণকটির আয়তন কত?</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q21" data-opt="ক" data-ans="গ">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">πr²h ঘনমিটার</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q21" data-opt="খ" data-ans="গ">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">১/২ πr²h ঘনমিটার</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q21" data-opt="গ" data-ans="গ">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">১/৩ πr²h ঘনমিটার</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q21" data-opt="ঘ" data-ans="গ">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">১/৪ πr²h ঘনমিটার</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q21">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q21">
+          <div class="exp-title">📝 সঠিক উত্তর: গ</div>
+          <div class="exp-content">সমবৃত্তভূমিক কোণকের ভূমির ব্যাসার্ধ $r$ এবং উচ্চতা $h$ হলে এর আয়তন নির্ণয়ের সূত্র হলো: <br>$$V = \mathbf{\frac{1}{3}\pi r^2 h}\text{ ঘন একক}$$।</div>
+        </div>
+      </div>
+    
+      <div class="q-card" id="geo-ch09-q22">
+        <div class="q-header">
+          <span class="q-num-badge">প্রশ্ন ২২</span>
+          <span class="q-exam">গণপূর্ত অধিদপ্তরের উপসহকারী প্রকৌশলী (সিভিল)-১৭</span>
+        </div>
+        <div class="q-text">ভূমির সাথে আলতোভাবে ঢিল ছুঁড়লে তা যে পথে পুনরায় ভূমি স্পর্শ করে তা-</div>
+        <div class="options-grid">
+          
+          <button class="opt-btn" data-qid="geo-ch09-q22" data-opt="ক" data-ans="ক">
+            <span class="opt-prefix">ক</span>
+            <span class="opt-text">অধিবৃত্তাকার</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q22" data-opt="খ" data-ans="ক">
+            <span class="opt-prefix">খ</span>
+            <span class="opt-text">উপবৃত্তাকার</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q22" data-opt="গ" data-ans="ক">
+            <span class="opt-prefix">গ</span>
+            <span class="opt-text">সরলরৈখিক</span>
+          </button>
+          <button class="opt-btn" data-qid="geo-ch09-q22" data-opt="ঘ" data-ans="ক">
+            <span class="opt-prefix">ঘ</span>
+            <span class="opt-text">পরাবৃত্তাকার</span>
+          </button>
+        </div>
+        <button class="toggle-exp-btn" data-exp-target="exp-geo-ch09-q22">
+          <span>💡 সমাধান ও ব্যাখ্যা দেখুন</span>
+        </button>
+        <div class="exp-box" id="exp-geo-ch09-q22">
+          <div class="exp-title">📝 সঠিক উত্তর: ক</div>
+          <div class="exp-content">ভূমির সাথে তির্যকভাবে কোনো বস্তু নিক্ষেপ করলে এর গতিপথকে প্রাস (Projectile) বলে। অভিকর্ষীয় বলের প্রভাবে এ গতিপথটি বক্ররেখা ধারণ করে। বইয়ের সমাধান অনুযায়ী এর গতিপথকে <b>অধিবৃত্তাকার</b> হিসেবে উত্তর করা হয়েছে।</div>
+        </div>
+      </div>
+    
+    </div>
+
+    <!-- Chapter Navigation -->
+    <div class="ch-nav-buttons">
+      <a href="ch-08-mensuration-circles-wheels.html" class="nav-ch-btn">← অধ্যায় ০৮: বৃত্তের পরিধি, ক্ষেত্রফল ও চাকা</a>
+      <a href="index.html" class="nav-ch-btn">পরিমিতি সমাপ্ত - মূল সূচিপত্র →</a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="ch-footer">
+      <p>পিএসসি নন-ক্যাডার প্রশ্নব্যাংক (২য় খণ্ড) • জ্যামিতি ও পরিমিতি</p>
+      <p>© ২০২৬ সর্বস্বত্ব সংরক্ষিত</p>
+    </footer>
+  </div>
+
+  <script>
+    // Theme Management
+    const themeToggle = document.getElementById('themeToggle');
+    const htmlElem = document.documentElement;
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    htmlElem.setAttribute('data-theme', currentTheme);
+    themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+    themeToggle.addEventListener('click', () => {
+      const newTheme = htmlElem.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      htmlElem.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    });
+
+    // Font Sizing
+    let currentScale = 1;
+    const container = document.querySelector('.container');
+    document.getElementById('fontSizeUp').addEventListener('click', () => {
+      if (currentScale < 1.3) {
+        currentScale += 0.05;
+        container.style.fontSize = `${currentScale}rem`;
+      }
+    });
+    document.getElementById('fontSizeDown').addEventListener('click', () => {
+      if (currentScale > 0.85) {
+        currentScale -= 0.05;
+        container.style.fontSize = `${currentScale}rem`;
+      }
+    });
+    document.getElementById('fontSizeReset').addEventListener('click', () => {
+      currentScale = 1;
+      container.style.fontSize = '1rem';
+    });
+
+    // Quiz Engine State
+    let score = 0;
+    const answered = new Set();
+    const scoreElem = document.getElementById('score');
+
+    function toBengaliNumerals(n) {
+      const bNums = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+      return n.toString().split('').map(d => bNums[parseInt(d)] || d).join('');
+    }
+
+    document.querySelectorAll('.opt-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const qid = this.getAttribute('data-qid');
+        if (answered.has(qid)) return;
+
+        answered.add(qid);
+        const userChoice = this.getAttribute('data-opt');
+        const correctChoice = this.getAttribute('data-ans');
+        const parentCard = document.getElementById(qid);
+
+        if (userChoice === correctChoice) {
+          this.classList.add('correct');
+          score++;
+          scoreElem.textContent = toBengaliNumerals(score);
+        } else {
+          this.classList.add('incorrect');
+          parentCard.querySelectorAll('.opt-btn').forEach(b => {
+            if (b.getAttribute('data-opt') === correctChoice) {
+              b.classList.add('correct');
+            }
+          });
+        }
+
+        // Auto reveal explanation
+        const expBox = document.getElementById(`exp-${qid}`);
+        if (expBox) expBox.style.display = 'block';
+      });
+    });
+
+    // Toggle Explanation button
+    document.querySelectorAll('.toggle-exp-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const targetId = this.getAttribute('data-exp-target');
+        const exp = document.getElementById(targetId);
+        if (exp) {
+          exp.style.display = (exp.style.display === 'block') ? 'none' : 'block';
+        }
+      });
+    });
+
+    // Reset Quiz
+    document.getElementById('resetQuiz').addEventListener('click', () => {
+      score = 0;
+      answered.clear();
+      scoreElem.textContent = '০';
+      document.querySelectorAll('.opt-btn').forEach(btn => {
+        btn.classList.remove('correct', 'incorrect');
+      });
+      document.querySelectorAll('.exp-box').forEach(exp => {
+        exp.style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>
