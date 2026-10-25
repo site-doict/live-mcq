@@ -105,7 +105,7 @@
       group: 'cadre',
       examSubject: 'Ethics & Good Governance'
     },
-    // নন-ক্যাডার প্রশ্নব্যাংক (৪টি বিষয়)
+    // নন-ক্যাডার প্রশ্নব্যাংক (১৪টি বিষয়)
     {
       id: 'non-cadre-bangla-grammar',
       folder: 'Non Cadre Bangla Grammar',
@@ -131,12 +131,92 @@
       examSubject: 'Non Cadre English'
     },
     {
+      id: 'non-cadre-bangladesh',
+      folder: 'Non Cadre Bangladesh',
+      bnName: 'পিএসসি নন-ক্যাডার বাংলাদেশ বিষয়াবলি',
+      enName: 'Non Cadre Bangladesh Affairs',
+      group: 'non-cadre',
+      examSubject: 'Non Cadre Bangladesh'
+    },
+    {
+      id: 'non-cadre-international',
+      folder: 'Non Cadre International',
+      bnName: 'পিএসসি নন-ক্যাডার আন্তর্জাতিক বিষয়াবলি',
+      enName: 'Non Cadre International Affairs',
+      group: 'non-cadre',
+      examSubject: 'Non Cadre International'
+    },
+    {
       id: 'non-cadre-general-science',
       folder: 'Non Cadre General Science',
       bnName: 'পিএসসি নন-ক্যাডার সাধারণ বিজ্ঞান',
       enName: 'Non Cadre General Science',
       group: 'non-cadre',
       examSubject: 'Non Cadre General Science'
+    },
+    {
+      id: 'non-cadre-computer-it',
+      folder: 'Non Cadre Computer & IT',
+      bnName: 'পিএসসি নন-ক্যাডার কম্পিউটার ও আইটি',
+      enName: 'Non Cadre Computer & IT',
+      group: 'non-cadre',
+      examSubject: 'Non Cadre Computer & IT'
+    },
+    {
+      id: 'non-cadre-arithmetic',
+      folder: 'Non Cadre Arithmetic',
+      bnName: 'পিএসসি নন-ক্যাডার পাটিগণিত',
+      enName: 'Non Cadre Arithmetic',
+      group: 'non-cadre',
+      examSubject: 'Non Cadre Arithmetic'
+    },
+    {
+      id: 'non-cadre-algebra',
+      folder: 'Non Cadre Algebra',
+      bnName: 'পিএসসি নন-ক্যাডার বীজগণিত',
+      enName: 'Non Cadre Algebra',
+      group: 'non-cadre',
+      examSubject: 'Non Cadre Algebra'
+    },
+    {
+      id: 'non-cadre-geometry',
+      folder: 'Non Cadre Geometry',
+      bnName: 'পিএসসি নন-ক্যাডার জ্যামিতি',
+      enName: 'Non Cadre Geometry',
+      group: 'non-cadre',
+      examSubject: 'Non Cadre Geometry'
+    },
+    {
+      id: 'non-cadre-trigonometry',
+      folder: 'Non Cadre Trigonometry & Higher Math',
+      bnName: 'পিএসসি নন-ক্যাডার ত্রিকোণমিতি ও উচ্চতর গণিত',
+      enName: 'Non Cadre Trigonometry & Higher Math',
+      group: 'non-cadre',
+      examSubject: 'Non Cadre Trigonometry & Higher Math'
+    },
+    {
+      id: 'non-cadre-mental-ability',
+      folder: 'Non Cadre Mental Ability',
+      bnName: 'পিএসসি নন-ক্যাডার মানসিক দক্ষতা',
+      enName: 'Non Cadre Mental Ability',
+      group: 'non-cadre',
+      examSubject: 'Non Cadre Mental Ability'
+    },
+    {
+      id: 'non-cadre-geography',
+      folder: 'Non Cadre Geography & Environment',
+      bnName: 'পিএসসি নন-ক্যাডার ভূগোল ও পরিবেশ',
+      enName: 'Non Cadre Geography & Environment',
+      group: 'non-cadre',
+      examSubject: 'Non Cadre Geography & Environment'
+    },
+    {
+      id: 'non-cadre-ethics',
+      folder: 'Non Cadre Ethics & Good Governance',
+      bnName: 'পিএসসি নন-ক্যাডার নৈতিকতা ও সুশাসন',
+      enName: 'Non Cadre Ethics & Good Governance',
+      group: 'non-cadre',
+      examSubject: 'Non Cadre Ethics & Good Governance'
     }
   ];
 

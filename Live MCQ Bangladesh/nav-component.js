@@ -755,6 +755,12 @@
     }
 
     /* Mobile Phone Screen Layout (Samsung Galaxy A23 ~384px-412px) */
+    @media (max-width: 640px) {
+      .ebk-bar-center {
+        display: none !important;
+      }
+    }
+
     @media (max-width: 768px) {
       .ebk-topbar {
         padding-left: 8px;

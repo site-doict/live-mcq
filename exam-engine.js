@@ -1605,7 +1605,7 @@
 
                 if (isRealCorrect) {
                   optClass = 'is-correct';
-                  marker = '<span class="opt-tag correct">সঠিক উত্তর ✓</span>';
+                  marker = '<span class="opt-tag correct">✓</span>';
                 }
                 if (isUserChosen && !isRealCorrect) {
                   optClass = 'is-wrong-chosen';
@@ -1635,7 +1635,7 @@
               <div class="review-exp-drawer" id="expDrawer_${item.index}">
                 <div class="exp-content-box">
                   <div class="exp-answer-row">
-                    <strong>সঠিক উত্তর:</strong> <span class="ans-label">${OPT_LABELS[q.ans]} (${q.opts[q.ans]})</span>
+                    <strong>💡 বিশদ সমাধান ও বিশ্লেষণ:</strong>
                   </div>
                   <div class="exp-body-text">
                     ${q.exp ? q.exp : 'এই প্রশ্নের জন্য কোনো অতিরিক্ত ব্যাখ্যা মুদ্রিত নেই।'}

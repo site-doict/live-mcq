@@ -39,7 +39,13 @@ INDEX_FILES = [
     'Non Cadre Bangladesh/index.html',
     'Non Cadre International/index.html',
     'Non Cadre Arithmetic/index.html',
-    'Non Cadre Algebra/index.html'
+    'Non Cadre Algebra/index.html',
+    'Non Cadre Geometry/index.html',
+    'Non Cadre Trigonometry & Higher Math/index.html',
+    'Non Cadre Computer & IT/index.html',
+    'Non Cadre Mental Ability/index.html',
+    'Non Cadre Geography & Environment/index.html',
+    'Non Cadre Ethics & Good Governance/index.html'
 ]
 
 REGISTERED_FOLDERS = {
@@ -62,7 +68,13 @@ REGISTERED_FOLDERS = {
     'Non Cadre Bangladesh',
     'Non Cadre International',
     'Non Cadre Arithmetic',
-    'Non Cadre Algebra'
+    'Non Cadre Algebra',
+    'Non Cadre Geometry',
+    'Non Cadre Trigonometry & Higher Math',
+    'Non Cadre Computer & IT',
+    'Non Cadre Mental Ability',
+    'Non Cadre Geography & Environment',
+    'Non Cadre Ethics & Good Governance'
 }
 
 class TagBalanceParser(HTMLParser):
