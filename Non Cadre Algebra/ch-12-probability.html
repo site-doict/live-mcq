@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>অধ্যায় 12: সম্ভাব্যতা (Probability) - পিএসসি নন-ক্যাডার বীজগণিত</title>
+  <meta name="description" content="পিএসসি নন-ক্যাডার ও বিসিএস পরীক্ষার বিগত বছরের 11টি প্রামাণ্য সম্ভাব্যতা প্রশ্ন, সূত্রাবলি, স্কেচনোট ও সমাধান।">
+
+  <!-- Pre-render Theme Restore -->
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('theme_algebra') || localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch(e) {}
+    })();
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../bangla-fonts.css">
+  <link rel="stylesheet" href="../paper-textures.css">
+  <link rel="stylesheet" href="../universal-modes.css">
+
+  <style>
+    :root {
+      --primary: #9333ea;
+      --primary-dark: #0f172a;
+      --primary-light: rgba(99, 102, 241, 0.1);
+      --accent: #d97706;
+      --bg-base: #f8fafc;
+      --bg-surface: rgba(255, 255, 255, 0.88);
+      --bg-card: rgba(255, 255, 255, 0.85);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(226, 232, 240, 0.85);
+      --correct-bg: #ecfdf5;
+      --correct-border: #10b981;
+      --correct-text: #065f46;
+      --wrong-bg: #fef2f2;
+      --wrong-border: #ef4444;
+      --wrong-text: #991b1b;
+      --font-base: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+    }
+
+    [data-theme="dark"] {
+      --primary: #818cf8;
+      --primary-dark: #4f46e5;
+      --primary-light: rgba(129, 140, 248, 0.15);
+      --accent: #fbbf24;
+      --bg-base: #0f172a;
+      --bg-surface: rgba(30, 41, 59, 0.88);
+      --bg-card: rgba(30, 41, 59, 0.85);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(51, 65, 85, 0.85);
+      --correct-bg: rgba(16, 185, 129, 0.2);
+      --correct-border: #10b981;
+      --correct-text: #6ee7b7;
+      --wrong-bg: rgba(239, 68, 68, 0.2);
+      --wrong-border: #ef4444;
+      --wrong-text: #fca5a5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-base);
+      color: var(--text-main);
+      background-color: var(--bg-base);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Paper & Card Glassmorphism */
+    .paper-old-aged .q-card,
+    .paper-old-aged .sk-box,
+    .paper-old-aged .sk-sticky,
+    .paper-old-aged .bcs-matrix-card,
+    .paper-old-aged .score-sticky-bar {
+      background: var(--bg-card);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+    }
+
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 0.7em;
+      opacity: 0.85;
+      font-weight: 600;
+    }
+
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+    .bcs-table, .bcs-table *, .score-bar, .score-bar *, .doubt-box, .doubt-box * {
+      font-family: var(--font-base) !important;
+    }
+
+    .ch-header {
+      text-align: center;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 2px dashed var(--border-color);
+    }
+
+    .ch-badge-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .badge-primary {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .badge-secondary {
+      background: rgba(148, 163, 184, 0.15);
+      color: var(--text-muted);
+    }
+
+    .badge-accent {
+      background: rgba(217, 119, 6, 0.15);
+      color: var(--accent);
+    }
+
+    .ch-title {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .ch-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 16px;
+    }
+
+    .top-action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .btn-sm {
+      padding: 4px 10px;
+      font-size: 0.82rem;
+    }
+
+    .font-controls {
+      display: flex;
+      gap: 4px;
+    }
+
+    .bcs-matrix-card {
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 28px;
+    }
+
+    .sec-heading {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+
+    .bcs-table th, .bcs-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .sk-section {
+      margin-bottom: 36px;
+    }
+
+    .sk-box {
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+
+    .sk-box-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sk-formula-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin: 14px 0;
+    }
+
+    .sk-formula-card {
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px dashed var(--primary);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .sk-formula-card strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .sk-sticky {
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 14px 0;
+      background: rgba(217, 119, 6, 0.06);
+    }
+
+    .sk-sticky-title {
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .exam-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .filter-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-select {
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 0.88rem;
+      outline: none;
+    }
+
+    .score-sticky-bar {
+      position: sticky;
+      top: 16px;
+      z-index: 90;
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .score-display {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .score-val {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 1.15rem;
+    }
+
+    .q-card {
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 18px;
+      transition: border-color 0.2s ease;
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .q-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.88rem;
+    }
+
+    .q-session {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      background: rgba(148, 163, 184, 0.12);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .q-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      text-align: left;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      width: 100%;
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      transform: translateX(2px);
+    }
+
+    .opt-btn.correct {
+      background: var(--correct-bg) !important;
+      border-color: var(--correct-border) !important;
+      color: var(--correct-text) !important;
+      font-weight: 700;
+    }
+
+    .opt-btn.wrong {
+      background: var(--wrong-bg) !important;
+      border-color: var(--wrong-border) !important;
+      color: var(--wrong-text) !important;
+    }
+
+    .ans-drawer {
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: var(--correct-bg);
+      border-left: 4px solid var(--correct-border);
+      color: var(--correct-text);
+      font-size: 0.9rem;
+    }
+
+    .exp-drawer {
+      margin-top: 10px;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 10px;
+    }
+
+    .exp-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 6px 0;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .exp-content {
+      display: none;
+      padding: 12px 14px;
+      margin-top: 8px;
+      background: rgba(148, 163, 184, 0.08);
+      border-radius: 8px;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .exp-drawer.open .exp-content {
+      display: block;
+    }
+
+    .exp-drawer.open .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .toggle-icon {
+      transition: transform 0.2s ease;
+      font-size: 0.8rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body class="paper-old-aged">
+
+  <div class="container paper-container">
+
+    <!-- Top Action Bar -->
+    <div class="top-action-bar">
+      <a href="index.html" class="btn btn-sm">
+        <span>←</span> <span>বীজগণিত সূচিপত্র</span>
+      </a>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <div class="font-controls">
+          <button type="button" class="btn btn-sm" onclick="adjustFont(-1)" title="ফন্ট ছোট করুন">A−</button>
+          <button type="button" class="btn btn-sm" onclick="resetFont()" title="স্বাভাবিক ফন্ট">A</button>
+          <button type="button" class="btn btn-sm" onclick="adjustFont(1)" title="ফন্ট বড় করুন">A+</button>
+        </div>
+        <button type="button" class="btn btn-sm" id="theme-btn" onclick="toggleTheme()" title="থিম পরিবর্তন">🌙</button>
+      </div>
+    </div>
+
+    <!-- Chapter Header -->
+    <header class="ch-header">
+      <div class="ch-badge-row">
+        <span class="badge badge-primary">অধ্যায় 12</span>
+        <span class="badge badge-secondary">পৃষ্ঠা ৪৩৬ – ৪৪২</span>
+        <span class="badge badge-accent">মোট প্রশ্ন: 11টি</span>
+      </div>
+      <h1 class="ch-title font-gedamala">সম্ভাব্যতা <span class="ch-en">(Probability)</span></h1>
+      <p class="ch-subtitle">পিএসসি নন-ক্যাডার ও বিসিএস পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক, মৌলিক সূত্রাবলি, স্কেচনোট ও নির্ভুল সমাধান।</p>
+    </header>
+
+    <!-- BCS Analysis Matrix -->
+    <section class="bcs-matrix-card">
+      <h2 class="sec-heading font-gedamala">📊 প্রশ্ন বিশ্লেষণ ছক (সম্ভাব্যতা)</h2>
+      <div class="table-responsive">
+        <table class="bcs-table">
+          <thead>
+            <tr>
+              <th>বিষয় ও শাখা</th>
+              <th>গুরুত্বপূর্ণ টপিক ও প্রশ্ন প্রকার</th>
+              <th>গড় প্রশ্ন সংখ্যা</th>
+              <th>প্রস্তুতি অগ্রাধিকার</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>থলি হতে বল তোলার সম্ভাবনা</strong></td>
+              <td>বিভিন্ন রঙের বল থেকে নির্দিষ্ট রঙের বল পাওয়া বা না পাওয়া</td>
+              <td>৫+ টি</td>
+              <td>⭐⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>মুদ্রা ও ছক্কা নিক্ষেপ</strong></td>
+              <td>মুদ্রায় হেড/টেল, ছক্কায় জোড়/বিজোড়/মৌলিক সংখ্যা পড়ার সম্ভাবনা</td>
+              <td>৩+ টি</td>
+              <td>⭐⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>তাসের প্যাকেট হতে তাস নির্বাচন</strong></td>
+              <td>৫২ তাসের প্যাকেট থেকে টেক্কা, রাজা, লাল/কালো তাস তোলা</td>
+              <td>২+ টি</td>
+              <td>⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>পরিপূরক ও যৌগিক সম্ভাবনা</strong></td>
+              <td>P(A') = 1 - P(A), স্বাধীন ঘটনার ক্ষেত্রে P(A ∩ B) = P(A)P(B)</td>
+              <td>১+ টি</td>
+              <td>⭐⭐⭐⭐</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Part 1: Authentic Notes & Sketchnotes -->
+    <section class="sk-section">
+      <h2 class="sec-heading font-gedamala">📝 প্রামাণ্য রিভিশন নোট ও সূত্রাবলি (Sketchnotes)</h2>
+      <div class="sk-box">
+        <h3 class="sk-box-title font-gedamala">📌 ১. সম্ভাবনার মৌলিক সংজ্ঞা ও সূত্রাবলি</h3>
+        <p>কোনো একটি ঘটনা ঘটার অনুকূল ফলাফলের সংখ্যাকে সমগ্র সম্ভাব্য ফলাফলের সংখ্যা দ্বারা ভাগ করলে ঐ ঘটনার <strong>সম্ভাবনা (Probability)</strong> পাওয়া যায়।</p>
+        <div class="sk-formula-grid">
+          <div class="sk-formula-card">
+            <strong>মূল সূত্র:</strong>
+            <code>P(E) = <sup>অনুকূল ফলাফল সংখ্যা</sup> / <sub>সমগ্র সম্ভাব্য ফলাফল সংখ্যা</sub></code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>সীমা:</strong>
+            <code>০ ≤ P(E) ≤ ১</code><br>
+            (নিশ্চিত ঘটনা = ১, অসম্ভব ঘটনা = ০)
+          </div>
+          <div class="sk-formula-card">
+            <strong>না ঘটার সম্ভাবনা:</strong>
+            <code>P(না ঘটা) = ১ - P(ঘটা)</code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>মুদ্রা নিক্ষেপ:</strong>
+            <code>n টি মুদ্রা নিক্ষেপে মোট ঘটনা = ২<sup>n</sup></code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>ছক্কা নিক্ষেপ:</strong>
+            <code>n টি ছক্কা নিক্ষেপে মোট ঘটনা = ৬<sup>n</sup></code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>স্বাধীন ঘটনা:</strong>
+            <code>P(A ∩ B) = P(A) × P(B)</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Part 2: Question Engine -->
+    <section class="exam-section">
+      <div class="exam-section-header">
+        <h2 class="sec-heading font-gedamala" style="margin-bottom: 0;">🎯 বিগত পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক</h2>
+        <div class="filter-wrap">
+          <label for="sessionFilter" style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">সেশন ফিল্টার:</label>
+          <select id="sessionFilter" class="filter-select" onchange="filterSession(this.value)">
+<option value="all">সকল পরীক্ষা সেশন (11টি প্রশ্ন)</option>
+          <option value="গণপূর্ত অধিদপ্তর (উপ-সহকারী প্রকৌশলী ও ড্রাফটসম্যান)-১৮">গণপূর্ত অধিদপ্তর (উপ-সহকারী প্রকৌশলী ও ড্রাফটসম্যান)-১৮ (1টি)</option>
+          <option value="জনপ্রশাসন মন্ত্রণালয়ের অধীনে পিএসসি'র সহকারী পরিচালক-১৬">জনপ্রশাসন মন্ত্রণালয়ের অধীনে পিএসসি'র সহকারী পরিচালক-১৬ (1টি)</option>
+          <option value="পিএসসি (জেলা ক্রীড়া কর্মকর্তা)-২৩">পিএসসি (জেলা ক্রীড়া কর্মকর্তা)-২৩ (1টি)</option>
+          <option value="পিএসসি (বিভিন্ন মন্ত্রণালয়ের ব্যক্তিগত কর্মকর্তা)-১৯">পিএসসি (বিভিন্ন মন্ত্রণালয়ের ব্যক্তিগত কর্মকর্তা)-১৯ (1টি)</option>
+          <option value="পিএসসি (সহকারী কাস্টোডিয়ান)-২৩">পিএসসি (সহকারী কাস্টোডিয়ান)-২৩ (1টি)</option>
+          <option value="পিএসসি (স্টাফ অফিসার)-২৩">পিএসসি (স্টাফ অফিসার)-২৩ (1টি)</option>
+          <option value="বহিরাগমন ও পাসপোর্ট অধিদপ্তরের সহকারী পরিচালক-১৪ / ০৭">বহিরাগমন ও পাসপোর্ট অধিদপ্তরের সহকারী পরিচালক-১৪ / ০৭ (1টি)</option>
+          <option value="বাংলাদেশ রেলওয়ের উপসহকারী প্রকৌশলী (সিভিল)-১৬">বাংলাদেশ রেলওয়ের উপসহকারী প্রকৌশলী (সিভিল)-১৬ (1টি)</option>
+          <option value="স্বাস্থ্য মন্ত্রণালয়ের সহকারী প্রকৌশলী-১৬">স্বাস্থ্য মন্ত্রণালয়ের সহকারী প্রকৌশলী-১৬ (1টি)</option>
+          <option value="৪৫তম বিসিএস">৪৫তম বিসিএস (1টি)</option>
+          <option value="৪৬তম বিসিএস">৪৬তম বিসিএস (1টি)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Score Sticky Bar -->
+      <div class="score-sticky-bar">
+        <div class="score-display">
+          <span>আপনার স্কোর: </span>
+          <span class="score-val" id="score-val">০</span> / <span id="total-val">11</span>
+          <span id="score-pct" style="margin-left: 8px; font-size: 0.85rem; color: var(--text-muted);">(০%)</span>
+        </div>
+        <button type="button" class="btn btn-sm" onclick="resetQuiz()">🔄 রিসেট</button>
+      </div>
+
+      <!-- Question List -->
+      <div id="questionList">
+      <!-- Question 1 -->
+      <article class="q-card" data-qid="1" data-session="৪৬তম বিসিএস">
+        <div class="q-header">
+          <span class="q-num">1</span>
+          <span class="q-session">৪৬তম বিসিএস</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">একটি থলিতে ৫টি নীল, ১০টি সাদা, ২০টি কালো বল আছে। দৈবচয়ন পদ্ধতিতে একটি বল তুললে সেটি সাদা না হওয়ার সম্ভাবনা কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ২/৭</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ৫/৭</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৩/৭</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৪/৭</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-1" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ৫/৭</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-1">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(1)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              মোট বল = ৫ + ১০ + ২০ = ৩৫টি。<br>সাদা বল = ১০টি。<br>সাদা হওয়ার সম্ভাবনা = ১০/৩৫ = ২/৭。<br>∴ সাদা না হওয়ার সম্ভাবনা = ১ - ২/৭ = ৫/৭।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 2 -->
+      <article class="q-card" data-qid="2" data-session="পিএসসি (জেলা ক্রীড়া কর্মকর্তা)-২৩">
+        <div class="q-header">
+          <span class="q-num">2</span>
+          <span class="q-session">পিএসসি (জেলা ক্রীড়া কর্মকর্তা)-২৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">দুটি নিরপেক্ষ ছক্কা নিক্ষেপ করলে সংখ্যা দুটির সমষ্টি বিজোড় হওয়ার সম্ভাবনা কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১/৩</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১/৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ১/২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ২/৩</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-2" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ১/২</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-2">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(2)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              দুটি ছক্কায় মোট সম্ভাব্য ঘটনা = ৬ × ৬ = ৩৬টি。<br>সমষ্টি বিজোড় হওয়ার অনুকূল ঘটনা = ১৮টি (যেমন: (১,২), (১,৪), (১,৬), (২,১), ...)。<br>∴ সম্ভাবনা = ১৮/৩৬ = ১/২।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 3 -->
+      <article class="q-card" data-qid="3" data-session="পিএসসি (সহকারী কাস্টোডিয়ান)-২৩">
+        <div class="q-header">
+          <span class="q-num">3</span>
+          <span class="q-session">পিএসসি (সহকারী কাস্টোডিয়ান)-২৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">একটি মুদ্রা ২ বার নিক্ষেপ করলে অন্তত ১ বার Head (এইচ) পড়ার সম্ভাবনা কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১/৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১/২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ৩/৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-3" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ৩/৪</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-3">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(3)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              মুদ্রা ২ বার নিক্ষেপে মোট নমুনা বিন্দু = {HH, HT, TH, TT} = ৪টি。<br>অন্তত ১ বার Head পড়ার অনুকূল ঘটনা = {HH, HT, TH} = ৩টি。<br>∴ সম্ভাবনা = ৩/৪।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 4 -->
+      <article class="q-card" data-qid="4" data-session="পিএসসি (স্টাফ অফিসার)-২৩">
+        <div class="q-header">
+          <span class="q-num">4</span>
+          <span class="q-session">পিএসসি (স্টাফ অফিসার)-২৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">কোনো একটি অঙ্ক A অথবা B করতে পারার সম্ভাবনা যথাক্রমে ০.৪ এবং ০.৫। অঙ্কটি সমাধান হবার সম্ভাবনা কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ০.৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ০.৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ০.৭</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ০.৯</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-4" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ০.৭</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-4">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(4)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              দেওয়া আছে, P(A) = ০.৪ এবং P(B) = ০.৫。<br>P(A ∩ B) = ০.৪ × ০.৫ = ০.২。<br>অঙ্কটি সমাধান হওয়ার সম্ভাবনা P(A ∪ B) = P(A) + P(B) - P(A ∩ B) = ০.৪ + ০.৫ - ০.২ = ০.৭।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 5 -->
+      <article class="q-card" data-qid="5" data-session="৪৫তম বিসিএস">
+        <div class="q-header">
+          <span class="q-num">5</span>
+          <span class="q-session">৪৫তম বিসিএস</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">২৯ থেকে ৩৮ পর্যন্ত সংখ্যা হতে যে কোনো একটিকে ইচ্ছামতো বেছে নিলে সেটি মৌলিক হওয়ার সম্ভাবনা কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১/১০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১/৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ৩/১০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ২/৫</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-5" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ৩/১০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-5">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(5)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ২৯ থেকে ৩৮ পর্যন্ত মোট সংখ্যা = ৩৮ - ২৯ + ১ = ১০টি。<br>২৯ থেকে ৩৮ পর্যন্ত মৌলিক সংখ্যা = ২৯, ৩১, ৩৭ (মোট ৩টি)।<br>∴ নির্ণেয় সম্ভাবনা = ৩/১০।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 6 -->
+      <article class="q-card" data-qid="6" data-session="পিএসসি (বিভিন্ন মন্ত্রণালয়ের ব্যক্তিগত কর্মকর্তা)-১৯">
+        <div class="q-header">
+          <span class="q-num">6</span>
+          <span class="q-session">পিএসসি (বিভিন্ন মন্ত্রণালয়ের ব্যক্তিগত কর্মকর্তা)-১৯</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">দুটি মুদ্রা একসাথে নিক্ষেপ করলে দুইটিতেই Head আসার সম্ভাবনা কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ১/৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১/২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৩/৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-6" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ১/৪</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-6">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(6)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              দুটি মুদ্রা একসাথে নিক্ষেপ করলে মোট নমুনা বিন্দু = {HH, HT, TH, TT} = ৪টি。<br>উভয়টিতে Head (HH) আসার অনুকূল ঘটনা = ১টি。<br>∴ সম্ভাবনা = ১/৪।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 7 -->
+      <article class="q-card" data-qid="7" data-session="গণপূর্ত অধিদপ্তর (উপ-সহকারী প্রকৌশলী ও ড্রাফটসম্যান)-১৮">
+        <div class="q-header">
+          <span class="q-num">7</span>
+          <span class="q-session">গণপূর্ত অধিদপ্তর (উপ-সহকারী প্রকৌশলী ও ড্রাফটসম্যান)-১৮</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">একটি বাক্সে ১০টি নীল ও ১৫টি লাল মার্বেল আছে। যেমন খুশি টানলে প্রতিবার ২টি একই রঙের মার্বেল হওয়ার সম্ভাব্যতা কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ১/২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১/৩</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ১/৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ২/৫</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-7" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ১/২</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-7">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(7)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              নীল মার্বেল ১০টি, লাল মার্বেল ১৫টি, মোট মার্বেল = ২৫টি。<br>২টিই নীল মার্বেল টানার সম্ভাবনা = (১০/২৫) × (৯/২৪) = ৩/২০。<br>২টিই লাল মার্বেল টানার সম্ভাবনা = (১৫/২৫) × (১৪/২৪) = ৭/২০。<br>∴ একই রঙের মার্বেল হওয়ার মোট সম্ভাবনা = ৩/২০ + ৭/২০ = ১০/২০ = ১/২।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 8 -->
+      <article class="q-card" data-qid="8" data-session="বাংলাদেশ রেলওয়ের উপসহকারী প্রকৌশলী (সিভিল)-১৬">
+        <div class="q-header">
+          <span class="q-num">8</span>
+          <span class="q-session">বাংলাদেশ রেলওয়ের উপসহকারী প্রকৌশলী (সিভিল)-১৬</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">চাকরি পাওয়ার সম্ভাবনা ৪/৫ হলে, চাকরি না পাওয়ার সম্ভাবনা কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ১/৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ২/৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৩/৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৪/৫</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-8" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ১/৫</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-8">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(8)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              আমরা জানি, কোনো ঘটনা ঘটার সম্ভাবনা ও না ঘটার সম্ভাবনার সমষ্টি = ১。<br>∴ চাকরি না পাওয়ার সম্ভাবনা = ১ - ৪/৫ = ১/৫।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 9 -->
+      <article class="q-card" data-qid="9" data-session="স্বাস্থ্য মন্ত্রণালয়ের সহকারী প্রকৌশলী-১৬">
+        <div class="q-header">
+          <span class="q-num">9</span>
+          <span class="q-session">স্বাস্থ্য মন্ত্রণালয়ের সহকারী প্রকৌশলী-১৬</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">একটি ছক্কা নিক্ষেপ করলে ছক্কায় জোড় সংখ্যা পাওয়ার সম্ভাবনা কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৩০%</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৪০%</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ৫০%</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৬০%</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-9" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ৫০%</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-9">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(9)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ছক্কায় মোট সম্ভাব্য ঘটনা = ৬টি (১, ২, ৩, ৪, ৫, ৬)।<br>জোড় সংখ্যা = ৩টি (২, ৪, ৬)।<br>∴ জোড় সংখ্যা পাওয়ার সম্ভাবনা = ৩/৬ = ১/২ = ৫০%।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 10 -->
+      <article class="q-card" data-qid="10" data-session="জনপ্রশাসন মন্ত্রণালয়ের অধীনে পিএসসি'র সহকারী পরিচালক-১৬">
+        <div class="q-header">
+          <span class="q-num">10</span>
+          <span class="q-session">জনপ্রশাসন মন্ত্রণালয়ের অধীনে পিএসসি'র সহকারী পরিচালক-১৬</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">৫২টি তাসের একটি প্যাকেট হতে একটি তাস তোলা হলো। তাসটি টেক্কা (Ace) হওয়ার সম্ভাবনা কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১/৫২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১/২৬</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ১/৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. ১/১৩</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-10" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. ১/১৩</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-10">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(10)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ৫২টি তাসের একটি প্যাকেটে টেক্কা থাকে ৪টি。<br>∴ উত্তোলিত তাসটি টেক্কা হওয়ার সম্ভাবনা = ৪/৫২ = ১/১৩।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 11 -->
+      <article class="q-card" data-qid="11" data-session="বহিরাগমন ও পাসপোর্ট অধিদপ্তরের সহকারী পরিচালক-১৪ / ০৭">
+        <div class="q-header">
+          <span class="q-num">11</span>
+          <span class="q-session">বহিরাগমন ও পাসপোর্ট অধিদপ্তরের সহকারী পরিচালক-১৪ / ০৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">একটি ছক্কাকে একবার নিক্ষেপ করা হলে, ২ থেকে বড় সংখ্যা পাবার সম্ভাবনা কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১/৬</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১/৩</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ১/২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. ২/৩</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-11" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. ২/৩</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-11">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(11)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ছক্কায় মোট সংখ্যা = ৬টি (১, ২, ৩, ৪, ৫, ৬)।<br>২ থেকে বড় সংখ্যাগুলো হলো ৩, ৪, ৫, ৬ (মোট ৪টি)।<br>∴ অনুকূল ঘটনা = ৪টি。<br>∴ নির্ণেয় সম্ভাবনা = ৪/৬ = ২/৩।
+            </div>
+          </div>
+        </div>
+      </article>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p style="margin-bottom: 6px;">পিএসসি নন-ক্যাডার প্রশ্নব্যাংক ২য় খণ্ড (Job Hunter) • অধ্যায় 12: সম্ভাব্যতা</p>
+      <p style="opacity: 0.8;">প্রামাণ্য তথ্য ও জিরো-ফেব্রিকেশন নীতিতে প্রস্তুতকৃত ডিজিটাল স্মার্ট ই-বুক।</p>
+    </footer>
+
+  </div>
+
+  <!-- Interactive Logic -->
+  <script>
+    let currentScore = 0;
+    const answeredCards = new Set();
+    const totalQuestions = 11;
+    let currentFontSize = 1;
+
+    function checkAnswer(btn, isCorrect) {
+      const card = btn.closest('.q-card');
+      const qid = card.getAttribute('data-qid');
+
+      if (card.dataset.answered) return;
+      card.dataset.answered = "true";
+
+      const allBtns = card.querySelectorAll('.opt-btn');
+      allBtns.forEach(b => {
+        b.disabled = true;
+        if (b.getAttribute('data-is-correct') === 'true') {
+          b.classList.add('correct');
+        }
+      });
+
+      if (isCorrect === 1) {
+        btn.classList.add('correct');
+        currentScore++;
+      } else {
+        btn.classList.add('wrong');
+      }
+
+      const ansDrawer = document.getElementById('ans-' + qid);
+      if (ansDrawer) ansDrawer.style.display = 'block';
+
+      const expDrawer = document.getElementById('exp-' + qid);
+      if (expDrawer) expDrawer.classList.add('open');
+
+      updateScore();
+    }
+
+    function toggleExp(qid) {
+      const expDrawer = document.getElementById('exp-' + qid);
+      if (expDrawer) {
+        expDrawer.classList.toggle('open');
+      }
+    }
+
+    function updateScore() {
+      const scoreVal = document.getElementById('score-val');
+      const scorePct = document.getElementById('score-pct');
+      if (scoreVal) scoreVal.textContent = currentScore.toLocaleString('bn-BD');
+      if (scorePct) {
+        const pct = Math.round((currentScore / totalQuestions) * 100);
+        scorePct.textContent = '(' + pct.toLocaleString('bn-BD') + '%)';
+      }
+    }
+
+    function resetQuiz() {
+      if (!confirm('আপনি কি এই অধ্যায়ের সমস্ত কুইজ রিসেট করতে চান?')) return;
+      currentScore = 0;
+      updateScore();
+
+      document.querySelectorAll('.q-card').forEach(c => {
+        delete c.dataset.answered;
+        c.querySelectorAll('.opt-btn').forEach(b => {
+          b.disabled = false;
+          b.classList.remove('correct', 'wrong');
+        });
+        const drawer = c.querySelector('.ans-drawer');
+        if (drawer) drawer.style.display = 'none';
+        const exp = c.querySelector('.exp-drawer');
+        if (exp) exp.classList.remove('open');
+      });
+    }
+
+    function filterSession(session) {
+      document.querySelectorAll('.q-card').forEach(card => {
+        if (session === 'all' || card.getAttribute('data-session') === session) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function adjustFont(dir) {
+      currentFontSize += dir * 0.08;
+      if (currentFontSize < 0.8) currentFontSize = 0.8;
+      if (currentFontSize > 1.4) currentFontSize = 1.4;
+      document.querySelector('.paper-container').style.fontSize = currentFontSize + 'rem';
+    }
+
+    function resetFont() {
+      currentFontSize = 1;
+      document.querySelector('.paper-container').style.fontSize = '1rem';
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const themeBtn = document.getElementById('theme-btn');
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        if (themeBtn) themeBtn.textContent = '🌙';
+        localStorage.setItem('theme_algebra', 'light');
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        if (themeBtn) themeBtn.textContent = '☀️';
+        localStorage.setItem('theme_algebra', 'dark');
+      }
+    }
+  </script>
+  <script src="nav-component.js"></script>
+  <script src="../universal-modes.js"></script>
+</body>
+</html>

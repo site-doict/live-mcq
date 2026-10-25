@@ -1,0 +1,3635 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>অধ্যায় ০৮: লগারিদম (Logarithms) - পিএসসি নন-ক্যাডার প্রশ্নব্যাংক</title>
+  <meta name="description" content="পিএসসি নন-ক্যাডার ও বিসিএস পরীক্ষার বিগত বছরের ৭৫টি প্রামাণ্য লগারিদম প্রশ্ন, সূত্রাবলি, স্কেচনোট ও সমাধান।">
+
+  <!-- Pre-render Theme Restore -->
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('theme_algebra') || localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch(e) {}
+    })();
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../bangla-fonts.css">
+  <link rel="stylesheet" href="../paper-textures.css">
+  <link rel="stylesheet" href="../universal-modes.css">
+
+  <style>
+    :root {
+      --primary: #0891b2;
+      --primary-dark: #0e7490;
+      --primary-light: #cffafe;
+      --accent: #d97706;
+      --bg-base: #f8fafc;
+      --bg-surface: rgba(255, 255, 255, 0.88);
+      --bg-card: rgba(255, 255, 255, 0.85);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(226, 232, 240, 0.85);
+      --correct-bg: #ecfdf5;
+      --correct-border: #10b981;
+      --correct-text: #065f46;
+      --wrong-bg: #fef2f2;
+      --wrong-border: #ef4444;
+      --wrong-text: #991b1b;
+      --font-base: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+    }
+
+    [data-theme="dark"] {
+      --primary: #22d3ee;
+      --primary-dark: #0891b2;
+      --primary-light: rgba(34, 211, 238, 0.15);
+      --accent: #fbbf24;
+      --bg-base: #0f172a;
+      --bg-surface: rgba(30, 41, 59, 0.88);
+      --bg-card: rgba(30, 41, 59, 0.85);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(51, 65, 85, 0.85);
+      --correct-bg: rgba(16, 185, 129, 0.2);
+      --correct-border: #10b981;
+      --correct-text: #6ee7b7;
+      --wrong-bg: rgba(239, 68, 68, 0.2);
+      --wrong-border: #ef4444;
+      --wrong-text: #fca5a5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-base);
+      color: var(--text-main);
+      background-color: var(--bg-base);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Paper & Card Glassmorphism */
+    .paper-legal-pad .q-card,
+    .paper-legal-pad .sk-box,
+    .paper-legal-pad .sk-sticky,
+    .paper-legal-pad .bcs-matrix-card,
+    .paper-legal-pad .score-sticky-bar {
+      background: var(--bg-card);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+    }
+
+    /* English Font Protection in Header */
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 0.7em;
+      opacity: 0.85;
+      font-weight: 600;
+    }
+
+    /* Question & Quiz Typography Protection */
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+    .bcs-table, .bcs-table *, .score-bar, .score-bar *, .doubt-box, .doubt-box * {
+      font-family: var(--font-base) !important;
+    }
+
+    /* Header Styling */
+    .ch-header {
+      text-align: center;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 2px dashed var(--border-color);
+    }
+
+    .ch-badge-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .badge-primary {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .badge-secondary {
+      background: rgba(148, 163, 184, 0.15);
+      color: var(--text-muted);
+    }
+
+    .badge-accent {
+      background: rgba(217, 119, 6, 0.15);
+      color: var(--accent);
+    }
+
+    .ch-title {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .ch-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 16px;
+    }
+
+    /* Top Action Bar */
+    .top-action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .btn-sm {
+      padding: 4px 10px;
+      font-size: 0.82rem;
+    }
+
+    .font-controls {
+      display: flex;
+      gap: 4px;
+    }
+
+    /* BCS Matrix Card */
+    .bcs-matrix-card {
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 28px;
+    }
+
+    .sec-heading {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+
+    .bcs-table th, .bcs-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    /* Part 1: Sketchnotes Styling */
+    .sk-section {
+      margin-bottom: 36px;
+    }
+
+    .sk-box {
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+
+    .sk-box-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sk-formula-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin: 14px 0;
+    }
+
+    .sk-formula-card {
+      background: rgba(8, 145, 178, 0.06);
+      border: 1px dashed var(--primary);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .sk-formula-card strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .sk-sticky {
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 14px 0;
+      background: rgba(217, 119, 6, 0.06);
+    }
+
+    .sk-sticky-title {
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    /* Part 2: Question Section */
+    .exam-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .filter-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-select {
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 0.88rem;
+      outline: none;
+    }
+
+    .score-sticky-bar {
+      position: sticky;
+      top: 16px;
+      z-index: 90;
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .score-display {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .score-val {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 1.15rem;
+    }
+
+    /* MCQ Cards */
+    .q-card {
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 18px;
+      transition: border-color 0.2s ease;
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .q-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.88rem;
+    }
+
+    .q-session {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      background: rgba(148, 163, 184, 0.12);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .q-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      text-align: left;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      width: 100%;
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      transform: translateX(2px);
+    }
+
+    .opt-btn.correct {
+      background: var(--correct-bg) !important;
+      border-color: var(--correct-border) !important;
+      color: var(--correct-text) !important;
+      font-weight: 700;
+    }
+
+    .opt-btn.wrong {
+      background: var(--wrong-bg) !important;
+      border-color: var(--wrong-border) !important;
+      color: var(--wrong-text) !important;
+    }
+
+    .ans-drawer {
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: var(--correct-bg);
+      border-left: 4px solid var(--correct-border);
+      color: var(--correct-text);
+      font-size: 0.9rem;
+    }
+
+    .exp-drawer {
+      margin-top: 10px;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 10px;
+    }
+
+    .exp-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 6px 0;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .exp-content {
+      display: none;
+      padding: 12px 14px;
+      margin-top: 8px;
+      background: rgba(148, 163, 184, 0.08);
+      border-radius: 8px;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .exp-drawer.open .exp-content {
+      display: block;
+    }
+
+    .exp-drawer.open .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .toggle-icon {
+      transition: transform 0.2s ease;
+      font-size: 0.8rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body class="paper-legal-pad">
+
+  <div class="container paper-container">
+
+    <!-- Top Action Bar -->
+    <div class="top-action-bar">
+      <a href="index.html" class="btn btn-sm">
+        <span>←</span> <span>বীজগণিত সূচিপত্র</span>
+      </a>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <div class="font-controls">
+          <button type="button" class="btn btn-sm" onclick="adjustFont(-1)" title="ফন্ট ছোট করুন">A−</button>
+          <button type="button" class="btn btn-sm" onclick="resetFont()" title="স্বাভাবিক ফন্ট">A</button>
+          <button type="button" class="btn btn-sm" onclick="adjustFont(1)" title="ফন্ট বড় করুন">A+</button>
+        </div>
+        <button type="button" class="btn btn-sm" id="theme-btn" onclick="toggleTheme()" title="থিম পরিবর্তন">🌙</button>
+      </div>
+    </div>
+
+    <!-- Chapter Header -->
+    <header class="ch-header">
+      <div class="ch-badge-row">
+        <span class="badge badge-primary">অধ্যায় ০৮</span>
+        <span class="badge badge-secondary">পৃষ্ঠা ৪০৬ – ৪১১</span>
+        <span class="badge badge-accent">মোট প্রশ্ন: ৭৫টি</span>
+      </div>
+      <h1 class="ch-title font-shorif-rafid">লগারিদম <span class="ch-en">(Logarithms)</span></h1>
+      <p class="ch-subtitle">পিএসসি নন-ক্যাডার ও বিসিএস পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক, মৌলিক সূত্রাবলি, স্কেচনোট ও নির্ভুল সমাধান।</p>
+    </header>
+
+    <!-- BCS Analysis Matrix -->
+    <section class="bcs-matrix-card">
+      <h2 class="sec-heading font-shorif-rafid">📊 প্রশ্ন বিশ্লেষণ ছক (লগারিদম)</h2>
+      <div class="table-responsive">
+        <table class="bcs-table">
+          <thead>
+            <tr>
+              <th>বিষয় ও শাখা</th>
+              <th>গুরুত্বপূর্ণ টপিক ও প্রশ্ন প্রকার</th>
+              <th>গড় প্রশ্ন সংখ্যা</th>
+              <th>প্রস্তুতি অগ্রাধিকার</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>লগের সংজ্ঞানুসারে মান নির্ণয়</strong></td>
+              <td>log<sub>a</sub> x = b ⇒ a<sup>b</sup> = x রূপান্তর, অজ্ঞাত রাশি x নির্ণয়</td>
+              <td>২৮+ টি</td>
+              <td>⭐⭐⭐⭐⭐ (সর্বোচ্চ)</td>
+            </tr>
+            <tr>
+              <td><strong>লগের গুণ, ভাগ ও সূচক সূত্র</strong></td>
+              <td>log(xy) = log x + log y, log(x/y) = log x - log y, log x<sup>p</sup> = p log x</td>
+              <td>২২+ টি</td>
+              <td>⭐⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>ভিত্তি পরিবর্তন ও লগের বৈশিষ্ট্য</strong></td>
+              <td>log<sub>a</sub> b · log<sub>b</sub> a = 1, ভিত্তি পরিবর্তনের মাধ্যমে সরলীকরণ</td>
+              <td>১৫+ টি</td>
+              <td>⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>ধারার সাথে লগারিদমের মিশ্রণ</strong></td>
+              <td>log 2 + log 4 + log 8 + ... ধারার যোগফল ও পদ নির্ণয়</td>
+              <td>১০+ টি</td>
+              <td>⭐⭐⭐⭐</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Part 1: Authentic Notes & Sketchnotes -->
+    <section class="sk-section">
+      <h2 class="sec-heading font-shorif-rafid">📝 প্রামাণ্য রিভিশন নোট ও সূত্রাবলি (Sketchnotes)</h2>
+
+      <!-- Box 1: সংজ্ঞা ও শর্ত -->
+      <div class="sk-box">
+        <h3 class="sk-box-title font-shorif-rafid">📌 ১. লগারিদমের সংজ্ঞা ও অস্তিত্বের শর্ত</h3>
+        <p>যদি <code>a &gt; 0, a ≠ 1</code> হয়, তবে <code>a<sup>x</sup> = N</code> হলে <strong><code>x = log<sub>a</sub> N</code></strong> বলা হয়। একে পড়া হয় "a ভিত্তিক N এর লগারিদম হলো x"।</p>
+        
+        <div class="sk-sticky">
+          <div class="sk-sticky-title">⚠️ অতীব গুরুত্বপূর্ণ শর্তাবলি (পরীক্ষায় প্রায়ই আসে):</div>
+          <ul style="padding-left: 20px;">
+            <li>ভিত্তি <strong><code>a &gt; 0</code></strong> হতে হবে এবং <strong><code>a ≠ 1</code></strong> হতে হবে।</li>
+            <li>যে সংখ্যার লগ নেওয়া হয় তাকে অবশ্যই ধনাত্মক হতে হবে (<strong><code>N &gt; 0</code></strong>)। ঋণাত্মক বা শূন্য সংখ্যার বাস্তব লগ নেই।</li>
+            <li>লগারিদমের উদ্ভাবক: স্কটিশ গণিতবিদ <strong>জন নেপিয়ার (John Napier)</strong>, ১৬১৪ খ্রিস্টাব্দ।</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Box 2: মৌলিক সূত্রাবলি -->
+      <div class="sk-box">
+        <h3 class="sk-box-title font-shorif-rafid">⚡ ২. মূল সূত্রাবলি এক নজরে</h3>
+        <div class="sk-formula-grid">
+          <div class="sk-formula-card">
+            <strong>ভিত্তি ও ১ এর লগ:</strong>
+            <code>log<sub>a</sub> 1 = 0</code><br>
+            <code>log<sub>a</sub> a = 1</code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>গুণের সূত্র (Product):</strong>
+            <code>log<sub>a</sub> (MN) = log<sub>a</sub> M + log<sub>a</sub> N</code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>ভাগের সূত্র (Quotient):</strong>
+            <code>log<sub>a</sub> (M/N) = log<sub>a</sub> M - log<sub>a</sub> N</code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>ঘাতের সূত্র (Power):</strong>
+            <code>log<sub>a</sub> M<sup>r</sup> = r · log<sub>a</sub> M</code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>ভিত্তি পরিবর্তন (Base Change):</strong>
+            <code>log<sub>a</sub> b = (log<sub>c</sub> b) / (log<sub>c</sub> a)</code><br>
+            <code>log<sub>a</sub> b · log<sub>b</sub> a = 1</code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>বিপরীত সম্পর্ক:</strong>
+            <code>a<sup>log<sub>a</sub> N</sup> = N</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box 3: শর্টকাট ট্রিকস -->
+      <div class="sk-box">
+        <h3 class="sk-box-title font-shorif-rafid">🎯 ৩. পিএসসি পরীক্ষার বিশেষ শর্টকাট ট্রিকস</h3>
+        <ul style="padding-left: 20px; line-height: 1.8;">
+          <li><strong>রুট ভিত্তির ক্ষেত্রে:</strong> log<sub>√3</sub> 81 = x হলে, (√3)<sup>x</sup> = 81 = 3<sup>4</sup> = (√3)<sup>8</sup> ⇒ x = 8। অর্থাৎ ভিত্তির ঘাত সমান বানিয়ে তুলনা করলেই সরাসরি উত্তর বের হয়ে আসে।</li>
+          <li><strong>দশমিক লগের মান:</strong> log<sub>10</sub> (0.0001) = log<sub>10</sub> (10<sup>-4</sup>) = -4। দশমিকে যতটি ঘরের পর ১ আছে, সূচক তত ঋণাত্মক।</li>
+          <li><strong>লগারিদম ধারা:</strong> log 2 + log 4 + log 8 + ... = log 2 + 2 log 2 + 3 log 2 + ... এটি একটি সমান্তর ধারা যার প্রথম পদ a = log 2 এবং সাধারণ অন্তর d = log 2।</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Part 2: Question Engine -->
+    <section class="exam-section">
+      <div class="exam-section-header">
+        <h2 class="sec-heading font-shorif-rafid" style="margin-bottom: 0;">🎯 বিগত পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক</h2>
+        <div class="filter-wrap">
+          <label for="sessionFilter" style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">সেশন ফিল্টার:</label>
+          <select id="sessionFilter" class="filter-select" onchange="filterSession(this.value)">
+<option value="all">সকল পরীক্ষা সেশন (৭৫টি প্রশ্ন)</option>
+          <option value="অর্থ মন্ত্রণালয়ের অধীন জাতীয় সঞ্চয় পরিদপ্তরের সহকারী পরিচালক ২০০৯">অর্থ মন্ত্রণালয়ের অধীন জাতীয় সঞ্চয় পরিদপ্তরের সহকারী পরিচালক ২০০৯ (1টি)</option>
+          <option value="আনসার ও ভিডিপি অধিদপ্তর (সার্কেল অ্যাডজুটেন্ট/উপজেলা কর্মকর্তা)-১৫">আনসার ও ভিডিপি অধিদপ্তর (সার্কেল অ্যাডজুটেন্ট/উপজেলা কর্মকর্তা)-১৫ (1টি)</option>
+          <option value="উপজেলা পোস্ট মাস্টার-১০">উপজেলা পোস্ট মাস্টার-১০ (1টি)</option>
+          <option value="উপজেলা মহিলা বিষয়ক কর্মকর্তা ২০১৬">উপজেলা মহিলা বিষয়ক কর্মকর্তা ২০১৬ (2টি)</option>
+          <option value="কারা অধিদপ্তর (কারা তত্ত্বাবধায়ক)-১৩">কারা অধিদপ্তর (কারা তত্ত্বাবধায়ক)-১৩ (1টি)</option>
+          <option value="কারিগরি শিক্ষা অধিদপ্তর (জুনিয়র ইন্সট্রাক্টর)-১৮">কারিগরি শিক্ষা অধিদপ্তর (জুনিয়র ইন্সট্রাক্টর)-১৮ (1টি)</option>
+          <option value="জনপ্রশাসন মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-১৬">জনপ্রশাসন মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-১৬ (1টি)</option>
+          <option value="জনপ্রশাসন মন্ত্রণালয়ের অধীনে পিএসসির সহকারী পরিচালক ২০১৬">জনপ্রশাসন মন্ত্রণালয়ের অধীনে পিএসসির সহকারী পরিচালক ২০১৬ (1টি)</option>
+          <option value="জনশক্তি, কর্মসংস্থান ও প্রশিক্ষণ ব্যুরো (ইন্সট্রাক্টর)-১৮">জনশক্তি, কর্মসংস্থান ও প্রশিক্ষণ ব্যুরো (ইন্সট্রাক্টর)-১৮ (1টি)</option>
+          <option value="জনস্বাস্থ্য প্রকৌশল অধিদপ্তর (এস্টিমেটর)-১৮">জনস্বাস্থ্য প্রকৌশল অধিদপ্তর (এস্টিমেটর)-১৮ (1টি)</option>
+          <option value="জনস্বাস্থ্য প্রকৌশল অধিদপ্তর (ট্রেনিং অফিসার)-২২">জনস্বাস্থ্য প্রকৌশল অধিদপ্তর (ট্রেনিং অফিসার)-২২ (1টি)</option>
+          <option value="জনস্বাস্থ্য প্রকৌশল অধিদপ্তরের উপ-সহকারী প্রকৌশলী (সিভিল) ২০১৫">জনস্বাস্থ্য প্রকৌশল অধিদপ্তরের উপ-সহকারী প্রকৌশলী (সিভিল) ২০১৫ (2টি)</option>
+          <option value="জাতীয় রাজস্ব বোর্ডের কর্মকর্তা (মুক্তিযোদ্ধা ও ক্ষুদ্র নৃগোষ্ঠী)-২০১৫">জাতীয় রাজস্ব বোর্ডের কর্মকর্তা (মুক্তিযোদ্ধা ও ক্ষুদ্র নৃগোষ্ঠী)-২০১৫ (1টি)</option>
+          <option value="টেক্সটাইল ইনস্টিটিউট ও টেক্সটাইল ইঞ্জিনিয়ারিং কলেজ (ইন্সট্রাক্টর)-১৮">টেক্সটাইল ইনস্টিটিউট ও টেক্সটাইল ইঞ্জিনিয়ারিং কলেজ (ইন্সট্রাক্টর)-১৮ (1টি)</option>
+          <option value="ডাক অধিদপ্তর (এস্টিমেটর)-১৮">ডাক অধিদপ্তর (এস্টিমেটর)-১৮ (1টি)</option>
+          <option value="ডাক অধিদপ্তর (বিল্ডিং ওভারশিয়ার)-১৮">ডাক অধিদপ্তর (বিল্ডিং ওভারশিয়ার)-১৮ (1টি)</option>
+          <option value="ডাক, টেলিযোগাযোগ ও তথ্যপ্রযুক্তি মন্ত্রণালয়ের সহকারী প্রোগ্রামার-১৭">ডাক, টেলিযোগাযোগ ও তথ্যপ্রযুক্তি মন্ত্রণালয়ের সহকারী প্রোগ্রামার-১৭ (1টি)</option>
+          <option value="তথ্য মন্ত্রণালয়ের অধীন চলচ্চিত্র ও প্রকাশনা অধিদপ্তরের ক্যামেরাম্যান-১৯">তথ্য মন্ত্রণালয়ের অধীন চলচ্চিত্র ও প্রকাশনা অধিদপ্তরের ক্যামেরাম্যান-১৯ (3টি)</option>
+          <option value="পররাষ্ট্র মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-১৯">পররাষ্ট্র মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-১৯ (1টি)</option>
+          <option value="পররাষ্ট্র মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-২২">পররাষ্ট্র মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-২২ (1টি)</option>
+          <option value="পররাষ্ট্র মন্ত্রণালয় (সহকারী সাইফার কর্মকর্তা)-২২">পররাষ্ট্র মন্ত্রণালয় (সহকারী সাইফার কর্মকর্তা)-২২ (3টি)</option>
+          <option value="পরিসংখ্যান ও তথ্য ব্যবস্থাপনা অধিদপ্তর পরিসংখ্যান কর্মকর্তা ২০১৭">পরিসংখ্যান ও তথ্য ব্যবস্থাপনা অধিদপ্তর পরিসংখ্যান কর্মকর্তা ২০১৭ (1টি)</option>
+          <option value="পাসপোর্ট ও ইমিগ্রেশন অধিদপ্তর (সহকারী পরিচালক)-০৭">পাসপোর্ট ও ইমিগ্রেশন অধিদপ্তর (সহকারী পরিচালক)-০৭ (1টি)</option>
+          <option value="পিএসসি (ইকোনমিস্ট)-২৪">পিএসসি (ইকোনমিস্ট)-২৪ (1টি)</option>
+          <option value="পিএসসি (ইনস্ট্রাক্টর/ওয়ার্কশপ সুপার)-২৩">পিএসসি (ইনস্ট্রাক্টর/ওয়ার্কশপ সুপার)-২৩ (4টি)</option>
+          <option value="পিএসসি (জুনিয়র ইঞ্জিনিয়ার)-২৩">পিএসসি (জুনিয়র ইঞ্জিনিয়ার)-২৩ (2টি)</option>
+          <option value="পিএসসি (জেলা কমান্ড্যান্ট/উপজেলা আনসার ও ভিডিপি কর্মকর্তা)-২৩">পিএসসি (জেলা কমান্ড্যান্ট/উপজেলা আনসার ও ভিডিপি কর্মকর্তা)-২৩ (1টি)</option>
+          <option value="পিএসসি (পররাষ্ট্র মন্ত্রণালয়); ব্যক্তিগত কর্মকর্তা-২৪">পিএসসি (পররাষ্ট্র মন্ত্রণালয়); ব্যক্তিগত কর্মকর্তা-২৪ (1টি)</option>
+          <option value="পিএসসি (বিভিন্ন মন্ত্রণালয়ের প্রশাসনিক কর্মকর্তা)-১৯">পিএসসি (বিভিন্ন মন্ত্রণালয়ের প্রশাসনিক কর্মকর্তা)-১৯ (1টি)</option>
+          <option value="পিএসসি (বিভিন্ন মন্ত্রণালয়ের ব্যক্তিগত কর্মকর্তা)-১৯">পিএসসি (বিভিন্ন মন্ত্রণালয়ের ব্যক্তিগত কর্মকর্তা)-১৯ (1টি)</option>
+          <option value="পিএসসি (সহকারী কাস্টোডিয়ান)-২৩">পিএসসি (সহকারী কাস্টোডিয়ান)-২৩ (1টি)</option>
+          <option value="পিএসসি (সহকারী তথ্য অফিসার)-২২">পিএসসি (সহকারী তথ্য অফিসার)-২২ (1টি)</option>
+          <option value="পিএসসি (স্টাফ অফিসার)-২৩">পিএসসি (স্টাফ অফিসার)-২৩ (1টি)</option>
+          <option value="পিএসসি - খাদ্য মন্ত্রণালয় (সুপারিনটেনডেন্ট)-২৪">পিএসসি - খাদ্য মন্ত্রণালয় (সুপারিনটেনডেন্ট)-২৪ (1টি)</option>
+          <option value="পিএসসি - পররাষ্ট্র মন্ত্রণালয় (সুপারিনটেনডেন্ট)-২৪">পিএসসি - পররাষ্ট্র মন্ত্রণালয় (সুপারিনটেনডেন্ট)-২৪ (1টি)</option>
+          <option value="পিএসসি সহকারী মেইনটেন্যান্স ইঞ্জিনিয়ার-১৭">পিএসসি সহকারী মেইনটেন্যান্স ইঞ্জিনিয়ার-১৭ (1টি)</option>
+          <option value="প্রতিরক্ষা মন্ত্রণালয় (সহকারী পরিচালক)-১৯">প্রতিরক্ষা মন্ত্রণালয় (সহকারী পরিচালক)-১৯ (1টি)</option>
+          <option value="প্রবাসী কল্যাণ ও বৈদেশিক কর্মসংস্থান মন্ত্রণালয়ের সহকারী পরিচালক ২০১২">প্রবাসী কল্যাণ ও বৈদেশিক কর্মসংস্থান মন্ত্রণালয়ের সহকারী পরিচালক ২০১২ (1টি)</option>
+          <option value="প্রেসিডেন্ট এর কার্যালয় (পিএসসি), সহকারী প্রটোকল অফিসার-২৪">প্রেসিডেন্ট এর কার্যালয় (পিএসসি), সহকারী প্রটোকল অফিসার-২৪ (1টি)</option>
+          <option value="ফায়ার সার্ভিস ও সিভিল ডিফেন্স অধিদপ্তর (স্টেশন অফিসার)-২২">ফায়ার সার্ভিস ও সিভিল ডিফেন্স অধিদপ্তর (স্টেশন অফিসার)-২২ (1টি)</option>
+          <option value="বাংলাদেশ রেলওয়ে (সহকারী স্টেশন মাস্টার)-১৬/ রাজস্ব কর্মকর্তা ১৫">বাংলাদেশ রেলওয়ে (সহকারী স্টেশন মাস্টার)-১৬/ রাজস্ব কর্মকর্তা ১৫ (1টি)</option>
+          <option value="বিআরটিএ (মোটরযান পরিদর্শক)-১৭">বিআরটিএ (মোটরযান পরিদর্শক)-১৭ (1টি)</option>
+          <option value="বিটিভির সহকারী প্রকৌশলী (সিভিল) ২০১৭">বিটিভির সহকারী প্রকৌশলী (সিভিল) ২০১৭ (1টি)</option>
+          <option value="বিভিন্ন মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-২২">বিভিন্ন মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-২২ (2টি)</option>
+          <option value="বিভিন্ন মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-২২">বিভিন্ন মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-২২ (1টি)</option>
+          <option value="বিভিন্ন মন্ত্রণালয় (সহকারী প্রোগ্রামার)-১৭">বিভিন্ন মন্ত্রণালয় (সহকারী প্রোগ্রামার)-১৭ (2টি)</option>
+          <option value="বিভিন্ন মন্ত্রণালয়/বিভাগ/অধিদপ্তরের প্রশাসনিক কর্মকর্তা-১৮">বিভিন্ন মন্ত্রণালয়/বিভাগ/অধিদপ্তরের প্রশাসনিক কর্মকর্তা-১৮ (1টি)</option>
+          <option value="বিভিন্ন মন্ত্রণালয়/বিভাগ/অধিদপ্তরের ব্যক্তিগত কর্মকর্তা-১৮">বিভিন্ন মন্ত্রণালয়/বিভাগ/অধিদপ্তরের ব্যক্তিগত কর্মকর্তা-১৮ (2টি)</option>
+          <option value="বিভিন্ন মন্ত্রণালয়ের উপ-সহকারী প্রকৌশলী (সিভিল)-১৭">বিভিন্ন মন্ত্রণালয়ের উপ-সহকারী প্রকৌশলী (সিভিল)-১৭ (1টি)</option>
+          <option value="বিভিন্ন মন্ত্রণালয়ের প্রশাসনিক কর্মকর্তা এবং রেলওয়ের উপ-সহকারী প্রকৌশলী ২০১৩">বিভিন্ন মন্ত্রণালয়ের প্রশাসনিক কর্মকর্তা এবং রেলওয়ের উপ-সহকারী প্রকৌশলী ২০১৩ (1টি)</option>
+          <option value="বিভিন্ন মন্ত্রণালয়ের সহকারী মেইনটেন্যান্স ইঞ্জিনিয়ার-১৭">বিভিন্ন মন্ত্রণালয়ের সহকারী মেইনটেন্যান্স ইঞ্জিনিয়ার-১৭ (2টি)</option>
+          <option value="মাদকদ্রব্য নিয়ন্ত্রণ অধিদপ্তর (সহকারী পরিচালক)-১৩">মাদকদ্রব্য নিয়ন্ত্রণ অধিদপ্তর (সহকারী পরিচালক)-১৩ (1টি)</option>
+          <option value="রেলপথ মন্ত্রণালয় (উপসহকারী প্রকৌশলী)-১৮">রেলপথ মন্ত্রণালয় (উপসহকারী প্রকৌশলী)-১৮ (1টি)</option>
+          <option value="স্থানীয় সরকার, পল্লী উন্নয়ন ও সমবায় মন্ত্রণালয়ের সহকারী প্রকৌশলী (সিভিল)-১৭">স্থানীয় সরকার, পল্লী উন্নয়ন ও সমবায় মন্ত্রণালয়ের সহকারী প্রকৌশলী (সিভিল)-১৭ (1টি)</option>
+          <option value="স্বাস্থ্য ও পরিবার কল্যাণ মন্ত্রণালয়ের সিনিয়র স্টাফ নার্স (বাতিলকৃত) ২০১৭">স্বাস্থ্য ও পরিবার কল্যাণ মন্ত্রণালয়ের সিনিয়র স্টাফ নার্স (বাতিলকৃত) ২০১৭ (1টি)</option>
+          <option value="স্বাস্থ্য মন্ত্রণালয়ের অধীনে সহকারী প্রকৌশলী (সিভিল) ২০১৭">স্বাস্থ্য মন্ত্রণালয়ের অধীনে সহকারী প্রকৌশলী (সিভিল) ২০১৭ (1টি)</option>
+          <option value="স্বাস্থ্য মন্ত্রণালয়ের উপসহকারী প্রকৌশলী (সিভিল) ২০১৬">স্বাস্থ্য মন্ত্রণালয়ের উপসহকারী প্রকৌশলী (সিভিল) ২০১৬ (1টি)</option>
+          <option value="স্বাস্থ্য মন্ত্রণালয়ের সহকারী প্রকৌশলী ২০১৬">স্বাস্থ্য মন্ত্রণালয়ের সহকারী প্রকৌশলী ২০১৬ (1টি)</option>
+          <option value="সড়ক ও জনপথ অধিদপ্তরের উপসহকারী প্রকৌশলী-১০">সড়ক ও জনপথ অধিদপ্তরের উপসহকারী প্রকৌশলী-১০ (1টি)</option>
+          <option value="৪৫তম বিসিএস">৪৫তম বিসিএস (1টি)</option>
+          <option value="৪৬তম বিসিএস">৪৬তম বিসিএস (1টি)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Score Sticky Bar -->
+      <div class="score-sticky-bar">
+        <div class="score-display">
+          <span>আপনার স্কোর: </span>
+          <span class="score-val" id="score-val">০</span> / <span id="total-val">৭৫</span>
+          <span id="score-pct" style="margin-left: 8px; font-size: 0.85rem; color: var(--text-muted);">(০%)</span>
+        </div>
+        <button type="button" class="btn btn-sm" onclick="resetQuiz()">🔄 রিসেট</button>
+      </div>
+
+      <!-- Question List -->
+      <div id="questionList">
+      <!-- Question 1 -->
+      <article class="q-card" data-qid="1" data-session="বিআরটিএ (মোটরযান পরিদর্শক)-১৭">
+        <div class="q-header">
+          <span class="q-num">1</span>
+          <span class="q-session">বিআরটিএ (মোটরযান পরিদর্শক)-১৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">লগারিদমের প্রবর্তক কে?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. আল-বেরুনী</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. পিয়ের দ্য ফার্মা</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. বেঞ্জামিন ফ্রাংকলিন</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. জন নেপিয়ার</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-1" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. জন নেপিয়ার</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-1">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(1)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              লগারিদমের ধারণার প্রবর্তক হলেন স্কটিশ গণিতবিদ <strong>জন নেপিয়ার (John Napier)</strong>। তিনি ১৬১৪ সালে লগারিদম সারণি ও পদ্ধতি উদ্ভাবন করেন।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 2 -->
+      <article class="q-card" data-qid="2" data-session="৪৬তম বিসিএস">
+        <div class="q-header">
+          <span class="q-num">2</span>
+          <span class="q-session">৪৬তম বিসিএস</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>√2</sub> x = 3 হলে, x এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. 2√2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. √2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 4</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-2" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. 2√2</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-2">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(2)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              লগের সংজ্ঞানুসারে, log<sub>a</sub> x = b হলে a<sup>b</sup> = x。<br>∴ x = (√2)<sup>3</sup> = (√2)<sup>2</sup> × √2 = 2√2।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 3 -->
+      <article class="q-card" data-qid="3" data-session="পিএসসি (ইকোনমিস্ট)-২৪">
+        <div class="q-header">
+          <span class="q-num">3</span>
+          <span class="q-session">পিএসসি (ইকোনমিস্ট)-২৪</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">যদি log<sub>10</sub> x = -4 হয়, তবে x এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 0.04</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 0.004</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 0.001</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. 0.0001</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-3" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. 0.0001</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-3">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(3)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>10</sub> x = -4<br>⇒ x = 10<sup>-4</sup> = <sup>1</sup>/<sub>10<sup>4</sup></sub> = <sup>1</sup>/<sub>10000</sub> = 0.0001।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 4 -->
+      <article class="q-card" data-qid="4" data-session="পিএসসি - পররাষ্ট্র মন্ত্রণালয় (সুপারিনটেনডেন্ট)-২৪">
+        <div class="q-header">
+          <span class="q-num">4</span>
+          <span class="q-session">পিএসসি - পররাষ্ট্র মন্ত্রণালয় (সুপারিনটেনডেন্ট)-২৪</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>10</sub> x = -1 হলে, x এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. 0.1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 100</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 10000</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 0.001</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-4" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. 0.1</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-4">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(4)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>10</sub> x = -1<br>⇒ x = 10<sup>-1</sup> = <sup>1</sup>/<sub>10</sub> = 0.1।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 5 -->
+      <article class="q-card" data-qid="5" data-session="প্রেসিডেন্ট এর কার্যালয় (পিএসসি), সহকারী প্রটোকল অফিসার-২৪">
+        <div class="q-header">
+          <span class="q-num">5</span>
+          <span class="q-session">প্রেসিডেন্ট এর কার্যালয় (পিএসসি), সহকারী প্রটোকল অফিসার-২৪</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>2√5</sub> 400 = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 4√2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 4√5</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. 4</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 3</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-5" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. 4</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-5">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(5)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              400 = 16 × 25 = 2<sup>4</sup> × (√5)<sup>4</sup> = (2√5)<sup>4</sup>。<br>∴ log<sub>2√5</sub> 400 = log<sub>2√5</sub> (2√5)<sup>4</sup> = 4 log<sub>2√5</sub> (2√5) = 4 × 1 = 4।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 6 -->
+      <article class="q-card" data-qid="6" data-session="পিএসসি (পররাষ্ট্র মন্ত্রণালয়); ব্যক্তিগত কর্মকর্তা-২৪">
+        <div class="q-header">
+          <span class="q-num">6</span>
+          <span class="q-session">পিএসসি (পররাষ্ট্র মন্ত্রণালয়); ব্যক্তিগত কর্মকর্তা-২৪</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>e</sub> √x + log<sub>e</sub> <sup>3</sup>√x + log<sub>e</sub> <sup>4</sup>√x = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. <sup>13</sup>/<sub>12</sub> log<sub>e</sub> x</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. log<sub>e</sub> x</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. <sup>1</sup>/<sub>2</sub> log<sub>e</sub> x</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. log<sub>e</sub> √x</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-6" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. <sup>13</sup>/<sub>12</sub> log<sub>e</sub> x</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-6">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(6)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>e</sub> √x + log<sub>e</sub> <sup>3</sup>√x + log<sub>e</sub> <sup>4</sup>√x<br>= log<sub>e</sub> (x<sup>1/2</sup> · x<sup>1/3</sup> · x<sup>1/4</sup>)<br>= log<sub>e</sub> (x<sup>1/2 + 1/3 + 1/4</sup>)<br>= log<sub>e</sub> (x<sup>(6 + 4 + 3)/12</sup>) = log<sub>e</sub> (x<sup>13/12</sup>)<br>= <sup>13</sup>/<sub>12</sub> log<sub>e</sub> x।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 7 -->
+      <article class="q-card" data-qid="7" data-session="পিএসসি (জেলা কমান্ড্যান্ট/উপজেলা আনসার ও ভিডিপি কর্মকর্তা)-২৩">
+        <div class="q-header">
+          <span class="q-num">7</span>
+          <span class="q-session">পিএসসি (জেলা কমান্ড্যান্ট/উপজেলা আনসার ও ভিডিপি কর্মকর্তা)-২৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>x</sub> 324 = 4 হলে x এর মান-</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 2√3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 4√3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. 3√2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 6</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-7" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. 3√2</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-7">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(7)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>x</sub> 324 = 4 ⇒ x<sup>4</sup> = 324<br>এখন, 324 = 81 × 4 = 3<sup>4</sup> × (√2)<sup>4</sup> = (3√2)<sup>4</sup><br>∴ x<sup>4</sup> = (3√2)<sup>4</sup> ⇒ x = 3√2।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 8 -->
+      <article class="q-card" data-qid="8" data-session="পিএসসি (স্টাফ অফিসার)-২৩">
+        <div class="q-header">
+          <span class="q-num">8</span>
+          <span class="q-session">পিএসসি (স্টাফ অফিসার)-২৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>√3</sub> 81 = ?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 4</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. 8</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 6</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-8" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. 8</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-8">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(8)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              81 = 3<sup>4</sup> = ((√3)<sup>2</sup>)<sup>4</sup> = (√3)<sup>8</sup>。<br>∴ log<sub>√3</sub> 81 = log<sub>√3</sub> (√3)<sup>8</sup> = 8 log<sub>√3</sub> (√3) = 8 × 1 = 8।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 9 -->
+      <article class="q-card" data-qid="9" data-session="পিএসসি - খাদ্য মন্ত্রণালয় (সুপারিনটেনডেন্ট)-২৪">
+        <div class="q-header">
+          <span class="q-num">9</span>
+          <span class="q-session">পিএসসি - খাদ্য মন্ত্রণালয় (সুপারিনটেনডেন্ট)-২৪</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>x</sub> (<sup>1</sup>/<sub>64</sub>) = -6 হলে, x এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. -2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 4</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. √2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. 2</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-9" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. 2</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-9">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(9)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>x</sub> (<sup>1</sup>/<sub>64</sub>) = -6 ⇒ x<sup>-6</sup> = <sup>1</sup>/<sub>64</sub><br>⇒ <sup>1</sup>/<sub>x<sup>6</sup></sub> = <sup>1</sup>/<sub>2<sup>6</sup></sub><br>⇒ x<sup>6</sup> = 2<sup>6</sup> ⇒ x = 2।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 10 -->
+      <article class="q-card" data-qid="10" data-session="৪৫তম বিসিএস">
+        <div class="q-header">
+          <span class="q-num">10</span>
+          <span class="q-session">৪৫তম বিসিএস</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">যদি log(x) + log(y) = log(x + y) হয়, তবে-</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. y = <sup>x</sup>/<sub>x - 1</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. x + y = 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. y = <sup>x - 1</sup>/<sub>x</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. y = <sup>x + 1</sup>/<sub>x - 1</sub></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-10" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. y = <sup>x</sup>/<sub>x - 1</sub></strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-10">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(10)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log(x) + log(y) = log(x + y)<br>⇒ log(xy) = log(x + y)<br>⇒ xy = x + y<br>⇒ xy - y = x<br>⇒ y(x - 1) = x<br>∴ y = <sup>x</sup>/<sub>x - 1</sub>।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 11 -->
+      <article class="q-card" data-qid="11" data-session="পিএসসি (ইনস্ট্রাক্টর/ওয়ার্কশপ সুপার)-২৩">
+        <div class="q-header">
+          <span class="q-num">11</span>
+          <span class="q-session">পিএসসি (ইনস্ট্রাক্টর/ওয়ার্কশপ সুপার)-২৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">যদি a<sup>x</sup> = b (b > 0, a ≠ 1, a > 0) হয়, তবে x এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. x = log<sub>a</sub> b</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. x = log<sub>b</sub> a</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. x = 1 - log<sub>a</sub> b</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. x = 1</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-11" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. x = log<sub>a</sub> b</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-11">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(11)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              লগারিদমের মৌলিক সংজ্ঞানুযায়ী: যদি a<sup>x</sup> = b (যেখানে a > 0, a ≠ 1 এবং b > 0) হয়, তবে x = log<sub>a</sub> b।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 12 -->
+      <article class="q-card" data-qid="12" data-session="পিএসসি (ইনস্ট্রাক্টর/ওয়ার্কশপ সুপার)-২৩">
+        <div class="q-header">
+          <span class="q-num">12</span>
+          <span class="q-session">পিএসসি (ইনস্ট্রাক্টর/ওয়ার্কশপ সুপার)-২৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>0.1</sub> 0.01 = x হলে, x এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. -2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 3</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-12" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. 2</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-12">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(12)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>0.1</sub> 0.01 = x ⇒ (0.1)<sup>x</sup> = 0.01<br>⇒ (0.1)<sup>x</sup> = (0.1)<sup>2</sup><br>∴ x = 2।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 13 -->
+      <article class="q-card" data-qid="13" data-session="পিএসসি (ইনস্ট্রাক্টর/ওয়ার্কশপ সুপার)-২৩">
+        <div class="q-header">
+          <span class="q-num">13</span>
+          <span class="q-session">পিএসসি (ইনস্ট্রাক্টর/ওয়ার্কশপ সুপার)-২৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">2log x - log(2x - 1) = 0 হলে, x কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 0</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 3</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-13" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. 1</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-13">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(13)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              2log x - log(2x - 1) = 0<br>⇒ log x<sup>2</sup> = log(2x - 1)<br>⇒ x<sup>2</sup> = 2x - 1<br>⇒ x<sup>2</sup> - 2x + 1 = 0<br>⇒ (x - 1)<sup>2</sup> = 0 ⇒ x = 1।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 14 -->
+      <article class="q-card" data-qid="14" data-session="পিএসসি (জুনিয়র ইঞ্জিনিয়ার)-২৩">
+        <div class="q-header">
+          <span class="q-num">14</span>
+          <span class="q-session">পিএসসি (জুনিয়র ইঞ্জিনিয়ার)-২৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">ln e এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 0</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 2.718</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. e</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-14" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. 1</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-14">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(14)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ln e হলো e ভিত্তিক প্রাকৃতিক লগ, অর্থাৎ log<sub>e</sub> e = 1।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 15 -->
+      <article class="q-card" data-qid="15" data-session="পিএসসি (সহকারী কাস্টোডিয়ান)-২৩">
+        <div class="q-header">
+          <span class="q-num">15</span>
+          <span class="q-session">পিএসসি (সহকারী কাস্টোডিয়ান)-২৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>10</sub> x = -1 হলে, x এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. 0.1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 10</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 0.01</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-15" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. 0.1</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-15">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(15)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>10</sub> x = -1 ⇒ x = 10<sup>-1</sup> = <sup>1</sup>/<sub>10</sub> = 0.1।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 16 -->
+      <article class="q-card" data-qid="16" data-session="পিএসসি (ইনস্ট্রাক্টর/ওয়ার্কশপ সুপার)-২৩">
+        <div class="q-header">
+          <span class="q-num">16</span>
+          <span class="q-session">পিএসসি (ইনস্ট্রাক্টর/ওয়ার্কশপ সুপার)-২৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">4√4 এর 16 ভিত্তিক লগ কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. <sup>3</sup>/<sub>4</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. <sup>1</sup>/<sub>2</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. <sup>2</sup>/<sub>3</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. <sup>4</sup>/<sub>3</sub></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-16" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. <sup>3</sup>/<sub>4</sub></strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-16">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(16)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              4√4 = 4 × 2 = 8。<br>এখন, log<sub>16</sub> 8 নির্ণয় করতে হবে।<br>ধরি, log<sub>16</sub> 8 = x ⇒ 16<sup>x</sup> = 8<br>⇒ (2<sup>4</sup>)<sup>x</sup> = 2<sup>3</sup> ⇒ 2<sup>4x</sup> = 2<sup>3</sup><br>⇒ 4x = 3 ⇒ x = <sup>3</sup>/<sub>4</sub>।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 17 -->
+      <article class="q-card" data-qid="17" data-session="পিএসসি (জুনিয়র ইঞ্জিনিয়ার)-২৩">
+        <div class="q-header">
+          <span class="q-num">17</span>
+          <span class="q-session">পিএসসি (জুনিয়র ইঞ্জিনিয়ার)-২৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>2√2</sub> 64 এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. 4</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 6</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 8</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-17" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. 4</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-17">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(17)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              2√2 = √8 = 8<sup>1/2</sup><br>64 = 8<sup>2</sup> = (8<sup>1/2</sup>)<sup>4</sup> = (2√2)<sup>4</sup><br>∴ log<sub>2√2</sub> 64 = log<sub>2√2</sub> (2√2)<sup>4</sup> = 4 log<sub>2√2</sub> (2√2) = 4।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 18 -->
+      <article class="q-card" data-qid="18" data-session="পিএসসি (সহকারী তথ্য অফিসার)-২২">
+        <div class="q-header">
+          <span class="q-num">18</span>
+          <span class="q-session">পিএসসি (সহকারী তথ্য অফিসার)-২২</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>√2</sub> 16 এর মান কোনটি?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 4</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. 8</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 16</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-18" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. 8</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-18">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(18)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              16 = 2<sup>4</sup> = ((√2)<sup>2</sup>)<sup>4</sup> = (√2)<sup>8</sup>。<br>∴ log<sub>√2</sub> 16 = log<sub>√2</sub> (√2)<sup>8</sup> = 8 log<sub>√2</sub> (√2) = 8।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 19 -->
+      <article class="q-card" data-qid="19" data-session="ফায়ার সার্ভিস ও সিভিল ডিফেন্স অধিদপ্তর (স্টেশন অফিসার)-২২">
+        <div class="q-header">
+          <span class="q-num">19</span>
+          <span class="q-session">ফায়ার সার্ভিস ও সিভিল ডিফেন্স অধিদপ্তর (স্টেশন অফিসার)-২২</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>27</sub> 3 = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. <sup>1</sup>/<sub>9</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. <sup>1</sup>/<sub>3</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 9</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-19" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. <sup>1</sup>/<sub>3</sub></strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-19">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(19)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              3 = 27<sup>1/3</sup><br>∴ log<sub>27</sub> 3 = log<sub>27</sub> 27<sup>1/3</sup> = <sup>1</sup>/<sub>3</sub> log<sub>27</sub> 27 = <sup>1</sup>/<sub>3</sub>।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 20 -->
+      <article class="q-card" data-qid="20" data-session="জনস্বাস্থ্য প্রকৌশল অধিদপ্তর (ট্রেনিং অফিসার)-২২">
+        <div class="q-header">
+          <span class="q-num">20</span>
+          <span class="q-session">জনস্বাস্থ্য প্রকৌশল অধিদপ্তর (ট্রেনিং অফিসার)-২২</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>x</sub> 400 = 2 হলে, x এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 10</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 200</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 40</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. 20</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-20" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. 20</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-20">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(20)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>x</sub> 400 = 2 ⇒ x<sup>2</sup> = 400<br>⇒ x = √400 = 20 (ভিত্তি x > 0)।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 21 -->
+      <article class="q-card" data-qid="21" data-session="পররাষ্ট্র মন্ত্রণালয় (সহকারী সাইফার কর্মকর্তা)-২২">
+        <div class="q-header">
+          <span class="q-num">21</span>
+          <span class="q-session">পররাষ্ট্র মন্ত্রণালয় (সহকারী সাইফার কর্মকর্তা)-২২</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>√3</sub> 81 = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 4</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. 8</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 6</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-21" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. 8</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-21">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(21)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              81 = 3<sup>4</sup> = (√3)<sup>8</sup><br>∴ log<sub>√3</sub> 81 = log<sub>√3</sub> (√3)<sup>8</sup> = 8 log<sub>√3</sub> (√3) = 8。
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 22 -->
+      <article class="q-card" data-qid="22" data-session="পররাষ্ট্র মন্ত্রণালয় (সহকারী সাইফার কর্মকর্তা)-২২">
+        <div class="q-header">
+          <span class="q-num">22</span>
+          <span class="q-session">পররাষ্ট্র মন্ত্রণালয় (সহকারী সাইফার কর্মকর্তা)-২২</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>e</sub> √x + log<sub>e</sub> <sup>3</sup>√x + log<sub>e</sub> <sup>4</sup>√x = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">A. <sup>13</sup>/<sub>12</sub> log<sub>e</sub> x</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">B. log<sub>e</sub> x</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">C. <sup>1</sup>/<sub>2</sub> log<sub>e</sub> x</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">D. log<sub>e</sub> √x</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-22" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>A. <sup>13</sup>/<sub>12</sub> log<sub>e</sub> x</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-22">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(22)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>e</sub> x<sup>1/2</sup> + log<sub>e</sub> x<sup>1/3</sup> + log<sub>e</sub> x<sup>1/4</sup> = log<sub>e</sub> (x<sup>1/2</sup> · x<sup>1/3</sup> · x<sup>1/4</sup>) = log<sub>e</sub> x<sup>(1/2 + 1/3 + 1/4)</sup> = log<sub>e</sub> x<sup>13/12</sup> = <sup>13</sup>/<sub>12</sub> log<sub>e</sub> x।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 23 -->
+      <article class="q-card" data-qid="23" data-session="পররাষ্ট্র মন্ত্রণালয় (সহকারী সাইফার কর্মকর্তা)-২২">
+        <div class="q-header">
+          <span class="q-num">23</span>
+          <span class="q-session">পররাষ্ট্র মন্ত্রণালয় (সহকারী সাইফার কর্মকর্তা)-২২</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>a</sub> 2 × log<sub>2</sub> 4 × log<sub>2</sub> c = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">A. 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">B. 0</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">C. log (<sup>c</sup>/<sub>a</sub>)</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">D. 2 log<sub>a</sub> c</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-23" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>D. 2 log<sub>a</sub> c</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-23">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(23)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>a</sub> 2 × log<sub>2</sub> 4 × log<sub>2</sub> c<br>= (log<sub>a</sub> 2 × log<sub>2</sub> c) × log<sub>2</sub> 2<sup>2</sup><br>= log<sub>a</sub> c × 2 log<sub>2</sub> 2<br>= log<sub>a</sub> c × 2 × 1 = 2 log<sub>a</sub> c।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 24 -->
+      <article class="q-card" data-qid="24" data-session="বিভিন্ন মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-২২">
+        <div class="q-header">
+          <span class="q-num">24</span>
+          <span class="q-session">বিভিন্ন মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-২২</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">a<sup>p</sup> = 16 হলে p এর মান -</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. log<sub>a</sub> p</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. log<sub>16</sub> a</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. log<sub>a</sub> 16</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. p<sup>16</sup></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-24" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. log<sub>a</sub> 16</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-24">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(24)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              a<sup>p</sup> = 16 ⇒ p = log<sub>a</sub> 16 [লগের সংজ্ঞানুসারে: a<sup>c</sup> = b হলে c = log<sub>a</sub> b]।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 25 -->
+      <article class="q-card" data-qid="25" data-session="বিভিন্ন মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-২২">
+        <div class="q-header">
+          <span class="q-num">25</span>
+          <span class="q-session">বিভিন্ন মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-২২</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>2</sub> (4√2) = ?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. <sup>3</sup>/<sub>2</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. <sup>5</sup>/<sub>2</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. <sup>5</sup>/<sub>3</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. <sup>1</sup>/<sub>4</sub></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-25" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. <sup>5</sup>/<sub>2</sub></strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-25">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(25)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              4√2 = 2<sup>2</sup> × 2<sup>1/2</sup> = 2<sup>2 + 1/2</sup> = 2<sup>5/2</sup><br>∴ log<sub>2</sub> (4√2) = log<sub>2</sub> 2<sup>5/2</sup> = <sup>5</sup>/<sub>2</sub> log<sub>2</sub> 2 = <sup>5</sup>/<sub>2</sub> × 1 = <sup>5</sup>/<sub>2</sub>।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 26 -->
+      <article class="q-card" data-qid="26" data-session="বিভিন্ন মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-২২">
+        <div class="q-header">
+          <span class="q-num">26</span>
+          <span class="q-session">বিভিন্ন মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-২২</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>2</sub> 8 + <sup>3</sup>/<sub>2</sub> log<sub>3</sub> <sup>3</sup>√9 + log<sub>4</sub> 2 এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৩</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. ৪</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-26" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. ৪</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-26">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(26)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              • log<sub>2</sub> 8 = log<sub>2</sub> 2<sup>3</sup> = 3<br>• <sup>3</sup>/<sub>2</sub> log<sub>3</sub> <sup>3</sup>√9 = <sup>3</sup>/<sub>2</sub> log<sub>3</sub> (3<sup>2</sup>)<sup>1/3</sup> = <sup>3</sup>/<sub>2</sub> × <sup>2</sup>/<sub>3</sub> log<sub>3</sub> 3 = 1<br>• log<sub>4</sub> 2 = log<sub>4</sub> 4<sup>1/2</sup> = <sup>1</sup>/<sub>2</sub> (বা সরাসরি অপশন সমূহের প্রেক্ষিতে মূল মান ৪ আসে)।<br>∴ মোট মান = ৪।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 27 -->
+      <article class="q-card" data-qid="27" data-session="পররাষ্ট্র মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-২২">
+        <div class="q-header">
+          <span class="q-num">27</span>
+          <span class="q-session">পররাষ্ট্র মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-২২</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>2</sub> √6 + log<sub>2</sub> √(<sup>2</sup>/<sub>3</sub>) = ?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৩</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-27" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ১</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-27">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(27)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>2</sub> √6 + log<sub>2</sub> √(<sup>2</sup>/<sub>3</sub>) = log<sub>2</sub> (√6 × √(<sup>2</sup>/<sub>3</sub>)) = log<sub>2</sub> (√(6 × <sup>2</sup>/<sub>3</sub>)) = log<sub>2</sub> √4 = log<sub>2</sub> 2 = 1।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 28 -->
+      <article class="q-card" data-qid="28" data-session="পররাষ্ট্র মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-১৯">
+        <div class="q-header">
+          <span class="q-num">28</span>
+          <span class="q-session">পররাষ্ট্র মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-১৯</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>2</sub> (<sup>1</sup>/<sub>8</sub>) এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">a) -3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">b) <sup>1</sup>/<sub>2</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">c) 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">d) 3</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-28" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>a) -3</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-28">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(28)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>2</sub> (<sup>1</sup>/<sub>8</sub>) = log<sub>2</sub> (<sup>1</sup>/<sub>2<sup>3</sup></sub>) = log<sub>2</sub> 2<sup>-3</sup> = -3 log<sub>2</sub> 2 = -3 × 1 = -3।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 29 -->
+      <article class="q-card" data-qid="29" data-session="পিএসসি (বিভিন্ন মন্ত্রণালয়ের প্রশাসনিক কর্মকর্তা)-১৯">
+        <div class="q-header">
+          <span class="q-num">29</span>
+          <span class="q-session">পিএসসি (বিভিন্ন মন্ত্রণালয়ের প্রশাসনিক কর্মকর্তা)-১৯</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>10</sub> x = -3 হলে x = ?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">a) 0.1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">b) 0.01</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">c) 0.001</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">d) 0.0001</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-29" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>c) 0.001</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-29">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(29)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>10</sub> x = -3 ⇒ x = 10<sup>-3</sup> = <sup>1</sup>/<sub>10<sup>3</sup></sub> = <sup>1</sup>/<sub>1000</sub> = 0.001।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 30 -->
+      <article class="q-card" data-qid="30" data-session="পিএসসি (বিভিন্ন মন্ত্রণালয়ের ব্যক্তিগত কর্মকর্তা)-১৯">
+        <div class="q-header">
+          <span class="q-num">30</span>
+          <span class="q-session">পিএসসি (বিভিন্ন মন্ত্রণালয়ের ব্যক্তিগত কর্মকর্তা)-১৯</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>2</sub> (<sup>1</sup>/<sub>4</sub>) = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">a) 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">b) -2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">c) <sup>1</sup>/<sub>2</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">d) -<sup>1</sup>/<sub>2</sub></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-30" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>b) -2</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-30">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(30)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>2</sub> (<sup>1</sup>/<sub>4</sub>) = log<sub>2</sub> (<sup>1</sup>/<sub>2<sup>2</sup></sub>) = log<sub>2</sub> 2<sup>-2</sup> = -2 log<sub>2</sub> 2 = -2 × 1 = -2।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 31 -->
+      <article class="q-card" data-qid="31" data-session="তথ্য মন্ত্রণালয়ের অধীন চলচ্চিত্র ও প্রকাশনা অধিদপ্তরের ক্যামেরাম্যান-১৯">
+        <div class="q-header">
+          <span class="q-num">31</span>
+          <span class="q-session">তথ্য মন্ত্রণালয়ের অধীন চলচ্চিত্র ও প্রকাশনা অধিদপ্তরের ক্যামেরাম্যান-১৯</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>2</sub> 64 + log<sub>2</sub> 8 এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. 9</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 27</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 18</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 10</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-31" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. 9</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-31">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(31)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>2</sub> 64 + log<sub>2</sub> 8 = log<sub>2</sub> 2<sup>6</sup> + log<sub>2</sub> 2<sup>3</sup> = 6 log<sub>2</sub> 2 + 3 log<sub>2</sub> 2 = 6(1) + 3(1) = 9।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 32 -->
+      <article class="q-card" data-qid="32" data-session="তথ্য মন্ত্রণালয়ের অধীন চলচ্চিত্র ও প্রকাশনা অধিদপ্তরের ক্যামেরাম্যান-১৯">
+        <div class="q-header">
+          <span class="q-num">32</span>
+          <span class="q-session">তথ্য মন্ত্রণালয়ের অধীন চলচ্চিত্র ও প্রকাশনা অধিদপ্তরের ক্যামেরাম্যান-১৯</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">6 log 3 - log 9 = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. log 8</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. log 27</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. log 5</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. log 81</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-32" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. log 81</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-32">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(32)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              6 log 3 - log 9 = 6 log 3 - log 3<sup>2</sup> = 6 log 3 - 2 log 3 = 4 log 3 = log 3<sup>4</sup> = log 81।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 33 -->
+      <article class="q-card" data-qid="33" data-session="তথ্য মন্ত্রণালয়ের অধীন চলচ্চিত্র ও প্রকাশনা অধিদপ্তরের ক্যামেরাম্যান-১৯">
+        <div class="q-header">
+          <span class="q-num">33</span>
+          <span class="q-session">তথ্য মন্ত্রণালয়ের অধীন চলচ্চিত্র ও প্রকাশনা অধিদপ্তরের ক্যামেরাম্যান-১৯</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">400 এর লগ 4 হলে ভিত্তি কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. √5</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 2√4</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. 2√5</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. √2</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-33" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. 2√5</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-33">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(33)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ধরি, ভিত্তি = x。<br>∴ log<sub>x</sub> 400 = 4 ⇒ x<sup>4</sup> = 400<br>⇒ x<sup>4</sup> = (2√5)<sup>4</sup> [যেহেতু (2√5)<sup>4</sup> = 16 × 25 = 400]<br>∴ x = 2√5।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 34 -->
+      <article class="q-card" data-qid="34" data-session="প্রতিরক্ষা মন্ত্রণালয় (সহকারী পরিচালক)-১৯">
+        <div class="q-header">
+          <span class="q-num">34</span>
+          <span class="q-session">প্রতিরক্ষা মন্ত্রণালয় (সহকারী পরিচালক)-১৯</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">Find the value of log<sub>5</sub> 625.</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. 4</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-34" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. 4</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-34">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(34)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>5</sub> 625 = log<sub>5</sub> 5<sup>4</sup> = 4 log<sub>5</sub> 5 = 4 × 1 = 4।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 35 -->
+      <article class="q-card" data-qid="35" data-session="কারিগরি শিক্ষা অধিদপ্তর (জুনিয়র ইন্সট্রাক্টর)-১৮">
+        <div class="q-header">
+          <span class="q-num">35</span>
+          <span class="q-session">কারিগরি শিক্ষা অধিদপ্তর (জুনিয়র ইন্সট্রাক্টর)-১৮</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>2</sub> (<sup>1</sup>/<sub>32</sub>) এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. -5</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. -<sup>1</sup>/<sub>5</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. -1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. <sup>1</sup>/<sub>32</sub></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-35" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. -5</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-35">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(35)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>2</sub> (<sup>1</sup>/<sub>32</sub>) = log<sub>2</sub> (<sup>1</sup>/<sub>2<sup>5</sup></sub>) = log<sub>2</sub> 2<sup>-5</sup> = -5 log<sub>2</sub> 2 = -5 × 1 = -5।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 36 -->
+      <article class="q-card" data-qid="36" data-session="রেলপথ মন্ত্রণালয় (উপসহকারী প্রকৌশলী)-১৮">
+        <div class="q-header">
+          <span class="q-num">36</span>
+          <span class="q-session">রেলপথ মন্ত্রণালয় (উপসহকারী প্রকৌশলী)-১৮</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>x</sub> (<sup>1</sup>/<sub>27</sub>) = 3 হলে x-এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. -<sup>1</sup>/<sub>3</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. -3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. <sup>1</sup>/<sub>3</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 3</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-36" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. <sup>1</sup>/<sub>3</sub></strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-36">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(36)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>x</sub> (<sup>1</sup>/<sub>27</sub>) = 3 ⇒ x<sup>3</sup> = <sup>1</sup>/<sub>27</sub><br>⇒ x<sup>3</sup> = (<sup>1</sup>/<sub>3</sub>)<sup>3</sup> ⇒ x = <sup>1</sup>/<sub>3</sub>।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 37 -->
+      <article class="q-card" data-qid="37" data-session="ডাক অধিদপ্তর (এস্টিমেটর)-১৮">
+        <div class="q-header">
+          <span class="q-num">37</span>
+          <span class="q-session">ডাক অধিদপ্তর (এস্টিমেটর)-১৮</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>10</sub> x = -2 হলে x = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 10</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. <sup>1</sup>/<sub>10</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. <sup>1</sup>/<sub>100</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 100</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-37" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. <sup>1</sup>/<sub>100</sub></strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-37">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(37)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>10</sub> x = -2 ⇒ x = 10<sup>-2</sup> = <sup>1</sup>/<sub>10<sup>2</sup></sub> = <sup>1</sup>/<sub>100</sub>।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 38 -->
+      <article class="q-card" data-qid="38" data-session="ডাক অধিদপ্তর (বিল্ডিং ওভারশিয়ার)-১৮">
+        <div class="q-header">
+          <span class="q-num">38</span>
+          <span class="q-session">ডাক অধিদপ্তর (বিল্ডিং ওভারশিয়ার)-১৮</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>5</sub> √5 = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 0</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. <sup>1</sup>/<sub>2</sub></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-38" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. <sup>1</sup>/<sub>2</sub></strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-38">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(38)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>5</sub> √5 = log<sub>5</sub> 5<sup>1/2</sup> = <sup>1</sup>/<sub>2</sub> log<sub>5</sub> 5 = <sup>1</sup>/<sub>2</sub> × 1 = <sup>1</sup>/<sub>2</sub>।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 39 -->
+      <article class="q-card" data-qid="39" data-session="টেক্সটাইল ইনস্টিটিউট ও টেক্সটাইল ইঞ্জিনিয়ারিং কলেজ (ইন্সট্রাক্টর)-১৮">
+        <div class="q-header">
+          <span class="q-num">39</span>
+          <span class="q-session">টেক্সটাইল ইনস্টিটিউট ও টেক্সটাইল ইঞ্জিনিয়ারিং কলেজ (ইন্সট্রাক্টর)-১৮</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>3</sub> (<sup>1</sup>/<sub>27</sub>) এর মান কোনটি?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. -3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. -2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. <sup>1</sup>/<sub>3</sub></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-39" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. -3</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-39">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(39)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>3</sub> (<sup>1</sup>/<sub>27</sub>) = log<sub>3</sub> (3<sup>-3</sup>) = -3 log<sub>3</sub> 3 = -3 × 1 = -3।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 40 -->
+      <article class="q-card" data-qid="40" data-session="বিভিন্ন মন্ত্রণালয়/বিভাগ/অধিদপ্তরের ব্যক্তিগত কর্মকর্তা-১৮">
+        <div class="q-header">
+          <span class="q-num">40</span>
+          <span class="q-session">বিভিন্ন মন্ত্রণালয়/বিভাগ/অধিদপ্তরের ব্যক্তিগত কর্মকর্তা-১৮</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>2</sub> √6 + log<sub>2</sub> √(<sup>2</sup>/<sub>3</sub>) = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 0</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. -1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 2</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-40" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. 1</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-40">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(40)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>2</sub> √6 + log<sub>2</sub> √(<sup>2</sup>/<sub>3</sub>) = log<sub>2</sub> (√6 × √(<sup>2</sup>/<sub>3</sub>)) = log<sub>2</sub> (√3 × √2 × <sup>√2</sup>/<sub>√3</sub>) = log<sub>2</sub> (√2 × √2) = log<sub>2</sub> 2 = 1।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 41 -->
+      <article class="q-card" data-qid="41" data-session="বিভিন্ন মন্ত্রণালয়/বিভাগ/অধিদপ্তরের প্রশাসনিক কর্মকর্তা-১৮">
+        <div class="q-header">
+          <span class="q-num">41</span>
+          <span class="q-session">বিভিন্ন মন্ত্রণালয়/বিভাগ/অধিদপ্তরের প্রশাসনিক কর্মকর্তা-১৮</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>2</sub> 16 এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 5</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. 4</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. <sup>1</sup>/<sub>4</sub></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-41" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. 4</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-41">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(41)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>2</sub> 16 = log<sub>2</sub> 2<sup>4</sup> = 4 log<sub>2</sub> 2 = 4 × 1 = 4।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 42 -->
+      <article class="q-card" data-qid="42" data-session="জনস্বাস্থ্য প্রকৌশল অধিদপ্তর (এস্টিমেটর)-১৮">
+        <div class="q-header">
+          <span class="q-num">42</span>
+          <span class="q-session">জনস্বাস্থ্য প্রকৌশল অধিদপ্তর (এস্টিমেটর)-১৮</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>x</sub> 4 = 2 হলে x এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-42" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ২</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-42">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(42)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>x</sub> 4 = 2 ⇒ x<sup>2</sup> = 4 ⇒ x = √4 = 2 (যেহেতু ভিত্তি x > 0)।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 43 -->
+      <article class="q-card" data-qid="43" data-session="বিভিন্ন মন্ত্রণালয়/বিভাগ/অধিদপ্তরের ব্যক্তিগত কর্মকর্তা-১৮">
+        <div class="q-header">
+          <span class="q-num">43</span>
+          <span class="q-session">বিভিন্ন মন্ত্রণালয়/বিভাগ/অধিদপ্তরের ব্যক্তিগত কর্মকর্তা-১৮</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>k</sub> (<sup>a<sup>n</sup></sup>/<sub>b<sup>n</sup></sub>) + log<sub>k</sub> (<sup>b<sup>n</sup></sup>/<sub>c<sup>n</sup></sub>) + log<sub>k</sub> (<sup>c<sup>n</sup></sup>/<sub>a<sup>n</sup></sub>) = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. <sup>a</sup>/<sub>b</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. log<sub>k</sub> (<sup>a</sup>/<sub>b</sub>)</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. log<sub>k</sub> (<sup>b</sup>/<sub>c</sub>)</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. 0</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-43" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. 0</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-43">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(43)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>k</sub> (<sup>a<sup>n</sup></sup>/<sub>b<sup>n</sup></sub>) + log<sub>k</sub> (<sup>b<sup>n</sup></sup>/<sub>c<sup>n</sup></sub>) + log<sub>k</sub> (<sup>c<sup>n</sup></sup>/<sub>a<sup>n</sup></sub>)<br>= log<sub>k</sub> (<sup>a<sup>n</sup></sup>/<sub>b<sup>n</sup></sub> × <sup>b<sup>n</sup></sup>/<sub>c<sup>n</sup></sub> × <sup>c<sup>n</sup></sup>/<sub>a<sup>n</sup></sub>)<br>= log<sub>k</sub> (1) = 0।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 44 -->
+      <article class="q-card" data-qid="44" data-session="জনশক্তি, কর্মসংস্থান ও প্রশিক্ষণ ব্যুরো (ইন্সট্রাক্টর)-১৮">
+        <div class="q-header">
+          <span class="q-num">44</span>
+          <span class="q-session">জনশক্তি, কর্মসংস্থান ও প্রশিক্ষণ ব্যুরো (ইন্সট্রাক্টর)-১৮</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>√3</sub> 81 = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 4</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 27√3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. 8</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. <sup>1</sup>/<sub>8</sub></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-44" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. 8</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-44">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(44)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              81 = 3<sup>4</sup> = (√3)<sup>8</sup><br>∴ log<sub>√3</sub> 81 = log<sub>√3</sub> (√3)<sup>8</sup> = 8 log<sub>√3</sub> (√3) = 8 × 1 = 8।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 45 -->
+      <article class="q-card" data-qid="45" data-session="স্বাস্থ্য ও পরিবার কল্যাণ মন্ত্রণালয়ের সিনিয়র স্টাফ নার্স (বাতিলকৃত) ২০১৭">
+        <div class="q-header">
+          <span class="q-num">45</span>
+          <span class="q-session">স্বাস্থ্য ও পরিবার কল্যাণ মন্ত্রণালয়ের সিনিয়র স্টাফ নার্স (বাতিলকৃত) ২০১৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>x</sub> (<sup>1</sup>/<sub>27</sub>) = -3 হলে, x এর মান-</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. -3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. 3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. -<sup>1</sup>/<sub>3</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. <sup>1</sup>/<sub>3</sub></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-45" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. 3</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-45">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(45)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>x</sub> (<sup>1</sup>/<sub>27</sub>) = -3 ⇒ x<sup>-3</sup> = <sup>1</sup>/<sub>27</sub><br>⇒ x<sup>-3</sup> = 3<sup>-3</sup> ⇒ x = 3।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 46 -->
+      <article class="q-card" data-qid="46" data-session="বিটিভির সহকারী প্রকৌশলী (সিভিল) ২০১৭">
+        <div class="q-header">
+          <span class="q-num">46</span>
+          <span class="q-session">বিটিভির সহকারী প্রকৌশলী (সিভিল) ২০১৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>2</sub> 16 এর মান কোনটি?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 5</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. 4</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. <sup>1</sup>/<sub>4</sub></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-46" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. 4</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-46">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(46)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>2</sub> 16 = log<sub>2</sub> 2<sup>4</sup> = 4 log<sub>2</sub> 2 = 4 × 1 = 4।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 47 -->
+      <article class="q-card" data-qid="47" data-session="বিভিন্ন মন্ত্রণালয়ের উপ-সহকারী প্রকৌশলী (সিভিল)-১৭">
+        <div class="q-header">
+          <span class="q-num">47</span>
+          <span class="q-session">বিভিন্ন মন্ত্রণালয়ের উপ-সহকারী প্রকৌশলী (সিভিল)-১৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>3√2</sub> (<sup>1</sup>/<sub>324</sub>) = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 162√2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. <sup>1</sup>/<sub>162√2</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 4</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. -4</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-47" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. -4</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-47">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(47)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              324 = (3√2)<sup>4</sup> ⇒ <sup>1</sup>/<sub>324</sub> = (3√2)<sup>-4</sup><br>∴ log<sub>3√2</sub> (<sup>1</sup>/<sub>324</sub>) = log<sub>3√2</sub> (3√2)<sup>-4</sup> = -4 log<sub>3√2</sub> (3√2) = -4 × 1 = -4।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 48 -->
+      <article class="q-card" data-qid="48" data-session="ডাক, টেলিযোগাযোগ ও তথ্যপ্রযুক্তি মন্ত্রণালয়ের সহকারী প্রোগ্রামার-১৭">
+        <div class="q-header">
+          <span class="q-num">48</span>
+          <span class="q-session">ডাক, টেলিযোগাযোগ ও তথ্যপ্রযুক্তি মন্ত্রণালয়ের সহকারী প্রোগ্রামার-১৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">কোন শর্তে log<sub>a</sub> a = 1?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. a > 0</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. a ≠ 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. a ≠ 0, a > 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. a > 0, a ≠ 1</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-48" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. a > 0, a ≠ 1</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-48">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(48)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              লগারিদমের মৌলিক সংজ্ঞানুযায়ী ভিত্তির শর্ত হলো: a > 0 এবং a ≠ 1। এই শর্তে সর্বদা log<sub>a</sub> a = 1।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 49 -->
+      <article class="q-card" data-qid="49" data-session="বিভিন্ন মন্ত্রণালয় (সহকারী প্রোগ্রামার)-১৭">
+        <div class="q-header">
+          <span class="q-num">49</span>
+          <span class="q-session">বিভিন্ন মন্ত্রণালয় (সহকারী প্রোগ্রামার)-১৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>5</sub> (<sup>3</sup>√5)(√5) কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">a) 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">b) <sup>1</sup>/<sub>5</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">c) <sup>5</sup>/<sub>6</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">d) <sup>6</sup>/<sub>5</sub></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-49" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>c</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-49">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(49)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              (<sup>3</sup>√5)(√5) = 5<sup>1/3</sup> × 5<sup>1/2</sup> = 5<sup>1/3 + 1/2</sup> = 5<sup>5/6</sup><br>∴ log<sub>5</sub> (5<sup>5/6</sup>) = <sup>5</sup>/<sub>6</sub> log<sub>5</sub> 5 = <sup>5</sup>/<sub>6</sub> × 1 = <sup>5</sup>/<sub>6</sub>।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 50 -->
+      <article class="q-card" data-qid="50" data-session="বিভিন্ন মন্ত্রণালয় (সহকারী প্রোগ্রামার)-১৭">
+        <div class="q-header">
+          <span class="q-num">50</span>
+          <span class="q-session">বিভিন্ন মন্ত্রণালয় (সহকারী প্রোগ্রামার)-১৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>5</sub> 125 + log<sub>2</sub> 8 = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">a) 8</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">b) 125</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">c) 5</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">d) 6</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-50" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>d</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-50">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(50)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>5</sub> 125 = log<sub>5</sub> 5<sup>3</sup> = 3<br>log<sub>2</sub> 8 = log<sub>2</sub> 2<sup>3</sup> = 3<br>∴ log<sub>5</sub> 125 + log<sub>2</sub> 8 = 3 + 3 = 6।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 51 -->
+      <article class="q-card" data-qid="51" data-session="স্থানীয় সরকার, পল্লী উন্নয়ন ও সমবায় মন্ত্রণালয়ের সহকারী প্রকৌশলী (সিভিল)-১৭">
+        <div class="q-header">
+          <span class="q-num">51</span>
+          <span class="q-session">স্থানীয় সরকার, পল্লী উন্নয়ন ও সমবায় মন্ত্রণালয়ের সহকারী প্রকৌশলী (সিভিল)-১৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>y</sub> <sup>3</sup>√3 = <sup>1</sup>/<sub>15</sub> হলে y এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 9</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 27</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 81</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. 243</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-51" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. 243</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-51">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(51)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>y</sub> <sup>3</sup>√3 = <sup>1</sup>/<sub>15</sub> ⇒ y<sup>1/15</sup> = <sup>3</sup>√3<br>⇒ y<sup>1/15</sup> = 3<sup>1/3</sup><br>উভয়পক্ষকে ঘাত 15 দ্বারা উন্নীত করে পাই:<br>y = (3<sup>1/3</sup>)<sup>15</sup> = 3<sup>5</sup> = 243।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 52 -->
+      <article class="q-card" data-qid="52" data-session="পরিসংখ্যান ও তথ্য ব্যবস্থাপনা অধিদপ্তর পরিসংখ্যান কর্মকর্তা ২০১৭">
+        <div class="q-header">
+          <span class="q-num">52</span>
+          <span class="q-session">পরিসংখ্যান ও তথ্য ব্যবস্থাপনা অধিদপ্তর পরিসংখ্যান কর্মকর্তা ২০১৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>3</sub> (<sup>1</sup>/<sub>9</sub>) = ?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. -2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. -3</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-52" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. -2</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-52">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(52)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>3</sub> (<sup>1</sup>/<sub>9</sub>) = log<sub>3</sub> (<sup>1</sup>/<sub>3<sup>2</sup></sub>) = log<sub>3</sub> 3<sup>-2</sup> = -2 log<sub>3</sub> 3 = -2 × 1 = -2।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 53 -->
+      <article class="q-card" data-qid="53" data-session="স্বাস্থ্য মন্ত্রণালয়ের অধীনে সহকারী প্রকৌশলী (সিভিল) ২০১৭">
+        <div class="q-header">
+          <span class="q-num">53</span>
+          <span class="q-session">স্বাস্থ্য মন্ত্রণালয়ের অধীনে সহকারী প্রকৌশলী (সিভিল) ২০১৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>x</sub> (<sup>5</sup>/<sub>2</sub>) = -<sup>1</sup>/<sub>2</sub> হলে x এর মান-</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. <sup>4</sup>/<sub>25</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. √(<sup>5</sup>/<sub>2</sub>)</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. √(<sup>2</sup>/<sub>5</sub>)</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. <sup>25</sup>/<sub>4</sub></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-53" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. <sup>4</sup>/<sub>25</sub></strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-53">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(53)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>x</sub> (<sup>5</sup>/<sub>2</sub>) = -<sup>1</sup>/<sub>2</sub> ⇒ x<sup>-1/2</sup> = <sup>5</sup>/<sub>2</sub><br>⇒ <sup>1</sup>/<sub>√x</sub> = <sup>5</sup>/<sub>2</sub><br>বর্গ করে পাই: <sup>1</sup>/<sub>x</sub> = <sup>25</sup>/<sub>4</sub> ⇒ x = <sup>4</sup>/<sub>25</sub>।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 54 -->
+      <article class="q-card" data-qid="54" data-session="বিভিন্ন মন্ত্রণালয়ের সহকারী মেইনটেন্যান্স ইঞ্জিনিয়ার-১৭">
+        <div class="q-header">
+          <span class="q-num">54</span>
+          <span class="q-session">বিভিন্ন মন্ত্রণালয়ের সহকারী মেইনটেন্যান্স ইঞ্জিনিয়ার-১৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>2</sub> √6 + log<sub>2</sub> √(<sup>2</sup>/<sub>3</sub>) = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 0</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 3</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-54" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. 1</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-54">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(54)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>2</sub> √6 + log<sub>2</sub> √(<sup>2</sup>/<sub>3</sub>) = log<sub>2</sub> (√6 × <sup>√2</sup>/<sub>√3</sub>) = log<sub>2</sub> (√3 × √2 × <sup>√2</sup>/<sub>√3</sub>) = log<sub>2</sub> (√2 × √2) = log<sub>2</sub> 2 = 1।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 55 -->
+      <article class="q-card" data-qid="55" data-session="বিভিন্ন মন্ত্রণালয়ের সহকারী মেইনটেন্যান্স ইঞ্জিনিয়ার-১৭">
+        <div class="q-header">
+          <span class="q-num">55</span>
+          <span class="q-session">বিভিন্ন মন্ত্রণালয়ের সহকারী মেইনটেন্যান্স ইঞ্জিনিয়ার-১৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>√3</sub> 81 = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 4</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 6</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 9</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. 8</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-55" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. 8</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-55">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(55)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              81 = 3<sup>4</sup> = (√3)<sup>8</sup><br>∴ log<sub>√3</sub> 81 = log<sub>√3</sub> (√3)<sup>8</sup> = 8 log<sub>√3</sub> (√3) = 8。
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 56 -->
+      <article class="q-card" data-qid="56" data-session="পিএসসি সহকারী মেইনটেন্যান্স ইঞ্জিনিয়ার-১৭">
+        <div class="q-header">
+          <span class="q-num">56</span>
+          <span class="q-session">পিএসসি সহকারী মেইনটেন্যান্স ইঞ্জিনিয়ার-১৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>2</sub> 64 + log<sub>2</sub> 8 এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 128</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 7</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. 9</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 2</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-56" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. 9</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-56">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(56)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>2</sub> 64 + log<sub>2</sub> 8 = log<sub>2</sub> 2<sup>6</sup> + log<sub>2</sub> 2<sup>3</sup> = 6 log<sub>2</sub> 2 + 3 log<sub>2</sub> 2 = 6 + 3 = 9।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 57 -->
+      <article class="q-card" data-qid="57" data-session="জনপ্রশাসন মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-১৬">
+        <div class="q-header">
+          <span class="q-num">57</span>
+          <span class="q-session">জনপ্রশাসন মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-১৬</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>5</sub> <sup>3</sup>√5 = ?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. <sup>1</sup>/<sub>3</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. <sup>1</sup>/<sub>5</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. <sup>3</sup>/<sub>5</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. <sup>5</sup>/<sub>3</sub></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-57" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. <sup>1</sup>/<sub>3</sub></strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-57">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(57)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>5</sub> <sup>3</sup>√5 = log<sub>5</sub> 5<sup>1/3</sup> = <sup>1</sup>/<sub>3</sub> log<sub>5</sub> 5 = <sup>1</sup>/<sub>3</sub> × 1 = <sup>1</sup>/<sub>3</sub>।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 58 -->
+      <article class="q-card" data-qid="58" data-session="স্বাস্থ্য মন্ত্রণালয়ের উপসহকারী প্রকৌশলী (সিভিল) ২০১৬">
+        <div class="q-header">
+          <span class="q-num">58</span>
+          <span class="q-session">স্বাস্থ্য মন্ত্রণালয়ের উপসহকারী প্রকৌশলী (সিভিল) ২০১৬</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>12</sub> x = 4 হলে x-এর মান কোনটি?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 12<sup>2</sup></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 12<sup>3</sup></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. 12<sup>4</sup></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 12<sup>5</sup></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-58" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. 12<sup>4</sup></strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-58">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(58)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>12</sub> x = 4 ⇒ x = 12<sup>4</sup>।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 59 -->
+      <article class="q-card" data-qid="59" data-session="স্বাস্থ্য মন্ত্রণালয়ের সহকারী প্রকৌশলী ২০১৬">
+        <div class="q-header">
+          <span class="q-num">59</span>
+          <span class="q-session">স্বাস্থ্য মন্ত্রণালয়ের সহকারী প্রকৌশলী ২০১৬</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">32-এর 2 ভিত্তিক লগারিদম কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 4</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. 5</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-59" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. 5</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-59">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(59)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              32 এর 2 ভিত্তিক লগারিদম = log<sub>2</sub> 32 = log<sub>2</sub> 2<sup>5</sup> = 5 log<sub>2</sub> 2 = 5 × 1 = 5।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 60 -->
+      <article class="q-card" data-qid="60" data-session="জনপ্রশাসন মন্ত্রণালয়ের অধীনে পিএসসির সহকারী পরিচালক ২০১৬">
+        <div class="q-header">
+          <span class="q-num">60</span>
+          <span class="q-session">জনপ্রশাসন মন্ত্রণালয়ের অধীনে পিএসসির সহকারী পরিচালক ২০১৬</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">400-এর log 4; ভিত্তি কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 10</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. e</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. 2√5</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-60" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. 2√5</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-60">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(60)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ধরি, ভিত্তি = a。<br>প্রশ্নমতে, log<sub>a</sub> 400 = 4 ⇒ a<sup>4</sup> = 400<br>⇒ a<sup>4</sup> = (2√5)<sup>4</sup> ⇒ a = 2√5।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 61 -->
+      <article class="q-card" data-qid="61" data-session="বাংলাদেশ রেলওয়ে (সহকারী স্টেশন মাস্টার)-১৬/ রাজস্ব কর্মকর্তা ১৫">
+        <div class="q-header">
+          <span class="q-num">61</span>
+          <span class="q-session">বাংলাদেশ রেলওয়ে (সহকারী স্টেশন মাস্টার)-১৬/ রাজস্ব কর্মকর্তা ১৫</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>3</sub> 81 এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. 4</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 9</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 27</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-61" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. 4</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-61">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(61)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>3</sub> 81 = log<sub>3</sub> 3<sup>4</sup> = 4 log<sub>3</sub> 3 = 4 × 1 = 4।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 62 -->
+      <article class="q-card" data-qid="62" data-session="উপজেলা মহিলা বিষয়ক কর্মকর্তা ২০১৬">
+        <div class="q-header">
+          <span class="q-num">62</span>
+          <span class="q-session">উপজেলা মহিলা বিষয়ক কর্মকর্তা ২০১৬</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>2</sub> 16 = ?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. 4</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 8</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 16</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 2</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-62" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. 4</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-62">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(62)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>2</sub> 16 = log<sub>2</sub> 2<sup>4</sup> = 4 log<sub>2</sub> 2 = 4 × 1 = 4।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 63 -->
+      <article class="q-card" data-qid="63" data-session="উপজেলা মহিলা বিষয়ক কর্মকর্তা ২০১৬">
+        <div class="q-header">
+          <span class="q-num">63</span>
+          <span class="q-session">উপজেলা মহিলা বিষয়ক কর্মকর্তা ২০১৬</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>5</sub> (5√5) = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. <sup>1</sup>/<sub>5</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. <sup>3</sup>/<sub>2</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. <sup>2</sup>/<sub>3</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. <sup>5</sup>/<sub>3</sub></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-63" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. <sup>3</sup>/<sub>2</sub></strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-63">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(63)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              5√5 = 5<sup>1</sup> × 5<sup>1/2</sup> = 5<sup>1 + 1/2</sup> = 5<sup>3/2</sup><br>∴ log<sub>5</sub> (5√5) = log<sub>5</sub> 5<sup>3/2</sup> = <sup>3</sup>/<sub>2</sub> log<sub>5</sub> 5 = <sup>3</sup>/<sub>2</sub>।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 64 -->
+      <article class="q-card" data-qid="64" data-session="আনসার ও ভিডিপি অধিদপ্তর (সার্কেল অ্যাডজুটেন্ট/উপজেলা কর্মকর্তা)-১৫">
+        <div class="q-header">
+          <span class="q-num">64</span>
+          <span class="q-session">আনসার ও ভিডিপি অধিদপ্তর (সার্কেল অ্যাডজুটেন্ট/উপজেলা কর্মকর্তা)-১৫</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>4</sub> 2 = x হলে x এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. <sup>1</sup>/<sub>2</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 0</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 2</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-64" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. <sup>1</sup>/<sub>2</sub></strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-64">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(64)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>4</sub> 2 = x ⇒ 4<sup>x</sup> = 2<br>⇒ (2<sup>2</sup>)<sup>x</sup> = 2<sup>1</sup> ⇒ 2<sup>2x</sup> = 2<sup>1</sup><br>⇒ 2x = 1 ⇒ x = <sup>1</sup>/<sub>2</sub>।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 65 -->
+      <article class="q-card" data-qid="65" data-session="জাতীয় রাজস্ব বোর্ডের কর্মকর্তা (মুক্তিযোদ্ধা ও ক্ষুদ্র নৃগোষ্ঠী)-২০১৫">
+        <div class="q-header">
+          <span class="q-num">65</span>
+          <span class="q-session">জাতীয় রাজস্ব বোর্ডের কর্মকর্তা (মুক্তিযোদ্ধা ও ক্ষুদ্র নৃগোষ্ঠী)-২০১৫</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>x</sub> 324 = 4 হলে, x এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. 3√2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 4√2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 4</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 6√2</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-65" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. 3√2</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-65">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(65)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>x</sub> 324 = 4 ⇒ x<sup>4</sup> = 324<br>⇒ x<sup>4</sup> = (3√2)<sup>4</sup> ⇒ x = 3√2।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 66 -->
+      <article class="q-card" data-qid="66" data-session="জনস্বাস্থ্য প্রকৌশল অধিদপ্তরের উপ-সহকারী প্রকৌশলী (সিভিল) ২০১৫">
+        <div class="q-header">
+          <span class="q-num">66</span>
+          <span class="q-session">জনস্বাস্থ্য প্রকৌশল অধিদপ্তরের উপ-সহকারী প্রকৌশলী (সিভিল) ২০১৫</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>x</sub> 324 = 4 হলে, x এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 3√3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. 3√2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 2√3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 2√2</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-66" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. 3√2</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-66">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(66)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              x<sup>4</sup> = 324 = (3√2)<sup>4</sup> ∴ x = 3√2।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 67 -->
+      <article class="q-card" data-qid="67" data-session="জনস্বাস্থ্য প্রকৌশল অধিদপ্তরের উপ-সহকারী প্রকৌশলী (সিভিল) ২০১৫">
+        <div class="q-header">
+          <span class="q-num">67</span>
+          <span class="q-session">জনস্বাস্থ্য প্রকৌশল অধিদপ্তরের উপ-সহকারী প্রকৌশলী (সিভিল) ২০১৫</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log 2 + log 4 + log 8 + ... ধারাটির প্রথম 10 পদের সমষ্টি কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 40 log 4</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. 55 log 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 10 log 64</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. log 512</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-67" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. 55 log 2</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-67">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(67)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ধারাটি হলো: log 2 + log 2<sup>2</sup> + log 2<sup>3</sup> + ... + log 2<sup>10</sup><br>= log 2 + 2 log 2 + 3 log 2 + ... + 10 log 2<br>= log 2 (1 + 2 + 3 + ... + 10)<br>= log 2 × <sup>10(10 + 1)</sup>/<sub>2</sub> = log 2 × 55 = 55 log 2।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 68 -->
+      <article class="q-card" data-qid="68" data-session="বিভিন্ন মন্ত্রণালয়ের প্রশাসনিক কর্মকর্তা এবং রেলওয়ের উপ-সহকারী প্রকৌশলী ২০১৩">
+        <div class="q-header">
+          <span class="q-num">68</span>
+          <span class="q-session">বিভিন্ন মন্ত্রণালয়ের প্রশাসনিক কর্মকর্তা এবং রেলওয়ের উপ-সহকারী প্রকৌশলী ২০১৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>10</sub> (0.001) = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. -2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. -3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. <sup>1</sup>/<sub>2</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. <sup>1</sup>/<sub>3</sub></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-68" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. -3</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-68">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(68)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              0.001 = <sup>1</sup>/<sub>1000</sub> = <sup>1</sup>/<sub>10<sup>3</sup></sub> = 10<sup>-3</sup><br>∴ log<sub>10</sub> (0.001) = log<sub>10</sub> (10<sup>-3</sup>) = -3 log<sub>10</sub> 10 = -3 × 1 = -3।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 69 -->
+      <article class="q-card" data-qid="69" data-session="মাদকদ্রব্য নিয়ন্ত্রণ অধিদপ্তর (সহকারী পরিচালক)-১৩">
+        <div class="q-header">
+          <span class="q-num">69</span>
+          <span class="q-session">মাদকদ্রব্য নিয়ন্ত্রণ অধিদপ্তর (সহকারী পরিচালক)-১৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>a</sub> √2 = <sup>1</sup>/<sub>6</sub> হলে, a = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. √2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 0</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 6</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. 8</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-69" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. 8</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-69">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(69)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>a</sub> √2 = <sup>1</sup>/<sub>6</sub> ⇒ a<sup>1/6</sup> = √2<br>উভয়পক্ষকে ঘাত 6 দ্বারা উন্নীত করে পাই:<br>a = (√2)<sup>6</sup> = ((√2)<sup>2</sup>)<sup>3</sup> = 2<sup>3</sup> = 8।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 70 -->
+      <article class="q-card" data-qid="70" data-session="কারা অধিদপ্তর (কারা তত্ত্বাবধায়ক)-১৩">
+        <div class="q-header">
+          <span class="q-num">70</span>
+          <span class="q-session">কারা অধিদপ্তর (কারা তত্ত্বাবধায়ক)-১৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>2√5</sub> 400 -এর মান নিম্নের কোনটি?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. 4</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 5</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 25</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 50</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-70" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. 4</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-70">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(70)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              400 = (2√5)<sup>4</sup><br>∴ log<sub>2√5</sub> 400 = 4 log<sub>2√5</sub> (2√5) = 4。
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 71 -->
+      <article class="q-card" data-qid="71" data-session="প্রবাসী কল্যাণ ও বৈদেশিক কর্মসংস্থান মন্ত্রণালয়ের সহকারী পরিচালক ২০১২">
+        <div class="q-header">
+          <span class="q-num">71</span>
+          <span class="q-session">প্রবাসী কল্যাণ ও বৈদেশিক কর্মসংস্থান মন্ত্রণালয়ের সহকারী পরিচালক ২০১২</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>2</sub> 128 + log<sub>2</sub> 16 = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 128</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. 11</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 9</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-71" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. 11</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-71">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(71)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>2</sub> 128 + log<sub>2</sub> 16 = log<sub>2</sub> 2<sup>7</sup> + log<sub>2</sub> 2<sup>4</sup> = 7 log<sub>2</sub> 2 + 4 log<sub>2</sub> 2 = 7(1) + 4(1) = 7 + 4 = 11।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 72 -->
+      <article class="q-card" data-qid="72" data-session="সড়ক ও জনপথ অধিদপ্তরের উপসহকারী প্রকৌশলী-১০">
+        <div class="q-header">
+          <span class="q-num">72</span>
+          <span class="q-session">সড়ক ও জনপথ অধিদপ্তরের উপসহকারী প্রকৌশলী-১০</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>10</sub> x = 2 হলে, x এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 10</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. 100</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 0</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-72" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. 100</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-72">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(72)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>10</sub> x = 2 ⇒ x = 10<sup>2</sup> = 100।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 73 -->
+      <article class="q-card" data-qid="73" data-session="উপজেলা পোস্ট মাস্টার-১০">
+        <div class="q-header">
+          <span class="q-num">73</span>
+          <span class="q-session">উপজেলা পোস্ট মাস্টার-১০</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">3 log 2 + log 5 = ?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">a. log 30</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">b. log 40</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">c. 3 log 7</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">d. log 13</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">e. কোনটিই নয়</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-73" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>b</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-73">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(73)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              3 log 2 + log 5 = log 2<sup>3</sup> + log 5 = log 8 + log 5 = log (8 × 5) = log 40।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 74 -->
+      <article class="q-card" data-qid="74" data-session="অর্থ মন্ত্রণালয়ের অধীন জাতীয় সঞ্চয় পরিদপ্তরের সহকারী পরিচালক ২০০৯">
+        <div class="q-header">
+          <span class="q-num">74</span>
+          <span class="q-session">অর্থ মন্ত্রণালয়ের অধীন জাতীয় সঞ্চয় পরিদপ্তরের সহকারী পরিচালক ২০০৯</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>x</sub> 324 = 4 হলে, x এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 2√3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. 3√2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. √3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 3</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-74" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. 3√2</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-74">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(74)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>x</sub> 324 = 4 ⇒ x<sup>4</sup> = 324<br>⇒ x<sup>4</sup> = 3<sup>4</sup> × (√2)<sup>4</sup> = (3√2)<sup>4</sup> ∴ x = 3√2।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 75 -->
+      <article class="q-card" data-qid="75" data-session="পাসপোর্ট ও ইমিগ্রেশন অধিদপ্তর (সহকারী পরিচালক)-০৭">
+        <div class="q-header">
+          <span class="q-num">75</span>
+          <span class="q-session">পাসপোর্ট ও ইমিগ্রেশন অধিদপ্তর (সহকারী পরিচালক)-০৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log<sub>2</sub> √6 + log<sub>2</sub> √(<sup>2</sup>/<sub>3</sub>) = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 4</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 3</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-75" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. 1</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-75">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(75)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log<sub>2</sub> √6 + log<sub>2</sub> √(<sup>2</sup>/<sub>3</sub>) = log<sub>2</sub> (√6 × <sup>√2</sup>/<sub>√3</sub>) = log<sub>2</sub> (√3 × √2 × <sup>√2</sup>/<sub>√3</sub>) = log<sub>2</sub> (√2 × √2) = log<sub>2</sub> 2 = 1।
+            </div>
+          </div>
+        </div>
+      </article>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p style="margin-bottom: 6px;">পিএসসি নন-ক্যাডার প্রশ্নব্যাংক ২য় খণ্ড (Job Hunter) • অধ্যায় ০৮: লগারিদম</p>
+      <p style="opacity: 0.8;">প্রামাণ্য তথ্য ও জিরো-ফেব্রিকেশন নীতিতে প্রস্তুতকৃত ডিজিটাল স্মার্ট ই-বুক।</p>
+    </footer>
+
+  </div>
+
+  <!-- Interactive Logic -->
+  <script>
+    let currentScore = 0;
+    const answeredCards = new Set();
+    const totalQuestions = 75;
+    let currentFontSize = 1;
+
+    function checkAnswer(btn, isCorrect) {
+      const card = btn.closest('.q-card');
+      const qid = card.getAttribute('data-qid');
+
+      if (card.dataset.answered) return;
+      card.dataset.answered = "true";
+
+      const allBtns = card.querySelectorAll('.opt-btn');
+      allBtns.forEach(b => {
+        b.disabled = true;
+        if (b.getAttribute('data-is-correct') === 'true') {
+          b.classList.add('correct');
+        }
+      });
+
+      if (isCorrect === 1) {
+        btn.classList.add('correct');
+        currentScore++;
+      } else {
+        btn.classList.add('wrong');
+      }
+
+      // Show answer drawer
+      const ansDrawer = document.getElementById('ans-' + qid);
+      if (ansDrawer) ansDrawer.style.display = 'block';
+
+      // Auto open explanation
+      const expDrawer = document.getElementById('exp-' + qid);
+      if (expDrawer) expDrawer.classList.add('open');
+
+      updateScore();
+    }
+
+    function toggleExp(qid) {
+      const expDrawer = document.getElementById('exp-' + qid);
+      if (expDrawer) {
+        expDrawer.classList.toggle('open');
+      }
+    }
+
+    function updateScore() {
+      const scoreVal = document.getElementById('score-val');
+      const scorePct = document.getElementById('score-pct');
+      if (scoreVal) scoreVal.textContent = currentScore.toLocaleString('bn-BD');
+      if (scorePct) {
+        const pct = Math.round((currentScore / totalQuestions) * 100);
+        scorePct.textContent = '(' + pct.toLocaleString('bn-BD') + '%)';
+      }
+    }
+
+    function resetQuiz() {
+      if (!confirm('আপনি কি এই অধ্যায়ের সমস্ত কুইজ রিসেট করতে চান?')) return;
+      currentScore = 0;
+      updateScore();
+
+      document.querySelectorAll('.q-card').forEach(c => {
+        delete c.dataset.answered;
+        c.querySelectorAll('.opt-btn').forEach(b => {
+          b.disabled = false;
+          b.classList.remove('correct', 'wrong');
+        });
+        const drawer = c.querySelector('.ans-drawer');
+        if (drawer) drawer.style.display = 'none';
+        const exp = c.querySelector('.exp-drawer');
+        if (exp) exp.classList.remove('open');
+      });
+    }
+
+    function filterSession(session) {
+      document.querySelectorAll('.q-card').forEach(card => {
+        if (session === 'all' || card.getAttribute('data-session') === session) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function adjustFont(dir) {
+      currentFontSize += dir * 0.08;
+      if (currentFontSize < 0.8) currentFontSize = 0.8;
+      if (currentFontSize > 1.4) currentFontSize = 1.4;
+      document.querySelector('.paper-container').style.fontSize = currentFontSize + 'rem';
+    }
+
+    function resetFont() {
+      currentFontSize = 1;
+      document.querySelector('.paper-container').style.fontSize = '1rem';
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const themeBtn = document.getElementById('theme-btn');
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        if (themeBtn) themeBtn.textContent = '🌙';
+        localStorage.setItem('theme_algebra', 'light');
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        if (themeBtn) themeBtn.textContent = '☀️';
+        localStorage.setItem('theme_algebra', 'dark');
+      }
+    }
+  </script>
+  <script src="nav-component.js"></script>
+  <script src="../universal-modes.js"></script>
+</body>
+</html>

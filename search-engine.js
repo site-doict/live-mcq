@@ -30,7 +30,11 @@
     'Non Cadre Bangla Grammar': { bg: 'rgba(15,118,110,0.12)', text: '#0f766e', name: 'নন-ক্যাডার বাংলা ব্যাকরণ' },
     'Non Cadre Bangla Literature': { bg: 'rgba(15,118,110,0.12)', text: '#0f766e', name: 'নন-ক্যাডার বাংলা সাহিত্য' },
     'Non Cadre English': { bg: 'rgba(30,58,138,0.12)', text: '#1e3a8a', name: 'নন-ক্যাডার ইংরেজি' },
-    'Non Cadre General Science': { bg: 'rgba(2,132,199,0.12)', text: '#0284c7', name: 'নন-ক্যাডার সাধারণ বিজ্ঞান' }
+    'Non Cadre General Science': { bg: 'rgba(2,132,199,0.12)', text: '#0284c7', name: 'নন-ক্যাডার সাধারণ বিজ্ঞান' },
+    'Non Cadre Bangladesh': { bg: 'rgba(136,19,55,0.12)', text: '#881337', name: 'নন-ক্যাডার বাংলাদেশ বিষয়াবলি' },
+    'Non Cadre International': { bg: 'rgba(2,132,199,0.12)', text: '#0284c7', name: 'নন-ক্যাডার আন্তর্জাতিক বিষয়াবলি' },
+    'Non Cadre Arithmetic': { bg: 'rgba(79,70,229,0.12)', text: '#4f46e5', name: 'নন-ক্যাডার পাটিগণিত' },
+    'Non Cadre Algebra': { bg: 'rgba(8,145,178,0.12)', text: '#0891b2', name: 'নন-ক্যাডার বীজগণিত' }
   };
 
   var TYPE_BADGES = {

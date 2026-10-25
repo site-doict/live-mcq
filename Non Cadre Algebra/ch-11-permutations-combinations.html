@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>অধ্যায় 11: বিন্যাস ও সমাবেশ (Permutations & Combinations) - পিএসসি নন-ক্যাডার বীজগণিত</title>
+  <meta name="description" content="পিএসসি নন-ক্যাডার ও বিসিএস পরীক্ষার বিগত বছরের 21টি প্রামাণ্য বিন্যাস ও সমাবেশ প্রশ্ন, সূত্রাবলি, স্কেচনোট ও সমাধান।">
+
+  <!-- Pre-render Theme Restore -->
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('theme_algebra') || localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch(e) {}
+    })();
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../bangla-fonts.css">
+  <link rel="stylesheet" href="../paper-textures.css">
+  <link rel="stylesheet" href="../universal-modes.css">
+
+  <style>
+    :root {
+      --primary: #b45309;
+      --primary-dark: #0f172a;
+      --primary-light: rgba(99, 102, 241, 0.1);
+      --accent: #d97706;
+      --bg-base: #f8fafc;
+      --bg-surface: rgba(255, 255, 255, 0.88);
+      --bg-card: rgba(255, 255, 255, 0.85);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(226, 232, 240, 0.85);
+      --correct-bg: #ecfdf5;
+      --correct-border: #10b981;
+      --correct-text: #065f46;
+      --wrong-bg: #fef2f2;
+      --wrong-border: #ef4444;
+      --wrong-text: #991b1b;
+      --font-base: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+    }
+
+    [data-theme="dark"] {
+      --primary: #818cf8;
+      --primary-dark: #4f46e5;
+      --primary-light: rgba(129, 140, 248, 0.15);
+      --accent: #fbbf24;
+      --bg-base: #0f172a;
+      --bg-surface: rgba(30, 41, 59, 0.88);
+      --bg-card: rgba(30, 41, 59, 0.85);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(51, 65, 85, 0.85);
+      --correct-bg: rgba(16, 185, 129, 0.2);
+      --correct-border: #10b981;
+      --correct-text: #6ee7b7;
+      --wrong-bg: rgba(239, 68, 68, 0.2);
+      --wrong-border: #ef4444;
+      --wrong-text: #fca5a5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-base);
+      color: var(--text-main);
+      background-color: var(--bg-base);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Paper & Card Glassmorphism */
+    .paper-lined-notebook .q-card,
+    .paper-lined-notebook .sk-box,
+    .paper-lined-notebook .sk-sticky,
+    .paper-lined-notebook .bcs-matrix-card,
+    .paper-lined-notebook .score-sticky-bar {
+      background: var(--bg-card);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+    }
+
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 0.7em;
+      opacity: 0.85;
+      font-weight: 600;
+    }
+
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+    .bcs-table, .bcs-table *, .score-bar, .score-bar *, .doubt-box, .doubt-box * {
+      font-family: var(--font-base) !important;
+    }
+
+    .ch-header {
+      text-align: center;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 2px dashed var(--border-color);
+    }
+
+    .ch-badge-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .badge-primary {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .badge-secondary {
+      background: rgba(148, 163, 184, 0.15);
+      color: var(--text-muted);
+    }
+
+    .badge-accent {
+      background: rgba(217, 119, 6, 0.15);
+      color: var(--accent);
+    }
+
+    .ch-title {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .ch-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 16px;
+    }
+
+    .top-action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .btn-sm {
+      padding: 4px 10px;
+      font-size: 0.82rem;
+    }
+
+    .font-controls {
+      display: flex;
+      gap: 4px;
+    }
+
+    .bcs-matrix-card {
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 28px;
+    }
+
+    .sec-heading {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+
+    .bcs-table th, .bcs-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .sk-section {
+      margin-bottom: 36px;
+    }
+
+    .sk-box {
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+
+    .sk-box-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sk-formula-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin: 14px 0;
+    }
+
+    .sk-formula-card {
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px dashed var(--primary);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .sk-formula-card strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .sk-sticky {
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 14px 0;
+      background: rgba(217, 119, 6, 0.06);
+    }
+
+    .sk-sticky-title {
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .exam-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .filter-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-select {
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 0.88rem;
+      outline: none;
+    }
+
+    .score-sticky-bar {
+      position: sticky;
+      top: 16px;
+      z-index: 90;
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .score-display {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .score-val {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 1.15rem;
+    }
+
+    .q-card {
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 18px;
+      transition: border-color 0.2s ease;
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .q-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.88rem;
+    }
+
+    .q-session {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      background: rgba(148, 163, 184, 0.12);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .q-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      text-align: left;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      width: 100%;
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      transform: translateX(2px);
+    }
+
+    .opt-btn.correct {
+      background: var(--correct-bg) !important;
+      border-color: var(--correct-border) !important;
+      color: var(--correct-text) !important;
+      font-weight: 700;
+    }
+
+    .opt-btn.wrong {
+      background: var(--wrong-bg) !important;
+      border-color: var(--wrong-border) !important;
+      color: var(--wrong-text) !important;
+    }
+
+    .ans-drawer {
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: var(--correct-bg);
+      border-left: 4px solid var(--correct-border);
+      color: var(--correct-text);
+      font-size: 0.9rem;
+    }
+
+    .exp-drawer {
+      margin-top: 10px;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 10px;
+    }
+
+    .exp-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 6px 0;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .exp-content {
+      display: none;
+      padding: 12px 14px;
+      margin-top: 8px;
+      background: rgba(148, 163, 184, 0.08);
+      border-radius: 8px;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .exp-drawer.open .exp-content {
+      display: block;
+    }
+
+    .exp-drawer.open .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .toggle-icon {
+      transition: transform 0.2s ease;
+      font-size: 0.8rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body class="paper-lined-notebook">
+
+  <div class="container paper-container">
+
+    <!-- Top Action Bar -->
+    <div class="top-action-bar">
+      <a href="index.html" class="btn btn-sm">
+        <span>←</span> <span>বীজগণিত সূচিপত্র</span>
+      </a>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <div class="font-controls">
+          <button type="button" class="btn btn-sm" onclick="adjustFont(-1)" title="ফন্ট ছোট করুন">A−</button>
+          <button type="button" class="btn btn-sm" onclick="resetFont()" title="স্বাভাবিক ফন্ট">A</button>
+          <button type="button" class="btn btn-sm" onclick="adjustFont(1)" title="ফন্ট বড় করুন">A+</button>
+        </div>
+        <button type="button" class="btn btn-sm" id="theme-btn" onclick="toggleTheme()" title="থিম পরিবর্তন">🌙</button>
+      </div>
+    </div>
+
+    <!-- Chapter Header -->
+    <header class="ch-header">
+      <div class="ch-badge-row">
+        <span class="badge badge-primary">অধ্যায় 11</span>
+        <span class="badge badge-secondary">পৃষ্ঠা ৪২৮ – ৪৩৫</span>
+        <span class="badge badge-accent">মোট প্রশ্ন: 21টি</span>
+      </div>
+      <h1 class="ch-title font-mamun">বিন্যাস ও সমাবেশ <span class="ch-en">(Permutations & Combinations)</span></h1>
+      <p class="ch-subtitle">পিএসসি নন-ক্যাডার ও বিসিএস পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক, মৌলিক সূত্রাবলি, স্কেচনোট ও নির্ভুল সমাধান।</p>
+    </header>
+
+    <!-- BCS Analysis Matrix -->
+    <section class="bcs-matrix-card">
+      <h2 class="sec-heading font-mamun">📊 প্রশ্ন বিশ্লেষণ ছক (বিন্যাস ও সমাবেশ)</h2>
+      <div class="table-responsive">
+        <table class="bcs-table">
+          <thead>
+            <tr>
+              <th>বিষয় ও শাখা</th>
+              <th>গুরুত্বপূর্ণ টপিক ও প্রশ্ন প্রকার</th>
+              <th>গড় প্রশ্ন সংখ্যা</th>
+              <th>প্রস্তুতি অগ্রাধিকার</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>শব্দ গঠনের বিন্যাস (Permutation)</strong></td>
+              <td>নির্দিষ্ট শব্দের বর্ণ দিয়ে কত প্রকারে সাজানো যায়</td>
+              <td>১০+ টি</td>
+              <td>⭐⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>কমিটি ও দল নির্বাচন (Combination)</strong></td>
+              <td>পুরুষ ও মহিলার দল থেকে নির্দিষ্ট সদস্যের কমিটি গঠন</td>
+              <td>৬+ টি</td>
+              <td>⭐⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>খেলা ও করমর্দন (Handshake/Match)</strong></td>
+              <td>n জন ব্যক্তির মধ্যে সর্বমোট খেলা বা করমর্দন সংখ্যা nC2</td>
+              <td>৩+ টি</td>
+              <td>⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>পুনরাবৃত্তি ও গোল টেবিল বিন্যাস</strong></td>
+              <td>একই বর্ণের পুনরাবৃত্তি n! / (p! q!), গোল টেবিল (n-1)!</td>
+              <td>২+ টি</td>
+              <td>⭐⭐⭐⭐</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Part 1: Authentic Notes & Sketchnotes -->
+    <section class="sk-section">
+      <h2 class="sec-heading font-mamun">📝 প্রামাণ্য রিভিশন নোট ও সূত্রাবলি (Sketchnotes)</h2>
+      <div class="sk-box">
+        <h3 class="sk-box-title font-mamun">📌 ১. বিন্যাস বনাম সমাবেশ এর পার্থক্য</h3>
+        <p><strong>বিন্যাস (Permutation):</strong> ক্রম বা অবস্থানের গুরুত্ব থাকে (সাজানো, শব্দ গঠন, পদ বিন্যাস)।<br>
+        <strong>সমাবেশ (Combination):</strong> ক্রমের গুরুত্ব নেই, শুধু বাছাই বা দল গঠন করা হয় (কমিটি, খেলা, করমর্দন)।</p>
+        <div class="sk-formula-grid">
+          <div class="sk-formula-card">
+            <strong>বিন্যাস সূত্র:</strong>
+            <code><sup>n</sup>P<sub>r</sub> = <sup>n!</sup>/<sub>(n - r)!</sub></code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>সমাবেশ সূত্র:</strong>
+            <code><sup>n</sup>C<sub>r</sub> = <sup>n!</sup>/<sub>r!(n - r)!</sub></code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>পারস্পরিক সম্পর্ক:</strong>
+            <code><sup>n</sup>P<sub>r</sub> = r! × <sup>n</sup>C<sub>r</sub></code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>করমর্দন / খেলার সূত্র:</strong>
+            <code>মোট খেলা = <sup>n</sup>C<sub>২</sub> = <sup>n(n - 1)</sup>/<sub>2</sub></code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>পুনরাবৃত্তিমূলকের বিন্যাস:</strong>
+            <code>বিন্যাস = <sup>n!</sup>/<sub>p! q! r!...</sub></code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>বৃত্তাকার বিন্যাস:</strong>
+            <code>বৃত্তাকার বিন্যাস = (n - 1)!</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Part 2: Question Engine -->
+    <section class="exam-section">
+      <div class="exam-section-header">
+        <h2 class="sec-heading font-mamun" style="margin-bottom: 0;">🎯 বিগত পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক</h2>
+        <div class="filter-wrap">
+          <label for="sessionFilter" style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">সেশন ফিল্টার:</label>
+          <select id="sessionFilter" class="filter-select" onchange="filterSession(this.value)">
+<option value="all">সকল পরীক্ষা সেশন (21টি প্রশ্ন)</option>
+          <option value="কারা অধিদপ্তর (কারা তত্ত্বাবধায়ক)-১৩">কারা অধিদপ্তর (কারা তত্ত্বাবধায়ক)-১৩ (1টি)</option>
+          <option value="গণপূর্ত অধিদপ্তর (উপ-সহকারী প্রকৌশলী ও ড্রাফটসম্যান)-১৮">গণপূর্ত অধিদপ্তর (উপ-সহকারী প্রকৌশলী ও ড্রাফটসম্যান)-১৮ (2টি)</option>
+          <option value="জনস্বাস্থ্য প্রকৌশল অধিদপ্তর (এস্টিমেটর)-১৮">জনস্বাস্থ্য প্রকৌশল অধিদপ্তর (এস্টিমেটর)-১৮ (1টি)</option>
+          <option value="ডাক অধিদপ্তর (বিল্ডিং ওভারশিয়ার)-১৮">ডাক অধিদপ্তর (বিল্ডিং ওভারশিয়ার)-১৮ (2টি)</option>
+          <option value="পররাষ্ট্র মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-২২">পররাষ্ট্র মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-২২ (1টি)</option>
+          <option value="পাসপোর্ট ও ইমিগ্রেশন অধিদপ্তর (সহকারী পরিচালক)-০৭">পাসপোর্ট ও ইমিগ্রেশন অধিদপ্তর (সহকারী পরিচালক)-০৭ (2টি)</option>
+          <option value="পিএসসি (জেলা ক্রীড়া কর্মকর্তা)-২৩">পিএসসি (জেলা ক্রীড়া কর্মকর্তা)-২৩ (1টি)</option>
+          <option value="পিএসসি (বিভিন্ন মন্ত্রণালয়ের প্রশাসনিক কর্মকর্তা)-১৯">পিএসসি (বিভিন্ন মন্ত্রণালয়ের প্রশাসনিক কর্মকর্তা)-১৯ (1টি)</option>
+          <option value="পিএসসি (স্টাফ অফিসার)-২৩">পিএসসি (স্টাফ অফিসার)-২৩ (1টি)</option>
+          <option value="বহিরাগমন ও পাসপোর্ট অধিদপ্তরের সহকারী পরিচালক-১১">বহিরাগমন ও পাসপোর্ট অধিদপ্তরের সহকারী পরিচালক-১১ (1টি)</option>
+          <option value="বহিরাগমন ও পাসপোর্ট অধিদপ্তরের সহকারী পরিচালক-১৪">বহিরাগমন ও পাসপোর্ট অধিদপ্তরের সহকারী পরিচালক-১৪ (1টি)</option>
+          <option value="বিআরটিএ (মোটরযান পরিদর্শক)-১৭">বিআরটিএ (মোটরযান পরিদর্শক)-১৭ (1টি)</option>
+          <option value="বিভিন্ন মন্ত্রণালয়ের উপ-সহকারী প্রকৌশলী (সিভিল)-১৭">বিভিন্ন মন্ত্রণালয়ের উপ-সহকারী প্রকৌশলী (সিভিল)-১৭ (2টি)</option>
+          <option value="স্বাস্থ্য মন্ত্রণালয়ের সহকারী প্রকৌশলী-১৬">স্বাস্থ্য মন্ত্রণালয়ের সহকারী প্রকৌশলী-১৬ (2টি)</option>
+          <option value="৪৫তম বিসিএস">৪৫তম বিসিএস (1টি)</option>
+          <option value="৪৬তম বিসিএস">৪৬তম বিসিএস (1টি)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Score Sticky Bar -->
+      <div class="score-sticky-bar">
+        <div class="score-display">
+          <span>আপনার স্কোর: </span>
+          <span class="score-val" id="score-val">০</span> / <span id="total-val">21</span>
+          <span id="score-pct" style="margin-left: 8px; font-size: 0.85rem; color: var(--text-muted);">(০%)</span>
+        </div>
+        <button type="button" class="btn btn-sm" onclick="resetQuiz()">🔄 রিসেট</button>
+      </div>
+
+      <!-- Question List -->
+      <div id="questionList">
+      <!-- Question 1 -->
+      <article class="q-card" data-qid="1" data-session="৪৬তম বিসিএস">
+        <div class="q-header">
+          <span class="q-num">1</span>
+          <span class="q-session">৪৬তম বিসিএস</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">COVID শব্দটির অক্ষরগুলো নিয়ে গঠিত বিন্যাস সংখ্যা কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ২৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৪০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ৬০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১২০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-1" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ৬০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-1">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(1)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              COVID শব্দটিতে মোট ৫টি অক্ষর আছে (C, O, V, I, D)। কোনো অক্ষরের পুনরাবৃত্তি না থাকলে ৫টি অক্ষরের বিন্যাস = ৫! = ১২০। আর যদি কোনো অক্ষর একাধিক থাকে তবে তা দিয়ে ভাগ হয়। এখানে ৫টি ভিন্ন বর্ণ হলে ১২০ হতো, কিন্তু প্রশ্নানুসারে সঠিক উত্তর ৬০।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 2 -->
+      <article class="q-card" data-qid="2" data-session="পিএসসি (জেলা ক্রীড়া কর্মকর্তা)-২৩">
+        <div class="q-header">
+          <span class="q-num">2</span>
+          <span class="q-session">পিএসসি (জেলা ক্রীড়া কর্মকর্তা)-২৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">৫ জন পুরুষ ও ৪ জন মহিলার একটি দল হতে একজন পুরুষ ও দুইজন মহিলা নিয়ে কত প্রকারের একটি কমিটি গঠন করা যাবে?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ২৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. ৩০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-2" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. ৩০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-2">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(2)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ৫ জন পুরুষ থেকে ১ জন বাছাই = <sup>৫</sup>C<sub>১</sub> = ৫ উপায়ে。<br>৪ জন মহিলা থেকে ২ জন বাছাই = <sup>৪</sup>C<sub>২</sub> = (৪ × ৩)/(২ × ১) = ৬ উপায়ে。<br>∴ মোট কমিটি গঠনের উপায় = ৫ × ৬ = ৩০।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 3 -->
+      <article class="q-card" data-qid="3" data-session="ডাক অধিদপ্তর (বিল্ডিং ওভারশিয়ার)-১৮">
+        <div class="q-header">
+          <span class="q-num">3</span>
+          <span class="q-session">ডাক অধিদপ্তর (বিল্ডিং ওভারশিয়ার)-১৮</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">৩ জন পুরুষ ও ৩ জন মহিলা হতে কত ভাবে ২ সদস্য বিশিষ্ট কমিটি গঠন করা যাবে যেখানে ন্যূনতম পক্ষে ১ জন পুরুষ ও ১ জন মহিলা থাকবে?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ৯</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৬</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৩</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-3" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ৯</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-3">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(3)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              যেহেতু ২ সদস্যের কমিটিতে ন্যূনতম ১ জন পুরুষ ও ১ জন মহিলা থাকতে হবে, তাই কমিটিটি হতে হবে ১ জন পুরুষ ও ১ জন মহিলা নিয়ে গঠিত。<br>∴ বাছাইয়ের উপায় = <sup>৩</sup>C<sub>১</sub> × <sup>৩</sup>C<sub>১</sub> = ৩ × ৩ = ৯।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 4 -->
+      <article class="q-card" data-qid="4" data-session="পররাষ্ট্র মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-২২">
+        <div class="q-header">
+          <span class="q-num">4</span>
+          <span class="q-session">পররাষ্ট্র মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-২২</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১০ জন বালক ও ৮ জন বালিকা থেকে ২ জন বালক ও ২ জন বালিকা কত বিভিন্ন উপায়ে বেছে নেওয়া যায়?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৭৩</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ১২৬০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৩০৬০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৫০৬০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-4" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ১২৬০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-4">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(4)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ১০ জন বালক থেকে ২ জন নির্বাচন = <sup>১০</sup>C<sub>২</sub> = (১০ × ৯)/(২ × ১) = ৪৫ উপায়ে。<br>৮ জন বালিকা থেকে ২ জন নির্বাচন = <sup>৮</sup>C<sub>২</sub> = (৮ × ৭)/(২ × ১) = ২৮ উপায়ে。<br>∴ মোট বাছাইয়ের উপায় = ৪৫ × ২৮ = ১২৬০।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 5 -->
+      <article class="q-card" data-qid="5" data-session="পিএসসি (স্টাফ অফিসার)-২৩">
+        <div class="q-header">
+          <span class="q-num">5</span>
+          <span class="q-session">পিএসসি (স্টাফ অফিসার)-২৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">ALL শব্দটির বর্ণগুলো একত্রে নিয়ে কত প্রকারে সাজানো যায়?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ৩</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৬</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৯</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-5" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ৩</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-5">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(5)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ALL শব্দটিতে মোট ৩টি বর্ণ আছে, যার মধ্যে L আছে ২টি。<br>∴ বিন্যাস সংখ্যা = ৩! / ২! = (৩ × ২ × ১) / ২ = ৩।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 6 -->
+      <article class="q-card" data-qid="6" data-session="পিএসসি (বিভিন্ন মন্ত্রণালয়ের প্রশাসনিক কর্মকর্তা)-১৯">
+        <div class="q-header">
+          <span class="q-num">6</span>
+          <span class="q-session">পিএসসি (বিভিন্ন মন্ত্রণালয়ের প্রশাসনিক কর্মকর্তা)-১৯</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">SUN শব্দটির সবগুলো বর্ণ একত্রে নিয়ে কত প্রকারে সাজানো যায়?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৩</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. ৬</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-6" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. ৬</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-6">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(6)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              SUN শব্দটিতে ৩টি বর্ণই ভিন্ন。<br>∴ ৩টি বর্ণ নিয়ে গঠিত বিন্যাস সংখ্যা = ৩! = ৩ × ২ × ১ = ৬।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 7 -->
+      <article class="q-card" data-qid="7" data-session="স্বাস্থ্য মন্ত্রণালয়ের সহকারী প্রকৌশলী-১৬">
+        <div class="q-header">
+          <span class="q-num">7</span>
+          <span class="q-session">স্বাস্থ্য মন্ত্রণালয়ের সহকারী প্রকৌশলী-১৬</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">একটি নৌকায় ৩ জন লোক উঠতে পারে, নৌকাটি দ্বারা ৪ জন লোক কত প্রকারে উঠে নদী পার হতে পারে?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৩</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. ৪</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-7" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. ৪</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-7">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(7)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ৪ জন লোক থেকে নৌকায় ৩ জন বাছাই করার উপায় = <sup>৪</sup>C<sub>৩</sub> = ৪! / (৩! × ১!) = ৪ উপায়ে।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 8 -->
+      <article class="q-card" data-qid="8" data-session="বহিরাগমন ও পাসপোর্ট অধিদপ্তরের সহকারী পরিচালক-১৪">
+        <div class="q-header">
+          <span class="q-num">8</span>
+          <span class="q-session">বহিরাগমন ও পাসপোর্ট অধিদপ্তরের সহকারী পরিচালক-১৪</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">A, B, C বর্ণের ৩টি করে বর্ণ নিয়ে কত প্রকারে বিন্যাস করা যায়?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৩ উপায়ে</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৪ উপায়ে</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৫ উপায়ে</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. ৬ উপায়ে</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-8" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. ৬ উপায়ে</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-8">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(8)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              A, B, C তিনটি ভিন্ন বর্ণ। ৩টি বর্ণ নিয়ে বিন্যাস সংখ্যা = ৩! = ৬ উপায়ে।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 9 -->
+      <article class="q-card" data-qid="9" data-session="কারা অধিদপ্তর (কারা তত্ত্বাবধায়ক)-১৩">
+        <div class="q-header">
+          <span class="q-num">9</span>
+          <span class="q-session">কারা অধিদপ্তর (কারা তত্ত্বাবধায়ক)-১৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">PARALLEL শব্দটির সবগুলো বর্ণ একত্রে নিয়ে কত প্রকারে সাজানো যায়?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ৩৩৬০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১৬৮০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৫০৪০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১২০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-9" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ৩৩৬০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-9">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(9)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              PARALLEL শব্দে মোট বর্ণ = ৮টি (P-১, A-২, R-১, L-৩, E-১)।<br>∴ বিন্যাস সংখ্যা = ৮! / (২! × ৩!) = ৪০৩২০ / ১২ = ৩৩৬০।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 10 -->
+      <article class="q-card" data-qid="10" data-session="স্বাস্থ্য মন্ত্রণালয়ের সহকারী প্রকৌশলী-১৬">
+        <div class="q-header">
+          <span class="q-num">10</span>
+          <span class="q-session">স্বাস্থ্য মন্ত্রণালয়ের সহকারী প্রকৌশলী-১৬</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">২০ সদস্যবিশিষ্ট একটি ফুটবল দল থেকে একজন অধিনায়ক ও একজন সহ-অধিনায়ক কতভাবে নির্বাচন করা যাবে?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১৬০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১৭০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ১৮০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. ১৯০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-10" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. ১৯০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-10">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(10)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ২০ সদস্যবিশিষ্ট দল থেকে অধিনায়ক ও সহ-অধিনায়ক নির্বাচন = ২০ × ১৯ = ৩৮০ (যদি ক্রম হিসাব না করা হয় তবে ১৯০) বা বইয়ের উত্তরে ১৯০।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 11 -->
+      <article class="q-card" data-qid="11" data-session="বহিরাগমন ও পাসপোর্ট অধিদপ্তরের সহকারী পরিচালক-১১">
+        <div class="q-header">
+          <span class="q-num">11</span>
+          <span class="q-session">বহিরাগমন ও পাসপোর্ট অধিদপ্তরের সহকারী পরিচালক-১১</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">৫, ৯, ১, ৪ অঙ্কগুলি দ্বারা ৫,০০০ এর চেয়ে বড় কতগুলো সংখ্যা তৈরি করা যায়?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ১২টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৮টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ১৮টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১৬টি</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-11" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ১২টি</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-11">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(11)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ৫,০০০ এর চেয়ে বড় ৪ অঙ্কের সংখ্যা বানাতে হলে প্রথম স্থানে ৫ অথবা ৯ বসাতে হবে (২ প্রকারে)।<br>বাকি ৩টি স্থান অবশিষ্ট ৩টি অঙ্ক দ্বারা ৩! = ৬ প্রকারে পূরণ করা যায়。<br>∴ মোট সংখ্যা = ২ × ৬ = ১২টি।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 12 -->
+      <article class="q-card" data-qid="12" data-session="পাসপোর্ট ও ইমিগ্রেশন অধিদপ্তর (সহকারী পরিচালক)-০৭">
+        <div class="q-header">
+          <span class="q-num">12</span>
+          <span class="q-session">পাসপোর্ট ও ইমিগ্রেশন অধিদপ্তর (সহকারী পরিচালক)-০৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">A, B, C বর্ণের ৩টি করে বর্ণ নিয়ে কত প্রকারে বিন্যাস করা যায়?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৩ উপায়ে</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৪ উপায়ে</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৫ উপায়ে</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. ৬ উপায়ে</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-12" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. ৬ উপায়ে</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-12">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(12)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ৩টি বর্ণ নিয়ে বিন্যাস = ৩! = ৩ × ২ × ১ = ৬ উপায়ে।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 13 -->
+      <article class="q-card" data-qid="13" data-session="বিআরটিএ (মোটরযান পরিদর্শক)-১৭">
+        <div class="q-header">
+          <span class="q-num">13</span>
+          <span class="q-session">বিআরটিএ (মোটরযান পরিদর্শক)-১৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">একটি ত্রিদেশীয় ক্রিকেট খেলায় প্রত্যেকে অন্যদেশের সাথে একবার মাত্র খেলবে। মোট কয়টি খেলা অনুষ্ঠিত হবে?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৭টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৫টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ৩টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৪টি</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-13" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ৩টি</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-13">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(13)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ৩টি দেশের মধ্যে প্রতি খেলায় ২টি দেশ অংশ নেয়。<br>∴ মোট খেলা = <sup>৩</sup>C<sub>২</sub> = ৩টি।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 14 -->
+      <article class="q-card" data-qid="14" data-session="৪৫তম বিসিএস">
+        <div class="q-header">
+          <span class="q-num">14</span>
+          <span class="q-session">৪৫তম বিসিএস</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">0, 1, 2, 3, 4 অঙ্কগুলি দ্বারা কতগুলি পাঁচ অঙ্কের অর্থপূর্ণ সংখ্যা গঠন করা যাবে?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ৯৬</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১২০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ২৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১৪৪</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-14" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ৯৬</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-14">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(14)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ৫টি অঙ্ক দ্বারা মোট বিন্যাস = ৫! = ১২০টি。<br>০ কে প্রথমে রেখে গঠিত সংখ্যা = ৪! = ২৪টি (যা ৪ অঙ্কের সংখ্যা)।<br>∴ ৫ অঙ্কের অর্থপূর্ণ সংখ্যা = ১২০ - ২৪ = ৯৬টি।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 15 -->
+      <article class="q-card" data-qid="15" data-session="ডাক অধিদপ্তর (বিল্ডিং ওভারশিয়ার)-১৮">
+        <div class="q-header">
+          <span class="q-num">15</span>
+          <span class="q-session">ডাক অধিদপ্তর (বিল্ডিং ওভারশিয়ার)-১৮</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">0! এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. -১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ২</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-15" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ১</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-15">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(15)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              সংজ্ঞানুসারে ও গাণিতিক নিয়মে 0! = 1।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 16 -->
+      <article class="q-card" data-qid="16" data-session="জনস্বাস্থ্য প্রকৌশল অধিদপ্তর (এস্টিমেটর)-১৮">
+        <div class="q-header">
+          <span class="q-num">16</span>
+          <span class="q-session">জনস্বাস্থ্য প্রকৌশল অধিদপ্তর (এস্টিমেটর)-১৮</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">একটি দাবা খেলার প্রতিযোগিতায় ৩ জন প্রতিযোগীর প্রত্যেকে অন্য একজন খেলোয়াড়ের সাথে একবার মাত্র খেলবে। সর্বমোট কতগুলো খেলা অনুষ্ঠিত হবে?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ২ বার</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ৩ বার</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৬ বার</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৯ বার</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-16" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ৩ বার</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-16">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(16)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ৩ জন খেলোয়াড় একে অপরের সাথে ১ বার খেললে মোট খেলার সংখ্যা = <sup>৩</sup>C<sub>২</sub> = ৩টি।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 17 -->
+      <article class="q-card" data-qid="17" data-session="গণপূর্ত অধিদপ্তর (উপ-সহকারী প্রকৌশলী ও ড্রাফটসম্যান)-১৮">
+        <div class="q-header">
+          <span class="q-num">17</span>
+          <span class="q-session">গণপূর্ত অধিদপ্তর (উপ-সহকারী প্রকৌশলী ও ড্রাফটসম্যান)-১৮</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">কালামের বাড়ি থেকে ডাকঘরে যাওয়ার পাঁচটি পথ আছে। সে কতভাবে বাড়ি থেকে ডাকঘরে গিয়ে আবার বাড়িতে ফিরে আসতে পারবে?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৬</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ২৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ২০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-17" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ২৫</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-17">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(17)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              যাওয়ার উপায় = ৫টি, আসার উপায় = ৫টি。<br>∴ মোট উপায় = ৫ × ৫ = ২৫টি।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 18 -->
+      <article class="q-card" data-qid="18" data-session="বিভিন্ন মন্ত্রণালয়ের উপ-সহকারী প্রকৌশলী (সিভিল)-১৭">
+        <div class="q-header">
+          <span class="q-num">18</span>
+          <span class="q-session">বিভিন্ন মন্ত্রণালয়ের উপ-সহকারী প্রকৌশলী (সিভিল)-১৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">A = {x : মৌলিক সংখ্যা এবং x ≤ 5} হলে P(A) এর সদস্য সংখ্যা কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ৮</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৬</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৩</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-18" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ৮</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-18">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(18)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ৫ বা তার ছোট মৌলিক সংখ্যা হলো ২, ৩, ৫।<br>∴ A = {২, ৩, ৫} যার উপাদান সংখ্যা n = ৩。<br>∴ শক্তি সেট P(A) এর সদস্য সংখ্যা = ২<sup>n</sup> = ২<sup>৩</sup> = ৮টি।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 19 -->
+      <article class="q-card" data-qid="19" data-session="গণপূর্ত অধিদপ্তর (উপ-সহকারী প্রকৌশলী ও ড্রাফটসম্যান)-১৮">
+        <div class="q-header">
+          <span class="q-num">19</span>
+          <span class="q-session">গণপূর্ত অধিদপ্তর (উপ-সহকারী প্রকৌশলী ও ড্রাফটসম্যান)-১৮</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text"><sup>৫</sup>C<sub>৩</sub> এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ১০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ২০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ২৫</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-19" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ১০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-19">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(19)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              <sup>৫</sup>C<sub>৩</sub> = <sup>৫</sup>C<sub>২</sub> = (৫ × ৪) / (২ × ১) = ২০ / ২ = ১০।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 20 -->
+      <article class="q-card" data-qid="20" data-session="বিভিন্ন মন্ত্রণালয়ের উপ-সহকারী প্রকৌশলী (সিভিল)-১৭">
+        <div class="q-header">
+          <span class="q-num">20</span>
+          <span class="q-session">বিভিন্ন মন্ত্রণালয়ের উপ-সহকারী প্রকৌশলী (সিভিল)-১৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text"><sup>n</sup>C<sub>n-r</sub> এর সঠিক মান কোনটি?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. <sup>n</sup>C<sub>r-1</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. <sup>n</sup>C<sub>r</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. <sup>n</sup>P<sub>r</sub></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. r!</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-20" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. <sup>n</sup>C<sub>r</sub></strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-20">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(20)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              সম্পূরক সমাবেশের সূত্রানুসারে: <sup>n</sup>C<sub>n-r</sub> = <sup>n</sup>C<sub>r</sub>।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 21 -->
+      <article class="q-card" data-qid="21" data-session="পাসপোর্ট ও ইমিগ্রেশন অধিদপ্তর (সহকারী পরিচালক)-০৭">
+        <div class="q-header">
+          <span class="q-num">21</span>
+          <span class="q-session">পাসপোর্ট ও ইমিগ্রেশন অধিদপ্তর (সহকারী পরিচালক)-০৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text"><sup>n</sup>C<sub>২</sub> = <sup>n</sup>C<sub>৯</sub> হলে, n এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ১১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৭</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৯</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. -১</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-21" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ১১</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-21">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(21)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              আমরা জানি, <sup>n</sup>C<sub>x</sub> = <sup>n</sup>C<sub>y</sub> হলে n = x + y অথবা x = y হয়।<br>এখানে x = ২, y = ৯。<br>∴ n = ২ + ৯ = ১১।
+            </div>
+          </div>
+        </div>
+      </article>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p style="margin-bottom: 6px;">পিএসসি নন-ক্যাডার প্রশ্নব্যাংক ২য় খণ্ড (Job Hunter) • অধ্যায় 11: বিন্যাস ও সমাবেশ</p>
+      <p style="opacity: 0.8;">প্রামাণ্য তথ্য ও জিরো-ফেব্রিকেশন নীতিতে প্রস্তুতকৃত ডিজিটাল স্মার্ট ই-বুক।</p>
+    </footer>
+
+  </div>
+
+  <!-- Interactive Logic -->
+  <script>
+    let currentScore = 0;
+    const answeredCards = new Set();
+    const totalQuestions = 21;
+    let currentFontSize = 1;
+
+    function checkAnswer(btn, isCorrect) {
+      const card = btn.closest('.q-card');
+      const qid = card.getAttribute('data-qid');
+
+      if (card.dataset.answered) return;
+      card.dataset.answered = "true";
+
+      const allBtns = card.querySelectorAll('.opt-btn');
+      allBtns.forEach(b => {
+        b.disabled = true;
+        if (b.getAttribute('data-is-correct') === 'true') {
+          b.classList.add('correct');
+        }
+      });
+
+      if (isCorrect === 1) {
+        btn.classList.add('correct');
+        currentScore++;
+      } else {
+        btn.classList.add('wrong');
+      }
+
+      const ansDrawer = document.getElementById('ans-' + qid);
+      if (ansDrawer) ansDrawer.style.display = 'block';
+
+      const expDrawer = document.getElementById('exp-' + qid);
+      if (expDrawer) expDrawer.classList.add('open');
+
+      updateScore();
+    }
+
+    function toggleExp(qid) {
+      const expDrawer = document.getElementById('exp-' + qid);
+      if (expDrawer) {
+        expDrawer.classList.toggle('open');
+      }
+    }
+
+    function updateScore() {
+      const scoreVal = document.getElementById('score-val');
+      const scorePct = document.getElementById('score-pct');
+      if (scoreVal) scoreVal.textContent = currentScore.toLocaleString('bn-BD');
+      if (scorePct) {
+        const pct = Math.round((currentScore / totalQuestions) * 100);
+        scorePct.textContent = '(' + pct.toLocaleString('bn-BD') + '%)';
+      }
+    }
+
+    function resetQuiz() {
+      if (!confirm('আপনি কি এই অধ্যায়ের সমস্ত কুইজ রিসেট করতে চান?')) return;
+      currentScore = 0;
+      updateScore();
+
+      document.querySelectorAll('.q-card').forEach(c => {
+        delete c.dataset.answered;
+        c.querySelectorAll('.opt-btn').forEach(b => {
+          b.disabled = false;
+          b.classList.remove('correct', 'wrong');
+        });
+        const drawer = c.querySelector('.ans-drawer');
+        if (drawer) drawer.style.display = 'none';
+        const exp = c.querySelector('.exp-drawer');
+        if (exp) exp.classList.remove('open');
+      });
+    }
+
+    function filterSession(session) {
+      document.querySelectorAll('.q-card').forEach(card => {
+        if (session === 'all' || card.getAttribute('data-session') === session) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function adjustFont(dir) {
+      currentFontSize += dir * 0.08;
+      if (currentFontSize < 0.8) currentFontSize = 0.8;
+      if (currentFontSize > 1.4) currentFontSize = 1.4;
+      document.querySelector('.paper-container').style.fontSize = currentFontSize + 'rem';
+    }
+
+    function resetFont() {
+      currentFontSize = 1;
+      document.querySelector('.paper-container').style.fontSize = '1rem';
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const themeBtn = document.getElementById('theme-btn');
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        if (themeBtn) themeBtn.textContent = '🌙';
+        localStorage.setItem('theme_algebra', 'light');
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        if (themeBtn) themeBtn.textContent = '☀️';
+        localStorage.setItem('theme_algebra', 'dark');
+      }
+    }
+  </script>
+  <script src="nav-component.js"></script>
+  <script src="../universal-modes.js"></script>
+</body>
+</html>

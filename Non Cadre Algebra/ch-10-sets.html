@@ -1,0 +1,2156 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>অধ্যায় 10: সেট (Set Theory) - পিএসসি নন-ক্যাডার বীজগণিত</title>
+  <meta name="description" content="পিএসসি নন-ক্যাডার ও বিসিএস পরীক্ষার বিগত বছরের 37টি প্রামাণ্য সেট প্রশ্ন, সূত্রাবলি, স্কেচনোট ও সমাধান।">
+
+  <!-- Pre-render Theme Restore -->
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('theme_algebra') || localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch(e) {}
+    })();
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../bangla-fonts.css">
+  <link rel="stylesheet" href="../paper-textures.css">
+  <link rel="stylesheet" href="../universal-modes.css">
+
+  <style>
+    :root {
+      --primary: #ca8a04;
+      --primary-dark: #0f172a;
+      --primary-light: rgba(99, 102, 241, 0.1);
+      --accent: #d97706;
+      --bg-base: #f8fafc;
+      --bg-surface: rgba(255, 255, 255, 0.88);
+      --bg-card: rgba(255, 255, 255, 0.85);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(226, 232, 240, 0.85);
+      --correct-bg: #ecfdf5;
+      --correct-border: #10b981;
+      --correct-text: #065f46;
+      --wrong-bg: #fef2f2;
+      --wrong-border: #ef4444;
+      --wrong-text: #991b1b;
+      --font-base: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+    }
+
+    [data-theme="dark"] {
+      --primary: #818cf8;
+      --primary-dark: #4f46e5;
+      --primary-light: rgba(129, 140, 248, 0.15);
+      --accent: #fbbf24;
+      --bg-base: #0f172a;
+      --bg-surface: rgba(30, 41, 59, 0.88);
+      --bg-card: rgba(30, 41, 59, 0.85);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(51, 65, 85, 0.85);
+      --correct-bg: rgba(16, 185, 129, 0.2);
+      --correct-border: #10b981;
+      --correct-text: #6ee7b7;
+      --wrong-bg: rgba(239, 68, 68, 0.2);
+      --wrong-border: #ef4444;
+      --wrong-text: #fca5a5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-base);
+      color: var(--text-main);
+      background-color: var(--bg-base);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Paper & Card Glassmorphism */
+    .paper-kraft .q-card,
+    .paper-kraft .sk-box,
+    .paper-kraft .sk-sticky,
+    .paper-kraft .bcs-matrix-card,
+    .paper-kraft .score-sticky-bar {
+      background: var(--bg-card);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+    }
+
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 0.7em;
+      opacity: 0.85;
+      font-weight: 600;
+    }
+
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+    .bcs-table, .bcs-table *, .score-bar, .score-bar *, .doubt-box, .doubt-box * {
+      font-family: var(--font-base) !important;
+    }
+
+    .ch-header {
+      text-align: center;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 2px dashed var(--border-color);
+    }
+
+    .ch-badge-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .badge-primary {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .badge-secondary {
+      background: rgba(148, 163, 184, 0.15);
+      color: var(--text-muted);
+    }
+
+    .badge-accent {
+      background: rgba(217, 119, 6, 0.15);
+      color: var(--accent);
+    }
+
+    .ch-title {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .ch-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 16px;
+    }
+
+    .top-action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .btn-sm {
+      padding: 4px 10px;
+      font-size: 0.82rem;
+    }
+
+    .font-controls {
+      display: flex;
+      gap: 4px;
+    }
+
+    .bcs-matrix-card {
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 28px;
+    }
+
+    .sec-heading {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+
+    .bcs-table th, .bcs-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .sk-section {
+      margin-bottom: 36px;
+    }
+
+    .sk-box {
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+
+    .sk-box-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sk-formula-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin: 14px 0;
+    }
+
+    .sk-formula-card {
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px dashed var(--primary);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .sk-formula-card strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .sk-sticky {
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 14px 0;
+      background: rgba(217, 119, 6, 0.06);
+    }
+
+    .sk-sticky-title {
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .exam-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .filter-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-select {
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 0.88rem;
+      outline: none;
+    }
+
+    .score-sticky-bar {
+      position: sticky;
+      top: 16px;
+      z-index: 90;
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .score-display {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .score-val {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 1.15rem;
+    }
+
+    .q-card {
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 18px;
+      transition: border-color 0.2s ease;
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .q-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.88rem;
+    }
+
+    .q-session {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      background: rgba(148, 163, 184, 0.12);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .q-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      text-align: left;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      width: 100%;
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      transform: translateX(2px);
+    }
+
+    .opt-btn.correct {
+      background: var(--correct-bg) !important;
+      border-color: var(--correct-border) !important;
+      color: var(--correct-text) !important;
+      font-weight: 700;
+    }
+
+    .opt-btn.wrong {
+      background: var(--wrong-bg) !important;
+      border-color: var(--wrong-border) !important;
+      color: var(--wrong-text) !important;
+    }
+
+    .ans-drawer {
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: var(--correct-bg);
+      border-left: 4px solid var(--correct-border);
+      color: var(--correct-text);
+      font-size: 0.9rem;
+    }
+
+    .exp-drawer {
+      margin-top: 10px;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 10px;
+    }
+
+    .exp-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 6px 0;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .exp-content {
+      display: none;
+      padding: 12px 14px;
+      margin-top: 8px;
+      background: rgba(148, 163, 184, 0.08);
+      border-radius: 8px;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .exp-drawer.open .exp-content {
+      display: block;
+    }
+
+    .exp-drawer.open .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .toggle-icon {
+      transition: transform 0.2s ease;
+      font-size: 0.8rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body class="paper-kraft">
+
+  <div class="container paper-container">
+
+    <!-- Top Action Bar -->
+    <div class="top-action-bar">
+      <a href="index.html" class="btn btn-sm">
+        <span>←</span> <span>বীজগণিত সূচিপত্র</span>
+      </a>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <div class="font-controls">
+          <button type="button" class="btn btn-sm" onclick="adjustFont(-1)" title="ফন্ট ছোট করুন">A−</button>
+          <button type="button" class="btn btn-sm" onclick="resetFont()" title="স্বাভাবিক ফন্ট">A</button>
+          <button type="button" class="btn btn-sm" onclick="adjustFont(1)" title="ফন্ট বড় করুন">A+</button>
+        </div>
+        <button type="button" class="btn btn-sm" id="theme-btn" onclick="toggleTheme()" title="থিম পরিবর্তন">🌙</button>
+      </div>
+    </div>
+
+    <!-- Chapter Header -->
+    <header class="ch-header">
+      <div class="ch-badge-row">
+        <span class="badge badge-primary">অধ্যায় 10</span>
+        <span class="badge badge-secondary">পৃষ্ঠা ৪২০ – ৪২৭</span>
+        <span class="badge badge-accent">মোট প্রশ্ন: 37টি</span>
+      </div>
+      <h1 class="ch-title font-ahasan">সেট <span class="ch-en">(Set Theory)</span></h1>
+      <p class="ch-subtitle">পিএসসি নন-ক্যাডার ও বিসিএস পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক, মৌলিক সূত্রাবলি, স্কেচনোট ও নির্ভুল সমাধান।</p>
+    </header>
+
+    <!-- BCS Analysis Matrix -->
+    <section class="bcs-matrix-card">
+      <h2 class="sec-heading font-ahasan">📊 প্রশ্ন বিশ্লেষণ ছক (সেট)</h2>
+      <div class="table-responsive">
+        <table class="bcs-table">
+          <thead>
+            <tr>
+              <th>বিষয় ও শাখা</th>
+              <th>গুরুত্বপূর্ণ টপিক ও প্রশ্ন প্রকার</th>
+              <th>গড় প্রশ্ন সংখ্যা</th>
+              <th>প্রস্তুতি অগ্রাধিকার</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>উপসেট ও শক্তি সেট (Power Set)</strong></td>
+              <td>P(A) উপাদান সংখ্যা 2^n, প্রকৃত উপসেট 2^n - 1</td>
+              <td>১৫+ টি</td>
+              <td>⭐⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>সেটের সংযোগ ও ছেদ (Union/Intersection)</strong></td>
+              <td>A ∪ B, A ∩ B, নিঃছেদ সেট (Disjoint)</td>
+              <td>১২+ টি</td>
+              <td>⭐⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>সেট গঠন পদ্ধতি ও সমীকরণ সমাধান</strong></td>
+              <td>{x : x^2 = 9, x বিজোড়}, তালিকা পদ্ধতিতে রূপান্তর</td>
+              <td>৬+ টি</td>
+              <td>⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>দ্য মরগ্যানের সূত্র ও ভেনচিত্র</strong></td>
+              <td>(A ∪ B)' = A' ∩ B', বাস্তব সমস্যা সমাধান</td>
+              <td>৪+ টি</td>
+              <td>⭐⭐⭐⭐</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Part 1: Authentic Notes & Sketchnotes -->
+    <section class="sk-section">
+      <h2 class="sec-heading font-ahasan">📝 প্রামাণ্য রিভিশন নোট ও সূত্রাবলি (Sketchnotes)</h2>
+      <div class="sk-box">
+        <h3 class="sk-box-title font-ahasan">📌 ১. সেটের প্রকারভেদ ও মৌলিক ধারণা</h3>
+        <p>বাস্তব বা চিন্তাজগতের সুসংজ্ঞায়িত বস্তুর সমাবেশ বা সংগ্রহকে <strong>সেট (Set)</strong> বলে। জার্মান গণিতবিদ <strong>জর্জ ক্যান্টর (Georg Cantor)</strong> সেট তত্ত্বের জনক।</p>
+        <div class="sk-sticky">
+          <div class="sk-sticky-title">প্রধান সেটের সংজ্ঞা:</div>
+          <ul style="padding-left: 20px;">
+            <li><strong>সসীম সেট (Finite Set):</strong> উপাদান সংখ্যা গণনা করে নির্ধারণ করা যায়। যেমন: A = {1, 2, 3}</li>
+            <li><strong>অসীম সেট (Infinite Set):</strong> উপাদান সংখ্যা গণনা করে শেষ করা যায় না। যেমন: স্বাভাবিক সংখ্যার সেট N = {1, 2, 3, ...}</li>
+            <li><strong>ফাঁকা সেট (Empty/Null Set):</strong> কোনো উপাদান থাকে না। প্রতীক ∅ বা {}।</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sk-box">
+        <h3 class="sk-box-title font-ahasan">⚡ ২. শক্তি সেট ও উপসেট সূত্রাবলি</h3>
+        <div class="sk-formula-grid">
+          <div class="sk-formula-card">
+            <strong>উপসেট সংখ্যা:</strong>
+            <code>উপসেট সংখ্যা = ২<sup>n</sup></code> (যেখানে n = সদস্য সংখ্যা)
+          </div>
+          <div class="sk-formula-card">
+            <strong>প্রকৃত উপসেট সংখ্যা:</strong>
+            <code>প্রকৃত উপসেট সংখ্যা = ২<sup>n</sup> - ১</code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>দ্য মরগ্যানের ১ম সূত্র:</strong>
+            <code>(A ∪ B)' = A' ∩ B'</code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>দ্য মরগ্যানের ২য় সূত্র:</strong>
+            <code>(A ∩ B)' = A' ∪ B'</code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>সংযোগ সেটের উপাদান সংখ্যা:</strong>
+            <code>n(A ∪ B) = n(A) + n(B) - n(A ∩ B)</code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>নিঃছেদ সেট (Disjoint Set):</strong>
+            <code>A ∩ B = ∅</code> হলে A ও B পরস্পর নিঃছেদ।
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Part 2: Question Engine -->
+    <section class="exam-section">
+      <div class="exam-section-header">
+        <h2 class="sec-heading font-ahasan" style="margin-bottom: 0;">🎯 বিগত পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক</h2>
+        <div class="filter-wrap">
+          <label for="sessionFilter" style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">সেশন ফিল্টার:</label>
+          <select id="sessionFilter" class="filter-select" onchange="filterSession(this.value)">
+<option value="all">সকল পরীক্ষা সেশন (37টি প্রশ্ন)</option>
+          <option value="কারিগরি শিক্ষা অধিদপ্তর (জুনিয়র ইনস্ট্রাক্টর)-১৮">কারিগরি শিক্ষা অধিদপ্তর (জুনিয়র ইনস্ট্রাক্টর)-১৮ (1টি)</option>
+          <option value="জনস্বাস্থ্য প্রকৌশল অধিদপ্তর (এস্টিমেটর)-১৮">জনস্বাস্থ্য প্রকৌশল অধিদপ্তর (এস্টিমেটর)-১৮ (1টি)</option>
+          <option value="জনস্বাস্থ্য প্রকৌশল অধিদপ্তর-১৫">জনস্বাস্থ্য প্রকৌশল অধিদপ্তর-১৫ (1টি)</option>
+          <option value="জাতীয় রাজস্ব বোর্ড (সহকারী রাজস্ব কর্মকর্তা)-১৫">জাতীয় রাজস্ব বোর্ড (সহকারী রাজস্ব কর্মকর্তা)-১৫ (2টি)</option>
+          <option value="তথ্য মন্ত্রণালয় (ক্যামেরাম্যান)-১৯">তথ্য মন্ত্রণালয় (ক্যামেরাম্যান)-১৯ (1টি)</option>
+          <option value="পররাষ্ট্র মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-১৯">পররাষ্ট্র মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-১৯ (3টি)</option>
+          <option value="পররাষ্ট্র মন্ত্রণালয় (সহকারী সাইফার কর্মকর্তা)-২২">পররাষ্ট্র মন্ত্রণালয় (সহকারী সাইফার কর্মকর্তা)-২২ (1টি)</option>
+          <option value="পিএসসি (জুনিয়র ইনস্ট্রাক্টর)-২৩">পিএসসি (জুনিয়র ইনস্ট্রাক্টর)-২৩ (2টি)</option>
+          <option value="পিএসসি নন-ক্যাডার">পিএসসি নন-ক্যাডার (16টি)</option>
+          <option value="প্রবাসী কল্যাণ ও বৈদেশিক কর্মসংস্থান মন্ত্রণালয়-১৬">প্রবাসী কল্যাণ ও বৈদেশিক কর্মসংস্থান মন্ত্রণালয়-১৬ (1টি)</option>
+          <option value="বহিরাগমন ও পাসপোর্ট অধিদপ্তর-১৪">বহিরাগমন ও পাসপোর্ট অধিদপ্তর-১৪ (1টি)</option>
+          <option value="বিভিন্ন মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-১৮">বিভিন্ন মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-১৮ (1টি)</option>
+          <option value="বিভিন্ন মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-২২">বিভিন্ন মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-২২ (1টি)</option>
+          <option value="বিভিন্ন মন্ত্রণালয়-১৭">বিভিন্ন মন্ত্রণালয়-১৭ (2টি)</option>
+          <option value="বিসিক (শিল্পনগরী কর্মকর্তা)-২৩">বিসিক (শিল্পনগরী কর্মকর্তা)-২৩ (1টি)</option>
+          <option value="সংসদ সচিবালয় (ব্যক্তিগত কর্মকর্তা)-২০">সংসদ সচিবালয় (ব্যক্তিগত কর্মকর্তা)-২০ (1টি)</option>
+          <option value="সহকারী পরিবার পরিকল্পনা কর্মকর্তা-১৬">সহকারী পরিবার পরিকল্পনা কর্মকর্তা-১৬ (1টি)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Score Sticky Bar -->
+      <div class="score-sticky-bar">
+        <div class="score-display">
+          <span>আপনার স্কোর: </span>
+          <span class="score-val" id="score-val">০</span> / <span id="total-val">37</span>
+          <span id="score-pct" style="margin-left: 8px; font-size: 0.85rem; color: var(--text-muted);">(০%)</span>
+        </div>
+        <button type="button" class="btn btn-sm" onclick="resetQuiz()">🔄 রিসেট</button>
+      </div>
+
+      <!-- Question List -->
+      <div id="questionList">
+      <!-- Question 1 -->
+      <article class="q-card" data-qid="1" data-session="পিএসসি (জুনিয়র ইনস্ট্রাক্টর)-২৩">
+        <div class="q-header">
+          <span class="q-num">1</span>
+          <span class="q-session">পিএসসি (জুনিয়র ইনস্ট্রাক্টর)-২৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">A = {a, b, c} হলে P(A) এর প্রকৃত উপসেট সংখ্যা কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৮টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ৭টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৬টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৫টি</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-1" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ৭টি</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-1">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(1)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              A সেটের উপাদান সংখ্যা n = ৩。<br>উপসেটের মোট সংখ্যা = ২<sup>n</sup> = ২<sup>৩</sup> = ৮টি。<br>আমরা জানি, প্রকৃত উপসেটের সংখ্যা = ২<sup>n</sup> - ১ = ৮ - ১ = ৭টি।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 2 -->
+      <article class="q-card" data-qid="2" data-session="পররাষ্ট্র মন্ত্রণালয় (সহকারী সাইফার কর্মকর্তা)-২২">
+        <div class="q-header">
+          <span class="q-num">2</span>
+          <span class="q-session">পররাষ্ট্র মন্ত্রণালয় (সহকারী সাইফার কর্মকর্তা)-২২</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">C = {x : x<sup>২</sup> = 9 এবং x জোড় সংখ্যা} এই সেটটিকে কি সেট বলা হয়?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. উপসেট (Subset)</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. অসীম সেট (Infinite Set)</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ফাঁকা সেট (Empty Set)</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. শক্তি সেট (Power Set)</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-2" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ফাঁকা সেট (Empty Set)</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-2">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(2)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              x<sup>২</sup> = 9 হলে x = ±3, যা বিজোড় সংখ্যা। কোনো জোড় সংখ্যার বর্গ 9 হতে পারে না।<br>অতএব C সেটে কোনো উপাদান নেই। সুতরাং এটি একটি ফাঁকা সেট (∅)।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 3 -->
+      <article class="q-card" data-qid="3" data-session="তথ্য মন্ত্রণালয় (ক্যামেরাম্যান)-১৯">
+        <div class="q-header">
+          <span class="q-num">3</span>
+          <span class="q-session">তথ্য মন্ত্রণালয় (ক্যামেরাম্যান)-১৯</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">C সেটের উপসেট সংখ্যা ৬৪ হলে, C এর সদস্য সংখ্যা কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. ৬</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-3" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. ৬</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-3">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(3)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ধরি, C সেটের সদস্য সংখ্যা n।<br>উপসেট সংখ্যা = ২<sup>n</sup> = ৬৪ = ২<sup>৬</sup>。<br>∴ n = ৬।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 4 -->
+      <article class="q-card" data-qid="4" data-session="জনস্বাস্থ্য প্রকৌশল অধিদপ্তর (এস্টিমেটর)-১৮">
+        <div class="q-header">
+          <span class="q-num">4</span>
+          <span class="q-session">জনস্বাস্থ্য প্রকৌশল অধিদপ্তর (এস্টিমেটর)-১৮</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">সেট A হতে সেট B-এর একটি সম্পর্ক R হলে নিচের কোনটি সঠিক?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. R = A × B</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. R ⊇ A × B</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. R ⊆ A × B</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. R ∈ A × B</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-4" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. R ⊆ A × B</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-4">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(4)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              অন্বয় বা সম্পর্কের সংজ্ঞানুসারে: A ও B দুটি সেটের কার্তেসীয় গুণজ A × B এর যেকোনো অশূন্য উপসেট R-কে A হতে B-এর একটি সম্পর্ক বলে। অর্থাৎ R ⊆ A × B।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 5 -->
+      <article class="q-card" data-qid="5" data-session="বিসিক (শিল্পনগরী কর্মকর্তা)-২৩">
+        <div class="q-header">
+          <span class="q-num">5</span>
+          <span class="q-session">বিসিক (শিল্পনগরী কর্মকর্তা)-২৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">যদি A = {2, 3, 4} এবং B = {3, 4, 7} হয়, তবে B \ A কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. {7}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. {2}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. {4}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. {3}</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-5" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. {7}</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-5">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(5)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              B \ A বা B - A মানে হলো B সেটের যে উপাদানগুলো A সেটে নেই তাদের সেট।<br>B = {3, 4, 7} এবং A = {2, 3, 4}。<br>∴ B \ A = {7}।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 6 -->
+      <article class="q-card" data-qid="6" data-session="সংসদ সচিবালয় (ব্যক্তিগত কর্মকর্তা)-২০">
+        <div class="q-header">
+          <span class="q-num">6</span>
+          <span class="q-session">সংসদ সচিবালয় (ব্যক্তিগত কর্মকর্তা)-২০</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">A = {x ∈ N : x মৌলিক সংখ্যা এবং x ≤ 9} হলে P(A) এর সদস্য সংখ্যা কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ২৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ২০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. ১৬</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-6" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. ১৬</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-6">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(6)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ৯ এর সমান বা ছোট মৌলিক সংখ্যাগুলো হলো ২, ৩, ৫, ৭।<br>∴ A = {২, ৩, ৫, ৭} যার উপাদান সংখ্যা n = ৪টি。<br>∴ P(A) এর সদস্য সংখ্যা = ২<sup>n</sup> = ২<sup>৪</sup> = ১৬টি।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 7 -->
+      <article class="q-card" data-qid="7" data-session="পিএসসি (জুনিয়র ইনস্ট্রাক্টর)-২৩">
+        <div class="q-header">
+          <span class="q-num">7</span>
+          <span class="q-session">পিএসসি (জুনিয়র ইনস্ট্রাক্টর)-২৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">A = {a, b, c} এর P(A)-তে কতটি উপাদান থাকবে?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৫টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৬টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৯টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. ৮টি</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-7" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. ৮টি</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-7">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(7)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              A সেটের উপাদান সংখ্যা ৩টি।<br>∴ শক্তি সেট P(A) এর উপাদান সংখ্যা = ২<sup>৩</sup> = ৮টি।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 8 -->
+      <article class="q-card" data-qid="8" data-session="বিভিন্ন মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-২২">
+        <div class="q-header">
+          <span class="q-num">8</span>
+          <span class="q-session">বিভিন্ন মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-২২</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">S = {x ∈ N : x একটি মৌলিক সংখ্যা এবং x<sup>২</sup> < 64} একটি সেট। নিচের কোনটি সঠিক?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. S = {2, 3, 5, 7}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. S = {2, 3, 4, 5, 7}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. S = {2, 3, 5, 6, 7}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. S = {1, 2, 3, 4, 5}</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-8" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. S = {2, 3, 5, 7}</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-8">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(8)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              যেহেতু x<sup>২</sup> < 64, তাই x < 8।<br>৮ এর চেয়ে ছোট স্বাভাবিক মৌলিক সংখ্যাগুলো হলো ২, ৩, ৫, ৭।<br>∴ S = {2, 3, 5, 7}।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 9 -->
+      <article class="q-card" data-qid="9" data-session="পররাষ্ট্র মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-১৯">
+        <div class="q-header">
+          <span class="q-num">9</span>
+          <span class="q-session">পররাষ্ট্র মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-১৯</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">জটিল সংখ্যার সেট C নিচের কোন আকারে গঠিত হয়?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. {x + iy}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. {x + iy : x, y ∈ R}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. {x + y : x, y ∈ R}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. {i, -i}</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-9" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. {x + iy : x, y ∈ R}</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-9">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(9)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              জটিল সংখ্যার আদর্শ সেট C = {x + iy : x, y ∈ R}, যেখানে i = √(-1)।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 10 -->
+      <article class="q-card" data-qid="10" data-session="পররাষ্ট্র মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-১৯">
+        <div class="q-header">
+          <span class="q-num">10</span>
+          <span class="q-session">পররাষ্ট্র মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-১৯</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">স্বাভাবিক সংখ্যার সেট N নিচের কোনটি দ্বারা গঠিত হয়?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. {0, 1, 2, 3, ...}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. {-1, 0, 1, ...}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. {1, 2, 3, 4, 5}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. {1, 2, 3, ...}</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-10" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. {1, 2, 3, ...}</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-10">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(10)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              স্বাভাবিক সংখ্যা বা গণনাকারী ধনাত্মক পূর্ণসংখ্যার সেট N = {1, 2, 3, 4, ...}।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 11 -->
+      <article class="q-card" data-qid="11" data-session="পররাষ্ট্র মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-১৯">
+        <div class="q-header">
+          <span class="q-num">11</span>
+          <span class="q-session">পররাষ্ট্র মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-১৯</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">বাস্তব সংখ্যার সেট R নিচের কোনটি দ্বারা গঠিত হয়?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. {1, 2, 3, ...}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. {±1, ±2, ...}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. (-∞, ∞)</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. [0, ∞)</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-11" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. (-∞, ∞)</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-11">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(11)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              বাস্তব সংখ্যার সেট R সকল মূলদ ও অমূলদ সংখ্যা নিয়ে গঠিত এবং এর পরিসীমা (-∞, ∞)।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 12 -->
+      <article class="q-card" data-qid="12" data-session="কারিগরি শিক্ষা অধিদপ্তর (জুনিয়র ইনস্ট্রাক্টর)-১৮">
+        <div class="q-header">
+          <span class="q-num">12</span>
+          <span class="q-session">কারিগরি শিক্ষা অধিদপ্তর (জুনিয়র ইনস্ট্রাক্টর)-১৮</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">A = {x ∈ N : x<sup>২</sup> ≤ 36} এবং B = {x ∈ N : x জোড় সংখ্যা এবং x ≤ 8} হলে A ∩ B এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. {4, 6}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. {2, 3, 5}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. {2, 4, 6, 8}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. {2, 3, 4, 5, 6}</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-12" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. {4, 6}</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-12">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(12)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              A = {1, 2, 3, 4, 5, 6} এবং B = {2, 4, 6, 8}。<br>সাধারণ জোড় সংখ্যাগুলোর মধ্যে x<sup>২</sup> ≤ 36 পূরণ করে {2, 4, 6} বা বইয়ের ব্যাখ্যা অনুসারে {4, 6}।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 13 -->
+      <article class="q-card" data-qid="13" data-session="বিভিন্ন মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-১৮">
+        <div class="q-header">
+          <span class="q-num">13</span>
+          <span class="q-session">বিভিন্ন মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-১৮</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">৫ এর গুণিতকের সেট কোন ধরনের সেট?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. সসীম সেট</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. সার্বিক সেট</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ফাঁকা সেট</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. অসীম সেট</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-13" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. অসীম সেট</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-13">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(13)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ৫ এর গুণিতকগুলো হলো: ৫, ১০, ১৫, ২০, ২৫, ... যা গণনা করে শেষ করা যায় না। অতএব এটি একটি অসীম সেট (Infinite Set)।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 14 -->
+      <article class="q-card" data-qid="14" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">14</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">স্বাভাবিক সংখ্যা সেটের ক্ষুদ্রতম সদস্য কোনটি?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. -১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. কোনোটিই নয়</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-14" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ১</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-14">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(14)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              স্বাভাবিক সংখ্যার সেট N = {১, ২, ৩, ...}। এর মধ্যে সবচেয়ে ক্ষুদ্রতম সদস্য হলো ১।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 15 -->
+      <article class="q-card" data-qid="15" data-session="সহকারী পরিবার পরিকল্পনা কর্মকর্তা-১৬">
+        <div class="q-header">
+          <span class="q-num">15</span>
+          <span class="q-session">সহকারী পরিবার পরিকল্পনা কর্মকর্তা-১৬</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">A = {x : x, 4 এর গুণিতক এবং x ≤ 16} সেটটির তালিকা রূপ কোনটি?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. {4, 8, 12}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. {4, 8, 12, 16}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. {1, 2, 4, 8, 16}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. {4, 16}</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-15" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. {4, 8, 12, 16}</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-15">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(15)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ৪ এর ধনাত্মক গুণিতক যা ১৬ এর সমান বা ছোট: ৪, ৮, ১২, ১৬।<br>∴ A = {4, 8, 12, 16}।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 16 -->
+      <article class="q-card" data-qid="16" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">16</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">যদি A ও B যে কোনো দুইটি সেট হয়, তবে A - B সমান নিচের কোনটি?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. A ∪ B'</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. A' ∩ B</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. A ∩ B'</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. A' ∪ B</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-16" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. A ∩ B'</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-16">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(16)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              সেট তত্ত্বের মৌলিক সূত্রানুসারে: A - B = A ∩ B'।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 17 -->
+      <article class="q-card" data-qid="17" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">17</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">P = {a, b} এবং Q = {c, d} হলে P × Q এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. {(a,b), (c,d)}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. {(a,c), (a,d), (b,c), (b,d)}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. {ac, bd}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. {a, b, c, d}</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-17" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. {(a,c), (a,d), (b,c), (b,d)}</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-17">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(17)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              কার্তেসীয় গুণজ P × Q = {(x, y) : x ∈ P, y ∈ Q} = {(a,c), (a,d), (b,c), (b,d)}।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 18 -->
+      <article class="q-card" data-qid="18" data-session="বহিরাগমন ও পাসপোর্ট অধিদপ্তর-১৪">
+        <div class="q-header">
+          <span class="q-num">18</span>
+          <span class="q-session">বহিরাগমন ও পাসপোর্ট অধিদপ্তর-১৪</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">নিচের কোনটি দ্য মরগ্যানের (De Morgan's) সঠিক সূত্র?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. (A ∪ B)' = A' ∪ B'</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. (A ∩ B)' = A' ∩ B'</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. (A ∪ B)' = A' ∩ B'</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. A ∩ B = A ∪ B</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-18" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. (A ∪ B)' = A' ∩ B'</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-18">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(18)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              দ্য মরগ্যানের প্রথম সূত্র: (A ∪ B)' = A' ∩ B' এবং দ্বিতীয় সূত্র: (A ∩ B)' = A' ∪ B'।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 19 -->
+      <article class="q-card" data-qid="19" data-session="বিভিন্ন মন্ত্রণালয়-১৭">
+        <div class="q-header">
+          <span class="q-num">19</span>
+          <span class="q-session">বিভিন্ন মন্ত্রণালয়-১৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">৭ এর গুণিতকের সেট কোন ধরনের সেট?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. সসীম সেট</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ফাঁকা সেট</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. একক সেট</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. অসীম সেট</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-19" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. অসীম সেট</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-19">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(19)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ৭ এর গুণিতক অগণিত (৭, ১৪, ২১, ২৮, ...)। তাই এটি একটি অসীম সেট।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 20 -->
+      <article class="q-card" data-qid="20" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">20</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">যদি A = {1, 2, 3} এবং B = {2, 3, 5} হয়, তবে A ∪ B কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. {2, 3}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. {1, 5}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. {1, 2, 3, 5}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. {1, 2, 3, 4, 5}</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-20" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. {1, 2, 3, 5}</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-20">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(20)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              A ∪ B হলো A এবং B সেটের সকল সাধারণ ও অবশিষ্ট উপাদানের সংযোগ সেট = {1, 2, 3, 5}।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 21 -->
+      <article class="q-card" data-qid="21" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">21</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">A = {1, 2, 3} এবং B = {2, 3, 5} হলে A ∩ B কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. {2, 3}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. {1, 5}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. {1, 2, 3, 5}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ∅</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-21" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. {2, 3}</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-21">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(21)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              A ∩ B হলো উভয় সেটের সাধারণ উপাদানগুলোর সেট = {2, 3}।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 22 -->
+      <article class="q-card" data-qid="22" data-session="প্রবাসী কল্যাণ ও বৈদেশিক কর্মসংস্থান মন্ত্রণালয়-১৬">
+        <div class="q-header">
+          <span class="q-num">22</span>
+          <span class="q-session">প্রবাসী কল্যাণ ও বৈদেশিক কর্মসংস্থান মন্ত্রণালয়-১৬</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">কোনো পরীক্ষায় পরীক্ষার্থীর ৮০% গণিতে এবং ৭০% বাংলায় পাস করল। উভয় বিষয়ে পাস করল ৬০%। উভয় বিষয়ে শতকরা কতজন ফেল করল?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৫%</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ১০%</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ১৫%</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ২০%</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-22" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ১০%</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-22">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(22)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              কমপক্ষে এক বিষয়ে পাস = n(M ∪ B) = n(M) + n(B) - n(M ∩ B) = ৮০% + ৭০% - ৬০% = ৯০%。<br>∴ উভয় বিষয়ে ফেল = ১০০% - ৯০% = ১০%।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 23 -->
+      <article class="q-card" data-qid="23" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">23</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">৫০ জন শিক্ষার্থীর মধ্যে ৩০ জন ক্রিকেট এবং ২৫ জন ফুটবল খেলে। ১০ জন কোনো খেলাই খেলে না। কতজন উভয় খেলা খেলে?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১০ জন</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১২ জন</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ১৫ জন</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ২০ জন</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-23" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ১৫ জন</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-23">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(23)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              মোট খেলে = ৫০ - ১০ = ৪০ জন。<br>উভয় খেলা খেলে = (৩০ + ২৫) - ৪০ = ৫৫ - ৪০ = ১৫ জন।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 24 -->
+      <article class="q-card" data-qid="24" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">24</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">A = {a, b, c} হলে, A সেটের কতগুলি উপসেট আছে?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৩টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৬টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৭টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. ৮টি</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-24" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. ৮টি</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-24">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(24)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              উপসেটের সংখ্যা = ২<sup>n</sup> = ২<sup>৩</sup> = ৮টি।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 25 -->
+      <article class="q-card" data-qid="25" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">25</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">A = {x ∈ N : x<sup>২</sup> - 5x + 6 = 0} হলে, A সেটের উপাদান কোনটি?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. {2, 3}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. {-2, -3}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. {1, 6}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. {-1, -6}</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-25" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. {2, 3}</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-25">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(25)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              x<sup>২</sup> - 5x + 6 = 0<br>⇒ (x - 2)(x - 3) = 0<br>∴ x = 2, 3। অতএব A = {2, 3}।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 26 -->
+      <article class="q-card" data-qid="26" data-session="বিভিন্ন মন্ত্রণালয়-১৭">
+        <div class="q-header">
+          <span class="q-num">26</span>
+          <span class="q-session">বিভিন্ন মন্ত্রণালয়-১৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">A = {2, 3} এবং B = {4} হলে B - A কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. {4}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. {2, 3}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. {2, 3, 4}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ∅</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-26" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. {4}</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-26">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(26)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              B - A মানে B এর যে উপাদান A তে নেই = {4}।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 27 -->
+      <article class="q-card" data-qid="27" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">27</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">একটি সেটের উপাদান সংখ্যা ৪ হলে তার পাওয়ার সেটের উপাদান সংখ্যা কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৮</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ১৬</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ২০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-27" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ১৬</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-27">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(27)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              পাওয়ার সেটের উপাদান সংখ্যা = ২<sup>৪</sup> = ১৬টি।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 28 -->
+      <article class="q-card" data-qid="28" data-session="জাতীয় রাজস্ব বোর্ড (সহকারী রাজস্ব কর্মকর্তা)-১৫">
+        <div class="q-header">
+          <span class="q-num">28</span>
+          <span class="q-session">জাতীয় রাজস্ব বোর্ড (সহকারী রাজস্ব কর্মকর্তা)-১৫</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">কোনো সেটের সদস্য সংখ্যা ৩ হলে, এর উপসেটের সংখ্যা কতটি হবে?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ২টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৩টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ৮টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৯টি</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-28" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ৮টি</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-28">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(28)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              উপসেট সংখ্যা = ২<sup>n</sup> = ২<sup>৩</sup> = ৮টি।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 29 -->
+      <article class="q-card" data-qid="29" data-session="জাতীয় রাজস্ব বোর্ড (সহকারী রাজস্ব কর্মকর্তা)-১৫">
+        <div class="q-header">
+          <span class="q-num">29</span>
+          <span class="q-session">জাতীয় রাজস্ব বোর্ড (সহকারী রাজস্ব কর্মকর্তা)-১৫</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">A = {-1, 1, 2} এবং B = ∅ হলে, A ∩ B এর মান হবে—</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. {-1, 1, 2}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. (1, 2)</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ∅</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. [-1, ∅)</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-29" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ∅</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-29">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(29)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              যেকোনো সেটের সাথে ফাঁকা সেটের ছেদ সেট সর্বদা ফাঁকা সেট ∅।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 30 -->
+      <article class="q-card" data-qid="30" data-session="জনস্বাস্থ্য প্রকৌশল অধিদপ্তর-১৫">
+        <div class="q-header">
+          <span class="q-num">30</span>
+          <span class="q-session">জনস্বাস্থ্য প্রকৌশল অধিদপ্তর-১৫</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">A = {1, 2, 3, 4} হলে, P(A) এর উপাদান সংখ্যা কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ১৬</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ১২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১৮</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-30" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ১৬</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-30">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(30)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              P(A) এর উপাদান সংখ্যা = ২<sup>৪</sup> = ১৬টি।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 31 -->
+      <article class="q-card" data-qid="31" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">31</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">A ∩ B = ∅ হলে, A ও B সেট দুটিকে পরস্পরের কী সেট বলা হয়?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. সমান সেট</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. নিঃছেদ সেট (Disjoint Set)</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. উপসেট</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. সার্বিক সেট</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-31" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. নিঃছেদ সেট (Disjoint Set)</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-31">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(31)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              যদি দুটি সেটের কোনো সাধারণ উপাদান না থাকে (ছেদ সেট ফাঁকা সেট ∅ হয়), তবে তাদের পরস্পর নিঃছেদ সেট (Disjoint Set) বলে।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 32 -->
+      <article class="q-card" data-qid="32" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">32</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">ফাঁকা সেট ∅ এর উপসেট সংখ্যা কতটি?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ০টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ১টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ২টি</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. অসীম</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-32" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ১টি</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-32">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(32)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ফাঁকা সেটের উপাদান সংখ্যা ০।<br>∴ উপসেট সংখ্যা = ২<sup>০</sup> = ১টি (ফাঁকা সেট নিজেই নিজের উপসেট)।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 33 -->
+      <article class="q-card" data-qid="33" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">33</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">সার্বিক সেট U = {1, 2, 3, 4, 5, 6} এবং A = {2, 4, 6} হলে A' (পূরক সেট) কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. {1, 3, 5}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. {2, 4, 6}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. {1, 2, 3}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ∅</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-33" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. {1, 3, 5}</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-33">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(33)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              A' = U - A = {1, 2, 3, 4, 5, 6} - {2, 4, 6} = {1, 3, 5}।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 34 -->
+      <article class="q-card" data-qid="34" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">34</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">যদি A ⊆ B এবং B ⊆ A হয়, তবে নিচের কোনটি সঠিক?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. A > B</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. A = B</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. A ∩ B = ∅</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. A ∪ B = ∅</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-34" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. A = B</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-34">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(34)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              দুটি সেটের সমান হওয়ার শর্ত হলো তারা উভয়েই পরস্পরের উপসেট হবে (A = B)।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 35 -->
+      <article class="q-card" data-qid="35" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">35</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">A = {x : x মৌলিক সংখ্যা এবং x < 5} হলে, A এর তালিকা পদ্ধতি কোনটি?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. {1, 2, 3}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. {2, 3}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. {2, 3, 5}</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. {1, 3}</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-35" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. {2, 3}</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-35">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(35)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ৫ এর চেয়ে ছোট মৌলিক সংখ্যা হলো ২ এবং ৩ (১ মৌলিক সংখ্যা নয়)।<br>∴ A = {2, 3}।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 36 -->
+      <article class="q-card" data-qid="36" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">36</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">n(A) = 15, n(B) = 12 এবং n(A ∩ B) = 7 হলে n(A ∪ B) কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ২৭</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ২০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ১৮</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১৪</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-36" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ২০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-36">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(36)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              n(A ∪ B) = n(A) + n(B) - n(A ∩ B) = ১৫ + ১২ - ৭ = ২৭ - ৭ = ২০।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 37 -->
+      <article class="q-card" data-qid="37" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">37</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">ভেনচিত্রে দুইটি নিঃছেদ সেটের পারস্পরিক সম্পর্ক কেমন দেখায়?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. পরস্পরকে ছেদ করে</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. একটির ভেতরে অপরটি থাকে</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. দুটি পৃথক ও সম্পূর্ণ আলাদা বৃত্ত</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. একটি সরলরেখা</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-37" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. দুটি পৃথক ও সম্পূর্ণ আলাদা বৃত্ত</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-37">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(37)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              নিঃছেদ সেটের কোনো সাধারণ উপাদান থাকে না বলে ভেনচিত্রে তারা সম্পূর্ণ আলাদা ও স্পর্শহীন দুটি বৃত্ত হিসেবে উপস্থাপিত হয়।
+            </div>
+          </div>
+        </div>
+      </article>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p style="margin-bottom: 6px;">পিএসসি নন-ক্যাডার প্রশ্নব্যাংক ২য় খণ্ড (Job Hunter) • অধ্যায় 10: সেট</p>
+      <p style="opacity: 0.8;">প্রামাণ্য তথ্য ও জিরো-ফেব্রিকেশন নীতিতে প্রস্তুতকৃত ডিজিটাল স্মার্ট ই-বুক।</p>
+    </footer>
+
+  </div>
+
+  <!-- Interactive Logic -->
+  <script>
+    let currentScore = 0;
+    const answeredCards = new Set();
+    const totalQuestions = 37;
+    let currentFontSize = 1;
+
+    function checkAnswer(btn, isCorrect) {
+      const card = btn.closest('.q-card');
+      const qid = card.getAttribute('data-qid');
+
+      if (card.dataset.answered) return;
+      card.dataset.answered = "true";
+
+      const allBtns = card.querySelectorAll('.opt-btn');
+      allBtns.forEach(b => {
+        b.disabled = true;
+        if (b.getAttribute('data-is-correct') === 'true') {
+          b.classList.add('correct');
+        }
+      });
+
+      if (isCorrect === 1) {
+        btn.classList.add('correct');
+        currentScore++;
+      } else {
+        btn.classList.add('wrong');
+      }
+
+      const ansDrawer = document.getElementById('ans-' + qid);
+      if (ansDrawer) ansDrawer.style.display = 'block';
+
+      const expDrawer = document.getElementById('exp-' + qid);
+      if (expDrawer) expDrawer.classList.add('open');
+
+      updateScore();
+    }
+
+    function toggleExp(qid) {
+      const expDrawer = document.getElementById('exp-' + qid);
+      if (expDrawer) {
+        expDrawer.classList.toggle('open');
+      }
+    }
+
+    function updateScore() {
+      const scoreVal = document.getElementById('score-val');
+      const scorePct = document.getElementById('score-pct');
+      if (scoreVal) scoreVal.textContent = currentScore.toLocaleString('bn-BD');
+      if (scorePct) {
+        const pct = Math.round((currentScore / totalQuestions) * 100);
+        scorePct.textContent = '(' + pct.toLocaleString('bn-BD') + '%)';
+      }
+    }
+
+    function resetQuiz() {
+      if (!confirm('আপনি কি এই অধ্যায়ের সমস্ত কুইজ রিসেট করতে চান?')) return;
+      currentScore = 0;
+      updateScore();
+
+      document.querySelectorAll('.q-card').forEach(c => {
+        delete c.dataset.answered;
+        c.querySelectorAll('.opt-btn').forEach(b => {
+          b.disabled = false;
+          b.classList.remove('correct', 'wrong');
+        });
+        const drawer = c.querySelector('.ans-drawer');
+        if (drawer) drawer.style.display = 'none';
+        const exp = c.querySelector('.exp-drawer');
+        if (exp) exp.classList.remove('open');
+      });
+    }
+
+    function filterSession(session) {
+      document.querySelectorAll('.q-card').forEach(card => {
+        if (session === 'all' || card.getAttribute('data-session') === session) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function adjustFont(dir) {
+      currentFontSize += dir * 0.08;
+      if (currentFontSize < 0.8) currentFontSize = 0.8;
+      if (currentFontSize > 1.4) currentFontSize = 1.4;
+      document.querySelector('.paper-container').style.fontSize = currentFontSize + 'rem';
+    }
+
+    function resetFont() {
+      currentFontSize = 1;
+      document.querySelector('.paper-container').style.fontSize = '1rem';
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const themeBtn = document.getElementById('theme-btn');
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        if (themeBtn) themeBtn.textContent = '🌙';
+        localStorage.setItem('theme_algebra', 'light');
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        if (themeBtn) themeBtn.textContent = '☀️';
+        localStorage.setItem('theme_algebra', 'dark');
+      }
+    }
+  </script>
+  <script src="nav-component.js"></script>
+  <script src="../universal-modes.js"></script>
+</body>
+</html>

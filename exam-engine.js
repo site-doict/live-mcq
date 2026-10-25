@@ -113,6 +113,20 @@
       icon: '🔬',
       logo: 'Non Cadre General Science/logo.png',
       bcsMarks: 20
+    },
+    'Non Cadre Arithmetic': {
+      name: 'নন-ক্যাডার পাটিগণিত',
+      short: 'নন-ক্যাডার পাটিগণিত',
+      icon: '🔢',
+      logo: 'Non Cadre Arithmetic/logo.png',
+      bcsMarks: 20
+    },
+    'Non Cadre Algebra': {
+      name: 'নন-ক্যাডার বীজগণিত',
+      short: 'নন-ক্যাডার বীজগণিত',
+      icon: '📐',
+      logo: 'Non Cadre Algebra/logo.png',
+      bcsMarks: 20
     }
   };
 

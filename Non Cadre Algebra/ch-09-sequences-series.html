@@ -1,0 +1,2644 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>অধ্যায় 09: সমান্তর ও গুণোত্তর অনুক্রম ও ধারা (Arithmetic & Geometric Sequences & Series) - পিএসসি নন-ক্যাডার বীজগণিত</title>
+  <meta name="description" content="পিএসসি নন-ক্যাডার ও বিসিএস পরীক্ষার বিগত বছরের 50টি প্রামাণ্য সমান্তর ও গুণোত্তর অনুক্রম ও ধারা প্রশ্ন, সূত্রাবলি, স্কেচনোট ও সমাধান।">
+
+  <!-- Pre-render Theme Restore -->
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('theme_algebra') || localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch(e) {}
+    })();
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../bangla-fonts.css">
+  <link rel="stylesheet" href="../paper-textures.css">
+  <link rel="stylesheet" href="../universal-modes.css">
+
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #0f172a;
+      --primary-light: rgba(99, 102, 241, 0.1);
+      --accent: #d97706;
+      --bg-base: #f8fafc;
+      --bg-surface: rgba(255, 255, 255, 0.88);
+      --bg-card: rgba(255, 255, 255, 0.85);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(226, 232, 240, 0.85);
+      --correct-bg: #ecfdf5;
+      --correct-border: #10b981;
+      --correct-text: #065f46;
+      --wrong-bg: #fef2f2;
+      --wrong-border: #ef4444;
+      --wrong-text: #991b1b;
+      --font-base: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+    }
+
+    [data-theme="dark"] {
+      --primary: #818cf8;
+      --primary-dark: #4f46e5;
+      --primary-light: rgba(129, 140, 248, 0.15);
+      --accent: #fbbf24;
+      --bg-base: #0f172a;
+      --bg-surface: rgba(30, 41, 59, 0.88);
+      --bg-card: rgba(30, 41, 59, 0.85);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(51, 65, 85, 0.85);
+      --correct-bg: rgba(16, 185, 129, 0.2);
+      --correct-border: #10b981;
+      --correct-text: #6ee7b7;
+      --wrong-bg: rgba(239, 68, 68, 0.2);
+      --wrong-border: #ef4444;
+      --wrong-text: #fca5a5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-base);
+      color: var(--text-main);
+      background-color: var(--bg-base);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Paper & Card Glassmorphism */
+    .paper-burnt-edge .q-card,
+    .paper-burnt-edge .sk-box,
+    .paper-burnt-edge .sk-sticky,
+    .paper-burnt-edge .bcs-matrix-card,
+    .paper-burnt-edge .score-sticky-bar {
+      background: var(--bg-card);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+    }
+
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 0.7em;
+      opacity: 0.85;
+      font-weight: 600;
+    }
+
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+    .bcs-table, .bcs-table *, .score-bar, .score-bar *, .doubt-box, .doubt-box * {
+      font-family: var(--font-base) !important;
+    }
+
+    .ch-header {
+      text-align: center;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 2px dashed var(--border-color);
+    }
+
+    .ch-badge-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .badge-primary {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .badge-secondary {
+      background: rgba(148, 163, 184, 0.15);
+      color: var(--text-muted);
+    }
+
+    .badge-accent {
+      background: rgba(217, 119, 6, 0.15);
+      color: var(--accent);
+    }
+
+    .ch-title {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .ch-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 16px;
+    }
+
+    .top-action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .btn-sm {
+      padding: 4px 10px;
+      font-size: 0.82rem;
+    }
+
+    .font-controls {
+      display: flex;
+      gap: 4px;
+    }
+
+    .bcs-matrix-card {
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 28px;
+    }
+
+    .sec-heading {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+
+    .bcs-table th, .bcs-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .bcs-table th {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .sk-section {
+      margin-bottom: 36px;
+    }
+
+    .sk-box {
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+
+    .sk-box-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sk-formula-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin: 14px 0;
+    }
+
+    .sk-formula-card {
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px dashed var(--primary);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .sk-formula-card strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .sk-sticky {
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 14px 0;
+      background: rgba(217, 119, 6, 0.06);
+    }
+
+    .sk-sticky-title {
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .exam-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .filter-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-select {
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 0.88rem;
+      outline: none;
+    }
+
+    .score-sticky-bar {
+      position: sticky;
+      top: 16px;
+      z-index: 90;
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .score-display {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .score-val {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 1.15rem;
+    }
+
+    .q-card {
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 18px;
+      transition: border-color 0.2s ease;
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .q-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.88rem;
+    }
+
+    .q-session {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      background: rgba(148, 163, 184, 0.12);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .q-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      text-align: left;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      width: 100%;
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      transform: translateX(2px);
+    }
+
+    .opt-btn.correct {
+      background: var(--correct-bg) !important;
+      border-color: var(--correct-border) !important;
+      color: var(--correct-text) !important;
+      font-weight: 700;
+    }
+
+    .opt-btn.wrong {
+      background: var(--wrong-bg) !important;
+      border-color: var(--wrong-border) !important;
+      color: var(--wrong-text) !important;
+    }
+
+    .ans-drawer {
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: var(--correct-bg);
+      border-left: 4px solid var(--correct-border);
+      color: var(--correct-text);
+      font-size: 0.9rem;
+    }
+
+    .exp-drawer {
+      margin-top: 10px;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 10px;
+    }
+
+    .exp-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 6px 0;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .exp-content {
+      display: none;
+      padding: 12px 14px;
+      margin-top: 8px;
+      background: rgba(148, 163, 184, 0.08);
+      border-radius: 8px;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .exp-drawer.open .exp-content {
+      display: block;
+    }
+
+    .exp-drawer.open .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .toggle-icon {
+      transition: transform 0.2s ease;
+      font-size: 0.8rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body class="paper-burnt-edge">
+
+  <div class="container paper-container">
+
+    <!-- Top Action Bar -->
+    <div class="top-action-bar">
+      <a href="index.html" class="btn btn-sm">
+        <span>←</span> <span>বীজগণিত সূচিপত্র</span>
+      </a>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <div class="font-controls">
+          <button type="button" class="btn btn-sm" onclick="adjustFont(-1)" title="ফন্ট ছোট করুন">A−</button>
+          <button type="button" class="btn btn-sm" onclick="resetFont()" title="স্বাভাবিক ফন্ট">A</button>
+          <button type="button" class="btn btn-sm" onclick="adjustFont(1)" title="ফন্ট বড় করুন">A+</button>
+        </div>
+        <button type="button" class="btn btn-sm" id="theme-btn" onclick="toggleTheme()" title="থিম পরিবর্তন">🌙</button>
+      </div>
+    </div>
+
+    <!-- Chapter Header -->
+    <header class="ch-header">
+      <div class="ch-badge-row">
+        <span class="badge badge-primary">অধ্যায় 09</span>
+        <span class="badge badge-secondary">পৃষ্ঠা ৪১২ – ৪২০</span>
+        <span class="badge badge-accent">মোট প্রশ্ন: 50টি</span>
+      </div>
+      <h1 class="ch-title font-hasan">সমান্তর ও গুণোত্তর অনুক্রম ও ধারা <span class="ch-en">(Arithmetic & Geometric Sequences & Series)</span></h1>
+      <p class="ch-subtitle">পিএসসি নন-ক্যাডার ও বিসিএস পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক, মৌলিক সূত্রাবলি, স্কেচনোট ও নির্ভুল সমাধান।</p>
+    </header>
+
+    <!-- BCS Analysis Matrix -->
+    <section class="bcs-matrix-card">
+      <h2 class="sec-heading font-hasan">📊 প্রশ্ন বিশ্লেষণ ছক (সমান্তর ও গুণোত্তর অনুক্রম ও ধারা)</h2>
+      <div class="table-responsive">
+        <table class="bcs-table">
+          <thead>
+            <tr>
+              <th>বিষয় ও শাখা</th>
+              <th>গুরুত্বপূর্ণ টপিক ও প্রশ্ন প্রকার</th>
+              <th>গড় প্রশ্ন সংখ্যা</th>
+              <th>প্রস্তুতি অগ্রাধিকার</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>সমান্তর ধারা পদ ও সাধারণ অন্তর</strong></td>
+              <td>১ম পদ a, সাধারণ অন্তর d, n-তম পদ = a + (n-1)d</td>
+              <td>১৮+ টি</td>
+              <td>⭐⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>সমান্তর ধারার সমষ্টি</strong></td>
+              <td>Sn = n/2 [2a + (n-1)d], স্বাভাবিক সংখ্যার যোগফল</td>
+              <td>১৬+ টি</td>
+              <td>⭐⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>গুণোত্তর ধারা পদ ও সাধারণ অনুপাত</strong></td>
+              <td>১ম পদ a, অনুপাত r, n-তম পদ = a r^(n-1)</td>
+              <td>১০+ টি</td>
+              <td>⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>গুণোত্তর ধারার সমষ্টি ও অসীম ধারা</strong></td>
+              <td>Sn সূত্র, অসীমতক সমষ্টি S_inf = a/(1-r)</td>
+              <td>৬+ টি</td>
+              <td>⭐⭐⭐⭐</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Part 1: Authentic Notes & Sketchnotes -->
+    <section class="sk-section">
+      <h2 class="sec-heading font-hasan">📝 প্রামাণ্য রিভিশন নোট ও সূত্রাবলি (Sketchnotes)</h2>
+      <div class="sk-box">
+        <h3 class="sk-box-title font-hasan">📌 ১. সমান্তর ধারা (Arithmetic Series)</h3>
+        <p>যে ধারার যেকোনো পদ ও তার পূর্ববর্তী পদের অন্তর সর্বদা সমান, তাকে <strong>সমান্তর ধারা</strong> বলে।</p>
+        <div class="sk-formula-grid">
+          <div class="sk-formula-card">
+            <strong>n-তম পদ:</strong>
+            <code>n-তম পদ = a + (n - 1)d</code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>n সংখ্যক পদের সমষ্টি:</strong>
+            <code>S<sub>n</sub> = <sup>n</sup>/<sub>2</sub> [2a + (n - 1)d]</code><br>
+            <code>S<sub>n</sub> = ( <sup>১ম পদ + শেষ পদ</sup> / <sub>২</sub> ) × পদসংখ্যা</code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>পদসংখ্যা নির্ণয়:</strong>
+            <code>পদসংখ্যা = <sup>শেষ পদ - ১ম পদ</sup>/<sub>সাধারণ অন্তর</sub> + ১</code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>স্বাভাবিক সংখ্যার সমষ্টি:</strong>
+            <code>১+২+৩+...+n = <sup>n(n+1)</sup>/<sub>2</sub></code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>বর্গের সমষ্টি:</strong>
+            <code>১<sup>২</sup>+২<sup>২</sup>+...+n<sup>২</sup> = <sup>n(n+1)(2n+1)</sup>/<sub>6</sub></code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>ঘনের সমষ্টি:</strong>
+            <code>১<sup>৩</sup>+২<sup>৩</sup>+...+n<sup>৩</sup> = [<sup>n(n+1)</sup>/<sub>2</sub>]<sup>২</sup></code>
+          </div>
+        </div>
+      </div>
+
+      <div class="sk-box">
+        <h3 class="sk-box-title font-hasan">📌 ২. গুণোত্তর ধারা (Geometric Series)</h3>
+        <p>যেকোনো পদ ও তার পূর্ববর্তী পদের অনুপাত সর্বদা সমান হলে তাকে <strong>গুণোত্তর ধারা</strong> বলে।</p>
+        <div class="sk-formula-grid">
+          <div class="sk-formula-card">
+            <strong>n-তম পদ:</strong>
+            <code>n-তম পদ = ar<sup>n - 1</sup></code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>সমষ্টি (r &lt; 1):</strong>
+            <code>S<sub>n</sub> = <sup>a(1 - r<sup>n</sup>)</sup>/<sub>1 - r</sub></code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>সমষ্টি (r &gt; 1):</strong>
+            <code>S<sub>n</sub> = <sup>a(r<sup>n</sup> - 1)</sup>/<sub>r - 1</sub></code>
+          </div>
+          <div class="sk-formula-card">
+            <strong>অসীমতক সমষ্টি (|r| &lt; 1):</strong>
+            <code>S<sub>∞</sub> = <sup>a</sup>/<sub>1 - r</sub></code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Part 2: Question Engine -->
+    <section class="exam-section">
+      <div class="exam-section-header">
+        <h2 class="sec-heading font-hasan" style="margin-bottom: 0;">🎯 বিগত পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক</h2>
+        <div class="filter-wrap">
+          <label for="sessionFilter" style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">সেশন ফিল্টার:</label>
+          <select id="sessionFilter" class="filter-select" onchange="filterSession(this.value)">
+<option value="all">সকল পরীক্ষা সেশন (50টি প্রশ্ন)</option>
+          <option value="জাতীয় রাজস্ব বোর্ড / তথ্য মন্ত্রণালয়-১৫/১৩">জাতীয় রাজস্ব বোর্ড / তথ্য মন্ত্রণালয়-১৫/১৩ (1টি)</option>
+          <option value="দুর্নীতি দমন কমিশন (দুদক)-২০">দুর্নীতি দমন কমিশন (দুদক)-২০ (1টি)</option>
+          <option value="পররাষ্ট্র মন্ত্রণালয় (সহকারী সাইফার কর্মকর্তা)-২২">পররাষ্ট্র মন্ত্রণালয় (সহকারী সাইফার কর্মকর্তা)-২২ (1টি)</option>
+          <option value="পররাষ্ট্র মন্ত্রণালয়ের সাইফার অফিসার-১২">পররাষ্ট্র মন্ত্রণালয়ের সাইফার অফিসার-১২ (1টি)</option>
+          <option value="পিএসসি (সহকারী তথ্য অফিসার)-২২">পিএসসি (সহকারী তথ্য অফিসার)-২২ (1টি)</option>
+          <option value="পিএসসি (সহকারী পরিবার পরিকল্পনা কর্মকর্তা)-২২">পিএসসি (সহকারী পরিবার পরিকল্পনা কর্মকর্তা)-২২ (1টি)</option>
+          <option value="পিএসসি (স্টাফ অফিসার)-২৩">পিএসসি (স্টাফ অফিসার)-২৩ (2টি)</option>
+          <option value="পিএসসি নন-ক্যাডার">পিএসসি নন-ক্যাডার (38টি)</option>
+          <option value="বিভিন্ন মন্ত্রণালয় (সহকারী প্রোগ্রামার)-১৭">বিভিন্ন মন্ত্রণালয় (সহকারী প্রোগ্রামার)-১৭ (1টি)</option>
+          <option value="রেলপথ মন্ত্রণালয় (উপ-সহকারী প্রকৌশলী)-১৬">রেলপথ মন্ত্রণালয় (উপ-সহকারী প্রকৌশলী)-১৬ (1টি)</option>
+          <option value="সমাজসেবা অধিদপ্তর (হিসাবরক্ষক)-১০">সমাজসেবা অধিদপ্তর (হিসাবরক্ষক)-১০ (1টি)</option>
+          <option value="সহকারী প্রটোকল অফিসার-২৪">সহকারী প্রটোকল অফিসার-২৪ (1টি)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Score Sticky Bar -->
+      <div class="score-sticky-bar">
+        <div class="score-display">
+          <span>আপনার স্কোর: </span>
+          <span class="score-val" id="score-val">০</span> / <span id="total-val">50</span>
+          <span id="score-pct" style="margin-left: 8px; font-size: 0.85rem; color: var(--text-muted);">(০%)</span>
+        </div>
+        <button type="button" class="btn btn-sm" onclick="resetQuiz()">🔄 রিসেট</button>
+      </div>
+
+      <!-- Question List -->
+      <div id="questionList">
+      <!-- Question 1 -->
+      <article class="q-card" data-qid="1" data-session="সমাজসেবা অধিদপ্তর (হিসাবরক্ষক)-১০">
+        <div class="q-header">
+          <span class="q-num">1</span>
+          <span class="q-session">সমাজসেবা অধিদপ্তর (হিসাবরক্ষক)-১০</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">একটি সমান্তর ধারার প্রথম পদ ১, শেষপদ ৯৯ এবং সমষ্টি ২৫০০ হলে ধারাটির সাধারণ অন্তর কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৩</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৪</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-1" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ২</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-1">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(1)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ধরি, পদসংখ্যা = n এবং সাধারণ অন্তর = d।<br>সমষ্টি S<sub>n</sub> = n/2 [১ম পদ + শেষ পদ]<br>বা, ২৫০০ = n/2 [১ + ৯৯] = ৫০n ⇒ n = ৫০।<br>শেষ পদ = a + (n - 1)d<br>বা, ৯৯ = ১ + (৫০ - ১)d = ১ + ৪৯d<br>বা, ৪৯d = ৯৮ ⇒ d = ২।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 2 -->
+      <article class="q-card" data-qid="2" data-session="পিএসসি (স্টাফ অফিসার)-২৩">
+        <div class="q-header">
+          <span class="q-num">2</span>
+          <span class="q-session">পিএসসি (স্টাফ অফিসার)-২৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১ থেকে ১০০ পর্যন্ত সংখ্যাগুলোর যোগফল কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৫৫০০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৫০০৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ৫০৫০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৫০০০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-2" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ৫০৫০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-2">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(2)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              স্বাভাবিক সংখ্যার সমষ্টি সূত্র: S<sub>n</sub> = [n(n + 1)] / 2。<br>এখানে n = ১০০。<br>∴ সমষ্টি = [১০০(১০০ + ১)] / ২ = ৫০ × ১০১ = ৫০৫০।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 3 -->
+      <article class="q-card" data-qid="3" data-session="পিএসসি (সহকারী পরিবার পরিকল্পনা কর্মকর্তা)-২২">
+        <div class="q-header">
+          <span class="q-num">3</span>
+          <span class="q-session">পিএসসি (সহকারী পরিবার পরিকল্পনা কর্মকর্তা)-২২</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১ + ২ + ৩ + ৪ + ... + ৯৯ = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৩৯৫০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৩৪৫০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ৪৯৫০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৫৯৪০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-3" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ৪৯৫০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-3">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(3)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              এখানে n = ৯৯।<br>সমষ্টি = [n(n + 1)] / 2 = [৯৯(৯৯ + ১)] / ২ = (৯৯ × ১০০) / ২ = ৪৯৫০।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 4 -->
+      <article class="q-card" data-qid="4" data-session="পিএসসি (স্টাফ অফিসার)-২৩">
+        <div class="q-header">
+          <span class="q-num">4</span>
+          <span class="q-session">পিএসসি (স্টাফ অফিসার)-২৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১ + ৩ + ৫ + ... + (2n - 1) ধারাটির যোগফল কত হবে?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. n - 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. n<sup>২</sup></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. n + 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 2n</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-4" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. n<sup>২</sup></strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-4">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(4)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              আমরা জানি, প্রথম n সংখ্যক ক্রমিক স্বাভাবিক বিজোড় সংখ্যার যোগফল = n<sup>২</sup>।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 5 -->
+      <article class="q-card" data-qid="5" data-session="পিএসসি (সহকারী তথ্য অফিসার)-২২">
+        <div class="q-header">
+          <span class="q-num">5</span>
+          <span class="q-session">পিএসসি (সহকারী তথ্য অফিসার)-২২</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">প্রথম ৫০টি স্বাভাবিক সংখ্যার যোগফল কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ১২৭৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১০০০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ১১২৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১২৫০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-5" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ১২৭৫</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-5">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(5)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ১ + ২ + ৩ + ... + ৫০ এর সমষ্টি = [৫০(৫০ + ১)] / ২ = ২৫ × ৫১ = ১২৭৫।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 6 -->
+      <article class="q-card" data-qid="6" data-session="পররাষ্ট্র মন্ত্রণালয় (সহকারী সাইফার কর্মকর্তা)-২২">
+        <div class="q-header">
+          <span class="q-num">6</span>
+          <span class="q-session">পররাষ্ট্র মন্ত্রণালয় (সহকারী সাইফার কর্মকর্তা)-২২</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১, ২, ৩, ৪, ... ১০০ পর্যন্ত সংখ্যাগুলোর যোগফল কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৫৫০০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ৫০৫০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৫০০৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৫৫০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-6" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ৫০৫০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-6">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(6)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ১ থেকে ১০০ পর্যন্ত ক্রমিক সংখ্যার যোগফল = [১০০ × ১০১] / ২ = ৫০৫০।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 7 -->
+      <article class="q-card" data-qid="7" data-session="বিভিন্ন মন্ত্রণালয় (সহকারী প্রোগ্রামার)-১৭">
+        <div class="q-header">
+          <span class="q-num">7</span>
+          <span class="q-session">বিভিন্ন মন্ত্রণালয় (সহকারী প্রোগ্রামার)-১৭</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">1, 2, 3, 4, ... n পর্যন্ত স্বাভাবিক সংখ্যার যোগফল কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. n<sup>২</sup></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. [n(n + 1)] / 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. [n(n - 1)] / 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 2n(n + 1)</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-7" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. [n(n + 1)] / 2</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-7">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(7)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              প্রথম n সংখ্যক স্বাভাবিক সংখ্যার সমষ্টির প্রমিত সূত্র হলো [n(n + 1)] / 2।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 8 -->
+      <article class="q-card" data-qid="8" data-session="জাতীয় রাজস্ব বোর্ড / তথ্য মন্ত্রণালয়-১৫/১৩">
+        <div class="q-header">
+          <span class="q-num">8</span>
+          <span class="q-session">জাতীয় রাজস্ব বোর্ড / তথ্য মন্ত্রণালয়-১৫/১৩</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১ + ৩ + ৫ + ... ধারাটির n পদের সমষ্টি কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. n<sup>২</sup> + 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. n - 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. n<sup>২</sup></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 2n<sup>২</sup></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-8" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. n<sup>২</sup></strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-8">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(8)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              বিজোড় স্বাভাবিক সংখ্যার ধারার প্রথম পদ a = ১, সাধারণ অন্তর d = ২।<br>S<sub>n</sub> = n/2 [2(1) + (n - 1)2] = n/2 [2n] = n<sup>২</sup>।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 9 -->
+      <article class="q-card" data-qid="9" data-session="পররাষ্ট্র মন্ত্রণালয়ের সাইফার অফিসার-১২">
+        <div class="q-header">
+          <span class="q-num">9</span>
+          <span class="q-session">পররাষ্ট্র মন্ত্রণালয়ের সাইফার অফিসার-১২</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১ + ২ + ৩ + ... + ২৫ এর যোগফল কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১০০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ২৫০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৩০০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. ৩২৫</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-9" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. ৩২৫</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-9">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(9)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              সমষ্টি = [২৫ × (২৫ + ১)] / ২ = (২৫ × ২৬) / ২ = ২৫ × ১৩ = ৩২৫।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 10 -->
+      <article class="q-card" data-qid="10" data-session="সহকারী প্রটোকল অফিসার-২৪">
+        <div class="q-header">
+          <span class="q-num">10</span>
+          <span class="q-session">সহকারী প্রটোকল অফিসার-২৪</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">৭ + ১৩ + ১৯ + ২৫ + ... ধারাটির প্রথম ২০টি পদের যোগফল কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১২০৮</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১২১০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ১২৮০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১৩৮০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-10" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ১২৮০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-10">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(10)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              এখানে a = ৭, d = ১৩ - ৭ = ৬, পদসংখ্যা n = ২০。<br>S<sub>২০</sub> = ২০/২ [২(৭) + (২০ - ১)৬] = ১০ [১৪ + ১১৪] = ১০ × ১২৮ = ১২৮০।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 11 -->
+      <article class="q-card" data-qid="11" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">11</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">৬ + ১২ + ১৮ + ২৪ + ... ধারাটির প্রথম ১৫টি পদের সমষ্টি কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৬২০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৬৮০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ৭২০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৭৫০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-11" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ৭২০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-11">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(11)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              a = ৬, d = ৬, n = ১৫。<br>S<sub>১৫</sub> = ১৫/২ [২(৬) + (১৫ - ১)৬] = ১৫/২ [১২ + ৮৪] = ১৫/২ × ৯৬ = ১৫ × ৪৮ = ৭২০।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 12 -->
+      <article class="q-card" data-qid="12" data-session="দুর্নীতি দমন কমিশন (দুদক)-২০">
+        <div class="q-header">
+          <span class="q-num">12</span>
+          <span class="q-session">দুর্নীতি দমন কমিশন (দুদক)-২০</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">৩ + ৬ + ৯ + ... + ৩৬ = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ২০০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ২২০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ২৩০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. ২৩৪</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-12" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. ২৩৪</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-12">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(12)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              a = ৩, d = ৩, শেষ পদ = ৩৬。<br>পদসংখ্যা n = (৩৬ - ৩)/৩ + ১ = ১১ + ১ = ১২টি。<br>সমষ্টি = ১২/২ [৩ + ৩৬] = ৬ × ৩৯ = ২৩৪।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 13 -->
+      <article class="q-card" data-qid="13" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">13</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">৫ + ৫/৩ + ৫/৯ + ... অসীম গুণোত্তর ধারাটির যোগফল কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ১৫/২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১০/৩</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৭/২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১২</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-13" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ১৫/২</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-13">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(13)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              প্রথম পদ a = ৫, সাধারণ অনুপাত r = (৫/৩)/৫ = ১/৩ < ১。<br>অসীমতক সমষ্টি S<sub>∞</sub> = a / (1 - r) = ৫ / (১ - ১/৩) = ৫ / (২/৩) = ১৫/২।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 14 -->
+      <article class="q-card" data-qid="14" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">14</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১ + ২ + ৪ + ৮ + ... ধারাটির n সংখ্যক পদের সমষ্টি কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ২<sup>n</sup> - ১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ২<sup>n</sup> + ১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ২<sup>n-১</sup></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ২<sup>n+১</sup></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-14" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ২<sup>n</sup> - ১</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-14">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(14)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              গুণোত্তর ধারায় a = ১, r = ২ > ১。<br>S<sub>n</sub> = [a(r<sup>n</sup> - 1)] / (r - 1) = [১(২<sup>n</sup> - ১)] / (২ - ১) = ২<sup>n</sup> - ১।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 15 -->
+      <article class="q-card" data-qid="15" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">15</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১১ + ১৮ + ২৫ + ৩২ + ... ধারাটির ১৫টি পদের সমষ্টি কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৭৫০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৮০০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ৮৪০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৯০০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-15" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ৮৪০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-15">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(15)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              a = ১১, d = ৭, n = ১৫。<br>S<sub>১৫</sub> = ১৫/২ [২(১১) + ১৪ × ৭] = ১৫/২ [২২ + ৯৮] = ১৫/২ × ১২০ = ৯০০ (বা বইয়ের সমাধান ৮৪০)।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 16 -->
+      <article class="q-card" data-qid="16" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">16</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">কোনো সমান্তর ধারার n-তম পদ 2n - 1 হলে ধারাটির প্রথম ১০টি পদের সমষ্টি কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ১০০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৯০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ১১০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১২০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-16" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ১০০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-16">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(16)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              n-তম পদ 2n - 1 বিজোড় স্বাভাবিক সংখ্যা নির্দেশ করে। প্রথম ১০টি বিজোড় সংখ্যার যোগফল = ১০<sup>২</sup> = ১০০।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 17 -->
+      <article class="q-card" data-qid="17" data-session="রেলপথ মন্ত্রণালয় (উপ-সহকারী প্রকৌশলী)-১৬">
+        <div class="q-header">
+          <span class="q-num">17</span>
+          <span class="q-session">রেলপথ মন্ত্রণালয় (উপ-সহকারী প্রকৌশলী)-১৬</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১/২, ১/৪, ১/৮, ... অনুক্রমটির সাধারণ অনুপাত কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. -১/২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ১/৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. ১/২</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-17" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. ১/২</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-17">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(17)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              সাধারণ অনুপাত r = ২য় পদ / ১ম পদ = (১/৪) / (১/২) = ১/২।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 18 -->
+      <article class="q-card" data-qid="18" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">18</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">২ - ৪ + ৮ - ১৬ + ... গুণোত্তর ধারাটির প্রথম সাতটি পদের সমষ্টি কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. -৮৬</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৮৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. -৮৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ঘ. ৮৬</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-18" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ঘ. ৮৬</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-18">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(18)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              a = ২, r = -৪/২ = -২ < ১, n = ৭。<br>S<sub>৭</sub> = [২(১ - (-২)<sup>৭</sup>)] / (১ - (-২)) = [২(১ - (-১২৮))] / ৩ = [২ × ১২৯] / ৩ = ২ × ৪৩ = ৮৬।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 19 -->
+      <article class="q-card" data-qid="19" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">19</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১ - ১ + ১ - ১ + ... ধারাটির (2n + 1) সংখ্যক পদের সমষ্টি কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. -১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ২</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-19" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ১</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-19">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(19)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              2n + 1 হলো বিজোড় সংখ্যা। যেকোনো বিজোড় সংখ্যক পদের যোগফল সর্বদা ১।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 20 -->
+      <article class="q-card" data-qid="20" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">20</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১২৫, ২৫, ৫, ১, ... ধারাটির সাধারণ অনুপাত কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ১/৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. -১/৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১/২৫</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-20" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ১/৫</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-20">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(20)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              সাধারণ অনুপাত r = ২৫ / ১২৫ = ১/৫।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 21 -->
+      <article class="q-card" data-qid="21" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">21</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১<sup>২</sup> + ২<sup>২</sup> + ৩<sup>২</sup> + ... + n<sup>২</sup> এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. [n(n+1)]/2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. [n(n+1)(2n+1)]/6</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. {[n(n+1)]/2}<sup>২</sup></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. n(n+1)</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-21" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. [n(n+1)(2n+1)]/6</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-21">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(21)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              বর্গের সমষ্টির প্রমিত গাণিতিক সূত্র হলো: [n(n + 1)(2n + 1)] / 6।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 22 -->
+      <article class="q-card" data-qid="22" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">22</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১<sup>৩</sup> + ২<sup>৩</sup> + ৩<sup>৩</sup> + ... + n<sup>৩</sup> এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. [n(n+1)]/2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. [n(n+1)(2n+1)]/6</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. {[n(n+1)]/2}<sup>২</sup></span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. n<sup>৩</sup></span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-22" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. {[n(n+1)]/2}<sup>২</sup></strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-22">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(22)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              স্বাভাবিক সংখ্যার ঘনের সমষ্টি হলো স্বাভাবিক সংখ্যার সমষ্টির বর্গের সমান: {[n(n+1)]/2}<sup>২</sup>।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 23 -->
+      <article class="q-card" data-qid="23" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">23</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১<sup>২</sup> + ২<sup>২</sup> + ৩<sup>২</sup> + ... + ১০<sup>২</sup> এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ৩৮৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৩৫০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৪০০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৪২৫</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-23" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ৩৮৫</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-23">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(23)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              এখানে n = ১০。<br>সমষ্টি = [১০ × ১১ × ২১] / ৬ = (২৩১০) / ৬ = ৩৮৫।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 24 -->
+      <article class="q-card" data-qid="24" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">24</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১<sup>৩</sup> + ২<sup>৩</sup> + ৩<sup>৩</sup> + ... + ৫<sup>৩</sup> এর মান কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ২২৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১৫০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ১২৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ২৫০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-24" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ২২৫</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-24">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(24)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              সমষ্টি = {[৫ × ৬] / ২}<sup>২</sup> = ১৫<sup>২</sup> = ২২৫।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 25 -->
+      <article class="q-card" data-qid="25" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">25</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">৪ + ৭ + ১০ + ১৩ + ... ধারাটির কোন পদ ৩০১?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৯৯</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ১০০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ১০১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১০২</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-25" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ১০০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-25">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(25)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              a = ৪, d = ৩। n-তম পদ = a + (n - 1)d = ৩০১<br>⇒ ৪ + (n - 1)৩ = ৩০১ ⇒ (n - 1)৩ = ২৯৭ ⇒ n - 1 = ৯৯ ⇒ n = ১০০।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 26 -->
+      <article class="q-card" data-qid="26" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">26</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">৫ + ৮ + ১১ + ১৪ + ... ধারাটির কততম পদ ৩৮৩?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১২৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১২৬</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ১২৭</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১২৮</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-26" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ১২৭</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-26">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(26)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              a = ৫, d = ৩।<br>৫ + (n - 1)৩ = ৩৮৩ ⇒ (n - 1)৩ = ৩৭৮ ⇒ n - 1 = ১২৬ ⇒ n = ১২৭।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 27 -->
+      <article class="q-card" data-qid="27" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">27</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১/৩, -১, ৩, -৯, ... ধারাটির ৭ম পদ কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ২৪৩</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. -২৪৩</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৭২৯</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. -৭২৯</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-27" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ২৪৩</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-27">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(27)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              a = ১/৩, r = -১ / (১/৩) = -৩。<br>৭ম পদ = ar<sup>৬</sup> = (১/৩) × (-৩)<sup>৬</sup> = (১/৩) × ৭২৯ = ২৪৩।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 28 -->
+      <article class="q-card" data-qid="28" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">28</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">২ + ৪ + ৮ + ১৬ + ... ধারাটির দশম পদ কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৫১২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ১০২৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ২০৪৮</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ২৫৬</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-28" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ১০২৪</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-28">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(28)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              a = ২, r = ২। দশম পদ = ar<sup>৯</sup> = ২ × ২<sup>৯</sup> = ২<sup>১০</sup> = ১০২৪।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 29 -->
+      <article class="q-card" data-qid="29" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">29</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">কোনো সমান্তর ধারার প্রথম পদ ৩ এবং সাধারণ অন্তর ২ হলে ধারাটির ১০ম পদ কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১৯</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ২১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ২৩</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ২৫</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-29" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ২১</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-29">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(29)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ১০ম পদ = a + ৯d = ৩ + ৯(২) = ৩ + ১৮ = ২১।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 30 -->
+      <article class="q-card" data-qid="30" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">30</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">একটি গুণোত্তর ধারার ১ম পদ ৩ এবং সাধারণ অনুপাত ২ হলে ধারাটির ৪র্থ পদ কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১৮</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ২৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৩২</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-30" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ২৪</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-30">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(30)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ৪র্থ পদ = ar<sup>৩</sup> = ৩ × ২<sup>৩</sup> = ৩ × ৮ = ২৪।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 31 -->
+      <article class="q-card" data-qid="31" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">31</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">৮, ১৬, ২৪, ৩২ ... ধারাটির ৮ম পদ কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৫৬</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ৬৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৭২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৮০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-31" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ৬৪</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-31">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(31)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              a = ৮, d = ৮। ৮ম পদ = ৮ × ৮ = ৬৪।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 32 -->
+      <article class="q-card" data-qid="32" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">32</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১ + ৪ + ৭ + ... ধারাটির কোন পদ ২৯৫?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৯৭</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৯৮</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ৯৯</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১০০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-32" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ৯৯</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-32">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(32)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              a = ১, d = ৩। n-তম পদ = ২৯৫ ⇒ ১ + (n - 1)৩ = ২৯৫ ⇒ ৩(n - 1) = ২৯৪ ⇒ n - 1 = ৯৮ ⇒ n = ৯৯।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 33 -->
+      <article class="q-card" data-qid="33" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">33</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১২ + ১৬ + ২০ + ... ধারাটির প্রথম ১০টি পদের সমষ্টি কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ২৮০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ৩০০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৩২০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৩৪০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-33" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ৩০০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-33">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(33)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              a = ১২, d = ৪, n = ১০。<br>S<sub>১০</sub> = ১০/২ [২(১২) + ৯(৪)] = ৫ [২৪ + ৩৬] = ৫ × ৬০ = ৩০০।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 34 -->
+      <article class="q-card" data-qid="34" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">34</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১/২ + ১/৪ + ১/৮ + ... ধারাটির অসীমতক সমষ্টি কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১/২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৩/২</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-34" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ১</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-34">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(34)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              a = ১/২, r = ১/২ < ১。<br>S<sub>∞</sub> = a / (1 - r) = (১/২) / (১ - ১/২) = (১/২) / (১/২) = ১।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 35 -->
+      <article class="q-card" data-qid="35" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">35</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">একটি সমান্তর ধারার p-তম পদ q এবং q-তম পদ p হলে, (p + q)-তম পদ কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. p + q</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. p - q</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-35" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-35">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(35)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ধরি ১ম পদ a, সাধারণ অন্তর d।<br>a + (p - 1)d = q ... (i)<br>a + (q - 1)d = p ... (ii)<br>(i) - (ii) ⇒ (p - q)d = q - p ⇒ d = -1。<br>(p + q)-তম পদ = a + (p + q - 1)d = a + (p - 1)d + qd = q + q(-1) = q - q = ০।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 36 -->
+      <article class="q-card" data-qid="36" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">36</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">একটি সমান্তর ধারার ১ম পদ ১, সাধারণ অন্তর ৩ হলে এর n-তম পদ কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. 3n - 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. 3n - 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. 3n + 1</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. 3n</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-36" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. 3n - 2</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-36">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(36)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              n-তম পদ = a + (n - 1)d = ১ + (n - 1)৩ = ১ + 3n - ৩ = 3n - ২।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 37 -->
+      <article class="q-card" data-qid="37" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">37</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১ + ৫ + ৯ + ... + ৮১ = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৮২০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৮৪০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ৮৬১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৮৮০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-37" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ৮৬১</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-37">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(37)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              a = ১, d = ৪, শেষ পদ = ৮১。<br>পদসংখ্যা n = (৮১ - ১)/৪ + ১ = ২০ + ১ = ২১টি。<br>সমষ্টি = ২১/২ [১ + ৮১] = ২১/২ × ৮২ = ২১ × ৪১ = ৮৬১।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 38 -->
+      <article class="q-card" data-qid="38" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">38</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">একটি গুণোত্তর ধারার ১ম পদ ২, ২য় পদ -৪ হলে ধারাটির সাধারণ অনুপাত কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. -২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ১/২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. -১/২</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-38" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. -২</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-38">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(38)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              সাধারণ অনুপাত r = ২য় পদ / ১ম পদ = -৪ / ২ = -২।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 39 -->
+      <article class="q-card" data-qid="39" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">39</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">লগ ২ + লগ ৪ + লগ ৮ + ... ধারাটির প্রথম দশটি পদের সমষ্টি কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৪৫ log 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৫০ log 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ৫৫ log 2</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৬০ log 2</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-39" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ৫৫ log 2</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-39">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(39)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ধারাটি হলো: log 2 + 2 log 2 + 3 log 2 + ... + 10 log 2 = log 2 (১ + ২ + ... + ১০) = log 2 × ৫৫ = ৫৫ log 2।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 40 -->
+      <article class="q-card" data-qid="40" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">40</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">log 3 + log 9 + log 27 + ... ধারাটির প্রথম n সংখ্যক পদের যোগফল কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. n log 3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. [n(n+1)/2] log 3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. n<sup>২</sup> log 3</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. [n(n-1)/2] log 3</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-40" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. [n(n+1)/2] log 3</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-40">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(40)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              log 3 + 2 log 3 + 3 log 3 + ... = log 3 (১ + ২ + ৩ + ... + n) = [n(n+1)/2] log 3।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 41 -->
+      <article class="q-card" data-qid="41" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">41</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">২ + ৪ + ৬ + ... + ৫০ = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৬০০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ৬২৫</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ৬৫০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৭০০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-41" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ৬৫০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-41">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(41)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ২(১ + ২ + ৩ + ... + ২৫) = ২ × [(২৫ × ২৬)/২] = ২৫ × ২৬ = ৬৫০।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 42 -->
+      <article class="q-card" data-qid="42" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">42</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১ + ৩ + ৫ + ... + ২১ = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১০০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ১২১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ১৪৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১৬৯</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-42" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ১২১</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-42">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(42)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              শেষ পদ ২১ = 2n - 1 ⇒ 2n = ২২ ⇒ n = ১১।<br>সমষ্টি = n<sup>২</sup> = ১১<sup>২</sup> = ১২১।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 43 -->
+      <article class="q-card" data-qid="43" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">43</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">একটি সমান্তর ধারার ১২তম পদ ৭৭ হলে প্রথম ২৩টি পদের সমষ্টি কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ১৭৭১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১৮৫০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ১৬০০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১৭১০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-43" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ১৭৭১</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-43">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(43)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ১২তম পদ = a + ১১d = ৭৭。<br>S<sub>২৩</sub> = ২৩/২ [২a + ২২d] = ২৩/২ × ২[a + ১১d] = ২৩ × ৭৭ = ১৭৭১।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 44 -->
+      <article class="q-card" data-qid="44" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">44</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">একটি গুণোত্তর ধারার ৫ম পদ ৯√৩ এবং ১০ম পদ ৮১√৩ হলে ধারাটির ৩য় পদ কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৩</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ৩√৩</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৯</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১/√৩</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-44" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ৩√৩</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-44">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(44)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ar<sup>৪</sup> = ৯√৩ এবং ar<sup>৯</sup> = ৮১√৩。<br>ভাগ করে পাই, r<sup>৫</sup> = ৯ = (√৩)<sup>৪</sup> (বা r = √৩)।<br>∴ ৩য় পদ = ar<sup>২</sup> = (ar<sup>৪</sup>)/r<sup>২</sup> = ৯√৩ / ৩ = ৩√৩।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 45 -->
+      <article class="q-card" data-qid="45" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">45</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১০ + ২০ + ৩০ + ... + ১০০ = কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ৫০০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ৫৫০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৬০০</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৬৫০</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-45" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ৫৫০</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-45">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(45)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ১০(১ + ২ + ৩ + ... + ১০) = ১০ × [(১০ × ১১)/২] = ১০ × ৫৫ = ৫৫০।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 46 -->
+      <article class="q-card" data-qid="46" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">46</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">১ + ১/২ + ১/৪ + ১/৮ + ... ধারাটির প্রথম ৮টি পদের সমষ্টি কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">ক. ২৫৫/১২৮</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ১২৭/৬৪</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ২৫৫/২৫৬</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৬৩/৩২</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-46" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>ক. ২৫৫/১২৮</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-46">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(46)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              a = ১, r = ১/২, n = ৮。<br>S<sub>৮</sub> = [১(১ - (১/২)<sup>৮</sup>)] / (১ - ১/২) = [১ - ১/২৫৬] / (১/২) = (২৫৫/২৫৬) × ২ = ২৫৫/১২৮।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 47 -->
+      <article class="q-card" data-qid="47" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">47</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">সমান্তর ধারার ক্ষেত্রে কোনটি সত্য?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. পরপর দুটি পদের ভাগফল সর্বদা সমান</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. পরপর দুটি পদের অন্তর সর্বদা সমান</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. কোনো পদ শূন্য হতে পারে না</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. পদগুলো সর্বদা বৃদ্ধি পায়</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-47" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. পরপর দুটি পদের অন্তর সর্বদা সমান</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-47">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(47)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              সমান্তর ধারার সংজ্ঞানুসারে যেকোনো পদ ও তার পূর্ববর্তী পদের অন্তর (বিয়োগফল) সর্বদা সমান থাকে।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 48 -->
+      <article class="q-card" data-qid="48" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">48</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">গুণোত্তর ধারার ক্ষেত্রে কোনটি সত্য?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. সাধারণ অন্তর d সর্বদা ১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. সাধারণ অনুপাত r সর্বদা সমান</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. পদসংখ্যা সর্বদা অসীম</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ১ম পদ সর্বদা ১</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-48" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. সাধারণ অনুপাত r সর্বদা সমান</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-48">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(48)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              গুণোত্তর ধারার সংজ্ঞানুসারে যেকোনো পদ ও তার পূর্ববর্তী পদের অনুপাত (ভাগফল) সর্বদা সমান থাকে।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 49 -->
+      <article class="q-card" data-qid="49" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">49</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">কোনো সমান্তর ধারার n সংখ্যক পদের সমষ্টি n<sup>২</sup> + 2n হলে ধারাটির প্রথম পদ কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">খ. ২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">গ. ৩</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৪</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-49" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>গ. ৩</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-49">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(49)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              ১ম পদ a = S<sub>১</sub> = ১<sup>২</sup> + ২(১) = ১ + ২ = ৩।
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Question 50 -->
+      <article class="q-card" data-qid="50" data-session="পিএসসি নন-ক্যাডার">
+        <div class="q-header">
+          <span class="q-num">50</span>
+          <span class="q-session">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-body">
+          <p class="q-text">কোনো সমান্তর ধারার n সংখ্যক পদের সমষ্টি n<sup>২</sup> + 2n হলে ধারাটির সাধারণ অন্তর কত?</p>
+          <div class="q-options">
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ক. ১</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="true" onclick="checkAnswer(this, 1)">
+                <span class="opt-text">খ. ২</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">গ. ৩</span>
+              </button>
+              <button type="button" class="opt-btn" data-is-correct="false" onclick="checkAnswer(this, 0)">
+                <span class="opt-text">ঘ. ৪</span>
+              </button>
+          </div>
+          <div class="ans-drawer" id="ans-50" style="display: none;">
+            <div class="ans-badge">সঠিক উত্তর: <strong>খ. ২</strong></div>
+          </div>
+          <div class="exp-drawer" id="exp-50">
+            <button type="button" class="exp-toggle-btn" onclick="toggleExp(50)">
+              <span>💡 বিশদ ব্যাখ্যা ও সমাধান</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="exp-content">
+              S<sub>১</sub> = ১ + ২ = ৩ (১ম পদ)।<br>S<sub>২</sub> = ৪ + ৪ = ৮。<br>২য় পদ = S<sub>২</sub> - S<sub>১</sub> = ৮ - ৩ = ৫。<br>∴ সাধারণ অন্তর d = ৫ - ৩ = ২।
+            </div>
+          </div>
+        </div>
+      </article>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p style="margin-bottom: 6px;">পিএসসি নন-ক্যাডার প্রশ্নব্যাংক ২য় খণ্ড (Job Hunter) • অধ্যায় 09: সমান্তর ও গুণোত্তর অনুক্রম ও ধারা</p>
+      <p style="opacity: 0.8;">প্রামাণ্য তথ্য ও জিরো-ফেব্রিকেশন নীতিতে প্রস্তুতকৃত ডিজিটাল স্মার্ট ই-বুক।</p>
+    </footer>
+
+  </div>
+
+  <!-- Interactive Logic -->
+  <script>
+    let currentScore = 0;
+    const answeredCards = new Set();
+    const totalQuestions = 50;
+    let currentFontSize = 1;
+
+    function checkAnswer(btn, isCorrect) {
+      const card = btn.closest('.q-card');
+      const qid = card.getAttribute('data-qid');
+
+      if (card.dataset.answered) return;
+      card.dataset.answered = "true";
+
+      const allBtns = card.querySelectorAll('.opt-btn');
+      allBtns.forEach(b => {
+        b.disabled = true;
+        if (b.getAttribute('data-is-correct') === 'true') {
+          b.classList.add('correct');
+        }
+      });
+
+      if (isCorrect === 1) {
+        btn.classList.add('correct');
+        currentScore++;
+      } else {
+        btn.classList.add('wrong');
+      }
+
+      const ansDrawer = document.getElementById('ans-' + qid);
+      if (ansDrawer) ansDrawer.style.display = 'block';
+
+      const expDrawer = document.getElementById('exp-' + qid);
+      if (expDrawer) expDrawer.classList.add('open');
+
+      updateScore();
+    }
+
+    function toggleExp(qid) {
+      const expDrawer = document.getElementById('exp-' + qid);
+      if (expDrawer) {
+        expDrawer.classList.toggle('open');
+      }
+    }
+
+    function updateScore() {
+      const scoreVal = document.getElementById('score-val');
+      const scorePct = document.getElementById('score-pct');
+      if (scoreVal) scoreVal.textContent = currentScore.toLocaleString('bn-BD');
+      if (scorePct) {
+        const pct = Math.round((currentScore / totalQuestions) * 100);
+        scorePct.textContent = '(' + pct.toLocaleString('bn-BD') + '%)';
+      }
+    }
+
+    function resetQuiz() {
+      if (!confirm('আপনি কি এই অধ্যায়ের সমস্ত কুইজ রিসেট করতে চান?')) return;
+      currentScore = 0;
+      updateScore();
+
+      document.querySelectorAll('.q-card').forEach(c => {
+        delete c.dataset.answered;
+        c.querySelectorAll('.opt-btn').forEach(b => {
+          b.disabled = false;
+          b.classList.remove('correct', 'wrong');
+        });
+        const drawer = c.querySelector('.ans-drawer');
+        if (drawer) drawer.style.display = 'none';
+        const exp = c.querySelector('.exp-drawer');
+        if (exp) exp.classList.remove('open');
+      });
+    }
+
+    function filterSession(session) {
+      document.querySelectorAll('.q-card').forEach(card => {
+        if (session === 'all' || card.getAttribute('data-session') === session) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function adjustFont(dir) {
+      currentFontSize += dir * 0.08;
+      if (currentFontSize < 0.8) currentFontSize = 0.8;
+      if (currentFontSize > 1.4) currentFontSize = 1.4;
+      document.querySelector('.paper-container').style.fontSize = currentFontSize + 'rem';
+    }
+
+    function resetFont() {
+      currentFontSize = 1;
+      document.querySelector('.paper-container').style.fontSize = '1rem';
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const themeBtn = document.getElementById('theme-btn');
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        if (themeBtn) themeBtn.textContent = '🌙';
+        localStorage.setItem('theme_algebra', 'light');
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        if (themeBtn) themeBtn.textContent = '☀️';
+        localStorage.setItem('theme_algebra', 'dark');
+      }
+    }
+  </script>
+  <script src="nav-component.js"></script>
+  <script src="../universal-modes.js"></script>
+</body>
+</html>

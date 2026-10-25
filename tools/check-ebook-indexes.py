@@ -35,7 +35,11 @@ INDEX_FILES = [
     'Non Cadre Bangla Grammar/index.html',
     'Non Cadre Bangla Literature/index.html',
     'Non Cadre English/index.html',
-    'Non Cadre General Science/index.html'
+    'Non Cadre General Science/index.html',
+    'Non Cadre Bangladesh/index.html',
+    'Non Cadre International/index.html',
+    'Non Cadre Arithmetic/index.html',
+    'Non Cadre Algebra/index.html'
 ]
 
 REGISTERED_FOLDERS = {
@@ -54,7 +58,11 @@ REGISTERED_FOLDERS = {
     'Non Cadre Bangla Grammar',
     'Non Cadre Bangla Literature',
     'Non Cadre English',
-    'Non Cadre General Science'
+    'Non Cadre General Science',
+    'Non Cadre Bangladesh',
+    'Non Cadre International',
+    'Non Cadre Arithmetic',
+    'Non Cadre Algebra'
 }
 
 class TagBalanceParser(HTMLParser):
