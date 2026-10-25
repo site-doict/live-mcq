@@ -227,10 +227,23 @@
     },
 
     initDefaultSession: function() {
-      // Pick 49th BCS if available, else first top session
-      if (!this.sessionMap[this.selectedSession]) {
-        const sortedSessions = Object.keys(this.sessionMap).sort((a,b) => this.sessionMap[b].length - this.sessionMap[a].length);
-        this.selectedSession = sortedSessions[0] || '';
+      // Pick highest BCS session available
+      const bcsSessions = Object.keys(this.sessionMap)
+        .filter(s => s.includes('বিসিএস'))
+        .sort((a,b) => {
+          const getNum = str => {
+            const m = str.match(/([০-৯]+)/);
+            if (m) {
+              const bnToEn = m[1].split('').map(c => BN_DIGITS.indexOf(c)).join('');
+              return parseInt(bnToEn, 10);
+            }
+            return 0;
+          };
+          return getNum(b) - getNum(a);
+        });
+
+      if (!this.selectedSession || !this.selectedSession.includes('বিসিএস') || !this.sessionMap[this.selectedSession]) {
+        this.selectedSession = bcsSessions[0] || '';
       }
       this.resetSessionSubjectsToAll();
     },
@@ -318,8 +331,20 @@
         return getNum(b) - getNum(a);
       });
 
-      // Quick popular badges
-      const popularSessions = ['৪৯তম বিসিএস', '৪৭তম বিসিএস', '৪৬তম বিসিএস', '৪৫তম বিসিএস', '৪৪তম বিসিএস', '৪৩তম বিসিএস', '৪১তম বিসিএস', '৪০তম বিসিএস', '৩৮তম বিসিএস', '৩৭তম বিসিএস', '৩৫তম বিসিএস', '১০ম বিসিএস'];
+      // Available BCS sessions sorted descending by BCS number
+      const bcsSessions = Object.keys(this.sessionMap)
+        .filter(s => s.includes('বিসিএস'))
+        .sort((a,b) => {
+          const getNum = str => {
+            const m = str.match(/([০-৯]+)/);
+            if (m) {
+              const bnToEn = m[1].split('').map(c => BN_DIGITS.indexOf(c)).join('');
+              return parseInt(bnToEn, 10);
+            }
+            return 0;
+          };
+          return getNum(b) - getNum(a);
+        });
 
       container.innerHTML = `
         <div class="exam-setup-wrapper">
@@ -334,7 +359,7 @@
           <div class="mode-tabs">
             <button class="mode-tab-btn ${this.activeMode === 'session' ? 'active' : ''}" onclick="ExamEngine.switchMode('session')">
               <span class="tab-icon">🏛️</span>
-              <span class="tab-label">বিসিএস সেশন পরীক্ষা</span>
+              <span class="tab-label">বিসিএস প্রশ্নের উপর পরীক্ষা দিন</span>
             </button>
             <button class="mode-tab-btn ${this.activeMode === 'subject' ? 'active' : ''}" onclick="ExamEngine.switchMode('subject')">
               <span class="tab-icon">📚</span>
@@ -352,7 +377,7 @@
 
           <!-- Mode Content Card -->
           <div class="setup-card">
-            ${this.renderActiveModeContent(sortedSessions, popularSessions)}
+            ${this.renderActiveModeContent(bcsSessions)}
           </div>
 
           <!-- Exam Parameters & Start Banner -->
@@ -370,7 +395,7 @@
       this.renderSetupView();
     },
 
-    renderActiveModeContent: function(sortedSessions, popularSessions) {
+    renderActiveModeContent: function(bcsSessions) {
       if (this.activeMode === 'session') {
         const sessionQs = this.sessionMap[this.selectedSession] || [];
         const totalSessionCount = sessionQs.length;
@@ -384,21 +409,11 @@
         return `
           <div class="mode-session-panel">
             <div class="section-label">১. বিসিএস পরীক্ষার সেশন নির্বাচন করুন:</div>
-            
-            <!-- Quick Session Badges -->
-            <div class="quick-chips-row">
-              ${popularSessions.map(sess => `
-                <button type="button" class="chip-btn ${this.selectedSession === sess ? 'active' : ''}" onclick="ExamEngine.changeSession('${sess}')">
-                  ${sess}
-                </button>
-              `).join('')}
-            </div>
 
-            <!-- Session Dropdown -->
-            <div class="form-row" style="margin-top: 14px;">
-              <label for="sessionSelect" class="form-label">অথবা সকল বিসিএস সেশন তালিকা থেকে বেছে নিন:</label>
+            <!-- Session Dropdown (Only BCS sessions) -->
+            <div class="form-row" style="margin-top: 8px;">
               <select id="sessionSelect" class="custom-select" onchange="ExamEngine.changeSession(this.value)">
-                ${sortedSessions.map(sess => `
+                ${bcsSessions.map(sess => `
                   <option value="${sess}" ${this.selectedSession === sess ? 'selected' : ''}>
                     ${sess} (${toBn(this.sessionMap[sess].length)} টি প্রশ্ন)
                   </option>
