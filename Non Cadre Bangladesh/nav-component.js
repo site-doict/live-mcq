@@ -290,6 +290,7 @@
     { name: "📖 নন-ক্যাডার English", url: "../Non Cadre English/index.html" },
     { name: "🔬 নন-ক্যাডার সাধারণ বিজ্ঞান", url: "../Non Cadre General Science/index.html" },
     { name: "🇧🇩 নন-ক্যাডার বাংলাদেশ বিষয়াবলি (বর্তমান)", url: "index.html", current: true },
+    { name: "🌐 নন-ক্যাডার আন্তর্জাতিক বিষয়াবলি", url: "../Non Cadre International/index.html" },
     { name: "🏛️ মাস্টার লাইব্রেরি পোর্টাল", url: "../index.html" }
   ];
 

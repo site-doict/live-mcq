@@ -165,10 +165,10 @@
       title: "বিবিধ আন্তর্জাতিক তথ্যপ্রবাহ, মহাশূন্য, নারী বিশ্ব ও পূর্ণরূপ",
       titleEn: "Miscellaneous World Affairs, Space, Women in World & Important Abbreviations",
       pages: "পৃষ্ঠা ২২০–২২৭",
-      questions: "আসন্ন",
-      qCount: 0,
-      badgeColor: "#b45309",
-      file: "ch-12-miscellaneous-space-abbreviations.html"
+      questions: "৭৬টি প্রশ্ন",
+      qCount: 76,
+      badgeColor: "#059669",
+      file: "ch-12-miscellaneous-world-affairs.html"
     }
   ];
 
