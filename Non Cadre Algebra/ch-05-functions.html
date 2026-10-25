@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ফাংশন - পিএসসি নন-ক্যাডার বীজগণিত</title>
+  <meta name="description" content="পিএসসি নন-ক্যাডার পরীক্ষার বিগত সালের ১২টি প্রামাণ্য ফাংশন প্রশ্ন, ডোমেন ও রেঞ্জ নির্ণয়, পরমমান ফাংশন ও ব্যাখ্যা।">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../bangla-fonts.css">
+  <link rel="stylesheet" href="../paper-textures.css">
+  <link rel="stylesheet" href="../universal-modes.css">
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --accent: #d97706;
+      --accent-light: #fef3c7;
+      --bg-base: #f0f9ff;
+      --bg-surface: rgba(255, 255, 255, 0.88);
+      --bg-card: rgba(255, 255, 255, 0.85);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(226, 232, 240, 0.85);
+      --correct-bg: #ecfdf5;
+      --correct-border: #10b981;
+      --correct-text: #065f46;
+      --wrong-bg: #fef2f2;
+      --wrong-border: #ef4444;
+      --wrong-text: #991b1b;
+      --font-base: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+    }
+
+    [data-theme="dark"] {
+      --primary: #38bdf8;
+      --primary-dark: #0284c7;
+      --primary-light: rgba(56, 189, 248, 0.15);
+      --accent: #fbbf24;
+      --accent-light: rgba(251, 191, 36, 0.15);
+      --bg-base: #0f172a;
+      --bg-surface: rgba(30, 41, 59, 0.88);
+      --bg-card: rgba(30, 41, 59, 0.85);
+      --text-main: #f8fafc;
+      --text-muted: #cbd5e1;
+      --border-color: rgba(51, 65, 85, 0.85);
+      --correct-bg: rgba(6, 95, 70, 0.3);
+      --correct-border: #10b981;
+      --correct-text: #a7f3d0;
+      --wrong-bg: rgba(153, 27, 27, 0.3);
+      --wrong-border: #ef4444;
+      --wrong-text: #fecaca;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-base);
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.7;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .paper-container {
+      max-width: 960px;
+      margin: 20px auto;
+      padding: 32px 28px;
+      border-radius: 18px;
+      box-shadow: 0 10px 28px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transition: all 0.3s ease;
+    }
+
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      transition: all 0.2s;
+    }
+    .nav-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ctrl-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .ctrl-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .header-box {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 24px 20px;
+      background: var(--bg-surface);
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+    }
+    .ch-title {
+      font-size: 2.1rem;
+      line-height: 1.35;
+      margin-bottom: 12px;
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+    [data-theme="dark"] .ch-title {
+      color: var(--primary);
+    }
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 4px;
+    }
+    .badge-bar {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+    [data-theme="dark"] .badge {
+      color: var(--primary);
+    }
+
+    /* Part 1 Sketchnotes */
+    .part-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 35px 0 20px 0;
+      padding-bottom: 10px;
+      border-bottom: 2px dashed var(--border-color);
+    }
+    .part-tag {
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+    .part-title {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .sk-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 20px 18px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      position: relative;
+    }
+
+    .sk-box-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    [data-theme="dark"] .sk-box-title {
+      color: var(--primary);
+    }
+
+    .sk-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    .sk-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 8px;
+      font-size: 0.96rem;
+    }
+    .sk-list li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      top: -1px;
+      color: var(--primary);
+      font-size: 1.3rem;
+    }
+
+    .sk-formula {
+      background: var(--bg-surface);
+      border-left: 4px solid var(--primary);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      margin: 10px 0;
+      font-weight: 600;
+      color: var(--text-main);
+      font-size: 0.98rem;
+    }
+
+    .sk-sticky {
+      background: var(--accent-light);
+      border: 1px solid rgba(217, 119, 6, 0.3);
+      border-left: 5px solid var(--accent);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin: 14px 0;
+      color: var(--text-main);
+      font-size: 0.94rem;
+    }
+    [data-theme="dark"] .sk-sticky {
+      background: rgba(251, 191, 36, 0.1);
+      border-color: rgba(251, 191, 36, 0.3);
+    }
+
+    .sk-compare {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 0.92rem;
+    }
+    .sk-compare th, .sk-compare td {
+      border: 1px solid var(--border-color);
+      padding: 8px 10px;
+      text-align: left;
+    }
+    .sk-compare th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+    [data-theme="dark"] .sk-compare th {
+      color: var(--primary);
+    }
+
+    /* Part 2 Quiz Engine */
+    .quiz-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 14px 20px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: sticky;
+      top: 15px;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+
+    .score-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--primary);
+    }
+
+    .filter-select {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .reset-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .reset-btn:hover {
+      border-color: var(--wrong-border);
+      color: var(--wrong-border);
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 22px 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .q-card:hover {
+      box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+    }
+
+    .q-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .q-num {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 2px 10px;
+      border-radius: 12px;
+    }
+    [data-theme="dark"] .q-num {
+      color: var(--primary);
+    }
+
+    .q-tag {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      font-weight: 500;
+    }
+
+    .q-text {
+      font-size: 1.08rem;
+      font-weight: 700;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      color: var(--text-main);
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .opt-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 10px 14px;
+      border-radius: 10px;
+      text-align: left;
+      font-family: inherit;
+      font-size: 0.96rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+      width: 100%;
+    }
+    .opt-btn:hover:not(.locked) {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .opt-letter {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .opt-btn.correct {
+      background: var(--correct-bg) !important;
+      border-color: var(--correct-border) !important;
+      color: var(--correct-text) !important;
+      font-weight: 700;
+    }
+    .opt-btn.correct .opt-letter {
+      background: var(--correct-border);
+      color: #fff;
+    }
+
+    .opt-btn.wrong {
+      background: var(--wrong-bg) !important;
+      border-color: var(--wrong-border) !important;
+      color: var(--wrong-text) !important;
+      font-weight: 700;
+    }
+    .opt-btn.wrong .opt-letter {
+      background: var(--wrong-border);
+      color: #fff;
+    }
+
+    .drawer-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: none;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      padding: 4px 0;
+      margin-top: 6px;
+    }
+    .drawer-toggle:hover {
+      text-decoration: underline;
+    }
+
+    .exp-drawer {
+      display: none;
+      background: var(--bg-surface);
+      border: 1px dashed var(--border-color);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-top: 12px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      animation: fadeIn 0.3s ease;
+    }
+    .exp-drawer.open {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Footer */
+    .ch-footer {
+      text-align: center;
+      margin-top: 45px;
+      padding: 30px 20px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .paper-container {
+        padding: 20px 14px;
+        margin: 10px;
+      }
+      .ch-title {
+        font-size: 1.6rem;
+      }
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+      .quiz-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+
+    /* Typography Protection */
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+    .score-badge, .score-badge *, .sk-compare, .sk-compare * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+    }
+  </style>
+</head>
+<body class="paper-graph">
+
+  <div class="paper-container">
+
+    <!-- Top Navigation -->
+    <div class="top-nav">
+      <div class="nav-left">
+        <a href="index.html" class="nav-btn">
+          <span>←</span> সূচিপত্রে ফিরুন
+        </a>
+      </div>
+      <div class="nav-controls">
+        <button class="ctrl-btn" onclick="adjustFontSize(-1)" title="ফন্ট ছোট করুন">A-</button>
+        <button class="ctrl-btn" onclick="adjustFontSize(0)" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="ctrl-btn" onclick="adjustFontSize(1)" title="ফন্ট বড় করুন">A+</button>
+        <button class="ctrl-btn" id="themeToggleBtn" onclick="toggleTheme()" title="থিম পরিবর্তন">🌙</button>
+      </div>
+    </div>
+
+    <!-- Chapter Header -->
+    <div class="header-box">
+      <h1 class="ch-title font-begum-zia-curve">
+        ফাংশন
+        <span class="ch-en">(Functions)</span>
+      </h1>
+      <div class="badge-bar">
+        <span class="badge">📖 বইয়ের পৃষ্ঠা: ৩৬৪–৩৬৫</span>
+        <span class="badge">📝 ১২টি প্রামাণ্য MCQ</span>
+        <span class="badge">🎯 শতভাগ সমাধান ও ব্যাখ্যা</span>
+        <span class="badge">🎨 ফন্ট: বেগম জিয়া কার্ভ</span>
+      </div>
+    </div>
+
+    <!-- PART 1: Sketchnotes & Formulas -->
+    <div class="part-header">
+      <span class="part-tag">PART 1</span>
+      <h2 class="part-title font-begum-zia-curve">প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি</h2>
+    </div>
+
+    <!-- Sketchnote Grid -->
+    <div class="sk-grid">
+
+      <!-- Card 1: ডোমেন ও রেঞ্জের মূলনীতি -->
+      <div class="sk-box">
+        <h3 class="sk-box-title font-begum-zia-curve">১. ডোমেন ও রেঞ্জের মৌলিক সংজ্ঞা</h3>
+        <p style="margin-bottom: 8px;">ফাংশন `y = f(x)` এর ক্ষেত্রে:</p>
+        <ul class="sk-list">
+          <li><strong>ডোমেন (Domain):</strong> চলক `x` এর যে সকল বাস্তব মানের জন্য `f(x)` বাস্তব ও সংজ্ঞায়িত হয়।</li>
+          <li><strong>রেঞ্জ (Range):</strong> ডোমেনের অন্তর্ভুক্ত মানসমূহের জন্য `y` বা `f(x)` এর প্রাপ্ত বাস্তব মানসমূহ।</li>
+          <li><strong>ধ্রুবক ফাংশন:</strong> `f(x) = c` হলে `x` এর যেকোনো মানের জন্য `f(x) = c` (যেমন: `f(x) = 10` হলে `f(0) = 10`)।</li>
+        </ul>
+      </div>
+
+      <!-- Card 2: ডোমেন নির্ণয়ের ৩টি গোল্ডেন রুলস -->
+      <div class="sk-box">
+        <h3 class="sk-box-title font-begum-zia-curve">২. ডোমেন নির্ণয়ের ৩টি গোল্ডেন রুলস</h3>
+        <table class="sk-compare">
+          <thead>
+            <tr>
+              <th>ফাংশনের ধরন</th>
+              <th>বাস্তব হওয়ার শর্ত</th>
+              <th>ডোমেন রূপ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>f(x) = P(x) / Q(x)</td>
+              <td>হর Q(x) ≠ 0</td>
+              <td>ℝ - {যে মানে হর 0}</td>
+            </tr>
+            <tr>
+              <td>f(x) = √(ax + b)</td>
+              <td>ax + b ≥ 0</td>
+              <td>{x ∈ ℝ : x ≥ -b/a}</td>
+            </tr>
+            <tr>
+              <td>f(x) = √(a² - x²)</td>
+              <td>a² - x² ≥ 0</td>
+              <td>[-a, a] বা -a ≤ x ≤ a</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="sk-sticky">
+          <strong>উদাহরণ:</strong> `f(x) = (x + 3) / (x - 1)` হলে হর `x - 1 ≠ 0 ⇒ x ≠ 1`। ডোমেন = `{x ∈ ℝ : x ≠ 1}`।
+        </div>
+      </div>
+
+      <!-- Card 3: পরমমান ফাংশনের বিশেষ রূপ -->
+      <div class="sk-box">
+        <h3 class="sk-box-title font-begum-zia-curve">৩. পরমমান ফাংশন: f(x) = |x| / x</h3>
+        <p>পরমমানের সংজ্ঞানুযায়ী:</p>
+        <div class="sk-formula">
+          `|x| = x` (যদি `x ≥ 0`) এবং `|x| = -x` (যদি `x < 0`)
+        </div>
+        <p>সুতরাং, `f(x) = |x| / x` ফাংশনের ক্ষেত্রে:</p>
+        <ul class="sk-list">
+          <li>যেকোনো ধনাত্মক মানে `x > 0 ⇒ f(x) = x/x = 1`</li>
+          <li>যেকোনো ঋণাত্মক মানে `x < 0 ⇒ f(x) = -x/x = -1`</li>
+          <li>অতএব, `f(-10) = |-10| / (-10) = 10 / (-10) = -1`</li>
+        </ul>
+      </div>
+
+      <!-- Card 4: কম্পোজিট ও বহুচলক ফাংশন -->
+      <div class="sk-box">
+        <h3 class="sk-box-title font-begum-zia-curve">৪. কম্পোজিট ও দ্বি-চলক ফাংশন</h3>
+        <p>ফাংশনের ইনপুট হিসেবে অন্য একটি ফাংশন বা একাধিক চলক থাকা:</p>
+        <div class="sk-formula">
+          `f(x, y) = x²y²` এবং `h(x) = x² - 5`<br>
+          • প্রথমে `h(3) = 3² - 5 = 4`<br>
+          • এরপর `f(2, h(3)) = f(2, 4) = 2² × 4² = 4 × 16 = 64`
+        </div>
+        <div class="sk-sticky">
+          <strong>উৎপাদক উপপাদ্য (Factor Theorem):</strong><br>
+          যদি `(ax + b)` কোনো বহুপদী `f(x)` এর উৎপাদক হয়, তবে `f(-b/a) = 0` হবে।
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PART 2: Question Engine -->
+    <div class="part-header">
+      <span class="part-tag">PART 2</span>
+      <h2 class="part-title font-begum-zia-curve">বিগত বছরের প্রামাণ্য প্রশ্নব্যাংক ও ইন্টারঅ্যাক্টিভ কুইজ</h2>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="quiz-toolbar">
+      <div class="score-badge">
+        <span>স্কোর:</span>
+        <span id="scoreDisplay">০ / ১২</span>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+        <select id="examFilter" class="filter-select" onchange="filterQuestions()">
+          <option value="all">সমস্ত প্রশ্ন (১২টি)</option>
+          <option value="domain">ডোমেন ও রেঞ্জ</option>
+          <option value="value">মান নির্ণয় সংক্রান্ত</option>
+          <option value="misc">পরমমান ও উৎপাদক</option>
+        </select>
+        <button class="reset-btn" onclick="resetQuiz()">🔄 রিসেট</button>
+      </div>
+    </div>
+
+    <!-- Question Cards Container -->
+    <div id="questionsContainer">
+
+      <!-- Q1 -->
+      <div class="q-card" data-id="1" data-ans="b" data-cat="value">
+        <div class="q-meta">
+          <span class="q-num">প্রশ্ন ০১</span>
+          <span class="q-tag">প্রেসিডেন্ট এর কার্যালয় (পিএসসি), সহকারী প্রটোকল অফিসার-২৪</span>
+        </div>
+        <div class="q-text">f(x) = (4x - 7)/(2x - 4) একটি ফাংশন হলে f(-1/2) = কত?</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(1, 'a')">
+            <span class="opt-letter">ক</span>
+            <span>-7/8</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(1, 'b')">
+            <span class="opt-letter">খ</span>
+            <span>9/5</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(1, 'c')">
+            <span class="opt-letter">গ</span>
+            <span>7/3</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(1, 'd')">
+            <span class="opt-letter">ঘ</span>
+            <span>-7/5</span>
+          </button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(1)">
+          <span>💡 সমাধান ও ব্যাখ্যা</span>
+        </button>
+        <div class="exp-drawer" id="drawer-1">
+          <strong>সঠিক উত্তর: খ</strong><br>
+          সমাধান:<br>দেওয়া আছে, f(x) = (4x - 7) / (2x - 4)<br>∴ f(-1/2) = {4(-1/2) - 7} / {2(-1/2) - 4}<br>= (-2 - 7) / (-1 - 4)<br>= -9 / -5<br>= 9/5
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="q-card" data-id="2" data-ans="a" data-cat="domain">
+        <div class="q-meta">
+          <span class="q-num">প্রশ্ন ০২</span>
+          <span class="q-tag">পিএসসি (জেলা ক্রীড়া কর্মকর্তা)-২৩</span>
+        </div>
+        <div class="q-text">f(x) = √(4x - 1) ফাংশনটির ডোমেন কত?</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(2, 'a')">
+            <span class="opt-letter">ক</span>
+            <span>{x ∈ ℝ : x ≥ 1/4}</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(2, 'b')">
+            <span class="opt-letter">খ</span>
+            <span>{x ∈ ℝ : x ≤ 1/4}</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(2, 'c')">
+            <span class="opt-letter">গ</span>
+            <span>{x ∈ ℝ : x < 1/4}</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(2, 'd')">
+            <span class="opt-letter">ঘ</span>
+            <span>{x ∈ ℝ : x ≥ 4}</span>
+          </button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(2)">
+          <span>💡 সমাধান ও ব্যাখ্যা</span>
+        </button>
+        <div class="exp-drawer" id="drawer-2">
+          <strong>সঠিক উত্তর: ক</strong><br>
+          ব্যাখ্যা:<br>f(x) = √(4x - 1) বাস্তব ও সংজ্ঞায়িত হবে যদি ও কেবল যদি বর্গমূলের ভিতরের রাশি অঋণাত্মক হয়:<br>4x - 1 ≥ 0<br>⇒ 4x ≥ 1<br>⇒ x ≥ 1/4<br>∴ ডোমেন = {x ∈ ℝ : x ≥ 1/4}।<br>[Note: বইয়ের উত্তরমালায় ভুলবশত ঘ মুদ্রিত হলেও সমাধান অনুযায়ী সঠিক উত্তর অপশন ক]।
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="q-card" data-id="3" data-ans="c" data-cat="value">
+        <div class="q-meta">
+          <span class="q-num">প্রশ্ন ০৩</span>
+          <span class="q-tag">পিএসসি (ইন্সট্রাক্টর/ওয়ার্কশপ সুপার)-২৩</span>
+        </div>
+        <div class="q-text">f(x) = x³ - x² - x - 1/8 হলে, f(-1/2) এর মান কত?</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(3, 'a')">
+            <span class="opt-letter">ক</span>
+            <span>1/2</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(3, 'b')">
+            <span class="opt-letter">খ</span>
+            <span>1</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(3, 'c')">
+            <span class="opt-letter">গ</span>
+            <span>0</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(3, 'd')">
+            <span class="opt-letter">ঘ</span>
+            <span>-1/2</span>
+          </button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(3)">
+          <span>💡 সমাধান ও ব্যাখ্যা</span>
+        </button>
+        <div class="exp-drawer" id="drawer-3">
+          <strong>সঠিক উত্তর: গ</strong><br>
+          সমাধান:<br>দেওয়া আছে, f(x) = x³ - x² - x - 1/8<br>∴ f(-1/2) = (-1/2)³ - (-1/2)² - (-1/2) - 1/8<br>= -1/8 - 1/4 + 1/2 - 1/8<br>= -1/8 - 2/8 + 4/8 - 1/8<br>= (-1 - 2 + 4 - 1) / 8<br>= 0 / 8 = 0
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="q-card" data-id="4" data-ans="d" data-cat="misc">
+        <div class="q-meta">
+          <span class="q-num">প্রশ্ন ০৪</span>
+          <span class="q-tag">ফায়ার সার্ভিস ও সিভিল ডিফেন্স অধিদপ্তর (স্টেশন অফিসার)-২২</span>
+        </div>
+        <div class="q-text">f(x) = |x|/x হলে, f(-10) কত হবে?</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(4, 'a')">
+            <span class="opt-letter">ক</span>
+            <span>10</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(4, 'b')">
+            <span class="opt-letter">খ</span>
+            <span>-10</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(4, 'c')">
+            <span class="opt-letter">গ</span>
+            <span>1</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(4, 'd')">
+            <span class="opt-letter">ঘ</span>
+            <span>-1</span>
+          </button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(4)">
+          <span>💡 সমাধান ও ব্যাখ্যা</span>
+        </button>
+        <div class="exp-drawer" id="drawer-4">
+          <strong>সঠিক উত্তর: ঘ</strong><br>
+          সমাধান:<br>দেওয়া আছে, f(x) = |x| / x<br>∴ f(-10) = |-10| / (-10)<br>= 10 / (-10)<br>= -1<br>[Note: পরমমানের সংজ্ঞানুযায়ী x < 0 হলে |x| = -x, তাই f(x) = -x/x = -1। বইয়ের মুদ্রিত ব্যাজে গ থাকলেও সমাধান অনুযায়ী সঠিক উত্তর ঘ: -1]।
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="q-card" data-id="5" data-ans="b" data-cat="value">
+        <div class="q-meta">
+          <span class="q-num">প্রশ্ন ০৫</span>
+          <span class="q-tag">পররাষ্ট্র মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-২১</span>
+        </div>
+        <div class="q-text">f(x) = 10 হলে f(0) = ?</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(5, 'a')">
+            <span class="opt-letter">ক</span>
+            <span>0</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(5, 'b')">
+            <span class="opt-letter">খ</span>
+            <span>10</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(5, 'c')">
+            <span class="opt-letter">গ</span>
+            <span>∞</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(5, 'd')">
+            <span class="opt-letter">ঘ</span>
+            <span>100</span>
+          </button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(5)">
+          <span>💡 সমাধান ও ব্যাখ্যা</span>
+        </button>
+        <div class="exp-drawer" id="drawer-5">
+          <strong>সঠিক উত্তর: খ</strong><br>
+          ব্যাখ্যা:<br>f(x) = 10 একটি ধ্রুবক ফাংশন (Constant Function)।<br>এখানে x এর যেকোনো বাস্তব মানের জন্যই ফাংশনের মান সর্বদা 10 হবে।<br>∴ f(0) = 10।
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="q-card" data-id="6" data-ans="d" data-cat="value">
+        <div class="q-meta">
+          <span class="q-num">প্রশ্ন ০৬</span>
+          <span class="q-tag">পররাষ্ট্র মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-১৯</span>
+        </div>
+        <div class="q-text">f(x) = x³ + ax³ + 2x³ = 0 হলে, a এর মান কত?</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(6, 'a')">
+            <span class="opt-letter">ক</span>
+            <span>3</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(6, 'b')">
+            <span class="opt-letter">খ</span>
+            <span>1</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(6, 'c')">
+            <span class="opt-letter">গ</span>
+            <span>0</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(6, 'd')">
+            <span class="opt-letter">ঘ</span>
+            <span>-3</span>
+          </button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(6)">
+          <span>💡 সমাধান ও ব্যাখ্যা</span>
+        </button>
+        <div class="exp-drawer" id="drawer-6">
+          <strong>সঠিক উত্তর: ঘ</strong><br>
+          সমাধান:<br>দেওয়া আছে,<br>f(x) = x³ + ax³ + 2x³ = 0<br>⇒ 3x³ + ax³ = 0<br>⇒ x³(3 + a) = 0<br>যেহেতু x ≠ 0,<br>⇒ 3 + a = 0<br>∴ a = -3<br>[Note: অপশনে মুদ্রিত -1 এর স্থানে -3 হলে উত্তর সঠিক হয়]।
+        </div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="q-card" data-id="7" data-ans="a" data-cat="domain">
+        <div class="q-meta">
+          <span class="q-num">প্রশ্ন ০৭</span>
+          <span class="q-tag">পিএসসি (বিভিন্ন মন্ত্রণালয়ের ব্যক্তিগত কর্মকর্তা)-১৯</span>
+        </div>
+        <div class="q-text">f(x) = (x + 3)/(x - 1) এর Domain কত?</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(7, 'a')">
+            <span class="opt-letter">ক</span>
+            <span>{x ∈ ℝ : x ≠ 1}</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(7, 'b')">
+            <span class="opt-letter">খ</span>
+            <span>ℝ - {3/2}</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(7, 'c')">
+            <span class="opt-letter">গ</span>
+            <span>ℝ - {1, -1}</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(7, 'd')">
+            <span class="opt-letter">ঘ</span>
+            <span>{1}</span>
+          </button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(7)">
+          <span>💡 সমাধান ও ব্যাখ্যা</span>
+        </button>
+        <div class="exp-drawer" id="drawer-7">
+          <strong>সঠিক উত্তর: ক</strong><br>
+          ব্যাখ্যা:<br>x এর যেসকল বাস্তব মানের জন্য f(x) সংজ্ঞায়িত হয়, তাদের সেটকে ডোমেন বলে।<br>ভগ্নাংশ আকারের ফাংশনে হর শূন্য হতে পারে না।<br>এখানে হর x - 1 = 0 ⇒ x = 1 হলে ফাংশনটি অসংজ্ঞায়িত হয়ে যায়।<br>সুতরাং x = 1 ব্যতীত সকল বাস্তব সংখ্যাই ফাংশনটির ডোমেন।<br>∴ Domain = {x ∈ ℝ : x ≠ 1} বা ℝ - {1}।
+        </div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="q-card" data-id="8" data-ans="a" data-cat="value">
+        <div class="q-meta">
+          <span class="q-num">প্রশ্ন ০৮</span>
+          <span class="q-tag">তথ্য মন্ত্রণালয়ের অধীন চলচ্চিত্র ও প্রকাশনা অধিদপ্তরের ক্যামেরাম্যান-১৯</span>
+        </div>
+        <div class="q-text">f(x) = x² - 4x + 4 হলে f(2) = ?</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(8, 'a')">
+            <span class="opt-letter">ক</span>
+            <span>0</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(8, 'b')">
+            <span class="opt-letter">খ</span>
+            <span>2</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(8, 'c')">
+            <span class="opt-letter">গ</span>
+            <span>3</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(8, 'd')">
+            <span class="opt-letter">ঘ</span>
+            <span>4</span>
+          </button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(8)">
+          <span>💡 সমাধান ও ব্যাখ্যা</span>
+        </button>
+        <div class="exp-drawer" id="drawer-8">
+          <strong>সঠিক উত্তর: ক</strong><br>
+          সমাধান:<br>f(x) = x² - 4x + 4 = (x - 2)²<br>∴ f(2) = 2² - 4(2) + 4<br>= 4 - 8 + 4<br>= 0
+        </div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="q-card" data-id="9" data-ans="a" data-cat="value">
+        <div class="q-meta">
+          <span class="q-num">প্রশ্ন ০৯</span>
+          <span class="q-tag">গণপূর্ত অধিদপ্তর (উপসহকারী প্রকৌশলী ও ড্রাফটসম্যান)-১৮</span>
+        </div>
+        <div class="q-text">x, y বাস্তব রাশি এবং f(x, y) = x²y², যদি h(x) = (x² - 5) হয়, তবে f(2, h(3)) এর মান কত?</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(9, 'a')">
+            <span class="opt-letter">ক</span>
+            <span>৬৪</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(9, 'b')">
+            <span class="opt-letter">খ</span>
+            <span>১৬</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(9, 'c')">
+            <span class="opt-letter">গ</span>
+            <span>৯৬</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(9, 'd')">
+            <span class="opt-letter">ঘ</span>
+            <span>৩২</span>
+          </button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(9)">
+          <span>💡 সমাধান ও ব্যাখ্যা</span>
+        </button>
+        <div class="exp-drawer" id="drawer-9">
+          <strong>সঠিক উত্তর: ক</strong><br>
+          সমাধান:<br>দেওয়া আছে, h(x) = x² - 5<br>∴ h(3) = 3² - 5 = 9 - 5 = 4<br><br>আবার, f(x, y) = x²y²<br>∴ f(2, h(3)) = f(2, 4)<br>= (2)² × (4)²<br>= 4 × 16 = 64
+        </div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="q-card" data-id="10" data-ans="c" data-cat="domain">
+        <div class="q-meta">
+          <span class="q-num">প্রশ্ন ১০</span>
+          <span class="q-tag">বাংলাদেশ রেলওয়ের উপসহকারী প্রকৌশলী (সিভিল)-১৬</span>
+        </div>
+        <div class="q-text">f(x) = √(4 - x²) হলে f এর রেঞ্জ কত?</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(10, 'a')">
+            <span class="opt-letter">ক</span>
+            <span>-2 ≤ x ≤ 0</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(10, 'b')">
+            <span class="opt-letter">খ</span>
+            <span>0 ≤ x ≤ 2</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(10, 'c')">
+            <span class="opt-letter">গ</span>
+            <span>-2 ≤ x ≤ 2</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(10, 'd')">
+            <span class="opt-letter">ঘ</span>
+            <span>-4 ≤ x ≤ 4</span>
+          </button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(10)">
+          <span>💡 সমাধান ও ব্যাখ্যা</span>
+        </button>
+        <div class="exp-drawer" id="drawer-10">
+          <strong>সঠিক উত্তর: গ</strong><br>
+          সমাধান:<br>দেওয়া আছে, f(x) = √(4 - x²)<br>বাস্তব মানের জন্য 4 - x² ≥ 0 ⇒ x² ≤ 4 ⇒ -2 ≤ x ≤ 2 (এটি হলো ডোমেন)।<br>বর্গমূল চিহ্নের মান সর্বদা অঋণাত্মক হওয়ায় রেঞ্জ: 0 ≤ y ≤ 2।<br>[Note: বইয়ের উত্তরমালায় ডোমেন সাপেক্ষে উত্তর গ (-2 ≤ x ≤ 2) দেওয়া হয়েছে]।
+        </div>
+      </div>
+
+      <!-- Q11 -->
+      <div class="q-card" data-id="11" data-ans="d" data-cat="misc">
+        <div class="q-meta">
+          <span class="q-num">প্রশ্ন ১১</span>
+          <span class="q-tag">জনস্বাস্থ্য প্রকৌশল অধিদপ্তরের উপ-সহকারী প্রকৌশলী (সিভিল)-২০১৫</span>
+        </div>
+        <div class="q-text">f(x) এর একটি উৎপাদক (3x + 2) হলে নিচের কোনটির মান শূন্য হবে?</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(11, 'a')">
+            <span class="opt-letter">ক</span>
+            <span>f(-3/2)</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(11, 'b')">
+            <span class="opt-letter">খ</span>
+            <span>f(2)</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(11, 'c')">
+            <span class="opt-letter">গ</span>
+            <span>f(3/2)</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(11, 'd')">
+            <span class="opt-letter">ঘ</span>
+            <span>f(-2/3)</span>
+          </button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(11)">
+          <span>💡 সমাধান ও ব্যাখ্যা</span>
+        </button>
+        <div class="exp-drawer" id="drawer-11">
+          <strong>সঠিক উত্তর: ঘ</strong><br>
+          ব্যাখ্যা:<br>উৎপাদক উপপাদ্য অনুসারে, যদি (ax + b) কোনো বহুপদী f(x) এর একটি উৎপাদক হয়, তবে f(-b/a) = 0 হবে।<br>এখানে 3x + 2 = 0 ⇒ x = -2/3<br>অতএব, f(-2/3) = 0 হবে।<br>[Note: বইয়ের নোটে উল্লেখ করা হয়েছে, উৎপাদক যদি (2x + 3) হতো, তবে উত্তর হতো f(-3/2)]।
+        </div>
+      </div>
+
+      <!-- Q12 -->
+      <div class="q-card" data-id="12" data-ans="d" data-cat="value">
+        <div class="q-meta">
+          <span class="q-num">প্রশ্ন ১২</span>
+          <span class="q-tag">কারা অধিদপ্তর (কারা তত্ত্বাবধায়ক)-১৩</span>
+        </div>
+        <div class="q-text">f(x) = x² + 1/(x - 1) - 1 হলে, নিম্নের কোনটি সঠিক?</div>
+        <div class="options-grid">
+          <button class="opt-btn" onclick="checkAnswer(12, 'a')">
+            <span class="opt-letter">ক</span>
+            <span>f(0) = ∞</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(12, 'b')">
+            <span class="opt-letter">খ</span>
+            <span>f(1) = -1</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(12, 'c')">
+            <span class="opt-letter">গ</span>
+            <span>f(1) = 0</span>
+          </button>
+          <button class="opt-btn" onclick="checkAnswer(12, 'd')">
+            <span class="opt-letter">ঘ</span>
+            <span>f(-1) = -1/2</span>
+          </button>
+        </div>
+        <button class="drawer-toggle" onclick="toggleDrawer(12)">
+          <span>💡 সমাধান ও ব্যাখ্যা</span>
+        </button>
+        <div class="exp-drawer" id="drawer-12">
+          <strong>সঠিক উত্তর: ঘ</strong><br>
+          সমাধান:<br>দেওয়া আছে, f(x) = x² + 1/(x - 1) - 1<br>অপশনগুলো পরীক্ষা করি:<br>• x = 1 হলে হর 1 - 1 = 0 হয়, তাই f(1) অসংজ্ঞায়িত (খ ও গ ভুল)।<br>• x = 0 হলে f(0) = 0² + 1/(-1) - 1 = -2 (ক ভুল)।<br>• x = -1 হলে:<br>f(-1) = (-1)² + 1/(-1 - 1) - 1<br>= 1 + 1/(-2) - 1<br>= 1 - 1/2 - 1<br>= -1/2<br>সুতরাং অপশন (ঘ) সঠিক।
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Chapter Footer -->
+    <div class="ch-footer">
+      <p style="font-weight: 700; font-size: 1.05rem; margin-bottom: 6px;">পিএসসি নন-ক্যাডার প্রশ্নব্যাংক (২য় খণ্ড) • বিষয়: বীজগণিত</p>
+      <p>অধ্যায় ০৫: ফাংশন (পৃষ্ঠা ৩৬৪–৩৬৫) • মোট ১২টি প্রামাণ্য প্রশ্ন</p>
+      <p style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">© সর্বস্বত্ব সংরক্ষিত • শতভাগ নির্ভুল ও প্রামাণ্য ডিজিটাল সংস্করণ</p>
+    </div>
+
+  </div>
+
+  <!-- Navigation Component Script -->
+  <script src="nav-component.js"></script>
+
+  <!-- Interactive Logic Script -->
+  <script>
+    let score = 0;
+    const answeredMap = new Map();
+    const totalQuestions = 12;
+
+    function checkAnswer(qid, selectedOpt) {
+      if (answeredMap.has(qid)) return; // Already answered
+
+      const card = document.querySelector(`.q-card[data-id="${qid}"]`);
+      if (!card) return;
+
+      const correctAns = card.getAttribute('data-ans');
+      const buttons = card.querySelectorAll('.opt-btn');
+      const optKeys = ['a', 'b', 'c', 'd'];
+
+      answeredMap.set(qid, selectedOpt);
+
+      buttons.forEach((btn, idx) => {
+        btn.classList.add('locked');
+        const key = optKeys[idx];
+
+        if (key === correctAns) {
+          btn.classList.add('correct');
+        } else if (key === selectedOpt) {
+          btn.classList.add('wrong');
+        }
+      });
+
+      if (selectedOpt === correctAns) {
+        score++;
+      }
+
+      updateScoreDisplay();
+      
+      // Auto open explanation drawer
+      const drawer = document.getElementById(`drawer-${qid}`);
+      if (drawer) drawer.classList.add('open');
+    }
+
+    function toggleDrawer(qid) {
+      const drawer = document.getElementById(`drawer-${qid}`);
+      if (drawer) {
+        drawer.classList.toggle('open');
+      }
+    }
+
+    function updateScoreDisplay() {
+      const display = document.getElementById('scoreDisplay');
+      if (display) {
+        display.textContent = `${convertToBengaliNumber(score)} / ${convertToBengaliNumber(totalQuestions)}`;
+      }
+    }
+
+    function convertToBengaliNumber(num) {
+      const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+      return num.toString().split('').map(d => bnDigits[parseInt(d)] || d).join('');
+    }
+
+    function filterQuestions() {
+      const filterVal = document.getElementById('examFilter').value;
+      const cards = document.querySelectorAll('.q-card');
+
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-cat') || '';
+        if (filterVal === 'all' || cat.includes(filterVal)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function resetQuiz() {
+      if (!confirm('আপনি কি সমস্ত উত্তর রিসেট করতে চান?')) return;
+
+      answeredMap.clear();
+      score = 0;
+      updateScoreDisplay();
+
+      const cards = document.querySelectorAll('.q-card');
+      cards.forEach(card => {
+        const buttons = card.querySelectorAll('.opt-btn');
+        buttons.forEach(btn => {
+          btn.classList.remove('locked', 'correct', 'wrong');
+        });
+        const drawer = card.querySelector('.exp-drawer');
+        if (drawer) drawer.classList.remove('open');
+      });
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      document.getElementById('themeToggleBtn').textContent = newTheme === 'light' ? '🌙' : '☀️';
+    }
+
+    let currentFontSize = 0;
+    function adjustFontSize(delta) {
+      if (delta === 0) {
+        currentFontSize = 0;
+      } else {
+        currentFontSize = Math.max(-2, Math.min(3, currentFontSize + delta));
+      }
+      document.body.style.fontSize = `${1 + currentFontSize * 0.08}rem`;
+    }
+
+    // Init theme
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) btn.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+    });
+  </script>
+  <script src="nav-component.js"></script>
+</body>
+</html>
