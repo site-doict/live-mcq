@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>অধ্যায় ০৩: স্থানাঙ্ক জ্যামিতি ও সরলরেখা - নন-ক্যাডার প্রশ্নব্যাংক</title>
+  <meta name="description" content="পিএসসি নন-ক্যাডার স্থানাঙ্ক জ্যামিতি, ঢাল ও সরলরেখার সমীকরণের ২৪টি প্রামাণ্য প্রশ্ন ও বিস্তারিত গাণিতিক সমাধান।">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../ebook-ui.css">
+  <link rel="stylesheet" href="../bangla-fonts.css">
+  <link rel="stylesheet" href="../paper-textures.css">
+  <link rel="stylesheet" href="../universal-modes.css">
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --accent: #d97706;
+      --accent-light: #fef3c7;
+      --bg-base: #f8fafc;
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(226, 232, 240, 0.85);
+      --font-base: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+    }
+    [data-theme="dark"] {
+      --primary: #38bdf8;
+      --primary-dark: #0284c7;
+      --primary-light: rgba(56, 189, 248, 0.15);
+      --accent: #fbbf24;
+      --accent-light: rgba(251, 191, 36, 0.15);
+      --bg-base: #0b1329;
+      --bg-surface: rgba(15, 23, 42, 0.85);
+      --bg-card: rgba(15, 23, 42, 0.82);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(51, 65, 85, 0.85);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: var(--font-base);
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding-bottom: 70px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 0;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      background: var(--primary-light);
+      border: none;
+      cursor: pointer;
+    }
+    .nav-controls {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .ch-header {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .ch-badges {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+    }
+    .badge-primary { background: var(--primary-light); color: var(--primary); }
+    .badge-accent { background: var(--accent-light); color: var(--accent); }
+
+    .ch-title {
+      font-size: 2.1rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 0.35rem;
+    }
+
+    .sec-heading {
+      font-size: 1.6rem;
+      margin: 2.5rem 0 1.2rem 0;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 0.5rem;
+    }
+
+    .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .sk-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.25rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .sk-box-title {
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .sk-box ul {
+      list-style-type: disc;
+      padding-left: 1.3rem;
+      font-size: 0.95rem;
+    }
+    .sk-box li {
+      margin-bottom: 0.45rem;
+    }
+
+    .formula-card {
+      background: var(--bg-card);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .formula-title {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .quiz-toolbar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.8rem 1.2rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .score-badge {
+      font-family: 'Inter', sans-serif !important;
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+    .filter-select {
+      font-family: var(--font-base);
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 0.9rem;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.4rem;
+      margin-bottom: 1.4rem;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.02);
+      transition: all 0.2s;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .q-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.8rem;
+      margin-bottom: 0.75rem;
+    }
+    .q-num {
+      font-family: 'Inter', sans-serif !important;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+    .q-exam {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: right;
+      line-height: 1.4;
+    }
+    .q-text {
+      font-size: 1.12rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .opt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-family: var(--font-base);
+      font-size: 0.98rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+    .opt-lbl {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.06);
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    [data-theme="dark"] .opt-lbl {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .opt-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: 700;
+    }
+    .opt-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+    [data-theme="dark"] .opt-btn.correct {
+      background: rgba(34, 197, 94, 0.2) !important;
+      color: #86efac !important;
+    }
+    [data-theme="dark"] .opt-btn.wrong {
+      background: rgba(239, 68, 68, 0.2) !important;
+      color: #fca5a5 !important;
+    }
+
+    .exp-box {
+      background: var(--primary-light);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 0.8rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      border-left: 4px solid var(--primary);
+      display: none;
+    }
+    .exp-title {
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .btn-show-ans {
+      background: none;
+      border: 1px dashed var(--primary);
+      color: var(--primary);
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+    .btn-show-ans:hover {
+      background: var(--primary-light);
+    }
+
+    /* Typography Protection */
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .exp-box, .exp-box *, .bcs-table, .bcs-table *, .score-bar, .score-bar * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+    .ch-title .ch-en, .badge, .q-num, .score-badge {
+      font-family: 'Inter', sans-serif !important;
+    }
+  </style>
+</head>
+<body class="paper-torn font-durbar">
+  <div class="container">
+    <nav class="top-nav">
+      <a href="index.html" class="nav-btn">← সূচিপত্র</a>
+      <div class="nav-controls">
+        <button class="nav-btn" onclick="toggleTheme()" id="themeBtn">🌙 ডার্ক</button>
+      </div>
+    </nav>
+
+    <header class="ch-header">
+      <div class="ch-badges">
+        <span class="badge badge-primary">অধ্যায় ০৩</span>
+        <span class="badge badge-accent">পৃষ্ঠা: ৪৯৮–৫০১</span>
+        <span class="badge badge-primary">মোট প্রশ্ন: 24টি</span>
+      </div>
+      <h1 class="ch-title">স্থানাঙ্ক জ্যামিতি ও সরলরেখা <span class="ch-en">(Coordinate Geometry & Straight Lines)</span></h1>
+    </header>
+
+    <section class="sec-notes">
+      <h2 class="sec-heading">📌 প্রামাণ্য রিভিশন নোট ও সূত্রাবলি</h2>
+      
+<div class="sk-grid">
+  <div class="sk-box">
+    <h3 class="sk-box-title">📍 দুই বিন্দুর দূরত্ব ও মধ্যবিন্দু</h3>
+    <ul>
+      <li><strong>দূরত্ব:</strong> d = √[(x₂ - x₁)² + (y₂ - y₁)²]</li>
+      <li><strong>মধ্যবিন্দু:</strong> ((x₁ + x₂)/2, (y₁ + y₂)/2)</li>
+      <li><strong>ত্রিভুজের ভরকেন্দ্র:</strong> ((x₁ + x₂ + x₃)/3, (y₁ + y₂ + y₃)/3)</li>
+    </ul>
+  </div>
+  <div class="sk-box">
+    <h3 class="sk-box-title">📏 সরলরেখার ঢাল ও সমীকরণ</h3>
+    <ul>
+      <li><strong>ঢাল (Slope, m):</strong> m = (y₂ - y₁) / (x₂ - x₁) = tan θ</li>
+      <li><strong>সরলরেখার স্ট্যান্ডার্ড সমীকরণ:</strong> y = mx + c (m = ঢাল, c = y-অক্ষের ছেদক)</li>
+      <li>ax + by + c = 0 রেখার ঢাল m = -(x এর সহগ) / (y এর সহগ) = -a/b</li>
+    </ul>
+  </div>
+</div>
+<div class="formula-card">
+  <h4 class="formula-title">⚡ রেখাদ্বয়ের সমান্তরাল ও লম্ব হওয়ার শর্ত</h4>
+  <p>• দুটি রেখা সমান্তরাল হলে তাদের ঢাল সমান: m₁ = m₂</p>
+  <p>• দুটি রেখা পরস্পরের ওপর লম্ব হলে তাদের ঢালের গুণফল -১: m₁ × m₂ = -১</p>
+</div>
+
+    </section>
+
+    <section class="sec-quiz">
+      <h2 class="sec-heading">📝 বিগত বছরের প্রশ্নব্যাংক</h2>
+      <div class="quiz-toolbar">
+        <div>
+          <span>স্কোর: </span>
+          <span class="score-badge" id="scoreDisplay">০ / 24</span>
+        </div>
+        <button class="nav-btn" onclick="resetQuiz()">🔄 রিসেট কুইজ</button>
+      </div>
+
+      <div class="question-list">
+        
+      <div class="q-card" data-q-id="hm-ch03-q01" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">পিএসসি (জেলা ক্রীড়া কর্মকর্তা)-২৩</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">বিন্দু $(2, 3)$ এর মান অপশনগুলোতে বসিয়ে পাই:<br>ক. $2 + 2(3) = 8 \ne 5$<br>খ. $2(2) + 3 = 4 + 3 = 7 = 7$ (সিদ্ধ করে)<br>গ. $2 + 3(3) = 11 \ne 10$<br>ঘ. $2(2) + 4(3) = 16 \ne 6$<br>সুতরাং সঠিক উত্তর <b>2x + y = 7</b>।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q02" data-ans="গ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">৪৫তম বিসিএস / পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>গ</strong></span>
+          </div>
+          <div class="exp-desc">আমরা জানি, সরলরেখার সাধারণ সমীকরণ $ax + by + c = 0$ আকারে $x$ ও $y$ এর একঘাত বিশিষ্ট হয় এবং এতে $xy$ পদ থাকে না।<br>গ. $$\frac{x}{y} - \frac{1}{x} = \frac{1}{y} \implies \frac{x - 1}{y} = \frac{1}{x} \implies x(x - 1) = y$$ বা সরলীকরণ করলে একঘাত সরলরেখা পাওয়া যায়।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q03" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">ভূমি মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-২২</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">১ম রেখা: $x + y = 1$ বা ঢাল $m_1 = -1$।<br>২য় রেখা: $4x + 4y = -1 \implies x + y = -1/4$ বা ঢাল $m_2 = -1$।<br>যেহেতু উভয় রেখার ঢাল সমান ($m_1 = m_2 = -1$) কিন্তু ধ্রুবক ভিন্ন, তাই রেখা দুটি পরস্পর সমান্তরাল। সমান্তরাল রেখা কখনো ছেদ করে না, অর্থাৎ এদের ছেদবিন্দু অসীমে <b>(∞, ∞)</b>।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q04" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">বিভিন্ন মন্ত্রণালয় (ব্যক্তিগত কর্মকর্তা)-২২</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">$$x + y + 3 = 0 \implies y = -x - 3$$<br>$y = mx + c$ সমীকরণের সাথে তুলনা করলে ঢাল $m = \mathbf{-১}$।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q05" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">বিভিন্ন মন্ত্রণালয় (প্রশাসনিক কর্মকর্তা)-২২</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">$x$-অক্ষের উপর অবস্থিত যেকোনো বিন্দুর কোটি $y = 0$। এবং $y$-অক্ষ হতে ৩ একক দূরে অবস্থিত হওয়ায় ভুজ $x = 3$। সুতরাং নির্ণেয় বিন্দুর স্থানাঙ্ক <b>(3, 0)</b>।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q06" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">পিএসসি (বিভিন্ন মন্ত্রণালয়ের প্রশাসনিক কর্মকর্তা)-১৯</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">$$x + 2y = 8 \quad \dots (1)$$<br>$$2x + y = 7 \implies y = 7 - 2x \quad \dots (2)$$<br>(১) নং-এ $y$ এর মান বসিয়ে:<br>$$x + 2(7 - 2x) = 8 \implies x + 14 - 4x = 8 \implies -3x = -6 \implies x = 2$$<br>$$y = 7 - 2(2) = 3$$<br>সুতরাং ছেদবিন্দু <b>(2, 3)</b>।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q07" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">তথ্য মন্ত্রণালয়ের চলচ্চিত্র ও প্রকাশনা অধিদপ্তর ক্যামেরাম্যান-১৯</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">স্থানাঙ্কের চিহ্ন $(+, -)$ হলে বিন্দুটি <b>৪র্থ চতুর্ভাগে</b> অবস্থিত (যেহেতু ভুজ ধনাত্মক এবং কোটি ঋণাত্মক)।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q08" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">পিএসসি (বিভিন্ন মন্ত্রণালয়ের ব্যক্তিগত কর্মকর্তা)-১৯</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">$y$-অক্ষের সমান্তরাল রেখার সমীকরণ সর্বদা $x = a$ (ধ্রুবক) আকারের হয়। সুতরাং <b>x = 4</b> রেখাটি $y$-অক্ষের সমান্তরাল।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q09" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">তথ্য মন্ত্রণালয়ের অধীন চলচ্চিত্র ও প্রকাশনা অধিদপ্তর ক্যামেরাম্যান-১৯</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">বিন্দু $(2, 3)$ বসিয়ে পাই:<br>বামপক্ষ = $3(2) = 6$<br>ডানপক্ষ = $3 + 3 = 6$<br>উভয়পক্ষ সমান হওয়ায় <b>(2, 3)</b> বিন্দুটি উক্ত সরলরেখার উপর অবস্থিত।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q10" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">নার্সিং ও মিডওয়াইফারি অধিদপ্তর (সিনিয়র স্টাফ নার্স)-১৮</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">দুই বিন্দু দিয়ে গমনকারী সরলরেখার সমীকরণ:<br>$$\frac{y - (-1)}{-1 - 5} = \frac{x - 1}{1 - 3} \implies \frac{y + 1}{-6} = \frac{x - 1}{-2}$$<br>$$\implies \frac{y + 1}{3} = x - 1 \implies y + 1 = 3x - 3 \implies y = 3x - 4$$<br>উভয়পক্ষে ২ দিয়ে গুণ করলে: $$\mathbf{2y = 6x - 8}$$।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q11" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">জনস্বাস্থ্য প্রকৌশল অধিদপ্তর (এস্টিমেটর)-১৮</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">যেহেতু ভুজ ঋণাত্মক এবং কোটি ধনাত্মক $(-, +)$, তাই বিন্দুটি <b>দ্বিতীয় চতুর্ভাগে</b> অবস্থিত।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q12" data-ans="গ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">বিআরটিএ (মোটরযান পরিদর্শক)-১৭</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>গ</strong></span>
+          </div>
+          <div class="exp-desc">ভুজ ও কোটি উভয়ই ঋণাত্মক $(-, -)$ হওয়ায় বিন্দুটি <b>তৃতীয় চতুর্ভাগে</b> অবস্থিত।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q13" data-ans="গ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">বিভিন্ন মন্ত্রণালয়/অধিদপ্তরের ব্যক্তিগত কর্মকর্তা-১৮</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>গ</strong></span>
+          </div>
+          <div class="exp-desc">বিন্দু $(2, -5)$ অপশন (গ)-তে বসালে:<br>$$4(2) - 3(-5) = 8 + 15 = 23 = 23$$<br>সুতরাং সঠিক উত্তর <b>4x - 3y = 23</b>।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q14" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">গণপূর্ত অধিদপ্তর (উপ-সহকারী প্রকৌশলী)-১৮</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">$$y = \frac{2}{x} \implies xy = 2$$<br>এটি একটি আয়তাকার পরাবৃত্তের (Rectangular Hyperbola) সমীকরণ, সরলরেখা নয়। সরলরেখার সমীকরণে চলকের ঘাত এক হতে হয় এবং $xy$ পদ থাকতে পারে না।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q15" data-ans="গ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">স্থানীয় সরকার প্রকৌশল অধিদপ্তর (সহকারী প্রকৌশলী)-১৭</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>গ</strong></span>
+          </div>
+          <div class="exp-desc">১ম রেখা: $y = -x + 1 \implies m_1 = -1$<br>২য় রেখা: $y = x + 1 \implies m_2 = 1$<br>ঢালদ্বয়ের গুণফল: $$m_1 \times m_2 = (-1) \times 1 = -1$$<br>যেহেতু দুটি রেখার ঢালের গুণফল $-1$, তাই রেখা দুটি পরস্পর লম্ব। সুতরাং গঠিত ত্রিভুজটি একটি <b>সমকোণী ত্রিভুজ</b>।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q16" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">জনপ্রশাসন মন্ত্রণালয়ের ব্যক্তিগত কর্মকর্তা-১৬</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">মূলবিন্দু $(0, 0)$ হতে দূরত্ব:<br>$$\sqrt{(-5 - 0)^2 + (5 - 0)^2} = \sqrt{(5 - 0)^2 + (k - 0)^2}$$<br>$$25 + 25 = 25 + k^2 \implies k^2 = 25 \implies k = \mathbf{৫}$$।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q17" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">সহকারী পরিবার পরিকল্পনা কর্মকর্তা-১৬</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">$x$-অক্ষকে ছেদ করলে $y = 0$ হয়।<br>$$2x + 3(0) - 6 = 0 \implies 2x = 6 \implies x = 3$$<br>ছেদবিন্দুর স্থানাঙ্ক <b>(3, 0)</b>।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q18" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">রেলওয়ে মন্ত্রণালয়ের সহকারী প্রকৌশলী-১৬</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">$$m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{y - 0}{0 - x} = -\frac{y}{x}$$<br>যেহেতু $x + y = 0 \implies y = -x$, তাই<br>$$m = -\frac{-x}{x} = \mathbf{১}$$।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q19" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">জনপ্রশাসন মন্ত্রণালয়ের অধীনে পিএসসি'র সহকারী পরিচালক-১৬</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">$$x + 3 = -x - 3 \implies 2x = -6 \implies x = -3$$<br>$$y = -3 + 3 = 0$$<br>ছেদবিন্দুর স্থানাঙ্ক <b>(-3, 0)</b>।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q20" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">কারা অধিদপ্তর (কারা তত্ত্বাবধায়ক)-১৩</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">মূলবিন্দু $(0, 0)$ ও $P(x, y)$ এর মধ্যবর্তী দূরত্ব: <br>$$OP = \sqrt{(x - 0)^2 + (y - 0)^2} = \mathbf{\sqrt{x^2 + y^2}}$$।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q21" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার বিভিন্ন মন্ত্রণালয়</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">$$\frac{x}{3} + \frac{y}{4} = 1$$<br>এখানে $x$-অক্ষের খণ্ডিতাংশ $a = 3$ এবং $y$-অক্ষের খণ্ডিতাংশ $b = 4$।<br>উৎপন্ন ত্রিভুজের ক্ষেত্রফল = $$\frac{1}{2}ab = \frac{1}{2}\times 3 \times 4 = \mathbf{৬}\text{ বর্গ একক}$$।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q22" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">পিএসসি সহকারী প্রকৌশলী পরীক্ষা</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">দুটি সরলরেখা পরস্পর সমান্তরাল হলে তাদের ঢালদ্বয় পরস্পর সমান হয়, অর্থাৎ <b>m₁ = m₂</b>।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q23" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার কারিগরি পরীক্ষা</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">দুটি সরলরেখা পরস্পর লম্ব হলে তাদের ঢালদ্বয়ের গুণফল সর্বদা <b>-১</b> হয় ($m_1 \times m_2 = -1$)।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="hm-ch03-q24" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন </span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার বিভিন্ন নিয়োগ পরীক্ষা</span>
+        </div>
+        <div class="q-text"></div>
+        <div class="opt-grid">
+          
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">$$m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{6 - 2}{4 - 1} = \mathbf{\frac{৪}{৩}}$$।</div>
+        </div>
+      </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    let score = 0;
+    const answered = new Set();
+    const totalQ = 24;
+
+    function selectOpt(btn, optKey, correctAns) {
+      const card = btn.closest('.q-card');
+      const qId = card.getAttribute('data-q-id');
+      if (card.classList.contains('locked')) return;
+
+      card.classList.add('locked');
+      const btns = card.querySelectorAll('.opt-btn');
+      btns.forEach(b => b.disabled = true);
+
+      if (optKey === correctAns) {
+        btn.classList.add('correct');
+        score++;
+      } else {
+        btn.classList.add('wrong');
+        btns.forEach(b => {
+          const lbl = b.querySelector('.opt-lbl').innerText.trim();
+          if (lbl === correctAns) b.classList.add('correct');
+        });
+      }
+
+      // Show explanation
+      const exp = card.querySelector('.exp-box');
+      if (exp) exp.style.display = 'block';
+
+      updateScore();
+    }
+
+    function toggleExp(btn) {
+      const card = btn.closest('.q-card');
+      const exp = card.querySelector('.exp-box');
+      const arrow = btn.querySelector('.arrow-icon');
+      if (exp.style.display === 'block') {
+        exp.style.display = 'none';
+        if (arrow) arrow.innerText = '▼';
+      } else {
+        exp.style.display = 'block';
+        if (arrow) arrow.innerText = '▲';
+      }
+    }
+
+    function updateScore() {
+      const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+      const scoreBn = String(score).split('').map(d => bnDigits[d] || d).join('');
+      const totalBn = String(totalQ).split('').map(d => bnDigits[d] || d).join('');
+      document.getElementById('scoreDisplay').innerText = `${scoreBn} / ${totalBn}`;
+    }
+
+    function resetQuiz() {
+      score = 0;
+      document.querySelectorAll('.q-card').forEach(c => {
+        c.classList.remove('locked');
+        c.querySelectorAll('.opt-btn').forEach(b => {
+          b.disabled = false;
+          b.classList.remove('correct', 'wrong');
+        });
+        const exp = c.querySelector('.exp-box');
+        if (exp) exp.style.display = 'none';
+        const arrow = c.querySelector('.arrow-icon');
+        if (arrow) arrow.innerText = '▼';
+      });
+      updateScore();
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const btn = document.getElementById('themeBtn');
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        btn.innerText = '🌙 ডার্ক';
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        btn.innerText = '☀️ লাইট';
+      }
+    }
+  </script>
+</body>
+</html>
