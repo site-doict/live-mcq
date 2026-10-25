@@ -282,6 +282,15 @@
         };
       }
 
+      // 100-Question BCS Sessions (10th-34th & Special BCS) = 60 minutes
+      if (total === 100 && this.activeMode === 'session') {
+        return {
+          seconds: 60 * 60,
+          text: '৬০ মিনিট (১ ঘণ্টা)',
+          rule: 'বিসিএস প্রিলিমিনারি ১০০ নম্বরের পরীক্ষা সময়: ৬০ মিনিট'
+        };
+      }
+
       // Math & Mental questions ratio
       const mathCount = questionsList.filter(q => q.s === 'Mathematical Reasoning' || q.s === 'Mental Ability').length;
       const mathRatio = mathCount / total;
@@ -1111,13 +1120,22 @@
 
     cleanExamQuestionText: function(qText, hideSource) {
       if (!qText) return '';
+      // Separate diagram HTML if attached at the end
+      let diagramPart = '';
+      let mainText = qText;
+      const diagMatch = qText.match(/(<div class="q-diagram-wrap">[\s\S]*?<\/div>|<img[\s\S]*?>)$/);
+      if (diagMatch) {
+        diagramPart = diagMatch[0];
+        mainText = qText.slice(0, diagMatch.index);
+      }
+
       // Strip leading original book question numbers like "৫৯. ", "৫. ", "২. ", "৫৮- ", "১০) "
-      let cleaned = qText.replace(/^\s*(?:[\d]+|[০-৯]+)[\.\-\)]\s*/, '');
+      let cleaned = mainText.replace(/^\s*(?:[\d]+|[০-৯]+)[\.\-\)]\s*/, '');
       if (hideSource) {
         // Strip trailing exam names/sessions like "২০তম বিসিএস", "২৬তম/১৭তম বিসিএস", "- ৪৪তম বিসিএস", "[সহকারী পরিচালক...]"
         cleaned = cleaned.replace(/(?:[\s\-\–—\(\[]*(?:[০-৯\d]+(?:তম)?(?:\/[০-৯\d]+)?(?:তম|th|st|nd|rd)?)?(?:\s*(?:বিশেষ|বাতিল|প্রিলি))?\s*(?:বিসিএস|BCS|নন[\-\s]?ক্যাডার|পিএসসি|নিয়োগ|মন্ত্রণালয়)[^)\]]*[\)\]]?)+\s*$/i, '');
       }
-      return cleaned;
+      return (cleaned.trim() + (diagramPart ? ' ' + diagramPart : '')).trim();
     },
 
     cleanOptText: function(text) {
