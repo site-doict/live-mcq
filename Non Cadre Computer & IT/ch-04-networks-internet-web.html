@@ -1,0 +1,2086 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>অধ্যায় ০৪: ডেটা কমিউনিকেশন, নেটওয়ার্ক ও ইন্টারনেট - নন-ক্যাডার কম্পিউটার ও তথ্যপ্রযুক্তি</title>
+  <meta name="description" content="পিএসসি নন-ক্যাডার ল্যান, ওয়ান, রাউটার, আইপি অ্যাড্রেস, ডোমেইন নেম ও ইন্টারনেটের প্রামাণ্য প্রশ্নব্যাংক।">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../ebook-ui.css">
+  <link rel="stylesheet" href="../bangla-fonts.css">
+  <link rel="stylesheet" href="../paper-textures.css">
+  <link rel="stylesheet" href="../universal-modes.css">
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --accent: #d97706;
+      --accent-light: #fef3c7;
+      --bg-base: #f8fafc;
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(226, 232, 240, 0.85);
+      --font-base: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+    }
+    [data-theme="dark"] {
+      --primary: #38bdf8;
+      --primary-dark: #0284c7;
+      --primary-light: rgba(56, 189, 248, 0.15);
+      --accent: #fbbf24;
+      --accent-light: rgba(251, 191, 36, 0.15);
+      --bg-base: #0b1329;
+      --bg-surface: rgba(15, 23, 42, 0.85);
+      --bg-card: rgba(15, 23, 42, 0.82);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(51, 65, 85, 0.85);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: var(--font-base);
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding-bottom: 70px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 0;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      background: var(--primary-light);
+      border: none;
+      cursor: pointer;
+    }
+    .nav-controls {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .ch-header {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .ch-badges {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+    }
+    .badge-primary { background: var(--primary-light); color: var(--primary); }
+    .badge-accent { background: var(--accent-light); color: var(--accent); }
+
+    .ch-title {
+      font-size: 2.1rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 0.35rem;
+    }
+
+    .sec-heading {
+      font-size: 1.6rem;
+      margin: 2.5rem 0 1.2rem 0;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 0.5rem;
+    }
+
+    .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .sk-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.25rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .sk-box-title {
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .sk-box ul {
+      list-style-type: disc;
+      padding-left: 1.3rem;
+      font-size: 0.95rem;
+    }
+    .sk-box li {
+      margin-bottom: 0.45rem;
+    }
+
+    .quiz-toolbar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.8rem 1.2rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .score-badge {
+      font-family: 'Inter', sans-serif !important;
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.4rem;
+      margin-bottom: 1.4rem;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.02);
+      transition: all 0.2s;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .q-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.8rem;
+      margin-bottom: 0.75rem;
+    }
+    .q-num {
+      font-family: 'Inter', sans-serif !important;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+    .q-exam {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: right;
+      line-height: 1.4;
+    }
+    .q-text {
+      font-size: 1.12rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .opt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-family: var(--font-base);
+      font-size: 0.98rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+    .opt-lbl {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.06);
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    [data-theme="dark"] .opt-lbl {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .opt-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: 700;
+    }
+    .opt-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+    [data-theme="dark"] .opt-btn.correct {
+      background: rgba(34, 197, 94, 0.2) !important;
+      color: #86efac !important;
+    }
+    [data-theme="dark"] .opt-btn.wrong {
+      background: rgba(239, 68, 68, 0.2) !important;
+      color: #fca5a5 !important;
+    }
+
+    .exp-box {
+      background: var(--primary-light);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 0.8rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      border-left: 4px solid var(--primary);
+      display: none;
+    }
+    .exp-title {
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .btn-show-ans {
+      background: none;
+      border: 1px dashed var(--primary);
+      color: var(--primary);
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+    .btn-show-ans:hover {
+      background: var(--primary-light);
+    }
+
+    /* Typography Protection */
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .exp-box, .exp-box *, .bcs-table, .bcs-table *, .score-bar, .score-bar * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+    .ch-title .ch-en, .badge, .q-num, .score-badge {
+      font-family: 'Inter', sans-serif !important;
+    }
+  </style>
+</head>
+<body class="paper-dot-grid font-kornofuli">
+  <div class="container">
+    <nav class="top-nav">
+      <a href="index.html" class="nav-btn">← সূচিপত্র</a>
+      <div class="nav-controls">
+        <button class="nav-btn" onclick="toggleTheme()" id="themeBtn">🌙 ডার্ক</button>
+      </div>
+    </nav>
+
+    <header class="ch-header">
+      <div class="ch-badges">
+        <span class="badge badge-primary">অধ্যায় ০৪</span>
+        <span class="badge badge-accent">পৃষ্ঠা: ৫৩৮–৫৪৪</span>
+        <span class="badge badge-primary">মোট প্রশ্ন: 45টি</span>
+      </div>
+      <h1 class="ch-title">ডেটা কমিউনিকেশন, নেটওয়ার্ক ও ইন্টারনেট <span class="ch-en">(Networking, Internet & Web Protocols)</span></h1>
+    </header>
+
+    <section class="sec-notes">
+      <h2 class="sec-heading">📌 প্রামাণ্য রিভিশন নোট ও তথ্য কণিকা</h2>
+      
+<div class="sk-grid">
+  <div class="sk-box">
+    <h3 class="sk-box-title">🌐 নেটওয়ার্কের প্রকার ও টপোলজি</h3>
+    <ul>
+      <li><strong>শ্রেণিবিভাগ:</strong> LAN (Local Area), MAN (Metropolitan), WAN (Wide Area / Internet)।</li>
+      <li><strong>টপোলজি:</strong> বাস, স্টার, রিং, মেশ, ও হাইব্রিড টপোলজি।</li>
+      <li><strong>নেটওয়ার্ক ডিভাইস:</strong> মডেম (Modulator-Demodulator), রাউটার, সুইচ, হাব।</li>
+    </ul>
+  </div>
+  <div class="sk-box">
+    <h3 class="sk-box-title">🌍 ইন্টারনেট ও ওয়েব প্রটোকল</h3>
+    <ul>
+      <li><strong>IP Address:</strong> IPv4 (৩২ বিট), IPv6 (১২৮ বিট)।</li>
+      <li><strong>MAC Address:</strong> ফিজিক্যাল হার্ডওয়্যার অ্যাড্রেস (৪৮ বিট)।</li>
+      <li><strong>প্রটোকল:</strong> HTTP/HTTPS (Port 80/443), FTP (Port 20/21), DNS, SMTP।</li>
+    </ul>
+  </div>
+</div>
+
+    </section>
+
+    <section class="sec-quiz">
+      <h2 class="sec-heading">📝 বিগত বছরের প্রশ্নব্যাংক</h2>
+      <div class="quiz-toolbar">
+        <div>
+          <span>স্কোর: </span>
+          <span class="score-badge" id="scoreDisplay">০ / 45</span>
+        </div>
+        <button class="nav-btn" onclick="resetQuiz()">🔄 রিসেট কুইজ</button>
+      </div>
+
+      <div class="question-list">
+        
+      <div class="q-card" data-q-id="comp-04-01" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ০১</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">নিচের কোনটি Spyware এর উদাহরণ! (৪৫তম বিসিএস! (ক) Keyloggers (খ) Avast</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">Key loggers হলো Spyw</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt"></span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Norton</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">K</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-02" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ০২</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">নিচের কোনটি ইউটিলিটি দে [বিভিন্ন মন্ত্রণালয়ের সহকা মেইনটেন্যাগ ইজিনিয়ার-১৭/</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">উইন্ডোজ</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">এন্টি ভাইরাস</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-03" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ০৩</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">নিচের কোনটি Antivirus নয়- [তথ্য ও যোগাযোগ প্রযুক্তি say <. Norton খ. MCAfee</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ঘ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">M</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt"></span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ঘ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">ব্যা</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">আযান্টিভাইরাস হলো এক ধরনের ভাইরাস afer
+সফটওয়্যার যা কোন কম্পিউটার ভাইরাসকে শনাক্ত করতে পানে
+এবং তাকে আক্রান্ত কম্পিউটার থেকে মুছে ফেলতে বা ভাইরাস মু
+করতে পারে। বর্তমানে জনপ্রিয় কিছু এন্টি-ভাইরাস প্রোগ্রাম হলো
+Norton, McAfee, Dr. Soloman toolkit, AVAST
+AVG, Symantec, Cobra, Bit defender, Panda.</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-04" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ০৪</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">নিচের কোনটি Antivirus Program নয়? [মহা-হিসা (*) AVG (¥) Kaspersky</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">PHP</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ঘ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">ot হলো এ</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-05" data-ans="গ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ০৫</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">GPU-a& পূর্ণরূপ কী? (৪৫তম বিসিএস] (ক) Graph Processing Unit (খ) Graphic Processing Unit (1) Graphics: Processing Unit : = ৫৩৬</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'গ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt"></span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'গ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt"></span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'গ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">fH 139145-এর f</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'গ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt"></span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>গ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-06" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ০৬</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">Global Protect Radiation Service</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">ব্যা</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Gener</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">General Packet Radio Service (GPRS) হলো
+J প্যাকেট অরিয়েন্টেড ওয়্যারলেস মোবাইল ডাটা ASA, যা সাধারণত
+2G সেলুলার মোবাইল কমিউনিকেশন সিস্টেমের ব্যবহারকারীদের
+জন্য পাওয়া যায়। এটি 20 সিস্টেমে প্রতি সেকেন্ডে 56-1 14 kbps
+ডাটা রেট প্রদান করে।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-07" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ০৭</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">VOIP এর “Fat কী?  Voice over Internet Protocol (VoIP) ইন্টারনেটের মাধ্যমে কথা বলার এক ধরনের মাধ্যম। মোবাইল দিয়ে বিশ্বের এক দেশ থেকে অন্য দেশে কথা বলতে VolP : ব্যবহৃত হয়। VolP কল বিভিন্ন প্রোটোকলের মাধ্যমে সম্ভব৷</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ঘ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt"></span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ঘ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">এয াব-এর পূর্ণরূপ-&৮৫10103100 Teller M</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt"></span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ঘ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt"></span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">Voice over Internet Protocol (VoIP)
+ইন্টারনেটের মাধ্যমে কথা বলার এক ধরনের মাধ্যম। মোবাইল
+দিয়ে বিশ্বের এক দেশ থেকে অন্য দেশে কথা বলতে VolP
+: ব্যবহৃত হয়। VolP কল বিভিন্ন প্রোটোকলের মাধ্যমে সম্ভব৷
+1 | ০৫. TOT হল? শিক্ষা প্রকৌশল অধিদপ্তর (সহকারী গরকৌশলী)-২২]
+ক) Internet of Technologies
+: খ) Internet of Teachings
+গ) International of Technics
+ঘ) Internet of Things. উত্তর: ঘ
+| | ০৬. ATM -এর পূর্ণযূপ কী? (fs, whe ও শিক্ষণ 7
+হ্ট্েরর)-১৮/
+ক. Auto Timing Machine
+খ. Automatic Teller Machine
+গ. Auto Touch ...</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-08" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ০৮</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">০31প4-পূর্ণ রূপ কি? /এনএসআই (সহকারী পরিচালক)-২০১৫] (ক) Global System for Mobile Telecommunication | (¥) Global System for Management (গ) Global System for Mobile | Communication | (ঘ) General System for Mobile Management GSM হলো মোবাইল ফোনের Networking & Communication-93 জন্য ব্যবহৃত একটি পদ্ধতি। এর পূর্ণরূপ-010831 System for Mobile Communication. C—O] জীবনে কম্পিউটার</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">Glo</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Glo</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">Gener</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-09" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ০৯</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">চিকিৎসা ক্ষেত্রে কম্পিউটার-এর কাজ কোনটি? (৪৫তম বিসিএস] (ক) তথ্য সংরক্ষণ (খ) ইমেজ বিশ্লেষণ</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ঘ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">তথ্য সংর</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ঘ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">ইমেজ বিশ্লেষণ</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">রো</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ঘ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">চি</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-10" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১০</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">TV remote এর carrier frequency-¥ range</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ঘ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt"><MHz 4. <2GHz</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt"><1GHz</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-11" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১১</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">C Programming -এ Variable এর মান ০ হতে ১৮০০০ বৃদ্ধি করার জন্য কতক্ষণ সময় লাগে? [পিএসসি(রেলপথ</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'খ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">15</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'খ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">15</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-12" data-ans="গ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১২</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">Program ডেভেলপমেন্ট টুলস হলো- [পিএসসি(রেলগথ ফল) (উপ-সহকারী হকৌশলী)-২৪/</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'গ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">এডিটর</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'গ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">i r</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>গ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-13" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১৩</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">মোবাইল Cg, গীন্টারনেট ব্যবহার করার জন্য কোন ডিভাইসটি ব্যবহার করা হয়? Farts (মোটরযান TE (ক) মডেম (খ) নেটওয়ার্ক ইন্টারফেন কার্ড</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ঘ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">মডেম</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ঘ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">নেটওয়ার্</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">হার্ডডিস্</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ঘ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">রাউটার</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">মোবাইল ফোনে ইন্টারনেট ব্যবহার করার জন্য রাউটার
+ব্যবহার করা হয়৷ কম্পিউটারকে ইন্টারনেটে সংযুক্ত করার জন্য
+আবশ্যক যন্ত্রাংশ হলো মডেম | নেটওয়ার্ক ইন্টারফেজ কার্ত ও TE
+ow হলো কম্পিউটারের যন্ত্রাংশ ৷</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-14" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১৪</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">সকল নেটওয়ার্কের জননী কোনটি [mgs 77 (প্রশাসনিক</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">ই-মেইল</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">মোবাইল</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-15" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১৫</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">http সংক্ষিপ্ত রূপটি কি বোঝায়? এনএতই (সহকর পরচলক।/- ২০১৫/ প্রবাসী কল্যাণ § বৈদেশিক FIRES মন্ত্রণালয়ের সহকারী পরিচালক ২০১২, (ক) Hyper Text Transfer Protocol (¥) High Task Termination Procedure (গ) Harvard Teletext Proof (ঘ) High Timed Technical Professional</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">ব্যা</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">H</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">High Time</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">কম্পিউটার-ইন্টারনেট ব্যবহৃত শব্দ সংক্ষেপ hiip- এর পূর্ণ
+অভিব্যক্তি হচেছ Hyper Text Transfer Protocol. এটি
+WWW এর জন্য একটি আদর্শ প্রটোকল। এর ক্যরণেই
+ওয়েবপেজগুলো পৃথিবীর যে কোনো প্রান্ত থেকে ভিজিট করা যায়</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-16" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১৬</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">নেটওয়ার্কডুক্ত কম্পিউটারসমূহের অবস্থনগত এবং সংযোগ বিন্যাসকে কি বলেঃ [পল উন্নয়ন ও সময় বিভাগের একটি বাড়ি একট সায়ার প্রকল্পের উপজেলা RSE ২০১২ (ক) নেটওয়ার্ক (ব) কমিউনিকেশন</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ঘ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">নেটওয়ার্</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">সোর্স</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ঘ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">টপোলজি</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-17" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১৭</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">IPv4-q নিচের কোনটি Google DNS Server এর IP Address? seas 35s (ক) 8.8.7.6 (¥) 8.7.8.6</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ঘ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">8.8.7.6</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ঘ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">M</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-18" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১৮</span>
+          <span class="q-exam">৪৫তম বিসিএস</span>
+        </div>
+        <div class="q-text">ইন্টারনেটের মাধ্যমে তথ্য আদান-প্রদানের জন্য সর্বাধিক | ব্যবহৃত খোটোকল কী? (8৫তম বিসিএস! | (ক) HTTP (গ) DNS</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ঘ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt"></span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ঘ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">Light</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Unwire</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ঘ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">Wireless</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-19" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১৯</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">Optical fiber এ আলোর বিচ্যুতি ঘটে কোনটির মধ্য দিয়ে? [পিএসসি(রেলপথ মন্ত্রণালয়) (উপ-সহকারী রকৌশলী)-২৪|</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ঘ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">Met</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ঘ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt"></span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Light</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-20" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২০</span>
+          <span class="q-exam">RR</span>
+        </div>
+        <div class="q-text">নিচের কোন নেটওয়ার্কটি সবচেয়ে বেশি জায়গা ব্যাপ্তি হয়? =. LAN 4. WAN</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'খ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">[RR]</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'খ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">P</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-21" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২১</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">LAN এর অপর নাম কী? (দুর্নীতি দমন কমিশন (কোট পরিদশর্ক)-২২|</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'খ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">মডেম</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'খ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">ইন্টারনেট</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'খ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">রাউটার</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-22" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২২</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">LAN বলতে বোঝায়?  !</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">60</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Ne</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-23" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২৩</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">ব্রডব্যান্ড ৫. বু-টুথ উত্তর: ০ frond উচ্চ ক্ষমতার তারবিহীন ইন্টারনেট প্রযুক্তি হলো ওয়াইম্যাক্স (Worldwide Interoperability of Microwave) | ব্রড ব্যান্ড হলো এমন ধরনের ডাটা স্থানান্তর ব্যান্ড উইড্থ, যার গতি 114005-এর কিছু বেশি৷ আর বু টুথ প্রযুক্তির মাধ্যমে খুব সংক্ষিপ্ত দূরত্বের মধ্যে ডাটা স্থানান্তর সম্ভব। সেলুলার ডাটা নেটওয়ার্ক: টুজি (20), থ্রিজি (30), ফোরজি (4G), ওয়াইম্যাক্স (Wimax) ইত্যাদি >. বাংলাদেশ বর্তমানে Internet এর কোন যুগে আছে? (রেলগথ ক্.40 টে</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt"></span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">NSFNET</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">20</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">১৯ ফেব্রুয়ারি ২০১৮ চতুর্থ প্রজন্মের (40) মোবাইল ফোন
+সেবার যুগে প্রবেশ করেছে বাংলাদেশ | এই তারিখে মোবাইল ফোন
+অপারেটরদের হাতে 40 লাইসেন্স তুলে দেয় 811২0 লাইসেন্স
+পাওয়ার পরপরই মোবাইল ফোন অপারেটরগুলো ঢাকাসহ বড় বড়
+শহরে সীমিত পরিসরে 40 সেবা চালু করে।
+
+XR. কোনটি প্রথম নেটওয়ার্ক? [তথ্য ও যোগাযোগ যুক্তি অধিদপ্তর (সহকারী
+খোযামার)-২০]
+
+ক. CNNET খ. NSFNET
+of. ASPANET 9. ARPANET উত্তর:ঃঘ
+Wiig প্রযুক্তি ব্যবহার করে কম্পিউটার থেকে
+তথ্য আদানপ্রদানের প্রযুক্তিকে বলা হয় ইন্টারনেট।
+ইন্টারনেট এর শব্দগত বিশ্ল...</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-24" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২৪</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">নিচের কোনটি Private IP adress? [তথ্য ও যোগাযোগ «ifs 1192.169.10.10 খ.11.5.10.10</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ঘ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">11.5.10.10</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ঘ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">172.16.5.3</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-25" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২৫</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">কোন Routing Protocol এ Dijkstr: Algorithm ব্যবহার করা হয়? (তথা ও যোগাযোগ fe অধিদপ (সহকারী ধোয়ামার)-২০/</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'খ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt"></span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'খ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">মোবাইল প্রযু</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-26" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২৬</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">Cellular Data Network এর ক্ষেত্রে GPRS বলবে</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ঘ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">Glo</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ঘ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">Gener</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Glo</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ঘ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">ব্যা</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">GPRS এর Full Meaning হলো (০011613
+Packet Radio Service এটি তারবিহীন মোবাই'
+টেলিযোগাযোগ সংক্রান্ত এক ধরনের ব্যবস্থা। প্রতি সেকেন্ডে ১১৫
+কিলোবিট হারে তথ্য সরবরাহ নিশ্চিত করে। এটি অনেক ব
+সীমার মধ্যে থেকে বিভিন্ন ব্যান্ডউইথ সমর্থন করে। TY তথ্যগুচ
+সরবরাহের জন্য এই ব্যবস্থা বিশেষভাবে কার্যকরী |</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-27" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২৭</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">SIM এর পূর্ণরূপ হচ্ছে [Ryo মন্ত্রণালয়ের উপ-সহকারী প্রকৌশন</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'খ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">সুপিরিয়র ইনটিলিজেন্ট মেশিন</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'খ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">সাবস্তাইবার আইডেনটিটি মড়্যুল</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'খ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">সাবস্জাইবার ইনটিলিজেন্ট মেশিন</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'খ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">সুপার আইডেনটিটি মেশিন</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-28" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২৮</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">Bf মোবাইল ফোনের আবিষ্কার কে? (পল্লী উন্নয়ন ও সমবায় বিডাগের একটি বাড়ি একটি খামার ধরকয়পের উপজেলা সমন্বয়কারী ২০১৭/আইন, বিচার ও সংসদ বিষয়ক মন্ত্রণালয় (সাব-রেজিস্ট্রর)-১৬| (ক) বিল গেটস (খ) স্টিভ জবস</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'খ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">বিল</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'খ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">স্টিভ জবস</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'খ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">ঢাল ব্যাবেজ</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'খ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">জর্জ বুল</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-29" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২৯</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">মোবাইল ফোনের আবিষ্কারক কে? [জনস্বাস্থ্য একৌশল অধিদপ্তর (এস্টিমেটর)-১৮/</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">চার্লস ব্যাবেজ</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">JS বারজার</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-30" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৩০</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">আইপ্যাড এর উদ্ভাবনকারী প্রতিষ্ঠান কোনটি? [শিক্ষা প্রকৌশল</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'খ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">HTML এর পূর্ণরূপ হচ্ছে: Hypertext M</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'খ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">Hyper Text M</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'খ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Hyperlinke</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'খ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">Hier</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">, গ্রাফিক্স এবং অন্যান্য
+J আনুষঙ্গিক তথ্যটি কম্পিউটার নেটওয়ার্কের মাধ্যমে সহজে পাওয়ার
+লক্ষ্যে ১৯৮৯ সালে একটি বিশেষ তথ্য আহরণ এবং সেবাপ্রদান
+ব্যবস্থা উদ্ভাবন করেন। তাদের উদ্ভাবিত এ ব্যবস্থাই পরবর্তীতে
+ইন্টারনেটের মাধ্যমে ওয়ার্ল্ড ওয়াইড ওয়েব (World Wide
+Web) নামে ব্যাপক জনপ্রিয়তা অর্জন করে। একে ইন্টারনেট
+ব্যবহারকারীগণ পৃথিবীর বিভিন্ন স্থানে যে তথ্যভাণ্ডার রয়েছে তার
+রঃ যেকোনটিতে পৌছে যেতে পারে। সাধারণ টেক্সট, গ্রাফিক্স অডিও
+বা ভিডিও যেভাবেই এর তথ্যসমূহ সংরক্ষিত থাকুক না কেন
+4 ওয়েবসাইট ব্যবহ...</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-31" data-ans="গ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৩১</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">ইন্টারনেট জগতে hyper-linked document গুলোর কালেকশানকে কী বলে? (৪৬তম বিসিএস/</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'গ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">HTML</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'গ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">ওয়ার্ল্ড ওয়াইড ওয়েব সং</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>গ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-32" data-ans="গ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৩২</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">WWW(World Wide Web) এর জনক কে? [পিএসসি (সিনিয়র ইন্টরইর)-২৪/ BPSC এর সিনিয়র 38194 (7700-২১</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'গ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">বিল</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'গ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">স্টিভ জবস</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'গ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">fom] টিম বার্নাস লি</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>গ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-33" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৩৩</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">কোন ওয়েবসাইটের নামের শুরুতে ‘www’ এর অর্থ কি?</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">Worl</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">Worl</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-34" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৩৪</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">হোম পেজ কি? [সড়ক ও জনপথ অধিদপ্তরের উপসহকারী প্রকৌশলী-১০/</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ঘ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">বিশেষ তথ্য</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ঘ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">WWW3</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">form The Internet</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ঘ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">IS</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-35" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৩৫</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">DNS port number is:  53 Default Port Numbers Port [IP | Protocol 0</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">63</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">53</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">24 few]</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">53 Default Port Numbers
+
+Port [IP | Protocol
+
+0</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-36" data-ans="গ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৩৬</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">সার্ভারের সাথে সংযুক্ত কম্পিউটারকে কী বলা হয়? (দুর্নীতি দমন কমিশন (কোর্ট পরিদৰর্ক)-২২/মহা হিসাব নিরীক্ষক ও নিয়ন্ত্রকের কার্যালয়ের</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'গ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">হোস্ট</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'গ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">For সার্ভার এ</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'গ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt"></span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>গ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-37" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৩৭</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">নিচের কোনটি সার্চ ইঞ্জিন নয়? (৪৬তম বিসিএস/</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ঘ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt"></span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ঘ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">Google</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Y</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ঘ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">FORT সার্চ ইঞ্জিন এ</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-38" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৩৮</span>
+          <span class="q-exam">সরকারি কর্ম কমিশন (সহকারী প্রযামার)-২২</span>
+        </div>
+        <div class="q-text">Which one of the following is not a web (ক) Firefox (খ) Facebook (গ) Chrome (ঘ) Safari খ ইন্টারনেটের মাধ্যমে কোন কিছু খোঁজার যে বিশেষ ধরনে ApplicationSoftware ব্যবহার করা হয় তাকে সার্চ ইন্জি' বলে। বহুল ব্যবহৃত কয়েকটি সার্চ ইঞ্জিন হলো ফায়ারফজ্স, সাফারি Yahoo, Yandex, Baidu, Bing, AOL, MSN & Bing, Chrome.</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">Firefox</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">ইন্টারনেটের মাধ্যমে</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt"></span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">S</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-39" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৩৯</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">গুগল কি? উগজেলা মহিলা বিষয়ক কর্মকর্তা ২০১৬|</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'খ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">ওয়েবসাইট</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'খ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">= এ</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'খ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">অভিধান</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-40" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৪০</span>
+          <span class="q-exam">মহা-হিসাব নিরীক্ষক ও নিয়ন্তক (অডিটর) ১৫</span>
+        </div>
+        <div class="q-text">কোনটাকে সামাজিক অন্তর্জাল (Social Network) বলে! (ক) Yahoo (খ) Firefox</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ঘ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">ইয়াহু ৮.</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ঘ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">Firefox</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Google</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ঘ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">ব্যা</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">সামাজিক যোগাযোগের সবচেয়ে জনপ্রিয় সাইট হচ্ছে ফেসবুক
+(Facebook) | ফেসবুক চালু হয় ৪ ফেব্রুয়ারি ২০০৪। এর
+প্রতিষ্ঠাতা মাক জুকারবার্গ । Google হচ্ছে জনপ্রিয় সার্চ ইঞ্জিন এবং
+Yahoo একটি সার্চ ইঞজ্জিন। আর Firefox হলো বহুল ব্যবহৃত
+ওয়েব ব্রাউজার |
+oe. নিচের কোনটি মাইক্রোসফটের নতুন সার্চ ইঞ্জিন? (উপজেল
+পেস্ট মস্টার-১০]
+a. ইয়াহু ৮.গুগল</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-41" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৪১</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">ইন্টারনেটের জনক কে? [পিএসসি (পররাষ্ট্র মন্ত্রণালয়); foro কর্মকর্তা-২৪|</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt"></span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">Vinto Gr</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Vinton Gr</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt"></span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-42" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৪২</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">বাংলাদেশে সর্বপ্রথম ইন্টারনেট চালু হয় কোন সালে? [পিএসসি</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'খ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">ই-মেইল</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'খ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">উজ R</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-43" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৪৩</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">নিচের কোনটি ইমেইল প্রটোকল? /তথ্য ও যোগাযোগ fe অধিদপ্তর (সহকারী ধোযামার)-২০|</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">এ4াাঢ</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">S</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">০0170</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">Simple Mail Transfer Protocol (SMTP)
+J হলো একটি ই-মেইল প্রটোকল | যে সকল মেইল বাইরে পাঠানো
+হয় সেগুলোকে AA বা আউটগোয়িং মেইল বলা হয়।
+। আউটগোয়িং মেইল পাঠানোর জন্য SMTP প্রটোকল ব্যবহার করা
+হ্য়।
+"| MbPS</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-44" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৪৪</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">নেটওয়ার্ক ট্রালসমিশন রেট বোঝাতে ব্যবহৃত 'MbPS' এর</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'খ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">Meg</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'খ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">MO</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'খ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Mili</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'খ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt"></span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-04-45" data-ans="গ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৪৫</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">মডেম হচ্ছে (পরিসংখ্যান ও তথ্য ব্যবস্থাপনা অধিদপ্তর পরিসংখ্যান $94 ২০১৭ (ক) সহায়ক স্মৃতি (খ) সিপিইউ এর অংশ (গ) তথ্য আদান প্রদানের যন্ত্র</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'গ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">সহায়</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'গ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">সিপিইউ এর অংশ</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'গ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">তথ্য আদান প্রদানের যন্ত্র</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'গ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">উন্নতমানের প্রিন্টার</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>গ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    let score = 0;
+    const totalQ = 45;
+
+    function selectOpt(btn, optKey, correctAns) {
+      const card = btn.closest('.q-card');
+      if (card.classList.contains('locked')) return;
+
+      card.classList.add('locked');
+      const btns = card.querySelectorAll('.opt-btn');
+      btns.forEach(b => b.disabled = true);
+
+      if (optKey === correctAns) {
+        btn.classList.add('correct');
+        score++;
+      } else {
+        btn.classList.add('wrong');
+        btns.forEach(b => {
+          const lbl = b.querySelector('.opt-lbl').innerText.trim();
+          if (lbl === correctAns) b.classList.add('correct');
+        });
+      }
+
+      const exp = card.querySelector('.exp-box');
+      if (exp) exp.style.display = 'block';
+
+      updateScore();
+    }
+
+    function toggleExp(btn) {
+      const card = btn.closest('.q-card');
+      const exp = card.querySelector('.exp-box');
+      const arrow = btn.querySelector('.arrow-icon');
+      if (exp.style.display === 'block') {
+        exp.style.display = 'none';
+        if (arrow) arrow.innerText = '▼';
+      } else {
+        exp.style.display = 'block';
+        if (arrow) arrow.innerText = '▲';
+      }
+    }
+
+    function updateScore() {
+      const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+      const scoreBn = String(score).split('').map(d => bnDigits[d] || d).join('');
+      const totalBn = String(totalQ).split('').map(d => bnDigits[d] || d).join('');
+      document.getElementById('scoreDisplay').innerText = `${scoreBn} / ${totalBn}`;
+    }
+
+    function resetQuiz() {
+      score = 0;
+      document.querySelectorAll('.q-card').forEach(c => {
+        c.classList.remove('locked');
+        c.querySelectorAll('.opt-btn').forEach(b => {
+          b.disabled = false;
+          b.classList.remove('correct', 'wrong');
+        });
+        const exp = c.querySelector('.exp-box');
+        if (exp) exp.style.display = 'none';
+        const arrow = c.querySelector('.arrow-icon');
+        if (arrow) arrow.innerText = '▼';
+      });
+      updateScore();
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const btn = document.getElementById('themeBtn');
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        btn.innerText = '🌙 ডার্ক';
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        btn.innerText = '☀️ লাইট';
+      }
+    }
+  </script>
+</body>
+</html>

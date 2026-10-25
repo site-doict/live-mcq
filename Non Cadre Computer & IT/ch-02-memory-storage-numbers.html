@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>অধ্যায় ০২: মেমরি, স্টোরেজ ডিভাইস ও সংখ্যা পদ্ধতি - নন-ক্যাডার কম্পিউটার ও তথ্যপ্রযুক্তি</title>
+  <meta name="description" content="পিএসসি নন-ক্যাডার র‍্যাম, রম, ক্যাশ মেমোরি, টেরাবাইট রূপান্তর ও বাইনারি সংখ্যা পদ্ধতির প্রশ্নব্যাংক।">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../ebook-ui.css">
+  <link rel="stylesheet" href="../bangla-fonts.css">
+  <link rel="stylesheet" href="../paper-textures.css">
+  <link rel="stylesheet" href="../universal-modes.css">
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --accent: #d97706;
+      --accent-light: #fef3c7;
+      --bg-base: #f8fafc;
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: rgba(226, 232, 240, 0.85);
+      --font-base: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+    }
+    [data-theme="dark"] {
+      --primary: #38bdf8;
+      --primary-dark: #0284c7;
+      --primary-light: rgba(56, 189, 248, 0.15);
+      --accent: #fbbf24;
+      --accent-light: rgba(251, 191, 36, 0.15);
+      --bg-base: #0b1329;
+      --bg-surface: rgba(15, 23, 42, 0.85);
+      --bg-card: rgba(15, 23, 42, 0.82);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(51, 65, 85, 0.85);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: var(--font-base);
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding-bottom: 70px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 0;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      background: var(--primary-light);
+      border: none;
+      cursor: pointer;
+    }
+    .nav-controls {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .ch-header {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .ch-badges {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+    }
+    .badge-primary { background: var(--primary-light); color: var(--primary); }
+    .badge-accent { background: var(--accent-light); color: var(--accent); }
+
+    .ch-title {
+      font-size: 2.1rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 0.35rem;
+    }
+
+    .sec-heading {
+      font-size: 1.6rem;
+      margin: 2.5rem 0 1.2rem 0;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 0.5rem;
+    }
+
+    .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .sk-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.25rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .sk-box-title {
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .sk-box ul {
+      list-style-type: disc;
+      padding-left: 1.3rem;
+      font-size: 0.95rem;
+    }
+    .sk-box li {
+      margin-bottom: 0.45rem;
+    }
+
+    .quiz-toolbar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.8rem 1.2rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .score-badge {
+      font-family: 'Inter', sans-serif !important;
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.4rem;
+      margin-bottom: 1.4rem;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.02);
+      transition: all 0.2s;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .q-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.8rem;
+      margin-bottom: 0.75rem;
+    }
+    .q-num {
+      font-family: 'Inter', sans-serif !important;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+    .q-exam {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: right;
+      line-height: 1.4;
+    }
+    .q-text {
+      font-size: 1.12rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .opt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-family: var(--font-base);
+      font-size: 0.98rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+    .opt-lbl {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.06);
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    [data-theme="dark"] .opt-lbl {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .opt-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      font-weight: 700;
+    }
+    .opt-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+    }
+    [data-theme="dark"] .opt-btn.correct {
+      background: rgba(34, 197, 94, 0.2) !important;
+      color: #86efac !important;
+    }
+    [data-theme="dark"] .opt-btn.wrong {
+      background: rgba(239, 68, 68, 0.2) !important;
+      color: #fca5a5 !important;
+    }
+
+    .exp-box {
+      background: var(--primary-light);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 0.8rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      border-left: 4px solid var(--primary);
+      display: none;
+    }
+    .exp-title {
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .btn-show-ans {
+      background: none;
+      border: 1px dashed var(--primary);
+      color: var(--primary);
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+    .btn-show-ans:hover {
+      background: var(--primary-light);
+    }
+
+    /* Typography Protection */
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .exp-box, .exp-box *, .bcs-table, .bcs-table *, .score-bar, .score-bar * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+    .ch-title .ch-en, .badge, .q-num, .score-badge {
+      font-family: 'Inter', sans-serif !important;
+    }
+  </style>
+</head>
+<body class="paper-lined-notebook font-mamun">
+  <div class="container">
+    <nav class="top-nav">
+      <a href="index.html" class="nav-btn">← সূচিপত্র</a>
+      <div class="nav-controls">
+        <button class="nav-btn" onclick="toggleTheme()" id="themeBtn">🌙 ডার্ক</button>
+      </div>
+    </nav>
+
+    <header class="ch-header">
+      <div class="ch-badges">
+        <span class="badge badge-primary">অধ্যায় ০২</span>
+        <span class="badge badge-accent">পৃষ্ঠা: ৫২৭–৫৩১</span>
+        <span class="badge badge-primary">মোট প্রশ্ন: 36টি</span>
+      </div>
+      <h1 class="ch-title">মেমরি, স্টোরেজ ডিভাইস ও সংখ্যা পদ্ধতি <span class="ch-en">(Memory, Storage & Number Systems)</span></h1>
+    </header>
+
+    <section class="sec-notes">
+      <h2 class="sec-heading">📌 প্রামাণ্য রিভিশন নোট ও তথ্য কণিকা</h2>
+      
+<div class="sk-grid">
+  <div class="sk-box">
+    <h3 class="sk-box-title">🧠 মেমোরি ও স্টোরেজ স্তরক্রম</h3>
+    <ul>
+      <li><strong>দ্রুততম মেমোরি:</strong> রেজিস্টার > ক্যাশ মেমোরি (L1, L2, L3) > র‍্যাম (RAM)।</li>
+      <li><strong>অস্থায়ী মেমোরি (Volatile):</strong> RAM (বিদ্যুৎ গেলে তথ্য মুছে যায়)।</li>
+      <li><strong>স্থায়ী মেমোরি (Non-volatile):</strong> ROM, হার্ডডিস্ক, SSD, ফ্ল্যাশ ড্রাইভ।</li>
+    </ul>
+  </div>
+  <div class="sk-box">
+    <h3 class="sk-box-title">🔢 ডেটার পরিমাপ ও সংখ্যা পদ্ধতি</h3>
+    <ul>
+      <li>৮ বিট = ১ বাইট (Byte)</li>
+      <li>১০২৪ বাইট = ১ কিলোবাইট (KB), ১০২৪ KB = ১ MB</li>
+      <li>১০২৪ MB = ১ GB, ১০২৪ GB = ১ টেরাবাইট (TB)</li>
+      <li><strong>বেস:</strong> বাইনারি (২), অক্টাল (৮), দশমিক (১০), হেক্সাডেসিমেল (১৬)।</li>
+    </ul>
+  </div>
+</div>
+
+    </section>
+
+    <section class="sec-quiz">
+      <h2 class="sec-heading">📝 বিগত বছরের প্রশ্নব্যাংক</h2>
+      <div class="quiz-toolbar">
+        <div>
+          <span>স্কোর: </span>
+          <span class="score-badge" id="scoreDisplay">০ / 36</span>
+        </div>
+        <button class="nav-btn" onclick="resetQuiz()">🔄 রিসেট কুইজ</button>
+      </div>
+
+      <div class="question-list">
+        
+      <div class="q-card" data-q-id="comp-02-01" data-ans="গ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ০১</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">RAM খ. Fard Disk</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'গ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">F</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'গ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">|</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>গ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-02" data-ans="গ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ০২</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">নিচের কোনটি ক্ষণস্থায়ী বা Volatile memory? [শিক্ষা</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'গ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">H</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'গ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt"></span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'গ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">Pen</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>গ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-03" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ০৩</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">DVD এর চেয়ে বেশী Data store করা যায় কোনটিতে?</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">শে Rom</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt"></span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">Re</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-04" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ০৪</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">BIOS কি? [তথ্য ও যোগাযোগ প্রযুক্তি অধিদপ্তর (সহকারী প্রোযামার)-২০/</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">H</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">Firmw</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Softw</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt"></span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">BIOS এর পূর্ণরূপ হলো- Basic Input Outpul
+System. এটি System BIOS, ROM BIOS, PC
+BIOS হিসেবেও পরিচিত। এটি হলো এক ধরনের Chip 3
+Hardware যেখানে কিছু Special Instruction 3
+Program load করা থাকে । আর কোন Hardware এর TY
+যদি Software বা Program built in থাকে, তবে তাবে
+
+PEL ST BERR
+Firmware বলে। এজন্য 8103-কে অনেক সময়
+Firmware-8 বলা হয়।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-05" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ০৫</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">নিচের কোনটি কম্পিউটারের মেমোরি ডিভাইস নয়? (এনএসসই (ক) Hard disk (থ) Floppy disk</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ঘ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">ফ্লপি ডিস্</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt"></span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ঘ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">ব্যা</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">কম্পিউটারের মেমোরি দুই প্রকার। যথা- ১. প্রধান
+(Primary) মেমোরি ও ২. সহায়ক (Secondary) Gam)
+RAM ও ROM প্রধান মেমোরির অন্তর্ভুক্ত ৷
+সহায়ক মেমোরি | হার্ড ডিক্স , ফ্লাশ OH, ফ্লপি ডিক্স, Oe
+ড্রাম, সিডি ডিভিডি
+মোবাইল ফোনে ব্যবহার করা হয় ।
+হ্‌লো
+ob. নিচের কোন মাধ্যমটির ডাটা (data) ধারণক্ষমতা সবচেয়ে
+বেশি? উপজেলা পোস্ট মাস্টার-১০]
+a. ফ্লপি ডিস্ক ৮.কমপ্যাক্ট ডিস্ক</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-06" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ০৬</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">ডিজিটাল ভিডিও ডিস্ক 0. মডেম উত্তর: ০ ব্যাখ্যা ডিজিটাল ভিডিও few (DVD), কমপ্যাক্ট ডিস্ক (সিডি)- এর চাইতে বহুগুণ বেশি ডাটা ধারণ করতে পারে। সিডিতে এক পার্শ্বে ডাটা সংরক্ষণ করা হয় কিন্তু ডিভিডিতে এক পার্শ্বে কিংবা উভয় পার্শবেই ডাটা সংরক্ষণ করা যায়। আবার ডিভিডিতে সিঙ্গেল লেয়ার কিংবা ডবল লেয়ার ডাটা সংরক্ষণ করা যায়। এসব কারণে সিডি রমের উন্নতর ডাটা সংরক্ষণ ব্যবস্থা হচ্ছে ডিভিডি । একটি ডিভিডিতে ৪.৭ গিগাবাইট থেকে ১৭ গিগাবাইট পর্যন্ত ডাটা সংরক্ষণ করা যায়। ফ্লপি ডিস্ক এর ধারণক্ষমতা অনেক কম। আর মডেম দ্বারা ইন্টারনেটের সংযোগ পাওয়া যায়। Bit & Byte | ১০. কম্পিউটারে পরিভাষায় তথ্যের ক্ষুদ্রতম একক কোনটি? [পিএসসি <=. bit খ. byte</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ঘ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt"></span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ঘ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">ব্যা</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">ডিজিটাল ভিডিও few (DVD), কমপ্যাক্ট ডিস্ক (সিডি)-
+এর চাইতে বহুগুণ বেশি ডাটা ধারণ করতে পারে। সিডিতে এক
+পার্শ্বে ডাটা সংরক্ষণ করা হয় কিন্তু ডিভিডিতে এক পার্শ্বে কিংবা
+উভয় পার্শবেই ডাটা সংরক্ষণ করা যায়। আবার ডিভিডিতে সিঙ্গেল
+লেয়ার কিংবা ডবল লেয়ার ডাটা সংরক্ষণ করা যায়। এসব কারণে
+সিডি রমের উন্নতর ডাটা সংরক্ষণ ব্যবস্থা হচ্ছে ডিভিডি । একটি
+ডিভিডিতে ৪.৭ গিগাবাইট থেকে ১৭ গিগাবাইট পর্যন্ত ডাটা সংরক্ষণ
+করা যায়। ফ্লপি ডিস্ক এর ধারণক্ষমতা অনেক কম। আর মডেম
+দ্বারা ইন্টারনেটের সংযোগ পাওয়া যায়।
+Bit & Byt...</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-07" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ০৭</span>
+          <span class="q-exam">পিএসসি (37587 ওয়ার্কশপ সুপার)-২৩</span>
+        </div>
+        <div class="q-text">কম্পিউটারে Hard Disk Drive- এ কীসের সাহায্যে</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">৪ Ly</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">১৬</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">শব্দতরঙ্</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-08" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ০৮</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">কম্পিউটারে গণনার একক কোনটি? /কারিগরি শিক্ষা অধিদপ্তর (জুনিয়র Te)</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'খ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">সেন্টিমিটার</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'খ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">ডেসিবল</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-09" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ০৯</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">এক বাইট (byte) সমান- [wy মন্ত্রণালয়ের অধীনে সহকারী গকৌশলী (ক) 4 বিট (খ) 6 বিট</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ঘ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">4 বিট</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ঘ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">6 বিট</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">7 বিট</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ঘ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">8 বিট</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">কম্পিউটার মেমোরিতে বাইটের সংখ্যাকে তার ধারণ ক্ষমতা
+বলে। ৮ বিট (8105১ বাইট (Byte), > কিলোবাইট (KB) =
+২১- বাইট বা ১০২৪ কিলোবাইট ১ গিগাবাইট (GB) = ২০ বাইট
+বা ১০২৪ মেগাবাইট |</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-10" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১০</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">১ মেগাবাইট = কত কিলোবাইট? (বিভিন্ন মন্ত্রণালয়ের সহকারী মেইনটেন্যাল ইঞ্জিনিয়ার-১৭|</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ঘ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">১০০০</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">১০২৬</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-11" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১১</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">নিচের কোনটি কম্পিউটার মেমোরি হিসেবে দ্রুততম? (৪৬তম ক্.াংণা4 খ. Hard Disk</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ঘ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">res ous ioe</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ঘ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">H</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt"></span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ঘ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">Registers টিত্তরঁ</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-12" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১২</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">নিচের কোনটি ALU- আউটপুট রাখার জন্য ব্যবহৃত (ক) Register খে) ROM</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">Register</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Fl</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">Output Unit</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-13" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১৩</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">মেইন — te (তথ্য ও যোগাযোগ fF অধিদপ্তর (সহকারী গ্রোযরামার)-২০/</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">R</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">ROM</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">ডাটা ও প্রোগ্রাম সংরক্ষণে জন্য ব্যবহৃত মাধ্যম বা ধারককে
+মেমোরিয়া বলে। যে মেমোরি সিপিইউ এর গণিতিক ও যুক্তি অংশের
+সাথে সংযুক্ত তাকে প্রধান মেমোরি বলা হয়। প্রধান মেমোরিকে
+প্রাথমিক মেমোরি বা প্রাথমিক স্টোরেজ হিসেবেও উল্লেখ করা হয়।
+প্রধান মেমোরি দুই প্রকার: ক) RAM (Random Acess
+Memory) খ. ROM (Read Only Memory)</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-14" data-ans="গ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১৪</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">কোনটি কম্পিউটারের প্রাইমারী মেমোরি? (গণপূর্ত অধিদপ্তরের উপসহকারী প্রকৌশলী (সিভিল)-১৭| (ক) Hard Disk (খ) Pendrive</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'গ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">H</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'গ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">Pen</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'গ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">ব্যা</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'গ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">H</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>গ</strong></span>
+          </div>
+          <div class="exp-desc">যে মেমোরি সিপিইউ এর গাণিতিক ও যুক্তি অংশের সাথে
+সংযুক্ত থাকে, তাকে প্রধান মেমোরি বা প্রাইমারি মেমোরি বলে।
+RAM ও ROM হলো কম্পিউটারের প্রাইমারি মেমোরি |</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-15" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১৫</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">নিচের কোনটি কম্পিউটারের প্রাইমারি মেমোরি? [বিডিনন মন্ত্রণালয় (are কক্তা)-২২|</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">াংণা 4</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Pen</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">ROM</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-16" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১৬</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">RAM এর পূর্ণরূপ কি?/ RAM stands for — [জাতীয় ম্যালেরিয়া fof কর্মসূচি, স্বাস্থ্য অধিদপ্তর (টেকনিশিয়ান)-২৩/ সংস্কৃতি মন্ত্রণালয়ের উপ-সহকারী প্রকৌশলী (সিভিল)-১৯/ মহা হিসাব fades ও নিয়ন্ত্রকের কার্যালয়ের wih অডিটর-১১|</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'খ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">Re</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'খ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">R</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'খ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Run</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-17" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১৭</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">ROM ভিত্তিক Program এর নাম কী? /পিএসসি(রেলপথ মন্ত্রণালয়) (উপ-সহকারী ধকৌশলী)-২৪/খতিরক্ষা মন্ত্রণালয়; সহকারী পরিচালক (নন-টেকনিক্যাল)-২৩/ NE ce আআ 11 10030 নন-ক্যাডার প্রশ্ব্যাক ~~ ৫২৭ yo. কম্পিউটারে গণনার একক কোনটি? /কারিগরি শিক্ষা অধিদপ্তর (জুনিয়র TR)</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'খ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">সেন্টিমিটার</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'খ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">ব্যা</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'খ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">ডেসিবল</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">কম্পিউটারের সমস্ত কর্মকান্ড পরিচালিত হয় মূলত বাইনারি
+পদ্ধতিতে | বাইনারি পদ্ধতিতে ব্যবহৃত বিট হল 0 ও 1 । ৮ বিট
+মিলে হয় 1 বাইট (byte) | সবচেয়ে HW character প্রকাশে এ
+৮ বিট বা ] বাইট প্রয়োজন হয়। তাই এ হিসেবে কম্পিউটারের
+হিসাব, গণনা বা শ্রক্রিয়াকরণের একক বলতে বাইট (byte) ধরা
+হ্য়।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-18" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১৮</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">এক বাইট (byte) সমান- [wy মন্ত্রণালয়ের অধীনে সহকারী গরকৌশলী (ক) 4 বিট (খ) 6 বিট</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ঘ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">4 বিট</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ঘ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">6 বিট</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">7 বিট</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ঘ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">8 বিট</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-19" data-ans="ঘ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ১৯</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">১ মেগাবাইট = কত কিলোবাইট? /বিডিন্ন মন্ত্রণালয়ের সহকারী মেইনটেন্যাল ইঞ্জিনিয়ার-১৭|</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ঘ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">১০০০</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ঘ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">১০২৬</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ঘ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-20" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২০</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">.... are used to quickly accept, store and transfer data and instruction that are being used immediately by the CPU. সরকারি FF কমিশন (সহকারী প্রোমার)-২২| (ক) Graphics (¥) RAMs (গ) Caches (9) Registers B= ঘ Registers are a type of computer memory used to quickly accept, store, and transfer data and instructions that are being used immediately by the CPU. The registers used by the CPU are often termed as Processor registers. ০০০০</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">type of</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt"></span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">Registers</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-21" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২১</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">নিচের কোনটি ALU-G7 আউটপুট রাখার জন্য ব্যবহৃত (ক) Register (¥) ROM</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">[</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Fl</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-22" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২২</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">মেইন কোনটি? [তথ্য ও যোগাযোগ প্রযুক্তি অধিদপ্তর (সহকারী +. RAM 4. ROM</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">R</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">ROM</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">ডাটা ও প্রোগ্রাম সংরক্ষণে জন্য ব্যবহৃত মাধ্যম বা ধারককে
+মেমোরিয়া বলে। যে মেমোরি সিপিইউ এর গণিতিক ও যুক্তি অংশের
+সাথে সংযুক্ত তাকে প্রধান মেমোরি বলা হয়। প্রধান মেমোরিকে
+প্রাথমিক মেমোরি বা প্রাথমিক স্টোরেজ হিসেবেও উল্লেখ করা হয়।
+প্রধান মেমোরি দুই প্রকার: ক) RAM (Random Acess
+Memory) খ. ROM (Read Only Memory)</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-23" data-ans="গ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২৩</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">কোনটি কম্পিউটারের প্রাইমারী মেমোরি? (গণপূর্ত অধিদপ্তরের উপসহকারী একৌশলী (সিভিল)-১৭/ (ক) Hard Disk (¥) Pendrive</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'গ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">H</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'গ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">form যে মেমোরি সিপিইউ এর</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'গ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">H</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>গ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-24" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২৪</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">নিচের কোনটি কম্পিউটারের প্রাইমারি মেমোরি? [বিভিন্ন মন্ত্রণালয় (fore Fed) ¥. RAM খ. Hard Disk</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">H</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Pen</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-25" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২৫</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">RAM এর পূর্ণরূপ কি?/ RAM stands for — (জাতীয় ম্যালেরিয়া fof wf, স্বাস্থ্য অধিদপ্তর (টেকনিশিয়ান)-২৩/ সংস্কৃতি মন্ত্রণালয়ের উপ-সহকারী প্রকৌশলী (সিডিল)-১৯/ মহা হিসাব নিরীক্ষক ও নিয়ন্ত্রকের কার্যালয়ের</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'খ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">Re</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'খ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">R</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'খ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Run</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'খ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">Re</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-26" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২৬</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">ROM ভিত্তিক Program এর নাম কী? [পিএসসি(রেলগথ মন্ত্রণালয়) (উপ-সহকারী প্রকৌশলী)-২৪/খতিরক্ষা মন্ত্রণালয়; সহকারী পরিচালক MATRIX PSC ননু্যাডার প্রব্যাক  .... ৫২</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'খ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">Size of R</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'খ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">Size of Register</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'খ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Size of</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-27" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২৭</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">কম্পিউটার-এর স্থায়ী স্মৃতিশক্তি কোথায় থাকে? (সংঘ্কৃতি wei</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'খ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">অপারেটিং সিস্টেম «R</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'খ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">f</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'খ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">ROM</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-28" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২৮</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">DVD এর চেয়ে বেশী Data store করা যায় কোনটিতো</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">:</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">Floppy</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">ব্যা</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">Re</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">যুর-রে ডিস্ক হলো অপটিক্যাল fow Goi মিডিয়া, যা
+সংক্ষেপে বু-রে বা বিড়ি নামে পরিচিত। ডিভিডি বা সিডির মতো ু-
+রে ডিত্বের রয়েছে একই STIG ডাইমেনশন। এর প্রধান কাজ
+হচ্ছে হাইডেফিনেশন ভিডিও ও ডাটা স্টোর war | goa ডিস্ক-এর
+নামটি আসে বু-লেজার (ভায়োলেট রঙ) এর ব্যবহার থেকে, যা এ
+
+লা 0 SEAPUNE a... :
+
+wae ডিস্ক ডাটা রিড ও wel করে। এটি son আগামী
+stores অপগাটিকাাল ডিস্ক ফরমেট খা যৌথভাবে ডেভেলপ করে 3.
+রে (ow sprue, বিশ্বের শীর্ষস্থানীয় কনজুমার ইলেক্ট্রমিক্স
+Spe, পাসখোনাল কমাপউটার ও মিডিয়া ম্যানুঘ্যাকচারার যে...</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-29" data-ans="খ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ২৯</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">CD-ROM এর পূর্ণযূপ কি?  CD-ROM এর stat compact dise read-only memory. 09, Which technology is used in Compact Disk (CD)? সরকারি কর্ম কমিশন (সহকারী যেমামার)-২২/ (ক) Mechanical (খ) Laser (গ) Electrical</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'খ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">পেন ড্রাইভ</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'খ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">ব্যা</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'খ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">Ele</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>খ</strong></span>
+          </div>
+          <div class="exp-desc">CD-ROM এর stat compact dise read-only
+memory.
+
+09, Which technology is used in Compact
+Disk (CD)? সরকারি কর্ম কমিশন (সহকারী যেমামার)-২২/
+(ক) Mechanical (খ) Laser
+(গ) Electrical
+(4) Electro Magnetic উত্তর খ
+ব্যাখ্যা) Laser technology is used in Compact
+disks. The compact disc is an evolution of
+LaserDise technology, where a focused laser
+beam is used that enables the high information
+density required for high-quality digital audio
+signals. Prototypes were developed by Philips
+and Sony independent...</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-30" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৩০</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">এক টেরাবইট (TB) সমান- [গিএসসি (ইকোনমিস্ট)-২৪|</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">১০২৪ মে</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">১০২৪ ন্যানোবাইট</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">১০২৪</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'ক')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">১০২৪</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-31" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৩১</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">= চর কোনটি অপারেটিং সিস্টেমের উদাহরণ নয়? [পিএসসি</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">Mi</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">Linux</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-32" data-ans="গ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৩২</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">Operating system এর কয়টি অংশ? [পিএসসি(রেলগথ | মন্ত্রণালয়) (উপ-সহকারী ধকৌশলী)-২৪| |</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'গ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">২টি</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'গ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">৪টি</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>গ</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-33" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৩৩</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">কোনটি Operating System নয়? (পিএসসি(রেলগথ J মন্ত্রণালয়) (উপ-সহকারী ধকৌশলী)-২৪|</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">:</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">LINUX</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">বইয়ের মূল প্রশ্ন ও সঠিক উত্তর।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-34" data-ans="গ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৩৪</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">নীচের কোনটি অপারেটিং সিস্টেম নয়? (তথ্য ও সম্প্রচার মন্ত্রণালয়ের , Sl বাংলাদেশ টেলিভিশন (উপসহকারী ধকৌশলী/ স্টুডিও মেকানিক)-২৩|</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'গ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">Fr</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'গ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">fom] ব্যবহারি</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'গ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt">ডিস্</span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>গ</strong></span>
+          </div>
+          <div class="exp-desc">ের জন্য ব্যবহৃত Program-
+application software MS Word 4 Word
+processing Software Application Software এর
+একটি অংশ। আর Disk Operating System (DOS), ও
+LINUX হলো অপারেটিং সিস্টেম।</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-35" data-ans="গ">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৩৫</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">নিচের কোনটি কম্পিউটারের অপারেটিং সিস্টেম? (গণপূর্ত অধিদপ্তরের উপসহকারী ধরকৌশলী (সিডিল)-১১| %. ROM 4. RAM</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'গ')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">এটি মাল্টি টাঙ্</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'গ')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">Win</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'গ')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt">U</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'ঘ', 'গ')">
+              <span class="opt-lbl">ঘ</span>
+              <span class="opt-txt"></span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>গ</strong></span>
+          </div>
+          <div class="exp-desc">Linux: টরভোল্ডাস উদ্ভাবিত মুক্ত সোর্স অপারেটিং
+সিস্টেম | অর্থাৎ এটি বিনামূল্যে পাওয়া যায় এমন একটি অপারেটিং
+সিস্টেম |
+Windows অপারেটিং সিস্টেম সম্পর্কিত নিম্নের কোন
+তথ্যটি সঠিক? [৪৬তম বিসিএস/
+ক. এটি মাল্টি টাঙ্কিং অপারেটিং সিস্টেম</div>
+        </div>
+      </div>
+      <div class="q-card" data-q-id="comp-02-36" data-ans="ক">
+        <div class="q-top">
+          <span class="q-num">প্রশ্ন ৩৬</span>
+          <span class="q-exam">পিএসসি নন-ক্যাডার</span>
+        </div>
+        <div class="q-text">এটি Open source অপারেটিং সিস্টেম</div>
+        <div class="opt-grid">
+          
+            <button class="opt-btn" onclick="selectOpt(this, 'ক', 'ক')">
+              <span class="opt-lbl">ক</span>
+              <span class="opt-txt">ব্যা</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'খ', 'ক')">
+              <span class="opt-lbl">খ</span>
+              <span class="opt-txt">উভয়ই সত্য</span>
+            </button>
+            <button class="opt-btn" onclick="selectOpt(this, 'গ', 'ক')">
+              <span class="opt-lbl">গ</span>
+              <span class="opt-txt"></span>
+            </button>
+        </div>
+        <div class="ans-action-bar">
+          <button class="btn-show-ans" onclick="toggleExp(this)">
+            <span>💡 সমাধান ও ব্যাখ্যা</span>
+            <span class="arrow-icon">▼</span>
+          </button>
+        </div>
+        <div class="exp-box">
+          <div class="exp-title">
+            <span>সঠিক উত্তর: <strong>ক</strong></span>
+          </div>
+          <div class="exp-desc">Multi user operating system (বহু
+ব্যবহারকারী): এটি একাধিক ব্যবহারকারী এবং একাধিক প্রসেসর
+সমর্থন করে এবং নেটওয়ার্কিং বা ইন্টারনেট ব্যবস্থার মাধ্যমে কাজ
+করতে পারে। টাইম শেয়ারিং, মাল্টিপ্রসেসিং, মাল্টিপ্রো্রামিং,
+মাল্টিটান্বিং ইত্যাদিতে এ অপারেটিং সিস্টেম ব্যবহার করা হয়।
+এটি বর্ণভিত্তিক ও চিত্র ভিত্তিক উভয়ই হতে পারে।
+উদাহরণ: Windows 95/98, Windows 10, Windows
+11, VISTA, 7, Unix, Linux প্রভৃতি।
+Open source operating system: যে সকল অপারেটিং
+সিস্টেমের ওপর সবার জন্য উন্মুক্ত যা বিনামূল্যে সংগ্রহ কর...</div>
+        </div>
+      </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    let score = 0;
+    const totalQ = 36;
+
+    function selectOpt(btn, optKey, correctAns) {
+      const card = btn.closest('.q-card');
+      if (card.classList.contains('locked')) return;
+
+      card.classList.add('locked');
+      const btns = card.querySelectorAll('.opt-btn');
+      btns.forEach(b => b.disabled = true);
+
+      if (optKey === correctAns) {
+        btn.classList.add('correct');
+        score++;
+      } else {
+        btn.classList.add('wrong');
+        btns.forEach(b => {
+          const lbl = b.querySelector('.opt-lbl').innerText.trim();
+          if (lbl === correctAns) b.classList.add('correct');
+        });
+      }
+
+      const exp = card.querySelector('.exp-box');
+      if (exp) exp.style.display = 'block';
+
+      updateScore();
+    }
+
+    function toggleExp(btn) {
+      const card = btn.closest('.q-card');
+      const exp = card.querySelector('.exp-box');
+      const arrow = btn.querySelector('.arrow-icon');
+      if (exp.style.display === 'block') {
+        exp.style.display = 'none';
+        if (arrow) arrow.innerText = '▼';
+      } else {
+        exp.style.display = 'block';
+        if (arrow) arrow.innerText = '▲';
+      }
+    }
+
+    function updateScore() {
+      const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+      const scoreBn = String(score).split('').map(d => bnDigits[d] || d).join('');
+      const totalBn = String(totalQ).split('').map(d => bnDigits[d] || d).join('');
+      document.getElementById('scoreDisplay').innerText = `${scoreBn} / ${totalBn}`;
+    }
+
+    function resetQuiz() {
+      score = 0;
+      document.querySelectorAll('.q-card').forEach(c => {
+        c.classList.remove('locked');
+        c.querySelectorAll('.opt-btn').forEach(b => {
+          b.disabled = false;
+          b.classList.remove('correct', 'wrong');
+        });
+        const exp = c.querySelector('.exp-box');
+        if (exp) exp.style.display = 'none';
+        const arrow = c.querySelector('.arrow-icon');
+        if (arrow) arrow.innerText = '▼';
+      });
+      updateScore();
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const btn = document.getElementById('themeBtn');
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        btn.innerText = '🌙 ডার্ক';
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        btn.innerText = '☀️ লাইট';
+      }
+    }
+  </script>
+</body>
+</html>
