@@ -1116,6 +1116,9 @@
 
       this.updateTimerDisplay();
       this.updateProgressCounters();
+      if (typeof window.renderMathEverywhere === 'function') {
+        window.renderMathEverywhere(container);
+      }
     },
 
     cleanExamQuestionText: function(qText, hideSource) {
@@ -1135,14 +1138,22 @@
         // Strip trailing exam names/sessions like "২০তম বিসিএস", "২৬তম/১৭তম বিসিএস", "- ৪৪তম বিসিএস", "[সহকারী পরিচালক...]"
         cleaned = cleaned.replace(/(?:[\s\-\–—\(\[]*(?:[০-৯\d]+(?:তম)?(?:\/[০-৯\d]+)?(?:তম|th|st|nd|rd)?)?(?:\s*(?:বিশেষ|বাতিল|প্রিলি))?\s*(?:বিসিএস|BCS|নন[\-\s]?ক্যাডার|পিএসসি|নিয়োগ|মন্ত্রণালয়)[^)\]]*[\)\]]?)+\s*$/i, '');
       }
+      if (typeof window.normalizeMath === 'function') {
+        cleaned = window.normalizeMath(cleaned);
+      }
       return (cleaned.trim() + (diagramPart ? ' ' + diagramPart : '')).trim();
     },
 
     cleanOptText: function(text) {
       if (!text) return '';
       // Strip duplicate leading prefixes like "(ক) ", "(খ) ", "ক. ", "(a) ", "A. "
-      return text.replace(/^\s*[\(\[]?(?:[কখগঘ]|[abcdABCD])[\)\]\.\-:\s]\s*/, '');
+      let cleaned = text.replace(/^\s*[\(\[]?(?:[কখগঘ]|[abcdABCD])[\)\]\.\-:\s]\s*/, '');
+      if (typeof window.normalizeMath === 'function') {
+        cleaned = window.normalizeMath(cleaned);
+      }
+      return cleaned;
     },
+
 
     toggleSourceTags: function() {
       this.showSourceTags = !this.showSourceTags;

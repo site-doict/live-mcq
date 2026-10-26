@@ -60,6 +60,53 @@
     }
   }
 
+  // 1.1 Pure Math Normalizer
+  function normalizeMath(text) {
+    if (!text) return '';
+    // Strip invisible characters
+    text = text.replace(/[\u2061\u2062\u2063\u200B\uFEFF]/g, '');
+
+    // TeX \over -> \frac{a}{b}
+    text = text.replace(/([0-9a-zA-Z]+)\s*\\over\s*([0-9a-zA-Z]+)/g, '\\frac{$1}{$2}');
+
+    // Unbracketed \frac: \frac23 -> \frac{2}{3}, \frac12 -> \frac{1}{2}, \frac 12 -> \frac{1}{2}
+    text = text.replace(/\\frac\s*([0-9a-zA-Z])\s*([0-9a-zA-Z])(?![0-9a-zA-Z{])/g, '\\frac{$1}{$2}');
+    text = text.replace(/\\frac\s*π\s*([0-9]+)/g, '\\frac{\\pi}{$1}');
+    text = text.replace(/\\frac\s*\{\s*2π3\s*\}/g, '\\frac{2\\pi}{3}');
+    text = text.replace(/\\frac\s*([0-9a-zA-Z])\s*\{([^}]+)\}/g, '\\frac{$1}{$2}');
+    text = text.replace(/\\frac\s*\{([^}]+)\}\s*([0-9a-zA-Z])(?![0-9a-zA-Z{])/g, '\\frac{$1}{$2}');
+    text = text.replace(/\\frac\s+([a-zA-Z0-9])\s*([0-9a-zA-Z])(?![0-9a-zA-Z{])/g, '\\frac{$1}{$2}');
+
+    // Unbracketed \sqrt: \sqrt3 -> \sqrt{3}, \sqrt 2 -> \sqrt{2}, 8\sqrt3 -> 8\sqrt{3}
+    text = text.replace(/\\sqrt\s*([0-9a-zA-Z])(?![0-9a-zA-Z{])/g, '\\sqrt{$1}');
+
+    // log_x324 -> \log_{x} 324
+    text = text.replace(/(?<!\\)log_([a-zA-Z0-9])([0-9]+)/g, '\\log_{$1} $2');
+    text = text.replace(/\\log_([a-zA-Z0-9])([0-9]+)/g, '\\log_{$1} $2');
+    text = text.replace(/(?<!\\)log_([a-zA-Z0-9]+)/g, '\\log_{$1}');
+
+    // Dots in series: +...+ or ...{\frac...} -> \dots
+    text = text.replace(/\.\.\.\s*\{\s*\\frac\s*\{?([^}]+)\}?\s*\{([^}]+)\}\s*\}/g, '\\dots + \\frac{$1}{$2}');
+    text = text.replace(/\+\s*\.\.\.\s*\+/g, '+ \\dots +');
+
+    // Specific expressions outside tags
+    text = text.replace(/\bx\^4-2x\+1\b/g, '\\( x^4-2x+1 \\)');
+    text = text.replace(/\bx\^2-\(p\+q\)x\+pq=0\b/g, '\\( x^2-(p+q)x+pq=0 \\)');
+    text = text.replace(/\\?\{p\s*,\s*q\\?\}/g, '\\( \\{p,q\\} \\)');
+
+    // Wrap bare LaTeX run in \( \) if not already delimited
+    if ((text.includes('\\frac') || text.includes('\\sqrt') || text.includes('\\times') || text.includes('\\div') || text.includes('\\log')) &&
+        !text.includes('\\(') && !text.includes('\\[') && !text.includes('$$')) {
+      // If it looks like a formula or short option string
+      if (!text.includes('<') && (text.length < 160 || /^[\s\w\+\-\*\/=\(\)\^_{}\.\\]+$/.test(text))) {
+        text = `\\( ${text.trim()} \\)`;
+      }
+    }
+
+    return text;
+  }
+  window.normalizeMath = normalizeMath;
+
   // Pre-sanitize text nodes to fix any broken delimiters before KaTeX runs
   function sanitizeMathDelimiters(root = document.body) {
     if (!root) return;
@@ -78,7 +125,7 @@
     const nodesToFix = [];
     while (walker.nextNode()) {
       const val = walker.currentNode.nodeValue;
-      if (val && (val.includes('\\(') || val.includes('$$') || val.includes('$') || val.includes('\\frac'))) {
+      if (val && (val.includes('\\') || val.includes('$$') || val.includes('$') || val.includes('^') || /[\u2061\u2062\u2063\u200B\uFEFF]/.test(val))) {
         nodesToFix.push(walker.currentNode);
       }
     }
@@ -86,10 +133,10 @@
     nodesToFix.forEach(node => {
       let text = node.nodeValue;
       if (!text) return;
+      text = normalizeMath(text);
+
       text = text.replace(/\$\$\\?\(/g, '$$').replace(/\\?\(\$\$/g, '$$');
-      text = text.replace(/\$\\?\(/g, '$').replace(/\\?\(\$/g, '$');
       text = text.replace(/\\?\)\$\$/g, '$$').replace(/\$\$\\?\)/g, '$$');
-      text = text.replace(/\\?\)\$/g, '$').replace(/\$\\?\)/g, '$');
       text = text.replace(/\\?\(\s*implies/g, '\\implies');
       text = text.replace(/\\text\{\s*\\?\)/g, '\\text{');
       text = text.replace(/\\?\(\s*\\text\{/g, '\\text{');
@@ -102,8 +149,8 @@
                  .replace(/&deg;/g, '^\\circ ')
                  .replace(/&hellip;/g, '\\dots ');
 
-      if (text.includes('\\frac{') && !text.includes('$') && !text.includes('\\(') && !text.includes('\\[')) {
-        text = text.replace(/(\\frac\{[^{}]+\}\{[^{}]+\})/g, '$$$1$$');
+      if (text.includes('\\frac{') && !text.includes('$$') && !text.includes('\\(') && !text.includes('\\[')) {
+        text = text.replace(/(\\frac\{[^{}]+\}\{[^{}]+\})/g, '\\( $1 \\)');
       }
 
       if (text !== node.nodeValue) {
@@ -142,11 +189,31 @@
       let html = text.replace(fracRegex, (m, num, den) => {
         return `<span class="math-frac"><span class="num">${num}</span><span class="den">${den}</span></span>`;
       });
-      html = html.replace(/\$\$/g, '').replace(/\$/g, '');
+      html = html.replace(/\$\$/g, '').replace(/\\\(|\\\)/g, '');
       span.innerHTML = html;
       if (node.parentNode) {
         node.parentNode.replaceChild(span, node);
       }
+    });
+  }
+
+  // 1.3 Math Guard
+  function runMathGuard(root = document.body) {
+    if (!root) return;
+    const targetSelectors = '.q-text, .opt-text, .exam-q-text, .opt-label-text, .exp-text, .exp-body-text, .review-opt-box, .q-card, .review-q-text';
+    const targets = root.matches && root.matches(targetSelectors) ? [root] : root.querySelectorAll(targetSelectors);
+    targets.forEach(el => {
+      const clone = el.cloneNode(true);
+      clone.querySelectorAll('.katex, script, style, .math-frac').forEach(k => k.remove());
+      const visibleText = clone.innerText || '';
+      if (/\\[A-Za-z]+|\^|_\{\d*\}|\u2061/.test(visibleText)) {
+        if (visibleText.includes('\\frac') || visibleText.includes('\\sqrt') || visibleText.includes('\\times') || visibleText.includes('^') || visibleText.includes('\u2061')) {
+          el.setAttribute('data-math-raw', 'true');
+          console.warn('[Math Guard] Unrendered raw math detected in element:', el, visibleText);
+          return;
+        }
+      }
+      el.removeAttribute('data-math-raw');
     });
   }
 
@@ -160,8 +227,7 @@
           delimiters: [
             { left: '$$', right: '$$', display: true },
             { left: '\\[', right: '\\]', display: true },
-            { left: '\\(', right: '\\)', display: false },
-            { left: '$', right: '$', display: false }
+            { left: '\\(', right: '\\)', display: false }
           ],
           throwOnError: false,
           errorColor: '#cc0000',
@@ -174,8 +240,10 @@
     }
 
     convertRawFracFallback(container);
+    runMathGuard(container);
   }
   window.renderMathEverywhere = renderMathEverywhere;
+
 
 
 /**
@@ -2810,16 +2878,27 @@
     setTimeout(tagAllCorrectAnswers, 1200);
     setTimeout(handleHashDeepLink, 1000);
 
+    // Debounced Math & Answers Renderer
+    let ebkMutationTimeout = null;
+    function scheduleDebouncedRender() {
+      if (ebkMutationTimeout) clearTimeout(ebkMutationTimeout);
+      ebkMutationTimeout = setTimeout(() => {
+        tagAllCorrectAnswers();
+        registerQuestionCardAnchors();
+        if (typeof window.renderMathEverywhere === 'function') {
+          window.renderMathEverywhere();
+        }
+      }, 50);
+    }
+
     // Hook dynamic render functions if defined globally
     function hookDynamicRenderers() {
-      ['renderQuiz', 'renderQuestions', 'generateQuiz', 'resetQuiz'].forEach(fn => {
+      ['renderQuiz', 'renderQuestions', 'generateQuiz', 'resetQuiz', 'changeFilter', 'filterQuestions'].forEach(fn => {
         if (typeof window[fn] === 'function' && !window[fn]._ebkHooked) {
           const orig = window[fn];
           window[fn] = function(...args) {
             const res = orig.apply(this, args);
-            tagAllCorrectAnswers();
-            registerQuestionCardAnchors();
-            handleHashDeepLink();
+            scheduleDebouncedRender();
             return res;
           };
           window[fn]._ebkHooked = true;
@@ -2830,11 +2909,27 @@
     setTimeout(hookDynamicRenderers, 400);
     setTimeout(hookDynamicRenderers, 1000);
 
-    // Watch for dynamic quiz renderers
+    // Watch for dynamic quiz renderers & DOM mutations
     try {
-      const observer = new MutationObserver(() => {
-        tagAllCorrectAnswers();
-        registerQuestionCardAnchors();
+      const observer = new MutationObserver((mutations) => {
+        let shouldRender = false;
+        for (const m of mutations) {
+          if (m.addedNodes && m.addedNodes.length > 0) {
+            for (const node of m.addedNodes) {
+              if (node.nodeType === 1) { // Element node
+                const cl = node.classList;
+                if (!cl.contains('katex') && !node.closest('.katex') && !cl.contains('ebk-admin-modal-backdrop') && !cl.contains('math-frac')) {
+                  shouldRender = true;
+                  break;
+                }
+              }
+            }
+          }
+          if (shouldRender) break;
+        }
+        if (shouldRender) {
+          scheduleDebouncedRender();
+        }
       });
       observer.observe(document.body, { childList: true, subtree: true });
     } catch (e) {}
