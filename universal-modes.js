@@ -1,7 +1,21 @@
-// ─── KaTeX Shared Math Typography Engine (Offline & Delimiters \( \) and \[ \]) ───
+// ─── KaTeX Shared Math Typography Engine (Full Delimiters, Horizontal Fractions & Fallback) ───
+  function getVendorPrefix() {
+    const scriptTag = document.currentScript || document.querySelector('script[src*="universal-modes.js"]');
+    if (scriptTag && scriptTag.getAttribute('src')) {
+      const src = scriptTag.getAttribute('src');
+      if (src.startsWith('../')) return '../vendor/katex/';
+      if (src.startsWith('./') || !src.includes('/')) return 'vendor/katex/';
+    }
+    const path = decodeURIComponent(window.location.pathname || '').replace(/\\/g, '/');
+    const parts = path.split('/').filter(Boolean);
+    if (parts.length > 1) {
+      return '../vendor/katex/';
+    }
+    return 'vendor/katex/';
+  }
+
   function ensureKaTeXLoaded() {
-    const isRoot = !window.location.pathname.includes('/Live MCQ ') && !window.location.pathname.includes('/Non Cadre ');
-    const vendorPrefix = isRoot ? 'vendor/katex/' : '../vendor/katex/';
+    const vendorPrefix = getVendorPrefix();
 
     if (!document.querySelector('link[href*="katex"]')) {
       const link = document.createElement('link');
@@ -46,24 +60,115 @@
     }
   }
 
+  // Pre-sanitize text nodes to fix any broken delimiters before KaTeX runs
+  function sanitizeMathDelimiters(root = document.body) {
+    if (!root) return;
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        if (!node.nodeValue) return NodeFilter.FILTER_REJECT;
+        const parent = node.parentElement;
+        if (!parent) return NodeFilter.FILTER_REJECT;
+        const tag = parent.tagName.toUpperCase();
+        if (['SCRIPT', 'STYLE', 'TEXTAREA', 'CODE', 'PRE'].includes(tag)) return NodeFilter.FILTER_REJECT;
+        if (parent.closest('.katex, .katex-display, .math-frac')) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+
+    const nodesToFix = [];
+    while (walker.nextNode()) {
+      const val = walker.currentNode.nodeValue;
+      if (val && (val.includes('\\(') || val.includes('$$') || val.includes('$') || val.includes('\\frac'))) {
+        nodesToFix.push(walker.currentNode);
+      }
+    }
+
+    nodesToFix.forEach(node => {
+      let text = node.nodeValue;
+      if (!text) return;
+      text = text.replace(/\$\$\\?\(/g, '$$').replace(/\\?\(\$\$/g, '$$');
+      text = text.replace(/\$\\?\(/g, '$').replace(/\\?\(\$/g, '$');
+      text = text.replace(/\\?\)\$\$/g, '$$').replace(/\$\$\\?\)/g, '$$');
+      text = text.replace(/\\?\)\$/g, '$').replace(/\$\\?\)/g, '$');
+      text = text.replace(/\\?\(\s*implies/g, '\\implies');
+      text = text.replace(/\\text\{\s*\\?\)/g, '\\text{');
+      text = text.replace(/\\?\(\s*\\text\{/g, '\\text{');
+
+      if (text.includes('\\frac{') && !text.includes('$') && !text.includes('\\(') && !text.includes('\\[')) {
+        text = text.replace(/(\\frac\{[^{}]+\}\{[^{}]+\})/g, '$$$1$$');
+      }
+
+      if (text !== node.nodeValue) {
+        node.nodeValue = text;
+      }
+    });
+  }
+
+  // Pure HTML/CSS fraction converter fallback (ensures raw "frac" is NEVER visible)
+  function convertRawFracFallback(root = document.body) {
+    if (!root) return;
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        if (!node.nodeValue || !node.nodeValue.includes('\\frac')) return NodeFilter.FILTER_REJECT;
+        const parent = node.parentElement;
+        if (!parent) return NodeFilter.FILTER_REJECT;
+        const tag = parent.tagName.toUpperCase();
+        if (['SCRIPT', 'STYLE', 'TEXTAREA', 'CODE', 'PRE'].includes(tag)) return NodeFilter.FILTER_REJECT;
+        if (parent.closest('.katex, .katex-display, .math-frac')) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+
+    const nodesToReplace = [];
+    while (walker.nextNode()) {
+      nodesToReplace.push(walker.currentNode);
+    }
+
+    nodesToReplace.forEach(node => {
+      const text = node.nodeValue;
+      if (!text || !text.includes('\\frac')) return;
+      const fracRegex = /\\frac\{([^{}]+(?:\{[^{}]+\}[^{}]+)*)\}\{([^{}]+(?:\{[^{}]+\}[^{}]+)*)\}/g;
+      if (!fracRegex.test(text)) return;
+
+      const span = document.createElement('span');
+      let html = text.replace(fracRegex, (m, num, den) => {
+        return `<span class="math-frac"><span class="num">${num}</span><span class="den">${den}</span></span>`;
+      });
+      html = html.replace(/\$\$/g, '').replace(/\$/g, '');
+      span.innerHTML = html;
+      if (node.parentNode) {
+        node.parentNode.replaceChild(span, node);
+      }
+    });
+  }
+
   function renderMathEverywhere(container = document.body) {
-    if (typeof window.renderMathInElement === 'function' && container) {
+    if (!container) return;
+    sanitizeMathDelimiters(container);
+
+    if (typeof window.renderMathInElement === 'function') {
       try {
         window.renderMathInElement(container, {
           delimiters: [
+            { left: '$$', right: '$$', display: true },
             { left: '\\[', right: '\\]', display: true },
-            { left: '\\(', right: '\\)', display: false }
+            { left: '\\(', right: '\\)', display: false },
+            { left: '$', right: '$', display: false }
           ],
           throwOnError: false,
           errorColor: '#cc0000',
-          strict: false
+          strict: false,
+          trust: true
         });
       } catch (err) {
         console.warn('KaTeX auto-render notice:', err);
       }
     }
+
+    convertRawFracFallback(container);
   }
   window.renderMathEverywhere = renderMathEverywhere;
+
 
 /**
  * ইউনিভার্সাল স্মার্ট স্টাডি ও কুইক রিভিশন ইঞ্জিন (Universal Smart Study & Revision Modes Engine)
@@ -1130,13 +1235,45 @@
         background: #059669;
       }
 
-      /* KaTeX Mobile Display Overflow */
+      /* KaTeX Mobile Display Overflow & Textbook Fraction Bar */
       .katex-display {
         overflow-x: auto !important;
         overflow-y: hidden !important;
         -webkit-overflow-scrolling: touch !important;
         padding: 4px 0 !important;
         max-width: 100% !important;
+        margin: 0.65em 0 !important;
+      }
+      .katex {
+        font-size: 1.05em;
+        text-rendering: auto;
+      }
+      /* Prominent textbook horizontal fraction division line */
+      .katex .frac-line {
+        border-bottom-width: 0.09em !important;
+        border-bottom-style: solid !important;
+        border-color: currentColor !important;
+        min-height: 1px !important;
+      }
+
+      /* Authentic Fallback Horizontal Fraction Box (if raw \frac or offline fallback) */
+      .math-frac {
+        display: inline-flex !important;
+        flex-direction: column !important;
+        vertical-align: -0.45em !important;
+        text-align: center !important;
+        padding: 0 0.22em !important;
+        font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+        line-height: 1.15 !important;
+      }
+      .math-frac > .num {
+        border-bottom: 1.5px solid currentColor !important;
+        padding-bottom: 2px !important;
+        display: block !important;
+      }
+      .math-frac > .den {
+        padding-top: 2px !important;
+        display: block !important;
       }
 
       /* Universal Mobile Topbar Safeguards across all chapter architectures */
