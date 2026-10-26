@@ -7,6 +7,17 @@ description: Transforms PDF chapter pages or scanned book images of competitive 
 
 Use this skill whenever the user provides a folder or set of PDF files / book page images and asks to generate interactive HTML chapters for the BCS Live MCQ e-book library or any future competitive exam books (PSC Non-Cadre Job Solution, Bank Recruitment, Primary Teacher, NTRCA, Subject-wise Digests, etc.).
 
+## Skill Guardrails (pdf-to-html-ebook)
+- One request = one subject/book (or only the chapters I name). Do not touch other subjects, the master index, exam-data.json or search-data.json beyond what the steps require for that subject.
+- Never regenerate or overwrite an existing chapter file unless I ask. For fixes, edit only the affected part.
+- Count the questions in the source PDF first and keep output 1:1 with it. Never pad or drop questions to hit a number.
+- Reuse existing templates, CSS and JS. Do not invent new classes or scripts when an existing one fits.
+- No new dependencies, CDNs or fonts. List any scratch or temp files you create and ask before deleting them.
+- If a source page is unreadable and the 3-step recovery fails, mark it "unresolved" in the report instead of guessing.
+- Run python tools/check-ebook-indexes.py and your audit script, and report the real results only.
+- After the final data-sync step, STOP and give the report. Do not start another subject.
+- Never print or copy passwords/tokens found in the rules into any output or file.
+
 ---
 
 ## 1. Core Principles & Philosophy (মূল দর্শন ও মূলনীতি)

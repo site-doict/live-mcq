@@ -1,5 +1,22 @@
 # Antigravity IDE - Safety & Modification Rules
 
+## G. Engineering Guardrails (Anti-Overengineering / Anti-Hallucination)
+These apply to every task, including Overnight Maintenance Mode. If one conflicts with another rule, the stricter rule wins and the conflict is reported.
+
+G1. Scope lock. Do only the explicitly assigned task. No bonus features, unrelated fixes, redesigns or "while I'm here" cleanups. When done, STOP and report. Do not start the next subject, book or phase. (Exception: when I ask for a whole subject under the Autonomous Execution Protocol, run all its steps for THAT subject only.)
+G2. Inspect before editing. Read the relevant files, git status and recent commits first. Before referencing any file path, function, CSS class, JS module or JSON key, verify it exists (open or grep it). Never reference things from memory.
+G3. Simplest solution. Reuse existing scripts, templates, CSS classes and JS modules (universal-modes.js, nav-component.js, ebook-ui.js, _templates/, tools/) before writing anything new. No new framework, build step, abstraction layer or helper hierarchy unless unavoidable.
+G4. Dependencies. Do not install, upgrade or remove any npm/pip package. Do not add any CDN, external script, font or asset. KaTeX stays self-hosted in vendor/katex/. If a new dependency seems necessary, STOP and ask, giving the reason.
+G5. Surgical diffs. Edit the smallest necessary region. No whole-file rewrites, mass reformatting, or regeneration of existing chapters unless I explicitly ask. Preserve unrelated code, comments and config.
+G6. No fake fixes. Never hardcode expected results; never delete or skip questions or checks to make counts or audits pass; never weaken or edit tools/check-ebook-indexes.py or any audit script; never hide errors. If a check fails, fix the real cause or report it.
+G7. No fabrication. Never invent questions, answers, years, sources or facts. When the source is unclear, follow the existing 3-step damaged-question recovery protocol; if still unresolved, mark it "unresolved" in the report instead of guessing.
+G8. Honest verification. Run the checks relevant to the change (for example python tools/check-ebook-indexes.py, question-count audit, link check, and viewport checks at 320/360/390/412px for UI changes). Say a check passed only if you actually ran it and saw it pass; otherwise say "not run" and why.
+G9. Git safety. Before editing run git status --short and git branch --show-current. Never use reset --hard, clean -fd, force checkout, force push, history rewrite or automatic stash. No commit, push, merge or tag unless I ask. (Overnight Mode still applies: only branch audit-overnight, never main.)
+G10. External access. No network calls, downloads, scraping, uploads or production writes, EXCEPT web search used for the damaged/ambiguous-question recovery protocol.
+G11. Secrets. Never print, log, copy into reports or commits, or hard-code passwords, tokens or PATs, and never create new ones.
+G12. Stop conditions. STOP and ask when: project/repo/branch mismatch; unexpectedly dirty tree; a high-risk file (Section 2) must change; scope grows; a new dependency or architecture change is needed; or two rules conflict.
+G13. Final review and report. Before finishing run git status --short, git diff --check and git diff, and remove unrelated changes. Report: Result (PASS/PARTIAL/FAILED/BLOCKED), Implemented, Files changed, Checks run and NOT run, Deviations, Limitations, Recommended next step (recommend only; do not start it).
+
 ## 0. Overnight Maintenance Mode (exception to Section 1)
 Active ONLY while the file `.agents/OVERNIGHT_MODE` exists in the repo root.
 While active, do NOT ask for confirmation for: editing/refactoring any file inside this repository
