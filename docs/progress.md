@@ -8,4 +8,4 @@
 | Stage 3 | GREEN (Login button icon-only <=360px, safe patch CMS) | 4ef172a | মোবাইল হেডার লগইন বাটন অপ্টিমাইজেশন ও প্যাচ-ভিত্তিক সেভ মডেল |
 | Stage 4 | GREEN (0 static index errors, 26/26 E2E tests passed) | cbeec53 | বাংলাদেশ ইনডেক্সের ২৪টি অধ্যায় লিংক ফিক্স ও নন-ক্যাডার ইংরেজি ইনডেক্সে মেটাডাটা পুনঃস্থাপন |
 | Stage 5 | GREEN (Standards unified, rules deduplicated, CI & git hook active) | f512b2f | docs/STANDARDS.md তৈরি, রুল ফাইলের ডুপ্লিকেশন পরিহার, .githooks ও CI র্কফ্লো স্থাপন |
-| Stage 6 | GREEN (Full report documented & overnight mode safely exited) | [PENDING] | docs/overnight-report.md তৈরি, টেম্প ফাইল ক্লিনআপ ও .agents/OVERNIGHT_MODE রিমুভাল |
+| Stage 6 | GREEN (Full report documented & overnight mode safely exited) | 1c5935f | docs/overnight-report.md তৈরি, টেম্প ফাইল ক্লিনআপ ও .agents/OVERNIGHT_MODE রিমুভাল |
