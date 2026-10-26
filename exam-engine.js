@@ -1543,6 +1543,9 @@
           </div>
         </div>
       `;
+      if (typeof window.renderMathEverywhere === 'function') {
+        window.renderMathEverywhere(container);
+      }
     },
 
     filterReviewItems: function(filterType, btnEl) {
@@ -1556,6 +1559,9 @@
       const container = document.getElementById('reviewCardsList');
       if (container) {
         container.innerHTML = this.renderReviewItemsList();
+        if (typeof window.renderMathEverywhere === 'function') {
+          window.renderMathEverywhere(container);
+        }
       }
     },
 
@@ -1616,15 +1622,15 @@
 
                 if (isRealCorrect) {
                   optClass = 'is-correct';
-                  marker = '<span class="opt-tag correct">✓</span>';
+                  marker = '';
                 }
                 if (isUserChosen && !isRealCorrect) {
                   optClass = 'is-wrong-chosen';
-                  marker = '<span class="opt-tag wrong">আপনার উত্তর ✕</span>';
+                  marker = '<span class="opt-tag wrong">আপনার উত্তর</span>';
                 }
                 if (isUserChosen && isRealCorrect) {
                   optClass = 'is-correct-chosen';
-                  marker = '<span class="opt-tag correct">আপনার উত্তর ✓</span>';
+                  marker = '<span class="opt-tag correct">আপনার উত্তর</span>';
                 }
 
                 return `
@@ -1649,7 +1655,7 @@
                     <strong>💡 বিশদ সমাধান ও বিশ্লেষণ:</strong>
                   </div>
                   <div class="exp-body-text">
-                    ${q.exp ? q.exp : 'এই প্রশ্নের জন্য কোনো অতিরিক্ত ব্যাখ্যা মুদ্রিত নেই।'}
+                    ${q.exp ? this.cleanOptText(q.exp) : 'এই প্রশ্নের জন্য কোনো অতিরিক্ত ব্যাখ্যা মুদ্রিত নেই।'}
                   </div>
                 </div>
               </div>
