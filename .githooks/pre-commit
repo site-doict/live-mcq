@@ -1,0 +1,15 @@
+#!/bin/sh
+# BCS Static E-Book Library Pre-Commit Verification Hook
+echo "Running pre-commit static verification..."
+python tools/check-all.py
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -ne 0 ]; then
+  echo ""
+  echo "============================================================"
+  echo "❌ PRE-COMMIT CHECK FAILED: Please fix errors before committing."
+  echo "============================================================"
+  exit $EXIT_CODE
+fi
+
+exit 0

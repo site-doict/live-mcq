@@ -1,0 +1,42 @@
+name: Static & UI Quality Verification
+
+on:
+  push:
+    branches: [ main, audit-overnight ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Playwright Dependencies
+        run: |
+          npm ci || npm install
+          npx playwright install --with-deps chromium
+
+      - name: Run Static Integrity Checks
+        run: |
+          python tools/check-all.py
+
+      - name: Start Test Server & Run E2E Gate Checks
+        run: |
+          python -m http.server 8089 &
+          SERVER_PID=$!
+          sleep 2
+          node tests/e2e.test.js
+          kill $SERVER_PID
