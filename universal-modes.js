@@ -94,6 +94,14 @@
       text = text.replace(/\\text\{\s*\\?\)/g, '\\text{');
       text = text.replace(/\\?\(\s*\\text\{/g, '\\text{');
 
+      // Clean HTML entities if found inside math strings
+      text = text.replace(/&rArr;/g, '\\implies ')
+                 .replace(/&rarr;/g, '\\rightarrow ')
+                 .replace(/&times;/g, '\\times ')
+                 .replace(/&pi;/g, '\\pi ')
+                 .replace(/&deg;/g, '^\\circ ')
+                 .replace(/&hellip;/g, '\\dots ');
+
       if (text.includes('\\frac{') && !text.includes('$') && !text.includes('\\(') && !text.includes('\\[')) {
         text = text.replace(/(\\frac\{[^{}]+\}\{[^{}]+\})/g, '$$$1$$');
       }
