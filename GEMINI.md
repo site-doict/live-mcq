@@ -1,5 +1,16 @@
 # Antigravity IDE - Safety & Modification Rules
 
+## 0. Overnight Maintenance Mode (exception to Section 1)
+Active ONLY while the file `.agents/OVERNIGHT_MODE` exists in the repo root.
+While active, do NOT ask for confirmation for: editing/refactoring any file inside this repository
+(including authentication, login and admin-editor code), creating files/folders, running scripts and tests,
+installing dev dependencies (npm/pip).
+Still FORBIDDEN in this mode: git push / force-push / history rewrite / branch deletion; committing to `main`
+(work only on branch `audit-overnight`); deleting anything outside the repo; deleting repo files that have no
+copy in `_backup_before_audit/`; printing, logging or committing secrets (GitHub PAT `ebk_admin_pat`, tokens,
+passwords); changing remote databases or policies.
+Instead of asking, record every non-trivial decision in `docs/overnight-report.md`.
+
 ## 1. Core Principle: Explicit Confirmation First
 - **Never delete or overwrite core functionality without asking:** You must NEVER delete, rewrite, or substantially modify core business logic, schema, or configuration files without explicit user approval.
 - **Deletions require permission:** Before executing any file deletion, removing large blocks of code, dropping database tables/policies, or deleting environment variables, you MUST pause and ask:
