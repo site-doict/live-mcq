@@ -28,9 +28,9 @@ RAW_LATEX_PATTERNS = [
 RAW_LATEX_RE = re.compile('|'.join(RAW_LATEX_PATTERNS))
 
 ANSWER_LETTER_PATTERNS = [
-    re.compile(r'(?:সঠিক\s*)?উত্তর\s*[:：]?\s*\(?[কখগঘ]\)?', re.IGNORECASE),
-    re.compile(r'মুদ্রিত\s*উত্তর\s*[:：]?\s*\(?[কখগঘ]\)?', re.IGNORECASE),
-    re.compile(r'সঠিক\s*উত্তরটি\s*হলো\s*\(?[কখগঘ]\)?', re.IGNORECASE),
+    re.compile(r'(?:সঠিক\s*)?উত্তর\s*(?:[:：]|\s+)\s*\(?[কখগঘ]\)?(?![\\u0980-\\u09FF])', re.IGNORECASE),
+    re.compile(r'মুদ্রিত\s*উত্তর\s*(?:[:：]|\s+)\s*\(?[কখগঘ]\)?(?![\\u0980-\\u09FF])', re.IGNORECASE),
+    re.compile(r'সঠিক\s*উত্তরটি\s*হলো\s*\(?[কখগঘ]\)?(?![\\u0980-\\u09FF])', re.IGNORECASE),
 ]
 
 def check_math_integrity():
@@ -79,13 +79,13 @@ def check_math_integrity():
                 item_str = json.dumps(item, ensure_ascii=False)
                 for char in INVISIBLE_CHARS:
                     inv_count += item_str.count(char)
-                # Check options and questions for bare \frac or \sqrt without \(
+                # Check options and questions for bare \frac or \sqrt without \(, \[, or $
                 for opt in item.get('opts', []):
                     if isinstance(opt, str) and ('\\frac' in opt or '\\sqrt' in opt):
-                        if not ('\\(' in opt or '$' in opt):
+                        if not ('\\(' in opt or '$' in opt or '\\[' in opt):
                             raw_math_items += 1
                 q_text = item.get('q', '')
-                if ('\\frac' in q_text or '\\sqrt' in q_text) and not ('\\(' in q_text or '$' in q_text):
+                if ('\\frac' in q_text or '\\sqrt' in q_text) and not ('\\(' in q_text or '$' in q_text or '\\[' in q_text):
                     raw_math_items += 1
 
             if inv_count > 0:

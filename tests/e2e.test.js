@@ -175,7 +175,7 @@ async function runTests() {
 
       // Check 3: Correct answer styling is green border or background
       const isGreen = await page.evaluate(() => {
-        const opt = document.querySelector('.opt-btn.is-correct, .opt-btn[data-correct="true"], .review-opt-box.is-correct');
+        const opt = document.querySelector('.opt-btn.is-correct, .opt-btn[data-is-correct="true"], .opt-btn[data-correct="true"], .review-opt-box.is-correct, [data-is-correct="true"]');
         if (!opt) return false;
         const style = window.getComputedStyle(opt);
         const bg = style.backgroundColor;

@@ -89,10 +89,15 @@
     text = text.replace(/\.\.\.\s*\{\s*\\frac\s*\{?([^}]+)\}?\s*\{([^}]+)\}\s*\}/g, '\\dots + \\frac{$1}{$2}');
     text = text.replace(/\+\s*\.\.\.\s*\+/g, '+ \\dots +');
 
-    // Specific expressions outside tags
-    text = text.replace(/\bx\^4-2x\+1\b/g, '\\( x^4-2x+1 \\)');
-    text = text.replace(/\bx\^2-\(p\+q\)x\+pq=0\b/g, '\\( x^2-(p+q)x+pq=0 \\)');
-    text = text.replace(/\\?\{p\s*,\s*q\\?\}/g, '\\( \\{p,q\\} \\)');
+    // Specific expressions outside tags (only if not already in \()
+    if (!text.includes('\\(') && !text.includes('$$')) {
+      text = text.replace(/\bx\^4-2x\+1\b/g, '\\( x^4-2x+1 \\)');
+      text = text.replace(/\bx\^2-\(p\+q\)x\+pq=0\b/g, '\\( x^2-(p+q)x+pq=0 \\)');
+      text = text.replace(/\\?\{p\s*,\s*q\\?\}/g, '\\( \\{p,q\\} \\)');
+      text = text.replace(/\\?\{2\s*,\s*3\s*,\s*4\\?\}/g, '\\( \\{2,3,4\\} \\)');
+      text = text.replace(/\\?\{\s*-p\s*,\s*q\s*\\?\}/g, '\\( \\{-p,q\\} \\)');
+      text = text.replace(/\\?\{\s*-p\s*,\s*-q\s*\\?\}/g, '\\( \\{-p,-q\\} \\)');
+    }
 
     // Wrap bare LaTeX run in \( \) if not already delimited
     if ((text.includes('\\frac') || text.includes('\\sqrt') || text.includes('\\times') || text.includes('\\div') || text.includes('\\log')) &&
@@ -102,6 +107,12 @@
         text = `\\( ${text.trim()} \\)`;
       }
     }
+
+    // Clean any nested \( or \)
+    text = text.replace(/\\\((\s*\\\()+/g, '\\(');
+    text = text.replace(/(\\\)\s*)+\\\)/g, '\\)');
+    text = text.replace(/\$\s*\\\(/g, '\\(');
+    text = text.replace(/\\\)\s*\$/g, '\\)');
 
     return text;
   }
@@ -200,7 +211,7 @@
   // 1.3 Math Guard
   function runMathGuard(root = document.body) {
     if (!root) return;
-    const targetSelectors = '.q-text, .opt-text, .exam-q-text, .opt-label-text, .exp-text, .exp-body-text, .review-opt-box, .q-card, .review-q-text';
+    const targetSelectors = '.q-text, .opt-text, .exam-q-text, .opt-label-text, .exp-text, .exp-body-text, .review-opt-box, .review-q-text';
     const targets = root.matches && root.matches(targetSelectors) ? [root] : root.querySelectorAll(targetSelectors);
     targets.forEach(el => {
       const clone = el.cloneNode(true);
@@ -208,9 +219,12 @@
       const visibleText = clone.innerText || '';
       if (/\\[A-Za-z]+|\^|_\{\d*\}|\u2061/.test(visibleText)) {
         if (visibleText.includes('\\frac') || visibleText.includes('\\sqrt') || visibleText.includes('\\times') || visibleText.includes('^') || visibleText.includes('\u2061')) {
-          el.setAttribute('data-math-raw', 'true');
-          console.warn('[Math Guard] Unrendered raw math detected in element:', el, visibleText);
-          return;
+          // Ignore recurring decimal dot if written as ^ ̇
+          if (!/^\s*[0-9.]+\^\s*[\u0307\u02D9\.\*̇]\s*$/.test(visibleText)) {
+            el.setAttribute('data-math-raw', 'true');
+            console.warn('[Math Guard] Unrendered raw math detected in element:', el, visibleText);
+            return;
+          }
         }
       }
       el.removeAttribute('data-math-raw');
@@ -437,28 +451,34 @@
         color: #a7f3d0 !important;
       }
 
-      /* Add the 'উত্তর: ' prefix */
-      [data-qa-mode="direct-answer"] [data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
-      [data-qa-mode="direct-answer"] .opt-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
-      [data-qa-mode="direct-answer"] .option-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
-      [data-qa-mode="direct-answer"] .quiz-opt-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
-      [data-qa-mode="direct-answer"] .quiz-option[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
-      [data-qa-mode="direct-answer"] .q-opt[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
-      [data-qa-mode="direct-answer"] .option[data-is-correct="true"]:not(.ebk-no-ans-notice)::before {
-        content: "উত্তর: ";
-        font-weight: 800;
-        color: #059669;
-        flex-shrink: 0;
+      /* Hide option letter labels (ক, খ, গ, ঘ) in direct-answer and show-answers for correct option */
+      [data-qa-mode="direct-answer"] [data-is-correct="true"] .opt-lbl,
+      [data-qa-mode="direct-answer"] [data-is-correct="true"] .opt-key,
+      [data-qa-mode="direct-answer"] [data-is-correct="true"] .option-letter,
+      [data-qa-mode="direct-answer"] [data-is-correct="true"] .q-opt-key,
+      [data-qa-mode="show-answers"] [data-is-correct="true"] .opt-lbl,
+      [data-qa-mode="show-answers"] [data-is-correct="true"] .opt-key,
+      [data-qa-mode="show-answers"] [data-is-correct="true"] .option-letter,
+      [data-qa-mode="show-answers"] [data-is-correct="true"] .q-opt-key {
+        display: none !important;
       }
 
-      [data-theme="dark"][data-qa-mode="direct-answer"] [data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
-      [data-theme="dark"][data-qa-mode="direct-answer"] .opt-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
-      [data-theme="dark"][data-qa-mode="direct-answer"] .option-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
-      [data-theme="dark"][data-qa-mode="direct-answer"] .quiz-opt-btn[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
-      [data-theme="dark"][data-qa-mode="direct-answer"] .quiz-option[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
-      [data-theme="dark"][data-qa-mode="direct-answer"] .q-opt[data-is-correct="true"]:not(.ebk-no-ans-notice)::before,
-      [data-theme="dark"][data-qa-mode="direct-answer"] .option[data-is-correct="true"]:not(.ebk-no-ans-notice)::before {
-        color: #34d399;
+      /* Pure Green styling for correct options */
+      .opt-btn.is-correct,
+      .option-btn.is-correct,
+      .review-opt-box.is-correct,
+      [data-is-correct="true"] {
+        background: rgba(16, 185, 129, 0.12) !important;
+        border-color: #10b981 !important;
+        color: #065f46 !important;
+      }
+      [data-theme="dark"] .opt-btn.is-correct,
+      [data-theme="dark"] .option-btn.is-correct,
+      [data-theme="dark"] .review-opt-box.is-correct,
+      [data-theme="dark"] [data-is-correct="true"] {
+        background: rgba(16, 185, 129, 0.2) !important;
+        border-color: #34d399 !important;
+        color: #a7f3d0 !important;
       }
 
       /* Notice for questions with no correct option */
@@ -1440,7 +1460,10 @@
 
     // Helper: tag button
     function tagBtn(btn) {
-      if (btn) btn.setAttribute('data-is-correct', 'true');
+      if (btn) {
+        btn.setAttribute('data-is-correct', 'true');
+        btn.classList.add('is-correct');
+      }
     }
 
     // Helper: show canceled / no answer notice
@@ -1453,7 +1476,7 @@
           noAnsNote = document.createElement('div');
           noAnsNote.className = 'ebk-no-ans-notice';
           noAnsNote.setAttribute('data-is-correct', 'true');
-          noAnsNote.innerHTML = '<span>⚠️</span> <span>উত্তর: অপশনে সঠিক উত্তর নেই (প্রশ্নটি বাতিল/বিতর্কিত)</span>';
+          noAnsNote.innerHTML = '<span>⚠️</span> <span>অপশনে সঠিক উত্তর নেই (প্রশ্নটি বাতিল/বিতর্কিত)</span>';
           optContainer.appendChild(noAnsNote);
         }
       }
