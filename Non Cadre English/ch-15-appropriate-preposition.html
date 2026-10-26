@@ -7107,7 +7107,7 @@
     function updateScoreDisplay() {
       const scoreEl = document.getElementById('scoreDisplay');
       if (scoreEl) {
-        scoreEl.textContent = `${toBengaliNumber(correctAnswers)} / ${toBengaliNumber(totalQuestions)}`;
+        scoreEl.textContent = `\( {toBengaliNumber(correctAnswers)} / \){toBengaliNumber(totalQuestions)}`;
       }
     }
 
@@ -7116,8 +7116,8 @@
       userAnswers[qId] = selectedIdx;
       answeredQuestions.add(qId);
 
-      const selectedBtn = document.getElementById(`opt_${qId}_${selectedIdx}`);
-      const correctBtn = document.getElementById(`opt_${qId}_${correctIdx}`);
+      const selectedBtn = document.getElementById(`opt_\( {qId}_ \){selectedIdx}`);
+      const correctBtn = document.getElementById(`opt_\( {qId}_ \){correctIdx}`);
       const expDrawer = document.getElementById(`exp_${qId}`);
 
       if (selectedIdx === correctIdx) {
@@ -7130,7 +7130,7 @@
 
       // Disable all options for this card
       for (let i = 0; i < 4; i++) {
-        const btn = document.getElementById(`opt_${qId}_${i}`);
+        const btn = document.getElementById(`opt_\( {qId}_ \){i}`);
         if (btn) btn.disabled = true;
       }
 
@@ -7153,7 +7153,7 @@
 
       for (let qId = 1; qId <= totalQuestions; qId++) {
         for (let i = 0; i < 4; i++) {
-          const btn = document.getElementById(`opt_${qId}_${i}`);
+          const btn = document.getElementById(`opt_\( {qId}_ \){i}`);
           if (btn) {
             btn.classList.remove('correct', 'wrong');
             btn.disabled = false;

@@ -59,9 +59,9 @@ def check_math_integrity():
         body_text = re.sub(r'<style\b[^>]*>[\s\S]*?</style>', '', body_text)
         
         # Strip delimited math \( ... \) and \[ ... \] and $$ ... $$
-        delimited_stripped = re.sub(r'\\\(.*?\\\)', '', body_text)
-        delimited_stripped = re.sub(r'\\\[.*?\\\]', '', delimited_stripped)
-        delimited_stripped = re.sub(r'\$\$.*?\$\$', '', delimited_stripped)
+        delimited_stripped = re.sub(r'\\\(.*?\\\)', '', body_text, flags=re.DOTALL)
+        delimited_stripped = re.sub(r'\\\[.*?\\\]', '', delimited_stripped, flags=re.DOTALL)
+        delimited_stripped = re.sub(r'\$\$.*?\$\$', '', delimited_stripped, flags=re.DOTALL)
 
         matches = RAW_LATEX_RE.findall(delimited_stripped)
         if matches:

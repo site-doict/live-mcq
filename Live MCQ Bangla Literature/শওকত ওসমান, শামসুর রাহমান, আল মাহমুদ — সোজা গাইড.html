@@ -1150,15 +1150,15 @@
     function renderQuiz() {
       const container = document.getElementById("quiz-box");
       container.innerHTML = questions.map((item, qIdx) => `
-        <div class="quiz-card" id="qcard-${qIdx}" data-ans="${item.ans}">
+        <div class="quiz-card" id="qcard-\( {qIdx}" data-ans=" \){item.ans}">
           <div class="quiz-header">
-            <span class="quiz-question">${qIdx + 1}. ${item.q}</span>
+            <span class="quiz-question">\( {qIdx + 1}. \){item.q}</span>
             <span class="quiz-badge">${item.bcs}</span>
           </div>
           <div class="quiz-options">
             ${item.opts.map((opt, oIdx) => `
-              <button class="quiz-opt-btn" id="btn-${qIdx}-${oIdx}" ${oIdx === item.ans ? 'data-is-correct="true"' : ''} onclick="selectAnswer(${qIdx}, ${oIdx})">
-                <span>${['ক', 'খ', 'গ', 'ঘ'][oIdx]}.</span> ${opt}
+              <button class="quiz-opt-btn" id="btn-\( {qIdx}- \){oIdx}" \( {oIdx === item.ans ? 'data-is-correct="true"' : ''} onclick="selectAnswer( \){qIdx}, ${oIdx})">
+                <span>\( {['ক', 'খ', 'গ', 'ঘ'][oIdx]}.</span> \){opt}
               </button>
             `).join('')}
           </div>
@@ -1176,14 +1176,14 @@
       const isCorrect = oIdx === q.ans;
 
       for (let i = 0; i < 4; i++) {
-        const btn = document.getElementById(`btn-${qIdx}-${i}`);
+        const btn = document.getElementById(`btn-\( {qIdx}- \){i}`);
         btn.disabled = true;
         if (i === q.ans) btn.classList.add("correct");
         else if (i === oIdx) btn.classList.add("wrong");
       }
 
       fb.className = `quiz-feedback show ${isCorrect ? 'correct-fb' : 'wrong-fb'}`;
-      fb.innerHTML = `<strong>${isCorrect ? '✅ সঠিক উত্তর!' : '❌ ভুল উত্তর!'}</strong> সঠিক: ${['ক', 'খ', 'গ', 'ঘ'][q.ans]} (${q.opts[q.ans]})।<br><span style="margin-top:4px;display:block;">${q.exp}</span>`;
+      fb.innerHTML = `<strong>\( {isCorrect ? '✅ সঠিক উত্তর!' : '❌ ভুল উত্তর!'}</strong> সঠিক: \){['ক', 'খ', 'গ', 'ঘ'][q.ans]} (\( {q.opts[q.ans]})।<br><span style="margin-top:4px;display:block;"> \){q.exp}</span>`;
 
       if (Object.keys(userAnswers).length === questions.length) {
         showScore();

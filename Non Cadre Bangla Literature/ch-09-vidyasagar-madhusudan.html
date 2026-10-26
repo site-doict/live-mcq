@@ -1712,13 +1712,13 @@
 
         card.innerHTML = `
           <div class="q-header">
-            <span class="q-num">প্রশ্ন ${toBn(q.id)} [${sectionTag}]</span>
+            <span class="q-num">প্রশ্ন \( {toBn(q.id)} [ \){sectionTag}]</span>
             <span class="q-badge">${q.bcs || 'নন-ক্যাডার'}</span>
           </div>
           <div class="q-text">${q.q}</div>
           <div class="options-grid">
             ${q.options.map((opt, idx) => `
-              <button class="opt-btn" id="opt_${q.id}_${idx}" onclick="selectOption(${q.id}, ${idx})">
+              <button class="opt-btn" id="opt_\( {q.id}_ \){idx}" onclick="selectOption(\( {q.id}, \){idx})">
                 <span class="opt-letter">(${['ক', 'খ', 'গ', 'ঘ'][idx]})</span>
                 <span>${opt}</span>
               </button>
@@ -1754,7 +1754,7 @@
       if (!q) return;
 
       q.options.forEach((_, optIdx) => {
-        const btn = document.getElementById(`opt_${qid}_${optIdx}`);
+        const btn = document.getElementById(`opt_\( {qid}_ \){optIdx}`);
         if (!btn) return;
         btn.disabled = true;
         if (optIdx === q.ans) {
@@ -1790,7 +1790,7 @@
         const q = questions.find(item => item.id === parseInt(qid));
         if (q && userAnswers[qid] === q.ans) correct++;
       });
-      document.getElementById('liveScore').textContent = `${toBn(correct)} / ${toBn(questions.length)}`;
+      document.getElementById('liveScore').textContent = `\( {toBn(correct)} / \){toBn(questions.length)}`;
     }
 
     function filterQuestions() {

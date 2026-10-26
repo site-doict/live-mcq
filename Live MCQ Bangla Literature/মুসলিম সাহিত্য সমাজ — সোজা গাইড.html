@@ -951,18 +951,18 @@
 
       container.innerHTML = QUIZ_DATA.map((item, idx) => {
         return `
-          <div class="quiz-card" id="q-card-${idx}" data-ans="${item.ans}">
+          <div class="quiz-card" id="q-card-\( {idx}" data-ans=" \){item.ans}">
             <div class="quiz-q-title">
-              <span><strong>${toBn(idx + 1)}.</strong> ${item.q}</span>
+              <span><strong>\( {toBn(idx + 1)}.</strong> \){item.q}</span>
               <span class="quiz-bcs-tag">${item.bcs}</span>
             </div>
             <div class="options-grid">
               ${item.opts.map((opt, oIdx) => `
                 <button 
                   class="opt-btn" 
-                  id="opt-${idx}-${oIdx}" 
+                  id="opt-\( {idx}- \){oIdx}" 
                   ${oIdx === item.ans ? 'data-is-correct="true"' : ''}
-                  onclick="selectOption(${idx}, ${oIdx})"
+                  onclick="selectOption(\( {idx}, \){oIdx})"
                 >
                   <span class="opt-letter">${LETTERS[oIdx]}</span>
                   <span>${opt}</span>
@@ -970,7 +970,7 @@
               `).join('')}
             </div>
             <div class="quiz-expl" id="expl-${idx}">
-              <strong>সঠিক উত্তর: (${LETTERS[item.ans]})</strong> — ${item.expl}
+              <strong>সঠিক উত্তর: (\( {LETTERS[item.ans]})</strong> — \){item.expl}
             </div>
           </div>
         `;
@@ -982,8 +982,8 @@
       userAnswers[qIdx] = oIdx;
 
       const q = QUIZ_DATA[qIdx];
-      const selectedBtn = document.getElementById(`opt-${qIdx}-${oIdx}`);
-      const correctBtn = document.getElementById(`opt-${qIdx}-${q.ans}`);
+      const selectedBtn = document.getElementById(`opt-\( {qIdx}- \){oIdx}`);
+      const correctBtn = document.getElementById(`opt-\( {qIdx}- \){q.ans}`);
       const explBox = document.getElementById(`expl-${qIdx}`);
 
       if (oIdx === q.ans) {
@@ -994,7 +994,7 @@
       }
 
       for (let i = 0; i < 4; i++) {
-        const b = document.getElementById(`opt-${qIdx}-${i}`);
+        const b = document.getElementById(`opt-\( {qIdx}- \){i}`);
         if (b) b.disabled = true;
       }
 
@@ -1009,7 +1009,7 @@
       });
       const counter = document.getElementById('score-counter');
       if (counter) {
-        counter.textContent = `${toBn(correct)} / ${toBn(QUIZ_DATA.length)}`;
+        counter.textContent = `\( {toBn(correct)} / \){toBn(QUIZ_DATA.length)}`;
       }
     }
 

@@ -1105,16 +1105,16 @@ function renderQuiz() {
     const letters = ['ক', 'খ', 'গ', 'ঘ'];
     qItem.opts.forEach((opt, oIdx) => {
       optsHtml += `
-        <button class="opt-btn" ${oIdx === qItem.ans ? \'data-is-correct="true"\' : \'\'} onclick="checkAnswer(${qItem.id}, ${oIdx})" id="opt-${qItem.id}-${oIdx}">
-          <strong>${letters[oIdx]}.</strong> ${opt}
+        <button class="opt-btn" \( {oIdx === qItem.ans ? \'data-is-correct="true"\' : \'\'} onclick="checkAnswer( \){qItem.id}, \( {oIdx})" id="opt- \){qItem.id}-${oIdx}">
+          <strong>\( {letters[oIdx]}.</strong> \){opt}
         </button>
       `;
     });
     
     card.setAttribute("data-ans", qItem.ans);
-    card.innerHTML = `<span id="q${qItem.id}" class="ebk-anchor-target"></span><span id="q-${qItem.id}" class="ebk-anchor-target"></span>
+    card.innerHTML = `<span id="q\( {qItem.id}" class="ebk-anchor-target"></span><span id="q- \){qItem.id}" class="ebk-anchor-target"></span>
       <div class="question-header">
-        <div class="q-text">${idx + 1}. ${qItem.q}</div>
+        <div class="q-text">\( {idx + 1}. \){qItem.q}</div>
         <span class="q-tag">${qItem.tag}</span>
       </div>
       <div class="options-grid">
@@ -1138,7 +1138,7 @@ function checkAnswer(qId, selectedOpt) {
   const isCorrect = selectedOpt === qData.ans;
   
   for(let i=0; i<qData.opts.length; i++) {
-    const btn = document.getElementById(`opt-${qId}-${i}`);
+    const btn = document.getElementById(`opt-\( {qId}- \){i}`);
     btn.disabled = true;
     if(i === qData.ans) {
       btn.classList.add('correct-choice');

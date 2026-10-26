@@ -2320,7 +2320,7 @@
               data-q-idx="${idx}" 
               data-opt-idx="${optIdx}" 
               data-is-correct="${isCorrect}"
-              onclick="handleOptionClick(this, ${idx}, ${optIdx}, ${q.ans})">
+              onclick="handleOptionClick(this, \( {idx}, \){optIdx}, ${q.ans})">
               <span><strong>(${banglaLetters[optIdx]})</strong></span>
               <span>${opt}</span>
             </button>
@@ -2329,7 +2329,7 @@
 
         card.innerHTML = `
           <div class="q-header">
-            <span class="q-tag">প্রশ্ন নং ${idx + 1} • ${q.sub || q.topic}</span>
+            <span class="q-tag">প্রশ্ন নং \( {idx + 1} • \){q.sub || q.topic}</span>
             <span class="q-tag" style="background: var(--bg-surface); border-color: var(--border-color);">${q.tag}</span>
           </div>
           <div class="q-text">${q.q}</div>
@@ -2342,7 +2342,7 @@
               <span>▼</span>
             </button>
             <div class="drawer-content" id="ans-content-${idx}">
-              <strong>সঠিক উত্তর:</strong> (${banglaLetters[q.ans]}) ${q.options[q.ans]}
+              <strong>সঠিক উত্তর:</strong> (\( {banglaLetters[q.ans]}) \){q.options[q.ans]}
             </div>
           </div>
           <div class="exp-drawer">
@@ -2396,7 +2396,7 @@
       const total = QUESTIONS_DATA.length;
       const scoreBangla = toBanglaNum(currentScore);
       const totalBangla = toBanglaNum(total);
-      document.getElementById('scoreText').textContent = `${scoreBangla} / ${totalBangla}`;
+      document.getElementById('scoreText').textContent = `\( {scoreBangla} / \){totalBangla}`;
     }
 
     function toBanglaNum(num) {

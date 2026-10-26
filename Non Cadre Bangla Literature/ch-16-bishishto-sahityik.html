@@ -2887,7 +2887,7 @@
           }
 
           optHtml += `
-            <button class="${optClass}" id="opt_${q.id}_${optIdx}" onclick="selectOption(${q.id}, ${optIdx})" ${isAnswered ? 'disabled' : ''}>
+            <button class="\( {optClass}" id="opt_ \){q.id}_\( {optIdx}" onclick="selectOption( \){q.id}, \( {optIdx})" \){isAnswered ? 'disabled' : ''}>
               <span class="opt-marker">${optLabels[optIdx]}</span>
               <span>${optText}</span>
             </button>
@@ -2908,16 +2908,16 @@
             <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">#${toBn(q.id)}</span>
           </div>
           <div class="q-text">
-            <span class="q-num">${toBn(q.id)}.</span> ${q.q}
+            <span class="q-num">\( {toBn(q.id)}.</span> \){q.q}
           </div>
           <div class="opt-grid">
             ${optHtml}
           </div>
           <button class="exp-toggle-btn" onclick="toggleExp(${q.id})">
-            <span>ব্যাখ্যা</span> <span id="expArrow_${q.id}">${isAnswered ? '▲' : '▼'}</span>
+            <span>ব্যাখ্যা</span> <span id="expArrow_\( {q.id}"> \){isAnswered ? '▲' : '▼'}</span>
           </button>
-          <div class="exp-drawer ${isAnswered ? 'open' : ''}" id="expDrawer_${q.id}">
-            <strong style="color: var(--primary);">সঠিক উত্তর: ${optLabels[q.ans] || ''} (${q.options[q.ans] || ''})</strong><br>
+          <div class="exp-drawer \( {isAnswered ? 'open' : ''}" id="expDrawer_ \){q.id}">
+            <strong style="color: var(--primary);">সঠিক উত্তর: \( {optLabels[q.ans] || ''} ( \){q.options[q.ans] || ''})</strong><br>
             <div style="margin-top: 0.35rem;">${q.exp}</div>
           </div>
         `;
@@ -2940,7 +2940,7 @@
       if (!q) return;
 
       q.options.forEach((_, optIdx) => {
-        const btn = document.getElementById(`opt_${qid}_${optIdx}`);
+        const btn = document.getElementById(`opt_\( {qid}_ \){optIdx}`);
         if (!btn) return;
         btn.disabled = true;
         if (optIdx === q.ans) {
@@ -2976,7 +2976,7 @@
         const q = questions.find(item => item.id === parseInt(qid));
         if (q && userAnswers[qid] === q.ans) correct++;
       });
-      document.getElementById('liveScore').textContent = `${toBn(correct)} / ${toBn(questions.length)}`;
+      document.getElementById('liveScore').textContent = `\( {toBn(correct)} / \){toBn(questions.length)}`;
     }
 
     function filterQuestions() {

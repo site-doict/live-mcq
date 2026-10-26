@@ -69,6 +69,19 @@ def fix_broken_latex_syntax(text):
 
     return text, fixes
 
+def clean_dollar_artifacts(text):
+    # 1. Remove nested $\( and \)$
+    text = re.sub(r'\$\s*\\\(\s*', r'\\(', text)
+    text = re.sub(r'\s*\\\)\s*\$', r'\\)', text)
+    # 2. Convert single $...$ containing math to \( ... \)
+    def convert_single_dollar(m):
+        inner = m.group(1).strip()
+        if re.search(r'\\[a-zA-Z]+|[=+\-*/^_{}]|\b[a-zA-Z]\b', inner):
+            return f"\\( {inner} \\)"
+        return m.group(0)
+    text = re.sub(r'(?<!\$)\$(?!\$)(.*?)(?<!\$)\$(?!\$)', convert_single_dollar, text)
+    return text
+
 def wrap_undelimited_math(text, math_review_list, filename):
     # Splits by existing tags, scripts, and math blocks
     parts = re.split(r'(<[^>]+>|\\\(.*?\\\)|\\\[.*?\\\]|\$\$.*?\$\$)', text, flags=re.DOTALL)
@@ -76,7 +89,7 @@ def wrap_undelimited_math(text, math_review_list, filename):
     new_parts = []
 
     # Patterns that indicate mathematical expressions that need \( ... \)
-    has_latex = re.compile(r'\\(?:frac|sqrt|log|cdots|dots|times|div|pm|approx|le|ge|neq|pi|theta|alpha|beta|sigma|sum|int|infty)')
+    has_latex = re.compile(r'\\(?:frac|sqrt|log|cdots|dots|times|div|pm|approx|le|ge|neq|pi|theta|alpha|beta|sigma|sum|int|infty|in|subset)')
     # Specific known math golden fixtures outside tags
     math_exprs = [
         (re.compile(r'x\^4-2x\+1'), r'x^4-2x+1'),
@@ -130,6 +143,19 @@ def wrap_undelimited_math(text, math_review_list, filename):
 
             part = math_token_pattern.sub(replacer, part)
 
+            # Wrap remaining bare LaTeX commands like \le, \in, \times, etc.
+            def wrap_single_latex(m):
+                nonlocal wrapped_count
+                cmd = m.group(0).strip()
+                for amb in AMBIGUOUS_PATTERNS:
+                    if re.search(amb, cmd):
+                        math_review_list.append((filename, "AMBIGUOUS", cmd, f"\\( {cmd} \\) (হস্তচালিত যাচাই প্রয়োজন)"))
+                        return cmd
+                wrapped_count += 1
+                return f"\\( {cmd} \\)"
+
+            part = re.sub(r'\\frac\s*\{[^}]*\}\s*\{[^}]*\}|\\sqrt\s*\{[^}]*\}|\\log_[0-9a-zA-Z]+|\\(?:times|div|pm|neq|approx|le|ge|in|subset)', wrap_single_latex, part)
+
         new_parts.append(part)
 
     return ''.join(new_parts), wrapped_count
@@ -141,6 +167,7 @@ def process_html_file(filepath, dry_run=True, math_review_list=None):
     orig = content
     content, inv_count = clean_invisible_characters(content)
     content, fix_count = fix_broken_latex_syntax(content)
+    content = clean_dollar_artifacts(content)
     content, wrap_count = wrap_undelimited_math(content, math_review_list, filepath)
 
     is_modified = (content != orig)
@@ -171,17 +198,27 @@ def process_exam_data(filepath, dry_run=True, math_review_list=None):
         total_inv += inv
         s, fix = fix_broken_latex_syntax(s)
         total_fixes += fix
+        s = clean_dollar_artifacts(s)
 
-        # If option or question contains math indicators and is not delimited, wrap it
+        # Check if option or question contains math indicators
         has_math = ('\\frac' in s or '\\sqrt' in s or '\\log' in s or '\\times' in s or
-                    '\\pm' in s or '\\approx' in s or '\\pi' in s or 'x^4' in s or '324=4' in s)
+                    '\\pm' in s or '\\approx' in s or '\\pi' in s or 'x^4' in s or '324=4' in s or
+                    '\\le' in s or '\\ge' in s or '\\in' in s or '\\div' in s or '\\neq' in s)
 
-        if has_math and not ('\\(' in s or '$' in s or '\\[' in s):
-            # For options, often the entire option is a formula
-            if field_name == 'opts':
-                s = f"\\({s.strip()}\\)"
-                total_wraps += 1
+        if has_math:
+            # Check if ambiguous
+            is_amb = any(re.search(pat, s) for pat in AMBIGUOUS_PATTERNS)
+            if is_amb:
+                math_review_list.append((f"exam-data.json (ID {item_id})", "AMBIGUOUS", s, "হস্তচালিত যাচাই প্রয়োজন"))
+            elif not ('\\(' in s or '$' in s or '\\[' in s):
+                if field_name == 'opts':
+                    s = f"\\({s.strip()}\\)"
+                    total_wraps += 1
+                else:
+                    s, wraps = wrap_undelimited_math(s, math_review_list, f"exam-data.json (ID {item_id})")
+                    total_wraps += wraps
             else:
+                # Might have partial bare commands even if some \( exists
                 s, wraps = wrap_undelimited_math(s, math_review_list, f"exam-data.json (ID {item_id})")
                 total_wraps += wraps
 

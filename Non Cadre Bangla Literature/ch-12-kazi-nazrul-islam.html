@@ -2108,7 +2108,7 @@
             else if (idx === userChoice) btnClass += ' incorrect';
           }
           optHtml += `
-            <button class="${btnClass}" id="opt_${q.id}_${idx}" onclick="selectOption(${q.id}, ${idx})" ${isAnswered ? 'disabled' : ''}>
+            <button class="\( {btnClass}" id="opt_ \){q.id}_\( {idx}" onclick="selectOption( \){q.id}, \( {idx})" \){isAnswered ? 'disabled' : ''}>
               <span class="opt-label">${optLabels[idx]}</span>
               <span>${opt}</span>
             </button>
@@ -2121,15 +2121,15 @@
             <span style="font-size: 0.8rem; color: var(--text-muted);">#${toBn(q.id)}</span>
           </div>
           <div class="q-text">
-            <span class="q-num">${toBn(q.id)}.</span> ${q.q}
+            <span class="q-num">\( {toBn(q.id)}.</span> \){q.q}
           </div>
           <div class="opt-grid">
             ${optHtml}
           </div>
           <button class="exp-toggle-btn" onclick="toggleExp(${q.id})">
-            <span>ব্যাখ্যা</span> <span id="expArrow_${q.id}">${isAnswered ? '▲' : '▼'}</span>
+            <span>ব্যাখ্যা</span> <span id="expArrow_\( {q.id}"> \){isAnswered ? '▲' : '▼'}</span>
           </button>
-          <div class="exp-drawer ${isAnswered ? 'open' : ''}" id="expDrawer_${q.id}">
+          <div class="exp-drawer \( {isAnswered ? 'open' : ''}" id="expDrawer_ \){q.id}">
             <strong>সঠিক উত্তর: ${optLabels[q.ans]}</strong><br>
             ${q.exp}
           </div>
@@ -2153,7 +2153,7 @@
       if (!q) return;
 
       q.options.forEach((_, optIdx) => {
-        const btn = document.getElementById(`opt_${qid}_${optIdx}`);
+        const btn = document.getElementById(`opt_\( {qid}_ \){optIdx}`);
         if (!btn) return;
         btn.disabled = true;
         if (optIdx === q.ans) {
@@ -2189,7 +2189,7 @@
         const q = questions.find(item => item.id === parseInt(qid));
         if (q && userAnswers[qid] === q.ans) correct++;
       });
-      document.getElementById('liveScore').textContent = `${toBn(correct)} / ${toBn(questions.length)}`;
+      document.getElementById('liveScore').textContent = `\( {toBn(correct)} / \){toBn(questions.length)}`;
     }
 
     function filterQuestions() {
