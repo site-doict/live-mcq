@@ -114,6 +114,17 @@
       qCount: 100,
       badgeColor: "#0284c7",
       file: "ch-05-mofa-personal-officer-2025.html"
+    },
+    {
+      id: "ch-06",
+      number: "৬",
+      title: "ফরেন সার্ভিস একাডেমি - প্রশাসনিক কর্মকর্তা ২০২৫",
+      titleEn: "Foreign Service Academy Admin Officer 2025",
+      pages: "তারিখ: ০৯.১১.২০২৫",
+      questions: "১০০টি প্রশ্ন",
+      qCount: 100,
+      badgeColor: "#0f766e",
+      file: "ch-06-fsa-admin-officer-2025.html"
     }
   ];
 
