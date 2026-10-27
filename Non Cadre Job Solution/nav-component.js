@@ -39,6 +39,28 @@
   // 2. Data Definition: 4 Chapters, 96 Pages, 384 Authentic Questions
   const JOB_SOLUTION_CHAPTERS = [
     {
+      id: "guide-01",
+      number: "গাইড",
+      title: "সাব-রেজিস্ট্রার নিয়োগ ২০২৬ পূর্ণাঙ্গ গাইড ও সিলেবাস",
+      titleEn: "Sub-Registrar 2026 Guide & Syllabus",
+      pages: "সার্কুলার ও সিলেবাস",
+      questions: "পূর্ণাঙ্গ গাইডলাইন",
+      qCount: 0,
+      badgeColor: "#059669",
+      file: "guide-sub-registrar-2026.html"
+    },
+    {
+      id: "guide-02",
+      number: "ট্রেন্ড",
+      title: "বিপিএসসি নন-ক্যাডার প্রশ্ন বিশ্লেষণ ও টপিক ট্রেন্ড",
+      titleEn: "Non-Cadre Question Analysis & Trends",
+      pages: "১,১০৪ প্রশ্ন পরিসংখ্যান",
+      questions: "টপিক অ্যানালাইসিস",
+      qCount: 0,
+      badgeColor: "#0284c7",
+      file: "analysis-non-cadre-questions.html"
+    },
+    {
       id: "ch-01",
       number: "১",
       title: "সাব-রেজিস্ট্রার নিয়োগ পরীক্ষা ২০১৬",
@@ -81,6 +103,17 @@
       qCount: 100,
       badgeColor: "#7c3aed",
       file: "ch-04-sub-registrar-2001.html"
+    },
+    {
+      id: "ch-05",
+      number: "৫",
+      title: "পররাষ্ট্র মন্ত্রণালয় - ব্যক্তিগত কর্মকর্তা ২০২৫",
+      titleEn: "MOFA Personal Officer Exam 2025",
+      pages: "তারিখ: ১১.১১.২০২৫",
+      questions: "১০০টি প্রশ্ন",
+      qCount: 100,
+      badgeColor: "#0284c7",
+      file: "ch-05-mofa-personal-officer-2025.html"
     }
   ];
 
