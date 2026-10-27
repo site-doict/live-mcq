@@ -217,6 +217,14 @@
       enName: 'Non Cadre Ethics & Good Governance',
       group: 'non-cadre',
       examSubject: 'Non Cadre Ethics & Good Governance'
+    },
+    {
+      id: 'non-cadre-job-solution',
+      folder: 'Non Cadre Job Solution',
+      bnName: 'পিএসসি নন-ক্যাডার নিয়োগ প্রশ্ন সমাধান',
+      enName: 'Non Cadre Job Solution',
+      group: 'non-cadre',
+      examSubject: 'Non Cadre Job Solution'
     }
   ];
 
