@@ -1,45 +1,41 @@
 # Antigravity IDE - Safety & Autonomy Rules
 
-## 0. Autonomy Policy (default mode, overrides Sections 1, 2, 4 and G12)
+## VIBE MODE (highest priority, overrides everything below)
 
-A. DEFAULT = ACT, DON'T ASK. Never ask permission for: reading or searching files; creating or editing files inside this repo; refactoring; running scripts, tests and checks (python tools/check-all.py, node tests/e2e.test.js, tools/*.py); editing auth, login, admin-CMS and universal-modes.js code when the task requires it; multi-file edits; deleting files you created yourself this session; deleting repo files that have a copy in _backup_before_audit/ or git history; and creating or switching to a working branch (never main).
-B. Do not post a plan and wait. Write a 3-line plan, then execute immediately. Record non-trivial decisions in docs/overnight-report.md or the final report.
-C. Do not ask clarifying questions when a reasonable assumption exists. Pick the most conservative sensible assumption, state it in one line, proceed.
-D. Run commands without approval prompts where the IDE allows it.
-E. The overnight-mode exception becomes the permanent default. The OVERNIGHT_MODE flag file is no longer required.
-F. Output discipline: Final report max 15 lines. Do not ask follow-up questions at the end. Put 'Recommended next step' as a single line only.
+1. I give a command, you execute it. Do exactly what I say, immediately, end to end. No confirmation, no permission requests, no "shall I proceed?", no plan-then-wait, no menus of options.
+2. Never ask clarifying questions. If something is ambiguous, pick the most sensible interpretation, state it in one line in the final report, and proceed. I will correct you afterward if needed.
+3. Never ask before: reading, creating, editing, refactoring, renaming, deleting repo files (git history is the safety net), multi-file edits, running scripts/tests/checks/dev servers, editing auth/login/CMS code, creating branches, or doing follow-up work needed to finish the requested task.
+4. Finish the whole job in one go. Do not stop midway to report progress. If a step fails, fix it and retry up to 3 times with different approaches before reporting.
+5. Run the relevant checks yourself (python tools/check-all.py, node tests/e2e.test.js, viewport checks for UI changes) and fix failures before finishing. Never claim a check passed unless you ran it.
+6. Keep scope tight: do what I asked, no bonus features or unrelated cleanups. But if my request obviously requires a related change to work (e.g. updating an index badge after adding a question), do it without asking.
+7. Final report: max 10 lines. What was done, files changed, checks run, assumptions made. No follow-up questions. One-line "Recommended next step" at most.
 
----
-
-## 1. HARD-STOP List (The only conditions that may pause for the user)
-
-Only these 5 conditions may pause for the user:
-1. git push, force-push, history rewrite, branch deletion, or committing to main.
-2. Deleting files outside the repo, or repo files with no backup or git history.
-3. Printing, logging or committing secrets (GitHub PAT, passwords, tokens).
-4. Changing remote or production databases, RLS policies or .env values.
-5. Installing a new non-dev dependency or adding any CDN or external asset.
-
-Everything else is autonomous.
+### HARD STOPS (the only cases where you may pause and ask):
+- git push, force-push, history rewrite, branch deletion, or committing to main
+- deleting anything outside the repo
+- printing, logging or committing secrets (PAT, passwords, tokens)
+- changing remote/production databases, RLS policies or .env values
+- installing a non-dev dependency or adding any CDN/external asset
+Outside this list, never ask. If a request would cross a hard stop, do everything else first, then ask only about that one item.
 
 ---
 
-## 2. Autonomous Scope & Boundaries
-All development and maintenance tasks within the repository outside the HARD-STOP list are fully autonomous. Refactoring, editing auth, login, admin-CMS, and universal-modes.js code, running tests and checks, installing dev dependencies, and multi-file edits proceed directly without prompts. If rules conflict, follow the newest and most specific rule, note it in one line, and continue.
+## 1. Autonomous Scope & Boundaries
+All standard development tasks inside this repository outside the HARD STOPS list are fully autonomous. Refactoring, editing auth, login, admin-CMS, and universal-modes.js code, running tests and checks, installing dev dependencies, and multi-file edits proceed directly without prompts. If rules conflict, follow the newest and most specific rule, note it in one line, and continue.
 
 ---
 
-## 3. Surgical & Non-Destructive Editing
+## 2. Surgical & Non-Destructive Editing
 - **Additive over Subtractive:** Prefer adding new functions or wrapping existing code rather than replacing/deleting established logic.
 - **Preserve Working Features:** Always keep backwards compatibility with existing UI workflows and components unless explicitly requested otherwise.
 - **Deprecation over Deletion:** If an older helper or function seems unused, comment it out or mark it as deprecated rather than outright deleting it, and note it in the report.
 
 ---
 
-## 4. Change Summary & Immediate Execution
-- State a concise 3-line plan of intent, then execute immediately.
+## 3. Change Summary & Immediate Execution
+- Execute immediately end-to-end.
 - Record non-trivial decisions in docs/overnight-report.md or the final report.
-- Follow surgical diff principles and verify with local test scripts.
+- Follow surgical diff principles and verify via local scripts.
 
 ---
 
@@ -58,4 +54,4 @@ G9. Git safety. Before editing run git status --short and git branch --show-curr
 G10. External access. No network calls, downloads, scraping, uploads or production writes, EXCEPT web search used for the damaged/ambiguous-question recovery protocol.
 G11. Secrets. Never print, log, copy into reports or commits, or hard-code passwords, tokens or PATs, and never create new ones.
 G12. Stop conditions. HARD-STOP conditions govern when to stop for user direction. If rules conflict, follow the newest and most specific rule, note it in one line, and continue.
-G13. Final review and report. Before finishing run git status --short, git diff --check and git diff, and remove unrelated changes. Report: Result (PASS/PARTIAL/FAILED/BLOCKED), Implemented, Files changed, Checks run and NOT run, Deviations, Limitations, Recommended next step (recommend only; do not start it). Follow output discipline (max 15 lines, single-line next step).
+G13. Final review and report. Before finishing run git status --short, git diff --check and git diff, and remove unrelated changes. Report: Result (PASS/PARTIAL/FAILED/BLOCKED), Implemented, Files changed, Checks run and NOT run, Deviations, Limitations, Recommended next step (recommend only; do not start it). Follow output discipline (max 10 lines, single-line next step).

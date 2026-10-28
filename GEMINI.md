@@ -1,6 +1,6 @@
 # Antigravity IDE - Project Rules & Standards
-Safety and autonomy rules are governed centrally by [.agents/rules/safety-rules.md](file:///.agents/rules/safety-rules.md).
-Refer to that document for engineering guardrails, autonomy policies, and hard-stop boundaries.
+Vibe Mode is active. Follow safety-rules.md VIBE MODE section ([.agents/rules/safety-rules.md](file:///.agents/rules/safety-rules.md)).
+Execute commands directly without asking.
 
 ---
 
