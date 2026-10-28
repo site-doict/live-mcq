@@ -4,10 +4,10 @@
 
 ## Skill Guardrails (pdf-to-html-ebook)
 - One request = one subject/book (or only the chapters I name). Do not touch other subjects, the master index, exam-data.json or search-data.json beyond what the steps require for that subject.
-- Never regenerate or overwrite an existing chapter file unless I ask. For fixes, edit only the affected part.
+- Never regenerate or overwrite existing chapter files without instruction. Edit only affected parts.
 - Count the questions in the source PDF first and keep output 1:1 with it. Never pad or drop questions to hit a number.
 - Reuse existing templates, CSS and JS. Do not invent new classes or scripts when an existing one fits.
-- No new dependencies, CDNs or fonts. List any scratch or temp files you create and ask before deleting them.
+- No new dependencies, CDNs or fonts. Delete your own scratch files at the end and list them in the report.
 - If a source page is unreadable and the 3-step recovery fails, mark it "unresolved" in the report instead of guessing.
 - Run python tools/check-ebook-indexes.py and your audit script, and report the real results only.
 - After the final data-sync step, STOP and give the report. Do not start another subject.
