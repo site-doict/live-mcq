@@ -125,6 +125,17 @@
       qCount: 100,
       badgeColor: "#0f766e",
       file: "ch-06-fsa-admin-officer-2025.html"
+    },
+    {
+      id: "ch-07",
+      number: "৭",
+      title: "৪৯তম (বিশেষ) বিসিএস - শিক্ষা ক্যাডার ২০২৫",
+      titleEn: "49th Special BCS Education Cadre 2025",
+      pages: "তারিখ: ১০.১০.২০২৫",
+      questions: "১০০টি প্রশ্ন",
+      qCount: 100,
+      badgeColor: "#b45309",
+      file: "ch-07-49th-bcs-special-education-2025.html"
     }
   ];
 
