@@ -147,6 +147,28 @@
       qCount: 100,
       badgeColor: "#ca8a04",
       file: "ch-08-eed-sub-assistant-engineer-civil-2025.html"
+    },
+    {
+      id: "ch-09",
+      number: "৯",
+      title: "দি সিকিউরিটি প্রিন্টিং করপোরেশন - সহকারী ব্যবস্থাপক ২০২৫",
+      titleEn: "SPCL Assistant Manager General 2025",
+      pages: "তারিখ: ২০.০৯.২০২৫",
+      questions: "১০০টি প্রশ্ন",
+      qCount: 100,
+      badgeColor: "#9a3412",
+      file: "ch-09-spcl-assistant-manager-2025.html"
+    },
+    {
+      id: "ch-10",
+      number: "১০",
+      title: "৪৭তম বিসিএস প্রিলিমিনারি পরীক্ষা — সহকারী সার্জন ২০২৫",
+      titleEn: "47th BCS Preliminary Exam Assistant Surgeon 2025",
+      pages: "তারিখ: ১৯.০৯.২০২৫",
+      questions: "২০০টি প্রশ্ন",
+      qCount: 200,
+      badgeColor: "#0284c7",
+      file: "ch-10-47th-bcs-assistant-surgeon-2025.html"
     }
   ];
 

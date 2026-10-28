@@ -45,10 +45,12 @@ INDEX_FILES = [
     'Non Cadre Computer & IT/index.html',
     'Non Cadre Mental Ability/index.html',
     'Non Cadre Geography & Environment/index.html',
-    'Non Cadre Ethics & Good Governance/index.html'
+    'Non Cadre Ethics & Good Governance/index.html',
+    'Non Cadre Job Solution/index.html'
 ]
 
 REGISTERED_FOLDERS = {
+    'Non Cadre Job Solution',
     'Live MCQ Bangla Language',
     'Live MCQ Bangla Literature',
     'Live MCQ Bangladesh',
