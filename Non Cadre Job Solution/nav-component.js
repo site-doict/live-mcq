@@ -136,6 +136,17 @@
       qCount: 100,
       badgeColor: "#b45309",
       file: "ch-07-49th-bcs-special-education-2025.html"
+    },
+    {
+      id: "ch-08",
+      number: "৮",
+      title: "শিক্ষা প্রকৌশল অধিদপ্তর - উপসহকারী প্রকৌশলী (সিভিল) ২০২৫",
+      titleEn: "EED Sub-Assistant Engineer Civil 2025",
+      pages: "তারিখ: ২৭.০৯.২০২৫",
+      questions: "১০০টি প্রশ্ন",
+      qCount: 100,
+      badgeColor: "#ca8a04",
+      file: "ch-08-eed-sub-assistant-engineer-civil-2025.html"
     }
   ];
 
