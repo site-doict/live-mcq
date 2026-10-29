@@ -169,6 +169,182 @@
       qCount: 200,
       badgeColor: "#0284c7",
       file: "ch-10-47th-bcs-assistant-surgeon-2025.html"
+    },
+    {
+      id: "ch-11",
+      number: "১১",
+      title: "পিএসসি — সহকারী পরিচালক ২০২৫",
+      titleEn: "PSC Assistant Director 2025",
+      pages: "তারিখ: ১৫.০৯.২০২৫",
+      questions: "১০০টি প্রশ্ন",
+      qCount: 100,
+      badgeColor: "#0369a1",
+      file: "ch-11-psc-assistant-director-2025.html"
+    },
+    {
+      id: "ch-12",
+      number: "১২",
+      title: "উপজেলা সহকারী শিক্ষা অফিসার ২০২৫",
+      titleEn: "Upazila Assistant Education Officer 2025",
+      pages: "তারিখ: ১২.০৯.২০২৫",
+      questions: "১০০টি প্রশ্ন",
+      qCount: 100,
+      badgeColor: "#0d9488",
+      file: "ch-12-dpe-assistant-education-officer-2025.html"
+    },
+    {
+      id: "ch-13",
+      number: "১৩",
+      title: "জেলা শিশু বিষয়ক কর্মকর্তা ২০২৫",
+      titleEn: "District Children Affairs Officer 2025",
+      pages: "তারিখ: ১২.০৯.২০২৫",
+      questions: "১০০টি প্রশ্ন",
+      qCount: 100,
+      badgeColor: "#059669",
+      file: "ch-13-district-children-affairs-officer-2025.html"
+    },
+    {
+      id: "ch-14",
+      number: "১৪",
+      title: "ইলেক্ট্রিক ইন্সপেক্টর ২০২৫",
+      titleEn: "PSC Electric Inspector 2025",
+      pages: "তারিখ: ০২.০৯.২০২৫",
+      questions: "১০০টি প্রশ্ন",
+      qCount: 100,
+      badgeColor: "#d97706",
+      file: "ch-14-psc-electric-inspector-2025.html"
+    },
+    {
+      id: "ch-15",
+      number: "১৫",
+      title: "ব্যক্তিগত কর্মকর্তা (বিভিন্ন মন্ত্রণালয়) ২০২৫",
+      titleEn: "PSC Personal Officer 2025",
+      pages: "তারিখ: ৩০.০৮.২০২৫",
+      questions: "১০০টি প্রশ্ন",
+      qCount: 100,
+      badgeColor: "#ea580c",
+      file: "ch-15-psc-personal-officer-2025.html"
+    },
+    {
+      id: "ch-16",
+      number: "১৬",
+      title: "মাদকদ্রব্য নিয়ন্ত্রণ অধিদপ্তর: সিনিয়র স্টাফ নার্স ২০২৫",
+      titleEn: "DNC Senior Staff Nurse 2025",
+      pages: "তারিখ: ২৯.০৮.২০২৫",
+      questions: "৮০টি প্রশ্ন",
+      qCount: 80,
+      badgeColor: "#059669",
+      file: "ch-16-dnc-senior-staff-nurse-2025.html"
+    },
+    {
+      id: "ch-17",
+      number: "১৭",
+      title: "স্থানীয় সরকার প্রকৌশল অধিদপ্তর (এলজিইডি): সহকারী প্রকৌশলী ২০২৫",
+      titleEn: "LGED Assistant Engineer 2025",
+      pages: "তারিখ: ২৫.০৮.২০২৫",
+      questions: "৯৯টি প্রশ্ন",
+      qCount: 99,
+      badgeColor: "#059669",
+      file: "ch-17-lged-assistant-engineer-2025.html"
+    },
+    {
+      id: "ch-18",
+      number: "১৮",
+      title: "৪৮তম বিসিএস প্রিলি: সহকারী সার্জন ২০২৫",
+      titleEn: "48th BCS Preli Assistant Surgeon 2025",
+      pages: "তারিখ: ১৮.০৭.২০২৫",
+      questions: "১০০টি প্রশ্ন",
+      qCount: 100,
+      badgeColor: "#059669",
+      file: "ch-18-48th-bcs-assistant-surgeon-2025.html"
+    },
+    {
+      id: "ch-19",
+      number: "১৯",
+      title: "পিএসসি: উপ-সহকারী কৃষি কর্মকর্তা ২০২৫",
+      titleEn: "PSC Sub-Assistant Agriculture Officer 2025",
+      pages: "তারিখ: ১১.০৭.২০২৫",
+      questions: "১০১টি প্রশ্ন",
+      qCount: 101,
+      badgeColor: "#059669",
+      file: "ch-19-psc-sub-assistant-agriculture-officer-2025.html"
+    },
+    {
+      id: "ch-20",
+      number: "২০",
+      title: "পিএসসি (রেলপথ মন্ত্রণালয়): উপসহকারী প্রকৌশলী ২০২৫",
+      titleEn: "PSC Railway Sub-Assistant Engineer 2025",
+      pages: "তারিখ: ২৮.০৬.২০২৫",
+      questions: "১০০টি প্রশ্ন",
+      qCount: 100,
+      badgeColor: "#059669",
+      file: "ch-20-psc-railway-sub-assistant-engineer-2025.html"
+    },
+    {
+      id: "ch-21",
+      number: "২১",
+      title: "বিসিআইসি: সহকারী ব্যবস্থাপক ২০২৫",
+      titleEn: "BCIC Assistant Manager 2025",
+      pages: "তারিখ: ২৭.০৬.২০২৫",
+      questions: "৮০টি প্রশ্ন",
+      qCount: 80,
+      badgeColor: "#059669",
+      file: "ch-21-bcic-assistant-manager-2025.html"
+    },
+    {
+      id: "ch-22",
+      number: "২২",
+      title: "বিসিআইসি: সহকারী প্রশাসনিক কর্মকর্তা ২০২৫",
+      titleEn: "BCIC Assistant Administrative Officer 2025",
+      pages: "তারিখ: ২৭.০৬.২০২৫",
+      questions: "৮০টি প্রশ্ন",
+      qCount: 80,
+      badgeColor: "#d97706",
+      file: "ch-22-bcic-assistant-administrative-officer-2025.html"
+    },
+    {
+      id: "ch-23",
+      number: "২৩",
+      title: "পিএসসি: সিনিয়র স্টাফ নার্স ২০২৫",
+      titleEn: "PSC Senior Staff Nurse 2025",
+      pages: "তারিখ: ২৮.০৪.২০২৫",
+      questions: "১০০টি প্রশ্ন",
+      qCount: 100,
+      badgeColor: "#0284c7",
+      file: "ch-23-psc-senior-staff-nurse-2025.html"
+    },
+    {
+      id: "ch-24",
+      number: "২৪",
+      title: "রুরাল পাওয়ার: উপ-সহকারী প্রকৌশলী ২০২৫",
+      titleEn: "RPCL Sub-Assistant Engineer 2025",
+      pages: "তারিখ: ২৬.০৪.২০২৫",
+      questions: "৬৩টি প্রশ্ন",
+      qCount: 63,
+      badgeColor: "#0284c7",
+      file: "ch-24-rpcl-sub-assistant-engineer-2025.html"
+    },
+    {
+      id: "ch-25",
+      number: "২৫",
+      title: "বিএমএসআরআই: সিনিয়র স্টাফ নার্স ২০২৫",
+      titleEn: "BMSRI Senior Staff Nurse 2025",
+      pages: "তারিখ: ১৮.০৪.২০২৫",
+      questions: "১০০টি প্রশ্ন",
+      qCount: 100,
+      badgeColor: "#0284c7",
+      file: "ch-25-bmsri-senior-staff-nurse-2025.html"
+    },
+    {
+      id: "ch-26",
+      number: "২৬",
+      title: "বিসিআইসি: সহকারী প্রশাসনিক কর্মকর্তা ২০২৫",
+      titleEn: "BCIC Assistant Administrative Officer Feb 2025",
+      pages: "তারিখ: ১৪.০২.২০২৫",
+      questions: "৬৫টি প্রশ্ন",
+      qCount: 65,
+      badgeColor: "#0d9488",
+      file: "ch-26-bcic-assistant-administrative-officer-feb-2025.html"
     }
   ];
 
