@@ -1,0 +1,3158 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বাংলাদেশ রেলওয়ে : ট্রেন কন্ট্রোলার ২০২৬ | নন-ক্যাডার জব সলিউশন</title>
+  <link rel="stylesheet" href="../css/ebook-modern.css">
+  <link rel="stylesheet" href="../css/paper-textures.css">
+  <link rel="stylesheet" href="../css/bangla-fonts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap">
+  <style>
+    :root {
+      --bg-page: #f5efe6;
+      --bg-surface: rgba(255, 255, 255, 0.88);
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --text-primary: #292524;
+      --text-secondary: #57534e;
+      --text-muted: #78716c;
+      --border-color: rgba(214, 211, 209, 0.85);
+      --accent-color: #b45309;
+      --accent-hover: #92400e;
+      --accent-light: rgba(180, 83, 9, 0.12);
+      --success-color: #15803d;
+      --success-bg: rgba(21, 128, 61, 0.12);
+      --error-color: #b91c1c;
+      --error-bg: rgba(185, 28, 28, 0.12);
+      --warning-bg: rgba(245, 158, 11, 0.15);
+      --warning-border: #f59e0b;
+      --header-bg: rgba(255, 255, 255, 0.92);
+      --box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #1c1917;
+      --bg-surface: rgba(28, 25, 23, 0.88);
+      --bg-card: rgba(38, 34, 32, 0.85);
+      --text-primary: #fafaf9;
+      --text-secondary: #d6d3d1;
+      --text-muted: #a8a29e;
+      --border-color: rgba(68, 64, 60, 0.8);
+      --accent-color: #f59e0b;
+      --accent-hover: #fbbf24;
+      --accent-light: rgba(245, 158, 11, 0.2);
+      --success-color: #22c55e;
+      --success-bg: rgba(34, 197, 94, 0.2);
+      --error-color: #ef4444;
+      --error-bg: rgba(239, 68, 68, 0.2);
+      --warning-bg: rgba(245, 158, 11, 0.2);
+      --warning-border: #f59e0b;
+      --header-bg: rgba(28, 25, 23, 0.94);
+      --box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    .page-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem;
+      width: 100%;
+    }
+
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--header-bg);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1rem;
+    }
+
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .nav-controls {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .ctrl-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .ctrl-btn:hover {
+      background: var(--accent-light);
+      border-color: var(--accent-color);
+    }
+
+    .ch-header {
+      background: var(--bg-surface);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--box-shadow);
+    }
+
+    .ch-title {
+      font-size: 1.85rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+      line-height: 1.35;
+    }
+
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 0.25rem;
+      font-weight: 500;
+    }
+
+    .ch-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.85rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.65rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: var(--accent-light);
+      color: var(--accent-color);
+    }
+
+    .badge-outline {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+    }
+
+    /* Part 1: Notes & Sketchnotes */
+    .part-banner {
+      background: linear-gradient(135deg, rgba(180, 83, 9, 0.1), rgba(217, 119, 6, 0.15));
+      border-left: 4px solid var(--accent-color);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .part-title {
+      font-size: 1.4rem;
+      color: var(--accent-color);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .part-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .sk-box {
+      background: var(--bg-card);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem;
+      box-shadow: var(--box-shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .sk-box-title {
+      font-size: 1.15rem;
+      color: var(--accent-color);
+      border-bottom: 2px dashed var(--border-color);
+      padding-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .sk-sticky {
+      background: rgba(254, 243, 199, 0.7);
+      border-left: 4px solid #f59e0b;
+      padding: 0.85rem;
+      border-radius: 6px;
+      font-size: 0.92rem;
+      color: #78350f;
+      line-height: 1.5;
+    }
+
+    [data-theme="dark"] .sk-sticky {
+      background: rgba(120, 53, 15, 0.25);
+      color: #fde68a;
+    }
+
+    .sk-formula {
+      background: rgba(254, 243, 199, 0.75);
+      border: 1px solid #fcd34d;
+      border-radius: 8px;
+      padding: 0.85rem;
+      font-size: 0.95rem;
+      color: #92400e;
+    }
+
+    [data-theme="dark"] .sk-formula {
+      background: rgba(146, 64, 14, 0.25);
+      color: #fde68a;
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+
+    .sk-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-size: 0.92rem;
+    }
+
+    .sk-list li {
+      position: relative;
+      padding-left: 1.25rem;
+    }
+
+    .sk-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0.25rem;
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+
+    .sk-mark {
+      background: rgba(253, 224, 71, 0.35);
+      padding: 0.1rem 0.3rem;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+
+    /* Part 2: Question Engine */
+    .filter-bar {
+      background: var(--bg-surface);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0.85rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .score-badge {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent-color);
+      background: var(--accent-light);
+      padding: 0.35rem 0.75rem;
+      border-radius: 8px;
+    }
+
+    .q-card, .q-card * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--box-shadow);
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .q-card:hover {
+      border-color: rgba(180, 83, 9, 0.4);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+      gap: 0.5rem;
+    }
+
+    .q-num {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent-color);
+      background: var(--accent-light);
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .opts-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    @media (min-width: 600px) {
+      .opts-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .opt-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 0.65rem 0.85rem;
+      border-radius: 8px;
+      text-align: left;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      background: var(--accent-light);
+      border-color: var(--accent-color);
+    }
+
+    .opt-btn.correct {
+      background: var(--success-bg) !important;
+      border-color: var(--success-color) !important;
+      color: var(--success-color) !important;
+      font-weight: 700;
+    }
+
+    .opt-btn.wrong {
+      background: var(--error-bg) !important;
+      border-color: var(--error-color) !important;
+      color: var(--error-color) !important;
+      text-decoration: line-through;
+    }
+
+    .opt-prefix {
+      font-weight: 700;
+      color: var(--text-muted);
+      min-width: 1.75rem;
+    }
+
+    .opt-btn.correct .opt-prefix {
+      color: var(--success-color);
+    }
+
+    .opt-btn.wrong .opt-prefix {
+      color: var(--error-color);
+    }
+
+    .card-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .toggle-exp-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--accent-color);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .toggle-exp-btn:hover {
+      background: var(--accent-light);
+      border-color: var(--accent-color);
+    }
+
+    .exp-drawer {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: var(--bg-surface);
+      border-left: 3px solid var(--accent-color);
+      border-radius: 0 8px 8px 0;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .exp-drawer.open {
+      display: block;
+    }
+
+    .ans-tag {
+      font-weight: 700;
+      color: var(--success-color);
+      margin-bottom: 0.4rem;
+      display: inline-block;
+      background: var(--success-bg);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .footer {
+      margin-top: auto;
+      border-top: 1px solid var(--border-color);
+      padding: 2rem 1rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body class="paper-kraft">
+
+  <nav class="top-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-link">← সূচিপত্র</a>
+      <div class="nav-controls">
+        <button class="ctrl-btn" onclick="adjustFontSize(-1)">A-</button>
+        <button class="ctrl-btn" onclick="adjustFontSize(1)">A+</button>
+        <button class="ctrl-btn" id="themeToggle" onclick="toggleTheme()">🌙</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-container">
+    <header class="ch-header">
+      <h1 class="ch-title font-ahasan">বাংলাদেশ রেলওয়ে : ট্রেন কন্ট্রোলার <span class="ch-en">(Bangladesh Railway Train Controller 2026)</span></h1>
+      <div class="ch-meta-row">
+        <span class="badge">পরীক্ষার তারিখ: ২৩ জানুয়ারি ২০২৬</span>
+        <span class="badge badge-outline">সময়: ৯০ মিনিট</span>
+        <span class="badge">মোট প্রশ্ন: ৭০টি</span>
+        <span class="badge badge-outline">পূর্ণমান: ৭০</span>
+        <span class="badge badge-outline">পৃষ্ঠা: ৪৪ – ৫৭</span>
+      </div>
+    </header>
+
+    <!-- Part 1: Authentic Interactive Notes & Sketchnotes -->
+    <section class="part-banner">
+      <h2 class="part-title font-ahasan">📘 ১ম অংশ: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি</h2>
+      <p class="part-subtitle">বাংলাদেশ রেলওয়ে ট্রেন কন্ট্রোলার পরীক্ষার ৭০টি প্রশ্ন ও তাদের বিশদ সমাধান থেকে সংকলিত কোর নোটস।</p>
+    </section>
+
+    <div class="sk-grid">
+      <!-- Railway & Transport Box -->
+      <div class="sk-box">
+        <h3 class="sk-box-title font-ahasan">🚆 বাংলাদেশ রেলওয়ে ও যাতায়াত স্পেশাল</h3>
+        <div class="sk-sticky">
+          🛤️ <strong>রেলওয়ে গেজ:</strong><br>
+          বাংলাদেশ রেলওয়েতে <span class="sk-mark">৩ ধরনের গেজ</span> চালু আছে— ব্রড গেজ (Broad Gauge: ১৬৭৬ মিমি), মিটার গেজ (Meter Gauge: ১০০০ মিমি), এবং ডুয়েল গেজ (Dual Gauge)।
+        </div>
+        <ul class="sk-list">
+          <li><strong>এশিয়ার প্রথম এলিফ্যান্ট ওভারপাস:</strong> চট্টগ্রাম জেলার লোহাগাড়ার চুনতি বন্যপ্রাণী অভয়ারণ্যে (দোহাজারী-কক্সবাজার রেললাইন)। দৈর্ঘ্য ৫০ মিটার।</li>
+          <li><strong>আন্তঃনগর ট্রেন:</strong> সুবর্ণ এক্সপ্রেস (ঢাকা-চট্টগ্রাম), তিস্তা এক্সপ্রেস (ঢাকা-দেওয়ানগঞ্জ), পদ্মা এক্সপ্রেস (ঢাকা-রাজশাহী)। <em>চট্টগ্রাম মেইল আন্তঃনগর ট্রেন নয়</em>।</li>
+          <li><strong>Boulevard vs Avenue:</strong> দুই পাশে বৃক্ষশোভিত চওড়া রাস্তাকে <span class="sk-mark">Boulevard</span> এবং শহরের প্রধান সোজা প্রশস্ত পথকে <span class="sk-mark">Avenue</span> বলে।</li>
+        </ul>
+      </div>
+
+      <!-- Math Box -->
+      <div class="sk-box">
+        <h3 class="sk-box-title font-ahasan">📐 গাণিতিক সূত্রাবলি ও জ্যামিতি শর্টকাট</h3>
+        <div class="sk-formula">
+          <strong>আয়তক্ষেত্রের ক্ষেত্রফল ও কর্ণ:</strong><br>
+          \(	ext{Area} = b 	imes \sqrt{d^2 - b^2}\)<br>
+          (কর্ণ \(d = 15\) ও প্রস্থ \(b = 10\) হলে: \(	ext{Area} = 10 	imes \sqrt{15^2 - 10^2} = 10 	imes \sqrt{125} = 50\sqrt{5}\) বর্গমিটার)
+        </div>
+        <ul class="sk-list">
+          <li><strong>বৃত্তের বৃহত্তম জ্যা (ব্যাস):</strong> পরিধি \(2\pi r = 132\) ও ক্ষেত্রফল \(\pi r^2 = 1386\) হলে, \(rac{\pi r^2}{2\pi r} = rac{r}{2} = rac{1386}{132} = 10.5 \Rightarrow 	ext{ব্যাস } 2r = 42\) সেমি।</li>
+          <li><strong>ক্রমিক সংখ্যার যোগফল:</strong> পরপর ৩টি ক্রমিক সংখ্যার গুণফল ১২০ হলে, সংখ্যা তিনটি \(4, 5, 6\) (\(4 	imes 5 	imes 6 = 120\)) এবং যোগফল = \(4 + 5 + 6 = 15\)।</li>
+          <li><strong>অনুপাত ও গ.সা.গু:</strong> অনুপাত \(2:3\) ও গ.সা.গু \(4\) হলে বৃহত্তম সংখ্যা = \(3 	imes 4 = 12\)।</li>
+        </ul>
+      </div>
+
+      <!-- Bangla Literature & Grammar Box -->
+      <div class="sk-box">
+        <h3 class="sk-box-title font-ahasan">✍️ বাংলা ভাষা, ব্যাকরণ ও সাহিত্য</h3>
+        <ul class="sk-list">
+          <li><strong>প্রথম বাংলা ব্যাকরণ:</strong> মনোএল দ্য আসসুম্পসাঁও (১৭৪৩, পর্তুগিজ ভাষায় রচিত 'ভোকাবুলারিও')। রাজা রামমোহন রায়ের 'গৌড়ীয় ব্যাকরণ' (১৮৩৩) বাঙালিদের মধ্যে বাংলায় প্রথম।</li>
+          <li><strong>সন্ধি:</strong> ব্যাকরণের <span class="sk-mark">ধ্বনিতত্ত্বে (Phonology)</span> আলোচিত হয়।</li>
+          <li><strong>সার্থক বাক্যের ৩টি গুণ:</strong> আকাঙ্ক্ষা (Expectancy), আসত্তি (Proximity), ও যোগ্যতা (Propriety)।</li>
+          <li><strong>প্রাচীনতম বাঙালি মুসলিম কবি:</strong> শাহ মুহম্মদ সগীর (গিয়াসউদ্দিন আজম শাহের রাজত্বকালে রচিত 'ইউসুফ-জোলেখা')।</li>
+          <li><strong>'পরানের গহীন ভিতর':</strong> সৈয়দ শামসুল হকের বিখ্যাত আঞ্চলিক ভাষার কাব্যগ্রন্থ (১৯৮০)।</li>
+          <li><strong>শুদ্ধ বানান:</strong> <span class="sk-mark">অঞ্জলি</span>, <span class="sk-mark">কনীনিকা</span>, <span class="sk-mark">মৃন্ময়</span>।</li>
+        </ul>
+      </div>
+
+      <!-- English & International Box -->
+      <div class="sk-box">
+        <h3 class="sk-box-title font-ahasan">🌐 ইংরেজি সাহিত্য ও আন্তর্জাতিক সাধারণ জ্ঞান</h3>
+        <div class="sk-sticky">
+          📜 <strong>বিখ্যাত উক্তি ও সাহিত্য:</strong><br>
+          • "Know Thyself" (নিজেকে জানো) — সক্রেটিস<br>
+          • "The greatest remedy for anger is delay" — সেনেকা (Seneca)<br>
+          • Father of Humanism — পেত্রার্ক (Petrarch)
+        </div>
+        <ul class="sk-list">
+          <li><strong>George Orwell:</strong> ব্রিটিশ ভারতের মোতিহারিতে জন্ম (১৯০৩), প্রকৃত নাম এরিক আর্থার ব্লেয়ার। বিখ্যাত রূপক উপন্যাস 'Animal Farm' (১৯৪৫)।</li>
+          <li><strong>Barren Age:</strong> ইংরেজি সাহিত্যের ১৪০০–১৪৮৫ সময়কাল।</li>
+          <li><strong>সীমান্ত রেখা:</strong> মেক্সিকো ও যুক্তরাষ্ট্রকে বিভক্ত করেছে <span class="sk-mark">সনোরা লাইন</span>।</li>
+          <li><strong>ইউরেশিয়ান দেশ:</strong> তুরস্ক (এশিয়া ও ইউরোপ উভয় মহাদেশে অবস্থিত)।</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Part 2: Interactive Question Bank -->
+    <section class="part-banner">
+      <h2 class="part-title font-ahasan">📝 ২য় অংশ: বিগত বছরের প্রামাণ্য প্রশ্নব্যাংক ও ইন্টারঅ্যাক্টিভ কুইজ</h2>
+      <p class="part-subtitle">বাংলাদেশ রেলওয়ে ট্রেন কন্ট্রোলার পরীক্ষার ৭০টি প্রামাণ্য প্রশ্ন অনুশীলন করুন।</p>
+    </section>
+
+    <div class="filter-bar">
+      <div>
+        <span class="score-badge" id="scoreDisplay">স্কোর: ০ / ৭০</span>
+      </div>
+      <div>
+        <button class="ctrl-btn" onclick="resetQuiz()">পুনরায় পরীক্ষা দিন</button>
+      </div>
+    </div>
+
+    <div class="questions-list">
+
+      <!-- Q1 -->
+      <article class="q-card" id="q1" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">১</span>
+          <h3 class="q-text">George Orwell was born in-</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(1, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">England</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(1, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">India</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(1, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Finland</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(1, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">Australia</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(1)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp1">
+          <div class="ans-tag">সঠিক উত্তর: India</div>
+          <div class="exp-content">
+            onion J জুন, ১৯০৩ সালে ব্রিটিশ ভারতের<br>তহারিতে জন্ম নেন এরিক আর্থার EE যিনি পরে<br>বিশ্ববাসীর কাছে চিরপরিচিত হয়ে ওঠেন জর্জ অরওয়েল<br>নামে | অরওয়েলের শিক্ষা শুরু হয় ইংল্যান্ডের অভিজাত<br>বিদ্যাপীঠে, কিন্তু কর্মজীবন শুরু হয় ব্রিটিশ উপনিবেশ<br>বার্মায় একজন পুলিশ অফিসার হিসেবে । ১৯৪৫ সালে<br>প্রকাশিত 'আ্যানিমেল ফার্ম ছিল তার সাহিত্যিক<br>প্রতিবাদের অনন্য দলিল।<br>Sentence correction
+          </div>
+        </div>
+      </article>
+
+      <!-- Q2 -->
+      <article class="q-card" id="q2" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">২</span>
+          <h3 class="q-text">These flowers are not ____ to Bangladesh, because these are not found here.</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(2, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">ingenuous</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(2, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">indigenous</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(2, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">exigent</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(2, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">affluent</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(2)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp2">
+          <div class="ans-tag">সঠিক উত্তর: indigenous</div>
+          <div class="exp-content">
+            Indigenous to — দেশীয় বা দেশজ | উল্লিখিত<br>বাক্যে দেশিয় ফুল অর্থে Indigenous (ইনডিজিনাস)<br>“to” FIA | এই শব্দের মতোই দেখতে আরেকটি শব্দ<br>হলো Ingenuous (ইনজেনিউয়াস) যার অর্থ হলো<br>অকপট; সরলচিত্ত; নিষ্পট। কাজেই এক্ষেত্রে শব্দ দুটি<br>ব্যবহারের ক্ষেত্রে সতর্ক থাকতে হবে। উল্লেখ্য,<br>বাক্যের অর্থঃ এগুলো বাংলাদেশীয় ফুল নয় কারণ এগুলো<br>এখানে পাওয়া যায় না।<br>লসসা.গু AIS.
+          </div>
+        </div>
+      </article>
+
+      <!-- Q3 -->
+      <article class="q-card" id="q3" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">৩</span>
+          <h3 class="q-text">দুটি সংখ্যার অনুপাত ২ : ৩ এবং গ.সা.গু ৪ হলে বৃহত্তম সংখ্যাটি কত?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(3, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">৮</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(3, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">১০</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(3, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">১২</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(3, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">২০</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(3)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp3">
+          <div class="ans-tag">সঠিক উত্তর: ১২</div>
+          <div class="exp-content">
+            ২১৯৩৫ 2 XO=0bgI=038)d<br>ধরি, সংখ্যাটি যথাক্রমে dx এবং Ox<br>এখন, এই সংখ্যা দুটির গ.সা.গু. = x<br>প্রশ্নমতে,+- ৪<br>:. বৃহত্তম সংখ্যাটি ১৩৩ x 8=33
+          </div>
+        </div>
+      </article>
+
+      <!-- Q4 -->
+      <article class="q-card" id="q4" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">৪</span>
+          <h3 class="q-text">বাংলা ব্যাকরণ প্রথম কোন ভাষায় লেখা হয়েছে?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(4, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">রোমান</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(4, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">পর্তুগিজ</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(4, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">সংস্কৃত</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(4, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">ফার্সি</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(4)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp4">
+          <div class="ans-tag">সঠিক উত্তর: পর্তুগিজ</div>
+          <div class="exp-content">
+            প্রথম বাংলা ভাষার ব্যাকরণ লিখেন মনোএল দ্য<br>আসমসুম্পসাও (১৭৪৩)। তার রচিত গ্রন্থের নাম:<br>ভোকীবুলারিও এম ইদিওমা বেনগেল্লা ই পর্তুগিজ:<br>দিভিদিদো এম দুয়াস পার্তেস যা পর্তুগিজ ভাষায় রচিত।<br>রেলওয়ে<br>বন কন্ট্রোলার<br>য়ঃ ৯০ মিনিট; পূর্ণমানঃ ৭০<br>নাথানিয়েল ব্রাসি হ্যালহ্যাড (এন ব্রাসি হ্যালহেড) — A<br>Grammar of the Bengali Language (1778)<br>(আংশিক বাংলায় মুদ্রিত), উইলিয়াম কেরি -১ A<br>Grammar of the Bengla Language (1801)<br>(ইংরেজিতে 3S) | রাজা রামমোহন রায় হলেন প্রথম<br>বাঙালি যিনি বাংলা ভাষায় প্রথম বাংলা ব্যাকরণ রচনা<br>করেন। তার ব্যাকরণ গ্রন্থের নাম 'গৌড়ীয় ব্যাকরণ'<br>_০১৮৩৩)। উল্লেখ্য, _<br>রচয়িতা ব্যাকরণ গ্রন্থ<br>উইলিয়াম কেরি A Grammar of the Bengali<br>Language (১৮০১)<br>মুনীর চৌধুরী , ইব্রাহীম খলিল এবং বাংলা ভাষার ব্যাকরণ<br>মোফাজ্জল হায়দার
+          </div>
+        </div>
+      </article>
+
+      <!-- Q5 -->
+      <article class="q-card" id="q5" data-ans="0">
+        <div class="q-header">
+          <span class="q-num">৫</span>
+          <h3 class="q-text">কোন শব্দটি ভুল?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(5, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">অঞ্জলী</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(5, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">ক্ষমা</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(5, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">কটূক্তি</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(5, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">পরিপক্ব</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(5)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp5">
+          <div class="ans-tag">সঠিক উত্তর: অঞ্জলী</div>
+          <div class="exp-content">
+            'অঞ্জলী' এর শুদ্ধ বানান TGF |
+          </div>
+        </div>
+      </article>
+
+      <!-- Q6 -->
+      <article class="q-card" id="q6" data-ans="3">
+        <div class="q-header">
+          <span class="q-num">৬</span>
+          <h3 class="q-text">কোন দেশটি দুইটি মহাদেশে অবস্থিত?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(6, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">জর্ডান</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(6, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">মেক্সিকো</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(6, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">সুদান</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(6, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">তুরস্ক</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(6)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp6">
+          <div class="ans-tag">সঠিক উত্তর: তুরস্ক</div>
+          <div class="exp-content">
+            ইউরোপ এবং এশিয়া উভয় মহাদেশের অবস্থিত<br>হলো তুরস্ক। উল্লেখ্য, পশ্চিম এশিয়ার দেশ তুরস্কের<br>বিখ্যাত শহর ইন্তানবুল ইউরোপ মহাদেশে অবস্থিত।<br>এজন্য তুরস্ককে 'ইউরোশিয়ান FG এবং ইন্তানবুলকে<br>'ইউরেশিয়ান সিটি” বলা হয়।<br>Idiom phrase
+          </div>
+        </div>
+      </article>
+
+      <!-- Q7 -->
+      <article class="q-card" id="q7" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">৭</span>
+          <h3 class="q-text">“Let the cat out of the bag” means-</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(7, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">bring out a cat from a bag</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(7, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">reveal a secret carelessly</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(7, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">let a cat move at large</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(7, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">take a precautious step</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(7)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp7">
+          <div class="ans-tag">সঠিক উত্তর: reveal a secret carelessly</div>
+          <div class="exp-content">
+            bring out a cat from a bag<br>b) reveal a secret carelessly<br>০) Leta cat move at large<br>d) take a pre cautious step ans. B<br>Let the cat out of the bag এর আক্ষরিক অর্থ<br>হলো থলের বিড়াল বের করে দেয়া । তবে এর প্রকৃত অর্থ<br>হলো (অজ্ঞাতসারে) গোপন কথা ফীস করে দেয়া |<br>____ জানার জন্য<br>Like a cat on the hot bricks অত্যন্ত ঘাবড়ানো স্বভাবের<br>Wait for the cat to jump | অন্যরা কি করছে তা দেখার জন্য<br>নিজে নিষ্্রিয় থাকা<br>)26
+          </div>
+        </div>
+      </article>
+
+      <!-- Q8 -->
+      <article class="q-card" id="q8" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">৮</span>
+          <h3 class="q-text">এক কথায় প্রকাশ করুনঃ “মৃত্তিকা দিয়ে তৈরি”</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(8, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">মেটেল</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(8, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">মৃন্ময়</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(8, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">মন্ময়</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(8, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">চিন্ময়</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(8)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp8">
+          <div class="ans-tag">সঠিক উত্তর: মৃন্ময়</div>
+          <div class="exp-content">
+            "মৃত্তিকা দিয়ে তৈরি' এর বাক্য সংকোচন TR |<br>উল্লেখ্য, 'তন্যয়' অর্থ আবদ্ধ; শান্ত; মনোনিবেশ করা।<br>TE অর্থ আত্মবাদী; আত্মপ্রকাশক। 'চিন্ময়' অর্থ<br>জ্ঞানময়।
+          </div>
+        </div>
+      </article>
+
+      <!-- Q9 -->
+      <article class="q-card" id="q9" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">৯</span>
+          <h3 class="q-text">ফ্লোরা/ Flora বলা হয় কোনটিকে?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(9, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">প্রাণীকুলকে</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(9, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">পক্ষীকুলকে</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(9, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">উদ্ভিদকুলকে</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(9, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">মৎস্যকুলকে</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(9)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp9">
+          <div class="ans-tag">সঠিক উত্তর: উদ্ভিদকুলকে</div>
+          <div class="exp-content">
+            ফ্লোরা (Flora) বলতে কোনো নির্দিষ্ট অঞ্চল বা<br>সময়ে প্রাকৃতিকভাবে জন্মানো সমন্ত উদ্ভিদকুল বা<br>উদ্ভিদজীবনকে বোঝায় । এটি একটি নির্দিষ্ট ভোগোলিক<br>এলাকার স্থানীয় গাছপালা, ফুল, এবং শ্যাওলাসহ উদ্ভিদ<br>প্রজাতির সমষ্টি | ANGE যেমন 'ফনা' (Fauna) বলা<br>হয়, তেমনি উদ্ভিদকুলকে 'ফ্লোরা' (Flora) বলা হয়।<br>Preposition
+          </div>
+        </div>
+      </article>
+
+      <!-- Q10 -->
+      <article class="q-card" id="q10" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">১০</span>
+          <h3 class="q-text">The snow swirls ____ the valley.</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(10, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">in</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(10, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">through</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(10, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">down</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(10, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">up</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(10)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp10">
+          <div class="ans-tag">সঠিক উত্তর: down</div>
+          <div class="exp-content">
+            পুলিৎজার পুরস্কার বিজয়ী J K Rawling রচিত<br>একটি গল্প হলো A mother in Mannville, এই গল্পের<br>একটি লাইন হলো The snow swirls down the<br>valleys and a wind blows so bitterly.<br>এছাড়া পানি, বাতাস ইত্যাদি ঘুরপাক খেয়ে কোথাও<br>পতিত হওয়া অর্থে Swirls down something হবে।<br>বাক্যের অর্থঃ ঘূর্ণাৰত তুষার উপত্যকায় পতিত হয়।
+          </div>
+        </div>
+      </article>
+
+      <!-- Q11 -->
+      <article class="q-card" id="q11" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">১১</span>
+          <h3 class="q-text">বাংলাদেশ রেলওয়েতে কত ধরনের গেজ আছে?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(11, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">২ ধরনের</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(11, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">৩ ধরনের</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(11, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">৪ ধরনের</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(11, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">১ ধরনের</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(11)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp11">
+          <div class="ans-tag">সঠিক উত্তর: ৩ ধরনের</div>
+          <div class="exp-content">
+            বাংলাদেশ রেলওয়েতে ৩ ধরনের গেজ আছে।<br>এগুলো হলোঃ ব্রড গেজ, মিটার গেজ এবং ডুয়েল গেজ |
+          </div>
+        </div>
+      </article>
+
+      <!-- Q12 -->
+      <article class="q-card" id="q12" data-ans="0">
+        <div class="q-header">
+          <span class="q-num">১২</span>
+          <h3 class="q-text">The “father of humanism” was-</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(12, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">Petrarch</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(12, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Dante</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(12, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Boccaccio</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(12, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">Jane Austen</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(12)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp12">
+          <div class="ans-tag">সঠিক উত্তর: Petrarch</div>
+          <div class="exp-content">
+            ফ্রাঞ্চেসকো পেত্রার্ক মূলত রেনেসার অগ্রদূত,<br>মানবতাবাদের জনক (Father of Humanism) এবং<br>আধুনিক ইতালীয় ভাষার অন্যতম রূপকার হিসেবে<br>পরিচিত। তিনি প্রাচীন গ্রুপদী জ্ঞান ও সাহিত্য<br>পুনরুজ্জীবিত করেন এবং লরা-কে উৎসর্গ করা তার অমর<br>সনেট সংকলন 'ক্যানজোনিয়ের' (Canzoniere) এর<br>জন্য তিনি বিখ্যাত |
+          </div>
+        </div>
+      </article>
+
+      <!-- Q13 -->
+      <article class="q-card" id="q13" data-ans="3">
+        <div class="q-header">
+          <span class="q-num">১৩</span>
+          <h3 class="q-text">&#x27;মর্সিয়া&#x27; কি?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(13, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">ধ্বনিতত্ত্ব</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(13, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">অর্থতত্ত্ব</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(13, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">রূপতত্ত্ব</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(13, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">শোককাব্য / শোকগীতি</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(13)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp13">
+          <div class="ans-tag">সঠিক উত্তর: শোককাব্য / শোকগীতি</div>
+          <div class="exp-content">
+            বিয়োগান্ত কোনো কাহিনি রচনার মাধ্যমে শোক<br>প্রকাশিত হলে তাকে মর্সিয়া সাহিত্য বলে। মর্সিয়া<br>সাহিত্যধারার উল্লেখযোগ্য কবি ও কাব্য<br>- _ v® __  __
+          </div>
+        </div>
+      </article>
+
+      <!-- Q14 -->
+      <article class="q-card" id="q14" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">১৪</span>
+          <h3 class="q-text">একটি বর্গক্ষেত্রের ক্ষেত্রফল x^2 বর্গ একক। এর কর্ণের দৈর্ঘ্য কত?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(14, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">x একক</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(14, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">2x একক</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(14, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">√2 x একক</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(14, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">x/2 একক</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(14)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp14">
+          <div class="ans-tag">সঠিক উত্তর: √2 x একক</div>
+          <div class="exp-content">
+            একটি বর্গের ক্ষেত্রফল :2 হলে<br>:.. বর্গের বাহুর দৈর্ঘ্য - (3 = x একক<br>oo বর্গের কর্ণের দৈর্ঘ্য x2 একক ।<br>সূচক ও লগারিদম<br>6
+          </div>
+        </div>
+      </article>
+
+      <!-- Q15 -->
+      <article class="q-card" id="q15" data-ans="3">
+        <div class="q-header">
+          <span class="q-num">১৫</span>
+          <h3 class="q-text">(3^(1/3) × 4^(1/3))^6 = কত?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(15, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">12</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(15, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">48</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(15, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">36</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(15, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">144</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(15)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp15">
+          <div class="ans-tag">সঠিক উত্তর: 144</div>
+          <div class="exp-content">
+            z 3)<br>দেওয়া আছে, (35 x ২3)<br>1 1\6 1 1<br>=(37x43) =3 G9) 49)<br>=32x42<br>=9x16<br>=144
+          </div>
+        </div>
+      </article>
+
+      <!-- Q16 -->
+      <article class="q-card" id="q16" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">১৬</span>
+          <h3 class="q-text">কোনটি রবীন্দ্রনাথ ঠাকুরের কাব্যগ্রন্থ?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(16, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">মালঞ্চ</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(16, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">সেঁজুতি</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(16, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">প্রেম ও ফুল</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(16, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">শেষের কবিতা</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(16)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp16">
+          <div class="ans-tag">সঠিক উত্তর: সেঁজুতি</div>
+          <div class="exp-content">
+            Solution. রবীন্দনাথ ঠাকুর রচিত উল্লেখযোগ্য কিছু রচনাবলিঃ<br>কাব্যশ্র্থ বলাকা, সোনার তরী; মানসী; চিত্রা, চৈতালী; গীতাঞ্জলি, Gre<br>ইত্যাদি।<br>উপন্যাস | রব থ ঠাকুর তার জীব ১৩টি উপন্যাস রচনা করেন।<br>-<br>বাইরে , দুই বোন, যোগাযোগ, চার অধ্যায়, মালঞ্চ প্রভৃতি |<br>সাহিত্যের পথে, সমাজ, আত্মপরিচয়, জীবন-স্মৃতি, কালান্তর,<br>চা<br>তাসের দেশ ইত্যাদি।<br>বীজগাণিতিক সূত্র<br>Q_1 P+Q
+          </div>
+        </div>
+      </article>
+
+      <!-- Q17 -->
+      <article class="q-card" id="q17" data-ans="0">
+        <div class="q-header">
+          <span class="q-num">১৭</span>
+          <h3 class="q-text">যদি P/Q = 4/1 হয়, তবে (P+Q)/(P-Q) এর মান কত?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(17, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">5/3</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(17, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">4/3</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(17, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">2/3</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(17, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">3/5</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(17)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp17">
+          <div class="ans-tag">সঠিক উত্তর: 5/3</div>
+          <div class="exp-content">
+            P_4<br>= 3-1<br>P+Q_4+1<br>= FQ aT [যোজন-বিয়োজন করে]<br>P+Q_5<br>= PQ 3<br>27
+          </div>
+        </div>
+      </article>
+
+      <!-- Q18 -->
+      <article class="q-card" id="q18" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">১৮</span>
+          <h3 class="q-text">বাঙালি কবিদের মধ্যে প্রাচীনতম মুসলিম কবি কে?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(18, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">মাইকেল মধুসূদন দত্ত</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(18, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">শাহ মুহম্মদ সগীর</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(18, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">কায়কোবাদ</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(18, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">আলাওল</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(18)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp18">
+          <div class="ans-tag">সঠিক উত্তর: শাহ মুহম্মদ সগীর</div>
+          <div class="exp-content">
+            াহ মুহম্মদ সগীর বাংলা সাহিত্যের প্রথম মুসলিম<br>কবি। শাহ মুহম্মদ ANT আনুমানিক ১৪-১৫ শতকের<br>কবি। বাঙালি মুসলিম কবিদের মধ্যে তিনিই প্রাচীনতম।<br>তিনি গৌড়ের সুলতান গিয়াসউদ্দিন আজম শাহ এর<br>রাজত্বকালে (১৩৯৩-১৪০৯ খ্রিষ্টাব্দে) ইউসুফ-জোলেখা<br>কাব্য রচনা করেন। উল্লেখ্য, আধুনিক বাংলা সাহিত্যের<br>প্রথম মুসলিম কবি কায়কোবাদ | নিচে মুসলিম শাসকদের<br>পৃষ্ঠপোষকতায় রচিত কাব্যসমূহগুলো দেয়া হলোঃ<br>সুলতান কবি কাব্য<br>জালালউদ্দিন মুহম্মদ কৃত্তিবাস<br>শাহ<br>আলাউদ্দীন হোসেন শাহ<br>যশোরাজ খান শ্রীকৃষ্ণমঙ্গল (কুজবুলি ভাষায়<br>রচিত)<br>নাসিরুদ্দীন নুসরাত শাহ বিদ্যাপতি কীর্তিলতা, কীর্তিপতাকা,<br>পুরুষপরীক্ষা, শৈবসর্বস্বসার,<br>বিভাগসার<br>vocabulary
+          </div>
+        </div>
+      </article>
+
+      <!-- Q19 -->
+      <article class="q-card" id="q19" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">১৯</span>
+          <h3 class="q-text">The power of reading the thoughts of others is called-</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(19, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">Psychopathy</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(19, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Telecommunication</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(19, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Telepathy</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(19, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">Psychology</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(19)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp19">
+          <div class="ans-tag">সঠিক উত্তর: Telepathy</div>
+          <div class="exp-content">
+            Telepathy অর্থ কারো মনের কথা বুঝে নেওয়ার<br>ক্ষমতা, অন্যের চিন্তা বা অনুভূতি দ্রুত বুঝে নেওয়ার<br>ক্ষমতা।
+          </div>
+        </div>
+      </article>
+
+      <!-- Q20 -->
+      <article class="q-card" id="q20" data-ans="3">
+        <div class="q-header">
+          <span class="q-num">২০</span>
+          <h3 class="q-text">বাংলা কৃৎ-প্রত্যয় সাধিত শব্দ কোনটি?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(20, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">কারক</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(20, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">লিখিত</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(20, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">বেদনা</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(20, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">খেলনা</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(20)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp20">
+          <div class="ans-tag">সঠিক উত্তর: খেলনা</div>
+          <div class="exp-content">
+            বাংলা 'অনা' প্রত্যয় যোগে খখেল্‌+অনা = খেলনা<br>শব্দটি গঠিত হয়েছে। এরূপে গঠিত আরেকটি শব্দ হলোঃ<br>NFHS = দুলনা > দোলনা। কিন্তু Ves =<br>কারক; Fs = লিখিত; খবিদ্‌+অন+আ = বেদনা<br>সংস্কৃত F-2O যোগে গঠিত হয়েছে।
+          </div>
+        </div>
+      </article>
+
+      <!-- Q21 -->
+      <article class="q-card" id="q21" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">২১</span>
+          <h3 class="q-text">কোন ভাষায় সাহিত্যের আভিজাত্য প্রকাশ পায়?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(21, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">কথ্য ভাষা</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(21, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">চলিত ভাষা</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(21, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">সাধু ভাষা</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(21, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">আঞ্চলিক ভাষা</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(21)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp21">
+          <div class="ans-tag">সঠিক উত্তর: সাধু ভাষা</div>
+          <div class="exp-content">
+            সাধু ভাষার বৈশিষ্ট্য হলো এটি গুরুগন্ীর ও<br>আভিজাত্যের অধিকারী। এ রীতিতে সর্বনাম ও<br>ক্রিয়াপদপ্ুলো এক বিশেষ গঠন পদ্ধতি মেনে চলে। এ<br>ভাষায় তৎসম শব্দের প্রয়োগ বেশি।<br>vocabulary
+          </div>
+        </div>
+      </article>
+
+      <!-- Q22 -->
+      <article class="q-card" id="q22" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">২২</span>
+          <h3 class="q-text">A synonym of the word &#x27;Bellicose&#x27; is-</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(22, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">Bigotry</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(22, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Belligerent</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(22, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Averse</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(22, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">Assuage</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(22)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp22">
+          <div class="ans-tag">সঠিক উত্তর: Belligerent</div>
+          <div class="exp-content">
+            Bellicose অর্থ যুদ্ধে আগ্রহী; সমরণ্রিয়।<br>Belligerent অর্থ যুদ্ধরত; JO | উল্লেখ্য, _<br>Bigot Averse Assuage<br>ক্রা
+          </div>
+        </div>
+      </article>
+
+      <!-- Q23 -->
+      <article class="q-card" id="q23" data-ans="3">
+        <div class="q-header">
+          <span class="q-num">২৩</span>
+          <h3 class="q-text">বাংলা সাহিত্যের প্রথম ইতিহাস গ্রন্থ কোনটি?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(23, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">বাঙ্গালা সাহিত্যের ইতিহাস</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(23, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">বাংলা সাহিত্যের কথা</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(23, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">বাংলা সাহিত্যের রূপকথা</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(23, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">বঙ্গভাষা ও সাহিত্য</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(23)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp23">
+          <div class="ans-tag">সঠিক উত্তর: বঙ্গভাষা ও সাহিত্য</div>
+          <div class="exp-content">
+            23. বাংলা সাহিত্যের প্রথম ইতিহাস গ্রন্থ কোনটি?<br>a) বাঙ্গালা সাহিত্যের ইতিহাস<br>৮) বাংলা সাহিত্যের কথা<br>০) বাংলা সাহিত্যের রূপকথা<br>d) বঙ্গভাষা ও সাহিত্য ১<br>দীনেশচন্দ্র সেন 'বঙ্গভাষা ও সাহিত্য' (১৮৯৬) এবং<br>“বৃহৎ বঙ্গ' (১৯৩৫) শুধু এই দুটি গ্রন্থের প্রণেতা তার রচিত<br>'বঙ্গভাষা ও সাহিত্য' বাংলা সাহিত্যের পূর্ণাঙ্গ ইতিহাস<br>রচনার ভিত্তি স্থাপন করেছে, আর 'বৃহৎ বঙ্গ' বাংলার<br>ইতিহাস ও সংস্কৃতির অনেক Repo অধ্যায়কে স্মৃতির<br>আলোতে নিয়ে এসেছে।
+          </div>
+        </div>
+      </article>
+
+      <!-- Q24 -->
+      <article class="q-card" id="q24" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">২৪</span>
+          <h3 class="q-text">&#x27;খয়ের খাঁ&#x27; বাগধারাটির অর্থ কী?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(24, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">মন্দভাগ্য</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(24, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">তুচ্ছপদার্থ</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(24, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">চাটুকার</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(24, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">নির্বোধ</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(24)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp24">
+          <div class="ans-tag">সঠিক উত্তর: চাটুকার</div>
+          <div class="exp-content">
+            “খয়ের খা' বাগধারার অর্থ 'চাটুকার'। “ইদুর<br>কপালে' বাগধারার অর্থ “নিতান্ত মন্দভাগ্য'। 'অকাল Fie<br>বাগধারার অর্থ 'অপদার্থ্য অকেজো'।<br>vocabulary
+          </div>
+        </div>
+      </article>
+
+      <!-- Q25 -->
+      <article class="q-card" id="q25" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">২৫</span>
+          <h3 class="q-text">The study of human race is-</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(25, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">Biology</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(25, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Anatomy</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(25, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Anthropology</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(25, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">Physiology</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(25)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp25">
+          <div class="ans-tag">সঠিক উত্তর: Anthropology</div>
+          <div class="exp-content">
+            Nii} Human race বা Mankind অর্থ মানবজাতি 1<br>Anatomy (অঙ্গব্যবছচ্ছেদ | Science of the structure of<br>বিদ্যা) animal bodies.<br>Physiology ( বজ্ঞান) Deals with the normal<br>functions of living organisms<br>and their parts.
+          </div>
+        </div>
+      </article>
+
+      <!-- Q26 -->
+      <article class="q-card" id="q26" data-ans="3">
+        <div class="q-header">
+          <span class="q-num">২৬</span>
+          <h3 class="q-text">“ট্রেন ঢাকা ছাড়ল” - এখানে &#x27;ঢাকা&#x27; কোন কারক?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(26, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">অধিকরণ</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(26, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">করণ</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(26, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">কর্তৃ</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(26, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">অপাদান</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(26)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp26">
+          <div class="ans-tag">সঠিক উত্তর: অপাদান</div>
+          <div class="exp-content">
+            যা থেকে বিচ্যুত, গৃহীত, জাত, বিরত, আরম্ভ,<br>রীভূত ও রক্ষিত হয় এবং যা দেখে কেউ ভীত হয়,<br>তাকেই অপাদান কারক বলে । যেমনঃ ট্রেন ঢাকা ছাড়ল |<br>কারকের নাম প্রদত্ত বাক্য<br>ৃ ছাত্ররা ক্রিকেট খেলে। জন্ম হোক যথা তথা কর্ম হোক ভালো।<br>সব লি BR | রাখাল গরুর পাল নিয়ে ব ফন<br>ক যাবো। এ সময় তার দেখা মেলা ভার। কি করি আজ<br>fom | Ee a rere |<br>স্টেশন ছাড়ে | সেই সুমুধুর স্তব্ধ দুপুর পাঠ পলায়ন।<br>টা<br>)28<br>৮৫০৫০ ocabulary
+          </div>
+        </div>
+      </article>
+
+      <!-- Q27 -->
+      <article class="q-card" id="q27" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">২৭</span>
+          <h3 class="q-text">Who said “The greatest remedy for anger is delay”?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(27, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">Calvin</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(27, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Socrates</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(27, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Seneca</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(27, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">Cicero</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(27)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp27">
+          <div class="ans-tag">সঠিক উত্তর: Seneca</div>
+          <div class="exp-content">
+            ‘The greatest remedy for anger is delay’<br>is a famous quote by the Roman Stoic<br>philosopher Seneca. It advises that pausing<br>before reacting to an infuriating situation<br>allows reason to replace impulse, preventing<br>regrettable actions.
+          </div>
+        </div>
+      </article>
+
+      <!-- Q28 -->
+      <article class="q-card" id="q28" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">২৮</span>
+          <h3 class="q-text">মেক্সিকো ও যুক্তরাষ্ট্রকে বিভক্তকারী সীমারেখা কোনটি?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(28, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">ডুরাউন্ড লাইন</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(28, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">ম্যাকনামারা লাইন</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(28, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">সনোরা লাইন</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(28, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">হিন্ডারবার্গ লাইন</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(28)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp28">
+          <div class="ans-tag">সঠিক উত্তর: সনোরা লাইন</div>
+          <div class="exp-content">
+            ভিয়েতনামের সীমান্তে নির্মিত বৈদ্যুতিক বেষ্টনী। দুই<br>ভিয়েতনাম এক হয়ে যাওয়ায় এখন আর এর অস্তিত্ব নেই।
+          </div>
+        </div>
+      </article>
+
+      <!-- Q29 -->
+      <article class="q-card" id="q29" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">২৯</span>
+          <h3 class="q-text">উপসর্গ কোনটি?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(29, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">চেয়ে</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(29, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">অতি</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(29, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">থেকে</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(29, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">দ্বারা</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(29)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp29">
+          <div class="ans-tag">সঠিক উত্তর: অতি</div>
+          <div class="exp-content">
+            a) চেয়ে ৮) অতি<br>০) থেকে d) দ্বারা ans. B<br>“অতি' একটি তৎসম Tol | তৎসম উপসর্গ<br>বিশটিঃ প্র, পরা, অপ, সম, নি, অনু, অব, নির, দুর,<br>বি, অধি, সু, Be, পরি, প্রতি, অতি, অপি, অভি, উপ,<br>আ।<br>Number
+          </div>
+        </div>
+      </article>
+
+      <!-- Q30 -->
+      <article class="q-card" id="q30" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">৩০</span>
+          <h3 class="q-text">Which one has the identical singular and plural form?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(30, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">memento</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(30, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">dozen</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(30, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">alumni</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(30, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">basis</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(30)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp30">
+          <div class="ans-tag">সঠিক উত্তর: dozen</div>
+          <div class="exp-content">
+            প্রশ্নে বলছে নিচের কোনটির Singular এবং<br>Plural রূপ অভিন্ন । Dozen এর Singular এবং<br>Plural form একই হয়। _<br>Singular Plural<br>জানার জন্যঃ Deer, sheep, swine, pice, corps,<br>offspring, series, species, aircraft, hovercraft,<br>speecraft, dice, public, chassis, dozen, gross,<br>score, hundred, thousand, million এদের<br>Singular এবং Plural একই রকম ATF |
+          </div>
+        </div>
+      </article>
+
+      <!-- Q31 -->
+      <article class="q-card" id="q31" data-ans="0">
+        <div class="q-header">
+          <span class="q-num">৩১</span>
+          <h3 class="q-text">&#x27;পর্বত&#x27; এর সমার্থক শব্দ কোনটি?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(31, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">ক্ষিতিধর</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(31, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">পর্বতমালা</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(31, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">গজানন</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(31, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">দশরথ</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(31)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp31">
+          <div class="ans-tag">সঠিক উত্তর: ক্ষিতিধর</div>
+          <div class="exp-content">
+            “পর্বত' শব্দের সমার্থক শব্দগুলো হলোঃ মহীধর,<br>ক্ষিতিধর, পাহাড়, গিরি, অচল, শৈল, ভূধর, of,<br>শিখরী , শৃঙ্গী, শৃঙ্গধর, TRY, THR, নগ।
+          </div>
+        </div>
+      </article>
+
+      <!-- Q32 -->
+      <article class="q-card" id="q32" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">৩২</span>
+          <h3 class="q-text">কোনটি সংখ্যা গণনা পদ্ধতি নয়?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(32, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">ডেসিমেল</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(32, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">অক্টাল</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(32, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">বিসিডি (BCD)</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(32, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">হেক্সাডেসিমেল</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(32)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp32">
+          <div class="ans-tag">সঠিক উত্তর: বিসিডি (BCD)</div>
+          <div class="exp-content">
+            দশমিক, বাইনারি, হেক্সাডেসিমেল এবং অকট্যাল<br>হলো প্রধান সংখ্যা পদ্ধতি।<br>-_ i
+          </div>
+        </div>
+      </article>
+
+      <!-- Q33 -->
+      <article class="q-card" id="q33" data-ans="0">
+        <div class="q-header">
+          <span class="q-num">৩৩</span>
+          <h3 class="q-text">a^3 - 9 + (a + 1)^3 রাশিটির একটি উৎপাদক (a - 1) হলে, অপর উৎপাদক কোনটি?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(33, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">2a^2 + 5a + 8</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(33, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">2a^2 - 5a + 8</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(33, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">2a^2 - 6a + 8</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(33, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">2a^2 + 5a - 8</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(33)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp33">
+          <div class="ans-tag">সঠিক উত্তর: 2a^2 + 5a + 8</div>
+          <div class="exp-content">
+            হলে, অপর উৎপাদক কোনটি?<br>3) 2027 5৫7 8 ৮)2৫2-5৫+8<br>c)2a*-6a+8 d)2a*+5a-8 ans. A<br>দেওয়া আছে, ৫১-9 + (a + 1)<br>= -9+a*+3a?+3a+1<br>ল2৫১-2027 502- 5৫ 7 8৫ - 8<br>=2a%a—1)+5a(a—1)+8(a—1)<br>=(a-1)(2a®+5a +8)<br>অর্থাৎ অপর উৎপাদক (202 + Sa + 8)
+          </div>
+        </div>
+      </article>
+
+      <!-- Q34 -->
+      <article class="q-card" id="q34" data-ans="3">
+        <div class="q-header">
+          <span class="q-num">৩৪</span>
+          <h3 class="q-text">&#x27;পরানের গহীন ভিতর&#x27; কাব্যগ্রন্থের রচয়িতা কে?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(34, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">শামসুর রাহমান</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(34, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">আলাওল</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(34, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">আল মাহমুদ</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(34, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">সৈয়দ শামসুল হক</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(34)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp34">
+          <div class="ans-tag">সঠিক উত্তর: সৈয়দ শামসুল হক</div>
+          <div class="exp-content">
+            'পরানের গহীন ভিতর' কাব্যের কবি হলেন সৈয়দ<br>শামসুল হক। সাহিত্যের এমন কোন শাখা নেই, যেখানে<br>তিনি সফল হয়নি | ৮১ বছরের জীবনে দুই শতাধিক বই<br>লিখেছেন তিনি। কবিতার বইয়ের সংখ্যাও অনেক।<br>FINGER মধ্যে আঞ্চলিক ভাষায় লেখা “পরানের<br>গহীন ভিতর' তুমুল আলোচিত বই | বইটি প্রথম প্রকাশ<br>পায় ১৯৮০ সালে |
+          </div>
+        </div>
+      </article>
+
+      <!-- Q35 -->
+      <article class="q-card" id="q35" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">৩৫</span>
+          <h3 class="q-text">&#x27;এলিফ্যান্ট পয়েন্ট&#x27; কোথায় অবস্থিত?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(35, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">ভোলা</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(35, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">কক্সবাজার</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(35, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">কুষ্টিয়া</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(35, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">চট্টগ্রাম</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(35)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp35">
+          <div class="ans-tag">সঠিক উত্তর: কক্সবাজার</div>
+          <div class="exp-content">
+            চুনতি বন্যপ্রাণী অভয়ারণ্যে নির্মিত হয়েছে এশিয়ার প্রথম<br>এলিফ্যান্ট ওভারপাস/ রেলওয়ে ওভারপাস। দোহাজারী-<br>কক্সবাজার রেললাইন এই অভয়ারণ্যের মাঝ দিয়ে যাওয়ায়<br>বন্যপ্রাণীর চলাচলে বাধা সৃষ্টি হচ্ছিল। তাই হাতিসহ<br>অন্যান্য বন্যপ্রাণীর নিরাপদ চলাচলের অন্য নির্মাণ করা হয়<br>একটি ৫০ মিটার দীর্ঘ ওভারপাস ও কয়েকটি আন্ডারপাস।<br>শতকরা
+          </div>
+        </div>
+      </article>
+
+      <!-- Q36 -->
+      <article class="q-card" id="q36" data-ans="3">
+        <div class="q-header">
+          <span class="q-num">৩৬</span>
+          <h3 class="q-text">০.৩ এর ২০% কত?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(36, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">০.০৪</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(36, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">০.০৮</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(36, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">০.৬</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(36, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">০.০৬</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(36)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp36">
+          <div class="ans-tag">সঠিক উত্তর: ০.০৬</div>
+          <div class="exp-content">
+            36. ০.৩ এর ২০% ল কত?<br>3৪) ০.০৪ ৮)০.০৮<br>c) od 0)০.০৬ ৫15. ])<br>০.৩ X — 2০.০৬ = 0.09%<br>I A
+          </div>
+        </div>
+      </article>
+
+      <!-- Q37 -->
+      <article class="q-card" id="q37" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">৩৭</span>
+          <h3 class="q-text">যে চতুর্ভুজের বিপরীত বাহুগুলো পরস্পর সমান ও সমান্তরাল তাকে কি বলে?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(37, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">ট্রাপিজিয়াম</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(37, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">সামান্তরিক</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(37, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">আয়তক্ষেত্র</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(37, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">রম্বস</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(37)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp37">
+          <div class="ans-tag">সঠিক উত্তর: সামান্তরিক</div>
+          <div class="exp-content">
+            ,C &D<br>29<br>যে চতুর্ভুজের বিপরীত বাহুগুলো পরস্পর সমান ও<br>সমান্তরাল, তাকে সামান্তরিক বলে।<br>যে চতুর্তুজের কোণ গুলো পরস্পর সমান এবং বাহুগুলো<br>অসমান (বিপরীত বাহুগুলো সমান ও সমান্তরাল) তাকে<br>আয়তক্ষেত্র বলে।<br>যে চতুর্তুজের বাহু গুলো সমান ও সমান্তরাল এবং<br>কোণগুলো সমকোন নয় তাকে রম্বস বলে।<br>যে চতুর্ভুজের বিপরীত দুটি বাহু সমান্তরাল কিন্তু অসমান<br>তাকে ট্রাপিজিয়াম বলে।
+          </div>
+        </div>
+      </article>
+
+      <!-- Q38 -->
+      <article class="q-card" id="q38" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">৩৮</span>
+          <h3 class="q-text">কোন কারণে দ্রব্যমূল্য বৃদ্ধি পায়?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(38, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">বাণিজ্য ঘাটতি</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(38, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">সরকারের ব্যয় সংকোচন</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(38, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">মুদ্রাস্ফীতি</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(38, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">তারল্য সংকট</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(38)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp38">
+          <div class="ans-tag">সঠিক উত্তর: মুদ্রাস্ফীতি</div>
+          <div class="exp-content">
+            কোন নিদিষ্ট সময়ে পণ্য-সেবার মূল্য টাকার অঙ্কে<br>বেড়ে গেলে অর্থনীতির ভাষায় তাকে মুদ্রাস্ষীতি বলা হয়।<br>সাধারণত পণ্যদ্রব্যের দাম বেড়ে গেলে স্থানীয় মুদ্রা দিয়ে<br>এ পণ্য ক্রয়ে বেশি পরিমাণ মুদ্রার প্রয়োজন কিংবা একই<br>পরিমাণ মুদ্রা দিয়ে আগের পরিমাণ পণ্য কিনতে গেলে<br>পরিমাণে কম পাওয়া যায়। সুতরাং মুদ্রাসক্ষীতির ফলে<br>মানুষের ক্রয় ক্ষমতা কমে যায়।
+          </div>
+        </div>
+      </article>
+
+      <!-- Q39 -->
+      <article class="q-card" id="q39" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">৩৯</span>
+          <h3 class="q-text">একটি সার্থক বাক্যের গুণ নয় কোনটি?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(39, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">আকাঙ্ক্ষা</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(39, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">অবসান</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(39, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">আসত্তি</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(39, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">যোগ্যতা</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(39)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp39">
+          <div class="ans-tag">সঠিক উত্তর: অবসান</div>
+          <div class="exp-content">
+            একটি সার্থক বাক্যের বৈশিষ্ট্য বা গুণ ৩টি।<br>এগুলো হলোঃ আকাঙ্ক্ষা (Expectancy), আসত্তি<br>(Proximity) এবং যোগ্যতা (Propriety) |<br>সংখ্যা
+          </div>
+        </div>
+      </article>
+
+      <!-- Q40 -->
+      <article class="q-card" id="q40" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">৪০</span>
+          <h3 class="q-text">√2 / (√6 + 2) এর মান কত?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(40, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">√3 + √2</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(40, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">√3 - 2</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(40, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">√3 - √2</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(40, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">√3 + 2</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(40)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp40">
+          <div class="ans-tag">সঠিক উত্তর: √3 - √2</div>
+          <div class="exp-content">
+            Solution: দেওয়া আছে, Az = 26-2)<br>Vora (Y6+2) (6-2)<br>_V2(f6-2) 2(\6-2) 12-22<br>(We) -(0)2 6-4 2<br>_2\3 : 02 _ A EL V2) _ NN<br>+=
+          </div>
+        </div>
+      </article>
+
+      <!-- Q41 -->
+      <article class="q-card" id="q41" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">৪১</span>
+          <h3 class="q-text">একক ব্যাসার্ধবিশিষ্ট বৃত্তের ক্ষেত্রফল কত?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(41, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">১ বর্গ একক</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(41, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">২ বর্গ একক</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(41, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">π বর্গ একক</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(41, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">π^2 বর্গ একক</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(41)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp41">
+          <div class="ans-tag">সঠিক উত্তর: π বর্গ একক</div>
+          <div class="exp-content">
+            কোনো বর্গের ব্যাসার্ধ ১ একক হলে<br>ক্ষেত্রফল হবে 70(১)২ = Xx d=T7
+          </div>
+        </div>
+      </article>
+
+      <!-- Q42 -->
+      <article class="q-card" id="q42" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">৪২</span>
+          <h3 class="q-text">“The Last Supper” চিত্রকর্মের শিল্পী কে?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(42, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">মাইকেল অ্যাঞ্জেলো</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(42, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">জয়নুল আবেদীন</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(42, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">লিওনার্দো দ্যা ভিঞ্চি</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(42, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">হোমার</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(42)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp42">
+          <div class="ans-tag">সঠিক উত্তর: লিওনার্দো দ্যা ভিঞ্চি</div>
+          <div class="exp-content">
+            লিওনার্দো দ্যা ভিঞ্চির বিখ্যাত কিছু শিল্পকর্মঃ<br>Mona Lisa, The Last Supper, Virgin of the<br>Rocks, Lady with an Ermine, The Vitruvian<br>Man, Salvator Mundi ইত্যাদি।<br>- বন্ধ 000
+          </div>
+        </div>
+      </article>
+
+      <!-- Q43 -->
+      <article class="q-card" id="q43" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">৪৩</span>
+          <h3 class="q-text">একটি বৃত্তের পরিধি ও ক্ষেত্রফল যথাক্রমে ১৩২ সেন্টিমিটার ও ১,৩৮৬ বর্গ সেন্টিমিটার। বৃত্তটির বৃহত্তম জ্যা এর দৈর্ঘ্য কত?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(43, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">৩৮ সে.মি.</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(43, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">৪২ সে.মি.</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(43, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">২১ সে.মি.</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(43, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">২২ সে.মি.</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(43)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp43">
+          <div class="ans-tag">সঠিক উত্তর: ৪২ সে.মি.</div>
+          <div class="exp-content">
+            43. একটি বৃত্তের পরিধি ও ক্ষেত্রফল যথাক্রমে ১৩২<br>সেন্টিমিটার ও ১,৩৮৬ বর্গ সেন্টিমিটার | বৃত্তটির বৃহত্তম<br>জ্যা এর দৈর্ঘ্য কত?<br>a) vy সে.মি. b) 83 সে.মি.<br>০)২১সে.মি. ৫) ২২ সে.মি. 05. B<br>বৃত্তের বৃহত্তম জ্যা হলো TPT, d = r= x ব্যাসার্ধ<br>বৃত্তের পরিধি = ২7০ এবং ক্ষেত্রফল = m2<br>যেহেতু বৃত্তের বৃহত্তম জ্যা অর্থাৎ ব্যাস ৫ = ২/ বের করতে<br>হবে। তাই বৃত্তের ক্ষেত্রফলকে পরিধি দিয়ে ভাগ করলেই<br>আপনি ব্যাসার্ধ পেয়ে যাবেন।<br>তন 702 ১৩৮৬<br>1: 5১৩৮৬,<br>= ২- ১৩২<br>Soo ৮7ল-১০.৫ সস ২ল-২১<br>... বৃত্তের বৃহত্তম জ্যা =I =r = x ২১ - ৪২<br>Gender
+          </div>
+        </div>
+      </article>
+
+      <!-- Q44 -->
+      <article class="q-card" id="q44" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">৪৪</span>
+          <h3 class="q-text">Which of the word can be used as masculine and feminine?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(44, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">gander</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(44, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">spinster</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(44, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">spouse</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(44, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">actor</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(44)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp44">
+          <div class="ans-tag">সঠিক উত্তর: spouse</div>
+          <div class="exp-content">
+            Noun পুংবাচক বা স্ত্রীবাচক উভয়কে বুঝালে<br>Common/ Neutral gender হয়। যেমনঃ Friend,<br>people, orphan, student, cousin, doctor, thief,<br>infant, they ইত্যাদি |
+          </div>
+        </div>
+      </article>
+
+      <!-- Q45 -->
+      <article class="q-card" id="q45" data-ans="0">
+        <div class="q-header">
+          <span class="q-num">৪৫</span>
+          <h3 class="q-text">স্ট্যানলি ও লিভিংস্টোন দুইটি-</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(45, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">বিখ্যাত জলপ্রপাত</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(45, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">বিখ্যাত নদী</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(45, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">বিখ্যাত গিরিপথ</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(45, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">বিখ্যাত শহর</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(45)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp45">
+          <div class="ans-tag">সঠিক উত্তর: বিখ্যাত জলপ্রপাত</div>
+          <div class="exp-content">
+            স্ট্যানলি ও লিভিংস্টোন মূলত বিখ্যাত অভিযাত্রী<br>হেনরি মর্টন স্ট্যানলি এবং ডেভিড লিভিংস্টোনের<br>নামানুসারে নামকরণ করা দুটি বিখ্যাত জলপ্রপাত। এই<br>জলপ্রপাতগুলো আফ্রিকা মহাদেশের কঙ্গো নদীতে<br>অবস্থিত এবং তাদের নামগুলো ১৮৭১ সালে<br>লিভিংস্টোনকে খুঁজে বের করার অভিযানের সাথে যুক্ত।
+          </div>
+        </div>
+      </article>
+
+      <!-- Q46 -->
+      <article class="q-card" id="q46" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">৪৬</span>
+          <h3 class="q-text">ডিজিটাল মুদ্রার উদাহরণ কোনটি?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(46, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">বন্ড</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(46, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">বিটকয়েন</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(46, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">ক্রেডিট কার্ড</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(46, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">সবগুলোই</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(46)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp46">
+          <div class="ans-tag">সঠিক উত্তর: বিটকয়েন</div>
+          <div class="exp-content">
+            a) মিশ্র বাক্য b) বিটকয়েন<br>০) ক্রেডিট কার্ড 0) সবগুলোই ~~ ans. B<br>সাতোশি নাকামোতো ২০০৮ সালে 'বিটকয়েন'<br>আবিষ্কার করেন। বিটকয়েনের লেনদেন হয় পিয়ার টু<br>পিয়ার বা গ্রাহক থেকে গ্রাহকের কম্পিউটারে বা<br>মোবাইলে ৷ বিটকয়েনের সমস্ত প্রক্রিয়া সম্পন্ন হয়<br>অনলাইনের একটি উন্মুক্ত সোর্স সফটওয়্যারের মাধ্যমে<br>অথবা কোন ওয়েব সাইটের মাধ্যমে |<br>)30
+          </div>
+        </div>
+      </article>
+
+      <!-- Q47 -->
+      <article class="q-card" id="q47" data-ans="0">
+        <div class="q-header">
+          <span class="q-num">৪৭</span>
+          <h3 class="q-text">“যদি বৃষ্টি হয়, তবে বের হবে না” এটি কোন ধরনের বাক্য?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(47, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">মিশ্র বাক্য / জটিল বাক্য</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(47, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">যৌগিক বাক্য</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(47, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">ভাববাচ্য বাক্য</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(47, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">সরল বাক্য</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(47)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp47">
+          <div class="ans-tag">সঠিক উত্তর: মিশ্র বাক্য / জটিল বাক্য</div>
+          <div class="exp-content">
+            47. “যদি বৃষ্টি হয়, তবে বের হবে না' এটি কোন ধরনের<br>বাক্য?<br>a) মিশ্র বাক্য ৮) যৌগিক বাক্য<br>০) জটিল বাক্য 0) সরল বাক্য৫715. A & C<br>যে বাক্যে প্রধান খণ্ডবাক্যের অধীন এক বা একের<br>বেশি অপ্রধান খণ্ডবাক্য থাকে বা একটি প্রধান খণ্ডবাক্যের<br>এক বা একাধিক আশ্রিত বাক্য পরস্পর সাপেক্ষভাবে<br>ব্যবহৃত হয়, তাকে জটিল বাক্য বলে। জটিল বাক্যের<br>BL<br>মিশ্র বা জটিল বাক্য আশ্রিত বাক্য প্রধান খণ্ডবাক্য<br>anaes<br>তাকে সবাই শ্রদ্ধা করে। করেন, করে।<br>লাভ করে।<br>মুখ দেখেই বুঝেছি। করেছে, বুঝেছি।<br>spelling
+          </div>
+        </div>
+      </article>
+
+      <!-- Q48 -->
+      <article class="q-card" id="q48" data-ans="3">
+        <div class="q-header">
+          <span class="q-num">৪৮</span>
+          <h3 class="q-text">Select the correct spelling of the word.</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(48, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">Affedevit</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(48, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Afidevit</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(48, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Affidevit</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(48, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">Affidavit</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(48)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp48">
+          <div class="ans-tag">সঠিক উত্তর: Affidavit</div>
+          <div class="exp-content">
+            Affidavit অর্থ হলফনামা; শপথপত্র।<br>Translation
+          </div>
+        </div>
+      </article>
+
+      <!-- Q49 -->
+      <article class="q-card" id="q49" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">৪৯</span>
+          <h3 class="q-text">Translate into English: &#x27;ফুলটি ফুটি ফুটি করেও ফুটলো না&#x27;</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(49, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">The flower is about to bloom but did not bloom.</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(49, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">The flower was about to bloom but did not bloom.</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(49, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">The flower is about to blooming but did not bloom.</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(49, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">None of the above</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(49)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp49">
+          <div class="ans-tag">সঠিক উত্তর: The flower was about to bloom but did not bloom.</div>
+          <div class="exp-content">
+            nto English: ফুলটি ফুটি ফুটি করেও<br>ফুটলো না<br>a) The flower is about to bloom but did not<br>bloom.<br>b) The flower was about to bloom but did<br>not bloom.<br>০) The flower is about to blooming but did<br>not bloom.<br>d) None of the above ans. B<br>অতীত কালে কোনে কাজ প্রায় সম্পন্ন হতে গিয়েও<br>হয়নি এমন বোঝাতে “was/were about to” ব্যবহৃত হয়।<br>vocabulary
+          </div>
+        </div>
+      </article>
+
+      <!-- Q50 -->
+      <article class="q-card" id="q50" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">৫০</span>
+          <h3 class="q-text">A person whose head is in the clouds is-</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(50, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">a proud person</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(50, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">a day dreamer</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(50, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">an aviator</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(50, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">a pilot</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(50)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp50">
+          <div class="ans-tag">সঠিক উত্তর: a day dreamer</div>
+          <div class="exp-content">
+            Day dreamer অর্থ যে দিবা স্বপ্ন দেখে। এই<br>Day dreamer কে ইংরেজি ‘Have one’s head in<br>the cloud’ phrase টি দ্বারা Replace করা যায় যার<br>অর্থ অলীক; কাল্পনিক (Proud অর্থ গর্বিত; মর্যাদাবান।<br>Aviator অর্থ বিমান, নভযান বা বেলুনের চালক;<br>বৈমানিক | Insane অর্থ পাগল |
+          </div>
+        </div>
+      </article>
+
+      <!-- Q51 -->
+      <article class="q-card" id="q51" data-ans="0">
+        <div class="q-header">
+          <span class="q-num">৫১</span>
+          <h3 class="q-text">&#x27;নিজেকে জানো&#x27; (Know Thyself) উক্তিটি কার?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(51, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">সক্রেটিস</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(51, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">প্লেটো</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(51, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">অ্যারিস্টটল</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(51, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">হেরাক্লিটাস</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(51)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp51">
+          <div class="ans-tag">সঠিক উত্তর: সক্রেটিস</div>
+          <div class="exp-content">
+            a) EBT b) প্লেটো<br>০) এরিস্টটল 0) হেরাক্লিয়াস ans. A<br>“Know Thyself” (নিজেকে জানো) এই<br>উক্তিটি বিখ্যাত গ্রিক দার্শনিক ও দর্শনশান্তের জনক<br>সত্রেটিসের উক্তি | তার আরও কিছু উক্তি সমূহ:<br>০১. “Knowledge is virtue” (জ্ঞান হয় পূণ্য) |<br>০২. মানুষের আসল সৌন্দর্য হচ্ছে তার জ্ঞান<br>০৩. অন্যায় করে লজ্জিত না হওয়া আরেকটি অন্যায়।<br>০৪. বিস্ময় হলো জ্ঞানের শুরু |<br>লসা.গু AAS.
+          </div>
+        </div>
+      </article>
+
+      <!-- Q52 -->
+      <article class="q-card" id="q52" data-ans="3">
+        <div class="q-header">
+          <span class="q-num">৫২</span>
+          <h3 class="q-text">পরপর তিনটি ক্রমিক সংখ্যার গুণফল ১২০ হলে, তাদের যোগফল কত?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(52, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">৯</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(52, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">১৪</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(52, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">১২</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(52, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">১৫</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(52)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp52">
+          <div class="ans-tag">সঠিক উত্তর: ১৫</div>
+          <div class="exp-content">
+            পরপর সংখ্যা তিনটি (x — 1), x, (x + 1) হলে<br>সংখ্যা তিনটির যোগফল = (x— 1) +x + (x + 1) =3x<br>প্রশ্নমতে, (x— 1) x (x +1)=120<br>= x(x?-1)-120=0<br>= x3-x-120=0<br>= x-52+5x2-25x+24x-120=0<br>= x%(x-5)+5x(x=5)+24 (x-5)=0<br>= (x2+5x+24)(x-5)=0 nL x=5<br>.:. তাদের যোগফল =3x=3x5=15
+          </div>
+        </div>
+      </article>
+
+      <!-- Q53 -->
+      <article class="q-card" id="q53" data-ans="3">
+        <div class="q-header">
+          <span class="q-num">৫৩</span>
+          <h3 class="q-text">জ্বালানি তেল উৎপাদনে শীর্ষ দেশ কোনটি?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(53, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">সৌদি আরব</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(53, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">রাশিয়া</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(53, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">ইরাক</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(53, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">যুক্তরাষ্ট্র</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(53)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp53">
+          <div class="ans-tag">সঠিক উত্তর: যুক্তরাষ্ট্র</div>
+          <div class="exp-content">
+            a) সৌদি আরব b) রাশিয়া<br>০) ইরাক 0) যুক্তরাষ্ট্র ১<br>আপডেট তথ্য পরিবর্তনশীল প্রশ্ন পার্টে দেখুন।<br>সংখ্যা
+          </div>
+        </div>
+      </article>
+
+      <!-- Q54 -->
+      <article class="q-card" id="q54" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">৫৪</span>
+          <h3 class="q-text">একটি নতুন খাটের মূল্য ৩,০০০ টাকা। প্রতি বছর শেষে খাটটির মূল্য পূর্বতন মূল্যের ৩/৫ দাঁড়ায়। ৩য় বছর শেষে খাটটির মূল্য কত হবে?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(54, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">১,৮০০ টাকা</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(54, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">৬৪৮ টাকা</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(54, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">১,২৮০ টাকা</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(54, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">৭৪৮ টাকা</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(54)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp54">
+          <div class="ans-tag">সঠিক উত্তর: ৬৪৮ টাকা</div>
+          <div class="exp-content">
+            ১ম বছর শেষে খাটের মূল্য হবে<br>5 ৩,০০০ এর = 5১,৮০০ টাকা<br>... ২য় বছর শেষে খাটের মূল্য হবে<br>2১,৮০০ এর = 25১,০৮০ টাকা<br>... ৩য় বছর শেষে খাটের মূল্য হবে<br>25১,০৮০ এর = = ৬৪৮ টাকা
+          </div>
+        </div>
+      </article>
+
+      <!-- Q55 -->
+      <article class="q-card" id="q55" data-ans="0">
+        <div class="q-header">
+          <span class="q-num">৫৫</span>
+          <h3 class="q-text">কোন বানানটি শুদ্ধ?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(55, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">কনীনিকা</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(55, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">কণিনীকা</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(55, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">কনিনিকা</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(55, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">কণিনিকা</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(55)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp55">
+          <div class="ans-tag">সঠিক উত্তর: কনীনিকা</div>
+          <div class="exp-content">
+            'কনীনিকা' বিশেষ্য পদ। এর অর্থ হলো চোখের<br>তারা, চোখের মণি, কনিষ্ঠা আঙ্গুল, কনিষ্ঠ বোন।<br>31
+          </div>
+        </div>
+      </article>
+
+      <!-- Q56 -->
+      <article class="q-card" id="q56" data-ans="0">
+        <div class="q-header">
+          <span class="q-num">৫৬</span>
+          <h3 class="q-text">গণপ্রজাতন্ত্রী বাংলাদেশের রাষ্ট্রীয় মনোগ্রামে কতটি তারকা চিহ্ন রয়েছে?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(56, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">৪টি</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(56, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">৬টি</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(56, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">৭টি</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(56, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">৮টি</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(56)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp56">
+          <div class="ans-tag">সঠিক উত্তর: ৪টি</div>
+          <div class="exp-content">
+            বাংলাদেশের রাষ্ট্রীয় মনোগ্রামে লাল রঙের বৃত্তের<br>মাঝে হলুদ রঙের বাংলাদেশের মানচিত্র। বৃত্তের ওপর<br>দিকে লেখা "গণপ্রজাতন্ত্রী বাংলাদেশ', নিচে লেখা 'সরকার'<br>এবং বৃত্তের দুপাশে দুটি করে মোট ৪টি তারকা।<br>বাংলাদেশের মনোগ্রাম সরকারি অফিস, নথি, স্মারক,<br>চিঠিপত্র এবং বিজ্ঞপ্তিতে ব্যবহৃত হয়। এই মনোগ্রামের<br>ডিজাইনার এ. এন. সাহা।<br>spelling
+          </div>
+        </div>
+      </article>
+
+      <!-- Q57 -->
+      <article class="q-card" id="q57" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">৫৭</span>
+          <h3 class="q-text">Identify the correct spelling.</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(57, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">Colateral</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(57, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Colaterral</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(57, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Collateral</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(57, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">Colatteral</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(57)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp57">
+          <div class="ans-tag">সঠিক উত্তর: Collateral</div>
+          <div class="exp-content">
+            Collateral অর্থ একই উৎসজাত দ্বিতীয় পর্যায়ের;<br>পাশাপাশি; সহগামী; অতিরিক্ত ।<br>Idiom phrase
+          </div>
+        </div>
+      </article>
+
+      <!-- Q58 -->
+      <article class="q-card" id="q58" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">৫৮</span>
+          <h3 class="q-text">“Once in a blue moon” means-</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(58, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">always</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(58, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">very rarely</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(58, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">nearly</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(58, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">hourly</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(58)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp58">
+          <div class="ans-tag">সঠিক উত্তর: very rarely</div>
+          <div class="exp-content">
+            always b) very rarely<br>০) nearly d) hourly ans. B<br>Once in a blue moon এটি একটি Phrase<br>যার অর্থ হলো কদাচিৎ কালেভদ্রে। যেমনঃ He comes<br>here once in a blue moon<br>vocabulary
+          </div>
+        </div>
+      </article>
+
+      <!-- Q59 -->
+      <article class="q-card" id="q59" data-ans="0">
+        <div class="q-header">
+          <span class="q-num">৫৯</span>
+          <h3 class="q-text">Itinerary means-</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(59, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">Plan of journey</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(59, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">List of items to be discussed in a meeting</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(59, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Record of events occurred in a day</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(59, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">List of event in fixed time</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(59)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp59">
+          <div class="ans-tag">সঠিক উত্তর: Plan of journey</div>
+          <div class="exp-content">
+            Plan of journey<br>b) List of items to be discussed in a meeting<br>০) Record of events occurred in a day<br>d) List of event in fixed time ans. A<br>Itinerary অর্থ ভ্রমণের পরিকল্পনা যাকে Plan of<br>journey বলা যায়। কিন্তু, List of items to be<br>discussed in a meeting অর্থ মিটিংয়ের আলোচ্যসূচি।<br>Record of events occurred in a day অর্থ একদিনে<br>সংঘটিত ঘটনার @F | List of event in a fixed<br>time অর্থ একটি নির্দিষ্ট সময়ে সংঘটিত গুরুত্বপূর্ণ ঘটনার<br>তালিকা।<br>Number
+          </div>
+        </div>
+      </article>
+
+      <!-- Q60 -->
+      <article class="q-card" id="q60" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">৬০</span>
+          <h3 class="q-text">Choose the plural number.</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(60, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">News</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(60, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Physics</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(60, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Syllabi</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(60, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">Girl</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(60)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp60">
+          <div class="ans-tag">সঠিক উত্তর: Syllabi</div>
+          <div class="exp-content">
+            বিভিন্ন ভাষা থেকে ইংরেজি ভাষায় Foreign<br>plural নিজেদের স্থান দখল করে নিয়েছে এবং বর্তমানে<br>_এরা ইংরেজি ভাষার SRR RT<br>Singular অর্থ Plural<br>__ ০0995. মরুদ্যান Oascs
+          </div>
+        </div>
+      </article>
+
+      <!-- Q61 -->
+      <article class="q-card" id="q61" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">৬১</span>
+          <h3 class="q-text">কাজী নজরুল ইসলামের &#x27;দারিদ্র্য&#x27; কবিতাটি কোন কাব্যের অন্তর্ভুক্ত?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(61, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">অগ্নিবীণা</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(61, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">বিষের বাঁশী</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(61, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">সিন্ধু হিন্দোল</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(61, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">প্রলয়শিখা</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(61)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp61">
+          <div class="ans-tag">সঠিক উত্তর: সিন্ধু হিন্দোল</div>
+          <div class="exp-content">
+            'দারিদ্র্য' কবিতাটি কাজী নজরুল ইসলামের Brg<br>হিন্দোল' (১৯২৭) কাব্যের বিখ্যাত কবিতা wl’ | এটি<br>উৎসর্গ করেন হাবীবুল্লাহ বাহার ও শামসুন্নাহার<br>মাহমুদকে |
+          </div>
+        </div>
+      </article>
+
+      <!-- Q62 -->
+      <article class="q-card" id="q62" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">৬২</span>
+          <h3 class="q-text">গ্রীনল্যান্ড কোন মহাদেশে অবস্থিত?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(62, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">এশিয়া</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(62, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">উত্তর আমেরিকা</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(62, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">দক্ষিণ আমেরিকা</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(62, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">ওশেনিয়া</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(62)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp62">
+          <div class="ans-tag">সঠিক উত্তর: উত্তর আমেরিকা</div>
+          <div class="exp-content">
+            ০) দক্ষিণ আমেরিকা 0) ওশেনিয়া ans.B<br>ডেনমার্কের স্ব-নিয়ন্ত্রিত অঞ্চল হিসেবে স্বীকৃত<br>খ্রীনল্যান্ড। তবে ভৌগোলিকভাবে এটি উত্তর আমেরিকা<br>মহাদেশে অবস্থিত।<br>- খারা
+          </div>
+        </div>
+      </article>
+
+      <!-- Q63 -->
+      <article class="q-card" id="q63" data-ans="0">
+        <div class="q-header">
+          <span class="q-num">৬৩</span>
+          <h3 class="q-text">৭, ১১, ১২, ১৪, ১৭, ১৭, ২২, ? প্রশ্নবোধক স্থানে কোন সংখ্যাটি বসবে?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(63, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">২০</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(63, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">২২</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(63, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">২৪</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(63, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">২৭</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(63)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp63">
+          <div class="ans-tag">সঠিক উত্তর: ২০</div>
+          <div class="exp-content">
+            প্রদত্ত প্রশ্নে দুটি ধারা আছে<br>প্রথম 5৭, ১২, ১৭ এবং ২২<br>দ্বিতীয় 2 ১১, ১৪ এবং ১৭<br>প্রথমটিতে,১২ -৭-৫ আর দ্বিতয়টিতে,<br>১২-১২-৫ ১ ১৪-১১-৩<br>১১৭০-১২-০৫ ১ ১৭-১৪-৩<br>. ২২-১৭০৫<br>.. ধারাটির পরের পদ - ১৭ + ৩ - ২০<br>সংখ্যা
+          </div>
+        </div>
+      </article>
+
+      <!-- Q64 -->
+      <article class="q-card" id="q64" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">৬৪</span>
+          <h3 class="q-text">সংখ্যাগুলোর মধ্যক নির্ণয় করুনঃ ২৩, ১১, ২৫, ১৫, ২১, ১২, ১৭, ১৮, ২২, ২৭, ২৯, ৩০, ২৬, ১৯</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(64, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">২০</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(64, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">২০.৫</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(64, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">২১.৫</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(64, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">২৪</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(64)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp64">
+          <div class="ans-tag">সঠিক উত্তর: ২১.৫</div>
+          <div class="exp-content">
+            প্রথমেই সংখ্যাগুলোকে ক্রমানুযায়ী সাজাই<br>এখানে, n= ১৪<br>১ ৪১৪ ু ১১<br>* FE ১২<br>n ১৫<br>এবং +S 3<br>ল৭+১ল৮ বব<br>oo মধ্যমা = 9 এবং ৮তম পদের গাণিতিক গড় x<br>_২১+২২ ২২<br>TR ২৩<br>89 W<br>5 ২-২১:৫ ২৭<br>5 W<br>.. নির্ণয় মধ্যমা ২১.৫ ne<br>)32
+          </div>
+        </div>
+      </article>
+
+      <!-- Q65 -->
+      <article class="q-card" id="q65" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">৬৫</span>
+          <h3 class="q-text">নিচের কোনটি আন্তঃনগর ট্রেন নয়?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(65, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">সুবর্ণ এক্সপ্রেস</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(65, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">চট্টগ্রাম মেইল ট্রেন</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(65, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">তিস্তা এক্সপ্রেস</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(65, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">পদ্মা এক্সপ্রেস</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(65)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp65">
+          <div class="ans-tag">সঠিক উত্তর: চট্টগ্রাম মেইল ট্রেন</div>
+          <div class="exp-content">
+            উপরে উল্লিখিত অপশনগুলোর মধ্যে তিস্তা এক্সপ্রেস<br>এবং পদ্মা এক্সপ্রেস যথাক্রমে কমলাপুর থেকে জামালপুর,<br>কমলাপুর থেকে রাজশাহী অভীমুখে যাত্রা করে। সুবর্ণ<br>এক্সপ্রেস নামে কমলাপুর থেকে চট্টগ্রামে যাতায়াত করে।
+          </div>
+        </div>
+      </article>
+
+      <!-- Q66 -->
+      <article class="q-card" id="q66" data-ans="3">
+        <div class="q-header">
+          <span class="q-num">৬৬</span>
+          <h3 class="q-text">&#x27;রাত্রিকালীন যুদ্ধ&#x27; কে এক কথায় কি বলে?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(66, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">সূর্ব্ণ</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(66, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">নৈশরণ</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(66, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">দ্বৈরথ</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(66, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">সৌপ্তিক</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(66)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp66">
+          <div class="ans-tag">সঠিক উত্তর: সৌপ্তিক</div>
+          <div class="exp-content">
+            াত্রিকালীন যুদ্ধ = সৌস্তিক।<br>English literature
+          </div>
+        </div>
+      </article>
+
+      <!-- Q67 -->
+      <article class="q-card" id="q67" data-ans="2">
+        <div class="q-header">
+          <span class="q-num">৬৭</span>
+          <h3 class="q-text">Which period of English literature is the Barren age?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(67, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">1350-1400</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(67, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">1066-1350</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(67, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">1400-1485</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(67, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">1800-1845</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(67)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp67">
+          <div class="ans-tag">সঠিক উত্তর: 1400-1485</div>
+          <div class="exp-content">
+            Periods of English Literature<br>450-1066 | Anglo-Saxon Period or Old English Period |
+          </div>
+        </div>
+      </article>
+
+      <!-- Q68 -->
+      <article class="q-card" id="q68" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">৬৮</span>
+          <h3 class="q-text">&#x27;সন্ধি&#x27; ব্যাকরণের কোন অংশে আলোচিত হয়?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(68, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">ভাষাতত্ত্ব</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(68, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">ধ্বনিতত্ত্ব</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(68, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">রূপতত্ত্ব</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(68, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">বাক্যতত্ত্ব</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(68)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp68">
+          <div class="ans-tag">সঠিক উত্তর: ধ্বনিতত্ত্ব</div>
+          <div class="exp-content">
+            বাংলা ব্যাকরণের আলোচ্য বিষয়ঃ<br>বিষয় আলোচ্য বিষয়<br>রূপতত্ত AGT, পুরুষ, অ |<br>বাক্যতত্ত্ব বা বাক্যের গঠন প্রণালী , বাক্যের ff প্‌ র সংযোজন ও<br>পরিমিতি
+          </div>
+        </div>
+      </article>
+
+      <!-- Q69 -->
+      <article class="q-card" id="q69" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">৬৯</span>
+          <h3 class="q-text">একটি আয়তক্ষেত্রের কর্ণের দৈর্ঘ্য ১৫ মিটার এবং প্রস্থ ১০ মিটার হলে আয়তক্ষেত্রের ক্ষেত্রফল কত বর্গমিটার?</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(69, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">৩০√২</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(69, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">৫০√৫</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(69, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">৪০√১</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(69, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">৫০√৬</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(69)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp69">
+          <div class="ans-tag">সঠিক উত্তর: ৫০√৫</div>
+          <div class="exp-content">
+            69. একটি আয়তক্ষেত্রের কর্ণের দৈর্ঘ্য ১৫ মিটার এবং প্রস্থ ১০<br>মিটার হলে আয়তক্ষেত্রের ক্ষেত্রফল কত বর্গমিটার?<br>a) ৩০৬২ ৮) ৫০৬৫<br>০) ৪০৬১ d) ৫০৬৬ ৫715. B<br>আপনাকে একটি আয়তক্ষেত্রের দৈর্ঘ্য বা প্রস্থের<br>যেকোন একটি দেয়া থাকবে। এর সাথে আয়তক্ষেত্রটির<br>কর্ণের দৈর্ঘ্যও দেয়া থাকবে। আপনি আয়তক্ষেত্রটির<br>ক্ষেত্রফল বের করবেন।<br>প্রয়োজনীয় সূত্রঃ আয়তক্ষেত্রের দৈর্ঘ্য ৫ এবং প্রস্থ ZT<br>আয়তক্ষেত্রের ক্ষেত্রফল ৫ x b এবং<br>কর্ণের দৈর্ঘ্য - Ja? + 5<br>বিস্তারিত সমাধানঃ ধরি, আয়তক্ষেত্রের দৈর্ঘ্য ৫ মিটার<br>এবং প্রস্থ b মিটার<br>আমরা জানি, আয়তক্ষেত্রের কর্ণের A =a? + ৮<br>তাহলে, Va? + b= 15<br>= (3 (102) = (15)? [বর্গ করে]<br>= a*+100=225<br>= a?*=225-100<br>= a?=125 _<br>=> a=\5x25<br>= a=+5x(52<br>এ ৫ল 5\5 পপ<br>অতএব, আয়তক্ষেত্রের ক্ষেত্রফল হবে<br>৫১৪-5৬5 ১ 10 55045.<br>Shortcut সমাধানঃ সূত্রঃ আয়তক্ষেত্রের ক্ষেত্রফল<br>স দৈর্ঘ্য « প্র = কেন -(ছ) x প্রন<br>দৈর্ঘ্য মক্ণৌং-দেঘথ্য)ং<br>Shortcut সমাধানঃ ক্ষেত্রফল = N&O: - (=m) প্রস্থ<br>-৭৬0৫)১২-(০০)২ x So = ৫০৬৫.
+          </div>
+        </div>
+      </article>
+
+      <!-- Q70 -->
+      <article class="q-card" id="q70" data-ans="1">
+        <div class="q-header">
+          <span class="q-num">৭০</span>
+          <h3 class="q-text">A broad road bordered with trees is called-</h3>
+        </div>
+        <div class="opts-grid">
+          <button type="button" class="opt-btn" onclick="checkAns(70, 0)">
+            <span class="opt-prefix">(ক)</span>
+            <span class="opt-text">Boudoir</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(70, 1)">
+            <span class="opt-prefix">(খ)</span>
+            <span class="opt-text">Boulevard</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(70, 2)">
+            <span class="opt-prefix">(গ)</span>
+            <span class="opt-text">Avenue</span>
+          </button>
+          <button type="button" class="opt-btn" onclick="checkAns(70, 3)">
+            <span class="opt-prefix">(ঘ)</span>
+            <span class="opt-text">Facade</span>
+          </button>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="toggle-exp-btn" onclick="toggleExp(70)">ব্যাখ্যা দেখুন ▾</button>
+        </div>
+        <div class="exp-drawer" id="exp70">
+          <div class="ans-tag">সঠিক উত্তর: Boulevard</div>
+          <div class="exp-content">
+            Solution অর্থ অর্থ । উল্লেখ্য,<br>Boulevard | দুই পাশের বৃক্ষরাজি শোভিত প্রশস্ত রাস্ত বলে।<br>Avenue শহরের ভেতর দিয়ে যাওয়া একটি FR, সোজা এবং<br>৷<br>থাকে তাকে Avenue IC |<br>33<br>সংখ্যা<br>10. একটি বাশের 2 অংশ কাদায়, = অংশ পানিতে এবং ৬<br>হাত পানির উপরে আছে। If কত হাত লম্বা?<br>a) bo হাত b) ৭৫ হাত<br>০) ৭০ হাত d) ৯০ হাত ৫15. ])<br>ধরি, সম্পূর্ণ বাশটির দৈর্ঘ্য - x মিটার<br>.. কাদায় আছে উ অংশ; পানিতে আছে খু অংশ<br>HE, x — 5 — BN =v<br>@x + 5x)<br>= X= ( Se ) =v<br>১৪:<br>= x-— ১৫- ৬<br>Sex - 38x<br>> Te =v<br>Xx<br>= =<br>J. X=050<br>11. নাড়ী অর্থ শিরা; নারী অর্থ কীঃ?<br>৪) পানি b) f=<br>০)পারিনা _ 0) খড়ের শেষাংশ _ans. B<br>মূল শব্দ EC নাডী<br>মহিলা, রমণী, অবলা, স্ত্রীলোক,<br>শব্দ কামিনী, A, অঙ্গনা, ভামিনী ধমনী<br>English literature<br>12. Who is known as Lake poet?<br>a) Shelly b) William Wordsworth<br>c) Lord Byron d) Jhon Keats ans.B<br>William Wordsworth হলেন Romantic<br>যুগের সবচেয়ে প্রতিভাবান কবি। তিনি French<br>Revolution দ্বারা অনুপ্রাণিত হয়েছিলেন | তাকে ‘The<br>Poet of Nature’, ‘A Lake Poet’, ‘Poet of<br>Childhood’ বলা হয়।<br>13. কোন সংখ্যাকে সাহায্যকারী সংখ্যা বলা হয়?<br>a)o b) So<br>০)৯ 0)৩ ans. A<br>গণিতে শূন্য (০) সংখ্যাকে 'সাহায্যকারী সংখ্যা' বা<br>সাহায্যকারী অঙ্ক (Helper Digit) বলা হয়। কারণ এটি<br>স্থানিক মান পদ্ধতি (Place-value system). যেমনঃ<br>দশমিক পদ্ধতিতে সংখ্যাকে সঠিকভাবে প্রকাশ করতে<br>সাহায্য করে (যেমনঃ ১০, ১০০) এবং খণাত্মক ও জটিল<br>সংখ্যা ধারণার বিকাশে গুরুত্বপূর্ণ ভূমিকা রাখে।<br>14. বাংলা সাহিত্যের অবক্ষয় যুগ কোনটি?<br>a) ১৭৫০-১৮৫০ ৮) ১৭৬০-১৮৬০<br>০) ১৯০০-১৯৫০ 0) ১৯৫১-২০০০ ans. চু<br>বাংলা সাহিত্যের অবক্ষয় যুগ বা যুগসন্ধিক্ষণ হলো<br>আঠারো শতকের শেষার্ধ থেকে উনিশ শতকের মধ্যভাগ,<br>যা মূলত ১৭৬০ থেকে ১৮৬০ সাল পর্যন্ত সময়কালকে<br>বোঝায়। এটি মধ্যযুগ ও আধুনিক যুগের সঙন্ধিক্ষণ, যেখানে<br>ভারতচন্দ্র রায়গুণাকরের মৃত্যু (১৭৬০) থেকে মাইকেল<br>মধুসূদন দত্তের আবির্ভাবের পূর্ব পর্যন্ত সময়টি মৌলিক<br>সাহিত্যিক সৃষ্টির অভাবে এবং অনুকরণপ্রবণতার কারণে<br>অবক্ষয় বা "প্রায় শূন্যতার যুগ' হিসেবে পরিচিত |<br>vocabulary<br>15. The meaning of ‘posterity’ is-<br>a) Prosperity b) Present Time<br>c) Later Generation 0) Possession ans. C<br>Posterity অর্থ ভবিষ্যৎ প্রজন্ম পরম্পরা; পূর্ব<br>পুরুষ। কিন্তু, Prosperity অর্থ উন্নতি; সাফল্য ।<br>Possession অর্থ অধিকার; দখল; স্বত্ব ।<br>16. কোন জিনিসের TE বিক্রয়মূল্যের £ ভাগ হলে<br>শতকরা লাভের হার কত?<br>3) ২০% ৮) ২৫%<br>০) 80% d) ৫০% ans. B<br>ধরি, ক্রয়মূল্য 8 টাকা এবং বিক্রুয়মূল্য ৫ টাকা<br>so লাভল৫-৪-১টাকা<br>.. শতকরা লাভ = ( 2 x ১০০) % -২৫%<br>17. বাংলা বর্ণমালায় মোট বর্ণ কতটি?<br>৪)১১টি ৮) ৩৯টি<br>০)৫০টি 0)৮টি ৫5. 0<br>বাংলা ভাষার বর্ণ ৫০টি । উল্লেখ্য, _<br>মাত্রা মোট বর্ণ ৫০টি | ব্যঞ্জনবর্ণ ৩৯টি স্বরবর্ণ ১১টি<br>|v | ৭<br>| ১০ |] | ৪ |<br>18. নিপাতনে সিদ্ধ ব্যঞ্জন সন্ধি কোনটি?<br>a) কিন্তু b) একাদশ<br>০) কুলটা d) নিশ্চয় ans. 3<br>ব্যাকরণের সাধারণ বা বিশেষ কোনো<br>নিয়মানুসারেই যখন কোনো কর্ম ব্যাখ্যা করা যায় না,<br>অথচ তা সংঘটিত হয়, তখন সেই ব্যতিক্রমকে বৈধতা<br>দেয়ার নাম নিপাতনে সিদ্ধ। নিপাতনে সিদ্ধ কিছু ব্যঞ্জন<br>সন্ধিঃ আশ্চর্য, ষোড়শ, পরপর, দ্যুলোক, গোষ্পদ,<br>একাদশ, বৃহস্পতি ইত্যাদি।<br>বীজগাণিতিক সূত্র<br>19. ৫ + 8৪ ল8 এবং ৫ - 8 ₹ 2 হলে ab এর মান কত?<br>a)4 b) 8<br>c) 15 d) 16 ans. C<br>)35<br>দেওয়া আছে, a +b=88a—-b=2<br>আমরা জানি, dab = (a + 8)2- (৫- b)?<br>= 4ab=8-22=60<br>এ ab=2=15<br>20. Qf না বলেছিলে আগামীকাল আসবে?' এখানে 'না' এর<br>ব্যবহার কী অর্থে?<br>৪) না - বাচক ৮) ZT - বাচক<br>০) প্রশ্বোধক 0) বিস্ময়মূচক ans. C<br>এখানে 'না' হলো প্রশ্নাত্যক বা প্রশ্নবোধক অর্থে<br>ব্যবহৃত TAZ | রূপান্তরিত বাক্যে 'কে', 'কি', “কোথায়'<br>ইত্যাদি থাকে | প্রশ্নাত্বক বাক্যে প্রশ্ন (?) চিহ্ন বসাতে<br>=|<br>21. তৈরি পোশাক রপ্তানিতে শীর্ষ দেশ কোনটি?<br>৪) চীন ৮) বাংলাদেশ<br>০) ভিয়েতনাম d) ভারত ans. A<br>আপডেট তথ্য পরিবর্তনশীল প্রশ্ন পার্টে দেখুন।<br>verb<br>22. Which one is model auxiliaries?<br>a) was b) are<br>০) should d) did ans. C<br>Can, could, may, might, will, would,<br>shall, should, ought to এগুলোকে Modal<br>auxiliaries ICT |<br>23. প্রাচ্যের ডান্ডি নামে খ্যাত কোনটি?<br>৪) চট্টগ্রাম b) খুলনা<br>০) নারায়নগঞ্জ d) Bar ans. C<br>উল্লেখ্য, রা<br>উপনাম প্রকৃত নাম<br>৷ __ emmers | নারায়ণ |<br>vocabulary<br>24. Time after twilight and before night-<br>a) dusk b) dawn<br>০) evening d) eclipse ans. A<br>Twilight অর্থ গোধুলি | Dusk অর্থ রাত শুরুর বা<br>ঘন অন্ধকার শুরুর ঠিক পূর্বক্ষণ। Dawn অর্থ ভোর<br>হওয়া/ আলো ফৌটা/ উন্যেষিত হওয়া | Moonlight অর্থ<br>GEIST | Midnight অর্থ মধ্যরাত<br>Time after twilight and before night is dusk =<br>গোধূলীর পর এবং রাতের পূর্বক্ষণ হল Dusk.<br>25. বাংলাদেশ রেলওয়েকে প্রশাসনিক কাজের সুবিধার্থে কয়টি<br>অঞ্চলে ভাগ করা হয়েছে?<br>3)১টি ৮)৪টি<br>০)২টি 0)৫টি ans. C<br>বাংলাদেশ রেলওয়ের পরিচালনা অঞ্চল দুইটি<br>অংশে ভাগ করা হয়েছে। এগুলো হলোঃ যমুনা নদীর পূর্ব<br>পাশে পূর্বাঞ্চল রেলওয়ে এবং অপরটি যমুনা নদীর পশ্চিম<br>পাশে পশ্চিমাঞ্চল রেলওয়ে | পূর্ব পাশের অংশের on<br>১,২৭৯ কিলোমিটার এবং পশ্চিম পাশের অংশের দৈর্থ্য<br>১,৪২৭ কিলোমিটার |<br>spelling<br>26. The spelling of which one is correct?<br>a) Leiftenant b) Leftenant<br>c) Lieutenant d) Leftanant ans. C<br>Lieutenant অর্থ ক্যাপ্টেন পদমর্যাদার নীচে<br>সেনাবাহিনীর অফিসার |<br>27. ফর্রুখ আহমদ - কে কী বলা হয়?<br>a) নৌফেল ও হাতেম b) মুসলিম রেনেসার কবি<br>০) হাতেমতাই 0) মুসলিম কবি ans. B<br>মুসলিম রেনেসার কবি বলা হয় ফররুখ আহমদকে |<br>নিচে কিছু কবির উপাধি দেয়া হলো-<br>লেখক বা কবির নাম _ উপাধি<br>জীব দাশ মর হননের কবি, কূপসী বাংলার কবি, নির্জনতা<br>কবি, প্রকৃতির কবি, শুদ্ধতম কবি, চিত্রকূপময় কবি,<br>HARTER কবি।<br>গদ্যের জনক, বিদ্যাসাগর, বিরাম fore প্রবর্তক |<br>কবি<br>চতুরুর্জ<br>28. একটি আয়তক্ষেত্রের দৈর্ঘ্য প্রষ্থের তিনগুণ।<br>আয়তক্ষেত্রটির ক্ষেত্রফল ৩০০ বর্গমিটার হলে পরিসীমা<br>কত মিটার?<br>a) ৪০ ৮) ৬০<br>০)৭০ d) bo ans. D<br>36<br>32 -%- 12 = 0 সমীকরণকে উৎপাদকে বিশ্লেষণ<br>করলে সমীকরণটির দুটি মূল পাওয়া যাবে। আসুন, তাই<br>সমীকরণটিকে উৎপাদকে বিশ্লেষণ করি।<br>+৫-%-12-50<br>= :32-40+73%-125-0<br>= :0-4+7300-4)-0<br>. (-4)0+3)-0<br>অর্থাৎ (০-4)-০ এবং (+3) -0<br>2 লব এ লস 3<br>36. 'ছত্রটি কেটে দাও' এর ইংরেজি অনুবাদ কী?<br>a) Cross the line<br>b) Cut off the line<br>০) Put off the line<br>d) Pen through the line ans.D<br>Pen দিয়ে গুরুত্বপূর্ণ কিছু Idioms & Phrases<br>_ তুলে ধরা হলোঃ রটনা<br>Phrases Meaning<br>hd<br>সম্প্রসারিত হয়।<br>[Pen-knife |<br>Idiom phrase<br>37. ‘At dagger drawn’ — means:<br>a) To be in a state of hostility<br>b) Ata standstill<br>০) Ina state of understanding<br>d) State of friendship ans. A<br>এখানে At daggers drawn অর্থ দুই পক্ষের<br>মধ্যে ঝগড়া বা রেষারেষি বিদ্যমান থাকা | উল্লেখ্য, Ata<br>standstill অর্থ নিশ্চল, অচলাবষ্থায়।<br>38. কোনটি উপন্যাস?<br>a) নেমেসিস ৮) সোনার তরী<br>০) গড্ডালিকা ৫) কন্যাকুমারী ans. D<br>'কন্যাকুমারী' উপন্যাসটির রচয়িতা হলেন আবদুর<br>রাজ্জাক | অন্যদিকে, 'নেমেসিস' হলো নূরুল মোমেনের<br>একটি বিখ্যাত নাটক; 'সোনার তরী' হলো রবীন্দ্রনাথ<br>ঠাকুরের একটি বিখ্যাত কাব্যগ্রন্থ এবং 'গড্ডালিকা' হলো<br>রাজসেখর বসুর একটি গল্পগ্রন্থ |<br>Number<br>39. What is the plural form of the word<br>‘louse’?<br>a) losses b) louse<br>c) lice d) lice ans. C<br>কতঙগুলো Noun এর মাঝের Vowel এবং<br>__Consonant পরিবর্তন করে Plural করতে হয়। যেমনঃ<br>Singular Louse Dormouse Mouse<br>[Mice |<br>Gender<br>40. Which word is feminine?<br>a) sir b) buck<br>০) drone d) cow ans. D<br>Solution. RIS<br>Masculine Feminine Masculine Feminine<br>EES | Doc |<br>| Drake |<br>[Hat | Roc | Stag |<br>Sentence correction<br>41. New programs will be __ next week in<br>Bangladesh Television.<br>a) Telecast b) Published<br>০) Telecasted d) Broadcasted ans. A<br>Telecast এর Past এবং Past participle রূপ<br>একই | তাই এখানে Telecast-X FA |<br>বাক্যের অর্থ আগামী সপ্তাহে বাংলাদেশ টেলিভিশনের<br>নতুন অনুষ্ঠান সম্প্রচার করা হবে।<br>42. ক্রয়মূল্য বিক্রয়মূল্যের দ্বিগুণ হলে শতকরা লাভ বা ক্ষতির<br>পরিমান কত?<br>a) লাভ ২৫% b) ক্ষতি ২৫%<br>০) লাভ ৭৫% 0) ক্ষতি ৫০% ans.D<br>ধরি, বিক্রয়মূল্য x টাকা<br>-. ক্রয়মূল্য ২: টাকা<br>:. ক্ষতি হয় ল ২%-১%-১%টাকা<br>:. শতকরা ক্ষতি হয় ₹ ক x ১০০) % = 0%<br>ধরি, ত্রয়মূল্য - ১০ এবং বিক্রয়মূল্য = ৫<br>:. শতকরা ক্ষতি হয় = চে x ১০০) %-৫০%<br>বীজগাণিতিক সূত্র<br>43. m= 2 হলে 27715 + 54712 + 36m + 3 এর মান<br>কত?<br>a) 407 b) 507<br>০) 607 d) 707 ans. B<br>দেওয়া আছে, 2713 + 54m? + 36m +3<br>=@BmP+3x(BmPx2+3x3mx22+23-5<br>=(Bm+2)*-5<br>=(3x2+2°-5<br>=8-5<br>=512-5=507<br>44. বাংলাদেশের মোট ভৌগলিক নির্দেশক (01) পণ্য কতটি?<br>a) ৬০টি ৮)৬১টি<br>০) ৬৩টি ৫)৬২টি ans. Note<br>আপডেট তথ্য পরিবর্তনশীল প্রশ্ন পার্টে দেখুন।<br>)38<br>Idiom phrase<br>45. ‘Blue Blood’ phrase এর অর্থ কীঃ<br>a) Blood of blue color<br>b) Sound Health<br>০) Aristocratic Birth<br>d) Scoundrel ans. C<br>Blue blood অর্থ অভিজাত; উচ্চ বংশজাত।<br>Blood of blue color অর্থ নীল রংয়ের রক্ত। Sound<br>health অর্থ 37g (72 | Scoundrel অর্থ IM; দুর্বৃত্ত 1<br>46. EIB বাবরের সমাধি কোথায় অবস্থিত?<br>a) ইয়াঙ্গুন b) সিকান্দ্রা<br>০) কাবুল d) আগ্রা ans. 0<br>মুঘল সাম্রাজ্যের প্রতিষ্ঠাতা FG বাবরের সমাধি<br>আফগানিস্তানের রাজধানী কাবুলে অবস্থিত। বাবর ১৫৩০<br>সালে SAR মারা গেলেও, তার ইচ্ছা অনুযায়ী পরে<br>দেহাবশেষ সরিয়ে কাবুলের এঁতিহাসিক বাগে বাবর বা<br>বাবর গার্ডেনে সমাহিত করা হয়।<br>mr 000000<br>47. দুই অংকবিশিষ্ট কোন সংখ্যার অংকদ্বয়ের সমষ্টি ১৫ এবং<br>তাদের গুণফল ৫৬; সংখ্যাটি কত?<br>a) ৭৮ ৮) ৯৬<br>০) ৯৪ d) us ans. A<br>এই ধরণের অংকে আপনি সরাসরি উত্তর থেকে<br>চেষ্টা করবেন।<br>অপশন ৫) এর CFE =T + 8=15<br>এবং 7 x 8 = 56.<br>J |... A<br>48. চিনির মূল্য ১০% কমে যাওয়ায় চিনির ব্যবহার শতকরা<br>কত ভাগ বাড়লে চিনি বাবদ খরচ একই থাকবে?<br>৪)৫% ৮)১১%<br>০১১১১ dyed ans. C<br>চিনির মূল্য ১০% কমে যাওয়ায় চিনির বর্তমান<br>মূল্য = ১০০ - ১০ = ৯০ টাকা<br>এখন, ৯০ টাকায় চিনির ব্যবহার বৃদ্ধি করতে হবে = ১০<br>টাকা<br>.. ১০০ টাকায় চিনির ব্যবহার বৃদ্ধি করতে হবে<br>30 ১৫১০০ MN<br>== ল ১১৯ টাকা<br>49. What is the meaning of ‘concise’ in<br>Bangla?<br>a) সামগ্জস্যপূর্ণ b) সংক্ষিপ্ত<br>০) সাধনা 0) স্বাদহীন ans. B<br>Concise অর্থ সংক্ষিপ্ত |<br>বীজগাণিতিক সূত্র<br>50. a=1=5\3 হলে, ৫১+ ঢু এর মান কত?<br>a) 603 ৮) 60<br>০)77 d) 70:3 ans. C<br>2<br>দেয়া আছে, a? +5 = 0 2) +2xaxs<br>=(5\3) +2<br>=(25x3)+2<br>=75+2=177<br>51. শতকরা বার্ষিক ৭ টাকা হার সরল মুনাফায় ৬৫০ টাকার<br>৬ বছরের মুনাফা কত টাকা?<br>a) ২৭৩ টাকা ৮) ২৬০ টাকা<br>০) ২২০ টাকা 0) ৩৭৩ টাকা ans. A<br>আসল, p = ৬৫০ টাকা; মুনাফার হার, r= 1%;<br>সময়, / - ৬ বছর।<br>:-. মুনাফা, =F?<br>আমরা জানি, [= 22 = ৬৯০০১০৬5২৭৩ টাকা<br>52. বিশেষণের উদাহরণ কোনটি?<br>a) চৌকশ ৮) চৌকস<br>oF d) বালক ans. B<br>বিশেষণের উদাহরণ হলো চৌকস | উল্লেখ্য,<br>বিশেষণ বিশেষ্য বিশেষণ বিশেষ্য<br>= a |<br>Narration<br>53. The teacher said ‘Be quiet’. Change into<br>indirect-<br>a) The teacher ordered them to be quiet.<br>b) The teacher asked them to be quiet.<br>০) The teacher requested them to be quiet.<br>d) The teacher instructed to be quict.ans. A<br>Imperative sentence এ Reporting verb টি<br>অনুরোধ বুঝালে Request, আদেশ বুঝালে Order/<br>urge/ command, উপদেশ বুঝালে Advice, অন্যথায়<br>“tell” দ্বারা পরিবর্তিত হয়।<br>বাক্যের অর্থঃ শিক্ষক বললেন, “ছাত্ররা শান্ত হও'।<br>54. পদ্মাবতী কি ধরনের গ্রন্থ?<br>৪) ধর্মীয় b) প্রেমাখ্যান<br>০) রূপকথা d) পালা ans. B<br>আলাওল রচিত age হলোঃ পদ্মাবতী, তোহ্ফা,<br>সয়ফুলমূলক বদিউজ্জামাল, হপ্তপয়কর, সিকান্দরনামা।<br>উল্লেখ্য, কবি আলাওল 'রোসাঙ্গ' রাজসভার কবি ছিলেন।<br>আরাকানকে বাংলা সাহিত্যে 'রোসাং' বা 'রোসাঙ্গ' নামে<br>অভিহিত করা হয়েছে।<br>)39<br>I একিকনিম<br>55. 'ক' এবং “*খ' একত্রে মিলে একটি কাজ ১২ দিনে করতে<br>পারে। 'ক' একা কাজটি ২০ দিনে করতে পারে, “খ' একা<br>কাজটি কত দিনে করতে পারবে?<br>a) ২৫ দিনে ৮) ৩০ দিনে<br>০) ৩৫ দিনে 0) 8০ দিনে ans. 73<br>ক ও খ একত্রে 12 দিনে করে = | অংশ কাজ<br>so কও খ একত্রে | দিনে করে = = অংশ কাজ<br>আবার, ক একা এঁ কাজটি 1 দিনে করে ₹ x অংশ<br>1. 1<br>.. খ একা একদিনে করে = ( 5 2) = 3g অংশ কাজ<br>অর্থাৎ 0 অংশ কাজ করে = 1 দিনে<br>co খ! বাসম্পূর্ণ তংশ কাজ করে = 202 = 30 দিনে<br>y | ২১ ২ জনের কাজ ১: ১ জনের কাজ<br>সূত্রঃ ২ জনের কাজ - ১ জনের কাজ<br>. 20012<br>- খল 20-02-30<br>Sentence correction<br>56. Choose the correct sentence-<br>a) A few of the three boys a got a prize.<br>b) Each of the three boys got a prize.<br>০) Every of the three boys got a prize.<br>d) All the three boys got a prize. ans. B<br>যদি কোনো বাক্যে Each of the, one of the,<br>neither of the, either of the থাকে তাহলে এদের<br>পরে Noun (plural) কিন্তু, Verb (singular) ও<br>Possessive (singular) 7 |<br>বাক্যের অর্থট et ছাত্রের প্রত্যেক একটা করে পুরষ্কার<br>পেয়েছিল |<br>Translation<br>57. 'ট্রেনটি ঢাকা যাবে' এর সঠিক ইংরেজি অনুবাদ কোনটি?<br>a) The train is bound for Dhaka.<br>b) The train is going to Dhaka.<br>০) The train is leaving to Dhaka.<br>d) The train will go to Dhaka. ans. A<br>কোনো স্থানের উদ্দেশ্যে রওনা করা অর্থে Bound<br>for বসে। The train is leaving for Dhaka অর্থ<br>ট্রেনটি ঢাকার উদ্দেশ্যে যাচ্ছে। The train is going to<br>Dhaka অর্থ ট্রেনটি ঢাকা যাচ্ছে। The train went to<br>Dhaka অর্থ ট্রেনটি ঢাকা গিয়েছিলো |<br>58. 'ত্রীতদাসের হাসি' কার রচনা?<br>2) হাসান আজিজুল হক ৮) আলাউদ্দীন আল আজাদ<br>০) সৈয়দ ওয়ালীউল্লাহ এ) শওকত ওসমান ans. D<br>'ক্রীতদাসের ART শওকত ওসমান (১৯৬২)<br>রচিত প্রতীকধর্মী উপন্যাস 'ক্রীতদাসের হাসি' উপন্যাসে<br>তৎকালীন পাকিস্তানিদের বিরূপ শাসনের সমালোচনা করা<br>হয়েছে। এটি শওকত ওসমানের সর্বশ্রেষ্ঠ উপন্যাস বলে<br>স্বীকৃত। উল্লেখ্য, তার রচিত অন্যান্য উপন্যাসঃ সমাগম<br>(১৯৬৭), চৌরসন্ধি (১৯৬৮), রাজা উপাখ্যান (১৯৭০),<br>দুই সৈনিক (১৯৭৩), নেকড়ে অরণ্য (১৯৭৩) জলাংগী<br>(১৯৮৬) ইত্যাদি।<br>59. 'মৈমনসিংহ গীতিকা' কতটি ভাষায় অনুদিত?<br>a) ২০টি ৮) ২২টি<br>০) ৩২টি ৫) ২৩টি ans. D<br>ড. দীনেশচন্দ্র সেনের আগ্রহে এবং স্যার আশুতোষ<br>মুখোপাধ্যায়ের পৃষ্ঠপোষকতায় চন্দ্রকুমার দে 'মৈমনসিংহ<br>গীতিকা' সংগ্রহ করেন। এটি ২৩টি ভাষায় অনুদিত হয়।<br>'মৈমনসিংহ গীতিকা' বাংলা লোকগীতির একটি ভাগ।<br>vocabulary<br>60. Botany is to Plants as Zoology is to-<br>a) Flower b) Trees<br>০) Fauna d) Deer ans. C<br>‘Botany’ অর্থ উদ্ভিদবিদ্যা আর ‘Zoology’ অর্থ<br>প্রাণিবিদ্যা । ‘Plants’ অর্থ উদ্ভিদ আর ‘Animals’ অর্থ<br>প্রাণী।<br>এখানে Botany আলোচনা করে Plants নিয়ে। আর<br>Zoology আলোচনা করে Animals নিয়ে। উল্লেখ্য,<br>Fauna শব্দটি দ্বারা কোনো নির্দিষ্ট অঞ্চলের সামগ্রিক<br>প্রাণিকুলকে বোঝানো হয়।<br>61. 'সই কে শুনাইল শ্যাম নাম' কার উক্তি?<br>a) জ্ঞানদাস b) চন্ডীদাস<br>০) বিদ্যাপতি 0) শ্রীচেতন্য 005. 3<br>বাংলা সাহিত্যের মধ্যযুগের বিখ্যাত কবি চন্ডীদাস<br>এর বিখ্যাত “Refs wT হে মানুষ ভাই, সবার উপরে<br>মানুষ সত্য তার উপরে নাই, HR, কেবা শুনাইল শ্যাম<br>নাম?', 'আমার বধুয়া আন বাড়ী যায়, আমার আঙিনা<br>দিয়া'। চপ্তীদাসকে বাংলা ভাষার প্রথম মানবতাবাদী কবি<br>বলা হয়।<br>Noun<br>62. Which word in noun?<br>a) large b) man<br>০) bad d) me ans. B<br>যে সকল Noun দ্বারা নির্দিষ্ট কোনো ব্যক্তি, বস্তু,<br>স্থানের নাম না বুঝিয়ে একজাতীয় সকলকেই বোঝায়<br>তাদেরকে Common noun বলে। সংখ্যায় একের<br>অধিক বলে এদেরকে গণনা করা যায়। যেমনঃ Man,<br>girl, boy, student, teacher, doctor, book, pen,<br>pencil, cow, candle, sheep, elephant, fish,<br>river, flower, bee, soldier, king, capital, city,<br>ring, country, robber, table, chair ইত্যাদি |<br>63. ১ নটিক্যাল মাইল = কত ফুট?<br>3) ৬০৫০ ফুট ৮) ৬০০০ ফুট<br>০) ৬০৮০ ফুট 0) ৭০৫০ ফুট ans. C<br>40<br>নটিক্যাল মাইল নৌ পথ বা আকাশ পথের দৈর্ঘ্য<br>নির্ণয়ে ব্যবহৃত পরিমাপের একক। ১ নটিক্যাল মাইল<br>সমান ১,৮৫২ মিটার বা ৬০৭৬.১২ ফুট । এটি সিস্টেম<br>অফ ইন্টারন্যাশনাল (এস আই) একক নয় (যদিও<br>আন্তর্জাতিকভাবে ব্যবহারের জন্য বি আই পি এম কর্তৃক<br>স্বীকৃত)। আর ১ নটিক্যাল মাইল = ২০২৫ গজ। ১<br>নটিক্যাল মাইল = ১.৮৫৩ কিলোমিটার (প্রায়)।<br>64. মুক্তিযুদ্ধের ১ নম্বর সেক্টর ছিলো নিচের কোনটি?<br>a) ঢাকা b) খুলনা<br>০) সিলেট d) চট্টগ্রাম ans. 7<br>মুক্তিযুদ্ধের ১ নম্বর সেক্টর ছিলো চট্টগ্রাম । উল্লেখ্য,<br>সেক্টর কমান্ডার বা প্রধান _সংশিষ্ট তৎকালীন জেলাসমূহ<br>মেজর জিয়াউর রহমান (এপ্রিল-জুন) | চট্টগ্রাম, পার্বত্য চট্টগ্রাম এবং<br>এবং মেজর রফিকুল ইসলাম (জুন- | নোয়াখালী জেলার মুহুরী নদীর<br>ডিসেম্বর) পূর্বাংশর সমগ্র এলাকা<br>২ মেজর খালেদ মোশাররফ (এপ্রিল- | কুমিল্লা, আখাউড়া-ভৈরব এবং<br>সেপ্টেম্বর) এবং মেজর এ.টি.এম. ঢাকা শহর , ফরিদপুর ও<br>হায়দার (সেপ্টেম্বর-ডিসেম্বর) নোয়াখালী জেলার অংশবিশেষ<br>মেজর মীর শওকত আলী সিলেটের পশ্চিম এলাকা,<br>সিলেট-ডাউকি সড়ক থেকে<br>সুনামগঞ্জ এবং বৃহত্তর<br>ময়মনসিংহের সীমান্তবর্তী অঞ্চল<br>৮ ৮ নম্বর সেক্টরের কমান্ডার ছি: কুষ্টিয়া, যশোর এবং ফরিদপুর<br>মেজর আবু ওসমান চৌধুরী (পরে ও খুলনা জেলার অংশবিশেষ |<br>মেজর জেনারেল এম এ জলিল) এই সেক্টরের হেডকোয়ার্টার<br>ছিল কল্যানীতে।<br>১১ মেজর এম.আবু তাহের (© নভেম্বর | ময়মনসিংহ ও টাঙ্গাইল জেলা<br>পর্যন্ত) এবং ক্কোয়াড্রন লিডার এম<br>হামিদুল্লাহ (৩ নভেম্বর-ডিসেম্বর)<br>65. ট্যারিফ কমিশন কোন মন্ত্রণালয়ের অধীন?<br>৪) বাণিজ্য মন্ত্রণালয় ৮) পরিকল্পনা মন্ত্রণালয়<br>০) পরিকল্পনা মন্ত্রণালয় এ) অর্থ মন্ত্রণালয় ans. A<br>ট্যারিফ কমিশন বাণিজ্য মন্ত্রণালয়ের অধীনে।<br>বাণিজ্য মন্ত্রণালয়ের অধীনে যে সকল মন্ত্রণালয় রয়েছেঃ<br>বাংলাদেশ রপ্তানি উন্নয়ন ব্যুরো, ট্রেডিং কর্পোরেশন অব<br>বাংলাদেশ, ইনস্টিটিউট অব চার্টার্ড আ্যাকাউন্ট্যান্টস অব<br>বাংলাদেশ, বাংলাদেশ বৈদেশিক বাণিজ্য ইনস্টিটিউট,<br>অফিস অব দ্য রেজিস্ট্রার অব জয়েন্ট স্টক কোম্পানি<br>SITE ফার্মাস, ইনস্টিটিউট অব কস্ট SS ম্যানেজমেন্ট<br>একাউন্ট্যান্ট অব বাংলাদেশ, আমদানি ও রপ্তানি নিয়ন্ত্রণ<br>অধিদপ্তর, জাতীয় ভোক্তা অধিকার সংরক্ষণ অধিদপ্তর।<br>বৃত্ত<br>66. বৃত্তের ব্যাস ৪ গুণ বৃদ্ধি করলে ক্ষেত্রফল কতঙুণ বৃদ্ধি<br>পাবে?<br>a)8 ৮)৮<br>০)১২ d) ১৬ ans. ])<br>ধরি, বৃত্তের ব্যাস = x<br>... বৃত্তের ব্যাসার্ধ ২<br>2<br>:.. পূর্বের ক্ষেত্রফল = 6) n= x<br>এখন ব্যাস 8 গুণ করা হলে ব্যাস হবে 8x<br>8x<br>:. ETE = 5<br>... নতুন ক্ষেত্রফল হবে<br>2 2 2<br>=n x ® =| x oe লন্১৬১ (x x 5)<br>-. অর্থাৎ ক্ষেত্রফল বাড়ে ১৬ & |<br>Preposition<br>67. He has beenill Friday last.<br>a) from b) on<br>c)in d) since ans. D<br>Present Perfect Continuous Tense এর<br>ক্ষেত্রে সময় উল্লেখ থাকলে ব্যাপক সময় (Period of<br>time) এর পূর্বে ‘for’ এবং নির্দিষ্ট সময় (Point of<br>time) এর পূর্বে ‘since’ বসে। যেমনঃ It has been<br>drizzling since morning (সকাল থেকে ওগুড়িগুড়ি/<br>ঝিরিঝিরি (হালকা) বৃষ্টি =m) |<br>68. ডাক্তার TF কোন কারক কোন বিভক্তি?<br>a) করণে শূন্য b) কর্তৃকারকে শূন্য<br>০) কর্মকারকে শূন্য d) অপাদানে শূন্য ans. C<br>TER ডাক' বাক্যটিতে 'ডাক্তার' শব্দটি কর্মকারকে<br>শূন্য বিভক্তি । যাকে আশ্রয় করে কর্তা ক্রিয়া সম্পন্ন করে,<br>তাকে কর্ম কারক ICT | কী/ কাকে প্রশ্ন করলে কর্মকারক<br>পাওয়া যায়।<br>- খরা 000000<br>69. ১৪৪, ৮১, ৩৬ - এর পরবর্তী সংখ্যাটি কত?<br>a) ১৮ ৮)১২<br>০)৯ d)v ans. C<br>ধারাটির নিচের মতো করে এগিয়েছেঃ<br>প্রথমে ১২ এর বর্গ = ১২২ = ১৪৪<br>৯ এর বর্গ 2 ৯২5 ৮১<br>৬ এর বর্গ = ৬২ = ৩৬<br>এবং ৩ এর বর্গ ৮ ৩২১5 ৯<br>70. সৌরজগতে কোন ARR সর্বাধিক উপগ্রহ রয়েছে?<br>a) নেপচুন b) শনি<br>০) বৃহস্পতি 0) ইউরেনাস ans. B<br>শনি এর চতুর্দিকে তিনটি বলয় গ্রহটিকে বেষ্টন<br>করে রয়েছে। এর ৮২টি উপগ্রহ আছে। সৌরজগতে শনি<br>খ্রহের উপগ্রহ সর্বাধিক । এটি সৌরজগতের দ্বিতীয় বৃহত্তম<br>এ্রহ। টাইটান, হুয়া, ডাইওন, ক্যালিপাস এর প্রধান<br>উপগ্রহ। জ্যোতির্বিদগণের ধারণা, শনি গ্রহের চতুর্দিকে<br>অনেকগুলো বলয় রয়েছে।<br>41
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>© ২০২৬ নন-ক্যাডার জব সলিউশন ই-বুক সংকলন | বাংলাদেশ রেলওয়ে (BR)</p>
+    <p style="margin-top:0.35rem; font-size:0.8rem; color:var(--text-muted);">প্রামাণ্য মূল প্রশ্নপত্র ও ব্যাখ্যাসহ ডিজিটালাইজড সংস্করণ</p>
+  </footer>
+
+  <script>
+    let score = 0;
+    const answered = new Set();
+    const totalQuestions = 70;
+
+    function checkAns(qNum, selectedIdx) {
+      const card = document.getElementById(`q${qNum}`);
+      if (!card || answered.has(qNum)) return;
+      
+      const correctIdx = parseInt(card.getAttribute('data-ans'), 10);
+      const buttons = card.querySelectorAll('.opt-btn');
+      
+      answered.add(qNum);
+      
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === correctIdx) {
+          btn.classList.add('correct');
+        } else if (idx === selectedIdx) {
+          btn.classList.add('wrong');
+        }
+      });
+      
+      if (selectedIdx === correctIdx) {
+        score++;
+      }
+      
+      updateScore();
+      
+      // Auto open explanation
+      const expDrawer = document.getElementById(`exp${qNum}`);
+      if (expDrawer) {
+        expDrawer.classList.add('open');
+        const toggleBtn = card.querySelector('.toggle-exp-btn');
+        if (toggleBtn) toggleBtn.textContent = 'ব্যাখ্যা লুকান ▴';
+      }
+    }
+
+    function toggleExp(qNum) {
+      const expDrawer = document.getElementById(`exp${qNum}`);
+      const card = document.getElementById(`q${qNum}`);
+      const toggleBtn = card ? card.querySelector('.toggle-exp-btn') : null;
+      if (expDrawer) {
+        expDrawer.classList.toggle('open');
+        if (toggleBtn) {
+          toggleBtn.textContent = expDrawer.classList.contains('open') ? 'ব্যাখ্যা লুকান ▴' : 'ব্যাখ্যা দেখুন ▾';
+        }
+      }
+    }
+
+    function updateScore() {
+      const bnDigits = {'0':'০','1':'১','2':'২','3':'৩','4':'৪','5':'৫','6':'৬','7':'৭','8':'৮','9':'৯'};
+      const toBn = n => String(n).replace(/[0-9]/g, d => bnDigits[d]);
+      const display = document.getElementById('scoreDisplay');
+      if (display) {
+        display.textContent = `স্কোর: ${toBn(score)} / ৭০`;
+      }
+    }
+
+    function resetQuiz() {
+      score = 0;
+      answered.clear();
+      updateScore();
+      
+      document.querySelectorAll('.q-card').forEach(card => {
+        card.querySelectorAll('.opt-btn').forEach(btn => {
+          btn.disabled = false;
+          btn.classList.remove('correct', 'wrong');
+        });
+        const expDrawer = card.querySelector('.exp-drawer');
+        if (expDrawer) expDrawer.classList.remove('open');
+        const toggleBtn = card.querySelector('.toggle-exp-btn');
+        if (toggleBtn) toggleBtn.textContent = 'ব্যাখ্যা দেখুন ▾';
+      });
+    }
+
+    // Font Size Controller
+    let currentFontSize = 100;
+    function adjustFontSize(dir) {
+      currentFontSize += dir * 8;
+      if (currentFontSize < 80) currentFontSize = 80;
+      if (currentFontSize > 140) currentFontSize = 140;
+      document.querySelector('.page-container').style.fontSize = `${currentFontSize}%`;
+    }
+
+    // Theme Toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      const btn = document.getElementById('themeToggle');
+      if (btn) btn.textContent = next === 'dark' ? '☀️' : '🌙';
+      localStorage.setItem('theme', next);
+    }
+
+    // Restore saved theme
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+        const btn = document.getElementById('themeToggle');
+        if (btn) btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+      }
+    })();
+  </script>
+</body>
+</html>
