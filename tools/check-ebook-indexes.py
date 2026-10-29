@@ -46,7 +46,8 @@ INDEX_FILES = [
     'Non Cadre Mental Ability/index.html',
     'Non Cadre Geography & Environment/index.html',
     'Non Cadre Ethics & Good Governance/index.html',
-    'Non Cadre Job Solution/index.html'
+    'Non Cadre Job Solution/index.html',
+    'Inception Year Book 2025-2026/index.html'
 ]
 
 REGISTERED_FOLDERS = {
@@ -76,7 +77,8 @@ REGISTERED_FOLDERS = {
     'Non Cadre Computer & IT',
     'Non Cadre Mental Ability',
     'Non Cadre Geography & Environment',
-    'Non Cadre Ethics & Good Governance'
+    'Non Cadre Ethics & Good Governance',
+    'Inception Year Book 2025-2026'
 }
 
 class TagBalanceParser(HTMLParser):

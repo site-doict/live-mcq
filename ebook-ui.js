@@ -8,6 +8,15 @@
 
   // ─── 1. Canonical Subject Registry ───
   const SUBJECT_REGISTRY = [
+    {
+      id: 'inception-year-book',
+      folder: 'Inception Year Book 2025-2026',
+      bnName: 'ইনসেপশন ইয়ার বুক (২০২৫-২০২৬)',
+      enName: 'Inception Year Book 2025-2026',
+      group: 'non-cadre',
+      examSubject: 'ইনসেপশন ইয়ার বুক'
+    },
+
     // ক্যাডার প্রশ্নব্যাংক (১২টি বিষয়)
     {
       id: 'bangla-language',

@@ -28,9 +28,9 @@ RAW_LATEX_PATTERNS = [
 RAW_LATEX_RE = re.compile('|'.join(RAW_LATEX_PATTERNS))
 
 ANSWER_LETTER_PATTERNS = [
-    re.compile(r'(?:সঠিক\s*)?উত্তর\s*(?:[:：]|\s+)\s*\(?[কখগঘ]\)?(?![\\u0980-\\u09FF])', re.IGNORECASE),
-    re.compile(r'মুদ্রিত\s*উত্তর\s*(?:[:：]|\s+)\s*\(?[কখগঘ]\)?(?![\\u0980-\\u09FF])', re.IGNORECASE),
-    re.compile(r'সঠিক\s*উত্তরটি\s*হলো\s*\(?[কখগঘ]\)?(?![\\u0980-\\u09FF])', re.IGNORECASE),
+    re.compile(r'(?:সঠিক\s*)?উত্তর\s*(?:[:：]|\s+)\s*\(?[কখগঘ]\)?(?![\u0980-\u09FF])', re.IGNORECASE),
+    re.compile(r'মুদ্রিত\s*উত্তর\s*(?:[:：]|\s+)\s*\(?[কখগঘ]\)?(?![\u0980-\u09FF])', re.IGNORECASE),
+    re.compile(r'সঠিক\s*উত্তরটি\s*হলো\s*\(?[কখগঘ]\)?(?![\u0980-\u09FF])', re.IGNORECASE),
 ]
 
 def check_math_integrity():
