@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>পরিবেশ অধিদপ্তর — হিসাবরক্ষক | প্রামাণ্য সমাধান</title>
+  <link rel="stylesheet" href="css/paper-textures.css">
+  <link rel="stylesheet" href="css/bangla-fonts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Kalpurush&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\(', right: '\\)', display: false}]});">
+  </script>
+  <style>
+    :root {
+      --bg-page: #fdfbf7;
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: rgba(226, 232, 240, 0.8);
+      --accent-primary: #0284c7;
+      --accent-indigo: #6366f1;
+      --accent-emerald: #10b981;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #0f172a;
+      --bg-surface: rgba(30, 41, 59, 0.85);
+      --bg-card: rgba(30, 41, 59, 0.82);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: rgba(51, 65, 85, 0.8);
+      --accent-primary: #38bdf8;
+      --accent-indigo: #818cf8;
+      --accent-emerald: #34d399;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.65;
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Top Nav */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+    }
+    .back-btn {
+      text-decoration: none;
+      color: var(--accent-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .back-btn:hover { text-decoration: underline; }
+    .nav-controls { display: flex; align-items: center; gap: 0.75rem; }
+    .theme-btn, .font-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .theme-btn:hover, .font-btn:hover {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Chapter Header */
+    .ch-header {
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .ch-title {
+      font-size: 1.65rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+    }
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.05rem;
+      display: block;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 0.25rem;
+    }
+    .ch-meta-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .ch-badge {
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--accent-primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+
+    /* Sketchnotes Section */
+    .sk-container {
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+    .sk-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .sk-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.15rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .sk-box h4 {
+      font-size: 1.05rem;
+      color: var(--accent-indigo);
+      margin-bottom: 0.65rem;
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 0.35rem;
+    }
+    .sk-box ul { list-style-type: none; }
+    .sk-box li {
+      font-size: 0.92rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+    .sk-box li strong { color: var(--text-main); }
+
+    /* Part 2: Question Section */
+    .part2-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .part2-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .subject-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .tab-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.4rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Question Cards */
+    .q-card {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .q-header {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.85rem;
+    }
+    .q-num {
+      font-weight: 700;
+      color: var(--accent-primary);
+      font-size: 1.05rem;
+    }
+    .q-meta-tag {
+      background: rgba(2, 132, 199, 0.08);
+      color: var(--accent-primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .q-body {
+      margin-bottom: 1rem;
+    }
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* Answer Drawer */
+    .ans-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(2, 132, 199, 0.06);
+      border: 1px solid rgba(2, 132, 199, 0.15);
+      color: var(--accent-primary);
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+    .ans-toggle:hover { background: rgba(2, 132, 199, 0.12); }
+    .ans-drawer {
+      display: none;
+      padding: 1.25rem;
+      margin-top: 0.75rem;
+      background: rgba(0, 0, 0, 0.02);
+      border-left: 3px solid var(--accent-primary);
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    }
+    [data-theme="dark"] .ans-drawer { background: rgba(255, 255, 255, 0.02); }
+    .ans-drawer.open { display: block; }
+    .exp-content {
+      font-size: 0.98rem;
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+    .exp-content p { margin-bottom: 0.75rem; }
+    .exp-content ul, .exp-content ol { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+    .exp-content li { margin-bottom: 0.35rem; }
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.92rem;
+    }
+    .bcs-table th, .bcs-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+    }
+    .bcs-table th {
+      background: rgba(2, 132, 199, 0.08);
+      font-weight: 600;
+      color: var(--accent-primary);
+    }
+
+    /* Typography Protection */
+    .q-card, .q-card *, .q-text, .q-text *, .ans-drawer, .ans-drawer *,
+    .bcs-table, .bcs-table * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body class="paper-kraft font-shadhinata">
+  <div class="container">
+    <!-- Top Navigation -->
+    <header class="top-nav">
+      <a href="index.html" class="back-btn">
+        <span>←</span> সূচিপত্রে ফিরে যান
+      </a>
+      <div class="nav-controls">
+        <button class="font-btn" onclick="adjustFontSize(-1)">A-</button>
+        <button class="font-btn" onclick="adjustFontSize(0)">A</button>
+        <button class="font-btn" onclick="adjustFontSize(1)">A+</button>
+        <button class="theme-btn" onclick="toggleTheme()" id="themeToggleBtn">🌙</button>
+      </div>
+    </header>
+
+    <!-- Chapter Header -->
+    <section class="ch-header">
+      <h1 class="ch-title font-shadhinata">
+        পরিবেশ অধিদপ্তর — হিসাবরক্ষক
+        <span class="ch-en">Department of Environment (DoE) - Accountant 2023</span>
+      </h1>
+      <div class="ch-meta-wrap">
+        <span class="ch-badge">📋 পরীক্ষা নং: ১৪০</span>
+        <span class="ch-badge">🏛️ অন্যান্য নন-ক্যাডার ও স্বায়ত্তশাসিত প্রতিষ্ঠান</span>
+        <span class="ch-badge">📅 তারিখ: ৩১.০৩.২০২৩</span>
+        <span class="ch-badge">⏱️ সময়: ৯০ মিনিট</span>
+        <span class="ch-badge">🎯 পূর্ণমান: ১০০</span>
+        <span class="ch-badge">🔢 মোট প্রশ্ন: ১৭টি</span>
+        <span class="ch-badge">📄 পৃষ্ঠা: ৭৯৩–৭৯৫</span>
+      </div>
+    </section>
+
+    
+    <section class="sk-part1">
+      <div class="sk-badge">Part 1: Authentic Revision Notes &amp; Formulas</div>
+      <h3 class="sk-title font-shadhinata">পরিবেশ অধিদপ্তর — হিসাবরক্ষক প্রামাণ্য রিভিশন নোট ও সূত্রাবলি</h3>
+      <p class="sk-desc font-shadhinata">
+        এই অধ্যায়ের মূল পরীক্ষার প্রশ্ন ও বিশদ সমাধান থেকে সংকলিত হ্যান্ডনোট, গাণিতিক সূত্র ও সারসংক্ষেপ:
+      </p>
+      <div class="sk-grid">
+        
+        <div class="sk-box">
+          <h4 class="font-shadhinata">পরিবেশ ও বৈশ্বিক পুরস্কার সারসংক্ষেপ</h4>
+          <div>🔹 <strong>চ্যাম্পিয়ন অব দ্য আর্থ (Champions of the Earth):</strong> জাতিসংঘের পরিবেশ বিষয়ক সর্বোচ্চ বৈশ্বিক সম্মাননা (UNEP কর্তৃক প্রদত্ত)।<br>🔹 <strong>আমাজান বন:</strong> বিশ্বের সর্ববৃহৎ রেইনফরেস্ট; বায়ুমণ্ডলের ২০% অক্সিজেন সরবরাহ করায় একে 'পৃথিবীর ফুসফুস' (Lungs of the Earth) বলা হয়।</div>
+        </div>
+
+        <div class="sk-box">
+          <h4 class="font-shadhinata">পিতা-পুত্র ও ক্রয়-বিক্রয়ের গণিত লজিক</h4>
+          <div>🔹 <strong>পিতা-পুত্রের বয়স:</strong> সমীকরণ: \( 4x + 14 = 2(x + 14) \implies x = 7 \)। পুত্রের বর্তমান বয়স \( 7+10 = 17 \) এবং পিতার \( 28+10 = 38 \) বছর।<br>🔹 <strong>১০টি কিনে ৮টি বিক্রয়:</strong> \( \frac{10 - 8}{8} \times 100 = 25\% \) লাভ।</div>
+        </div>
+
+        <div class="sk-box">
+          <h4 class="font-shadhinata">বাংলা ব্যাকরণ ও সাহিত্যিক মেলবন্ধন</h4>
+          <div>🔹 <strong>বানান শুদ্ধি:</strong> ঐক্য / ঐকমত্য (ঐক্যমত অশুদ্ধ); দীনতা / দৈন্য (দৈন্যতা অশুদ্ধ); নিরপরাধ (নিরপরাধী অশুদ্ধ)।<br>🔹 <strong>উপন্যাস ও রচয়িতা:</strong> 'গোরা' - রবীন্দ্রনাথ; 'লালসালু' - ওয়ালীউল্লাহ; 'অবরোধবাসিনী' - বেগম রোকেয়া।</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PART 2: Written Examination Question Engine -->
+    <section>
+      <div class="part2-header">
+        <div class="part2-title">
+          <span>📝</span> Part 2: বিগত পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক ও সমাধান
+        </div>
+      </div>
+
+      <!-- Subject Filter Tabs -->
+      <nav class="subject-tabs">
+        <button class="tab-btn active" data-subject="all">সকল বিষয় (১৭)</button>
+        <button class="tab-btn" data-subject="গণিত">গণিত (৪)</button>
+        <button class="tab-btn" data-subject="বাংলা">বাংলা (৫)</button>
+        <button class="tab-btn" data-subject="বাংলা সাহিত্য">বাংলা সাহিত্য (১)</button>
+        <button class="tab-btn" data-subject="ইংরেজি">ইংরেজি (৬)</button>
+        <button class="tab-btn" data-subject="সাধারণ জ্ঞান">সাধারণ জ্ঞান (১)</button>
+      </nav>
+
+      <!-- Question Cards List -->
+      <main id="questionContainer">
+        
+        <article class="q-card" data-qid="1" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">01. ১০ বছর পূর্বে পিতার বয়স পুত্রের বয়সের ৪ গুণ ছিল। ৪ বছর পরে পিতার বয়স পুত্রের বয়সের ২ গুণ হবে। বর্তমানে কার বয়স কত?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-1')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-1" class="ans-drawer">
+            <div class="exp-content">
+              <strong>পিতার বর্তমান বয়স ৩৮ বছর এবং পুত্রের বর্তমান বয়স ১৭ বছর</strong>।<br><em>সমাধান:<br>ধরি, ১০ বছর পূর্বে পুত্রের বয়স ছিল \(x\) বছর।<br>\(\therefore\) ১০ বছর পূর্বে পিতার বয়স ছিল \(4x\) বছর।<br>বর্তমান বয়স: পুত্রের \( (x + 10) \) বছর এবং পিতার \( (4x + 10) \) বছর।<br><br>৪ বছর পরে: পুত্রের বয়স হবে \( = x + 10 + 4 = x + 14 \) বছর।<br>এবং পিতার বয়স হবে \( = 4x + 10 + 4 = 4x + 14 \) বছর।<br><br>প্রশ্নমতে, \(4x + 14 = 2(x + 14)\)<br>\(\implies 4x + 14 = 2x + 28\)<br>\(\implies 4x - 2x = 28 - 14\)<br>\(\implies 2x = 14\)<br>\(\implies x = 7\)।<br><br>অতএব, পুত্রের বর্তমান বয়স \( = 7 + 10 = 17 \) বছর।<br>এবং পিতার বর্তমান বয়স \( = 4(7) + 10 = 28 + 10 = 38 \) বছর।</em>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="2" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ২</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">02. এক বিক্রেতা ১০টি কমলা যে দামে কিনে, ৮টি কমলা সেই দামে বিক্রি করে। তার শতকরা কত লাভ হয়?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-2')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-2" class="ans-drawer">
+            <div class="exp-content">
+              <strong>২৫%</strong>।<br><em>সমাধান:<br>ধরি, ১০টি কমলার ক্রয়মূল্য ১ টাকা।<br>\(\therefore\) ১টি কমলার ক্রয়মূল্য \( = \frac{1}{10} \) টাকা।<br>আবার, ৮টি কমলার বিক্রয়মূল্য ১ টাকা।<br>\(\therefore\) ১টি কমলার বিক্রয়মূল্য \( = \frac{1}{8} \) টাকা।<br><br>১টি কমলায় লাভ হয় \( = \frac{1}{8} - \frac{1}{10} = \frac{5 - 4}{40} = \frac{1}{40} \) টাকা।<br>\(\therefore\) শতকরা লাভ \( = \frac{\text{লাভ}}{\text{ক্রয়মূল্য}} \times 100 = \frac{1/40}{1/10} \times 100 = \frac{10}{40} \times 100 = 25\%\)।<br><br><strong>শর্টকাট:</strong> শতকরা লাভ \( = \frac{10 - 8}{8} \times 100 = \frac{2}{8} \times 100 = 25\%\)।</em>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="3" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৩</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">03. একটি দ্রব্য ১০% ক্ষতিতে বিক্রয় করা হলো। বিক্রয়মূল্য ৪৫ টাকা বেশি হলে ৫% লাভ হতো। দ্রব্যটির ক্রয় মূল্য কত?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-3')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-3" class="ans-drawer">
+            <div class="exp-content">
+              <strong>৩০০ টাকা</strong>।<br><em>সমাধান:<br>ধরি, দ্রব্যটির ক্রয়মূল্য ১০০ টাকা।<br>১০% ক্ষতিতে বিক্রয়মূল্য \( = 100 - 10 = 90 \) টাকা।<br>৫% লাভে বিক্রয়মূল্য \( = 100 + 5 = 105 \) টাকা।<br>বিক্রয়মূল্যের পার্থক্য \( = 105 - 90 = 15 \) টাকা।<br><br>বিক্রয়মূল্য ১৫ টাকা বেশি হলে ক্রয়মূল্য ১০০ টাকা।<br>\(\therefore\) বিক্রয়মূল্য ৪৫ টাকা বেশি হলে ক্রয়মূল্য \( = \frac{100 \times 45}{15} = 100 \times 3 = 300 \) টাকা।<br>অতএব দ্রব্যটির ক্রয়মূল্য ৩০০ টাকা।</em>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="4" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৪</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৬</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">04. a) উৎপাদকে বিশ্লেষণ করুন: \(x^2 + x + 1\)<br>b) সমাধান করুন: \(\frac{5}{4x - 15} = \frac{2}{3x + 1}\)</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-4')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-4" class="ans-drawer">
+            <div class="exp-content">
+              <strong>a) উৎপাদকে বিশ্লেষণ:</strong><br>\(x^2 + x + 1 = x^2 + 2x + 1 - x = (x + 1)^2 - (\sqrt{x})^2 = (x + 1 + \sqrt{x})(x + 1 - \sqrt{x})\)<br><em>(অথবা জটিল সংখ্যার ক্ষেত্রে: \((x - \omega)(x - \omega^2)\))</em><br><br><strong>b) সমীকরণ সমাধান:</strong><br>\(\frac{5}{4x - 15} = \frac{2}{3x + 1}\)<br>বজ্রগুণন করে পাই,<br>\(5(3x + 1) = 2(4x - 15)\)<br>\(\implies 15x + 5 = 8x - 30\)<br>\(\implies 15x - 8x = -30 - 5\)<br>\(\implies 7x = -35\)<br>\(\implies x = -\frac{35}{7} = -5\)।<br>অতএব নির্ণেয় সমাধান \(x = -5\)।
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="5" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৫</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">05. এক কথায় প্রকাশ করুন:<br>a) অরণ্যের অগ্নিকাণ্ড<br>b) ধী-শক্তির অধিকারী<br>c) মৃত্তিকা দ্বারা নির্মিত<br>d) যে বিষয়ে কোন বিতর্ক নাই<br>e) যুদ্ধে স্থির থাকেন যিনি</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-5')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-5" class="ans-drawer">
+            <div class="exp-content">
+              <strong>a) অরণ্যের অগ্নিকাণ্ড</strong> = দাবানল<br><strong>b) ধী-শক্তির অধিকারী</strong> = ধীমান<br><strong>c) মৃত্তিকা দ্বারা নির্মিত</strong> = মৃন্ময়<br><strong>d) যে বিষয়ে কোন বিতর্ক নাই</strong> = অবিসংবাদিত<br><strong>e) যুদ্ধে স্থির থাকেন যিনি</strong> = যুধিষ্ঠির
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="6" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৬</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">06. অর্থসহ বাক্য রচনা করুন:<br>a) আট কপালে<br>b) ব্যাঙের আধুলি<br>c) কেতাদুরস্ত<br>d) ভূষণ্ডির কাক<br>e) চোখের বালি</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-6')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-6" class="ans-drawer">
+            <div class="exp-content">
+              <strong>a) আট কপালে</strong> (হতভাগ্য) — ছেলেটার জন্মের পরই বাবা মারা গেল, এমন আট কপালে সন্তান আর দেখিনি।<br><strong>b) ব্যাঙের আধুলি</strong> (সামান্য সম্পদ) — সামান্য এই কটা সঞ্চয় নিয়ে অহংকার করো না, ব্যাঙের আধুলি হারাতে সময় লাগে না।<br><strong>c) কেতাদুরস্ত</strong> (পরিপাটি / নিখুঁত পোশাকী) — চালচলন ও পোশাকে লোকটি খুবই কেতাদুরস্ত।<br><strong>d) ভূষণ্ডির কাক</strong> (দীর্ঘজীবী / বহুদর্শী ব্যক্তি) — প্রবীণ মাস্টার মশাই এ গ্রামের ভূষণ্ডির কাক, সব ইতিহাস তাঁর নখদর্পণে।<br><strong>e) চোখের বালি</strong> (চক্ষুশূল / অপ্রিয় ব্যক্তি) — সৎ ও স্পষ্টবাদী কর্মচারীটি দুর্নীতিবাজদের চোখের বালি হয়ে উঠেছে।
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="7" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৭</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">07. বিপরীত শব্দ লিখুন:<br>a) নিরর্থক<br>b) পূর্বসূরি<br>c) সংশয়<br>d) উন্মুখ<br>e) উৎকৃষ্ট</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-7')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-7" class="ans-drawer">
+            <div class="exp-content">
+              <strong>a) নিরর্থক</strong> — সার্থক<br><strong>b) পূর্বসূরি</strong> — উত্তরসূরি<br><strong>c) সংশয়</strong> — প্রত্যয় / নিশ্চয়<br><strong>d) উন্মুখ</strong> — বিমুখ<br><strong>e) উৎকৃষ্ট</strong> — নিকৃষ্ট
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="8" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৮</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">08. শুদ্ধ করে লিখুন:<br>a) ঐক্যমত<br>b) সম্ভ্রান্তশালী<br>c) দৈন্যতা<br>d) মুখছবি<br>e) নিরপরাধী</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-8')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-8" class="ans-drawer">
+            <div class="exp-content">
+              <strong>a) ঐক্যমত</strong> -> <strong>ঐকমত্য</strong> (বা <em>ঐক্য</em>)<br><strong>b) সম্ভ্রান্তশালী</strong> -> <strong>সম্ভ্রান্ত</strong><br><strong>c) দৈন্যতা</strong> -> <strong>দীনতা</strong> (বা <em>দৈন্য</em>)<br><strong>d) মুখছবি</strong> -> <strong>মুখচ্ছবি</strong><br><strong>e) নিরপরাধী</strong> -> <strong>নিরপরাধ</strong>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="9" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৯</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">09. সন্ধি বিচ্ছেদ করুন:<br>a) উত্থাপন<br>b) অহরহ<br>c) অতীত<br>d) ষোড়শ<br>e) দ্যুলোক</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-9')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-9" class="ans-drawer">
+            <div class="exp-content">
+              <strong>a) উত্থাপন</strong> = উদ/উৎ + স্থাপন<br><strong>b) অহরহ</strong> = অহঃ + অহ<br><strong>c) অতীত</strong> = অতি + ইত<br><strong>d) ষোড়শ</strong> = ষট্ + দশ<br><strong>e) দ্যুলোক</strong> = দিব্ + লোক
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="10" data-subject="বাংলা সাহিত্য" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১০</span>
+            <span class="q-meta-tag">বাংলা সাহিত্য</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা সাহিত্য</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">10. নিচের গ্রন্থগুলোর রচয়িতার নাম লিখুন:<br>a) অবরোধবাসিনী<br>b) গোরা<br>c) লালসালু<br>d) সঞ্চিতা<br>e) পায়ের আওয়াজ পাওয়া যায়</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-10')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-10" class="ans-drawer">
+            <div class="exp-content">
+              <strong>a) অবরোধবাসিনী (১৯৩১)</strong> = বেগম রোকেয়া সাখাওয়াত হোসেন (নারী অধিকারমূলক প্রবন্ধগ্রন্থ)<br><strong>b) গোরা (১৯১০)</strong> = রবীন্দ্রনাথ ঠাকুর (মহাকাব্যিক রাজনৈতিক উপন্যাস)<br><strong>c) লালসালু (১৯৪৮)</strong> = সৈয়দ ওয়ালীউল্লাহ্ (সামাজিক কুসংস্কারবিরোধী ধ্রুপদী উপন্যাস)<br><strong>d) সঞ্চিতা (১৯২৮)</strong> = কাজী নজরুল ইসলাম (কাব্য সংকলন)<br><strong>e) পায়ের আওয়াজ পাওয়া যায় (১৯৭৬)</strong> = সৈয়দ শামসুল হক (মুক্তিযুদ্ধভিত্তিক কাব্যনাটক)
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="11" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১১</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">11. Write the appropriate preposition in the blank of the following sentences:<br>a) John Smith is good _____ mathematics.<br>b) Rizvi requested Rini _____ telephone to attend the meeting.<br>c) What are you so angry _____?<br>d) Look _____ the matter.<br>e) We should be devoted _____ God.</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-11')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-11" class="ans-drawer">
+            <div class="exp-content">
+              <strong>a) at</strong> (good at mathematics - দক্ষ অর্থে good at)<br><strong>b) by</strong> (by telephone - মাধ্যমে অর্থে by)<br><strong>c) about / at</strong> (angry about something / angry with a person)<br><strong>d) into</strong> (look into the matter - তদন্ত করা)<br><strong>e) to</strong> (devoted to God - অনুগত/নিবেদিতপ্রাণ)
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="12" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১২</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">12. Fill in the blanks with right form of verbs:<br>a) We are looking forward to (hear) _____ from you.<br>b) Bengali (speak) _____ in Calcutta also.<br>c) He said that he (will go) _____ home soon.<br>d) Two years (pass) _____ since he left home.<br>e) What did you (to do) _____ last night?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-12')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-12" class="ans-drawer">
+            <div class="exp-content">
+              <strong>a) hearing</strong> (looking forward to + Verb-ing)<br><strong>b) is spoken</strong> (Passive voice: Bengali is spoken in Calcutta also)<br><strong>c) would go</strong> (Sequence of Tense: Past + Future in the past: would go)<br><strong>d) have passed</strong> (since এর নিয়ম: Present Perfect + since + Past Indefinite)<br><strong>e) do</strong> (did এর পর Verb এর Base form: What did you do last night?)
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="13" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৩</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">13. Write the correct spelling:<br>a) Leftenent<br>b) Dilema<br>c) Misseleneous<br>d) Narvous<br>e) Dynosor</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-13')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-13" class="ans-drawer">
+            <div class="exp-content">
+              <strong>a) Lieutenant</strong> (অর্থ সেনা কর্মকর্তা / ক্যাপ্টেন)<br><strong>b) Dilemma</strong> (অর্থ উভয়সঙ্কট)<br><strong>c) Miscellaneous</strong> (অর্থ বিবিধ / নানা প্রকার)<br><strong>d) Nervous</strong> (অর্থ স্নায়বিক / উদ্বিগ্ন)<br><strong>e) Dinosaur</strong> (অর্থ প্রাগৈতিহাসিক দৈত্যাকার সরীসৃপ)
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="14" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৪</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">14. Translate following sentences into English:<br>a) বাংলাদেশ একটি উন্নয়নশীল দেশ।<br>b) তুমি কি কখনও বিদেশ গিয়েছ?<br>c) ঢাকা একটি জনবহুল শহর।<br>d) আমি কখনও হিমালয় পর্বত দেখিনি।<br>e) সূর্য পূর্বদিকে ওঠে।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-14')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-14" class="ans-drawer">
+            <div class="exp-content">
+              <strong>a)</strong> Bangladesh is a developing country.<br><strong>b)</strong> Have you ever been abroad? (বা <em>Have you ever gone abroad?</em>)<br><strong>c)</strong> Dhaka is a populous city. (বা <em>a densely populated city.</em>)<br><strong>d)</strong> I have never seen the Himalayas.<br><strong>e)</strong> The sun rises in the east.
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="15" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৫</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">15. Make sentences with appropriate meaning of the following idioms:<br>a) A bed of roses<br>b) A burning question<br>c) A dark horse<br>d) At home<br>e) Null and void</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-15')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-15" class="ans-drawer">
+            <div class="exp-content">
+              <strong>a) A bed of roses</strong> (আরামদায়ক বা সুখকর অবস্থা) — Life is not a bed of roses; it has challenges and struggles.<br><strong>b) A burning question</strong> (গুরুত্বপূর্ণ আলোচিত বিষয়) — Inflation and commodity price hike is the burning question in our country now.<br><strong>c) A dark horse</strong> (অপরিচিত কিন্তু চমকপ্রদ ব্যক্তি) — The newcomer proved to be a dark horse by securing the top position.<br><strong>d) At home</strong> (দক্ষ / স্বাচ্ছন্দ্যময়) — He is quite at home in English grammar.<br><strong>e) Null and void</strong> (বাতিল) — The supreme court declared the controversial law null and void.
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="16" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৬</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">16. What are the opposite gender of the following words?<br>a) Dog<br>b) Nephew<br>c) Poet<br>d) Master<br>e) Uncle</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-16')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-16" class="ans-drawer">
+            <div class="exp-content">
+              <strong>a) Dog</strong> — Bitch<br><strong>b) Nephew</strong> — Niece<br><strong>c) Poet</strong> — Poetess (বা <em>Female poet</em>)<br><strong>d) Master</strong> — Mistress<br><strong>e) Uncle</strong> — Aunt
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="17" data-subject="সাধারণ জ্ঞান" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৭</span>
+            <span class="q-meta-tag">সাধারণ জ্ঞান</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">সাধারণ জ্ঞান</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">17. সংক্ষিপ্ত উত্তর দিন:<br>a) ঢাকা সর্বপ্রথম বাংলার রাজধানী হয় কত সালে?<br>b) ভাষা আন্দোলনের প্রথম সংগঠন কি?<br>c) বাংলাদেশকে প্রথম কোন দেশ স্বীকৃতি দেয়?<br>d) বাংলাদেশের মুদ্রানীতি প্রণয়ন করে কোন প্রতিষ্ঠান?<br>e) বাংলাদেশের নিজস্ব স্যাটেলাইটের নাম কি?<br>f) “চ্যাম্পিয়ন অব দ্য আর্থ” কি বিষয়ক পুরস্কার?<br>g) মিয়ানমারের সীমান্তরক্ষী বাহিনীর নাম কি?<br>h) পৃথিবীর ফুসফুস বলা হয় কাকে?<br>i) কম্পিউটারের কোন অংশ সকল কার্যক্রম নিয়ন্ত্রণ করে?<br>j) কম্পিউটারের অস্থায়ী মেমোরিকে কি বলে?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-17')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-17" class="ans-drawer">
+            <div class="exp-content">
+              <strong>a) ১৬১০ সালে</strong> (মুঘল সুবাদার ইসলাম খানের সময়)।<br><strong>b) তমদ্দুন মজলিস</strong> (২ সেপ্টেম্বর ১৯৪৭ সালে অধ্যাপক আবুল কাসেমের নেতৃত্বে গঠিত)।<br><strong>c) ভুটান</strong> (৬ ডিসেম্বর ১৯৭১ সকালে; একই দিন দুপুরে ভারত স্বীকৃতি দেয়)।<br><strong>d) বাংলাদেশ ব্যাংক</strong> (কেন্দ্রীয় ব্যাংক)।<br><strong>e) বঙ্গবন্ধু স্যাটেলাইট-১</strong> (উৎক্ষেপণ: ১২ মে ২০১৮)।<br><strong>f) পরিবেশ বিষয়ক পুরস্কার</strong> (জাতিসংঘ পরিবেশ কর্মসূচি - UNEP কর্তৃক প্রদত্ত)।<br><strong>g) বর্ডার গার্ড পুলিশ (BGP)</strong> (পূর্বে নাম ছিল 'নাসাকা')।<br><strong>h) আমাজান বন (Amazon Rainforest)</strong>।<br><strong>i) সেন্ট্রাল প্রসেসিং ইউনিট (CPU)</strong>।<br><strong>j) র্যাম (RAM - Random Access Memory)</strong>।
+            </div>
+          </div>
+        </article>
+        
+      </main>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>PSC & IBA Written Job Solution Master Repository • নির্ভুল ও প্রামাণ্য ই-বুক সংস্করণ</p>
+      <p style="margin-top:0.25rem;">উৎস: মূল পরীক্ষার প্রশ্নপত্র ও অফিশিয়াল সমাধান সংগ্রহ</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      document.getElementById('themeToggleBtn').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    }
+
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.addEventListener('DOMContentLoaded', () => {
+          const btn = document.getElementById('themeToggleBtn');
+          if (btn) btn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        });
+      }
+    })();
+
+    function toggleDrawer(id) {
+      const drawer = document.getElementById(id);
+      if (!drawer) return;
+      const isVisible = drawer.classList.contains('open');
+      drawer.classList.toggle('open');
+      const toggleBtn = drawer.previousElementSibling;
+      if (toggleBtn) {
+        const icon = toggleBtn.querySelector('.toggle-icon');
+        if (icon) icon.textContent = isVisible ? '▼' : '▲';
+      }
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const subject = btn.getAttribute('data-subject');
+        document.querySelectorAll('.q-card').forEach(card => {
+          if (subject === 'all' || card.getAttribute('data-subject') === subject) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    let baseFontSize = 100;
+    function adjustFontSize(dir) {
+      if (dir === 0) baseFontSize = 100;
+      else baseFontSize += dir * 8;
+      if (baseFontSize < 80) baseFontSize = 80;
+      if (baseFontSize > 130) baseFontSize = 130;
+      document.documentElement.style.fontSize = baseFontSize + '%';
+    }
+  </script>
+</body>
+</html>

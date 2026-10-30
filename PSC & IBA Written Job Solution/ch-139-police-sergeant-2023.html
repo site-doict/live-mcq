@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বাংলাদেশ পুলিশ — সার্জেন্ট | প্রামাণ্য সমাধান</title>
+  <link rel="stylesheet" href="css/paper-textures.css">
+  <link rel="stylesheet" href="css/bangla-fonts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Kalpurush&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\(', right: '\\)', display: false}]});">
+  </script>
+  <style>
+    :root {
+      --bg-page: #fdfbf7;
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: rgba(226, 232, 240, 0.8);
+      --accent-primary: #0284c7;
+      --accent-indigo: #6366f1;
+      --accent-emerald: #10b981;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #0f172a;
+      --bg-surface: rgba(30, 41, 59, 0.85);
+      --bg-card: rgba(30, 41, 59, 0.82);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: rgba(51, 65, 85, 0.8);
+      --accent-primary: #38bdf8;
+      --accent-indigo: #818cf8;
+      --accent-emerald: #34d399;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.65;
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Top Nav */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+    }
+    .back-btn {
+      text-decoration: none;
+      color: var(--accent-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .back-btn:hover { text-decoration: underline; }
+    .nav-controls { display: flex; align-items: center; gap: 0.75rem; }
+    .theme-btn, .font-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .theme-btn:hover, .font-btn:hover {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Chapter Header */
+    .ch-header {
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .ch-title {
+      font-size: 1.65rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+    }
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.05rem;
+      display: block;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 0.25rem;
+    }
+    .ch-meta-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .ch-badge {
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--accent-primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+
+    /* Sketchnotes Section */
+    .sk-container {
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+    .sk-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .sk-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.15rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .sk-box h4 {
+      font-size: 1.05rem;
+      color: var(--accent-indigo);
+      margin-bottom: 0.65rem;
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 0.35rem;
+    }
+    .sk-box ul { list-style-type: none; }
+    .sk-box li {
+      font-size: 0.92rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+    .sk-box li strong { color: var(--text-main); }
+
+    /* Part 2: Question Section */
+    .part2-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .part2-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .subject-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .tab-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.4rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Question Cards */
+    .q-card {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .q-header {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.85rem;
+    }
+    .q-num {
+      font-weight: 700;
+      color: var(--accent-primary);
+      font-size: 1.05rem;
+    }
+    .q-meta-tag {
+      background: rgba(2, 132, 199, 0.08);
+      color: var(--accent-primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .q-body {
+      margin-bottom: 1rem;
+    }
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* Answer Drawer */
+    .ans-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(2, 132, 199, 0.06);
+      border: 1px solid rgba(2, 132, 199, 0.15);
+      color: var(--accent-primary);
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+    .ans-toggle:hover { background: rgba(2, 132, 199, 0.12); }
+    .ans-drawer {
+      display: none;
+      padding: 1.25rem;
+      margin-top: 0.75rem;
+      background: rgba(0, 0, 0, 0.02);
+      border-left: 3px solid var(--accent-primary);
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    }
+    [data-theme="dark"] .ans-drawer { background: rgba(255, 255, 255, 0.02); }
+    .ans-drawer.open { display: block; }
+    .exp-content {
+      font-size: 0.98rem;
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+    .exp-content p { margin-bottom: 0.75rem; }
+    .exp-content ul, .exp-content ol { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+    .exp-content li { margin-bottom: 0.35rem; }
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.92rem;
+    }
+    .bcs-table th, .bcs-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+    }
+    .bcs-table th {
+      background: rgba(2, 132, 199, 0.08);
+      font-weight: 600;
+      color: var(--accent-primary);
+    }
+
+    /* Typography Protection */
+    .q-card, .q-card *, .q-text, .q-text *, .ans-drawer, .ans-drawer *,
+    .bcs-table, .bcs-table * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body class="paper-burnt-edge font-kornofuli">
+  <div class="container">
+    <!-- Top Navigation -->
+    <header class="top-nav">
+      <a href="index.html" class="back-btn">
+        <span>←</span> সূচিপত্রে ফিরে যান
+      </a>
+      <div class="nav-controls">
+        <button class="font-btn" onclick="adjustFontSize(-1)">A-</button>
+        <button class="font-btn" onclick="adjustFontSize(0)">A</button>
+        <button class="font-btn" onclick="adjustFontSize(1)">A+</button>
+        <button class="theme-btn" onclick="toggleTheme()" id="themeToggleBtn">🌙</button>
+      </div>
+    </header>
+
+    <!-- Chapter Header -->
+    <section class="ch-header">
+      <h1 class="ch-title font-kornofuli">
+        বাংলাদেশ পুলিশ — সার্জেন্ট
+        <span class="ch-en">Bangladesh Police - Sergeant 2023</span>
+      </h1>
+      <div class="ch-meta-wrap">
+        <span class="ch-badge">📋 পরীক্ষা নং: ১৩৯</span>
+        <span class="ch-badge">🏛️ অন্যান্য নন-ক্যাডার ও স্বায়ত্তশাসিত প্রতিষ্ঠান</span>
+        <span class="ch-badge">📅 তারিখ: ১৮.০২.২০২৩</span>
+        <span class="ch-badge">⏱️ সময়: ৯০ মিনিট</span>
+        <span class="ch-badge">🎯 পূর্ণমান: ১০০</span>
+        <span class="ch-badge">🔢 মোট প্রশ্ন: ১৯টি</span>
+        <span class="ch-badge">📄 পৃষ্ঠা: ৭৮৬–৭৯২</span>
+      </div>
+    </section>
+
+    
+    <section class="sk-part1">
+      <div class="sk-badge">Part 1: Authentic Revision Notes &amp; Formulas</div>
+      <h3 class="sk-title font-kornofuli">বাংলাদেশ পুলিশ — সার্জেন্ট প্রামাণ্য রিভিশন নোট ও সূত্রাবলি</h3>
+      <p class="sk-desc font-kornofuli">
+        এই অধ্যায়ের মূল পরীক্ষার প্রশ্ন ও বিশদ সমাধান থেকে সংকলিত হ্যান্ডনোট, গাণিতিক সূত্র ও সারসংক্ষেপ:
+      </p>
+      <div class="sk-grid">
+        
+        <div class="sk-box">
+          <h4 class="font-kornofuli">পুলিশ সার্জেন্ট ভূমিকা ও দায়িত্বাবলি</h4>
+          <div>🔹 <strong>ট্রাফিক ব্যবস্থাপনা:</strong> সড়ক নিরাপত্তা নিশ্চিতকরণ, ট্রাফিক আইন প্রয়োগ এবং যানজট নিরসনে রাজপথের সম্মুখ সারির কর্মকর্তা।<br>🔹 <strong>নেতৃত্ব ও শৃঙ্খলা:</strong> অধস্তন কনস্টেবলদের তদারকি, দুর্ঘটনা তদন্ত এবং ডিজিটাল ট্রাফিক আইনানুগ ফাইন ও মামলা প্রক্রিয়াকরণ।</div>
+        </div>
+
+        <div class="sk-box">
+          <h4 class="font-kornofuli">বীজগণিত ও সেট তত্ত্বের শর্টকাট</h4>
+          <div>🔹 <strong>সেট ও পরীক্ষার্থী সংখ্যা:</strong> উভয় বিষয়ে পাস \( = 100 - (\text{অনলি এক বিষয়ে পাস}) \)। এখানে \( 70\% \equiv 350 \implies 100\% = 500 \) জন।<br>🔹 <strong>বীজগণিতীয় মান:</strong> \( 2a^2 + 2b^2 = (a+b)^2 + (a-b)^2 = 13^2 + 3^2 = 169 + 9 = 178 \)।</div>
+        </div>
+
+        <div class="sk-box">
+          <h4 class="font-kornofuli">আইসিটি ও আধুনিক সমাজ প্রবন্ধ রূপরেখা</h4>
+          <div>🔹 <strong>আইসিটির প্রভাব:</strong> দ্রুত ডাটা ট্রান্সমিশন, ই-কমার্স, ফ্রিল্যান্সিং এবং স্মার্ট নাগরিক সেবা রূপান্তর।<br>🔹 <strong>অর্থনৈতিক অবদান:</strong> সফটওয়্যার রপ্তানি ও আইটি আউটসোর্সিংয়ের মাধ্যমে কর্মসংস্থান সৃষ্টি ও জিডিপিতে সংযোজন।</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PART 2: Written Examination Question Engine -->
+    <section>
+      <div class="part2-header">
+        <div class="part2-title">
+          <span>📝</span> Part 2: বিগত পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক ও সমাধান
+        </div>
+      </div>
+
+      <!-- Subject Filter Tabs -->
+      <nav class="subject-tabs">
+        <button class="tab-btn active" data-subject="all">সকল বিষয় (১৯)</button>
+        <button class="tab-btn" data-subject="বাংলা">বাংলা (৫)</button>
+        <button class="tab-btn" data-subject="ইংরেজি">ইংরেজি (৬)</button>
+        <button class="tab-btn" data-subject="গণিত">গণিত (৮)</button>
+      </nav>
+
+      <!-- Question Cards List -->
+      <main id="questionContainer">
+        
+        <article class="q-card" data-qid="1" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">01. রচনা লিখুন: দ্রব্যমূল্যের ঊর্ধ্বগতি ও প্রতিকার।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-1')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-1" class="ans-drawer">
+            <div class="exp-content">
+              <strong>দ্রব্যমূল্যের ঊর্ধ্বগতি ও প্রতিকার:</strong><br><strong>ভূমিকা:</strong> সাধারণ মানুষের জীবনযাত্রার মান ও অর্থনৈতিক স্বস্তির সঙ্গে নিত্যপ্রয়োজনীয় পণ্যের মূল্যের সরাসরি সম্পর্ক বিদ্যমান। সাম্প্রতিক সময়ে চাল, ডাল, তেল, চিনি, পেঁয়াজ ও সবজিসহ প্রায় প্রতিটি ভোগ্যপণ্যের অস্বাভাবিক মূল্যবৃদ্ধি জনজীবনে তীব্র সংকট ও অস্বস্তি তৈরি করেছে।<br><strong>মূল্যবৃদ্ধির প্রধান কারণসমূহ:</strong><br>১. অসাধু ব্যবসায়ী সিন্ডিকেট, কৃত্রিম সংকট তৈরি ও গুদামজাতকরণ (হোর্ডিং)।<br>২. আন্তর্জাতিক বাজারে কাঁচামাল ও জ্বালানি তেলের মূল্যবৃদ্ধি এবং ডলারের বিপরীতে টাকার অবমূল্যায়ন।<br>৩. সরবরাহ শৃঙ্খলে পরিবহন ব্যয় ও চাঁদাবাজি এবং মধ্যস্বত্বভোগীদের মাত্রাতিরিক্ত মুনাফা লোভ।<br>৪. প্রাকৃতিক দুর্যোগের কারণে অভ্যন্তরীণ কৃষি উৎপাদন ব্যাহত হওয়া।<br><strong>জনজীবনে বিরূপ প্রভাব:</strong> নির্দিষ্ট আয়ের মধ্যবিত্ত ও নিম্নবিত্ত মানুষ তাদের পরিবারের খাদ্য ও পুষ্টির চাহিদা কমাতে বাধ্য হচ্ছে। সঞ্চয় ভেঙে চিকিৎসা ও শিক্ষার মতো মৌলিক অধিকার হুমকির মুখে পড়ছে।<br><strong>প্রতিকার ও সুপারিশমালা:</strong><br>১. টিসিবি (TCB)-এর মাধ্যমে সারাদেশে ন্যায্যমূল্যে পণ্য বিক্রি কার্যক্রম ব্যাপকভাবে বাড়ানো।<br>২. ভোক্তা অধিকার সংরক্ষণ অধিদপ্তর ও প্রশাসনের নিয়মিত বাজার তদারকি এবং সিন্ডিকেটের বিরুদ্ধে দৃষ্টান্তমূলক আইনগত শাস্তি নিশ্চিত করা।<br>৩. পণ্যের সরবরাহ চেইনে মধ্যস্বত্বভোগী হ্রাস করে উৎপাদক থেকে ভোক্তার কাছে সরাসরি পণ্য পৌঁছানোর বিপণন ব্যবস্থা গড়ে তোলা।<br>৪. অভ্যন্তরীণ কৃষি উৎপাদন বৃদ্ধি এবং আমদানি শুল্ক যৌক্তিক পর্যায়ে নামিয়ে আনা।<br><strong>উপসংহার:</strong> দ্রব্যমূল্য নিয়ন্ত্রণ কেবল অর্থনৈতিক বিষয় নয়, এটি সামাজিক স্থিতিশীলতা ও সুশাসনের মাপকাঠি। সম্মিলিত কার্যকর পদক্ষেপই পারে সাধারণ মানুষের মুখে স্বস্তি ফিরিয়ে আনতে।
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="2" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ২</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">02. ভাব সম্প্রসারণ করুনঃ সুশিক্ষিত লোক মাত্রই স্বশিক্ষিত।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-2')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-2" class="ans-drawer">
+            <div class="exp-content">
+              <strong>সুশিক্ষিত লোক মাত্রই স্বশিক্ষিত:</strong><br><strong>মূলভাব:</strong> প্রাতিষ্ঠানিক সার্টিফিকেট অর্জন করলেই প্রকৃত শিক্ষিত হওয়া যায় না; আত্মপ্রচেষ্টা ও স্ব-উদ্যোগে অর্জিত জ্ঞানই মানুষকে যথার্থ সুশিক্ষিত করে তোলে।<br><strong>ভাব-সম্প্রসারণ:</strong> মানবশিশু সম্ভাবনা নিয়ে জন্মগ্রহণ করে। স্কুল, কলেজ ও বিশ্ববিদ্যালয়ের আনুষ্ঠানিক শিক্ষা কেবল মানুষকে জ্ঞানের পথ দেখায় এবং চিন্তার দুয়ার উন্মোচন করে দেয়। কিন্তু সেই পথে হেঁটে নিজের মন ও মননকে গড়ে তোলার দায়িত্ব ব্যক্তির নিজের। প্রমথ চৌধুরীর মতে, শিক্ষকের সার্থকতা শিক্ষার্থীকে শিক্ষা দেওয়ায় নয়, তাকে শিক্ষা গ্রহণে সক্ষম করে তোলায়। যে ব্যক্তি নিজের কৌতূহল, অধ্যবসায় ও অনুসন্ধিৎসার মাধ্যমে জগত ও জীবনকে জানতে চায়, সেই প্রকৃত স্বশিক্ষিত। সক্রেটিস, অ্যারিস্টটল, রবীন্দ্রনাথ, নজরুল বা নিউটন প্রাতিষ্ঠানিক উচ্চ ডিগ্রির চেয়ে স্বশিক্ষার গভীর সাধনাতেই অমর হয়েছেন। ডিগ্রিধারী মানুষ যদি বিবেকহীন, স্বার্থপর ও মুক্তচিন্তাবিবর্জিত হয়, তবে সে সুশিক্ষিত নয়।<br><strong>উপসংহার:</strong> স্বশিক্ষা ছাড়া শিক্ষার প্রকৃত উদ্দেশ্য সাধন অসম্ভব। আত্মোপলব্ধি, নৈতিকতাবোধ ও মানবিক গুণাবলিসম্পন্ন স্বশিক্ষিত মানুষই সমাজ ও সভ্যতার প্রকৃত কান্ডারি।
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="3" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৩</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">03. এক কথায় প্রকাশ করুন:<br>a) আকাশে চড়ে যে<br>b) বলা হয়েছে যা<br>c) পূর্বে যা ঘটেনি<br>d) একবার ফল দিয়ে যে গাছ মরে যায়<br>e) একই গুরুর শিষ্য যারা</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-3')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-3" class="ans-drawer">
+            <div class="exp-content">
+              <strong>a) আকাশে চড়ে যে</strong> = খেচর / আকাশচারী<br><strong>b) বলা হয়েছে যা</strong> = উক্ত<br><strong>c) পূর্বে যা ঘটেনি</strong> = অভূতপূর্ব<br><strong>d) একবার ফল দিয়ে যে গাছ মরে যায়</strong> = ওষধি<br><strong>e) একই গুরুর শিষ্য যারা</strong> = সতীর্থ
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="4" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৪</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">04. অর্থসহ রচনা করুন (বাগধারা):<br>a) টাকার কুমির<br>b) দুধের মাছি<br>c) কৈ মাছের প্রাণ<br>d) মাকাল ফল<br>e) ঘোড়া রোগ</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-4')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-4" class="ans-drawer">
+            <div class="exp-content">
+              <strong>a) টাকার কুমির</strong> (ধনী ব্যক্তি) — এলাকায় এক সময় নিঃস্ব থাকা ব্যক্তিটি দুর্নীতির বদৌলতে এখন টাকার কুমির বনে গেছে।<br><strong>b) দুধের মাছি</strong> (সুসময়ের বন্ধু) — সুদিনে চারদিকে দুধের মাছির অভাব হয় না, কিন্তু দুর্দিনে কারও ছায়াও মেলে না।<br><strong>c) কৈ মাছের প্রাণ</strong> (যা সহজে মরে না / দীর্ঘজীবী) — এতো বড় সড়ক দুর্ঘটনার পরেও সে বেঁচে ফিরেছে, একেই বলে কৈ মাছের প্রাণ।<br><strong>d) মাকাল ফল</strong> (অনন্তসারশূন্য / দেখতে সুন্দর কিন্তু গুণে অন্তঃসারশূন্য) — চালচলনে ভদ্রলোক মনে হলেও লোকটির চরিত্র আসলে মাকাল ফলের মতো।<br><strong>e) ঘোড়া রোগ</strong> (সাধ্যের অতিরিক্ত সাধ) — সামান্য বেতনের কেরানি হয়ে দামি গাড়ি কেনার স্বপ্ন দেখা নিছক ঘোড়া রোগ ছাড়া কিছু নয়।
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="5" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৫</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">05. বাংলায় অনুবাদ করুনঃ The students of Bangladesh played a significant role during the freedom struggle in 1971. Their sacrifice, zeal, heroism and gallantry constitute an important part of our national history. During the nine-month struggle, numerous students left their places of learning and underwent military training to fight against the Pakistani Occupation Forces. The student community of this country has always been conscious about their socio-political responsibilities. They have crafted the history of sacrificing their tender lives for the cause of mother tongue, democracy and motherland. But we should remember that it is hard to achieve freedom but it is harder to preserve it.</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-5')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-5" class="ans-drawer">
+            <div class="exp-content">
+              <strong>বঙ্গানুবাদ:</strong><br>১৯৭১ সালের স্বাধীনতা সংগ্রামে বাংলাদেশের ছাত্রসমাজ তাৎপর্যপূর্ণ ভূমিকা পালন করেছিল। তাদের আত্মত্যাগ, উদ্দীপনা, বীরত্ব ও শৌর্যবীর্য আমাদের জাতীয় ইতিহাসের এক অবিচ্ছেদ্য অংশ। দীর্ঘ নয় মাসের রক্তক্ষয়ী যুদ্ধের সময় অগণিত ছাত্রছাত্রী বিদ্যাপীঠ ছেড়ে পাকিস্তানি দখলদার বাহিনীর বিরুদ্ধে লড়াই করার জন্য সামরিক প্রশিক্ষণ গ্রহণ করেছিল। এদেশের ছাত্রসমাজ সবসময় তাদের সামাজিক-রাজনৈতিক দায়বদ্ধতা সম্পর্কে সচেতন ছিল। তারা মাতৃভাষা, গণতন্ত্র ও মাতৃভূমির জন্য তাদের তরুণ তাজা প্রাণ উৎসর্গ করার এক গৌরবোজ্জ্বল ইতিহাস রচনা করেছে। কিন্তু আমাদের মনে রাখা উচিত যে, স্বাধীনতা অর্জন করা যেমন কঠিন, তা রক্ষা করা আরও অনেক বেশি কঠিন।
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="6" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৬</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">06. Write an Essay on: Information and Communication Technology.</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-6')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-6" class="ans-drawer">
+            <div class="exp-content">
+              <strong>Information and Communication Technology (ICT)</strong><br><strong>Introduction:</strong> Information and Communication Technology (ICT) is the defining catalyst of the contemporary era. It encompasses computing hardware, software applications, telecommunications, and digital networks used for gathering, processing, storing, and disseminating data.<br><strong>Impact on Education and Business:</strong> ICT has democratized education through e-learning portals, digital textbooks, virtual classrooms, and open-source research repositories. In global business, ICT powers electronic commerce (e-commerce), enterprise resource planning (ERP), digital marketing, and instantaneous financial transactions through mobile financial services.<br><strong>The Bangladesh Context:</strong> Bangladesh has experienced phenomenal expansion in internet penetration, 4G/5G mobile telecommunications, national optical fiber networks, and digital administrative governance. Youth engagement in freelancing, software engineering, and business process outsourcing (BPO) generates valuable foreign remittances and technological self-reliance.<br><strong>Challenges:</strong> Cyber security threats, digital divides between rural and urban sectors, data piracy, and algorithmic job automation remain prominent hurdles.<br><strong>Conclusion:</strong> Embracing cutting-edge advancements in Artificial Intelligence, cloud computing, and big data will propel Bangladesh into an inclusive and knowledge-driven technological powerhouse.
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="7" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৭</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">07. Write a letter to your father about your dream of becoming a Sergeant of Bangladesh Police.</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-7')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-7" class="ans-drawer">
+            <div class="exp-content">
+              <strong>Letter Writing:</strong><br>18.02.2023<br>Dhaka, Bangladesh<br><br>My dear Father,<br>Please accept my heartfelt respect and salam. I hope you and mother are keeping well by the grace of Almighty Allah. Today, I am writing to share with you my long-cherished aspiration of joining the Bangladesh Police as a Sergeant.<br><br>A Police Sergeant holds a vital responsibility in maintaining highway and metropolitan traffic safety, upholding the rule of law on roads, preventing reckless driving, and serving citizens during emergencies. To me, wearing the prestigious uniform represents discipline, patriotism, courage, and an opportunity to serve people directly with honesty and integrity. I am diligently preparing myself both physically and academically to succeed in the competitive examinations.<br><br>Please pray for me so that I can achieve my goal and bring honor to our family and country.<br><br>With deepest love and respect,<br>Your loving son,<br>Tutul
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="8" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৮</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">08. Make Sentences with the following:<br>a) Red letter day<br>b) Bag and baggage<br>c) Hand to mouth<br>d) Black sheep<br>e) ABC</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-8')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-8" class="ans-drawer">
+            <div class="exp-content">
+              <strong>a) Red letter day</strong> (স্মরণীয় দিন) — The 26th March is a red letter day in our national history.<br><strong>b) Bag and baggage</strong> (তল্পিতল্পাসহ) — The corrupt tenant left the apartment bag and baggage overnight.<br><strong>c) Hand to mouth</strong> (দিন এনে দিন খাওয়া) — The poor rickshaw puller lives from hand to mouth.<br><strong>d) Black sheep</strong> (কুলাঙ্গার) — Every society has some black sheep who disgrace their family.<br><strong>e) ABC</strong> (প্রাথমিক জ্ঞান) — He doesn't know even the ABC of digital marketing.
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="9" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৯</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">09. Translate into English:<br>a) এখন কয়টা বাজে?<br>b) তিনি ঠান্ডা পানি পান করেন।<br>c) বলা সহজ করা কঠিন।<br>d) তিনি পরশুদিন ফিরবেন।<br>e) ঢাকার চারপাশে চারটি নদী।<br>f) বই পড়লে জ্ঞান বাড়ে।<br>g) পুকুরে মাছ আছে।<br>h) জাহাজ পানিতে ভাসে।<br>i) মেয়েটি দেখতে তার মায়ের মত।<br>j) বাংলাদেশ সম্ভাবনাময় দেশ।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-9')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-9" class="ans-drawer">
+            <div class="exp-content">
+              <strong>a)</strong> What time is it now? (বা <em>What is the time by your watch?</em>)<br><strong>b)</strong> He drinks cold water.<br><strong>c)</strong> It is easy to say but difficult to do.<br><strong>d)</strong> He will return the day after tomorrow.<br><strong>e)</strong> Dhaka is surrounded by four rivers.<br><strong>f)</strong> Reading books increases knowledge.<br><strong>g)</strong> There are fish in the pond.<br><strong>h)</strong> The ship floats on water.<br><strong>i)</strong> The girl takes after her mother.<br><strong>j)</strong> Bangladesh is a country of great potential (বা <em>a promising country</em>).
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="10" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১০</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">10. Fill in the blanks:<br>a) _____ Earth moves round _____ Sun.<br>b) He died _____ fever.<br>c) Dhaka stands _____ the bank _____ Buriganga.<br>d) He belongs _____ this book.<br>e) _____ you remain honest, you will succeed.</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-10')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-10" class="ans-drawer">
+            <div class="exp-content">
+              <strong>a) The, the</strong> (<u>The</u> Earth moves round <u>the</u> Sun.)<br><strong>b) of</strong> (He died <u>of</u> fever - রোগে মৃত্যু বোঝালে die of বসে।)<br><strong>c) on, of</strong> (Dhaka stands <u>on</u> the bank <u>of</u> Buriganga.)<br><strong>d) to</strong> (The book belongs <u>to</u> him / He belongs <u>to</u> this organization.)<br><strong>e) If</strong> (<u>If</u> you remain honest, you will succeed.)
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="11" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১১</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">11. Read the text below and answer the questions:<br>Even a few years ago very few people had even heard of the word Internet. Now it would be difficult to find anyone who has not heard of it. Many of us use it on a regular basis and most of us have access to it at our homes too. The net in the internet stands for network, which is done by two or more computers connected together so that information can be shared or sent from one to the other. Internet is a vast resource for all forms of information...<br>Questions:<br>a) What does ‘net’ mean?<br>b) Can a single computer make a network?<br>c) What purposes can internet be used for?<br>d) Why does one have to be cautious while using internet?<br>e) Why will internet be important in the future?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-11')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-11" class="ans-drawer">
+            <div class="exp-content">
+              <strong>Answers:</strong><br><strong>a)</strong> In the word 'Internet', 'net' is the short form of 'network'.<br><strong>b)</strong> No, a single computer cannot make a network; it requires two or more interconnected computers to share information.<br><strong>c)</strong> The internet can be used for research, education, communication, entertainment, business, online banking, and information retrieval.<br><strong>d)</strong> Since anyone can share anything on the web, one must exercise critical judgment and common sense to avoid misinformation, scams, and cyber threats.<br><strong>e)</strong> The internet will connect the physical and digital worlds and serve as the foundational driving force behind automation, artificial intelligence, and economic globalization.
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="12" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১২</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৩</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">12. উৎপাদকে বিশ্লেষণ কর: \(x^2 + 14x + 40\)</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-12')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-12" class="ans-drawer">
+            <div class="exp-content">
+              <strong>\((x + 10)(x + 4)\)</strong>।<br><em>সমাধান:<br>প্রদত্ত রাশি \( = x^2 + 14x + 40\)<br>\( = x^2 + 10x + 4x + 40 \quad [\text{যেহেতু } 10 \times 4 = 40 \text{ এবং } 10 + 4 = 14]\)<br>\( = x(x + 10) + 4(x + 10)\)<br>\( = (x + 10)(x + 4)\)।</em>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="13" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৩</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৪</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">13. \(a + b = 13\) এবং \(a - b = 3\) হলে \(2a^2 + 2b^2\) এবং \(ab\) এর মান কত?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-13')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-13" class="ans-drawer">
+            <div class="exp-content">
+              <strong>\(2a^2 + 2b^2 = 178\) এবং \(ab = 40\)</strong>।<br><em>সমাধান:<br>আমরা জানি,<br>\(2a^2 + 2b^2 = 2(a^2 + b^2) = (a + b)^2 + (a - b)^2\)<br>\( = (13)^2 + (3)^2 = 169 + 9 = 178\)।<br><br>আবার,<br>\(ab = \frac{(a + b)^2 - (a - b)^2}{4}\)<br>\( = \frac{(13)^2 - (3)^2}{4} = \frac{169 - 9}{4} = \frac{160}{4} = 40\)।<br>অতএব নির্ণেয় মান যথাক্রমে ১৭৮ এবং ৪০।</em>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="14" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৪</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৩</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">14. একটি আয়তাকার ক্ষেত্রের দৈর্ঘ্য প্রস্থের ৩ গুণ। এর পরিসীমা ৪০ মিটার হলে, দৈর্ঘ্য ও প্রস্থ নির্ণয় কর।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-14')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-14" class="ans-drawer">
+            <div class="exp-content">
+              <strong>দৈর্ঘ্য ১৫ মিটার এবং প্রস্থ ৫ মিটার</strong>।<br><em>সমাধান:<br>ধরি, আয়তাকার ক্ষেত্রের প্রস্থ \(x\) মিটার।<br>\(\therefore\) দৈর্ঘ্য \( = 3x\) মিটার।<br><br>আমরা জানি, পরিসীমা \( = 2(\text{দৈর্ঘ্য} + \text{প্রস্থ})\)<br>প্রশ্নমতে, \(2(3x + x) = 40\)<br>\(\implies 2 \times 4x = 40\)<br>\(\implies 8x = 40\)<br>\(\implies x = \frac{40}{8} = 5\)।<br><br>অতএব, ক্ষেত্রের প্রস্থ ৫ মিটার এবং দৈর্ঘ্য \( = 3 \times 5 = 15\) মিটার।</em>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="15" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৫</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৪</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">15. একটি চৌবাচ্চায় ৮,০০০ লিটার পানি ধরে। চৌবাচ্চাটির দৈর্ঘ্য ২.৫৬ মিটার এবং প্রস্থ ১.২৫ মিটার হলে চৌবাচ্চার গভীরতা কত?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-15')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-15" class="ans-drawer">
+            <div class="exp-content">
+              <strong>২.৫ মিটার</strong>।<br><em>সমাধান:<br>আমরা জানি, ১,০০০ লিটার \( = 1 \) ঘনমিটার।<br>\(\therefore\) ৮,০০০ লিটার \( = \frac{8000}{1000} = 8 \) ঘনমিটার।<br>অর্থাৎ চৌবাচ্চার আয়তন \( = 8 \) ঘনমিটার।<br><br>চৌবাচ্চাটির তলার ক্ষেত্রফল \( = \text{দৈর্ঘ্য} \times \text{প্রস্থ} = 2.56 \times 1.25 = 3.2 \) বর্গমিটার।<br><br>আমরা জানি, আয়তন \( = \text{তলার ক্ষেত্রফল} \times \text{গভীরতা}\)<br>\(\therefore \text{গভীরতা} = \frac{\text{আয়তন}}{\text{তলার ক্ষেত্রফল}} = \frac{8}{3.2} = 2.5 \) মিটার।</em>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="16" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৬</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৪</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">16. একটি স্কুলে ইংরেজিতে ৯০% এবং গণিতে ৮০% শিক্ষার্থী পাশ করে। উভয় বিষয়ে কেউই ফেল করেনি। উভয় বিষয়ে পাশ করেছে ৩৫০ জন। ঐ স্কুলে কত জন শিক্ষার্থী পরীক্ষা দিয়েছে?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-16')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-16" class="ans-drawer">
+            <div class="exp-content">
+              <strong>৫০০ জন</strong>।<br><em>সমাধান:<br>ধরি, মোট পরীক্ষার্থী ১০০%।<br>যেহেতু উভয় বিষয়ে কেউই ফেল করেনি, সুতরাং কেবল ইংরেজিতে ফেল শূন্য এবং কেবল গণিতে ফেল শূন্য।<br>কেবল ইংরেজিতে পাস করে \( = 100\% - 80\% = 20\%\)।<br>কেবল গণিতে পাস করে \( = 100\% - 90\% = 10\%\)।<br><br>অতএব উভয় বিষয়ে পাস করে \( = 100\% - (20\% + 10\%) = 70\%\)।<br><br>শর্তমতে, ৭০% শিক্ষার্থী সমান ৩৫০ জন।<br>\(\therefore 1\% \text{ শিক্ষার্থী} = \frac{350}{70} = 5 \) জন।<br>\(\therefore 100\% \text{ শিক্ষার্থী} = 5 \times 100 = 500 \) জন।<br>অতএব মোট পরীক্ষার্থীর সংখ্যা ৫০০ জন।</em>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="17" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৭</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৩</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">17. একজন দোকানদার প্রতি হালি ডিম ২৫ টাকা দরে ক্রয় করে প্রতি হালি ৫৬ টাকা করে বিক্রয় করলে তার শতকরা কত লাভ হবে?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-17')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-17" class="ans-drawer">
+            <div class="exp-content">
+              <strong>১২৪%</strong>।<br><em>সমাধান:<br>১ হালি ডিমের ক্রয়মূল্য \( = 25 \) টাকা।<br>১ হালি ডিমের বিক্রয়মূল্য \( = 56 \) টাকা।<br>\(\therefore\) লাভ হয় \( = 56 - 25 = 31 \) টাকা।<br><br>২৫ টাকায় লাভ হয় ৩১ টাকা।<br>\(\therefore\) ১০০ টাকায় লাভ হয় \( = \frac{31 \times 100}{25} = 31 \times 4 = 124 \) টাকা।<br>অতএব, শতকরা লাভ ১২৪%।</em>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="18" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৮</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৪</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">18. একটি ছাগল ৮% ক্ষতিতে বিক্রয় করা হলো, ছাগলটি আরো ৮০০ টাকা বেশি মূল্যে বিক্রয় করলে ৮% লাভ হতো। ছাগলটির ক্রয়মূল্য কত?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-18')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-18" class="ans-drawer">
+            <div class="exp-content">
+              <strong>৫,০০০ টাকা</strong>।<br><em>সমাধান:<br>ধরি, ছাগলটির ক্রয়মূল্য ১০০ টাকা।<br>৮% ক্ষতিতে বিক্রয়মূল্য \( = 100 - 8 = 92 \) টাকা।<br>৮% লাভে বিক্রয়মূল্য \( = 100 + 8 = 108 \) টাকা।<br>বিক্রয়মূল্যের ব্যবধান \( = 108 - 92 = 16 \) টাকা।<br><br>বিক্রয়মূল্য ১৬ টাকা বেশি হলে ক্রয়মূল্য ১০০ টাকা।<br>\(\therefore\) বিক্রয়মূল্য ১ টাকা বেশি হলে ক্রয়মূল্য \( = \frac{100}{16} \) টাকা।<br>\(\therefore\) বিক্রয়মূল্য ৮০০ টাকা বেশি হলে ক্রয়মূল্য \( = \frac{100 \times 800}{16} = 100 \times 50 = 5,000 \) টাকা।<br>অতএব ছাগলটির ক্রয়মূল্য ৫,০০০ টাকা।</em>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="19" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৯</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">19. একটি আয়তাকার বাগানের দৈর্ঘ্য ৮০ মিটার এবং প্রস্থ ৬০ মিটার। বাগানের ভিতর চারপাশে ৪ মিটার প্রস্থের একটি রাস্তা আছে। প্রতি বর্গমিটার রাস্তা ঠিক করতে ৭.২৫ টাকা লাগলে পুরো রাস্তা ঠিক করতে কত খরচ হবে?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-19')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-19" class="ans-drawer">
+            <div class="exp-content">
+              <strong>৭,৬৫৬ টাকা</strong>।<br><em>সমাধান:<br>রাস্তাসহ বাগানের দৈর্ঘ্য \( = 80 \) মিটার এবং প্রস্থ \( = 60 \) মিটার।<br>\(\therefore\) সম্পূর্ণ বাগানের ক্ষেত্রফল \( = 80 \times 60 = 4,800 \) বর্গমিটার।<br><br>যেহেতু রাস্তাটি বাগানের ভেতরের চারপাশে অবস্থিত:<br>রাস্তা বাদে বাগানের দৈর্ঘ্য \( = 80 - (4 \times 2) = 80 - 8 = 72 \) মিটার।<br>রাস্তা বাদে বাগানের প্রস্থ \( = 60 - (4 \times 2) = 60 - 8 = 52 \) মিটার।<br>\(\therefore\) রাস্তা বাদে বাগানের ক্ষেত্রফল \( = 72 \times 52 = 3,744 \) বর্গমিটার।<br><br>\(\therefore\) রাস্তার ক্ষেত্রফল \( = 4,800 - 3,744 = 1,056 \) বর্গমিটার।<br><br>১ বর্গমিটার রাস্তা সংস্কারে খরচ হয় ৭.২৫ টাকা।<br>\(\therefore 1,056\) বর্গমিটার রাস্তা সংস্কারে মোট খরচ হবে \( = 1,056 \times 7.25 = 7,656 \) টাকা।</em>
+            </div>
+          </div>
+        </article>
+        
+      </main>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>PSC & IBA Written Job Solution Master Repository • নির্ভুল ও প্রামাণ্য ই-বুক সংস্করণ</p>
+      <p style="margin-top:0.25rem;">উৎস: মূল পরীক্ষার প্রশ্নপত্র ও অফিশিয়াল সমাধান সংগ্রহ</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      document.getElementById('themeToggleBtn').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    }
+
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.addEventListener('DOMContentLoaded', () => {
+          const btn = document.getElementById('themeToggleBtn');
+          if (btn) btn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        });
+      }
+    })();
+
+    function toggleDrawer(id) {
+      const drawer = document.getElementById(id);
+      if (!drawer) return;
+      const isVisible = drawer.classList.contains('open');
+      drawer.classList.toggle('open');
+      const toggleBtn = drawer.previousElementSibling;
+      if (toggleBtn) {
+        const icon = toggleBtn.querySelector('.toggle-icon');
+        if (icon) icon.textContent = isVisible ? '▼' : '▲';
+      }
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const subject = btn.getAttribute('data-subject');
+        document.querySelectorAll('.q-card').forEach(card => {
+          if (subject === 'all' || card.getAttribute('data-subject') === subject) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    let baseFontSize = 100;
+    function adjustFontSize(dir) {
+      if (dir === 0) baseFontSize = 100;
+      else baseFontSize += dir * 8;
+      if (baseFontSize < 80) baseFontSize = 80;
+      if (baseFontSize > 130) baseFontSize = 130;
+      document.documentElement.style.fontSize = baseFontSize + '%';
+    }
+  </script>
+</body>
+</html>
