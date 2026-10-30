@@ -1,187 +1,370 @@
 <!DOCTYPE html>
-<html lang="bn" data-theme="light">
+<html lang="bn">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>বিসিএস পূর্ণাঙ্গ স্মার্ট ই-বুক লাইব্রেরি পোর্টাল | বিসিএস স্মার্ট ই-বুক লাইব্রেরি</title>
-  <meta name="description" content="বিসিএস ও সরকারি চাকরি পরীক্ষার পূর্ণাঙ্গ স্মার্ট ই-বুক লাইব্রেরি ড্যাশবোর্ড।">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>বিসিএস ও পিএসসি নন-ক্যাডার প্রস্তুতি পোর্টাল | বিসিএস স্মার্ট ই-বুক লাইব্রেরি</title>
+  <meta name="description" content="১০ম–৫০তম বিসিএস ও পিএসসি নন-ক্যাডার পরীক্ষার প্রিলিমিনারি, লিখিত ও ভাইভা প্রস্তুতির প্রামাণ্য ই-বুক লাইব্রেরি ও প্রশ্নব্যাংক।">
 
-  <!-- Bulletproof Pre-render Theme Restore -->
   <script>
-    (function() {
-      try {
-        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        if (savedTheme === 'dark') {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
-      } catch(e) {}
-    })();
+    try {
+      var t = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', t);
+      if (t === 'dark') document.documentElement.classList.add('dark');
+    } catch (e) {}
   </script>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Unified Design System -->
   <link rel="stylesheet" href="ebook-ui.css">
+  <link rel="stylesheet" href="portal-home.css">
 </head>
 <body>
+  <a href="#mainContent" class="skip-link">মূল কন্টেন্টে চলে যান</a>
 
-  <!-- Top Sticky Navigation Bar -->
-  <header class="topbar">
-    <div class="page-container topbar-inner">
-      <a href="index.html" class="topbar-brand" title="বিসিএস স্মার্ট ই-বুক লাইব্রেরি">
-        <span class="topbar-brand-icon">🏛️</span>
-        <span>বিসিএস লাইব্রেরি</span>
+  <!-- 1. Sticky Top Navigation -->
+  <header class="portal-navbar">
+    <div class="portal-container portal-nav-inner">
+      <a href="index.html" class="portal-brand" aria-label="লাইব্রেরি হোম">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="portal-brand-icon"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/><path d="M6 14h6"/></svg>
+        <span>লাইব্রেরি হোম</span>
       </a>
 
-      <div class="topbar-actions">
-        <button type="button" class="btn btn-icon theme-toggle-btn" id="themeBtn" aria-label="থিম পরিবর্তন" title="থিম পরিবর্তন">
-          <span class="theme-icon"></span>
+      <nav class="portal-nav-links" aria-label="প্রধান নেভিগেশন">
+        <a href="#prelimSection" class="portal-nav-link" onclick="handleNavStep('prelim')">প্রিলিমিনারি</a>
+        <a href="#writtenSection" class="portal-nav-link" onclick="handleNavStep('written')">লিখিত</a>
+        <a href="#vivaSection" class="portal-nav-link" onclick="handleNavStep('viva')">ভাইভা (মৌখিক)</a>
+        <a href="#featuresSection" class="portal-nav-link">ফিচারসমূহ</a>
+        <a href="exam.html" class="portal-nav-link">পরীক্ষা ইঞ্জিন</a>
+      </nav>
+
+      <div class="portal-nav-actions">
+        <button type="button" class="portal-action-btn" onclick="focusSearch()" aria-label="সার্চ করুন" title="সার্চ করুন">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
         </button>
-        <a href="exam.html" class="btn btn-primary" title="বিসিএস পূর্ণাঙ্গ পরীক্ষায় অংশ নিন">
-          <span>বিসিএস পরীক্ষা</span>
-          <span>→</span>
+
+        <a href="exam.html" class="portal-exam-pill" title="অনলাইন পরীক্ষা দিন">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <span>পরীক্ষা দিন</span>
         </a>
-        <button type="button" class="btn btn-icon menu-toggle-btn" id="menuToggleBtn" aria-label="মেনু ও সেটিংস" aria-expanded="false" title="মেনু">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>
+
+        <button type="button" id="themeBtn" class="portal-action-btn" onclick="toggleTheme()" aria-label="থিম পরিবর্তন" title="থিম পরিবর্তন">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        </button>
+
+        <!-- Container for Admin Login Button injected by universal-modes.js -->
+        <div class="topbar-actions"></div>
+
+        <button type="button" id="menuToggleBtn" class="portal-action-btn" aria-label="মেনু খুলুন" title="মেনু খুলুন">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Menu Drawer / Popover -->
-  <div class="menu-backdrop" id="menuBackdrop"></div>
-  <div class="menu-drawer" id="menuDrawer" role="dialog" aria-modal="true" aria-label="সেটিংস ও নেভিগেশন">
+  <!-- Side Navigation Drawer (#menuDrawer) -->
+  <aside class="menu-drawer" id="menuDrawer" aria-label="নেভিগেশন ড্রয়ার">
     <div class="menu-header">
-      <div class="menu-title">মেনু ও সেটিংস</div>
-      <button type="button" class="menu-close-btn" id="menuCloseBtn" aria-label="বন্ধ করুন">&times;</button>
-    </div>
-    
-    <div class="menu-group">
-      <div class="menu-label">কুইক রিভিশন সেটিংস:</div>
-      <button type="button" class="btn btn-secondary btn-block" onclick="openRevisionModal(); if(window.closeMenu)closeMenu();">
-        <span>⚡ রিভিশন মোড কনফিগার করুন</span>
-      </button>
+      <span class="menu-title">⚡ কুইক সেটিংস ও নেভিগেশন</span>
+      <button type="button" class="menu-close-btn" id="menuCloseBtn" aria-label="ড্রয়ার বন্ধ করুন">&times;</button>
     </div>
 
-    <div class="menu-group">
-      <div class="menu-label">ফন্ট সাইজ (Font Scale):</div>
-      <div class="font-size-controls">
-        <button type="button" class="font-size-btn" data-font-scale="dec" title="ফন্ট ছোট করুন">A−</button>
-        <button type="button" class="font-size-btn" data-font-scale="reset" title="স্বাভাবিক ফন্ট">A</button>
-        <button type="button" class="font-size-btn" data-font-scale="inc" title="ফন্ট বড় করুন">A+</button>
-      </div>
-    </div>
-
-    <div class="menu-group">
-      <button type="button" class="btn btn-secondary btn-block" onclick="window.print()">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-        <span>প্রিন্ট বা সেভ করুন</span>
-      </button>
-    </div>
-  </div>
-
-  <main class="page-container flex-grow">
-    <!-- Hero Section -->
-    <section class="hero">
-      <h1 class="hero-title">বিসিএস পূর্ণাঙ্গ স্মার্ট ই-বুক লাইব্রেরি</h1>
-      <p class="hero-desc">১০ম–৫০তম বিসিএস প্রিলিমিনারি ও পিএসসি নন-ক্যাডার পরীক্ষার পূর্ণাঙ্গ অধ্যায়ভিত্তিক প্রশ্নব্যাংক ও বিশদ ব্যাখ্যার ডিজিটাল লাইব্রেরি।</p>
-
-      <!-- Overall Progress Card -->
-      <div class="progress-card">
-        <div class="prog-meta-row">
-          <span class="prog-label">সার্বিক পড়ার অগ্রগতি</span>
-          <span class="prog-pct" id="overallPercentage">০%</span>
-        </div>
-        <div class="sub-prog-bar-bg">
-          <div class="sub-prog-fill" id="overallFill" style="--p:0%;"></div>
-        </div>
-        <div class="prog-meta-row">
-          <span class="prog-caption" id="completedCountText">সম্পন্ন: ০ / ২১১টি অধ্যায়</span>
+    <div class="menu-body">
+      <div class="menu-group">
+        <span class="menu-label">ধাপ ভিত্তিক নেভিগেশন:</span>
+        <div class="menu-step-nav">
+          <button type="button" class="btn btn-secondary btn-drawer-nav" onclick="handleNavStep('prelim'); closeMenuDrawer();">
+            <span>১. প্রিলিমিনারি পরীক্ষা</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-drawer-nav" onclick="handleNavStep('written'); closeMenuDrawer();">
+            <span>২. লিখিত পরীক্ষা</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-drawer-nav" onclick="handleNavStep('viva'); closeMenuDrawer();">
+            <span>৩. ভাইভা (মৌখিক) পরীক্ষা</span>
+          </button>
+          <a href="exam.html" class="btn btn-primary menu-exam-btn">
+            <span>🎯 কেন্দ্রীয় মডেল টেস্ট</span>
+          </a>
         </div>
       </div>
 
-      <!-- Quick Study & Revision Modes Details Accordion -->
-      <details class="revision-accordion">
-        <summary class="revision-accordion-summary">
-          <span>⚡ স্মার্ট স্টাডি ও কুইক রিভিশন সেটিংস</span>
-          <span class="summary-toggle-icon">▾</span>
-        </summary>
-        <div class="revision-accordion-body">
-          <div class="menu-group">
-            <span class="menu-label">অধ্যায় কন্টেন্ট ভিউ:</span>
-            <div class="segmented-control" id="viewModeGroup">
-              <button type="button" class="segmented-btn mode-pill active" data-view="full" onclick="setGlobalViewMode('full')">
-                পূর্ণাঙ্গ পাঠ
-              </button>
-              <button type="button" class="segmented-btn mode-pill" data-view="notes-only" onclick="setGlobalViewMode('notes-only')">
-                শুধু নোট ও সূত্র
-              </button>
-              <button type="button" class="segmented-btn mode-pill" data-view="questions-only" onclick="setGlobalViewMode('questions-only')">
-                শুধু প্রশ্নব্যাংক
-              </button>
-            </div>
+      <div class="menu-group">
+        <span class="menu-label">কুইক রিভিশন মোড:</span>
+        <button type="button" class="btn btn-secondary btn-block" onclick="openRevisionModal(); closeMenuDrawer();">
+          <span>⚙️ রিভিশন ও স্টাডি সেটিংস</span>
+        </button>
+      </div>
+
+      <div class="menu-group">
+        <span class="menu-label">অধ্যায় ভিউ মোড:</span>
+        <div class="segmented-control" id="viewModeGroup">
+          <button type="button" class="segmented-btn mode-pill" data-view="full" onclick="setGlobalViewMode('full')">নোট+প্রশ্ন</button>
+          <button type="button" class="segmented-btn mode-pill" data-view="notes-only" onclick="setGlobalViewMode('notes-only')">শুধু নোট</button>
+          <button type="button" class="segmented-btn mode-pill" data-view="questions-only" onclick="setGlobalViewMode('questions-only')">শুধু প্রশ্ন</button>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <span class="menu-label">প্রশ্ন-উত্তর প্রদর্শন মোড:</span>
+        <div class="segmented-control" id="qaModeGroup">
+          <button type="button" class="segmented-btn mode-pill" data-qa="quiz" onclick="setGlobalQaMode('quiz')">কুইজ</button>
+          <button type="button" class="segmented-btn mode-pill" data-qa="show-answers" onclick="setGlobalQaMode('show-answers')">ব্যাখ্যাসহ</button>
+          <button type="button" class="segmented-btn mode-pill" data-qa="direct-answer" onclick="setGlobalQaMode('direct-answer')">উত্তর</button>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <span class="menu-label">ফন্ট সাইজ স্কেল:</span>
+        <div class="segmented-control">
+          <button type="button" class="segmented-btn" onclick="adjustFontSize(-1)">A-</button>
+          <button type="button" class="segmented-btn" onclick="adjustFontSize(0)">স্বাভাবিক</button>
+          <button type="button" class="segmented-btn" onclick="adjustFontSize(1)">A+</button>
+        </div>
+      </div>
+
+      <div class="menu-group menu-print-group">
+        <button type="button" class="btn btn-secondary btn-block" onclick="window.print()">
+          <span>🖨️ পেজ প্রিন্ট / PDF</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 2. Hero Section -->
+  <section class="portal-hero">
+    <div class="portal-container portal-hero-inner">
+      <div class="portal-hero-badge">
+        <span>🏛️</span>
+        <span>১০ম–৫০তম বিসিএস ও পিএসসি নন-ক্যাডার প্রশ্নব্যাংক</span>
+      </div>
+
+      <h1 class="portal-hero-title">
+        বিসিএস ও নন-ক্যাডার: <span class="portal-gradient-text">পূর্ণাঙ্গ প্রস্তুতি</span>
+      </h1>
+
+      <p class="portal-hero-sub">
+        প্রিলিমিনারি, লিখিত ও ভাইভা — প্রতিটি ধাপের প্রামাণ্য সিলেবাস, স্বয়ংসম্পূর্ণ প্রশ্নব্যাংক ও নির্ভুল ব্যাখ্যার আধুনিক ই-বুক পোর্টাল।
+      </p>
+
+      <div class="portal-hero-cta">
+        <a href="#stageStepper" class="portal-btn-primary" onclick="scrollToStepper()">
+          <span>পড়া শুরু করুন</span>
+          <span>↓</span>
+        </a>
+        <a href="exam.html" class="portal-btn-secondary">
+          <span>মডেল টেস্ট দিন</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- Live Dynamic Stats -->
+      <div class="portal-stat-row">
+        <div class="portal-stat-card">
+          <div class="portal-stat-num" id="statSubjects">১২</div>
+          <div class="portal-stat-label">মোট বিষয়</div>
+        </div>
+        <div class="portal-stat-card">
+          <div class="portal-stat-num" id="statChapters">২১১</div>
+          <div class="portal-stat-label">মোট পরিচ্ছেদ</div>
+        </div>
+        <div class="portal-stat-card">
+          <div class="portal-stat-num" id="statQuestions">৪,৫০৮</div>
+          <div class="portal-stat-label">মোট প্রশ্ন</div>
+        </div>
+      </div>
+
+      <!-- Overall Reading Progress Card -->
+      <div class="portal-overall-prog-card">
+        <div class="portal-prog-header">
+          <span id="completedCountText">সম্পন্ন: ০ / ২১১টি অধ্যায়</span>
+          <span id="overallPercentage" class="prog-pct">০%</span>
+        </div>
+        <div class="portal-prog-bar-wrap">
+          <div id="overallFill" class="portal-prog-fill" style="--p:0%;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Search Section -->
+  <section class="portal-container portal-search-section">
+    <div id="ebkSearchMount" class="portal-search-box"></div>
+  </section>
+
+  <!-- 4. Track Switcher & Stepper Cards -->
+  <main id="mainContent" class="portal-container">
+    <div class="portal-track-section" id="stageStepper">
+      <!-- Segmented Track Switcher -->
+      <div class="portal-track-segmented" role="tablist" aria-label="পরীক্ষার ট্র্যাক নির্বাচন">
+        <button type="button" id="tabCadre" class="portal-track-btn active" role="tab" aria-selected="true" aria-controls="cadreBookSection" onclick="switchBook('cadre')">
+          বিসিএস (ক্যাডার)
+        </button>
+        <button type="button" id="tabNonCadre" class="portal-track-btn" role="tab" aria-selected="false" aria-controls="nonCadreBookSection" onclick="switchBook('noncadre')">
+          পিএসসি নন-ক্যাডার
+        </button>
+      </div>
+
+      <!-- 3 Steps Stepper Cards (Common UI Stepper that changes step) -->
+      <div class="portal-stepper-grid" role="tablist" aria-label="পরীক্ষার ৩টি ধাপ">
+        <!-- Step 1: Preliminary -->
+        <div class="portal-step-card active" id="stepBtnPrelim" role="tab" aria-selected="true" onclick="switchStep('prelim')">
+          <div class="portal-step-top">
+            <span class="portal-step-num">১</span>
+            <span class="portal-step-marks-chip" id="chipPrelimMarks">২০০ নম্বর</span>
           </div>
+          <h2 class="portal-step-title">প্রিলিমিনারি টেস্ট</h2>
+          <ul class="portal-step-bullets">
+            <li>বহুনির্বাচনি (MCQ) বাছাই পরীক্ষা</li>
+            <li>প্রতি ভুল উত্তরের জন্য ০.৫০ নম্বর কর্তন</li>
+            <li>অধ্যায়ভিত্তিক ব্যাখ্যা ও কুইজ মোড</li>
+          </ul>
+          <span class="portal-step-status portal-status-live">চালু ⚡</span>
+        </div>
 
-          <div class="menu-group">
-            <span class="menu-label">প্রশ্ন ও উত্তর প্রদর্শন:</span>
-            <div class="segmented-control" id="qaModeGroup">
-              <button type="button" class="segmented-btn mode-pill active" data-qa="quiz" onclick="setGlobalQaMode('quiz')">
-                কুইজ প্র্যাকটিস
-              </button>
-              <button type="button" class="segmented-btn mode-pill" data-qa="show-answers" onclick="setGlobalQaMode('show-answers')">
-                উত্তরসহ ব্যাখ্যা
-              </button>
-              <button type="button" class="segmented-btn mode-pill" data-qa="direct-answer" onclick="setGlobalQaMode('direct-answer')">
-                সরাসরি উত্তর
-              </button>
-            </div>
+        <!-- Step 2: Written -->
+        <div class="portal-step-card" id="stepBtnWritten" role="tab" aria-selected="false" onclick="switchStep('written')">
+          <div class="portal-step-top">
+            <span class="portal-step-num">২</span>
+            <span class="portal-step-marks-chip" id="chipWrittenMarks">৯০০ নম্বর</span>
           </div>
+          <h2 class="portal-step-title">লিখিত পরীক্ষা</h2>
+          <ul class="portal-step-bullets">
+            <li>বিষয়ভিত্তিক রচনামূলক ও গাণিতিক প্রশ্ন</li>
+            <li>ধাপে ধাপে নির্ভুল সমাধানের ড্রয়ার</li>
+            <li>বিগত বছরের আসল প্রশ্ন ও সমাধান</li>
+          </ul>
+          <span class="portal-step-status portal-status-live" id="badgeWrittenStatus">চালু 📝</span>
         </div>
-      </details>
-    </section>
 
-    <!-- BCS Exam Launcher Banner Card -->
-    <section class="exam-banner-card">
-      <div class="exam-banner-info">
-        <div class="exam-banner-icon">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 15 5-3-5-3v6Z"/></svg>
-        </div>
-        <div>
-          <div class="exam-banner-title">বিসিএস প্রিলিমিনারি পূর্ণাঙ্গ পরীক্ষা ইঞ্জিন</div>
-          <div class="exam-banner-desc">৪৯তম সহ বিগত বিসিএস সেশন পরীক্ষা, বিষয়ভিত্তিক কাস্টম টেস্ট ও ২০০ নম্বরের মডেল টেস্ট দিন।</div>
+        <!-- Step 3: Viva -->
+        <div class="portal-step-card" id="stepBtnViva" role="tab" aria-selected="false" onclick="switchStep('viva')">
+          <div class="portal-step-top">
+            <span class="portal-step-num">৩</span>
+            <span class="portal-step-marks-chip" id="chipVivaMarks">২০০ নম্বর</span>
+          </div>
+          <h2 class="portal-step-title">ভাইভা (মৌখিক)</h2>
+          <ul class="portal-step-bullets">
+            <li>বোর্ড ইন্টারভিউ ও মৌখিক মূল্যায়ন</li>
+            <li>সংবিধান, মুক্তিযুদ্ধ ও সাম্প্রতিক বিষয়াবলি</li>
+            <li>পদভিত্তিক প্রফেশনাল ভাইভা গাইডলাইন</li>
+          </ul>
+          <span class="portal-step-status portal-status-upcoming">শীঘ্রই আসছে ⏳</span>
         </div>
       </div>
-      <a href="exam.html" class="btn btn-secondary">
-        <span>পরীক্ষা শুরু করুন</span>
-        <span>→</span>
-      </a>
-    </section>
-
-    <!-- Universal Deep Search Engine Mount Point -->
-    <div id="ebkSearchMount"></div>
-
-    <!-- Book Switcher Tabs -->
-    <div class="book-tabs-segmented" role="tablist">
-      <button type="button" class="book-tab-btn active" id="tabCadre" onclick="switchBook('cadre')" role="tab" aria-selected="true">
-        <span>🏛️ ক্যাডার প্রশ্নব্যাংক</span>
-        <span class="book-tab-badge">১২টি বিষয় · ২১১ অধ্যায়</span>
-      </button>
-      <button type="button" class="book-tab-btn" id="tabNonCadre" onclick="switchBook('non-cadre')" role="tab" aria-selected="false">
-        <span>🎯 নন-ক্যাডার প্রশ্নব্যাংক</span>
-        <span class="book-tab-badge">১৫টি বিষয় · ১৫৮ অধ্যায়</span>
-      </button>
     </div>
 
-    <!-- Subjects Cards Grid (Cadre Book) -->
-    <section class="master-subject-grid" id="cadreBookSection">
-      <!-- বিষয় ০১: বাংলা ভাষা ও ব্যাকরণ -->
-      <article class="master-subject-card">
+    <!-- ======================================================== -->
+    <!-- TRACK 1: BCS CADRE SECTION (#cadreBookSection)           -->
+    <!-- ======================================================== -->
+    <section id="cadreBookSection" class="portal-track-wrapper">
+
+      <!-- Cadre Step 1: Preliminary Panel -->
+      <div id="panelCadrePrelim" class="portal-step-panel active" role="tabpanel" aria-labelledby="stepBtnPrelim">
+        <!-- Syllabus & Marks Breakdown -->
+        <div class="portal-syllabus-card" id="prelimSection">
+          <div class="portal-syllabus-header">
+            <h3 class="portal-syllabus-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+              <span>বিসিএস প্রিলিমিনারি সিলেবাস ও নম্বর বণ্টন (মোট ২০০ নম্বর)</span>
+            </h3>
+            <span class="portal-syllabus-source">তথ্যসূত্র: BPSC ৪৬তম ও ৪৭তম বিসিএস গেজেট/বিজ্ঞপ্তি</span>
+          </div>
+          <div class="portal-syllabus-list">
+            <a href="#cadre-card-01" class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">১.</span> বাংলা ভাষা ও সাহিত্য</span>
+              <div class="portal-syllabus-bar-group">
+                <div class="portal-syllabus-bar-wrap"><div class="portal-syllabus-bar-fill" style="--p:17.5%;"></div></div>
+                <span class="portal-syllabus-marks">৩৫</span>
+              </div>
+            </a>
+            <a href="#cadre-card-03" class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">২.</span> English Language &amp; Literature</span>
+              <div class="portal-syllabus-bar-group">
+                <div class="portal-syllabus-bar-wrap"><div class="portal-syllabus-bar-fill" style="--p:17.5%;"></div></div>
+                <span class="portal-syllabus-marks">৩৫</span>
+              </div>
+            </a>
+            <a href="#cadre-card-05" class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">৩.</span> বাংলাদেশ বিষয়াবলি</span>
+              <div class="portal-syllabus-bar-group">
+                <div class="portal-syllabus-bar-wrap"><div class="portal-syllabus-bar-fill" style="--p:15%;"></div></div>
+                <span class="portal-syllabus-marks">৩০</span>
+              </div>
+            </a>
+            <a href="#cadre-card-06" class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">৪.</span> আন্তর্জাতিক বিষয়াবলি</span>
+              <div class="portal-syllabus-bar-group">
+                <div class="portal-syllabus-bar-wrap"><div class="portal-syllabus-bar-fill" style="--p:10%;"></div></div>
+                <span class="portal-syllabus-marks">২০</span>
+              </div>
+            </a>
+            <a href="#cadre-card-08" class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">৫.</span> সাধারণ বিজ্ঞান</span>
+              <div class="portal-syllabus-bar-group">
+                <div class="portal-syllabus-bar-wrap"><div class="portal-syllabus-bar-fill" style="--p:7.5%;"></div></div>
+                <span class="portal-syllabus-marks">১৫</span>
+              </div>
+            </a>
+            <a href="#cadre-card-09" class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">৬.</span> কম্পিউটার ও তথ্যপ্রযুক্তি</span>
+              <div class="portal-syllabus-bar-group">
+                <div class="portal-syllabus-bar-wrap"><div class="portal-syllabus-bar-fill" style="--p:7.5%;"></div></div>
+                <span class="portal-syllabus-marks">১৫</span>
+              </div>
+            </a>
+            <a href="#cadre-card-10" class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">৭.</span> গাণিতিক যুক্তি</span>
+              <div class="portal-syllabus-bar-group">
+                <div class="portal-syllabus-bar-wrap"><div class="portal-syllabus-bar-fill" style="--p:7.5%;"></div></div>
+                <span class="portal-syllabus-marks">১৫</span>
+              </div>
+            </a>
+            <a href="#cadre-card-11" class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">৮.</span> মানসিক দক্ষতা</span>
+              <div class="portal-syllabus-bar-group">
+                <div class="portal-syllabus-bar-wrap"><div class="portal-syllabus-bar-fill" style="--p:7.5%;"></div></div>
+                <span class="portal-syllabus-marks">১৫</span>
+              </div>
+            </a>
+            <a href="#cadre-card-07" class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">৯.</span> ভূগোল, পরিবেশ ও দুর্যোগ ব্যবস্থাপনা</span>
+              <div class="portal-syllabus-bar-group">
+                <div class="portal-syllabus-bar-wrap"><div class="portal-syllabus-bar-fill" style="--p:5%;"></div></div>
+                <span class="portal-syllabus-marks">১০</span>
+              </div>
+            </a>
+            <a href="#cadre-card-12" class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">১০.</span> নৈতিকতা, মূল্যবোধ ও সুশাসন</span>
+              <div class="portal-syllabus-bar-group">
+                <div class="portal-syllabus-bar-wrap"><div class="portal-syllabus-bar-fill" style="--p:5%;"></div></div>
+                <span class="portal-syllabus-marks">১০</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Exam Engine Banner -->
+        <div class="portal-exam-banner">
+          <div class="portal-exam-banner-content">
+            <h3>🎯 বিসিএস প্রিলিমিনারি লাইভ মডেল টেস্ট ইঞ্জিন</h3>
+            <p>১০ম থেকে ৫০তম বিসিএস পরীক্ষার ২০০টি বিষয়ের আসল প্রশ্নব্যাংক থেকে কাস্টম পরীক্ষা ও স্ব-মূল্যায়ন অনুশীলন করুন।</p>
+          </div>
+          <a href="exam.html" class="portal-btn-primary">
+            <span>পরীক্ষা শুরু করুন</span>
+            <span>→</span>
+          </a>
+        </div>
+
+        <!-- Cadre Subject Cards Grid -->
+        <div class="portal-grid-header">
+          <h3 class="portal-grid-title">বিসিএস ক্যাডার প্রিলিমিনারি বিষয়ভিত্তিক ই-বুক</h3>
+          <p class="portal-grid-sub">প্রতিটি বিষয়ের বিস্তারিত তত্ত্ব, গুরুত্বপূর্ণ নিয়ম, বিগত পরীক্ষার প্রশ্ন ও ব্যাখ্যা:</p>
+        </div>
+
+        <div class="portal-subject-grid" id="cadreSubjectGrid">
+      <article class="master-subject-card" id="cadre-card-01" data-chapters="22" data-questions="421">
         <div class="master-card-top">
           <span class="master-card-badge">০১</span>
           <div class="flex-grow">
@@ -210,9 +393,7 @@
           </a>
         </div>
       </article>
-
-      <!-- বিষয় ০২: বাংলা সাহিত্য -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="cadre-card-02" data-chapters="30" data-questions="460">
         <div class="master-card-top">
           <span class="master-card-badge">০২</span>
           <div class="flex-grow">
@@ -241,9 +422,7 @@
           </a>
         </div>
       </article>
-
-      <!-- বিষয় ০৩: English Grammar -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="cadre-card-03" data-chapters="29" data-questions="757">
         <div class="master-card-top">
           <span class="master-card-badge">০৩</span>
           <div class="flex-grow">
@@ -272,9 +451,7 @@
           </a>
         </div>
       </article>
-
-      <!-- বিষয় ০৪: English Literature -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="cadre-card-04" data-chapters="8" data-questions="205">
         <div class="master-card-top">
           <span class="master-card-badge">০৪</span>
           <div class="flex-grow">
@@ -303,9 +480,7 @@
           </a>
         </div>
       </article>
-
-      <!-- বিষয় ০৫: বাংলাদেশ বিষয়াবলি -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="cadre-card-05" data-chapters="31" data-questions="550">
         <div class="master-card-top">
           <span class="master-card-badge">০৫</span>
           <div class="flex-grow">
@@ -334,9 +509,7 @@
           </a>
         </div>
       </article>
-
-      <!-- বিষয় ০৬: আন্তর্জাতিক বিষয়াবলি -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="cadre-card-06" data-chapters="21" data-questions="515">
         <div class="master-card-top">
           <span class="master-card-badge">০৬</span>
           <div class="flex-grow">
@@ -365,9 +538,7 @@
           </a>
         </div>
       </article>
-
-      <!-- বিষয় ০৭: ভূগোল, পরিবেশ ও দুর্যোগ ব্যবস্থাপনা -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="cadre-card-07" data-chapters="4" data-questions="122">
         <div class="master-card-top">
           <span class="master-card-badge">০৭</span>
           <div class="flex-grow">
@@ -396,9 +567,7 @@
           </a>
         </div>
       </article>
-
-      <!-- বিষয় ০৮: সাধারণ বিজ্ঞান -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="cadre-card-08" data-chapters="31" data-questions="463">
         <div class="master-card-top">
           <span class="master-card-badge">০৮</span>
           <div class="flex-grow">
@@ -427,9 +596,7 @@
           </a>
         </div>
       </article>
-
-      <!-- বিষয় ০৯: কম্পিউটার ও তথ্য প্রযুক্তি -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="cadre-card-09" data-chapters="12" data-questions="188">
         <div class="master-card-top">
           <span class="master-card-badge">০৯</span>
           <div class="flex-grow">
@@ -458,9 +625,7 @@
           </a>
         </div>
       </article>
-
-      <!-- বিষয় ১০: গাণিতিক যুক্তি -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="cadre-card-10" data-chapters="13" data-questions="538">
         <div class="master-card-top">
           <span class="master-card-badge">১০</span>
           <div class="flex-grow">
@@ -489,9 +654,7 @@
           </a>
         </div>
       </article>
-
-      <!-- বিষয় ১১: মানসিক দক্ষতা -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="cadre-card-11" data-chapters="6" data-questions="175">
         <div class="master-card-top">
           <span class="master-card-badge">১১</span>
           <div class="flex-grow">
@@ -520,9 +683,7 @@
           </a>
         </div>
       </article>
-
-      <!-- বিষয় ১২: নৈতিকতা, মূল্যবোধ ও সুশাসন -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="cadre-card-12" data-chapters="4" data-questions="114">
         <div class="master-card-top">
           <span class="master-card-badge">১২</span>
           <div class="flex-grow">
@@ -551,12 +712,249 @@
           </a>
         </div>
       </article>
+        </div>
+      </div>
+
+      <!-- Cadre Step 2: Written Panel -->
+      <div id="panelCadreWritten" class="portal-step-panel" role="tabpanel" aria-labelledby="stepBtnWritten">
+        <div class="portal-syllabus-card" id="writtenSection">
+          <div class="portal-syllabus-header">
+            <h3 class="portal-syllabus-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              <span>বিসিএস সাধারণ ক্যাডার লিখিত পরীক্ষা কাঠামো (মোট ৯০০ নম্বর)</span>
+            </h3>
+            <span class="portal-syllabus-source">তথ্যসূত্র: BPSC গেজেট ও বিধিমালা (সাধারণ ক্যাডার ৯০০ নম্বর)</span>
+          </div>
+          <div class="portal-syllabus-list">
+            <div class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">১.</span> বাংলা (প্রথম ও দ্বিতীয় পত্র)</span>
+              <span class="portal-syllabus-marks">২০০ নম্বর</span>
+            </div>
+            <div class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">২.</span> English (Paper I &amp; Paper II)</span>
+              <span class="portal-syllabus-marks">২০০ নম্বর</span>
+            </div>
+            <div class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">৩.</span> বাংলাদেশ বিষয়াবলি (প্রথম ও দ্বিতীয় পত্র)</span>
+              <span class="portal-syllabus-marks">২০০ নম্বর</span>
+            </div>
+            <div class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">৪.</span> আন্তর্জাতিক বিষয়াবলি</span>
+              <span class="portal-syllabus-marks">১০০ নম্বর</span>
+            </div>
+            <div class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">৫.</span> গাণিতিক যুক্তি (৫০) ও মানসিক দক্ষতা (৫০)</span>
+              <span class="portal-syllabus-marks">১০০ নম্বর</span>
+            </div>
+            <div class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">৬.</span> সাধারণ বিজ্ঞান (৫০) ও প্রযুক্তি (৫০)</span>
+              <span class="portal-syllabus-marks">১০০ নম্বর</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cadre Written Modules Grid (Coming Soon) -->
+        <div class="portal-grid-header">
+          <h3 class="portal-grid-title">বিসিএস লিখিত বিষয়ভিত্তিক প্রস্তুতি মডিউল</h3>
+          <p class="portal-grid-sub">রচনামূলক প্রশ্নের স্ট্যান্ডার্ড নোট, অনুবাদ ও সমাধান সংকলন প্রস্তুত হচ্ছে:</p>
+        </div>
+
+        <div class="portal-subject-grid">
+          <article class="master-subject-card" aria-disabled="true">
+            <div class="master-card-top">
+              <span class="master-card-badge">WR</span>
+              <div class="flex-grow">
+                <h2 class="master-card-title">বিসিএস লিখিত বাংলা (১ম ও ২য় পত্র)</h2>
+              </div>
+            </div>
+            <div class="master-card-meta">
+              <span>পূর্ণমান: ২০০ নম্বর · ব্যাকরণ, ভাবসম্প্রসারণ, সারমর্ম ও প্রবন্ধ</span>
+            </div>
+            <div class="master-card-progress">
+              <div class="prog-meta-row">
+                <span class="prog-label">স্ট্যাটাস:</span>
+                <span class="prog-pct">সংকলন চলছে</span>
+              </div>
+              <div class="sub-prog-bar-bg"><div class="sub-prog-fill" style="--p:0%;"></div></div>
+            </div>
+            <div class="master-card-actions">
+              <button type="button" class="btn-disabled" disabled>শীঘ্রই আসছে ⏳</button>
+            </div>
+          </article>
+
+          <article class="master-subject-card" aria-disabled="true">
+            <div class="master-card-top">
+              <span class="master-card-badge">WR</span>
+              <div class="flex-grow">
+                <h2 class="master-card-title">বিসিএস লিখিত English (Paper I &amp; II)</h2>
+              </div>
+            </div>
+            <div class="master-card-meta">
+              <span>পূর্ণমান: ২০০ নম্বর · Comprehension, Essay, Translation</span>
+            </div>
+            <div class="master-card-progress">
+              <div class="prog-meta-row">
+                <span class="prog-label">স্ট্যাটাস:</span>
+                <span class="prog-pct">সংকলন চলছে</span>
+              </div>
+              <div class="sub-prog-bar-bg"><div class="sub-prog-fill" style="--p:0%;"></div></div>
+            </div>
+            <div class="master-card-actions">
+              <button type="button" class="btn-disabled" disabled>শীঘ্রই আসছে ⏳</button>
+            </div>
+          </article>
+
+          <article class="master-subject-card" aria-disabled="true">
+            <div class="master-card-top">
+              <span class="master-card-badge">WR</span>
+              <div class="flex-grow">
+                <h2 class="master-card-title">বাংলাদেশ ও আন্তর্জাতিক বিষয়াবলি</h2>
+              </div>
+            </div>
+            <div class="master-card-meta">
+              <span>পূর্ণমান: ৩০০ নম্বর · সংবিধান, মুক্তিযুদ্ধ ও ভূ-রাজনীতি</span>
+            </div>
+            <div class="master-card-progress">
+              <div class="prog-meta-row">
+                <span class="prog-label">স্ট্যাটাস:</span>
+                <span class="prog-pct">সংকলন চলছে</span>
+              </div>
+              <div class="sub-prog-bar-bg"><div class="sub-prog-fill" style="--p:0%;"></div></div>
+            </div>
+            <div class="master-card-actions">
+              <button type="button" class="btn-disabled" disabled>শীঘ্রই আসছে ⏳</button>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Cadre Step 3: Viva Panel -->
+      <div id="panelCadreViva" class="portal-step-panel" role="tabpanel" aria-labelledby="stepBtnViva">
+        <div class="portal-syllabus-card" id="vivaSection">
+          <div class="portal-syllabus-header">
+            <h3 class="portal-syllabus-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              <span>বিসিএস মৌখিক পরীক্ষা (ভাইভা) কাঠামো (মোট ২০০ নম্বর)</span>
+            </h3>
+            <span class="portal-syllabus-source">তথ্যসূত্র: BPSC বিধিমালা (পাস নম্বর ৫০% বা ১০০ নম্বর)</span>
+          </div>
+          <p class="portal-syllabus-desc">
+            লিখিত পরীক্ষায় উত্তীর্ণ প্রার্থীদের মৌখিক মূল্যায়নের জন্য ২০০ নম্বরের ভাইভা বোর্ড গ্রহণ করা হয়। বোর্ডে প্রার্থীর সাধারণ জ্ঞান, উপস্থিত বুদ্ধি, মানসিক সতর্কতা, নেতৃত্ব গুণাবলি, জাতীয় ও আন্তর্জাতিক সচেতনতা এবং নিজের পঠিত বিষয়ের গভীরতা যাচাই করা হয়।
+          </p>
+          <div class="portal-syllabus-list">
+            <div class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">•</span> স্নাতক/স্নাতকোত্তর পর্যায়ের একাডেমিক বিষয়</span>
+              <span class="portal-syllabus-marks">মূল্যায়ন</span>
+            </div>
+            <div class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">•</span> বাংলাদেশের সংবিধান ও মুক্তিযুদ্ধ</span>
+              <span class="portal-syllabus-marks">মূল্যায়ন</span>
+            </div>
+            <div class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">•</span> সমসাময়িক জাতীয় ও আন্তর্জাতিক বিষয়াবলি</span>
+              <span class="portal-syllabus-marks">মূল্যায়ন</span>
+            </div>
+            <div class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">•</span> ১ম চয়েস ক্যাডার বিষয়ক প্রায়োগিক জ্ঞান</span>
+              <span class="portal-syllabus-marks">মূল্যায়ন</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="portal-subject-grid">
+          <article class="master-subject-card" aria-disabled="true">
+            <div class="master-card-top">
+              <span class="master-card-badge">VV</span>
+              <div class="flex-grow">
+                <h2 class="master-card-title">বিসিএস ভাইভা অভিজ্ঞতা ও প্রশ্ন সম্ভার</h2>
+              </div>
+            </div>
+            <div class="master-card-meta">
+              <span>২০০ নম্বর · বিগত সফল ক্যাডারদের রিয়েল বোর্ড অভিজ্ঞতা</span>
+            </div>
+            <div class="master-card-progress">
+              <div class="prog-meta-row">
+                <span class="prog-label">স্ট্যাটাস:</span>
+                <span class="prog-pct">সংকলন চলছে</span>
+              </div>
+              <div class="sub-prog-bar-bg"><div class="sub-prog-fill" style="--p:0%;"></div></div>
+            </div>
+            <div class="master-card-actions">
+              <button type="button" class="btn-disabled" disabled>শীঘ্রই আসছে ⏳</button>
+            </div>
+          </article>
+        </div>
+      </div>
+
     </section>
 
-    <!-- Subjects Cards Grid (Non-Cadre Book) -->
-    <section class="master-subject-grid" id="nonCadreBookSection">
-      <!-- নন-ক্যাডার বিষয় ০১: বাংলা সাহিত্য -->
-      <article class="master-subject-card">
+    <!-- ======================================================== -->
+    <!-- TRACK 2: PSC NON-CADRE SECTION (#nonCadreBookSection)     -->
+    <!-- ======================================================== -->
+    <section id="nonCadreBookSection" class="portal-track-wrapper">
+
+      <!-- Non-Cadre Step 1: Preliminary Panel -->
+      <div id="panelNonCadrePrelim" class="portal-step-panel active" role="tabpanel" aria-labelledby="stepBtnPrelim">
+        <!-- Syllabus Breakdown -->
+        <div class="portal-syllabus-card">
+          <div class="portal-syllabus-header">
+            <h3 class="portal-syllabus-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+              <span>পিএসসি নন-ক্যাডার প্রিলিমিনারি সিলেবাস (সাধারণ পদ: মোট ১০০ নম্বর)</span>
+            </h3>
+            <span class="portal-syllabus-source">তথ্যসূত্র: BPSC নন-ক্যাডার নিয়োগ বিধিমালা (পদভেদে ভিন্ন হতে পারে)</span>
+          </div>
+          <div class="portal-syllabus-list">
+            <a href="#nc-card-01" class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">১.</span> বাংলা ভাষা ও সাহিত্য</span>
+              <div class="portal-syllabus-bar-group">
+                <div class="portal-syllabus-bar-wrap"><div class="portal-syllabus-bar-fill" style="--p:25%;"></div></div>
+                <span class="portal-syllabus-marks">২৫</span>
+              </div>
+            </a>
+            <a href="#nc-card-03" class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">২.</span> ইংরেজি ভাষা ও সাহিত্য</span>
+              <div class="portal-syllabus-bar-group">
+                <div class="portal-syllabus-bar-wrap"><div class="portal-syllabus-bar-fill" style="--p:25%;"></div></div>
+                <span class="portal-syllabus-marks">২৫</span>
+              </div>
+            </a>
+            <a href="#nc-card-05" class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">৩.</span> সাধারণ জ্ঞান (বাংলাদেশ ও আন্তর্জাতিক)</span>
+              <div class="portal-syllabus-bar-group">
+                <div class="portal-syllabus-bar-wrap"><div class="portal-syllabus-bar-fill" style="--p:25%;"></div></div>
+                <span class="portal-syllabus-marks">২৫</span>
+              </div>
+            </a>
+            <a href="#nc-card-07" class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">৪.</span> গাণিতিক যুক্তি ও সাধারণ বিজ্ঞান</span>
+              <div class="portal-syllabus-bar-group">
+                <div class="portal-syllabus-bar-wrap"><div class="portal-syllabus-bar-fill" style="--p:25%;"></div></div>
+                <span class="portal-syllabus-marks">২৫</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="portal-exam-banner">
+          <div class="portal-exam-banner-content">
+            <h3>📝 পিএসসি নন-ক্যাডার নিয়োগ প্রশ্ন সমাধান</h3>
+            <p>সাব-রেজিস্ট্রার, খাদ্য অধিদপ্তর, পরিবার পরিকল্পনা ও পরিসংখ্যান কর্মকর্তাসহ ৯ম-১২তম গ্রেডের বিগত প্রশ্ন ও মডেল টেস্ট।</p>
+          </div>
+          <a href="Non Cadre Job Solution/index.html" class="portal-btn-primary">
+            <span>প্রশ্নব্যাংক দেখুন</span>
+            <span>→</span>
+          </a>
+        </div>
+
+        <!-- Non-Cadre Subject Grid -->
+        <div class="portal-grid-header">
+          <h3 class="portal-grid-title">পিএসসি নন-ক্যাডার প্রিলিমিনারি বিষয়ভিত্তিক সংকলন</h3>
+          <p class="portal-grid-sub">প্রতিটি বিষয়ের বিস্তারিত থিওরি, শর্টকাট সূত্রাবলি ও বিগত পরীক্ষার প্রশ্নব্যাংক:</p>
+        </div>
+
+        <div class="portal-subject-grid" id="nonCadreSubjectGrid">
+      <article class="master-subject-card" id="nc-card-01" data-chapters="16" data-questions="407">
         <div class="master-card-top">
           <span class="master-card-badge">০১</span>
           <div class="flex-grow">
@@ -568,8 +966,8 @@
         </div>
         <div class="master-card-progress">
           <div class="prog-meta-row">
-            <span class="prog-label">স্ট্যাটাস:</span>
-            <span class="prog-pct">১ম খন্ড • সম্পূর্ণ</span>
+            <span class="prog-label">প্রস্তুতি রিসোর্স:</span>
+            <span class="prog-pct">পূর্ণাঙ্গ ই-বুক</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill" style="--p:100%;"></div>
@@ -585,9 +983,7 @@
           </a>
         </div>
       </article>
-
-      <!-- নন-ক্যাডার বিষয় ০২: বাংলা ব্যাকরণ -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="nc-card-02" data-chapters="19" data-questions="580">
         <div class="master-card-top">
           <span class="master-card-badge">০২</span>
           <div class="flex-grow">
@@ -599,8 +995,8 @@
         </div>
         <div class="master-card-progress">
           <div class="prog-meta-row">
-            <span class="prog-label">স্ট্যাটাস:</span>
-            <span class="prog-pct">১ম খন্ড • সম্পূর্ণ</span>
+            <span class="prog-label">প্রস্তুতি রিসোর্স:</span>
+            <span class="prog-pct">পূর্ণাঙ্গ ই-বুক</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill" style="--p:100%;"></div>
@@ -616,9 +1012,7 @@
           </a>
         </div>
       </article>
-
-      <!-- নন-ক্যাডার বিষয় ০৩: ইংরেজি ভাষা ও সাহিত্য -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="nc-card-03" data-chapters="28" data-questions="3327">
         <div class="master-card-top">
           <span class="master-card-badge">০৩</span>
           <div class="flex-grow">
@@ -630,8 +1024,8 @@
         </div>
         <div class="master-card-progress">
           <div class="prog-meta-row">
-            <span class="prog-label">স্ট্যাটাস:</span>
-            <span class="prog-pct">১ম খন্ড • সম্পূর্ণ</span>
+            <span class="prog-label">প্রস্তুতি রিসোর্স:</span>
+            <span class="prog-pct">পূর্ণাঙ্গ ই-বুক</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill" style="--p:100%;"></div>
@@ -647,9 +1041,7 @@
           </a>
         </div>
       </article>
-
-      <!-- নন-ক্যাডার বিষয় ০৪: সাধারণ বিজ্ঞান -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="nc-card-04" data-chapters="12" data-questions="650">
         <div class="master-card-top">
           <span class="master-card-badge">০৪</span>
           <div class="flex-grow">
@@ -661,8 +1053,8 @@
         </div>
         <div class="master-card-progress">
           <div class="prog-meta-row">
-            <span class="prog-label">স্ট্যাটাস:</span>
-            <span class="prog-pct">১ম খন্ড • সম্পূর্ণ</span>
+            <span class="prog-label">প্রস্তুতি রিসোর্স:</span>
+            <span class="prog-pct">পূর্ণাঙ্গ ই-বুক</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill" style="--p:100%;"></div>
@@ -678,9 +1070,7 @@
           </a>
         </div>
       </article>
-
-      <!-- নন-ক্যাডার বিষয় ০৫: বাংলাদেশ বিষয়াবলি -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="nc-card-05" data-chapters="15" data-questions="1107">
         <div class="master-card-top">
           <span class="master-card-badge">০৫</span>
           <div class="flex-grow">
@@ -692,8 +1082,8 @@
         </div>
         <div class="master-card-progress">
           <div class="prog-meta-row">
-            <span class="prog-label">স্ট্যাটাস:</span>
-            <span class="prog-pct">২য় খন্ড • সম্পূর্ণ (১০০%)</span>
+            <span class="prog-label">প্রস্তুতি রিসোর্স:</span>
+            <span class="prog-pct">পূর্ণাঙ্গ ই-বুক</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill" style="--p:100%;"></div>
@@ -709,9 +1099,7 @@
           </a>
         </div>
       </article>
-
-      <!-- নন-ক্যাডার বিষয় ০৬: আন্তর্জাতিক বিষয়াবলি -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="nc-card-06" data-chapters="12" data-questions="906">
         <div class="master-card-top">
           <span class="master-card-badge">০৬</span>
           <div class="flex-grow">
@@ -723,8 +1111,8 @@
         </div>
         <div class="master-card-progress">
           <div class="prog-meta-row">
-            <span class="prog-label">স্ট্যাটাস:</span>
-            <span class="prog-pct">২য় খন্ড • সম্পূর্ণ (১০০%)</span>
+            <span class="prog-label">প্রস্তুতি রিসোর্স:</span>
+            <span class="prog-pct">পূর্ণাঙ্গ ই-বুক</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill" style="--p:100%;"></div>
@@ -740,9 +1128,7 @@
           </a>
         </div>
       </article>
-
-      <!-- নন-ক্যাডার বিষয় ০৭: পাটিগণিত -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="nc-card-07" data-chapters="13" data-questions="450">
         <div class="master-card-top">
           <span class="master-card-badge">০৭</span>
           <div class="flex-grow">
@@ -754,8 +1140,8 @@
         </div>
         <div class="master-card-progress">
           <div class="prog-meta-row">
-            <span class="prog-label">স্ট্যাটাস:</span>
-            <span class="prog-pct">২য় খন্ড • সম্পূর্ণ (১০০%)</span>
+            <span class="prog-label">প্রস্তুতি রিসোর্স:</span>
+            <span class="prog-pct">পূর্ণাঙ্গ ই-বুক</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill" style="--p:100%;"></div>
@@ -771,9 +1157,7 @@
           </a>
         </div>
       </article>
-
-      <!-- নন-ক্যাডার বিষয় ০৮: বীজগণিত -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="nc-card-08" data-chapters="12" data-questions="739">
         <div class="master-card-top">
           <span class="master-card-badge">০৮</span>
           <div class="flex-grow">
@@ -785,8 +1169,8 @@
         </div>
         <div class="master-card-progress">
           <div class="prog-meta-row">
-            <span class="prog-label">স্ট্যাটাস:</span>
-            <span class="prog-pct">২য় খন্ড • সম্পূর্ণ (১০০%)</span>
+            <span class="prog-label">প্রস্তুতি রিসোর্স:</span>
+            <span class="prog-pct">পূর্ণাঙ্গ ই-বুক</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill" style="--p:100%;"></div>
@@ -802,9 +1186,7 @@
           </a>
         </div>
       </article>
-
-      <!-- নন-ক্যাডার বিষয় ০৯: জ্যামিতি ও পরিমিতি -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="nc-card-09" data-chapters="9" data-questions="329">
         <div class="master-card-top">
           <span class="master-card-badge">০৯</span>
           <div class="flex-grow">
@@ -816,8 +1198,8 @@
         </div>
         <div class="master-card-progress">
           <div class="prog-meta-row">
-            <span class="prog-label">স্ট্যাটাস:</span>
-            <span class="prog-pct">২য় খন্ড • সম্পূর্ণ (১০০%)</span>
+            <span class="prog-label">প্রস্তুতি রিসোর্স:</span>
+            <span class="prog-pct">পূর্ণাঙ্গ ই-বুক</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill" style="--p:100%;"></div>
@@ -833,9 +1215,7 @@
           </a>
         </div>
       </article>
-
-      <!-- নন-ক্যাডার বিষয় ১০: ত্রিকোণমিতি ও উচ্চতর গণিত -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="nc-card-10" data-chapters="4" data-questions="95">
         <div class="master-card-top">
           <span class="master-card-badge">১০</span>
           <div class="flex-grow">
@@ -847,8 +1227,8 @@
         </div>
         <div class="master-card-progress">
           <div class="prog-meta-row">
-            <span class="prog-label">স্ট্যাটাস:</span>
-            <span class="prog-pct">২য় খন্ড • সম্পূর্ণ (১০০%)</span>
+            <span class="prog-label">প্রস্তুতি রিসোর্স:</span>
+            <span class="prog-pct">পূর্ণাঙ্গ ই-বুক</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill" style="--p:100%;"></div>
@@ -864,9 +1244,7 @@
           </a>
         </div>
       </article>
-
-      <!-- নন-ক্যাডার বিষয় ১১: মানসিক দক্ষতা -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="nc-card-11" data-chapters="2" data-questions="45">
         <div class="master-card-top">
           <span class="master-card-badge">১১</span>
           <div class="flex-grow">
@@ -878,8 +1256,8 @@
         </div>
         <div class="master-card-progress">
           <div class="prog-meta-row">
-            <span class="prog-label">স্ট্যাটাস:</span>
-            <span class="prog-pct">২য় খন্ড • সম্পূর্ণ (১০০%)</span>
+            <span class="prog-label">প্রস্তুতি রিসোর্স:</span>
+            <span class="prog-pct">পূর্ণাঙ্গ ই-বুক</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill" style="--p:100%;"></div>
@@ -895,9 +1273,7 @@
           </a>
         </div>
       </article>
-
-      <!-- নন-ক্যাডার বিষয় ১২: ভূগোল, পরিবেশ ও দুর্যোগ ব্যবস্থাপনা -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="nc-card-12" data-chapters="2" data-questions="60">
         <div class="master-card-top">
           <span class="master-card-badge">১২</span>
           <div class="flex-grow">
@@ -909,8 +1285,8 @@
         </div>
         <div class="master-card-progress">
           <div class="prog-meta-row">
-            <span class="prog-label">স্ট্যাটাস:</span>
-            <span class="prog-pct">২য় খন্ড • সম্পূর্ণ (১০০%)</span>
+            <span class="prog-label">প্রস্তুতি রিসোর্স:</span>
+            <span class="prog-pct">পূর্ণাঙ্গ ই-বুক</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill" style="--p:100%;"></div>
@@ -926,9 +1302,7 @@
           </a>
         </div>
       </article>
-
-      <!-- নন-ক্যাডার বিষয় ১৩: কম্পিউটার ও তথ্যপ্রযুক্তি -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="nc-card-13" data-chapters="5" data-questions="203">
         <div class="master-card-top">
           <span class="master-card-badge">১৩</span>
           <div class="flex-grow">
@@ -940,8 +1314,8 @@
         </div>
         <div class="master-card-progress">
           <div class="prog-meta-row">
-            <span class="prog-label">স্ট্যাটাস:</span>
-            <span class="prog-pct">২য় খন্ড • সম্পূর্ণ (১০০%)</span>
+            <span class="prog-label">প্রস্তুতি রিসোর্স:</span>
+            <span class="prog-pct">পূর্ণাঙ্গ ই-বুক</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill" style="--p:100%;"></div>
@@ -957,9 +1331,7 @@
           </a>
         </div>
       </article>
-
-      <!-- নন-ক্যাডার বিষয় ১৪: নৈতিকতা, মূল্যবোধ ও সুশাসন -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="nc-card-14" data-chapters="1" data-questions="4">
         <div class="master-card-top">
           <span class="master-card-badge">১৪</span>
           <div class="flex-grow">
@@ -971,8 +1343,8 @@
         </div>
         <div class="master-card-progress">
           <div class="prog-meta-row">
-            <span class="prog-label">স্ট্যাটাস:</span>
-            <span class="prog-pct">২য় খন্ড • সম্পূর্ণ (১০০%)</span>
+            <span class="prog-label">প্রস্তুতি রিসোর্স:</span>
+            <span class="prog-pct">পূর্ণাঙ্গ ই-বুক</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill" style="--p:100%;"></div>
@@ -988,9 +1360,7 @@
           </a>
         </div>
       </article>
-
-      <!-- নন-ক্যাডার বিষয় ১৫: নিয়োগ প্রশ্ন সমাধান -->
-      <article class="master-subject-card">
+      <article class="master-subject-card" id="nc-card-15" data-chapters="48" data-questions="4400">
         <div class="master-card-top">
           <span class="master-card-badge">১৫</span>
           <div class="flex-grow">
@@ -1002,8 +1372,8 @@
         </div>
         <div class="master-card-progress">
           <div class="prog-meta-row">
-            <span class="prog-label">স্ট্যাটাস:</span>
-            <span class="prog-pct">নিয়োগ পরীক্ষাভিত্তিক • সম্পূর্ণ (১০০%)</span>
+            <span class="prog-label">প্রস্তুতি রিসোর্স:</span>
+            <span class="prog-pct">পূর্ণাঙ্গ ই-বুক</span>
           </div>
           <div class="sub-prog-bar-bg">
             <div class="sub-prog-fill" style="--p:100%;"></div>
@@ -1019,73 +1389,343 @@
           </a>
         </div>
       </article>
+        </div>
+      </div>
 
-      <!-- বিষয় ১৬: ইনসেপশন ইয়ার বুক (২০২৫-২০২৬) -->
-      <article class="master-subject-card">
-        <div class="master-card-top">
-          <span class="master-card-badge">১৬</span>
-          <div class="flex-grow">
-            <h2 class="master-card-title">ইনসেপশন ইয়ার বুক (২০২৫-২০২৬)</h2>
+      <!-- Non-Cadre Step 2: Written Panel -->
+      <div id="panelNonCadreWritten" class="portal-step-panel" role="tabpanel" aria-labelledby="stepBtnWritten">
+        <div class="portal-syllabus-card">
+          <div class="portal-syllabus-header">
+            <h3 class="portal-syllabus-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              <span>নন-ক্যাডার লিখিত পরীক্ষা কাঠামো (সাধারণ পদ: মোট ২০০ নম্বর)</span>
+            </h3>
+            <span class="portal-syllabus-source">তথ্যসূত্র: BPSC ও বিভিন্ন মন্ত্রণালয়/অধিদপ্তরের নিয়োগ বিজ্ঞপ্তি</span>
+          </div>
+          <p class="portal-syllabus-desc">
+            * নন-ক্যাডারে পদ ও গ্রেডভেদে লিখিত পরীক্ষার নম্বর বণ্টন ভিন্ন হতে পারে। সাধারণ ৯ম-১০ম গ্রেডে সাধারণত বাংলা ৫০, ইংরেজি ৫০, সাধারণ জ্ঞান ৪০ এবং গণিত ও মানসিক দক্ষতায় ৬০ নম্বর থাকে।
+          </p>
+          <div class="portal-syllabus-list">
+            <div class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">১.</span> বাংলা (প্রবন্ধ, পত্র, অনুবাদ ও ব্যাকরণ)</span>
+              <span class="portal-syllabus-marks">৫০ নম্বর</span>
+            </div>
+            <div class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">২.</span> ইংরেজি (Essay, Letter, Comprehension &amp; Grammar)</span>
+              <span class="portal-syllabus-marks">৫০ নম্বর</span>
+            </div>
+            <div class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">৩.</span> সাধারণ জ্ঞান (বাংলাদেশ ও আন্তর্জাতিক)</span>
+              <span class="portal-syllabus-marks">৪০ নম্বর</span>
+            </div>
+            <div class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">৪.</span> গাণিতিক সমস্যা ও মানসিক দক্ষতা</span>
+              <span class="portal-syllabus-marks">৬০ নম্বর</span>
+            </div>
           </div>
         </div>
-        <div class="master-card-meta">
-          <span>১০টি বিষয় · ৬,২২৭টি প্রশ্ন · পৃষ্ঠা ১–৮৭২</span>
-        </div>
-        <div class="master-card-progress">
-          <div class="prog-meta-row">
-            <span class="prog-label">স্ট্যাটাস:</span>
-            <span class="prog-pct">সম্পূর্ণ (১০০%)</span>
-          </div>
-          <div class="sub-prog-bar-bg">
-            <div class="sub-prog-fill" style="--p:100%;"></div>
-          </div>
-        </div>
-        <div class="master-card-actions">
-          <a href="Inception Year Book 2025-2026/ch-01-bangla-bhasha.html" class="btn btn-primary">
-            <span>পড়া শুরু করুন</span>
-            <span>→</span>
-          </a>
-          <a href="Inception Year Book 2025-2026/index.html" class="btn btn-secondary">
-            <span>সূচিপত্র</span>
-          </a>
-        </div>
-      </article>
 
-      <!-- বিষয় ১৭: পিএসসি ও আইবিএ লিখিত জব সলিউশন -->
-      <article class="master-subject-card">
-        <div class="master-card-top">
-          <span class="master-card-badge">১৭</span>
-          <div class="flex-grow">
-            <h2 class="master-card-title">আইবিএ, বুয়েট ও পিএসসি লিখিত জব সলিউশন</h2>
+        <div class="portal-grid-header">
+          <h3 class="portal-grid-title">নন-ক্যাডার লিখিত পূর্ণাঙ্গ ই-বুক ও বিগত প্রশ্ন সমাধান</h3>
+          <p class="portal-grid-sub">আইবিএ, বুয়েট ও পিএসসির নেওয়া ১৫৮টি লিখিত পরীক্ষার পূর্ণাঙ্গ সমাধান ও সাম্প্রতিক তথ্যভাণ্ডার:</p>
+        </div>
+
+        <div class="portal-subject-grid">
+          <!-- Card 17: PSC & IBA Written Job Solution -->
+          <article class="master-subject-card" data-chapters="158" data-questions="3060">
+            <div class="master-card-top">
+              <span class="master-card-badge">WR</span>
+              <div class="flex-grow">
+                <h2 class="master-card-title">আইবিএ, বুয়েট ও পিএসসি লিখিত জব সলিউশন</h2>
+              </div>
+            </div>
+            <div class="master-card-meta">
+              <span>১৫৮টি সম্পূর্ণ পরীক্ষা (মোট ১৫৮টি) · ৩০৬০টি লিখিত প্রশ্ন · পৃষ্ঠা ১–৮৭২</span>
+            </div>
+            <div class="master-card-progress">
+              <div class="prog-meta-row">
+                <span class="prog-label">স্ট্যাটাস:</span>
+                <span class="prog-pct">১০০% সম্পন্ন</span>
+              </div>
+              <div class="sub-prog-bar-bg"><div class="sub-prog-fill" style="--p:100%;"></div></div>
+            </div>
+            <div class="master-card-actions">
+              <a href="PSC & IBA Written Job Solution/ch-001-psc-ad-2022.html" class="btn btn-primary">
+                <span>১ম পরীক্ষা শুরু</span>
+                <span>→</span>
+              </a>
+              <a href="PSC & IBA Written Job Solution/subjects.html" class="btn btn-secondary">
+                <span>বিষয়ভিত্তিক</span>
+              </a>
+              <a href="PSC & IBA Written Job Solution/index.html" class="btn btn-secondary">
+                <span>সূচিপত্র</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 16: Inception Year Book -->
+          <article class="master-subject-card" data-chapters="10" data-questions="6227">
+            <div class="master-card-top">
+              <span class="master-card-badge">YB</span>
+              <div class="flex-grow">
+                <h2 class="master-card-title">ইনসেপশন ইয়ার বুক (২০২৫-২০২৬)</h2>
+              </div>
+            </div>
+            <div class="master-card-meta">
+              <span>১০টি বিষয় · ৬,২২৭টি প্রশ্ন · পৃষ্ঠা ১–৮৭২</span>
+            </div>
+            <div class="master-card-progress">
+              <div class="prog-meta-row">
+                <span class="prog-label">স্ট্যাটাস:</span>
+                <span class="prog-pct">পূর্ণাঙ্গ সংস্করণ</span>
+              </div>
+              <div class="sub-prog-bar-bg"><div class="sub-prog-fill" style="--p:100%;"></div></div>
+            </div>
+            <div class="master-card-actions">
+              <a href="Inception Year Book 2025-2026/ch-01-bangla-bhasha.html" class="btn btn-primary">
+                <span>পড়া শুরু করুন</span>
+                <span>→</span>
+              </a>
+              <a href="Inception Year Book 2025-2026/index.html" class="btn btn-secondary">
+                <span>সূচিপত্র</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Non-Cadre Step 3: Viva Panel -->
+      <div id="panelNonCadreViva" class="portal-step-panel" role="tabpanel" aria-labelledby="stepBtnViva">
+        <div class="portal-syllabus-card">
+          <div class="portal-syllabus-header">
+            <h3 class="portal-syllabus-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              <span>পিএসসি নন-ক্যাডার ভাইভা (মৌখিক) পরীক্ষা কাঠামো</span>
+            </h3>
+            <span class="portal-syllabus-source">তথ্যসূত্র: BPSC ও সংশ্লিষ্ট নিয়োগ বিধিমালা (৫০ নম্বর)</span>
+          </div>
+          <p class="portal-syllabus-desc">
+            নন-ক্যাডার ৯ম থেকে ১৩তম গ্রেডের মৌখিক পরীক্ষায় সাধারণত ৫০ নম্বর বরাদ্দ থাকে। এতে প্রার্থীর একাডেমিক সনদ, পদ-সংশ্লিষ্ট কারিগরি বা ব্যবহারিক দক্ষতা এবং দেশ ও আন্তর্জাতিক সাধারণ জ্ঞান মূল্যায়ন করা হয়।
+          </p>
+          <div class="portal-syllabus-list">
+            <div class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">•</span> পদভিত্তিক টেকনিক্যাল ও ব্যবহারিক জ্ঞান</span>
+              <span class="portal-syllabus-marks">মূল্যায়ন</span>
+            </div>
+            <div class="portal-syllabus-row">
+              <span class="portal-syllabus-subject"><span class="portal-syllabus-row-num">•</span> সাধারণ জ্ঞান, বাংলাদেশ ও সাম্প্রতিক ঘটনাবলি</span>
+              <span class="portal-syllabus-marks">মূল্যায়ন</span>
+            </div>
           </div>
         </div>
-        <div class="master-card-meta">
-          <span>১৫৮টি সম্পূর্ণ পরীক্ষা (মোট ১৫৮টি) · ৩০৬০টি লিখিত প্রশ্ন · পৃষ্ঠা ১–৮৭২</span>
+
+        <div class="portal-subject-grid">
+          <article class="master-subject-card" aria-disabled="true">
+            <div class="master-card-top">
+              <span class="master-card-badge">VV</span>
+              <div class="flex-grow">
+                <h2 class="master-card-title">নন-ক্যাডার ভাইভা প্রশ্ন ও প্রস্তুতি গাইড</h2>
+              </div>
+            </div>
+            <div class="master-card-meta">
+              <span>৫০ নম্বর · পদভিত্তিক মৌখিক পরীক্ষার প্রস্তুতি</span>
+            </div>
+            <div class="master-card-progress">
+              <div class="prog-meta-row">
+                <span class="prog-label">স্ট্যাটাস:</span>
+                <span class="prog-pct">সংকলন চলছে</span>
+              </div>
+              <div class="sub-prog-bar-bg"><div class="sub-prog-fill" style="--p:0%;"></div></div>
+            </div>
+            <div class="master-card-actions">
+              <button type="button" class="btn-disabled" disabled>শীঘ্রই আসছে ⏳</button>
+            </div>
+          </article>
         </div>
-        <div class="master-card-progress">
-          <div class="prog-meta-row">
-            <span class="prog-label">স্ট্যাটাস:</span>
-            <span class="prog-pct">১০০% সম্পন্ন</span>
-          </div>
-          <div class="sub-prog-bar-bg">
-            <div class="sub-prog-fill" style="--p:100%;"></div>
-          </div>
-        </div>
-        <div class="master-card-actions">
-          <a href="PSC & IBA Written Job Solution/ch-001-psc-ad-2022.html" class="btn btn-primary">
-            <span>১ম পরীক্ষা শুরু</span>
-            <span>→</span>
-          </a>
-          <a href="PSC & IBA Written Job Solution/subjects.html" class="btn btn-secondary">
-            <span>বিষয়ভিত্তিক</span>
-          </a>
-          <a href="PSC & IBA Written Job Solution/index.html" class="btn btn-secondary">
-            <span>সূচিপত্র</span>
-          </a>
-        </div>
-      </article>
+      </div>
+
     </section>
   </main>
+
+  <!-- 7. Features Section ("কেন এই লাইব্রেরি") -->
+  <section class="portal-features-section" id="featuresSection">
+    <div class="portal-container">
+      <div class="portal-section-header">
+        <h2>কেন এই ই-বুক লাইব্রেরি?</h2>
+        <p>প্রতিযোগিতামূলক পরীক্ষার আধুনিক, গতিশীল ও বিভ্রান্তিমুক্ত প্রস্তুতির জন্য বিশেষভাবে তৈরিকৃত স্ট্যাটিক প্ল্যাটফর্ম:</p>
+      </div>
+
+      <div class="portal-features-grid">
+        <div class="portal-feature-card">
+          <div class="portal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></div>
+          <h3 class="portal-feature-title">দ্বি-স্তরীয় অধ্যায় আর্কিটেকচার</h3>
+          <p class="portal-feature-desc">প্রতিটি অধ্যায়ের শুরুতে প্রামাণ্য রিভিশন হ্যান্ডনোট ও সূত্রাবলি এবং নিচে ইন্টারঅ্যাক্টিভ প্রশ্নব্যাংক।</p>
+        </div>
+
+        <div class="portal-feature-card">
+          <div class="portal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
+          <h3 class="portal-feature-title">মাস্টার ডিপ সার্চ ইঞ্জিন</h3>
+          <p class="portal-feature-desc">৭৬,০০০+ ইনডেক্স করা টপিক ও প্রশ্ন থেকে যেকোনো তথ্য এক ক্লিকে নিমেষে খুঁজে পাওয়ার সুবিধা।</p>
+        </div>
+
+        <div class="portal-feature-card">
+          <div class="portal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+          <h3 class="portal-feature-title">অনলাইন সিমুলেশন পরীক্ষা</h3>
+          <p class="portal-feature-desc">বিগত বিসিএস পরীক্ষার সেশনভিত্তিক রিয়েল-টাইম টাইমার ও নেগেটিভ মার্কিংযুক্ত কেন্দ্রীয় মডেল টেস্ট।</p>
+        </div>
+
+        <div class="portal-feature-card">
+          <div class="portal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+          <h3 class="portal-feature-title">অটো প্রগ্রেস ট্র্যাকিং</h3>
+          <p class="portal-feature-desc">কোন অধ্যায় কতটুকু পড়া হয়েছে তা ব্রাউজারের লোকাল স্টোরেজে স্বয়ংক্রিয়ভাবে সংরক্ষিত থাকে।</p>
+        </div>
+
+        <div class="portal-feature-card">
+          <div class="portal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <h3 class="portal-feature-title">৩টি কুইক রিভিশন মোড</h3>
+          <p class="portal-feature-desc">পরীক্ষার আগের রাতে দ্রুত রিভিশনের জন্য ফুল রিডিং, শুধু হ্যান্ডনোট কিংবা সরাসরি উত্তর দেখার মোড।</p>
+        </div>
+
+        <div class="portal-feature-card">
+          <div class="portal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></div>
+          <h3 class="portal-feature-title">শতভাগ অফলাইন ও মোবাইল বান্ধব</h3>
+          <p class="portal-feature-desc">যেকোনো স্মার্টফোনে ৩২০px থেকে শুরু করে যেকোনো স্ক্রিনে স্ফটিক-স্বচ্ছ ও দ্রুত লোডিং পারফরম্যান্স।</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. FAQ Section -->
+  <section class="portal-faq-section" id="faqSection">
+    <div class="portal-container">
+      <div class="portal-section-header">
+        <h2>সাধারণ জিজ্ঞাসা (FAQ)</h2>
+        <p>লাইব্রেরি ও পরীক্ষার প্রস্তুতি সম্পর্কিত সচরাচর জিজ্ঞাসিত প্রশ্নাবলি:</p>
+      </div>
+
+      <div class="portal-faq-list">
+        <details class="portal-faq-item">
+          <summary class="portal-faq-summary">
+            <span>১. এই লাইব্রেরিটি কীভাবে ব্যবহার করব?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="portal-faq-chevron"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="portal-faq-body">
+            <p>আপনার লক্ষ্য অনুযায়ী ওপরে বিসিএস (ক্যাডার) অথবা পিএসসি নন-ক্যাডার ট্র্যাক নির্বাচন করুন। এরপর প্রিলিমিনারি বা লিখিত ধাপ বেছে নিয়ে নির্দিষ্ট বিষয়ের "পড়া শুরু করুন" বাটনে ক্লিক করে প্রস্তুতি নিতে পারবেন।</p>
+          </div>
+        </details>
+
+        <details class="portal-faq-item">
+          <summary class="portal-faq-summary">
+            <span>২. পড়ার অগ্রগতি ও স্কোর কীভাবে সংরক্ষিত হয়?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="portal-faq-chevron"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="portal-faq-body">
+            <p>আপনার পড়ার অগ্রগতি ও মডেল টেস্টের ফলাফল সম্পূর্ণ নিরাপদভাবে আপনার ব্রাউজারের LocalStorage-এ সংরক্ষিত থাকে। কোনো ইন্টারনেট কানেকশন বা অ্যাকাউন্টের প্রয়োজন নেই।</p>
+          </div>
+        </details>
+
+        <details class="portal-faq-item">
+          <summary class="portal-faq-summary">
+            <span>৩. কুইক রিভিশন মোডগুলো কীভাবে কাজ করে?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="portal-faq-chevron"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="portal-faq-body">
+            <p>সাইড ড্রয়ারের রিভিশন সেটিংসে গিয়ে আপনি 'শুধু হ্যান্ডনোট' বেছে নিলে অধ্যায়ের শুধু সূত্র ও সামারি দেখতে পাবেন; আর 'শুধু প্রশ্ন' বেছে নিলে সরাসরি প্র্যাকটিস করতে পারবেন।</p>
+          </div>
+        </details>
+
+        <details class="portal-faq-item">
+          <summary class="portal-faq-summary">
+            <span>৪. বিসিএস প্রিলিমিনারি ও লিখিত পরীক্ষার নম্বর বণ্টন কী?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="portal-faq-chevron"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="portal-faq-body">
+            <p>BPSC সরকারি বিধি অনুযায়ী বিসিএস প্রিলিমিনারি পরীক্ষায় ১০টি বিষয়ে মোট ২০০ নম্বর (সময় ২ ঘণ্টা) এবং সাধারণ ক্যাডার লিখিত পরীক্ষায় ৬টি বিষয়ে মোট ৯০০ নম্বর (পাস ৫০%) থাকে।</p>
+          </div>
+        </details>
+
+        <details class="portal-faq-item">
+          <summary class="portal-faq-summary">
+            <span>৫. এই প্ল্যাটফর্মটি কি মোবাইলে অফলাইনে ব্যবহার করা সম্ভব?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="portal-faq-chevron"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="portal-faq-body">
+            <p>হ্যাঁ, সম্পূর্ণ প্ল্যাটফর্মটি আধুনিক পিওর HTML, CSS ও JS দ্বারা নির্মিত। ফাইলগুলো অফলাইনে সংরক্ষণ করে যেকোনো ডিভাইসে নিরবচ্ছিন্নভাবে পড়া যায়।</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Dark CTA Band -->
+  <section class="portal-cta-band">
+    <div class="portal-container portal-cta-inner">
+      <h2>আপনার স্বপ্ন পূরণের প্রস্তুতি শুরু করুন আজই</h2>
+      <p>১০ম থেকে ৫০তম বিসিএস ও পিএসসি নন-ক্যাডারের লক্ষাধিক শিক্ষার্থীর নির্ভরযোগ্য ডিজিটাল স্টাডি সঙ্গী।</p>
+      <div class="portal-cta-btns">
+        <a href="#stageStepper" class="portal-btn-primary" onclick="scrollToStepper()">
+          <span>পড়া শুরু করুন</span>
+          <span>↓</span>
+        </a>
+        <a href="exam.html" class="portal-btn-secondary">
+          <span>মডেল টেস্ট দিন</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Modern Dark Footer -->
+  <footer class="portal-footer">
+    <div class="portal-container">
+      <div class="portal-footer-grid">
+        <div class="portal-footer-col">
+          <h4>বিসিএস স্মার্ট ই-বুক লাইব্রেরি</h4>
+          <p class="portal-footer-desc">
+            বাংলাদেশ সরকারি কর্ম কমিশন (BPSC)-এর বিসিএস ও নন-ক্যাডার নিয়োগ পরীক্ষার জন্য প্রস্তুতকৃত নির্ভুল ও নির্ভরযোগ্য ওপেন ই-বুক লাইব্রেরি।
+          </p>
+          <p class="portal-footer-copy">কপিরাইট &copy; ২০২৬ • সর্বস্বত্ব সংরক্ষিত</p>
+        </div>
+
+        <div class="portal-footer-col">
+          <h4>বিসিএস ক্যাডার বিষয়সমূহ</h4>
+          <ul>
+            <li><a href="Live MCQ Bangla Language/index.html">বাংলা ভাষা ও সাহিত্য</a></li>
+            <li><a href="Live MCQ English Grammar/index.html">English Language</a></li>
+            <li><a href="Live MCQ Bangladesh/index.html">বাংলাদেশ বিষয়াবলি</a></li>
+            <li><a href="Live MCQ International/index.html">আন্তর্জাতিক বিষয়াবলি</a></li>
+            <li><a href="Live MCQ General Science/index.html">সাধারণ বিজ্ঞান ও প্রযুক্তি</a></li>
+            <li><a href="Live MCQ Mathematical Reasoning/index.html">গাণিতিক যুক্তি ও মানসিক দক্ষতা</a></li>
+          </ul>
+        </div>
+
+        <div class="portal-footer-col">
+          <h4>পিএসসি নন-ক্যাডার</h4>
+          <ul>
+            <li><a href="Non Cadre Job Solution/index.html">নিয়োগ প্রশ্ন সমাধান</a></li>
+            <li><a href="PSC & IBA Written Job Solution/index.html">লিখিত জব সলিউশন (১৫৮ পরীক্ষা)</a></li>
+            <li><a href="Inception Year Book 2025-2026/index.html">ইনসেপশন ইয়ার বুক</a></li>
+            <li><a href="Non Cadre English/index.html">নন-ক্যাডার ইংরেজি</a></li>
+            <li><a href="Non Cadre Arithmetic/index.html">নন-ক্যাডার পাটিগণিত ও বীজগণিত</a></li>
+          </ul>
+        </div>
+
+        <div class="portal-footer-col">
+          <h4>অফিশিয়াল রিসোর্স</h4>
+          <ul>
+            <li><a href="http://www.bpsc.gov.bd" target="_blank" rel="noopener">বাংলাদেশ কর্ম কমিশন (BPSC)</a></li>
+            <li><a href="exam.html">মডেল টেস্ট ইঞ্জিন</a></li>
+            <li><a href="search-data.json">মাস্টার ইনডেক্স ডেটা</a></li>
+            <li><a href="docs/sources.md">তথ্যসূত্র ও সরকারি গেজেট</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="portal-footer-bottom">
+        <p>নির্ভুলতা নীতি: মূল বই ও সরকারি সিলেবাসের বাইরে কোনো কাল্পনিক তথ্য যোগ করা সম্পূর্ণ নিষিদ্ধ।</p>
+      </div>
+    </div>
+  </footer>
 
   <!-- Revision Modes Modal Bottom Sheet -->
   <div class="modal-overlay" id="revisionModal" onclick="if(event.target===this)closeRevisionModal()" role="dialog" aria-modal="true" aria-label="কুইক রিভিশন সেটিংস">
@@ -1094,9 +1734,6 @@
         <div class="modal-title">⚡ কুইক রিভিশন ও স্টাডি সেটিংস</div>
         <button type="button" class="modal-close-btn" onclick="closeRevisionModal()" aria-label="বন্ধ করুন">&times;</button>
       </div>
-      <p class="modal-desc">
-        আপনার পড়ার সুবিধার্থে যেকোনো মোড নির্বাচন করুন। এটি পোর্টাল ও সকল বিষয়ের প্রতিটি অধ্যায়ে স্বয়ংক্রিয়ভাবে কার্যকর থাকবে।
-      </p>
 
       <div class="menu-group">
         <span class="menu-label">অধ্যায় কন্টেন্ট ভিউ:</span>
@@ -1138,154 +1775,255 @@
 
   <div id="ebkToast" class="ebk-toast"></div>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="page-container">
-      <p>বিসিএস স্মার্ট ই-বুক লাইব্রেরি • ১০ম–৫০তম বিসিএস ও পিএসসি নন-ক্যাডার</p>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
+  <!-- Core Scripts -->
   <script src="universal-modes.js"></script>
   <script src="search-engine.js"></script>
   <script src="ebook-ui.js"></script>
 
+  <!-- Portal Initialization & Dynamic Routing Script -->
   <script>
-    // Bengali numeral formatter
-    function toBn(num) {
-      const bDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
-      return String(num).replace(/\d/g, d => bDigits[d]);
+    function toBnNum(num) {
+      var bDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+      return String(num).replace(/\d/g, function(d) { return bDigits[d]; });
     }
 
-    // Master Progress Synchronization
-    function updateProgressUI() {
-      let banglaLangDone = 0;
-      try {
-        const blStored = JSON.parse(localStorage.getItem('ebk_bangla_lang_progress') || localStorage.getItem('bangla_lang_progress_data_v1') || '{}');
-        banglaLangDone = Object.keys(blStored).filter(k => blStored[k]).length;
-      } catch(e) {}
+    var currentTrack = 'cadre';
+    var currentStep = 'prelim';
 
-      let banglaDone = 0;
-      try {
-        const bStored = JSON.parse(localStorage.getItem('ebk_bangla_progress') || localStorage.getItem('bangla_progress_data_v1') || '{}');
-        banglaDone = Object.keys(bStored).filter(k => bStored[k]).length;
-      } catch(e) {}
+    function scrollToStepper() {
+      var el = document.getElementById('stageStepper');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 
-      let bdDone = 0;
-      try {
-        const bdStored = JSON.parse(localStorage.getItem('ebk_bd_progress') || localStorage.getItem('bangladesh_progress_data_v1') || '{}');
-        bdDone = Object.keys(bdStored).filter(k => bdStored[k]).length;
-      } catch(e) {}
-
-      let englishLitDone = 0;
-      try {
-        const elStored = JSON.parse(localStorage.getItem('ebk_english_lit_progress') || localStorage.getItem('english_lit_progress_data_v1') || '{}');
-        englishLitDone = Object.keys(elStored).filter(k => elStored[k]).length;
-      } catch(e) {}
-
-      let intlDone = 0;
-      try {
-        const intlStored = JSON.parse(localStorage.getItem('ebk_intl_progress') || localStorage.getItem('intl_affairs_progress_data_v1') || '{}');
-        intlDone = Object.keys(intlStored).filter(k => intlStored[k]).length;
-      } catch(e) {}
-
-      let englishGrammarDone = 0;
-      try {
-        const egStored = JSON.parse(localStorage.getItem("ebk_english_grammar_progress") || localStorage.getItem("english_grammar_progress_data_v1") || '{}');
-        englishGrammarDone = Object.keys(egStored).filter(k => egStored[k]).length;
-      } catch(e) {}
-
-      let geoDone = 0;
-      try {
-        const geoStored = JSON.parse(localStorage.getItem('ebk_geo_progress') || localStorage.getItem('geo_progress_data_v1') || '{}');
-        geoDone = Object.keys(geoStored).filter(k => geoStored[k]).length;
-      } catch(e) {}
-
-      let scienceDone = 0;
-      try {
-        const sciStored = JSON.parse(localStorage.getItem('ebk_science_progress') || localStorage.getItem('science_progress_data_v1') || '{}');
-        scienceDone = Object.keys(sciStored).filter(k => sciStored[k]).length;
-      } catch(e) {}
-
-      let computerDone = 0;
-      try {
-        const compStored = JSON.parse(localStorage.getItem('ebk_computer_progress') || localStorage.getItem('cit_progress_data_v1') || '{}');
-        computerDone = Object.keys(compStored).filter(k => compStored[k]).length;
-      } catch(e) {}
-
-      let ethicsDone = 0;
-      try {
-        const ethStored = JSON.parse(localStorage.getItem('ebk_ethics_progress') || '{}');
-        ethicsDone = Object.keys(ethStored).filter(k => ethStored[k]).length;
-      } catch(e) {}
-
-      let mathDone = 0;
-      try {
-        const mathStored = JSON.parse(localStorage.getItem('ebk_math_progress') || '{}');
-        mathDone = Object.keys(mathStored).filter(k => mathStored[k]).length;
-      } catch(e) {}
-
-      let mentalDone = 0;
-      try {
-        const mentalStored = JSON.parse(localStorage.getItem('ebk_mental_progress') || '{}');
-        mentalDone = Object.keys(mentalStored).filter(k => mentalStored[k]).length;
-      } catch(e) {}
-
-      const totalDone = banglaLangDone + banglaDone + bdDone + englishGrammarDone + englishLitDone + intlDone + geoDone + scienceDone + computerDone + ethicsDone + mathDone + mentalDone;
-      const totalCount = 211;
-
-      const pctTotal = Math.round((totalDone / totalCount) * 100);
-      const pctLang = Math.round((banglaLangDone / 22) * 100);
-      const pctBangla = Math.round((banglaDone / 30) * 100);
-      const pctBd = Math.round((bdDone / 31) * 100);
-      const pctIntl = Math.round((intlDone / 21) * 100);
-      const pctGrammar = Math.round((englishGrammarDone / 29) * 100);
-      const pctLit = Math.round((englishLitDone / 8) * 100);
-      const pctGeo = Math.round((geoDone / 4) * 100);
-      const pctSci = Math.round((scienceDone / 31) * 100);
-      const pctComp = Math.round((computerDone / 12) * 100);
-      const pctMath = Math.round((mathDone / 13) * 100);
-      const pctMental = Math.round((mentalDone / 6) * 100);
-      const pctEthics = Math.round((ethicsDone / 4) * 100);
-
-      const overallPctElem = document.getElementById('overallPercentage');
-      const overallFillElem = document.getElementById('overallFill');
-      const countTextElem = document.getElementById('completedCountText');
-
-      if (overallPctElem) overallPctElem.innerText = toBn(pctTotal) + '%';
-      if (overallFillElem) {
-        overallFillElem.style.setProperty('--p', pctTotal + '%');
-        overallFillElem.style.width = pctTotal + '%';
+    function focusSearch() {
+      var searchInput = document.querySelector('#ebkSearchMount input') || document.querySelector('.search-input');
+      if (searchInput) {
+        searchInput.focus();
+        searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        scrollToStepper();
       }
-      if (countTextElem) countTextElem.innerText = 'সম্পন্ন: ' + toBn(totalDone) + ' / ' + toBn(totalCount) + 'টি অধ্যায়';
+    }
 
-      function applySub(textId, fillId, pct, done, total) {
-        const t = document.getElementById(textId);
-        const f = document.getElementById(fillId);
-        if (t) t.innerText = toBn(pct) + '% (' + toBn(done) + '/' + toBn(total) + ')';
-        if (f) {
-          f.style.setProperty('--p', pct + '%');
-          f.style.width = pct + '%';
+    function handleNavStep(step) {
+      switchStep(step);
+      var panelId = currentTrack === 'cadre' ? 
+        (step === 'prelim' ? 'panelCadrePrelim' : (step === 'written' ? 'panelCadreWritten' : 'panelCadreViva')) :
+        (step === 'prelim' ? 'panelNonCadrePrelim' : (step === 'written' ? 'panelNonCadreWritten' : 'panelNonCadreViva'));
+      var el = document.getElementById(panelId);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function switchBook(bookType) {
+      if (bookType === 'non-cadre') bookType = 'noncadre';
+      currentTrack = (bookType === 'noncadre') ? 'noncadre' : 'cadre';
+      
+      var cadreSection = document.getElementById('cadreBookSection');
+      var nonCadreSection = document.getElementById('nonCadreBookSection');
+      var tabCadre = document.getElementById('tabCadre');
+      var tabNonCadre = document.getElementById('tabNonCadre');
+
+      var chipPrelim = document.getElementById('chipPrelimMarks');
+      var chipWritten = document.getElementById('chipWrittenMarks');
+      var chipViva = document.getElementById('chipVivaMarks');
+
+      if (currentTrack === 'cadre') {
+        if (cadreSection) cadreSection.style.display = 'block';
+        if (nonCadreSection) nonCadreSection.style.display = 'none';
+        if (tabCadre) {
+          tabCadre.classList.add('active');
+          tabCadre.setAttribute('aria-selected', 'true');
+        }
+        if (tabNonCadre) {
+          tabNonCadre.classList.remove('active');
+          tabNonCadre.setAttribute('aria-selected', 'false');
+        }
+        if (chipPrelim) chipPrelim.textContent = '২০০ নম্বর';
+        if (chipWritten) chipWritten.textContent = '৯০০ নম্বর';
+        if (chipViva) chipViva.textContent = '২০০ নম্বর';
+        try { localStorage.setItem('selected_book', 'cadre'); } catch(e) {}
+      } else {
+        if (cadreSection) cadreSection.style.display = 'none';
+        if (nonCadreSection) nonCadreSection.style.display = 'block';
+        if (tabCadre) {
+          tabCadre.classList.remove('active');
+          tabCadre.setAttribute('aria-selected', 'false');
+        }
+        if (tabNonCadre) {
+          tabNonCadre.classList.add('active');
+          tabNonCadre.setAttribute('aria-selected', 'true');
+        }
+        if (chipPrelim) chipPrelim.textContent = '১০০ নম্বর';
+        if (chipWritten) chipWritten.textContent = '২০০ নম্বর';
+        if (chipViva) chipViva.textContent = '৫০ নম্বর';
+        try { localStorage.setItem('selected_book', 'noncadre'); } catch(e) {}
+      }
+
+      // Refresh step panel in active track
+      switchStep(currentStep, false);
+      updateHash();
+      calculateActiveStats();
+    }
+
+    function switchStep(stepName, updateUrl) {
+      if (updateUrl === undefined) updateUrl = true;
+      currentStep = stepName;
+
+      // Update stepper buttons
+      ['prelim', 'written', 'viva'].forEach(function(s) {
+        var btn = document.getElementById('stepBtn' + s.charAt(0).toUpperCase() + s.slice(1));
+        if (btn) {
+          if (s === stepName) {
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+          } else {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-selected', 'false');
+          }
+        }
+      });
+
+      // Show panel for current track & step
+      var allPanels = document.querySelectorAll('.portal-step-panel');
+      allPanels.forEach(function(p) { p.classList.remove('active'); });
+
+      var activePanelId = currentTrack === 'cadre' ? 
+        (stepName === 'prelim' ? 'panelCadrePrelim' : (stepName === 'written' ? 'panelCadreWritten' : 'panelCadreViva')) :
+        (stepName === 'prelim' ? 'panelNonCadrePrelim' : (stepName === 'written' ? 'panelNonCadreWritten' : 'panelNonCadreViva'));
+
+      var activePanel = document.getElementById(activePanelId);
+      if (activePanel) activePanel.classList.add('active');
+
+      try { localStorage.setItem('ebk_selected_step', stepName); } catch(e) {}
+      if (updateUrl) updateHash();
+      calculateActiveStats();
+    }
+
+    function updateHash() {
+      var hash = '#' + currentTrack + '-' + currentStep;
+      if (window.location.hash !== hash) {
+        if (history.replaceState) {
+          history.replaceState(null, null, hash);
+        } else {
+          window.location.hash = hash;
         }
       }
-
-      applySub('banglaLangProgressText', 'banglaLangProgressFill', pctLang, banglaLangDone, 22);
-      applySub('banglaProgressText', 'banglaProgressFill', pctBangla, banglaDone, 30);
-      applySub('englishGrammarProgressText', 'englishGrammarProgressFill', pctGrammar, englishGrammarDone, 29);
-      applySub('englishLitProgressText', 'englishLitProgressFill', pctLit, englishLitDone, 8);
-      applySub('bdProgressText', 'bdProgressFill', pctBd, bdDone, 31);
-      applySub('intlProgressText', 'intlProgressFill', pctIntl, intlDone, 21);
-      applySub('geoProgressText', 'geoProgressFill', pctGeo, geoDone, 4);
-      applySub('scienceProgressText', 'scienceProgressFill', pctSci, scienceDone, 31);
-      applySub('computerProgressText', 'computerProgressFill', pctComp, computerDone, 12);
-      applySub('mathProgressText', 'mathProgressFill', pctMath, mathDone, 13);
-      applySub('mentalProgressText', 'mentalProgressFill', pctMental, mentalDone, 6);
-      applySub('ethicsProgressText', 'ethicsProgressFill', pctEthics, ethicsDone, 4);
     }
 
-    // Toast notification
+    function parseHashAndActivate() {
+      var hash = window.location.hash.toLowerCase().replace('#', '');
+      if (!hash) return false;
+
+      var track = null;
+      var step = null;
+
+      if (hash.indexOf('noncadre') !== -1 || hash.indexOf('non-cadre') !== -1) {
+        track = 'noncadre';
+      } else if (hash.indexOf('cadre') !== -1) {
+        track = 'cadre';
+      }
+
+      if (hash.indexOf('written') !== -1 || hash.indexOf('likhit') !== -1) {
+        step = 'written';
+      } else if (hash.indexOf('viva') !== -1 || hash.indexOf('moukhik') !== -1) {
+        step = 'viva';
+      } else if (hash.indexOf('prelim') !== -1 || hash.indexOf('mcq') !== -1) {
+        step = 'prelim';
+      }
+
+      if (track) switchBook(track);
+      if (step) switchStep(step, false);
+      return (track || step) ? true : false;
+    }
+
+    function calculateActiveStats() {
+      var activePanel = document.querySelector('.portal-step-panel.active');
+      if (!activePanel) return;
+
+      var cards = activePanel.querySelectorAll('.master-subject-card:not([aria-disabled="true"])');
+      var totalSubjects = cards.length;
+      var totalChapters = 0;
+      var totalQuestions = 0;
+
+      cards.forEach(function(c) {
+        var ch = parseInt(c.getAttribute('data-chapters') || '0', 10);
+        var q = parseInt(c.getAttribute('data-questions') || '0', 10);
+        totalChapters += ch;
+        totalQuestions += q;
+      });
+
+      if (totalSubjects === 0) {
+        // Fallback for empty/upcoming panels
+        totalSubjects = (currentTrack === 'cadre' && currentStep === 'prelim') ? 12 : 15;
+        totalChapters = (currentTrack === 'cadre' && currentStep === 'prelim') ? 211 : 210;
+        totalQuestions = (currentTrack === 'cadre' && currentStep === 'prelim') ? 4508 : 13800;
+      }
+
+      var sEl = document.getElementById('statSubjects');
+      var cEl = document.getElementById('statChapters');
+      var qEl = document.getElementById('statQuestions');
+
+      if (sEl) sEl.textContent = toBnNum(totalSubjects);
+      if (cEl) cEl.textContent = toBnNum(totalChapters);
+      if (qEl) qEl.textContent = toBnNum(totalQuestions.toLocaleString('bn-BD'));
+    }
+
+    // Reading Progress Synchronization
+    function updateProgressUI() {
+      var subjects = [
+        { key: 'ebk_bangla_lang_progress', alt: 'bangla_lang_progress_data_v1', text: 'banglaLangProgressText', fill: 'banglaLangProgressFill', total: 22 },
+        { key: 'ebk_bangla_progress', alt: 'bangla_progress_data_v1', text: 'banglaProgressText', fill: 'banglaProgressFill', total: 30 },
+        { key: 'ebk_english_grammar_progress', alt: 'english_grammar_progress_data_v1', text: 'englishGrammarProgressText', fill: 'englishGrammarProgressFill', total: 29 },
+        { key: 'ebk_english_lit_progress', alt: 'english_lit_progress_data_v1', text: 'englishLitProgressText', fill: 'englishLitProgressFill', total: 8 },
+        { key: 'ebk_bd_progress', alt: 'bangladesh_progress_data_v1', text: 'bdProgressText', fill: 'bdProgressFill', total: 31 },
+        { key: 'ebk_intl_progress', alt: 'intl_affairs_progress_data_v1', text: 'intlProgressText', fill: 'intlProgressFill', total: 21 },
+        { key: 'ebk_geo_progress', alt: 'geo_progress_data_v1', text: 'geoProgressText', fill: 'geoProgressFill', total: 4 },
+        { key: 'ebk_science_progress', alt: 'science_progress_data_v1', text: 'scienceProgressText', fill: 'scienceProgressFill', total: 31 },
+        { key: 'ebk_computer_progress', alt: 'cit_progress_data_v1', text: 'computerProgressText', fill: 'computerProgressFill', total: 12 },
+        { key: 'ebk_math_progress', alt: '', text: 'mathProgressText', fill: 'mathProgressFill', total: 13 },
+        { key: 'ebk_mental_progress', alt: '', text: 'mentalProgressText', fill: 'mentalProgressFill', total: 6 },
+        { key: 'ebk_ethics_progress', alt: '', text: 'ethicsProgressText', fill: 'ethicsProgressFill', total: 4 }
+      ];
+
+      var totalDone = 0;
+      var totalChapters = 211;
+
+      subjects.forEach(function(s) {
+        var count = 0;
+        try {
+          var stored = JSON.parse(localStorage.getItem(s.key) || (s.alt ? localStorage.getItem(s.alt) : null) || '{}');
+          count = Object.keys(stored).filter(function(k) { return stored[k]; }).length;
+        } catch(e) {}
+        totalDone += count;
+
+        var pct = Math.round((count / s.total) * 100);
+        var tEl = document.getElementById(s.text);
+        var fEl = document.getElementById(s.fill);
+
+        if (tEl) tEl.innerText = toBnNum(pct) + '% (' + toBnNum(count) + '/' + toBnNum(s.total) + ')';
+        if (fEl) {
+          fEl.style.setProperty('--p', pct + '%');
+          fEl.style.width = pct + '%';
+        }
+      });
+
+      var overallPct = Math.round((totalDone / totalChapters) * 100);
+      var overallPctEl = document.getElementById('overallPercentage');
+      var overallFillEl = document.getElementById('overallFill');
+      var countTextEl = document.getElementById('completedCountText');
+
+      if (overallPctEl) overallPctEl.innerText = toBnNum(overallPct) + '%';
+      if (overallFillEl) {
+        overallFillEl.style.setProperty('--p', overallPct + '%');
+        overallFillEl.style.width = overallPct + '%';
+      }
+      if (countTextEl) {
+        countTextEl.innerText = 'সম্পন্ন: ' + toBnNum(totalDone) + ' / ' + toBnNum(totalChapters) + 'টি অধ্যায়';
+      }
+    }
+
     function showToast(msg) {
-      let toast = document.getElementById('ebkToast');
+      var toast = document.getElementById('ebkToast');
       if (!toast) {
         toast = document.createElement('div');
         toast.id = 'ebkToast';
@@ -1294,22 +2032,17 @@
       }
       toast.innerHTML = '<span>⚡</span> <span>' + msg + '</span>';
       toast.classList.add('show');
-      setTimeout(function() {
-        toast.classList.remove('show');
-      }, 2600);
+      setTimeout(function() { toast.classList.remove('show'); }, 2500);
     }
 
-    // View & QA Modes
     function setGlobalViewMode(mode) {
       document.documentElement.setAttribute('data-view-mode', mode);
       try { localStorage.setItem('ebk_view_mode', mode); } catch(e) {}
-      
       document.querySelectorAll('#viewModeGroup .mode-pill, .modal-view-pill').forEach(function(btn) {
         if (btn.getAttribute('data-view') === mode) btn.classList.add('active');
         else btn.classList.remove('active');
       });
-      
-      const labels = {
+      var labels = {
         'full': 'পূর্ণাঙ্গ পাঠ (নোট + প্রশ্নব্যাংক)',
         'notes-only': 'শুধু প্রামাণ্য রিভিশন নোট ও সূত্রাবলি',
         'questions-only': 'শুধু পরীক্ষার প্রশ্নব্যাংক'
@@ -1320,13 +2053,11 @@
     function setGlobalQaMode(mode) {
       document.documentElement.setAttribute('data-qa-mode', mode);
       try { localStorage.setItem('ebk_qa_mode', mode); } catch(e) {}
-      
       document.querySelectorAll('#qaModeGroup .mode-pill, .modal-qa-pill').forEach(function(btn) {
         if (btn.getAttribute('data-qa') === mode) btn.classList.add('active');
         else btn.classList.remove('active');
       });
-      
-      const labels = {
+      var labels = {
         'quiz': 'কুইজ প্র্যাকটিস মোড',
         'show-answers': 'উত্তর ও ব্যাখ্যা ওপেন মোড',
         'direct-answer': 'সরাসরি সঠিক উত্তর মোড'
@@ -1335,60 +2066,59 @@
     }
 
     function openRevisionModal() {
-      const modal = document.getElementById('revisionModal');
+      var modal = document.getElementById('revisionModal');
       if (modal) modal.classList.add('open');
     }
 
     function closeRevisionModal() {
-      const modal = document.getElementById('revisionModal');
+      var modal = document.getElementById('revisionModal');
       if (modal) modal.classList.remove('open');
     }
 
-    // Book switcher (Cadre vs Non-Cadre)
-    function switchBook(bookType) {
-      const cadreSection = document.getElementById('cadreBookSection');
-      const nonCadreSection = document.getElementById('nonCadreBookSection');
-      const tabCadre = document.getElementById('tabCadre');
-      const tabNonCadre = document.getElementById('tabNonCadre');
-      if (bookType === 'cadre') {
-        if (cadreSection) cadreSection.style.display = 'grid';
-        if (nonCadreSection) nonCadreSection.style.display = 'none';
-        if (tabCadre) {
-          tabCadre.classList.add('active');
-          tabCadre.setAttribute('aria-selected', 'true');
-        }
-        if (tabNonCadre) {
-          tabNonCadre.classList.remove('active');
-          tabNonCadre.setAttribute('aria-selected', 'false');
-        }
-        try { localStorage.setItem('selected_book', 'cadre'); } catch(e) {}
-      } else {
-        if (cadreSection) cadreSection.style.display = 'none';
-        if (nonCadreSection) nonCadreSection.style.display = 'grid';
-        if (tabCadre) {
-          tabCadre.classList.remove('active');
-          tabCadre.setAttribute('aria-selected', 'false');
-        }
-        if (tabNonCadre) {
-          tabNonCadre.classList.add('active');
-          tabNonCadre.setAttribute('aria-selected', 'true');
-        }
-        try { localStorage.setItem('selected_book', 'non-cadre'); } catch(e) {}
-      }
+    function closeMenuDrawer() {
+      var drawer = document.getElementById('menuDrawer');
+      if (drawer) drawer.classList.remove('open');
     }
 
-    // Initialize state
+    // Font size scaling
+    var currentFontScale = 1;
+    function adjustFontSize(dir) {
+      if (dir === 0) currentFontScale = 1;
+      else currentFontScale += dir * 0.08;
+      if (currentFontScale < 0.85) currentFontScale = 0.85;
+      if (currentFontScale > 1.25) currentFontScale = 1.25;
+      document.documentElement.style.fontSize = (currentFontScale * 100) + '%';
+      showToast('ফন্ট সাইজ: ' + Math.round(currentFontScale * 100) + '%');
+    }
+
+    // Initialize
     document.addEventListener('DOMContentLoaded', function() {
+      // Hash or saved state
+      var hashLoaded = parseHashAndActivate();
+      if (!hashLoaded) {
+        try {
+          var savedBook = localStorage.getItem('selected_book') || 'cadre';
+          var savedStep = localStorage.getItem('ebk_selected_step') || 'prelim';
+          switchBook(savedBook);
+          switchStep(savedStep, false);
+        } catch(e) {
+          switchBook('cadre');
+          switchStep('prelim', false);
+        }
+      }
+
       try {
-        const savedBook = localStorage.getItem('selected_book') || 'cadre';
-        switchBook(savedBook);
-        
-        const savedView = localStorage.getItem('ebk_view_mode') || 'full';
-        const savedQa = localStorage.getItem('ebk_qa_mode') || 'quiz';
+        var savedView = localStorage.getItem('ebk_view_mode') || 'full';
+        var savedQa = localStorage.getItem('ebk_qa_mode') || 'quiz';
         setGlobalViewMode(savedView);
         setGlobalQaMode(savedQa);
       } catch(e) {}
+
       updateProgressUI();
+      calculateActiveStats();
+
+      // Listen to popstate / hashchange
+      window.addEventListener('hashchange', parseHashAndActivate);
     });
   </script>
 </body>
