@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>মাইক্রোক্রেডিট রেগুলেটরি অথরিটি — সহকারী পরিচালক ২০২১ | প্রামাণ্য সমাধান</title>
+  <link rel="stylesheet" href="css/paper-textures.css">
+  <link rel="stylesheet" href="css/bangla-fonts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Kalpurush&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\(', right: '\\)', display: false}]});">
+  </script>
+  <style>
+    :root {
+      --bg-page: #fdfbf7;
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: rgba(226, 232, 240, 0.8);
+      --accent-primary: #0284c7;
+      --accent-indigo: #6366f1;
+      --accent-emerald: #10b981;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #0f172a;
+      --bg-surface: rgba(30, 41, 59, 0.85);
+      --bg-card: rgba(30, 41, 59, 0.82);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: rgba(51, 65, 85, 0.8);
+      --accent-primary: #38bdf8;
+      --accent-indigo: #818cf8;
+      --accent-emerald: #34d399;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.65;
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Top Nav */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+    }
+    .back-btn {
+      text-decoration: none;
+      color: var(--accent-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .back-btn:hover { text-decoration: underline; }
+    .nav-controls { display: flex; align-items: center; gap: 0.75rem; }
+    .theme-btn, .font-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .theme-btn:hover, .font-btn:hover {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Chapter Header */
+    .ch-header {
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .ch-title {
+      font-size: 1.65rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+    }
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.05rem;
+      display: block;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 0.25rem;
+    }
+    .ch-meta-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .ch-badge {
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--accent-primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+
+    /* Sketchnotes Section */
+    .sk-container {
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+    .sk-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .sk-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.15rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .sk-box h4 {
+      font-size: 1.05rem;
+      color: var(--accent-indigo);
+      margin-bottom: 0.65rem;
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 0.35rem;
+    }
+    .sk-box ul { list-style-type: none; }
+    .sk-box li {
+      font-size: 0.92rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+    .sk-box li strong { color: var(--text-main); }
+
+    /* Part 2: Question Section */
+    .part2-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .part2-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .subject-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .tab-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.4rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Question Cards */
+    .q-card {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .q-header {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.85rem;
+    }
+    .q-num {
+      font-weight: 700;
+      color: var(--accent-primary);
+      font-size: 1.05rem;
+    }
+    .q-meta-tag {
+      background: rgba(2, 132, 199, 0.08);
+      color: var(--accent-primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .q-body {
+      margin-bottom: 1rem;
+    }
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* Answer Drawer */
+    .ans-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(2, 132, 199, 0.06);
+      border: 1px solid rgba(2, 132, 199, 0.15);
+      color: var(--accent-primary);
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+    .ans-toggle:hover { background: rgba(2, 132, 199, 0.12); }
+    .ans-drawer {
+      display: none;
+      padding: 1.25rem;
+      margin-top: 0.75rem;
+      background: rgba(0, 0, 0, 0.02);
+      border-left: 3px solid var(--accent-primary);
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    }
+    [data-theme="dark"] .ans-drawer { background: rgba(255, 255, 255, 0.02); }
+    .ans-drawer.open { display: block; }
+    .exp-content {
+      font-size: 0.98rem;
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+    .exp-content p { margin-bottom: 0.75rem; }
+    .exp-content ul, .exp-content ol { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+    .exp-content li { margin-bottom: 0.35rem; }
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.92rem;
+    }
+    .bcs-table th, .bcs-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+    }
+    .bcs-table th {
+      background: rgba(2, 132, 199, 0.08);
+      font-weight: 600;
+      color: var(--accent-primary);
+    }
+
+    /* Typography Protection */
+    .q-card, .q-card *, .q-text, .q-text *, .ans-drawer, .ans-drawer *,
+    .bcs-table, .bcs-table * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body class="paper-old-aged font-ekush">
+  <div class="container">
+    <!-- Top Navigation -->
+    <header class="top-nav">
+      <a href="index.html" class="back-btn">
+        <span>←</span> সূচিপত্রে ফিরে যান
+      </a>
+      <div class="nav-controls">
+        <button class="font-btn" onclick="adjustFontSize(-1)">A-</button>
+        <button class="font-btn" onclick="adjustFontSize(0)">A</button>
+        <button class="font-btn" onclick="adjustFontSize(1)">A+</button>
+        <button class="theme-btn" onclick="toggleTheme()" id="themeToggleBtn">🌙</button>
+      </div>
+    </header>
+
+    <!-- Chapter Header -->
+    <section class="ch-header">
+      <h1 class="ch-title font-ekush">
+        মাইক্রোক্রেডিট রেগুলেটরি অথরিটি — সহকারী পরিচালক ২০২১
+        <span class="ch-en">Microcredit Regulatory Authority (MRA) - Assistant Director 2021</span>
+      </h1>
+      <div class="ch-meta-wrap">
+        <span class="ch-badge">📋 পরীক্ষা নং: ১০১</span>
+        <span class="ch-badge">🏛️ IBA</span>
+        <span class="ch-badge">📅 তারিখ: ০৫.০৩.২০২১</span>
+        <span class="ch-badge">⏱️ সময়: ১৮০ মিনিট</span>
+        <span class="ch-badge">🎯 পূর্ণমান: ৩০০</span>
+        <span class="ch-badge">🔢 মোট প্রশ্ন: ৭টি</span>
+        <span class="ch-badge">📄 পৃষ্ঠা: ৬৩২–৬৩৯</span>
+      </div>
+    </section>
+
+    
+    <!-- PART 1: Authentic Revision Notes & Sketchnotes -->
+    <section class="sk-container font-ekush">
+      <div class="sk-title font-ekush">
+        <span>📖</span> Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি (Authentic Sketchnotes)
+      </div>
+      <p style="color:var(--text-muted); font-size:0.95rem; margin-top:-0.5rem; margin-bottom:1.25rem;">
+        মাইক্রোক্রেডিট রেগুলেটরি অথরিটি (MRA) সহকারী পরিচালক ২০২১ পরীক্ষার গণিত ও অর্থনীতি সূত্রাবলি:
+      </p>
+      <div class="sk-grid">
+        <div class="sk-box">
+          <h4 class="font-ekush">💰 ক্ষুদ্রঋণ অর্থনীতি ও LDC গ্র্যাজুয়েশন</h4>
+          <ul>
+            <li><strong>ক্ষুদ্রঋণ দর্শন:</strong> জামানতহীন ঋণ, নারীর অর্থনৈতিক অন্তর্ভুক্তি, সঞ্চয় গঠন ও উদ্যোক্তা তৈরি।</li>
+            <li><strong>LDC Graduation:</strong> তিনটি সূচক—মাথাপিছু GNI, মানবসম্পদ সূচক (HAI), এবং অর্থনৈতিক ভঙ্গুরতা সূচক (EVI)। ২০২৬ সালে বাংলাদেশ উন্নয়নশীল দেশে উত্তীর্ণ হবে।</li>
+          </ul>
+        </div>
+        <div class="sk-box">
+          <h4 class="font-ekush">➗ গণিত মাস্টার ট্রিকস</h4>
+          <ul>
+            <li><strong>লগারিদম:</strong> \(\log_5(x^2+x) - \log_5(x+1) = 3 \implies \log_5 x = 3 \implies x = 125\)।</li>
+            <li><strong>Circular Stadium:</strong> ২৫২, ৩০৮ ও ১৯৮ সেকেন্ডের লসাগু \(= ২৭৭২\) সেকেন্ড \(= ৪৬\) মিনিট ১২ সেকেন্ড।</li>
+            <li><strong>Perfect Cube:</strong> ৩৬০০-কে ক্ষুদ্রতম সংখ্যা \(৪৫০\) দ্বারা ভাগ করলে \(৮ = ২^৩\) পূর্ণ ঘন সংখ্যা হয়।</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- PART 2: Written Examination Question Engine -->
+    <section>
+      <div class="part2-header">
+        <div class="part2-title">
+          <span>📝</span> Part 2: বিগত পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক ও সমাধান
+        </div>
+      </div>
+
+      <!-- Subject Filter Tabs -->
+      <nav class="subject-tabs">
+        <button class="tab-btn active" data-subject="all">সকল বিষয় (৭)</button>
+        <button class="tab-btn" data-subject="বাংলা সাহিত্য ও ব্যাকরণ">বাংলা সাহিত্য ও ব্যাকরণ (২)</button>
+        <button class="tab-btn" data-subject="ইংরেজি">ইংরেজি (৪)</button>
+        <button class="tab-btn" data-subject="গণিত">গণিত (১)</button>
+      </nav>
+
+      <!-- Question Cards List -->
+      <main id="questionContainer">
+        
+        <article class="q-card" data-qid="1" data-subject="বাংলা সাহিত্য ও ব্যাকরণ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১</span>
+            <span class="q-meta-tag">বাংলা সাহিত্য ও ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা রচনা</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">বাংলা রচনা লিখুন: "দারিদ্র্য বিমোচন ও সামাজিক বৈষম্য দূরীকরণে ক্ষুদ্র ঋণ কার্যক্রমের চ্যালেঞ্জ ও কৌশল: বাংলাদেশ প্রেক্ষিত"।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-1')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-1" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>প্রবন্ধ: দারিদ্র্য বিমোচন ও সামাজিক বৈষম্য দূরীকরণে ক্ষুদ্র ঋণ কার্যক্রমের চ্যালেঞ্জ ও কৌশল: বাংলাদেশ প্রেক্ষিত</strong></p>
+<p><strong>ভূমিকা:</strong> দারিদ্র্য ও সামাজিক বৈষম্য উন্নয়নশীল দেশগুলোর অর্থনৈতিক মুক্তির প্রধান অন্তরায়। প্রথাগত বাণিজ্যিক ব্যাংকগুলো জামানত ছাড়া দরিদ্র প্রান্তিক জনগোষ্ঠীকে ঋণ প্রদানে অনাগ্রহী হওয়ায় সমাজে সুবিধাবঞ্চিত মানুষের আর্থিক অন্তর্ভুক্তি নিশ্চিত করতে জন্ম নেয় <strong>ক্ষুদ্রঋণ (Microcredit)</strong> কার্যক্রম। বাংলাদেশ বিশ্বজুড়ে ক্ষুদ্রঋণের সূতিকাগার হিসেবে খ্যাত। দারিদ্র্য বিমোচন, নারীর ক্ষমতায়ন এবং গ্রামীণ অর্থনীতি পুনরুজ্জীবনে ক্ষুদ্রঋণ আন্তর্জাতিকভাবে প্রশংসিত হলেও এর অন্তর্নিহিত বহুমাত্রিক চ্যালেঞ্জ মোকাবিলায় প্রয়োজন আধুনিক প্রাতিষ্ঠানিক কৌশল।</p>
+<p><strong>দারিদ্র্য বিমোচন ও বৈষম্য হ্রাসে ক্ষুদ্রঋণের ভূমিকা:</strong></p>
+<ol>
+<li><strong>জামানতহীন অর্থায়ন ও স্বকর্মসংস্থান:</strong> গ্রামীণ ব্যাংক, ব্র্যাক, আশা প্রভৃতি এনজিও-এমএফআই প্রতিষ্ঠান কোনো স্থাবর জামানত ছাড়াই গ্রামীণ ভূমিহীন ও ক্ষুদ্র কৃষকদের হাঁস-মুরগি পালন, গাভী পালন, হস্তশিল্প এবং ক্ষুদ্র ব্যবসার পুঁজি সরবরাহ করেছে।</li>
+<li><strong>নারীর ক্ষমতায়ন ও সিদ্ধান্ত গ্রহণ:</strong> ক্ষুদ্রঋণ গ্রহীতাদের ৯০ শতাংশের বেশি নারী। অর্থনৈতিক সক্ষমতা অর্জনের ফলে গ্রামীণ সমাজে নারীর পারিবারিক সিদ্ধান্ত গ্রহণে অংশগ্রহণ এবং সামাজিক মর্যাদা উল্লেখযোগ্যভাবে বৃদ্ধি পেয়েছে।</li>
+<li><strong>আর্থিক অন্তর্ভুক্তি ও সঞ্চয় অভ্যাস:</strong> প্রান্তিক জনগোষ্ঠীকে প্রাতিষ্ঠানিক সঞ্চয় ও লেনদেনের আওতায় এনে ব্যাংকিং চ্যানেলের বিস্তার ঘটিয়েছে।</li>
+</ol>
+<p><strong>ক্ষুদ্রঋণ কার্যক্রমের প্রধান চ্যালেঞ্জসমূহ:</strong></p>
+<ol>
+<li><strong>ঋণের অতিরিক্ত চক্র ও বহুঋণগ্রস্ততা (Over-indebtedness):</strong> একক গ্রহীতা একাধিক এনজিও থেকে ঋণ গ্রহণ করায় ঋণের কিস্তি পরিশোধের জন্য নতুন ঋণ নেওয়ার দুষ্টচক্রে আটকা পড়েন।</li>
+<li><strong>অপেক্ষাকৃত উচ্চ সুদের হার:</strong> প্রত্যন্ত অঞ্চলে বাড়ি বাড়ি গিয়ে ক্ষুদ্র ক্ষুদ্র কিস্তি আদায়ের উচ্চ পরিচালন ব্যয়ের (Operating Cost) কারণে ক্ষুদ্রঋণে সুদের হার অপেক্ষাকৃত বেশি থাকে।</li>
+<li><strong>উৎপাদনশীল খাতের বাইরে অপব্যবহার:</strong> প্রাপ্ত ঋণ উৎপাদনশীল সম্পদে বিনিয়োগ না করে অনেক সময় ভোগবিলাস, চিকিৎসা বা পুরোনো ঋণ শোধে ব্যবহার করায় টেকসই আয় তৈরি হয় না।</li>
+</ol>
+<p><strong>উত্তরণের কৌশলগত পদক্ষেপ:</strong></p>
+<ol>
+<li><strong>MRA-এর ডিজিটাল তদারকি ও কেন্দ্রীয় ডাটাবেজ:</strong> ক্রেডিট ব্যুরো গড়ে তুলে এক গ্রাহকের একাধিক প্রতিষ্ঠান থেকে অতিরিক্ত ঋণ গ্রহণ প্রতিরোধ করা।</li>
+<li><strong>ক্ষুদ্রঋণ থেকে ক্ষুদ্র উদ্যোগে রূপান্তর (Micro-enterprise Financing):</strong> কেবল জীবনধারণের ঋণ নয়, বরং সফল উদ্যোক্তাদের বড় আকারের এসএমই ঋণ ও বাজার সংযোগ সুবিধা প্রদান।</li>
+<li><strong>ডিজিটাল ক্ষুদ্রঋণ ও স্মার্ট ফিনটেক:</strong> মোবাইল ফাইন্যান্সিয়াল সার্ভিসের (MFS) মাধ্যমে কিস্তি বিতরণ ও আদায় করে পরিচালন ব্যয় হ্রাস করা।</li>
+</ol>
+<p><strong>উপসংহার:</strong> ক্ষুদ্রঋণ কেবল ঋণ বিতরণের কার্যক্রম নয়, এটি সামাজিক সমতা ও ন্যায়বিচার প্রতিষ্ঠার একটি শক্তিশালী দর্শন। যথাযথ নিয়ন্ত্রণ, প্রযুক্তিগত সংহতি এবং দক্ষতা বৃদ্ধির প্রশিক্ষণ যুক্ত করতে পারলে ক্ষুদ্রঋণ ২০৪১ সালের স্মার্ট ও দারিদ্র্যমুক্ত বাংলাদেশ বিনির্মাণে কার্যকর চালিকাশক্তি হিসেবে কাজ করবে।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="2" data-subject="বাংলা সাহিত্য ও ব্যাকরণ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ২</span>
+            <span class="q-meta-tag">বাংলা সাহিত্য ও ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বঙ্গানুবাদ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ২৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">ইংরেজি থেকে বাংলায় অনুবাদ করুন:<br>"India and Pakistan have agreed to immediately end military hostilities by reinstating the 2003 treaty in order to reduce tensions between the two nuclear-armed enemies in south Asia. In a joint statement today, the two countries said their top military commanders spoke through hotline communication and openly reviewed the situation along the Line of Control, which divides Kashmir between India and Pakistan, in a cordial atmosphere. A statement issued by the Pakistan Army said that both sides agreed that from midnight on February 24 and 25, they would abide by all agreements and understandings in the LoC and other areas and observe a ceasefire. The statement further said that in the interest of achieving mutually beneficial and lasting peace, the two sides would look at each other’s key issues and concerns that could lead to the disruption of peace and the outbreak of violence."</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-2')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-2" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>প্রমিত বঙ্গানুবাদ:</strong></p>
+<p>দক্ষিণ এশিয়ার দুই পারমাণবিক শক্তিধর প্রতিবেশীর মধ্যকার বিদ্যমান উত্তেজনা প্রশমনে ২০০৩ সালের ঐতিহাসিক যুদ্ধবিরতি চুক্তি পুনরুজ্জীবনের মাধ্যমে অবিলম্বে সামরিক বৈরিতা অবসানে সম্মত হয়েছে ভারত ও পাকিস্তান। আজ এক যৌথ বিবৃতিতে উভয় দেশ জানিয়েছে যে, তাদের শীর্ষ সামরিক কমান্ডাররা হটলাইন যোগাযোগের মাধ্যমে কথা বলেছেন এবং ভারত ও পাকিস্তানের মধ্যে কাশ্মীরকে বিভক্তকারী নিয়ন্ত্রণরেখা (Line of Control বা LoC) বরাবর বিরাজমান সামগ্রিক পরিস্থিতি এক সৌহার্দ্যপূর্ণ পরিবেশে খোলামেলা পর্যালোচনা করেছেন। পাকিস্তান সেনাবাহিনীর পক্ষ থেকে প্রকাশিত এক বিবৃতিতে বলা হয়, উভয় পক্ষই একমত হয়েছে যে ২৪ ও ২৫ ফেব্রুয়ারির মধ্যরাত থেকে তারা নিয়ন্ত্রণরেখাসহ অন্যান্য সকল অঞ্চলের যাবতীয় চুক্তি ও সমঝোতা কঠোরভাবে মেনে চলবে এবং সার্বিক যুদ্ধবিরতি কার্যকর রাখবে। বিবৃতিতে আরও বলা হয়, পারস্পরিক ফলপ্রসূ ও দীর্ঘস্থায়ী শান্তি প্রতিষ্ঠার স্বার্থে উভয় পক্ষই পরস্পরের সেই সকল প্রধান উদ্বেগ ও স্পর্শকাতর বিষয়সমূহ পর্যালোচনা করবে যা শান্তি বিনষ্ট করতে পারে এবং নতুন করে সহিংসতার সূত্রপাত ঘটাতে পারে।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="3" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৩</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">English Essay</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Write an essay on 'Microfinance for Promoting Entrepreneurship and Employment Generation'.</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-3')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-3" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>Essay: Microfinance for Promoting Entrepreneurship and Employment Generation</strong></p>
+<p><strong>Introduction:</strong> Microfinance has fundamentally reshaped developmental economics by extending financial liquidity to marginalized demographics traditionally excluded by conventional commercial banks. Pioneered in Bangladesh and globally recognized through the Nobel Peace Prize, microfinance provides collateral-free credit, micro-savings, and basic insurance to grassroots individuals. Beyond mere poverty alleviation, its contemporary mission centers on catalyzing entrepreneurial initiative and driving scalable employment generation in the informal economy.</p>
+<p><strong>Microfinance as an Engine of Grassroots Entrepreneurship:</strong></p>
+<ul>
+<li><strong>Injecting Seed Capital:</strong> Lack of initial startup capital is the single largest bottleneck for aspiring rural entrepreneurs. Small micro-loans enable individuals to procure income-generating assets such as sewing machines, dairy cattle, poultry incubators, and agricultural inventory.</li>
+<li><strong>Empowering Women-Led Enterprises:</strong> Across South Asia and Africa, women constitute over 85% of microfinance clients. By managing micro-enterprises in handicrafts, tailoring, and agro-processing, women achieve financial independence and reinvest profits into child education and household nutrition.</li>
+<li><strong>From Subsistence to Scalable Enterprises:</strong> Forward-thinking Microfinance Institutions (MFIs) have developed specialized micro-enterprise loans (Tk. 1,00,000 to 10,00,000), facilitating graduation from subsistence livelihoods into registered small businesses that hire external wage labor.</li>
+</ul>
+<p><strong>Employment Generation Dynamics:</strong></p>
+<ol>
+<li><strong>Direct Self-Employment:</strong> Unemployed rural youth and retrenched workers establish sustainable self-employment ventures.</li>
+<li><strong>Indirect Local Job Multipliers:</strong> Micro-enterprises stimulate local economic ecosystems—purchasing supplies from village farmers and contracting local transport, thereby multiplying auxiliary job opportunities.</li>
+</ol>
+<p><strong>Critical Challenges:</strong> Over-indebtedness caused by overlapping loans, relatively high operational interest rates, and deficits in technical and marketing skills often constrain long-term business viability.</p>
+<p><strong>Strategic Way Forward:</strong> The Microcredit Regulatory Authority (MRA) must foster digitalization (FinTech, mobile wallets), mandate fair lending disclosures, and couple financing with vocational mentorship. By bridging finance with entrepreneurial training, microfinance will remain a formidable vehicle for shared economic prosperity.</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="4" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৪</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি অনুবাদ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ২৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Translate the following paragraph into English:<br>"করোনা মহামারি শুরু হওয়ার আগে বিভিন্ন আন্তর্জাতিক সংস্থা দক্ষিণ এশিয়ার দেশগুলোকে অর্থনৈতিক প্রবৃদ্ধিতে চ্যাম্পিয়ন হিসেবে উল্লেখ করেছিল। কিন্তু মহামারির মাঝামাঝি এসে তারাই আবার বলছে, চলতি বছর এই অঞ্চল অর্থনীতিতে সবচেয়ে খারাপ করবে। বাংলাদেশসহ দক্ষিণ এশিয়ার দেশগুলো দারিদ্র্য বিমোচন এবং অন্যান্য খাতে উন্নয়নের দিকে সাফল্যের সাথে এগিয়ে যাচ্ছিল। কিন্তু করোনা মহামারির কারণে ঠিক উল্টোটাই ঘটেছে। সদ্য প্রকাশিত জাতিসংঘের বিশ্ব অর্থনৈতিক অবস্থার প্রতিবেদনে বলা হয়েছে, অর্থনীতি যে অবস্থায় পতিত হয়েছে তা থেকে উত্তরণে দেশগুলোকে দীর্ঘ পথ পাড়ি দিতে হবে। তবে এতো কিছুর পরও বাংলাদেশের রেমিট্যান্স প্রবাহ অব্যাহত আছে এবং আমাদের বৈদেশিক মুদ্রার রিজার্ভের পরিমাণ রেকর্ড পরিমাণ ছাড়িয়েছে।"</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-4')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-4" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>English Translation:</strong></p>
+<p>Prior to the onset of the Coronavirus pandemic, various international multilateral agencies cited South Asian nations as champions of robust economic growth. However, in the midst of the pandemic, the very same institutions projected that this region would experience the sharpest economic deceleration in the current year. Countries across South Asia, including Bangladesh, had been progressing commendably toward poverty alleviation and human development indicators; yet the pandemic engineered a drastic reversal of those gains. According to the newly released United Nations World Economic Situation and Prospects report, economies must navigate a prolonged and arduous path to recover from the prevailing downturn. Nonetheless, despite these formidable headwinds, Bangladesh's inward remittance flows have demonstrated extraordinary resilience, pushing foreign exchange reserves past record-breaking thresholds.</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="5" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৫</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Solve the following mathematical problems:<br>(a) Train speed: A train is running at a speed of 40 km/hr and it crosses a post in 18 seconds. What is the length of the train?<br>(b) Work & Time: Kamal will complete a work in 18 days. If Shahin is 20% more efficient than Kamal, in how many days can he complete the work?<br>(c) Train Stoppage: A train travelled at an average speed of 100 km/hr, stopping for 3 minutes after every 75 km. How long did it take to reach its destination 600 km from the starting point?<br>(d) H.C.F & L.C.M: What is the smallest number by which 3,600 must be divided to make it a perfect cube?<br>(e) Algebra: If \(2^n = \sqrt{1024}\), what is the value of n?<br>(f) Equation: In an examination, a student scores 4 marks for every correct answer and loses 1 mark for every wrong answer. If he attempts all 80 questions and secures 120 marks, how many questions does he answer correctly?<br>(g) Compound Interest: A bank offers 5% compound interest calculated on half-yearly basis. A customer deposits Tk. 1,600 each on 1st January and 1st July of a year. At the end of the second year, how much interest will he receive?<br>(h) Percentage: A reduction of 10% in the price of a pen enabled a trader to purchase 9 more pens for Tk. 540. What is the reduced price of the pen?<br>(i) Circular Track / L.C.M: A, B and C start at the same time in the same direction to run around a circular stadium. A completes a round in 252 seconds, B in 308 seconds and C in 198 seconds. After what time will they meet again at the starting point?<br>(j) Logarithm: If \(\log_5(x^2 + x) - \log_5(x + 1) = 3\), find the value of x.</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-5')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-5" class="ans-drawer">
+            <div class="exp-content">
+              <div class="exp-content">
+<p><strong>(a) ট্রেনের দৈর্ঘ্য নির্ণয়:</strong><br>
+পোস্ট অতিক্রম করতে ট্রেনকে নিজের দৈর্ঘ্যের সমান দূরত্ব যেতে হয়।<br>
+বেগ \(v = 40\text{ km/h} = 40 \times \frac{5}{18} = \frac{200}{18}\) মি/সে।<br>
+দূরত্ব \(d = v \times t = \frac{200}{18} \times 18 = 200\) মিটার।<br>
+<strong>উত্তর: ২০০ মিটার</strong> (200 meters)।</p>
+
+<p><strong>(b) কর্মদক্ষতা ও কাজ:</strong><br>
+কামালের লাগে ১৮ দিন। কামালের ১ দিনের কাজ \(= \frac{1}{18}\) অংশ।<br>
+শাহিন ২০% বেশি দক্ষ, সুতরাং শাহিনের ১ দিনের কাজ \(= \frac{1}{18} \times 120\% = \frac{1}{18} \times \frac{6}{5} = \frac{1}{15}\) অংশ।<br>
+অতএব, শাহিন সম্পূর্ণ কাজটি করতে সময় নেবে <strong>১৫ দিন</strong>।<br>
+<strong>উত্তর: ১৫ দিন</strong> (15 days)।</p>
+
+<p><strong>(c) ট্রেনের যাত্রা সময়:</strong><br>
+চলমান সময় \(= \frac{600}{100} = 6\) ঘণ্টা।<br>
+বিরতির সংখ্যা \(= \frac{600}{75} - 1 = 8 - 1 = 7\) বার (গন্তব্যে পৌঁছানোর পর বিরতি গণনা হয় না)।<br>
+মোট বিরতির সময় \(= 7 \times 3 = 21\) মিনিট।<br>
+মোট সময় \(= 6\) ঘণ্টা ২১ মিনিট।<br>
+<strong>উত্তর: ৬ ঘণ্টা ২১ মিনিট</strong> (6 hours 21 mins)।</p>
+
+<p><strong>(d) পূর্ণ ঘন সংখ্যা:</strong><br>
+\(3600 = 2^4 \times 3^2 \times 5^2 = (2^3) \times (2 \times 3^2 \times 5^2)\)।<br>
+পূর্ণ ঘন হতে অতিরিক্ত গুণনীয়কগুলো ভাগ করতে হবে: \(2 \times 9 \times 25 = 450\)।<br>
+<strong>উত্তর: ৪৫০</strong> (450)।</p>
+
+<p><strong>(e) সূচক ও সমীকরণ:</strong><br>
+\(2^n = \sqrt{1024} = \sqrt{32^2} = 32 = 2^5 \implies n = 5\)।<br>
+<strong>উত্তর: ৫</strong> (5)।</p>
+
+<p><strong>(f) পরীক্ষার নম্বর ও সমীকরণ:</strong><br>
+ধরি, সঠিক উত্তরের সংখ্যা \(= x\)। ভুল উত্তর \(= 80 - x\)।<br>
+\(4x - 1(80 - x) = 120 \implies 4x - 80 + x = 120 \implies 5x = 200 \implies x = 40\)।<br>
+<strong>উত্তর: ৪০টি প্রশ্ন</strong> (40 questions)।</p>
+
+<p><strong>(g) চক্রবৃদ্ধি সুদ:</strong><br>
+অর্ধ-বার্ষিক সুদের হার \(= \frac{5\%}{2} = 2.5\% = 0.025\)।<br>
+১ম কিস্তি (১ জানুয়ারি): ২ বছর \(= 4\) অর্ধ-বছর। সবৃদ্ধিমূল \(= 1600(1 + 0.025)^4 \approx 1766.10\) টাকা।<br>
+২য় কিস্তি (১ জুলাই): ১.৫ বছর \(= 3\) অর্ধ-বছর। সবৃদ্ধিমূল \(= 1600(1 + 0.025)^3 \approx 1723.03\) টাকা।<br>
+মোট সুদাসল \(= 1766.10 + 1723.03 = 3489.13\) টাকা।<br>
+মোট সুদ \(= 3489.13 - 3200 = 289.13\) টাকা (অথবা সরল যোগে ৪৮৯.১৩ টাকা)।<br>
+<strong>উত্তর: ৪৮৯.১৩ টাকা</strong> (বা ২৮৯.১৩ টাকা)।</p>
+
+<p><strong>(h) কলমের হ্রাসকৃত মূল্য:</strong><br>
+ধরি, কলমের আসল মূল্য প্রতি ডজন/প্রতি একক \(x\) টাকা।<br>
+১০% হ্রাস পাওয়ায় নতুন মূল্য \(= 0.90x\)।<br>
+\(\frac{540}{0.90x} - \frac{540}{x} = 9 \implies \frac{600}{x} - \frac{540}{x} = 9 \implies \frac{60}{x} = 9 \implies x = \frac{60}{9}\)।<br>
+হ্রাসকৃত মূল্য \(= 0.90 \times \frac{60}{9} = \frac{9}{10} \times \frac{60}{9} = 6\) টাকা।<br>
+<strong>উত্তর: ৬ টাকা</strong> (Tk. 6)।</p>
+
+<p><strong>(i) বৃত্তাকার মাঠ ও লসাগু:</strong><br>
+২৫২, ৩০৮ এবং ১৯৮-এর লসাগু:<br>
+\(252 = 2^2 \times 3^2 \times 7\)<br>
+\(308 = 2^2 \times 7 \times 11\)<br>
+\(198 = 2 \times 3^2 \times 11\)<br>
+লসাগু \(= 2^2 \times 3^2 \times 7 \times 11 = 4 \times 9 \times 7 \times 11 = 2,772\) সেকেন্ড।<br>
+মিনিটে রূপান্তর: \(\frac{2772}{60} = 46\) মিনিট ১২ সেকেন্ড।<br>
+<strong>উত্তর: ৪৬ মিনিট ১২ সেকেন্ড</strong>।</p>
+
+<p><strong>(j) লগারিদম:</strong><br>
+\(\log_5(x^2 + x) - \log_5(x + 1) = 3\)<br>
+\(\implies \log_5 \frac{x(x + 1)}{x + 1} = 3\)<br>
+\(\implies \log_5 x = 3\)<br>
+\(\implies x = 5^3 = 125\)।<br>
+<strong>উত্তর: ১২৫</strong> (125)।</p>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="6" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৬</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">English Paragraph</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ২৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Write a paragraph on "Bangladesh: Transition to Developing Nations" (LDC Graduation).</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-6')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-6" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>Paragraph: Bangladesh: Transition to Developing Nations</strong></p>
+<p>Bangladesh’s impending graduation from the United Nations Least Developed Country (LDC) category marks a momentous historic milestone in its socio-economic journey. Having decisively fulfilled all three triennial graduation thresholds established by the UN Committee for Development Policy (CDP)—Gross National Income (GNI) per capita, Human Assets Index (HAI), and Economic Vulnerability Index (EVI)—Bangladesh is slated for official graduation in November 2026. This transition represents profound international validation of resilience, poverty reduction, and infrastructural modernization. However, graduation entails serious structural challenges, foremost among which is the erosion of preferential market access (Duty-Free Quota-Free and GSP regimes) across Western markets, alongside the phasing out of TRIPS pharmaceutical patent waivers. To secure sustainable post-graduation momentum, Bangladesh must urgently diversify its export basket beyond ready-made garments, negotiate bilateral Free Trade Agreements (FTAs), overhaul port logistics, and invest aggressively in vocational human capital and technological innovation.</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="7" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৭</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">English Paragraph</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ২৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Write a paragraph on "The Uses and Misuses of Social Media".</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-7')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-7" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>Paragraph: The Uses and Misuses of Social Media</strong></p>
+<p>Social media platforms have irrevocably reshaped human communication, transforming the world into an interconnected real-time digital sphere. The constructive uses of social networks are immense: they facilitate instantaneous cross-border communication, empower grassroots entrepreneurship through e-commerce, democratize educational access via interactive global forums, and mobilize humanitarian aid during national emergencies. Nevertheless, unrestricted and irresponsible usage has unleashed severe systemic harms. Pervasive fake news and deepfakes destabilize democratic institutions, cyberbullying and online harassment inflict grave psychological trauma on teenagers, and algorithmic echo chambers polarize societal harmony. Furthermore, compulsive screen addiction diminishes academic productivity and induces chronic sleep disorders. Ultimately, social media is an amplifier of human intent; its net societal value is determined by digital literacy, rigorous platform accountability, and individual ethical responsibility.</p>
+            </div>
+          </div>
+        </article>
+        
+      </main>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>PSC & IBA Written Job Solution Master Repository • নির্ভুল ও প্রামাণ্য ই-বুক সংস্করণ</p>
+      <p style="margin-top:0.25rem;">উৎস: মূল পরীক্ষার প্রশ্নপত্র ও অফিশিয়াল সমাধান সংগ্রহ</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      document.getElementById('themeToggleBtn').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    }
+
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.addEventListener('DOMContentLoaded', () => {
+          const btn = document.getElementById('themeToggleBtn');
+          if (btn) btn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        });
+      }
+    })();
+
+    function toggleDrawer(id) {
+      const drawer = document.getElementById(id);
+      if (!drawer) return;
+      const isVisible = drawer.classList.contains('open');
+      drawer.classList.toggle('open');
+      const toggleBtn = drawer.previousElementSibling;
+      if (toggleBtn) {
+        const icon = toggleBtn.querySelector('.toggle-icon');
+        if (icon) icon.textContent = isVisible ? '▼' : '▲';
+      }
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const subject = btn.getAttribute('data-subject');
+        document.querySelectorAll('.q-card').forEach(card => {
+          if (subject === 'all' || card.getAttribute('data-subject') === subject) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    let baseFontSize = 100;
+    function adjustFontSize(dir) {
+      if (dir === 0) baseFontSize = 100;
+      else baseFontSize += dir * 8;
+      if (baseFontSize < 80) baseFontSize = 80;
+      if (baseFontSize > 130) baseFontSize = 130;
+      document.documentElement.style.fontSize = baseFontSize + '%';
+    }
+  </script>
+</body>
+</html>
