@@ -169,13 +169,53 @@
 
   </div>
 
+    <script src="data/written_questions_data.js"></script>
   <script src="../universal-modes.js"></script>
   <script src="../search-engine.js"></script>
   <script src="../ebook-ui.js"></script>
   <script>
     let allQuestions = [];
+    let currentFilter = 'all';
+    let currentPage = 1;
+    const pageSize = 25;
+    let currentFiltered = [];
+
+    function initFilterFromHash() {
+      var initHash = (window.location.hash || '').replace('#', '').toLowerCase();
+      var targetBtn = null;
+      var initialSub = 'all';
+
+      if (initHash === 'bangla' || initHash === 'বাংলা') {
+        targetBtn = document.querySelector('[onclick*="বাংলা"]');
+        initialSub = 'বাংলা';
+      } else if (initHash === 'english' || initHash === 'ইংরেজি') {
+        targetBtn = document.querySelector('[onclick*="English"]');
+        initialSub = 'English';
+      } else if (initHash === 'math' || initHash === 'গণিত') {
+        targetBtn = document.querySelector('[onclick*="গণিত"]');
+        initialSub = 'গণিত';
+      } else if (initHash === 'science' || initHash === 'বিজ্ঞান') {
+        targetBtn = document.querySelector('[onclick*="বিজ্ঞান"]');
+        initialSub = 'বিজ্ঞান';
+      } else if (initHash === 'gk' || initHash === 'সাধারণ জ্ঞান') {
+        targetBtn = document.querySelector('[onclick*="সাধারণ জ্ঞান"]');
+        initialSub = 'সাধারণ জ্ঞান';
+      }
+
+      if (targetBtn) {
+        document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+        targetBtn.classList.add('active');
+      }
+      applyFilter(initialSub);
+    }
 
     async function loadData() {
+      if (window.PSC_IBA_QUESTIONS && Array.isArray(window.PSC_IBA_QUESTIONS) && window.PSC_IBA_QUESTIONS.length > 0) {
+        allQuestions = window.PSC_IBA_QUESTIONS;
+        updateCounts();
+        initFilterFromHash();
+        return;
+      }
       try {
         const manifestRes = await fetch('data/exam_manifest.json');
         const manifest = await manifestRes.json();
@@ -193,7 +233,7 @@
         }
         allQuestions = loaded;
         updateCounts();
-        renderQuestions('all');
+        initFilterFromHash();
       } catch (e) {
         console.error(e);
       }
@@ -213,27 +253,41 @@
       document.getElementById('countGK').textContent = toBn(allQuestions.filter(q => q.subject.includes('বাংলাদেশ') || q.subject.includes('আন্তর্জাতিক') || q.subject.includes('সাধারণ জ্ঞান') || q.subject.includes('ভূগোল') || q.subject.includes('মুক্তিযুদ্ধ') || q.subject.includes('ইতিহাস') || q.subject.includes('খেলাধুলা')).length);
     }
 
-    function renderQuestions(subFilter) {
-      const cont = document.getElementById('subjectQuestionsContainer');
-      let filtered = allQuestions;
+    function applyFilter(subFilter) {
+      currentFilter = subFilter;
+      currentPage = 1;
       if (subFilter === 'বাংলা') {
-        filtered = allQuestions.filter(q => q.subject.includes('বাংলা'));
+        currentFiltered = allQuestions.filter(q => q.subject.includes('বাংলা'));
       } else if (subFilter === 'English') {
-        filtered = allQuestions.filter(q => q.subject.includes('English') || q.subject.includes('ইংরেজি'));
+        currentFiltered = allQuestions.filter(q => q.subject.includes('English') || q.subject.includes('ইংরেজি'));
       } else if (subFilter === 'গণিত') {
-        filtered = allQuestions.filter(q => q.subject.includes('গণিত'));
+        currentFiltered = allQuestions.filter(q => q.subject.includes('গণিত'));
       } else if (subFilter === 'বিজ্ঞান') {
-        filtered = allQuestions.filter(q => q.subject.includes('বিজ্ঞান') || q.subject.includes('প্রযুক্তি') || q.subject.includes('কম্পিউটার') || q.subject.includes('পদার্থবিজ্ঞান') || q.subject.includes('জীববিজ্ঞান'));
+        currentFiltered = allQuestions.filter(q => q.subject.includes('বিজ্ঞান') || q.subject.includes('প্রযুক্তি') || q.subject.includes('কম্পিউটার') || q.subject.includes('পদার্থবিজ্ঞান') || q.subject.includes('জীববিজ্ঞান'));
       } else if (subFilter === 'সাধারণ জ্ঞান') {
-        filtered = allQuestions.filter(q => q.subject.includes('বাংলাদেশ') || q.subject.includes('আন্তর্জাতিক') || q.subject.includes('সাধারণ জ্ঞান') || q.subject.includes('ভূগোল') || q.subject.includes('মুক্তিযুদ্ধ') || q.subject.includes('ইতিহাস') || q.subject.includes('খেলাধুলা'));
+        currentFiltered = allQuestions.filter(q => q.subject.includes('বাংলাদেশ') || q.subject.includes('আন্তর্জাতিক') || q.subject.includes('সাধারণ জ্ঞান') || q.subject.includes('ভূগোল') || q.subject.includes('মুক্তিযুদ্ধ') || q.subject.includes('ইতিহাস') || q.subject.includes('খেলাধুলা'));
+      } else {
+        currentFiltered = allQuestions;
       }
-      
-      if (filtered.length === 0) {
+      renderPage();
+    }
+
+    function renderPage() {
+      const cont = document.getElementById('subjectQuestionsContainer');
+      if (currentFiltered.length === 0) {
         cont.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:2rem;">কোনো প্রশ্ন পাওয়া যায়নি।</p>';
         return;
       }
 
-      cont.innerHTML = filtered.map(q => `
+      const totalPages = Math.ceil(currentFiltered.length / pageSize);
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+
+      const startIndex = (currentPage - 1) * pageSize;
+      const endIndex = Math.min(startIndex + pageSize, currentFiltered.length);
+      const pageItems = currentFiltered.slice(startIndex, endIndex);
+
+      const itemsHtml = pageItems.map(q => `
         <article class="q-card">
           <div class="q-exam-ref">
             <span>🏛️</span>
@@ -247,7 +301,7 @@
             ${q.question_html}
           </div>
 
-          <button class="reveal-toggle" onclick="toggleSubSol(this)">
+          <button type="button" class="reveal-toggle" onclick="toggleSubSol(this)">
             👁️ উত্তর ও সমাধান দেখুন
           </button>
 
@@ -256,6 +310,22 @@
           </div>
         </article>
       `).join('');
+
+      const paginationHtml = `
+        <div style="display:flex; justify-content:center; align-items:center; gap:0.75rem; margin:1.5rem 0; flex-wrap:wrap;">
+          <button type="button" class="sub-tab-btn" onclick="changePage(-1)" ${currentPage === 1 ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>← পূর্ববর্তী পৃষ্ঠা</button>
+          <span style="font-weight:700; color:var(--text-main);">পৃষ্ঠা ${toBn(currentPage)} / ${toBn(totalPages)} (প্রশ্ন ${toBn(startIndex + 1)}–${toBn(endIndex)}, মোট ${toBn(currentFiltered.length)}টি)</span>
+          <button type="button" class="sub-tab-btn" onclick="changePage(1)" ${currentPage === totalPages ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>পরবর্তী পৃষ্ঠা →</button>
+        </div>
+      `;
+
+      cont.innerHTML = paginationHtml + itemsHtml + paginationHtml;
+    }
+
+    function changePage(delta) {
+      currentPage += delta;
+      renderPage();
+      window.scrollTo({ top: 200, behavior: 'smooth' });
     }
 
     function toggleSubSol(btn) {
@@ -268,7 +338,7 @@
     function showSubject(sub) {
       document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
       event.target.classList.add('active');
-      renderQuestions(sub);
+      applyFilter(sub);
     }
 
     loadData();

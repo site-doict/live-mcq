@@ -72,3 +72,4 @@ All data verified from official BPSC (Bangladesh Public Service Commission) circ
 - **Duration & Passing:** 50% minimum score. Evaluates academic discipline, general awareness, constitution, and liberation war.
 
 *(Cautionary Note: Grade, post, and ministry specific variations exist; always refer to the specific official job circular on bpsc.gov.bd).*
+

@@ -17,3 +17,4 @@ This document logs specific examinations, syllabi, or grade-specific variations 
 
 ## 3. Cadre Written and Viva Modules
 - **Status:** Currently, written solutions in the codebase are contained in `PSC & IBA Written Job Solution` (158 exams). Direct BCS Cadre 900-mark written questions will be added in subsequent expansions. Until then, Cadre Written and Viva display non-clickable "শীঘ্রই আসছে" (Coming Soon) placeholder cards with `aria-disabled="true"` without dead links.
+
