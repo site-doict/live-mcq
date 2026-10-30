@@ -1,0 +1,947 @@
+/**
+ * সার্বজনীন স্মার্ট স্টাডি ও রিভিশন মোড সিস্টেম
+ * Universal Smart Study & Quick Revision Modes Engine
+ * Supports:
+ *   data-view-mode="full" | "notes-only" | "questions-only"
+ *   data-qa-mode="quiz" | "show-answers" | "direct-answer"
+ */
+
+/* ══════════════════════════════════════════════════════════
+   ১. অধ্যায় কন্টেন্ট ভিউ মোডস (Chapter Content Visibility)
+   ══════════════════════════════════════════════════════════ */
+
+/* [notes-only]: শুধু প্রামাণ্য নোট ও আলোচনা মোড — প্রশ্ন ও কুইজ সম্পূর্ণ হাইড */
+[data-view-mode="notes-only"] .q-card,
+[data-view-mode="notes-only"] .quiz-card,
+[data-view-mode="notes-only"] .mcq-card,
+[data-view-mode="notes-only"] .quiz-item,
+[data-view-mode="notes-only"] article.q-card,
+[data-view-mode="notes-only"] .quiz-container,
+[data-view-mode="notes-only"] #quiz-container,
+[data-view-mode="notes-only"] #mcq-container,
+[data-view-mode="notes-only"] .quiz-section,
+[data-view-mode="notes-only"] .score-bar,
+[data-view-mode="notes-only"] .score-banner,
+[data-view-mode="notes-only"] .quiz-control-bar,
+[data-view-mode="notes-only"] .filter-wrap,
+[data-view-mode="notes-only"] .bcs-filter,
+[data-view-mode="notes-only"] .bcs-matrix-card {
+  display: none !important;
+}
+
+[data-view-mode="notes-only"] .notes-only-banner {
+  display: block !important;
+}
+
+/* [questions-only]: শুধু পরীক্ষার প্রশ্নব্যাংক মোড — অধ্যায়ের শুরুর আলোচনা/নোট হাইড */
+[data-view-mode="questions-only"] .part-1,
+[data-view-mode="questions-only"] .part-1-notes,
+[data-view-mode="questions-only"] .notes-section,
+[data-view-mode="questions-only"] .sk-section,
+[data-view-mode="questions-only"] .info-summary-card,
+[data-view-mode="questions-only"] .theory-box,
+[data-view-mode="questions-only"] .theory-card,
+[data-view-mode="questions-only"] .card.theory-card,
+[data-view-mode="questions-only"] .study-section:not(.quiz-section),
+[data-view-mode="questions-only"] .hero-banner,
+[data-view-mode="questions-only"] .bcs-table-card,
+[data-view-mode="questions-only"] .bcs-matrix,
+[data-view-mode="questions-only"] .bcs-stat-grid,
+[data-view-mode="questions-only"] .study-steps,
+[data-view-mode="questions-only"] .sk-box,
+[data-view-mode="questions-only"] .sk-sticky,
+[data-view-mode="questions-only"] .bcs-table-wrap {
+  display: none !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   ২. প্রশ্ন ও উত্তর প্রদর্শন মোডস (Question & Answer Modes)
+   ══════════════════════════════════════════════════════════ */
+
+/* [show-answers]: তাত্ক্ষণিক উত্তর ও ব্যাখ্যা ওপেন মোড */
+[data-qa-mode="show-answers"] .answer-drawer,
+[data-qa-mode="show-answers"] .exp-drawer,
+[data-qa-mode="show-answers"] .explanation-drawer,
+[data-qa-mode="show-answers"] .explanation-box,
+[data-qa-mode="show-answers"] .quiz-explanation,
+[data-qa-mode="show-answers"] .quiz-expl,
+[data-qa-mode="show-answers"] .ans-drawer {
+  display: block !important;
+  max-height: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  animation: none !important;
+}
+
+[data-qa-mode="show-answers"] [data-is-correct="true"],
+[data-qa-mode="show-answers"] .opt-btn[data-is-correct="true"],
+[data-qa-mode="show-answers"] .option-btn[data-is-correct="true"],
+[data-qa-mode="show-answers"] .q-opt[data-is-correct="true"],
+[data-qa-mode="show-answers"] .option[data-is-correct="true"] {
+  background: rgba(16, 185, 129, 0.12) !important;
+  border-color: #10b981 !important;
+  color: #065f46 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="dark"][data-qa-mode="show-answers"] [data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="show-answers"] .opt-btn[data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="show-answers"] .option-btn[data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="show-answers"] .q-opt[data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="show-answers"] .option[data-is-correct="true"] {
+  background: rgba(16, 185, 129, 0.2) !important;
+  border-color: #34d399 !important;
+  color: #a7f3d0 !important;
+}
+
+[data-qa-mode="show-answers"] .exp-toggle-btn,
+[data-qa-mode="show-answers"] .btn-explain,
+[data-qa-mode="show-answers"] .drawer-toggle,
+[data-qa-mode="show-answers"] .toggle-exp-btn,
+[data-qa-mode="show-answers"] .exp-toggle {
+  opacity: 0.6;
+}
+
+/* [direct-answer]: শুধু প্রশ্ন ও সঠিক উত্তর মোড — ভুল অপশন ও ব্যাখ্যা সম্পূর্ণ বন্ধ */
+[data-qa-mode="direct-answer"] .q-card,
+[data-qa-mode="direct-answer"] .quiz-card,
+[data-qa-mode="direct-answer"] .mcq-card,
+[data-qa-mode="direct-answer"] .quiz-item,
+[data-qa-mode="direct-answer"] article.q-card {
+  display: block !important;
+}
+
+[data-qa-mode="direct-answer"] .options-grid,
+[data-qa-mode="direct-answer"] .quiz-options,
+[data-qa-mode="direct-answer"] .opt-grid,
+[data-qa-mode="direct-answer"] .q-options,
+[data-qa-mode="direct-answer"] .options-list,
+[data-qa-mode="direct-answer"] .mcq-options {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  margin-top: 8px !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Hide all options that are NOT the correct answer */
+[data-qa-mode="direct-answer"] .options-grid > *:not([data-is-correct="true"]),
+[data-qa-mode="direct-answer"] .quiz-options > *:not([data-is-correct="true"]),
+[data-qa-mode="direct-answer"] .opt-grid > *:not([data-is-correct="true"]),
+[data-qa-mode="direct-answer"] .q-options > *:not([data-is-correct="true"]),
+[data-qa-mode="direct-answer"] .options-list > *:not([data-is-correct="true"]),
+[data-qa-mode="direct-answer"] .mcq-options > *:not([data-is-correct="true"]),
+[data-qa-mode="direct-answer"] .opt-btn:not([data-is-correct="true"]),
+[data-qa-mode="direct-answer"] .option-btn:not([data-is-correct="true"]),
+[data-qa-mode="direct-answer"] .q-opt:not([data-is-correct="true"]),
+[data-qa-mode="direct-answer"] .option:not([data-is-correct="true"]) {
+  display: none !important;
+}
+
+/* Style ONLY the single correct option */
+[data-qa-mode="direct-answer"] [data-is-correct="true"],
+[data-qa-mode="direct-answer"] .opt-btn[data-is-correct="true"],
+[data-qa-mode="direct-answer"] .option-btn[data-is-correct="true"],
+[data-qa-mode="direct-answer"] .q-opt[data-is-correct="true"],
+[data-qa-mode="direct-answer"] .option[data-is-correct="true"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: rgba(16, 185, 129, 0.12) !important;
+  border: 1.5px solid #10b981 !important;
+  color: #065f46 !important;
+  padding: 8px 14px !important;
+  border-radius: 8px !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  cursor: default !important;
+  pointer-events: none !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  margin: 4px 0 !important;
+  box-shadow: 0 1px 4px rgba(16, 185, 129, 0.12) !important;
+}
+
+[data-theme="dark"][data-qa-mode="direct-answer"] [data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="direct-answer"] .opt-btn[data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="direct-answer"] .option-btn[data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="direct-answer"] .q-opt[data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="direct-answer"] .option[data-is-correct="true"] {
+  background: rgba(16, 185, 129, 0.2) !important;
+  border-color: #34d399 !important;
+  color: #a7f3d0 !important;
+}
+
+/* Hide option letter labels (ক, খ, গ, ঘ) in direct-answer and show-answers for correct option */
+[data-qa-mode="direct-answer"] [data-is-correct="true"] .opt-lbl,
+[data-qa-mode="direct-answer"] [data-is-correct="true"] .opt-key,
+[data-qa-mode="direct-answer"] [data-is-correct="true"] .option-letter,
+[data-qa-mode="direct-answer"] [data-is-correct="true"] .q-opt-key,
+[data-qa-mode="direct-answer"] .is-correct .opt-lbl,
+[data-qa-mode="direct-answer"] .is-correct .opt-key,
+[data-qa-mode="show-answers"] [data-is-correct="true"] .opt-lbl,
+[data-qa-mode="show-answers"] [data-is-correct="true"] .opt-key,
+[data-qa-mode="show-answers"] [data-is-correct="true"] .option-letter,
+[data-qa-mode="show-answers"] [data-is-correct="true"] .q-opt-key,
+[data-qa-mode="show-answers"] .is-correct .opt-lbl,
+[data-qa-mode="show-answers"] .is-correct .opt-key {
+  display: none !important;
+}
+
+/* Green Styling for Correct Options (Pure Visual Excellence - Green Only) */
+.opt-btn.is-correct,
+.option-btn.is-correct,
+.review-opt-box.is-correct,
+[data-is-correct="true"] {
+  background: rgba(16, 185, 129, 0.12) !important;
+  border-color: #10b981 !important;
+  color: #065f46 !important;
+}
+[data-theme="dark"] .opt-btn.is-correct,
+[data-theme="dark"] .option-btn.is-correct,
+[data-theme="dark"] .review-opt-box.is-correct,
+[data-theme="dark"] [data-is-correct="true"] {
+  background: rgba(16, 185, 129, 0.2) !important;
+  border-color: #34d399 !important;
+  color: #a7f3d0 !important;
+}
+
+/* Notice for questions with no correct option */
+.ebk-no-ans-notice {
+  display: none;
+}
+[data-qa-mode="direct-answer"] .ebk-no-ans-notice {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  background: rgba(245, 158, 11, 0.12) !important;
+  border: 1.5px solid #f59e0b !important;
+  color: #b45309 !important;
+  padding: 8px 14px !important;
+  border-radius: 8px !important;
+  font-weight: 700 !important;
+  font-size: 0.92rem !important;
+  margin: 4px 0 !important;
+}
+[data-theme="dark"][data-qa-mode="direct-answer"] .ebk-no-ans-notice {
+  background: rgba(245, 158, 11, 0.2) !important;
+  border-color: #fbbf24 !important;
+  color: #fde68a !important;
+}
+
+/* Hide explanation drawers & toggle buttons completely in direct-answer mode */
+[data-qa-mode="direct-answer"] .answer-drawer,
+[data-qa-mode="direct-answer"] .exp-drawer,
+[data-qa-mode="direct-answer"] .explanation-drawer,
+[data-qa-mode="direct-answer"] .explanation-box,
+[data-qa-mode="direct-answer"] .quiz-explanation,
+[data-qa-mode="direct-answer"] .quiz-expl,
+[data-qa-mode="direct-answer"] .ans-drawer,
+[data-qa-mode="direct-answer"] .exp-toggle-btn,
+[data-qa-mode="direct-answer"] .btn-explain,
+[data-qa-mode="direct-answer"] .drawer-toggle,
+[data-qa-mode="direct-answer"] .toggle-exp-btn,
+[data-qa-mode="direct-answer"] .exp-toggle-wrap,
+[data-qa-mode="direct-answer"] .exp-toggle,
+[data-qa-mode="direct-answer"] .mcq-actions,
+[data-qa-mode="direct-answer"] .status-indicator,
+[data-qa-mode="direct-answer"] .explanation-title,
+[data-qa-mode="direct-answer"] .exp-header,
+[data-qa-mode="direct-answer"] .exp-title,
+[data-qa-mode="direct-answer"] .exp-source {
+  display: none !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   ৩. ফ্লোটিং কুইক মোড সুইচ বাটন (In-Page Floating Quick Mode Switcher)
+   ══════════════════════════════════════════════════════════ */
+.ebk-mode-fab {
+  position: fixed;
+  bottom: 80px;
+  right: 18px;
+  background: linear-gradient(135deg, #0f766e, #0284c7);
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 99990;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: inherit;
+}
+
+.ebk-mode-fab:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.ebk-mode-fab-active {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+/* Quick Mode Popover / Drawer */
+.ebk-mode-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 99998;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.ebk-mode-modal-overlay.open {
+  display: block;
+  opacity: 1;
+}
+
+.ebk-mode-modal {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  width: 100%;
+  max-width: 500px;
+  background: var(--bg-surface, #ffffff);
+  border-radius: 20px 20px 0 0;
+  border: 1px solid var(--border-color, #e2e8f0);
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.25);
+  z-index: 99999;
+  padding: 20px 18px 28px 18px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  font-family: inherit;
+  color: var(--text-main, #0f172a);
+}
+
+[data-theme="dark"] .ebk-mode-modal {
+  background: #111827;
+  border-color: #1f2937;
+  color: #f8fafc;
+}
+
+.ebk-mode-modal.open {
+  transform: translate(-50%, 0);
+}
+
+.ebk-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color, #e2e8f0);
+}
+
+.ebk-modal-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ebk-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--text-muted, #64748b);
+  padding: 4px;
+  line-height: 1;
+}
+
+.ebk-modal-sec-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted, #64748b);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ebk-modal-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.ebk-modal-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border-color, #e2e8f0);
+  background: var(--bg-base, #f8fafc);
+  color: inherit;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  text-align: left;
+}
+
+[data-theme="dark"] .ebk-modal-btn {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+.ebk-modal-btn:hover {
+  border-color: #0f766e;
+  background: rgba(15, 118, 110, 0.08);
+}
+
+.ebk-modal-btn.active {
+  border-color: #0f766e;
+  background: rgba(15, 118, 110, 0.14);
+  color: #0f766e;
+  font-weight: 700;
+}
+
+[data-theme="dark"] .ebk-modal-btn.active {
+  border-color: #2dd4bf;
+  background: rgba(45, 212, 191, 0.18);
+  color: #2dd4bf;
+}
+
+/* ══════════════════════════════════════════════════════════
+   ৪. মোবাইল স্ক্রিন ও স্যামসাং গ্যালাক্সি A23 পারফেক্ট ফিট সাপোর্ট
+   ══════════════════════════════════════════════════════════ */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  -webkit-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.sk-box,
+.matrix-box,
+.bcs-matrix,
+.bcs-matrix-card,
+.sk-card,
+.bcs-table-card,
+.theory-box,
+.theory-card,
+.bcs-table-wrap,
+.table-responsive,
+.sk-table-container,
+.q-card,
+.ch-header {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.sk-box,
+.matrix-box,
+.bcs-matrix,
+.bcs-matrix-card,
+.bcs-table-card,
+.theory-box,
+.theory-card,
+.bcs-table-wrap,
+.table-responsive,
+.sk-table-container {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+@media (max-width: 640px) {
+  table,
+  .sk-table,
+  .sk-compare,
+  .bcs-table,
+  .sk-table--long {
+    width: 100% !important;
+    font-size: 0.82rem !important;
+    line-height: 1.4 !important;
+  }
+
+  table th,
+  table td,
+  .sk-table th,
+  .sk-table td,
+  .sk-compare th,
+  .sk-compare td,
+  .bcs-table th,
+  .bcs-table td,
+  .sk-table--long th,
+  .sk-table--long td {
+    padding: 6px 8px !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 10px 8px !important;
+  }
+
+  .sk-box {
+    padding: 10px 8px !important;
+  }
+
+  table,
+  .sk-table,
+  .sk-compare,
+  .bcs-table,
+  .sk-table--long {
+    font-size: 0.78rem !important;
+  }
+
+  table th,
+  table td,
+  .sk-table th,
+  .sk-table td,
+  .sk-compare th,
+  .sk-compare td,
+  .bcs-table th,
+  .bcs-table td,
+  .sk-table--long th,
+  .sk-table--long td {
+    padding: 5px 6px !important;
+  }
+}
+
+
+
+/* ==========================================================================
+   Universal Authentic MCQ Option Styling (Unified Image 1 Standard)
+   Solid circular badge for opt-prefix, high-contrast correct/wrong feedback
+   Zero External Fabrication | Anti-glare & Dark Mode WCAG AAA Contrast
+   ========================================================================== */
+
+/* Universal Option Button Layout & High Contrast */
+.opt-btn,
+.option-btn,
+.q-opt,
+.quiz-opt-btn {
+  display: flex !important;
+  align-items: center !important;
+  text-align: left !important;
+  padding: 0.7rem 1rem !important;
+  border-radius: 10px !important;
+  border: 1.5px solid #cbd5e1 !important;
+  background: var(--bg-surface, #ffffff) !important;
+  color: #0f172a !important;
+  font-size: 0.98rem !important;
+  cursor: pointer !important;
+  gap: 0.65rem !important;
+  line-height: 1.5 !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+
+[data-theme="dark"] .opt-btn,
+[data-theme="dark"] .option-btn,
+[data-theme="dark"] .q-opt,
+[data-theme="dark"] .quiz-opt-btn {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+/* Hover effect */
+.opt-btn:hover:not(:disabled),
+.option-btn:hover:not(:disabled),
+.q-opt:hover:not(:disabled),
+.quiz-opt-btn:hover:not(:disabled) {
+  background: #f8fafc !important;
+  border-color: #0284c7 !important;
+}
+
+[data-theme="dark"] .opt-btn:hover:not(:disabled),
+[data-theme="dark"] .option-btn:hover:not(:disabled),
+[data-theme="dark"] .q-opt:hover:not(:disabled),
+[data-theme="dark"] .quiz-opt-btn:hover:not(:disabled) {
+  background: #334155 !important;
+  border-color: #38bdf8 !important;
+}
+
+/* Circular Prefix Badge: ক, খ, গ, ঘ (Image 1 Standard) */
+.opt-prefix,
+.opt-badge,
+.opt-letter,
+.opt-label,
+.opt-key,
+.option-letter,
+.opt-lbl {
+  width: 28px !important;
+  min-width: 28px !important;
+  max-width: 28px !important;
+  height: 28px !important;
+  min-height: 28px !important;
+  max-height: 28px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  background: #e2e8f0 !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #1e293b !important;
+  font-weight: 700 !important;
+  font-size: 0.9rem !important;
+  flex-shrink: 0 !important;
+  line-height: 1 !important;
+  box-sizing: border-box !important;
+  transition: all 0.2s ease !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+[data-theme="dark"] .opt-prefix,
+[data-theme="dark"] .opt-badge,
+[data-theme="dark"] .opt-letter,
+[data-theme="dark"] .opt-label,
+[data-theme="dark"] .opt-key,
+[data-theme="dark"] .option-letter,
+[data-theme="dark"] .opt-lbl {
+  background: #334155 !important;
+  border-color: #475569 !important;
+  color: #f1f5f9 !important;
+}
+
+/* Correct Option Button: Solid High-Contrast Emerald Green */
+.opt-btn.correct,
+.option-btn.correct,
+.q-opt.correct,
+.quiz-opt-btn.correct,
+.opt-btn[data-is-correct="true"].correct,
+[data-qa-mode="show-answers"] .opt-btn[data-is-correct="true"],
+[data-qa-mode="show-answers"] .option-btn[data-is-correct="true"],
+[data-qa-mode="show-answers"] .q-opt[data-is-correct="true"],
+[data-qa-mode="direct-answer"] .opt-btn[data-is-correct="true"],
+[data-qa-mode="direct-answer"] .option-btn[data-is-correct="true"] {
+  background: #ecfdf5 !important;
+  border-color: #059669 !important;
+  color: #064e3b !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 0 1px #059669 !important;
+}
+
+[data-theme="dark"] .opt-btn.correct,
+[data-theme="dark"] .option-btn.correct,
+[data-theme="dark"] .q-opt.correct,
+[data-theme="dark"] .quiz-opt-btn.correct,
+[data-theme="dark"] .opt-btn[data-is-correct="true"].correct,
+[data-theme="dark"][data-qa-mode="show-answers"] .opt-btn[data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="show-answers"] .option-btn[data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="show-answers"] .q-opt[data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="direct-answer"] .opt-btn[data-is-correct="true"],
+[data-theme="dark"][data-qa-mode="direct-answer"] .option-btn[data-is-correct="true"] {
+  background: rgba(6, 95, 70, 0.35) !important;
+  border-color: #10b981 !important;
+  color: #a7f3d0 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 0 1px #10b981 !important;
+}
+
+/* Correct Circular Badge: Solid Filled Green with White Letter (Image 1 Standard) */
+.opt-btn.correct .opt-prefix,
+.opt-btn.correct .opt-badge,
+.opt-btn.correct .opt-letter,
+.opt-btn.correct .opt-label,
+.opt-btn.correct .opt-key,
+.opt-btn.correct .option-letter,
+.opt-btn.correct .opt-lbl,
+.option-btn.correct .opt-prefix,
+.q-opt.correct .opt-prefix,
+.quiz-opt-btn.correct .opt-prefix,
+[data-qa-mode="show-answers"] [data-is-correct="true"] .opt-prefix,
+[data-qa-mode="show-answers"] [data-is-correct="true"] .opt-badge,
+[data-qa-mode="show-answers"] [data-is-correct="true"] .opt-letter,
+[data-qa-mode="direct-answer"] [data-is-correct="true"] .opt-prefix,
+[data-qa-mode="direct-answer"] [data-is-correct="true"] .opt-badge,
+[data-qa-mode="direct-answer"] [data-is-correct="true"] .opt-letter {
+  background: #059669 !important;
+  color: #ffffff !important;
+  border-color: #059669 !important;
+  box-shadow: 0 2px 6px rgba(5, 150, 105, 0.45) !important;
+}
+
+[data-theme="dark"] .opt-btn.correct .opt-prefix,
+[data-theme="dark"] .opt-btn.correct .opt-badge,
+[data-theme="dark"] .opt-btn.correct .opt-letter,
+[data-theme="dark"] .opt-btn.correct .opt-label,
+[data-theme="dark"] .opt-btn.correct .opt-key,
+[data-theme="dark"] .opt-btn.correct .option-letter,
+[data-theme="dark"] .opt-btn.correct .opt-lbl,
+[data-theme="dark"] .option-btn.correct .opt-prefix,
+[data-theme="dark"] .q-opt.correct .opt-prefix,
+[data-theme="dark"] .quiz-opt-btn.correct .opt-prefix,
+[data-theme="dark"][data-qa-mode="show-answers"] [data-is-correct="true"] .opt-prefix,
+[data-theme="dark"][data-qa-mode="show-answers"] [data-is-correct="true"] .opt-badge,
+[data-theme="dark"][data-qa-mode="show-answers"] [data-is-correct="true"] .opt-letter,
+[data-theme="dark"][data-qa-mode="direct-answer"] [data-is-correct="true"] .opt-prefix,
+[data-theme="dark"][data-qa-mode="direct-answer"] [data-is-correct="true"] .opt-badge,
+[data-theme="dark"][data-qa-mode="direct-answer"] [data-is-correct="true"] .opt-letter {
+  background: #10b981 !important;
+  color: #ffffff !important;
+  border-color: #10b981 !important;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.55) !important;
+}
+
+/* Wrong Option Button: Solid High-Contrast Crimson Red */
+.opt-btn.wrong,
+.option-btn.wrong,
+.q-opt.wrong,
+.quiz-opt-btn.wrong {
+  background: #fef2f2 !important;
+  border-color: #dc2626 !important;
+  color: #7f1d1d !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 0 1px #dc2626 !important;
+}
+
+[data-theme="dark"] .opt-btn.wrong,
+[data-theme="dark"] .option-btn.wrong,
+[data-theme="dark"] .q-opt.wrong,
+[data-theme="dark"] .quiz-opt-btn.wrong {
+  background: rgba(153, 27, 27, 0.35) !important;
+  border-color: #ef4444 !important;
+  color: #fecaca !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 0 1px #ef4444 !important;
+}
+
+/* Wrong Circular Badge: Solid Filled Red with White Letter (Image 1 Standard) */
+.opt-btn.wrong .opt-prefix,
+.opt-btn.wrong .opt-badge,
+.opt-btn.wrong .opt-letter,
+.opt-btn.wrong .opt-label,
+.opt-btn.wrong .opt-key,
+.opt-btn.wrong .option-letter,
+.opt-btn.wrong .opt-lbl,
+.option-btn.wrong .opt-prefix,
+.q-opt.wrong .opt-prefix,
+.quiz-opt-btn.wrong .opt-prefix {
+  background: #dc2626 !important;
+  color: #ffffff !important;
+  border-color: #dc2626 !important;
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.45) !important;
+}
+
+[data-theme="dark"] .opt-btn.wrong .opt-prefix,
+[data-theme="dark"] .opt-btn.wrong .opt-badge,
+[data-theme="dark"] .opt-btn.wrong .opt-letter,
+[data-theme="dark"] .opt-btn.wrong .opt-label,
+[data-theme="dark"] .opt-btn.wrong .opt-key,
+[data-theme="dark"] .opt-btn.wrong .option-letter,
+[data-theme="dark"] .opt-btn.wrong .opt-lbl,
+[data-theme="dark"] .option-btn.wrong .opt-prefix,
+[data-theme="dark"] .q-opt.wrong .opt-prefix,
+[data-theme="dark"] .quiz-opt-btn.wrong .opt-prefix {
+  background: #ef4444 !important;
+  color: #ffffff !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.55) !important;
+}
+
+/* ==========================================================================
+   Hide Redundant Correct Answer Badges/Lines (User Rule)
+   "আর নতুন করে বলার দরকার নাই নিচে যে সঠিক উত্তর ক, খ ইত্যাদি"
+   ========================================================================== */
+.ans-badge,
+.correct-badge,
+.ans-tag,
+.correct-ans-line,
+.correct-answer-badge,
+.answer-tag,
+.correct-ans-tag,
+.q-ans-badge,
+span[id^="badge-"] {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Dark Mode & High Contrast Global Safety Protections
+   Fixes dark text on dark backgrounds in cards, tables, titles & notes
+   ========================================================================== */
+.q-text,
+.quiz-question {
+  color: #0f172a !important;
+}
+
+[data-theme="dark"] .q-text,
+[data-theme="dark"] .quiz-question {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .sk-box-title,
+[data-theme="dark"] .score-box,
+[data-theme="dark"] .score-badge,
+[data-theme="dark"] .matrix-title,
+[data-theme="dark"] .table-title,
+[data-theme="dark"] .doubt-title,
+[data-theme="dark"] .sec-heading,
+[data-theme="dark"] .sk-title,
+[data-theme="dark"] .quiz-score-badge {
+  color: #facc15 !important;
+  border-bottom-color: rgba(250, 204, 21, 0.3) !important;
+}
+
+[data-theme="dark"] .sk-box,
+[data-theme="dark"] .matrix-box,
+[data-theme="dark"] .bcs-matrix,
+[data-theme="dark"] .bcs-table-card,
+[data-theme="dark"] .theory-box,
+[data-theme="dark"] .q-card {
+  background: rgba(30, 41, 59, 0.88) !important;
+  border-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .sk-content,
+[data-theme="dark"] .sk-content p,
+[data-theme="dark"] .sk-content li,
+[data-theme="dark"] .matrix-table td,
+[data-theme="dark"] .sk-compare-table td,
+[data-theme="dark"] .bcs-table td,
+[data-theme="dark"] .custom-table td,
+[data-theme="dark"] .table td {
+  color: #f1f5f9 !important;
+  border-color: #334155 !important;
+}
+
+[data-theme="dark"] .matrix-table th,
+[data-theme="dark"] .sk-compare-table th,
+[data-theme="dark"] .bcs-table th,
+[data-theme="dark"] .custom-table th,
+[data-theme="dark"] .table th {
+  background: #1e293b !important;
+  color: #facc15 !important;
+  border-color: #334155 !important;
+}
+
+[data-theme="dark"] .q-exam-badge,
+[data-theme="dark"] .q-exam-tag {
+  background: #334155 !important;
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .sk-sticky {
+  background: rgba(254, 240, 138, 0.12) !important;
+  color: #fef08a !important;
+  border-left-color: #facc15 !important;
+}
+
+[data-theme="dark"] .sk-mark {
+  background: rgba(250, 204, 21, 0.25) !important;
+  color: #fde047 !important;
+}
+
+[data-theme="dark"] .exp-drawer,
+[data-theme="dark"] .explanation-drawer,
+[data-theme="dark"] .answer-drawer,
+[data-theme="dark"] .explanation-box {
+  background: #1e293b !important;
+  border-left-color: #38bdf8 !important;
+  color: #f1f5f9 !important;
+}
+[data-theme="dark"] .exp-drawer p,
+[data-theme="dark"] .explanation-drawer p {
+  color: #f1f5f9 !important;
+}
+
+/* ─── Question & Explanation Authentic Diagrams ─── */
+.q-diagram-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.85rem 0;
+  text-align: center;
+  width: 100%;
+}
+
+.q-diagram {
+  max-width: 100%;
+  max-height: 240px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #e2e8f0);
+  background: #ffffff;
+  padding: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.q-diagram:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] .q-diagram {
+  background: #ffffff !important;
+  border-color: #475569 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+/* ─── Textbook Horizontal Fraction Bar Typography ─── */
+.katex-display {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  padding: 4px 0 !important;
+  max-width: 100% !important;
+  margin: 0.65em 0 !important;
+}
+
+.katex {
+  font-size: 1.05em;
+  text-rendering: auto;
+}
+
+/* Authentic textbook horizontal fraction division line */
+.katex .frac-line {
+  border-bottom-width: 0.09em !important;
+  border-bottom-style: solid !important;
+  border-color: currentColor !important;
+  min-height: 1px !important;
+}
+
+/* Authentic Fallback Horizontal Fraction Box (if raw \frac or offline fallback) */
+.math-frac {
+  display: inline-flex !important;
+  flex-direction: column !important;
+  vertical-align: -0.45em !important;
+  text-align: center !important;
+  padding: 0 0.22em !important;
+  font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+  line-height: 1.15 !important;
+}
+
+.math-frac > .num {
+  border-bottom: 1.5px solid currentColor !important;
+  padding-bottom: 2px !important;
+  display: block !important;
+}
+
+.math-frac > .den {
+  padding-top: 2px !important;
+  display: block !important;
+}
+

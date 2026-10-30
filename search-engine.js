@@ -39,6 +39,7 @@
 
   var TYPE_BADGES = {
     'title': { text: '📖 অধ্যায়ের নাম', bg: 'rgba(136,19,55,0.1)', color: '#881337' },
+    'chapter': { text: '📖 পরীক্ষার নাম / অধ্যায়', bg: 'rgba(136,19,55,0.1)', color: '#881337' },
     'topic': { text: '📑 টপিকের নাম', bg: 'rgba(124,58,237,0.1)', color: '#7c3aed' },
     'q': { text: '🎯 বিগত বছরের প্রশ্ন', bg: 'rgba(15,118,110,0.1)', color: '#0f766e' },
     'exp': { text: '💡 বিশদ ব্যাখ্যা', bg: 'rgba(217,119,6,0.12)', color: '#b45309' },
@@ -234,7 +235,7 @@
     // 5. নিজের তৈরি ব্যাখ্যা হতে তৈরি নোট (Synthesized Study Notes / Sketchnotes)
     function getItemPriority(it) {
       var itType = it.t;
-      if (itType === 'title') return 1;
+      if (itType === 'title' || itType === 'chapter') return 1;
       if (itType === 'topic') return 2;
       if (itType === 'q') return 3;
       if (itType === 'exp') return 4;
