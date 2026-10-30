@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বাংলাদেশ সুপ্রীম কোর্ট — ব্যক্তিগত কর্মকর্তা | প্রামাণ্য সমাধান</title>
+  <link rel="stylesheet" href="css/paper-textures.css">
+  <link rel="stylesheet" href="css/bangla-fonts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Kalpurush&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\(', right: '\\)', display: false}]});">
+  </script>
+  <style>
+    :root {
+      --bg-page: #fdfbf7;
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: rgba(226, 232, 240, 0.8);
+      --accent-primary: #0284c7;
+      --accent-indigo: #6366f1;
+      --accent-emerald: #10b981;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #0f172a;
+      --bg-surface: rgba(30, 41, 59, 0.85);
+      --bg-card: rgba(30, 41, 59, 0.82);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: rgba(51, 65, 85, 0.8);
+      --accent-primary: #38bdf8;
+      --accent-indigo: #818cf8;
+      --accent-emerald: #34d399;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.65;
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Top Nav */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+    }
+    .back-btn {
+      text-decoration: none;
+      color: var(--accent-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .back-btn:hover { text-decoration: underline; }
+    .nav-controls { display: flex; align-items: center; gap: 0.75rem; }
+    .theme-btn, .font-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .theme-btn:hover, .font-btn:hover {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Chapter Header */
+    .ch-header {
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .ch-title {
+      font-size: 1.65rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+    }
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.05rem;
+      display: block;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 0.25rem;
+    }
+    .ch-meta-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .ch-badge {
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--accent-primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+
+    /* Sketchnotes Section */
+    .sk-container {
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+    .sk-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .sk-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.15rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .sk-box h4 {
+      font-size: 1.05rem;
+      color: var(--accent-indigo);
+      margin-bottom: 0.65rem;
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 0.35rem;
+    }
+    .sk-box ul { list-style-type: none; }
+    .sk-box li {
+      font-size: 0.92rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+    .sk-box li strong { color: var(--text-main); }
+
+    /* Part 2: Question Section */
+    .part2-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .part2-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .subject-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .tab-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.4rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Question Cards */
+    .q-card {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .q-header {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.85rem;
+    }
+    .q-num {
+      font-weight: 700;
+      color: var(--accent-primary);
+      font-size: 1.05rem;
+    }
+    .q-meta-tag {
+      background: rgba(2, 132, 199, 0.08);
+      color: var(--accent-primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .q-body {
+      margin-bottom: 1rem;
+    }
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* Answer Drawer */
+    .ans-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(2, 132, 199, 0.06);
+      border: 1px solid rgba(2, 132, 199, 0.15);
+      color: var(--accent-primary);
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+    .ans-toggle:hover { background: rgba(2, 132, 199, 0.12); }
+    .ans-drawer {
+      display: none;
+      padding: 1.25rem;
+      margin-top: 0.75rem;
+      background: rgba(0, 0, 0, 0.02);
+      border-left: 3px solid var(--accent-primary);
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    }
+    [data-theme="dark"] .ans-drawer { background: rgba(255, 255, 255, 0.02); }
+    .ans-drawer.open { display: block; }
+    .exp-content {
+      font-size: 0.98rem;
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+    .exp-content p { margin-bottom: 0.75rem; }
+    .exp-content ul, .exp-content ol { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+    .exp-content li { margin-bottom: 0.35rem; }
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.92rem;
+    }
+    .bcs-table th, .bcs-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+    }
+    .bcs-table th {
+      background: rgba(2, 132, 199, 0.08);
+      font-weight: 600;
+      color: var(--accent-primary);
+    }
+
+    /* Typography Protection */
+    .q-card, .q-card *, .q-text, .q-text *, .ans-drawer, .ans-drawer *,
+    .bcs-table, .bcs-table * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body class="paper-burnt-edge font-hasan">
+  <div class="container">
+    <!-- Top Navigation -->
+    <header class="top-nav">
+      <a href="index.html" class="back-btn">
+        <span>←</span> সূচিপত্রে ফিরে যান
+      </a>
+      <div class="nav-controls">
+        <button class="font-btn" onclick="adjustFontSize(-1)">A-</button>
+        <button class="font-btn" onclick="adjustFontSize(0)">A</button>
+        <button class="font-btn" onclick="adjustFontSize(1)">A+</button>
+        <button class="theme-btn" onclick="toggleTheme()" id="themeToggleBtn">🌙</button>
+      </div>
+    </header>
+
+    <!-- Chapter Header -->
+    <section class="ch-header">
+      <h1 class="ch-title font-hasan">
+        বাংলাদেশ সুপ্রীম কোর্ট — ব্যক্তিগত কর্মকর্তা
+        <span class="ch-en">Supreme Court of Bangladesh - Personal Officer 2020</span>
+      </h1>
+      <div class="ch-meta-wrap">
+        <span class="ch-badge">📋 পরীক্ষা নং: ১৩১</span>
+        <span class="ch-badge">🏛️ Others</span>
+        <span class="ch-badge">📅 তারিখ: ১১.১০.২০২০</span>
+        <span class="ch-badge">⏱️ সময়: ১২০ মিনিট</span>
+        <span class="ch-badge">🎯 পূর্ণমান: ১০০</span>
+        <span class="ch-badge">🔢 মোট প্রশ্ন: ১৩টি</span>
+        <span class="ch-badge">📄 পৃষ্ঠা: ৭৬১–৭৬৫</span>
+      </div>
+    </section>
+
+    
+    <section class="sk-part1">
+      <div class="sk-badge">Part 1: Authentic Revision Notes &amp; Formulas</div>
+      <h3 class="sk-title font-hasan">বাংলাদেশ সুপ্রীম কোর্ট — ব্যক্তিগত কর্মকর্তা প্রামাণ্য রিভিশন নোট ও সূত্রাবলি</h3>
+      <p class="sk-desc font-hasan">
+        এই অধ্যায়ের মূল পরীক্ষার প্রশ্ন ও বিশদ সমাধান থেকে সংকলিত হ্যান্ডনোট, গাণিতিক সূত্র ও সারসংক্ষেপ:
+      </p>
+      <div class="sk-grid">
+        
+        <div class="sk-box">
+          <h4 class="font-hasan">বীজগণিত ও চৌবাচ্চা সমীকরণ সূত্রাবলি</h4>
+          <div>• <strong>বীজগাণিতিক অনুসিদ্ধান্ত:</strong> \(a^4 - a^2 + 1 = 0 \implies a^2 + \frac{1}{a^2} = 1 \implies a + \frac{1}{a} = \sqrt{3}\)।<br>• অতএব, \(a^3 + \frac{1}{a^3} = (a+\frac{1}{a})^3 - 3(a+\frac{1}{a}) = 3\sqrt{3} - 3\sqrt{3} = 0\)।<br>• <strong>চৌবাচ্চার ধারণক্ষমতা:</strong> \(\frac{x}{12} - \frac{x}{48} = 15 \implies \frac{3x}{48} = 15 \implies x = 240\) লিটার।</div>
+        </div>
+
+        <div class="sk-box">
+          <h4 class="font-hasan">আইন ও সাংবিধানিক ফ্যাক্টফাইল</h4>
+          <div>• <strong>যুদ্ধ ঘোষণা:</strong> সংবিধানের অনুচ্ছেদ ৬৩ অনুযায়ী জাতীয় সংসদের সম্মতি ছাড়া যুদ্ধ ঘোষণা করা যাবে না।<br>• <strong>পায়রা বন্দর:</strong> পটুয়াখালীর রাবনাবাদ চ্যানেলে দেশের ৩য় গভীর সমুদ্র বন্দর (২০১৬ সালে যাত্রা শুরু)।</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PART 2: Written Examination Question Engine -->
+    <section>
+      <div class="part2-header">
+        <div class="part2-title">
+          <span>📝</span> Part 2: বিগত পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক ও সমাধান
+        </div>
+      </div>
+
+      <!-- Subject Filter Tabs -->
+      <nav class="subject-tabs">
+        <button class="tab-btn active" data-subject="all">সকল বিষয় (১৩)</button>
+        <button class="tab-btn" data-subject="বাংলা">বাংলা (১)</button>
+        <button class="tab-btn" data-subject="অনুবাদ">অনুবাদ (২)</button>
+        <button class="tab-btn" data-subject="বাংলা ব্যাকরণ">বাংলা ব্যাকরণ (৩)</button>
+        <button class="tab-btn" data-subject="ইংরেজি">ইংরেজি (১)</button>
+        <button class="tab-btn" data-subject="ইংরেজি ব্যাকরণ">ইংরেজি ব্যাকরণ (১)</button>
+        <button class="tab-btn" data-subject="ইংরেজি রচনা">ইংরেজি রচনা (১)</button>
+        <button class="tab-btn" data-subject="সাধারণ জ্ঞান">সাধারণ জ্ঞান (১)</button>
+        <button class="tab-btn" data-subject="গণিত">গণিত (৩)</button>
+      </nav>
+
+      <!-- Question Cards List -->
+      <main id="questionContainer">
+        
+        <article class="q-card" data-qid="1" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">ভাবসম্প্রসারণ করুন (যে কোনো ১টি):<br>a) আত্মশক্তি অর্জনই শিক্ষার উদ্দেশ্য।<br>b) জাতীয় অবিচার জাতীয় পতনের নিশ্চিত কারণ।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-1')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-1" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>a) 'আত্মশক্তি অর্জনই শিক্ষার উদ্দেশ্য'</strong></p>
+<p><strong>মূলভাব:</strong> শিক্ষার আসল সার্থকতা কেবলমাত্র পাঠ্যপুস্তকের বিদ্যা বা সনদ অর্জনের মধ্যে সীমাবদ্ধ নয়; বরং মানুষের অন্তর্নিহিত সুপ্ত মেধার বিকাশ ঘটিয়ে আত্মনির্ভরশীল ও আত্মপ্রত্যয়ী মানবসম্পদে রূপান্তর করাই শিক্ষার পরম লক্ষ্য।</p>
+<p><strong>সম্প্রসারিত ভাব:</strong> জ্ঞান মানুষের চিন্তাশক্তিকে শাণিত করে এবং বিচারবুদ্ধিকে জাগ্রত করে সত্য ও মিথ্যার পার্থক্য শেখায়। একজন শিক্ষিত মানুষ পরনির্ভরশীল না হয়ে নিজের যোগ্যতা ও কর্মদক্ষতার ওপর ভরসা করে জীবনসংগ্রামে জয়ী হয়। আত্মশক্তিতে বলীয়ান মানুষ যেকোনো প্রতিকূলতায় অবিচল থাকে এবং সমাজ ও রাষ্ট্রের কল্যাণে সর্বোচ্চ অবদান রাখে। অতএব, মুখস্থবিদ্যার শৃঙ্খল ভেঙে নিজের ভেতরের আত্মশক্তিকে জাগ্রত করাই শিক্ষার প্রধান ব্রত।</p>
+<hr>
+<p><strong>b) 'জাতীয় অবিচার জাতীয় পতনের নিশ্চিত কারণ'</strong></p>
+<p><strong>মূলভাব:</strong> একটি রাষ্ট্রের স্থায়িত্ব ও সমৃদ্ধির মূল ভিত্তি হলো ন্যায়বিচার ও আইনের অনুশাসন। সমাজে যখন শোষণ, বৈষম্য ও রাষ্ট্রীয় অবিচার প্রশ্রয় পায়, তখন সে জাতির চরম নৈতিক ও রাজনৈতিক পতন অনিবার্য হয়ে ওঠে।</p>
+<p><strong>সম্প্রসারিত ভাব:</strong> ইতিহাস সাক্ষী, অতীতে যে সাম্রাজ্যেই ন্যায়বিচারের স্থান দখল করেছে স্বৈরাচার ও পক্ষপাতিত্ব, সে রাষ্ট্রই কালের গর্ভে ধূলিসাৎ হয়েছে। অবিচার জনগণের মাঝে ক্ষোভ ও বিদ্রোহের জন্ম দেয়, যা সামাজিক সংহতি ধ্বংস করে। একটি সুখী ও টেকসই রাষ্ট্র বিনির্মাণে সমতা, মানবিক মর্যাদা ও সামাজিক ন্যায়বিচার নিশ্চিত করার কোনো বিকল্প নেই।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="2" data-subject="অনুবাদ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ২</span>
+            <span class="q-meta-tag">অনুবাদ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">অনুবাদ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">বাংলায় অনুবাদ করুন:<br>"You may ask what then will become of the fundamental principles of equity and fair play which our constitutions enshrine; and whether I seriously believe that unsupported they will serve merely as counsels of moderation. I do not think that anyone can say what will be left of those principles; but this much I think I do know-that a society so riven that the spirit of moderation is gone, no court can save; that a society where that spirit flourishes, no court need save; that in a society which evades its responsibility by thrusting upon the courts the nurture of that spirit, that spirit in the end will perish." </div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-2')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-2" class="ans-drawer">
+            <div class="exp-content">
+              <strong>অনুবাদ:</strong> আপনারা হয়তো প্রশ্ন তুলতে পারেন যে, আমাদের সংবিধানে সন্নিবেশিত সমতা ও ন্যায়বিচারের মৌলিক নীতিগুলোর পরিণতি তাহলে কী হবে; এবং আমি কি আন্তরিকভাবেই বিশ্বাস করি যে, কোনো সহায়তা ছাড়া সেগুলো কেবল সংযমের উপদেশ হিসেবেই অবশিষ্ট থাকবে? আমার মনে হয় না কেউ নিশ্চিত করে বলতে পারে সেই নীতিগুলোর কী অবশিষ্ট থাকবে; তবে এইটুকু আমি নিশ্চিত জানি যে—যে সমাজ এতটা বিভক্ত যেখানে সংযম ও সহনশীলতার চেতনা বিলুপ্ত হয়ে গেছে, কোনো আদালতই সেই সমাজকে রক্ষা করতে পারে না; আবার যেখানে সেই মানবিক চেতনা সমুন্নত থাকে, সেখানে কোনো আদালতের রক্ষার প্রয়োজনও পড়ে না; আর যে সমাজ সেই চেতনা লালনের দায়ভার আদালতের কাঁধে চাপিয়ে দিয়ে নিজের দায়িত্ব এড়িয়ে চলে, সেই সমাজে শেষ পর্যন্ত সেই চেতনা চিরতরে বিনষ্ট হতে বাধ্য।
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="3" data-subject="বাংলা ব্যাকরণ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৩</span>
+            <span class="q-meta-tag">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">নির্দেশিত মতে বাক্য রূপান্তর করুন (যে কোনো ৫টি):<br>a) মাংসাশী পশু অত্যন্ত বলবান (মিশ্র বাক্য)।<br>b) পরীক্ষায় উত্তীর্ণ হওয়ার জন্য এখন থেকেই তোমার পড়া উচিত (যৌগিক)।<br>c) তোমার মনস্কামনা সফল হোক (জটিল)।<br>d) ভূস্বামী যখন স্বাধিকারে অধিষ্ঠান করেন, তখন প্রজারা একদিনের নিমিত্ত নিশ্চিত থাকিতে পারে না (সরল)।<br>e) আমারও ইহাদের উপর সহোদর স্নেহ আছে (নেতিবাচক)।<br>f) আমরা বাধা দিতে পারলাম না (অস্তিবাচক)।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-3')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-3" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>মূল বাক্য ও রূপান্তরের ধরন</th><th>রূপান্তরিত বাক্য</th></tr></thead>
+<tbody>
+<tr><td>a) মাংসাশী পশু অত্যন্ত বলবান (মিশ্র)</td><td><strong>যে সকল পশু মাংস ভোজন করে, তারা অত্যন্ত বলবান।</strong></td></tr>
+<tr><td>b) পরীক্ষায় উত্তীর্ণ হওয়ার জন্য এখন থেকেই পড়া উচিত (যৌগিক)</td><td><strong>এখন থেকেই তোমার পড়া উচিত, তবেই পরীক্ষায় উত্তীর্ণ হতে পারবে।</strong></td></tr>
+<tr><td>c) তোমার মনস্কামনা সফল হোক (জটিল)</td><td><strong>তুমি মনে মনে যা কামনা করেছ, তা সফল হোক।</strong></td></tr>
+<tr><td>d) ভূস্বামী যখন স্বাধিকারে অধিষ্ঠান করেন... (সরল)</td><td><strong>ভূস্বামী স্বাধিকারে অধিষ্ঠিত হলে প্রজারা একদিনের নিমিত্তেও নিশ্চিত থাকতে পারে না।</strong></td></tr>
+<tr><td>e) আমারও ইহাদের উপর সহোদর স্নেহ আছে (নেতিবাচক)</td><td><strong>আমারও ইহাদের উপর যে সহোদর স্নেহ নেই, তা নয়।</strong></td></tr>
+<tr><td>f) আমরা বাধা দিতে পারলাম না (অস্তিবাচক)</td><td><strong>আমরা বাধা দিতে অক্ষম হলাম / ব্যর্থ হলাম।</strong></td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="4" data-subject="বাংলা ব্যাকরণ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৪</span>
+            <span class="q-meta-tag">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">বাক্য শুদ্ধ করে লিখুন (যে কোনো ৫টি):<br>a) জ্ঞানী মানুষ অবশ্যই যশলাভ করেন।<br>b) ইতিমধ্যে যা ঘটেছে তাতেই তার মনবিকার দেখা দিয়াছে।<br>c) এ নির্মম হত্যাকাণ্ডে গ্রামবাসী নিস্তব্ধ হয়ে গেল।<br>d) কলেজের পুনর্মিলনী উৎসবে বহু বিশিষ্ট ব্যক্তিবর্গ যোগদান করেন।<br>e) ঝর্না ঝর্না সুন্দরী ঝর্না।<br>f) 'করুণ' হলো ক্রিয়া আর 'করুন' হলো বিশেষণ।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-4')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-4" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>অশুদ্ধ বাক্য</th><th>শুদ্ধ প্রমিত রূপ</th></tr></thead>
+<tbody>
+<tr><td>a) জ্ঞানী মানুষ অবশ্যই যশলাভ করেন।</td><td><strong>গুণী মানুষ অবশ্যই যশ লাভ করেন / জ্ঞানীরা যশলাভ করেন।</strong></td></tr>
+<tr><td>b) ইতিমধ্যে যা ঘটেছে তাতেই তার মনবিকার দেখা দিয়াছে।</td><td><strong>ইতোমধ্যে যা ঘটেছে তাতেই তার মনোবিকার দেখা দিয়েছে।</strong></td></tr>
+<tr><td>c) এ নির্মম হত্যাকাণ্ডে গ্রামবাসী নিস্তব্ধ হয়ে গেল।</td><td><strong>এ নির্মম হত্যাকাণ্ডে গ্রামবাসী স্তব্ধ হয়ে গেল।</strong></td></tr>
+<tr><td>d) কলেজের পুনর্মিলনী উৎসবে বহু বিশিষ্ট ব্যক্তিবর্গ যোগদান করেন।</td><td><strong>কলেজের পুনর্মিলনী উৎসবে বিশিষ্ট ব্যক্তিবর্গ যোগদান করেন।</strong> <em>(বাহুল্য দোষ বর্জন)</em></td></tr>
+<tr><td>e) ঝর্না ঝর্না সুন্দরী ঝর্না।</td><td><strong>ঝরনা ঝরনা সুন্দরী ঝরনা।</strong> <em>(তদ্ভব শব্দে 'র')</em></td></tr>
+<tr><td>f) 'করুণ' হলো ক্রিয়া আর 'করুন' হলো বিশেষণ।</td><td><strong>'করুন' হলো ক্রিয়া আর 'করুণ' হলো বিশেষণ।</strong></td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="5" data-subject="বাংলা ব্যাকরণ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৫</span>
+            <span class="q-meta-tag">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">সমোচ্চারিত ভিন্নার্থক শব্দের অর্থ লিখুন:<br>a) আবরণ / আভরণ<br>b) পড়-পড় / পর-পর<br>c) শব / সব<br>d) সাড়া / সারা<br>e) সকল / শকল</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-5')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-5" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>শব্দযুগল</th><th>শব্দার্থ</th></tr></thead>
+<tbody>
+<tr><td>আবরণ<br>আভরণ</td><td>আবৃতকরণ / ঢাকনা / আচ্ছাদন<br>ভূষণ / অলঙ্কার / গহনা</td></tr>
+<tr><td>পড়-পড়<br>পর-পর</td><td>পড়ন্ত / পতন আসন্ন এমন অবস্থা<br>ক্রমান্বয়ে / একের পর এক</td></tr>
+<tr><td>শব<br>সব</td><td>মৃতদেহ / লাশ<br>সকল / সমস্ত / তামাম</td></tr>
+<tr><td>সাড়া<br>সারা</td><td>ধ্বনি / শব্দ / প্রত্যুত্তর<br>সম্পূর্ণ / সমাপ্ত / শেষ</td></tr>
+<tr><td>সকল<br>শকল</td><td>সব / সমুদয় / সমগ্র<br>মাছের আঁশ / খণ্ড / অংশ</td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="6" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৬</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Amplify any one of the following:<br>a) For duty, duty must be done; the rule applies to everyone.<br>b) Cowards die many times before their death.</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-6')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-6" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>a) For duty, duty must be done; the rule applies to everyone</strong></p>
+<p><strong>Theme:</strong> Duty is the supreme moral obligation that governs human existence. No individual, irrespective of power, prestige, or position, is exempt from performing their assigned duties with sincerity and devotion.</p>
+<p><strong>Amplification:</strong> Every human being in a civilized society plays multiple interconnected roles—as a citizen, a professional, a family member, and a moral agent. The harmony and prosperity of an entire nation depend entirely on the conscientious fulfillment of these obligations. A student must study diligently, a doctor must treat patients selflessly, and leaders must govern with integrity. Escaping responsibility breeds chaos and decay. Performing one's duty without expectation of personal favor elevates character and cements social stability.</p>
+<hr>
+<p><strong>b) Cowards die many times before their death</strong></p>
+<p><strong>Theme:</strong> Fear and cowardice paralyze the human soul. A faint-hearted person suffers the torment and agonies of imaginary death repeatedly throughout life, whereas the brave face reality with fortitude.</p>
+<p><strong>Amplification:</strong> This immortal Shakespearean maxim from <em>Julius Caesar</em> encapsulates the tragedy of fear. Physical death occurs only once in a lifetime, but those plagued by constant anxiety, moral hesitation, and dread of adversity experience psychological demise daily. By shrinking away from challenges, cowards forfeit the joy of living and honor. Courage does not mean the absence of danger, but the resolve to triumph over it.</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="7" data-subject="ইংরেজি ব্যাকরণ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৭</span>
+            <span class="q-meta-tag">ইংরেজি ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Correct following sentences (any five):<br>a) He excels to speak English.<br>b) Elephants are found in Asia and African countries.<br>c) He wants to admit to Dhaka College.<br>d) He entered into the building by the main door.<br>e) Sitting on the top of the Pyramid, the camels looked very tiny.<br>f) We went to the meeting despite of our heavy burden of work in the office.</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-7')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-7" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>Incorrect Sentence</th><th>Corrected Sentence</th><th>Grammatical Rule</th></tr></thead>
+<tbody>
+<tr><td>a) He excels to speak English.</td><td><strong>He excels in speaking English.</strong></td><td>'Excel' takes preposition 'in' + gerund.</td></tr>
+<tr><td>b) Elephants are found in Asia and African countries.</td><td><strong>Elephants are found in Asian and African countries.</strong></td><td>Parallel adjective forms (Asian and African).</td></tr>
+<tr><td>c) He wants to admit to Dhaka College.</td><td><strong>He wants to be admitted to Dhaka College.</strong></td><td>Passive sense for academic admission.</td></tr>
+<tr><td>d) He entered into the building by the main door.</td><td><strong>He entered the building through the main door.</strong></td><td>'Enter' does not take 'into' for physical spaces.</td></tr>
+<tr><td>e) Sitting on the top of the Pyramid, the camels looked tiny.</td><td><strong>From the top of the Pyramid, the camels looked very tiny.</strong></td><td>Dangling modifier correction.</td></tr>
+<tr><td>f) We went to the meeting despite of our work.</td><td><strong>We went to the meeting in spite of / despite our work.</strong></td><td>'Despite' does not take 'of'.</td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="8" data-subject="অনুবাদ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৮</span>
+            <span class="q-meta-tag">অনুবাদ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">অনুবাদ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Translate the following passage into English:<br>"একজন বিচারককে দেশের সর্বোচ্চ আইন, সংবিধানের প্রতি শ্রদ্ধাশীল হইতে হইবে। আইন, নজির এবং তথ্য ও ঘটনাবলির আলোকে বিচার করিতে হইবে। এইখানে ব্যক্তিগত অভিমত, পছন্দ বা অপছন্দের কোনো স্থান নাই। রাজনৈতিক পরিস্থিতিতে সংসদ বিভিন্ন আইন পাস করিতে পারে। কিন্তু সেই আইন সংবিধানের কষ্টিপাথরে বিবেচনা করিবার দায়িত্ব ও কর্তব্য সুপ্রীম কোর্টের।" </div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-8')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-8" class="ans-drawer">
+            <div class="exp-content">
+              <strong>Translation:</strong> A judge must remain profoundly reverent to the constitution, the supreme law of the land. Justice must be administered strictly in the light of laws, judicial precedents, and proven factual evidence. Here, there is absolutely no room for personal opinions, prejudices, or preferences. Parliament may enact diverse legislations depending on changing political situations. However, the sacred constitutional duty and ultimate responsibility of testing those laws upon the touchstone of the constitution rest squarely with the Supreme Court.
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="9" data-subject="ইংরেজি রচনা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৯</span>
+            <span class="q-meta-tag">ইংরেজি রচনা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি রচনা</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Write a letter to your Bangladeshi pen-friend living in England about how unemployment problem resulting from Covid-19 is creating social insecurity in Bangladesh together with your suggestion to address the same.</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-9')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-9" class="ans-drawer">
+            <div class="exp-content">
+              <p>11 October, 2020<br>
+London, UK.</p>
+<p>Dear Hanjala,<br>
+I hope this letter finds you in good health and spirit. Today, I am writing to share my deep concerns regarding the economic fallout of the Covid-19 pandemic and the escalating unemployment that is aggravating social insecurity in Bangladesh.</p>
+<p>Prolonged lockdowns and disruption in global supply chains have dealt a severe blow to the informal sector, micro-enterprises, and readymade garments. Millions of daily wage earners and low-income workers have been rendered jobless overnight. This unprecedented income shock is pushing vulnerable families below the poverty threshold, triggering reverse migration to rural areas, and increasing social friction and crime rates.</p>
+<p>To overcome this crisis, the government should expand targeted direct cash transfers, extend low-interest refinancing schemes for SMEs, and launch community-based public works. Furthermore, upgrading technical vocational training can equip the youth for new digital freelance avenues. Let me know your thoughts on this situation.</p>
+<p>Yours lovingly,<br>
+S. M. Shawon</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="10" data-subject="সাধারণ জ্ঞান" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১০</span>
+            <span class="q-meta-tag">সাধারণ জ্ঞান</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">সাধারণ জ্ঞান</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">নিম্নের যে কোনো ১০টি প্রশ্নের উত্তর দিনঃ<br>a) মুক্তিযুদ্ধে অভ্যন্তরীণ নৌপথ ও সমুদ্র উপকূলীয় অঞ্চল কত নম্বর সেক্টরের অধীনে ছিল?<br>b) স্বাধীন বাংলাদেশে নির্মিত দেশের প্রথম সমুদ্র বন্দরের নাম কী?<br>c) বাংলাদেশের সংবিধান অনুসারে কে যুদ্ধ ঘোষণা করতে পারেন?<br>d) বায়ুমণ্ডলে CO2 বৃদ্ধির প্রধান দুইটি কারণ লিখুন।<br>e) কবি গোলাম মোস্তফার দুইটি কাব্যগ্রন্থের নাম লিখুন।<br>f) 'ক্রীতদাসের হাসি' কোন জাতীয় রচনা এবং এর রচয়িতা কে?<br>g) ২০২০ সালে চিকিৎসাবিজ্ঞানে নোবেল পুরস্কার প্রাপ্তদের নাম লিখুন।<br>h) আর্মেনিয়া-আজারবাইজানের মধ্যকার বিরোধপূর্ণ নাগর্নো-কারাবাখের রাজধানীর নাম লিখুন।<br>i) আল-কুদস (Al-Quds) কী?<br>j) ইলেকট্রনিক চক্ষু ও ইলেকট্রনিক মস্তিষ্ক কী?<br>k) 'Power Point' এর চারটি ব্যবহার লিখুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-10')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-10" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>নং</th><th>প্রশ্ন</th><th>প্রমিত উত্তর</th></tr></thead>
+<tbody>
+<tr><td>a</td><td>মুক্তিযুদ্ধের নৌপথ ও উপকূলীয় সেক্টর</td><td><strong>১০ নম্বর সেক্টর</strong> (প্রধান সেনাপতি এম এ জি ওসমানীর সরাসরি নিয়ন্ত্রণে ছিল, কোনো নিয়মিত সেক্টর কমান্ডার ছিল না)</td></tr>
+<tr><td>b</td><td>স্বাধীন বাংলাদেশে নির্মিত প্রথম সমুদ্র বন্দর</td><td><strong>পায়রা সমুদ্র বন্দর</strong> (পটুয়াখালী)</td></tr>
+<tr><td>c</td><td>সংবিধান অনুসারে যুদ্ধ ঘোষণা করতে পারেন</td><td><strong>জাতীয় সংসদ</strong> (সংবিধানের ৬৩ অনুচ্ছেদ অনুযায়ী)</td></tr>
+<tr><td>d</td><td>বায়ুমণ্ডলে \(\text{CO}_2\) বৃদ্ধির ২টি কারণ</td><td>১. জীবাশ্ম জ্বালানি (কয়লা, তেল, গ্যাস) পোড়ানো এবং ২. নির্বিচারে বন উজাড় ও গাছপালা কর্তন</td></tr>
+<tr><td>e</td><td>কবি গোলাম মোস্তফার ২টি কাব্যগ্রন্থ</td><td><strong>'রক্তরাগ'</strong> (১৯২৪) এবং <strong>'খোশরোজ'</strong> (১৯২৯)</td></tr>
+<tr><td>f</td><td>'ক্রীতদাসের হাসি' গ্রন্থের পরিচয়</td><td>এটি একটি রূপকধর্মী ঐতিহাসিক <strong>উপন্যাস</strong>; রচয়িতা কথাসাহিত্যিক <strong>শওকত ওসমান</strong></td></tr>
+<tr><td>g</td><td>২০২০ সালে চিকিৎসায় নোবেল বিজয়ী</td><td>হেপাটাইটিস সি ভাইরাস আবিষ্কারের জন্য: <strong>হার্ভে জে. অল্টার, মাইকেল হিউটন ও চার্লস এম. রাইস</strong></td></tr>
+<tr><td>h</td><td>নাগর্নো-কারাবাখের রাজধানী</td><td><strong>স্টেপানাকার্ট</strong> (Stepanakert / খানকেন্দী)</td></tr>
+<tr><td>i</td><td>আল-কুদস (Al-Quds) কী?</td><td>ঐতিহাসিক <strong>জেরুজালেম</strong> শহরের আরবি নাম (যেখানে পবিত্র আল-আকসা মসজিদ অবস্থিত)</td></tr>
+<tr><td>j</td><td>ইলেকট্রনিক চক্ষু ও মস্তিষ্ক</td><td>ইলেকট্রনিক চক্ষু হলো <strong>রাডার (Radar)</strong> এবং ইলেকট্রনিক মস্তিষ্ক হলো <strong>কম্পিউটার (Computer / CPU)</strong></td></tr>
+<tr><td>k</td><td>PowerPoint এর ৪টি ব্যবহার</td><td>১. স্লাইড তৈরি ও ব্যবসায়িক প্রেজেন্টেশন, ২. শিক্ষামূলক ডিজিটাল কনটেন্ট তৈরি, ৩. ইনফোগ্রাফিক্স ও চার্ট প্রদর্শন, ৪. ভিডিও স্লাইডশো ও হ্যান্ডআউট প্রস্তুত</td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="11" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১১</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">একটি নল দ্বারা ১২ মিনিটে একটি চৌবাচ্চা পূর্ণ হয়। অপর একটি নল দ্বারা ১ মিনিটে তা থেকে ১৫ লিটার পানি বের করে দেয়। চৌবাচ্চাটি খালি থাকা অবস্থায় দুইটি নল একসঙ্গে খুলে দেওয়া হয় এবং চৌবাচ্চাটি ৪৮ মিনিটে পূর্ণ হয়। চৌবাচ্চাটিতে কত লিটার পানি ধরে?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-11')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-11" class="ans-drawer">
+            <div class="exp-content">
+              <p>ধরি, চৌবাচ্চাটিতে মোট পানি ধরে \(x\) লিটার (ধারণক্ষমতা)।</p>
+<p>১ম নল দ্বারা চৌবাচ্চাটি ১২ মিনিটে পূর্ণ হয় \(x\) লিটার।<br>
+\(\therefore\) ১ম নল দ্বারা ১ মিনিটে পানি প্রবেশ করে \(= \frac{x}{১২}\) লিটার।</p>
+<p>২য় নল দ্বারা ১ মিনিটে পানি বের হয় \(= ১৫\) লিটার।</p>
+<p>উভয় নল একসঙ্গে খোলা থাকলে ১ মিনিটে চৌবাচ্চায় পানি অবশিষ্ট থাকে:<br>
+\(= \left(\frac{x}{১২} - ১৫\right)\) লিটার।</p>
+<p>প্রশ্নমতে, উভয় নল খোলা থাকলে ৪৮ মিনিটে সম্পূর্ণ চৌবাচ্চা (\(x\) লিটার) পূর্ণ হয়:<br>
+\(\therefore\) ১ মিনিটে পূর্ণ হয় \(= \frac{x}{৪৮}\) লিটার।</p>
+<p>অতএব সমীকরণ:<br>
+\(\frac{x}{১২} - ১৫ = \frac{x}{৪৮}\)<br>
+\(\Rightarrow \frac{x}{১২} - \frac{x}{৪৮} = ১৫\)<br>
+\(\Rightarrow \frac{৪x - x}{৪৮} = ১৫\)<br>
+\(\Rightarrow \frac{৩x}{৪৮} = ১৫\)<br>
+\(\Rightarrow \frac{x}{১৬} = ১৫\)<br>
+\(\Rightarrow x = ১৫ \times ১৬ = \mathbf{২৪০}\) লিটার।</p>
+<p><strong>উত্তর:</strong> ২৪০ লিটার।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="12" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১২</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">১০ টাকায় ১০টি এবং ৮টি দরে সমান সংখ্যক লিচু খরিদ করে ১০ টাকায় ৯টি দরে বিক্রয় করলে, শতকরা কত লাভ বা ক্ষতি হবে?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-12')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-12" class="ans-drawer">
+            <div class="exp-content">
+              <p>ধরি, উভয় প্রকার থেকে ১০ ও ৮ এর লসাগু ৪০টি করে মোট ৮০টি লিচু ক্রয় করা হলো।</p>
+<p>১ম প্রকার ৪০টি লিচুর ক্রয়মূল্য \(= \frac{১০}{১০} \times ৪০ = ৪০\) টাকা।<br>
+২য় প্রকার ৪০টি লিচুর ক্রয়মূল্য \(= \frac{১০}{৮} \times ৪০ = ৫০\) টাকা।<br>
+\(\therefore\) মোট \((৪০ + ৪০) = ৮০\)টি লিচুর মোট ক্রয়মূল্য \(= ৪০ + ৫০ = ৯০\) টাকা।<br>
+\(\therefore\) ১টি লিচুর গড় ক্রয়মূল্য \(= \frac{৯০}{৮০} = ১.১২৫\) টাকা।</p>
+<p>বিক্রয়ের ক্ষেত্রে:<br>
+৯টি লিচুর বিক্রয়মূল্য \(= ১০\) টাকা।<br>
+\(\therefore\) ১টি লিচুর বিক্রয়মূল্য \(= \frac{১০}{৯} \approx ১.১১১\) টাকা।</p>
+<p>যেহেতু বিক্রয়মূল্য ক্রয়মূল্যের চেয়ে কম, তাই ক্ষতি হবে।<br>
+৮০টি লিচুর বিক্রয়মূল্য \(= \frac{১০}{৯} \times ৮০ = \frac{৮০০}{৯} = ৮৮.৮৯\) টাকা।<br>
+\(\therefore\) মোট ক্ষতি \(= ৯০ - \frac{৮০০}{৯} = \frac{৮১০ - ৮০০}{৯} = \frac{১০}{৯}\) টাকা।</p>
+<p>শতকরা ক্ষতি:<br>
+\(৯০\) টাকায় ক্ষতি হয় \(= \frac{১০}{৯}\) টাকা।<br>
+\(\therefore ১০০\) টাকায় ক্ষতি \(= \frac{\frac{১০}{৯} \times ১০০}{৯০} = \frac{১০ \times ১০০}{৯ \times ৯০} = \frac{১০০}{৮১} \approx \mathbf{১.২৪\%}\)।</p>
+<p><strong>উত্তর:</strong> ১.২৪% ক্ষতি।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="13" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৩</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">a^4 - a^2 + 1 = 0 হলে, প্রমাণ করুন যে a^3 + 1/a^3 = 0।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-13')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-13" class="ans-drawer">
+            <div class="exp-content">
+              <p>দেওয়া আছে,<br>
+\(a^4 - a^2 + 1 = 0\)<br>
+\(\Rightarrow a^4 + 1 = a^2\)</p>
+<p>উভয়পক্ষকে \(a^2\) দ্বারা ভাগ করে পাই:<br>
+\(\Rightarrow \frac{a^4 + 1}{a^2} = \frac{a^2}{a^2}\)<br>
+\(\Rightarrow a^2 + \frac{1}{a^2} = 1\)</p>
+<p>আমরা জানি, \(a^2 + b^2 = (a + b)^2 - 2ab\)<br>
+\(\Rightarrow \left(a + \frac{1}{a}\right)^2 - 2 \cdot a \cdot \frac{1}{a} = 1\)<br>
+\(\Rightarrow \left(a + \frac{1}{a}\right)^2 - 2 = 1\)<br>
+\(\Rightarrow \left(a + \frac{1}{a}\right)^2 = 3\)<br>
+\(\therefore a + \frac{1}{a} = \sqrt{3}\)</p>
+<p>এখন, বামপক্ষ:<br>
+\(= a^3 + \frac{1}{a^3}\)<br>
+\(= \left(a + \frac{1}{a}\right)^3 - 3 \cdot a \cdot \frac{1}{a} \left(a + \frac{1}{a}\right)\)<br>
+\(a + \frac{1}{a} = \sqrt{3}\) মান বসিয়ে পাই:<br>
+\(= (\sqrt{3})^3 - 3(\sqrt{3})\)<br>
+\(= 3\sqrt{3} - 3\sqrt{3}\)<br>
+\(= 0\)<br>
+\(= \text{ডানপক্ষ}\)</p>
+<p><strong>\(\therefore a^3 + \frac{1}{a^3} = 0\) (প্রমাণিত)।</strong></p>
+            </div>
+          </div>
+        </article>
+        
+      </main>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>PSC & IBA Written Job Solution Master Repository • নির্ভুল ও প্রামাণ্য ই-বুক সংস্করণ</p>
+      <p style="margin-top:0.25rem;">উৎস: মূল পরীক্ষার প্রশ্নপত্র ও অফিশিয়াল সমাধান সংগ্রহ</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      document.getElementById('themeToggleBtn').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    }
+
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.addEventListener('DOMContentLoaded', () => {
+          const btn = document.getElementById('themeToggleBtn');
+          if (btn) btn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        });
+      }
+    })();
+
+    function toggleDrawer(id) {
+      const drawer = document.getElementById(id);
+      if (!drawer) return;
+      const isVisible = drawer.classList.contains('open');
+      drawer.classList.toggle('open');
+      const toggleBtn = drawer.previousElementSibling;
+      if (toggleBtn) {
+        const icon = toggleBtn.querySelector('.toggle-icon');
+        if (icon) icon.textContent = isVisible ? '▼' : '▲';
+      }
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const subject = btn.getAttribute('data-subject');
+        document.querySelectorAll('.q-card').forEach(card => {
+          if (subject === 'all' || card.getAttribute('data-subject') === subject) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    let baseFontSize = 100;
+    function adjustFontSize(dir) {
+      if (dir === 0) baseFontSize = 100;
+      else baseFontSize += dir * 8;
+      if (baseFontSize < 80) baseFontSize = 80;
+      if (baseFontSize > 130) baseFontSize = 130;
+      document.documentElement.style.fontSize = baseFontSize + '%';
+    }
+  </script>
+</body>
+</html>

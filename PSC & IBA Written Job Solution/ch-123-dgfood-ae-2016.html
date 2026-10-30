@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>খাদ্য অধিদপ্তর — সহকারী প্রকৌশলী | প্রামাণ্য সমাধান</title>
+  <link rel="stylesheet" href="css/paper-textures.css">
+  <link rel="stylesheet" href="css/bangla-fonts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Kalpurush&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\(', right: '\\)', display: false}]});">
+  </script>
+  <style>
+    :root {
+      --bg-page: #fdfbf7;
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: rgba(226, 232, 240, 0.8);
+      --accent-primary: #0284c7;
+      --accent-indigo: #6366f1;
+      --accent-emerald: #10b981;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #0f172a;
+      --bg-surface: rgba(30, 41, 59, 0.85);
+      --bg-card: rgba(30, 41, 59, 0.82);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: rgba(51, 65, 85, 0.8);
+      --accent-primary: #38bdf8;
+      --accent-indigo: #818cf8;
+      --accent-emerald: #34d399;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.65;
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Top Nav */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+    }
+    .back-btn {
+      text-decoration: none;
+      color: var(--accent-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .back-btn:hover { text-decoration: underline; }
+    .nav-controls { display: flex; align-items: center; gap: 0.75rem; }
+    .theme-btn, .font-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .theme-btn:hover, .font-btn:hover {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Chapter Header */
+    .ch-header {
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .ch-title {
+      font-size: 1.65rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+    }
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.05rem;
+      display: block;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 0.25rem;
+    }
+    .ch-meta-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .ch-badge {
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--accent-primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+
+    /* Sketchnotes Section */
+    .sk-container {
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+    .sk-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .sk-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.15rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .sk-box h4 {
+      font-size: 1.05rem;
+      color: var(--accent-indigo);
+      margin-bottom: 0.65rem;
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 0.35rem;
+    }
+    .sk-box ul { list-style-type: none; }
+    .sk-box li {
+      font-size: 0.92rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+    .sk-box li strong { color: var(--text-main); }
+
+    /* Part 2: Question Section */
+    .part2-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .part2-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .subject-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .tab-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.4rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Question Cards */
+    .q-card {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .q-header {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.85rem;
+    }
+    .q-num {
+      font-weight: 700;
+      color: var(--accent-primary);
+      font-size: 1.05rem;
+    }
+    .q-meta-tag {
+      background: rgba(2, 132, 199, 0.08);
+      color: var(--accent-primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .q-body {
+      margin-bottom: 1rem;
+    }
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* Answer Drawer */
+    .ans-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(2, 132, 199, 0.06);
+      border: 1px solid rgba(2, 132, 199, 0.15);
+      color: var(--accent-primary);
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+    .ans-toggle:hover { background: rgba(2, 132, 199, 0.12); }
+    .ans-drawer {
+      display: none;
+      padding: 1.25rem;
+      margin-top: 0.75rem;
+      background: rgba(0, 0, 0, 0.02);
+      border-left: 3px solid var(--accent-primary);
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    }
+    [data-theme="dark"] .ans-drawer { background: rgba(255, 255, 255, 0.02); }
+    .ans-drawer.open { display: block; }
+    .exp-content {
+      font-size: 0.98rem;
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+    .exp-content p { margin-bottom: 0.75rem; }
+    .exp-content ul, .exp-content ol { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+    .exp-content li { margin-bottom: 0.35rem; }
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.92rem;
+    }
+    .bcs-table th, .bcs-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+    }
+    .bcs-table th {
+      background: rgba(2, 132, 199, 0.08);
+      font-weight: 600;
+      color: var(--accent-primary);
+    }
+
+    /* Typography Protection */
+    .q-card, .q-card *, .q-text, .q-text *, .ans-drawer, .ans-drawer *,
+    .bcs-table, .bcs-table * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body class="paper-old-aged font-nirlipta">
+  <div class="container">
+    <!-- Top Navigation -->
+    <header class="top-nav">
+      <a href="index.html" class="back-btn">
+        <span>←</span> সূচিপত্রে ফিরে যান
+      </a>
+      <div class="nav-controls">
+        <button class="font-btn" onclick="adjustFontSize(-1)">A-</button>
+        <button class="font-btn" onclick="adjustFontSize(0)">A</button>
+        <button class="font-btn" onclick="adjustFontSize(1)">A+</button>
+        <button class="theme-btn" onclick="toggleTheme()" id="themeToggleBtn">🌙</button>
+      </div>
+    </header>
+
+    <!-- Chapter Header -->
+    <section class="ch-header">
+      <h1 class="ch-title font-nirlipta">
+        খাদ্য অধিদপ্তর — সহকারী প্রকৌশলী
+        <span class="ch-en">Directorate General of Food (DG Food) - Assistant Engineer 2016</span>
+      </h1>
+      <div class="ch-meta-wrap">
+        <span class="ch-badge">📋 পরীক্ষা নং: ১২৩</span>
+        <span class="ch-badge">🏛️ BUET</span>
+        <span class="ch-badge">📅 তারিখ: ০৯.০৪.২০১৬</span>
+        <span class="ch-badge">⏱️ সময়: ২৪০ মিনিট</span>
+        <span class="ch-badge">🎯 পূর্ণমান: ২০০</span>
+        <span class="ch-badge">🔢 মোট প্রশ্ন: ১৮টি</span>
+        <span class="ch-badge">📄 পৃষ্ঠা: ৭৩৪–৭৪০</span>
+      </div>
+    </section>
+
+    
+    <section class="sk-part1">
+      <div class="sk-badge">Part 1: Authentic Revision Notes &amp; Formulas</div>
+      <h3 class="sk-title font-nirlipta">খাদ্য অধিদপ্তর — সহকারী প্রকৌশলী প্রামাণ্য রিভিশন নোট ও সূত্রাবলি</h3>
+      <p class="sk-desc font-nirlipta">
+        এই অধ্যায়ের মূল পরীক্ষার প্রশ্ন ও বিশদ সমাধান থেকে সংকলিত হ্যান্ডনোট, গাণিতিক সূত্র ও সারসংক্ষেপ:
+      </p>
+      <div class="sk-grid">
+        
+        <div class="sk-box">
+          <h4 class="font-nirlipta">পরিবেশ প্রকৌশল ও আন্তর্জাতিক প্রটোকল</h4>
+          <div>• <strong>গ্রিনহাউস গ্যাসসমূহ:</strong> কার্বন ডাই-অক্সাইড (\(\text{CO}_2\)), মিথেন (\(\text{CH}_4\)), নাইট্রাস অক্সাইড (\(\text{N}_2\text{O}\)), জলীয়বাষ্প, ওজোন (\(\text{O}_3\)) এবং সিএফসি (\(\text{CFC}\))।<br>• <strong>গ্রিন কনস্ট্রাকশন ও LEED:</strong> Leadership in Energy and Environmental Design — ভবন নির্মাণে জ্বালানি সাশ্রয়, বৃষ্টির পানি সংরক্ষণ (Rainwater Harvesting) ও পরিবেশবান্ধব উপকরণ ব্যবহারের আন্তর্জাতিক মানদণ্ড।<br>• <strong>কার্বন ট্রেডিং:</strong> কিয়োটো প্রটোকল অনুমোদিত বাজারভিত্তিক মেকানিজম (Cap-and-Trade), যেখানে অতিরিক্ত কার্বন নির্গমনের বিপরীতে কার্বন ক্রেডিট কেনাবেচা করা হয়।</div>
+        </div>
+
+        <div class="sk-box">
+          <h4 class="font-nirlipta">সংবিধান ও স্থানীয় সরকার কাঠামো</h4>
+          <div>• <strong>সংবিধান:</strong> ৪ নভেম্বর ১৯৭২ গণপরিষদে গৃহীত এবং ১৬ ডিসেম্বর ১৯৭২ কার্যকর। এতে মোট ১৫৩টি অনুচ্ছেদ, ১১টি ভাগ ও ৭টি তফসিল রয়েছে।<br>• <strong>স্থানীয় সরকার বিবর্তন:</strong> লর্ড রিপনের ১৮৮২ সালের স্থানীয় স্বায়ত্তশাসন প্রস্তাব এবং ১৮৮৫ সালের বেঙ্গল লোকাল সেলফ-গভর্নমেন্ট অ্যাক্ট এর ভিত্তি। বর্তমানে ইউনিয়ন পরিষদ, উপজেলা পরিষদ ও জেলা পরিষদ সমন্বয়ে ৩-স্তরীয় ব্যবস্থা বিদ্যমান।</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PART 2: Written Examination Question Engine -->
+    <section>
+      <div class="part2-header">
+        <div class="part2-title">
+          <span>📝</span> Part 2: বিগত পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক ও সমাধান
+        </div>
+      </div>
+
+      <!-- Subject Filter Tabs -->
+      <nav class="subject-tabs">
+        <button class="tab-btn active" data-subject="all">সকল বিষয় (১৮)</button>
+        <button class="tab-btn" data-subject="বাংলা">বাংলা (৪)</button>
+        <button class="tab-btn" data-subject="ইংরেজি">ইংরেজি (৫)</button>
+        <button class="tab-btn" data-subject="সাধারণ জ্ঞান">সাধারণ জ্ঞান (১)</button>
+        <button class="tab-btn" data-subject="বিজ্ঞান ও প্রযুক্তি">বিজ্ঞান ও প্রযুক্তি (২)</button>
+        <button class="tab-btn" data-subject="বাংলাদেশ বিষয়াবলি">বাংলাদেশ বিষয়াবলি (২)</button>
+        <button class="tab-btn" data-subject="প্রকৌশল সাধারণ জ্ঞান">প্রকৌশল সাধারণ জ্ঞান (১)</button>
+        <button class="tab-btn" data-subject="আন্তর্জাতিক বিষয়াবলি">আন্তর্জাতিক বিষয়াবলি (১)</button>
+        <button class="tab-btn" data-subject="বিজ্ঞান ও পরিবেশ">বিজ্ঞান ও পরিবেশ (১)</button>
+        <button class="tab-btn" data-subject="পরিবেশ ও অর্থনীতি">পরিবেশ ও অর্থনীতি (১)</button>
+      </nav>
+
+      <!-- Question Cards List -->
+      <main id="questionContainer">
+        
+        <article class="q-card" data-qid="1" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ২০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">'আধুনিক জীবন ও সংবাদপত্র' শিরোনামে একটি প্রবন্ধ লিখুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-1')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-1" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>ভূমিকা:</strong> তথ্যনির্ভর যুগে সংবাদপত্রের গুরুত্ব অপরিসীম। প্রতিদিনের পরিবর্তনশীল বিশ্বে মানুষকে সচেতন, আপডেট ও যুক্ত রাখার প্রধান মাধ্যমগুলোর একটি হলো সংবাদপত্র। এটি কেবল খবর পরিবেশন করে না; বরং সমাজ, রাজনীতি, অর্থনীতি, সংস্কৃতি-সবকিছুর একটি সামগ্রিক চিত্র তুলে ধরে। ফলে আধুনিক জীবনের সঙ্গে সংবাদপত্রের সম্পর্ক অত্যন্ত ঘনিষ্ঠ ও অপরিহার্য।</p>
+<p><strong>সংবাদপত্রের ধারণা ও বিবর্তন:</strong> সংবাদপত্র বলতে এমন একটি মাধ্যমকে বোঝায় যা নিয়মিতভাবে বিভিন্ন তথ্য, ঘটনা ও বিশ্লেষণ প্রকাশ করে। একসময় মুদ্রিত কাগজই ছিল এর একমাত্র রূপ, কিন্তু বর্তমানে এটি ডিজিটাল প্ল্যাটফর্মেও বিস্তৃত হয়েছে। অনলাইন সংবাদপত্র, ই-পেপার এবং মোবাইল অ্যাপের মাধ্যমে মানুষ এখন যেকোনো সময় সংবাদ পড়তে পারে।</p>
+<p><strong>তথ্যপ্রাপ্তির প্রধান উৎস হিসেবে ভূমিকা:</strong> সংবাদপত্র মানুষের জন্য নির্ভরযোগ্য তথ্যের একটি গুরুত্বপূর্ণ উৎস। দেশ-বিদেশের রাজনৈতিক পরিস্থিতি, অর্থনৈতিক উন্নয়ন, প্রাকৃতিক দুর্যোগ, বিজ্ঞান ও প্রযুক্তির অগ্রগতি সবকিছু সম্পর্কে মানুষ সংবাদপত্রের মাধ্যমে জানতে পারে।</p>
+<p><strong>শিক্ষা ও জ্ঞানবৃদ্ধিতে অবদান:</strong> বিভিন্ন সম্পাদকীয়, কলাম, ফিচার এবং বিশ্লেষণধর্মী লেখার মাধ্যমে পাঠকের জ্ঞান বৃদ্ধি পায়। শিক্ষার্থীরা ভাষা, সাধারণ জ্ঞান এবং সমসাময়িক বিষয় সম্পর্কে ধারণা লাভ করে।</p>
+<p><strong>জনমত গঠন ও সামাজিক সচেতনতা:</strong> দুর্নীতি, সামাজিক অসঙ্গতি, পরিবেশ সমস্যা বা মানবাধিকার লঙ্ঘনের মতো বিষয়গুলো সংবাদপত্রের মাধ্যমে আলোচনায় আসে এবং এর ফলে মানুষ সচেতন হয় ও পরিবর্তনের দাবি তোলে।</p>
+<p><strong>গণতন্ত্র রক্ষায় সংবাদপত্রের ভূমিকা:</strong> গণতান্ত্রিক সমাজে সংবাদপত্রকে 'চতুর্থ স্তম্ভ' বলা হয়। এটি সরকারের কার্যক্রম পর্যবেক্ষণ করে এবং জনগণের সামনে তা তুলে ধরে স্বচ্ছতা ও জবাবদিহিতা নিশ্চিত করে।</p>
+<p><strong>উপসংহার:</strong> সচেতন সমাজ গঠনে সংবাদপত্র একটি অপরিহার্য মাধ্যম। প্রযুক্তির ইতিবাচক ব্যবহারের মাধ্যমে এর বস্তুনিষ্ঠতা রক্ষা করা গেলে তা চিরকাল সমাজ বিনির্মাণে পথপ্রদর্শক হয়ে থাকবে।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="2" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ২</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">সারমর্ম লিখুন:<br>বন্ধু, বলিনি ঝুট,<br>এইখানে এসে লুটাইয়া পড়ে সকল রাজমুকুট।<br>এই হৃদয়ই সে নীলাচল, কাশী, মথুরা বৃন্দাবন,<br>বুদ্ধ-গয়া এ, জেরুজালেম এ, মদিনা, কাবা-ভবন,<br>মসজিদ এই, মন্দির এই, গির্জা এই হৃদয়,<br>এইখানে বসে ঈসা মুসা পেল সত্যের পরিচয়।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-2')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-2" class="ans-drawer">
+            <div class="exp-content">
+              <strong>সারমর্ম:</strong> মানুষের হৃদয়ই সকল ধর্মের পরম মিলনক্ষেত্র ও তীর্থস্থান। বাহ্যিক আচার-অনুষ্ঠান, মসজিদ বা মন্দিরের চেয়ে অন্তরের শুদ্ধতা, প্রেম ও মানবিক মূল্যবোধই সৃষ্টিকর্তার সান্নিধ্য লাভের সর্বোৎকৃষ্ট পথ।
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="3" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৩</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">বাংলাদেশের কোনো একটি ঐতিহাসিক স্থানের বিবরণ দিয়ে দূরের কোনো বন্ধুকে পত্র লিখুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-3')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-3" class="ans-drawer">
+            <div class="exp-content">
+              <p>১১ এপ্রিল, ২০১৬<br>ধানমন্ডি, ঢাকা।</p>
+<p>প্রিয় রাকিব,<br>আমার প্রীতি ও শুভেচ্ছা নিও। গত চিঠিতে তুমি বাংলাদেশের ঐতিহাসিক স্থান সম্পর্কে জানতে চেয়েছিলে। আজ আমি তোমাকে রাজধানী ঢাকার বুড়িগঙ্গা তীরের মুঘল স্থাপত্যের অন্যতম নিদর্শন 'লালবাগ কেল্লা' সম্পর্কে লিখছি।</p>
+<p>১৬৭৮ সালে মুঘল সম্রাট আওরঙ্গজেবের পুত্র যুবরাজ মুহাম্মদ আজম শাহ এই দুর্গের নির্মাণকাজ শুরু করেন। পরবর্তীতে সুবাদার শায়েস্তা খাঁ কেল্লার কাজ এগিয়ে নেন। দুর্গের অভ্যন্তরে রয়েছে পরি বিবির মাজার, দরবার হল (হাম্মামখানা) ও তিন গম্বুজবিশিষ্ট ঐতিহাসিক শাহী মসজিদ। দুর্গের সুড়ঙ্গপথ ও সুরম্য বাগান পর্যটকদের মুগ্ধ করে। সুযোগ পেলে তুমি অবশ্যই এটি দেখতে আসবে।</p>
+<p>ইতি,<br>তোমার বন্ধু,<br>সাকিব</p>
+<div class="table-responsive">
+<table class="table table-bordered bcs-table" style="max-width: 350px;">
+<tr><td><strong>From:</strong> Sakib, Dhanmondi, Dhaka, Bangladesh</td><td><strong>To:</strong> Rakib, 10 Downing Street, Westminster, London, UK</td></tr>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="4" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৪</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">বাংলায় অনুবাদ করুন:<br>The world’s main coffee-growing regions are roasting under additional days of climate-change-driven heat every year, threatening harvests and contributing to higher prices. An analysis found that there were 47 extra days of harmful heat per year on average in 25 countries representing nearly all global coffee production between 2021 and 2025.</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-4')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-4" class="ans-drawer">
+            <div class="exp-content">
+              <strong>অনুবাদ:</strong> জলবায়ু পরিবর্তনজনিত কারণে প্রতি বছর বিশ্বের প্রধান কফি উৎপাদনকারী অঞ্চলগুলোতে অতিরিক্ত দিনের তীব্র তাপপ্রবাহ চলছে, যা কফি উৎপাদন হুমকির মুখে ফেলছে এবং কফির দাম বৃদ্ধিতে অবদান রাখছে। একটি বিশ্লেষণে দেখা গেছে যে, ২০২১ থেকে ২০২৫ সালের মধ্যে বৈশ্বিক কফি উৎপাদনের প্রায় পুরোটাই প্রতিনিধিত্বকারী ২৫টি দেশে প্রতি বছর গড়ে ৪৭ দিন অতিরিক্ত ক্ষতিকর তাপমাত্রা বিদ্যমান ছিল।
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="5" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৫</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">a) ড্যাশ, হাইফেন ও কোলন ব্যবহারের নিয়ম লিখুন।<br>b) উদাহরণসহ অনুসর্গ, যোজক ও আবেগ শব্দের পরিচয় দিন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-5')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-5" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>a) যতিচিহ্নের নিয়ম:</strong><br>
+• <strong>ড্যাশ (—):</strong> যৌগিক ও মিশ্র বাক্যে পৃথক ভাবাপন্ন দুই বা ততোধিক বাক্যের সমন্বয় বা ব্যঞ্জনা প্রকাশে ব্যবহৃত হয়। যেমন: তিনি—আমাদের সবার প্রিয় শিক্ষক—আগামীকাল অবসর নেবেন।<br>
+• <strong>হাইফেন (-):</strong> সমাসবদ্ধ বা সমজাতীয় একাধিক পদকে যুক্ত করতে শব্দ সংযোগ চিহ্ন হিসেবে ব্যবহৃত হয়। যেমন: বাংলাদেশ নদ-নদীর দেশ।<br>
+• <strong>কোলন (:):</strong> একটি অপূর্ণ বাক্যের পর দৃষ্টান্ত বা ব্যাখ্যার অবতারণা করতে কোলন ব্যবহৃত হয়। যেমন: সভায় সিদ্ধান্ত হলো: এক মাস পর নতুন সভাপতি নির্বাচন হবে।</p>
+<p><strong>b) ব্যাকরণিক শব্দশ্রেণি:</strong><br>
+• <strong>অনুসর্গ:</strong> যে শব্দগুলো কখনো স্বাধীন পদরূপে আবার কখনো বিভক্তির ন্যায় বাক্যে ব্যবহৃত হয়ে অর্থ প্রকাশে সাহায্য করে। যেমন: তোমার <em>চেয়ে</em> আমি বড়।<br>
+• <strong>যোজক:</strong> যে শব্দ একটি বাক্যের সাথে অন্য বাক্য বা পদের সংযোজন, বিয়োজন বা সংকোচন ঘটায়। যেমন: আমি গান গাইব <em>ও</em> তুমি নাচবে।<br>
+• <strong>আবেগ শব্দ:</strong> মনের হর্ষ, বিষাদ, বিস্ময় বা ক্রোধ প্রকাশক শব্দ। যেমন: <em>হাঁ</em>, আমাদের জিততেই হবে!</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="6" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৬</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ২০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Write an essay on the following topic using the hints given below: "Local Government in Bangladesh". [Hints: Introduction - Importance of Local Government - History of Local Government - The Present States of Local Government - Conclusion]</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-6')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-6" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>Introduction:</strong> Local government is an essential part of the administrative system of Bangladesh. It refers to the institutions that operate at the grassroots level to manage local affairs and ensure development. These bodies work closely with the people and play a vital role in delivering public services, maintaining law and order, and implementing government policies.</p>
+<p><strong>Importance of Local Government:</strong> The importance of local government lies in its direct connection with the people. It ensures that local needs and problems are addressed quickly and efficiently. Through institutions like Union Parishad, Upazila Parishad, Municipality, and City Corporation, citizens can participate in decision-making processes. It also reduces the administrative burden on the central government and promotes balanced rural development.</p>
+<p><strong>History of Local Government:</strong> The history of local government in South Asia is deeply rooted in ancient village Panchayats and Mughal parganas. However, its modern formal framework was initiated during the British colonial period through Lord Ripon's 1882 resolution and the 1885 Bengal Local Self-Government Act. After 1971, Bangladesh institutionalized a three-tier local administrative structure under Constitutional mandate.</p>
+<p><strong>The Present States of Local Government:</strong> At present, local government in Bangladesh is driving massive infrastructure, digital e-services, and social welfare programs. However, challenges like inadequate financial autonomy, excessive reliance on central budget allocations, and shortage of skilled manpower persist.</p>
+<p><strong>Conclusion:</strong> Strengthening local bodies through fiscal decentralization and transparent governance is critical for achieving sustainable national growth.</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="7" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৭</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Write a letter to the manager of an online shop complaining to replace an electric rice cooker with a new one.</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-7')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-7" class="ans-drawer">
+            <div class="exp-content">
+              <p>05 May, 2016<br>
+The Manager<br>
+Smart Online Shop<br>
+smartonlineshop@gmail.com</p>
+<p><strong>Subject: Request for replacement of a defective electric rice cooker (Order No: 234576)</strong></p>
+<p>Dear Sir,<br>
+I am writing to formally report an issue with an electric rice cooker I recently purchased from your online store and to request a full replacement.</p>
+<p>On 02 May, 2016, I placed an order for a Miyako 3-in-1 Double Pot Rice Cooker (Order Number: 234576). The parcel was delivered to my address on 03 May, 2016. However, upon unboxing and testing, I discovered that the internal heating element fails to operate. As the product was delivered defective and remains well within the 7-day replacement warranty period, I request you to arrange a replacement unit at your earliest convenience. I have attached the original invoice and warranty slip for your reference.</p>
+<p>Sincerely,<br>
+Md. Feroz Ahamed<br>
+mdferozahamed@gmail.com</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="8" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৮</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Read the following passage carefully and answer the questions in your own words:<br>"Ethics and safety are central to civil engineering practice. Engineers are responsible for ensuring that structures meet safety standards and regulations. Negligence or unethical decisions can lead to structural failures, causing loss of life and property. Therefore, civil engineers must prioritize integrity, transparency and accountability in all stages of a project. Ethical engineering builds public trust and ensures sustainable development."<br>a) What qualities should civil engineers prioritize?<br>b) How does ethical engineering benefit society?<br>c) What consequence may result from negligence?<br>d) At which stages should ethics be maintained?<br>e) Give a suitable title of the passage.</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-8')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-8" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>a)</strong> Civil engineers should prioritize integrity, transparency, and accountability.<br>
+<strong>b)</strong> Ethical engineering protects public life and property by ensuring structural safety, building public confidence, and fostering sustainable socio-economic development.<br>
+<strong>c)</strong> Negligence or unethical choices can lead to catastrophic structural collapse, leading to tragic loss of human lives and severe damage to infrastructure.<br>
+<strong>d)</strong> Ethics must be strictly maintained across all stages of an engineering project, from design and procurement to construction and supervision.<br>
+<strong>e)</strong> Suitable Title: <em>"The Paramount Importance of Ethics and Safety in Civil Engineering"</em>.</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="9" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৯</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Fill in the blanks and rewrite the following as directed:<br>a) His grandmother looked after him. (Make it passive)<br>b) Five miles (be) a long distance. (Use the right form of verb)<br>c) It was long since I (visit) my brother last. (Use the right form of verb)<br>d) I cut the mango by a knife. (Correct the sentence)<br>e) Make sentences using the pair of words: "affect and effect".<br>f) The police is investigating the matter. (Correct the sentence)<br>g) I, and not my friends, are to blame. (Correct the sentence)<br>h) He was accused ___ a crime which he did not commit. (Use appropriate preposition)<br>i) Do you adhere ___ any special political opinions? (Use appropriate preposition)<br>j) The student was exempted ___ paying his fees. (Use appropriate preposition)</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-9')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-9" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>নং</th><th>নির্দেশনা</th><th>সঠিক উত্তর</th></tr></thead>
+<tbody>
+<tr><td>a</td><td>Passive voice</td><td>He was looked after by his grandmother.</td></tr>
+<tr><td>b</td><td>Right form of verb</td><td>Five miles <strong>is</strong> a long distance.</td></tr>
+<tr><td>c</td><td>Right form of verb</td><td>It was long since I <strong>had visited</strong> my brother last.</td></tr>
+<tr><td>d</td><td>Sentence correction</td><td>I cut the mango <strong>with</strong> a knife.</td></tr>
+<tr><td>e</td><td>Pair of words</td><td><strong>Affect:</strong> The harsh drought will affect the yield.<br><strong>Effect:</strong> The medicine had an immediate healing effect.</td></tr>
+<tr><td>f</td><td>Sentence correction</td><td>The police <strong>are</strong> investigating the matter.</td></tr>
+<tr><td>g</td><td>Sentence correction</td><td>I and not my friends, <strong>am</strong> to blame.</td></tr>
+<tr><td>h</td><td>Appropriate preposition</td><td>He was accused <strong>of</strong> a crime which he did not commit.</td></tr>
+<tr><td>i</td><td>Appropriate preposition</td><td>Do you adhere <strong>to</strong> any special political opinions?</td></tr>
+<tr><td>j</td><td>Appropriate preposition</td><td>The student was exempted <strong>from</strong> paying his fees.</td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="10" data-subject="সাধারণ জ্ঞান" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১০</span>
+            <span class="q-meta-tag">সাধারণ জ্ঞান</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">সাধারণ জ্ঞান</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">বাংলাদেশের উপকূলীয় অঞ্চলের জলবায়ু পরিবর্তনের প্রভাব এবং টেকসই অভিযোজন কৌশল লিখুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-10')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-10" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>উপকূলীয় অঞ্চলে জলবায়ু পরিবর্তনের প্রধান প্রভাবসমূহ:</strong></p>
+<div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>ক্র.নং</th><th>প্রভাবের ক্ষেত্র</th><th>বিশদ বিবরণ</th></tr></thead>
+<tbody>
+<tr><td>০১</td><td>লবণাক্ততা বৃদ্ধি</td><td>মাটি ও সুপেয় পানিতে লবণাক্ততা বেড়ে যাওয়ায় কৃষিজ উৎপাদন হ্রাস এবং স্বাস্থ্যঝুঁকি বাড়ছে।</td></tr>
+<tr><td>০২</td><td>সমুদ্রপৃষ্ঠের উচ্চতা বৃদ্ধি</td><td>২০৫০ সাল নাগাদ সমুদ্রপৃষ্ঠের উচ্চতা বৃদ্ধির ফলে উপকূলীয় নিম্নাঞ্চল প্লাবিত হওয়ার আশঙ্কা।</td></tr>
+<tr><td>০৩</td><td>ঘূর্ণিঝড় ও দুর্যোগের তীব্রতা</td><td>আইলা, সিডর ও রিমালের মতো বিধ্বংসী ঘূর্ণিঝড়ে উপকূলীয় বেড়িবাঁধ ও জনপদ ক্ষতিগ্রস্ত হচ্ছে।</td></tr>
+<tr><td>০৪</td><td>নদীভাঙন ও ভূমিহীনতা</td><td>তীব্র স্রোত ও জোয়ারে উপকূলীয় ভূখণ্ড নদীগর্ভে বিলীন হয়ে অভ্যন্তরীণ বাস্তুচ্যুতি সৃষ্টি হচ্ছে।</td></tr>
+<tr><td>০৫</td><td>স্বাস্থ্য ঝুঁকি</td><td>লবণাক্ত পানির আধিক্যে নারীদের প্রজনন স্বাস্থ্য সমস্যা ও উচ্চ রক্তচাপের প্রাদুর্ভাব বাড়ছে।</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>টেকসই অভিযোজন কৌশলসমূহ:</strong><br>
+১. <strong>কৃষি অভিযোজন:</strong> লবণাক্ততা ও জলমগ্নতা সহিষ্ণু ধানের জাত (যেমন: ব্রি ধান-৪৭, ৬৭) চাষ সম্প্রসারণ।<br>
+২. <strong>অবকাঠামোগত উন্নয়ন:</strong> শক্তিশালী টেকসই বেড়িবাঁধ ও আধুনিক বহুমুখী সাইক্লোন শেল্টার নির্মাণ।<br>
+৩. <strong>প্রাকৃতিক সুরক্ষা:</strong> সুন্দরবন ও উপকূলীয় সবুজ বেষ্টনী (ম্যানগ্রোভ বনায়ন) সংরক্ষণ।<br>
+৪. <strong>সুপেয় পানি ব্যবস্থাপনা:</strong> বৃষ্টির পানি সংরক্ষণ (Rainwater Harvesting) ও সৌরবিদ্যুৎচালিত ডিস্যালিনেশন প্ল্যান্ট স্থাপন।<br>
+৫. <strong>বিকল্প জীবিকা:</strong> খাঁচায় মাছ চাষ, কাঁকড়া মোটাতাজাকরণ ও ভাসমান ধাপ চাষের সুযোগ তৈরি।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="11" data-subject="বিজ্ঞান ও প্রযুক্তি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১১</span>
+            <span class="q-meta-tag">বিজ্ঞান ও প্রযুক্তি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বিজ্ঞান ও প্রযুক্তি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">বাংলাদেশের নবায়নযোগ্য জ্বালানিসমূহ কী কী? এদেশের প্রেক্ষাপটে নবায়নযোগ্য জ্বালানির সম্ভাবনা সংক্ষেপে লিখুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-11')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-11" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>নবায়নযোগ্য জ্বালানি:</strong> যে শক্তির উৎস বারবার ব্যবহারের পরও নিঃশেষিত হয় না এবং পরিবেশের ভারসাম্য রক্ষা করে, তাকে নবায়নযোগ্য জ্বালানি বলে। প্রধান উৎসগুলো হলো: সৌরশক্তি, বায়ুশক্তি, জলবিদ্যুৎ, বায়োগ্যাস, বায়োমাস, ভূতাপীয় শক্তি ও সমুদ্র তরঙ্গ শক্তি।</p>
+<div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>উৎস</th><th>বর্তমান অবস্থা ও সম্ভাবনা</th></tr></thead>
+<tbody>
+<tr><td>সৌরশক্তি (Solar Power)</td><td>সবচেয়ে সম্ভাবনাময় উৎস। বর্তমানে ছাদভিত্তিক সোলার (Rooftop Solar), সোলার ইরিগেশন ও সোলার পার্কের মাধ্যমে জাতীয় গ্রিডে বিদ্যুৎ যোগ হচ্ছে।</td></tr>
+<tr><td>বায়ুশক্তি (Wind Energy)</td><td>উপকূলীয় অঞ্চল বিশেষ করে ফেনী ও কুতুবদিয়া এবং কক্সবাজারে বায়ুবিদ্যুৎ কেন্দ্র চালু হয়েছে।</td></tr>
+<tr><td>জলবিদ্যুৎ (Hydropower)</td><td>কর্ণফুলী জলবিদ্যুৎ কেন্দ্র থেকে ২৩০ মেগাওয়াট বিদ্যুৎ উৎপাদিত হচ্ছে। ভৌগোলিক কারণে বড় পরিসরে নতুন কেন্দ্রের সুযোগ সীমিত।</td></tr>
+<tr><td>বায়োগ্যাস ও বায়োমাস</td><td>গ্রামাঞ্চলে হাঁস-মুরগি ও গবাদিপশুর বর্জ্য হতে বিদ্যুৎ ও রান্নার গ্যাস উৎপাদনের অপার সম্ভাবনা রয়েছে।</td></tr>
+<tr><td>বর্জ্য থেকে বিদ্যুৎ (Waste-to-Energy)</td><td>মেগাসিটির কঠিন বর্জ্য ব্যবস্থাপনার মাধ্যমে ইনসিনারেটর ভিত্তিক বিদ্যুৎ প্ল্যান্টের উদ্যোগ গৃহীত হয়েছে।</td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="12" data-subject="বাংলাদেশ বিষয়াবলি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১২</span>
+            <span class="q-meta-tag">বাংলাদেশ বিষয়াবলি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলাদেশ বিষয়াবলি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">সংবিধানের সংজ্ঞা কী? বাংলাদেশের সংবিধানে মোট কতটি অনুচ্ছেদ রয়েছে?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-12')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-12" class="ans-drawer">
+            <div class="exp-content">
+              <strong>সংবিধান:</strong> সংবিধান হলো একটি রাষ্ট্র পরিচালনার সর্বোচ্চ ও মৌলিক আইন। এটি রাষ্ট্রের সরকারের বিভিন্ন অঙ্গের ক্ষমতা ও দায়িত্ব নির্ধারণ করে এবং নাগরিকদের মৌলিক অধিকারের নিশ্চয়তা দেয়।<br><strong>বাংলাদেশের সংবিধান:</strong> বাংলাদেশের সংবিধানে মোট <strong>১৫৩টি</strong> অনুচ্ছেদ, ১১টি ভাগ ও ৭টি তফসিল রয়েছে।
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="13" data-subject="বাংলাদেশ বিষয়াবলি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৩</span>
+            <span class="q-meta-tag">বাংলাদেশ বিষয়াবলি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলাদেশ বিষয়াবলি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">মুক্তিযুদ্ধে ১নং সেক্টরের কমান্ডার কে ছিলেন? মুক্তিযুদ্ধে তাঁর অবদান সংক্ষেপে বর্ণনা করুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-13')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-13" class="ans-drawer">
+            <div class="exp-content">
+              মুক্তিযুদ্ধে ১নং সেক্টরের প্রথম কমান্ডার ছিলেন মেজর জিয়াউর রহমান (মার্চ থেকে জুন ১৯৭১)। পরবর্তীতে তিনি 'জেড ফোর্স' গঠন করলে ১নং সেক্টরের কমান্ডারের দায়িত্ব গ্রহণ করেন ক্যাপ্টেন রফিকুল ইসলাম। ১নং সেক্টর চট্টগ্রাম, পার্বত্য চট্টগ্রাম ও নোয়াখালী জেলার অংশ নিয়ে গঠিত ছিল। এই সেক্টর পাকিস্তান সেনাবাহিনীর বিরুদ্ধে তীব্র গেরিলা প্রতিরোধ গড়ে তোলে এবং সমুদ্র ও পার্বত্য অঞ্চলের কৌশলগত যোগাযোগ রক্ষা করতে বীরোচিত ভূমিকা পালন করে।
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="14" data-subject="প্রকৌশল সাধারণ জ্ঞান" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৪</span>
+            <span class="q-meta-tag">প্রকৌশল সাধারণ জ্ঞান</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">প্রকৌশল সাধারণ জ্ঞান</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">গ্রিন কনস্ট্রাকশন (Green Construction) এবং LEED সার্টিফিকেশন আন্তর্জাতিক মানদণ্ডসমূহ সংক্ষেপে লিখুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-14')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-14" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>গ্রিন কনস্ট্রাকশন (Green Construction):</strong> পরিবেশবান্ধব উপকরণ, জ্বালানি ও পানির সর্বোত্তম সাশ্রয়ী ব্যবহার এবং কার্বন নির্গমন হ্রাস নিশ্চিত করে ভবন নকশা ও নির্মাণের আধুনিক প্রকৌশল পদ্ধতিকে গ্রিন কনস্ট্রাকশন বলা হয়।</p>
+<p><strong>LEED সার্টিফিকেশন (Leadership in Energy and Environmental Design):</strong> এটি মার্কিন গ্রিন বিল্ডিং কাউন্সিল (USGBC) কর্তৃক প্রণীত একটি আন্তর্জাতিক মানদণ্ড। এর মূল্যায়নের প্রধান ক্ষেত্রসমূহ হলো:<br>
+১. টেকসই নির্মাণস্থল নির্বাচন (Sustainable Sites)<br>
+২. পানির দক্ষ ব্যবহার (Water Efficiency)<br>
+৩. শক্তি ও বায়ুমণ্ডল সুরক্ষা (Energy and Atmosphere)<br>
+৪. পরিবেশবান্ধব উপাদান ও সম্পদ (Materials and Resources)<br>
+৫. অভ্যন্তরীণ পরিবেশের গুণমান (Indoor Environmental Quality)<br>
+৬. উদ্ভাবনী নকশা (Innovation in Design)।<br>
+অর্জিত স্কোরের ভিত্তিতে Certified, Silver, Gold এবং সর্বোচ্চ Platinum সার্টিফিকেট প্রদান করা হয়।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="15" data-subject="বিজ্ঞান ও প্রযুক্তি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৫</span>
+            <span class="q-meta-tag">বিজ্ঞান ও প্রযুক্তি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বিজ্ঞান ও প্রযুক্তি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">চতুর্থ শিল্পবিপ্লব (4th Industrial Revolution) কী? টেকসই উন্নয়ন লক্ষ্যমাত্রা (SDG) অর্জনে এর চ্যালেঞ্জ ও সম্ভাবনাগুলো সংক্ষেপে লিখুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-15')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-15" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>চতুর্থ শিল্পবিপ্লব (4IR):</strong> কৃত্রিম বুদ্ধিমত্তা (AI), রোবোটিক্স, আইওটি (IoT), ক্লাউড কম্পিউটিং এবং সাইবার-ফিজিক্যাল সিস্টেমের সমন্বয়ে প্রচলিত উৎপাদন ব্যবস্থা ও প্রযুক্তির বৈপ্লবিক ডিজিটাল রূপান্তরকে চতুর্থ শিল্পবিপ্লব বলে।</p>
+<p><strong>SDG অর্জনে সম্ভাবনা:</strong><br>
+• স্মার্ট এগ্রিকালচার ও আইওটি ভিত্তিক সেচ নিশ্চিত করে খাদ্য নিরাপত্তা (SDG 2) অর্জন।<br>
+• টেলিমেডিসিন ও এআই ডায়াগনস্টিকসের মাধ্যমে স্বাস্থ্যসেবা (SDG 3) তৃণমূল পর্যায়ে পৌঁছানো।<br>
+• শিল্প কারখানায় অটোমেশনের মাধ্যমে শক্তি অপচয় রোধ (SDG 7 ও 12)।</p>
+<p><strong>প্রধান চ্যালেঞ্জসমূহ:</strong><br>
+• অটোমেশনের কারণে সাধারণ ও অদক্ষ শ্রমিকের কর্মসংস্থান হারানোর ঝুঁকি।<br>
+• উন্নত ও উন্নয়নশীল দেশের মধ্যে ডিজিটাল বিভাজন (Digital Divide) বৃদ্ধি।<br>
+• সাইবার নিরাপত্তা ও তথ্যের গোপনীয়তা রক্ষার ঝুঁকি।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="16" data-subject="আন্তর্জাতিক বিষয়াবলি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৬</span>
+            <span class="q-meta-tag">আন্তর্জাতিক বিষয়াবলি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">আন্তর্জাতিক বিষয়াবলি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">ফিলিস্তিন-ইসরাইলের সংকটের ঐতিহাসিক প্রেক্ষাপট উল্লেখ করে এর শান্তিপূর্ণ সমাধানের জন্য আপনার সুচিন্তিত মতামত লিখুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-16')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-16" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>ঐতিহাসিক প্রেক্ষাপট:</strong> প্রথম বিশ্বযুদ্ধের পর ব্রিটিশ ম্যান্ডেট আমলে ১৯১৭ সালের বেলফোর ঘোষণার মাধ্যমে ইহুদিদের জন্য পৃথক আবাসভূমির উদ্যোগ এই সংকটের সূচনা করে। ১৯৪৭ সালে জাতিসংঘের প্রস্তাব অনুযায়ী ফিলিস্তিনকে আরব ও ইহুদি দুই রাষ্ট্রে বিভক্ত করার পরিকল্পনা করা হয়। ১৯৪৮ সালে ইসরাইল স্বাধীনতা ঘোষণার পর আরব-ইসরাইল যুদ্ধ শুরু হয় এবং লক্ষ লক্ষ ফিলিস্তিনি বাস্তুচ্যুত হয়। ১৯৬৭ সালের ৬ দিনের যুদ্ধে ইসরাইল পশ্চিম তীর, গাজা ও পূর্ব জেরুজালেম দখল করে নেয়, যা বর্তমান সংঘাতের মূল কেন্দ্রবিন্দু।</p>
+<p><strong>শান্তিপূর্ণ সমাধানের সুচিন্তিত রূপরেখা:</strong><br>
+১. <strong>দ্বি-রাষ্ট্র সমাধান (Two-State Solution):</strong> ১৯৬৭ সালের সীমান্ত অনুযায়ী পূর্ব জেরুজালেমকে রাজধানী করে একটি স্বাধীন, সার্বভৌম ও ভৌগোলিকভাবে অবিচ্ছিন্ন ফিলিস্তিন রাষ্ট্র প্রতিষ্ঠা।<br>
+২. <strong>অবৈধ বসতি স্থাপন বন্ধ:</strong> পশ্চিম তীরে আন্তর্জাতিক আইন লঙ্ঘন করে নির্মিত সকল ইসরাইলি বসতি সম্প্রসারণ অবিলম্বে বন্ধ ও প্রত্যাহার।<br>
+৩. <strong>শরণার্থীদের অধিকার ও মানবিক সহায়তা:</strong> ফিলিস্তিনি শরণার্থীদের পুনর্বাসন ও জাতিসংঘের নিরাপত্তা পরিষদের প্রস্তাবনা বাস্তবায়ন।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="17" data-subject="বিজ্ঞান ও পরিবেশ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৭</span>
+            <span class="q-meta-tag">বিজ্ঞান ও পরিবেশ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বিজ্ঞান ও পরিবেশ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">গ্রিন হাউজ কী? পরিবেশের উপর গ্রিন হাউজের প্রভাব সংক্ষেপে উল্লেখ করুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-17')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-17" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>গ্রিন হাউজ ও গ্রিনহাউজ ইফেক্ট:</strong> গ্রিন হাউজ হলো কাচ নির্মিত ঘর যা শীতপ্রধান দেশে উদ্ভিদ চাষে তাপ ধরে রাখার জন্য ব্যবহৃত হয়। একইভাবে, পৃথিবীর বায়ুমণ্ডলে উপস্থিত কতিপয় গ্যাস সূর্যের ক্ষুদ্র তরঙ্গদৈর্ঘ্যের আলো প্রবেশ করতে দেয় কিন্তু ভূপৃষ্ঠ থেকে প্রতিফলিত দীর্ঘ তরঙ্গদৈর্ঘ্যের অবলোহিত রশ্মিকে মহাশূন্যে ফিরে যেতে বাধা দিয়ে আটকে রাখে। এই তাপ আটকে রেখে পৃথিবীর গড় তাপমাত্রা বজায় রাখার প্রাকৃতিক প্রক্রিয়াকে গ্রিন হাউজ ইফেক্ট বলে। ১৮৯৬ সালে বিজ্ঞানী স্ভান্তে আরহেনিয়াস এটি ব্যাখ্যা করেন। প্রধান গ্রিনহাউজ গ্যাসসমূহ: \(\text{CO}_2, \text{CH}_4, \text{N}_2\text{O}, \text{CFCs}, \text{O}_3\) ও জলীয়বাষ্প।</p>
+<p><strong>পরিবেশের ওপর ক্ষতিকর প্রভাব:</strong><br>
+• <strong>বৈশ্বিক উষ্ণায়ন ও হিমবাহ গলন:</strong> মেরু অঞ্চলের বরফ গলে সমুদ্রপৃষ্ঠের উচ্চতা বৃদ্ধি পেয়ে নিম্নাঞ্চল প্লাবিত হওয়া।<br>
+• <strong>চরম আবহাওয়া:</strong> অতিবৃষ্টি, আকস্মিক বন্যা, খরা ও তীব্র তাপপ্রবাহের পুনরাবৃত্তি বৃদ্ধি।<br>
+• <strong>জীববৈচিত্র্য ও বাস্তুতন্ত্র ধ্বংস:</strong> প্রবাল প্রাচীর ক্ষয় এবং কৃষি উৎপাদনের ঋতুভিত্তিক চক্র ব্যাহত হওয়া।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="18" data-subject="পরিবেশ ও অর্থনীতি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৮</span>
+            <span class="q-meta-tag">পরিবেশ ও অর্থনীতি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">পরিবেশ ও অর্থনীতি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">কার্বন ট্রেডিং বলতে কী বুঝেন? বাংলাদেশের পরিবেশ দূষণ রোধে এর গুরুত্ব এবং সম্ভাবনা সংক্ষেপে উল্লেখ করুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-18')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-18" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>কার্বন ট্রেডিং (Carbon Trading):</strong> এটি একটি আন্তর্জাতিক বাজারভিত্তিক অর্থনৈতিক ব্যবস্থা যেখানে দেশ বা প্রতিষ্ঠানসমূহের গ্রিনহাউজ গ্যাস নির্গমনের একটি নির্দিষ্ট সীমা (Emission Cap) বেঁধে দেওয়া হয়। কোনো প্রতিষ্ঠান নির্ধারিত সীমার কম কার্বন নিঃসরণ করলে উদ্বৃত্ত পরিমাণ 'কার্বন ক্রেডিট' আকারে অন্য প্রতিষ্ঠানের কাছে বিক্রয় করতে পারে। ১৯৯৭ সালের কিয়োটো প্রটোকলের অধীনে এটি প্রাতিষ্ঠানিক রূপ লাভ করে।</p>
+<p><strong>বাংলাদেশের প্রেক্ষাপটে গুরুত্ব ও সম্ভাবনা:</strong><br>
+১. <strong>সবুজ বিনিয়োগ বৃদ্ধি:</strong> সৌরবিদ্যুৎ পার্ক, রুফটপ সোলার ও জ্বালানি সাশ্রয়ী শিল্প স্থাপন করে আন্তর্জাতিক কার্বন বাজার থেকে বৈদেশিক মুদ্রা আয় করা সম্ভব।<br>
+২. <strong>ম্যানগ্রোভ ও বনায়ন সুরক্ষা:</strong> সুন্দরবন ও উপকূলীয় ম্যানগ্রোভ বনায়ন সংরক্ষণ করে 'ব্লু কার্বন ক্রেডিট' বা কার্বন শোষক তহবিল আহরণ করা যায়।<br>
+৩. <strong>শিল্প আধুনিকায়ন:</strong> টেক্সটাইল ও স্টিল মিলগুলোতে জ্বালানি-দক্ষ আধুনিক মেশিনারিজ স্থাপনে অর্থনৈতিক প্রণোদনা পাওয়া যায়।</p>
+            </div>
+          </div>
+        </article>
+        
+      </main>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>PSC & IBA Written Job Solution Master Repository • নির্ভুল ও প্রামাণ্য ই-বুক সংস্করণ</p>
+      <p style="margin-top:0.25rem;">উৎস: মূল পরীক্ষার প্রশ্নপত্র ও অফিশিয়াল সমাধান সংগ্রহ</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      document.getElementById('themeToggleBtn').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    }
+
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.addEventListener('DOMContentLoaded', () => {
+          const btn = document.getElementById('themeToggleBtn');
+          if (btn) btn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        });
+      }
+    })();
+
+    function toggleDrawer(id) {
+      const drawer = document.getElementById(id);
+      if (!drawer) return;
+      const isVisible = drawer.classList.contains('open');
+      drawer.classList.toggle('open');
+      const toggleBtn = drawer.previousElementSibling;
+      if (toggleBtn) {
+        const icon = toggleBtn.querySelector('.toggle-icon');
+        if (icon) icon.textContent = isVisible ? '▼' : '▲';
+      }
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const subject = btn.getAttribute('data-subject');
+        document.querySelectorAll('.q-card').forEach(card => {
+          if (subject === 'all' || card.getAttribute('data-subject') === subject) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    let baseFontSize = 100;
+    function adjustFontSize(dir) {
+      if (dir === 0) baseFontSize = 100;
+      else baseFontSize += dir * 8;
+      if (baseFontSize < 80) baseFontSize = 80;
+      if (baseFontSize > 130) baseFontSize = 130;
+      document.documentElement.style.fontSize = baseFontSize + '%';
+    }
+  </script>
+</body>
+</html>
