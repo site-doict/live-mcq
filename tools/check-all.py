@@ -170,6 +170,48 @@ def check_indexes_integrity():
     return errors
 
 
+
+def check_portal_integrity():
+    errors = []
+    portal_path = os.path.join(ROOT_DIR, 'index.html')
+    if not os.path.exists(portal_path):
+        errors.append("PORTAL: index.html not found!")
+        return errors
+
+    try:
+        with open(portal_path, 'r', encoding='utf-8', errors='ignore') as f:
+            content = f.read()
+    except Exception as e:
+        errors.append(f"PORTAL: Cannot read index.html: {e}")
+        return errors
+
+    # 1. Check for 2 tracks
+    required_tracks = ['cadreBookSection', 'nonCadreBookSection']
+    for t in required_tracks:
+        if f'id="{t}"' not in content and f"id='{t}'" not in content:
+            errors.append(f"PORTAL: index.html is missing required track container #{t}")
+
+    # 2. Check for 3 steps in both tracks (6 panels)
+    required_panels = [
+        'panelCadrePrelim', 'panelCadreWritten', 'panelCadreViva',
+        'panelNonCadrePrelim', 'panelNonCadreWritten', 'panelNonCadreViva'
+    ]
+    for p in required_panels:
+        if f'id="{p}"' not in content and f"id='{p}'" not in content:
+            errors.append(f"PORTAL: index.html is missing required step panel #{p}")
+
+    # 3. Check for zero disallowed inline styles in index.html (only CSS variables like --p allowed)
+    tag_regex = re.compile(r'<([a-z0-9-]+)[^>]*style=([\'"])(.*?)\2[^>]*>', re.IGNORECASE)
+    for m in tag_regex.finditer(content):
+        tag = m.group(1)
+        val = m.group(3).strip()
+        parts = [p.strip() for p in val.split(';') if p.strip()]
+        non_custom = [p for p in parts if not p.startswith('--')]
+        if non_custom:
+            errors.append(f"PORTAL: index.html contains disallowed inline style in <{tag}>: {val}")
+
+    return errors
+
 def main():
     print("=" * 60)
     print("BCS Static E-Book Library - Static Verification Check")
@@ -178,8 +220,9 @@ def main():
     math_errs = check_math_integrity()
     ans_errs = check_answer_integrity()
     idx_errs = check_indexes_integrity()
+    portal_errs = check_portal_integrity()
 
-    total_errors = len(math_errs) + len(ans_errs) + len(idx_errs)
+    total_errors = len(math_errs) + len(ans_errs) + len(idx_errs) + len(portal_errs)
 
     print(f"\n1. Math Data & Delimiter Check: {len(math_errs)} issues")
     for err in math_errs[:10]:
@@ -198,6 +241,12 @@ def main():
         print(f"   [FAIL] {err}")
     if len(idx_errs) > 10:
         print(f"   ... and {len(idx_errs) - 10} more index issues")
+
+    print(f"\n4. Portal & Step Architecture Check: {len(portal_errs)} issues")
+    for err in portal_errs[:10]:
+        print(f"   [FAIL] {err}")
+    if len(portal_errs) > 10:
+        print(f"   ... and {len(portal_errs) - 10} more portal issues")
 
     print("\n" + "=" * 60)
     if total_errors == 0:
