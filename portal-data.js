@@ -29,7 +29,7 @@
         step: 'written',
         badge: 'WR',
         title: 'বিসিএস লিখিত বাংলা (১ম ও ২য় পত্র)',
-        meta: 'পূর্ণমান: ২০০ নম্বর · ব্যাকরণ, ভাবসম্প্রসারণ, সারমর্ম ও প্রবন্ধ',
+        meta: 'বিষয়ভিত্তিক রচনামূলক ও ব্যাকরণ',
         href: '',
         progressId: 'cadreWrittenBangla',
         status: 'soon',
@@ -43,7 +43,7 @@
         step: 'written',
         badge: 'WR',
         title: 'বিসিএস লিখিত English (Paper I & II)',
-        meta: 'পূর্ণমান: ২০০ নম্বর · Comprehension, Essay, Translation',
+        meta: 'Comprehension, Essay, Translation & Grammar',
         href: '',
         progressId: 'cadreWrittenEnglish',
         status: 'soon',
@@ -57,7 +57,7 @@
         step: 'written',
         badge: 'WR',
         title: 'বাংলাদেশ ও আন্তর্জাতিক বিষয়াবলি',
-        meta: 'পূর্ণমান: ৩০০ নম্বর · সংবিধান, পররাষ্ট্রনীতি ও অর্থনীতি',
+        meta: 'সংবিধান, পররাষ্ট্রনীতি, অর্থনীতি ও আন্তর্জাতিক বিষয়াবলি',
         href: '',
         progressId: 'cadreWrittenAffairs',
         status: 'soon',
@@ -71,7 +71,7 @@
         step: 'written',
         badge: 'WR',
         title: 'গাণিতিক যুক্তি ও সাধারণ বিজ্ঞান',
-        meta: 'পূর্ণমান: ২০০ নম্বর · সমীকরণ, জ্যামিতি, পদার্থ ও তথ্যপ্রযুক্তি',
+        meta: 'গাণিতিক যুক্তি ও সাধারণ বিজ্ঞান',
         href: '',
         progressId: 'cadreWrittenMathSci',
         status: 'soon',
@@ -91,7 +91,7 @@
         step: 'viva',
         badge: 'VV',
         title: 'বিসিএস ভাইভা অভিজ্ঞতা ও প্রশ্ন সম্ভার',
-        meta: 'পূর্ণমান: ২০০ নম্বর · বোর্ডভিত্তিক মূল্যায়ন, পরিস্থিতিগত বিচার',
+        meta: 'বোর্ডভিত্তিক মূল্যায়ন ও পরিস্থিতিগত বিচার',
         href: '',
         progressId: 'cadreVivaExp',
         status: 'soon',
@@ -112,7 +112,7 @@
         badge: 'WR',
         title: 'লিখিত প্রশ্ন সমাধান: পিএসসি ও অন্যান্য প্রতিষ্ঠান',
         fullTitle: 'আইবিএ, বুয়েট ও পিএসসি লিখিত জব সলিউশন',
-        meta: '১৫৮টি সম্পূর্ণ লিখিত পরীক্ষা · ৩,০৬০টি প্রামাণ্য প্রশ্ন · পৃষ্ঠা ১–৮৭২',
+        meta: '১৫৮টি সম্পূর্ণ লিখিত পরীক্ষা · ৩,০৬০টি প্রামাণ্য প্রশ্ন',
         href: 'PSC & IBA Written Job Solution/ch-001-psc-ad-2022.html',
         indexHref: 'PSC & IBA Written Job Solution/index.html',
         progressId: 'writtenJobSol',
@@ -171,3 +171,4 @@
   window.PORTAL_DATA = PORTAL_REGISTRY;
 
 })(typeof window !== 'undefined' ? window : this);
+
