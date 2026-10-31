@@ -210,6 +210,49 @@ def check_portal_integrity():
         if non_custom:
             errors.append(f"PORTAL: index.html contains disallowed inline style in <{tag}>: {val}")
 
+    # 4. Check for card nesting (No nested cards allowed)
+    open_count = 0
+    max_depth = 0
+    for tag_match in re.finditer(r'<(/?article)[^>]*>', content):
+        tname = tag_match.group(1).lower()
+        if tname == 'article':
+            open_count += 1
+            if open_count > max_depth:
+                max_depth = open_count
+        elif tname == '/article':
+            open_count -= 1
+    if max_depth > 1:
+        errors.append(f"PORTAL: Detected nested <article> cards! Max depth={max_depth}")
+
+    # 5. Check progress bar on every active subject card
+    card_blocks = re.findall(r"""<article[^>]*class=["'][^"']*master-subject-card[^"']*["'][^>]*>([\s\S]*?)</article>""", content)
+    for i, cb in enumerate(card_blocks):
+        if 'aria-disabled="true"' in cb or 'btn-disabled' in cb:
+            continue
+        if 'class="master-card-progress"' not in cb or 'class="prog-pct"' not in cb:
+            title_m = re.search(r'<h4[^>]*class=[\'"]master-card-title[\'"][^>]*>([\s\S]*?)</h4>', cb)
+            c_title = title_m.group(1).strip() if title_m else f"Card #{i+1}"
+            errors.append(f"PORTAL: Card '{c_title}' is missing standard progress bar!")
+
+    # 6. Check for emojis in index.html (Strict Zero Emoji Rule)
+    emoji_regex = re.compile(
+        r'[\U0001F300-\U0001F64F\U0001F680-\U0001F6FF\U0001F900-\U0001F9FF'
+        r'\U0001FA00-\U0001FA6F\U0001FA70-\U0001FAFF\u2600-\u26FF\u2700-\u27BF'
+        r'\u2300-\u23FF\u2B50\u23F0-\u23F3\u26A1]'
+    )
+    emoji_found = emoji_regex.findall(content)
+    if emoji_found:
+        errors.append(f"PORTAL: Found {len(emoji_found)} emojis in index.html! Use inline SVGs only.")
+
+    # 7. Check for dead links on cards
+    card_links = re.findall(r"""<article[^>]*class=["'][^"']*master-subject-card[^"']*["'][^>]*>[\s\S]*?href=["']([^"']+\.html)["']""", content)
+    for cl in card_links:
+        if cl.startswith('http') or cl.startswith('#'):
+            continue
+        target_path = os.path.normpath(os.path.join(ROOT_DIR, cl.split('#')[0]))
+        if not os.path.exists(target_path):
+            errors.append(f"PORTAL: Dead link in card: {cl} (file does not exist on disk)")
+
     return errors
 
 def main():

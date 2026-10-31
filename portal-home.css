@@ -87,7 +87,7 @@ body {
 /* Layout Container */
 .portal-container {
   width: 100%;
-  max-width: 1140px;
+  max-width: 1120px;
   margin: 0 auto;
   padding: 0 1.25rem;
   box-sizing: border-box;
@@ -650,12 +650,24 @@ body {
   align-self: flex-start;
 }
 .portal-status-live {
-  background: rgba(16, 185, 129, 0.12);
-  color: #10b981;
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid rgba(6, 95, 70, 0.2);
+}
+[data-theme="dark"] .portal-status-live {
+  background: rgba(16, 185, 129, 0.25);
+  color: #34d399;
+  border: 1px solid rgba(52, 211, 153, 0.35);
 }
 .portal-status-upcoming {
-  background: rgba(100, 116, 139, 0.12);
-  color: #64748b;
+  background: #fef3c7;
+  color: #78350f;
+  border: 1px solid rgba(120, 53, 15, 0.2);
+}
+[data-theme="dark"] .portal-status-upcoming {
+  background: rgba(245, 158, 11, 0.25);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.35);
 }
 
 /* ─── 5. Step Panels ─── */
@@ -868,14 +880,20 @@ body {
   height: 32px;
   min-width: 32px;
   border-radius: var(--portal-radius-pill);
-  background: var(--portal-blue-subtle);
-  color: var(--portal-blue);
+  background: #dbeafe;
+  color: #1e40af;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
   font-size: 0.88rem;
-  border: 1px solid var(--portal-blue-border);
+  border: 1px solid rgba(30, 64, 175, 0.25);
+}
+
+[data-theme="dark"] .master-card-badge {
+  background: rgba(59, 91, 219, 0.28);
+  color: #93c5fd;
+  border-color: rgba(147, 197, 253, 0.35);
 }
 
 .master-card-title {
@@ -1673,4 +1691,137 @@ body {
   border-radius: 9px;
   font-size: 0.88rem;
   font-weight: 700;
+}
+
+
+/* ─── Floating Revision Mode FAB (Position: Fixed, Bottom-Right) ─── */
+.ebk-mode-fab {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 20px !important;
+  background: var(--portal-blue, #3b5bdb) !important;
+  color: #ffffff !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+  border-radius: var(--portal-radius-pill, 9999px) !important;
+  padding: 10px 18px !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  cursor: pointer !important;
+  z-index: 99990 !important;
+  box-shadow: 0 4px 16px rgba(59, 91, 219, 0.35) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
+  font-family: 'Noto Sans Bengali', sans-serif !important;
+  text-decoration: none !important;
+}
+
+.ebk-mode-fab:hover {
+  background: var(--portal-blue-hover, #2f4ac0) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 22px rgba(59, 91, 219, 0.45) !important;
+}
+
+.ebk-mode-fab:focus-visible {
+  outline: 3px solid #60a5fa !important;
+  outline-offset: 2px !important;
+}
+
+.ebk-mode-fab svg {
+  width: 18px !important;
+  height: 18px !important;
+  stroke: currentColor !important;
+  flex-shrink: 0 !important;
+}
+
+@media (max-width: 640px) {
+  .ebk-mode-fab {
+    bottom: 20px !important;
+    right: 14px !important;
+    padding: 8px 14px !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+
+/* ─── Extra Resources Divider in Prelim ─── */
+.portal-resource-divider {
+  grid-column: 1 / -1;
+  margin: 1.5rem 0 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--portal-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.portal-resource-divider-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.portal-resource-pill {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  background: var(--portal-blue-subtle);
+  color: var(--portal-blue);
+  font-weight: 700;
+  border-radius: var(--portal-radius-pill);
+}
+
+.portal-resource-title {
+  font-weight: 700;
+  color: var(--portal-text-main);
+  font-size: 0.95rem;
+}
+
+.portal-resource-subtext {
+  font-size: 0.8rem;
+  color: var(--portal-text-muted);
+}
+
+
+/* ─── WCAG AA / AAA High Contrast Overrides ─── */
+.portal-syllabus-source {
+  font-size: 0.78rem;
+  color: #475569 !important;
+  font-weight: 500;
+}
+[data-theme="dark"] .portal-syllabus-source {
+  color: #cbd5e1 !important;
+}
+
+.portal-footer-copy {
+  color: #94a3b8 !important;
+}
+
+.portal-syllabus-row-num {
+  font-weight: 700;
+  color: #1e40af;
+}
+.portal-syllabus-marks {
+  font-weight: 700;
+  color: #1e40af;
+}
+[data-theme="dark"] .portal-syllabus-row-num {
+  color: #93c5fd !important;
+}
+[data-theme="dark"] .portal-syllabus-marks {
+  color: #93c5fd !important;
+}
+
+[data-theme="dark"] .portal-step-marks-chip {
+  background: rgba(59, 91, 219, 0.25) !important;
+  color: #93c5fd !important;
+  border-color: rgba(147, 197, 253, 0.3) !important;
+}
+
+[data-theme="dark"] .portal-btn-primary,
+[data-theme="dark"] .portal-exam-pill {
+  background: #3b5bdb !important;
+  color: #ffffff !important;
 }
