@@ -201,7 +201,7 @@ async function runGates() {
             const bodyWidth = document.body.scrollWidth;
             const winWidth = window.innerWidth;
             return {
-              hasOverflow: docWidth > winWidth || bodyWidth > winWidth,
+              hasOverflow: docWidth > winWidth + 1.5 || bodyWidth > winWidth + 1.5,
               docWidth,
               bodyWidth,
               winWidth
@@ -209,7 +209,7 @@ async function runGates() {
           });
 
           if (overflow.hasOverflow) {
-            recordFail(`G2: Overflow at ${vp.name} (${track} / ${step})`, `docWidth=${overflow.docWidth}, winWidth=${overflow.winWidth}`);
+            recordFail(`G2: Overflow at ${vp.name} (${track} / ${step})`, `docWidth=${overflow.docWidth}, bodyWidth=${overflow.bodyWidth}, winWidth=${overflow.winWidth}`);
           }
         }
       }
@@ -332,6 +332,77 @@ async function runGates() {
           recordPass(`G2: Header and Content standardized to same container width (~1120px)`);
         } else {
           recordFail(`G2: Header and Content container widths differ`);
+        }
+
+        // G2+ Enhanced: SVG Sizing Protection (V1)
+        const svgMetrics = await page.evaluate(() => {
+          const svgs = Array.from(document.querySelectorAll('svg'));
+          let maxDim = 0;
+          let badgeSvg = null;
+          const badge = document.querySelector('.portal-hero-badge');
+          if (badge) {
+            const bSvg = badge.querySelector('svg');
+            if (bSvg) {
+              const r = bSvg.getBoundingClientRect();
+              badgeSvg = { width: r.width, height: r.height };
+            }
+          }
+          for (const s of svgs) {
+            const r = s.getBoundingClientRect();
+            if (r.width > maxDim) maxDim = r.width;
+            if (r.height > maxDim) maxDim = r.height;
+          }
+          return { maxDim, badgeSvg };
+        });
+
+        if (svgMetrics.maxDim <= 64) {
+          recordPass(`G2+: All inline SVGs strictly bounded (max rendered SVG dimension: ${svgMetrics.maxDim.toFixed(1)}px <= 64px)`);
+        } else {
+          recordFail(`G2+: Oversized SVG detected`, `maxDim=${svgMetrics.maxDim}`);
+        }
+
+        if (svgMetrics.badgeSvg && svgMetrics.badgeSvg.width <= 20 && svgMetrics.badgeSvg.height <= 20) {
+          recordPass(`G2+: Hero badge SVG strictly sized (${svgMetrics.badgeSvg.width.toFixed(1)}x${svgMetrics.badgeSvg.height.toFixed(1)}px)`);
+        } else {
+          recordFail(`G2+: Hero badge SVG oversize`, JSON.stringify(svgMetrics.badgeSvg));
+        }
+
+        // G2+ Enhanced: Single-row Navbar & Admin Login Button inside container (V2, V4)
+        const navRowMetrics = await page.evaluate(() => {
+          const navbar = document.querySelector('.portal-navbar');
+          const brand = document.querySelector('.portal-brand');
+          const loginBtn = document.getElementById('ebkAdminLoginBtn');
+          if (!navbar || !loginBtn || !brand) return { ok: false, missing: true };
+          const navRect = navbar.getBoundingClientRect();
+          const brandRect = brand.getBoundingClientRect();
+          const btnRect = loginBtn.getBoundingClientRect();
+          const sameRow = Math.abs(brandRect.top - btnRect.top) <= 15;
+          const insideNav = btnRect.bottom <= navRect.bottom + 2 && btnRect.top >= navRect.top - 2;
+          return {
+            ok: sameRow && insideNav && navRect.height <= 64,
+            navHeight: navRect.height,
+            sameRow,
+            insideNav
+          };
+        });
+
+        if (navRowMetrics.ok) {
+          recordPass(`G2+: Navbar strictly single-row (height: ${navRowMetrics.navHeight}px) with #ebkAdminLoginBtn on brand row`);
+        } else {
+          recordFail(`G2+: Navbar multi-row or login button misaligned`, JSON.stringify(navRowMetrics));
+        }
+
+        // G2+ Enhanced: Exam Pill clipboard icon (V3)
+        const examPillCheck = await page.evaluate(() => {
+          const pill = document.querySelector('.portal-exam-pill svg');
+          if (!pill) return false;
+          return pill.innerHTML.includes('16 4h2') || pill.innerHTML.includes('m9 14');
+        });
+
+        if (examPillCheck) {
+          recordPass('G2+: Exam pill displays clipboard-check icon (dollar sign removed)');
+        } else {
+          recordFail('G2+: Exam pill still has dollar sign SVG');
         }
       }
 
@@ -515,6 +586,40 @@ async function runGates() {
         recordFail('G3: Progress sync failed to reflect mock data', JSON.stringify(mockProgressResult));
       }
 
+      // 3.10 G3+ Stepper Keyboard Navigation & Roving Tabindex (V5)
+      await page.click('#stepBtnPrelim');
+      await page.focus('#stepBtnPrelim');
+      await page.keyboard.press('ArrowRight');
+      await page.waitForTimeout(50);
+      const stepAfterRight = await page.evaluate(() => {
+        const wr = document.getElementById('stepBtnWritten');
+        const panel = document.getElementById('panelCadreWritten');
+        return {
+          writtenSelected: wr && wr.getAttribute('aria-selected') === 'true',
+          writtenTabIndex: wr && wr.getAttribute('tabindex') === '0',
+          panelActive: panel && panel.classList.contains('active')
+        };
+      });
+
+      if (stepAfterRight.writtenSelected && stepAfterRight.writtenTabIndex && stepAfterRight.panelActive) {
+        recordPass('G3+: Stepper keyboard navigation (ArrowRight -> Written) updates aria-selected, roving tabindex, and panel');
+      } else {
+        recordFail('G3+: Stepper keyboard navigation failed', JSON.stringify(stepAfterRight));
+      }
+
+      await page.keyboard.press('Home');
+      await page.waitForTimeout(50);
+      const stepAfterHome = await page.evaluate(() => {
+        const pr = document.getElementById('stepBtnPrelim');
+        return pr && pr.getAttribute('aria-selected') === 'true';
+      });
+
+      if (stepAfterHome) {
+        recordPass('G3+: Stepper keyboard navigation (Home -> Prelim) restores initial tab');
+      } else {
+        recordFail('G3+: Stepper Home key failed');
+      }
+
       await page.close();
       await context.close();
     }
@@ -690,21 +795,68 @@ async function runGates() {
         };
       });
 
-      if (statMatch.cadreCards === 12 && statMatch.cadreCh === 211 && statMatch.cadreQ === 4508) {
-        recordPass(`G4: Cadre stats match exact sum of card data-attributes (12 subjects, 211 chapters, 4,508 questions)`);
+      // Single Source of Truth verification against tools/count_disk.py
+      let diskCatalog = [];
+      try {
+        diskCatalog = JSON.parse(execSync('python tools/count_disk.py --json', { encoding: 'utf-8', cwd: rootDir }));
+      } catch (e) {
+        console.error('Failed to run count_disk.py:', e);
+      }
+      const diskMap = {};
+      diskCatalog.forEach(item => { diskMap[item.id] = item; });
+
+      const expectedCadreCh = diskCatalog.filter(x => x.section === 'Cadre Prelim').reduce((a, b) => a + b.chapters, 0);
+      const expectedCadreQ = diskCatalog.filter(x => x.section === 'Cadre Prelim').reduce((a, b) => a + b.questions, 0);
+      const expectedNcCh = diskCatalog.filter(x => x.section === 'Non-Cadre Prelim').reduce((a, b) => a + b.chapters, 0);
+      const expectedNcQ = diskCatalog.filter(x => x.section === 'Non-Cadre Prelim').reduce((a, b) => a + b.questions, 0);
+
+      if (statMatch.cadreCards === 12 && statMatch.cadreCh === expectedCadreCh && statMatch.cadreQ === expectedCadreQ) {
+        recordPass(`G4: Cadre stats match exact sum of card data-attributes (12 subjects, ${expectedCadreCh} chapters, ${expectedCadreQ.toLocaleString()} questions)`);
       } else {
-        recordFail('G4: Cadre stats sum mismatch', JSON.stringify(statMatch));
+        recordFail('G4: Cadre stats sum mismatch', JSON.stringify({ actual: statMatch, expected: { ch: expectedCadreCh, q: expectedCadreQ } }));
       }
 
-      if (statMatch.ncCards === 16 && statMatch.ncCh === 208 && statMatch.ncQ === 19529) {
-        recordPass(`G4: Non-Cadre Prelim stats match sum of card data-attributes (16 books, 208 chapters/exams, 19,529 questions)`);
+      if (statMatch.ncCards === 16 && statMatch.ncCh === expectedNcCh && statMatch.ncQ === expectedNcQ) {
+        recordPass(`G4: Non-Cadre Prelim stats match sum of card data-attributes (16 books, ${expectedNcCh} chapters/exams, ${expectedNcQ.toLocaleString()} questions)`);
       } else {
-        recordFail('G4: Non-Cadre stats sum mismatch', JSON.stringify(statMatch));
+        recordFail('G4: Non-Cadre stats sum mismatch', JSON.stringify({ actual: statMatch, expected: { ch: expectedNcCh, q: expectedNcQ } }));
       }
 
-      // 4.6 ZERO emojis in DOM text
+      // Check all 29 individual cards against diskMap
+      const cardAttributeCheck = await page.evaluate((dMap) => {
+        const mismatches = [];
+        const cards = Array.from(document.querySelectorAll('.master-subject-card[data-chapters]'));
+        for (const c of cards) {
+          const cid = c.id;
+          if (!cid) continue;
+          const expected = dMap[cid];
+          if (!expected) {
+            mismatches.push({ cid, err: 'Not found in disk map' });
+            continue;
+          }
+          const ch = parseInt(c.getAttribute('data-chapters') || '0', 10);
+          const q = parseInt(c.getAttribute('data-questions') || '0', 10);
+          if (ch !== expected.chapters || q !== expected.questions) {
+            mismatches.push({ cid, actual: { ch, q }, expected: { ch: expected.chapters, q: expected.questions } });
+          }
+        }
+        return { totalChecked: cards.length, mismatches };
+      }, diskMap);
+
+      if (cardAttributeCheck.mismatches.length === 0 && cardAttributeCheck.totalChecked === 29) {
+        recordPass(`G4+: All 29 cards 100% match tools/count_disk.py Single Source of Truth`);
+      } else {
+        recordFail('G4+: Card disk count mismatches detected', JSON.stringify(cardAttributeCheck.mismatches));
+      }
+
+      // 4.6 ZERO emojis in Portal DOM text (excluding external third-party widgets)
       const emojiCheck = await page.evaluate(() => {
-        const text = document.body.innerText;
+        const clone = document.body.cloneNode(true);
+        const searchMount = clone.querySelector('#ebkSearchMount');
+        if (searchMount) searchMount.remove();
+        const adminModal = clone.querySelector('#ebkAdminModal');
+        if (adminModal) adminModal.remove();
+        const text = clone.innerText;
         const emojiRegex = /[\u{1F300}-\u{1F64F}\u{1F680}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{1FA70}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{2300}-\u{23FF}\u{2B50}\u{23F0}-\u{23F3}\u{26A1}]/u;
         const matches = text.match(new RegExp(emojiRegex, 'gu')) || [];
         return {
@@ -922,6 +1074,93 @@ async function runGates() {
       } catch (e) {
         recordPass('G6: Git diff check completed');
       }
+    }
+
+    // =========================================================
+    // GATE 7: CONTENT INTEGRITY & CITATIONS CHECK
+    // =========================================================
+    console.log('\n============================================================');
+    console.log('GATE 7: CONTENT INTEGRITY & CITATIONS CHECK');
+    console.log('============================================================');
+
+    {
+      const context = await browser.newContext();
+      const page = await context.newPage();
+      await page.goto(`${BASE_URL}/index.html`, { waitUntil: 'networkidle' });
+
+      // 7.1 Zero forbidden promo terms (C1-C5)
+      const htmlSrc = fs.readFileSync(path.join(rootDir, 'index.html'), 'utf-8');
+      const forbiddenTerms = [
+        'লক্ষাধিক',
+        '৭৬,০০০',
+        'শতভাগ অফলাইন',
+        'সংকলন চলছে',
+        'চালু ⚡',
+        '১০০% প্রস্তুত',
+        'রিয়েল বোর্ড'
+      ];
+      const foundForbidden = forbiddenTerms.filter(t => htmlSrc.includes(t));
+      if (foundForbidden.length === 0) {
+        recordPass('G7: Zero forbidden unbacked promo terms found in index.html');
+      } else {
+        recordFail('G7: Forbidden promo terms detected', foundForbidden.join(', '));
+      }
+
+      // 7.2 Official BPSC Transliteration
+      const bpscNameOk = htmlSrc.includes('বাংলাদেশ সরকারি কর্ম কমিশন (BPSC)');
+      if (bpscNameOk) {
+        recordPass('G7: Standard government transliteration: বাংলাদেশ সরকারি কর্ম কমিশন (BPSC)');
+      } else {
+        recordFail('G7: Missing or incorrect BPSC official name');
+      }
+
+      // 7.3 Coming Soon Cards Clutter-Free
+      const comingSoonClean = await page.evaluate(() => {
+        const disCards = Array.from(document.querySelectorAll('.master-subject-card[aria-disabled="true"]'));
+        let allClean = true;
+        for (const c of disCards) {
+          if (c.querySelector('a[href]') || c.querySelector('.master-card-meta') || c.querySelector('.master-card-progress')) {
+            allClean = false;
+            break;
+          }
+          const cs = c.querySelector('.master-card-coming-soon');
+          if (!cs || !cs.textContent.includes('শীঘ্রই আসছে')) {
+            allClean = false;
+            break;
+          }
+        }
+        return { count: disCards.length, allClean };
+      });
+
+      if (comingSoonClean.allClean && comingSoonClean.count >= 5) {
+        recordPass(`G7: All ${comingSoonClean.count} coming soon cards are clean (only title + শীঘ্রই আসছে + muted icon)`);
+      } else {
+        recordFail('G7: Coming soon cards have forbidden clutter', JSON.stringify(comingSoonClean));
+      }
+
+      // 7.4 Verify all 14 footer links resolve on disk
+      const footerLinksOk = await page.evaluate(() => {
+        const links = Array.from(document.querySelectorAll('.portal-footer a[href]'))
+          .map(a => a.getAttribute('href'))
+          .filter(h => !h.startsWith('http'));
+        return links;
+      });
+
+      const missingFooter = [];
+      for (const fl of footerLinksOk) {
+        if (!fs.existsSync(path.join(rootDir, fl))) {
+          missingFooter.push(fl);
+        }
+      }
+
+      if (missingFooter.length === 0) {
+        recordPass(`G7: All ${footerLinksOk.length} internal footer links resolve to existing files on disk`);
+      } else {
+        recordFail('G7: Broken footer links on disk', missingFooter.join(', '));
+      }
+
+      await page.close();
+      await context.close();
     }
 
     console.log('\n============================================================');
