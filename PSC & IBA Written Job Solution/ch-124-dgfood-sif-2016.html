@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>খাদ্য অধিদপ্তর — উপ-খাদ্য পরিদর্শক | প্রামাণ্য সমাধান</title>
+  <link rel="stylesheet" href="css/paper-textures.css">
+  <link rel="stylesheet" href="css/bangla-fonts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Kalpurush&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\(', right: '\\)', display: false}]});">
+  </script>
+  <style>
+    :root {
+      --bg-page: #fdfbf7;
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: rgba(226, 232, 240, 0.8);
+      --accent-primary: #0284c7;
+      --accent-indigo: #6366f1;
+      --accent-emerald: #10b981;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #0f172a;
+      --bg-surface: rgba(30, 41, 59, 0.85);
+      --bg-card: rgba(30, 41, 59, 0.82);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: rgba(51, 65, 85, 0.8);
+      --accent-primary: #38bdf8;
+      --accent-indigo: #818cf8;
+      --accent-emerald: #34d399;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.65;
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Top Nav */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+    }
+    .back-btn {
+      text-decoration: none;
+      color: var(--accent-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .back-btn:hover { text-decoration: underline; }
+    .nav-controls { display: flex; align-items: center; gap: 0.75rem; }
+    .theme-btn, .font-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .theme-btn:hover, .font-btn:hover {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Chapter Header */
+    .ch-header {
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .ch-title {
+      font-size: 1.65rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+    }
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.05rem;
+      display: block;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 0.25rem;
+    }
+    .ch-meta-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .ch-badge {
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--accent-primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+
+    /* Sketchnotes Section */
+    .sk-container {
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+    .sk-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .sk-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.15rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .sk-box h4 {
+      font-size: 1.05rem;
+      color: var(--accent-indigo);
+      margin-bottom: 0.65rem;
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 0.35rem;
+    }
+    .sk-box ul { list-style-type: none; }
+    .sk-box li {
+      font-size: 0.92rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+    .sk-box li strong { color: var(--text-main); }
+
+    /* Part 2: Question Section */
+    .part2-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .part2-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .subject-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .tab-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.4rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Question Cards */
+    .q-card {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .q-header {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.85rem;
+    }
+    .q-num {
+      font-weight: 700;
+      color: var(--accent-primary);
+      font-size: 1.05rem;
+    }
+    .q-meta-tag {
+      background: rgba(2, 132, 199, 0.08);
+      color: var(--accent-primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .q-body {
+      margin-bottom: 1rem;
+    }
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* Answer Drawer */
+    .ans-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(2, 132, 199, 0.06);
+      border: 1px solid rgba(2, 132, 199, 0.15);
+      color: var(--accent-primary);
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+    .ans-toggle:hover { background: rgba(2, 132, 199, 0.12); }
+    .ans-drawer {
+      display: none;
+      padding: 1.25rem;
+      margin-top: 0.75rem;
+      background: rgba(0, 0, 0, 0.02);
+      border-left: 3px solid var(--accent-primary);
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    }
+    [data-theme="dark"] .ans-drawer { background: rgba(255, 255, 255, 0.02); }
+    .ans-drawer.open { display: block; }
+    .exp-content {
+      font-size: 0.98rem;
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+    .exp-content p { margin-bottom: 0.75rem; }
+    .exp-content ul, .exp-content ol { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+    .exp-content li { margin-bottom: 0.35rem; }
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.92rem;
+    }
+    .bcs-table th, .bcs-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+    }
+    .bcs-table th {
+      background: rgba(2, 132, 199, 0.08);
+      font-weight: 600;
+      color: var(--accent-primary);
+    }
+
+    /* Typography Protection */
+    .q-card, .q-card *, .q-text, .q-text *, .ans-drawer, .ans-drawer *,
+    .bcs-table, .bcs-table * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body class="paper-lined-notebook font-rayhan">
+  <div class="container">
+    <!-- Top Navigation -->
+    <header class="top-nav">
+      <a href="index.html" class="back-btn">
+        <span>←</span> সূচিপত্রে ফিরে যান
+      </a>
+      <div class="nav-controls">
+        <button class="font-btn" onclick="adjustFontSize(-1)">A-</button>
+        <button class="font-btn" onclick="adjustFontSize(0)">A</button>
+        <button class="font-btn" onclick="adjustFontSize(1)">A+</button>
+        <button class="theme-btn" onclick="toggleTheme()" id="themeToggleBtn">🌙</button>
+      </div>
+    </header>
+
+    <!-- Chapter Header -->
+    <section class="ch-header">
+      <h1 class="ch-title font-rayhan">
+        খাদ্য অধিদপ্তর — উপ-খাদ্য পরিদর্শক
+        <span class="ch-en">Directorate General of Food (DG Food) - Sub-Inspector of Food 2016</span>
+      </h1>
+      <div class="ch-meta-wrap">
+        <span class="ch-badge">📋 পরীক্ষা নং: ১২৪</span>
+        <span class="ch-badge">🏛️ BUET</span>
+        <span class="ch-badge">📅 তারিখ: ০৮.০৫.২০১৬</span>
+        <span class="ch-badge">⏱️ সময়: ৯০ মিনিট</span>
+        <span class="ch-badge">🎯 পূর্ণমান: ১০০</span>
+        <span class="ch-badge">🔢 মোট প্রশ্ন: ১৭টি</span>
+        <span class="ch-badge">📄 পৃষ্ঠা: ৭৪১–৭৪৩</span>
+      </div>
+    </section>
+
+    
+    <section class="sk-part1">
+      <div class="sk-badge">Part 1: Authentic Revision Notes &amp; Formulas</div>
+      <h3 class="sk-title font-rayhan">খাদ্য অধিদপ্তর — উপ-খাদ্য পরিদর্শক প্রামাণ্য রিভিশন নোট ও সূত্রাবলি</h3>
+      <p class="sk-desc font-rayhan">
+        এই অধ্যায়ের মূল পরীক্ষার প্রশ্ন ও বিশদ সমাধান থেকে সংকলিত হ্যান্ডনোট, গাণিতিক সূত্র ও সারসংক্ষেপ:
+      </p>
+      <div class="sk-grid">
+        
+        <div class="sk-box">
+          <h4 class="font-rayhan">বীজগণিত ও সমান্তর ধারার সূত্রাবলি</h4>
+          <div>• <strong>উৎপাদকে বিশ্লেষণ কৌশল:</strong> \(x^2 + x - (a+1)(a+2) = (x - a - 1)(x + a + 2)\)।<br>• <strong>সমান্তর ধারার \(n\) তম পদ:</strong> \(T_n = a + (n-1)d\)।<br>• ১ম মিটারে ২০ টাকা এবং পরবর্তী প্রতি মিটারে ২ টাকা বৃদ্ধিতে ৬০০তম মিটারের খরচ: \(20 + (600-1)\times 2 = 20 + 1198 = 1,218\) টাকা।</div>
+        </div>
+
+        <div class="sk-box">
+          <h4 class="font-rayhan">ব্যাকরণ ও সাধারণ জ্ঞান কুইক ফ্যাক্টস</h4>
+          <div>• <strong>নিত্য মূর্ধন্য 'ণ':</strong> স্বভাবতই 'ণ' হয় এমন শব্দ: তৃণ, বিপণি, গৌণ, নিপুণ, নিক্বণ।<br>• <strong>শব্দ ভাণ্ডার:</strong> উৎস অনুসারে শব্দ ৫ প্রকার (তৎসম, অর্ধ-তৎসম, তদ্ভব, দেশি, বিদেশি)।<br>• <strong>খাদ্য নিরাপত্তা (Food Security):</strong> ৩টি স্তম্ভ — প্রাপ্যতা (Availability), প্রবেশগম্যতা (Access) এবং খাদ্য উপযোগিতা (Utilization)।<br>• <strong>সংবিধান ৭০ অনুচ্ছেদ:</strong> সংসদ সদস্যদের দলের বিরুদ্ধে ভোটদানে আসন শূন্য হওয়া (ফ্লোর ক্রসিং)।</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PART 2: Written Examination Question Engine -->
+    <section>
+      <div class="part2-header">
+        <div class="part2-title">
+          <span>📝</span> Part 2: বিগত পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক ও সমাধান
+        </div>
+      </div>
+
+      <!-- Subject Filter Tabs -->
+      <nav class="subject-tabs">
+        <button class="tab-btn active" data-subject="all">সকল বিষয় (১৭)</button>
+        <button class="tab-btn" data-subject="বাংলা">বাংলা (৫)</button>
+        <button class="tab-btn" data-subject="বাংলা সাহিত্য">বাংলা সাহিত্য (১)</button>
+        <button class="tab-btn" data-subject="ইংরেজি">ইংরেজি (৬)</button>
+        <button class="tab-btn" data-subject="গণিত">গণিত (৪)</button>
+        <button class="tab-btn" data-subject="সাধারণ জ্ঞান">সাধারণ জ্ঞান (১)</button>
+      </nav>
+
+      <!-- Question Cards List -->
+      <main id="questionContainer">
+        
+        <article class="q-card" data-qid="1" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">বাগধারা (অর্থসহ বাক্য গঠন করুন):<br>a) ময়ূর ছাড়া কার্তিক<br>b) দুধ-ঘিয়ের শ্রাদ্ধ করা<br>c) গয়ংগচ্ছ<br>d) আঁচা-আঁচি<br>e) রাঙা মুলো</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-1')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-1" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>বাগধারা</th><th>অর্থ</th><th>বাক্য প্রয়োগ</th></tr></thead>
+<tbody>
+<tr><td>a) ময়ূর ছাড়া কার্তিক</td><td>রূপবান পুরুষ</td><td>পাড়ার নতুন ছেলেটিকে দেখে মনে হয়, যেন ময়ূর ছাড়া কার্তিক।</td></tr>
+<tr><td>b) দুধ-ঘিয়ের শ্রাদ্ধ করা</td><td>অপব্যয় / অর্থের অপচয়</td><td>বাবার কষ্টে উপার্জিত টাকা দিয়ে সে দুধ-ঘিয়ে শ্রাদ্ধ করছে।</td></tr>
+<tr><td>c) গয়ংগচ্ছ</td><td>ঢিলেমি / আলসেমি</td><td>এমন গয়ংগচ্ছ ভাব করলে তো কাজ শেষ হবে না, দ্রুত করো।</td></tr>
+<tr><td>d) আঁচা-আঁচি</td><td>পরস্পরের মনের ভাব / রেষারেষি</td><td>ভাইবোনদের মধ্যে আঁচা-আঁচি ভালো থাকলে সংসারের সুখ বজায় থাকে।</td></tr>
+<tr><td>e) রাঙা মুলো</td><td>প্রিয়দর্শন কিন্তু গুণহীন</td><td>ছেলেটি দেখতে খুব সুন্দর হলেও আসলে আস্ত একটা রাঙা মুলো, কাজের কিছু পারে না।</td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="2" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ২</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">নিচের শব্দগুলো হতে স্বভাবতই মূর্ধন্য 'ণ' (নিত্য মূর্ধন্য 'ণ') হয়, এমন শব্দগুলো বেছে লিখুন: তৃণ, লুণ্ঠন, বিপণি, ধরন, গৌণ, রমণীয়, প্রণিপাত, নিপুণ, প্রবণ, নিক্বণ।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-2')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-2" class="ans-drawer">
+            <div class="exp-content">
+              <strong>নিত্য মূর্ধন্য 'ণ' যুক্ত শব্দসমূহ:</strong> বিপণি, গৌণ, নিপুণ, নিক্বণ, তৃণ।<br><em>(নোট: ন-ত্ব বিধানের নিয়মের বাইরে যেসব শব্দে স্বভাবতই মূর্ধন্য 'ণ' বসে, সেগুলোকে নিত্য মূর্ধন্য 'ণ' বলা হয়)।</em>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="3" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৩</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">উৎস অনুসারে বাংলা ভাষার শব্দকে কয়ভাগে ভাগ করা হয়েছে ও কী কী?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-3')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-3" class="ans-drawer">
+            <div class="exp-content">
+              উৎস অনুসারে বাংলা ভাষার শব্দকে <strong>৫ ভাগে</strong> ভাগ করা হয়েছে। যথা:<br>১. তৎসম শব্দ (যেমন: চন্দ্র, সূর্য, নক্ষত্র)<br>২. অর্ধ-তৎসম শব্দ (যেমন: জোছনা, গিন্নি, নেমন্তন্ন)<br>৩. তদ্ভব শব্দ (যেমন: হাত, চামার)<br>৪. দেশি শব্দ (যেমন: কুলা, গঞ্জ, ডাব)<br>৫. বিদেশি শব্দ (যেমন: চেয়ার, টেবিল, কলম)।
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="4" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৪</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">শব্দগুলোর ব্যাসবাক্যসহ সমাস লিখুন:<br>a) আয়-ব্যয়<br>b) জ্ঞানবৃক্ষ<br>c) চৌরাস্তা<br>d) লাঠালাঠি<br>e) প্রাগৈতিহাসিক</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-4')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-4" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>সমস্তপদ</th><th>ব্যাসবাক্য</th><th>সমাসের নাম</th></tr></thead>
+<tbody>
+<tr><td>a) আয়-ব্যয়</td><td>আয় ও ব্যয়</td><td>দ্বন্দ্ব সমাস</td></tr>
+<tr><td>b) জ্ঞানবৃক্ষ</td><td>জ্ঞান রূপ বৃক্ষ</td><td>রূপক কর্মধারয় সমাস</td></tr>
+<tr><td>c) চৌরাস্তা</td><td>চৌ (চার) রাস্তার সমাহার</td><td>দ্বিগু সমাস</td></tr>
+<tr><td>d) লাঠালাঠি</td><td>লাঠিতে লাঠিতে যে যুদ্ধ</td><td>ব্যতিহার বহুব্রীহি সমাস</td></tr>
+<tr><td>e) প্রাগৈতিহাসিক</td><td>ইতিহাসের প্রাক</td><td>ষষ্ঠী তৎপুরুষ সমাস</td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="5" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৫</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">শব্দগুলোর সঠিক বানান লিখুন:<br>a) সমিপবর্তীনি<br>b) বুৎপত্তি<br>c) দুর্দশাগ্রস্থ<br>d) উর্দ্ধমুখি<br>e) নির্নিমেশ</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-5')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-5" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>অশুদ্ধ বানান</th><th>শুদ্ধ প্রমিত রূপ</th></tr></thead>
+<tbody>
+<tr><td>a) সমিপবর্তীনি</td><td><strong>সমীপবর্তিনী</strong></td></tr>
+<tr><td>b) বুৎপত্তি</td><td><strong>ব্যুৎপত্তি</strong></td></tr>
+<tr><td>c) দুর্দশাগ্রস্থ</td><td><strong>দুর্দশাগ্রস্ত</strong></td></tr>
+<tr><td>d) উর্দ্ধমুখি</td><td><strong>ঊর্ধ্বমুখী</strong></td></tr>
+<tr><td>e) নির্নিমেশ</td><td><strong>নির্নিমেষ</strong></td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="6" data-subject="বাংলা সাহিত্য" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৬</span>
+            <span class="q-meta-tag">বাংলা সাহিত্য</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা সাহিত্য</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">নিম্নলিখিত প্রশ্নগুলোর সংক্ষিপ্ত উত্তর লিখুন:<br>a) হরিনাথ মজুমদার সম্পাদিত পত্রিকার নাম কী?<br>b) 'মহাশ্মশান' কাব্যের বিষয়বস্তু কী?<br>c) 'যদ্যপি আমার গুরু' প্রবন্ধটির লেখকের নাম লিখুন।<br>d) 'আগুনপাখি' উপন্যাসটির রচয়িতা কে?<br>e) 'ছিন্নপত্র' রবীন্দ্রনাথ ঠাকুর এর কোন ধরনের সাহিত্যকর্ম?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-6')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-6" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>a)</strong> কাঙাল হরিনাথ মজুমদার সম্পাদিত বিখ্যাত পত্রিকার নাম <strong>'গ্রামবার্তা প্রকাশিকা'</strong> (১৮৬৩)।<br>
+<strong>b)</strong> মহাকবি কায়কোবাদের 'মহাশ্মশান' (১৯০৪) মহাকাব্যের মূল বিষয়বস্তু হলো ১৭৬১ সালের ঐতিহাসিক <strong>তৃতীয় পানিপথের যুদ্ধ</strong>।<br>
+<strong>c)</strong> 'যদ্যপি আমার গুরু' গ্রন্থটির লেখক প্রাবন্ধিক <strong>আহমদ ছফা</strong> (অধ্যাপক আবদুর রাজ্জাকের সান্নিধ্য নিয়ে রচিত)।<br>
+<strong>d)</strong> দেশভাগের পটভূমিতে রচিত 'আগুনপাখি' উপন্যাসের রচয়িতা কথাশিল্পী <strong>হাসান আজিজুল হক</strong>।<br>
+<strong>e)</strong> 'ছিন্নপত্র' রবীন্দ্রনাথ ঠাকুরের রচিত একটি অমূল্য <strong>চিঠিপত্র বা পত্রসংকলন</strong> সাহিত্যকর্ম (মোট ১৫৩টি পত্রের সংকলন)।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="7" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৭</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Answer the following English questions:<br>a) What is the meaning of 'Sporadic'?<br>b) What is the verb form of 'Danger'?<br>c) What would be the right antonym for 'initiative'?<br>d) What is the noun form of the word 'laugh'?<br>e) Who wrote 'Paradise Lost'?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-7')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-7" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>a)</strong> Meaning of 'Sporadic': <strong>বিক্ষিপ্ত / অনিয়মিত (Occasional / Scattered / Infrequent)</strong>.<br>
+<strong>b)</strong> Verb form of 'Danger': <strong>Endanger</strong>.<br>
+<strong>c)</strong> Antonym for 'initiative': <strong>Indifference / Inaction / Lethargy</strong>.<br>
+<strong>d)</strong> Noun form of 'laugh': <strong>Laughter</strong>.<br>
+<strong>e)</strong> 'Paradise Lost' was written by the epic poet <strong>John Milton</strong> (1667).</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="8" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৮</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Fill in the Blanks:<br>a) The man died ___ overeating.<br>b) Arif ___ left before I came.<br>c) She ___ saving every penny she could for months.<br>d) ___ Nelson is a British warship.<br>e) He was dressed ___ a black suit.</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-8')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-8" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>নং</th><th>বাক্য</th><th>সঠিক শব্দ</th><th>বাক্যের অর্থ</th></tr></thead>
+<tbody>
+<tr><td>a</td><td>The man died ___ overeating.</td><td><strong>from</strong></td><td>লোকটি অতিরিক্ত খাওয়ার কারণে মারা গেল।</td></tr>
+<tr><td>b</td><td>Arif ___ left before I came.</td><td><strong>had</strong></td><td>আমি আসার পূর্বেই আরিফ চলে গিয়েছিল।</td></tr>
+<tr><td>c</td><td>She ___ saving every penny she could for months.</td><td><strong>had been</strong></td><td>সে কয়েক মাস ধরে যথাসম্ভব অর্থ সঞ্চয় করছিল।</td></tr>
+<tr><td>d</td><td>___ Nelson is a British warship.</td><td><strong>The</strong></td><td>নেলসন একটি ব্রিটিশ যুদ্ধজাহাজ।</td></tr>
+<tr><td>e</td><td>He was dressed ___ a black suit.</td><td><strong>in</strong></td><td>তিনি একটি কালো স্যুট পরিহিত ছিলেন।</td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="9" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৯</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">ইংরেজিতে অনুবাদ করুন:<br>a) কিছু করার আগে ভালো করে ভেবে নাও।<br>b) রোম একদিনে তৈরি হয়নি।<br>c) সে চাকরি থেকে পদত্যাগ করল।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-9')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-9" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>a)</strong> Look before you leap.<br>
+<strong>b)</strong> Rome was not built in a day.<br>
+<strong>c)</strong> He resigned from his job.</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="10" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১০</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Make sentences with meaning:<br>a) Black and blue<br>b) At a stretch<br>c) Toil and moil<br>d) To no purpose<br>e) Take into account</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-10')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-10" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>Idiom</th><th>Meaning</th><th>Sentence</th></tr></thead>
+<tbody>
+<tr><td>a) Black and blue</td><td>নির্মমভাবে প্রহার করা</td><td>The thieves were beaten black and blue by the angry mob.</td></tr>
+<tr><td>b) At a stretch</td><td>একনাগাড়ে</td><td>He can study for six hours at a stretch without feeling exhausted.</td></tr>
+<tr><td>c) Toil and moil</td><td>কঠোর পরিশ্রম</td><td>Farmers toil and moil day and night to feed the nation.</td></tr>
+<tr><td>d) To no purpose</td><td>উদ্দেশ্যহীনভাবে / অনর্থক</td><td>He spent hours in arguments to no purpose.</td></tr>
+<tr><td>e) Take into account</td><td>হিসেবে আনা / বিবেচনায় নেওয়া</td><td>The committee should take all relevant factors into account.</td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="11" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১১</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Change the sentences as directed:<br>a) He annoyed me. (Passive voice)<br>b) Who will do the work? (Passive voice)<br>c) The Padma is a very big river. (Exclamatory sentence)<br>d) He is poor but honest. (Simple sentence)<br>e) He said, "What a fool I am." (Indirect speech)</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-11')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-11" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>নং</th><th>মূল বাক্য ও নির্দেশনা</th><th>রূপান্তরিত বাক্য</th></tr></thead>
+<tbody>
+<tr><td>a</td><td>He annoyed me. (Passive)</td><td><strong>I was annoyed with him.</strong></td></tr>
+<tr><td>b</td><td>Who will do the work? (Passive)</td><td><strong>By whom will the work be done?</strong></td></tr>
+<tr><td>c</td><td>The Padma is a very big river. (Exclamatory)</td><td><strong>What a big river the Padma is!</strong></td></tr>
+<tr><td>d</td><td>He is poor but honest. (Simple)</td><td><strong>In spite of being poor, he is honest.</strong></td></tr>
+<tr><td>e</td><td>He said, "What a fool I am." (Indirect)</td><td><strong>He exclaimed with sorrow that he was a great fool.</strong></td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="12" data-subject="ইংরেজি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১২</span>
+            <span class="q-meta-tag">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">ইংরেজি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Write a paragraph on "Food Security".</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-12')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-12" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>Food Security:</strong> Food security refers to a situation where all people, at all times, have physical, social, and economic access to sufficient, safe, and nutritious food that meets their dietary needs and food preferences for an active and healthy life. It rests on three vital pillars: food availability, access to food, and food utilization. In Bangladesh, achieving sustainable food security has always been a top national priority due to its large population and limited arable land. While the country has made remarkable strides in food grain production, challenges such as climate vulnerability, natural disasters, post-harvest losses, and price volatility continue to threaten vulnerable segments of society. Ensuring resilient agricultural techniques, stable supply chains, and social safety net programs are indispensable to maintaining long-term food sovereignty.</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="13" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৩</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">উৎপাদকে বিশ্লেষণ করুন: \(x^2 + x - (a + 1)(a + 2)\)</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-13')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-13" class="ans-drawer">
+            <div class="exp-content">
+              <p>প্রদত্ত রাশি, \(x^2 + x - (a + 1)(a + 2)\)</p>
+<p>\(= x^2 + x - (a + 1)(a + 1 + 1)\)</p>
+<p>ধরি, \((a + 1) = p\)</p>
+<p>অতএব, রাশিটি দাঁড়ায় \(x^2 + x - p(p + 1)\)<br>
+\(= x^2 + x - p^2 - p\)<br>
+\(= (x^2 - p^2) + (x - p)\)<br>
+\(= (x + p)(x - p) + 1(x - p)\)<br>
+\(= (x - p)(x + p + 1)\)</p>
+<p>এখন \(p = a + 1\) মান বসিয়ে পাই,<br>
+\(= \{x - (a + 1)\}\{x + (a + 1) + 1\}\)<br>
+\(= (x - a - 1)(x + a + 2)\)</p>
+<p><strong>উত্তর:</strong> \((x - a - 1)(x + a + 2)\)</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="14" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৪</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">৬০০ মিটার রাস্তা নির্মাণ করতে ১ম মিটারের জন্য ২০ টাকা এবং পরবর্তী প্রত্যেক মিটারের জন্য অতিরিক্ত ২ টাকা করে খরচ হয়। রাস্তাটির শেষ মিটারের জন্য নির্মাণ খরচ কত হবে?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-14')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-14" class="ans-drawer">
+            <div class="exp-content">
+              <p>প্রথম মিটারের খরচ \(a = ২০\) টাকা।<br>
+পরবর্তী প্রতি মিটারে অতিরিক্ত খরচ বাড়ে \(d = ২\) টাকা।<br>
+এটি একটি সমান্তর ধারা: \(২০ + ২২ + ২৪ + \dots\dots\)</p>
+<p>আমরা জানি, সমান্তর ধারার \(n\) তম পদ \(= a + (n - 1)d\)</p>
+<p>অতএব, শেষ মিটার অর্থাৎ ৬০০ তম মিটারের নির্মাণ খরচ হবে:<br>
+\(= ২০ + (৬০০ - ১) \times ২\)<br>
+\(= ২০ + (৫৯৯ \times ২)\)<br>
+\(= ২০ + ১,১৯৮\)<br>
+\(= ১,২১৮\) টাকা।</p>
+<p><strong>উত্তর:</strong> ১,২১৮ টাকা।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="15" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৫</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">একজন ফল বিক্রেতার ৫% ফল পঁচে গেল এবং আরও ৫% ফল পরিবহনের সময় নষ্ট হলো। বাকি ফল শতকরা কত লাভে বিক্রয় করলে মোটের উপর তার ২০% লাভ হবে?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-15')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-15" class="ans-drawer">
+            <div class="exp-content">
+              <p>মোট নষ্ট ফলের পরিমাণ \(= ৫\% + ৫\% = ১০\%\)<br>
+অতএব, অবশিষ্ট ভালো ফলের পরিমাণ \(= (১০০ - ১০)\% = ৯০\%\)</p>
+<p>ধরি, মোট ফলের ক্রয়মূল্য ১০০ টাকা।<br>
+মোটের উপর ২০% লাভ করতে হলে বিক্রয়মূল্য হতে হবে \(= ১২০\) টাকা।</p>
+<p>অর্থাৎ, অবশিষ্ট ৯০ টাকার ফল বিক্রি করতে হবে ১২০ টাকায়।<br>
+\(\therefore\) ১ টাকার ফল বিক্রি করতে হবে \(= \frac{১২০}{৯০}\) টাকায়।<br>
+\(\therefore\) ১০০ টাকার ফল বিক্রি করতে হবে \(= \frac{১২০ \times ১০০}{৯০} = \frac{৪০০}{৩} = ১৩৩.\frac{১}{৩}\) টাকায়।</p>
+<p>অতএব, বাকি ফলের ক্ষেত্রে শতকরা লাভের হার \(= ১৩৩.\frac{১}{৩}\% - ১০০\% = ৩৩.\frac{১}{৩}\% = ৩৩.৩৩\%\)।</p>
+<p><strong>উত্তর:</strong> \(৩৩.\frac{১}{৩}\% বা ৩৩.৩৩\%\)।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="16" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৬</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">১৫ বছর পরে পিতার বয়স পুত্রের বয়সের দ্বিগুণ হবে। কিন্তু ৫ বছর পূর্বে পিতার বয়স পুত্রের বয়সের ৪ গুণ ছিল। তাদের বর্তমান বয়স কত?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-16')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-16" class="ans-drawer">
+            <div class="exp-content">
+              <p>ধরি, পুত্রের বর্তমান বয়স \(x\) বছর এবং পিতার বর্তমান বয়স \(y\) বছর।</p>
+<p>১ম শর্তমতে (১৫ বছর পর):<br>
+\(y + ১৫ = ২(x + ১৫)\)<br>
+\(\Rightarrow y + ১৫ = ২x + ৩০\)<br>
+\(\Rightarrow y = ২x + ১৫\) ... (i)</p>
+<p>২য় শর্তমতে (৫ বছর পূর্বে):<br>
+\(y - ৫ = ৪(x - ৫)\)<br>
+\(\Rightarrow y - ৫ = ৪x - ২০\)<br>
+\(\Rightarrow y = ৪x - ১৫\) ... (ii)</p>
+<p>সমীকরণ (ii) থেকে (i) বিয়োগ করে পাই:<br>
+\((৪x - ১৫) - (২x + ১৫) = ০\)<br>
+\(\Rightarrow ২x - ৩০ = ০\)<br>
+\(\Rightarrow ২x = ৩০\)<br>
+\(\Rightarrow x = ১৫\)</p>
+<p>এখন, \(x\) এর মান (i) নং সমীকরণে বসিয়ে পাই:<br>
+\(y = ২(১৫) + ১৫ = ৩০ + ১৫ = ৪৫\)</p>
+<p><strong>উত্তর:</strong> পুত্রের বর্তমান বয়স ১৫ বছর এবং পিতার বর্তমান বয়স ৪৫ বছর।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="17" data-subject="সাধারণ জ্ঞান" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৭</span>
+            <span class="q-meta-tag">সাধারণ জ্ঞান</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">সাধারণ জ্ঞান</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ২০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">নিচের প্রশ্নগুলোর উত্তর লিখুন:<br>a) পুরাতন ব্রহ্মপুত্র ও মেঘনার মিলনস্থল কোথায়?<br>b) বাংলাদেশ জাতিসংঘের কততম সদস্য রাষ্ট্র?<br>c) ১ জিবি = কত এমবি?<br>d) DBMS এর পূর্ণরূপ কী?<br>e) চাঁদ দিগন্তের কাছে অনেক বড় দেখায় কেন?<br>f) SAARC কবে গঠিত হয়?<br>g) 'ফিফা বিশ্বকাপ ২০২৬' কোথায় অনুষ্ঠিত হবে?<br>h) ইরাটম কী?<br>i) কোন রং সবচেয়ে বেশি দূর থেকে দেখা যায়?<br>j) 'গ্লোবাল জিরো' কী?<br>k) ChatGPT এর নির্মাতা প্রতিষ্ঠানের নাম কী?<br>l) ইতালির মিলান শহরে রক্ষিত The Last Supper চিত্রকর্মটি কে এঁকেছেন?<br>m) বাংলাদেশের কোন জেলা দুই দেশের সীমানা দ্বারা বেষ্টিত?<br>n) বাংলাদেশের মুক্তিযুদ্ধে অবদানের জন্য 'বীরপ্রতীক' উপাধি লাভ করেছেন কতজন?<br>o) বাংলাদেশের প্রথম অর্গানিক চা বাগান কোন উপজেলায় অবস্থিত?<br>p) 'ফ্লোর ক্রসিং' বাংলাদেশের কততম অনুচ্ছেদে বলা আছে?<br>q) অভ্যন্তরীণ বোরো সংগ্রহ মৌসুমে সরকারি পর্যায়ে প্রতি কেজি ধানের সংগ্রহ মূল্য কত টাকা?<br>r) সম্প্রতি ঘোষিত বাংলাদেশের ১৩তম সিটি কর্পোরেশন এর নাম কী?<br>s) প্রথম সাফ গেমস অনুষ্ঠিত হয় কোন দেশে?<br>t) হরমুজ প্রণালি কোন দুটি উপসাগরকে সংযুক্ত করেছে?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-17')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-17" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>নং</th><th>প্রশ্ন</th><th>প্রমিত উত্তর</th></tr></thead>
+<tbody>
+<tr><td>a</td><td>পুরাতন ব্রহ্মপুত্র ও মেঘনার মিলনস্থল</td><td><strong>ভৈরববাজার</strong></td></tr>
+<tr><td>b</td><td>বাংলাদেশ জাতিসংঘের কততম সদস্য?</td><td><strong>১৩৬তম</strong> সদস্য রাষ্ট্র (১৭ সেপ্টেম্বর ১৯৭৪)</td></tr>
+<tr><td>c</td><td>১ জিবি = কত এমবি?</td><td><strong>১০২৪ এমবি</strong> (\(2^{10}\) MB)</td></tr>
+<tr><td>d</td><td>DBMS এর পূর্ণরূপ</td><td><strong>Database Management System</strong></td></tr>
+<tr><td>e</td><td>চাঁদ দিগন্তের কাছে বড় দেখানোর কারণ</td><td><strong>বায়ুমণ্ডলীয় প্রতিসরণ (Atmospheric Refraction) ও দৃষ্টিবিভ্রম</strong></td></tr>
+<tr><td>f</td><td>SAARC কবে গঠিত হয়?</td><td><strong>৮ ডিসেম্বর ১৯৮৫</strong> (ঢাকায় প্রতিষ্ঠিত)</td></tr>
+<tr><td>g</td><td>ফিফা বিশ্বকাপ ২০২৬ আয়োজক</td><td>যৌথভাবে <strong>যুক্তরাষ্ট্র, মেক্সিকো ও কানাডা</strong></td></tr>
+<tr><td>h</td><td>ইরাটম কী?</td><td>একটি উন্নত পরমাণু বিকিরণজাত উচ্চফলনশীল <strong>উফশী ধান</strong></td></tr>
+<tr><td>i</td><td>সবচেয়ে বেশি দূর থেকে দৃশ্যমান রং</td><td><strong>লাল রং</strong> (তরঙ্গদৈর্ঘ্য সবচেয়ে বেশি হওয়ায় বিচ্ছুরণ কম)</td></tr>
+<tr><td>j</td><td>'গ্লোবাল জিরো' কী?</td><td>বিশ্বজুড়ে পরমাণু অস্ত্র সম্পূর্ণ নির্মূলের আন্তর্জাতিক আন্দোলন</td></tr>
+<tr><td>k</td><td>ChatGPT এর নির্মাতা প্রতিষ্ঠান</td><td><strong>OpenAI</strong></td></tr>
+<tr><td>l</td><td>The Last Supper চিত্রকর্মটির শিল্পী</td><td><strong>লিওনার্দো দ্য ভিঞ্চি</strong> (Leonardo da Vinci)</td></tr>
+<tr><td>m</td><td>দুই দেশের (ভারত ও মিয়ানমার) সীমানাবেষ্টিত জেলা</td><td><strong>রাঙামাটি</strong> পার্বত্য জেলা</td></tr>
+<tr><td>n</td><td>মুক্তিযুদ্ধে বীরপ্রতীক খেতাবপ্রাপ্ত সংখ্যা</td><td><strong>৪২৬ জন</strong></td></tr>
+<tr><td>o</td><td>প্রথম অর্গানিক চা বাগান অবস্থিত</td><td>পঞ্চগড় জেলার <strong>তেঁতুলিয়া</strong> উপজেলায়</td></tr>
+<tr><td>p</td><td>'ফ্লোর ক্রসিং' সংবিধানের অনুচ্ছেদ</td><td>সংবিধানের <strong>৭০ নং</strong> অনুচ্ছেদ</td></tr>
+<tr><td>q</td><td>বোরো সংগ্রহ মৌসুমে ধানের সংগ্রহ মূল্য</td><td><strong>৩৬ টাকা</strong> (কেজি প্রতি)</td></tr>
+<tr><td>r</td><td>১৩তম সিটি কর্পোরেশন (প্রস্তাবিত)</td><td><strong>বগুড়া</strong></td></tr>
+<tr><td>s</td><td>প্রথম সাফ (SAF) গেমস অনুষ্ঠিত হয়</td><td><strong>কাঠমান্ডু, নেপাল</strong> (১৯৮৪ সালে)</td></tr>
+<tr><td>t</td><td>হরমুজ প্রণালি সংযুক্ত করেছে</td><td><strong>পারস্য উপসাগর ও ওমান উপসাগরকে</strong></td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+      </main>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>PSC & IBA Written Job Solution Master Repository • নির্ভুল ও প্রামাণ্য ই-বুক সংস্করণ</p>
+      <p style="margin-top:0.25rem;">উৎস: মূল পরীক্ষার প্রশ্নপত্র ও অফিশিয়াল সমাধান সংগ্রহ</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      document.getElementById('themeToggleBtn').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    }
+
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.addEventListener('DOMContentLoaded', () => {
+          const btn = document.getElementById('themeToggleBtn');
+          if (btn) btn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        });
+      }
+    })();
+
+    function toggleDrawer(id) {
+      const drawer = document.getElementById(id);
+      if (!drawer) return;
+      const isVisible = drawer.classList.contains('open');
+      drawer.classList.toggle('open');
+      const toggleBtn = drawer.previousElementSibling;
+      if (toggleBtn) {
+        const icon = toggleBtn.querySelector('.toggle-icon');
+        if (icon) icon.textContent = isVisible ? '▼' : '▲';
+      }
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const subject = btn.getAttribute('data-subject');
+        document.querySelectorAll('.q-card').forEach(card => {
+          if (subject === 'all' || card.getAttribute('data-subject') === subject) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    let baseFontSize = 100;
+    function adjustFontSize(dir) {
+      if (dir === 0) baseFontSize = 100;
+      else baseFontSize += dir * 8;
+      if (baseFontSize < 80) baseFontSize = 80;
+      if (baseFontSize > 130) baseFontSize = 130;
+      document.documentElement.style.fontSize = baseFontSize + '%';
+    }
+  </script>
+</body>
+</html>

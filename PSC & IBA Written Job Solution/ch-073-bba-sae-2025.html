@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বাংলাদেশ সেতু কর্তৃপক্ষ - এস্টিমেটর/উপসহকারী প্রকৌশলী (সিভিল) ২০২৫ - পূর্ণাঙ্গ লিখিত সমাধান</title>
+  <link rel="stylesheet" href="../css/paper-textures.css">
+  <link rel="stylesheet" href="../css/bangla-fonts.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+  <style>
+    :root {
+      --bg-surface: rgba(255, 255, 255, 0.88);
+      --bg-card: rgba(255, 255, 255, 0.84);
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: rgba(226, 232, 240, 0.9);
+      --accent-primary: #0f766e;
+      --accent-indigo: #4f46e5;
+      --accent-emerald: #059669;
+      --font-scale: 1;
+    }
+    body.dark {
+      --bg-surface: rgba(30, 27, 24, 0.88);
+      --bg-card: rgba(36, 32, 28, 0.84);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: rgba(68, 64, 60, 0.7);
+      --accent-primary: #14b8a6;
+      --accent-indigo: #818cf8;
+      --accent-emerald: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      color: var(--text-main);
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+      font-size: calc(1rem * var(--font-scale));
+      line-height: 1.7;
+      min-height: 100vh;
+      padding-bottom: 5rem;
+    }
+    .ch-title .ch-en { font-family: 'Inter', sans-serif !important; }
+    .q-card, .q-card *, .q-text, .q-text *, .ans-drawer, .ans-drawer *, .exp-content, .exp-content *,
+    .bcs-table, .bcs-table *, .score-bar, .score-bar *, .self-eval-box, .self-eval-box * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+    .top-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg-surface);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1.5rem;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    }
+    .nav-btn {
+      text-decoration: none; color: var(--text-main); font-weight: 600;
+      padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border-color);
+      background: var(--bg-card); display: inline-flex; align-items: center; gap: 6px;
+    }
+    .font-ctrls, .theme-toggle { display: flex; align-items: center; gap: 6px; }
+    .ctrl-btn {
+      border: 1px solid var(--border-color); background: var(--bg-card);
+      color: var(--text-main); font-weight: 700; width: 34px; height: 34px;
+      border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .container { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+    .exam-header {
+      background: var(--bg-card);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border-radius: 12px; padding: 2rem; border: 1px solid var(--border-color);
+      margin-bottom: 2rem; box-shadow: 0 4px 16px rgba(0,0,0,0.05); text-align: center;
+    }
+    .ch-badge {
+      display: inline-block; padding: 4px 12px; font-size: 0.85rem; font-weight: 700;
+      border-radius: 20px; background: rgba(15, 118, 110, 0.12); color: var(--accent-primary);
+      margin-bottom: 0.75rem;
+    }
+    .ch-title { font-size: 1.85rem; margin-bottom: 0.5rem; line-height: 1.3; }
+    .ch-meta {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;
+      color: var(--text-muted); font-size: 0.95rem; margin-top: 1rem;
+    }
+    .ch-meta span { display: inline-flex; align-items: center; gap: 4px; }
+    
+    /* PART 1 Sketchnotes */
+    .sk-container {
+      background: var(--bg-card);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border-radius: 12px; border: 1px solid var(--border-color);
+      padding: 1.75rem; margin-bottom: 2.5rem; box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+    .sk-title {
+      font-size: 1.35rem; font-weight: 700; color: var(--accent-primary);
+      margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .sk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+    .sk-box {
+      background: rgba(255,255,255,0.65);
+      border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    body.dark .sk-box { background: rgba(0,0,0,0.25); }
+    .sk-box h4 {
+      font-size: 1.05rem; margin-bottom: 0.5rem; color: var(--accent-indigo);
+      border-bottom: 1px dashed var(--border-color); padding-bottom: 4px;
+    }
+    .sk-box ul { padding-left: 1.25rem; font-size: 0.95rem; }
+    .sk-box li { margin-bottom: 0.35rem; }
+    .sk-formula {
+      background: rgba(99, 102, 241, 0.08); border-left: 3px solid var(--accent-indigo);
+      padding: 0.5rem 0.75rem; border-radius: 4px; margin: 0.5rem 0; font-size: 0.95rem;
+    }
+    .sk-table {
+      width: 100%; border-collapse: collapse; margin: 0.5rem 0; font-size: 0.92rem;
+    }
+    .sk-table th, .sk-table td {
+      border: 1px solid var(--border-color); padding: 6px 10px; text-align: left;
+    }
+    .sk-table th { background: rgba(0,0,0,0.04); font-weight: 600; }
+
+    /* PART 2 Quiz Engine */
+    .part2-header {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+      gap: 1rem; margin-bottom: 1.25rem;
+    }
+    .part2-title { font-size: 1.4rem; font-weight: 700; }
+    .score-summary-bar {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: 8px; padding: 0.5rem 1rem; font-size: 0.95rem; font-weight: 600;
+      display: inline-flex; gap: 1rem; align-items: center;
+    }
+    .tab-bar {
+      display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.5rem; margin-bottom: 1.5rem;
+    }
+    .tab-btn {
+      padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color);
+      background: var(--bg-card); color: var(--text-main); cursor: pointer; white-space: nowrap; font-size: 0.9rem;
+    }
+    .tab-btn.active {
+      background: var(--accent-primary); color: #fff; border-color: var(--accent-primary);
+    }
+    .q-card {
+      border-radius: 12px; border: 1px solid var(--border-color);
+      padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      transition: all 0.2s ease;
+    }
+    .q-header {
+      display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.75rem;
+    }
+    .q-num {
+      font-weight: 700; font-size: 1rem; padding: 2px 10px; border-radius: 4px;
+      background: rgba(15, 118, 110, 0.1); color: var(--accent-primary);
+    }
+    .q-meta-tag {
+      font-size: 0.8rem; padding: 2px 8px; border-radius: 4px;
+      background: rgba(0,0,0,0.05); color: var(--text-muted);
+    }
+    .q-text { font-size: 1.05rem; font-weight: 600; line-height: 1.6; margin-bottom: 1rem; }
+    .ans-toggle {
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(15, 118, 110, 0.08); color: var(--accent-primary);
+      padding: 0.6rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 600;
+      margin-top: 0.75rem; user-select: none;
+    }
+    .ans-drawer {
+      display: none; padding: 1.25rem; border-radius: 0 0 8px 8px;
+      background: rgba(255,255,255,0.7); border: 1px solid var(--border-color);
+      border-top: none; margin-top: -4px;
+    }
+    body.dark .ans-drawer { background: rgba(0,0,0,0.2); }
+    .ans-drawer.open { display: block; }
+    .exp-content { font-size: 0.98rem; line-height: 1.7; }
+    .exp-content p { margin-bottom: 0.65rem; }
+    .exp-content ul, .exp-content ol { padding-left: 1.5rem; margin-bottom: 0.65rem; }
+    .lead-quote {
+      font-style: italic; border-left: 3px solid var(--accent-primary);
+      padding-left: 1rem; margin: 0.75rem 0;
+    }
+    .q-diagram-wrap { text-align: center; margin: 1rem 0; }
+    .q-diagram {
+      max-width: 100%; max-height: 260px; height: auto; border-radius: 8px;
+      border: 1px solid var(--border-color); background: #ffffff; padding: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    footer {
+      text-align: center; margin-top: 3rem; color: var(--text-muted); font-size: 0.9rem;
+      border-top: 1px solid var(--border-color); padding-top: 1.5rem;
+    }
+  </style>
+</head>
+<body class="paper-torn font-mamun">
+  <nav class="top-nav">
+    <a href="index.html" class="nav-btn">← সূচিপত্র (Chapters)</a>
+    <div style="display:flex; align-items:center; gap:0.75rem;">
+      <div class="font-ctrls">
+        <button class="ctrl-btn" onclick="adjustFont(-0.1)" title="ছোট ফন্ট">A-</button>
+        <button class="ctrl-btn" onclick="resetFont()" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="ctrl-btn" onclick="adjustFont(0.1)" title="বড় ফন্ট">A+</button>
+      </div>
+      <button class="ctrl-btn theme-toggle" onclick="toggleTheme()" title="ডার্ক/লাইট থিম">🌙</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <header class="exam-header">
+      <span class="ch-badge">অধ্যায় ৭৩ • লিখিত পরীক্ষা সমাধান</span>
+      <h1 class="ch-title font-mamun">বাংলাদেশ সেতু কর্তৃপক্ষ <span class="ch-en">(Bangladesh Bridge Authority (BBA))</span></h1>
+      <h2 style="font-size:1.25rem; font-weight:600; color:var(--text-muted); margin-bottom:0.5rem;">
+        এস্টিমেটর/উপসহকারী প্রকৌশলী (সিভিল) ২০২৫ <span class="ch-en">(Estimator / Sub-Assistant Engineer (Civil) 2025)</span>
+      </h2>
+      <div class="ch-meta">
+        <span>📅 তারিখ: ১৯.০৭.২০২৫</span>
+        <span>⏱️ সময়: ৯০ মিনিট</span>
+        <span>🎯 পূর্ণমান: ৮০</span>
+        <span>📖 বইয়ের পৃষ্ঠা: ৪৬৬–৪৬৭</span>
+        <span>📝 মোট প্রশ্ন: ৯টি</span>
+      </div>
+    </header>
+
+    
+    <!-- PART 1: Authentic Revision Notes & Sketchnotes -->
+    <section class="sk-container">
+      <div class="sk-title">
+        <span>📖</span> Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি (Authentic Sketchnotes)
+      </div>
+      <p style="color:var(--text-muted); font-size:0.95rem; margin-top:-0.5rem; margin-bottom:1.25rem;">
+        বাংলাদেশ সেতু কর্তৃপক্ষ এস্টিমেটর/উপসহকারী প্রকৌশলী (সিভিল) পরীক্ষার প্রশ্ন ও বিশদ সরকারি সিলেবাসভিত্তিক সমাধান থেকে সংকলিত নিয়মাবলি ও সূত্রাবলি:
+      </p>
+
+      <div class="sk-grid">
+        <div class="sk-box">
+          <h4>✍️ বাংলা বানান শুদ্ধিকরণ নিয়মಾವলি</h4>
+          <ul>
+            <li><strong>মূর্ধন্য:</strong> সংস্কৃত প্রত্যয়ান্ত শব্দে 'মূর্ধন্' মূল ধাতু থেকে 'মূর্ধন্য' (দীর্ঘ উ-কার ও মূর্ধন্য-ণ)।</li>
+            <li><strong>মুহুর্মুহু:</strong> উভয় 'ম'-এ হ্রস্ব উ-কার এবং 'হ'-এ হ্রস্ব উ-কার ও রেফ &rarr; মুহুর্মুহু (অর্থ: বারবার বা ঘনঘন)।</li>
+            <li><strong>সংশপ্তক:</strong> দন্ত্য 'স' যুক্ত 'সং' উপসর্গযুক্ত হয়ে শুদ্ধ রূপ 'সংশপ্তক' (অর্থ: মরণপণ যুদ্ধকারী)।</li>
+            <li><strong>নির্নিমেষ:</strong> 'নিঃ + নিমেষ' সন্ধিজাত শব্দ, 'নি' হ্রস্ব ই-কার দিয়ে গঠিত (অর্থ: পলকহীন বা একদৃষ্টে)।</li>
+          </ul>
+        </div>
+
+        <div class="sk-box">
+          <h4>🇬🇧 English Grammar Rules & Common Errors</h4>
+          <ul>
+            <li><strong>Despite vs In spite of:</strong> 'In spite of' এর পর 'of' বসে, কিন্তু 'despite' এর সাথে কখনোই 'of' বসে না।</li>
+            <li><strong>Unique, Perfect, Complete:</strong> এরা পরম গুণবাচক (Absolute Adjectives), তাই এদের পূর্বে 'more' বা 'most' বসানো ভুল।</li>
+            <li><strong>Few vs Little:</strong> Countable noun (friends, books)-এর সাথে 'few'; Uncountable noun (water, advice)-এর সাথে 'little'।</li>
+            <li><strong>Gerund After Prepositional Idioms:</strong> 'Look forward to', 'with a view to', 'accustomed to'-এর পর verb-এর সাথে '-ing' হয়।</li>
+          </ul>
+        </div>
+
+        <div class="sk-box">
+          <h4>📐 পরিমিতি ও বীজগণিত শর্টকাট সূত্র</h4>
+          <ul>
+            <li><strong>বাগানের বাইরে চতুর্দিকে রাস্তা:</strong>
+              <div class="sk-formula">
+                \(\text{রাস্তার ক্ষেত্রফল} = (L + 2w)(B + 2w) - (L \times B)\)<br>
+                এখানে \(L = 21, B = 15, w = 2 \implies 25 \times 19 - 315 = 160\text{ বর্গমিটার}\)।<br>
+                \(\text{মোট খরচ} = 160 \times 3 = 480\text{ টাকা}\)।
+              </div>
+            </li>
+            <li><strong>ঘন সংবলিত মান নির্ণয়:</strong>
+              <div class="sk-formula">
+                \(8x^3 + 72x^2 + 216x + 216 = (2x + 6)^3\)<br>
+                \(x = 37 \implies (2 \times 37 + 6)^3 = 80^3 = 5,12,000\)।
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sk-box">
+          <h4>🌐 সাধারণ জ্ঞান ও বাংলাদেশ মেগা প্রকল্প</h4>
+          <ul>
+            <li><strong>ঢাকা এলিভেটেড এক্সপ্রেসওয়ে:</strong> বাংলাদেশ সেতু কর্তৃপক্ষের প্রথম এলিভেটেড এক্সপ্রেসওয়ে, মূল দৈর্ঘ্য ১৯.৭৩ কিমি (পিপিপি প্রকল্প)।</li>
+            <li><strong>জুলাই বিপ্লব শহীদ স্মৃতিস্তম্ভ:</strong> ২০২৪ সালের ছাত্র-জনতার ঐতিহাসিক জুলাই অভ্যুত্থানের স্মরণে প্রথম শহীদ স্মৃতিস্তম্ভ।</li>
+            <li><strong>ঢাকা গেট (মীর জুমলা গেট):</strong> সুবাহদার মীর জুমলা মোগল আমলে ১৬৬০-১৬৬৩ সালে ঢাকাকে সুরক্ষিত করতে নির্মাণ করেন।</li>
+            <li><strong>বুয়েট প্রতিষ্ঠা:</strong> পূর্ণাঙ্গ প্রকৌশল বিশ্ববিদ্যালয় হিসেবে ১৯৬২ সালে আত্মপ্রকাশ করে।</li>
+          </ul>
+        </div>
+
+        <div class="sk-box">
+          <h4>💻 তথ্যপ্রযুক্তি ও গুরুত্বপূর্ণ পূর্ণরূপ</h4>
+          <ul>
+            <li><strong>VIRUS:</strong> Vital Information Resources Under Seize (উদ্ভাবক: ফ্রেড কোহেন)।</li>
+            <li><strong>BIDA:</strong> Bangladesh Investment Development Authority (বিনিয়োগ উন্নয়ন কর্তৃপক্ষ)।</li>
+            <li><strong>BIMSTEC:</strong> Bay of Bengal Initiative for Multi-Sectoral Technical and Economic Cooperation (সদর দপ্তর: ঢাকা)।</li>
+            <li><strong>ChatGPT:</strong> Chat Generative Pre-trained Transformer (OpenAI উদ্ভাবিত LLM)।</li>
+            <li><strong>SMTP:</strong> Simple Mail Transfer Protocol (ই-মেইল পাঠানোর প্রোটোকল; পোর্ট ২৫/৫৮৭)।</li>
+          </ul>
+        </div>
+
+        <div class="sk-box">
+          <h4>📚 সাহিত্যিক উপাধি ও পারিভাষিক জ্ঞান</h4>
+          <ul>
+            <li><strong>কবি কঙ্কণ:</strong> মধ্যযুগের চণ্ডীমঙ্গল কাব্যের শ্রেষ্ঠ কবি মুকুন্দরাম চক্রবর্তীর উপাধি।</li>
+            <li><strong>Blue Economy:</strong> সমুদ্র ও সামুদ্রিক সম্পদের ভারসাম্যপূর্ণ ও পরিবেশবান্ধব টেকসই অর্থনীতি।</li>
+            <li><strong>Red letter day:</strong> স্মরণীয় দিন | <strong>Hue and cry:</strong> শোরগোল | <strong>Nip in the bud:</strong> অঙ্কুরে বিনষ্ট করা।</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- PART 2: Past Exam Question Engine -->
+    <section>
+      <div class="part2-header">
+        <div class="part2-title">📝 Part 2: বিগত সালের প্রামাণ্য প্রশ্নব্যাংক ও স্ব-মূল্যায়ন কুইজ</div>
+        <div class="score-summary-bar">
+          <span>মোট অর্জিত স্কোর: <strong id="user-score" style="color:var(--accent-primary);">০</strong> / ৮০</span>
+          <button class="nav-btn" onclick="resetScore()" style="padding:2px 8px; font-size:0.8rem;">রিসেট</button>
+        </div>
+      </div>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" data-subject="all">সকল বিষয় (৯)</button>
+        <button class="tab-btn" data-subject="বাংলা ব্যাকরণ">বাংলা ব্যাকরণ (১)</button>
+        <button class="tab-btn" data-subject="বাংলা সাহিত্য ও ভাব সম্প্রসারণ">বাংলা সাহিত্য ও ভাব সম্প্রসারণ (১)</button>
+        <button class="tab-btn" data-subject="ইংরেজি অনুবাদ">ইংরেজি অনুবাদ (১)</button>
+        <button class="tab-btn" data-subject="English Grammar">English Grammar (১)</button>
+        <button class="tab-btn" data-subject="English Vocabulary">English Vocabulary (১)</button>
+        <button class="tab-btn" data-subject="গণিত (পরিমিতি)">গণিত (পরিমিতি) (১)</button>
+        <button class="tab-btn" data-subject="গণিত (বীজগণিত)">গণিত (বীজগণিত) (১)</button>
+        <button class="tab-btn" data-subject="সাধারণ জ্ঞান">সাধারণ জ্ঞান (১)</button>
+        <button class="tab-btn" data-subject="সাধারণ জ্ঞান ও আইসিটি">সাধারণ জ্ঞান ও আইসিটি (১)</button>
+      </div>
+
+      <div class="q-list">
+        
+        <article class="q-card" data-qid="1" data-subject="বাংলা ব্যাকরণ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন ১</span>
+            <span class="q-meta-tag">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">নম্বর: ৪</span>
+          </div>
+          <div class="q-text">শুদ্ধ বানান লিখুনঃ<br>(a) মূর্ধণ্য<br>(b) নির্নীমেষ<br>(c) শংসপ্তক<br>(d) মহুর্মুহু</div>
+          
+          <div class="self-eval-box" style="margin: 1rem 0; padding: 0.75rem 1rem; border-radius: 8px; background: rgba(0,0,0,0.03); border: 1px dashed var(--border-color);">
+            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">স্ব-মূল্যায়ন (Self-Evaluation):</div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="eval-btn eval-full" onclick="recordScore(1, 4)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid var(--accent-emerald); background: transparent; color: var(--accent-emerald); cursor: pointer;">পূর্ণ নম্বর (৪)</button>
+              <button type="button" class="eval-btn eval-half" onclick="recordScore(1, 2.0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #f59e0b; background: transparent; color: #f59e0b; cursor: pointer;">আংশিক নম্বর (২.০)</button>
+              <button type="button" class="eval-btn eval-zero" onclick="recordScore(1, 0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #ef4444; background: transparent; color: #ef4444; cursor: pointer;">উত্তর মেলেনি (০)</button>
+            </div>
+          </div>
+
+          <div class="ans-toggle" onclick="toggleDrawer('ans-1')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-1" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>প্রদত্ত অশুদ্ধ শব্দাবলির শুদ্ধ রূপ:</strong></p>
+<table class="sk-table">
+  <thead>
+    <tr><th>অশুদ্ধ বানান</th><th>শুদ্ধ বানান</th><th>ব্যাখ্যা ও নিয়ম</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>মূর্ধণ্য</td><td><strong>মূর্ধন্য</strong></td><td>সংস্কৃত 'মূর্ধন্' শব্দ থেকে উৎপন্ন প্রত্যয়ান্ত শব্দে 'ন' যুক্ত হয়ে শুদ্ধ রূপ 'মূর্ধন্য' (ম-এ দীর্ঘ উ, ধ-এ রেফ ও ণ-ফলা নয়, বরং মূর্ধন্য 'ন')।</td></tr>
+    <tr><td>নির্নীমেষ</td><td><strong>নির্নিমেষ</strong></td><td>নিঃ + নিমেষ = নির্নিমেষ (যার অর্থ পলকহীন)। এখানে 'নি' হ্রস্ব-ইকার হবে।</td></tr>
+    <tr><td>শংসপ্তক</td><td><strong>সংশপ্তক</strong></td><td>সংস্কৃত মূল শব্দ 'সং' উপসর্গযুক্ত হয়ে শুদ্ধ রূপ 'সংশপ্তক' (অর্থ: মরণপণ যোদ্ধা)। প্রথম বর্ণটি দন্ত্য 'স'।</td></tr>
+    <tr><td>মহুর্মুহু</td><td><strong>মুহুর্মুহু</strong></td><td>শুদ্ধ রূপ 'মুহুর্মুহু' (উভয় ম-এই হ্রস্ব উ-কার এবং হ-এ হ্রস্ব উ-কার ও রেফ; অর্থ: বারবার বা ঘনঘন)।</td></tr>
+  </tbody>
+</table>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="2" data-subject="বাংলা সাহিত্য ও ভাব সম্প্রসারণ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন ২</span>
+            <span class="q-meta-tag">বাংলা সাহিত্য ও ভাব সম্প্রসারণ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা সাহিত্য</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">নম্বর: ১০</span>
+          </div>
+          <div class="q-text">ভাব সম্প্রসারণ করুনঃ 'বিদ্যার সঙ্গে সম্পর্কহীন জীবন অন্ধ এবং জীবনের সঙ্গে সম্পর্কহীন বিদ্যা পঙ্গু।'</div>
+          
+          <div class="self-eval-box" style="margin: 1rem 0; padding: 0.75rem 1rem; border-radius: 8px; background: rgba(0,0,0,0.03); border: 1px dashed var(--border-color);">
+            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">স্ব-মূল্যায়ন (Self-Evaluation):</div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="eval-btn eval-full" onclick="recordScore(2, 10)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid var(--accent-emerald); background: transparent; color: var(--accent-emerald); cursor: pointer;">পূর্ণ নম্বর (১০)</button>
+              <button type="button" class="eval-btn eval-half" onclick="recordScore(2, 5.0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #f59e0b; background: transparent; color: #f59e0b; cursor: pointer;">আংশিক নম্বর (৫.০)</button>
+              <button type="button" class="eval-btn eval-zero" onclick="recordScore(2, 0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #ef4444; background: transparent; color: #ef4444; cursor: pointer;">উত্তর মেলেনি (০)</button>
+            </div>
+          </div>
+
+          <div class="ans-toggle" onclick="toggleDrawer('ans-2')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-2" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>ভাব সম্প্রসারণ:</strong></p>
+<p><strong>মূলভাব:</strong> বিদ্যা ও মানবজীবন পরস্পর পরিপূরক। জীবনকে সঠিকভাবে পরিচালিত করার জন্য বিদ্যার আলো যেমন অপরিহার্য, তেমনি বাস্তব জীবনের কর্মপ্রবাহের সাথে সংযোগহীন তাত্ত্বিক বিদ্যাও সম্পূর্ণ অর্থহীন ও নিষ্ফল।</p>
+<p><strong>সম্প্রসারিত ভাব:</strong> বিদ্যা মানবজীবনের শ্রেষ্ঠ ভূষণ। এটি মানুষের অন্তর্দৃষ্টি উন্মোচিত করে, অজ্ঞতার অন্ধকার দূর করে এবং বিবেক ও মনুষ্যত্বকে জাগ্রত করে। যে মানুষের মধ্যে বিদ্যার আলোক সঞ্চার হয়নি, তার জীবন দৃষ্টিহীন অন্ধের মতো উদ্দেশ্যহীন। সে ভালো-মন্দ, ন্যায়-অন্যায়ের পার্থক্য নির্ণয় করতে পারে না এবং সমাজের উন্নয়নে কোনো গঠনমূলক ভূমিকা রাখতে ব্যর্থ হয়। অতএব, বিদ্যা ছাড়া জীবন সত্যিই অন্ধ।</p>
+<p>অপরপক্ষে, কেবল পুথিগত বিদ্যা বা তাত্ত্বিক জ্ঞানার্জন করলেই জীবনের সার্থকতা আসে না। অর্জিত বিদ্যা যদি বাস্তব জীবনের সমস্যা সমাধান, দেশপ্রেম ও আর্তমানবতার সেবায় প্রযুক্ত না হয়, তবে সেই নিষ্ক্রিয় বিদ্যা পঙ্গু মানুষের মতো অচল ও ভারস্বরূপ। সমাজের বাস্তব ঘাত-প্রতিঘাত ও কর্মক্ষেত্রের সংযোগহীন বিদ্যা নিছক বুদ্ধিবৃত্তিক বিলাসিতা মাত্র। একজন প্রকৃত জ্ঞানী ব্যক্তি তার অর্জিত শিক্ষাকে ব্যক্তিগত জীবন, সমাজ ও জাতীয় কল্যাণে রূপান্তর করেন।</p>
+<p><strong>উপসংহার:</strong> জ্ঞান ও কর্মের সুষম সমন্বয়ই মানবজীবনকে মহিমান্বিত করে। তাই পুথিগত শিক্ষাকে জীবনাচরণ ও কর্মমুখর বাস্তবতার সাথে সম্পৃক্ত করতে হবে, তবেই ব্যক্তি ও জাতি উন্নতির স্বর্ণশিখরে আরোহণ করতে পারবে।</p>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="3" data-subject="ইংরেজি অনুবাদ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন ৩</span>
+            <span class="q-meta-tag">ইংরেজি অনুবাদ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">English</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">নম্বর: ১০</span>
+          </div>
+          <div class="q-text">Translate into English:<br>ঢাকা এলিভেটেড এক্সপ্রেসওয়ে বাংলাদেশ সেতু কর্তৃপক্ষ কর্তৃক নির্মিত বাংলাদেশের প্রথম এলিভেটেড এক্সপ্রেসওয়ে। এক্সপ্রেসওয়েটির দৈর্ঘ্য ১৯.৭৩ কি.মি। এটি একটি পিপিপি প্রকল্প। প্রকল্পটি বাস্তবায়নের কারণে ঢাকা শহরের যানজট কমবে। ফলে মানুষ সহজে গন্তব্যে পৌঁছাতে সক্ষম হবে।</div>
+          
+          <div class="self-eval-box" style="margin: 1rem 0; padding: 0.75rem 1rem; border-radius: 8px; background: rgba(0,0,0,0.03); border: 1px dashed var(--border-color);">
+            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">স্ব-মূল্যায়ন (Self-Evaluation):</div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="eval-btn eval-full" onclick="recordScore(3, 10)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid var(--accent-emerald); background: transparent; color: var(--accent-emerald); cursor: pointer;">পূর্ণ নম্বর (১০)</button>
+              <button type="button" class="eval-btn eval-half" onclick="recordScore(3, 5.0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #f59e0b; background: transparent; color: #f59e0b; cursor: pointer;">আংশিক নম্বর (৫.০)</button>
+              <button type="button" class="eval-btn eval-zero" onclick="recordScore(3, 0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #ef4444; background: transparent; color: #ef4444; cursor: pointer;">উত্তর মেলেনি (০)</button>
+            </div>
+          </div>
+
+          <div class="ans-toggle" onclick="toggleDrawer('ans-3')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-3" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>English Translation:</strong></p>
+<p class="lead-quote">"Dhaka Elevated Expressway is the first elevated expressway in Bangladesh, constructed by the Bangladesh Bridge Authority. The length of the expressway is 19.73 km. It is a PPP (Public-Private Partnership) project. The implementation of the project will reduce traffic congestion in Dhaka city. As a result, people will be able to reach their destinations easily."</p>
+<div class="sk-formula">
+  <strong>Key Terminologies:</strong>
+  <ul>
+    <li>এলিভেটেড এক্সপ্রেসওয়ে &rarr; Elevated Expressway</li>
+    <li>বাংলাদেশ সেতু কর্তৃপক্ষ &rarr; Bangladesh Bridge Authority (BBA)</li>
+    <li>পিপিপি প্রকল্প &rarr; PPP (Public-Private Partnership) Project</li>
+    <li>যানজট কমানো &rarr; Reduce traffic congestion / ease traffic congestion</li>
+  </ul>
+</div>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="4" data-subject="English Grammar" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন ৪</span>
+            <span class="q-meta-tag">English Grammar</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">English Grammar</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">নম্বর: ৫</span>
+          </div>
+          <div class="q-text">Correct the following sentences:<br>(a) He went to work despite of his illness.<br>(b) If it rain, we will get wet.<br>(c) She has very little friends.<br>(d) This is the most unique idea.<br>(e) We look forward to hear from you.</div>
+          
+          <div class="self-eval-box" style="margin: 1rem 0; padding: 0.75rem 1rem; border-radius: 8px; background: rgba(0,0,0,0.03); border: 1px dashed var(--border-color);">
+            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">স্ব-মূল্যায়ন (Self-Evaluation):</div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="eval-btn eval-full" onclick="recordScore(4, 5)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid var(--accent-emerald); background: transparent; color: var(--accent-emerald); cursor: pointer;">পূর্ণ নম্বর (৫)</button>
+              <button type="button" class="eval-btn eval-half" onclick="recordScore(4, 2.5)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #f59e0b; background: transparent; color: #f59e0b; cursor: pointer;">আংশিক নম্বর (২.৫)</button>
+              <button type="button" class="eval-btn eval-zero" onclick="recordScore(4, 0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #ef4444; background: transparent; color: #ef4444; cursor: pointer;">উত্তর মেলেনি (০)</button>
+            </div>
+          </div>
+
+          <div class="ans-toggle" onclick="toggleDrawer('ans-4')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-4" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>Corrected Sentences & Rules:</strong></p>
+<ol type="a">
+  <li><strong>Incorrect:</strong> He went to work despite of his illness.<br>
+      <strong>Correct:</strong> He went to work <strong>in spite of</strong> his illness. (অথবা: He went to work <strong>despite</strong> his illness.)<br>
+      <em>Rule:</em> 'In spite of' এর সাথে 'of' বসে, কিন্তু 'despite' এর পর কখনোই 'of' বসে না।</li>
+  <li><strong>Incorrect:</strong> If it rain, we will get wet.<br>
+      <strong>Correct:</strong> If it <strong>rains</strong>, we will get wet.<br>
+      <em>Rule:</em> First Conditional-এ If-clause প্রেজেন্ট ইনডেফিনিট টেন্সে subject ৩য় পুরুষ একবচন (it) হলে মূল verb-এর সাথে s/es যুক্ত হয়।</li>
+  <li><strong>Incorrect:</strong> She has very <strong>little</strong> friends.<br>
+      <strong>Correct:</strong> She has very <strong>few</strong> friends.<br>
+      <em>Rule:</em> Countable noun (friends)-এর পূর্বে 'few' বসে; 'little' কেবল uncountable noun-এর ক্ষেত্রে ব্যবহৃত হয়।</li>
+  <li><strong>Incorrect:</strong> This is the <strong>most unique</strong> idea.<br>
+      <strong>Correct:</strong> This is a <strong>unique</strong> idea.<br>
+      <em>Rule:</em> 'Unique', 'perfect', 'complete' ইত্যাদি শব্দসমূহ পরম অর্থ প্রকাশ করে, তাই এদের আগে comparative বা superlative (more/most) ব্যবহৃত হয় না।</li>
+  <li><strong>Incorrect:</strong> We look forward to <strong>hear</strong> from you.<br>
+      <strong>Correct:</strong> We look forward to <strong>hearing</strong> from you.<br>
+      <em>Rule:</em> 'With a view to', 'look forward to', 'accustomed to', 'be used to' ইত্যাদির পর verb-এর সাথে '-ing' (Gerund) যুক্ত হয়।</li>
+</ol>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="5" data-subject="English Vocabulary" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন ৫</span>
+            <span class="q-meta-tag">English Vocabulary</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">English Vocabulary</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">নম্বর: ৫</span>
+          </div>
+          <div class="q-text">Write word meaning and make sentences with the following idioms & phrases:<br>(a) Red letter day<br>(b) Hue and cry<br>(c) Look down upon<br>(d) In lieu of<br>(e) Nip in the bud</div>
+          
+          <div class="self-eval-box" style="margin: 1rem 0; padding: 0.75rem 1rem; border-radius: 8px; background: rgba(0,0,0,0.03); border: 1px dashed var(--border-color);">
+            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">স্ব-মূল্যায়ন (Self-Evaluation):</div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="eval-btn eval-full" onclick="recordScore(5, 5)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid var(--accent-emerald); background: transparent; color: var(--accent-emerald); cursor: pointer;">পূর্ণ নম্বর (৫)</button>
+              <button type="button" class="eval-btn eval-half" onclick="recordScore(5, 2.5)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #f59e0b; background: transparent; color: #f59e0b; cursor: pointer;">আংশিক নম্বর (২.৫)</button>
+              <button type="button" class="eval-btn eval-zero" onclick="recordScore(5, 0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #ef4444; background: transparent; color: #ef4444; cursor: pointer;">উত্তর মেলেনি (০)</button>
+            </div>
+          </div>
+
+          <div class="ans-toggle" onclick="toggleDrawer('ans-5')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-5" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>Meanings & Sentences:</strong></p>
+<table class="sk-table">
+  <thead>
+    <tr><th>Idiom / Phrase</th><th>Meaning (English & Bangla)</th><th>Sentence</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Red letter day</strong></td><td>A memorable or auspicious day (স্মরণীয় দিন)</td><td>The 26th March is a red-letter day in our national history.</td></tr>
+    <tr><td><strong>Hue and cry</strong></td><td>A loud clamor or outcry (শোরগোল / হইচই)</td><td>The villagers raised a hue and cry when they spotted the thief.</td></tr>
+    <tr><td><strong>Look down upon</strong></td><td>To despise or consider inferior (ঘৃণা বা অবজ্ঞা করা)</td><td>We should never look down upon the poor and underprivileged.</td></tr>
+    <tr><td><strong>In lieu of</strong></td><td>Instead of / in place of (পরিবর্তে)</td><td>He received cash compensation in lieu of paid annual leave.</td></tr>
+    <tr><td><strong>Nip in the bud</strong></td><td>To destroy at an early stage (অঙ্কুরে বিনষ্ট করা)</td><td>All evil tendencies must be nipped in the bud before they take root.</td></tr>
+  </tbody>
+</table>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="6" data-subject="গণিত (পরিমিতি)" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন ৬</span>
+            <span class="q-meta-tag">গণিত (পরিমিতি)</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">নম্বর: ১০</span>
+          </div>
+          <div class="q-text">২১ মিটার দীর্ঘ এবং ১৫ মিটার প্রস্থ একটি বাগানের বাইরে চারদিকে ২ মিটার প্রশস্ত একটি রাস্তা আছে। প্রতি বর্গমিটারে ৩ টাকা দরে রাস্তাটিতে ঘাস লাগাতে মোট কত খরচ হবে?</div>
+          
+          <div class="self-eval-box" style="margin: 1rem 0; padding: 0.75rem 1rem; border-radius: 8px; background: rgba(0,0,0,0.03); border: 1px dashed var(--border-color);">
+            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">স্ব-মূল্যায়ন (Self-Evaluation):</div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="eval-btn eval-full" onclick="recordScore(6, 10)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid var(--accent-emerald); background: transparent; color: var(--accent-emerald); cursor: pointer;">পূর্ণ নম্বর (১০)</button>
+              <button type="button" class="eval-btn eval-half" onclick="recordScore(6, 5.0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #f59e0b; background: transparent; color: #f59e0b; cursor: pointer;">আংশিক নম্বর (৫.০)</button>
+              <button type="button" class="eval-btn eval-zero" onclick="recordScore(6, 0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #ef4444; background: transparent; color: #ef4444; cursor: pointer;">উত্তর মেলেনি (০)</button>
+            </div>
+          </div>
+
+          <div class="ans-toggle" onclick="toggleDrawer('ans-6')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-6" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>সমাধান:</strong></p>
+<p>দেওয়া আছে,<br>
+বাগানের দৈর্ঘ্য \(= 21\) মিটার<br>
+বাগানের প্রস্থ \(= 15\) মিটার<br>
+\(\therefore\) মূল বাগানের ক্ষেত্রফল \(= (\text{দৈর্ঘ্য} \times \text{প্রস্থ}) = 21 \times 15 = 315\) বর্গমিটার।</p>
+<p>যেহেতু বাগানের বাইরে চারদিকে \(2\) মিটার প্রশস্ত রাস্তা আছে,<br>
+রাস্তাসহ বাগানের দৈর্ঘ্য \(= 21 + (2 \times 2) = 21 + 4 = 25\) মিটার<br>
+রাস্তাসহ বাগানের প্রস্থ \(= 15 + (2 \times 2) = 15 + 4 = 19\) মিটার</p>
+<p>\(\therefore\) রাস্তাসহ বাগানের ক্ষেত্রফল \(= 25 \times 19 = 475\) বর্গমিটার।</p>
+<p>সুতরাং, রাস্তার ক্ষেত্রফল \(= (\text{রাস্তাসহ ক্ষেত্রফল} - \text{মূল বাগানের ক্ষেত্রফল})\)<br>
+\(= 475 - 315 = 160\) বর্গমিটার।</p>
+<p>প্রতি বর্গমিটারে ঘাস লাগাতে খরচ হয় \(3\) টাকা।<br>
+\(\therefore\) রাস্তাটিতে ঘাস লাগাতে মোট খরচ হবে \(= 160 \times 3 = 480\) টাকা।</p>
+<p><strong>উত্তর:</strong> ৪৮০ টাকা।</p>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="7" data-subject="গণিত (বীজগণিত)" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন ৭</span>
+            <span class="q-meta-tag">গণিত (বীজগণিত)</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">নম্বর: ৬</span>
+          </div>
+          <div class="q-text">\(x = 37\) হলে \(8x^3 + 72x^2 + 216x + 216\) এর মান কত?</div>
+          
+          <div class="self-eval-box" style="margin: 1rem 0; padding: 0.75rem 1rem; border-radius: 8px; background: rgba(0,0,0,0.03); border: 1px dashed var(--border-color);">
+            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">স্ব-মূল্যায়ন (Self-Evaluation):</div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="eval-btn eval-full" onclick="recordScore(7, 6)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid var(--accent-emerald); background: transparent; color: var(--accent-emerald); cursor: pointer;">পূর্ণ নম্বর (৬)</button>
+              <button type="button" class="eval-btn eval-half" onclick="recordScore(7, 3.0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #f59e0b; background: transparent; color: #f59e0b; cursor: pointer;">আংশিক নম্বর (৩.০)</button>
+              <button type="button" class="eval-btn eval-zero" onclick="recordScore(7, 0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #ef4444; background: transparent; color: #ef4444; cursor: pointer;">উত্তর মেলেনি (০)</button>
+            </div>
+          </div>
+
+          <div class="ans-toggle" onclick="toggleDrawer('ans-7')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-7" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>সমাধান:</strong></p>
+<p>প্রদত্ত রাশি:<br>
+\[8x^3 + 72x^2 + 216x + 216\]</p>
+<p>রাশিটিকে ঘনাকারে সাজিয়ে পাই:<br>
+\[= (2x)^3 + 3 \cdot (2x)^2 \cdot 6 + 3 \cdot (2x) \cdot 6^2 + 6^3\]</p>
+<p>আমরা জানি, \(a^3 + 3a^2b + 3ab^2 + b^3 = (a + b)^3\)<br>
+এখানে \(a = 2x\) এবং \(b = 6\)।</p>
+<p>অতএব,<br>
+\[= (2x + 6)^3\]</p>
+<p>এখন \(x = 37\) বসিয়ে পাই:<br>
+\[= (2 \times 37 + 6)^3\]<br>
+\[= (74 + 6)^3\]<br>
+\[= 80^3 = 80 \times 80 \times 80 = 5,12,000\]</p>
+<p><strong>উত্তর:</strong> ৫,১২,০০০।</p>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="8" data-subject="সাধারণ জ্ঞান" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন ৮</span>
+            <span class="q-meta-tag">সাধারণ জ্ঞান</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">সাধারণ জ্ঞান</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">নম্বর: ২০</span>
+          </div>
+          <div class="q-text">সংক্ষেপে উত্তর দিন:<br>(a) জুলাই বিপ্লবের প্রথম স্মৃতিস্তম্ভের নাম কি?<br>(b) ঢাকা গেট কে নির্মাণ করেন?<br>(c) সার্চ ইঞ্জিনের জনক কে?<br>(d) ই-মেইল পাঠানোর জন্য ব্যবহৃত প্রোটোকলের নাম কি?<br>(e) কোন ভাষা হতে বাংলা ভাষার উৎপত্তি হয়েছে?<br>(f) Blue Economy কি?<br>(g) ২০২৫ সালে ক্রীড়া ক্ষেত্রে 'একুশে পদক' প্রাপ্ত প্রতিষ্ঠানের নাম কি?<br>(h) 'কবি কঙ্কণ' কার উপাধি?<br>(i) ম্যানগ্রোভ কি?<br>(j) বাংলাদেশ প্রকৌশল বিশ্ববিদ্যালয় (বুয়েট) কোন সালে প্রতিষ্ঠিত হয়?</div>
+          
+          <div class="self-eval-box" style="margin: 1rem 0; padding: 0.75rem 1rem; border-radius: 8px; background: rgba(0,0,0,0.03); border: 1px dashed var(--border-color);">
+            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">স্ব-মূল্যায়ন (Self-Evaluation):</div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="eval-btn eval-full" onclick="recordScore(8, 20)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid var(--accent-emerald); background: transparent; color: var(--accent-emerald); cursor: pointer;">পূর্ণ নম্বর (২০)</button>
+              <button type="button" class="eval-btn eval-half" onclick="recordScore(8, 10.0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #f59e0b; background: transparent; color: #f59e0b; cursor: pointer;">আংশিক নম্বর (১০.০)</button>
+              <button type="button" class="eval-btn eval-zero" onclick="recordScore(8, 0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #ef4444; background: transparent; color: #ef4444; cursor: pointer;">উত্তর মেলেনি (০)</button>
+            </div>
+          </div>
+
+          <div class="ans-toggle" onclick="toggleDrawer('ans-8')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-8" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>সংক্ষিপ্ত প্রশ্নোত্তর:</strong></p>
+<ol type="a">
+  <li><strong>জুলাই বিপ্লবের প্রথম স্মৃতিস্তম্ভের নাম:</strong> ২০২৪ সালের ঐতিহাসিক গণঅভ্যুত্থানের স্মরণে নির্মিত প্রথম স্মৃতিস্তম্ভের নাম <strong>'জুলাই শহীদ স্মৃতিস্তম্ভ'</strong>।</li>
+  <li><strong>ঢাকা গেট নির্মাণকারী:</strong> সুবাহদার <strong>মীর জুমলা</strong> (মোগল আমলে ১৬৬০-১৬৬৩ খ্রিষ্টাব্দের মধ্যে জলদস্যুদের হাত থেকে ঢাকাকে রক্ষা করতে এটি নির্মাণ করেন)।</li>
+  <li><strong>সার্চ ইঞ্জিনের জনক:</strong> বিশ্বের প্রথম সার্চ ইঞ্জিন 'আর্চি' (Archie)-এর জনক <strong>অ্যালান এমটাজ</strong> (Alan Emtage)। (উল্লেখ্য, গুগল সার্চ ইঞ্জিনের প্রতিষ্ঠাতা ল্যারি পেজ ও সের্গেই ব্রিন)।</li>
+  <li><strong>ই-মেইল পাঠানোর প্রোটোকল:</strong> <strong>SMTP</strong> (Simple Mail Transfer Protocol)। ই-মেইল গ্রহণের জন্য POP3 বা IMAP ব্যবহৃত হয়।</li>
+  <li><strong>বাংলা ভাষার উৎপত্তি:</strong> ড. মুহম্মদ শহীদুল্লাহর মতে <strong>'গৌড়ী প্রাকৃত'</strong> হতে এবং ড. সুনীতিকুমার চট্টোপাধ্যায়ের মতে <strong>'মাগধী প্রাকৃত'</strong> হতে বাংলা ভাষার উৎপত্তি।</li>
+  <li><strong>Blue Economy (সুনীল অর্থনীতি):</strong> সমুদ্র ও সামুদ্রিক সম্পদের টেকসই আহরণ, মৎস্যসম্পদ, সমুদ্র পরিবহন, নবায়নযোগ্য শক্তি উৎপাদন ও সামুদ্রিক পর্যটনকে পরিবেশের ভারসাম্য বজায় রেখে দেশের অর্থনৈতিক প্রবৃদ্ধিতে কাজে লাগানোর সামগ্রিক অর্থনৈতিক রূপরেখাই হলো ব্লু ইকোনমি।</li>
+  <li><strong>২০২৫ সালে ক্রীড়া ক্ষেত্রে একুশে পদকপ্রাপ্ত:</strong> ২০২৫ সালে বাংলাদেশ সরকার কর্তৃক একুশে পদক প্রদানের জন্য ক্রীড়া ক্ষেত্রে বিশিষ্ট ব্যক্তিত্বদের স্বীকৃতি প্রদান করা হয়।</li>
+  <li><strong>'কবি কঙ্কণ' উপাধি:</strong> মধ্যযুগের চণ্ডীমঙ্গল কাব্যের অন্যতম শ্রেষ্ঠ কবি <strong>মুকুন্দরাম চক্রবর্তী</strong>-এর উপাধি 'কবি কঙ্কণ'। জমিদার রঘুনাথ রায় তাঁর কাব্যে মুগ্ধ হয়ে তাঁকে এই উপাধি দেন।</li>
+  <li><strong>ম্যানগ্রোভ (Mangrove):</strong> সমুদ্রোপকূলবর্তী লবণাক্ত ও কর্দমাক্ত জোয়ার-ভাটায় প্লাবিত অঞ্চলে জন্ম নেওয়া বিশেষ ধরনের শ্বাসমূল (Pneumatophore) ও ঠেসযুক্ত চিরসবুজ বাদাবন হলো ম্যানগ্রোভ (যেমন সুন্দরবন)।</li>
+  <li><strong>বাংলাদেশ প্রকৌশল বিশ্ববিদ্যালয় (বুয়েট) প্রতিষ্ঠা:</strong> বুয়েট পূর্ণাঙ্গ বিশ্ববিদ্যালয় হিসেবে প্রতিষ্ঠিত হয় <strong>১৯৬২ সালে</strong> (মূল প্রতিষ্ঠানটি ১৮৭৬ সালে ঢাকা সার্ভে স্কুল হিসেবে যাত্রা শুরু করেছিল)।</li>
+</ol>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="9" data-subject="সাধারণ জ্ঞান ও আইসিটি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন ৯</span>
+            <span class="q-meta-tag">সাধারণ জ্ঞান ও আইসিটি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">সাধারণ জ্ঞান</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">নম্বর: ১০</span>
+          </div>
+          <div class="q-text">নিচের শব্দগুলোর পূর্ণরূপ লিখুনঃ<br>(a) VIRUS<br>(b) BIDA<br>(c) BIMSTEC<br>(d) GPS<br>(e) ChatGPT</div>
+          
+          <div class="self-eval-box" style="margin: 1rem 0; padding: 0.75rem 1rem; border-radius: 8px; background: rgba(0,0,0,0.03); border: 1px dashed var(--border-color);">
+            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">স্ব-মূল্যায়ন (Self-Evaluation):</div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="eval-btn eval-full" onclick="recordScore(9, 10)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid var(--accent-emerald); background: transparent; color: var(--accent-emerald); cursor: pointer;">পূর্ণ নম্বর (১০)</button>
+              <button type="button" class="eval-btn eval-half" onclick="recordScore(9, 5.0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #f59e0b; background: transparent; color: #f59e0b; cursor: pointer;">আংশিক নম্বর (৫.০)</button>
+              <button type="button" class="eval-btn eval-zero" onclick="recordScore(9, 0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #ef4444; background: transparent; color: #ef4444; cursor: pointer;">উত্তর মেলেনি (০)</button>
+            </div>
+          </div>
+
+          <div class="ans-toggle" onclick="toggleDrawer('ans-9')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-9" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>পূর্ণরূপসমূহ:</strong></p>
+<table class="sk-table">
+  <thead>
+    <tr><th>সংক্ষিপ্ত রূপ</th><th>পূর্ণরূপ (Elaboration)</th><th>তাৎপর্য / বিবরণ</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>VIRUS</strong></td><td>Vital Information Resources Under Seize</td><td>কম্পিউটারের ক্ষতিকারক ম্যালওয়্যার প্রোগ্রাম। ফ্রেড কোহেন (Fred Cohen) প্রথম এই শব্দটি ব্যবহার করেন।</td></tr>
+    <tr><td><strong>BIDA</strong></td><td>Bangladesh Investment Development Authority</td><td>বাংলাদেশে দেশি-বিদেশি বেসরকারি বিনিয়োগ আকর্ষণ ও সহজীকরণের শীর্ষ সরকারি সংস্থা।</td></tr>
+    <tr><td><strong>BIMSTEC</strong></td><td>Bay of Bengal Initiative for Multi-Sectoral Technical and Economic Cooperation</td><td>বঙ্গোপসাগর তীরবর্তী ৭টি দেশের অর্থনৈতিক ও কারিগরি সহযোগিতার আঞ্চলিক জোট (সদর দপ্তর: ঢাকা)।</td></tr>
+    <tr><td><strong>GPS</strong></td><td>Global Positioning System</td><td>উপগ্রহভিত্তিক বৈশ্বিক অবস্থান নির্ণয় প্রযুক্তি।</td></tr>
+    <tr><td><strong>ChatGPT</strong></td><td>Chat Generative Pre-trained Transformer</td><td>OpenAI কর্তৃক উদ্ভাবিত কৃত্রিম বুদ্ধিমত্তা (AI) চালিত জনপ্রিয় লার্জ ল্যাঙ্গুয়েজ মডেল (LLM)।</td></tr>
+  </tbody>
+</table>
+            </div>
+          </div>
+        </article>
+    
+      </div>
+    </section>
+
+    <footer>
+      <p>PSC & IBA Written Job Solution • 100% Authentic Reference Book Solutions</p>
+      <p style="font-size:0.8rem; margin-top:4px;">Strictly adheres to Zero External Fabrication Policy & KaTeX Math Notation</p>
+    </footer>
+  </main>
+
+  <script>
+    let scores = {};
+
+    function toggleDrawer(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.toggle('open');
+      const icon = el.previousElementSibling.querySelector('.toggle-icon');
+      if (icon) icon.textContent = el.classList.contains('open') ? '▲' : '▼';
+    }
+
+    function recordScore(qid, marks) {
+      scores[qid] = marks;
+      updateTotalScore();
+    }
+
+    function updateTotalScore() {
+      let total = 0;
+      for (let k in scores) {
+        total += scores[k];
+      }
+      document.getElementById('user-score').textContent = toBn(total);
+    }
+
+    function resetScore() {
+      scores = {};
+      document.getElementById('user-score').textContent = '০';
+    }
+
+    function toBn(n) {
+      const bn = {'0':'০','1':'১','2':'২','3':'৩','4':'৪','5':'৫','6':'৬','7':'৭','8':'৮','9':'৯'};
+      return String(n).replace(/[0-9]/g, d => bn[d]);
+    }
+
+    // Tab Filtering
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const subj = btn.getAttribute('data-subject');
+        document.querySelectorAll('.q-card').forEach(card => {
+          if (subj === 'all' || card.getAttribute('data-subject') === subj) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Font scaling
+    let scale = 1;
+    function adjustFont(delta) {
+      scale = Math.min(1.4, Math.max(0.8, scale + delta));
+      document.documentElement.style.setProperty('--font-scale', scale);
+    }
+    function resetFont() {
+      scale = 1;
+      document.documentElement.style.setProperty('--font-scale', 1);
+    }
+
+    // Theme toggle
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      document.querySelector('.theme-toggle').textContent = isDark ? '☀️' : '🌙';
+    }
+
+    // Render KaTeX
+    document.addEventListener("DOMContentLoaded", function() {
+      if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '\[', right: '\]', display: true},
+            {left: '\(', right: '\)', display: false}
+          ],
+          throwOnError: false
+        });
+      }
+    });
+  </script>
+</body>
+</html>

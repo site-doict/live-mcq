@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বাংলাদেশ কর্মচারী কল্যাণ বোর্ড — সহকারী প্রোগ্রামার | প্রামাণ্য সমাধান</title>
+  <link rel="stylesheet" href="css/paper-textures.css">
+  <link rel="stylesheet" href="css/bangla-fonts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Kalpurush&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\(', right: '\\)', display: false}]});">
+  </script>
+  <style>
+    :root {
+      --bg-page: #fdfbf7;
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: rgba(226, 232, 240, 0.8);
+      --accent-primary: #0284c7;
+      --accent-indigo: #6366f1;
+      --accent-emerald: #10b981;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #0f172a;
+      --bg-surface: rgba(30, 41, 59, 0.85);
+      --bg-card: rgba(30, 41, 59, 0.82);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: rgba(51, 65, 85, 0.8);
+      --accent-primary: #38bdf8;
+      --accent-indigo: #818cf8;
+      --accent-emerald: #34d399;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.65;
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Top Nav */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+    }
+    .back-btn {
+      text-decoration: none;
+      color: var(--accent-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .back-btn:hover { text-decoration: underline; }
+    .nav-controls { display: flex; align-items: center; gap: 0.75rem; }
+    .theme-btn, .font-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .theme-btn:hover, .font-btn:hover {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Chapter Header */
+    .ch-header {
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .ch-title {
+      font-size: 1.65rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+    }
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.05rem;
+      display: block;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 0.25rem;
+    }
+    .ch-meta-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .ch-badge {
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--accent-primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+
+    /* Sketchnotes Section */
+    .sk-container {
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+    .sk-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .sk-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.15rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .sk-box h4 {
+      font-size: 1.05rem;
+      color: var(--accent-indigo);
+      margin-bottom: 0.65rem;
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 0.35rem;
+    }
+    .sk-box ul { list-style-type: none; }
+    .sk-box li {
+      font-size: 0.92rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+    .sk-box li strong { color: var(--text-main); }
+
+    /* Part 2: Question Section */
+    .part2-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .part2-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .subject-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .tab-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.4rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Question Cards */
+    .q-card {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .q-header {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.85rem;
+    }
+    .q-num {
+      font-weight: 700;
+      color: var(--accent-primary);
+      font-size: 1.05rem;
+    }
+    .q-meta-tag {
+      background: rgba(2, 132, 199, 0.08);
+      color: var(--accent-primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .q-body {
+      margin-bottom: 1rem;
+    }
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* Answer Drawer */
+    .ans-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(2, 132, 199, 0.06);
+      border: 1px solid rgba(2, 132, 199, 0.15);
+      color: var(--accent-primary);
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+    .ans-toggle:hover { background: rgba(2, 132, 199, 0.12); }
+    .ans-drawer {
+      display: none;
+      padding: 1.25rem;
+      margin-top: 0.75rem;
+      background: rgba(0, 0, 0, 0.02);
+      border-left: 3px solid var(--accent-primary);
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    }
+    [data-theme="dark"] .ans-drawer { background: rgba(255, 255, 255, 0.02); }
+    .ans-drawer.open { display: block; }
+    .exp-content {
+      font-size: 0.98rem;
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+    .exp-content p { margin-bottom: 0.75rem; }
+    .exp-content ul, .exp-content ol { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+    .exp-content li { margin-bottom: 0.35rem; }
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.92rem;
+    }
+    .bcs-table th, .bcs-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+    }
+    .bcs-table th {
+      background: rgba(2, 132, 199, 0.08);
+      font-weight: 600;
+      color: var(--accent-primary);
+    }
+
+    /* Typography Protection */
+    .q-card, .q-card *, .q-text, .q-text *, .ans-drawer, .ans-drawer *,
+    .bcs-table, .bcs-table * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body class="paper-dot-grid font-begum-zia">
+  <div class="container">
+    <!-- Top Navigation -->
+    <header class="top-nav">
+      <a href="index.html" class="back-btn">
+        <span>←</span> সূচিপত্রে ফিরে যান
+      </a>
+      <div class="nav-controls">
+        <button class="font-btn" onclick="adjustFontSize(-1)">A-</button>
+        <button class="font-btn" onclick="adjustFontSize(0)">A</button>
+        <button class="font-btn" onclick="adjustFontSize(1)">A+</button>
+        <button class="theme-btn" onclick="toggleTheme()" id="themeToggleBtn">🌙</button>
+      </div>
+    </header>
+
+    <!-- Chapter Header -->
+    <section class="ch-header">
+      <h1 class="ch-title font-begum-zia">
+        বাংলাদেশ কর্মচারী কল্যাণ বোর্ড — সহকারী প্রোগ্রামার
+        <span class="ch-en">Bangladesh Employees Welfare Board (BKKB) - Assistant Programmer 2017</span>
+      </h1>
+      <div class="ch-meta-wrap">
+        <span class="ch-badge">📋 পরীক্ষা নং: ১২৬</span>
+        <span class="ch-badge">🏛️ Others</span>
+        <span class="ch-badge">📅 তারিখ: ২০১৭</span>
+        <span class="ch-badge">⏱️ সময়: ১৮০ মিনিট</span>
+        <span class="ch-badge">🎯 পূর্ণমান: ২০০</span>
+        <span class="ch-badge">🔢 মোট প্রশ্ন: ৮টি</span>
+        <span class="ch-badge">📄 পৃষ্ঠা: ৭৪৮–৭৪৯</span>
+      </div>
+    </section>
+
+    
+    <section class="sk-part1">
+      <div class="sk-badge">Part 1: Authentic Revision Notes &amp; Formulas</div>
+      <h3 class="sk-title font-begum-zia">বাংলাদেশ কর্মচারী কল্যাণ বোর্ড — সহকারী প্রোগ্রামার প্রামাণ্য রিভিশন নোট ও সূত্রাবলি</h3>
+      <p class="sk-desc font-begum-zia">
+        এই অধ্যায়ের মূল পরীক্ষার প্রশ্ন ও বিশদ সমাধান থেকে সংকলিত হ্যান্ডনোট, গাণিতিক সূত্র ও সারসংক্ষেপ:
+      </p>
+      <div class="sk-grid">
+        
+        <div class="sk-box">
+          <h4 class="font-begum-zia">কম্পিউটার আর্কিটেকচার ও মেমোরি হায়ারার্কি</h4>
+          <div>• <strong>কম্পিউটার বাস:</strong> মাদারবোর্ডে ডেটা চলাচলের পরিবাহী লাইন। প্রধান ৩ প্রকার: ডেটা বাস (উভয়মুখী), অ্যাড্রেস বাস (একমুখী), ও কন্ট্রোল বাস। গতি মাপা হয় MHz/GHz-এ।<br>• <strong>মেমোরি তুলনা:</strong> রেজিস্টার > ক্যাশ মেমোরি (L1, L2, L3) > র‍্যাম (RAM) > সেকেন্ডারি স্টোরেজ (SSD/HDD) > ভার্চুয়াল মেমোরি (সোয়াপ স্পেস)।<br>• <strong>ডেটা ট্রান্সমিশন মোড:</strong> সিমপ্লেক্স (একমুখী, যেমন রেডিও), হাফ-ডুপ্লেক্স (একবারে একমুখী, যেমন ওয়াকি-টকি), ফুল-ডুপ্লেক্স (একই সাথে উভয়মুখী, যেমন মোবাইল ফোন)।</div>
+        </div>
+
+        <div class="sk-box">
+          <h4 class="font-begum-zia">ডাটাবেজ ও নেটওয়ার্কিং টার্মিনোলজি</h4>
+          <div>• <strong>DDL:</strong> Data Definition Language (CREATE, ALTER, DROP)।<br>• <strong>DML:</strong> Data Manipulation Language (SELECT, INSERT, UPDATE, DELETE)।<br>• <strong>টপোলজি প্রকারভেদ:</strong> বাস (একক ব্যাকবোন), রিং (বৃত্তাকার লুপ), স্টার (কেন্দ্রীয় হাব/সুইচ), ট্রি (শাখা-প্রশাখা), মেশ (পয়েন্ট-টু-পয়েন্ট)।</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PART 2: Written Examination Question Engine -->
+    <section>
+      <div class="part2-header">
+        <div class="part2-title">
+          <span>📝</span> Part 2: বিগত পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক ও সমাধান
+        </div>
+      </div>
+
+      <!-- Subject Filter Tabs -->
+      <nav class="subject-tabs">
+        <button class="tab-btn active" data-subject="all">সকল বিষয় (৮)</button>
+        <button class="tab-btn" data-subject="আইসিটি">আইসিটি (৮)</button>
+      </nav>
+
+      <!-- Question Cards List -->
+      <main id="questionContainer">
+        
+        <article class="q-card" data-qid="1" data-subject="আইসিটি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১</span>
+            <span class="q-meta-tag">আইসিটি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">আইসিটি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ২৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">কম্পিউটার বাস কি? কম্পিউটার বাসের গতি মাপার একক কি? বিভিন্ন কম্পিউটার বাসের প্রকারভেদগুলো সংক্ষিপ্ত বর্ণনা করুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-1')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-1" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>কম্পিউটার বাস (Computer Bus):</strong> কম্পিউটারের মাদারবোর্ডে মাইক্রোপ্রসেসর এবং অন্যান্য চিপ বা কম্পোনেন্টগুলোর মধ্যে বৈদ্যুতিক সংকেত ও ডেটা আদান-প্রদানের জন্য ব্যবহৃত পরিবাহী তারের সমান্তরাল পথকে কম্পিউটার বাস বলে।</p>
+<p><strong>গতির একক:</strong> কম্পিউটার বাসের গতি মাপার সাধারণ একক হলো <strong>মেগাহার্টজ (MHz)</strong> বা গিগাহার্টজ (GHz), এবং ডেটা স্থানান্তরের হার পরিমাপ করা হয় মেগাবাইট/সেকেন্ড (MB/s) বা গিগাবাইট/সেকেন্ড (GB/s)-এ।</p>
+<p><strong>কম্পিউটার বাসের প্রকারভেদ:</strong><br>
+১. <strong>ডেটা বাস (Data Bus):</strong> এটি সিপিইউ, মেমোরি এবং ইনপুট-আউটপুট ডিভাইসের মধ্যে সরাসরি ডেটা স্থানান্তরের জন্য ব্যবহৃত হয়। এটি একটি উভয়মুখী (Bidirectional) বাস। ডেটা বাস সাধারণত ৮, ১৬, ৩২ বা ৬৪ বিটের হয়ে থাকে।<br>
+২. <strong>অ্যাড্রেস বাস (Address Bus):</strong> সিপিইউ যখন মেমোরির নির্দিষ্ট কোনো লোকেশনে ডেটা পাঠাতে বা পড়তে চায়, তখন সেই অবস্থানের ঠিকানা এই বাসের মাধ্যমে পাঠানো হয়। এটি একটি একমুখী (Unidirectional) বাস।<br>
+৩. <strong>কন্ট্রোল বাস (Control Bus):</strong> ডেটা আদান-প্রদান সমন্বয় ও নিয়ন্ত্রণ করতে সিপিইউ বিভিন্ন কন্ট্রোল সিগন্যাল (যেমন: Read, Write, Interrupt, Clock) পাঠায়। এটি মূলত উভয়মুখী সংকেত বহন করে।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="2" data-subject="আইসিটি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ২</span>
+            <span class="q-meta-tag">আইসিটি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">আইসিটি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ২৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">অপারেটিং সিস্টেম কাকে বলে? অপারেটিং সিস্টেমের ০৪টি কাজ লিখুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-2')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-2" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>অপারেটিং সিস্টেম (Operating System - OS):</strong> অপারেটিং সিস্টেম হলো এমন একটি প্রধান সিস্টেম সফটওয়্যার যা কম্পিউটার হার্ডওয়্যার এবং ব্যবহারকারীর প্রয়োগমূলক প্রোগ্রামের (Application Software) মধ্যে সংযোগ স্থাপন করে এবং কম্পিউটারের সামগ্রিক সম্পদ ও কার্যক্রম পরিচালনা করে।</p>
+<p><strong>অপারেটিং সিস্টেমের ৪টি প্রধান কাজ:</strong><br>
+১. <strong>প্রসেস ম্যানেজমেন্ট (Process Management):</strong> বিভিন্ন প্রোগ্রামের এক্সিকিউশন শিডিউলিং, টাস্ক অগ্রাধিকার নির্ধারণ এবং মাল্টিটাস্কিং নিয়ন্ত্রণ করা।<br>
+২. <strong>মেমোরি ম্যানেজমেন্ট (Memory Management):</strong> প্রধান মেমোরির (RAM) জায়গা বরাদ্দ করা, ডি-অ্যালোকেট করা এবং ভার্চুয়াল মেমোরি পরিচালনা করা।<br>
+৩. <strong>ফাইল সিস্টেম ম্যানেজমেন্ট (File System Management):</strong> সেকেন্ডারি স্টোরেজে ফাইল ও ডিরেক্টরি তৈরি, সংরক্ষণ, বিন্যাস এবং নিরাপত্তা অ্যাক্সেস নিয়ন্ত্রণ করা।<br>
+৪. <strong>ডিভাইস ও আই/ও ম্যানেজমেন্ট (Device Management):</strong> ড্রাইভারের মাধ্যমে কীবোর্ড, মাউস, প্রিন্টার ও ডিস্কসহ সকল ইনপুট-আউটপুট ডিভাইসের সংযোগ ও যোগাযোগ নিয়ন্ত্রণ করা।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="3" data-subject="আইসিটি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৩</span>
+            <span class="q-meta-tag">আইসিটি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">আইসিটি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ২৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">কম্পিউটার ভাইরাস কাকে বলে? কম্পিউটারের ব্যবহৃত ০৬ টি এন্টি-ভাইরাসের নাম লিখুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-3')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-3" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>কম্পিউটার ভাইরাস (VIRUS - Vital Information Resources Under Siege):</strong> কম্পিউটার ভাইরাস হলো এক ধরনের ধ্বংসাত্মক বা ক্ষতিকর সফটওয়্যার প্রোগ্রাম যা ব্যবহারকারীর অনুমতি ছাড়াই কম্পিউটারে প্রবেশ করে নিজের প্রতিলিপি তৈরি করে ফাইল, অপারেটিং সিস্টেম বা মেমোরিকে ক্ষতিগ্রস্ত করে।</p>
+<p><strong>৬টি জনপ্রিয় অ্যান্টি-ভাইরাসের নাম:</strong><br>
+১. Kaspersky Anti-Virus<br>
+২. Norton AntiVirus (Symantec)<br>
+৩. Bitdefender Antivirus<br>
+৪. Avast Antivirus<br>
+৫. McAfee Total Protection<br>
+৬. ESET NOD32 Antivirus</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="4" data-subject="আইসিটি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৪</span>
+            <span class="q-meta-tag">আইসিটি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">আইসিটি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ২৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">কম্পিউটার নেটওয়ার্ক বলতে কি বুঝ? কম্পিউটার নেটওয়ার্কের ০৪টি Topology'র নাম লিখুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-4')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-4" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>কম্পিউটার নেটওয়ার্ক (Computer Network):</strong> তথ্য আদান-প্রদান এবং হার্ডওয়্যার ও সফটওয়্যার রিসোর্স (যেমন: ফাইল, প্রিন্টার, ইন্টারনেট সংযোগ) শেয়ার করার উদ্দেশ্যে দুই বা ততোধিক কম্পিউটার যখন কোনো মাধ্যম (ক্যাবল বা বেতার) দ্বারা পরস্পরের সাথে সংযুক্ত থাকে, তখন তাকে কম্পিউটার নেটওয়ার্ক বলে।</p>
+<p><strong>নেটওয়ার্কের ৪টি প্রধান টপোলজি:</strong><br>
+১. <strong>বাস টপোলজি (Bus Topology):</strong> যেখানে সব কম্পিউটার একটিমাত্র মূল তার বা ব্যাকবোন লাইনের সাথে যুক্ত থাকে।<br>
+২. <strong>স্টার টপোলজি (Star Topology):</strong> প্রতিটি কম্পিউটার একটি কেন্দ্রীয় নিয়ন্ত্রণকারী ডিভাইস (সুইচ বা হাব)-এর সাথে সরাসরি সংযুক্ত থাকে।<br>
+৩. <strong>রিং টপোলজি (Ring Topology):</strong> প্রতিটি কম্পিউটার তার পাশের দুটি কম্পিউটারের সাথে যুক্ত হয়ে একটি বৃত্তাকার লুপ তৈরি করে।<br>
+৪. <strong>ট্রি টপোলজি (Tree Topology):</strong> স্টার টপোলজির একাধিক হাব পরস্পরের সাথে যুক্ত হয়ে হায়ারার্কিকাল বা শাখা-প্রশাখাযুক্ত কাঠামো তৈরি করে।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="5" data-subject="আইসিটি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৫</span>
+            <span class="q-meta-tag">আইসিটি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">আইসিটি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ২৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">ডাটাবেজ কাকে বলে? DBMS বলতে কি বুঝ? DDL এবং DML পূর্ণরূপ লিখ।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-5')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-5" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>ডাটাবেজ (Database):</strong> পরস্পর সম্পর্কযুক্ত এক বা একাধিক তথ্যের সুসংগঠিত এবং নিয়মতান্ত্রিক সংগ্রহকে ডাটাবেজ বলে, যেখান থেকে প্রয়োজন অনুযায়ী তথ্য সহজে সংরক্ষণ, অনুসন্ধান ও আপডেট করা যায়।</p>
+<p><strong>DBMS (Database Management System):</strong> এটি এমন একটি সফটওয়্যার স্যুট যা ব্যবহারকারী ও অ্যাপ্লিকেশনকে ডাটাবেজ তৈরি, পরিচালনা, আপডেট এবং নিরাপদে ডেটা অ্যাক্সেস করার সুবিধা দেয় (যেমন: Oracle, MySQL, SQL Server)।</p>
+<p><strong>পূর্ণরূপ:</strong><br>
+• <strong>DDL:</strong> Data Definition Language (ডাটাবেজের স্কিমা বা টেবিল স্ট্রাকচার তৈরিতে ব্যবহৃত হয়; যেমন: <code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>)।<br>
+• <strong>DML:</strong> Data Manipulation Language (টেবিলের ডেটা ম্যানিপুলেট করতে ব্যবহৃত হয়; যেমন: <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>)।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="6" data-subject="আইসিটি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৬</span>
+            <span class="q-meta-tag">আইসিটি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">আইসিটি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ২৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">ফ্ল্যাশ মেমরি, ক্যাশ মেমোরি এবং ভার্চুয়াল মেমোরিগুলোর পার্থক্য লিখুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-6')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-6" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>বৈশিষ্ট্য</th><th>ফ্ল্যাশ মেমোরি (Flash Memory)</th><th>ক্যাশ মেমোরি (Cache Memory)</th><th>ভার্চুয়াল মেমোরি (Virtual Memory)</th></tr></thead>
+<tbody>
+<tr><td><strong>প্রকৃতি</strong></td><td>নন-ভোলাটাইল (বিদ্যুৎ চলে গেলেও তথ্য মোছে না)</td><td>ভোলাটাইল অতি দ্রুতগতির মেমোরি</td><td>অপারেটিং সিস্টেম নিয়ন্ত্রিত কাল্পনিক মেমোরি</td></tr>
+<tr><td><strong>অবস্থান</strong></td><td>পেনড্রাইভ, এসএসডি বা মেমোরি কার্ডে চিপ আকারে</td><td>সিপিইউ ও র‍্যামের মধ্যবর্তী অতি ক্ষুদ্র সেমিকন্ডাক্টর চিপ</td><td>হার্ডডিস্ক বা এসএসডির সংরক্ষিত নির্দিষ্ট সোয়াপ অংশ</td></tr>
+<tr><td><strong>গতি</strong></td><td>মাঝারি গতির স্টোরেজ</td><td>সিপিইউ রেজিস্টারের পরেই সবচেয়ে দ্রুতগতির মেমোরি</td><td>র‍্যামের চেয়ে ধীরগতির সেকেন্ডারি স্টোরেজ গতিসম্পন্ন</td></tr>
+<tr><td><strong>মূল কাজ</strong></td><td>স্থায়ীভাবে ডেটা বহন ও দীর্ঘমেয়াদী সংরক্ষণ</td><td>সিপিইউ-এর ঘনঘন ব্যবহৃত নির্দেশাবলি সাময়িক জমা রাখা</td><td>র‍্যামের ঘাটতি হলে বড় প্রোগ্রাম চালু রাখতে সহায়তা করা</td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="7" data-subject="আইসিটি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৭</span>
+            <span class="q-meta-tag">আইসিটি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">আইসিটি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ২৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">ডেটা কমিউনিকেশন কাকে বলে? ডেটা ট্রান্সমিশনের ০৩টি মোডের ব্যাখ্যা করুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-7')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-7" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>ডেটা কমিউনিকেশন:</strong> এক স্থান থেকে অন্য স্থানে অথবা এক ডিভাইস থেকে অন্য ডিভাইসে কোনো মাধ্যমের (তার বা বেতার) সাহায্যে নির্ভরযোগ্যভাবে সংকেত বা ডেটা আদান-প্রদানের সামগ্রিক প্রক্রিয়াকে ডেটা কমিউনিকেশন বলে।</p>
+<p><strong>ডেটা ট্রান্সমিশনের ৩টি মোড:</strong><br>
+১. <strong>সিমপ্লেক্স মোড (Simplex Mode):</strong> ডেটা কেবল একদিকে প্রবাহিত হয়। গ্রাহক প্রেরককে কোনো উত্তর দিতে পারে না। উদাহরণ: রেডিও সম্প্রচার, টেলিভিশন ব্রডকাস্ট বা কীবোর্ড থেকে সিপিইউ-তে ডেটা পাঠানো।<br>
+২. <strong>হাফ-ডুপ্লেক্স মোড (Half-Duplex Mode):</strong> উভয় দিক থেকেই ডেটা প্রেরণ সম্ভব, তবে একই সময়ে নয়; একজন প্রেরণ শেষ করলে অন্যজন পাঠাতে পারে। উদাহরণ: ওয়াকি-টকি (Walkie-Talkie)।<br>
+৩. <strong>ফুল-ডুপ্লেক্স মোড (Full-Duplex Mode):</strong> একই সাথে উভয় দিক থেকেই যুগপৎ ডেটা আদান-প্রদান করা যায়। উদাহরণ: টেলিফোন, মোবাইল নেটওয়ার্ক বা ইন্টারনেটে ভিডিও কলিং।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="8" data-subject="আইসিটি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৮</span>
+            <span class="q-meta-tag">আইসিটি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">আইসিটি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ২৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">নিচের শব্দগুলোর পূর্ণরূপ লিখুন:<br>a) VGA<br>b) OCR<br>c) VLAN<br>d) SMTP<br>e) ICMP<br>f) URL<br>g) VOIP<br>h) VSAT<br>i) TCP/IP<br>j) DHCP</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-8')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-8" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>সংক্ষেপ</th><th>পূর্ণরূপ (Full Form)</th><th>অর্থ / বিবরণ</th></tr></thead>
+<tbody>
+<tr><td>VGA</td><td><strong>Video Graphics Array</strong></td><td>কম্পিউটার ডিসপ্লে পোর্ট ও গ্রাফিক্স স্ট্যান্ডার্ড</td></tr>
+<tr><td>OCR</td><td><strong>Optical Character Recognition</strong></td><td>মুদ্রিত টেক্সটকে ডিজিটাল টেক্সটে রূপান্তর প্রযুক্তি</td></tr>
+<tr><td>VLAN</td><td><strong>Virtual Local Area Network</strong></td><td>লজিক্যাল উপায়ে বিভক্ত ভার্চুয়াল নেটওয়ার্ক</td></tr>
+<tr><td>SMTP</td><td><strong>Simple Mail Transfer Protocol</strong></td><td>ই-মেইল প্রেরণের স্ট্যান্ডার্ড প্রটোকল</td></tr>
+<tr><td>ICMP</td><td><strong>Internet Control Message Protocol</strong></td><td>নেটওয়ার্ক এরর রিপোর্টিং প্রটোকল (Ping/Traceroute)</td></tr>
+<tr><td>URL</td><td><strong>Uniform Resource Locator</strong></td><td>ওয়েব ঠিকানার স্ট্যান্ডার্ড কাঠামো</td></tr>
+<tr><td>VOIP</td><td><strong>Voice over Internet Protocol</strong></td><td>ইন্টারনেটের মাধ্যমে ভয়েস কল প্রযুক্তি</td></tr>
+<tr><td>VSAT</td><td><strong>Very Small Aperture Terminal</strong></td><td>স্যাটেলাইট যোগাযোগ অ্যান্টেনা প্রযুক্তি</td></tr>
+<tr><td>TCP/IP</td><td><strong>Transmission Control Protocol / Internet Protocol</strong></td><td>ইন্টারনেটের মূল স্যুট ও প্যাকেট ট্রান্সমিশন আর্কিটেকচার</td></tr>
+<tr><td>DHCP</td><td><strong>Dynamic Host Configuration Protocol</strong></td><td>নেটওয়ার্কে স্বয়ংক্রিয়ভাবে আইপি প্রদানকারী প্রটোকল</td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+      </main>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>PSC & IBA Written Job Solution Master Repository • নির্ভুল ও প্রামাণ্য ই-বুক সংস্করণ</p>
+      <p style="margin-top:0.25rem;">উৎস: মূল পরীক্ষার প্রশ্নপত্র ও অফিশিয়াল সমাধান সংগ্রহ</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      document.getElementById('themeToggleBtn').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    }
+
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.addEventListener('DOMContentLoaded', () => {
+          const btn = document.getElementById('themeToggleBtn');
+          if (btn) btn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        });
+      }
+    })();
+
+    function toggleDrawer(id) {
+      const drawer = document.getElementById(id);
+      if (!drawer) return;
+      const isVisible = drawer.classList.contains('open');
+      drawer.classList.toggle('open');
+      const toggleBtn = drawer.previousElementSibling;
+      if (toggleBtn) {
+        const icon = toggleBtn.querySelector('.toggle-icon');
+        if (icon) icon.textContent = isVisible ? '▼' : '▲';
+      }
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const subject = btn.getAttribute('data-subject');
+        document.querySelectorAll('.q-card').forEach(card => {
+          if (subject === 'all' || card.getAttribute('data-subject') === subject) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    let baseFontSize = 100;
+    function adjustFontSize(dir) {
+      if (dir === 0) baseFontSize = 100;
+      else baseFontSize += dir * 8;
+      if (baseFontSize < 80) baseFontSize = 80;
+      if (baseFontSize > 130) baseFontSize = 130;
+      document.documentElement.style.fontSize = baseFontSize + '%';
+    }
+  </script>
+</body>
+</html>

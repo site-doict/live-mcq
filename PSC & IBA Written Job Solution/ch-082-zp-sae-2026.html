@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>জেলা পরিষদ (স্থানীয় সরকার বিভাগ) — উপ-সহকারী প্রকৌশলী ২০২৬ | প্রামাণ্য সমাধান</title>
+  <link rel="stylesheet" href="css/paper-textures.css">
+  <link rel="stylesheet" href="css/bangla-fonts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Kalpurush&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\(', right: '\\)', display: false}]});">
+  </script>
+  <style>
+    :root {
+      --bg-page: #f9f6f0;
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --border-color: rgba(180, 160, 135, 0.4);
+      --text-main: #2c2523;
+      --text-muted: #5c554e;
+      --accent-crimson: #9e2a2b;
+      --accent-indigo: #3f37c9;
+      --accent-emerald: #1b4332;
+      --accent-gold: #b5838d;
+      --toggle-bg: #e2d7c7;
+      font-size: 16px;
+    }
+    body.dark-theme {
+      --bg-page: #1a1715;
+      --bg-surface: rgba(36, 32, 29, 0.88);
+      --bg-card: rgba(42, 37, 34, 0.85);
+      --border-color: rgba(90, 80, 70, 0.45);
+      --text-main: #ece6df;
+      --text-muted: #b5ada4;
+      --accent-crimson: #ff7b72;
+      --accent-indigo: #79c0ff;
+      --accent-emerald: #7ee787;
+      --accent-gold: #d2a8ff;
+      --toggle-bg: #2d2621;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.65;
+      padding-bottom: 5rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem;
+    }
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .back-btn {
+      text-decoration: none;
+      color: var(--accent-crimson);
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .nav-controls {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .ctrl-btn {
+      background: var(--toggle-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      border-radius: 6px;
+      padding: 0.3rem 0.65rem;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-family: 'Inter', sans-serif;
+    }
+    .header-box {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      background: var(--bg-surface);
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    }
+    .ch-title {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent-crimson);
+    }
+    .ch-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-main);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    .ch-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+    .ch-badge {
+      background: rgba(158, 42, 43, 0.1);
+      color: var(--accent-crimson);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1px solid rgba(158, 42, 43, 0.2);
+    }
+    body.dark-theme .ch-badge {
+      background: rgba(255, 123, 114, 0.15);
+      border-color: rgba(255, 123, 114, 0.3);
+    }
+
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+    .bcs-table th, .bcs-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.65rem 0.85rem;
+      text-align: left;
+    }
+    .bcs-table th {
+      background: rgba(158, 42, 43, 0.08);
+      color: var(--accent-crimson);
+      font-weight: 600;
+    }
+    body.dark-theme .bcs-table th {
+      background: rgba(255, 123, 114, 0.12);
+    }
+
+    /* Sketchnotes Part 1 */
+    .sk-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+    .sk-title {
+      font-size: 1.35rem;
+      color: var(--accent-crimson);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+    }
+    .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+    .sk-box {
+      background: var(--bg-card);
+      border: 1px dashed var(--border-color);
+      border-radius: 8px;
+      padding: 1.15rem;
+    }
+    .sk-box h4 {
+      font-size: 1.1rem;
+      color: var(--accent-indigo);
+      margin-bottom: 0.65rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.35rem;
+    }
+    .sk-box ul {
+      list-style-type: disc;
+      padding-left: 1.2rem;
+      font-size: 0.95rem;
+    }
+    .sk-box li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Question Engine Part 2 */
+    .sec-heading {
+      font-size: 1.35rem;
+      color: var(--accent-crimson);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+    }
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .tab-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      border-radius: 20px;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn.active {
+      background: var(--accent-crimson);
+      color: #fff;
+      border-color: var(--accent-crimson);
+    }
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .q-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .q-num {
+      font-weight: 700;
+      color: var(--accent-crimson);
+      font-size: 1rem;
+    }
+    .q-meta-tag {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background: rgba(180, 160, 135, 0.2);
+      color: var(--text-muted);
+    }
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.85rem;
+      line-height: 1.6;
+    }
+    .ans-toggle {
+      background: rgba(63, 55, 201, 0.08);
+      color: var(--accent-indigo);
+      border-radius: 6px;
+      padding: 0.6rem 0.85rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+    .ans-toggle:hover {
+      background: rgba(63, 55, 201, 0.14);
+    }
+    .ans-drawer {
+      display: none;
+      margin-top: 0.75rem;
+      padding: 1rem;
+      border-left: 3px solid var(--accent-indigo);
+      background: rgba(63, 55, 201, 0.03);
+      border-radius: 0 6px 6px 0;
+    }
+    .ans-drawer.open {
+      display: block;
+    }
+    .exp-content p {
+      margin-bottom: 0.65rem;
+    }
+    .exp-content ul, .exp-content ol {
+      margin-left: 1.3rem;
+      margin-bottom: 0.65rem;
+    }
+    .footer-box {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: 3rem;
+    }
+
+    /* Typography Protection */
+    .q-card, .q-card *, .q-text, .q-text *, .opt-btn, .opt-btn *,
+    .ans-drawer, .ans-drawer *, .exp-drawer, .exp-drawer *,
+    .bcs-table, .bcs-table *, .score-bar, .score-bar *, .doubt-box, .doubt-box * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+  </style>
+</head>
+<body class="paper-lined-notebook font-priotoma-2">
+  <div class="container">
+    <nav class="top-nav">
+      <a href="index.html" class="back-btn">← মূল সূচিপত্র</a>
+      <div class="nav-controls">
+        <button class="ctrl-btn" onclick="adjustFontSize(-1)">A-</button>
+        <button class="ctrl-btn" onclick="adjustFontSize(0)">A</button>
+        <button class="ctrl-btn" onclick="adjustFontSize(1)">A+</button>
+        <button class="ctrl-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
+      </div>
+    </nav>
+
+    <header class="header-box">
+      <h1 class="ch-title">জেলা পরিষদ (স্থানীয় সরকার বিভাগ) <span class="ch-en">(Zilla Parishad, Local Government Division)</span></h1>
+      <div class="ch-subtitle">পদের নাম: উপ-সহকারী প্রকৌশলী ২০২৬</div>
+      <div class="ch-badges">
+        <span class="ch-badge">তারিখ: ২৩.০১.২০২৬</span>
+        <span class="ch-badge">সময়: ৬০ মিনিট</span>
+        <span class="ch-badge">পূর্ণমান: ১০০</span>
+        <span class="ch-badge">মোট প্রশ্ন: ৯ টি</span>
+        <span class="ch-badge">পৃষ্ঠা: ৫২৩–৫২৪</span>
+        <span class="ch-badge">১০ম গ্রেড</span>
+      </div>
+    </header>
+
+    <section style="background:var(--bg-surface); padding:1rem 1.25rem; border-radius:10px; border:1px solid var(--border-color); margin-bottom:1.5rem;">
+      <h3 style="font-size:1.15rem; color:var(--accent-crimson); margin-bottom:0.5rem;">📊 বিষয়ভিত্তিক মানবণ্টন ও বিশ্লেষণ ছক</h3>
+      <table class="bcs-table" style="margin:0.5rem 0;">
+        <thead>
+          <tr>
+            <th>বিষয়</th>
+            <th>প্রশ্ন সংখ্যা</th>
+            <th>পূর্ণমান</th>
+            <th>প্রশ্ন পরিসীমা</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>বাংলা ভাষা ও ব্যাকরণ</td>
+            <td>২ টি</td>
+            <td>২০</td>
+            <td>প্রশ্ন ০১ – ০২ (বানান শুদ্ধকরণ ও সমাস নির্ণয়)</td>
+          </tr>
+          <tr>
+            <td>English Language & Composition</td>
+            <td>২ টি</td>
+            <td>৩০</td>
+            <td>প্রশ্ন ০৩ – ০৪ (১০ বাক্যের অনুচ্ছেদ ও Right form of verbs)</td>
+          </tr>
+          <tr>
+            <td>গাণিতিক যুক্তি ও মানসিক দক্ষতা</td>
+            <td>৫ টি</td>
+            <td>৫০</td>
+            <td>প্রশ্ন ০৫ – ০৯ (জ্যামিতি, সম্ভাবনা, বীজগণিত, সেট ও শতকরা)</td>
+          </tr>
+          <tr style="font-weight:700; background:rgba(158, 42, 43, 0.05);">
+            <td>সর্বমোট</td>
+            <td>৯ টি</td>
+            <td>১০০</td>
+            <td>পূর্ণাঙ্গ সরকারি লিখিত পরীক্ষা</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    
+    <!-- PART 1: Authentic Revision Notes & Sketchnotes -->
+    <section class="sk-container">
+      <div class="sk-title">
+        <span>📖</span> Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি (Authentic Sketchnotes)
+      </div>
+      <p style="color:var(--text-muted); font-size:0.95rem; margin-top:-0.5rem; margin-bottom:1.25rem;">
+        জেলা পরিষদ (স্থানীয় সরকার বিভাগ) উপ-সহকারী প্রকৌশলী পরীক্ষার প্রশ্ন ও সরকারি সিলেবাসভিত্তিক বিশদ ব্যাখ্যা থেকে সংকলিত নিয়মাবলি ও রিভিশন রত্ন:
+      </p>
+
+      <div class="sk-grid">
+        <div class="sk-box">
+          <h4>✍️ বাংলা বানান ও সন্ধিসূত্র</h4>
+          <ul>
+            <li><strong>শিরশ্ছেদ:</strong> বিসর্গ সন্ধি — শিরঃ + ছেদ = শিরশ্ছেদ (চ/ছ পরে থাকলে বিসর্গ স্থানে 'শ্' হয়; শিরোচ্ছেদ ভুল)।</li>
+            <li><strong>সান্ত্বনা:</strong> দন্ত্য 'স'-এর সাথে ত-ব যুক্তবর্ণ: সান্ত্বনা (শান্তনা ভুল)।</li>
+            <li><strong>উপরিউক্ত:</strong> উপরি + উক্ত = উপরিউক্ত (উপরোক্ত অশুদ্ধ)।</li>
+            <li><strong>পিপীলিকা:</strong> বানানের রূপ হ্রস্ব ই + দীর্ঘ ঈ + হ্রস্ব ই: পি + পী + লি + কা।</li>
+            <li><strong>আকাঙ্ক্ষা:</strong> যুক্তবর্ণ 'ক্ষ'-এর পূর্বে অনুস্বার বা ঙ-এর বিধানে ঙ বসে (আকাংখা অশুদ্ধ)।</li>
+          </ul>
+        </div>
+
+        <div class="sk-box">
+          <h4>🧩 সমাস নির্ণয় ও ব্যাসবাক্য সূত্র</h4>
+          <ul>
+            <li><strong>তমসাচ্ছন্ন:</strong> তমসা দ্বারা আচ্ছন্ন &rarr; ৩য়া তৎপুরুষ সমাস ('দ্বারা' অনুসর্গ লোপ)।</li>
+            <li><strong>দোভাষী:</strong> দুই ভাষা যার &rarr; সংখ্যাবাচক বহুব্রীহি সমাস (অন্য ব্যক্তি বা ইন্টারপ্রেটারকে বোঝায়)।</li>
+            <li><strong>তেপান্তর:</strong> তিন প্রান্তরের সমাহার &rarr; দ্বিগু সমাস (সংখ্যা + সমাহার)।</li>
+            <li><strong>মৌমাছি:</strong> মৌ সংগ্রহকারী মাছি &rarr; মধ্যপদলোপী কর্মধারয় সমাস।</li>
+            <li><strong>নদীমাতৃক:</strong> নদী মাতা যার &rarr; ব্যধিকরণ বহুব্রীহি সমাস (বাংলাদেশকে নির্দেশ করে)।</li>
+          </ul>
+        </div>
+
+        <div class="sk-box">
+          <h4>🇬🇧 English Grammar & Subject-Verb Agreement</h4>
+          <ul>
+            <li><strong>Inspire:</strong> কাউকে কোনো কাজের প্রেরণা দিতে: <em>inspire someone to do something</em>।</li>
+            <li><strong>Subject-Verb Agreement:</strong> 'The unpatriotic men' বহুবচন, তাই verb হবে <em>think</em> (not thinks)।</li>
+            <li><strong>Passive Voice:</strong> সার্বজনীন সম্মান বোঝাতে: <em>A true patriot is honoured by all</em>।</li>
+            <li><strong>Historical Past:</strong> ১৯৭১ সালের সুনির্দিষ্ট অতীত ত্যাগে Past Indefinite: <em>who sacrificed their lives in 1971</em>।</li>
+          </ul>
+        </div>
+
+        <div class="sk-box">
+          <h4>📐 জ্যামিতিক উপপাদ্য ও সমান্তরাল রেখা</h4>
+          <ul>
+            <li><strong>সমদ্বিবাহু ত্রিভুজ:</strong> সমান বাহুদ্বয়ের বিপরীত কোণদ্বয় সমান: \(AB = AC \Rightarrow \angle B = \angle C = 52^\circ\)।</li>
+            <li><strong>তিন কোণের সমষ্টি:</strong> \(\angle A + \angle B + \angle C = 180^\circ \Rightarrow \angle A = 180^\circ - 104^\circ = 76^\circ\)।</li>
+            <li><strong>অনুরূপ কোণ:</strong> দুটি সমান্তরাল রেখাকে একটি ছেদক ছেদ করলে অনুরূপ কোণ সমান: \(EF \parallel BC \Rightarrow \angle AFE = \angle C = 52^\circ\)।</li>
+            <li><strong>নির্ণেয় যোগফল:</strong> \(\angle A + \angle AFE = 76^\circ + 52^\circ = 128^\circ\)।</li>
+          </ul>
+        </div>
+
+        <div class="sk-box">
+          <h4>🎲 সম্ভাবনা ও সেট তত্ত্ব</h4>
+          <ul>
+            <li><strong>সম্ভাবনার সূত্র:</strong> \(P(E) = \frac{\text{অনুকূল ফলাফল}}{\text{মোট সম্ভাব্য ফলাফল}}\)। সপ্তাহে বৃষ্টি না হওয়ার সম্ভাবনা \(= \frac{7 - 5}{7} = \frac{2}{7}\)।</li>
+            <li><strong>ছেদ সেট (\(\cap\)):</strong> উভয় সেটে সাধারণ উপাদান।</li>
+            <li><strong>ফাঁকা সেট উপপাদ্য:</strong> যেকোনো সেট \(A\)-এর সাথে ফাঁকা সেটের ছেদ সর্বদা ফাঁকা সেট: \(A \cap \emptyset = \emptyset\)।</li>
+          </ul>
+        </div>
+
+        <div class="sk-box">
+          <h4>📈 দ্বিঘাত সমীকরণ ও শতকরা লাভ</h4>
+          <ul>
+            <li><strong>মূলদ্বয়ের যোগফল:</strong> \(ax^2 + bx + c = 0\) সমীকরণে মূলদ্বয়ের যোগফল \(= -\frac{b}{a}\)। এখানে \(-2x^2 + 16x - 8 = 0 \Rightarrow -\frac{16}{-2} = 8\)।</li>
+            <li><strong>শতকরা লাভ:</strong> মূলধনের ২.৫% কর্তনে অবশিষ্ট থাকে ৯৭.৫ টাকা। পূর্বে ফিরে যেতে লাভ প্রয়োজন ২.৫ টাকা। লাভের হার \(= \frac{2.5}{97.5} \times 100\% = 2.564\%\)।</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- PART 2: Interactive Question Engine -->
+    <section>
+      <div class="sec-heading">
+        <span>📝</span> Part 2: বিগত পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক ও সমাধান
+      </div>
+
+      <div class="filter-tabs">
+        <button class="tab-btn active" data-subject="all">সকল বিষয় (৯)</button>
+        <button class="tab-btn" data-subject="বাংলা ভাষা ও ব্যাকরণ">বাংলা ভাষা ও ব্যাকরণ (২)</button>
+        <button class="tab-btn" data-subject="English Language & Composition">English Language & Composition (২)</button>
+        <button class="tab-btn" data-subject="গাণিতিক যুক্তি ও জ্যামিতি">গাণিতিক যুক্তি ও জ্যামিতি (১)</button>
+        <button class="tab-btn" data-subject="গাণিতিক যুক্তি ও সম্ভাবনা">গাণিতিক যুক্তি ও সম্ভাবনা (১)</button>
+        <button class="tab-btn" data-subject="গাণিতিক যুক্তি ও বীজগণিত">গাণিতিক যুক্তি ও বীজগণিত (১)</button>
+        <button class="tab-btn" data-subject="গাণিতিক যুক্তি ও সেট তত্ত্ব">গাণিতিক যুক্তি ও সেট তত্ত্ব (১)</button>
+        <button class="tab-btn" data-subject="গাণিতিক যুক্তি ও পাটিগণিত">গাণিতিক যুক্তি ও পাটিগণিত (১)</button>
+      </div>
+
+      <div class="questions-list">
+        
+        <article class="q-card" data-qid="1" data-subject="বাংলা ভাষা ও ব্যাকরণ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১</span>
+            <span class="q-meta-tag">বাংলা ভাষা ও ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা ভাষা ও ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">বানান শুদ্ধ করুনঃ<br>a) শিরোচ্ছেদ<br>b) শান্তনা<br>c) উপরোক্ত<br>d) পিপিলীকা<br>e) আকাংখা</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-1')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-1" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>প্রমিত শুদ্ধ বানান তালিকা:</strong></p>
+<table class="bcs-table" style="width:100%;">
+  <thead>
+    <tr><th>অশুদ্ধ বানান</th><th>শুদ্ধ রূপ</th><th>ব্যাকরণিক ব্যাখ্যা ও সন্ধিসূত্র</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>শিরোচ্ছেদ</td><td><strong>শিরশ্ছেদ</strong></td><td>বিসর্গ সন্ধির নিয়ম: শিরঃ + ছেদ = শিরশ্ছেদ (বিসর্গের পর চ/ছ থাকলে বিসর্গ 'শ্' হয়)।</td></tr>
+    <tr><td>শান্তনা</td><td><strong>সান্ত্বনা</strong></td><td>দন্ত্য স এবং ত-এর নিচে ব-ফলা (স্ + ত্ + ব): সান্ত্বনা।</td></tr>
+    <tr><td>উপরোক্ত</td><td><strong>উপরিউক্ত</strong></td><td>সন্ধিসূত্র: উপরি + উক্ত = উপর্যুপরি বা উপরিউক্ত (উপরোক্ত অশুদ্ধ)।</td></tr>
+    <tr><td>পিপিলীকা</td><td><strong>পিপীলিকা</strong></td><td>হ্রস্ব ই, দীর্ঘ ঈ, হ্রস্ব ই ক্রম: পি + পী + লি + কা = পিপীলিকা।</td></tr>
+    <tr><td>আকাংখা</td><td><strong>আকাঙ্ক্ষা</strong></td><td>যুক্তবর্ণ ক্ষ (ক্ + ষ)-এর পূর্বে ঙ বসে: আ + কা + ঙ্ক্ষ + আ = আকাঙ্ক্ষা।</td></tr>
+  </tbody>
+</table>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="2" data-subject="বাংলা ভাষা ও ব্যাকরণ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ২</span>
+            <span class="q-meta-tag">বাংলা ভাষা ও ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা ভাষা ও ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">ব্যাসবাক্যসহ সমাস লিখুনঃ<br>a) তমসাচ্ছন্ন<br>b) দোভাষী<br>c) তেপান্তর<br>d) মৌমাছি<br>e) নদীমাতৃক</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-2')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-2" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>ব্যাসবাক্যসহ সমাস নির্ণয়:</strong></p>
+<table class="bcs-table" style="width:100%;">
+  <thead>
+    <tr><th>সমস্ত পদ</th><th>ব্যাসবাক্য</th><th>সমাসের নাম ও বৈশিষ্ট্য</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>তমসাচ্ছন্ন</td><td>তমসা দ্বারা আচ্ছন্ন</td><td><strong>তৃতীয়া তৎপুরুষ সমাস</strong> (পূর্বপদের 'দ্বারা' অনুসর্গ লোপ পেয়েছে)</td></tr>
+    <tr><td>দোভাষী</td><td>দুই ভাষা যার</td><td><strong>সংখ্যাবাচক বহুব্রীহি সমাস</strong> (পূর্বপদ সংখ্যাবাচক এবং পরপদ বিশেষ্য হয়ে অন্য ব্যক্তি বা অনুবাদককে বোঝায়)</td></tr>
+    <tr><td>তেপান্তর</td><td>তিন প্রান্তরের সমাহার</td><td><strong>দ্বিগু সমাস</strong> (পূর্বপদে সংখ্যা এবং পরপদে সমাহার অর্থে বিশেষ্য পদ)</td></tr>
+    <tr><td>মৌমাছি</td><td>মৌ সংগ্রহকারী মাছি</td><td><strong>মধ্যপদলোপী কর্মধারয় সমাস</strong> (ব্যাসবাক্যের মধ্যবর্তী 'সংগ্রহকারী' পদ লোপ পেয়েছে)</td></tr>
+    <tr><td>নদীমাতৃক</td><td>নদী মাতা যার</td><td><strong>ব্যধিকরণ বহুব্রীহি সমাস</strong> (পূর্বপদ ও পরপদ কোনোটিই সমধিকরণ নয়, নদী যার মায়ের মতো স্নেহ দান করে অর্থাৎ নদীমাতৃক দেশ)</td></tr>
+  </tbody>
+</table>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="3" data-subject="English Language & Composition" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৩</span>
+            <span class="q-meta-tag">English Language & Composition</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">English Language & Composition</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Write a paragraph on the following topic exactly in 10 sentences:<br>The Uses and Misuses of Social Media.</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-3')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-3" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>The Uses and Misuses of Social Media</strong></p>
+<ol style="margin-left:1.5rem; line-height:1.75;">
+  <li>Social media has revolutionized modern communication, connecting people across the globe instantaneously.</li>
+  <li>It serves as an invaluable platform for sharing real-time news, academic knowledge, creative ideas, and personal experiences.</li>
+  <li>It provides students and educators with dynamic interactive spaces for collaborative learning and skill development.</li>
+  <li>Furthermore, social media is an exceptionally powerful and cost-effective tool for business promotion, e-commerce, and brand marketing.</li>
+  <li>It enables organizations and welfare groups to raise humanitarian funds, mobilize social campaigns, and generate public awareness swiftly.</li>
+  <li>However, its rampant misuse can lead to severe issues, particularly through the rapid spread of fake news and misinformation.</li>
+  <li>People often waste excessive time on social networks, resulting in addiction, decreased academic productivity, and social alienation.</li>
+  <li>Cyberbullying, hateful trolling, and character assassination have unfortunately become rampant across these digital platforms.</li>
+  <li>Moreover, severe privacy breaches, identity theft, and data vulnerability pose immense security threats to unsuspecting users.</li>
+  <li>Therefore, social media should be embraced judiciously with robust digital literacy and personal discipline to reap its vast benefits while preventing its harms.</li>
+</ol>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="4" data-subject="English Language & Composition" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৪</span>
+            <span class="q-meta-tag">English Language & Composition</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">English Language & Composition</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Complete the following text with right form of verbs given in the box. You may have to use one word more than once.<br>[think, die, be, defend, inspire, sacrifice, remember, honour]<br><br>Patriotism is noble virtue. It (a) _____ a man to shed the drop of blood to (b) _____ the freedom of his country. A man without patriotism (c) _____ not better than a beast. A true patriot (d) _____ by all. He always (e) _____ for the welfare of his country. On the other hand, the unpatriotic men (f) _____ of only their own interest. Those who (g) _____ for the country are true patriots. They (h) _____ even after their death. That is why, the freedom fighters who (i) _____ their lives in 1971 are remembered and (j) _____ forever.</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-4')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-4" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>Correct Forms of Verbs with Bengali Meaning:</strong></p>
+<table class="bcs-table" style="width:100%;">
+  <thead>
+    <tr><th>Blank</th><th>Correct Form</th><th>Grammatical Explanation / Rule</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>(a)</td><td><strong>inspires</strong></td><td>Subject 'It' (Patriotism) singular, তাই Present Simple-এ verb-এর সাথে 's' যোগ হয়েছে।</td></tr>
+    <tr><td>(b)</td><td><strong>defend</strong></td><td>Infinitive 'to'-র পর verb-এর base form বসে।</td></tr>
+    <tr><td>(c)</td><td><strong>is</strong></td><td>Subject 'A man without patriotism' singular, তাই 'is' প্রযোজ্য।</td></tr>
+    <tr><td>(d)</td><td><strong>is honoured</strong></td><td>Present Simple Passive (A true patriot is honoured by all)।</td></tr>
+    <tr><td>(e)</td><td><strong>thinks</strong></td><td>Subject 'He' ৩য় পুরুষ একবচন, চিরন্তন অভ্যাস অর্থে 'thinks'।</td></tr>
+    <tr><td>(f)</td><td><strong>think</strong></td><td>Subject 'the unpatriotic men' বহুবচন (Plural), তাই base verb 'think' বসেছে।</td></tr>
+    <tr><td>(g)</td><td><strong>die</strong></td><td>'Those who die for the country' — সাধারণ সত্যে plural verb 'die'।</td></tr>
+    <tr><td>(h)</td><td><strong>are remembered</strong></td><td>Present Passive — মৃত্যুর পরও তারা স্মরিত হন (They are remembered)।</td></tr>
+    <tr><td>(i)</td><td><strong>sacrificed</strong></td><td>১৯৭১ সালের সুনির্দিষ্ট ঐতিহাসিক অতীত ঘটনা বোঝাতে Past Simple 'sacrificed'।</td></tr>
+    <tr><td>(j)</td><td><strong>honoured</strong></td><td>'are remembered and (are) honoured' — সমান্তরাল passive past participle রূপ।</td></tr>
+  </tbody>
+</table>
+<p><em>অনুবাদ:</em> স্বদেশপ্রেম একটি মহৎ গুণ। দেশের স্বাধীনতা রক্ষার জন্য এটি তাকে রক্ত দিতে উদ্বুদ্ধ করে। স্বদেশপ্রেম ছাড়া একজন মানুষ পশুর চাইতে কোনো অংশে কম নয়। একজন প্রকৃত স্বদেশপ্রেমীকে সকলেই সম্মান করে। সে সর্বদা রাষ্ট্রের কল্যাণ কামনা করে। অন্যদিকে দেশপ্রেমবর্জিত লোক সর্বদা নিজের স্বার্থ নিয়ে চিন্তা করে। যারা দেশের জন্য জীবন দেয় তারাই প্রকৃত দেশপ্রেমিক। মৃত্যুর পরও সবাই তাদেরকে স্মরণ করে। একারণে ১৯৭১ সালের স্বাধীনতা যুদ্ধে যারা জীবন দিয়েছেন তাদেরকে স্মরণ করে এবং চিরকালের জন্য সম্মান দেয়।</p>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="5" data-subject="গাণিতিক যুক্তি ও জ্যামিতি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৫</span>
+            <span class="q-meta-tag">গাণিতিক যুক্তি ও জ্যামিতি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গাণিতিক যুক্তি ও জ্যামিতি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">ABC ত্রিভুজের B কোণের পরিমাণ 52° এবং AB = AC। যদি E এবং F যথাক্রমে AB এবং AC কে এমনভাবে ছেদ করে যেন EF || BC হয়, তাহলে \(\angle A + \angle AFE = ?\)</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-5')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-5" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>জ্যামিতিক সমাধান ও প্রামাণ্য চিত্র:</strong></p>
+<div class="q-diagram-wrap" style="text-align:center; margin:1rem 0;">
+  <img src="images/ch082_q05_triangle.png" alt="ABC ত্রিভুজ ও কোণ চিত্র" class="q-diagram" style="max-width:100%; max-height:220px; border-radius:8px; border:1px solid var(--border-color); background:#ffffff; padding:6px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+</div>
+
+<p><strong>ধাপভিত্তিক সমাধান:</strong></p>
+<ol>
+  <li>দেওয়া আছে, \(\triangle ABC\)-এ \(AB = AC\)।<br>
+  আমরা জানি, সমদ্বিবাহু ত্রিভুজের সমান সমান বাহুর বিপরীত কোণদ্বয় পরস্পর সমান হয়।<br>
+  অতএব, \(\angle C = \angle B = 52^\circ\)।
+  </li>
+  <li>ত্রিভুজের তিন কোণের সমষ্টি দুই সমকোণ বা \(180^\circ\):<br>
+  \(\angle A + \angle B + \angle C = 180^\circ\)<br>
+  \(\Rightarrow \angle A + 52^\circ + 52^\circ = 180^\circ\)<br>
+  \(\Rightarrow \angle A + 104^\circ = 180^\circ\)<br>
+  \(\Rightarrow \angle A = 180^\circ - 104^\circ = 76^\circ\)।
+  </li>
+  <li>আবার দেওয়া আছে, \(EF \parallel BC\) এবং \(AC\) তাদের ছেদক।<br>
+  আমরা জানি, দুটি সমান্তরাল সরলরেখাকে অপর একটি রেখা ছেদ করলে অনুরূপ কোণদ্বয় পরস্পর সমান হয়।<br>
+  অতএব, \(\angle AFE = \text{অনুরূপ } \angle C = 52^\circ\)।
+  </li>
+  <li>এখন নির্ণেয় মান:<br>
+  \(\angle A + \angle AFE = 76^\circ + 52^\circ = 128^\circ\)।
+  </li>
+</ol>
+
+<p><strong>বিকল্প পদ্ধতি:</strong><br>
+\(\triangle AEF\)-এ \(EF \parallel BC\) হওয়ায় \(\angle AEF = \angle B = 52^\circ\) এবং \(\angle AFE = \angle C = 52^\circ\)।<br>
+\(\triangle AEF\)-এর তিন কোণের সমষ্টি \(180^\circ\):<br>
+\(\angle A + \angle AEF + \angle AFE = 180^\circ\)<br>
+\(\Rightarrow \angle A + 52^\circ + \angle AFE = 180^\circ\)<br>
+\(\Rightarrow \angle A + \angle AFE = 180^\circ - 52^\circ = 128^\circ\)।</p>
+<p><strong>উত্তর:</strong> \(128^\circ\)</p>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="6" data-subject="গাণিতিক যুক্তি ও সম্ভাবনা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৬</span>
+            <span class="q-meta-tag">গাণিতিক যুক্তি ও সম্ভাবনা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গাণিতিক যুক্তি ও সম্ভাবনা</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">২০২৬ সালের মার্চ মাসের ৩য় সপ্তাহে পবিত্র ঈদ-উল ফিতর অনুষ্ঠিত হতে পারে। আবহাওয়া অফিসের রিপোর্ট অনুযায়ী ঐ সপ্তাহে মোট ৫ দিন বৃষ্টির সম্ভাবনা আছে। ঐ সপ্তাহের শুক্রবারে ঈদ-উল ফিতর হলে ঐ দিন বৃষ্টি না হওয়ার সম্ভাবনা কত?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-6')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-6" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>সম্ভাবনার সূত্রভিত্তিক সমাধান:</strong></p>
+<ul>
+  <li>আমরা জানি, ১ সপ্তাহ \(= 7\) দিন।<br>
+  সুতরাং সম্ভাব্য মোট দিনের সংখ্যা (Sample Space), \(n(S) = 7\)।</li>
+  <li>সপ্তাহে বৃষ্টি হবার অনুকূল দিন \(= 5\) দিন।</li>
+  <li>সপ্তাহে বৃষ্টি <strong>না হওয়ার</strong> অনুকূল দিন \(= 7 - 5 = 2\) দিন।</li>
+  <li>যেহেতু শুক্রবারে ঈদ অনুষ্ঠিত হচ্ছে, শুক্রবার হলো ঐ সপ্তাহের নির্দিষ্ট একটি দিন।<br>
+  ঐ দিনটিতে বৃষ্টি না হওয়ার সম্ভাবনা:
+  \[
+  P(\text{বৃষ্টি না হওয়া}) = \frac{\text{বৃষ্টি না হওয়ার অনুকূল দিন}}{\text{সপ্তাহের মোট দিন}} = \frac{2}{7}
+  \]
+  </li>
+</ul>
+<p><strong>উত্তর:</strong> \(\frac{2}{7}\)</p>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="7" data-subject="গাণিতিক যুক্তি ও বীজগণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৭</span>
+            <span class="q-meta-tag">গাণিতিক যুক্তি ও বীজগণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গাণিতিক যুক্তি ও বীজগণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">\(16ক - 8 - 2ক^2 = 0\) হলে 'ক' এর সম্ভাব্য মানগুলোর যোগফল কত?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-7')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-7" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>দ্বিঘাত সমীকরণ বিশ্লেষণ ও সমাধান:</strong></p>
+<p>প্রদত্ত সমীকরণ:<br>
+\(16ক - 8 - 2ক^2 = 0\)<br>
+বা, \(-2ক^2 + 16ক - 8 = 0\)<br>
+উভয়পক্ষকে \(-2\) দ্বারা ভাগ করে পাই:<br>
+\(ক^2 - 8ক + 4 = 0\)</p>
+
+<p><strong>পদ্ধতি ১ (দ্বিঘাত সূত্র প্রয়োগ):</strong><br>
+সমীকরণটিকে আদর্শ দ্বিঘাত সমীকরণ \(ax^2 + bx + c = 0\)-এর সাথে তুলনা করে পাই:<br>
+\(a = 1, b = -8, c = 4\)</p>
+<p>দ্বিঘাত সূত্রানুযায়ী 'ক' এর মান:
+\[
+ক = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\]
+\[
+= \frac{-(-8) \pm \sqrt{(-8)^2 - 4(1)(4)}}{2(1)}
+\]
+\[
+= \frac{8 \pm \sqrt{64 - 16}}{2} = \frac{8 \pm \sqrt{48}}{2}
+\]
+\[
+= \frac{8 \pm 4\sqrt{3}}{2} = 4 \pm 2\sqrt{3}
+\]
+সুতরাং 'ক' এর মান দুটি হলো: \(ক_1 = 4 + 2\sqrt{3}\) এবং \(ক_2 = 4 - 2\sqrt{3}\)।</p>
+<p>মান দুটির যোগফল:
+\[
+ক_1 + ক_2 = (4 + 2\sqrt{3}) + (4 - 2\sqrt{3}) = 8
+\]
+</p>
+
+<p><strong>পদ্ধতি ২ (সরাসরি মূলদ্বয়ের যোগফলের সূত্র):</strong><br>
+\(a x^2 + b x + c = 0\) সমীকরণের মূলদ্বয়ের যোগফল \(= -\frac{b}{a}\)।<br>
+এখানে মূল সমীকরণে \(a = -2, b = 16\):<br>
+যোগফল \(= -\frac{16}{-2} = 8\)।</p>
+<p><strong>উত্তর:</strong> ৮</p>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="8" data-subject="গাণিতিক যুক্তি ও সেট তত্ত্ব" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৮</span>
+            <span class="q-meta-tag">গাণিতিক যুক্তি ও সেট তত্ত্ব</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গাণিতিক যুক্তি ও সেট তত্ত্ব</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">যদি \(A = \{1, 2, 3, \phi\}\) এবং \(B = \{\}\) হয়, \(A \cap B = ?\)</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-8')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-8" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>সেট তত্ত্বীয় বিশ্লেষণ:</strong></p>
+<ul>
+  <li>দেওয়া আছে, \(A = \{1, 2, 3, \phi\}\)।<br>
+  এখানে \(A\) সেটের উপাদানসমূহ হলো \(1, 2, 3\) এবং প্রতীক \(\phi\)।</li>
+  <li>এবং \(B = \{\} = \emptyset\)।<br>
+  অর্থাৎ \(B\) হলো একটি <strong>ফাঁকা সেট (Empty Set / Null Set)</strong>, যার কোনো উপাদান নেই।</li>
+  <li>আমরা জানি, দুটি সেটের ছেদ (Intersection বা \(\cap\)) হলো কেবল সেই উপাদানসমূহের সেট যা উভয় সেটেই সাধারণ (Common) বিদ্যমান।</li>
+  <li>যেহেতু \(B\) সেটে কোনো উপাদানই নেই, সেহেতু \(A\) এবং \(B\)-এর মধ্যে কোনো সাধারণ উপাদান থাকা সম্ভব নয়।<br>
+  সেট তত্ত্বের মৌলিক উপপাদ্য অনুযায়ী: যেকোনো সেট \(A\)-এর জন্য,
+  \[
+  A \cap \emptyset = \emptyset
+  \]
+  </li>
+  <li>অতএব,
+  \[
+  A \cap B = \{1, 2, 3, \phi\} \cap \{\} = \{\} \text{ বা } \emptyset
+  \]
+  </li>
+</ul>
+<p><strong>উত্তর:</strong> \(\{\}\) বা \(\emptyset\)</p>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="9" data-subject="গাণিতিক যুক্তি ও পাটিগণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৯</span>
+            <span class="q-meta-tag">গাণিতিক যুক্তি ও পাটিগণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গাণিতিক যুক্তি ও পাটিগণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">কোন এক ব্যক্তির কাছে বছরের শুরুতে যত টাকা থাকে তা থেকে ২.৫% হার কর্তন করা হয়। বছর শেষে অর্থের পরিমাণ ঐ বছরের শুরুতে যা ছিল তার সমান করতে হলে তাকে কত % লাভে অর্থ বিনিয়োগ করতে হবে?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-9')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-9" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>শতকরা লাভ ও বিনিয়োগ বিশ্লেষণ:</strong></p>
+<ol>
+  <li>ধরি, বছরের শুরুতে ঐ ব্যক্তির নিকট অর্থের পরিমাণ ছিল \(= 100\) টাকা।</li>
+  <li>বছরের শুরুতে ২.৫% হারে কর্তন করা হলে কর্তনের পরিমাণ:
+  \[
+  100 \times 2.5\% = 2.5 \text{ টাকা}
+  \]
+  </li>
+  <li>কর্তনের পর ব্যক্তির অবশিষ্ট পুঁজি/আসল:
+  \[
+  100 - 2.5 = 97.5 \text{ টাকা}
+  \]
+  </li>
+  <li>বছর শেষে অর্থের পরিমাণ বছরের শুরুর সমান (১০০ টাকা) করতে হলে, অবশিষ্ট ৯৭.৫ টাকার ওপর লাভ করতে হবে:
+  \[
+  100 - 97.5 = 2.5 \text{ টাকা}
+  \]
+  </li>
+  <li>অতএব, বিনিয়োগকৃত অর্থের ওপর শতকরা লাভের হার:
+  \[
+  \text{লাভের হার} = \left(\frac{\text{লাভ}}{\text{অবশিষ্ট আসল}} \times 100\right)\%
+  \]
+  \[
+  = \left(\frac{2.5}{97.5} \times 100\right)\% = \left(\frac{250}{97.5}\right)\% = \left(\frac{2500}{975}\right)\% = \left(\frac{100}{39}\right)\% \approx 2.5641\%
+  \]
+  </li>
+</ol>
+<p><strong>উত্তর:</strong> ২.৫৬৪% (বা \(২\frac{২২}{৩৯}\%\))</p>
+            </div>
+          </div>
+        </article>
+    
+      </div>
+    </section>
+
+    <footer class="footer-box">
+      <p>প্রামাণ্য তথ্যসূত্র: জেলা পরিষদ (স্থানীয় সরকার বিভাগ) লিখিত পরীক্ষা ২০২৬ ও পিএসসি প্রামাণ্য সলিউশন প্রশ্নব্যাংক</p>
+      <p style="margin-top:0.35rem;">© ২০২৬ Antigravity Interactive Job Solution E-Book Engine | সর্বস্বত্ব সংরক্ষিত</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleDrawer(id) {
+      const drawer = document.getElementById(id);
+      if (drawer) {
+        drawer.classList.toggle('open');
+        const toggleBtn = drawer.previousElementSibling;
+        const icon = toggleBtn.querySelector('.toggle-icon');
+        if (drawer.classList.contains('open')) {
+          icon.textContent = '▲';
+        } else {
+          icon.textContent = '▼';
+        }
+      }
+    }
+
+    // Subject Filtering
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const qCards = document.querySelectorAll('.q-card');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const subj = btn.getAttribute('data-subject');
+
+        qCards.forEach(card => {
+          if (subj === 'all' || card.getAttribute('data-subject') === subj) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Font size adjustment
+    let currentFontSize = 16;
+    function adjustFontSize(delta) {
+      if (delta === 0) {
+        currentFontSize = 16;
+      } else {
+        currentFontSize = Math.min(22, Math.max(14, currentFontSize + delta));
+      }
+      document.documentElement.style.fontSize = currentFontSize + 'px';
+    }
+
+    // Theme toggle
+    function toggleTheme() {
+      const isDark = document.body.classList.toggle('dark-theme');
+      document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme_zp_sae', isDark ? 'dark' : 'light');
+    }
+
+    // Restore saved theme
+    if (localStorage.getItem('theme_zp_sae') === 'dark') {
+      document.body.classList.add('dark-theme');
+      document.getElementById('themeBtn').textContent = '☀️';
+    }
+  </script>
+</body>
+</html>

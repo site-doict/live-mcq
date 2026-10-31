@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বাংলাদেশ পুলিশ — সাব ইন্সপেক্টর | প্রামাণ্য সমাধান</title>
+  <link rel="stylesheet" href="css/paper-textures.css">
+  <link rel="stylesheet" href="css/bangla-fonts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Kalpurush&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\(', right: '\\)', display: false}]});">
+  </script>
+  <style>
+    :root {
+      --bg-page: #fdfbf7;
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: rgba(226, 232, 240, 0.8);
+      --accent-primary: #0284c7;
+      --accent-indigo: #6366f1;
+      --accent-emerald: #10b981;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #0f172a;
+      --bg-surface: rgba(30, 41, 59, 0.85);
+      --bg-card: rgba(30, 41, 59, 0.82);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: rgba(51, 65, 85, 0.8);
+      --accent-primary: #38bdf8;
+      --accent-indigo: #818cf8;
+      --accent-emerald: #34d399;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.65;
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Top Nav */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+    }
+    .back-btn {
+      text-decoration: none;
+      color: var(--accent-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .back-btn:hover { text-decoration: underline; }
+    .nav-controls { display: flex; align-items: center; gap: 0.75rem; }
+    .theme-btn, .font-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .theme-btn:hover, .font-btn:hover {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Chapter Header */
+    .ch-header {
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .ch-title {
+      font-size: 1.65rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+    }
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.05rem;
+      display: block;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 0.25rem;
+    }
+    .ch-meta-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .ch-badge {
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--accent-primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+
+    /* Sketchnotes Section */
+    .sk-container {
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+    .sk-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .sk-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.15rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .sk-box h4 {
+      font-size: 1.05rem;
+      color: var(--accent-indigo);
+      margin-bottom: 0.65rem;
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 0.35rem;
+    }
+    .sk-box ul { list-style-type: none; }
+    .sk-box li {
+      font-size: 0.92rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+    .sk-box li strong { color: var(--text-main); }
+
+    /* Part 2: Question Section */
+    .part2-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .part2-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .subject-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .tab-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.4rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Question Cards */
+    .q-card {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .q-header {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.85rem;
+    }
+    .q-num {
+      font-weight: 700;
+      color: var(--accent-primary);
+      font-size: 1.05rem;
+    }
+    .q-meta-tag {
+      background: rgba(2, 132, 199, 0.08);
+      color: var(--accent-primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .q-body {
+      margin-bottom: 1rem;
+    }
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* Answer Drawer */
+    .ans-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(2, 132, 199, 0.06);
+      border: 1px solid rgba(2, 132, 199, 0.15);
+      color: var(--accent-primary);
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+    .ans-toggle:hover { background: rgba(2, 132, 199, 0.12); }
+    .ans-drawer {
+      display: none;
+      padding: 1.25rem;
+      margin-top: 0.75rem;
+      background: rgba(0, 0, 0, 0.02);
+      border-left: 3px solid var(--accent-primary);
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    }
+    [data-theme="dark"] .ans-drawer { background: rgba(255, 255, 255, 0.02); }
+    .ans-drawer.open { display: block; }
+    .exp-content {
+      font-size: 0.98rem;
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+    .exp-content p { margin-bottom: 0.75rem; }
+    .exp-content ul, .exp-content ol { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+    .exp-content li { margin-bottom: 0.35rem; }
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.92rem;
+    }
+    .bcs-table th, .bcs-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+    }
+    .bcs-table th {
+      background: rgba(2, 132, 199, 0.08);
+      font-weight: 600;
+      color: var(--accent-primary);
+    }
+
+    /* Typography Protection */
+    .q-card, .q-card *, .q-text, .q-text *, .ans-drawer, .ans-drawer *,
+    .bcs-table, .bcs-table * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body class="paper-coffee-stained font-badhon-ador">
+  <div class="container">
+    <!-- Top Navigation -->
+    <header class="top-nav">
+      <a href="index.html" class="back-btn">
+        <span>←</span> সূচিপত্রে ফিরে যান
+      </a>
+      <div class="nav-controls">
+        <button class="font-btn" onclick="adjustFontSize(-1)">A-</button>
+        <button class="font-btn" onclick="adjustFontSize(0)">A</button>
+        <button class="font-btn" onclick="adjustFontSize(1)">A+</button>
+        <button class="theme-btn" onclick="toggleTheme()" id="themeToggleBtn">🌙</button>
+      </div>
+    </header>
+
+    <!-- Chapter Header -->
+    <section class="ch-header">
+      <h1 class="ch-title font-badhon-ador">
+        বাংলাদেশ পুলিশ — সাব ইন্সপেক্টর
+        <span class="ch-en">Bangladesh Police - Sub-Inspector 2019</span>
+      </h1>
+      <div class="ch-meta-wrap">
+        <span class="ch-badge">📋 পরীক্ষা নং: ১২৯</span>
+        <span class="ch-badge">🏛️ Others</span>
+        <span class="ch-badge">📅 তারিখ: ১৭.০৬.২০১৯</span>
+        <span class="ch-badge">⏱️ সময়: ১৮০ মিনিট</span>
+        <span class="ch-badge">🎯 পূর্ণমান: ১০০</span>
+        <span class="ch-badge">🔢 মোট প্রশ্ন: ১০টি</span>
+        <span class="ch-badge">📄 পৃষ্ঠা: ৭৫৬–৭৫৯</span>
+      </div>
+    </section>
+
+    
+    <section class="sk-part1">
+      <div class="sk-badge">Part 1: Authentic Revision Notes &amp; Formulas</div>
+      <h3 class="sk-title font-badhon-ador">বাংলাদেশ পুলিশ — সাব ইন্সপেক্টর প্রামাণ্য রিভিশন নোট ও সূত্রাবলি</h3>
+      <p class="sk-desc font-badhon-ador">
+        এই অধ্যায়ের মূল পরীক্ষার প্রশ্ন ও বিশদ সমাধান থেকে সংকলিত হ্যান্ডনোট, গাণিতিক সূত্র ও সারসংক্ষেপ:
+      </p>
+      <div class="sk-grid">
+        
+        <div class="sk-box">
+          <h4 class="font-badhon-ador">পাটিগণিত ও সমীকরণ সূত্রাবলি</h4>
+          <div>• <strong>গড় গতিবেগ সমীকরণ:</strong> মোট সময় \(t_1 + t_2 = \frac{x}{60} + \frac{240 - x}{40} = 5 \implies x = 120\) কিমি।<br>• <strong>পিতা-পুত্রের বয়স সমীকরণ:</strong> ৮ বছর পূর্বে অনুপাত ৮:১, ১০ বছর পর দ্বিগুণ \(\implies\) বর্তমান বয়স যথাক্রমে ৩২ ও ১১ বছর।<br>• <strong>লাভের শতকরা হার:</strong> ৫টির ক্রয়মূল্য ১ টাকা ও ৪টির বিক্রয়মূল্য ১ টাকা হলে লাভ \(= \frac{\frac{1}{4} - \frac{1}{5}}{\frac{1}{5}} \times 100\% = 25\%\)।</div>
+        </div>
+
+        <div class="sk-box">
+          <h4 class="font-badhon-ador">কমিউনিটি পুলিশিং ও সাইবার নিরাপত্তা</h4>
+          <div>• <strong>কমিউনিটি পুলিশিং:</strong> পুলিশ ও জনগণের পারস্পরিক অংশীদারিত্ব ও সহযোগিতায় অপরাধ প্রতিরোধমূলক আধুনিক পুলিশিং দর্শন।<br>• <strong>সাইবার অপরাধ প্রতিরোধ:</strong> সচেতনতা বৃদ্ধি, শক্তিশালী পাসওয়ার্ড ব্যবহার, সাইবার সুরক্ষা হেল্পলাইন ও পারিবারিক নজরদারি।</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PART 2: Written Examination Question Engine -->
+    <section>
+      <div class="part2-header">
+        <div class="part2-title">
+          <span>📝</span> Part 2: বিগত পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক ও সমাধান
+        </div>
+      </div>
+
+      <!-- Subject Filter Tabs -->
+      <nav class="subject-tabs">
+        <button class="tab-btn active" data-subject="all">সকল বিষয় (১০)</button>
+        <button class="tab-btn" data-subject="বাংলাদেশ বিষয়াবলি">বাংলাদেশ বিষয়াবলি (১)</button>
+        <button class="tab-btn" data-subject="আন্তর্জাতিক বিষয়াবলি">আন্তর্জাতিক বিষয়াবলি (১)</button>
+        <button class="tab-btn" data-subject="সাধারণ জ্ঞান">সাধারণ জ্ঞান (১)</button>
+        <button class="tab-btn" data-subject="সমাজ ও উন্নয়ন">সমাজ ও উন্নয়ন (১)</button>
+        <button class="tab-btn" data-subject="তথ্যপ্রযুক্তি ও সমাজ">তথ্যপ্রযুক্তি ও সমাজ (১)</button>
+        <button class="tab-btn" data-subject="গণিত">গণিত (৫)</button>
+      </nav>
+
+      <!-- Question Cards List -->
+      <main id="questionContainer">
+        
+        <article class="q-card" data-qid="1" data-subject="বাংলাদেশ বিষয়াবলি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১</span>
+            <span class="q-meta-tag">বাংলাদেশ বিষয়াবলি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলাদেশ বিষয়াবলি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">সংক্ষেপে উত্তর দিন (বাংলাদেশ প্রেক্ষিত):<br>a) তমুদ্দিন মজলিশ কি?<br>b) বাংলাদেশের সীমান্তবর্তী অথচ সেভেন সিস্টার্সভুক্ত নয় ভারতের রাজ্যটির নাম লিখুন।<br>c) কত সালে ইস্ট ইন্ডিয়া কোম্পানির অবসান ও রানীর শাসন শুরু হয়?<br>d) বাংলাদেশের জাতীয় সঙ্গীত রবীন্দ্রনাথের কোন গ্রন্থের অন্তর্ভুক্ত?<br>e) পদ্মা সেতু কোন কোন জেলাকে সংযুক্ত করেছে?<br>f) সাইমন ড্রিং কে?<br>g) হর্ষবর্ধনের রাজত্বকালে চীনা যে পরিব্রাজক প্রাচীনবঙ্গে এসেছিলেন তার নাম কি?<br>h) বাংলাদেশের সর্ব উত্তরের উপজেলার নাম কি?<br>i) BTRC কি নিয়ন্ত্রণ করে?<br>j) DNA বলতে কি বুঝায়?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-1')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-1" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>নং</th><th>প্রশ্ন</th><th>প্রমিত উত্তর</th></tr></thead>
+<tbody>
+<tr><td>a</td><td>তমুদ্দিন মজলিশ কি?</td><td>১৯৪৭ সালের ২ সেপ্টেম্বর অধ্যাপক আবুল কাশেমের নেতৃত্বে গঠিত প্রথম ভাষা আন্দোলনভিত্তিক সাংস্কৃতিক সংগঠন</td></tr>
+<tr><td>b</td><td>সীমান্তবর্তী অ-সেভেন সিস্টার্স রাজ্য</td><td><strong>পশ্চিমবঙ্গ</strong></td></tr>
+<tr><td>c</td><td>কোম্পানি অবসান ও রানীর শাসন শুরু</td><td><strong>১৮৫৮ সালে</strong> (ভারত শাসন আইনের মাধ্যমে)</td></tr>
+<tr><td>d</td><td>জাতীয় সঙ্গীতের মূল উৎস গ্রন্থ</td><td><strong>গীতবিতান</strong> গ্রন্থের 'স্বদেশ' পর্যায় (স্বরবিতানের ৪৬তম খণ্ড)</td></tr>
+<tr><td>e</td><td>পদ্মা সেতু সংযোগকারী জেলাসমূহ</td><td><strong>মুন্সিগঞ্জ (মাওয়া প্রান্ত)</strong> এবং <strong>শরীয়তপুর ও মাদারীপুর (জাজিরা প্রান্ত)</strong></td></tr>
+<tr><td>f</td><td>সাইমন ড্রিং কে?</td><td>১৯৭১ সালে ২৫ মার্চ কালরাতে পাকিস্তানি বর্বরতার প্রত্যক্ষদর্শী ও আন্তর্জাতিক সংবাদ পরিবেশনকারী খ্যাতনামা ব্রিটিশ সাংবাদিক</td></tr>
+<tr><td>g</td><td>হর্ষবর্ধনের আমলের চীনা পরিব্রাজক</td><td><strong>হিউয়েন সাঙ</strong> (Hiuen Tsang)</td></tr>
+<tr><td>h</td><td>সর্ব উত্তরের উপজেলা</td><td>পঞ্চগড় জেলার <strong>তেঁতুলিয়া</strong></td></tr>
+<tr><td>i</td><td>BTRC এর মূল দায়িত্ব</td><td>বাংলাদেশ টেলিযোগাযোগ নিয়ন্ত্রণ কমিশন — টেলিযোগাযোগ, তরঙ্গ ও ইন্টারনেট পরিসেবা নিয়ন্ত্রণ</td></tr>
+<tr><td>j</td><td>DNA বলতে কি বুঝায়?</td><td>Deoxyribonucleic Acid — জীবের বংশগতির বৈশিষ্ট্য ধারণ ও বহনকারী প্রধান নিউক্লিক অ্যাসিড</td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="2" data-subject="আন্তর্জাতিক বিষয়াবলি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ২</span>
+            <span class="q-meta-tag">আন্তর্জাতিক বিষয়াবলি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">আন্তর্জাতিক বিষয়াবলি</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">সংক্ষেপে উত্তর দিন (আন্তর্জাতিক প্রেক্ষিত):<br>a) BRICS এর পূর্ণরূপ কি?<br>b) তক্ষশীলা কোন দেশে?<br>c) আন্তর্জাতিক নারী দিবস কত তারিখে পালিত হয়?<br>d) মার্কিন যুক্তরাষ্ট্রের নিম্নকক্ষের আইনসভার নাম কি?<br>e) বন্দর আব্বাস কোন দেশের সমুদ্রবন্দর?<br>f) সুয়েজখাল কোন কোন সাগরকে যুক্ত করেছে?<br>g) ২০২৬ সালের বিশ্বকাপ ফুটবল কোন কোন দেশে অনুষ্ঠিত হবে?<br>h) দ্য ল্যুভর মিউজিয়াম কোন দেশে অবস্থিত?<br>i) হেমলক বিষপানে কোন গ্রীক দার্শনিককে হত্যা করা হয়?<br>j) পার্ল হারবার যুক্তরাষ্ট্রের কোন রাজ্যে অবস্থিত?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-2')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-2" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>নং</th><th>প্রশ্ন</th><th>প্রমিত উত্তর</th></tr></thead>
+<tbody>
+<tr><td>a</td><td>BRICS এর পূর্ণরূপ</td><td>Brazil, Russia, India, China, South Africa (উদ্বোধনী সদস্য রাষ্ট্রসমূহের আদ্যক্ষর)</td></tr>
+<tr><td>b</td><td>তক্ষশীলা অবস্থিত</td><td><strong>পাকিস্তানে</strong> (পাঞ্জাব প্রদেশের প্রাচীন বৌদ্ধ বিশ্ববিদ্যালয় নগরী)</td></tr>
+<tr><td>c</td><td>আন্তর্জাতিক নারী দিবস</td><td><strong>৮ মার্চ</strong></td></tr>
+<tr><td>d</td><td>মার্কিন কংগ্রেসের নিম্নকক্ষ</td><td><strong>House of Representatives</strong> (প্রতিনিধি পরিষদ, মোট ৪৩৫ আসন)</td></tr>
+<tr><td>e</td><td>বন্দর আব্বাস সমুদ্রবন্দর অবস্থিত</td><td><strong>ইরানে</strong> (হরমুজ প্রণালির তীরে কৌশলগত নৌবন্দর)</td></tr>
+<tr><td>f</td><td>সুয়েজখাল যুক্ত করেছে</td><td><strong>ভূমধ্যসাগর ও লোহিত সাগরকে</strong></td></tr>
+<tr><td>g</td><td>ফিফা বিশ্বকাপ ২০২৬ আয়োজক</td><td>যৌথভাবে <strong>যুক্তরাষ্ট্র, মেক্সিকো ও কানাডা</strong></td></tr>
+<tr><td>h</td><td>দ্য ল্যুভর মিউজিয়াম অবস্থিত</td><td>প্যারিস, <strong>ফ্রান্স</strong></td></tr>
+<tr><td>i</td><td>হেমলক বিষপানে মৃত্যুদণ্ডপ্রাপ্ত দার্শনিক</td><td>গ্রিক দার্শনিক <strong>সক্রেটিস</strong> (খ্রিস্টপূর্ব ৩৯৯ অব্দ)</td></tr>
+<tr><td>j</td><td>পার্ল হারবার অবস্থিত</td><td>যুক্তরাষ্ট্রের <strong>হাওয়াই অঙ্গরাজ্যে</strong> (ওআহু দ্বীপে নৌঘাঁটি)</td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="3" data-subject="সাধারণ জ্ঞান" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৩</span>
+            <span class="q-meta-tag">সাধারণ জ্ঞান</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">সাধারণ জ্ঞান</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">টীকা লিখুন (যে কোন ৫টি):<br>a) SDG<br>b) ওয়ান বেল্ট ওয়ান রোড (OBOR / BRI)<br>c) Human Development Index (HDI)<br>d) CNN<br>e) মানি লন্ডারিং<br>f) কমিউনিটি পুলিশিং</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-3')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-3" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>a) SDG (Sustainable Development Goals):</strong> ২০১৫ সালে জাতিসংঘ গৃহীত ২০৩০ সালের মধ্যে বাস্তবায়নের জন্য ১৭টি লক্ষ্যমাত্রা ও ১৬৯টি সুনির্দিষ্ট টার্গেট সম্বলিত বৈশ্বিক উন্নয়ন রূপরেখা।</p>
+<p><strong>b) ওয়ান বেল্ট ওয়ান রোড (OBOR / BRI):</strong> ২০১৩ সালে চীনের প্রেসিডেন্ট শি জিনপিং ঘোষিত প্রাচীন সিল্ক রোডের আদলে এশিয়া, আফ্রিকা ও ইউরোপ জুড়ে সড়ক ও সমুদ্রপথের মাধ্যমে অবকাঠামোগত সংযোগ স্থাপনের বৈশ্বিক মেগাপ্রকল্প।</p>
+<p><strong>c) Human Development Index (HDI):</strong> মানব উন্নয়ন সূচক যা জাতিসংঘ উন্নয়ন কর্মসূচি (UNDP) কর্তৃক প্রকাশিত হয়। এটি গড় আয়ুষ্কাল, শিক্ষা ও মাথাপিছু আয়ের ভিত্তিতে দেশগুলোর মানবিক অগ্রগতির তুলনামূলক পরিমাপ করে।</p>
+<p><strong>d) CNN (Cable News Network):</strong> ১৯৮০ সালে টেড টার্নার কর্তৃক প্রতিষ্ঠিত বিশ্বের প্রথম ২৪ ঘণ্টার আন্তর্জাতিক সংবাদভিত্তিক মার্কিন টেলিভিশন নেটওয়ার্ক। এর সদর দপ্তর আটলান্টায় অবস্থিত।</p>
+<p><strong>e) মানি লন্ডারিং (Money Laundering):</strong> অপরাধমূলক কার্যক্রম যেমন ঘুষ, দুর্নীতি, মাদক চোরাচালান বা কর ফাঁকির মাধ্যমে অবৈধ উপায়ে অর্জিত কালো অর্থকে বৈধ অর্থে রূপান্তর করার বেআইনি আর্থিক প্রক্রিয়া।</p>
+<p><strong>f) কমিউনিটি পুলিশিং (Community Policing):</strong> পুলিশ এবং স্থানীয় জনগণের মধ্যে নিবিড় যোগাযোগ, পারস্পরিক বিশ্বাস ও অংশীদারিত্ব গড়ে তুলে সামাজিক অপরাধ প্রতিরোধ, দমন ও আইনশৃঙ্খলা সুরক্ষার আধুনিক দর্শন।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="4" data-subject="সমাজ ও উন্নয়ন" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৪</span>
+            <span class="q-meta-tag">সমাজ ও উন্নয়ন</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">সমাজ ও উন্নয়ন</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">শহরমুখী গ্রামীণ জনস্রোতের কারণ সমূহ উল্লেখ করুন। বাসযোগ্য শহর গঠনে আপনার মতামত লিখুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-4')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-4" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>শহরমুখী গ্রামীণ জনস্রোতের কারণসমূহ:</strong><br>
+১. <strong>কর্মসংস্থানের সুযোগের অভাব:</strong> গ্রামাঞ্চলে কৃষির বাইরে টেকসই কাজের সুযোগ কম থাকায় জীবিকার সন্ধানে মানুষ ঢাকাসহ বড় শহরে আসে।<br>
+২. <strong>নদীভাঙন ও প্রাকৃতিক দুর্যোগ:</strong> প্রতি বছর নদীভাঙন, ঘূর্ণিঝড় ও বন্যায় বাস্তুভিটা হারিয়ে বহু মানুষ জলবায়ু উদ্বাস্তু হিসেবে শহরে ভিড় করে।<br>
+৩. <strong>উন্নত শিক্ষা ও স্বাস্থ্যসেবার কেন্দ্রীকরণ:</strong> মানসম্মত উচ্চশিক্ষা প্রতিষ্ঠান এবং বিশেষায়িত হাসপাতালগুলো শহরকেন্দ্রিক হওয়ায় মানুষের তীব্র শহরমুখিতা সৃষ্টি হয়।<br>
+৪. <strong>নগর জীবনের আধুনিক সুযোগ-সুবিধা:</strong> গ্যাস, সার্বক্ষণিক বিদ্যুৎ, বিনোদন ও অর্থনৈতিক তৎপরতার আকর্ষণ।</p>
+<p><strong>বাসযোগ্য শহর গঠনে সুচিন্তিত মতামত:</strong><br>
+• <strong>প্রশাসনিক ও অর্থনৈতিক বিকেন্দ্রীকরণ:</strong> জেলা ও উপজেলা পর্যায়ে কর্মসংস্থান, মানসম্মত শিক্ষা ও স্বাস্থ্যসেবা নিশ্চিত করা।<br>
+• <strong>পরিকল্পিত নগর ড্রেনেজ ও বর্জ্য ব্যবস্থাপনা:</strong> খালের দখলমুক্তকরণ ও আধুনিক রিসাইক্লিং পদ্ধতি চালু করা।<br>
+• <strong>গণপরিবহন ব্যবস্থার আধুনিকায়ন:</strong> ব্যক্তিগত গাড়ির ওপর চাপ কমিয়ে মেট্রো ও ডেডিকেটেড বাস রুট নেটওয়ার্ক সম্প্রসারণ।<br>
+• <strong>সবুজ ও খোলা জায়গা সংরক্ষণ:</strong> খেলার মাঠ, পার্ক ও জলাশয় সুরক্ষার মাধ্যমে পরিবেশবান্ধব নগর কাঠামো গড়ে তোলা।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="5" data-subject="তথ্যপ্রযুক্তি ও সমাজ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৫</span>
+            <span class="q-meta-tag">তথ্যপ্রযুক্তি ও সমাজ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">তথ্যপ্রযুক্তি ও সমাজ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">সোশ্যাল মিডিয়া কি? এসব মিডিয়া ব্যবহারের মাধ্যমে কোন কোন ধরনের অপরাধ সংঘটিত হয়? এসকল অপরাধ প্রতিরোধের উপায় বর্ণনা করুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-5')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-5" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>সোশ্যাল মিডিয়া (Social Media):</strong> ইন্টারনেটভিত্তিক এমন সব ডিজিটাল প্ল্যাটফর্ম ও অ্যাপ্লিকেশন যার মাধ্যমে ব্যবহারকারীরা দ্রুত তথ্য, ছবি, ভিডিও আদান-প্রদান এবং সামাজিক যোগাযোগ গড়ে তুলতে পারে (যেমন: ফেসবুক, এক্স/টুইটার, ইউটিউব, হোয়াটসঅ্যাপ, ইনস্টাগ্রাম)।</p>
+<p><strong>সংগঠিত অপরাধসমূহ:</strong><br>
+১. <strong>গুজব ও বিভ্রান্তি ছড়ানো:</strong> সাম্প্রদায়িক উসকানি, অসত্য তথ্য ও ভুয়া খবর প্রচার করে অস্থিতিশীলতা সৃষ্টি করা।<br>
+২. <strong>সাইবার বুলিং ও ব্ল্যাকমেইলিং:</strong> নারীদের ছবি বিকৃত করে অপপ্রচার বা ব্যক্তিগত গোপন তথ্য ফাঁস করার ভয় দেখিয়ে অর্থ দাবি।<br>
+৩. <strong>আর্থিক প্রতারণা ও ফিশিং:</strong> জাল লিংক ও প্রলোভনমূলক অফার পাঠিয়ে ওটিপি (OTP) ও পাসওয়ার্ড চুরি করে ব্যাংক/বিকাশ অ্যাকাউন্ট খালি করা।<br>
+৪. <strong>পরিচয় জালিয়াতি (Identity Theft):</strong> অন্যের নামে ফেক আইডি খুলে প্রতারণামূলক কার্যক্রম পরিচালনা।</p>
+<p><strong>প্রতিরোধের উপায়:</strong><br>
+• কোনো তথ্য যাচাই না করে শেয়ার না করার সচেতনতা গড়ে তোলা।<br>
+• শক্তিশালী টু-ফ্যাক্টর অথেনটিকেশন (2FA) চালু রাখা এবং ব্যক্তিগত তথ্যের গোপনীয়তা রক্ষা।<br>
+• সাইবার ট্রাইব্যুনাল ও পুলিশ সাইবার সাপোর্ট ফর উইমেন (PCSW) হেল্পলাইনে অবিলম্বে অভিযোগ দায়ের করা।<br>
+• সাইবার নিরাপত্তা আইনের কঠোর ও নিরপেক্ষ প্রয়োগ নিশ্চিত করা।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="6" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৬</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">৩০ জন শ্রমিক ২০ দিনে একটি রাস্তা তৈরি করতে পারে। কাজ শুরুর ১০ দিন পর রাস্তা তৈরির সরঞ্জামের অভাবে ৬ দিন কাজ বন্ধ রাখতে হয়েছে। নির্ধারিত সময়ে কাজটি শেষ করতে অতিরিক্ত কয়জন শ্রমিক লাগবে?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-6')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-6" class="ans-drawer">
+            <div class="exp-content">
+              <p>৩০ জন শ্রমিক ২০ দিনে করে \(= ১\)টি কাজ।<br>
+\(\therefore\) ৩০ জন শ্রমিক ১০ দিনে করে \(= \frac{১০}{২০} = \frac{১}{২}\) অংশ কাজ।</p>
+<p>কাজ বাকি থাকে \(= ১ - \frac{১}{২} = \frac{১}{২}\) অংশ।</p>
+<p>কাজের মোট নির্ধারিত সময় ছিল \(= ২০\) দিন।<br>
+ইতিমধ্যে অতিবাহিত দিন \(= ১০ + ৬ = ১৬\) দিন।<br>
+\(\therefore\) অবশিষ্ট নির্ধারিত সময় আছে \(= ২০ - ১৬ = ৪\) দিন।</p>
+<p>এখন, \(\frac{১}{২}\) অংশ কাজ ১০ দিনে করতে পারে \(= ৩০\) জন শ্রমিক।<br>
+\(\therefore \frac{১}{২}\) অংশ কাজ ১ দিনে করতে লাগবে \(= ৩০ \times ১০ = ৩০০\) জন শ্রমিক।<br>
+\(\therefore \frac{১}{২}\) অংশ কাজ অবশিষ্ট ৪ দিনে করতে লাগবে \(= \frac{৩০০}{৪} = ৭৫\) জন শ্রমিক।</p>
+<p>অতএব, অতিরিক্ত শ্রমিক লাগবে \(= ৭৫ - ৩০ = \mathbf{৪৫}\) জন।</p>
+<p><strong>উত্তর:</strong> ৪৫ জন।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="7" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৭</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">ক. শতকরা বার্ষিক কত মুনাফায় ৩,০০০ টাকায় ৫ বছরের মুনাফা ১,৫০০ টাকা হবে?<br>খ. ১ টাকায় ৫টি দরে ক্রয় করে ৪টি দরে বিক্রয় করলে শতকরা কত লাভ বা ক্ষতি হবে?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-7')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-7" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>ক. এর সমাধান:</strong><br>
+আমরা জানি, সরল মুনাফা \(I = Pnr\)<br>
+এখানে, আসল \(P = ৩,০০০\) টাকা, সময় \(n = ৫\) বছর, মুনাফা \(I = ১,৫০০\) টাকা।<br>
+\(\therefore r = \frac{I}{Pn} = \frac{১,৫০০}{৩,০০০ \times ৫} = \frac{১,৫০০}{১৫,০০০} = \frac{১}{১০}\)<br>
+\(\therefore\) শতকরা মুনাফার হার \(= \frac{১}{১০} \times ১০০\% = \mathbf{১০\%}\)।<br>
+<strong>উত্তর:</strong> ১০%।</p>
+<hr>
+<p><strong>খ. এর সমাধান:</strong><br>
+১টি ফলের ক্রয়মূল্য \(= \frac{১}{৫}\) টাকা।<br>
+১টি ফলের বিক্রয়মূল্য \(= \frac{১}{৪}\) টাকা।<br>
+যেহেতু বিক্রয়মূল্য ক্রয়মূল্যের চেয়ে বেশি, তাই লাভ হবে।<br>
+\(\therefore\) লাভ \(= \frac{১}{৪} - \frac{১}{৫} = \frac{৫ - ৪}{২০} = \frac{১}{২০}\) টাকা।<br>
+\(\frac{১}{৫}\) টাকায় লাভ হয় \(= \frac{১}{২০}\) টাকা।<br>
+\(\therefore\) ১০০ টাকায় শতকরা লাভ হয় \(= \frac{\frac{১}{২০} \times ১০০}{\frac{১}{৫}} = \frac{১}{২০} \times ৫ \times ১০০\% = \mathbf{২৫\%}\)।<br>
+<strong>উত্তর:</strong> ২৫% লাভ।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="8" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৮</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">একটি বইয়ের মূল্য ৮০ টাকা, যা প্রকৃত খরচের ৭০%। বাকী মূল্য সরকার ভর্তুকি প্রদান করে থাকেন। সরকার প্রতিটি বইয়ের ক্ষেত্রে কত টাকা ভর্তুকি প্রদান করেন?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-8')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-8" class="ans-drawer">
+            <div class="exp-content">
+              <p>বইটির প্রকৃত খরচের ৭০% \(= ৮০\) টাকা।<br>
+\(\therefore\) বইটির প্রকৃত খরচের ১% \(= \frac{৮০}{৭০}\) টাকা।<br>
+\(\therefore\) বইটির প্রকৃত খরচের ১০০% \(= \frac{৮০ \times ১০০}{৭০} = \frac{৮০০}{৭}\) টাকা।</p>
+<p>যেহেতু সরকার বাকি মূল্য ভর্তুকি দেন, তাই ভর্তুকির পরিমাণ:<br>
+\(= (\text{প্রকৃত খরচ}) - (\text{বিক্রয়মূল্য})\)<br>
+\(= \frac{৮০০}{৭} - ৮০ = \frac{৮০০ - ৫৬০}{৭} = \frac{২৪০}{৭} = \mathbf{৩৪.২৯}\) টাকা (প্রায়)।</p>
+<p><em>(বিকল্প নিয়ম: ভর্তুকির হার \(= ১০০\% - ৭০\% = ৩০\%\)।<br>
+অতএব, ভর্তুকি \(= \frac{৮০}{৭০} \times ৩০ = \frac{২৪০}{৭} = ৩৪.২৯\) টাকা)।</em></p>
+<p><strong>উত্তর:</strong> ৩৪.২৯ টাকা (প্রায়)।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="9" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৯</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">৮ বছর পূর্বে পিতার বয়স পুত্রের বয়সের ৮ গুণ ছিল। ১০ বছর পর পিতার বয়স পুত্রের বয়সের দ্বিগুণ হবে। বর্তমানে কার বয়স কত?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-9')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-9" class="ans-drawer">
+            <div class="exp-content">
+              <p>ধরি, ৮ বছর পূর্বে পুত্রের বয়স ছিল \(x\) বছর।<br>
+\(\therefore\) ৮ বছর পূর্বে পিতার বয়স ছিল \(৮x\) বছর।</p>
+<p>বর্তমানে পুত্রের বয়স \(= (x + ৮)\) বছর।<br>
+বর্তমানে পিতার বয়স \(= (৮x + ৮)\) বছর।</p>
+<p>১০ বছর পর:<br>
+পুত্রের বয়স হবে \(= (x + ৮ + ১০) = (x + ১৮)\) বছর।<br>
+পিতার বয়স হবে \(= (৮x + ৮ + ১০) = (৮x + ১৮)\) বছর।</p>
+<p>প্রশ্নমতে (১০ বছর পর দ্বিগুণ):<br>
+\(৮x + ১৮ = ২(x + ১৮)\)<br>
+\(\Rightarrow ৮x + ১৮ = ২x + ৩৬\)<br>
+\(\Rightarrow ৮x - ২x = ৩৬ - ১৮\)<br>
+\(\Rightarrow ৬x = ১৮\)<br>
+\(\Rightarrow x = \frac{১৮}{৬} = ৩\)</p>
+<p>অতএব,<br>
+পুত্রের বর্তমান বয়স \(= ৩ + ৮ = \mathbf{১১}\) বছর।<br>
+পিতার বর্তমান বয়স \(= (৮ \times ৩) + ৮ = ২৪ + ৮ = \mathbf{৩২}\) বছর।</p>
+<p><strong>উত্তর:</strong> পুত্রের বর্তমান বয়স ১১ বছর এবং পিতার বর্তমান বয়স ৩২ বছর।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="10" data-subject="গণিত" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১০</span>
+            <span class="q-meta-tag">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">গণিত</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">একটি গাড়ি ঘণ্টায় ৬০ কিলোমিটার বেগে কিছু পথ এবং ঘণ্টায় ৪০ কিলোমিটার বেগে অবশিষ্ট পথ অতিক্রম করলো। গাড়িটি মোট ৫ ঘণ্টায় ২৪০ কিলোমিটার পথ অতিক্রম করলে ঘণ্টায় ৬০ কিলোমিটার বেগে কতদূর গিয়েছিলো?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-10')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-10" class="ans-drawer">
+            <div class="exp-content">
+              <p>ধরি, গাড়িটি ঘণ্টায় ৬০ কিমি বেগে গিয়েছিল \(x\) কিমি পথ।<br>
+\(\therefore\) ঘণ্টায় ৪০ কিমি বেগে অবশিষ্ট পথ অতিক্রম করেছিল \(= (২৪০ - x)\) কিমি।</p>
+<p>আমরা জানি, সময় \(= \frac{\text{দূরত্ব}}{\text{বেগ}}\)।<br>
+৬০ কিমি বেগে যেতে সময় লাগে \(= \frac{x}{৬০}\) ঘণ্টা।<br>
+৪০ কিমি বেগে যেতে সময় লাগে \(= \frac{২৪০ - x}{৪০}\) ঘণ্টা।</p>
+<p>প্রশ্নমতে (মোট সময় ৫ ঘণ্টা):<br>
+\(\frac{x}{৬০} + \frac{২৪০ - x}{৪০} = ৫\)<br>
+লসাগু ১২০ নিয়ে পাই:<br>
+\(\Rightarrow \frac{২x + ৩(২৪০ - x)}{১২০} = ৫\)<br>
+\(\Rightarrow ২x + ৭২০ - ৩x = ৫ \times ১২০\)<br>
+\(\Rightarrow ৭২০ - x = ৬০০\)<br>
+\(\Rightarrow x = ৭২০ - ৬০০ = \mathbf{১২০}\) কিমি।</p>
+<p>অতএব, ঘণ্টায় ৬০ কিমি বেগে গাড়িটি <strong>১২০ কিমি</strong> দূরত্ব অতিক্রম করেছিল।</p>
+<p><strong>উত্তর:</strong> ১২০ কিলোমিটার।</p>
+            </div>
+          </div>
+        </article>
+        
+      </main>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>PSC & IBA Written Job Solution Master Repository • নির্ভুল ও প্রামাণ্য ই-বুক সংস্করণ</p>
+      <p style="margin-top:0.25rem;">উৎস: মূল পরীক্ষার প্রশ্নপত্র ও অফিশিয়াল সমাধান সংগ্রহ</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      document.getElementById('themeToggleBtn').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    }
+
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.addEventListener('DOMContentLoaded', () => {
+          const btn = document.getElementById('themeToggleBtn');
+          if (btn) btn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        });
+      }
+    })();
+
+    function toggleDrawer(id) {
+      const drawer = document.getElementById(id);
+      if (!drawer) return;
+      const isVisible = drawer.classList.contains('open');
+      drawer.classList.toggle('open');
+      const toggleBtn = drawer.previousElementSibling;
+      if (toggleBtn) {
+        const icon = toggleBtn.querySelector('.toggle-icon');
+        if (icon) icon.textContent = isVisible ? '▼' : '▲';
+      }
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const subject = btn.getAttribute('data-subject');
+        document.querySelectorAll('.q-card').forEach(card => {
+          if (subject === 'all' || card.getAttribute('data-subject') === subject) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    let baseFontSize = 100;
+    function adjustFontSize(dir) {
+      if (dir === 0) baseFontSize = 100;
+      else baseFontSize += dir * 8;
+      if (baseFontSize < 80) baseFontSize = 80;
+      if (baseFontSize > 130) baseFontSize = 130;
+      document.documentElement.style.fontSize = baseFontSize + '%';
+    }
+  </script>
+</body>
+</html>

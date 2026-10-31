@@ -47,10 +47,12 @@ INDEX_FILES = [
     'Non Cadre Geography & Environment/index.html',
     'Non Cadre Ethics & Good Governance/index.html',
     'Non Cadre Job Solution/index.html',
-    'Inception Year Book 2025-2026/index.html'
+    'Inception Year Book 2025-2026/index.html',
+    'PSC & IBA Written Job Solution/index.html'
 ]
 
 REGISTERED_FOLDERS = {
+    'PSC & IBA Written Job Solution',
     'Non Cadre Job Solution',
     'Live MCQ Bangla Language',
     'Live MCQ Bangla Literature',

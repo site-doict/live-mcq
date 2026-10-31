@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বাংলাদেশ রেলওয়ে - উপ-সহকারী প্রকৌশলী ২০২৫ - পূর্ণাঙ্গ লিখিত সমাধান</title>
+  <link rel="stylesheet" href="../css/paper-textures.css">
+  <link rel="stylesheet" href="../css/bangla-fonts.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+  <style>
+    :root {
+      --bg-surface: rgba(255, 255, 255, 0.88);
+      --bg-card: rgba(255, 255, 255, 0.84);
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: rgba(226, 232, 240, 0.9);
+      --accent-primary: #0f766e;
+      --accent-indigo: #4f46e5;
+      --accent-emerald: #059669;
+      --font-scale: 1;
+    }
+    body.dark {
+      --bg-surface: rgba(30, 27, 24, 0.88);
+      --bg-card: rgba(36, 32, 28, 0.84);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: rgba(68, 64, 60, 0.7);
+      --accent-primary: #14b8a6;
+      --accent-indigo: #818cf8;
+      --accent-emerald: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      color: var(--text-main);
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+      font-size: calc(1rem * var(--font-scale));
+      line-height: 1.7;
+      min-height: 100vh;
+      padding-bottom: 5rem;
+    }
+    .ch-title .ch-en { font-family: 'Inter', sans-serif !important; }
+    .q-card, .q-card *, .q-text, .q-text *, .ans-drawer, .ans-drawer *, .exp-content, .exp-content *,
+    .bcs-table, .bcs-table *, .score-bar, .score-bar *, .self-eval-box, .self-eval-box * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+    .top-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg-surface);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1.5rem;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    }
+    .nav-btn {
+      text-decoration: none; color: var(--text-main); font-weight: 600;
+      padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border-color);
+      background: var(--bg-card); display: inline-flex; align-items: center; gap: 6px;
+    }
+    .font-ctrls, .theme-toggle { display: flex; align-items: center; gap: 6px; }
+    .ctrl-btn {
+      border: 1px solid var(--border-color); background: var(--bg-card);
+      color: var(--text-main); font-weight: 700; width: 34px; height: 34px;
+      border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .container { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+    .exam-header {
+      background: var(--bg-card);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border-radius: 12px; padding: 2rem; border: 1px solid var(--border-color);
+      margin-bottom: 2rem; box-shadow: 0 4px 16px rgba(0,0,0,0.05); text-align: center;
+    }
+    .ch-badge {
+      display: inline-block; padding: 4px 12px; font-size: 0.85rem; font-weight: 700;
+      border-radius: 20px; background: rgba(15, 118, 110, 0.12); color: var(--accent-primary);
+      margin-bottom: 0.75rem;
+    }
+    .ch-title { font-size: 1.85rem; margin-bottom: 0.5rem; line-height: 1.3; }
+    .ch-meta {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;
+      color: var(--text-muted); font-size: 0.95rem; margin-top: 1rem;
+    }
+    .ch-meta span { display: inline-flex; align-items: center; gap: 4px; }
+    
+    /* PART 1 Sketchnotes */
+    .sk-container {
+      background: var(--bg-card);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border-radius: 12px; border: 1px solid var(--border-color);
+      padding: 1.75rem; margin-bottom: 2.5rem; box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+    .sk-title {
+      font-size: 1.35rem; font-weight: 700; color: var(--accent-primary);
+      margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .sk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+    .sk-box {
+      background: rgba(255,255,255,0.65);
+      border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    body.dark .sk-box { background: rgba(0,0,0,0.25); }
+    .sk-box h4 {
+      font-size: 1.05rem; margin-bottom: 0.5rem; color: var(--accent-indigo);
+      border-bottom: 1px dashed var(--border-color); padding-bottom: 4px;
+    }
+    .sk-box ul { padding-left: 1.25rem; font-size: 0.95rem; }
+    .sk-box li { margin-bottom: 0.35rem; }
+    .sk-formula {
+      background: rgba(99, 102, 241, 0.08); border-left: 3px solid var(--accent-indigo);
+      padding: 0.5rem 0.75rem; border-radius: 4px; margin: 0.5rem 0; font-size: 0.95rem;
+    }
+    .sk-table {
+      width: 100%; border-collapse: collapse; margin: 0.5rem 0; font-size: 0.92rem;
+    }
+    .sk-table th, .sk-table td {
+      border: 1px solid var(--border-color); padding: 6px 10px; text-align: left;
+    }
+    .sk-table th { background: rgba(0,0,0,0.04); font-weight: 600; }
+
+    /* PART 2 Quiz Engine */
+    .part2-header {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+      gap: 1rem; margin-bottom: 1.25rem;
+    }
+    .part2-title { font-size: 1.4rem; font-weight: 700; }
+    .score-summary-bar {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: 8px; padding: 0.5rem 1rem; font-size: 0.95rem; font-weight: 600;
+      display: inline-flex; gap: 1rem; align-items: center;
+    }
+    .tab-bar {
+      display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.5rem; margin-bottom: 1.5rem;
+    }
+    .tab-btn {
+      padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color);
+      background: var(--bg-card); color: var(--text-main); cursor: pointer; white-space: nowrap; font-size: 0.9rem;
+    }
+    .tab-btn.active {
+      background: var(--accent-primary); color: #fff; border-color: var(--accent-primary);
+    }
+    .q-card {
+      border-radius: 12px; border: 1px solid var(--border-color);
+      padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      transition: all 0.2s ease;
+    }
+    .q-header {
+      display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.75rem;
+    }
+    .q-num {
+      font-weight: 700; font-size: 1rem; padding: 2px 10px; border-radius: 4px;
+      background: rgba(15, 118, 110, 0.1); color: var(--accent-primary);
+    }
+    .q-meta-tag {
+      font-size: 0.8rem; padding: 2px 8px; border-radius: 4px;
+      background: rgba(0,0,0,0.05); color: var(--text-muted);
+    }
+    .q-text { font-size: 1.05rem; font-weight: 600; line-height: 1.6; margin-bottom: 1rem; }
+    .ans-toggle {
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(15, 118, 110, 0.08); color: var(--accent-primary);
+      padding: 0.6rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 600;
+      margin-top: 0.75rem; user-select: none;
+    }
+    .ans-drawer {
+      display: none; padding: 1.25rem; border-radius: 0 0 8px 8px;
+      background: rgba(255,255,255,0.7); border: 1px solid var(--border-color);
+      border-top: none; margin-top: -4px;
+    }
+    body.dark .ans-drawer { background: rgba(0,0,0,0.2); }
+    .ans-drawer.open { display: block; }
+    .exp-content { font-size: 0.98rem; line-height: 1.7; }
+    .exp-content p { margin-bottom: 0.65rem; }
+    .exp-content ul, .exp-content ol { padding-left: 1.5rem; margin-bottom: 0.65rem; }
+    .lead-quote {
+      font-style: italic; border-left: 3px solid var(--accent-primary);
+      padding-left: 1rem; margin: 0.75rem 0;
+    }
+    .q-diagram-wrap { text-align: center; margin: 1rem 0; }
+    .q-diagram {
+      max-width: 100%; max-height: 260px; height: auto; border-radius: 8px;
+      border: 1px solid var(--border-color); background: #ffffff; padding: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    footer {
+      text-align: center; margin-top: 3rem; color: var(--text-muted); font-size: 0.9rem;
+      border-top: 1px solid var(--border-color); padding-top: 1.5rem;
+    }
+  </style>
+</head>
+<body class="paper-dot-grid font-gedamala">
+  <nav class="top-nav">
+    <a href="index.html" class="nav-btn">← সূচিপত্র (Chapters)</a>
+    <div style="display:flex; align-items:center; gap:0.75rem;">
+      <div class="font-ctrls">
+        <button class="ctrl-btn" onclick="adjustFont(-0.1)" title="ছোট ফন্ট">A-</button>
+        <button class="ctrl-btn" onclick="resetFont()" title="স্বাভাবিক ফন্ট">A</button>
+        <button class="ctrl-btn" onclick="adjustFont(0.1)" title="বড় ফন্ট">A+</button>
+      </div>
+      <button class="ctrl-btn theme-toggle" onclick="toggleTheme()" title="ডার্ক/লাইট থিম">🌙</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <header class="exam-header">
+      <span class="ch-badge">অধ্যায় ৭৪ • লিখিত পরীক্ষা সমাধান</span>
+      <h1 class="ch-title font-gedamala">বাংলাদেশ রেলওয়ে <span class="ch-en">(Bangladesh Railway)</span></h1>
+      <h2 style="font-size:1.25rem; font-weight:600; color:var(--text-muted); margin-bottom:0.5rem;">
+        উপ-সহকারী প্রকৌশলী ২০২৫ <span class="ch-en">(Sub-Assistant Engineer 2025)</span>
+      </h2>
+      <div class="ch-meta">
+        <span>📅 তারিখ: ২৬.০৭.২০২৫</span>
+        <span>⏱️ সময়: ১১০০ মিনিট</span>
+        <span>🎯 পূর্ণমান: ১০০</span>
+        <span>📖 বইয়ের পৃষ্ঠা: ৪৬৮–৪৭২</span>
+        <span>📝 মোট প্রশ্ন: ৮টি</span>
+      </div>
+    </header>
+
+    
+    
+    <!-- PART 1: Authentic Revision Notes & Sketchnotes -->
+    <section class="sk-container">
+      <div class="sk-title">
+        <span>📖</span> Part 1: প্রামাণ্য ইন্টারেক্টিভ রিভিশন নোট ও সূত্রাবলি (Authentic Sketchnotes)
+      </div>
+      <p style="color:var(--text-muted); font-size:0.95rem; margin-top:-0.5rem; margin-bottom:1.25rem;">
+        বাংলাদেশ রেলওয়ে উপ-সহকারী প্রকৌশলী পরীক্ষার প্রশ্ন ও বিশদ সরকারি সিলেবাসভিত্তিক সমাধান থেকে সংকলিত নিয়মাবলি ও সূত্রাবলি:
+      </p>
+
+      <div class="sk-grid">
+        <div class="sk-box">
+          <h4>✍️ ণ-ত্ব ও ষ-ত্ব বিধানের মূল পার্থক্য</h4>
+          <ul>
+            <li><strong>ণ-ত্ব বিধান:</strong> তৎসম শব্দে ঋ, র, ষ-এর পর মূর্ধন্য-ণ হয় (ঋণ, বর্ণ, ভীষণ)। ট-বর্গের পূর্বে যুক্তবর্ণে সর্বদা 'ণ' যুক্ত হয় (বণ্টন, কাণ্ড)।</li>
+            <li><strong>ষ-ত্ব বিধান:</strong> অ/আ ভিন্ন অন্য স্বরের পর প্রত্যয়ের 'স' স্থানে 'ষ' হয় (ভবিষ্যৎ, মুমূর্ষু)। ই/উ-কারান্ত উপসর্গের পর ধাতুতে 'ষ' হয় (অনুষ্ঠান, অভিষেক)।</li>
+            <li><strong>স্বভাবতই ণ ও ষ:</strong> চাণক্য, মাণিক্য, বাণিজ, লবণ, বেণু (ণ); আষাঢ়, পাষাণ, মানুষ, পৌষ (ষ)।</li>
+          </ul>
+        </div>
+
+        <div class="sk-box">
+          <h4>🇬🇧 English Transformation & Tense Shortcuts</h4>
+          <ul>
+            <li><strong>Too ... to Rule:</strong> 'He is too weak to walk' = He is so weak that he cannot walk (অতিরিক্ত দুর্বলতার কারণে সমর্থ নয়)।</li>
+            <li><strong>After/Before Rule:</strong>
+              <div class="sk-formula">
+                Past Perfect + <strong>BEFORE</strong> + Past Indefinite<br>
+                Past Indefinite + <strong>AFTER</strong> + Past Perfect<br>
+                <em>Example:</em> We started after the rain <strong>had stopped</strong>.
+              </div>
+            </li>
+            <li><strong>Language as Object:</strong> 'English is spoken all over the world' (Passive form mandatory).</li>
+            <li><strong>Blame Preposition:</strong> Blame someone <strong>for</strong> something.</li>
+          </ul>
+        </div>
+
+        <div class="sk-box">
+          <h4>💻 কম্পিউটার মেমরি ও সাইবার সিকিউরিটি</h4>
+          <ul>
+            <li><strong>RAM বনাম ROM:</strong> RAM হলো ভোলাটাইল বা অস্থায়ী প্রধান মেমরি যেখানে রানিং প্রোগ্রামের নির্দেশাবলি থাকে; ROM নন-ভোলাটাইল যা বুটিং নির্দেশাবলি (BIOS) ধারণ করে।</li>
+            <li><strong>CIA Triad:</strong> সাইবার নিরাপত্তার মূল তিন স্তম্ভ— Confidentiality (গোপনীয়তা), Integrity (সততা/নির্ভুলতা), Availability (সহজলভ্যতা)।</li>
+            <li><strong>Data vs Information:</strong> ডেটা হলো অসংগঠিত কাঁচামাল; ইনফরমেশন হলো প্রক্রিয়াজাত অর্থবহ ফলাফল।</li>
+          </ul>
+        </div>
+
+        <div class="sk-box">
+          <h4>🌱 পরিবেশ ও জলবায়ু কূটনীতি (COP-29)</h4>
+          <ul>
+            <li><strong>ভেন্যু ও প্রেক্ষাপট:</strong> বাকু, আজারবাইজান (২০২৪)।</li>
+            <li><strong>বাংলাদেশের ৪ দফা প্রস্তাব:</strong>
+              <ol>
+                <li>ক্ষতিপূরণ তহবিল (Loss & Damage Fund) দ্রুত সক্রিয় করা।</li>
+                <li>অভিযোজন সহায়তা অনুদান হিসেবে নিশ্চিত করা।</li>
+                <li>কার্বন নিঃসরণ কমাতে পরিবেশবান্ধব প্রযুক্তি হস্তান্তর।</li>
+                <li>জলবায়ু উদ্বাস্তুদের আন্তর্জাতিক স্বীকৃতি প্রদান।</li>
+              </ol>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sk-box">
+          <h4>💰 অর্থনীতি ও ক্ষুদ্রঋণ (Microcredit)</h4>
+          <ul>
+            <li><strong>মূল দর্শন:</strong> জামানতবিহীন স্বল্পমেয়াদি ঋণ দিয়ে দরিদ্র জনগোষ্ঠীর আত্মকর্মসংস্থান নিশ্চিত করা।</li>
+            <li><strong>নারীর ক্ষমতায়ন:</strong> ঋণগ্রহীতাদের সিংহভাগ নারী হওয়ায় গ্রামীণ অর্থনীতি ও পরিবারে নারী সিদ্ধান্তগ্রহণ ক্ষমতা বৃদ্ধি।</li>
+            <li><strong>আর্থিক অন্তর্ভুক্তিকরণ:</strong> প্রান্তিক জনগোষ্ঠীকে আনুষ্ঠানিক অর্থনৈতিক প্রবাহে সংযুক্ত করা।</li>
+          </ul>
+        </div>
+
+        <div class="sk-box">
+          <h4>📝 অনুচ্ছেদ ও অফিসিয়াল পত্র লিখন</h4>
+          <ul>
+            <li><strong>Casual Leave Application:</strong> প্রাপক (Superior Officer), সুনির্দিষ্ট ছুটির সময়কাল, স্পষ্ট কারণ ও সমাপ্তি সৌজন্যতা।</li>
+            <li><strong>ব্যক্তিগত পত্র:</strong> ডানপাশে স্থান ও তারিখ, সম্বোধন, মূল বিষয়বস্তু, ইতি ও ডাকটিকিট সহ প্রেরক-প্রাপক বক্স।</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- PART 2: Past Exam Question Engine -->
+    <section>
+      <div class="part2-header">
+        <div class="part2-title">📝 Part 2: বিগত সালের প্রামাণ্য প্রশ্নব্যাংক ও স্ব-মূল্যায়ন কুইজ</div>
+        <div class="score-summary-bar">
+          <span>মোট অর্জিত স্কোর: <strong id="user-score" style="color:var(--accent-primary);">০</strong> / ১০০</span>
+          <button class="nav-btn" onclick="resetScore()" style="padding:2px 8px; font-size:0.8rem;">রিসেট</button>
+        </div>
+      </div>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" data-subject="all">সকল বিষয় (৮)</button>
+        <button class="tab-btn" data-subject="বাংলা সাহিত্য ও সারাংশ">বাংলা সাহিত্য ও সারাংশ (১)</button>
+        <button class="tab-btn" data-subject="বাংলা পত্রলিখন">বাংলা পত্রলিখন (১)</button>
+        <button class="tab-btn" data-subject="ইংরেজি অনুবাদ">ইংরেজি অনুবাদ (১)</button>
+        <button class="tab-btn" data-subject="বাংলা ব্যাকরণ">বাংলা ব্যাকরণ (১)</button>
+        <button class="tab-btn" data-subject="English Writing">English Writing (১)</button>
+        <button class="tab-btn" data-subject="English Comprehension">English Comprehension (১)</button>
+        <button class="tab-btn" data-subject="English Grammar">English Grammar (১)</button>
+        <button class="tab-btn" data-subject="সাধারণ জ্ঞান ও প্রযুক্তি">সাধারণ জ্ঞান ও প্রযুক্তি (১)</button>
+      </div>
+
+      <div class="q-list">
+
+        <article class="q-card" data-qid="1" data-subject="বাংলা সাহিত্য ও সারাংশ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন ১</span>
+            <span class="q-meta-tag">বাংলা সাহিত্য ও সারাংশ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা সাহিত্য</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">নম্বর: ১০</span>
+          </div>
+          <div class="q-text">সারাংশ লিখুনঃ<br>"কোথায় স্বর্গ? কোথায় নরক? কে বলে তা বহুদূর?<br>মানুষের মাঝে স্বর্গ-নরক, মানুষেতেই সুরাসুর।<br>রিপুর তাড়নে যখনি মোদের বিবেক পায় গো লয়,<br>আত্মগ্লানির নরক-অনলে তখনি পুরিতে হয়।<br>প্রীতি ও প্রেমের পুণ্য বাঁধনে যবে মিলি পরস্পরে,<br>স্বর্গ আসিয়া দাঁড়ায় তখন আমাদের কুঁড়েঘরে।"</div>
+          
+          <div class="self-eval-box" style="margin: 1rem 0; padding: 0.75rem 1rem; border-radius: 8px; background: rgba(0,0,0,0.03); border: 1px dashed var(--border-color);">
+            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">স্ব-মূল্যায়ন (Self-Evaluation):</div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="eval-btn eval-full" onclick="recordScore(1, 10)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid var(--accent-emerald); background: transparent; color: var(--accent-emerald); cursor: pointer;">পূর্ণ নম্বর (১০)</button>
+              <button type="button" class="eval-btn eval-half" onclick="recordScore(1, 5.0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #f59e0b; background: transparent; color: #f59e0b; cursor: pointer;">আংশিক নম্বর (৫.০)</button>
+              <button type="button" class="eval-btn eval-zero" onclick="recordScore(1, 0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #ef4444; background: transparent; color: #ef4444; cursor: pointer;">উত্তর মেলেনি (০)</button>
+            </div>
+          </div>
+
+          <div class="ans-toggle" onclick="toggleDrawer('ans-1')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-1" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>সারাংশ:</strong></p>
+<p>স্বর্গ বা নরক কোনো দূরবর্তী কাল্পনিক জগত নয়, বরং মানুষের ভালো ও মন্দ কাজের মধ্যেই এদের অস্তিত্ব। রিপুর তাড়নায় বিবেক হারিয়ে মানুষ যখন অন্যায় করে, তখন সে অনুশোচনা ও আত্মগ্লানির নরক-যন্ত্রণা ভোগ করে। পক্ষান্তরে, প্রীতি, ভালোবাসা, পরোপকার ও ভ্রাতৃত্ববোধের মাধ্যমে যখন মানুষ একে অপরের পাশে দাঁড়ায়, তখন পার্থিব ক্ষুদ্র কুঁড়েঘরও স্বর্গের অনাবিল শান্তিতে পরিণত হয়।</p>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="2" data-subject="বাংলা পত্রলিখন" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন ২</span>
+            <span class="q-meta-tag">বাংলা পত্রলিখন</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা পত্রলিখন</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">নম্বর: ১০</span>
+          </div>
+          <div class="q-text">বাংলা নববর্ষের দিন দেশের সার্বিক অবস্থার বর্ণনা দিয়ে প্রবাসী বন্ধুর কাছে একটি পত্র লিখুন।</div>
+          
+          <div class="self-eval-box" style="margin: 1rem 0; padding: 0.75rem 1rem; border-radius: 8px; background: rgba(0,0,0,0.03); border: 1px dashed var(--border-color);">
+            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">স্ব-মূল্যায়ন (Self-Evaluation):</div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="eval-btn eval-full" onclick="recordScore(2, 10)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid var(--accent-emerald); background: transparent; color: var(--accent-emerald); cursor: pointer;">পূর্ণ নম্বর (১০)</button>
+              <button type="button" class="eval-btn eval-half" onclick="recordScore(2, 5.0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #f59e0b; background: transparent; color: #f59e0b; cursor: pointer;">আংশিক নম্বর (৫.০)</button>
+              <button type="button" class="eval-btn eval-zero" onclick="recordScore(2, 0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #ef4444; background: transparent; color: #ef4444; cursor: pointer;">উত্তর মেলেনি (০)</button>
+            </div>
+          </div>
+
+          <div class="ans-toggle" onclick="toggleDrawer('ans-2')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-2" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>প্রবাসী বন্ধুর নিকট পত্র:</strong></p>
+<div style="border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 8px; background: rgba(0,0,0,0.02);">
+  <p style="text-align: right;">২৬ শে বৈশাখ, ১৪৩২<br>ঢাকা, বাংলাদেশ</p>
+  <p>প্রিয় নাসির,<br>আমার আন্তরিক শুভেচ্ছা ও ভালোবাসা নিও। আশা করি প্যারিসের ব্যস্ত জীবনের মাঝেও ভালো আছো।</p>
+  <p>তোমার পাঠানো চিঠিতে তুমি দেশের পহেলা বৈশাখের আবহ নিয়ে জানতে চেয়েছিলে। সত্যি বলতে, প্রবাসে থাকলেও দেশের মাটির টান কখনো ম্লান হয় না। এবারের নববর্ষের ভোর শুরু হয়েছিল ছায়ানটের সুমধুর বর্ষবরণ সঙ্গীত ও ঢাকা বিশ্ববিদ্যালয়ের চারুকলা ইনস্টিটিউটের বর্ণাঢ্য 'মঙ্গল শোভাযাত্রা' দিয়ে। ধর্ম-বর্ণ নির্বিশেষে হাজারো মানুষ বৈশাখী সাজে—সাদা-লাল শাড়ি ও পাঞ্জাবি পরে উৎসবে মেতে উঠেছিল। রমনার বটমূল ও সোহরাওয়ার্দী উদ্যানে মানুষের আনন্দোচ্ছ্বাস ছিল চোখে পড়ার মতো।</p>
+  <p>তবে আনন্দের পাশাপাশি দেশের চলমান অর্থনৈতিক বাস্তবতাও স্পষ্ট। দ্রব্যমূল্যের ঊর্ধ্বগতির কারণে নিম্নবিত্ত মানুষের দৈনন্দিন সংগ্রামে কিছুটা টানাপোড়েন থাকলেও নববর্ষের দিনে সবাই ক্ষণিকের জন্য দুঃখ ভুলে একাত্ম হয়েছিল। দেশের সার্বিক সংস্কৃতি ও ঐক্যের বন্ধন যে কত গভীর, তা বৈশাখের এ দিনে না দেখলে বিশ্বাস করা যায় না।</p>
+  <p>তুমি থাকলে আনন্দ আরও বহুগুণ বেড়ে যেত। দেশে আসার অপেক্ষায় রইলাম। তোমার বাবা-মাকে আমার সালাম দিও।</p>
+  <p style="text-align: right;">ইতি,<br>তোমার বন্ধু<br><strong>রফিক</strong></p>
+  
+  <div style="margin-top: 1.5rem; display: flex; justify-content: space-between; border: 1px solid var(--border-color); padding: 0.75rem 1rem; border-radius: 6px; max-width: 450px;">
+    <div><strong>প্রেরক:</strong><br>রফিক<br>১৬/১, পুরান ঢাকা, ঢাকা।</div>
+    <div style="border-left: 1px solid var(--border-color); padding-left: 1rem;"><strong>প্রাপক:</strong><br>নাসির<br>প্যারিস, ফ্রান্স।<br><span style="border: 1px solid #999; padding: 2px 6px; font-size: 0.75rem;">ডাকটিকিট</span></div>
+  </div>
+</div>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="3" data-subject="ইংরেজি অনুবাদ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন ৩</span>
+            <span class="q-meta-tag">ইংরেজি অনুবাদ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">English</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">নম্বর: ১০</span>
+          </div>
+          <div class="q-text">বাংলায় অনুবাদ করুন:<br>"The aim of education is to make a man fully fit for himself and the society. It means to develop the whole man, his body, mind and soul. It is education, which aims at providing a child with opportunities so that it can bring to light its all latent qualities. An educated man should be gentle, polite, thoughtful, creative, kind, sympathetic and co-operative."</div>
+          
+          <div class="self-eval-box" style="margin: 1rem 0; padding: 0.75rem 1rem; border-radius: 8px; background: rgba(0,0,0,0.03); border: 1px dashed var(--border-color);">
+            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">স্ব-মূল্যায়ন (Self-Evaluation):</div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="eval-btn eval-full" onclick="recordScore(3, 10)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid var(--accent-emerald); background: transparent; color: var(--accent-emerald); cursor: pointer;">পূর্ণ নম্বর (১০)</button>
+              <button type="button" class="eval-btn eval-half" onclick="recordScore(3, 5.0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #f59e0b; background: transparent; color: #f59e0b; cursor: pointer;">আংশিক নম্বর (৫.০)</button>
+              <button type="button" class="eval-btn eval-zero" onclick="recordScore(3, 0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #ef4444; background: transparent; color: #ef4444; cursor: pointer;">উত্তর মেলেনি (০)</button>
+            </div>
+          </div>
+
+          <div class="ans-toggle" onclick="toggleDrawer('ans-3')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-3" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>বঙ্গানুবাদ:</strong></p>
+<p class="lead-quote">"শিক্ষার মূল লক্ষ্য হলো একজন মানুষকে নিজের জন্য এবং সমাজের জন্য সম্পূর্ণ উপযোগী করে গড়ে তোলা। এর অর্থ হলো একজন পূর্ণাঙ্গ মানুষের শারীরিক, মানসিক ও আত্মিক বিকাশ সাধন করা। শিক্ষাই একটি শিশুকে এমন সব সুযোগ-সুবিধা প্রদান করে যাতে তার ভেতরের সমস্ত সুপ্ত প্রতিভা ও গুণাবলি বিকশিত হতে পারে। একজন শিক্ষিত মানুষকে অবশ্যই ভদ্র, বিনয়ী, চিন্তাশীল, সৃজনশীল, দয়ালু, সহানুভূতিশীল এবং সহযোগিতাপূর্ণ মনোভাবের অধিকারী হতে হবে।"</p>
+<div class="sk-formula">
+  <strong>কোর ভোকাবুলারি ও স্ট্রাকচার:</strong>
+  <ul>
+    <li>Latent qualities &rarr; সুপ্ত প্রতিভা / সুপ্ত গুণাবলি</li>
+    <li>Body, mind and soul &rarr; দেহ, মন ও আত্মা (শারীরিক, মানসিক ও আত্মিক)</li>
+    <li>Bring to light &rarr; উন্মোচিত করা বা বিকশিত করা</li>
+    <li>Sympathetic and co-operative &rarr; সহানুভূতিশীল ও সহযোগিতাপূর্ণ</li>
+  </ul>
+</div>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="4" data-subject="বাংলা ব্যাকরণ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন ৪</span>
+            <span class="q-meta-tag">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">নম্বর: ১০</span>
+          </div>
+          <div class="q-text">ণ-ত্ব বিধান অথবা ষ-ত্ব বিধানের পাঁচটি নিয়ম উদাহরণসহ লিখুন।</div>
+          
+          <div class="self-eval-box" style="margin: 1rem 0; padding: 0.75rem 1rem; border-radius: 8px; background: rgba(0,0,0,0.03); border: 1px dashed var(--border-color);">
+            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">স্ব-মূল্যায়ন (Self-Evaluation):</div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="eval-btn eval-full" onclick="recordScore(4, 10)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid var(--accent-emerald); background: transparent; color: var(--accent-emerald); cursor: pointer;">পূর্ণ নম্বর (১০)</button>
+              <button type="button" class="eval-btn eval-half" onclick="recordScore(4, 5.0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #f59e0b; background: transparent; color: #f59e0b; cursor: pointer;">আংশিক নম্বর (৫.০)</button>
+              <button type="button" class="eval-btn eval-zero" onclick="recordScore(4, 0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #ef4444; background: transparent; color: #ef4444; cursor: pointer;">উত্তর মেলেনি (০)</button>
+            </div>
+          </div>
+
+          <div class="ans-toggle" onclick="toggleDrawer('ans-4')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-4" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>ণ-ত্ব ও ষ-ত্ব বিধানের তুলনামূলক পাঁচটি করে প্রামাণ্য নিয়ম:</strong></p>
+<table class="sk-table">
+  <thead>
+    <tr><th>ক্রম</th><th>ণ-ত্ব বিধানের ৫টি নিয়ম ও উদাহরণ</th><th>ষ-ত্ব বিধানের ৫টি নিয়ম ও উদাহরণ</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>১</td>
+      <td>তৎসম শব্দে <strong>ঋ, র, ষ</strong>-এর পর মূর্ধন্য-ণ হয়।<br><em>উদাহরণ:</em> ঋণ, বর্ণ, কারণ, ভীষণ।</td>
+      <td><strong>অ, আ ভিন্ন অন্য স্বরধ্বনি</strong> এবং ক ও র-এর পর প্রত্যয়ের 'স' মূর্ধন্য 'ষ' হয়।<br><em>উদাহরণ:</em> ভবিষ্যৎ, মুমূর্ষু, চক্ষুष्मान।</td>
+    </tr>
+    <tr>
+      <td>২</td>
+      <td>ঋ, র, ষ-এর পর স্বরবর্ণ, ক-বর্গ, প-বর্গ, য, হ, ং থাকলে পরবর্তী দন্ত্য-ন মূর্ধন্য-ণ হয়।<br><em>উদাহরণ:</em> কৃপণ, লক্ষণ, রামায়ণ।</td>
+      <td><strong>ই-কারান্ত ও উ-কারান্ত উপসর্গের পর</strong> কতগুলো ধাতুতে 'ষ' হয়।<br><em>উদাহরণ:</em> অনুষ্ঠান, সুষম, অভিষেক, বিষাদ।</td>
+    </tr>
+    <tr>
+      <td>৩</td>
+      <td><strong>ট-বর্গীয় বর্ণের</strong> (ট, ঠ, ড, ঢ) পূর্বে যুক্তবর্ণে সর্বদা 'ণ' যুক্ত হয়।<br><em>উদাহরণ:</em> বণ্টন, লুণ্ঠন, কাণ্ড, কণ্ঠ।</td>
+      <td><strong>ঋ-কার ও র-কারের পর</strong> মূর্ধন্য 'ষ' হয়।<br><em>উদাহরণ:</em> ঋষি, কৃষক, বৃষ্টি, সৃষ্টি।</td>
+    </tr>
+    <tr>
+      <td>৪</td>
+      <td><strong>প্র, পরা, পরি, নির্</strong> উপসর্গের পর নদ্, নশ্ ধাতুর 'ন' স্থানে 'ণ' হয়।<br><em>উদাহরণ:</em> প্রণাম, প্রমাণ, পরায়ণ, পরিণাম।</td>
+      <td><strong>ট ও ঠ-এর সঙ্গে যুক্ত হয়ে</strong> সর্বদা মূর্ধন্য 'ষ' হয়।<br><em>উদাহরণ:</em> কষ্ট, নষ্ট, কাষ্ঠ, নিষ্ঠা।</td>
+    </tr>
+    <tr>
+      <td>৫</td>
+      <td>কতগুলো শব্দে <strong>স্বাভাবিকভাবেই 'ণ'</strong> হয়।<br><em>উদাহরণ:</em> চাণক্য, মাণিক্য, বাণিজ, লবণ, বেণু।</td>
+      <td>কতগুলো শব্দে <strong>স্বভাবতই 'ষ'</strong> হয়।<br><em>উদাহরণ:</em> আষাঢ়, পাষাণ, ষোড়শ, মানুষ, পৌষ।</td>
+    </tr>
+  </tbody>
+</table>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="5" data-subject="English Writing" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন ৫</span>
+            <span class="q-meta-tag">English Writing</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">English</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">নম্বর: ১০</span>
+          </div>
+          <div class="q-text">Write an application to the superior officer of your office praying for three days casual leave.</div>
+          
+          <div class="self-eval-box" style="margin: 1rem 0; padding: 0.75rem 1rem; border-radius: 8px; background: rgba(0,0,0,0.03); border: 1px dashed var(--border-color);">
+            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">স্ব-মূল্যায়ন (Self-Evaluation):</div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="eval-btn eval-full" onclick="recordScore(5, 10)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid var(--accent-emerald); background: transparent; color: var(--accent-emerald); cursor: pointer;">পূর্ণ নম্বর (১০)</button>
+              <button type="button" class="eval-btn eval-half" onclick="recordScore(5, 5.0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #f59e0b; background: transparent; color: #f59e0b; cursor: pointer;">আংশিক নম্বর (৫.০)</button>
+              <button type="button" class="eval-btn eval-zero" onclick="recordScore(5, 0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #ef4444; background: transparent; color: #ef4444; cursor: pointer;">উত্তর মেলেনি (০)</button>
+            </div>
+          </div>
+
+          <div class="ans-toggle" onclick="toggleDrawer('ans-5')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-5" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>Official Application for Casual Leave:</strong></p>
+<div style="border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 8px; background: rgba(0,0,0,0.02);">
+  <p>27th July 2025</p>
+  <p>The Superior Officer / Divisional Railway Manager,<br>
+  Bangladesh Railway,<br>
+  Dhaka Division, Dhaka.</p>
+  
+  <p><strong>Subject: Application for three days' casual leave.</strong></p>
+  
+  <p>Sir,</p>
+  <p>I have the honour to state that I need to attend to an urgent family emergency at my village home regarding the sudden illness of my mother, who has been admitted to the district hospital. Consequently, I will not be able to attend to my official duties from 28th July to 30th July 2025.</p>
+  
+  <p>May I, therefore, pray and hope that you would be kind enough to grant me three days' casual leave for the aforementioned period and oblige thereby.</p>
+  
+  <p>Yours faithfully,</p>
+  <p><strong>Md. Mahtab Hossain</strong><br>
+  Sub-Assistant Engineer<br>
+  Bangladesh Railway, Dhaka.</p>
+</div>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="6" data-subject="English Comprehension" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন ৬</span>
+            <span class="q-meta-tag">English Comprehension</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">English</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">নম্বর: ১০</span>
+          </div>
+          <div class="q-text">Read the passage carefully and answer the questions:<br>"Science and technology have come to pervade every aspect of our lives, and as a result, society is changing at a speed which is quite unprecedented. There is a great technological explosion around us, generated by science. This explosion is already freeing vast numbers of people from the fear which is based on want. Now, for the first time man can reasonably begin to think that life can be something more than a grim struggle for survival. But even today in spite of the high standard of living which has become general in the more fortunate west, the majority of people in the world still spend nearly all their time and energy in a never-ending struggle with nature to secure food and shelter they need."<br><br>Questions:<br>(a) What pervades every aspect of our life?<br>(b) What explosion has Science generated?<br>(c) What has man in his power?<br>(d) How is life in the west?<br>(e) Who are engaged in a never-ending struggle with nature?</div>
+          
+          <div class="self-eval-box" style="margin: 1rem 0; padding: 0.75rem 1rem; border-radius: 8px; background: rgba(0,0,0,0.03); border: 1px dashed var(--border-color);">
+            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">স্ব-মূল্যায়ন (Self-Evaluation):</div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="eval-btn eval-full" onclick="recordScore(6, 10)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid var(--accent-emerald); background: transparent; color: var(--accent-emerald); cursor: pointer;">পূর্ণ নম্বর (১০)</button>
+              <button type="button" class="eval-btn eval-half" onclick="recordScore(6, 5.0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #f59e0b; background: transparent; color: #f59e0b; cursor: pointer;">আংশিক নম্বর (৫.০)</button>
+              <button type="button" class="eval-btn eval-zero" onclick="recordScore(6, 0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #ef4444; background: transparent; color: #ef4444; cursor: pointer;">উত্তর মেলেনি (০)</button>
+            </div>
+          </div>
+
+          <div class="ans-toggle" onclick="toggleDrawer('ans-6')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-6" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>Comprehension Answers:</strong></p>
+<ol type="a">
+  <li><strong>What pervades every aspect of our life?</strong><br>
+      <em>Answer:</em> Science and technology have come to pervade every aspect of our lives.</li>
+  <li><strong>What explosion has Science generated?</strong><br>
+      <em>Answer:</em> Science has generated a massive technological explosion around us that is rapidly transforming society and freeing people from the fear of want.</li>
+  <li><strong>What has man in his power?</strong><br>
+      <em>Answer:</em> Man now has the power to reasonably think that life can be something meaningful and fulfilling, far beyond a mere grim struggle for physical survival.</li>
+  <li><strong>How is life in the west?</strong><br>
+      <em>Answer:</em> In the more fortunate Western countries, people generally enjoy a significantly high standard of living.</li>
+  <li><strong>Who are engaged in a never-ending struggle with nature?</strong><br>
+      <em>Answer:</em> The majority of the world's population who live outside the affluent nations are still engaged in a never-ending struggle with nature simply to secure basic food and shelter.</li>
+</ol>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="7" data-subject="English Grammar" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন ৭</span>
+            <span class="q-meta-tag">English Grammar</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">English Grammar</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">নম্বর: ১০</span>
+          </div>
+          <div class="q-text">Rewrite the following sentences and use the idioms as directed:<br>(a) English speaks all over the world. (Correct the sentence)<br>(b) He is very weak to walk. (Correct the sentence)<br>(c) The roads are (crowd) with traffic. (Right form of verb)<br>(d) We started after the rain (stop). (Right form of verb)<br>(e) They blamed him _____ their suffering. (Appropriate preposition)<br>(f) Listen _____ what I say. (Appropriate preposition)<br>(g) He drew a nice painting of his father. (Make passive)<br>(h) The door was opened by her. (Make active)<br>(i) He said to me, "Please lend me your book". (Indirect speech)<br>(j) Make a sentence with the idiom: 'in a body'.</div>
+          
+          <div class="self-eval-box" style="margin: 1rem 0; padding: 0.75rem 1rem; border-radius: 8px; background: rgba(0,0,0,0.03); border: 1px dashed var(--border-color);">
+            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">স্ব-মূল্যায়ন (Self-Evaluation):</div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="eval-btn eval-full" onclick="recordScore(7, 10)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid var(--accent-emerald); background: transparent; color: var(--accent-emerald); cursor: pointer;">পূর্ণ নম্বর (১০)</button>
+              <button type="button" class="eval-btn eval-half" onclick="recordScore(7, 5.0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #f59e0b; background: transparent; color: #f59e0b; cursor: pointer;">আংশিক নম্বর (৫.০)</button>
+              <button type="button" class="eval-btn eval-zero" onclick="recordScore(7, 0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #ef4444; background: transparent; color: #ef4444; cursor: pointer;">উত্তর মেলেনি (০)</button>
+            </div>
+          </div>
+
+          <div class="ans-toggle" onclick="toggleDrawer('ans-7')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-7" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>Answers with Grammar Rules:</strong></p>
+<table class="sk-table">
+  <thead>
+    <tr><th>No</th><th>Prompt</th><th>Correct Answer</th><th>Grammar Rule</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>a</td><td>English speaks all over the world.</td><td><strong>English is spoken all over the world.</strong></td><td>Passive Voice: English নিজে কথা বলে না, মানুষের দ্বারা কথিত হয়।</td></tr>
+    <tr><td>b</td><td>He is very weak to walk.</td><td><strong>He is too weak to walk.</strong></td><td>'Too ... to' গঠন নেতিবাচক অর্থ প্রকাশ করে (এতই দুর্বল যে হাঁটতে পারে না)।</td></tr>
+    <tr><td>c</td><td>The roads are (crowd) with traffic.</td><td><strong>The roads are crowded with traffic.</strong></td><td>Passive participle Adjective হিসেবে 'crowded' ব্যবহৃত হয়।</td></tr>
+    <tr><td>d</td><td>We started after the rain (stop).</td><td><strong>We started after the rain had stopped.</strong></td><td>'After'-এর পরবর্তী ক্লজটি Past Perfect Tense (had + V3) হয়।</td></tr>
+    <tr><td>e</td><td>They blamed him _____ their suffering.</td><td><strong>They blamed him for their suffering.</strong></td><td>Appropriate preposition: 'Blame someone for something'।</td></tr>
+    <tr><td>f</td><td>Listen _____ what I say.</td><td><strong>Listen to what I say.</strong></td><td>'Listen'-এর পর সর্বদা preposition 'to' বসে।</td></tr>
+    <tr><td>g</td><td>He drew a nice painting of his father.</td><td><strong>A nice painting of his father was drawn by him.</strong></td><td>Past Indefinite Passive: Object + was/were + V3 + by + Subject.</td></tr>
+    <tr><td>h</td><td>The door was opened by her.</td><td><strong>She opened the door.</strong></td><td>Active Voice: Subject + V2 + Object.</td></tr>
+    <tr><td>i</td><td>He said to me, "Please lend me your book".</td><td><strong>He requested me to lend him my book.</strong></td><td>Imperative request: Reporting verb 'requested' + to + V1.</td></tr>
+    <tr><td>j</td><td>Idiom: 'In a body' (দলবদ্ধভাবে)</td><td><strong>The students marched to the principal's office in a body.</strong></td><td>অর্থ: All together / unitedly.</td></tr>
+  </tbody>
+</table>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="q-card" data-qid="8" data-subject="সাধারণ জ্ঞান ও প্রযুক্তি" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন ৮</span>
+            <span class="q-meta-tag">সাধারণ জ্ঞান ও প্রযুক্তি</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">সাধারণ জ্ঞান</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">নম্বর: ৩০</span>
+          </div>
+          <div class="q-text">নিম্নলিখিত বিষয়গুলোর বিশদ উত্তর দিন:<br>(a) COP-29 সম্মেলনে বাংলাদেশ প্রদত্ত প্রস্তাবসমূহ আলোচনা করুন।<br>(b) ক্ষুদ্র ঋণ কী? বাংলাদেশের অর্থনীতিতে ক্ষুদ্র ঋণের গুরুত্ব আলোচনা করুন।<br>(c) ইন্টারনেট এর প্রয়োজনীয়তা কী?<br>(d) কম্পিউটারের কোন অংশটি প্রোগ্রামের নির্দেশাবলী ধারণ করে? (RAM, ROM ও স্টোরেজের তুলনা)<br>(e) সাইবার নিরাপত্তা বলতে কী বোঝায়?<br>(f) Data এবং Information এর মধ্যে পার্থক্যসমূহ উদাহরণসহ আলোচনা করুন।</div>
+          
+          <div class="self-eval-box" style="margin: 1rem 0; padding: 0.75rem 1rem; border-radius: 8px; background: rgba(0,0,0,0.03); border: 1px dashed var(--border-color);">
+            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">স্ব-মূল্যায়ন (Self-Evaluation):</div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="eval-btn eval-full" onclick="recordScore(8, 30)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid var(--accent-emerald); background: transparent; color: var(--accent-emerald); cursor: pointer;">পূর্ণ নম্বর (৩০)</button>
+              <button type="button" class="eval-btn eval-half" onclick="recordScore(8, 15.0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #f59e0b; background: transparent; color: #f59e0b; cursor: pointer;">আংশিক নম্বর (১৫.০)</button>
+              <button type="button" class="eval-btn eval-zero" onclick="recordScore(8, 0)" style="padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; border: 1px solid #ef4444; background: transparent; color: #ef4444; cursor: pointer;">উত্তর মেলেনি (০)</button>
+            </div>
+          </div>
+
+          <div class="ans-toggle" onclick="toggleDrawer('ans-8')">
+            <span>💡 সমাধান ও প্রামাণ্য বিশ্লেষণ দেখুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-8" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>রচনামূলক প্রশ্নোত্তর:</strong></p>
+
+<h4>(a) COP-29 সম্মেলনে বাংলাদেশের প্রধান প্রস্তাবসমূহ:</h4>
+<p>২০২৪ সালে আজারবাইজানের বাকুতে অনুষ্ঠিত জাতিসংঘ জলবায়ু পরিবর্তন ফ্রেমওয়ার্ক কনভেনশন (COP-29)-এ বাংলাদেশ জলবায়ু ঝুঁকিপূর্ণ দেশগুলোর পক্ষে জোরালো ভূমিকা রাখে। বাংলাদেশের মূল প্রস্তাবগুলো হলো:</p>
+<ul>
+  <li><strong>Loss and Damage Fund দ্রুত কার্যকরীকরণ:</strong> জলবায়ু বিপর্যয়ে ক্ষতিগ্রস্ত স্বল্পোন্নত দেশগুলোর জন্য জলবায়ু ক্ষতিপূরণ তহবিল থেকে দ্রুত ও সহজ শর্তে অর্থ ছাড়।</li>
+  <li><strong>অভিযোজন অর্থায়ন (Adaptation Finance):</strong> ঋণ নয়, বরং অনুদানভিত্তিক অভিযোজন সহায়তায় ধনী দেশগুলোর প্রতিশ্রুতি বাস্তবায়ন।</li>
+  <li><strong>প্রযুক্তি হস্তান্তর (Technology Transfer):</strong> নবায়নযোগ্য জ্বালানি ও কার্বন নিঃসরণ কমানোর পরিবেশবান্ধব প্রযুক্তির উন্মুক্ত বিস্তার।</li>
+  <li><strong>জলবায়ু উদ্বাস্তু স্বীকৃতি:</strong> নদীভাঙন ও লবণাক্ততার কারণে বাস্তুচ্যুত মানুষদের আন্তর্জাতিক আইনি সুরক্ষা ও পুনর্বাসন।</li>
+</ul>
+
+<h4>(b) ক্ষুদ্র ঋণ (Microcredit) ও অর্থনীতিতে এর গুরুত্ব:</h4>
+<p><strong>সংজ্ঞা:</strong> কোনো ধরনের স্থাবর জামানত ছাড়াই সমাজের দরিদ্র, ভূমিহীন ও প্রান্তিক জনগোষ্ঠীর আত্মকর্মসংস্থান সৃষ্টির লক্ষ্যে প্রদত্ত স্বল্পমেয়াদি ক্ষুদ্র তহবিলকে ক্ষুদ্র ঋণ বলা হয়। ড. মুহাম্মদ ইউনূস ও গ্রামীণ ব্যাংক এর পথিকৃৎ।</p>
+<p><strong>গুরুত্ব:</strong></p>
+<ol>
+  <li><strong>দারিদ্র্য বিমোচন ও কর্মসংস্থান:</strong> হাঁস-মুরগি পালন, কুটির শিল্প ও ক্ষুদ্র ব্যবসার মাধ্যমে গ্রামীণ দারিদ্র্য হ্রাস।</li>
+  <li><strong>নারীর ক্ষমতায়ন:</strong> ঋণগ্রহীতাদের ৯০%-এর বেশি নারী হওয়ায় পারিবারিক সিদ্ধান্তে তাদের ক্ষমতায়ন নিশ্চিত হয়েছে।</li>
+  <li><strong>মহাজনি শোষণ বন্ধ:</strong> গ্রামীণ চড়া সুদের দাদন ব্যবস্থার অবসান ঘটিয়েছে।</li>
+</ol>
+
+<h4>(c) ইন্টারনেটের বহুমুখী প্রয়োজনীয়তা:</h4>
+<ul>
+  <li><strong>শিক্ষা ও গবেষণা:</strong> ই-লার্নিং, ডিজিটাল লাইব্রেরি ও বিশ্বমানের গবেষণাপত্র সহজে প্রাপ্তি।</li>
+  <li><strong>অর্থনীতি ও কর্মসংস্থান:</strong> ই-কমার্স, মোবাইল ব্যাংকিং (MFS) ও ফ্রিল্যান্সিংয়ের মাধ্যমে বৈদেশিক মুদ্রা অর্জন।</li>
+  <li><strong>ই-গভর্ন্যান্স:</strong> সরকারি সেবাসমূহ (পাসপোর্ট, জাতীয় পরিচয়পত্র, ভূমি রেকর্ড) ডিজিটাল মাধ্যমে ঘরে বসে প্রাপ্তি।</li>
+</ul>
+
+<h4>(d) কম্পিউটারে প্রোগ্রামের নির্দেশাবলি ধারণকারী অংশ:</h4>
+<p>কম্পিউটারে চলমান প্রোগ্রামের নির্দেশাবলি মূলত <strong>RAM (Random Access Memory)</strong>-এ ধারণ করা হয়, যেখান থেকে CPU সরাসরি দ্রুত ডেটা পড়ে প্রক্রিয়াকরণ সম্পন্ন করে। নিচে মেমরিসমূহের তুলনা তুলে ধরা হলো:</p>
+<table class="sk-table">
+  <thead><tr><th>মেমরি ধরন</th><th>বৈশিষ্ট্য</th><th>প্রকৃতি ও ভূমিকা</th></tr></thead>
+  <tbody>
+    <tr><td><strong>RAM</strong></td><td>অস্থায়ী (Volatile)</td><td>কম্পিউটার চালু থাকা অবস্থায় রানিং অ্যাপ্লিকেশনের নির্দেশাবলি ধারণ করে। বিদ্যুৎ গেলে ডেটা মুছে যায়।</td></tr>
+    <tr><td><strong>ROM</strong></td><td>স্থায়ী (Non-Volatile)</td><td>কম্পিউটার বুট করার প্রাথমিক নির্দেশাবলি (BIOS/UEFI) স্থায়ীভাবে ধারণ করে।</td></tr>
+    <tr><td><strong>HDD / SSD</strong></td><td>সেকেন্ডারি স্টোরেজ</td><td>অপারেটিং সিস্টেম ও ফাইলসমূহ দীর্ঘমেয়াদে স্থায়ীভাবে সংরক্ষণ করে।</td></tr>
+  </tbody>
+</table>
+
+<h4>(e) সাইবার নিরাপত্তা (Cyber Security):</h4>
+<p>সাইবার নিরাপত্তা হলো ইন্টারনেট বা নেটওয়ার্কের সাথে যুক্ত কম্পিউটার সিস্টেম, সার্ভার, মোবাইল ডিভাইস, ইলেকট্রনিক সিস্টেম ও ডেটাকে ক্ষতিকর আক্রমণ, অননুমোদিত প্রবেশাধিকার বা ধ্বংসের হাত থেকে সুরক্ষিত রাখার সামগ্রিক পদ্ধতি। এর মূল লক্ষ্য হলো তথ্যের <strong>CIA Triad</strong> (Confidentiality বা গোপনীয়তা, Integrity বা নির্ভুলতা, Availability বা সহজলভ্যতা) নিশ্চিত করা।</p>
+
+<h4>(f) Data (উপাত্ত) এবং Information (তথ্য)-এর পার্থক্য:</h4>
+<table class="sk-table">
+  <thead><tr><th>বৈশিষ্ট্য</th><th>Data (উপাত্ত)</th><th>Information (তথ্য)</th></tr></thead>
+  <tbody>
+    <tr><td>সংজ্ঞা</td><td>প্রক্রিয়াকরণবিহীন এলোমেলো কাঁচামাল বা বিচ্ছিন্ন প্রতীক।</td><td>উপাত্তকে অর্থবহ ও সুশৃঙ্খলভাবে সাজানোর পর প্রাপ্ত ফলাফল।</td></tr>
+    <tr><td>অর্থবোধকতা</td><td>এককভাবে কোনো পূর্ণাঙ্গ অর্থ প্রকাশ করতে পারে না।</td><td>পূর্ণাঙ্গ, সুস্পষ্ট ও অর্থবহ ধারণা দেয়।</td></tr>
+    <tr><td>নির্ভরশীলতা</td><td>অন্যের ওপর নির্ভরশীল নয় (মৌলিক একক)।</td><td>উপাত্তের ওপর সম্পূর্ণরূপে নির্ভরশীল।</td></tr>
+    <tr><td>উদাহরণ</td><td>'রহিম', '২৫', 'ঢাকা'। (বিচ্ছিন্ন ডেটা)</td><td>"রহিমের বয়স ২৫ বছর এবং সে ঢাকায় বাস করে।" (ইনফরমেশন)</td></tr>
+  </tbody>
+</table>
+            </div>
+          </div>
+        </article>
+    
+      </div>
+    </section>
+
+    <footer>
+      <p>PSC & IBA Written Job Solution • 100% Authentic Reference Book Solutions</p>
+      <p style="font-size:0.8rem; margin-top:4px;">Strictly adheres to Zero External Fabrication Policy & KaTeX Math Notation</p>
+    </footer>
+  </main>
+
+  <script>
+    let scores = {};
+
+    function toggleDrawer(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.toggle('open');
+      const icon = el.previousElementSibling.querySelector('.toggle-icon');
+      if (icon) icon.textContent = el.classList.contains('open') ? '▲' : '▼';
+    }
+
+    function recordScore(qid, marks) {
+      scores[qid] = marks;
+      updateTotalScore();
+    }
+
+    function updateTotalScore() {
+      let total = 0;
+      for (let k in scores) {
+        total += scores[k];
+      }
+      document.getElementById('user-score').textContent = toBn(total);
+    }
+
+    function resetScore() {
+      scores = {};
+      document.getElementById('user-score').textContent = '০';
+    }
+
+    function toBn(n) {
+      const bn = {'0':'০','1':'১','2':'২','3':'৩','4':'৪','5':'৫','6':'৬','7':'৭','8':'৮','9':'৯'};
+      return String(n).replace(/[0-9]/g, d => bn[d]);
+    }
+
+    // Tab Filtering
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const subj = btn.getAttribute('data-subject');
+        document.querySelectorAll('.q-card').forEach(card => {
+          if (subj === 'all' || card.getAttribute('data-subject') === subj) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Font scaling
+    let scale = 1;
+    function adjustFont(delta) {
+      scale = Math.min(1.4, Math.max(0.8, scale + delta));
+      document.documentElement.style.setProperty('--font-scale', scale);
+    }
+    function resetFont() {
+      scale = 1;
+      document.documentElement.style.setProperty('--font-scale', 1);
+    }
+
+    // Theme toggle
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      document.querySelector('.theme-toggle').textContent = isDark ? '☀️' : '🌙';
+    }
+
+    // Render KaTeX
+    document.addEventListener("DOMContentLoaded", function() {
+      if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '\[', right: '\]', display: true},
+            {left: '\(', right: '\)', display: false}
+          ],
+          throwOnError: false
+        });
+      }
+    });
+  </script>
+</body>
+</html>

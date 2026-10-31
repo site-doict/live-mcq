@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>বিষয়ভিত্তিক লিখিত প্রশ্নব্যাংক | বিসিএস স্মার্ট ই-বুক লাইব্রেরি</title>
+  <meta name="description" content="পিএসসি ও বিভিন্ন নিয়োগ পরীক্ষার লিখিত প্রশ্নাবলি বিষয় অনুযায়ী (বাংলা, ইংরেজি, গণিত, সাধারণ বিজ্ঞান ও আইসিটি, সাধারণ জ্ঞান) অনুশীলন।">
+
+  <script>
+    try {
+      var t = localStorage.getItem('theme') || localStorage.getItem('ebk_portal_theme') || localStorage.getItem('bcs_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', t);
+      if (t === 'dark') document.documentElement.classList.add('dark');
+    } catch (e) {}
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../ebook-ui.css">
+  <link rel="stylesheet" href="../paper-textures.css">
+  <link rel="stylesheet" href="../universal-modes.css">
+  <style>
+    .sub-hero {
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.12), rgba(217, 119, 6, 0.08));
+      border: 1px solid var(--border-color, rgba(226, 232, 240, 0.9));
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .sub-hero h1 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main, #0f172a);
+      margin-bottom: 0.5rem;
+    }
+    .sub-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+    }
+    .sub-tab-btn {
+      padding: 0.55rem 1.15rem;
+      border-radius: 24px;
+      border: 1px solid var(--border-color, #cbd5e1);
+      background: var(--bg-card, #ffffff);
+      color: var(--text-muted, #475569);
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .sub-tab-btn.active, .sub-tab-btn:hover {
+      background: var(--primary, #0f766e);
+      color: #ffffff;
+      border-color: var(--primary, #0f766e);
+      box-shadow: 0 4px 10px rgba(15, 118, 110, 0.25);
+    }
+    .q-card {
+      background: var(--bg-card, #ffffff);
+      border: 1px solid var(--border-color, #e2e8f0);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-bottom: 1.75rem;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+    .q-exam-ref {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 118, 110, 0.1);
+      color: #0f766e;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .reveal-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--bg-surface, #f8fafc);
+      border: 1px solid #0f766e;
+      color: #0f766e;
+      padding: 0.45rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 0.75rem;
+    }
+    .reveal-toggle:hover {
+      background: #0f766e;
+      color: #fff;
+    }
+    .solution-drawer {
+      display: none;
+      margin-top: 1.25rem;
+      padding: 1.25rem;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid var(--border-color, #e2e8f0);
+    }
+    .solution-drawer.open {
+      display: block;
+    }
+    .table-responsive {
+      overflow-x: auto;
+      margin: 0.85rem 0;
+    }
+    .ans-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    .ans-table th, .ans-table td {
+      padding: 8px 12px;
+      border: 1px solid #cbd5e1;
+    }
+    .ans-table th {
+      background: rgba(15, 118, 110, 0.08);
+      color: #0f766e;
+    }
+    .fraction {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      padding: 0 4px;
+      font-size: 0.9em;
+    }
+    .fraction .num { border-bottom: 1.5px solid currentColor; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+
+    <div id="ebkSearchMount"></div>
+
+    <header class="sub-hero">
+      <h1>📂 বিষয়ভিত্তিক লিখিত প্রশ্নব্যাংক ও সমাধান</h1>
+      <p>সকল নিয়োগ পরীক্ষা থেকে সংগৃহীত প্রশ্নাবলি বিষয় ও টপিক অনুযায়ী সাজানো। আপনি নির্দিষ্ট বিষয়ে দক্ষতা যাচাই করতে পারেন।</p>
+      <div style="display:flex; justify-content:center; gap:0.75rem;">
+        <a href="index.html" class="nav-btn">← পরীক্ষাভিত্তিক সূচিপত্র</a>
+        <a href="../index.html" class="nav-btn">🏠 মূল লাইব্রেরি</a>
+      </div>
+    </header>
+
+    <div class="sub-tabs">
+      <button class="sub-tab-btn active" onclick="showSubject('all')">সকল বিষয় (<span id="countAll">০</span>টি)</button>
+      <button class="sub-tab-btn" onclick="showSubject('বাংলা')">বাংলা (<span id="countBangla">০</span>টি)</button>
+      <button class="sub-tab-btn" onclick="showSubject('English')">English (<span id="countEnglish">০</span>টি)</button>
+      <button class="sub-tab-btn" onclick="showSubject('গণিত')">গণিত (<span id="countMath">০</span>টি)</button>
+      <button class="sub-tab-btn" onclick="showSubject('বিজ্ঞান')">বিজ্ঞান ও আইসিটি (<span id="countSci">০</span>টি)</button>
+      <button class="sub-tab-btn" onclick="showSubject('সাধারণ জ্ঞান')">সাধারণ জ্ঞান (<span id="countGK">০</span>টি)</button>
+    </div>
+
+    <div id="subjectQuestionsContainer">
+      <p style="text-align:center; color:var(--text-muted); padding:2rem;">প্রশ্নাবলি লোড হচ্ছে...</p>
+    </div>
+
+  </div>
+
+    <script src="data/written_questions_data.js"></script>
+  <script src="../universal-modes.js"></script>
+  <script src="../search-engine.js"></script>
+  <script src="../ebook-ui.js"></script>
+  <script>
+    let allQuestions = [];
+    let currentFilter = 'all';
+    let currentPage = 1;
+    const pageSize = 25;
+    let currentFiltered = [];
+
+    function initFilterFromHash() {
+      var initHash = (window.location.hash || '').replace('#', '').toLowerCase();
+      var targetBtn = null;
+      var initialSub = 'all';
+
+      if (initHash === 'bangla' || initHash === 'বাংলা') {
+        targetBtn = document.querySelector('[onclick*="বাংলা"]');
+        initialSub = 'বাংলা';
+      } else if (initHash === 'english' || initHash === 'ইংরেজি') {
+        targetBtn = document.querySelector('[onclick*="English"]');
+        initialSub = 'English';
+      } else if (initHash === 'math' || initHash === 'গণিত') {
+        targetBtn = document.querySelector('[onclick*="গণিত"]');
+        initialSub = 'গণিত';
+      } else if (initHash === 'science' || initHash === 'বিজ্ঞান') {
+        targetBtn = document.querySelector('[onclick*="বিজ্ঞান"]');
+        initialSub = 'বিজ্ঞান';
+      } else if (initHash === 'gk' || initHash === 'সাধারণ জ্ঞান') {
+        targetBtn = document.querySelector('[onclick*="সাধারণ জ্ঞান"]');
+        initialSub = 'সাধারণ জ্ঞান';
+      }
+
+      if (targetBtn) {
+        document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+        targetBtn.classList.add('active');
+      }
+      applyFilter(initialSub);
+    }
+
+    async function loadData() {
+      if (window.PSC_IBA_QUESTIONS && Array.isArray(window.PSC_IBA_QUESTIONS) && window.PSC_IBA_QUESTIONS.length > 0) {
+        allQuestions = window.PSC_IBA_QUESTIONS;
+        updateCounts();
+        initFilterFromHash();
+        return;
+      }
+      try {
+        const manifestRes = await fetch('data/exam_manifest.json');
+        const manifest = await manifestRes.json();
+        
+        let loaded = [];
+        for (const fn of manifest) {
+          const res = await fetch('data/' + fn);
+          const data = await res.json();
+          const qs = data.questions.map(q => ({
+            ...q,
+            exam_name: data.metadata.organization + ' — ' + data.metadata.post + ' ' + data.metadata.year,
+            exam_file: data.metadata.filename
+          }));
+          loaded = loaded.concat(qs);
+        }
+        allQuestions = loaded;
+        updateCounts();
+        initFilterFromHash();
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    function toBn(n) {
+      const bn = {'0':'০', '1':'১', '2':'২', '3':'৩', '4':'৪', '5':'৫', '6':'৬', '7':'৭', '8':'৮', '9':'৯'};
+      return String(n).split('').map(c => bn[c] || c).join('');
+    }
+
+    function updateCounts() {
+      document.getElementById('countAll').textContent = toBn(allQuestions.length);
+      document.getElementById('countBangla').textContent = toBn(allQuestions.filter(q => q.subject.includes('বাংলা')).length);
+      document.getElementById('countEnglish').textContent = toBn(allQuestions.filter(q => q.subject.includes('English') || q.subject.includes('ইংরেজি')).length);
+      document.getElementById('countMath').textContent = toBn(allQuestions.filter(q => q.subject.includes('গণিত')).length);
+      document.getElementById('countSci').textContent = toBn(allQuestions.filter(q => q.subject.includes('বিজ্ঞান') || q.subject.includes('প্রযুক্তি') || q.subject.includes('কম্পিউটার') || q.subject.includes('পদার্থবিজ্ঞান') || q.subject.includes('জীববিজ্ঞান')).length);
+      document.getElementById('countGK').textContent = toBn(allQuestions.filter(q => q.subject.includes('বাংলাদেশ') || q.subject.includes('আন্তর্জাতিক') || q.subject.includes('সাধারণ জ্ঞান') || q.subject.includes('ভূগোল') || q.subject.includes('মুক্তিযুদ্ধ') || q.subject.includes('ইতিহাস') || q.subject.includes('খেলাধুলা')).length);
+    }
+
+    function applyFilter(subFilter) {
+      currentFilter = subFilter;
+      currentPage = 1;
+      if (subFilter === 'বাংলা') {
+        currentFiltered = allQuestions.filter(q => q.subject.includes('বাংলা'));
+      } else if (subFilter === 'English') {
+        currentFiltered = allQuestions.filter(q => q.subject.includes('English') || q.subject.includes('ইংরেজি'));
+      } else if (subFilter === 'গণিত') {
+        currentFiltered = allQuestions.filter(q => q.subject.includes('গণিত'));
+      } else if (subFilter === 'বিজ্ঞান') {
+        currentFiltered = allQuestions.filter(q => q.subject.includes('বিজ্ঞান') || q.subject.includes('প্রযুক্তি') || q.subject.includes('কম্পিউটার') || q.subject.includes('পদার্থবিজ্ঞান') || q.subject.includes('জীববিজ্ঞান'));
+      } else if (subFilter === 'সাধারণ জ্ঞান') {
+        currentFiltered = allQuestions.filter(q => q.subject.includes('বাংলাদেশ') || q.subject.includes('আন্তর্জাতিক') || q.subject.includes('সাধারণ জ্ঞান') || q.subject.includes('ভূগোল') || q.subject.includes('মুক্তিযুদ্ধ') || q.subject.includes('ইতিহাস') || q.subject.includes('খেলাধুলা'));
+      } else {
+        currentFiltered = allQuestions;
+      }
+      renderPage();
+    }
+
+    function renderPage() {
+      const cont = document.getElementById('subjectQuestionsContainer');
+      if (currentFiltered.length === 0) {
+        cont.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:2rem;">কোনো প্রশ্ন পাওয়া যায়নি।</p>';
+        return;
+      }
+
+      const totalPages = Math.ceil(currentFiltered.length / pageSize);
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+
+      const startIndex = (currentPage - 1) * pageSize;
+      const endIndex = Math.min(startIndex + pageSize, currentFiltered.length);
+      const pageItems = currentFiltered.slice(startIndex, endIndex);
+
+      const itemsHtml = pageItems.map(q => `
+        <article class="q-card">
+          <div class="q-exam-ref">
+            <span>🏛️</span>
+            <span>উৎস: <a href="${q.exam_file}#q_${q.q_no}" style="color:inherit; font-weight:bold;">${q.exam_name} (প্রশ্ন ${toBn(q.q_no)})</a></span>
+            <span>• বিষয়: ${q.subject}</span>
+            <span>• টপিক: ${q.topic}</span>
+            <span>• পূর্ণমান: ${toBn(q.marks)}</span>
+          </div>
+
+          <div class="q-content">
+            ${q.question_html}
+          </div>
+
+          <button type="button" class="reveal-toggle" onclick="toggleSubSol(this)">
+            👁️ উত্তর ও সমাধান দেখুন
+          </button>
+
+          <div class="solution-drawer">
+            ${q.solution_html}
+          </div>
+        </article>
+      `).join('');
+
+      const paginationHtml = `
+        <div style="display:flex; justify-content:center; align-items:center; gap:0.75rem; margin:1.5rem 0; flex-wrap:wrap;">
+          <button type="button" class="sub-tab-btn" onclick="changePage(-1)" ${currentPage === 1 ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>← পূর্ববর্তী পৃষ্ঠা</button>
+          <span style="font-weight:700; color:var(--text-main);">পৃষ্ঠা ${toBn(currentPage)} / ${toBn(totalPages)} (প্রশ্ন ${toBn(startIndex + 1)}–${toBn(endIndex)}, মোট ${toBn(currentFiltered.length)}টি)</span>
+          <button type="button" class="sub-tab-btn" onclick="changePage(1)" ${currentPage === totalPages ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>পরবর্তী পৃষ্ঠা →</button>
+        </div>
+      `;
+
+      cont.innerHTML = paginationHtml + itemsHtml + paginationHtml;
+    }
+
+    function changePage(delta) {
+      currentPage += delta;
+      renderPage();
+      window.scrollTo({ top: 200, behavior: 'smooth' });
+    }
+
+    function toggleSubSol(btn) {
+      const drawer = btn.nextElementSibling;
+      if (drawer) {
+        drawer.classList.toggle('open');
+      }
+    }
+
+    function showSubject(sub) {
+      document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      applyFilter(sub);
+    }
+
+    loadData();
+  </script>
+</body>
+</html>

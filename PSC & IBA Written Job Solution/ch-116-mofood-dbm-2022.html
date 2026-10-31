@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>খাদ্য মন্ত্রণালয় (পিএসসি) — ডাটাবেজ ম্যানেজার | প্রামাণ্য সমাধান</title>
+  <link rel="stylesheet" href="css/paper-textures.css">
+  <link rel="stylesheet" href="css/bangla-fonts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Kalpurush&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\(', right: '\\)', display: false}]});">
+  </script>
+  <style>
+    :root {
+      --bg-page: #fdfbf7;
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: rgba(226, 232, 240, 0.8);
+      --accent-primary: #0284c7;
+      --accent-indigo: #6366f1;
+      --accent-emerald: #10b981;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #0f172a;
+      --bg-surface: rgba(30, 41, 59, 0.85);
+      --bg-card: rgba(30, 41, 59, 0.82);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: rgba(51, 65, 85, 0.8);
+      --accent-primary: #38bdf8;
+      --accent-indigo: #818cf8;
+      --accent-emerald: #34d399;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.65;
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Top Nav */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+    }
+    .back-btn {
+      text-decoration: none;
+      color: var(--accent-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .back-btn:hover { text-decoration: underline; }
+    .nav-controls { display: flex; align-items: center; gap: 0.75rem; }
+    .theme-btn, .font-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .theme-btn:hover, .font-btn:hover {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Chapter Header */
+    .ch-header {
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .ch-title {
+      font-size: 1.65rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+    }
+    .ch-title .ch-en {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.05rem;
+      display: block;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 0.25rem;
+    }
+    .ch-meta-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .ch-badge {
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--accent-primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+
+    /* Sketchnotes Section */
+    .sk-container {
+      background: var(--bg-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+    .sk-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .sk-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.15rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .sk-box h4 {
+      font-size: 1.05rem;
+      color: var(--accent-indigo);
+      margin-bottom: 0.65rem;
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 0.35rem;
+    }
+    .sk-box ul { list-style-type: none; }
+    .sk-box li {
+      font-size: 0.92rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+    .sk-box li strong { color: var(--text-main); }
+
+    /* Part 2: Question Section */
+    .part2-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .part2-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .subject-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .tab-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.4rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Question Cards */
+    .q-card {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .q-header {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.85rem;
+    }
+    .q-num {
+      font-weight: 700;
+      color: var(--accent-primary);
+      font-size: 1.05rem;
+    }
+    .q-meta-tag {
+      background: rgba(2, 132, 199, 0.08);
+      color: var(--accent-primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .q-body {
+      margin-bottom: 1rem;
+    }
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* Answer Drawer */
+    .ans-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(2, 132, 199, 0.06);
+      border: 1px solid rgba(2, 132, 199, 0.15);
+      color: var(--accent-primary);
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+    .ans-toggle:hover { background: rgba(2, 132, 199, 0.12); }
+    .ans-drawer {
+      display: none;
+      padding: 1.25rem;
+      margin-top: 0.75rem;
+      background: rgba(0, 0, 0, 0.02);
+      border-left: 3px solid var(--accent-primary);
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    }
+    [data-theme="dark"] .ans-drawer { background: rgba(255, 255, 255, 0.02); }
+    .ans-drawer.open { display: block; }
+    .exp-content {
+      font-size: 0.98rem;
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+    .exp-content p { margin-bottom: 0.75rem; }
+    .exp-content ul, .exp-content ol { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+    .exp-content li { margin-bottom: 0.35rem; }
+    .bcs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.92rem;
+    }
+    .bcs-table th, .bcs-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+    }
+    .bcs-table th {
+      background: rgba(2, 132, 199, 0.08);
+      font-weight: 600;
+      color: var(--accent-primary);
+    }
+
+    /* Typography Protection */
+    .q-card, .q-card *, .q-text, .q-text *, .ans-drawer, .ans-drawer *,
+    .bcs-table, .bcs-table * {
+      font-family: 'Noto Serif Bengali', 'Kalpurush', Georgia, serif !important;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body class="paper-dot-grid font-trimohona">
+  <div class="container">
+    <!-- Top Navigation -->
+    <header class="top-nav">
+      <a href="index.html" class="back-btn">
+        <span>←</span> সূচিপত্রে ফিরে যান
+      </a>
+      <div class="nav-controls">
+        <button class="font-btn" onclick="adjustFontSize(-1)">A-</button>
+        <button class="font-btn" onclick="adjustFontSize(0)">A</button>
+        <button class="font-btn" onclick="adjustFontSize(1)">A+</button>
+        <button class="theme-btn" onclick="toggleTheme()" id="themeToggleBtn">🌙</button>
+      </div>
+    </header>
+
+    <!-- Chapter Header -->
+    <section class="ch-header">
+      <h1 class="ch-title font-trimohona">
+        খাদ্য মন্ত্রণালয় (পিএসসি) — ডাটাবেজ ম্যানেজার
+        <span class="ch-en">Ministry of Food (PSC Exam, BUET Exam Taker) - Database Manager 2022</span>
+      </h1>
+      <div class="ch-meta-wrap">
+        <span class="ch-badge">📋 পরীক্ষা নং: ১১৬</span>
+        <span class="ch-badge">🏛️ BUET</span>
+        <span class="ch-badge">📅 তারিখ: ২৯.১১.২০২২</span>
+        <span class="ch-badge">⏱️ সময়: ৬০ মিনিট</span>
+        <span class="ch-badge">🎯 পূর্ণমান: ১০০</span>
+        <span class="ch-badge">🔢 মোট প্রশ্ন: ১৩টি</span>
+        <span class="ch-badge">📄 পৃষ্ঠা: ৭০৫–৭১৯</span>
+      </div>
+    </section>
+
+    
+    <section class="sk-part1">
+      <div class="sk-badge">Part 1: Authentic Revision Notes &amp; Formulas</div>
+      <h3 class="sk-title font-trimohona">খাদ্য মন্ত্রণালয় (পিএসসি) — ডাটাবেজ ম্যানেজার প্রামাণ্য রিভিশন নোট ও সূত্রাবলি</h3>
+      <p class="sk-desc font-trimohona">
+        এই অধ্যায়ের মূল পরীক্ষার প্রশ্ন ও বিশদ সমাধান থেকে সংকলিত হ্যান্ডনোট, গাণিতিক সূত্র ও সারসংক্ষেপ:
+      </p>
+      <div class="sk-grid">
+        
+        <div class="sk-box">
+          <h4 class="font-trimohona">বাংলা ব্যাকরণ ও প্রামাণ্য সাহিত্য সূত্র</h4>
+          <div>• <strong>ধাতু বনাম প্রকৃতি:</strong> ক্রিয়ার মূল অবিভাজ্য অংশকে 'ধাতু' বলে (যেমন: কর, যা, খা)। আর নামশব্দ বা ক্রিয়ার মূলকে সামগ্রিকভাবে 'প্রকৃতি' বলে (প্রকৃতি দুই প্রকার: নাম প্রকৃতি ও ক্রিয়া/ধাতু প্রকৃতি)।<br>• <strong>দ্বিগু সমাস:</strong> সমাহার বা মিলন অর্থে সংখ্যাবাচক শব্দের সাথে বিশেষ্যের যে সমাস হয় এবং সমাসবদ্ধ পদটি বিশেষ্য বোঝায় তাকে দ্বিগু সমাস বলে (যেমন: ত্রিকালের সমাহার = ত্রিকাল)।<br>• <strong>সাধিত শব্দ:</strong> যেসব শব্দকে বিশ্লেষণ করলে আলাদা অর্থবোধক শব্দ ও প্রত্যয়/উপসর্গ পাওয়া যায় (যেমন: শীতল = শীত + ল)।</div>
+        </div>
+
+        <div class="sk-box">
+          <h4 class="font-trimohona">জাতীয় ও আন্তর্জাতিক সমসাময়িক নীতি ও অর্থনীতি</h4>
+          <div>• <strong>সবুজ অর্থনীতি (Green Economy):</strong> পরিবেশগত ঝুঁকি হ্রাস, কার্বন নিঃসরণ কমানো ও টেকসই প্রবৃদ্ধি অর্জনের অর্থনৈতিক নীতি।<br>• <strong>অর্থনৈতিক অঞ্চল (SEZ):</strong> বিশেষ কর সুবিধা, এক ছাদের নিচে সেবা (One Stop Service) ও অবকাঠামো সুবিধা দিয়ে দেশি-বিদেশি বিনিয়োগ আকৃষ্ট করার নির্ধারিত ভৌগোলিক এলাকা।<br>• <strong>JICA:</strong> জাপান সরকারের আন্তর্জাতিক দ্বিপাক্ষিক সংস্থা যা বাংলাদেশে মেগা অবকাঠামো (মেট্রোরেল, মাতারবাড়ী, থার্ড টার্মিনাল) অর্থায়ন করে।</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PART 2: Written Examination Question Engine -->
+    <section>
+      <div class="part2-header">
+        <div class="part2-title">
+          <span>📝</span> Part 2: বিগত পরীক্ষার প্রামাণ্য প্রশ্নব্যাংক ও সমাধান
+        </div>
+      </div>
+
+      <!-- Subject Filter Tabs -->
+      <nav class="subject-tabs">
+        <button class="tab-btn active" data-subject="all">সকল বিষয় (১৩)</button>
+        <button class="tab-btn" data-subject="বাংলা প্রবন্ধ">বাংলা প্রবন্ধ (১)</button>
+        <button class="tab-btn" data-subject="বাংলা">বাংলা (১)</button>
+        <button class="tab-btn" data-subject="বাংলা পত্রলিখন">বাংলা পত্রলিখন (১)</button>
+        <button class="tab-btn" data-subject="English Translation">English Translation (১)</button>
+        <button class="tab-btn" data-subject="বাংলা ব্যাকরণ">বাংলা ব্যাকরণ (৩)</button>
+        <button class="tab-btn" data-subject="English Essay">English Essay (১)</button>
+        <button class="tab-btn" data-subject="English Letter">English Letter (১)</button>
+        <button class="tab-btn" data-subject="English Comprehension">English Comprehension (১)</button>
+        <button class="tab-btn" data-subject="English Grammar">English Grammar (১)</button>
+        <button class="tab-btn" data-subject="English Idioms">English Idioms (১)</button>
+        <button class="tab-btn" data-subject="সাধারণ জ্ঞান ও বিষয়ভিত্তিক">সাধারণ জ্ঞান ও বিষয়ভিত্তিক (১)</button>
+      </nav>
+
+      <!-- Question Cards List -->
+      <main id="questionContainer">
+        
+        <article class="q-card" data-qid="1" data-subject="বাংলা প্রবন্ধ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১</span>
+            <span class="q-meta-tag">বাংলা প্রবন্ধ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা প্রবন্ধ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">প্রবন্ধ রচনা করুন: 'সাহিত্যে-শিল্পে বঙ্গবন্ধু' (বর্তমান প্রেক্ষাপটে: 'কৃত্রিম বুদ্ধিমত্তা: সম্ভাবনা ও চ্যালেঞ্জ')</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-1')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-1" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>কৃত্রিম বুদ্ধিমত্তা: সম্ভাবনা ও চ্যালেঞ্জ</strong></p>
+<p><strong>ভূমিকা:</strong> একবিংশ শতাব্দীর চতুর্থ শিল্পবিপ্লবের সবচেয়ে যুগান্তকারী প্রযুক্তি হলো কৃত্রিম বুদ্ধিমত্তা বা Artificial Intelligence (AI)। মানুষের বুদ্ধিবৃত্তিক সক্ষমতা—যেমন চিন্তাশক্তি, যৌক্তিক বিশ্লেষণ, সিদ্ধান্ত গ্রহণ এবং জটিল সমস্যার সমাধানকে যখন কম্পিউটারের অ্যালগরিদম ও ডেটাসেটের মাধ্যমে যন্ত্রে রূপায়িত করা হয়, তাকে কৃত্রিম বুদ্ধিমত্তা বলা হয়।</p>
+<p><strong>AI-এর পরিধি ও বিস্তার:</strong> মেশিন লার্নিং (ML), ডিপ লার্নিং (DL), প্রাকৃতিক ভাষা প্রক্রিয়াকরণ (NLP), কম্পিউটার ভিশন এবং সর্বাধুনিক জেনারেটিভ এআই (Generative AI) প্রযুক্তির মাধ্যমে আজ টেক্সট, অডিও, ভিডিও এবং সফটওয়্যার কোড তৈরি করা সম্ভব হচ্ছে। শিক্ষা, স্বাস্থ্যসেবা, কৃষি, শিল্প উৎপাদন, ব্যাংকিং ও সরকারি নাগরিক সেবা—প্রতিটি ক্ষেত্রেই এআই এক নতুন বিপ্লব সূচনা করেছে।</p>
+<p><strong>সম্ভাবনার ক্ষেত্রসমূহ:</strong><br>
+১. <em>স্বাস্থ্যসেবা:</em> জটিল রোগ নির্ণয়, রেডিওলজিক্যাল ইমেজ বিশ্লেষণ এবং দ্রুততম সময়ে নতুন ওষুধ উদ্ভাবনে এআই যুগান্তকারী ভূমিকা রাখছে।<br>
+২. <em>স্মার্ট কৃষি:</em> স্যাটেলাইট ইমেজ বিশ্লেষণ, আবহাওয়ার পূর্বাভাস, মাটির আর্দ্রতা পরীক্ষা এবং ফসলের রোগ শনাক্তকরণে এআই প্রযুক্তির ব্যবহার ফসলের উৎপাদন বহুগুণ বাড়াতে পারে।<br>
+৩. <em>শিক্ষা ও গবেষণা:</em> শিক্ষার্থীদের মেধার স্তর অনুযায়ী ব্যক্তিগতকৃত শিখন পদ্ধতি (Personalized learning) নিশ্চিত করছে।<br>
+৪. <em>শিল্প ও ই-কমার্স:</em> উৎপাদন স্বয়ংক্রিয়করণ, কোয়ালিটি কন্ট্রোল এবং কাস্টমার সার্ভিসে চ্যাটবটের ব্যবহার পরিচালন ব্যয় বহুলাংশে হ্রাস করছে।</p>
+<p><strong>চ্যালেঞ্জ ও উদ্বেগের দিকসমূহ:</strong><br>
+১. <em>কর্মসংস্থান সংকোচন:</em> রুটিনমাফিক ও ক্ল্যারিক্যাল কাজের অটোমেশন ঘটায় বিপুল সংখ্যক জনবল চাকরি হারানোর ঝুঁকিতে পড়ছে।<br>
+২. <em>ডিপফেক ও ভুয়া তথ্যের বিস্তার:</em> বাস্তবসম্মত নকল ছবি ও ভয়েস ক্লোনিংয়ের মাধ্যমে সাইবার অপরাধ, রাজনৈতিক মিথ্যাচার ও ব্ল্যাকমেইলিং বাড়ছে।<br>
+৩. <em>ব্যক্তিগত গোপনীয়তার লঙ্ঘন:</em> ব্যবহারকারীদের বিশাল পরিমাণ ব্যক্তিগত তথ্য (Big Data) অনুমতিহীন ব্যবহারের কারণে সাইবার নিরাপত্তা ও মানবাধিকার হুমকির মুখে।<br>
+৪. <em>পক্ষপাতিত্ব ও অ্যালগরিদমিক বৈষম্য:</em> ট্রেনিং ডেটার পক্ষপাত এআই এর সিদ্ধান্তকেও পক্ষপাতদুষ্ট করে তোলে।</p>
+<p><strong>উপসংহার:</strong> কৃত্রিম বুদ্ধিমত্তা মানুষের বিকল্প নয়, বরং মানুষের সক্ষমতা বৃদ্ধির অপরিহার্য সহায়ক শক্তি। নৈতিক নীতিমালা, কঠোর সাইবার আইন এবং দক্ষ মানবসম্পদ তৈরির মাধ্যমে প্রযুক্তির ইতিবাচক ব্যবহার নিশ্চিত করলেই একটি নিরাপদ, অন্তর্ভুক্তিমূলক ও স্মার্ট সমাজ বিনির্মাণ সম্ভব।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="2" data-subject="বাংলা" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ২</span>
+            <span class="q-meta-tag">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">সারাংশ লিখুন:<br>"সময় ও স্রোত কারো অপেক্ষায় বসে থাকে না। চিরকাল চলতে থাকে। সময়ের নিকট অনুনয় কর, একে ভয় দেখাও, ভ্রুক্ষেপও করবে না, সময় চলে যাবে আর ফিরবে না। নষ্ট স্বাস্থ্য ও হারানো ধন পুনঃপ্রাপ্ত হওয়া যায়, কিন্তু সময় একবার গত হয়ে গেলে আর ফিরে আসেনা। গত সময়ের জন্য অনুশোচনা করা নিষ্ফল।"</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-2')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-2" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>সারাংশ:</strong><br>
+সময় চিরবহমান ও অপ্রতিরোধ্য; শত চেষ্টা বা অনুনয়েও সময়ের স্বাভাবিক গতিকে রোধ করা যায় না। শ্রম ও সাধনায় নষ্ট স্বাস্থ্য বা হারানো ধনসম্পদ পুনরুদ্ধার সম্ভব হলেও অতিক্রান্ত সময় কখনো ফিরে আসে না। তাই অতীত নিয়ে আক্ষেপ না করে বর্তমানের সদ্ব্যবহার করাই মানুষের মূল কর্তব্য।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="3" data-subject="বাংলা পত্রলিখন" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৩</span>
+            <span class="q-meta-tag">বাংলা পত্রলিখন</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা পত্রলিখন</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">আপনার এলাকায় একটি গ্রন্থাগার নির্মানের জন্য প্রয়োজনীয় পদক্ষেপ গ্রহণের আবেদন জানিয়ে কর্তৃপক্ষের কাছে একটি স্মারকলিপি প্রেরণ করুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-3')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-3" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>তারিখ:</strong> ২৯.১১.২০২২<br>
+<strong>বরাবর:</strong><br>
+সচিব<br>
+সংস্কৃতি বিষয়ক মন্ত্রণালয়<br>
+বাংলাদেশ সচিবালয়, ঢাকা।</p>
+<p><strong>বিষয়: মানিকগঞ্জ জেলার শিবালয় উপজেলা সদরে একটি গণগ্রন্থাগার স্থাপনের দাবিতে স্মারকলিপি।</strong></p>
+<p>জনাব,<br>
+বিনীত নিবেদন এই যে, মানিকগঞ্জ জেলার অন্তর্গত শিবালয় উপজেলা একটি প্রাচীন ও ঐতিহ্যবাহী জনপদ। বর্তমানে এ উপজেলার জনসংখ্যা প্রায় দুই লক্ষাধিক এবং শিক্ষার হার প্রায় ৬৫ শতাংশ। উপজেলায় তিনটি কলেজ, বিশটিরও বেশি মাধ্যমিক বিদ্যালয় ও বহু মাদ্রাসা রয়েছে। অত্যন্ত পরিতাপের বিষয় যে, বিপুল সংখ্যক জ্ঞানপিপাসু তরুণ, শিক্ষার্থী ও সাধারণ পাঠকের উপযোগী কোনো সরকারি বা পাবলিক লাইব্রেরি অত্র উপজেলায় নেই। উপযুক্ত বইপড়ার সুযোগ না থাকায় তরুণ প্রজন্ম মোবাইল আসক্তি ও সামাজিক অবক্ষয়ের দিকে ধাবিত হচ্ছে।</p>
+<p>অতএব, আপনার সুমহান সমীপে আমাদের আকুল আবেদন, শিবালয় উপজেলা সদরে অবিলম্বে সরকারি উদ্যোগে একটি আধুনিক, ডিজিটালাইজড ও সমৃদ্ধ গণগ্রন্থাগার স্থাপনের প্রয়োজনীয় বরাদ্দ ও প্রশাসনিক পদক্ষেপ গ্রহণ করে বাধিত করবেন।</p>
+<p><strong>বিনীত নিবেদক—</strong><br>
+শিবালয় উপজেলার সর্বস্তরের জনগণের পক্ষে:<br>
+১. 'ক' হোসেন<br>
+২. 'খ' মজুমদার<br>
+৩. 'গ' বেগম</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="4" data-subject="English Translation" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৪</span>
+            <span class="q-meta-tag">English Translation</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">English Translation</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">বাংলা অনুবাদ করুন: In our country poverty is a great problem. But we do not understand that this plight is our own creation. Most people do not try to improve their condition with hard labour. They only express regret for their distress and blame their lot for it.</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-4')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-4" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>বঙ্গানুবাদ:</strong><br>
+আমাদের দেশে দারিদ্র্য একটি বিরাট সমস্যা। কিন্তু আমরা এটি উপলব্ধি করতে পারি না যে, এই দুর্দশা আমাদের নিজেদেরই সৃষ্টি। অধিকাংশ মানুষই কঠোর পরিশ্রমের মাধ্যমে নিজেদের অবস্থার উন্নতি সাধনের চেষ্টা করে না। তারা কেবল নিজেদের দুর্ভাগ্যের জন্য আক্ষেপ প্রকাশ করে এবং ভাগ্যকে দোষারোপ করে।</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="5" data-subject="বাংলা ব্যাকরণ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৫</span>
+            <span class="q-meta-tag">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">ধাতু ও প্রকৃতির মধ্যে পার্থক্য নির্দেশ করুন।</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-5')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-5" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>তুলনার বিষয়</th><th>ধাতু (Root Verb)</th><th>প্রকৃতি (Root / Base Word)</th></tr></thead>
+<tbody>
+<tr><td><strong>সংজ্ঞা</strong></td><td>ক্রিয়াপদের মূল অবিভাজ্য অংশকে 'ধাতু' বা ক্রিয়ামূল বলে।</td><td>যে শব্দকে বা শব্দের অংশকে আর ভাঙা যায় না, তাকে 'প্রকৃতি' বলে। এটি নামশব্দ ও ক্রিয়াপদ উভয়ের মূল।</td></tr>
+<tr><td><strong>প্রকারভেদ</strong></td><td>ধাতু তিন প্রকার: ১. মৌলিক, ২. সাধিত, ও ৩. যৌগিক বা সংযোগমূলক ধাতু।</td><td>প্রকৃতি দুই প্রকার: ১. নাম প্রকৃতি এবং ২. ক্রিয়া প্রকৃতি (বা ধাতু)।</td></tr>
+<tr><td><strong>ব্যাপ্তি</strong></td><td>ধাতু কেবল ক্রিয়াপদের সাথে সম্পর্কিত।</td><td>প্রকৃতি নামপদ ও ক্রিয়াপদ উভয় পদের মৌলিক ভিত্তিমূল।</td></tr>
+<tr><td><strong>উদাহরণ</strong></td><td>'চল্', 'কর্', 'দেখ্', 'খা' ইত্যাদি ধাতু।</td><td>'হাত' (নাম প্রকৃতি), 'গোলাপ' (নাম প্রকৃতি); আবার 'চল্' (ক্রিয়া প্রকৃতি)।</td></tr>
+</tbody>
+</table>
+</div>
+<p><em>(সংক্ষেপে: সকল ধাতুই প্রকৃতি, কিন্তু সকল প্রকৃতি ধাতু নয়)।</em></p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="6" data-subject="বাংলা ব্যাকরণ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৬</span>
+            <span class="q-meta-tag">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৪</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">সমার্থক শব্দ লিখুন:<br>a) গিরি<br>b) নিপাত</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-6')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-6" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>শব্দ</th><th>সমার্থক শব্দাবলি</th></tr></thead>
+<tbody>
+<tr><td>a) গিরি</td><td><strong>পাহাড়, পর্বত, অচল, শৈল, ভূধর, মহীধর, নগ, অদ্রি</strong></td></tr>
+<tr><td>b) নিপাত</td><td><strong>নিধন, বিনাশ, ধ্বংস, উচ্ছেদ, মৃত্যু, বিনাশসাধন</strong></td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="7" data-subject="বাংলা ব্যাকরণ" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৭</span>
+            <span class="q-meta-tag">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">বাংলা ব্যাকরণ</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৬</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">ব্যাকরণিক প্রশ্নের উত্তর দিন:<br>a) বাগধারা প্রয়োগ করুন: গড্ডলিকা প্রবাহ, তাসের ঘর<br>b) সংজ্ঞা লিখুন: দ্বিগু সমাস, সাধিত শব্দ<br>c) বানান শুদ্ধ করুন: ইতঃপূর্বে, উপযোগীতা</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-7')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-7" class="ans-drawer">
+            <div class="exp-content">
+              <ol type="a">
+<li><strong>বাগধারা প্রয়োগ:</strong><br>
+• <em>গড্ডলিকা প্রবাহ (অন্ধ অনুকরণ):</em> নিজস্ব বিচার-বিবেচনা না করে গড্ডলিকা প্রবাহে গা ভাসালে জীবনে সাফল্য আসে না।<br>
+• <em>তাসের ঘর (ক্ষণস্থায়ী বস্তু):</em> লোভের ওপর প্রতিষ্ঠিত সাম্রাজ্য তাসের ঘরের মতো ভেঙে পড়তে বাধ্য।</li>
+<li><strong>সংজ্ঞা:</strong><br>
+• <em>দ্বিগু সমাস:</em> সমাহার (সমষ্টি) বা মিলন অর্থে সংখ্যাবাচক শব্দের সঙ্গে বিশেষ্য পদের যে সমাস হয় এবং সমাসবদ্ধ পদটি সমষ্টিগত বিশেষ্য বোঝায়, তাকে দ্বিগু সমাস বলে। যেমন: তিন কালের সমাহার = ত্রিকাল; চার রাস্তার সমাহার = চৌরাস্তা।<br>
+• <em>সাধিত শব্দ:</em> যেসব শব্দকে বিশ্লেষণ করলে আলাদা অর্থবোধক মৌলিক শব্দ এবং তার সাথে উপসর্গ বা প্রত্যয় পাওয়া যায়, তাদের সাধিত শব্দ বলে। যেমন: শীতল (শীত + ল), প্রত্যহ (প্রতি + অহ)।</li>
+<li><strong>বানান শুদ্ধকরণ:</strong><br>
+• অশুদ্ধ: ইতঃপূর্বে \(\implies\) <strong>শুদ্ধ: ইতোমধ্যে / ইতোপূর্বে</strong><br>
+• অশুদ্ধ: উপযোগীতা \(\implies\) <strong>শুদ্ধ: উপযোগিতা</strong> ('তা' প্রত্যয় যুক্ত হলে দীর্ঘ-ঈকার হ্রস্ব-ইকারে রূপান্তরিত হয়)।</li>
+</ol>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="8" data-subject="English Essay" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৮</span>
+            <span class="q-meta-tag">English Essay</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">English Essay</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Write an essay on: Emergence of Bangladesh as an Independent State [Hints: Introduction - Historical background - Gestation period of 1952-1970 - The armed struggle of 1971 against atrocious Pakistan Army - Conclusion]</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-8')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-8" class="ans-drawer">
+            <div class="exp-content">
+              <p><strong>Emergence of Bangladesh as an Independent State</strong></p>
+<p><strong>Introduction:</strong> The emergence of Bangladesh as a sovereign nation on December 16, 1971, stands out as one of the most heroic and transformative chapters in modern global history. It was the culmination of decades of continuous resilience, sacrifice, and political struggle of the Bengali people against systematic political suppression, cultural chauvinism, and extreme economic exploitation imposed by the West Pakistani ruling elites.</p>
+<p><strong>Historical Background:</strong> Following the partition of British India in 1947, Pakistan was artificially created comprising two culturally distinct and geographically separated territories—East Pakistan and West Pakistan. Despite constituting over 56 percent of the total population, the Bengalis in East Pakistan were systematically deprived of their rightful political power, civil service appointments, and military leadership, while foreign export revenues generated by Bengali jute were diverted to build West Pakistani cities.</p>
+<p><strong>Gestation Period (1952–1970):</strong><br>
+• <em>Language Movement of 1952:</em> The attempt to impose Urdu as the sole state language was vehemently resisted by the Bengalis. On February 21, 1952, students shed blood in Dhaka, cementing the foundational bedrock of secular Bengali nationalism.<br>
+• <em>The 1954 Elections and Six-Point Movement:</em> The historic Six-Point Programme declared by Bangabandhu Sheikh Mujibur Rahman in 1966 emerged as the 'Charter of Emancipation', demanding complete regional autonomy.<br>
+• <em>1969 Mass Uprising and 1970 Election:</em> The mass movement forced the withdrawal of the false Agartala Conspiracy Case. In the 1970 general elections, the Awami League achieved an absolute democratic majority, securing 167 of the 169 National Assembly seats in East Pakistan. However, the military junta conspiratorially refused to transfer constitutional power.</p>
+<p><strong>The Armed Struggle of 1971:</strong> Following Bangabandhu's historic call to arms on March 7 at the Racecourse Ground, the Pakistani military launched 'Operation Searchlight' on the fateful night of March 25, 1971, unleashing a horrific genocide. Bangabandhu formally declared independence in the first hours of March 26. The Mujibnagar Government was constituted on April 10 and took oath on April 17. The brave Freedom Fighters (Mukti Bahini), comprising farmers, students, workers, and defense personnel, waged an indomitable nine-month guerrilla war. Finally, with the diplomatic support of India and the Soviet Union, the joint allied forces compelled 93,000 Pakistani soldiers to unconditionally surrender on December 16, 1971.</p>
+<p><strong>Conclusion:</strong> The birth of Bangladesh proved that no amount of military brutality can subjugate the legitimate democratic aspirations of a united nation. Today, the ideals of democracy, secularism, socialism, and social justice continue to inspire the sovereign journey of Bangladesh.</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="9" data-subject="English Letter" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ৯</span>
+            <span class="q-meta-tag">English Letter</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">English Letter</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Write a letter to the Mayor of Dhaka North City Corporation, requesting him to take necessary steps to make the pavements of the city suitable for the people to walk on.</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-9')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-9" class="ans-drawer">
+            <div class="exp-content">
+              <p>12 August 2026<br>
+The Administrator / Mayor<br>
+Dhaka North City Corporation (DNCC)<br>
+Gulshan-2, Dhaka-1212.</p>
+<p><strong>Subject: Request for taking immediate steps to reclaim and renovate pavements for pedestrians.</strong></p>
+<p>Dear Sir,<br>
+We, the residents of the Mirpur and Uttara zones under Dhaka North City Corporation, would like to draw your kind attention to the deplorable and hazardous conditions of pedestrian pavements across major city streets.</p>
+<p>Pavements are built primarily to facilitate safe, uninterrupted pedestrian movement. However, most footpaths in our area have been illegally encroached upon by makeshift hawkers, open roadside tea stalls, and unauthorized vehicle parking. Furthermore, open manholes, damaged concrete slabs, accumulated construction debris, and unattended municipal garbage bins have turned these walkways into hazardous zones. Consequently, pedestrians—particularly school-going children, women, and elderly citizens—are forced to walk on main carriage roads, resulting in severe traffic congestion and recurring accidents.</p>
+<p>In order to transform Dhaka into a truly livable, smart, and pedestrian-friendly metropolis, we earnestly request your administration to conduct regular eviction drives against encroachers, reconstruct broken footpaths with tactile paving for disabled persons, and install proper street lighting.</p>
+<p>Yours faithfully,<br>
+The Inhabitants of Mirpur &amp; Uttara<br>
+Dhaka North City Corporation, Dhaka.</p>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="10" data-subject="English Comprehension" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১০</span>
+            <span class="q-meta-tag">English Comprehension</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">English Comprehension</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Read the following passage and then answer the questions that follow:<br><br>"Once there lived a beggar in a city. He thought that he would have more money if he pretended to be dumb. As planned, he had 'dumb' painted on a board and hung it round his neck. Another beggar who envied him determined to punish the cheat. So, he sat beside him and a gentleman gave taka fifty to the pretender. He then said. 'He is a rogue and is not dumb at all.' The first beggar shouted angrily, 'Liar, I have always been dumb and also now.' The gentleman became astonished and remarked that a dumb cannot talk."<br><br>Questions:<br>a) What did the beggar pretend and why?<br>b) What did he do accordingly?<br>c) How did another beggar expose the pretender?<br>d) How was the true nature of the pretender revealed?<br>e) What is the moral of the story?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-10')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-10" class="ans-drawer">
+            <div class="exp-content">
+              <ol type="a">
+<li><strong>Reason for pretending:</strong> The beggar pretended to be dumb because he thought he could arouse greater public sympathy and earn significantly more alms.</li>
+<li><strong>His action:</strong> To execute his deception, he got the word 'dumb' painted on a signboard and hung it around his neck.</li>
+<li><strong>Exposure by rival:</strong> An envious rival beggar sat beside him, watched a gentleman give him a fifty-taka note, and openly revealed to the benefactor that the pretender was a rogue who could speak.</li>
+<li><strong>Revelation of true nature:</strong> Provoked by the rival's accusation, the pretender lost his temper and instinctively shouted out, "Liar, I have always been dumb and also now", thereby inadvertently exposing his own lie through his own voice.</li>
+<li><strong>Moral:</strong> <em>A liar cannot sustain falsehood for long, or deception eventually unmasks itself.</em></li>
+</ol>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="11" data-subject="English Grammar" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১১</span>
+            <span class="q-meta-tag">English Grammar</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">English Grammar</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Correct the following sentences:<br>a) He is waiting for two hours.<br>b) None can hardly do this work.<br>c) I could not help to do it.<br>d) The color of the flowers are charming.<br>e) I want such an man whom sincerity is praiseworthy.</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-11')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-11" class="ans-drawer">
+            <div class="exp-content">
+              <ol type="a">
+<li>Incorrect: He is waiting for two hours.<br>
+<strong>Correct: He has been waiting for two hours.</strong> (Action started in the past and continuing into the present requires Present Perfect Continuous).</li>
+<li>Incorrect: None can hardly do this work.<br>
+<strong>Correct: One can hardly do this work.</strong> (or <em>Nobody can do this work</em>; 'hardly' itself has negative force, so double negative is avoided).</li>
+<li>Incorrect: I could not help to do it.<br>
+<strong>Correct: I could not help doing it.</strong> ('cannot help' / 'could not help' is followed by gerund V-ing).</li>
+<li>Incorrect: The color of the flowers are charming.<br>
+<strong>Correct: The color of the flowers is charming.</strong> (Subject is singular abstract noun 'color', not plural 'flowers').</li>
+<li>Incorrect: I want such an man whom sincerity is praiseworthy.<br>
+<strong>Correct: I want such a man whose sincerity is praiseworthy.</strong> (Indefinite article 'a' before consonant sound 'm', and possessive relative pronoun 'whose').</li>
+</ol>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="12" data-subject="English Idioms" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১২</span>
+            <span class="q-meta-tag">English Idioms</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">English Idioms</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ৫</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">Make sentences with the following Idioms & Phrases:<br>a) A blessing in disguise<br>b) In no time<br>c) Call to mind<br>d) Before long<br>e) In reference to</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-12')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-12" class="ans-drawer">
+            <div class="exp-content">
+              <div class="table-responsive">
+<table class="table table-bordered bcs-table">
+<thead><tr><th>Idiom / Phrase</th><th>Meaning</th><th>Sentence</th></tr></thead>
+<tbody>
+<tr><td>a) A blessing in disguise</td><td>আপাতদৃষ্টিতে ক্ষতিকর হলেও পরবর্তীতে কল্যাণকর</td><td>Failing his initial job interview was <strong>a blessing in disguise</strong>, as it led him to build a successful startup.</td></tr>
+<tr><td>b) In no time</td><td>খুব দ্রুত / পলকের মধ্যে</td><td>Don't worry, the ambulance will reach the hospital <strong>in no time</strong>.</td></tr>
+<tr><td>c) Call to mind</td><td>স্মরণ করা (Remember)</td><td>I know his face well, but I cannot <strong>call his name to mind</strong> right now.</td></tr>
+<tr><td>d) Before long</td><td>অচিরেই / শীঘ্রই</td><td>Have patience, and <strong>before long</strong> your hard work will bear fruit.</td></tr>
+<tr><td>e) In reference to</td><td>বিষয়ে / প্রসঙ্গে (Regarding)</td><td>I am writing this email <strong>in reference to</strong> your advertisement published yesterday.</td></tr>
+</tbody>
+</table>
+</div>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="q-card" data-qid="13" data-subject="সাধারণ জ্ঞান ও বিষয়ভিত্তিক" style="background:var(--bg-card); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);">
+          <div class="q-header">
+            <span class="q-num">প্রশ্ন নং ১৩</span>
+            <span class="q-meta-tag">সাধারণ জ্ঞান ও বিষয়ভিত্তিক</span>
+            <span class="q-meta-tag" style="background:rgba(99, 102, 241, 0.12); color:var(--accent-indigo);">সাধারণ জ্ঞান ও বিষয়ভিত্তিক</span>
+            <span class="q-meta-tag" style="background:rgba(16, 185, 129, 0.15); color:var(--accent-emerald);">পূর্ণমান: ১০</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text">সংক্ষিপ্ত ব্যাখ্যামূলক প্রশ্নের উত্তর দিন (a to o):<br>a) অর্থনৈতিক অঞ্চল (SEZ) বলতে কী বুঝেন?<br>b) তিস্তা নদীর বর্তমান অবস্থা ও গুরুত্ব লিখুন।<br>c) বাংলাদেশে সবুজ অর্থনীতির অপরিহার্যতা লিখুন।<br>d) ডেঙ্গু প্রতিরোধ ও নিয়ন্ত্রণে বাংলাদেশের করণীয় কী?<br>e) জনসংখ্যাকে কীভাবে জনসম্পদে পরিণত করা যায়?<br>f) রোহিঙ্গা সংকট নিরসনে গৃহীত পদক্ষেপগুলো লিখুন।<br>g) JICA এর পূর্ণরূপ ও বাংলাদেশে এর কার্যক্রম কী?<br>h) চীন ও যুক্তরাষ্ট্রের মধ্যকার বাণিজ্য বিরোধ সম্পর্কে লিখুন।<br>i) SAARC গঠনের উদ্দেশ্য ও ব্যর্থতার কারণ কী?<br>j) অর্থনৈতিক কূটনীতি বলতে কী বুঝেন?<br>k) সাইবার ক্রাইম কী?<br>l) বায়ুর প্রধান উপাদানসমূহ কী কী?<br>m) অটিজম কী জাতীয় সমস্যা এবং এর অগ্রগতি কী?<br>n) হরমোন ও এনজাইমের মধ্যে পার্থক্য কী?<br>o) খাদ্যের ছয়টি উপাদান ও ভিটামিনের ভূমিকা কী?</div>
+          </div>
+          <div class="ans-toggle" onclick="toggleDrawer('ans-13')">
+            <span>💡 সমাধান ও বিশ্লেষণ দেখতে ক্লিক করুন</span>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div id="ans-13" class="ans-drawer">
+            <div class="exp-content">
+              <ol type="a">
+<li><strong>অর্থনৈতিক অঞ্চল (Special Economic Zone - SEZ):</strong> অর্থনৈতিক কর্মকাণ্ডের বিকাশ, শিল্পায়ন, দেশি-বিদেশি বিনিয়োগ আকর্ষণ এবং রপ্তানি বৃদ্ধির লক্ষ্যে সরকার কর্তৃক নির্ধারিত বিশেষ সুবিধাপ্রাপ্ত ভৌগোলিক এলাকা। বাংলাদেশে বেজা (BEZA) ২০৩০ সালের মধ্যে ১০০টি অর্থনৈতিক অঞ্চল গড়ে তোলার কাজ করছে।</li>
+<li><strong>তিস্তা নদীর বর্তমান অবস্থা ও গুরুত্ব:</strong> তিস্তা উত্তরাঞ্চলের প্রধান নদী যা নীলফামারী, লালমনিরহাট, রংপুর ও গাইবান্ধার কোটি মানুষের জীবন-জীবিকা ও তিস্তা ব্যারেজ সেচ প্রকল্পের প্রাণ। শুষ্ক মৌসুমে উজানে ভারত কর্তৃক গজলডোবা ব্যারেজে একতরফা পানি প্রত্যাহারের ফলে নদীটি প্রায় শুকিয়ে যায় এবং বর্ষায় তীব্র বন্যা ও নদীভাঙন সৃষ্টি করে। তিস্তা মহাপরিকল্পনা (TRCMRP) বাস্তবায়নে চীন ও অন্যান্য উন্নয়ন সহযোগীদের সাথে আলোচনা চলমান।</li>
+<li><strong>সবুজ অর্থনীতি (Green Economy):</strong> পরিবেশগত ঝুঁকি হ্রাস, কার্বন নিঃসরণ কমানো, নবায়নযোগ্য জ্বালানির প্রসার এবং প্রাকৃতিক সম্পদের অপচয় রোধ করে টেকসই অর্থনৈতিক প্রবৃদ্ধি অর্জন করাই সবুজ অর্থনীতি। জলবায়ু ঝুঁকিপূর্ণ বাংলাদেশের জন্য উপকূলীয় বাঁধ নির্মাণ, সবুজ শিল্পায়ন ও বর্জ্য পুনর্ব্যবহার অপরিহার্য।</li>
+<li><strong>ডেঙ্গু প্রতিরোধে করণীয়:</strong> এডিস মশার প্রজননস্থল (জমে থাকা পরিষ্কার পানি, ফুলের টব, টায়ার) ধ্বংস করা, নিয়মিত লার্ভিসাইড ও ফগিং ছিটানো, সমন্বিত ভেক্টর ব্যবস্থাপনা (IVM) এবং জনসচেতনতা বৃদ্ধি করা।</li>
+<li><strong>জনসংখ্যাকে জনসম্পদে রূপান্তর:</strong> মানসম্মত ও যুগোপযোগী কর্মমুখী শিক্ষা, ভোকেশনাল ও আইসিটি প্রশিক্ষণ, ফ্রিল্যান্সিং সহায়তা, ভাষা শিক্ষা ও স্বাস্থ্যসেবার সম্প্রসারণের মাধ্যমে যুবসমাজকে আন্তর্জাতিক মানের দক্ষ জনশক্তিতে রূপান্তর করা যায়।</li>
+<li><strong>রোহিঙ্গা সংকট নিরসন:</strong> ২০১৭ সালে মিয়ানমার সেনাবাহিনীর গণহত্যার মুখে প্রায় ১২ লাখ রোহিঙ্গা বাংলাদেশে আশ্রয় নেয়। বাংলাদেশ মানবিক আশ্রয় দেওয়ার পাশাপাশি আন্তর্জাতিক বিচার আদালত (ICJ), জাতিসংঘ ও আসিয়ান ফোরামে টেকসই ও নিরাপদ প্রত্যাবাসনের কূটনৈতিক প্রচেষ্টা চালিয়ে যাচ্ছে।</li>
+<li><strong>JICA:</strong> <em>Japan International Cooperation Agency</em> (জাপান আন্তর্জাতিক সহযোগিতা সংস্থা)। ১৯৭২ সাল থেকে এটি বাংলাদেশের শীর্ষ দ্বিপাক্ষিক উন্নয়ন সহযোগী। মেট্রোরেল (MRT-6), মাতারবাড়ী গভীর সমুদ্রবন্দর ও আল্ট্রা সুপার ক্রিটিক্যাল বিদ্যুৎ কেন্দ্র, যমুনা রেলসেতু এবং হযরত শাহজালাল আন্তর্জাতিক বিমানবন্দরের তৃতীয় টার্মিনাল নির্মাণে জাইকার সিংহভাগ অর্থায়ন রয়েছে।</li>
+<li><strong>চীন-যুক্তরাষ্ট্র বাণিজ্য দ্বন্দ্ব:</strong> ২০১৮ সালে ট্রাম্প প্রশাসনের আমলে চীনা পণ্যের ওপর শাস্তিমূলক শুল্ক (Tariff) আরোপের মাধ্যমে 'ট্রেড ওয়ার' শুরু হয়। প্রযুক্তি চুরি, কারেন্সি ম্যানিপুলেশন, কৃত্রিম বুদ্ধিমত্তা ও মাইক্রোচিপ নিয়ন্ত্রণে উভয় পরাশক্তি পাল্টাপাল্টি বাণিজ্য নিষেধাজ্ঞা অব্যাহত রেখেছে।</li>
+<li><strong>সার্কের উদ্দেশ্য ও ব্যর্থতা:</strong> ১৯৮৫ সালে ঢাকায় প্রতিষ্ঠিত সার্কের মূল উদ্দেশ্য ছিল দক্ষিণ এশিয়ার জনগণের আর্থ-সামাজিক ও সাংস্কৃতিক উন্নয়ন। কিন্তু ভারত-পাকিস্তানের কাশ্মীর বিরোধ, সদস্য দেশগুলোর পারস্পরিক অনাস্থা এবং সনদে দ্বিপাক্ষিক বিতর্কিত ইস্যু তোলার নিষেধাজ্ঞার কারণে সংস্থাটি কার্যত স্থবির হয়ে পড়েছে।</li>
+<li><strong>অর্থনৈতিক কূটনীতি (Economic Diplomacy):</strong> বৈদেশিক নীতির মাধ্যমে একটি দেশের ব্যবসা-বাণিজ্য সম্প্রসারণ, বিদেশি বিনিয়োগ আকর্ষণ, পণ্যের নতুন বাজার অনুসন্ধান এবং বৈদেশিক শ্রমবাজার নিশ্চিত করার কূটনৈতিক কৌশল।</li>
+<li><strong>সাইবার ক্রাইম:</strong> ইন্টারনেট, কম্পিউটার সিস্টেম বা ডিজিটাল ডিভাইস ব্যবহার করে অনধিকার প্রবেশ, ডেটা চুরি, হ্যাকিং, র্যানসমওয়্যার আক্রমণ, ফিশিং বা আর্থিক জালিয়াতি করাকে সাইবার অপরাধ বলে।</li>
+<li><strong>বায়ুর প্রধান উপাদান:</strong> নাইট্রোজেন (৭৮.০২%), অক্সিজেন (২০.৭১%), আর্গন (০.৮০%), কার্বন ডাই-অক্সাইড (০.০৩%), জলীয় বাষ্প ও অন্যান্য নিষ্ক্রিয় গ্যাস।</li>
+<li><strong>অটিজম:</strong> অটিজম কোনো সংক্রামক রোগ বা মানসিক ব্যাধি নয়; এটি একটি বিকাশজনিত স্নায়বিক বৈকল্য (Neurodevelopmental Disorder)। বাংলাদেশে অটিস্টিক শিশুদের মূলধারায় অন্তর্ভুক্তির জন্য বিশেষায়িত অটিজম কর্নার ও থেরাপিউটিক সেবা চালু করা হয়েছে।</li>
+<li><strong>হরমোন বনাম এনজাইম:</strong> হরমোন হলো অনাল গ্রন্থি (Endocrine Gland) থেকে ক্ষরিত জৈব রাসায়নিক নিয়ন্ত্রক যা রক্তের মাধ্যমে লক্ষ্য অঙ্গে পৌঁছায় এবং ক্রিয়া শেষে ধ্বংস হয়। অন্যদিকে এনজাইম হলো সনাল গ্রন্থি থেকে ক্ষরিত প্রোটিনধর্মী জৈব অনুঘটক যা বিক্রিয়ার গতি বৃদ্ধি করে কিন্তু নিজেরা অপরিবর্তিত থাকে।</li>
+<li><strong>খাদ্যের ৬টি উপাদান ও ভিটামিন:</strong> খাদ্যের প্রধান উপাদান ৬টি: শর্করা, আমিষ, স্নেহ, ভিটামিন, খনিজ লবণ ও পানি। ভিটামিন প্রত্যক্ষভাবে শক্তি না দিলেও রোগ প্রতিরোধ ক্ষমতা বৃদ্ধি, দৃষ্টিশক্তি সংরক্ষণ এবং সার্বিক শারীরিক বৃদ্ধি ও বিপাকে অপরিহার্য প্রভাবক হিসেবে কাজ করে।</li>
+</ol>
+            </div>
+          </div>
+        </article>
+        
+      </main>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>PSC & IBA Written Job Solution Master Repository • নির্ভুল ও প্রামাণ্য ই-বুক সংস্করণ</p>
+      <p style="margin-top:0.25rem;">উৎস: মূল পরীক্ষার প্রশ্নপত্র ও অফিশিয়াল সমাধান সংগ্রহ</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      document.getElementById('themeToggleBtn').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    }
+
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.addEventListener('DOMContentLoaded', () => {
+          const btn = document.getElementById('themeToggleBtn');
+          if (btn) btn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        });
+      }
+    })();
+
+    function toggleDrawer(id) {
+      const drawer = document.getElementById(id);
+      if (!drawer) return;
+      const isVisible = drawer.classList.contains('open');
+      drawer.classList.toggle('open');
+      const toggleBtn = drawer.previousElementSibling;
+      if (toggleBtn) {
+        const icon = toggleBtn.querySelector('.toggle-icon');
+        if (icon) icon.textContent = isVisible ? '▼' : '▲';
+      }
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const subject = btn.getAttribute('data-subject');
+        document.querySelectorAll('.q-card').forEach(card => {
+          if (subject === 'all' || card.getAttribute('data-subject') === subject) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    let baseFontSize = 100;
+    function adjustFontSize(dir) {
+      if (dir === 0) baseFontSize = 100;
+      else baseFontSize += dir * 8;
+      if (baseFontSize < 80) baseFontSize = 80;
+      if (baseFontSize > 130) baseFontSize = 130;
+      document.documentElement.style.fontSize = baseFontSize + '%';
+    }
+  </script>
+</body>
+</html>
